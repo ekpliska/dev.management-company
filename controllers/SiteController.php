@@ -3,14 +3,12 @@
     namespace app\controllers;
     use Yii;
     use yii\filters\AccessControl;
-    use yii\web\Controller;
     use yii\web\Response;
     use yii\filters\VerbFilter;
-    
+    use yii\web\Controller;
     use app\models\RegistrationForm;
-    
     use app\models\LoginForm;
-    use app\models\ContactForm;
+    use app\models\User;
 
 class SiteController extends Controller
 {
@@ -19,13 +17,13 @@ class SiteController extends Controller
      */
     public function behaviors()
     {
-        return [
+        return [            
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout'],
+                'only' => ['index'],
                 'rules' => [
                     [
-                        'actions' => ['logout'],
+                        'actions' => ['index'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -61,29 +59,30 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-        
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        }
-        
-        $model->password = '';
-        
-        return $this->render('index', ['model' => $model]);
+        return $this->render('index');
     }
     
     /*
      * Форма регистрации
      */
     public function actionRegistration() {
-        $model = new RegistrationForm();
         
+        $model = new RegistrationForm();
+                
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
-                var_dump('OK');
+                
+                Yii::$app->session->setFlash('registration-done', 'Регистрация ОК, проверить email');
+                
+                $data_model = new User();
+                $data_model->user_login = $model->username;
+                $data_model->user_password = Yii::$app->security->generatePasswordHash($model->password);
+                
+                if ($data_model->validate() && $data_model->save()) {
+                    return $this->goHome();
+                }                
+            } else {
+                Yii::$app->session->setFlash('registration-error', 'Ошибка при регистрации');
             }
         }
         
@@ -91,12 +90,9 @@ class SiteController extends Controller
     }
 
     /**
-     * Login action.
-     *
-     * @return Response|string
+     * Форма входа в систему
      */
-    public function actionLogin()
-    {
+    public function actionLogin() {
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
@@ -112,43 +108,30 @@ class SiteController extends Controller
         ]);
     }
 
-    /**
-     * Logout action.
-     *
-     * @return Response
+    /*
+     * Выход из системы
      */
-    public function actionLogout()
-    {
+    public function actionLogout() {
         Yii::$app->user->logout();
-
         return $this->goHome();
     }
 
-    /**
-     * Displays contact page.
-     *
-     * @return Response|string
-     */
-    public function actionContact()
-    {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
+//    public function actionContact()
+//    {
+//        $model = new ContactForm();
+//        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
+//            Yii::$app->session->setFlash('contactFormSubmitted');
+//
+//            return $this->refresh();
+//        }
+//        return $this->render('contact', [
+//            'model' => $model,
+//        ]);
+//    }
 
-            return $this->refresh();
-        }
-        return $this->render('contact', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Displays about page.
-     *
-     * @return string
-     */
-    public function actionAbout()
-    {
-        return $this->render('about');
-    }
+//    public function actionAbout()
+//    {
+//        return $this->render('about');
+//    }
+    
 }

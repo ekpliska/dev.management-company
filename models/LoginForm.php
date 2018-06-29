@@ -1,15 +1,12 @@
 <?php
 
-namespace app\models;
-
-use Yii;
-use yii\base\Model;
+    namespace app\models;
+    use Yii;
+    use yii\base\Model;
+    use app\models\User;
 
 /**
- * LoginForm is the model behind the login form.
- *
- * @property User|null $user This property is read-only.
- *
+ * Форма входа в систему
  */
 class LoginForm extends Model
 {
@@ -21,26 +18,29 @@ class LoginForm extends Model
 
 
     /**
-     * @return array the validation rules.
+     * Правила валидации
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-            // username and password are both required
             [['username', 'password'], 'required'],
-            // rememberMe must be a boolean value
             ['rememberMe', 'boolean'],
-            // password is validated by validatePassword()
             ['password', 'validatePassword'],
         ];
     }
+    
+    /*
+     * Метки полей для формы
+     */
+    public function attributeLabels() {
+        return [
+            'username' => 'Логин',
+            'password' => 'Пароль',
+            'rememberMe' => 'Запомнить меня',
+        ];        
+    }
 
     /**
-     * Validates the password.
-     * This method serves as the inline validation for password.
-     *
-     * @param string $attribute the attribute currently being validated
-     * @param array $params the additional name-value pairs given in the rule
+     * Проверка введенного пароля пользователем
      */
     public function validatePassword($attribute, $params)
     {
@@ -48,27 +48,34 @@ class LoginForm extends Model
             $user = $this->getUser();
 
             if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Incorrect username or password.');
+                $this->addError($attribute, 'Введенный логин или пароль не верны.');
             }
         }
     }
 
     /**
-     * Logs in a user using the provided username and password.
-     * @return bool whether the user is logged in successfully
+     * Процесс авторизации пользователя
      */
     public function login()
     {
+        // Есди валидация формы прошла успешно
         if ($this->validate()) {
+            // Если установлен флаг "Запомнить меня"
+            if ($this->rememberMe) {
+                // Получаем текущего пользователя
+                $user = $this->getUser();
+                // Записываем в БД снегерированный ключ для аутентивикации по cookie
+                $user->generateAuthKey();                
+                $user->save();
+            }            
             return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600*24*30 : 0);
         }
         return false;
     }
 
     /**
-     * Finds user by [[username]]
-     *
-     * @return User|null
+     * Получить пользователя
+     * Если имя пользователя найдено в БД, то разрешаем доступ к системе
      */
     public function getUser()
     {
@@ -78,5 +85,4 @@ class LoginForm extends Model
 
         return $this->_user;
     }
-    
 }

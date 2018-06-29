@@ -3,7 +3,6 @@
     namespace app\models;
     use yii\base\Model;
     use app\models\PersonalAccount;
-    use app\models\Users;
 
 /**
  * Форма регистрации пользователя
@@ -43,7 +42,7 @@ class RegistrationForm extends Model {
             // Проверка введенного логина на уникалность в таблице Пользователи
             [
                 'username', 'unique', 
-                'targetClass' => Users::className(), 
+                'targetClass' => User::className(), 
                 'targetAttribute' => 'user_login', 
                 'message' => 'Пользователь с введенным лицевым счетом в системе уже зарегистрирован'
             ],

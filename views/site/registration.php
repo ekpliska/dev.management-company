@@ -7,12 +7,11 @@
  * Форма регистрации
  */
 $this->title = 'Customers | Регистрация';
-$this->params['breadcrumbs'][] = 'Регистрация';
 ?>
 <div class="site-registration">
     <h1>Регистрация</h1>
     <div class="row">
-        <div class="col-lg-7">
+        <div class="col-md-7">
             <?php
                 $form = ActiveForm::begin([
                     'id' => 'registration-form',

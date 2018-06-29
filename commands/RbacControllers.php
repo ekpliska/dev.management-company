@@ -3,6 +3,7 @@
     use yii\console\Controller;
     use Yii;
 
+
 /*
  * Инициация RBAC через консоль
  * Добавление ролей для пользователей:
@@ -55,16 +56,16 @@ class RbacController extends Controller {
         $auth->add($administrator);
 
         // Разрешение adminPanel - проверяет доступ к панеле управления 
-        $adminPanel = $auth->createPermission('AdminPanel');
-        $adminPanel->description = 'Панель администратора';
-        $auth->add($adminPanel);
+//        $adminPanel = $auth->createPermission('AdminPanel');
+//        $adminPanel->description = 'Панель администратора';
+//        $auth->add($adminPanel);
         
         // Администратор обладает правами всех других пользователей
         $auth->addChild($administrator, $lodger);
         $auth->addChild($administrator, $tenant);
         $auth->addChild($administrator, $dispatcher);
         $auth->addChild($administrator, $specialist);
-        $auth->addChild($administrator, $adminPanel);
+//        $auth->addChild($administrator, $adminPanel);
         
         $this->stdout('Формирование ролей и разрешений выполнено!', PHP_EOL);
         
