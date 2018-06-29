@@ -64,7 +64,6 @@ class User extends ActiveRecord implements IdentityInterface
         if (parent::beforeSave($insert)) {
             if ($insert) {
                 $this->date_create = date('Y-m-d H:i:s');
-                $this->status = self::STATUS_DISABLED;
                 return true;
             } else {
                 return false;
@@ -142,8 +141,15 @@ class User extends ActiveRecord implements IdentityInterface
      * Поиск пользователя по сгенерированному ключу
      * Если запрашиваемы ключ найден, то меняем статус пользователя на STATUS_ENABLED
      */
-    public function findEmailConfirmToken($email_confirm_token) {
-        return self::findOne(['email_confirm_token' => $email_confirm_token]);
+    public static function findByEmailConfirmToken($email_confirm_token) {
+        return static::findOne(['email_confirm_token' => $email_confirm_token, 'status' => User::STATUS_DISABLED]);
+    }
+    
+    public function confirmEmail($token) {
+        $user = self::findByEmailConfirmToken($token);
+        $user->status = self::STATUS_ENABLED;
+        $user->email_confirm_token = null;
+        
     }
     
     /*

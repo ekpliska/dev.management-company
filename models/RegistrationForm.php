@@ -85,15 +85,18 @@ class RegistrationForm extends Model {
             $model->generateEmailConfirmToken();
             
             if ($model->save()) {
-                // Отправка письма
-                Yii::$app->mailer->compose()
-                        ->setFrom('test@test.com')
-                        ->setTo('test1@test.com')
-                        ->setSubject('Подтверждение регистрации')
-                        ->send();
-                return $model;
+                $this->sendEmail('EmailConfirm', 'Подтверждение регистрации', ['user' => $model]);
             }
         }
+    }
+    
+    public function sendEmail($view, $subject, $params = []) {
+        $message = Yii::$app->mailer->compose(['html' => 'views/' . $view], $params)
+                ->setFrom('email-confirm@site.com')
+                ->setTo($this->email)
+                ->setSubject($subject)
+                ->send();
+        return $message;
     }
     
     

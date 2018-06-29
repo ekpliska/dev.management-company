@@ -6,9 +6,13 @@
     use yii\web\Response;
     use yii\filters\VerbFilter;
     use yii\web\Controller;
+    use yii\base\InvalidParamException;
+    use yii\web\BadRequestHttpException;
+    
     use app\models\RegistrationForm;
     use app\models\LoginForm;
     use app\models\User;
+    use app\models\EmailConfirmForm;
 
 class SiteController extends Controller
 {
@@ -75,8 +79,9 @@ class SiteController extends Controller
                 Yii::$app->session->setFlash('registration-done', 'Регистрация ОК, проверить email');
                 
                 $data_model = new User();                
+                $data_model = $model->registration();
                 
-                if ($data_model = $model->registration()) {
+                if ($data_model) {
                     return $this->goHome();
                 }                
             } else {
@@ -114,6 +119,21 @@ class SiteController extends Controller
         return $this->goHome();
     }
 
+    public function actionEmailConfirm($token) {
+        try {
+            $model = new EmailConfirmForm($token);
+        } catch (InvalidParamException $e) {
+            throw new BadRequestHttpException($e->getMessage());
+        }
+ 
+        if ($model->confirmEmail()) {
+            Yii::$app->getSession()->setFlash('success', 'Спасибо! Ваш Email успешно подтверждён.');
+        } else {
+            Yii::$app->getSession()->setFlash('error', 'Ошибка подтверждения Email.');
+        }
+ 
+        return $this->goHome();
+    }
 //    public function actionContact()
 //    {
 //        $model = new ContactForm();
