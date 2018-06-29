@@ -74,11 +74,9 @@ class SiteController extends Controller
                 
                 Yii::$app->session->setFlash('registration-done', 'Регистрация ОК, проверить email');
                 
-                $data_model = new User();
-                $data_model->user_login = $model->username;
-                $data_model->user_password = Yii::$app->security->generatePasswordHash($model->password);
+                $data_model = new User();                
                 
-                if ($data_model->validate() && $data_model->save()) {
+                if ($data_model = $model->registration()) {
                     return $this->goHome();
                 }                
             } else {

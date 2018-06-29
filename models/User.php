@@ -34,14 +34,19 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             [['user_login', 'user_password'], 'required'],
+            ['user_login', 'integer'],
             
-            [['user_login', 'user_check_email', 'user_check_sms'], 'integer'],
+            ['user_email', 'string', 'max' => 100],
+            ['user_email', 'email'],
+                
+            ['user_mobile', 'string', 'max' => 50],
+            
+            [['user_check_email', 'user_check_sms'], 'integer'],
             
             [['user_password', 'user_photo', 'user_authkey'], 'string', 'max' => 255],
             
-            [['date_create', 'date_last_login'], 'integer'],
+            ['status', 'integer'],
             
-            ['user_authkey', 'string'],
         ];
     }
 
@@ -68,11 +73,11 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /*
-     * Поиск экземпляра identity, используя ID пользователя
+     * Поиск экземпляра identity, используя ID пользователя со статусом подтверденной регистрации
      * Для поддержки состояние аутентификации через сессии
      */    
     public static function findIdentity($id) {
-        return static::findOne($id);
+        return static::findOne(['user_id' => $id, 'status' => self::STATUS_ENABLED]);
     }
 
     /*
@@ -123,6 +128,22 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function generateAuthKey() {
         $this->user_authkey = Yii::$app->security->generateRandomString();
+    }
+    
+    /*
+     * Генерация ключа email_confirm_token для подтверждения регистрации по почте
+     * Присваивается каждому пользователю при регистрации
+     */
+    public function generateEmailConfirmToken() {
+        $this->email_confirm_token = Yii::$app->security->generateRandomString();
+    }
+    
+    /*
+     * Поиск пользователя по сгенерированному ключу
+     * Если запрашиваемы ключ найден, то меняем статус пользователя на STATUS_ENABLED
+     */
+    public function findEmailConfirmToken($email_confirm_token) {
+        return self::findOne(['email_confirm_token' => $email_confirm_token]);
     }
     
     /*

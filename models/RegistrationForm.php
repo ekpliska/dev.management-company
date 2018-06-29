@@ -2,6 +2,7 @@
 
     namespace app\models;
     use yii\base\Model;
+    use Yii;
     use app\models\PersonalAccount;
 
 /**
@@ -17,8 +18,6 @@ class RegistrationForm extends Model {
     public $mobile_phone;
     public $email;
     public $verifyCode;
-    
-    private $_user = false;
     
     /*
      * Правила валидации
@@ -66,6 +65,34 @@ class RegistrationForm extends Model {
         if ($personalAccount == null) {
             $errorMsg = "Указанный лицевой счет не существует";
             $this->addError('username', $errorMsg);
+        }
+    }
+    
+    /*
+     * Метод описывает первый шаг рагистрации пользователя
+     */
+    public function registration() {
+
+        if ($this->validate()) {
+            $model = new User();
+            $model->user_login = $this->username;
+            $model->user_password = Yii::$app->security->generatePasswordHash($this->password);
+            $model->user_email = $this->email;
+            $model->user_mobile = $this->mobile_phone;
+            // Новый пользователь получает статус без доступа в систему
+            $model->status = User::STATUS_DISABLED;
+            // Для нового пользователя генерируем ключ, для отправки на почту (Для подтверждения email)
+            $model->generateEmailConfirmToken();
+            
+            if ($model->save()) {
+                // Отправка письма
+                Yii::$app->mailer->compose()
+                        ->setFrom('test@test.com')
+                        ->setTo('test1@test.com')
+                        ->setSubject('Подтверждение регистрации')
+                        ->send();
+                return $model;
+            }
         }
     }
     

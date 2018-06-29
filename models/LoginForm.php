@@ -46,9 +46,11 @@ class LoginForm extends Model
     {
         if (!$this->hasErrors()) {
             $user = $this->getUser();
-
+            
             if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Введенный логин или пароль не верны.');
+                $this->addError($attribute, 'Введенный логин или пароль не верны');
+            } else if ($user && $user->status == User::STATUS_DISABLED) {
+                $this->addError($attribute, 'Вы не прошли подтвержение регистрации');
             }
         }
     }
