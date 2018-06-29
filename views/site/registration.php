@@ -10,7 +10,7 @@ $this->title = 'Customers | Регистрация';
 $this->params['breadcrumbs'][] = 'Регистрация';
 ?>
 <div class="site-registration">
-    <h1>Registration</h1>
+    <h1>Регистрация</h1>
     <div class="row">
         <div class="col-lg-7">
             <?php
@@ -34,7 +34,11 @@ $this->params['breadcrumbs'][] = 'Регистрация';
 
                 <?= $form->field($model, 'square')->input('text', ['placeholder' => $model->getAttributeLabel('square')])->label(true) ?>
             
-                <?= $form->field($model, 'mobile_phone')->input('text', ['placeholder' => $model->getAttributeLabel('mobile_phone')])->label(true) ?>
+                <?= $form->field($model, 'mobile_phone')
+                        ->widget(MaskedInput::className(), [
+                            'mask' => '+7 (999) 999-99-99',
+                        ])
+                        ->input('text', ['placeholder' => $model->getAttributeLabel('mobile_phone')])->label(true) ?>
 
                 <?= $form->field($model, 'email')->input('text', ['placeholder' => $model->getAttributeLabel('email')])->label(true) ?>
 

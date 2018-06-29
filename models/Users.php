@@ -5,6 +5,7 @@
     use yii\db\ActiveRecord;
     use app\models\PersonalAccount;
     use yii\behaviors\TimestampBehavior;
+    use yii\web\IdentityInterface;
 
 /**
  * Пользователи системы / роли
@@ -54,7 +55,7 @@ class Users extends ActiveRecord
     public function getPersonalAccount() {
         return $this->hasOne(PersonalAccount::className(), ['user_login' => 'account_id']);
     }
-
+    
     /*
      * Метки для полей
      */
@@ -62,8 +63,8 @@ class Users extends ActiveRecord
     {
         return [
             'user_id' => 'User ID',
-            'user_login' => 'User Login',
-            'user_password' => 'User Password',
+            'user_login' => 'Логин',
+            'user_password' => 'Пароль',
             'user_photo' => 'User Photo',
             'user_check_email' => 'User Check Email',
             'user_check_sms' => 'User Check Sms',

@@ -78,4 +78,5 @@ class LoginForm extends Model
 
         return $this->_user;
     }
+    
 }
