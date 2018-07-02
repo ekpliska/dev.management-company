@@ -21,7 +21,7 @@ $this->title = 'Вход';
         <?php endif; ?>
     
         <?php if (Yii::$app->session->hasFlash('registration-error')) : ?>
-            <div class="alert alert-info" role="alert">
+            <div class="alert alert-error" role="alert">
                 <strong>
                     <?= Yii::$app->session->getFlash('registration-error', false); ?>
                 </strong>
@@ -47,7 +47,7 @@ $this->title = 'Вход';
 
                 <?= $form->field($model, 'username')->input('text', ['placeholder' => $model->getAttributeLabel('username')])->label(true) ?>                    
 
-                <?= $form->field($model, 'password')->input('text', ['placeholder' => $model->getAttributeLabel('password')])->label(true) ?>
+                <?= $form->field($model, 'password')->input('password', ['placeholder' => $model->getAttributeLabel('password')])->label(true) ?>
 
                 <?= $form->field($model, 'rememberMe')->checkbox([
                     'template' => "<div class=\"col-sm-12\">{input} {label}</div>\n<div class=\"col-sm-12\">{error}</div>",
@@ -55,13 +55,13 @@ $this->title = 'Вход';
 
                 <div class="form-group">
                     <div class="col-sm-12">
-                        <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+                        <?= Html::submitButton('Вход', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="col-sm-12">
-                        <a href="<?= Url::to(['/']) ?>">Забыли пароль?</a> | 
+                        <a href="<?= Url::to(['site/request-password-reset']) ?>">Забыли пароль?</a> | 
                         <a href="<?= Url::to(['site/registration']) ?>">Регистрация</a>
                     </div>
                 </div>

@@ -22,8 +22,8 @@ class EmailConfirmForm extends Model {
     public function confirmEmail() {
         $user = $this->_user;
         $user->status = User::STATUS_ENABLED;
-        $user->email_confirm_token = null;        
-        return $user->save();
+        $user->email_confirm_token = null;
+        return $user->save(false);
     }
     
 }

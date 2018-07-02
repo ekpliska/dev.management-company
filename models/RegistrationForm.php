@@ -46,6 +46,13 @@ class RegistrationForm extends Model {
                 'message' => 'Пользователь с введенным лицевым счетом в системе уже зарегистрирован'
             ],
             
+            [
+                'email', 'unique',
+                'targetClass' => User::className(),
+                'targetAttribute' => 'user_email',
+                'message' => 'Пользователь с введенным элетронным аресом в системе уже зарегистрирован'
+            ],
+            
             ['username', 'checkPersonalAccount'],
             
             ['password', 'compare', 'message' => 'Указанные пароли не совпадают!'],            
@@ -79,6 +86,7 @@ class RegistrationForm extends Model {
             $model->user_password = Yii::$app->security->generatePasswordHash($this->password);
             $model->user_email = $this->email;
             $model->user_mobile = $this->mobile_phone;
+            
             // Новый пользователь получает статус без доступа в систему
             $model->status = User::STATUS_DISABLED;
             // Для нового пользователя генерируем ключ, для отправки на почту (Для подтверждения email)
@@ -90,6 +98,9 @@ class RegistrationForm extends Model {
         }
     }
     
+    /*
+     * Отправка на электронный адрес ссылки на поддтверждение регистрации
+     */
     public function sendEmail($view, $subject, $params = []) {
         $message = Yii::$app->mailer->compose(['html' => 'views/' . $view], $params)
                 ->setFrom('email-confirm@site.com')

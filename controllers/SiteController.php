@@ -13,6 +13,8 @@
     use app\models\LoginForm;
     use app\models\User;
     use app\models\EmailConfirmForm;
+    
+    use app\models\PasswordResetRequestForm;
 
 class SiteController extends Controller
 {
@@ -63,7 +65,8 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $model = User::find()->all();
+        return $this->render('index', ['model' => $model]);
     }
     
     /*
@@ -80,10 +83,8 @@ class SiteController extends Controller
                 
                 $data_model = new User();                
                 $data_model = $model->registration();
+                return $this->goHome();
                 
-                if ($data_model) {
-                    return $this->goHome();
-                }                
             } else {
                 Yii::$app->session->setFlash('registration-error', 'Ошибка при регистрации');
             }
@@ -96,6 +97,7 @@ class SiteController extends Controller
      * Форма входа в систему
      */
     public function actionLogin() {
+        
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
@@ -119,21 +121,40 @@ class SiteController extends Controller
         return $this->goHome();
     }
 
+    /*
+     * Действие поддтверждения регистрации
+     */
     public function actionEmailConfirm($token) {
         try {
             $model = new EmailConfirmForm($token);
         } catch (InvalidParamException $e) {
             throw new BadRequestHttpException($e->getMessage());
         }
- 
+        
         if ($model->confirmEmail()) {
-            Yii::$app->getSession()->setFlash('success', 'Спасибо! Ваш Email успешно подтверждён.');
+            Yii::$app->getSession()->setFlash('registration-done', 'Ваш Email успешно подтверждён.');
         } else {
-            Yii::$app->getSession()->setFlash('error', 'Ошибка подтверждения Email.');
+            Yii::$app->getSession()->setFlash('registration-error', 'Ошибка подтверждения Email.');
         }
  
         return $this->goHome();
     }
+    
+    public function actionRequestPasswordReset() {
+        
+        $model = new PasswordResetRequestForm();
+        
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            if ($model->resetPassword()) {
+                Yii::$app->session->setFlash('info', 'На указанный email были высланы инструкции для восстановления пароля');
+            } else {
+                Yii::$app->session->setFlash('error', 'При восстановлении пароля произошла ошибка');
+            }
+        }
+        return $this->render('request-password-reset', ['model' => $model]);
+        
+    }
+    
 //    public function actionContact()
 //    {
 //        $model = new ContactForm();

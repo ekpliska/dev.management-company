@@ -4,7 +4,6 @@
     use yii\web\IdentityInterface;
     use app\models\PersonalAccount;
     use Yii;
-    use yii\behaviors\TimestampBehavior;
 
 /**
  * Пользователи системы / роли
@@ -20,12 +19,6 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_DISABLED = 0;
     const STATUS_ENABLED = 1;
     
-    public function behaviors() {
-        return [
-            TimestampBehavior::className(),
-        ];
-    }
-    
     /*
      *  Таблица из БД
      */
@@ -39,7 +32,10 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            ['user_login', 'required']
+            [['created_at', 'updated_at', 'username', 'password_hash', 'email'], 'required'],
+            [['created_at', 'updated_at', 'status'], 'integer'],
+            [['username', 'email_confirm_token', 'password_hash', 'password_reset_token', 'email'], 'string', 'max' => 255],
+            [['auth_key'], 'string', 'max' => 32],
         ];
     }
 
@@ -55,7 +51,7 @@ class User extends ActiveRecord implements IdentityInterface
      * Для поддержки состояние аутентификации через сессии
      */    
     public static function findIdentity($id) {
-        return static::findOne(['user_id' => $id, 'status' => self::STATUS_ENABLED]);
+        return static::findOne(['id' => $id, 'status' => self::STATUS_ENABLED]);
     }
 
     /*
@@ -70,42 +66,42 @@ class User extends ActiveRecord implements IdentityInterface
      *  Поиск имени пользователя    
      */
     public static function findByUsername($username) {
-        return static::findOne(['user_login' => $username]);
+        return static::findOne(['username' => $username]);
     }
 
     /*
      *  Получить ID пользователя
      */
     public function getId() {
-        return $this->user_id;
+        return $this->id;
     }
 
     /*
      *  Получить ключ, используемый для cookie аутентификации
      */
     public function getAuthKey() {
-        return $this->user_authkey;
+        return $this->auth_key;
     }
 
     /*
      *  Проверка ключа для аутентификации на основе cookie
      */
     public function validateAuthKey($autKey) {
-        return $this->user_authkey === $authKey;
+        return $this->auth_key === $authKey;
     }
 
     /*
      *  Проверка валидации пароля пользователя
      */
     public function validatePassword($password) {
-        return Yii::$app->security->validatePassword($password, $this->user_password);
+        return Yii::$app->security->validatePassword($password, $this->password_hash);
     }
 
     /*
      *  Генерация ключа в виде случайной строки    
      */
     public function generateAuthKey() {
-        $this->user_authkey = Yii::$app->security->generateRandomString();
+        $this->auth_key = Yii::$app->security->generateRandomString();
     }
     
     /*
@@ -124,25 +120,22 @@ class User extends ActiveRecord implements IdentityInterface
         return static::findOne(['email_confirm_token' => $email_confirm_token, 'status' => User::STATUS_DISABLED]);
     }
     
-    public static function findByEmail($user_email) {
-        return static::findOne(['user_email' => $user_email, 'status' => self::STATUS_ENABLED]);
-    }
-    
     /*
      * Настройка полей для форм
-     */
-    public function getAttributeLabel() {
+     */    
+    public function attributeLabels()
+    {
         return [
-            'user_id' => 'User Id',
-            'user_login' => 'Логин пользователя',
-            'user_password' => 'Пароль пользователя',
-            'user_photo' => 'Аватар',
-            'user_check_email' => 'Email рассылка',
-            'user_check_sms' => 'SMS оповещения',
-            'user_authkey' => 'User Authkey',
-            'date_create' => 'Дата регистрации',
-            'date_last_login' => 'Дата последнего логина',
+            'id' => 'ID',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
+            'username' => 'Username',
+            'auth_key' => 'Auth Key',
+            'email_confirm_token' => 'Email Confirm Token',
+            'password_hash' => 'Password Hash',
+            'password_reset_token' => 'Password Reset Token',
+            'email' => 'Email',
+            'status' => 'Status',
         ];
     }
-    
 }

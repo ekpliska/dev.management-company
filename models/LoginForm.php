@@ -48,10 +48,11 @@ class LoginForm extends Model
             $user = $this->getUser();
             
             if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Введенный логин или пароль не верны');
+                $this->addError($attribute, 'Данной комбинации логина и пароля не существует. Попробуйте ввести данные еще раз');
             } else if ($user && $user->status == User::STATUS_DISABLED) {
-                $this->addError($attribute, 'Вы не прошли подтвержение регистрации');
+                $this->addError($attribute, 'Вы не прошли поддтвержение регистрации на портале. Проверьте ваше электронную почту');
             }
+            
         }
     }
 
@@ -67,7 +68,9 @@ class LoginForm extends Model
                 // Получаем текущего пользователя
                 $user = $this->getUser();
                 // Записываем в БД снегерированный ключ для аутентивикации по cookie
-                $user->generateAuthKey();                
+                $user->generateAuthKey();
+                // Дата и время последнего логина
+                $user->updated_at = time();
                 $user->save();
             }            
             return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600*24*30 : 0);

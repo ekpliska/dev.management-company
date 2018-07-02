@@ -13,7 +13,6 @@ $this->title = 'Customers | Вход';
         <div class="row">
             <div class="col-lg-5">
                 <h2>Главная</h2>
-                content
             </div>
             <div class="col-lg-7">
                 <h2>title</h2>
