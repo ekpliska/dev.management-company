@@ -86,6 +86,7 @@ class RegistrationForm extends Model {
             $model->user_password = Yii::$app->security->generatePasswordHash($this->password);
             $model->user_email = $this->email;
             $model->user_mobile = $this->mobile_phone;
+            $model->setUserAccountId($this->username);
             
             // Новый пользователь получает статус без доступа в систему
             $model->status = User::STATUS_DISABLED;

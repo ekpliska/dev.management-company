@@ -124,8 +124,24 @@ class User extends ActiveRecord implements IdentityInterface
         return static::findOne(['email_confirm_token' => $email_confirm_token, 'status' => User::STATUS_DISABLED]);
     }
     
+    /*
+     * Поиск пользователя по email
+     */
     public static function findByEmail($user_email) {
         return static::findOne(['user_email' => $user_email, 'status' => self::STATUS_ENABLED]);
+    }
+    
+    /*
+     * Для связи таблица пользователь и лицевой счет
+     */
+    public function setUserAccountId($account_id) {
+        $id = PersonalAccount::find()
+                ->andWhere(['account_number' => $account_id])
+                ->select('account_id')
+                ->asArray()
+                ->one();
+        
+        $this->user_account_id = $id['account_id'];
     }
     
     /*

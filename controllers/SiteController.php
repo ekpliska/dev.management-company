@@ -140,13 +140,16 @@ class SiteController extends Controller
         return $this->goHome();
     }
     
+    /*
+     * Запрос на восстановление пароля
+     */
     public function actionRequestPasswordReset() {
         
         $model = new PasswordResetRequestForm();
         
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->resetPassword()) {
-                Yii::$app->session->setFlash('info', 'На указанный email были высланы инструкции для восстановления пароля');
+                Yii::$app->session->setFlash('success', 'На указанный email были высланы инструкции для восстановления пароля');
             } else {
                 Yii::$app->session->setFlash('error', 'При восстановлении пароля произошла ошибка');
             }

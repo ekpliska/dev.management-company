@@ -9,6 +9,9 @@ class PasswordResetRequestForm extends Model {
     
     public $email;
     
+    /*
+     * Правила валидации поля email для формы восстановления пароля
+     */
     public function rules() {
         return [
             ['email', 'required'],
@@ -25,6 +28,10 @@ class PasswordResetRequestForm extends Model {
         ];
     }
     
+    /*
+     * Поиск пользователя по указанному email
+     * Отправка письма на указанный адрес со случайно сгенерированным паролем
+     */
     public function resetPassword() {
         $user = User::findByEmail($this->email);
         
@@ -32,7 +39,9 @@ class PasswordResetRequestForm extends Model {
             return false;
         }
         
+        // Генерируем новый пароль (случайные 6 символов)
         $new_password = Yii::$app->security->generateRandomString(6);
+        // Хешируем новый пароль
         $user->user_password = Yii::$app->security->generatePasswordHash($new_password);
             
         if ($user->save()) {
