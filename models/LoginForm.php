@@ -50,7 +50,7 @@ class LoginForm extends Model
             if (!$user || !$user->validatePassword($this->password)) {
                 $this->addError($attribute, 'Данной комбинации логина и пароля не существует. Попробуйте ввести данные еще раз');
             } else if ($user && $user->status == User::STATUS_DISABLED) {
-                $this->addError($attribute, 'Вы не прошли поддтвержение регистрации на портале. Проверьте ваше электронную почту');
+                $this->addError($attribute, 'Вы не прошли подтвержение регистрации на портале. Проверьте вашу электронную почту');
             }
             
         }

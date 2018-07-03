@@ -65,8 +65,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $model = User::find()->all();
-        return $this->render('index', ['model' => $model]);
+        return $this->render('index');
     }
     
     /*
@@ -79,14 +78,14 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
                 
-                Yii::$app->session->setFlash('registration-done', 'Регистрация ОК, проверить email');
+                Yii::$app->session->setFlash('registration-done', 'Для подтверждения регистрации пройдите по ссылке, указанной в письме');
                 
                 $data_model = new User();                
                 $data_model = $model->registration();
                 return $this->goHome();
                 
             } else {
-                Yii::$app->session->setFlash('registration-error', 'Ошибка при регистрации');
+                Yii::$app->session->setFlash('registration-error', 'При регистрации возникла ошибка');
             }
         }
         
@@ -122,7 +121,7 @@ class SiteController extends Controller
     }
 
     /*
-     * Действие поддтверждения регистрации
+     * Поддтверждение регистрации
      */
     public function actionEmailConfirm($token) {
         try {
@@ -132,9 +131,9 @@ class SiteController extends Controller
         }
         
         if ($model->confirmEmail()) {
-            Yii::$app->getSession()->setFlash('registration-done', 'Ваш Email успешно подтверждён.');
+            Yii::$app->getSession()->setFlash('registration-done', 'Ваш Email успешно подтверждён');
         } else {
-            Yii::$app->getSession()->setFlash('registration-error', 'Ошибка подтверждения Email.');
+            Yii::$app->getSession()->setFlash('registration-error', 'Ошибка подтверждения Email');
         }
  
         return $this->goHome();

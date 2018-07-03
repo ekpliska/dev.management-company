@@ -10,11 +10,11 @@ class EmailConfirmForm extends Model {
 
     public function __construct($token, $config = []) {
         if (empty($token) || !is_string($token)) {
-            throw new InvalidParamException('Отсутствует код подтверждения.');
+            throw new InvalidParamException('Отсутствует код подтверждения');
         }
         $this->_user = User::findByEmailConfirmToken($token);
         if (!$this->_user) {
-            throw new InvalidParamException('Неверный токен.');
+            throw new InvalidParamException('Неверный код подтверждения');
         }
         parent::__construct($config);
     }

@@ -46,11 +46,20 @@ class RegistrationForm extends Model {
                 'message' => 'Пользователь с введенным лицевым счетом в системе уже зарегистрирован'
             ],
             
+            // Проверка введенного email на уникальность
             [
                 'email', 'unique',
                 'targetClass' => User::className(),
                 'targetAttribute' => 'user_email',
                 'message' => 'Пользователь с введенным элетронным аресом в системе уже зарегистрирован'
+            ],
+            
+            // Проверка введенного номера телефона на уникальность
+            [
+                'mobile_phone', 'unique',
+                'targetClass' => User::className(),
+                'targetAttribute' => 'user_mobile',
+                'message' => 'Пользователь с введенным номером мобильного телефона в системе уже зарегистрирован',
             ],
             
             ['username', 'checkPersonalAccount'],
@@ -70,7 +79,7 @@ class RegistrationForm extends Model {
     public function checkPersonalAccount() {
         $personalAccount = PersonalAccount::find()->andWhere(['account_number' => $this->username])->select('account_number')->one();
         if ($personalAccount == null) {
-            $errorMsg = "Указанный лицевой счет не существует";
+            $errorMsg = "Указанный лицевой счет в системе не существует";
             $this->addError('username', $errorMsg);
         }
     }
