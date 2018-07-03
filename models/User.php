@@ -2,9 +2,10 @@
     namespace app\models;
     use yii\db\ActiveRecord;
     use yii\web\IdentityInterface;
-    use app\models\PersonalAccount;
     use Yii;
     use yii\behaviors\TimestampBehavior;
+    use app\models\PersonalAccount;
+    
 
 /**
  * Пользователи системы / роли
@@ -39,7 +40,12 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            ['user_login', 'required']
+            ['user_login', 'required'],
+            
+            [['user_photo'], 'file', 'extensions' => 'png, jpg'],
+            [['user_photo'], 'image', 'maxWidth' => 510, 'maxHeight' => 510],
+            
+            [['user_check_email', 'user_check_sms'], 'boolean'],
         ];
     }
 
@@ -47,7 +53,7 @@ class User extends ActiveRecord implements IdentityInterface
      * Свзязь с таблицей "Лицевой счет"
      */
     public function getPersonalAccount() {
-        return $this->hasOne(PersonalAccount::className(), ['user_login' => 'account_id']);
+        return $this->hasOne(PersonalAccount::className(), ['account_id' => 'user_account_id']);
     }
     
     /*
@@ -132,7 +138,7 @@ class User extends ActiveRecord implements IdentityInterface
     }
     
     /*
-     * Для связи таблица пользователь и лицевой счет
+     * Для связи таблицы пользователь и лицевой счет
      */
     public function setUserAccountId($account_id) {
         $id = PersonalAccount::find()
@@ -144,17 +150,21 @@ class User extends ActiveRecord implements IdentityInterface
         $this->user_account_id = $id['account_id'];
     }
     
+    public function editProfile() {
+        //
+    }
+    
     /*
      * Настройка полей для форм
      */
-    public function getAttributeLabel() {
+    public function attributeLabels() {
         return [
             'user_id' => 'User Id',
             'user_login' => 'Логин пользователя',
             'user_password' => 'Пароль пользователя',
             'user_photo' => 'Аватар',
-            'user_check_email' => 'Email рассылка',
-            'user_check_sms' => 'SMS оповещения',
+            'user_check_email' => 'Разрешить e-mail оповещения',
+            'user_check_sms' => 'Разрешить SMS оповещения',
             'user_authkey' => 'User Authkey',
             'date_create' => 'Дата регистрации',
             'date_last_login' => 'Дата последнего логина',

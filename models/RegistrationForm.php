@@ -4,6 +4,8 @@
     use yii\base\Model;
     use Yii;
     use app\models\PersonalAccount;
+    use app\models\Clients;    
+    
 
 /**
  * Форма регистрации пользователя
@@ -17,7 +19,6 @@ class RegistrationForm extends Model {
     public $square;
     public $mobile_phone;
     public $email;
-    public $verifyCode;
     
     /*
      * Правила валидации
@@ -57,10 +58,12 @@ class RegistrationForm extends Model {
             // Проверка введенного номера телефона на уникальность
             [
                 'mobile_phone', 'unique',
-                'targetClass' => User::className(),
-                'targetAttribute' => 'user_mobile',
+                'targetClass' => Clients::className(),
+                'targetAttribute' => 'clients_mobile',
                 'message' => 'Пользователь с введенным номером мобильного телефона в системе уже зарегистрирован',
             ],
+            
+            // ['mobile_phone', 'match', 'pattern' => ''],
             
             ['username', 'checkPersonalAccount'],
             

@@ -4,7 +4,8 @@ $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
 $config = [
-    'id' => 'basic',
+    'id' => 'management-company',
+    'name' => 'Management Company',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'aliases' => [
@@ -12,6 +13,13 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
     ],
     'language' => 'ru',
+    // Подключение модулей
+    'modules' => [
+        'clients' => [
+            'class' => 'app\modules\clients\ClientsModule',
+            'layout' => 'main-clients',
+        ],
+    ],
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
@@ -48,13 +56,18 @@ $config = [
         ],
         'db' => $db,
         /*
+         * Настройка ЧПУ
+         */
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                '' => 'site/index',
+                'login' => 'site/login',
+                'registration' => 'site/registration',
+                'request-password-reset' => 'site/request-password-reset',
             ],
         ],
-         */
     ],
     'params' => $params,
 ];

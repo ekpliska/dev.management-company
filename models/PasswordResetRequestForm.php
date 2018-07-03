@@ -50,6 +50,9 @@ class PasswordResetRequestForm extends Model {
         return true;
     }
     
+    /*
+     * Отправка письма с новым паролем
+     */
     public function sendEmail($view, $subject, $params = []) {
         $message = Yii::$app->mailer->compose(['html' => 'views/' . $view], $params)
                 ->setFrom('email-confirm@site.com')

@@ -2,6 +2,7 @@
     use yii\bootstrap\ActiveForm;
     use yii\helpers\Html;
     use yii\widgets\MaskedInput;
+    use yii\helpers\Url;
 
 /* 
  * Форма регистрации
@@ -50,6 +51,13 @@ $this->title = 'Customers | Регистрация';
                         <?= Html::submitButton('Зарегистрироваться', ['class' => 'btn btn-primary']) ?>
                     </div>
                 </div>
+            
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <a href="<?= Url::to(['/']) ?>">Вход</a> | 
+                        <a href="<?= Url::to(['site/request-password-reset']) ?>">Забыли пароль</a>
+                    </div>
+                </div>                            
             
             <?php ActiveForm::end() ?>
         </div>

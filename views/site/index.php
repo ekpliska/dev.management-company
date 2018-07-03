@@ -13,15 +13,13 @@ $this->title = 'Customers | Вход';
         <div class="row">
             <div class="col-lg-5">
                 <h2>Главная</h2>
+                <br />
+                <p>Имя пользователя: <?= Yii::$app->user->identity->user_login ?></p>
+                <p>Роль: <?= (Yii::$app->authManager->getRole('clients')->description) ?></p>
             </div>
             <div class="col-lg-7">
-                <h2>title</h2>
-
-                <p>
-                    text
-                </p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
+                <h2>Модули</h2>
+                <a href="<?= Url::to(['clients/clients']) ?>" class="btn btn-default">Клиенты</a>
             </div>
         </div>
 

@@ -52,9 +52,11 @@ class RbacController extends Controller {
         $auth->add($administrator);
 
         // Разрешение adminPanel - проверяет доступ к панеле управления 
-//        $adminPanel = $auth->createPermission('AdminPanel');
-//        $adminPanel->description = 'Панель администратора';
-//        $auth->add($adminPanel);
+        /*
+        $adminPanel = $auth->createPermission('AdminPanel');
+        $adminPanel->description = 'Панель администратора';
+        $auth->add($adminPanel);
+         */
         
         // Администратор обладает правами всех других пользователей
         /*
