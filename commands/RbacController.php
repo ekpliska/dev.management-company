@@ -5,10 +5,15 @@
 
 
 /*
+ * Испольщование таблиц БД
+ * 
+ */    
+
+/*
  * Инициация RBAC через консоль
  * Добавление ролей для пользователей:
- * lodger - Жилец
- * tenant - Аредатор
+ * clients - Жилец
+ * clients_rent - Аредатор
  * dispatcher - Сотрудник (Диспетчер)
  * specialist - Специалист
  * administrator - Администратор
@@ -26,28 +31,19 @@ class RbacController extends Controller {
         
         $auth->removeAll();
 
-        /*
-         *  Добавление ролей для пользователей:
-         * lodger - Жилец
-         * tenant - Аредатор
-         * dispatcher - Сотрудник (Диспетчер)
-         * specialist - Специалист
-         * administrator - Администратор
-         */
-                
-        $lodger = $auth->createRole('lodger');
-        $lodger->description = 'Жилец';
-        $auth->add($lodger);
+        $clients = $auth->createRole('clients');
+        $clients->description = 'Жилец';
+        $auth->add($clients);
         
-        $tenant = $auth->createRole('tenant');
-        $tenant->description = 'Арендатор';
-        $auth->add($tenant);        
+        $clients_rent = $auth->createRole('clients_rent');
+        $clients_rent->description = 'Арендатор';
+        $auth->add($clients_rent);        
         
         $dispatcher = $auth->createRole('dispatcher');
         $dispatcher->description = 'Сотрудник (Диспетчер)';
         $auth->add($dispatcher);        
         
-        $specialist = $auth->cteateRole('specialist');
+        $specialist = $auth->createRole('specialist');
         $specialist->description = 'Специалист';
         $auth->add($specialist);
                 
@@ -61,11 +57,13 @@ class RbacController extends Controller {
 //        $auth->add($adminPanel);
         
         // Администратор обладает правами всех других пользователей
-        $auth->addChild($administrator, $lodger);
-        $auth->addChild($administrator, $tenant);
+        /*
+        $auth->addChild($administrator, $clients);
+        $auth->addChild($administrator, $clients_rent);
         $auth->addChild($administrator, $dispatcher);
         $auth->addChild($administrator, $specialist);
-//        $auth->addChild($administrator, $adminPanel);
+        $auth->addChild($administrator, $adminPanel);
+         */
         
         $this->stdout('Формирование ролей и разрешений выполнено!', PHP_EOL);
         
