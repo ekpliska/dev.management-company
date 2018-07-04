@@ -5,6 +5,7 @@
     use Yii;
     use yii\behaviors\TimestampBehavior;
     use app\models\PersonalAccount;
+    use yii\web\UploadedFile;
     
 
 /**
@@ -42,7 +43,7 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             ['user_login', 'required'],
             
-            [['user_photo'], 'file', 'extensions' => 'png, jpg'],
+            [['user_photo'], 'file', 'extensions' => 'png, jpg, jpeg'],
             [['user_photo'], 'image', 'maxWidth' => 510, 'maxHeight' => 510],
             
             [['user_check_email', 'user_check_sms'], 'boolean'],
@@ -150,8 +151,28 @@ class User extends ActiveRecord implements IdentityInterface
         $this->user_account_id = $id['account_id'];
     }
     
-    public function editProfile() {
-        //
+    /*
+     * Загрузка фотографии в профиле пользователя
+     */    
+    public function uploadPhoto($username) {
+        
+        $user = User::findOne(['user_login' => $username]);
+        $current_image = $user->user_photo;
+        if ($user->load(Yii::$app->request->post())) {
+            $file = UploadedFile::getInstance($user, 'user_photo');
+            if ($file) {
+                $user->user_photo = $file;
+                $dir = Yii::getAlias('images/users/');
+                $file_name = $user->user_login . '_' . $user->user_photo->baseName . '.' . $user->user_photo->extension;
+                $user->user_photo->saveAs($dir . $file_name);
+                $user->user_photo = '/' . $dir . $file_name;
+                @unlink(Yii::getAlias('@webroot' . $current_image));
+            } else {
+                $user->user_photo = $current_image;
+            }
+            
+            return $user->save(false);
+        }   
     }
     
     /*

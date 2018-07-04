@@ -3,8 +3,12 @@
     namespace app\modules\clients\controllers;
     use yii\web\Controller;
     use Yii;
-    use app\models\User;
     use yii\web\UploadedFile;
+    use app\models\User;
+    use app\modules\clients\models\ClientsRentForm;
+    use app\models\Clients;
+    use yii\web\NotFoundHttpException;
+    
 
 /**
  * Default controller for the `clients` module
@@ -22,11 +26,31 @@ class ClientsController extends Controller
     /*
      * Профиль пользователя
      */
-    public function actionProfile() {
+    public function actionProfile($username) {
+
+        $user = User::findOne(['user_login' => $username]);
+        // $current_image = $user->user_photo;
         
-        $user = User::findOne(['user_id' => Yii::$app->user->identity->user_id]);
-        $current_image = $user->user_photo;
+        if ($username === null || !$user) {
+            throw new NotFoundHttpException('Вы обратились к несуществющей странице');
+        }
         
+        $client = Clients::findByUser($user->user_account_id);
+        
+        $clients_rent = new ClientsRentForm();
+        
+        if ($clients_rent->load(Yii::$app->request->post())) {
+            $clients_rent->addNewClient();
+        }
+        
+        if ($user->load(Yii::$app->request->post())) {
+            
+            if ($user->uploadPhoto($username)) {
+                $this->refresh();
+            }
+        }
+        
+        /*
         if ($user->load(Yii::$app->request->post())) {
             $file = UploadedFile::getInstance($user, 'user_photo');
             if ($file) {
@@ -44,9 +68,12 @@ class ClientsController extends Controller
                 return $this->refresh();
             }
         }
+         */
         
         return $this->render('profile', [
             'user' => $user,
+            'clients_rent' => $clients_rent,
+            'client' => $client,
         ]);
     }
     

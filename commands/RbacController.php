@@ -32,7 +32,7 @@ class RbacController extends Controller {
         $auth->removeAll();
 
         $clients = $auth->createRole('clients');
-        $clients->description = 'Жилец';
+        $clients->description = 'Собственник';
         $auth->add($clients);
         
         $clients_rent = $auth->createRole('clients_rent');

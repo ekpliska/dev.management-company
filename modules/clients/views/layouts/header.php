@@ -21,13 +21,13 @@
         'items' => [
             ['label' => 'Новости', 'url' => ['clients/index']],
             ['label' => 'Голосование', 'url' => ['']],
-            ['label' => 'Профиль', 'url' => ['clients/profile']],
+            ['label' => 'Профиль', 'url' => ['clients/profile', 'username' => Yii::$app->user->identity->user_login]],
             [
                 'label' => 'Лицевой счет',
                 'items' => [
                     ['label' => 'Общая информация', 'url' => ['']],
-                    ['label' => 'Тарифы', 'url' => ['']],
-                    ['label' => 'Приборы учета', 'url' => ['']],
+                    ['label' => 'Квитанции ЖКУ', 'url' => ['']],
+                    ['label' => 'Показания приборов учета', 'url' => ['']],
                     ['label' => 'Платежи', 'url' => ['']],
                 ],
             ],

@@ -3,6 +3,7 @@
     use Yii;
     use yii\db\ActiveRecord;
     use app\models\Clients;
+    use app\models\Rents;
 
 /**
  * Лицевой счет
@@ -33,6 +34,10 @@ class PersonalAccount extends ActiveRecord
     
     public function getClient() {
         return $this->hasOne(Clients::className(), ['clients_account_id' => 'account_id']);
+    }
+    
+    public function getRent() {
+        return $this->hasOne(Rents::className(), ['rents_account_id' => 'account_id']);
     }
 
     /**
