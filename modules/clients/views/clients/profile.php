@@ -3,13 +3,14 @@
     use yii\bootstrap\ActiveForm;
     use yii\helpers\Html;
     use yii\widgets\MaskedInput;
+    use yii\helpers\Url;
 
 $this->title = 'Профиль абонента';
 ?>
 
 
 <?php
-        $form = ActiveForm::begin([
+    $form = ActiveForm::begin([
             'id' => 'profile-form',
             'enableClientValidation' => true,
             'enableAjaxValidation' => false,
@@ -17,9 +18,33 @@ $this->title = 'Профиль абонента';
                 'enctype' => 'multipart/form-data',
             ],
         ])
-    ?>
+?>
+
 <div class="clients-default-index">
     <h1><?= $this->title ?></h1>
+    
+    <?php if (Yii::$app->session->hasFlash('success')) : ?>
+            <div class="alert alert-info" role="alert">
+                <strong>
+                    <?= Yii::$app->session->getFlash('success', false); ?>
+                </strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>                    
+            </div>
+        <?php endif; ?>
+    
+        <?php if (Yii::$app->session->hasFlash('errorerror')) : ?>
+            <div class="alert alert-error" role="alert">
+                <strong>
+                    <?= Yii::$app->session->getFlash('error', false); ?>
+                </strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>                
+            </div>
+        <?php endif; ?>
+    
     <div class="col-md-4">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -29,7 +54,68 @@ $this->title = 'Профиль абонента';
                 <div class="text-right">
                     <?= $form->field($client, 'is_rent')->checkbox(['id' => 'addRent']) ?>
                 </div>
+            </div>            
+            
+            <?php
+                $this->registerJs('
+                    $("#addRent").change(function(e) {
+                        if (!this.checked && "' . $rent->id . '") {
+                            $("#delete_rent").modal("show");
+                            $(".delete_yes").on("click", function(e) {
+                                    $.ajax({
+                                        url:"' . Url::toRoute(['clients/delete-rent']) . '",
+                                        method: "POST",
+                                        data: {
+                                            rent_id: "' . $rent->id . '",
+                                            status: "' . false . '",
+                                        },
+                                        success: function(data){
+                                            console.log(data);
+                                        }
+                                    });
+                            });
+
+                            $(".delete_no").on("click", function(e) {
+                                $("#addRent").prop("checked", true);
+                            });
+
+                        }
+
+                        if (this.checked && !"' . $rent->id . '") {
+                            console.log("new rent");
+                            $(".add__rent").show();
+                            $.ajax({
+                                url:"' . Url::toRoute(['clients/add-rent']) . '",
+                                method: "POST",
+                                data: {},
+                                success: function(data){
+                                    console.log(data);
+                                }
+                            });
+                        }
+                    });
+                ');
+            ?>
+            
+<div class="modal fade" id="delete_rent" role="dialog" tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content"><button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    Подтверждение удаления
+                </h4>
             </div>
+            <div class="modal-body">
+                <div class="modal__text">Удаление арендатора</div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger delete_yes" data-dismiss="modal">Да</button>
+                <button class="btn btn-primary delete_no" data-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>            
+            
             <div class="panel-body">
                 
                 <p>Как вас зовут?</p>                
@@ -79,68 +165,28 @@ $this->title = 'Профиль абонента';
         </div>
 
    
-    <div class="col-md-4">        
-        <div class="panel panel-default panel__add_rent">
-            <div class="panel-heading"><strong>Контактные данные арендатора</strong></div>
-            <div class="panel-body add_rent">
-                
-                <?= $form->field($clients_rent, 'surnamne')->input('text', ['placeHolder' => $clients_rent->getAttributeLabel('surnamne')])->label(true) ?>
-                
-                <?= $form->field($clients_rent, 'name')->input('text', ['placeHolder' => $clients_rent->getAttributeLabel('name')])->label(true) ?>
-                
-                <?= $form->field($clients_rent, 'secondname')->input('text', ['placeHolder' => $clients_rent->getAttributeLabel('secondname')])->label(true) ?>
-                
-                <?= $form->field($clients_rent, 'mobile')
-                        ->widget(MaskedInput::className(), [
-                            'mask' => '+7(999) 999-99-99'])
-                        ->input('text', ['placeHolder' => $clients_rent->getAttributeLabel('mobile')])->label(true) ?>
-                
-                <?= $form->field($clients_rent, 'email')->input('text', ['placeHolder' => $clients_rent->getAttributeLabel('email')])->label(true) ?>
-                
-                <?= $form->field($clients_rent, 'password')->input('password', ['placeHolder' => $clients_rent->getAttributeLabel('password')])->label(true) ?>
-                
-            </div>
-            <div class="panel-body info_rent">
-                
-                <p>Фамилия Имя Отчество</p>
-                <?= $user->personalAccount->rent->rents_surname ?>
-                <?= $user->personalAccount->rent->rents_name ?>
-                <?= $user->personalAccount->rent->rents_second_name ?>
-                
-                <p>Мобильный телефон</p>
-                <?= $user->personalAccount->rent->rents_mobile ?>
-                
-                <p>Электронная почта</p>
-                <?php // = $user->personalAccount->rent->user_email ?>
-                
-            </div>
-        </div>
-    </div>
-    
-    <?php if ($client->is_rent) : ?>
         <div class="col-md-4">        
             <div class="panel panel-default">
                 <div class="panel-heading"><strong>Контактные данные арендатора</strong></div>
                 <div class="panel-body info_rent">
-
-                    <p>Фамилия Имя Отчество</p>
-                    <?= $user->personalAccount->rent->rents_surname ?>
-                    <?= $user->personalAccount->rent->rents_name ?>
-                    <?= $user->personalAccount->rent->rents_second_name ?>
-
-                    <p>Мобильный телефон</p>
-                    <?= $user->personalAccount->rent->rents_mobile ?>
-
-                    <p>Электронная почта</p>
-                    <?php // = $user->personalAccount->rent->user_email ?>
-
+                    <?php if ($is_rent) : ?>
+                    
+                        <?= $form->field($rent, 'rents_surname')->input('text')->label(true) ?>
+                        <?= $form->field($rent, 'rents_name')->input('text')->label(true) ?>
+                        <?= $form->field($rent, 'rents_second_name')->input('text')->label(true) ?>
+                    
+                        <?= $form->field($rent, 'rents_mobile')->input('text')->label(true) ?>
+                        <?= $form->field($rent, 'rents_email')->input('text')->label(true) ?>
+                    
+                    <?php else: ?>
+                        <?= 'У собственника арендатора нет' ?>                    
+                    <?php endif; ?>
                 </div>
             </div>
-        </div>
-    <?php endif; ?>
+        </div>    
     
     <div class="col-md-12 text-right">
-            <?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary']) ?>
+        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary']) ?>
     </div>
 </div>
-        <?php ActiveForm::end(); ?>        
+<?php ActiveForm::end(); ?>        

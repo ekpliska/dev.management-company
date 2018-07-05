@@ -1,12 +1,7 @@
 $(document).ready(function() {
     
-    $('.panel__add_rent').hide();
-    
-    $('#addRent').change(function() {
-        $('.panel__add_rent').show();
-    });
-    
-    
+    $('.add__rent').hide();
+        
     /*
      * Предварительная загрузка превью аватара
      */

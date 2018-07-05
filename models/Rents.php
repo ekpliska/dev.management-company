@@ -4,6 +4,8 @@
     use Yii;
     use yii\db\ActiveRecord;
     use app\models\PersonalAccount;
+    use app\models\Clients;
+    use app\models\User;
 
 /**
  * This is the model class for table "rents".
@@ -31,11 +33,23 @@ class Rents extends ActiveRecord
     public function rules()
     {
         return [
-            [['rents_name', 'rents_second_name', 'rents_surname', 'rents_mobile'], 'required'],
+            [['rents_name', 'rents_second_name', 'rents_surname', 'rents_mobile', 'rents_email'], 'required'],
             [['rents_account_id'], 'integer'],
             [['rents_name', 'rents_second_name', 'rents_surname'], 'string', 'max' => 70],
             [['rents_mobile'], 'string', 'max' => 50],
+            ['rents_email', 'email'],
         ];
+    }
+    
+    function getClient() {
+        return $this->hasOne(Clients::className(), ['clients_id' => 'rents_clients_id']);
+    }
+    
+    public static function findByClient($clients_id) {
+        return static::find()
+                ->andWhere(['rents_clients_id' => $clients_id])
+                ->with('client')
+                ->one();
     }
     
     /*
@@ -44,9 +58,10 @@ class Rents extends ActiveRecord
      */
     public function afterSave($insert, $changedAttributes) {
         parent::afterSave($insert, $changedAttributes);
-        
-        $rentRole = Yii::$app->authManager->getRole('clients_rent');
-        Yii::$app->authManager->assign($rentRole, $this->getId());        
+        if ($insert) {
+            $rentRole = Yii::$app->authManager->getRole('clients_rent');
+            Yii::$app->authManager->assign($rentRole, $this->getId());                    
+        }
     }
     
     /*
@@ -63,7 +78,7 @@ class Rents extends ActiveRecord
                 ->asArray()
                 ->one();
         $this->rents_account_id = $id['account_id'];
-    }
+    }    
 
     /**
      * {@inheritdoc}

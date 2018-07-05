@@ -14,11 +14,11 @@
  */     
 class ClientsRentForm extends Model {
     
-    public $surnamne;
-    public $name;
-    public $secondname;
-    public $mobile;
-    public $email;
+    public $rents_surname;
+    public $rents_name;
+    public $rents_second_name;
+    public $rents_mobile;
+    public $rents_email;
     public $password;
 
 
@@ -27,11 +27,11 @@ class ClientsRentForm extends Model {
      */
     public function rules() {
         return [
-            [['surnamne', 'name', 'secondname', 'mobile', 'email', 'password'], 'required'],
-            [['surnamne', 'name', 'secondname'], 'filter', 'filter' => 'trim'],
+            [['rents_surname', 'rents_name', 'rents_second_name', 'rents_mobile', 'rents_email', 'password'], 'required'],
+            [['rents_surname', 'rents_name', 'rents_second_name'], 'filter', 'filter' => 'trim'],
             
             [
-                'mobile', 'unique',
+                'rents_mobile', 'unique',
                 'targetClass' => Clients::className(),
                 'targetAttribute' => 'clients_mobile',
                 'message' => 'Пользователь с введенным номером мобильного телефона в системе уже зарегистрирован',
@@ -39,7 +39,7 @@ class ClientsRentForm extends Model {
             
             ['password', 'string', 'min' => 6],
             
-            ['email', 'email'],
+            ['rents_email', 'email'],
         ];
     }
     
@@ -52,7 +52,6 @@ class ClientsRentForm extends Model {
         $transaction = Yii::$app->db->beginTransaction();
         
         try {
-            
             if ($this->validate()) {
                 $rent_new = new Rents();
                 $rent_new->rents_name = $this->surnamne;
@@ -78,16 +77,16 @@ class ClientsRentForm extends Model {
         }
     }
         
-    public function attributeLabels() {
-        return [
-            'surnamne' => 'Фамилия арендатора',
-            'name' => 'Имя арендатора',
-            'secondname' => 'Отчество арендатора',
-            'mobile' => 'Контактный телефон арендатора',
-            'email' => 'Электронная почта',
-            'password' => 'Пароль',
-        ];
-    }
+//    public function attributeLabels() {
+//        return [
+//            'surnamne' => 'Фамилия арендатора',
+//            'name' => 'Имя арендатора',
+//            'secondname' => 'Отчество арендатора',
+//            'mobile' => 'Контактный телефон арендатора',
+//            'email' => 'Электронная почта',
+//            'password' => 'Пароль',
+//        ];
+//    }
     
         
 }

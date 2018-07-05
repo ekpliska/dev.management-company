@@ -3,6 +3,7 @@
     namespace app\models;
     use Yii;
     use yii\db\ActiveRecord;
+    use app\models\Rents;
 
 /**
  * Собственники
@@ -33,7 +34,11 @@ class Clients extends ActiveRecord
         $user = static::findOne(['clients_account_id' => $account_id]);
         return $user;
     }
-
+    
+    public function getId() {
+        return $this->clients_id;
+    }
+    
     /**
      * Настройка полей для форм
      */

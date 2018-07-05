@@ -7,6 +7,7 @@
     use app\models\User;
     use app\modules\clients\models\ClientsRentForm;
     use app\models\Clients;
+    use app\models\Rents;
     use yii\web\NotFoundHttpException;
     
 
@@ -27,30 +28,61 @@ class ClientsController extends Controller
      * Профиль пользователя
      */
     public function actionProfile($username) {
+        
+        $is_rent = false;
 
         $user = User::findOne(['user_login' => $username]);
-        // $current_image = $user->user_photo;
+        $client = Clients::findOne(['clients_account_id' => $user->user_account_id]);
+        $rent_new = new ClientsRentForm();
         
-        if ($username === null || !$user) {
-            throw new NotFoundHttpException('Вы обратились к несуществющей странице');
+        if ($username === null || !$user || !$client) {
+            throw new NotFoundHttpException('Вы обратились к несуществующей странице');
         }
         
-        $client = Clients::findByUser($user->user_account_id);
-        
-        $clients_rent = new ClientsRentForm();
-        
-        if ($clients_rent->load(Yii::$app->request->post())) {
-            $clients_rent->addNewClient();
+        if ($client->is_rent) {
+            $rent = Rents::findByClient($client->id);
+            $is_rent = true;
         }
         
-        if ($user->load(Yii::$app->request->post())) {
-            
-            if ($user->uploadPhoto($username)) {
-                $this->refresh();
+        if (
+                $user->load(Yii::$app->request->post()) && 
+                $client->load(Yii::$app->request->post())
+            ) {
+            $isValid = $user->validate();
+            $isValid = $client->validate() && $isValid;
+            if ($isValid) {
+                Yii::$app->session->setFlash('success', 'Профиль обновлен');
+                $user->uploadPhoto($username);
+                $client->save(false);
+                
+                if ($rent && $rent->load(Yii::$app->request->post()) && $rent->validate()) {
+                    $rent->save();
+                }
+                
+                return $this->refresh();
+            } else {
+                Yii::$app->session->set('error', 'Произошла ошбка');
             }
         }
         
+        /* 
+        if (
+                $user->load(Yii::$app->request->post()) && $client->load(Yii::$app->request->post()) && 
+                ($rent && $rent->load(Yii::$app->request->post()))
+            ) {
+            $isValid = $user->validate();
+            $isValid = $client->validate() && $isValid;
+            if ($isValid) {
+                $user->uploadPhoto($username);
+                $client->save(false);
+                $rent->save();
+                $this->refresh();
+            }
+        }
+        */
+        
         /*
+        $current_image = $user->user_photo; 
         if ($user->load(Yii::$app->request->post())) {
             $file = UploadedFile::getInstance($user, 'user_photo');
             if ($file) {
@@ -72,9 +104,35 @@ class ClientsController extends Controller
         
         return $this->render('profile', [
             'user' => $user,
-            'clients_rent' => $clients_rent,
             'client' => $client,
+            'rent' => $rent,
+            'rent_new' => $rent_new,
+            'is_rent' => $is_rent,
         ]);
+    }    
+    
+    public function actionDeleteRent() {
+        
+        $rent_id = Yii::$app->request->post('rent_id');
+        
+       if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
+            $status = Yii::$app->request->post('status');
+
+            $info = Rents::findOne(['rents_id' => $rent_id]);
+            
+            if (!$status) {
+                $info->delete();
+                return 'Удаляем запись';
+            }
+        }
+        
+    }
+    
+    public function actionAddRent() {
+        
+        if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
+            return 'add rent';
+        }
     }
     
 }

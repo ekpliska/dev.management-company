@@ -18,7 +18,7 @@ class ClientsModule extends \yii\base\Module
                 'rules' => [
                     [
                         'allow' => true,
-                        'roles' => ['clients'],
+                        'roles' => ['clients', 'clients_rent'],
                     ],
                 ],
             ],

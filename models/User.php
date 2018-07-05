@@ -77,7 +77,7 @@ class User extends ActiveRecord implements IdentityInterface
      *  Поиск имени пользователя    
      */
     public static function findByUsername($username) {
-        return static::findOne(['user_login' => $username]);
+        return static::findOne(['user_login' => $username]);        
     }
 
     /*
