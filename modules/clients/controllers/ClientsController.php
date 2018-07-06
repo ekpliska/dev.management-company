@@ -32,8 +32,7 @@ class ClientsController extends Controller
         $is_rent = false;
 
         $user = User::findOne(['user_login' => $username]);
-        $client = Clients::findOne(['clients_account_id' => $user->user_account_id]);
-        $rent_new = new ClientsRentForm();
+        $client = Clients::findOne(['clients_account_id' => $user->user_account_id]);        
         
         if ($username === null || !$user || !$client) {
             throw new NotFoundHttpException('Вы обратились к несуществующей странице');
@@ -43,6 +42,13 @@ class ClientsController extends Controller
             $rent = Rents::findByClient($client->id);
             $is_rent = true;
         }
+        
+        $rent_new = new ClientsRentForm();
+        
+        if ($rent_new->load(Yii::$app->request->post())) {
+            $rent_new->addNewClient();
+        }
+
         
         if (
                 $user->load(Yii::$app->request->post()) && 
@@ -55,7 +61,7 @@ class ClientsController extends Controller
                 $user->uploadPhoto($username);
                 $client->save(false);
                 
-                if ($rent && $rent->load(Yii::$app->request->post()) && $rent->validate()) {
+                if ($rent && $rent->load(Yii::$app->request->post()) && $rent->validate()) {                    
                     $rent->save();
                 }
                 
@@ -115,7 +121,7 @@ class ClientsController extends Controller
         
         $rent_id = Yii::$app->request->post('rent_id');
         
-       if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
+        if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
             $status = Yii::$app->request->post('status');
 
             $info = Rents::findOne(['rents_id' => $rent_id]);
@@ -129,10 +135,10 @@ class ClientsController extends Controller
     }
     
     public function actionAddRent() {
-        
-        if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
-            return 'add rent';
+        $ren_new = new ClientsRentForm();
+        if(Yii::$app->request->isPjax){
+            return 'tet';
         }
     }
-    
+
 }

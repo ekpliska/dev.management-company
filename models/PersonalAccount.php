@@ -4,6 +4,7 @@
     use yii\db\ActiveRecord;
     use app\models\Clients;
     use app\models\Rents;
+    use app\models\Houses;
 
 /**
  * Лицевой счет
@@ -33,13 +34,23 @@ class PersonalAccount extends ActiveRecord
     }
     
     public function getClient() {
-        return $this->hasOne(Clients::className(), ['clients_account_id' => 'account_id']);
+        return $this->hasOne(Clients::className(), ['clients_id' => 'personal_clients_id']);
     }
     
     public function getRent() {
         return $this->hasOne(Rents::className(), ['rents_account_id' => 'account_id']);
     }
-
+    
+    public function getHouse() {
+        return $this->hasOne(Houses::className(), ['houses_account_id' => 'account_id']);        
+    }
+    
+    public static function findByClient($client_id) {
+        return static::find()
+                ->andWhere(['personal_clients_id' => $client_id])
+                ->one();
+    }
+    
     /**
      * Метки для полей
      */

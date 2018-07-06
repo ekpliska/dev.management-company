@@ -23,7 +23,7 @@ class ClientsRentForm extends Model {
 
 
     /*
-     * Приавда валидации
+     * Правила валидации
      */
     public function rules() {
         return [
@@ -37,6 +37,13 @@ class ClientsRentForm extends Model {
                 'message' => 'Пользователь с введенным номером мобильного телефона в системе уже зарегистрирован',
             ],
             
+            [
+                'rents_email', 'unique',
+                'targetClass' => User::className(),
+                'targetAttribute' => 'user_email',
+                'message' => 'Данный электронный адрес уже использовается в системе',
+            ],
+            
             ['password', 'string', 'min' => 6],
             
             ['rents_email', 'email'],
@@ -48,45 +55,45 @@ class ClientsRentForm extends Model {
      * Для арендатора создаем новую учетную запись
      */
     public function addNewClient() {
-        
+        var_dump('here');die;
         $transaction = Yii::$app->db->beginTransaction();
         
-        try {
-            if ($this->validate()) {
-                $rent_new = new Rents();
-                $rent_new->rents_name = $this->surnamne;
-                $rent_new->rents_second_name = $this->name;
-                $rent_new->rents_surname = $this->secondname;
-                $rent_new->rents_mobile = $this->mobile;
-                $rent_new->setAccountId(Yii::$app->user->identity->user_login);
+        if ($this->validate()) {
+            $rent_new = new Rents();
+            $rent_new->rents_name = $this->rents_surname;
+            $rent_new->rents_second_name = $this->rents_name;
+            $rent_new->rents_surname = $this->rents_second_name;
+            $rent_new->rents_mobile = $this->rents_mobile;
+            $rent_new->setAccountId(Yii::$app->user->identity->user_login);
 
-                $user_new = new User();
-                $user_new->user_login = Yii::$app->user->identity->user_login . '_rent';
-                $user_new->user_password = Yii::$app->security->generatePasswordHash($this->password);
-                $user_new->user_mobile = $this->mobile;
-                $user_new->user_email = $this->email;
-                $user_new->status = User::STATUS_ENABLED;
-                $user_new->setUserAccountId(Yii::$app->user->identity->user_login);
-                
+            $user_new = new User();
+            $user_new->user_login = Yii::$app->user->identity->user_login . '_rent';
+            $user_new->user_password = Yii::$app->security->generatePasswordHash($this->password);
+            $user_new->user_mobile = $this->rents_mobile;
+            $user_new->user_email = $this->rents_email;
+            $user_new->status = User::STATUS_ENABLED;
+            $user_new->setUserAccountId(Yii::$app->user->identity->user_login);
+
+            try {
                 if ($rent_new->save() && $user_new->save()) {
-                    $transaction->commit();
+                    $transaction->commit();                
                 }
-            }            
-        } catch (Exception $e) {
-            $transaction->rollBack();
-        }
+            } catch (Exception $e) {
+                $transaction->rollBack();
+            }
+        }            
     }
         
-//    public function attributeLabels() {
-//        return [
-//            'surnamne' => 'Фамилия арендатора',
-//            'name' => 'Имя арендатора',
-//            'secondname' => 'Отчество арендатора',
-//            'mobile' => 'Контактный телефон арендатора',
-//            'email' => 'Электронная почта',
-//            'password' => 'Пароль',
-//        ];
-//    }
+    public function attributeLabels() {
+        return [
+            'rents_surname' => 'Фамилия арендатора',
+            'rents_name' => 'Имя арендатора',
+            'rents_second_name' => 'Отчество арендатора',
+            'rents_mobile' => 'Контактный телефон арендатора',
+            'rents_email' => 'Электронная почта',
+            'password' => 'Пароль',
+        ];
+    }
     
         
 }

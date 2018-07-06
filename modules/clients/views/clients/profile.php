@@ -4,6 +4,7 @@
     use yii\helpers\Html;
     use yii\widgets\MaskedInput;
     use yii\helpers\Url;
+    
 
 $this->title = 'Профиль абонента';
 ?>
@@ -83,7 +84,6 @@ $this->title = 'Профиль абонента';
 
                         if (this.checked && !"' . $rent->id . '") {
                             console.log("new rent");
-                            $(".add__rent").show();
                             $.ajax({
                                 url:"' . Url::toRoute(['clients/add-rent']) . '",
                                 method: "POST",
@@ -110,7 +110,7 @@ $this->title = 'Профиль абонента';
             </div>
             <div class="modal-footer">
                 <button class="btn btn-danger delete_yes" data-dismiss="modal">Да</button>
-                <button class="btn btn-primary delete_no" data-dismiss="modal">Закрыть</button>
+                <button class="btn btn-primary delete_no" data-dismiss="modal">Отмена</button>
             </div>
         </div>
     </div>
@@ -169,7 +169,7 @@ $this->title = 'Профиль абонента';
             <div class="panel panel-default">
                 <div class="panel-heading"><strong>Контактные данные арендатора</strong></div>
                 <div class="panel-body info_rent">
-                    <?php if ($is_rent) : ?>
+                    <?php if ($is_rent && isset($rent)) : ?>
                     
                         <?= $form->field($rent, 'rents_surname')->input('text')->label(true) ?>
                         <?= $form->field($rent, 'rents_name')->input('text')->label(true) ?>
@@ -179,8 +179,12 @@ $this->title = 'Профиль абонента';
                         <?= $form->field($rent, 'rents_email')->input('text')->label(true) ?>
                     
                     <?php else: ?>
-                        <?= 'У собственника арендатора нет' ?>                    
+                        <?= 'У собственника арендатора нет' ?>
+                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#add_rent">Добавить</button>
+                        
+                    
                     <?php endif; ?>
+                    
                 </div>
             </div>
         </div>    
@@ -188,5 +192,60 @@ $this->title = 'Профиль абонента';
     <div class="col-md-12 text-right">
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary']) ?>
     </div>
+<?php ActiveForm::end(); ?>      
+    <div class="col-md-4">        
+            <div class="panel panel-default add__rent">
+                <div class="panel-heading"><strong>Контактные данные арендатора</strong></div>
+                <div class="panel-body info_rent">
+                    <?php // = $this->render('_form/_rent_form', ['rent_new' => new app\modules\clients\models\ClientsRentForm()]) ?>
+                </div>
+            </div>
+        </div>
+    
 </div>
-<?php ActiveForm::end(); ?>        
+      
+<div id="add_rent" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Добавить арендатора</h4>
+            </div>
+            <div class="modal-body">
+
+    <?php
+        $form_rent = ActiveForm::begin([
+            'id' => 'add-rent',
+            'enableClientValidation' => true,
+            'enableAjaxValidation' => false,
+            'options' => [
+                'data-pjax' => true,
+            ],
+        ])
+    ?>
+        <?= $form_rent->field($rent_new, 'rents_surname')->input('text', ['placeHolder' => $rent_new->getAttributeLabel('rents_surname')])->label() ?>
+
+        <?= $form_rent->field($rent_new, 'rents_name')->input('text', ['placeHolder' => $rent_new->getAttributeLabel('rents_name')])->label() ?>
+
+        <?= $form_rent->field($rent_new, 'rents_second_name')->input('text', ['placeHolder' => $rent_new->getAttributeLabel('rents_second_name')])->label() ?>
+
+        <?= $form_rent->field($rent_new, 'rents_mobile')
+                ->widget(MaskedInput::className(), [
+                    'mask' => '+7(999) 999-99-99'])
+                ->input('text', ['placeHolder' => $rent_new->getAttributeLabel('rents_mobile')])->label() ?>
+
+        <?= $form_rent->field($rent_new, 'rents_email')->input('text', ['placeHolder' => $rent_new->getAttributeLabel('rents_email')])->label() ?>
+
+        <?= $form_rent->field($rent_new, 'password')->input('password', ['placeHolder' => $rent_new->getAttributeLabel('password')])->label() ?>
+
+        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary']) ?>
+
+    <?php ActiveForm::end() ?>                
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -8,14 +8,7 @@
     use app\models\User;
 
 /**
- * This is the model class for table "rents".
- *
- * @property int $rents_id
- * @property string $rents_name
- * @property string $rents_second_name
- * @property string $rents_surname
- * @property string $rents_mobile
- * @property int $rents_account_id
+ * Арендатор
  */
 class Rents extends ActiveRecord
 {
@@ -28,12 +21,20 @@ class Rents extends ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * Правила валидации
      */
     public function rules()
     {
         return [
             [['rents_name', 'rents_second_name', 'rents_surname', 'rents_mobile', 'rents_email'], 'required'],
+            
+            [
+                'rents_email', 'unique',
+                'targetClass' => User::className(),
+                'targetAttribute' => 'user_email',
+                'message' => 'Пользователь с введенным элетронным аресом в системе уже зарегистрирован'
+            ],
+            
             [['rents_account_id'], 'integer'],
             [['rents_name', 'rents_second_name', 'rents_surname'], 'string', 'max' => 70],
             [['rents_mobile'], 'string', 'max' => 50],
@@ -41,10 +42,16 @@ class Rents extends ActiveRecord
         ];
     }
     
+    /*
+     * Связь с таблицей Собственники
+     */
     function getClient() {
         return $this->hasOne(Clients::className(), ['clients_id' => 'rents_clients_id']);
     }
     
+    /*
+     * Найти собсвенника по ID
+     */
     public static function findByClient($clients_id) {
         return static::find()
                 ->andWhere(['rents_clients_id' => $clients_id])
@@ -71,6 +78,13 @@ class Rents extends ActiveRecord
         return $this->rents_id;
     }
     
+    public function getFullName() {
+        return $this->rents_surname . ' ' .
+                $this->rents_name . ' ' .
+                $this->rents_second_name;
+    }
+    
+    
     public function setAccountId($account_id) {
         $id = PersonalAccount::find()
                 ->andWhere(['account_number' => $account_id])
@@ -78,10 +92,10 @@ class Rents extends ActiveRecord
                 ->asArray()
                 ->one();
         $this->rents_account_id = $id['account_id'];
-    }    
+    }
 
     /**
-     * {@inheritdoc}
+     * Настройка полей для форм
      */
     public function attributeLabels()
     {

@@ -25,7 +25,7 @@
             [
                 'label' => 'Лицевой счет',
                 'items' => [
-                    ['label' => 'Общая информация', 'url' => ['']],
+                    ['label' => 'Общая информация', 'url' => ['personal-account/index', 'number' => Yii::$app->user->identity->user_account_id]],
                     ['label' => 'Квитанции ЖКУ', 'url' => ['']],
                     ['label' => 'Показания приборов учета', 'url' => ['']],
                     ['label' => 'Платежи', 'url' => ['']],
