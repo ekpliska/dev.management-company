@@ -52,10 +52,9 @@ class Rents extends ActiveRecord
     /*
      * Найти собсвенника по ID
      */
-    public static function findByClient($clients_id) {
+    public static function findByRent($rent_id) {
         return static::find()
-                ->andWhere(['rents_clients_id' => $clients_id])
-                ->with('client')
+                ->andWhere(['rents_id' => $rent_id])
                 ->one();
     }
     
@@ -64,6 +63,7 @@ class Rents extends ActiveRecord
      * добавление роли Арендатор к учетной записи пользователя
      */
     public function afterSave($insert, $changedAttributes) {
+        
         parent::afterSave($insert, $changedAttributes);
         if ($insert) {
             $rentRole = Yii::$app->authManager->getRole('clients_rent');

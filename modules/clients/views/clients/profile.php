@@ -181,7 +181,6 @@ $this->title = 'Профиль абонента';
                     <?php else: ?>
                         <?= 'У собственника арендатора нет' ?>
                         <button type="button" class="btn btn-info" data-toggle="modal" data-target="#add_rent">Добавить</button>
-                        
                     
                     <?php endif; ?>
                     
@@ -197,13 +196,20 @@ $this->title = 'Профиль абонента';
             <div class="panel panel-default add__rent">
                 <div class="panel-heading"><strong>Контактные данные арендатора</strong></div>
                 <div class="panel-body info_rent">
+                    
                     <?php // = $this->render('_form/_rent_form', ['rent_new' => new app\modules\clients\models\ClientsRentForm()]) ?>
+                    <?php \yii\widgets\Pjax::begin(['enablePushState' => false]) ?>
+                        <a href="<?= Url::to(['clients/test']) ?>">Добавить</a>
+                    <?php \yii\widgets\Pjax::end() ?>
+                   
+                   
                 </div>
             </div>
         </div>
     
 </div>
-      
+
+<?php /*
 <div id="add_rent" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -216,11 +222,9 @@ $this->title = 'Профиль абонента';
     <?php
         $form_rent = ActiveForm::begin([
             'id' => 'add-rent',
+            'action' => 'clients/add-rent',
             'enableClientValidation' => true,
             'enableAjaxValidation' => false,
-            'options' => [
-                'data-pjax' => true,
-            ],
         ])
     ?>
         <?= $form_rent->field($rent_new, 'rents_surname')->input('text', ['placeHolder' => $rent_new->getAttributeLabel('rents_surname')])->label() ?>
@@ -249,3 +253,6 @@ $this->title = 'Профиль абонента';
         </div>
     </div>
 </div>
+ * 
+ * 
+ */?>

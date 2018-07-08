@@ -55,8 +55,6 @@ class ClientsRentForm extends Model {
      * Для арендатора создаем новую учетную запись
      */
     public function addNewClient() {
-        var_dump('here');die;
-        $transaction = Yii::$app->db->beginTransaction();
         
         if ($this->validate()) {
             $rent_new = new Rents();
@@ -65,7 +63,8 @@ class ClientsRentForm extends Model {
             $rent_new->rents_surname = $this->rents_second_name;
             $rent_new->rents_mobile = $this->rents_mobile;
             $rent_new->setAccountId(Yii::$app->user->identity->user_login);
-
+            $rent_new->save(false);            
+            
             $user_new = new User();
             $user_new->user_login = Yii::$app->user->identity->user_login . '_rent';
             $user_new->user_password = Yii::$app->security->generatePasswordHash($this->password);
@@ -73,14 +72,8 @@ class ClientsRentForm extends Model {
             $user_new->user_email = $this->rents_email;
             $user_new->status = User::STATUS_ENABLED;
             $user_new->setUserAccountId(Yii::$app->user->identity->user_login);
-
-            try {
-                if ($rent_new->save() && $user_new->save()) {
-                    $transaction->commit();                
-                }
-            } catch (Exception $e) {
-                $transaction->rollBack();
-            }
+            $user_new->save();
+            
         }            
     }
         

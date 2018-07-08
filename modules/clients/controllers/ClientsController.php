@@ -39,17 +39,16 @@ class ClientsController extends Controller
         }
         
         if ($client->is_rent) {
-            $rent = Rents::findByClient($client->id);
+            $rent = Rents::findByRent($client->clients_rent_id);
             $is_rent = true;
         }
         
-        $rent_new = new ClientsRentForm();
+        $new_rent = new ClientsRentForm();
         
-        if ($rent_new->load(Yii::$app->request->post())) {
-            $rent_new->addNewClient();
+        if ($new_rent->load(Yii::$app->request->post('registration-form'))) {
+            return var_dump('test');
         }
 
-        
         if (
                 $user->load(Yii::$app->request->post()) && 
                 $client->load(Yii::$app->request->post())
@@ -71,48 +70,11 @@ class ClientsController extends Controller
             }
         }
         
-        /* 
-        if (
-                $user->load(Yii::$app->request->post()) && $client->load(Yii::$app->request->post()) && 
-                ($rent && $rent->load(Yii::$app->request->post()))
-            ) {
-            $isValid = $user->validate();
-            $isValid = $client->validate() && $isValid;
-            if ($isValid) {
-                $user->uploadPhoto($username);
-                $client->save(false);
-                $rent->save();
-                $this->refresh();
-            }
-        }
-        */
-        
-        /*
-        $current_image = $user->user_photo; 
-        if ($user->load(Yii::$app->request->post())) {
-            $file = UploadedFile::getInstance($user, 'user_photo');
-            if ($file) {
-                $user->user_photo = $file;
-                $dir = Yii::getAlias('images/users/');
-                $file_name = $user->user_login . '_' . $user->user_photo->baseName . '.' . $user->user_photo->extension;
-                $user->user_photo->saveAs($dir . $file_name);
-                $user->user_photo = '/' . $dir . $file_name;
-                @unlink(Yii::getAlias('@webroot' . $current_image));
-            } else {
-                $user->user_photo = $current_image;
-            }
-            
-            if ($user->validate() && $user->save()) {
-                return $this->refresh();
-            }
-        }
-         */
-        
         return $this->render('profile', [
             'user' => $user,
             'client' => $client,
             'rent' => $rent,
-            'rent_new' => $rent_new,
+            // 'rent_new' => $rent_new,
             'is_rent' => $is_rent,
         ]);
     }    
@@ -135,10 +97,40 @@ class ClientsController extends Controller
     }
     
     public function actionAddRent() {
-        $ren_new = new ClientsRentForm();
-        if(Yii::$app->request->isPjax){
-            return 'tet';
+        
+        $model = new ClientsRentForm();
+        
+        if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
+            if ($model->load(Yii::$app->request->post())) {
+                $model->addNewClient();
+                // return $rent_id;
+                return true;
+            }
         }
     }
+    
+    public function actionTest() {
+        
+//        $model = new ClientsRentForm();
+//        $rent_id = Yii::$app->request->post('rent_id');
+//        if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
+//            if ($model->load(Yii::$app->request->post())) {
+//                $model->addNewClient();
+//                return $rent_id;
+//            }
+//        }
+        return $this->renderAjax('_rent_form', ['rent_new' => new ClientsRentForm()]);
+    }
+    
+//    public function actionFormValidate() {
+//
+//        $model = new ClientsRentForm();
+//        if(Yii::$app->request->isAjax && $model->load($_POST))
+//        {
+//            Yii::$app->response->format = 'json';
+//            return \yii\widgets\ActiveForm::validate($model);
+//        }
+//    }
 
+    
 }
