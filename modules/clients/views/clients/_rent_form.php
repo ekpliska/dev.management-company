@@ -5,7 +5,7 @@
     use yii\helpers\Url;
 
 ?>
-
+<?= 'id ' . $client_id ?>
     <?php
         $form_rent = ActiveForm::begin([
             'id' => 'add-rent',
@@ -57,6 +57,7 @@
                                             "' . Html::getInputName($rent_new, "rents_mobile") . '": rents_mobile,
                                             "' . Html::getInputName($rent_new, "rents_email") . '": rents_email,
                                             "' . Html::getInputName($rent_new, "password") . '": password,
+                                            client_id: "' . $client_id . '",
                                         },
                                         success: function(data){
                                             console.log(data);

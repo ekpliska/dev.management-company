@@ -199,7 +199,7 @@ $this->title = 'Профиль абонента';
                     
                     <?php // = $this->render('_form/_rent_form', ['rent_new' => new app\modules\clients\models\ClientsRentForm()]) ?>
                     <?php \yii\widgets\Pjax::begin(['enablePushState' => false]) ?>
-                        <a href="<?= Url::to(['clients/test']) ?>">Добавить</a>
+                        <a href="<?= Url::to(['clients/test', 'client_id' => $client->id]) ?>">Добавить</a>
                     <?php \yii\widgets\Pjax::end() ?>
                    
                    

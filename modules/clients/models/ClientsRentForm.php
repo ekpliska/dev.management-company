@@ -54,7 +54,7 @@ class ClientsRentForm extends Model {
      * Добавление арендатора прикрепленного к заданному собственнику
      * Для арендатора создаем новую учетную запись
      */
-    public function addNewClient() {
+    public function addNewClient($client_id) {
         
         if ($this->validate()) {
             $rent_new = new Rents();
@@ -63,7 +63,8 @@ class ClientsRentForm extends Model {
             $rent_new->rents_surname = $this->rents_second_name;
             $rent_new->rents_mobile = $this->rents_mobile;
             $rent_new->setAccountId(Yii::$app->user->identity->user_login);
-            $rent_new->save(false);            
+            $rent_new->rents_clients_id = $client_id;
+            $rent_new->save(false);
             
             $user_new = new User();
             $user_new->user_login = Yii::$app->user->identity->user_login . '_rent';
@@ -71,6 +72,7 @@ class ClientsRentForm extends Model {
             $user_new->user_mobile = $this->rents_mobile;
             $user_new->user_email = $this->rents_email;
             $user_new->status = User::STATUS_ENABLED;
+            $user_new->user_rent_id = $rent_new->id;
             $user_new->setUserAccountId(Yii::$app->user->identity->user_login);
             $user_new->save();
             

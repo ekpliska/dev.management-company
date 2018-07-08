@@ -52,9 +52,9 @@ class Rents extends ActiveRecord
     /*
      * Найти собсвенника по ID
      */
-    public static function findByRent($rent_id) {
+    public static function findByRent($client_id) {
         return static::find()
-                ->andWhere(['rents_id' => $rent_id])
+                ->andWhere(['rents_clients_id' => $client_id])
                 ->one();
     }
     

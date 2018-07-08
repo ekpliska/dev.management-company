@@ -39,7 +39,7 @@ class ClientsController extends Controller
         }
         
         if ($client->is_rent) {
-            $rent = Rents::findByRent($client->clients_rent_id);
+            $rent = Rents::findByRent($client->clients_id);
             $is_rent = true;
         }
         
@@ -87,9 +87,11 @@ class ClientsController extends Controller
             $status = Yii::$app->request->post('status');
 
             $info = Rents::findOne(['rents_id' => $rent_id]);
+            $user = User::findOne(['user_rent_id' => $rent_id]);
             
             if (!$status) {
                 $info->delete();
+                $user->delete();
                 return 'Удаляем запись';
             }
         }
@@ -99,17 +101,18 @@ class ClientsController extends Controller
     public function actionAddRent() {
         
         $model = new ClientsRentForm();
+        $client_id = Yii::$app->request->post('client_id');
         
         if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
             if ($model->load(Yii::$app->request->post())) {
-                $model->addNewClient();
+                $model->addNewClient($client_id);
                 // return $rent_id;
                 return true;
             }
         }
     }
     
-    public function actionTest() {
+    public function actionTest($client_id) {
         
 //        $model = new ClientsRentForm();
 //        $rent_id = Yii::$app->request->post('rent_id');
@@ -119,7 +122,7 @@ class ClientsController extends Controller
 //                return $rent_id;
 //            }
 //        }
-        return $this->renderAjax('_rent_form', ['rent_new' => new ClientsRentForm()]);
+        return $this->renderAjax('_rent_form', ['rent_new' => new ClientsRentForm(), 'client_id' => $client_id]);
     }
     
 //    public function actionFormValidate() {
