@@ -56,27 +56,36 @@ class ClientsRentForm extends Model {
      */
     public function addNewClient($client_id) {
         
-        if ($this->validate()) {
-            $rent_new = new Rents();
-            $rent_new->rents_name = $this->rents_surname;
-            $rent_new->rents_second_name = $this->rents_name;
-            $rent_new->rents_surname = $this->rents_second_name;
-            $rent_new->rents_mobile = $this->rents_mobile;
-            $rent_new->setAccountId(Yii::$app->user->identity->user_login);
-            $rent_new->rents_clients_id = $client_id;
-            $rent_new->save(false);
+        $transaction = Yii::$app->db->beginTransaction();
+        
+        try {
             
-            $user_new = new User();
-            $user_new->user_login = Yii::$app->user->identity->user_login . '_rent';
-            $user_new->user_password = Yii::$app->security->generatePasswordHash($this->password);
-            $user_new->user_mobile = $this->rents_mobile;
-            $user_new->user_email = $this->rents_email;
-            $user_new->status = User::STATUS_ENABLED;
-            $user_new->user_rent_id = $rent_new->id;
-            $user_new->setUserAccountId(Yii::$app->user->identity->user_login);
-            $user_new->save();
-            
-        }            
+            if ($this->validate()) {
+                $rent_new = new Rents();
+                $rent_new->rents_name = $this->rents_name;
+                $rent_new->rents_second_name = $this->rents_second_name;
+                $rent_new->rents_surname = $this->rents_surname;
+                $rent_new->rents_mobile = $this->rents_mobile;
+                $rent_new->setAccountId(Yii::$app->user->identity->user_login);
+                $rent_new->rents_clients_id = $client_id;
+                $rent_new->rents_email = $this->rents_email;
+                $rent_new->save(false);
+                
+                $user_new = new User();
+                $user_new->user_login = Yii::$app->user->identity->user_login . '_rent';
+                $user_new->user_password = Yii::$app->security->generatePasswordHash($this->password);
+                $user_new->user_mobile = $this->rents_mobile;
+                $user_new->user_email = $this->rents_email;
+                $user_new->status = User::STATUS_ENABLED;
+                $user_new->user_rent_id = $rent_new->id;
+                $user_new->setUserAccountId(Yii::$app->user->identity->user_login);
+                $user_new->save(false);
+
+                $transaction->commit();
+            }            
+        } catch (Exception $e) {
+            $transaction->rollBack();                
+        }
     }
         
     public function attributeLabels() {
