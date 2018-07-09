@@ -78,6 +78,9 @@ class Rents extends ActiveRecord
         return $this->rents_id;
     }
     
+    /*
+     * Полное имя (фамилия, имя, отчество)
+     */
     public function getFullName() {
         return $this->rents_surname . ' ' .
                 $this->rents_name . ' ' .

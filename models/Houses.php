@@ -5,19 +5,7 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "houses".
- *
- * @property int $houses_id
- * @property string $houses_name
- * @property string $houses_town
- * @property string $houses_street
- * @property string $houses_number_house
- * @property int $houses_porch
- * @property int $houses_floor
- * @property int $houses_flat
- * @property int $houses_rooms
- * @property int $houses_square
- * @property int $houses_account_id
+ * Информация о жилых помещениях
  */
 class Houses extends \yii\db\ActiveRecord
 {

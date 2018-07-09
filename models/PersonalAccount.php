@@ -5,6 +5,7 @@
     use app\models\Clients;
     use app\models\Rents;
     use app\models\Houses;
+    use app\models\Organizations;
 
 /**
  * Лицевой счет
@@ -28,7 +29,7 @@ class PersonalAccount extends ActiveRecord
             [['account_number'], 'required'],
             [['account_balance'], 'integer'],
             [['account_number'], 'string', 'max' => 100],
-            [['account_organization'], 'string', 'max' => 255],
+            [['account_organization_id'], 'integer'],
             [['account_number'], 'unique'],
         ];
     }
@@ -45,6 +46,10 @@ class PersonalAccount extends ActiveRecord
         return $this->hasOne(Houses::className(), ['houses_account_id' => 'account_id']);        
     }
     
+    public function getOrganization() {
+        return $this->hasOne(Organizations::className(), ['organizations_id' => 'account_organization_id']);
+    }
+    
     public static function findByClient($client_id) {
         return static::find()
                 ->andWhere(['personal_clients_id' => $client_id])
@@ -59,7 +64,7 @@ class PersonalAccount extends ActiveRecord
         return [
             'account_id' => 'Account ID',
             'account_number' => 'Account Number',
-            'account_organization' => 'Account Organiztion',
+            'account_organization_id' => 'Account Organiztion',
             'account_balance' => 'Account Square',
         ];
     }
