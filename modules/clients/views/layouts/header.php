@@ -5,7 +5,12 @@
     
 /*
  * Шапка, меню, хлебные крошки
- */    
+ */
+$attr_url = [
+    'user' => Yii::$app->user->identity->user_id,
+    'username' => Yii::$app->user->identity->user_login,
+    'account' => Yii::$app->user->identity->user_account_id
+]    
 ?>
 
 <?php
@@ -31,7 +36,7 @@
                     ['label' => 'Платежи', 'url' => ['']],
                 ],
             ],
-            ['label' => 'Заявки', 'url' => ['']],
+            ['label' => 'Заявки', 'url' => ['requests/index', 'username' => Yii::$app->user->identity->user_client_id]],
             ['label' => 'Платные услуги', 'url' => ['']],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]

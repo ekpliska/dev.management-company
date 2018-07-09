@@ -56,6 +56,13 @@ class PersonalAccount extends ActiveRecord
                 ->one();
     }
     
+    public static function findByAccountNumber($user_id) {
+        return static::find()
+                ->andWhere(['personal_user_id' => $user_id])
+                ->select('account_number')
+                ->one();
+    }
+    
     /**
      * Метки для полей
      */
