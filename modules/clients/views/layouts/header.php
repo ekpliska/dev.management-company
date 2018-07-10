@@ -6,11 +6,16 @@
 /*
  * Шапка, меню, хлебные крошки
  */
-$attr_url = [
-    'user' => Yii::$app->user->identity->user_id,
-    'username' => Yii::$app->user->identity->user_login,
-    'account' => Yii::$app->user->identity->user_account_id
-]    
+    
+/* 
+ * Параметры формирования ссылок (внутри личного кибинета)
+ * @user - ID пользователя
+ * @username - Логин пользователя
+ * @account - ID Лицевого счета
+ */    
+$user = Yii::$app->user->identity->user_id; 
+$username = Yii::$app->user->identity->user_login;
+$account = Yii::$app->user->identity->user_account_id;   
 ?>
 
 <?php
@@ -26,17 +31,17 @@ $attr_url = [
         'items' => [
             ['label' => 'Новости', 'url' => ['clients/index']],
             ['label' => 'Голосование', 'url' => ['']],
-            ['label' => 'Профиль', 'url' => ['clients/profile', 'username' => Yii::$app->user->identity->user_login]],
+            ['label' => 'Профиль', 'url' => ['clients/profile', 'user' => $user, 'username' => $username, 'account' => $account]],
             [
                 'label' => 'Лицевой счет',
                 'items' => [
-                    ['label' => 'Общая информация', 'url' => ['personal-account/index', 'number' => Yii::$app->user->identity->user_account_id]],
+                    ['label' => 'Общая информация', 'url' => ['personal-account/index', 'user' => $user, 'username' => $username, 'account' => $account]],
                     ['label' => 'Квитанции ЖКУ', 'url' => ['']],
                     ['label' => 'Показания приборов учета', 'url' => ['']],
                     ['label' => 'Платежи', 'url' => ['']],
                 ],
             ],
-            ['label' => 'Заявки', 'url' => ['requests/index', 'username' => Yii::$app->user->identity->user_client_id]],
+            ['label' => 'Заявки', 'url' => ['requests/index', 'user' => $user, 'username' => $username, 'account' => $account]],
             ['label' => 'Платные услуги', 'url' => ['']],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]

@@ -30,7 +30,7 @@ $this->title = 'Лицевой счет | Общая информация';
 
             
             <div class="panel-body">
-                <?= DetailView::widget([
+                <?php /* DetailView::widget([
                     'model' => $account,
                     'attributes' => [
                         'account_number',
@@ -75,7 +75,7 @@ $this->title = 'Лицевой счет | Общая информация';
                             'value' => $account->house->square,                            
                         ],                        
                     ],
-                ]) ?>                
+                ]) */ ?>                
             </div>
         </div>
     </div>    

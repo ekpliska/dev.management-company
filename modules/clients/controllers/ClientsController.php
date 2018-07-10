@@ -27,14 +27,13 @@ class ClientsController extends Controller
     /*
      * Профиль пользователя
      */
-    public function actionProfile($username) {
+    public function actionProfile($user, $username, $account) {
         
-        $is_rent = false;
-
-        $user = User::findOne(['user_login' => $username]);
-        $client = Clients::findOne(['clients_account_id' => $user->user_account_id]);        
+        $user_info = User::findByUser($user, $username, $account);       
+        $is_rent = false;       
+        $client = Clients::findOne(['clients_account_id' => $account]);        
         
-        if ($username === null || !$user || !$client) {
+        if (!$user_info || !$client) {
             throw new NotFoundHttpException('Вы обратились к несуществующей странице');
         }
         
@@ -42,22 +41,23 @@ class ClientsController extends Controller
             $rent = Rents::findByRent($client->clients_id);
             $is_rent = true;
         }
-        
-        $new_rent = new ClientsRentForm();
-        
-        if ($new_rent->load(Yii::$app->request->post('registration-form'))) {
-            return var_dump('test');
-        }
+
+// ПРОВЕРИТЬ ДЛЯ ЧЕГО        
+//        $new_rent = new ClientsRentForm();
+//        
+//        if ($new_rent->load(Yii::$app->request->post('registration-form'))) {
+//            return var_dump('test');
+//        }
 
         if (
-                $user->load(Yii::$app->request->post()) && 
+                $user_info->load(Yii::$app->request->post()) && 
                 $client->load(Yii::$app->request->post())
             ) {
-            $isValid = $user->validate();
+            $isValid = $user_info->validate();
             $isValid = $client->validate() && $isValid;
             if ($isValid) {
                 Yii::$app->session->setFlash('success', 'Профиль обновлен');
-                $user->uploadPhoto($username);
+                $user_info->uploadPhoto($username);
                 $client->save(false);
                 
                 if ($rent && $rent->load(Yii::$app->request->post()) && $rent->validate()) {                    
@@ -71,7 +71,7 @@ class ClientsController extends Controller
         }
         
         return $this->render('profile', [
-            'user' => $user,
+            'user' => $user_info,
             'client' => $client,
             'rent' => $rent,
             // 'rent_new' => $rent_new,

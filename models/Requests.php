@@ -3,9 +3,9 @@
     namespace app\models;
     use Yii;
     use yii\db\ActiveRecord;
-    use app\models\TypeRequests;
     use yii\helpers\ArrayHelper;
     use yii\behaviors\TimestampBehavior;
+    use app\models\TypeRequests;
 
 /**
  * 
@@ -18,11 +18,12 @@ class Requests extends ActiveRecord
             TimestampBehavior::className(),
         ];
     }    
-    
-    const STATUS_IN_WORK = 0;
-    const STATUS_PERFORM = 1;
-    const STATUS_FEEDBAK = 2;
-    const STATUS_CLOSE = 3;
+
+    const STATUS_NEW = 0;
+    const STATUS_IN_WORK = 1;
+    const STATUS_PERFORM = 2;
+    const STATUS_FEEDBAK = 3;
+    const STATUS_CLOSE = 4;
 
     /**
      * {@inheritdoc}
@@ -34,6 +35,7 @@ class Requests extends ActiveRecord
     
     public static function getStatusNameArray() {
         return [
+            self::STATUS_NEW => 'Новая',
             self::STATUS_IN_WORK => 'В работе',
             self::STATUS_PERFORM => 'Исполненная',
             self::STATUS_FEEDBAK => 'На уточнении',
@@ -41,10 +43,21 @@ class Requests extends ActiveRecord
         ];
     }
     
-    public function setStatusName() {
-        return ArrayHelper::map(self::getStatusNameArray(), $this->status);
+    public function getStatusName() {
+        return ArrayHelper::getValue(self::getStatusNameArray(), $this->status);
     }
 
+    public function getNameRequest() {
+        return ArrayHelper::getValue(TypeRequests::getTypeNameArray(), $this->requests_type_id);
+    }    
+    
+    
+    public static function findRequestByIdent($request_numder) {
+        return self::find()
+                ->andWhere(['requests_ident' => $request_numder])
+                ->one();
+    }
+    
     /**
      * {@inheritdoc}
      */
@@ -61,9 +74,10 @@ class Requests extends ActiveRecord
         return $this->hasOne(TypeRequests::className(), ['type_requests_id' => 'requests_type_id']);
     }
     
-    public static function findByUser($username) {
+    public static function findByUser($user_id) {
         return self::find()
-                ->andWhere(['requests_user_id' => $username]);
+                ->andWhere(['requests_user_id' => $user_id])
+                ->orderBy(['created_at' => SORT_DESC]);
     }
 
     /**

@@ -20,7 +20,8 @@ class TypeRequests extends \yii\db\ActiveRecord
     }
     
     public static function getTypeNameArray() {
-        return $this->find()->asArray()->all();
+        $array = static::find()->asArray()->all();
+        return \yii\helpers\ArrayHelper::map($array, 'type_requests_id', 'type_requests_name');
     }
 
     /**

@@ -79,6 +79,16 @@ class User extends ActiveRecord implements IdentityInterface
     public static function findByUsername($username) {
         return static::findOne(['user_login' => $username]);        
     }
+    
+    public static function findByUser($user, $username, $account) {
+        return static::find()
+                ->andWhere([
+                    'user_id' => $user,
+                    'user_login' => $username,
+                    'user_account_id' => $account,
+                    ])
+                ->one();
+    }
 
     /*
      *  Получить ID пользователя
@@ -150,6 +160,19 @@ class User extends ActiveRecord implements IdentityInterface
         
         $this->user_account_id = $id['account_id'];
     }
+
+    /*
+     * Для связи таблицы пользователь и собственник (поиск по номеру телефона)
+     */
+    public function setClientByPhone($phone) {
+        $id = Clients::find()
+                ->andWhere(['clients_mobile' => $phone])
+                ->select('clients_id')
+                ->asArray()
+                ->one();
+        
+        $this->user_client_id = $id['clients_id'];
+    }    
     
     /*
      * Загрузка фотографии в профиле пользователя

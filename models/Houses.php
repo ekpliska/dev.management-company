@@ -31,6 +31,12 @@ class Houses extends \yii\db\ActiveRecord
         ];
     }
     
+    public static function findByAccountId($account_id) {
+        return self::find()
+                ->andWhere(['houses_account_id' => $account_id])
+                ->one();
+    }
+    
     public function getAdress() {
         return $this->houses_town . ' ' .
                 $this->houses_street . ' ' .

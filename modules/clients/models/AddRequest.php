@@ -31,18 +31,24 @@ class AddRequest extends Model {
         ];
     }
     
-    public function addRequest($username) {
+    public function addRequest($user) {
         
-        $account = PersonalAccount::findByAccountNumber($username);
-        var_dump($account);die;
+        $account = PersonalAccount::findByAccountNumber($user);
+        
+        /* Формирование идентификатора для заявки:
+         * последние 4 символа лицевого счета - тип заявки
+         */
+        $this->request_numder = substr($account->account_number, 2) . '-' . str_pad($this->request_type, 2, 0, STR_PAD_LEFT);
         
         $new_requests = new Requests();
         if ($new_requests->validate()) {
-            $new_requests->requests_ident = 'test' . '-' . str_pad($this->request_type, 2, 0, STR_PAD_LEFT);
+            $new_requests->requests_ident = $this->request_numder;
             $new_requests->requests_type_id = $this->request_type;
             $new_requests->requests_comment = $this->request_comment;
-            $new_requests->requests_user_id = Yii::$app->user->identity->user_id;
-            $new_requests->status = Requests::STATUS_IN_WORK;
+            $new_requests->requests_phone = $this->request_phone;
+            $new_requests->requests_user_id = $user;
+            $new_requests->status = Requests::STATUS_NEW;
+            $new_requests->is_accept = false;
             if ($new_requests->save()) {
                 return true;
             }

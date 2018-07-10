@@ -5,6 +5,7 @@
     use yii\widgets\ActiveForm;
     use yii\helpers\ArrayHelper;
     use yii\widgets\MaskedInput;
+    use yii\helpers\Url;
     
 /* 
  * Заявки (Обзая страница)
@@ -16,6 +17,15 @@ $this->title = 'Мои заявки';
     
     <div class="col-md-3">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-account-modal">Добавить заявку</button>
+        <h4>Статусы заявок</h4>
+        <div class="list-group">
+            <a href="#" class="list-group-item">Все</a>
+            <a href="#" class="list-group-item">Новые</a>
+            <a href="#" class="list-group-item">В работе</a>
+            <a href="#" class="list-group-item">Исполненные</a>
+            <a href="#" class="list-group-item">На уточнении</a>
+            <a href="#" class="list-group-item">Закрытые</a>
+        </div>
     </div>
     <div class="col-md-9">
         
@@ -47,14 +57,39 @@ $this->title = 'Мои заявки';
                 ['class' => 'yii\grid\SerialColumn'],
                 
                 'requests_ident',
-                'requests_type_id',
+                [
+                    'attribute' => 'requests_type_id',
+                    'value' => function ($data) {
+                        return $data->getNameRequest();
+                    },
+                ],
                 'requests_comment',
                 'requests_specialist_id',
-                'created_at',
-                'updated_at',
-                'status',
+                [
+                    'attribute' => 'created_at',
+                    'format' => ['date', 'php:d.m.Y H:m:i'],
+                ],
+                [
+                    'attribute' => 'updated_at',
+                    'format' => ['date', 'php:d.m.Y H:m:i'],
+                ],
+                [
+                    'attribute' => 'status',
+                    'value' => function ($data) {
+                        return $data->getStatusName();
+                    }
+                    ],
+                [
+                    'class' => 'yii\grid\ActionColumn',
+                    'template' => '{view-request}',
+                    'buttons' => [
+                        'view-request' => function ($url, $data) {
+                            $url = ['request_numder' => $data->requests_ident];
+                            return '<a href='. Url::to(['requests/view-request', 'request_numder' => $data->requests_ident]) .' class="btn btn-info">Подробнее</a>';
+                        },
+                    ],
+                ],
                 
-                ['class' => 'yii\grid\ActionColumn'],
             ],
             ]); ?>
     </div>

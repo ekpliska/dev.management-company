@@ -58,8 +58,8 @@ class RegistrationForm extends Model {
             // Проверка введенного номера телефона на уникальность
             [
                 'mobile_phone', 'unique',
-                'targetClass' => Clients::className(),
-                'targetAttribute' => 'clients_mobile',
+                'targetClass' => User::className(),
+                'targetAttribute' => 'user_mobile',
                 'message' => 'Пользователь с введенным номером мобильного телефона в системе уже зарегистрирован',
             ],
             
@@ -99,6 +99,8 @@ class RegistrationForm extends Model {
             $model->user_email = $this->email;
             $model->user_mobile = $this->mobile_phone;
             $model->setUserAccountId($this->username);
+            
+            $model->setClientByPhone($this->mobile_phone);
             
             // Новый пользователь получает статус без доступа в систему
             $model->status = User::STATUS_DISABLED;
