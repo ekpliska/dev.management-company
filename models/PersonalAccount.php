@@ -50,10 +50,22 @@ class PersonalAccount extends ActiveRecord
         return $this->hasOne(Organizations::className(), ['organizations_id' => 'account_organization_id']);
     }
     
-    public static function findByClient($client_id) {
+    public static function findByNumber($account_id) {
         return static::find()
+                ->andWhere(['account_id' => $account_id]);
+                // ->one();
+    }
+    
+    
+    /*
+     * Получить список всех лицевых счетов закрепенных за данным пользователем
+     */
+    public static function findByClient($client_id) {
+        
+        $account_find = static::find()
                 ->andWhere(['personal_clients_id' => $client_id])
-                ->one();
+                ->all();
+        return $account_all = \yii\helpers\ArrayHelper::map($account_find, 'account_id', 'account_number');
     }
     
     public static function findByAccountNumber($user_id) {

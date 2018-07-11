@@ -38,7 +38,7 @@ class ClientsController extends Controller
         }
         
         if ($client->is_rent) {
-            $rent = Rents::findByRent($client->clients_id);
+            $rent = Rents::findByRent($client->id);
             $is_rent = true;
         }
 
@@ -63,8 +63,10 @@ class ClientsController extends Controller
                 if ($rent) {
                     if ($rent->load(Yii::$app->request->post()) && $rent->validate()) {
                         $rent->save();
+                        return $this->refresh();
                     }
                 }                
+                
                 return $this->refresh();
                 
             } else {
@@ -79,7 +81,7 @@ class ClientsController extends Controller
             // 'rent_new' => $rent_new,
             'is_rent' => $is_rent,
         ]);
-    }    
+    }
     
     public function actionDeleteRent() {
         

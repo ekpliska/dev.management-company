@@ -1,13 +1,14 @@
 <?php
 
-namespace app\models;
-
-use Yii;
+    namespace app\models;
+    use Yii;
+    use yii\db\ActiveRecord;
+    use app\models\Clients;
 
 /**
  * Информация о жилых помещениях
  */
-class Houses extends \yii\db\ActiveRecord
+class Houses extends ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -30,6 +31,11 @@ class Houses extends \yii\db\ActiveRecord
             [['houses_number_house'], 'string', 'max' => 10],
         ];
     }
+    
+    public function getClient() {
+        return $this->hasOne(Clients::className(), ['client_id' => 'houses_account_id']);
+    }      
+        
     
     public static function findByAccountId($account_id) {
         return self::find()

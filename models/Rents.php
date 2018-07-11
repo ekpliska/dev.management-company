@@ -30,10 +30,10 @@ class Rents extends ActiveRecord
             
             [['rents_name', 'rents_second_name', 'rents_surname', 'rents_email'], 'filter', 'filter' => 'trim'],
             
-            [[
-                'rents_name', 'rents_second_name', 
-                'rents_surname'], 'match', 'pattern' => '/^[-А-я]+$/i', 'message' => 'Поле содержит не допустимые символы'
-            ],
+//            [[
+//                'rents_name', 'rents_second_name', 
+//                'rents_surname'], 'match', 'pattern' => '/^[А-я-]+$/i', 'message' => 'Поле содержит не допустимые символы'
+//            ],
             
             [
                 'rents_email', 'unique',

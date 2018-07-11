@@ -5,6 +5,7 @@
     use yii\db\ActiveRecord;
     use app\models\Rents;
     use app\models\PersonalAccount;
+    use app\models\Houses;
 
 /**
  * Собственники
@@ -34,6 +35,14 @@ class Clients extends ActiveRecord
     public function getPersonalAccount() {
         return $this->hasMany(PersonalAccount::className(), ['personal_clients_id' => 'clients_id']);
     }
+    
+    public function getRent() {
+        return $this->hasOne(Rents::className(), ['rents_clients_id' => 'clients_id']);
+    }
+    
+    public function getHouse() {
+        return $this->hasOne(Houses::className(), ['houses_client_id' => 'clients_id']);
+    }    
     
     public static function findByUser($account_id) {
         $user = static::findOne(['clients_account_id' => $account_id]);

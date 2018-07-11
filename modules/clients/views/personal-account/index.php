@@ -1,85 +1,60 @@
 <?php
-    use yii\widgets\DetailView;
     use yii\widgets\ActiveForm;
     use yii\helpers\Html;
     use yii\helpers\ArrayHelper;
+    use yii\widgets\Pjax;
+    use yii\widgets\ListView;
+    use yii\helpers\Url;
 /* 
  * Лицевой счет / Общая информация
  */
-$this->title = 'Лицевой счет | Общая информация';
+$this->title = 'Общая информация';
 ?>
 <div class="clients-default-index">
     <h1><?= $this->title ?></h1>
+    
     <div class="col-md-6">
-        Лицевой счет
-        <?php
-            // var_dump($number_account)
+        <?php 
+            $form_filter = ActiveForm::begin([
+                'id' => 'filter-form-account',
+                'options' => [
+                    'class' => 'form-inline',
+                ]
+            ]); 
         ?>
+        
+            <?= $form_filter->field($_filter, 'account_number')
+                    ->dropDownList($account_all, [
+                        'onchange' => '$.pjax.reload({container: "#pjax-list-account", url: "'.Url::to(['personal-account/list']).'", data: {id: $(this).val()}});',
+                    ]) ?>
+        
+        <?php ActiveForm::end(); ?> 
     </div>
+    
     <div class="col-md-6 text-right">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-account-modal">Добавить лицевой счет</button>
     </div>
+    <div class="clearfix"></div>    
+    
     <div class="col-md-6">
-        
         <div class="panel panel-default">
-            <div class="panel-heading">
-                <div class="text-left">
-                    <strong>Лицевой счет</strong>                    
-                </div>
-            </div>
-
-            
+            <div class="panel-heading"><strong>Иформация по лицевому счету</strong></div>
             <div class="panel-body">
-                <?php /* DetailView::widget([
-                    'model' => $account,
-                    'attributes' => [
-                        'account_number',
-                        [
-                            'attribute' => 'Организация',
-                            'value' => function ($data) {
-                                return $data->organization->organizations_name;
-                            },
-                        ],
-                        [
-                            'attribute' => 'Собственник',
-                            'value' => $account->client->fullName,
-                        ],
-                        [
-                            'attribute' => 'Телефон',
-                            'value' => $account->client->phone,
-                        ],
-                        [
-                            'attribute' => 'Арендатор',
-                            'value' => function ($data) {
-                                return $data->client->is_rent ? $data->rent->fullName : 'Арендатор отсутствует';
-                            },
-                        ],
-                        [
-                            'attribute' => 'Адрес',
-                            'value' => $account->house->adress,                            
-                        ],
-                        [
-                            'attribute' => 'Парадная',
-                            'value' => $account->house->porch,                            
-                        ],
-                        [
-                            'attribute' => 'Этаж',
-                            'value' => $account->house->floor,                            
-                        ],
-                        [
-                            'attribute' => 'Количество комнат',
-                            'value' => $account->house->rooms,                            
-                        ],
-                        [
-                            'attribute' => 'Жилая площадь (кв.м.)',
-                            'value' => $account->house->square,                            
-                        ],                        
-                    ],
-                ]) */ ?>                
+                <?php Pjax::begin(['enablePushState' => false, 'id' => 'pjax-list-account']); ?>
+            
+                    <?= ListView::widget([
+                            'dataProvider' => $dataProvider,
+                            'itemView' => 'list',
+                            'layout' => "{pager}\n{summary}\n{items}\n{pager}",
+                        ]) ?>
+            
+                <?php Pjax::end(); ?>
             </div>
         </div>
-    </div>    
+    </div>
+    
     <div class="col-md-6">
+        
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div class="text-left">
@@ -103,6 +78,7 @@ $this->title = 'Лицевой счет | Общая информация';
             </div>
             <div class="modal-body">
                 <div class="container-fluid">
+                    
                     <div class="row">
                         <?php 
                             $form = ActiveForm::begin([
@@ -111,15 +87,15 @@ $this->title = 'Лицевой счет | Общая информация';
                         ?>
 
                             <div class="col-md-6">
-                                <?= $form->field($model, 'account_number')->input('text', ['placeHolder' => $model->getAttributeLabel('account_number')])->label() ?>
+                                <?= $form->field($add_account, 'account_number')->input('text', ['placeHolder' => $add_account->getAttributeLabel('account_number')])->label() ?>
                             </div>
 
                             <div class="col-md-6">
-                                <?= $form->field($model, 'account_last_sum')->input('text', ['placeHolder' => $model->getAttributeLabel('account_last_sum')])->label() ?>
+                                <?= $form->field($add_account, 'account_last_sum')->input('text', ['placeHolder' => $add_account->getAttributeLabel('account_last_sum')])->label() ?>
                             </div>
 
                             <div class="col-md-12">
-                                <?= $form->field($model, 'account_organization_id')
+                                <?= $form->field($add_account, 'account_organization_id')
                                     ->dropDownList(ArrayHelper::map(\app\models\Organizations::find()->orderBy('organizations_name asc')->all(),
                                             'organizations_id', 'organizations_name'),
                                             ['prompt' => 'Выберите организацию из списка'])
@@ -127,27 +103,27 @@ $this->title = 'Лицевой счет | Общая информация';
                             </div>
                         
                             <div class="col-md-12">
-                                <?= $form->field($model, 'account_client_surname')
+                                <?= $form->field($add_account, 'account_client_surname')
                                     ->input('text', [
-                                        'placeHolder' => $model->getAttributeLabel('account_client_surname'),
+                                        'placeHolder' => $add_account->getAttributeLabel('account_client_surname'),
                                         'value' => $account->client->clients_surname,
                                     ])
                                     ->label() ?>
                             </div>
                             
                             <div class="col-md-6">
-                                <?= $form->field($model, 'account_client_name')
+                                <?= $form->field($add_account, 'account_client_name')
                                     ->input('text', [
-                                        'placeHolder' => $model->getAttributeLabel('account_client_name'),
+                                        'placeHolder' => $add_account->getAttributeLabel('account_client_name'),
                                         'value' => $account->client->clients_name,
                                     ])
                                     ->label() ?>
                             </div>
                         
                             <div class="col-md-6">
-                                <?= $form->field($model, 'account_client_secondname')
+                                <?= $form->field($add_account, 'account_client_secondname')
                                     ->input('text', [
-                                        'placeHolder' => $model->getAttributeLabel('account_client_secondname'), 
+                                        'placeHolder' => $add_account->getAttributeLabel('account_client_secondname'), 
                                         'value' => $account->client->clients_second_name,
                                     ])
                                     ->label() ?>
@@ -155,7 +131,7 @@ $this->title = 'Лицевой счет | Общая информация';
                         
                             <div class="col-md-12">
                                 <?php // var_dump($all_rent) ?>
-                                <?= $form->field($model, 'account_rent')->input('text', ['placeHolder' => $model->getAttributeLabel('account_rent')])->label() ?>
+                                <?= $form->field($add_account, 'account_rent')->input('text', ['placeHolder' => $add_account->getAttributeLabel('account_rent')])->label() ?>
                             </div>
                     </div>
                 </div>

@@ -20,6 +20,7 @@ $this->title = 'Customers | Вход';
             <div class="col-lg-7">
                 <h2>Модули</h2>
                 <a href="<?= Url::to(['clients/clients']) ?>" class="btn btn-default">Клиенты</a>
+                <a href="<?= Url::to(['houses/index']) ?>" class="btn btn-default">Клиенты</a>
             </div>
         </div>
 
