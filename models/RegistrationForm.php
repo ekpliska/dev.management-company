@@ -37,7 +37,7 @@ class RegistrationForm extends Model {
                 'last_sum', 'square',
                 'mobile_phone', 'email'], 'filter', 'filter' => 'trim'],
             
-            [['username'], 'string', 'min' => 6, 'max' => 70],
+            [['username'], 'string', 'min' => 11, 'max' => 11],
             
             // Проверка введенного логина на уникалность в таблице Пользователи
             [
@@ -62,6 +62,8 @@ class RegistrationForm extends Model {
                 'targetAttribute' => 'user_mobile',
                 'message' => 'Пользователь с введенным номером мобильного телефона в системе уже зарегистрирован',
             ],
+            
+            ['mobile_phone', 'match', 'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/i'],
             
             // ['mobile_phone', 'match', 'pattern' => ''],
             
@@ -91,15 +93,18 @@ class RegistrationForm extends Model {
      * Метод описывает первый шаг рагистрации пользователя
      */
     public function registration() {
-
+        
         if ($this->validate()) {
             $model = new User();
             $model->user_login = $this->username;
             $model->user_password = Yii::$app->security->generatePasswordHash($this->password);
             $model->user_email = $this->email;
             $model->user_mobile = $this->mobile_phone;
-            $model->setUserAccountId($this->username);
             
+            // Связываем таблицы Пользователь и лицевой счет (основной)
+            // $model->setUserAccountId($this->username);
+            
+            // Связываем таблицы Пользователь и Собственник
             $model->setClientByPhone($this->mobile_phone);
             
             // Новый пользователь получает статус без доступа в систему

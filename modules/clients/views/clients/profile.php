@@ -182,7 +182,7 @@ $this->title = 'Профиль абонента';
                 <div class="panel-heading"><strong>Добавить арендатора</strong></div>
                 <div class="panel-body info_rent">
                     <?php Pjax::begin(['enablePushState' => false]) ?>
-                        <a href="<?= Url::to(['clients/test', 'client_id' => $client->id]) ?>">Добавить</a>
+                        <a href="<?= Url::to(['clients/add-form-rent', 'client_id' => $client->id]) ?>">Добавить</a>
                     <?php Pjax::end() ?>
                 </div>
             </div>

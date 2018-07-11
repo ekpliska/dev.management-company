@@ -13,7 +13,7 @@
 class Rents extends ActiveRecord
 {
     /**
-     * {@inheritdoc}
+     * Таблица из БД
      */
     public static function tableName()
     {
@@ -28,16 +28,25 @@ class Rents extends ActiveRecord
         return [
             [['rents_name', 'rents_second_name', 'rents_surname', 'rents_mobile', 'rents_email'], 'required'],
             
+            [['rents_name', 'rents_second_name', 'rents_surname', 'rents_email'], 'filter', 'filter' => 'trim'],
+            
+            [[
+                'rents_name', 'rents_second_name', 
+                'rents_surname'], 'match', 'pattern' => '/^[-А-я]+$/i', 'message' => 'Поле содержит не допустимые символы'
+            ],
+            
             [
                 'rents_email', 'unique',
                 'targetClass' => User::className(),
                 'targetAttribute' => 'user_email',
-                'message' => 'Пользователь с введенным элетронным аресом в системе уже зарегистрирован'
+                'message' => 'Пользователь с введенным элетронным адресом в системе уже зарегистрирован'
             ],
             
-            [['rents_account_id'], 'integer'],
-            [['rents_name', 'rents_second_name', 'rents_surname'], 'string', 'max' => 70],
+            [['rents_name', 'rents_second_name', 'rents_surname'], 'string', 'min' => 3, 'max' => 70],
+            
             [['rents_mobile'], 'string', 'max' => 50],
+            ['rents_mobile', 'match', 'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/i'],
+            
             ['rents_email', 'email'],
         ];
     }
@@ -104,10 +113,11 @@ class Rents extends ActiveRecord
     {
         return [
             'rents_id' => 'Rents ID',
-            'rents_name' => 'Rents Name',
-            'rents_second_name' => 'Rents Second Name',
-            'rents_surname' => 'Rents Surname',
-            'rents_mobile' => 'Rents Mobile',
+            'rents_name' => 'Имя',
+            'rents_second_name' => 'Отчество',
+            'rents_surname' => 'Фамилия',
+            'rents_mobile' => 'Контактный телефон',
+            'rents_email' => 'Электронная почта',
             'rents_account_id' => 'Rents Account ID',
         ];
     }

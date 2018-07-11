@@ -39,7 +39,7 @@ class RequestsController extends Controller
                 Yii::$app->session->setFlash('error', 'Возникла ошибка');
             }
             return $this->refresh();
-        }        
+        }
         
         return $this->render('index', ['all_requests' => $all_requests, 'model' => $model]);
     }

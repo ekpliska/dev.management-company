@@ -59,12 +59,14 @@ class ClientsController extends Controller
                 Yii::$app->session->setFlash('success', 'Профиль обновлен');
                 $user_info->uploadPhoto($username);
                 $client->save(false);
-                
-                if ($rent && $rent->load(Yii::$app->request->post()) && $rent->validate()) {                    
-                    $rent->save();
-                }
-                
+
+                if ($rent) {
+                    if ($rent->load(Yii::$app->request->post()) && $rent->validate()) {
+                        $rent->save();
+                    }
+                }                
                 return $this->refresh();
+                
             } else {
                 Yii::$app->session->set('error', 'Произошла ошбка');
             }
@@ -112,16 +114,7 @@ class ClientsController extends Controller
         }
     }
     
-    public function actionTest($client_id) {
-        
-//        $model = new ClientsRentForm();
-//        $rent_id = Yii::$app->request->post('rent_id');
-//        if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
-//            if ($model->load(Yii::$app->request->post())) {
-//                $model->addNewClient();
-//                return $rent_id;
-//            }
-//        }
+    public function actionAddFormRent($client_id) {        
         return $this->renderAjax('_rent_form', ['rent_new' => new ClientsRentForm(), 'client_id' => $client_id]);
     }
     
