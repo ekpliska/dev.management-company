@@ -6,6 +6,7 @@
     use yii\helpers\ArrayHelper;
     use yii\widgets\MaskedInput;
     use yii\helpers\Url;
+    use yii\widgets\Pjax;
     
 /* 
  * Заявки (Обзая страница)
@@ -29,69 +30,77 @@ $this->title = 'Мои заявки';
     </div>
     <div class="col-md-9">
         
-    <?php if (Yii::$app->session->hasFlash('success')) : ?>
-        <div class="alert alert-info" role="alert">
-            <strong>
-                <?= Yii::$app->session->getFlash('success', false); ?>
-            </strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>                    
-        </div>
-    <?php endif; ?>
-    
-    <?php if (Yii::$app->session->hasFlash('error')) : ?>
-        <div class="alert alert-error" role="alert">
-            <strong>
-                <?= Yii::$app->session->getFlash('error', false); ?>
-            </strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>                
-        </div>
-    <?php endif; ?>         
+        <?php if (Yii::$app->session->hasFlash('success')) : ?>
+            <div class="alert alert-info" role="alert">
+                <strong>
+                    <?= Yii::$app->session->getFlash('success', false); ?>
+                </strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>                    
+            </div>
+        <?php endif; ?>
+
+        <?php if (Yii::$app->session->hasFlash('error')) : ?>
+            <div class="alert alert-error" role="alert">
+                <strong>
+                    <?= Yii::$app->session->getFlash('error', false); ?>
+                </strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>                
+            </div>
+        <?php endif; ?>         
         
-        <?= GridView::widget([
-            'dataProvider' => $all_requests,
-            'columns' => [
-                ['class' => 'yii\grid\SerialColumn'],
-                
-                'requests_ident',
-                [
-                    'attribute' => 'requests_type_id',
-                    'value' => function ($data) {
-                        return $data->getNameRequest();
-                    },
-                ],
-                'requests_comment',
-                'requests_specialist_id',
-                [
-                    'attribute' => 'created_at',
-                    'format' => ['date', 'php:d.m.Y H:m:i'],
-                ],
-                [
-                    'attribute' => 'updated_at',
-                    'format' => ['date', 'php:d.m.Y H:m:i'],
-                ],
-                [
-                    'attribute' => 'status',
-                    'value' => function ($data) {
-                        return $data->getStatusName();
-                    }
-                    ],
-                [
-                    'class' => 'yii\grid\ActionColumn',
-                    'template' => '{view-request}',
-                    'buttons' => [
-                        'view-request' => function ($url, $data) {
-                            $url = ['request_numder' => $data->requests_ident];
-                            return '<a href='. Url::to(['requests/view-request', 'request_numder' => $data->requests_ident]) .' class="btn btn-info">Подробнее</a>';
+        <?php echo $this->render('_filter', ['model_filter' => $model_filter, 'type_requests' => $type_requests]); ?>
+        
+        
+        <?php Pjax::begin(['enablePushState' => false]); ?>
+        
+        <?php echo $this->render('grid', ['all_requests' => $all_requests]); ?>
+            
+            <?php /*= GridView::widget([
+                'dataProvider' => $all_requests,
+                'columns' => [
+                    ['class' => 'yii\grid\SerialColumn'],
+
+                    'requests_ident',
+                    [
+                        'attribute' => 'requests_type_id',
+                        'value' => function ($data) {
+                            return $data->getNameRequest();
                         },
                     ],
+                    'requests_comment',
+                    'requests_specialist_id',
+                    [
+                        'attribute' => 'created_at',
+                        'format' => ['date', 'php:d.m.Y H:m:i'],
+                    ],
+                    [
+                        'attribute' => 'updated_at',
+                        'format' => ['date', 'php:d.m.Y H:m:i'],
+                    ],
+                    [
+                        'attribute' => 'status',
+                        'value' => function ($data) {
+                            return $data->getStatusName();
+                        }
+                        ],
+                    [
+                        'class' => 'yii\grid\ActionColumn',
+                        'template' => '{view-request}',
+                        'buttons' => [
+                            'view-request' => function ($url, $data) {
+                                $url = ['request_numder' => $data->requests_ident];
+                                return '<a href='. Url::to(['requests/view-request', 'request_numder' => $data->requests_ident]) .' class="btn btn-info">Подробнее</a>';
+                            },
+                        ],
+                    ],
+
                 ],
-                
-            ],
-            ]); ?>
+                ]); */ ?>
+            <?php Pjax::end() ?>
     </div>
 </div>
 

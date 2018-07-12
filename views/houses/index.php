@@ -19,6 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Create Houses', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
+    <?php yii\widgets\Pjax::begin(['id' => 'countries']) ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -41,4 +42,5 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
+    <?php yii\widgets\Pjax::end() ?>
 </div>

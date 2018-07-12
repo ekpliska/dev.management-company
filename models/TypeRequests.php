@@ -2,12 +2,10 @@
 
     namespace app\models;
     use Yii;
+    use yii\db\ActiveRecord;
 
 /**
- * This is the model class for table "type_requests".
- *
- * @property int $type_requests_id
- * @property string $type_requests_name
+ * Вид заявок
  */
 class TypeRequests extends \yii\db\ActiveRecord
 {

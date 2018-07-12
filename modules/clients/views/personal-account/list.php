@@ -3,20 +3,7 @@
     use yii\helpers\HtmlPurifier;
 ?>
 <div class="account-item">
-    <h2></h2>    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</div>
-
-
-<table class="table table-bordered">
+ <table class="table table-bordered">
     <tbody>
         <tr>
             <td>Лицевой счет</td>
@@ -61,3 +48,4 @@
         
     </tbody>
   </table>
+</div>

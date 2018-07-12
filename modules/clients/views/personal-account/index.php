@@ -19,11 +19,12 @@ $this->title = 'Общая информация';
                 'id' => 'filter-form-account',
                 'options' => [
                     'class' => 'form-inline',
-                ]
+                    'data-pjax' => true,
+                ],
             ]); 
         ?>
         
-            <?= $form_filter->field($_filter, 'account_number')
+            <?= $form_filter->field($_filter, '_value')
                     ->dropDownList($account_all, [
                         'onchange' => '$.pjax.reload({container: "#pjax-list-account", url: "'.Url::to(['personal-account/list']).'", data: {id: $(this).val()}});',
                     ]) ?>

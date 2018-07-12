@@ -4,7 +4,7 @@
     use app\models\PersonalAccount;
     use app\modules\clients\models\AddPersonalAccount;
     use app\models\User;
-    use app\modules\clients\models\FilterPersonalAccount;
+    use app\modules\clients\models\FilterForm;
 
 /**
  * Контроллер по работе с разделом "Лицевой счет"
@@ -31,7 +31,7 @@ class PersonalAccountController extends Controller {
         ]);
 
         // Форма для фильтрации лицевых счетов
-        $_filter = new FilterPersonalAccount();        
+        $_filter = new FilterForm();
         // Получить список всех лицевых счетов пользователя        
         $account_all = PersonalAccount::findByClient($user_info->user_client_id);
         
