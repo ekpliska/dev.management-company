@@ -1,5 +1,56 @@
 [
     {
+        "name": "abeautifulsite/simpleimage",
+        "version": "2.7.0",
+        "version_normalized": "2.7.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/claviska/SimpleImage.git",
+            "reference": "54a99d302355d22ee00d9842a8dbe101a52203d8"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/claviska/SimpleImage/zipball/54a99d302355d22ee00d9842a8dbe101a52203d8",
+            "reference": "54a99d302355d22ee00d9842a8dbe101a52203d8",
+            "shasum": ""
+        },
+        "require": {
+            "ext-gd": "*",
+            "php": ">=5.3.0"
+        },
+        "time": "2017-01-06T16:38:10+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.5-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "abeautifulsite": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Nazar Mokrynskyi",
+                "email": "nazar@mokrynskyi.com",
+                "homepage": "http://cleverstyle.org/",
+                "role": "Developer"
+            },
+            {
+                "name": "Cory LaViska",
+                "homepage": "http://www.abeautifulsite.net/",
+                "role": "Developer"
+            }
+        ],
+        "description": "A PHP class that simplifies working with images"
+    },
+    {
         "name": "behat/gherkin",
         "version": "v4.5.1",
         "version_normalized": "4.5.1.0",
@@ -509,6 +560,66 @@
         "description": "BDD assertion library for PHPUnit"
     },
     {
+        "name": "costa-rico/yii2-images",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/CostaRico/yii2-images.git",
+            "reference": "df63bd9113cb25d8f480485033b7ed23ff105915"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/CostaRico/yii2-images/zipball/df63bd9113cb25d8f480485033b7ed23ff105915",
+            "reference": "df63bd9113cb25d8f480485033b7ed23ff105915",
+            "shasum": ""
+        },
+        "require": {
+            "abeautifulsite/simpleimage": "2.7",
+            "yiisoft/yii2": "*"
+        },
+        "require-dev": {
+            "codeception/specify": "*",
+            "codeception/verify": "*",
+            "mikey179/vfsstream": "1.3.*@dev",
+            "yiisoft/yii2-codeception": "*"
+        },
+        "suggest": {
+            "ext-imagick": ""
+        },
+        "time": "2018-07-04T12:53:06+00:00",
+        "type": "yii2-extension",
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "rico\\yii2images\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Costa Rico",
+                "email": "zetogo@gmail.com"
+            },
+            {
+                "name": "Rob Rhyne",
+                "email": "rob.rhyne@gmail.com"
+            }
+        ],
+        "description": "yii2 images module for storing images",
+        "keywords": [
+            "Costa Rico",
+            "images",
+            "images store",
+            "store",
+            "yii2",
+            "yii2-images"
+        ]
+    },
+    {
         "name": "doctrine/instantiator",
         "version": "1.0.5",
         "version_normalized": "1.0.5.0",
@@ -615,17 +726,17 @@
     },
     {
         "name": "fzaninotto/faker",
-        "version": "v1.7.1",
-        "version_normalized": "1.7.1.0",
+        "version": "v1.8.0",
+        "version_normalized": "1.8.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/fzaninotto/Faker.git",
-            "reference": "d3ed4cc37051c1ca52d22d76b437d14809fc7e0d"
+            "reference": "f72816b43e74063c8b10357394b6bba8cb1c10de"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/d3ed4cc37051c1ca52d22d76b437d14809fc7e0d",
-            "reference": "d3ed4cc37051c1ca52d22d76b437d14809fc7e0d",
+            "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/f72816b43e74063c8b10357394b6bba8cb1c10de",
+            "reference": "f72816b43e74063c8b10357394b6bba8cb1c10de",
             "shasum": ""
         },
         "require": {
@@ -633,10 +744,10 @@
         },
         "require-dev": {
             "ext-intl": "*",
-            "phpunit/phpunit": "^4.0 || ^5.0",
+            "phpunit/phpunit": "^4.8.35 || ^5.7",
             "squizlabs/php_codesniffer": "^1.5"
         },
-        "time": "2017-08-15T16:48:10+00:00",
+        "time": "2018-07-12T10:23:15+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -2781,17 +2892,17 @@
     },
     {
         "name": "yiisoft/yii2-composer",
-        "version": "2.0.6",
-        "version_normalized": "2.0.6.0",
+        "version": "2.0.7",
+        "version_normalized": "2.0.7.0",
         "source": {
             "type": "git",
             "url": "https://github.com/yiisoft/yii2-composer.git",
-            "reference": "163419f1f197e02f015713b0d4f85598d8f8aa80"
+            "reference": "1439e78be1218c492e6cde251ed87d3f128b9534"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/yiisoft/yii2-composer/zipball/163419f1f197e02f015713b0d4f85598d8f8aa80",
-            "reference": "163419f1f197e02f015713b0d4f85598d8f8aa80",
+            "url": "https://api.github.com/repos/yiisoft/yii2-composer/zipball/1439e78be1218c492e6cde251ed87d3f128b9534",
+            "reference": "1439e78be1218c492e6cde251ed87d3f128b9534",
             "shasum": ""
         },
         "require": {
@@ -2800,7 +2911,7 @@
         "require-dev": {
             "composer/composer": "^1.0"
         },
-        "time": "2018-03-21T16:15:55+00:00",
+        "time": "2018-07-05T15:44:47+00:00",
         "type": "composer-plugin",
         "extra": {
             "class": "yii\\composer\\Plugin",

@@ -116,22 +116,27 @@ $this->title = 'Мои заявки';
                     <?php
                         $form = ActiveForm::begin([
                             'id' => 'add-request',
+                            'options' => [
+                                'enctype' => 'multipart/form-data',
+                            ]
                         ])
                     ?>
-                        <?= $form->field($model, 'request_type')
+                        <?= $form->field($model, 'requests_type_id')
                                 ->dropDownList(ArrayHelper::map(\app\models\TypeRequests::find()->orderBy('type_requests_name asc')->all(),
                                         'type_requests_id', 'type_requests_name'),
                                         ['prompt' => 'Выберите вид заявки из списка'])
                         ?>
                     
-                        <?= $form->field($model, 'request_phone')
+                        <?= $form->field($model, 'requests_phone')
                                 ->widget(MaskedInput::className(), [
                                     'mask' => '+7 (999) 999-99-99',
                                 ])
                                 ->input('text', ['placeHolder' => $model->getAttributeLabel('request_phone')])->label() ?>
                     
-                        <?= $form->field($model, 'request_comment')
+                        <?= $form->field($model, 'requests_comment')
                                 ->textarea(['rows' => 10]) ?>
+                    
+                        <?= $form->field($model, 'gallery[]')->input('file', ['multiple' => true])->label() ?>
                 </div>
             </div>
             <div class="modal-footer">

@@ -12,12 +12,6 @@
  */
 class Requests extends ActiveRecord
 {
-    
-    public function behaviors() {
-        return [
-            TimestampBehavior::className(),
-        ];
-    }    
 
     const STATUS_NEW = 0;
     const STATUS_IN_WORK = 1;
@@ -27,15 +21,60 @@ class Requests extends ActiveRecord
     const STATUS_REJECT = 5;
     const STATUS_CONFIRM = 6;
     const STATUS_ON_VIEW = 7;
+    
+    const SCENARIO_ADD_REQUEST = 'add_record';
+    
+    // Для загружаемых файлов
+    public $gallery;
 
+    
+    public function behaviors() {
+        return [
+            
+            TimestampBehavior::className(),
+            
+            'image' => [
+                'class' => 'rico\yii2images\behaviors\ImageBehave',
+            ],            
+        ];
+    }
+    
     /**
-     * {@inheritdoc}
+     * Таблица БД
      */
     public static function tableName()
     {
         return 'requests';
     }
     
+    /**
+     * Правила валидации
+     */
+    public function rules()
+    {
+        return [
+            
+            [['requests_type_id', 'requests_comment', 'requests_phone'], 'required', 'on' => self::SCENARIO_ADD_REQUEST],
+            [['gallery'], 'file', 
+                'extensions' => 'png, jpg, jpeg', 
+                'maxFiles' => 4, 
+                'maxSize' => 256 * 1024,
+                'mimeTypes' => 'image/*',                
+                'on' => self::SCENARIO_ADD_REQUEST,
+            ],
+            [['requests_comment'], 'string', 'on' => self::SCENARIO_ADD_REQUEST],
+            [['requests_ident'], 'string', 'min' => 10, 'max' => 255, 'on' => self::SCENARIO_ADD_REQUEST],
+            
+            
+            [['requests_type_id', 'requests_dispatcher_id', 'requests_specialist_id', 'created_at', 'status', 'requests_client_id', 'requests_rent_id', 'updated_at'], 'integer'],
+            [['requests_comment'], 'string'],
+            [['requests_ident'], 'string', 'max' => 10],
+        ];
+    }
+    
+    /*
+     * Массив статусов заявок
+     */
     public static function getStatusNameArray() {
         return [
             self::STATUS_NEW => 'Новая',
@@ -48,6 +87,26 @@ class Requests extends ActiveRecord
             self::STATUS_ON_VIEW => 'На рассмотрении',
         ];
     }
+    
+    
+    public function addRequest($user) {
+        
+        $account = PersonalAccount::findByAccountNumber($user);
+        
+        /* Формирование идентификатора для заявки:
+         * последние 7 символов лицевого счета - тип заявки
+         */
+        $request_numder = substr($account->account_number, 4) . '-' . str_pad($this->requests_type_id, 2, 0, STR_PAD_LEFT);
+        
+        if ($this->validate()) {
+            $this->requests_ident = $request_numder;
+            $this->requests_user_id = $user;
+            $this->status = Requests::STATUS_NEW;
+            $this->is_accept = false;
+            $this->save();
+            return true;
+        }
+    }    
     
     public function getStatusName() {
         return ArrayHelper::getValue(self::getStatusNameArray(), $this->status);
@@ -64,18 +123,7 @@ class Requests extends ActiveRecord
                 ->one();
     }
     
-    /**
-     * {@inheritdoc}
-     */
-    public function rules()
-    {
-        return [
-            [['requests_type_id', 'requests_dispatcher_id', 'requests_specialist_id', 'created_at', 'status', 'requests_client_id', 'requests_rent_id', 'updated_at'], 'integer'],
-            [['requests_comment'], 'string'],
-            [['requests_ident'], 'string', 'max' => 10],
-        ];
-    }
-    
+
     public function getTypeRequest() {
         return $this->hasOne(TypeRequests::className(), ['type_requests_id' => 'requests_type_id']);
     }
@@ -86,6 +134,25 @@ class Requests extends ActiveRecord
                 ->orderBy(['created_at' => SORT_DESC]);
     }
 
+    /*
+     * Загрузка прикрепленных к заявке изображений
+     */
+    public function uploadGallery() {
+        
+        if ($this->validate()) {
+            foreach ($this->gallery as $file) {
+                $path = 'images/upload/store' . $file->baseName . '.' . $file->extension;
+                $file->saveAs($path);
+                $this->attachImage($path);
+                @unlink($path);
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }    
+    
+    
     /**
      * {@inheritdoc}
      */
@@ -103,6 +170,8 @@ class Requests extends ActiveRecord
             'status' => 'Статус',
             'requests_client_id' => 'Requests Client ID',
             'requests_rent_id' => 'Requests Rent ID',
+            'requests_phone' => 'Контактный телефон',
+            'gallery' => 'Прикрепить файлы',
         ];
     }
 }

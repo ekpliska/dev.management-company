@@ -41,10 +41,17 @@ class RequestsController extends Controller
          * Определяем модель добавления новой заявки
          * Если данные получены и провалидированы сохраняем заявку
          */
-        $model = new AddRequest();        
+        // $model = new AddRequest();
+        $model = new Requests([
+                'scenario' => Requests::SCENARIO_ADD_REQUEST,
+            ]);
+        
         if ($model->load(Yii::$app->request->post())) {
             if ($model->addRequest($user)) {
-                Yii::$app->session->setFlash('success', 'Заявка создана');
+                    $model->gallery = \yii\web\UploadedFile::getInstances($model, 'gallery');
+                    $model->uploadGallery();
+                
+                Yii::$app->session->setFlash('success', 'Заявка создана');                
             } else {
                 Yii::$app->session->setFlash('error', 'Возникла ошибка');
             }
@@ -72,14 +79,18 @@ class RequestsController extends Controller
             throw new NotFoundHttpException('Вы обратились к несуществующей странице');
         }
         
-        
         $account_id = Yii::$app->user->identity->user_account_id;        
         $user_house = Houses::findByAccountId($account_id);
         
         return $this->render('view-request', ['request_info' => $request_info, 'user_house' => $user_house]);        
     }
     
+    
+    /*
+     * Фильтр заявок по типу заявки
+     */
     public function actionFilterByTypeRequest() {
+        
         $rent_id = Yii::$app->request->post('rent_id');
         
         if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {

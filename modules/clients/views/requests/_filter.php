@@ -18,10 +18,6 @@
                 'prompt' => 'Все заявки'])
             ->label('Вид заявки') ?>
 
-    <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-    </div>
-
     <?php ActiveForm::end(); ?>
 </div>
 
@@ -29,9 +25,6 @@
 $this->registerJS("
     $('#account_number').on('change', function(){
         var type_id = $(this).val();
-        if (type_id === null) {
-            alert(type_id);
-        }
         $.ajax({
             url:'" . Url::toRoute(['requests/filter-by-type-request']) . "',
             method: 'POST',

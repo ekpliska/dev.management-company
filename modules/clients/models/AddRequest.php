@@ -20,6 +20,9 @@ class AddRequest extends Model {
     // комментарий
     public $request_comment;
     
+    // Загружаемые файлы
+    public $gallery;
+
     public function rules() {
         return [
             
@@ -32,6 +35,11 @@ class AddRequest extends Model {
             ['request_phone', 'string'],
             
             ['request_phone', 'match', 'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/i'],
+            
+            [['gallery'], 'file', 'extensions' => 'png, jpg, jpeg', 'maxFiles' => 4],
+            
+            [['gallery'], 'image' /* , 'maxWidth' => 510, 'maxHeight' => 470 */],
+            
         ];
     }
     
@@ -55,10 +63,18 @@ class AddRequest extends Model {
             $new_requests->status = Requests::STATUS_NEW;
             $new_requests->is_accept = false;
             
+            if ($new_requests->save()) {
+                $new_requests->gallery = \yii\web\UploadedFile::getInstances($new_requests, 'gallery');
+//                var_dump($this->gallery);die;
+                $new_requests->uploadGallery();
+            }
             return $new_requests->save() ? $new_requests : null;
         }
         
     }
+    
+
+        
     
     public function attributeLabels() {
         return [

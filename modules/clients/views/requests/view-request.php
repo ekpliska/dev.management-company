@@ -45,7 +45,9 @@ $account = Yii::$app->user->identity->user_account_id;
                     </tr>
                     <tr>
                         <td>Заявка принята</td>
-                        <td><?= $request_info->is_accept ?></td>
+                        <td>
+                            <?= $request_info->is_accept ? '<span style="color: #ab1a1a" class="glyphicon glyphicon-ok"></span>' : '<span style="color: #c1c1c1;" class="glyphicon glyphicon-ok"></span>' ?>
+                        </td>
                     </tr>
                     <tr>
                         <td>Оценка</td>
