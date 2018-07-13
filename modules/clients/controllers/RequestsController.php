@@ -24,6 +24,9 @@ class RequestsController extends Controller
         // Делаем проверку, правильности переданных параметров в запросе url
         $user_info = User::findByUser($user, $username, $account);
         
+        $client_id = $user_info->client->clients_id;
+        $rent_id = $user_info->rent->rents_id;
+        
         // Если запрос пустой, кидаем исключение
         if ($user_info === null) {
             throw new NotFoundHttpException('Вы обратились к несуществующей странице');
@@ -35,6 +38,11 @@ class RequestsController extends Controller
         // В датапровайдер собираем все заявки по текущему пользователю
         $all_requests = new ActiveDataProvider([
             'query' => Requests::findByUser($user),
+            'pagination' => [
+                'forcePageParam' => false,
+                'pageSizeParam' => false,
+                'pageSize' => 15,
+            ]
         ]);
 
         /*
@@ -47,7 +55,7 @@ class RequestsController extends Controller
             ]);
         
         if ($model->load(Yii::$app->request->post())) {
-            if ($model->addRequest($user)) {
+            if ($model->addRequest($user, $client_id, $rent_id)) {
                     $model->gallery = \yii\web\UploadedFile::getInstances($model, 'gallery');
                     $model->uploadGallery();
                 
@@ -74,6 +82,9 @@ class RequestsController extends Controller
         // Ищем заявку по уникальному номеру
         $request_info = Requests::findRequestByIdent($request_numder);
         
+        $images = \app\models\Image::find()->andWhere(['itemId' => $request_info->requests_id])->all();
+//        echo '<pre>'; var_dump($images);
+        
         // Если заявка не найдена, кидаем исключение
         if ($request_info === null) {
             throw new NotFoundHttpException('Вы обратились к несуществующей странице');
@@ -82,7 +93,7 @@ class RequestsController extends Controller
         $account_id = Yii::$app->user->identity->user_account_id;        
         $user_house = Houses::findByAccountId($account_id);
         
-        return $this->render('view-request', ['request_info' => $request_info, 'user_house' => $user_house]);        
+        return $this->render('view-request', ['request_info' => $request_info, 'user_house' => $user_house, 'all_images' => $images]);        
     }
     
     

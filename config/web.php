@@ -24,8 +24,8 @@ $config = [
          */
         'yii2images' => [
             'class' => 'rico\yii2images\Module',
-            'imagesStorePath' => '@webroot/images/upload/store', //path to origin images
-            'imagesCachePath' => '@webroot/images/upload/cache', //path to resized copies
+            'imagesStorePath' => '@webroot/upload/store', //path to origin images
+            'imagesCachePath' => '@webroot/upload/cache', //path to resized copies
             'graphicsLibrary' => 'GD', //but really its better to use 'Imagick' 
             // 'placeHolderPath' => '@web/images/placeHolder.png', // if you want to get placeholder when image not exists, string will be processed by Yii::getAlias
             'imageCompressionQuality' => 100, // Optional. Default value is 85.

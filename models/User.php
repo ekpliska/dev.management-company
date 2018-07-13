@@ -56,6 +56,20 @@ class User extends ActiveRecord implements IdentityInterface
     public function getPersonalAccount() {
         return $this->hasOne(PersonalAccount::className(), ['account_id' => 'user_account_id']);
     }
+
+    /*
+     * Свзязь с таблицей "Собственники"
+     */    
+    public function getClient() {
+        return $this->hasOne(Clients::className(), ['clients_id' => 'user_client_id']);
+    }
+
+    /*
+     * Свзязь с таблицей "Арендаторы"
+     */    
+    public function getRent() {
+        return $this->hasOne(Rents::className(), ['rents_id' => 'user_rent_id']);
+    }
     
     /*
      * Поиск экземпляра identity, используя ID пользователя со статусом подтверденной регистрации
@@ -80,6 +94,10 @@ class User extends ActiveRecord implements IdentityInterface
         return static::findOne(['user_login' => $username]);        
     }
     
+    /*
+     * Поиск пользователя по параметрам
+     * @user (ID user) / @username / @account (ID лицевого счета)
+     */    
     public static function findByUser($user, $username, $account) {
         return static::find()
                 ->andWhere([
@@ -142,10 +160,10 @@ class User extends ActiveRecord implements IdentityInterface
     }
     
     /*
-     * Поиск пользователя по email
+     * Поиск ID клиента
      */
-    public static function findByEmail($user_email) {
-        return static::findOne(['user_email' => $user_email, 'status' => self::STATUS_ENABLED]);
+    public static function findByClientId($user_id) {
+        return static::findOne(['' => $user_id]);
     }
     
     /*

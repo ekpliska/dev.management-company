@@ -1,5 +1,6 @@
 <?php
     use yii\helpers\Url;
+    use app\helpers\FormatHelpers;
 
 /* 
  * Детали заявки
@@ -15,7 +16,7 @@ $account = Yii::$app->user->identity->user_account_id;
     
     <div class="col-md-7">
         <div class="panel panel-default">
-        <div class="panel-heading">Детали заявки</div>
+        <div class="panel-heading">Детали заявки № <?= $request_info->requests_ident ?></div>
         <div class="panel-body">
             <table class="table table-bordered">
                 <tbody>
@@ -44,6 +45,10 @@ $account = Yii::$app->user->identity->user_account_id;
                         <td><?= $request_info->getStatusName() ?></td>
                     </tr>
                     <tr>
+                        <td>Дата закрытия заявки</td>
+                        <td><?= $request_info->status == 4 ? Yii::$app->formatter->asDatetime($request_info->updated_at, "php:d.m.Y H:i:s") : '' ?></td>
+                    </tr>
+                    <tr>
                         <td>Заявка принята</td>
                         <td>
                             <?= $request_info->is_accept ? '<span style="color: #ab1a1a" class="glyphicon glyphicon-ok"></span>' : '<span style="color: #c1c1c1;" class="glyphicon glyphicon-ok"></span>' ?>
@@ -60,6 +65,17 @@ $account = Yii::$app->user->identity->user_account_id;
                     <tr>
                         <td>Время изменения</td>
                         <td><?= Yii::$app->formatter->asDatetime($request_info->updated_at, "php:d.m.Y H:i:s") ?></td>
+                    </tr>
+                    <tr>
+                        <td>Прикрепленные файлы</td>
+                        <td>
+                            <?php if (isset($all_images)) : ?>
+                                <?php foreach ($all_images as $image) : ?>
+                                    <?= FormatHelpers::formatUrlFileRequest($image->getImagePath($image->filePath)) ?>
+                                    <br />
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                        </td>
                     </tr>
                 </tbody>
             </table>            

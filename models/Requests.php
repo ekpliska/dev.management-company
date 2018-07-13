@@ -89,7 +89,7 @@ class Requests extends ActiveRecord
     }
     
     
-    public function addRequest($user) {
+    public function addRequest($user, $client_id, $rent_id) {
         
         $account = PersonalAccount::findByAccountNumber($user);
         
@@ -101,6 +101,8 @@ class Requests extends ActiveRecord
         if ($this->validate()) {
             $this->requests_ident = $request_numder;
             $this->requests_user_id = $user;
+            $this->requests_client_id = (!empty($client_id)) ? $client_id : null;
+            $this->requests_rent_id = (!empty($rent_id)) ? $rent_id : null;
             $this->status = Requests::STATUS_NEW;
             $this->is_accept = false;
             $this->save();
@@ -141,7 +143,7 @@ class Requests extends ActiveRecord
         
         if ($this->validate()) {
             foreach ($this->gallery as $file) {
-                $path = 'images/upload/store' . $file->baseName . '.' . $file->extension;
+                $path = 'upload/store' . $file->baseName . '.' . $file->extension;
                 $file->saveAs($path);
                 $this->attachImage($path);
                 @unlink($path);
