@@ -1,19 +1,15 @@
 <?php
 
-namespace app\models;
-
-use Yii;
+    namespace app\models;
+    use Yii;
 
 /**
- * This is the model class for table "organizations".
- *
- * @property int $organizations_id
- * @property string $organizations_name
+ * Организации, предоставляющие услуги ЖКХ
  */
 class Organizations extends \yii\db\ActiveRecord
 {
     /**
-     * {@inheritdoc}
+     * Таблица из БД
      */
     public static function tableName()
     {
@@ -21,7 +17,7 @@ class Organizations extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * Правила валидации
      */
     public function rules()
     {
@@ -31,7 +27,7 @@ class Organizations extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * Настройка полей для форм
      */
     public function attributeLabels()
     {

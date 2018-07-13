@@ -38,7 +38,7 @@
 <?php $this->registerJs('
     $("body").on("beforeSubmit", "form#profile-form", function (e) {
         e.preventDefault();
-        alert ("Добавляем ногового арендатора");
+        alert ("Добавляем нового арендатора");
         var rents_surname = $("#add-rent .in1").val();
         var rents_name = $("#add-rent .in2").val();
         var rents_second_name = $("#add-rent .in3").val();

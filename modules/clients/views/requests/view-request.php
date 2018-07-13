@@ -84,7 +84,7 @@ $account = Yii::$app->user->identity->user_account_id;
     </div>
     
     <div class="col-md-5">
-        chat
+        <?= $this->render('form/_comment', ['model' => $comments, 'comments_find' => $comments_find]); ?>
     </div>
     <div class="col-md-12 text-right">
         <a href="<?= Url::to(['requests/index', 'user' => $user, 'username' => $username, 'account' => $account]) ?>" class="btn btn-primary">Вернуться к списку заявок</a>

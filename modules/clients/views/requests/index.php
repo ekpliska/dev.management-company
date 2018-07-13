@@ -54,53 +54,8 @@ $this->title = 'Мои заявки';
         
         <?php echo $this->render('_filter', ['model_filter' => $model_filter, 'type_requests' => $type_requests]); ?>
         
-        
-        <?php Pjax::begin(['enablePushState' => false]); ?>
-        
         <?php echo $this->render('grid', ['all_requests' => $all_requests]); ?>
-            
-            <?php /*= GridView::widget([
-                'dataProvider' => $all_requests,
-                'columns' => [
-                    ['class' => 'yii\grid\SerialColumn'],
 
-                    'requests_ident',
-                    [
-                        'attribute' => 'requests_type_id',
-                        'value' => function ($data) {
-                            return $data->getNameRequest();
-                        },
-                    ],
-                    'requests_comment',
-                    'requests_specialist_id',
-                    [
-                        'attribute' => 'created_at',
-                        'format' => ['date', 'php:d.m.Y H:m:i'],
-                    ],
-                    [
-                        'attribute' => 'updated_at',
-                        'format' => ['date', 'php:d.m.Y H:m:i'],
-                    ],
-                    [
-                        'attribute' => 'status',
-                        'value' => function ($data) {
-                            return $data->getStatusName();
-                        }
-                        ],
-                    [
-                        'class' => 'yii\grid\ActionColumn',
-                        'template' => '{view-request}',
-                        'buttons' => [
-                            'view-request' => function ($url, $data) {
-                                $url = ['request_numder' => $data->requests_ident];
-                                return '<a href='. Url::to(['requests/view-request', 'request_numder' => $data->requests_ident]) .' class="btn btn-info">Подробнее</a>';
-                            },
-                        ],
-                    ],
-
-                ],
-                ]); */ ?>
-            <?php Pjax::end() ?>
     </div>
 </div>
 
@@ -122,10 +77,8 @@ $this->title = 'Мои заявки';
                         ])
                     ?>
                         <?= $form->field($model, 'requests_type_id')
-                                ->dropDownList(ArrayHelper::map(\app\models\TypeRequests::find()->orderBy('type_requests_name asc')->all(),
-                                        'type_requests_id', 'type_requests_name'),
-                                        ['prompt' => 'Выберите вид заявки из списка'])
-                        ?>
+                                ->dropDownList($type_requests,
+                                        ['prompt' => 'Выберите вид заявки из списка']) ?>
                     
                         <?= $form->field($model, 'requests_phone')
                                 ->widget(MaskedInput::className(), [

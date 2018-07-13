@@ -8,7 +8,7 @@
 /**
  * Жильцы, арендаторы
  */
-class Lodgers extends \yii\db\ActiveRecord
+class Lodgers extends ActiveRecord
 {
     /**
      * Таблица из БД

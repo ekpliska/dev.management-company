@@ -6,9 +6,10 @@
     use yii\helpers\ArrayHelper;
     use yii\behaviors\TimestampBehavior;
     use app\models\TypeRequests;
+    use app\models\CommentsToRequest;
 
 /**
- * 
+ * Заяки
  */
 class Requests extends ActiveRecord
 {
@@ -88,6 +89,10 @@ class Requests extends ActiveRecord
         ];
     }
     
+    public function getComment() {
+        return $this->hasMany(CommentsToRequest::className(), ['comments_request_id' => 'requests_id']);
+    }
+    
     
     public function addRequest($user, $client_id, $rent_id) {
         
@@ -156,7 +161,7 @@ class Requests extends ActiveRecord
     
     
     /**
-     * {@inheritdoc}
+     * Настройка полей для форм
      */
     public function attributeLabels()
     {

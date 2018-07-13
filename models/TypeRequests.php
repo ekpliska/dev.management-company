@@ -3,27 +3,31 @@
     namespace app\models;
     use Yii;
     use yii\db\ActiveRecord;
+    use yii\helpers\ArrayHelper;
 
 /**
  * Вид заявок
  */
-class TypeRequests extends \yii\db\ActiveRecord
+class TypeRequests extends ActiveRecord
 {
     /**
-     * {@inheritdoc}
+     * Таблица БД
      */
     public static function tableName()
     {
         return 'type_requests';
     }
     
+    /*
+     * Формирование видов (типов) заявок
+     */
     public static function getTypeNameArray() {
         $array = static::find()->asArray()->all();
-        return \yii\helpers\ArrayHelper::map($array, 'type_requests_id', 'type_requests_name');
+        return ArrayHelper::map($array, 'type_requests_id', 'type_requests_name');
     }
 
     /**
-     * {@inheritdoc}
+     * Правила валидации
      */
     public function rules()
     {
@@ -33,7 +37,7 @@ class TypeRequests extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * Настройка полей для форм
      */
     public function attributeLabels()
     {

@@ -10,6 +10,9 @@
     use app\models\User;
     use app\models\Houses;
     use app\modules\clients\models\FilterForm;
+    use app\models\CommentsToRequest;
+    use app\models\Image;
+    use app\models\TypeRequests;
 
 /**
  * Заявки
@@ -31,6 +34,9 @@ class RequestsController extends Controller
         if ($user_info === null) {
             throw new NotFoundHttpException('Вы обратились к несуществующей странице');
         }
+        
+        // Получаем виды заявок
+        $type_requests = TypeRequests::getTypeNameArray();
        
         // Модель для фильтра по типу заявок
         $model_filter = new FilterForm();
@@ -68,7 +74,7 @@ class RequestsController extends Controller
 
         return $this->render('index', [
             'all_requests' => $all_requests,
-            'type_requests' => \app\models\TypeRequests::getTypeNameArray(),
+            'type_requests' => $type_requests,
             'model' => $model,
             'model_filter' => $model_filter,
         ]);
@@ -81,19 +87,40 @@ class RequestsController extends Controller
         
         // Ищем заявку по уникальному номеру
         $request_info = Requests::findRequestByIdent($request_numder);
-        
-        $images = \app\models\Image::find()->andWhere(['itemId' => $request_info->requests_id])->all();
-//        echo '<pre>'; var_dump($images);
-        
+
         // Если заявка не найдена, кидаем исключение
         if ($request_info === null) {
             throw new NotFoundHttpException('Вы обратились к несуществующей странице');
         }
+
+        // Получаем прикрепленные к заявке файлы
+        $images = Image::find()->andWhere(['itemId' => $request_info->requests_id])->all();
+        
+        /*
+         * Для комментариев к заявке
+         */
+        $comments = new CommentsToRequest();
+        $comments_find = CommentsToRequest::findCommentsById($request_info->requests_id);
         
         $account_id = Yii::$app->user->identity->user_account_id;        
         $user_house = Houses::findByAccountId($account_id);
         
-        return $this->render('view-request', ['request_info' => $request_info, 'user_house' => $user_house, 'all_images' => $images]);        
+        
+        $model = new CommentsToRequest();
+		
+        if ($model->load(Yii::$app->request->post()))
+        {
+            $model->sendComment($request_info->requests_id);
+        }
+        
+        
+        return $this->render('view-request', [
+            'request_info' => $request_info, 
+            'user_house' => $user_house, 
+            'all_images' => $images,
+            'comments' => $comments,
+            'comments_find' => $comments_find,
+        ]);
     }
     
     
@@ -110,6 +137,28 @@ class RequestsController extends Controller
             $all_requests = $model_filter->searchRequest($rent_id);
             return $this->renderAjax('grid', ['all_requests' => $all_requests]);
         }
+    }
+    
+    
+    public function actionAddComment() {
+        
+        $model = new CommentsToRequest();
+        $client_id = Yii::$app->request->post('request_id');
+        
+        return $client_id;
+//        $model = new ClientsRentForm();
+//        
+//        $client_id = Yii::$app->request->post('client_id');
+//        
+//        if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
+//            if ($model->load(Yii::$app->request->post())) {
+//                $model->addNewClient($client_id);
+//                // return $rent_id;
+//                return true;
+//            }
+//        }
+//        
+        
     }
             
  }

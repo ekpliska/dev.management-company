@@ -1,5 +1,6 @@
 <?php
     namespace app\helpers;
+    use Yii;
     use yii\helpers\ArrayHelper;
     use yii\helpers\Html;
 
@@ -27,5 +28,17 @@ class FormatHelpers {
         } else {      
             return Html::a('Файл', $file);
         }        
+    }
+    
+    /*
+     * Форматирование вывода даты в комментариях на странице заявки
+     * число месяц год г. часы:минуты:секунды
+     */
+    public static function formatDate($date_int) {
+        $_date_int = Yii::$app->formatter->asDate($date_int, 'dd.MMMM.yyyy');
+        $_time = Yii::$app->formatter->asTime($date_int, 'H:i:s');
+        list($day, $month, $year) = explode('.', $_date_int);
+        $date_full = $day .' '. $month .' '. $year . ' г. ' . $_time;
+        return $date_full;
     }
 }
