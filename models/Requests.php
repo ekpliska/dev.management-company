@@ -66,10 +66,6 @@ class Requests extends ActiveRecord
             [['requests_comment'], 'string', 'on' => self::SCENARIO_ADD_REQUEST],
             [['requests_ident'], 'string', 'min' => 10, 'max' => 255, 'on' => self::SCENARIO_ADD_REQUEST],
             
-            
-            [['requests_type_id', 'requests_dispatcher_id', 'requests_specialist_id', 'created_at', 'status', 'requests_client_id', 'requests_rent_id', 'updated_at'], 'integer'],
-            [['requests_comment'], 'string'],
-            [['requests_ident'], 'string', 'max' => 10],
         ];
     }
     
@@ -104,9 +100,15 @@ class Requests extends ActiveRecord
         $account = PersonalAccount::findByAccountNumber($user);
         
         /* Формирование идентификатора для заявки:
-         * последние 7 символов лицевого счета - тип заявки
+         *      последние 7 символов лицевого счета - 
+         *      последние 6 символов даты в unix - 
+         *      тип заявки
          */
-        $request_numder = substr($account->account_number, 4) . '-' . str_pad($this->requests_type_id, 2, 0, STR_PAD_LEFT);
+        
+        $date = new \DateTime();
+        $int = $date->getTimestamp();
+        
+        $request_numder = substr($account->account_number, 4) . '-' . substr($int, 5) . '-' . str_pad($this->requests_type_id, 2, 0, STR_PAD_LEFT);
         
         if ($this->validate()) {
             $this->requests_ident = $request_numder;
@@ -115,8 +117,8 @@ class Requests extends ActiveRecord
             $this->requests_rent_id = (!empty($rent_id)) ? $rent_id : null;
             $this->status = Requests::STATUS_NEW;
             $this->is_accept = false;
-            $this->save();
-            return true;
+//            $this->save();
+            return $this->save() ? true : $this->hasErrors();
         }
     }    
     

@@ -26,6 +26,17 @@ class CategoryServices extends ActiveRecord
             [['category_name'], 'string', 'max' => 255],
         ];
     }
+    
+    public function getService() {
+        return $this->hasMany(Services::className(), ['services_category_id' => 'category_id']);
+    }
+    
+    public static function getAllCategory() {
+        return self::find()
+                ->joinWith(['service'])
+                ->andWhere(['services.isPay' => 1])
+                ->all();
+    }
 
     /**
      * Массив статусов заявок

@@ -45,7 +45,7 @@ $account = Yii::$app->user->identity->user_account_id;
             [
                 'label' => 'Платные услуги', 
                 'items' => [
-                    ['label' => 'История услуг', 'url' => ''],
+                    ['label' => 'История услуг', 'url' => ['paid-services/index']],
                     ['label' => 'Заказать услугу', 'url' => ['paid-services/order-services']],
                 ],
             ],

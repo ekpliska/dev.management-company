@@ -26,7 +26,7 @@ class Services extends ActiveRecord
     {
         return [
             [['services_category_id', 'isPay', 'isServices'], 'integer'],
-            [['services_name'], 'string', 'max' => 255],
+            [['services_name', 'services_image'], 'string', 'max' => 255],
         ];
     }
     
@@ -42,7 +42,14 @@ class Services extends ActiveRecord
      */
     public function getCategory() {
         return $this->hasOne(CategoryServices::className(), ['category_id' => 'services_category_id']);
-    }    
+    }
+    
+    public static function getServices($category_id) {
+        return self::find()
+                ->andWhere(['services_category_id' => $category_id])
+                ->asArray()
+                ->all();
+    }
     
     /**
      * Массив статусов заявок
@@ -55,6 +62,7 @@ class Services extends ActiveRecord
             'services_category_id' => 'Services Category ID',
             'isPay' => 'Is Pay',
             'isServices' => 'Is Services',
+            'services_image' => 'Services Image',
         ];
     }
 }

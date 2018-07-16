@@ -3,6 +3,7 @@
     namespace app\models;
     use Yii;
     use yii\db\ActiveRecord;
+    use yii\behaviors\TimestampBehavior;
 
 /**
  * Платные услуги
@@ -21,8 +22,11 @@ class PaidServices extends ActiveRecord
 
     const SCENARIO_ADD_SERVICE = 'add_record';
     
-    // Для загружаемых файлов
-    public $gallery;
+    public function behaviors() {
+        return [
+            TimestampBehavior::className(),
+        ];
+    }    
     
     /**
      * Таблица из БД
@@ -38,6 +42,9 @@ class PaidServices extends ActiveRecord
     public function rules()
     {
         return [
+            
+            [['services_phone', 'services_comment'], 'required', 'on' => self::SCENARIO_ADD_SERVICE],
+            
             [['services_name_services_id', 'created_at', 'updated_at', 'status', 'services_dispatcher_id', 'services_specialist_id', 'services_user_id'], 'integer'],
             [['services_number'], 'string', 'max' => 16],
             [['services_comment'], 'string', 'max' => 255],
@@ -68,6 +75,17 @@ class PaidServices extends ActiveRecord
         return ArrayHelper::getValue(self::getStatusNameArray(), $this->status);
     }
     
+    /*
+     * Сохранение новой платной заявки
+     */
+    public function addOrder() {
+        
+        if ($this->validate()) {
+            $this->services_user_id = Yii::$app->user->identity->user_id;
+            $this->save();
+        }
+    }
+    
     
     /**
      * Настройка полей для форм
@@ -79,8 +97,8 @@ class PaidServices extends ActiveRecord
             'services_number' => 'Services Number',
             'services_category_id' => 'Services Category ID',
             'services_name_services_id' => 'Services Name Services ID',
-            'services_comment' => 'Services Comment',
-            'services_phone' => 'Services Phone',
+            'services_comment' => 'Комментарий к заявке',
+            'services_phone' => 'Ваш телефон',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
             'status' => 'Status',
