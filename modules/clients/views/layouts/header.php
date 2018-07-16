@@ -42,7 +42,13 @@ $account = Yii::$app->user->identity->user_account_id;
                 ],
             ],
             ['label' => 'Заявки', 'url' => ['requests/index', 'user' => $user, 'username' => $username, 'account' => $account]],
-            ['label' => 'Платные услуги', 'url' => ['']],
+            [
+                'label' => 'Платные услуги', 
+                'items' => [
+                    ['label' => 'История услуг', 'url' => ''],
+                    ['label' => 'Заказать услугу', 'url' => ['paid-services/order-services']],
+                ],
+            ],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (

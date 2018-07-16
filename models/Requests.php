@@ -89,11 +89,16 @@ class Requests extends ActiveRecord
         ];
     }
     
+    /*
+     * Связь с таблицей комментариев к заявке
+     */
     public function getComment() {
         return $this->hasMany(CommentsToRequest::className(), ['comments_request_id' => 'requests_id']);
     }
     
-    
+    /*
+     * Сохранение новой заявки
+     */
     public function addRequest($user, $client_id, $rent_id) {
         
         $account = PersonalAccount::findByAccountNumber($user);
@@ -115,26 +120,39 @@ class Requests extends ActiveRecord
         }
     }    
     
+    /*
+     * Получить название статуса по его номеру
+     */
     public function getStatusName() {
         return ArrayHelper::getValue(self::getStatusNameArray(), $this->status);
     }
 
+    /*
+     * Получить тип заявки по его номеру
+     */
     public function getNameRequest() {
         return ArrayHelper::getValue(TypeRequests::getTypeNameArray(), $this->requests_type_id);
     }    
     
-    
+    /*
+     * Поиск заявки по его уникальному номеру
+     */
     public static function findRequestByIdent($request_numder) {
         return self::find()
                 ->andWhere(['requests_ident' => $request_numder])
                 ->one();
     }
     
-
+    /*
+     * Связь с талиблицей Виды заявок
+     */
     public function getTypeRequest() {
         return $this->hasOne(TypeRequests::className(), ['type_requests_id' => 'requests_type_id']);
     }
     
+    /*
+     * Поиск заявки по ID пользователя
+     */
     public static function findByUser($user_id) {
         return self::find()
                 ->andWhere(['requests_user_id' => $user_id])
