@@ -130,11 +130,11 @@ class Requests extends ActiveRecord
     }
 
     /*
-     * Получить тип заявки по его номеру
+     * Получить тип заявки по ID
      */
     public function getNameRequest() {
         return ArrayHelper::getValue(TypeRequests::getTypeNameArray(), $this->requests_type_id);
-    }    
+    }
     
     /*
      * Поиск заявки по его уникальному номеру

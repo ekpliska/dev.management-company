@@ -2,6 +2,7 @@
 
     namespace app\modules\clients\controllers;
     use Yii;
+    use yii\data\ActiveDataProvider;
     use yii\web\Controller;
     use yii\web\Response;
     use app\models\Services;
@@ -35,8 +36,16 @@ class PaidServicesController extends Controller {
         
     }
     
+    /*
+     * Страница "История услуг"
+     */
     public function actionIndex() {
-        return $this->render('index');
+        
+        $all_orders = new ActiveDataProvider([
+            'query' => PaidServices::find(Yii::$app->user->identity->user_id)->orderBy(['created_at' => SORT_DESC])
+        ]);
+        
+        return $this->render('index', ['all_orders' => $all_orders]);
     }
     
     

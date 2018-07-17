@@ -4,6 +4,7 @@
     use Yii;
     use yii\db\ActiveRecord;
     use yii\behaviors\TimestampBehavior;
+    use yii\helpers\ArrayHelper;
 
 /**
  * Платные услуги
@@ -51,6 +52,10 @@ class PaidServices extends ActiveRecord
             [['services_phone'], 'string', 'max' => 50],
         ];
     }
+    
+    public function getService() {
+        return $this->hasOne(Services::className(), ['services_id' => 'services_name_services_id']);
+    }
 
     /*
      * Массив статусов заявок
@@ -76,10 +81,33 @@ class PaidServices extends ActiveRecord
     }
     
     /*
+     * Получить название категории по ID услуги
+     */
+    public function getNameCategory() {
+        $serv = Services::find()->andWhere(['services_id' => $this->services_name_services_id])->one();
+        return ArrayHelper::getValue(CategoryServices::getCategoryNameArray(), $serv->services_category_id);
+    }
+    
+    /*
+     * Получить название услуги по ID
+     */
+    public function getNameServices() {
+        return ArrayHelper::getValue(Services::getServicesNameArray(), $this->services_name_services_id);
+    }    
+
+    /*
+     * Получить все заявки, заданного пользователя
+     */
+    public static function getOrderByUder($user_id) {
+        return self::find()
+                ->andWhere(['services_user_id' => $user_id])
+                ->orderBy(['created_at' => SORT_DESC]);
+    }
+    
+    /*
      * Сохранение новой платной заявки
      */
     public function addOrder() {
-        
         
         /* Формирование идентификатора для заявки:
          *      последние 7 символов лицевого счета - 
@@ -109,15 +137,15 @@ class PaidServices extends ActiveRecord
     {
         return [
             'services_id' => 'Services ID',
-            'services_number' => 'Services Number',
-            'services_name_services_id' => 'Название услуги',
-            'services_comment' => 'Комментарий к заявке',
+            'services_number' => 'Номер',
+            'services_name_services_id' => 'Наименование услуги',
+            'services_comment' => 'Текст заявки',
             'services_phone' => 'Ваш телефон',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
-            'status' => 'Status',
-            'services_dispatcher_id' => 'Services Dispatcher ID',
-            'services_specialist_id' => 'Services Specialist ID',
+            'created_at' => 'Дата заявки',
+            'updated_at' => 'Дата закрытия',
+            'status' => 'Статус',
+            'services_dispatcher_id' => 'Диспетчер',
+            'services_specialist_id' => 'Специалист',
             'services_user_id' => 'Services User ID',
         ];
     }

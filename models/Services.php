@@ -45,6 +45,17 @@ class Services extends ActiveRecord
         return $this->hasOne(CategoryServices::className(), ['category_id' => 'services_category_id']);
     }
     
+    /*
+     * Формирование массива услуг
+     */
+    public static function getServicesNameArray() {
+        $array = static::find()->asArray()->all();
+        return ArrayHelper::map($array, 'services_id', 'services_name');
+    }    
+
+    /*
+     * Получаем только платные услуги
+     */
     public static function getPayServices() {
         $pay_services = self::find()
                 ->andWhere(['isPay' => '1'])

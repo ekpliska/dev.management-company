@@ -3,6 +3,7 @@
     namespace app\models;
     use Yii;
     use yii\db\ActiveRecord;
+    use yii\helpers\ArrayHelper;
 
 /**
  * Категории услуг
@@ -31,6 +32,17 @@ class CategoryServices extends ActiveRecord
         return $this->hasMany(Services::className(), ['services_category_id' => 'category_id']);
     }
     
+    /*
+     * Формирование категорий заявок
+     */
+    public static function getCategoryNameArray() {
+        $array = static::find()->asArray()->all();
+        return ArrayHelper::map($array, 'category_id', 'category_name');
+    }    
+    
+    /*
+     * Получить все платные услуги
+     */
     public static function getAllCategory() {
         return self::find()
                 ->joinWith(['service'])
