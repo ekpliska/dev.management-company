@@ -27,11 +27,11 @@ class ClientsController extends Controller
     /*
      * Профиль пользователя
      */
-    public function actionProfile($user, $username, $account) {
+    public function actionProfile($user, $username) {
         
-        $user_info = User::findByUser($user, $username, $account);       
+        $user_info = User::findByUser($user, $username);
         $is_rent = false;       
-        $client = Clients::findOne(['clients_account_id' => $account]);        
+        $client = Clients::findOne(['clients_id' => $user_info->user_client_id]);
         
         if (!$user_info || !$client) {
             throw new NotFoundHttpException('Вы обратились к несуществующей странице');
@@ -41,13 +41,6 @@ class ClientsController extends Controller
             $rent = Rents::findByRent($client->id);
             $is_rent = true;
         }
-
-// ПРОВЕРИТЬ ДЛЯ ЧЕГО        
-//        $new_rent = new ClientsRentForm();
-//        
-//        if ($new_rent->load(Yii::$app->request->post('registration-form'))) {
-//            return var_dump('test');
-//        }
 
         if (
                 $user_info->load(Yii::$app->request->post()) && 

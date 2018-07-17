@@ -18,20 +18,43 @@
         'enableAjaxValidation' => false,
     ])
 ?>
-    <?= $form_rent->field($rent_new, 'rents_surname')->input('text', ['class' => 'in1', 'placeHolder' => $rent_new->getAttributeLabel('rents_surname')])->label() ?>
+    <?= $form_rent->field($rent_new, 'rents_surname')
+            ->input('text', [
+                'class' => 'form-control in1', 
+                'placeHolder' => $rent_new->getAttributeLabel('rents_surname')])
+            ->label() ?>
 
-    <?= $form_rent->field($rent_new, 'rents_name')->input('text', ['class' => 'in2', 'placeHolder' => $rent_new->getAttributeLabel('rents_name')])->label() ?>
+    <?= $form_rent->field($rent_new, 'rents_name')
+            ->input('text', [
+                'class' => 'form-control in2', 
+                'placeHolder' => $rent_new->getAttributeLabel('rents_name')])
+            ->label() ?>
 
-    <?= $form_rent->field($rent_new, 'rents_second_name')->input('text', ['class' => 'in3', 'placeHolder' => $rent_new->getAttributeLabel('rents_second_name')])->label() ?>
+    <?= $form_rent->field($rent_new, 'rents_second_name')
+            ->input('text', [
+                'class' => 'form-control in3', 
+                'placeHolder' => $rent_new->getAttributeLabel('rents_second_name')])
+            ->label() ?>
 
     <?= $form_rent->field($rent_new, 'rents_mobile')
             ->widget(MaskedInput::className(), [
                 'mask' => '+7(999) 999-99-99'])
-            ->input('text', ['class' => 'in4', 'placeHolder' => $rent_new->getAttributeLabel('rents_mobile')])->label() ?>
+            ->input('text', [
+                'class' => 'form-control in4', 
+                'placeHolder' => $rent_new->getAttributeLabel('rents_mobile')])
+            ->label() ?>
 
-    <?= $form_rent->field($rent_new, 'rents_email')->input('text', ['class' => 'in5', 'placeHolder' => $rent_new->getAttributeLabel('rents_email')])->label() ?>
+    <?= $form_rent->field($rent_new, 'rents_email')
+            ->input('text', [
+                'class' => 'form-control in5', 
+                'placeHolder' => $rent_new->getAttributeLabel('rents_email')])
+            ->label() ?>
 
-    <?= $form_rent->field($rent_new, 'password')->input('password', ['class' => 'in6', 'placeHolder' => $rent_new->getAttributeLabel('password')])->label() ?>
+    <?= $form_rent->field($rent_new, 'password')
+            ->input('password', [
+                'class' => 'form-control in6', 
+                'placeHolder' => $rent_new->getAttributeLabel('password')])
+            ->label() ?>
 
 <?php ActiveForm::end() ?>
 

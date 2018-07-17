@@ -15,7 +15,6 @@
  */    
 $user = Yii::$app->user->identity->user_id; 
 $username = Yii::$app->user->identity->user_login;
-$account = Yii::$app->user->identity->user_account_id;   
 ?>
 
 <?php
@@ -29,19 +28,19 @@ $account = Yii::$app->user->identity->user_account_id;
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Новости', 'url' => ['clients/index']],
+            ['label' => 'Главная', 'url' => ['clients/index']],
             ['label' => 'Голосование', 'url' => ['']],
-            ['label' => 'Профиль', 'url' => ['clients/profile', 'user' => $user, 'username' => $username, 'account' => $account]],
+            ['label' => 'Профиль', 'url' => ['clients/profile', 'user' => $user, 'username' => $username]],
             [
                 'label' => 'Лицевой счет',
                 'items' => [
-                    ['label' => 'Общая информация', 'url' => ['personal-account/index', 'user' => $user, 'username' => $username, 'account' => $account]],
+                    ['label' => 'Общая информация', 'url' => ['personal-account/index', 'user' => $user, 'username' => $username]],
                     ['label' => 'Квитанции ЖКУ', 'url' => ['']],
                     ['label' => 'Показания приборов учета', 'url' => ['']],
                     ['label' => 'Платежи', 'url' => ['']],
                 ],
             ],
-            ['label' => 'Заявки', 'url' => ['requests/index', 'user' => $user, 'username' => $username, 'account' => $account]],
+            ['label' => 'Заявки', 'url' => ['requests/index', 'user' => $user, 'username' => $username]],
             [
                 'label' => 'Платные услуги', 
                 'items' => [

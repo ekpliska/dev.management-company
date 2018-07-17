@@ -103,21 +103,21 @@ $this->title = 'Профиль абонента';
             
             <div class="panel-body">
                 <p>Как вас зовут?</p>                
-                <?= $user->personalAccount->client->clients_surname ?>
-                <?= $user->personalAccount->client->clients_name ?>
-                <?= $user->personalAccount->client->clients_second_name ?>
+                <?= $user->client->clients_surname ?>
+                <?= $user->client->clients_name ?>
+                <?= $user->client->clients_second_name ?>
                 
                 <p>Домашний телефон</p>
-                <?= $user->personalAccount->client->clients_phone ?>
+                <?= $user->client->clients_phone ?>
                 
                 <p>Мобильный телефон</p>
-                <?= $user->personalAccount->client->clients_mobile ?>
+                <?= $user->client->clients_mobile ?>
                 
                 <p>Электронная почта</p>
                 <?= $user->user_email ?>
                 
                 <p>Номер лицевого счета</p>
-                <?= $user->personalAccount->account_number ?>
+                <?= $user->client->personalAccount->account_number ?>
             </div>
         </div>
     </div>

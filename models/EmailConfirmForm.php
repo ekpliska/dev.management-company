@@ -32,10 +32,22 @@ class EmailConfirmForm extends Model {
     /*
      * Метод, который меняет статус пользователя на активный;
      * Удаляет из таблицы Пользователи токен, сформированный для подтверждение регистрации;
-     * Назначет роль для зарегистрированного пользователя, Клиент
+     * Назначает роль для зарегистрированного пользователя, Клиент
+     * fwDUFcLucYsQYGswEVNtNrsFzOZnN3c0
      */
     public function confirmEmail() {
+        
         $user = $this->_user;
+        
+        /*
+         * После подтверждения пользователя по email
+         * в таблицу "Лицевой счет" записываем ID пользователя
+         */
+        $account = PersonalAccount::findOne(['account_number' => $user->user_login]);
+        if ($account) {
+            $account->personal_user_id = $user->user_id;
+            $account->save(false);
+        }
         
         $user->status = User::STATUS_ENABLED;
         $user->email_confirm_token = null;

@@ -65,8 +65,6 @@ class RegistrationForm extends Model {
             
             ['mobile_phone', 'match', 'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/i'],
             
-            // ['mobile_phone', 'match', 'pattern' => ''],
-            
             ['username', 'checkPersonalAccount'],
             
             ['password', 'compare', 'message' => 'Указанные пароли не совпадают!'],            
@@ -105,7 +103,7 @@ class RegistrationForm extends Model {
             // $model->setUserAccountId($this->username);
             
             // Связываем таблицы Пользователь и Собственник
-            $model->setClientByPhone($this->mobile_phone);
+            $model->setClientByPhone($this->username);
             
             // Новый пользователь получает статус без доступа в систему
             $model->status = User::STATUS_DISABLED;

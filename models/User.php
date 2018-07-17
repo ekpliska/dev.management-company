@@ -50,12 +50,12 @@ class User extends ActiveRecord implements IdentityInterface
         ];
     }
 
-    /*
-     * Свзязь с таблицей "Лицевой счет"
-     */
-    public function getPersonalAccount() {
-        return $this->hasOne(PersonalAccount::className(), ['account_id' => 'user_account_id']);
-    }
+//    /*
+//     * Свзязь с таблицей "Лицевой счет"
+//     */
+//    public function getPersonalAccount() {
+//        return $this->hasOne(PersonalAccount::className(), ['account_id' => 'user_account_id']);
+//    }
 
     /*
      * Свзязь с таблицей "Собственники"
@@ -105,12 +105,12 @@ class User extends ActiveRecord implements IdentityInterface
      * Поиск пользователя по параметрам
      * @user (ID user) / @username / @account (ID лицевого счета)
      */    
-    public static function findByUser($user, $username, $account) {
+    public static function findByUser($user, $username) {
         return static::find()
                 ->andWhere([
                     'user_id' => $user,
                     'user_login' => $username,
-                    'user_account_id' => $account,
+                    'status' => 1
                     ])
                 ->one();
     }
@@ -189,14 +189,20 @@ class User extends ActiveRecord implements IdentityInterface
     /*
      * Для связи таблицы пользователь и собственник (поиск по номеру телефона)
      */
-    public function setClientByPhone($phone) {
-        $id = Clients::find()
-                ->andWhere(['clients_mobile' => $phone])
-                ->select('clients_id')
+    public function setClientByPhone($account_number) {
+//        $id = Clients::find()
+//                ->andWhere(['clients_mobile' => $phone])
+//                ->select('clients_id')
+//                ->asArray()
+//                ->one();
+        
+        $id = PersonalAccount::find()
+                ->andWhere(['account_number' => $account_number])
+                ->select('personal_clients_id')
                 ->asArray()
                 ->one();
         
-        $this->user_client_id = $id['clients_id'];
+        $this->user_client_id = $id['personal_clients_id'];
     }    
     
     /*

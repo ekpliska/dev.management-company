@@ -22,10 +22,10 @@ class RequestsController extends Controller
     /**
      * Главная страница
      */
-    public function actionIndex($user, $username, $account)
+    public function actionIndex($user, $username)
     {
         // Делаем проверку, правильности переданных параметров в запросе url
-        $user_info = User::findByUser($user, $username, $account);
+        $user_info = User::findByUser($user, $username);
         
         $client_id = $user_info->client->clients_id;
         $rent_id = $user_info->rent->rents_id;

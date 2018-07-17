@@ -33,7 +33,7 @@ class Clients extends ActiveRecord
     }
     
     public function getPersonalAccount() {
-        return $this->hasMany(PersonalAccount::className(), ['personal_clients_id' => 'clients_id']);
+        return $this->hasOne(PersonalAccount::className(), ['personal_clients_id' => 'clients_id']);
     }
     
     public function getRent() {
