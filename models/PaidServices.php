@@ -80,10 +80,25 @@ class PaidServices extends ActiveRecord
      */
     public function addOrder() {
         
-        if ($this->validate()) {
-            $this->services_user_id = Yii::$app->user->identity->user_id;
-            $this->save();
-        }
+        
+        /* Формирование идентификатора для заявки:
+         *      последние 7 символов лицевого счета - 
+         *      последние 6 символов даты в unix - 
+         *      тип платной заявки
+         */
+        
+        $account = PersonalAccount::findByAccountNumber(Yii::$app->user->identity->user_id);
+        
+        $date = new \DateTime();
+        $int = $date->getTimestamp();
+        
+        $order_numder = substr($account->account_number, 4) . '-' . substr($int, 5) . '-' . str_pad($this->services_name_services_id, 2, 0, STR_PAD_LEFT);
+        
+        $this->services_number = $order_numder;
+        $this->status = self::STATUS_NEW;
+        $this->services_user_id = Yii::$app->user->identity->user_id;
+        return $this->save() ? true : false;
+        
     }
     
     
@@ -95,8 +110,7 @@ class PaidServices extends ActiveRecord
         return [
             'services_id' => 'Services ID',
             'services_number' => 'Services Number',
-            'services_category_id' => 'Services Category ID',
-            'services_name_services_id' => 'Services Name Services ID',
+            'services_name_services_id' => 'Название услуги',
             'services_comment' => 'Комментарий к заявке',
             'services_phone' => 'Ваш телефон',
             'created_at' => 'Created At',
