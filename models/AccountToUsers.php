@@ -3,16 +3,18 @@
     namespace app\models;
     use Yii;
     use yii\db\ActiveRecord;
+    use app\models\PersonalAccount;
+    use app\models\User;
 
 /**
  * Промежуточная таблица для связи Пользователй и Лицевого счета
- * Один пользователь может иметь несколько лицевых счетов
- * Один лицевой счет может иметь несколько пользователей (собственника и 1(+) арендатора)
+ *      Один пользователь может иметь несколько лицевых счетов
+ *      Один лицевой счет может иметь несколько пользователей (собственника и 1(+) арендатора)
  */
 class AccountToUsers extends ActiveRecord
 {
     /**
-     * Тбалица БД
+     * Таблица БД
      */
     public static function tableName()
     {
@@ -24,6 +26,14 @@ class AccountToUsers extends ActiveRecord
         return [
             [['account_id', 'user_id'], 'integer'],
         ];
+    }
+    
+    public function getUser() {
+        return $this->hasOne(User::className(), ['user_id' => 'user_id']);
+    }
+    
+    public function getPersonalAccount() {
+        return $this->hasOne(PersonalAccount::className(), ['account_id' => 'account_id']);
     }
 
     public function attributeLabels()

@@ -7,6 +7,7 @@
     use app\models\Houses;
     use app\models\Organizations;
     use yii\helpers\ArrayHelper;
+    use app\models\AccountToUsers;
 
 /**
  * Лицевой счет
@@ -49,6 +50,18 @@ class PersonalAccount extends ActiveRecord
     
     public function getOrganization() {
         return $this->hasOne(Organizations::className(), ['organizations_id' => 'account_organization_id']);
+    }
+    
+// return $this->hasMany(Tag::className(), ['id' => 'tag_id']) // связываем tag.id с tag_to_post_bind.tag_id
+//            ->viaTable('tag_to_post_bind', ['post_id' => 'id']); // tag_to_post_bind.post_id с post.id    
+//    
+    
+    /*
+     * Свзяь с промежуточной таблицей
+     */
+    public function getUser() {
+        return $this->hasMany(User::className(), ['user_id' => 'user_id'])
+                ->viaTable('account_to_users', ['account_id' => 'account_id']);
     }
     
     public static function findByNumber($account_id) {

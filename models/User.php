@@ -50,13 +50,6 @@ class User extends ActiveRecord implements IdentityInterface
         ];
     }
 
-//    /*
-//     * Свзязь с таблицей "Лицевой счет"
-//     */
-//    public function getPersonalAccount() {
-//        return $this->hasOne(PersonalAccount::className(), ['account_id' => 'user_account_id']);
-//    }
-
     /*
      * Свзязь с таблицей "Собственники"
      */    
@@ -69,6 +62,15 @@ class User extends ActiveRecord implements IdentityInterface
      */    
     public function getRent() {
         return $this->hasOne(Rents::className(), ['rents_id' => 'user_rent_id']);
+    }
+    
+    
+// return $this->hasMany(Tag::className(), ['id' => 'tag_id']) // связываем tag.id с tag_to_post_bind.tag_id
+//            ->viaTable('tag_to_post_bind', ['post_id' => 'id']); // tag_to_post_bind.post_id с post.id    
+//        
+    public function getPersonalAccount() {
+        return $this->hasMany(PersonalAccount::className(), ['account_id' => 'account_id'])
+                ->viaTable('account_to_users', ['user_id' => 'user_id']);
     }
     
     /*

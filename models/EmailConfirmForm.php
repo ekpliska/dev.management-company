@@ -1,9 +1,11 @@
 <?php
     namespace app\models;
+    use Yii;
     use yii\base\Model;
     use yii\base\InvalidParamException;
     use app\models\User;
-    use Yii;
+    use app\models\AccountToUsers;
+    
 
 /*
  * Подтверждение регистрации пользователя по ссылке присланной в письме
@@ -41,12 +43,15 @@ class EmailConfirmForm extends Model {
         
         /*
          * После подтверждения пользователя по email
-         * в таблицу "Лицевой счет" записываем ID пользователя
+         * делаем связь между таблицами Пользователи и Лицевой счет
          */
         $account = PersonalAccount::findOne(['account_number' => $user->user_login]);
+        $bind_model = new AccountToUsers();
+        
         if ($account) {
-            $account->personal_user_id = $user->user_id;
-            $account->save(false);
+            $bind_model->account_id = $account->account_id;
+            $bind_model->user_id = $user->user_id;
+            $bind_model->save(false);
         }
         
         $user->status = User::STATUS_ENABLED;
