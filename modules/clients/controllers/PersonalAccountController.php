@@ -1,19 +1,21 @@
 <?php
     namespace app\modules\clients\controllers;
+    use Yii;
     use yii\web\Controller;
     use app\models\PersonalAccount;
     use app\modules\clients\models\AddPersonalAccount;
     use app\models\User;
     use app\modules\clients\models\FilterForm;
+    use yii\data\ActiveDataProvider;
 
 /**
  * Контроллер по работе с разделом "Лицевой счет"
  */
 class PersonalAccountController extends Controller {
 
-    public function actionIndex($user, $username, $account) {
+    public function actionIndex($user, $username) {
         
-        $user_info = User::findByUser($user, $username, $account);
+        $user_info = User::findByUser($user, $username);
         
         if ($user_info === null) {
             throw new NotFoundHttpException('Вы обратились к несуществующей странице');
@@ -23,12 +25,11 @@ class PersonalAccountController extends Controller {
         $add_account = new AddPersonalAccount();
         
         // Загружаем в провайдер данных информацию об основном лицевом счете (указанный при регистрации)
-        $dataProvider = new \yii\data\ActiveDataProvider([
-            'query' => PersonalAccount::findByNumber($account),
-            'pagination' => [
-                'pageSize' => 20,
-            ],
+        $dataProvider = new ActiveDataProvider([
+            'query' => PersonalAccount::findByUserID($user_info->user_id),
         ]);
+        
+        $dataProvider->pagination = false;        
 
         // Форма для фильтрации лицевых счетов
         $_filter = new FilterForm();
@@ -51,8 +52,10 @@ class PersonalAccountController extends Controller {
         if (isset($_POST['id'])) {
             return $this->refresh();
         } else {
-            $account_number = PersonalAccount::findOne(['account_id' => $id]);
-            return $this->renderAjax('list', ['model' => $account_number]);
+            if (Yii::$app->request->isAjax) {
+                $account_number = PersonalAccount::findOne(['account_id' => $id]);
+                return $this->renderAjax('list', ['model' => $account_number]);
+            }
         }
         
 //        if (isset($_POST['id']))

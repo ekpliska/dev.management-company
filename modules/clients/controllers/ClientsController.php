@@ -29,7 +29,14 @@ class ClientsController extends Controller
      */
     public function actionProfile($user, $username) {
         
+        $_user = Yii::$app->user->identity;
+        
         $user_info = User::findByUser($user, $username);
+        
+        if ($_user->user_id <> $user_info->user_id) {
+            throw new NotFoundHttpException('Вы обратились к несуществующей странице');
+        }
+        
         $is_rent = false;       
         $client = Clients::findOne(['clients_id' => $user_info->user_client_id]);
         

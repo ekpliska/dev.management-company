@@ -17,6 +17,7 @@ $this->title = 'Общая информация';
         <?php 
             $form_filter = ActiveForm::begin([
                 'id' => 'filter-form-account',
+                'method' => 'GET',
                 'options' => [
                     'class' => 'form-inline',
                     'data-pjax' => true,
@@ -25,9 +26,10 @@ $this->title = 'Общая информация';
         ?>
         
             <?= $form_filter->field($_filter, '_value')
-                    ->dropDownList($account_all, [
-                        'onchange' => '$.pjax.reload({container: "#pjax-list-account", url: "'.Url::to(['personal-account/list']).'", data: {id: $(this).val()}});',
-                    ]) ?>
+                ->dropDownList($account_all, [
+                    'onchange' => '$.pjax.reload({container: "#list-account", url: "'.Url::to(['personal-account/list']).'", data: {id: $(this).val()}});'])
+                ->label('Лицевой счет')
+                ?>
         
         <?php ActiveForm::end(); ?> 
     </div>
@@ -39,15 +41,15 @@ $this->title = 'Общая информация';
     
     <div class="col-md-6">
         <div class="panel panel-default">
-            <div class="panel-heading"><strong>Иформация по лицевому счету</strong></div>
+            <div class="panel-heading"><strong>Информация по лицевому счету</strong></div>
             <div class="panel-body">
-                <?php Pjax::begin(['enablePushState' => false, 'id' => 'pjax-list-account']); ?>
+                <?php Pjax::begin(['enablePushState' => false, 'id' => 'list-account']); ?>
             
                     <?= ListView::widget([
-                            'dataProvider' => $dataProvider,
-                            'itemView' => 'list',
-                            'layout' => "{pager}\n{summary}\n{items}\n{pager}",
-                        ]) ?>
+                        'dataProvider' => $dataProvider,
+                        'itemView' => 'list',
+                        // 'layout' => "{pager}\n{summary}\n{items}\n{pager}",
+                    ]) ?>
             
                 <?php Pjax::end(); ?>
             </div>

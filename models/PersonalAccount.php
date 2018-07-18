@@ -6,6 +6,7 @@
     use app\models\Rents;
     use app\models\Houses;
     use app\models\Organizations;
+    use yii\helpers\ArrayHelper;
 
 /**
  * Лицевой счет
@@ -52,8 +53,16 @@ class PersonalAccount extends ActiveRecord
     
     public static function findByNumber($account_id) {
         return static::find()
-                ->andWhere(['account_id' => $account_id]);
+                ->andWhere(['account_id' => $account_id])
+                ->orderBy(['account_id' => SORT_DESC]);
                 // ->one();
+    }
+    
+    public static function findByUserID($user_id) {
+        return static::find()
+                ->andWhere(['personal_user_id' => $user_id])
+                ->orderBy(['account_id' => SORT_DESC])
+                ->limit(1);
     }
     
     
@@ -65,7 +74,7 @@ class PersonalAccount extends ActiveRecord
         $account_find = static::find()
                 ->andWhere(['personal_clients_id' => $client_id])
                 ->all();
-        return $account_all = \yii\helpers\ArrayHelper::map($account_find, 'account_id', 'account_number');
+        return $account_all = ArrayHelper::map($account_find, 'account_id', 'account_number');
     }
     
     public static function findByAccountNumber($user_id) {
