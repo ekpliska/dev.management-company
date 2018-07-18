@@ -71,9 +71,9 @@ class PersonalAccount extends ActiveRecord
                 // ->one();
     }
     
-    public static function findByUserID($user_id) {
+    public static function findByClientID($client_id) {
         return static::find()
-                ->andWhere(['personal_user_id' => $user_id])
+                ->andWhere(['personal_clients_id' => $client_id])
                 ->orderBy(['account_id' => SORT_DESC])
                 ->limit(1);
     }

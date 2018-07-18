@@ -86,6 +86,10 @@ $this->title = 'Общая информация';
                         <?php 
                             $form = ActiveForm::begin([
                                 'id' => 'add-account',
+                                'enableClientValidation' => false,
+                                'enableAjaxValidation' => true,
+                                 'validationUrl' => ['personal-account/validate-record'],
+                                 'validateOnSubmit' => true,
                             ])
                         ?>
 
@@ -133,7 +137,6 @@ $this->title = 'Общая информация';
                             </div>
                         
                             <div class="col-md-12">
-                                <?php // var_dump($all_rent) ?>
                                 <?= $form->field($add_account, 'account_rent')->input('text', ['placeHolder' => $add_account->getAttributeLabel('account_rent')])->label() ?>
                             </div>
                     </div>

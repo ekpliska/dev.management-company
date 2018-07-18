@@ -24,13 +24,12 @@ class PersonalAccountController extends Controller {
         // Загружаем форму для добавления лицевого счета
         $add_account = new AddPersonalAccount();
         
-        // Загружаем в провайдер данных информацию об основном лицевом счете (указанный при регистрации)
+        // Загружаем в провайдер данных информацию об основном лицевом счете
         $dataProvider = new ActiveDataProvider([
-            'query' => PersonalAccount::findByUserID($user_info->user_id),
+            'query' => PersonalAccount::findByClientID($user_info->user_client_id),
+            'pagination' => false,
         ]);
         
-        $dataProvider->pagination = false;        
-
         // Форма для фильтрации лицевых счетов
         $_filter = new FilterForm();
         // Получить список всех лицевых счетов пользователя        
@@ -72,6 +71,18 @@ class PersonalAccountController extends Controller {
 //                'dataProvider' => $dataProvider,
 //            ]);
 //        }
-    }    
+    }
+    
+    public function actionValidateRecord() {
+        
+        
+        if (Yii::$app->request->isAjax) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            $model = new AddPersonalAccount();
+            $model->load(Yii::$app->request->post());
+            return \yii\bootstrap\ActiveForm::validate($model);
+        }
+        throw new \yii\web\BadRequestHttpException('Не верный формат запроса!');   
+    }
     
 }

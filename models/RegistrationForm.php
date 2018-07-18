@@ -82,7 +82,7 @@ class RegistrationForm extends Model {
     public function checkPersonalAccount() {
         $personalAccount = PersonalAccount::find()->andWhere(['account_number' => $this->username])->select('account_number')->one();
         if ($personalAccount == null) {
-            $errorMsg = "Указанный лицевой счет в системе не существует";
+            $errorMsg = 'Указанный лицевой счет в системе не существует';
             $this->addError('username', $errorMsg);
         }
     }

@@ -86,14 +86,14 @@ $this->title = 'Профиль абонента';
 
                         if (this.checked && !"' . $rent->id . '") {
                             // console.log("new rent");
-                            $.ajax({
-                                url:"' . Url::toRoute(['clients/add-rent']) . '",
-                                method: "POST",
-                                data: {},
-                                success: function(data){
-                                    console.log(data);
-                                }
-                            });
+//                            $.ajax({
+//                                url:"' . Url::toRoute(['clients/add-rent']) . '",
+//                                method: "POST",
+//                                data: {},
+//                                success: function(data){
+//                                    console.log(data);
+//                                }
+//                            });
                         }
                     });
                 ');

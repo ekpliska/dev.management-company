@@ -175,18 +175,18 @@ class User extends ActiveRecord implements IdentityInterface
         return static::findOne(['' => $user_id]);
     }
     
-    /*
-     * Для связи таблицы пользователь и лицевой счет
-     */
-    public function setUserAccountId($account_id) {
-        $id = PersonalAccount::find()
-                ->andWhere(['account_number' => $account_id])
-                ->select('account_id')
-                ->asArray()
-                ->one();
-        
-        $this->user_account_id = $id['account_id'];
-    }
+//    /*
+//     * Для связи таблицы пользователь и лицевой счет
+//     */
+//    public function setUserAccountId($account_id) {
+//        $id = PersonalAccount::find()
+//                ->andWhere(['account_number' => $account_id])
+//                ->select('account_id')
+//                ->asArray()
+//                ->one();
+//        
+//        $this->user_account_id = $id['account_id'];
+//    }
 
     /*
      * Для связи таблицы пользователь и собственник (поиск по номеру телефона)

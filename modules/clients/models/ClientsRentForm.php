@@ -69,7 +69,7 @@ class ClientsRentForm extends Model {
                 $rent_new->setAccountId(Yii::$app->user->identity->user_login);
                 $rent_new->rents_clients_id = $client_id;
                 $rent_new->rents_email = $this->rents_email;
-                $rent_new->save(false);
+                $rent_new->save();
                 
                 $user_new = new User();
                 $user_new->user_login = Yii::$app->user->identity->user_login . '_rent';
@@ -78,9 +78,8 @@ class ClientsRentForm extends Model {
                 $user_new->user_email = $this->rents_email;
                 $user_new->status = User::STATUS_ENABLED;
                 $user_new->user_rent_id = $rent_new->id;
-                $user_new->setUserAccountId(Yii::$app->user->identity->user_login);
-                $user_new->save(false);
-
+                $user_new->save();
+                
                 $transaction->commit();
             }            
         } catch (Exception $e) {

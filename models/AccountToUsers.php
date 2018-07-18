@@ -35,6 +35,13 @@ class AccountToUsers extends ActiveRecord
     public function getPersonalAccount() {
         return $this->hasOne(PersonalAccount::className(), ['account_id' => 'account_id']);
     }
+    
+    public function afterSave($insert, $changedAttributes) {
+        parent::afterSave($insert, $changedAttributes);
+        if ($this->isNewRecord) {
+            
+        }
+    }
 
     public function attributeLabels()
     {
