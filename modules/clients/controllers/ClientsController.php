@@ -33,6 +33,7 @@ class ClientsController extends Controller
         
         $user_info = User::findByUser($user, $username);
         
+        // Пользователь должен иметь доступ только к странице своего профиля
         if ($_user->user_id <> $user_info->user_id) {
             throw new NotFoundHttpException('Вы обратились к несуществующей странице');
         }

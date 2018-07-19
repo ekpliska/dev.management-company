@@ -6,6 +6,7 @@
     use app\models\PersonalAccount;
     use app\models\Clients;
     use app\models\User;
+    use yii\helpers\ArrayHelper;
 
 /**
  * Арендатор
@@ -80,6 +81,24 @@ class Rents extends ActiveRecord
     }
     
     /*
+     * Сформировать массив арендаторов закрепленных за собственником, 
+     * со статусом "не активен"
+     */
+    public static function findByClientID($client_id) {
+        $_list = self::find()
+                ->andWhere(['rents_clients_id' => $client_id])
+                ->andWhere(['isActive' => self::STATUS_DISABLED])
+                ->select(['rents_id', 'rents_surname', 'rents_name', 'rents_second_name'])
+                ->asArray()
+                ->all();
+        
+        return 
+            ArrayHelper::map($_list, 'rents_id', function ($elem) {
+                return $elem['rents_surname'] . ' ' . $elem['rents_name'] . ' ' . $elem['rents_second_name'];
+            });
+    } 
+    
+    /*
      * После создания новой записи Арендатора производим
      * добавление роли Арендатор к учетной записи пользователя
      */
@@ -107,8 +126,7 @@ class Rents extends ActiveRecord
                 $this->rents_name . ' ' .
                 $this->rents_second_name;
     }
-    
-    
+
     public function setAccountId($account_id) {
         $id = PersonalAccount::find()
                 ->andWhere(['account_number' => $account_id])

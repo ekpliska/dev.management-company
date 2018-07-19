@@ -4,6 +4,7 @@
     use Yii;
     use yii\db\ActiveRecord;
     use app\models\Clients;
+    use yii\helpers\ArrayHelper;
 
 /**
  * Информация о жилых помещениях
@@ -41,6 +42,26 @@ class Houses extends ActiveRecord
         return self::find()
                 ->andWhere(['houses_account_id' => $account_id])
                 ->one();
+    }
+    
+    /*
+     * Получить список квартир закрепленных за собственником
+     */
+    public static function findByClientID($client_id) {
+        $_list = self::find()
+                ->andWhere(['houses_client_id' => $client_id])
+                ->asArray()
+                ->all();
+        
+        return
+            ArrayHelper::map($_list, 'houses_id', function ($array) {
+                return 
+                    $array['houses_town'] . ' ' .
+                    $array['houses_street'] . ' ' .
+                    $array['houses_number_house'] . ' ' .
+                    $array['houses_flat'];
+            });
+        
     }
     
     public function getAdress() {

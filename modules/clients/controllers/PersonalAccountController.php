@@ -2,11 +2,12 @@
     namespace app\modules\clients\controllers;
     use Yii;
     use yii\web\Controller;
+    use yii\data\ActiveDataProvider;
     use app\models\PersonalAccount;
     use app\modules\clients\models\AddPersonalAccount;
     use app\models\User;
     use app\modules\clients\models\FilterForm;
-    use yii\data\ActiveDataProvider;
+    use app\models\Rents;
 
 /**
  * Контроллер по работе с разделом "Лицевой счет"
@@ -32,8 +33,15 @@ class PersonalAccountController extends Controller {
         
         // Форма для фильтрации лицевых счетов
         $_filter = new FilterForm();
+        
         // Получить список всех лицевых счетов пользователя        
         $account_all = PersonalAccount::findByClient($user_info->user_client_id);
+        
+        // Получить список всех арендаторов собственника со статусом "Не активен"
+        $all_rent = Rents::findByClientID($user_info->user_client_id);
+        
+        // Получить список всех домов закрепленных за собственником
+        $all_house = \app\models\Houses::findByClientID($user_info->user_client_id);
         
         return $this->render('index', [
             'user_info' => $user_info,
@@ -41,6 +49,8 @@ class PersonalAccountController extends Controller {
             'account_all' => $account_all,
             '_filter' => $_filter,
             'dataProvider' => $dataProvider,
+            'all_rent' => $all_rent,
+            'all_house' => $all_house,
         ]);
         
     }

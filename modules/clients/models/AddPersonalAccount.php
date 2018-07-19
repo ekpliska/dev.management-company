@@ -16,13 +16,17 @@ class AddPersonalAccount extends Model {
     public $account_client_name;
     public $account_client_secondname;
     
-    public $account_rent;        
+    public $account_rent;
     
+    public $flat;
+
+
     public function rules() {
         return [
             [[
                 'account_number', 'account_organization_id', 'account_last_sum',
-                'account_client_surname', 'account_client_name', 'account_client_secondname'], 'required'],
+                'account_client_surname', 'account_client_name', 'account_client_secondname',
+                'flat'], 'required'],
             
             ['account_number', 'string', 'min' => 11, 'max' => 11],
             ['account_number', 'checkPersonalAccount'],
@@ -57,7 +61,11 @@ class AddPersonalAccount extends Model {
             'account_client_secondname' => 'Отчество собственника',
             
             'account_rent' => 'Арендатор',
+            
+            'flat' => 'Адрес',
         ];
     }
+    
+    
    
 }

@@ -102,8 +102,18 @@ $this->title = 'Общая информация';
 
                             <div class="col-md-6">
                                 <?= $form->field($add_account, 'account_last_sum')
+                                    ->widget(yii\widgets\MaskedInput::className(), [
+                                        'clientOptions' => [
+                                            'alias' => 'decimal',
+                                            'digits' => 2,
+                                            'digitsOptional' => false,
+                                            'radixPoint' => ',',
+                                            'groupSeparator' => ' ',
+                                            'autoGroup' => true,
+                                            'removeMaskOnSubmit' => true,
+                                            ]])
                                     ->input('text', [
-                                        'placeHolder' => $add_account->getAttributeLabel('account_last_sum')])
+                                        'placeHolder' => '0,00'])
                                     ->label() ?>
                             </div>
 
@@ -111,7 +121,7 @@ $this->title = 'Общая информация';
                                 <?= $form->field($add_account, 'account_organization_id')
                                     ->dropDownList(ArrayHelper::map(\app\models\Organizations::find()->orderBy('organizations_name asc')->all(),
                                             'organizations_id', 'organizations_name'),
-                                            ['prompt' => 'Выберите организацию из списка'])
+                                            ['prompt' => 'Выбрать организацию из списка...'])
                                 ?>
                             </div>
                         
@@ -143,7 +153,17 @@ $this->title = 'Общая информация';
                             </div>
                         
                             <div class="col-md-12">
-                                <?= $form->field($add_account, 'account_rent')->input('text', ['placeHolder' => $add_account->getAttributeLabel('account_rent')])->label() ?>
+                                <?= $form->field($add_account, 'account_rent')
+                                    ->dropDownList($all_rent, [
+                                        'prompt' => 'Выбрать арендатора из списка...'
+                                    ]) ?>
+                            </div>
+                        
+                        <div class="col-md-12">
+                            <?= $form->field($add_account, 'flat')
+                                    ->dropDownList($all_house, [
+                                        'prompt' => 'Выбрать адрес из списка...'
+                                    ]) ?>
                             </div>
                     </div>
                 </div>
