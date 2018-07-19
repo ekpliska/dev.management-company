@@ -78,12 +78,26 @@ $this->title = 'Профиль абонента';
                                     });
                             });
 
+                            $(".undo_yes").on("click", function(e) {
+                                    $.ajax({
+                                        url:"' . Url::toRoute(['clients/undo-rent']) . '",
+                                        method: "POST",
+                                        data: {
+                                            rent_id: "' . $rent->id . '",
+                                            status: "' . false . '",
+                                        },
+                                        success: function(data){
+                                            console.log(data);
+                                        }
+                                    });
+                            });
+
                             $(".delete_no").on("click", function(e) {
                                 $("#addRent").prop("checked", true);
                             });
 
                         }
-
+                        
                         if (this.checked && !"' . $rent->id . '") {
                             // console.log("new rent");
 //                            $.ajax({
@@ -202,69 +216,19 @@ $this->title = 'Профиль абонента';
             </div>
             <div class="modal-body">
                 <div class="modal__text">
-                    Вы действительно хотите удалить 
+                    Какое действие вы хотите совершить с учетной записью арендатора? 
                     <?php if ($is_rent && isset($rent)) : ?>
-                        <strong><?= $rent->fullName ?></strong>
+                        Арендатор: <strong><?= $rent->fullName ?></strong>
                     <?php endif; ?>
-                    как вашего арендаторов? 
                     <br />
-                    Внимание, при удалении арендатора так же будет удалена его учетная запись на портале
+                    *** Внимание, при удалении арендатора так же будет удалена его учетная запись на портале
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-danger delete_yes" data-dismiss="modal">Да</button>
+                <button class="btn btn-danger delete_yes" data-dismiss="modal">Удалить</button>
+                <button class="btn btn-success undo_yes" data-dismiss="modal">Отвязать от лицевого счета</button>
                 <button class="btn btn-primary delete_no" data-dismiss="modal">Отмена</button>
             </div>
         </div>
     </div>
 </div> 
-
-
-
-<?php /*
-<div id="add_rent" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Добавить арендатора</h4>
-            </div>
-            <div class="modal-body">
-
-    <?php
-        $form_rent = ActiveForm::begin([
-            'id' => 'add-rent',
-            'action' => 'clients/add-rent',
-            'enableClientValidation' => true,
-            'enableAjaxValidation' => false,
-        ])
-    ?>
-        <?= $form_rent->field($rent_new, 'rents_surname')->input('text', ['placeHolder' => $rent_new->getAttributeLabel('rents_surname')])->label() ?>
-
-        <?= $form_rent->field($rent_new, 'rents_name')->input('text', ['placeHolder' => $rent_new->getAttributeLabel('rents_name')])->label() ?>
-
-        <?= $form_rent->field($rent_new, 'rents_second_name')->input('text', ['placeHolder' => $rent_new->getAttributeLabel('rents_second_name')])->label() ?>
-
-        <?= $form_rent->field($rent_new, 'rents_mobile')
-                ->widget(MaskedInput::className(), [
-                    'mask' => '+7(999) 999-99-99'])
-                ->input('text', ['placeHolder' => $rent_new->getAttributeLabel('rents_mobile')])->label() ?>
-
-        <?= $form_rent->field($rent_new, 'rents_email')->input('text', ['placeHolder' => $rent_new->getAttributeLabel('rents_email')])->label() ?>
-
-        <?= $form_rent->field($rent_new, 'password')->input('password', ['placeHolder' => $rent_new->getAttributeLabel('password')])->label() ?>
-
-        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary']) ?>
-
-    <?php ActiveForm::end() ?>                
-                
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
- * 
- * 
- */?>

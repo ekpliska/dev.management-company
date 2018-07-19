@@ -36,6 +36,7 @@ class PersonalAccountController extends Controller {
         $account_all = PersonalAccount::findByClient($user_info->user_client_id);
         
         return $this->render('index', [
+            'user_info' => $user_info,
             'add_account' => $add_account, 
             'account_all' => $account_all,
             '_filter' => $_filter,

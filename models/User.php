@@ -21,7 +21,9 @@ class User extends ActiveRecord implements IdentityInterface
      */
     const STATUS_DISABLED = 0;
     const STATUS_ENABLED = 1;
-    
+    const STATUS_BLOCK = 2;
+
+
     public function behaviors() {
         return [
             TimestampBehavior::className(),

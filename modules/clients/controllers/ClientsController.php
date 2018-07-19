@@ -83,6 +83,9 @@ class ClientsController extends Controller
         ]);
     }
     
+    /*
+     * Удаление учетной записи арендатора
+     */
     public function actionDeleteRent() {
         
         $rent_id = Yii::$app->request->post('rent_id');
@@ -90,18 +93,48 @@ class ClientsController extends Controller
         if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
             $status = Yii::$app->request->post('status');
 
-            $info = Rents::findOne(['rents_id' => $rent_id]);
-            $user = User::findOne(['user_rent_id' => $rent_id]);
+            $rents_info = Rents::findOne(['rents_id' => $rent_id]);
+            $user_info = User::findOne(['user_rent_id' => $rent_id]);
             
             if (!$status) {
-                $info->delete();
-                $user->delete();
+                 $rents_info->delete();
+                 $user_info->delete();
                 return 'Удаляем запись';
             }
         }
         
     }
+
+    /*
+     * Отвязать арендатора от лицевого счета
+     * Статус учетной записи арендатора для входа на портал - заблокирован
+     */
+    public function actionUndoRent() {
+        
+        $rent_id = Yii::$app->request->post('rent_id');
+        
+        if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
+            $status = Yii::$app->request->post('status');
+
+            $rents_info = Rents::findOne(['rents_id' => $rent_id]);
+            $user_info = User::findOne(['user_rent_id' => $rent_id]);
+            
+            if (!$status) {
+                $rents_info->rents_account_id = null;
+                $rents_info->isActive = Rents::STATUS_DISABLED;
+                $user_info->status = User::STATUS_BLOCK;
+                $rents_info->save(false);
+                $user_info->save(false);
+                return 'Отвязываем запись';
+            }
+        }
+        
+    }
     
+    /*
+     * Добавить запись арендатора
+     * Создать для него учетную запись для входа на портал
+     */
     public function actionAddRent() {
         
         $model = new ClientsRentForm();

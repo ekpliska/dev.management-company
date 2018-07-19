@@ -51,6 +51,8 @@ class LoginForm extends Model
                 $this->addError($attribute, 'Данной комбинации логина и пароля не существует. Попробуйте ввести данные еще раз');
             } else if ($user && $user->status == User::STATUS_DISABLED) {
                 $this->addError($attribute, 'Вы не прошли подтвержение регистрации на портале. Проверьте вашу электронную почту');
+            } else if ($user && $user->status == User::STATUS_BLOCK) {
+                $this->addError($attribute, 'Ваша учетная запись была заблокирована');
             }
             
         }

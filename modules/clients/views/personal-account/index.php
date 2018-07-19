@@ -94,11 +94,17 @@ $this->title = 'Общая информация';
                         ?>
 
                             <div class="col-md-6">
-                                <?= $form->field($add_account, 'account_number')->input('text', ['placeHolder' => $add_account->getAttributeLabel('account_number')])->label() ?>
+                                <?= $form->field($add_account, 'account_number')
+                                    ->input('text', [
+                                        'placeHolder' => $add_account->getAttributeLabel('account_number')])
+                                    ->label() ?>
                             </div>
 
                             <div class="col-md-6">
-                                <?= $form->field($add_account, 'account_last_sum')->input('text', ['placeHolder' => $add_account->getAttributeLabel('account_last_sum')])->label() ?>
+                                <?= $form->field($add_account, 'account_last_sum')
+                                    ->input('text', [
+                                        'placeHolder' => $add_account->getAttributeLabel('account_last_sum')])
+                                    ->label() ?>
                             </div>
 
                             <div class="col-md-12">
@@ -112,8 +118,8 @@ $this->title = 'Общая информация';
                             <div class="col-md-12">
                                 <?= $form->field($add_account, 'account_client_surname')
                                     ->input('text', [
-                                        'placeHolder' => $add_account->getAttributeLabel('account_client_surname'),
-                                        'value' => $account->client->clients_surname,
+                                        'value' => $user_info->client->clients_surname,
+                                        'disabled' => true,
                                     ])
                                     ->label() ?>
                             </div>
@@ -121,8 +127,8 @@ $this->title = 'Общая информация';
                             <div class="col-md-6">
                                 <?= $form->field($add_account, 'account_client_name')
                                     ->input('text', [
-                                        'placeHolder' => $add_account->getAttributeLabel('account_client_name'),
-                                        'value' => $account->client->clients_name,
+                                        'value' => $user_info->client->clients_name,
+                                        'disabled' => true,
                                     ])
                                     ->label() ?>
                             </div>
@@ -130,8 +136,8 @@ $this->title = 'Общая информация';
                             <div class="col-md-6">
                                 <?= $form->field($add_account, 'account_client_secondname')
                                     ->input('text', [
-                                        'placeHolder' => $add_account->getAttributeLabel('account_client_secondname'), 
-                                        'value' => $account->client->clients_second_name,
+                                        'value' => $user_info->client->clients_second_name,
+                                        'disabled' => true,
                                     ])
                                     ->label() ?>
                             </div>

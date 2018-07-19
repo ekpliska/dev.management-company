@@ -21,7 +21,6 @@ class ClientsRentForm extends Model {
     public $rents_email;
     public $password;
 
-
     /*
      * Правила валидации
      */
@@ -53,6 +52,7 @@ class ClientsRentForm extends Model {
     /*
      * Добавление арендатора прикрепленного к заданному собственнику
      * Для арендатора создаем новую учетную запись
+     * Новому арендатору присваиваем статус - Активнй
      */
     public function addNewClient($client_id) {
         
@@ -69,6 +69,7 @@ class ClientsRentForm extends Model {
                 $rent_new->setAccountId(Yii::$app->user->identity->user_login);
                 $rent_new->rents_clients_id = $client_id;
                 $rent_new->rents_email = $this->rents_email;
+                $rent_new->isActive = true;
                 $rent_new->save();
                 
                 $user_new = new User();

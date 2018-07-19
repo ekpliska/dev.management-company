@@ -12,6 +12,16 @@
  */
 class Rents extends ActiveRecord
 {
+    
+    /*
+     * Статусы арендатора
+     * STATUS_DISABLED - арендатор не закреплен за лицевым счетом
+     * STATUS_ENABLED - арендатор закреплен за лицевым счетом
+     */
+    const STATUS_DISABLED = 0;
+    const STATUS_ENABLED = 1;
+
+
     /**
      * Таблица из БД
      */
@@ -48,6 +58,8 @@ class Rents extends ActiveRecord
             ['rents_mobile', 'match', 'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/i'],
             
             ['rents_email', 'email'],
+            
+            ['isActive', 'boolean'],
         ];
     }
     
