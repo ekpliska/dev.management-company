@@ -86,7 +86,6 @@ class PersonalAccountController extends Controller {
     
     public function actionValidateRecord() {
         
-        
         if (Yii::$app->request->isAjax) {
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
             $model = new AddPersonalAccount();
@@ -96,4 +95,28 @@ class PersonalAccountController extends Controller {
         throw new \yii\web\BadRequestHttpException('Не верный формат запроса!');   
     }
     
+    public function actionAddRecordAccount() {
+
+        $model = new AddPersonalAccount();
+        
+        $request = Yii::$app->getRequest();
+        
+        if ($request->isPost && $model->load($request->post())) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            if ($model->saveRecord()) {
+                Yii::$app->session->setFlash('form', 'form');
+                // return ['status' => true];
+                
+            } else {
+                if ($model->hasErrors()) {
+                    Yii::$app->session->setFlash('error', 'error');
+                    return $this->redirect(Yii::$app->request->referrer);
+                    // return ['error' => $model->errors];
+                }
+            }
+        }
+        return $this->redirect(Yii::$app->request->referrer);
+    }
+    
+     
 }

@@ -102,8 +102,8 @@ class RequestsController extends Controller
         $comments = new CommentsToRequest();
         $comments_find = CommentsToRequest::findCommentsById($request_info->requests_id);
         
-        $account_id = Yii::$app->user->identity->user_account_id;        
-        $user_house = Houses::findByAccountId($account_id);
+        // $account_id = Yii::$app->user->identity->user_account_id;        
+        $user_house = Houses::findByAccountId('1');
         
         
         $model = new CommentsToRequest();

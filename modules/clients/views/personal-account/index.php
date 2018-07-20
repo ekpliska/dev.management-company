@@ -12,6 +12,30 @@ $this->title = 'Общая информация';
 ?>
 <div class="clients-default-index">
     <h1><?= $this->title ?></h1>
+
+        <?php if (Yii::$app->session->hasFlash('form')) : ?>
+            <div class="alert alert-info" role="alert">
+                <strong>
+                    <?= Yii::$app->session->getFlash('form', false); ?>
+                </strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>                    
+            </div>
+        <?php endif; ?>
+
+        <?php if (Yii::$app->session->hasFlash('error')) : ?>
+            <div class="alert alert-error" role="alert">
+                <strong>
+                    <?= Yii::$app->session->getFlash('error', false); ?>
+                </strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>                
+            </div>
+        <?php endif; ?>         
+            
+    
     
     <div class="col-md-6">
         <?php 
@@ -71,6 +95,9 @@ $this->title = 'Общая информация';
     </div>    
 </div>
 
+<div id="filter_id_test">
+    
+</div>
 
 <div id="add-account-modal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog">
@@ -86,17 +113,21 @@ $this->title = 'Общая информация';
                         <?php 
                             $form = ActiveForm::begin([
                                 'id' => 'add-account',
+                                'action' => [
+                                    'personal-account/add-record-account',
+                                ],
                                 'enableClientValidation' => false,
                                 'enableAjaxValidation' => true,
-                                 'validationUrl' => ['personal-account/validate-record'],
-                                 'validateOnSubmit' => true,
+                                'validationUrl' => ['personal-account/validate-record'],
+                                'validateOnSubmit' => true,
                             ])
                         ?>
 
                             <div class="col-md-6">
                                 <?= $form->field($add_account, 'account_number')
                                     ->input('text', [
-                                        'placeHolder' => $add_account->getAttributeLabel('account_number')])
+                                        'placeHolder' => $add_account->getAttributeLabel('account_number'),
+                                        'class' => 'form-control number in1'])
                                     ->label() ?>
                             </div>
 
@@ -113,7 +144,8 @@ $this->title = 'Общая информация';
                                             'removeMaskOnSubmit' => true,
                                             ]])
                                     ->input('text', [
-                                        'placeHolder' => '0,00'])
+                                        'placeHolder' => '0,00', 
+                                        'class' => 'form-control last_sum in2'])
                                     ->label() ?>
                             </div>
 
@@ -121,7 +153,10 @@ $this->title = 'Общая информация';
                                 <?= $form->field($add_account, 'account_organization_id')
                                     ->dropDownList(ArrayHelper::map(\app\models\Organizations::find()->orderBy('organizations_name asc')->all(),
                                             'organizations_id', 'organizations_name'),
-                                            ['prompt' => 'Выбрать организацию из списка...'])
+                                            [
+                                                'prompt' => 'Выбрать организацию из списка...',
+                                                'class' => 'form-control organization in3'
+                                            ])
                                 ?>
                             </div>
                         
@@ -130,6 +165,7 @@ $this->title = 'Общая информация';
                                     ->input('text', [
                                         'value' => $user_info->client->clients_surname,
                                         'disabled' => true,
+                                        'class' => 'form-control',
                                     ])
                                     ->label() ?>
                             </div>
@@ -139,6 +175,7 @@ $this->title = 'Общая информация';
                                     ->input('text', [
                                         'value' => $user_info->client->clients_name,
                                         'disabled' => true,
+                                        'class' => 'form-control',
                                     ])
                                     ->label() ?>
                             </div>
@@ -148,6 +185,7 @@ $this->title = 'Общая информация';
                                     ->input('text', [
                                         'value' => $user_info->client->clients_second_name,
                                         'disabled' => true,
+                                        'class' => 'form-control',
                                     ])
                                     ->label() ?>
                             </div>
@@ -155,14 +193,16 @@ $this->title = 'Общая информация';
                             <div class="col-md-12">
                                 <?= $form->field($add_account, 'account_rent')
                                     ->dropDownList($all_rent, [
-                                        'prompt' => 'Выбрать арендатора из списка...'
+                                        'prompt' => 'Выбрать арендатора из списка...',
+                                        'class' => 'form-control rent in4',
                                     ]) ?>
                             </div>
                         
                         <div class="col-md-12">
                             <?= $form->field($add_account, 'flat')
                                     ->dropDownList($all_house, [
-                                        'prompt' => 'Выбрать адрес из списка...'
+                                        'prompt' => 'Выбрать адрес из списка...',
+                                        'class' => 'form-control flat in5'
                                     ]) ?>
                             </div>
                     </div>
@@ -176,3 +216,32 @@ $this->title = 'Общая информация';
         </div>
     </div>
 </div>
+
+<?php 
+$this->registerJs("
+        $('body').on('beforeSubmit', 'form#add-account', function (e) {
+            e.preventDefault();
+            var form = $(this);
+            
+            if (form.find('.has-error').length) {
+                return false;
+            }
+            
+            $.ajax({
+                url    : form.attr('action'),
+                method   : 'POST',
+                data   : form.serialize(),
+                success: function(response) {
+                    if (response.status == true) {
+                        alert ('OK');
+                    }
+                },
+                error  : function () {
+                    console.log('internal server error');
+                }
+            });
+            return false;
+        });
+
+");
+?>

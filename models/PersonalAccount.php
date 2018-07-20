@@ -29,8 +29,8 @@ class PersonalAccount extends ActiveRecord
     {
         return [
             [['account_number'], 'required'],
-            [['account_balance'], 'integer'],
-            [['account_number'], 'string', 'min' => 11, 'max' => 11],
+            [['account_balance'], 'string'],
+            // [['account_number'], 'string', 'min' => 11, 'max' => 11],
             [['account_organization_id'], 'integer'],
             [['account_number'], 'unique'],
         ];
@@ -51,10 +51,6 @@ class PersonalAccount extends ActiveRecord
     public function getOrganization() {
         return $this->hasOne(Organizations::className(), ['organizations_id' => 'account_organization_id']);
     }
-    
-// return $this->hasMany(Tag::className(), ['id' => 'tag_id']) // связываем tag.id с tag_to_post_bind.tag_id
-//            ->viaTable('tag_to_post_bind', ['post_id' => 'id']); // tag_to_post_bind.post_id с post.id    
-//    
     
     /*
      * Свзяь с промежуточной таблицей

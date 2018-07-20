@@ -9,7 +9,7 @@ $this->title = 'Детали заявки';
 
 $user = Yii::$app->user->identity->user_id; 
 $username = Yii::$app->user->identity->user_login;
-$account = Yii::$app->user->identity->user_account_id;
+// $account = Yii::$app->user->identity->user_account_id;
 ?>
 <div class="clients-default-index">
     <h1><?= $this->title ?></h1>
@@ -87,7 +87,7 @@ $account = Yii::$app->user->identity->user_account_id;
         <?= $this->render('form/_comment', ['model' => $comments, 'comments_find' => $comments_find]); ?>
     </div>
     <div class="col-md-12 text-right">
-        <a href="<?= Url::to(['requests/index', 'user' => $user, 'username' => $username, 'account' => $account]) ?>" class="btn btn-primary">Вернуться к списку заявок</a>
+        <a href="<?= Url::to(['requests/index', 'user' => $user, 'username' => $username]) ?>" class="btn btn-primary">Вернуться к списку заявок</a>
     </div>
     
 </div>

@@ -1,5 +1,6 @@
 <?php
     namespace app\modules\clients\models;
+    use Yii;
     use yii\base\Model;
     use app\models\PersonalAccount;
 
@@ -28,7 +29,7 @@ class AddPersonalAccount extends Model {
                 'account_client_surname', 'account_client_name', 'account_client_secondname',
                 'flat'], 'required'],
             
-            ['account_number', 'string', 'min' => 11, 'max' => 11],
+            //['account_number', 'string', 'min' => 11, 'max' => 11],
             ['account_number', 'checkPersonalAccount'],
             
         ];
@@ -47,6 +48,26 @@ class AddPersonalAccount extends Model {
         if ($personal_account) {
             $errorMsg = 'Указанный лицевой счет уже используется';
             $this->addError('account_number', $errorMsg);
+        }
+    }
+    
+    public function saveRecord() {
+        $connection = Yii::$app->db;
+        $transaction = $connection->beginTransaction();
+        try {
+            $new_account = new PersonalAccount();
+            $new_account->account_number = $this->account_number;
+            $new_account->account_organization_id = $this->account_organization_id;
+            $new_account->account_balance = $this->account_last_sum;
+            $new_account->personal_clients_id = '00';
+            $new_account->personal_rent_id = $this->account_rent;
+            $new_account->personal_house_id = $this->flat;
+            $new_account->save(false);
+            $transaction->commit();
+        }
+        catch (Exception $e) {
+            $transaction->rollBack();
+            $e->getMessage();
         }
     }
     

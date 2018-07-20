@@ -63,7 +63,6 @@
                 <?php
                     $form = ActiveForm::begin([
                         'id' => 'add-comment',                    
-                        // 'action' => 'requests/add-comment',
                         'options' => [
                             'data-pjax' => true,
                         ]
