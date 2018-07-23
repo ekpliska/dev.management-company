@@ -8,11 +8,14 @@
     use app\models\User;
     use app\modules\clients\models\FilterForm;
     use app\models\Rents;
+    use app\models\Organizations;
+    use app\models\AccountToUsers;
 
 /**
  * Контроллер по работе с разделом "Лицевой счет"
  */
 class PersonalAccountController extends Controller {
+    
 
     public function actionIndex($user, $username) {
         
@@ -95,28 +98,119 @@ class PersonalAccountController extends Controller {
         throw new \yii\web\BadRequestHttpException('Не верный формат запроса!');   
     }
     
-    public function actionAddRecordAccount() {
+    
+    public function actionValidateAddRentForm() {
+        
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
-        $model = new AddPersonalAccount();
-        
-        $request = Yii::$app->getRequest();
-        
-        if ($request->isPost && $model->load($request->post())) {
-            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-            if ($model->saveRecord()) {
-                Yii::$app->session->setFlash('form', 'form');
-                // return ['status' => true];
+        if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
+            
+            $model = new \app\modules\clients\models\ClientsRentForm();
+
+            if ($model->load(Yii::$app->request->post())) {
                 
-            } else {
-                if ($model->hasErrors()) {
-                    Yii::$app->session->setFlash('error', 'error');
-                    return $this->redirect(Yii::$app->request->referrer);
-                    // return ['error' => $model->errors];
+                if ($model->validate()) {
+                    return ['status' => true];
                 }
             }
+            return [
+                'status' => false,
+                'errors' => $model->errors,
+            ];
         }
-        return $this->redirect(Yii::$app->request->referrer);
+        return ['status' => false];
     }
     
+//    public function actionAddRecordAccount() {
+//
+//        $model = new AddPersonalAccount();
+//        
+//        $request = Yii::$app->getRequest();
+//        
+//        if ($request->isPost && $model->load($request->post())) {
+//            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+//            if ($model->saveRecord()) {
+//                Yii::$app->session->setFlash('form', 'form');
+//                return ['status' => true];
+//                
+//            } else {
+//                if ($model->hasErrors()) {
+//                    Yii::$app->session->setFlash('error', 'error');
+//                    return $this->redirect(Yii::$app->request->referrer);
+//                    // return ['error' => $model->errors];
+//                }
+//            }
+//        }
+//        return $this->redirect(Yii::$app->request->referrer);
+//    }
+    
+    /*
+     * Вызов формы добавления нового лицевого счета
+     */
+    public function actionShowAddForm() {
+        
+        $all_organizations = Organizations::getOrganizations();
+        $user_info = AccountToUsers::findByUserID(Yii::$app->user->identity->user_id);
+        
+        // Получить список всех арендаторов собственника со статусом "Не активен"
+        $all_rent = Rents::findByClientID($user_info->personalAccount->client->clients_id);
+        
+        // echo '<pre>'; var_dump($user_info); die;
+        
+        $add_account = new AddPersonalAccount();
+        $add_rent = new \app\modules\clients\models\ClientsRentForm();
+        
+        return $this->render('_form/_add_account', [
+            'all_organizations' => $all_organizations,
+            'user_info' => $user_info,
+            'all_rent' => $all_rent,
+            'add_account' => $add_account,
+            'add_rent' => $add_rent,
+        ]);
+    }
+    
+    
+    public function actionAddRecordAccount($form) {
+
+        if (Yii::$app->request->isPost) {
+            
+            // Получаем значение checkBox "Арендатор" на форме
+            $is_rent = Yii::$app->request->post('isRent');
+            
+//            if ($is_rent) {
+//                echo 'check';
+//            } else {
+//                echo 'no check';
+//            }
+//            die;
+
+            $dynamicForm = new AddPersonalAccount();
+
+            $formName = $form;
+            $dynamicForm->load(Yii::$app->request->post('AddPersonalAccount'), $formName);
+
+            $dynamicForm->validate();
+
+            if ($dynamicForm->hasErrors()) {
+                Yii::$app->session->setFlash('error', ['form' => $formName, 'success' => false]);
+                if (Yii::$app->request->referrer) {
+                    Yii::$app->response->setStatusCode(400);
+                    return Yii::$app->request->isAjax ? \yii\helpers\Json::encode(['success' => false]) : $this->redirect(Yii::$app->request->referrer);
+                }
+                return Yii::$app->request->isAjax ? \yii\helpers\Json::encode(['success' => false]) : $this->goHome();
+            }
+            
+            
+            
+            
+
+//              $nomineeSaver = new NomineeSaver($dynamicForm->model->attributes);
+
+
+            return $this->redirectToReferrer();
+        }
+        return $this->goHome();
+        
+    }
      
 }

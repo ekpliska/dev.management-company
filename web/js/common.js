@@ -28,4 +28,26 @@ $(document).ready(function() {
         readURL(this);
     });
     
+    
+    
+    /*
+     * Раздел "Лицевой счет"
+     * Форма - Добавить лицевой счет
+     */
+    // Блокируем список доступных арендаторов, и кнопку добавить арендатора
+    $('#list_rent').prop('disabled', true);
+    $('.btn__add-rent').prop('disabled', true);
+    
+    // В зависимости от checkBox "Арендатор" скрываем/показываем элементы
+    $('#isRent').change(function() {
+        if (this.checked) {
+            $('#list_rent').prop('disabled', false);
+            $('.btn__add-rent').prop('disabled', false);
+        } else {
+            $('#list_rent').prop('disabled', true);
+            $('.btn__add-rent').prop('disabled', true);            
+        }
+    });
+    
+    
 });

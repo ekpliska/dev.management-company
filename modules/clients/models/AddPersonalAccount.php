@@ -9,28 +9,57 @@
  */
 class AddPersonalAccount extends Model {
     
+    // Номер лицевого счета
     public $account_number;
-    public $account_organization_id;
+    // Сумма предыдущей квитанции
     public $account_last_sum;
+    // Площадь квартиры
+    public $square_flat;
+
+    // Управляющая компания
+    public $account_organization_id;
     
+    // Собственник - Фамилия
     public $account_client_surname;
+    // Собственник - Имя
     public $account_client_name;
+    // Собственник - Отчество    
     public $account_client_secondname;
+    // Собственник - Наличие арендатора
+    public $is_rent;
     
+    // Арендатор из списка (закрепленные арендаторы собственника)
     public $account_rent;
+
+    // Арендатор - Фамилия
+    public $rent_surname;
+    // Арендатор - Имя
+    public $rent_name;
+    // Арендатор - Отчество
+    public $rent_secondname;
+    // Арендатор - Контактный телефон
+    public $rent_phone;
+    // Арендатор - Email
+    public $rent_email;
+    // Арендатор - Пароль
+    public $rent_password;
     
+    // Квартира
     public $flat;
 
 
     public function rules() {
         return [
             [[
-                'account_number', 'account_organization_id', 'account_last_sum',
-                'account_client_surname', 'account_client_name', 'account_client_secondname',
+                'account_number', 'account_organization_id', 
+                'account_last_sum', 'square_flat',
+                // 'account_client_surname', 'account_client_name', 'account_client_secondname',
                 'flat'], 'required'],
             
             //['account_number', 'string', 'min' => 11, 'max' => 11],
-            ['account_number', 'checkPersonalAccount'],
+            // ['account_number', 'checkPersonalAccount'],
+            
+            ['is_rent', 'boolean'],
             
         ];
     }
@@ -76,12 +105,14 @@ class AddPersonalAccount extends Model {
             'account_number' => 'Номер лицевого счета',
             'account_organization_id' => 'Управляющая организация',
             'account_last_sum' => 'Сумма последней квитанции',
+            'square_flat' => 'Площадь квартиры',
             
             'account_client_surname' => 'Фамилия собственника', 
             'account_client_name' => 'Имя собственника', 
             'account_client_secondname' => 'Отчество собственника',
             
-            'account_rent' => 'Арендатор',
+            'is_rent' => 'Арендатор',
+            'account_rent' => 'Выбрать арендатора, закрепленного за собственником',
             
             'flat' => 'Адрес',
         ];

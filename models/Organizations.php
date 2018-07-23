@@ -2,11 +2,14 @@
 
     namespace app\models;
     use Yii;
+    use yii\db\ActiveRecord;
+    use yii\helpers\ArrayHelper;
+
 
 /**
  * Организации, предоставляющие услуги ЖКХ
  */
-class Organizations extends \yii\db\ActiveRecord
+class Organizations extends ActiveRecord
 {
     /**
      * Таблица из БД
@@ -24,6 +27,11 @@ class Organizations extends \yii\db\ActiveRecord
         return [
             [['organizations_name'], 'string', 'max' => 70],
         ];
+    }
+    
+    public static function getOrganizations() {
+        $all_organizations = self::find()->asArray()->all();
+        return ArrayHelper::map($all_organizations, 'organizations_id', 'organizations_name');
     }
 
     /**

@@ -28,20 +28,27 @@ class AccountToUsers extends ActiveRecord
         ];
     }
     
+    /*
+     * Связь с таблицей Пользователи
+     */
     public function getUser() {
         return $this->hasOne(User::className(), ['user_id' => 'user_id']);
     }
     
+    /*
+     * Свзяь с таблицей Лицевой счет
+     */
     public function getPersonalAccount() {
         return $this->hasOne(PersonalAccount::className(), ['account_id' => 'account_id']);
     }
     
-    public function afterSave($insert, $changedAttributes) {
-        parent::afterSave($insert, $changedAttributes);
-        if ($this->isNewRecord) {
-            
-        }
+    public static function findByUserID($user_id) {
+        return self::find()
+                ->andWhere(['user_id' => $user_id])
+                ->select(['user_id', 'account_id'])
+                ->one();
     }
+    
 
     public function attributeLabels()
     {

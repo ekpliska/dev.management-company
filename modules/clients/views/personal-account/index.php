@@ -59,7 +59,8 @@ $this->title = 'Общая информация';
     </div>
     
     <div class="col-md-6 text-right">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-account-modal">Добавить лицевой счет</button>
+        <?= Html::a('Добавить лицевой счет', Url::to(['personal-account/show-add-form']), ['class' => 'btn btn-primary']) ?>
+            <!--<button type="button" class="btn btn-primary">Добавить лицевой счет</button>-->
     </div>
     <div class="clearfix"></div>    
     
