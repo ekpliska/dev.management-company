@@ -49,5 +49,14 @@ $(document).ready(function() {
         }
     });
     
+    // Если арендатор выбран из списка, то кнопку "Добавить арендатора" блокируем
+    $('#list_rent').change(function() {
+        if (!$(this).val()) {
+            $('.btn__add-rent').prop('disabled', false);
+        } else {
+            $('.btn__add-rent').prop('disabled', true);            
+        }
+    });
+    
     
 });

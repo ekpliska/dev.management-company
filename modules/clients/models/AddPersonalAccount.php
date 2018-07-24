@@ -27,10 +27,11 @@ class AddPersonalAccount extends Model {
     public $account_client_secondname;
     // Собственник - Наличие арендатора
     public $is_rent;
-    
+
     // Арендатор из списка (закрепленные арендаторы собственника)
     public $account_rent;
-
+    
+/* 
     // Арендатор - Фамилия
     public $rent_surname;
     // Арендатор - Имя
@@ -43,7 +44,7 @@ class AddPersonalAccount extends Model {
     public $rent_email;
     // Арендатор - Пароль
     public $rent_password;
-    
+*/    
     // Квартира
     public $flat;
 
@@ -53,11 +54,11 @@ class AddPersonalAccount extends Model {
             [[
                 'account_number', 'account_organization_id', 
                 'account_last_sum', 'square_flat',
-                // 'account_client_surname', 'account_client_name', 'account_client_secondname',
+                'account_client_surname', 'account_client_name', 'account_client_secondname',
                 'flat'], 'required'],
             
-            //['account_number', 'string', 'min' => 11, 'max' => 11],
-            // ['account_number', 'checkPersonalAccount'],
+            ['account_number', 'string', 'min' => 11, 'max' => 11],
+            ['account_number', 'checkPersonalAccount'],
             
             ['is_rent', 'boolean'],
             
@@ -81,7 +82,9 @@ class AddPersonalAccount extends Model {
     }
     
     public function saveRecord() {
+        
         $connection = Yii::$app->db;
+        
         $transaction = $connection->beginTransaction();
         try {
             $new_account = new PersonalAccount();
@@ -91,7 +94,9 @@ class AddPersonalAccount extends Model {
             $new_account->personal_clients_id = '00';
             $new_account->personal_rent_id = $this->account_rent;
             $new_account->personal_house_id = $this->flat;
-            $new_account->save(false);
+            if (!$new_account->save()) {
+                throw new \yii\db\Exception('Ошибка сохранения лицевого счета. Ошибка: ' . join(', ', $new_account->getFirstErrors()));
+            }
             $transaction->commit();
         }
         catch (Exception $e) {

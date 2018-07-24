@@ -14,6 +14,9 @@
  */     
 class ClientsRentForm extends Model {
     
+    const SCENARIO_AJAX_VALIDATION = 'required fields';
+    const SCENARIO_NOT_REQUIRED = 'not required fields';
+    
     public $rents_surname;
     public $rents_name;
     public $rents_second_name;
@@ -26,14 +29,15 @@ class ClientsRentForm extends Model {
      */
     public function rules() {
         return [
-            [['rents_surname', 'rents_name', 'rents_second_name', 'rents_mobile', 'rents_email', 'password'], 'required'],
-            [['rents_surname', 'rents_name', 'rents_second_name'], 'filter', 'filter' => 'trim'],
+            [['rents_surname', 'rents_name', 'rents_second_name', 'rents_mobile', 'rents_email', 'password'], 'required', 'on' => self::SCENARIO_AJAX_VALIDATION],
+            [['rents_surname', 'rents_name', 'rents_second_name'], 'filter', 'filter' => 'trim', 'on' => self::SCENARIO_AJAX_VALIDATION],
             
             [
                 'rents_mobile', 'unique',
                 'targetClass' => Clients::className(),
                 'targetAttribute' => 'clients_mobile',
                 'message' => 'Пользователь с введенным номером мобильного телефона в системе уже зарегистрирован',
+                'on' => self::SCENARIO_AJAX_VALIDATION,
             ],
             
             [
@@ -41,11 +45,12 @@ class ClientsRentForm extends Model {
                 'targetClass' => User::className(),
                 'targetAttribute' => 'user_email',
                 'message' => 'Данный электронный адрес уже использовается в системе',
+                'on' => self::SCENARIO_AJAX_VALIDATION,
             ],
             
-            ['password', 'string', 'min' => 6],
+            ['password', 'string', 'min' => 6, 'max' => 12, 'on' => self::SCENARIO_AJAX_VALIDATION],
             
-            ['rents_email', 'email'],
+            ['rents_email', 'email', 'on' => self::SCENARIO_AJAX_VALIDATION],
         ];
     }
     
@@ -86,6 +91,47 @@ class ClientsRentForm extends Model {
         } catch (Exception $e) {
             $transaction->rollBack();                
         }
+    }
+    
+    public function saveRentToUser($data) {
+        
+        $transaction = Yii::$app->db->beginTransaction();
+        
+        if ($data) {
+            try {
+                $add_rent = new Rents();
+                $add_rent->rents_name = $this->rents_name;
+                $add_rent->rents_second_name = $this->rents_second_name;
+                $add_rent->rents_surname = $this->rents_surname;
+                $add_rent->rents_mobile = $this->rents_mobile;
+                // Связать с собственником
+                $add_rent->isActive = Rents::STATUS_ENABLED;
+
+                if(!$add_rent->save()) {
+                    throw new \yii\db\Exception('Ошибка сохранения арендатора. Ошибка: ' . join(', ', $add_rent->getFirstErrors()));
+                }
+                
+                $add_user = new User();
+                $add_user->user_login = 'r';
+                $add_user->user_password = Yii::$app->security->generatePasswordHash($this->password);
+                $add_user->user_email = $this->rents_email;
+                $add_user->user_mobile = $this->rents_mobile;
+                $add_user->status = User::STATUS_ENABLED;
+                $add_user->save();
+                
+                if (!$add_user->save()) {
+                    throw new \yii\db\Exception('Ошибка сохранения пользователя. Ошибка: ' . join(', ', $add_user->getFirstErrors()));
+                }
+                
+                $transaction->commit();
+                
+            } catch (Exception $ex) {
+                $transaction->rollBack();
+                // $ex->getMessage();
+            }
+            return true;
+        }
+        return fale;
     }
         
     public function attributeLabels() {

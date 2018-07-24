@@ -10,6 +10,8 @@
     use app\models\Rents;
     use app\models\Organizations;
     use app\models\AccountToUsers;
+    use app\modules\clients\models\ClientsRentForm;
+    use app\models\Houses;
 
 /**
  * Контроллер по работе с разделом "Лицевой счет"
@@ -44,7 +46,7 @@ class PersonalAccountController extends Controller {
         $all_rent = Rents::findByClientID($user_info->user_client_id);
         
         // Получить список всех домов закрепленных за собственником
-        $all_house = \app\models\Houses::findByClientID($user_info->user_client_id);
+        $all_house = Houses::findByClientID($user_info->user_client_id);
         
         return $this->render('index', [
             'user_info' => $user_info,
@@ -105,7 +107,9 @@ class PersonalAccountController extends Controller {
 
         if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
             
-            $model = new \app\modules\clients\models\ClientsRentForm();
+            $model = new ClientsRentForm([
+                'scenario' => ClientsRentForm::SCENARIO_AJAX_VALIDATION,
+            ]);
 
             if ($model->load(Yii::$app->request->post())) {
                 
@@ -121,28 +125,6 @@ class PersonalAccountController extends Controller {
         return ['status' => false];
     }
     
-//    public function actionAddRecordAccount() {
-//
-//        $model = new AddPersonalAccount();
-//        
-//        $request = Yii::$app->getRequest();
-//        
-//        if ($request->isPost && $model->load($request->post())) {
-//            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-//            if ($model->saveRecord()) {
-//                Yii::$app->session->setFlash('form', 'form');
-//                return ['status' => true];
-//                
-//            } else {
-//                if ($model->hasErrors()) {
-//                    Yii::$app->session->setFlash('error', 'error');
-//                    return $this->redirect(Yii::$app->request->referrer);
-//                    // return ['error' => $model->errors];
-//                }
-//            }
-//        }
-//        return $this->redirect(Yii::$app->request->referrer);
-//    }
     
     /*
      * Вызов формы добавления нового лицевого счета
@@ -154,16 +136,21 @@ class PersonalAccountController extends Controller {
         
         // Получить список всех арендаторов собственника со статусом "Не активен"
         $all_rent = Rents::findByClientID($user_info->personalAccount->client->clients_id);
+
+        // Получить список жилой прощади, принадлежание собственнику
+        $all_flat = Houses::findByClientID($user_info->personalAccount->client->clients_id);
+
         
-        // echo '<pre>'; var_dump($user_info); die;
-        
+        // Форма Лицевой счет
         $add_account = new AddPersonalAccount();
-        $add_rent = new \app\modules\clients\models\ClientsRentForm();
+        // Форма добавить Арендатора
+        $add_rent = new ClientsRentForm();
         
         return $this->render('_form/_add_account', [
             'all_organizations' => $all_organizations,
             'user_info' => $user_info,
             'all_rent' => $all_rent,
+            'all_flat' => $all_flat,
             'add_account' => $add_account,
             'add_rent' => $add_rent,
         ]);
@@ -174,40 +161,44 @@ class PersonalAccountController extends Controller {
 
         if (Yii::$app->request->isPost) {
             
-            // Получаем значение checkBox "Арендатор" на форме
-            $is_rent = Yii::$app->request->post('isRent');
+            $account_form = new AddPersonalAccount();
+            $account_form->load(Yii::$app->request->post());
+            $account_form->validate();
             
-//            if ($is_rent) {
-//                echo 'check';
-//            } else {
-//                echo 'no check';
-//            }
-//            die;
-
-            $dynamicForm = new AddPersonalAccount();
-
-            $formName = $form;
-            $dynamicForm->load(Yii::$app->request->post('AddPersonalAccount'), $formName);
-
-            $dynamicForm->validate();
-
-            if ($dynamicForm->hasErrors()) {
-                Yii::$app->session->setFlash('error', ['form' => $formName, 'success' => false]);
+            if ($account_form->hasErrors()) {
+                Yii::$app->session->setFlash('form', ['success' => false, 'error' => 'При отправке формы возникла ошибка, попробуйте заполнить форму заново']);
                 if (Yii::$app->request->referrer) {
                     Yii::$app->response->setStatusCode(400);
                     return Yii::$app->request->isAjax ? \yii\helpers\Json::encode(['success' => false]) : $this->redirect(Yii::$app->request->referrer);
                 }
-                return Yii::$app->request->isAjax ? \yii\helpers\Json::encode(['success' => false]) : $this->goHome();
+                return Yii::$app->request->isAjax ? \yii\helpers\Json::encode(['success' => false, 'error' => 'Ошибка формы 1']) : $this->goHome();
             }
             
             
+            $data_rent = Yii::$app->request->post('ClientsRentForm');
+            if (array_filter($data_rent)) {
+                $rent_form = new ClientsRentForm($data_rent);
+                if (!$rent_form->validate()) {
+                    Yii::$app->session->setFlash('form', ['success' => false, 'error' => 'При отправке формы возникла ошибка, попробуйте заполнить форму заново.']);
+                    if (Yii::$app->request->referrer) {
+                        Yii::$app->response->setStatusCode(400);
+                        return Yii::$app->request->isAjax ? \yii\helpers\Json::encode(['success' => false]) : $this->redirect(Yii::$app->request->referrer);                        
+                    }
+                    return Yii::$app->request->isAjax ? \yii\helpers\Json::encode(['success' => false]) : $this->goHome();
+                    // return $rent_form->errors;
+                }
+                
+                if ($rent_form->saveRentToUser($data_rent)) {
+                    $account_form->saveRecord();
+                    Yii::$app->session->setFlash('form', ['success' => true, 'message' => 'All OK']);
+                }
+                
+            } else {
+                $account_form->saveRecord();
+                Yii::$app->session->setFlash('form', ['success' => true, 'message' => 'All OK']);
+            }
             
-            
-
-//              $nomineeSaver = new NomineeSaver($dynamicForm->model->attributes);
-
-
-            return $this->redirectToReferrer();
+            return $this->redirect(Yii::$app->request->referrer);            
         }
         return $this->goHome();
         
