@@ -56,7 +56,7 @@ class Rents extends ActiveRecord
             [['rents_name', 'rents_second_name', 'rents_surname'], 'string', 'min' => 3, 'max' => 70],
             
             [['rents_mobile'], 'string', 'max' => 50],
-            // ['rents_mobile', 'match', 'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/i'],
+            ['rents_mobile', 'match', 'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/i'],
             
             ['rents_email', 'email'],
             

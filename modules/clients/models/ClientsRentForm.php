@@ -15,7 +15,6 @@
 class ClientsRentForm extends Model {
     
     const SCENARIO_AJAX_VALIDATION = 'required fields';
-    const SCENARIO_NOT_REQUIRED = 'not required fields';
     
     public $rents_surname;
     public $rents_name;
@@ -32,6 +31,9 @@ class ClientsRentForm extends Model {
             [['rents_surname', 'rents_name', 'rents_second_name', 'rents_mobile', 'rents_email', 'password'], 'required', 'on' => self::SCENARIO_AJAX_VALIDATION],
             [['rents_surname', 'rents_name', 'rents_second_name'], 'filter', 'filter' => 'trim', 'on' => self::SCENARIO_AJAX_VALIDATION],
             
+            [['rents_surname', 'rents_name', 'rents_second_name'], 'string', 'min' => 3, 'max' => 50, 'on' => self::SCENARIO_AJAX_VALIDATION],
+            // [['rents_surname', 'rents_name', 'rents_second_name'], 'match', 'pattern' => '/^[А-Яа-я]?[-]{3,50}/i', 'on' => self::SCENARIO_AJAX_VALIDATION],
+            
             [
                 'rents_mobile', 'unique',
                 'targetClass' => Clients::className(),
@@ -39,12 +41,13 @@ class ClientsRentForm extends Model {
                 'message' => 'Пользователь с введенным номером мобильного телефона в системе уже зарегистрирован',
                 'on' => self::SCENARIO_AJAX_VALIDATION,
             ],
+            ['rents_mobile', 'match', 'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/i', 'on' => self::SCENARIO_AJAX_VALIDATION],
             
             [
                 'rents_email', 'unique',
                 'targetClass' => User::className(),
                 'targetAttribute' => 'user_email',
-                'message' => 'Данный электронный адрес уже использовается в системе',
+                'message' => 'Данный электронный адрес уже используется в системе',
                 'on' => self::SCENARIO_AJAX_VALIDATION,
             ],
             
@@ -57,7 +60,7 @@ class ClientsRentForm extends Model {
     /*
      * Добавление арендатора прикрепленного к заданному собственнику
      * Для арендатора создаем новую учетную запись
-     * Новому арендатору присваиваем статус - Активнй
+     * Новому арендатору присваиваем статус - Активный
      */
     public function addNewClient($client_id) {
         
@@ -93,18 +96,29 @@ class ClientsRentForm extends Model {
         }
     }
     
-    public function saveRentToUser($data) {
+    /*
+     * Метод сохранения нового арендатора через форму "Добавить лицевой счет"
+     * Для арендатора создаем новую учетную запись
+     * Новому арендатору присваиваем статус - Активный
+     */
+    public function saveRentToUser($data, $new_account) {
         
         $transaction = Yii::$app->db->beginTransaction();
         
         if ($data) {
             try {
+                
+                $client = Clients::find()
+                        ->andWhere(['clients_id' => Yii::$app->user->identity->user_client_id])
+                        ->one();
+                
                 $add_rent = new Rents();
                 $add_rent->rents_name = $this->rents_name;
                 $add_rent->rents_second_name = $this->rents_second_name;
                 $add_rent->rents_surname = $this->rents_surname;
                 $add_rent->rents_mobile = $this->rents_mobile;
-                // Связать с собственником
+                // Записываем связь Арендатора с Собственником
+                $add_rent->link('client', $client);
                 $add_rent->isActive = Rents::STATUS_ENABLED;
 
                 if(!$add_rent->save()) {
@@ -112,16 +126,21 @@ class ClientsRentForm extends Model {
                 }
                 
                 $add_user = new User();
-                $add_user->user_login = 'r';
+                $add_user->user_login = $new_account . 'r';
                 $add_user->user_password = Yii::$app->security->generatePasswordHash($this->password);
                 $add_user->user_email = $this->rents_email;
                 $add_user->user_mobile = $this->rents_mobile;
                 $add_user->status = User::STATUS_ENABLED;
+                // Записываем связь Пользователя с Арендатором
+                $add_user->link('rent', $add_rent);
                 $add_user->save();
                 
                 if (!$add_user->save()) {
                     throw new \yii\db\Exception('Ошибка сохранения пользователя. Ошибка: ' . join(', ', $add_user->getFirstErrors()));
                 }
+                
+//                $data_bind = new \app\models\AccountToUsers();
+//                $data_bind->link('user', $add_user);
                 
                 $transaction->commit();
                 
@@ -129,9 +148,9 @@ class ClientsRentForm extends Model {
                 $transaction->rollBack();
                 // $ex->getMessage();
             }
-            return true;
+            return ['rent' => $add_rent->rents_id];
         }
-        return fale;
+        return false;
     }
         
     public function attributeLabels() {

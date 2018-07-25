@@ -163,11 +163,11 @@ $this->title = 'Добавить лицевой счет';
                             'data-target' => '#add-rent-modal']) ?>
                     
                     
-                    <div id="add-rent-modal" class="modal fade" role="dialog">
+                    <div id="add-rent-modal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
                        <div class="modal-dialog">
                            <div class="modal-content">
                                <div class="modal-header">
-                                   <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                   <button type="button" class="close btn__modal_close" data-dismiss="modal">&times;</button>
                                    <h4 class="modal-title">Новый арендатор</h4>
                                </div>
                                <div class="modal-body">
@@ -188,6 +188,8 @@ $this->title = 'Добавить лицевой счет';
                                         ->label() ?>
 
                                    <?= $form->field($add_rent, 'rents_mobile')
+                                        ->widget(MaskedInput::className(), [
+                                            'mask' => '+7(999) 999-99-99'])
                                         ->input('text', [
                                             'class' => 'form-control rents-mobile'])
                                         ->label() ?>
@@ -205,7 +207,7 @@ $this->title = 'Добавить лицевой счет';
                                </div>
                                <div class="modal-footer">
                                    <button type="button" class="btn btn-success btn__add_rent">Добавить</button>
-                                   <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+                                   <button type="button" class="btn btn-default btn__modal_rent_close" data-dismiss="modal">Отмена</button>
                                </div>
                            </div>
                        </div>
@@ -225,10 +227,22 @@ $this->title = 'Добавить лицевой счет';
 
 </div>
 
+<?php
+$this->registerJs('
+    $("#add-rent-modal .btn__modal_rent_close, .btn__modal_close").on("click", function() {
+        $("#add-rent-modal input").val("");
+        $("#add-rent-modal .modal-body").removeClass("has-error");
+        $("#add-rent-modal .modal-body").removeClass("has-success");
+        $("#add-rent-modal .form-group").removeClass("has-success"); 
+        $("#add-rent-modal .form-group").removeClass("has-error");
+        $("#add-rent-modal").find(".help-block").text("");
+    });
+')
+?>
 
 <?php
 $this->registerJs('
-    $("#add-rent-modal .btn__add_rent").click(function(e) {
+    $("#add-rent-modal .btn__add_rent").on("click", function(e) {
         e.preventDefault();
         
         var rentSurname = $("#add-rent-modal .rents-surname").val();
@@ -370,7 +384,7 @@ $this->registerJs('
             return false;
         }
     } else {
-        alert("no add rent");
+        alert("Лицевой счет без арендатора");
         e.preventDefault();    
     }
     
@@ -386,11 +400,11 @@ $this->registerJs('
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Ошибка</h4>
+                <h4 class="modal-title">Ошибка привязки арндатора к лицевому счету</h4>
             </div>
             <div class="modal-body">
                 <p>
-                    Вы установили чекбокс Арендатор, но не указали информацию о нем.
+                    Вы не указали информацию об арендаторе.
                 </p>
                 <p>
                     Выберите арендатора из списка, или создайте нового, нажав на кнопку "Добавить арендатора". 

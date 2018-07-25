@@ -158,14 +158,23 @@ class PersonalAccountController extends Controller {
     
     
     public function actionAddRecordAccount($form) {
+        
+        // Получить ID пользователя
+        $user_client_id = AccountToUsers::find()
+                ->andWhere(['user_id' => Yii::$app->user->identity->user_id])
+                ->with(['user'])
+                ->one();
 
-        if (Yii::$app->request->isPost) {
+        if (Yii::$app->request->isPost && $user_client_id->user->user_client_id) {
             
             $account_form = new AddPersonalAccount();
             $account_form->load(Yii::$app->request->post());
             $account_form->validate();
             
+            $new_account = $account_form->account_number;
+            
             if ($account_form->hasErrors()) {
+                var_dump($account_form->getFirstErrors());die;
                 Yii::$app->session->setFlash('form', ['success' => false, 'error' => 'При отправке формы возникла ошибка, попробуйте заполнить форму заново']);
                 if (Yii::$app->request->referrer) {
                     Yii::$app->response->setStatusCode(400);
@@ -174,12 +183,16 @@ class PersonalAccountController extends Controller {
                 return Yii::$app->request->isAjax ? \yii\helpers\Json::encode(['success' => false, 'error' => 'Ошибка формы 1']) : $this->goHome();
             }
             
-            
+            // Заполняем массив данными о новом аренадтор
             $data_rent = Yii::$app->request->post('ClientsRentForm');
+            // Проверям массив на пустоту
             if (array_filter($data_rent)) {
+                // Если массив не пустой, передаем в модель Арендатор данные
                 $rent_form = new ClientsRentForm($data_rent);
+                
+                // Выводим ошибки в случае неудачной валидации
                 if (!$rent_form->validate()) {
-                    Yii::$app->session->setFlash('form', ['success' => false, 'error' => 'При отправке формы возникла ошибка, попробуйте заполнить форму заново.']);
+                    Yii::$app->session->setFlash('form', ['success' => false, 'error' => 'При отправке формы возникла ошибка, попробуйте заполнить форму заново (*) ']);
                     if (Yii::$app->request->referrer) {
                         Yii::$app->response->setStatusCode(400);
                         return Yii::$app->request->isAjax ? \yii\helpers\Json::encode(['success' => false]) : $this->redirect(Yii::$app->request->referrer);                        
@@ -188,14 +201,17 @@ class PersonalAccountController extends Controller {
                     // return $rent_form->errors;
                 }
                 
-                if ($rent_form->saveRentToUser($data_rent)) {
-                    $account_form->saveRecord();
-                    Yii::$app->session->setFlash('form', ['success' => true, 'message' => 'All OK']);
+                // Если данные прошли валидацию и успешно сохранены
+                $_rent = $rent_form->saveRentToUser($data_rent, $new_account);
+                if ($_rent) {
+                    // Сохраняем новый лицевой счет
+                    $account_form->saveAccountChekRent($_rent);
+                    Yii::$app->session->setFlash('form', ['success' => true, 'message' => 'Лицевой счет создан. Созданный лицевой счет связан с новым арендатором']);
                 }
                 
             } else {
-                $account_form->saveRecord();
-                Yii::$app->session->setFlash('form', ['success' => true, 'message' => 'All OK']);
+                $account_form->saveAccountChekRent($_rent = null);
+                Yii::$app->session->setFlash('form', ['success' => true, 'message' => 'Лицевой счет создан']);
             }
             
             return $this->redirect(Yii::$app->request->referrer);            
