@@ -18,12 +18,12 @@
             <td><?= HtmlPurifier::process($model->client->fullName) ?></td>
         </tr>        
         <tr>
-            <td>Телнфон</td>
+            <td>Телефон</td>
             <td><?= HtmlPurifier::process($model->client->phone) ?></td>
         </tr>        
         <tr>
             <td>Арендатор</td>
-            <td><?= HtmlPurifier::process($model->client->is_rent ? $model->client->rent->fullName : 'Арендатор отсутствует') ?></td>
+            <td><?= HtmlPurifier::process($model->personal_rent_id ? $model->client->rent->fullName : 'Арендатор отсутствует') ?></td>
         </tr>        
         <tr>
             <td>Адрес</td>

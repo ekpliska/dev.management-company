@@ -90,17 +90,6 @@ class PersonalAccountController extends Controller {
 //        }
     }
     
-    public function actionValidateRecord() {
-        
-        if (Yii::$app->request->isAjax) {
-            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-            $model = new AddPersonalAccount();
-            $model->load(Yii::$app->request->post());
-            return \yii\bootstrap\ActiveForm::validate($model);
-        }
-        throw new \yii\web\BadRequestHttpException('Не верный формат запроса!');   
-    }
-    
     /*
      * Валидация формы "Добавление нового арендатора"
      */
@@ -164,7 +153,9 @@ class PersonalAccountController extends Controller {
         ]);
     }
     
-    
+    /*
+     * Добавление нового лицевого счета
+     */
     public function actionAddRecordAccount($form) {
         
         // Получить ID пользователя

@@ -66,14 +66,14 @@ class PersonalAccount extends ActiveRecord
     public static function findByNumber($account_id) {
         return static::find()
                 ->andWhere(['account_id' => $account_id])
-                ->orderBy(['account_id' => SORT_DESC]);
+                ->orderBy(['account_id' => SORT_ASC]);
                 // ->one();
     }
     
     public static function findByClientID($client_id) {
         return static::find()
                 ->andWhere(['personal_clients_id' => $client_id])
-                ->orderBy(['account_id' => SORT_DESC])
+                ->orderBy(['account_id' => SORT_ASC])
                 ->limit(1);
     }
     
@@ -84,6 +84,7 @@ class PersonalAccount extends ActiveRecord
         
         $account_find = static::find()
                 ->andWhere(['personal_clients_id' => $client_id])
+                ->orderBy(['account_id' => SORT_ASC])
                 ->all();
         return $account_all = ArrayHelper::map($account_find, 'account_id', 'account_number');
     }
