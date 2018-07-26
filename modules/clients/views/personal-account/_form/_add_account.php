@@ -73,8 +73,15 @@ $this->title = 'Добавить лицевой счет';
                     
                     
                 <?= $form->field($add_account, 'square_flat')
-                    ->input('text', [
-                        'class' => 'form-control']) ?>
+                        ->widget(MaskedInput::className(), [
+                            'clientOptions' => [
+                                'alias' => 'decimal',
+                                'digits' => 0,
+                                'groupSeparator' => ' ',
+                                'autoGroup' => true,
+                            ]])
+                        ->input('text', [
+                            'class' => 'form-control']) ?>
                     
                 <?= $form->field($add_account, 'account_organization_id')
                         ->dropDownList($all_organizations, [
@@ -156,16 +163,19 @@ $this->title = 'Добавить лицевой счет';
                                    
                                 <?= $form->field($add_rent, 'rents_surname')
                                         ->input('text', [
+                                            'placeHolder' => $add_account->getAttributeLabel('rents_surname'),
                                             'class' => 'form-control rents-surname'])
                                         ->label() ?>
 
                                 <?= $form->field($add_rent, 'rents_name')
                                         ->input('text', [
+                                            'placeHolder' => $add_rent->getAttributeLabel('rents_name'),
                                             'class' => 'form-control rents-name'])
                                         ->label() ?>
 
                                 <?= $form->field($add_rent, 'rents_second_name')
                                         ->input('text', [
+                                            'placeHolder' => $add_rent->getAttributeLabel('rents_second_name'),
                                             'class' => 'form-control rents-second-name'])
                                         ->label() ?>
 
@@ -173,16 +183,19 @@ $this->title = 'Добавить лицевой счет';
                                         ->widget(MaskedInput::className(), [
                                             'mask' => '+7(999) 999-99-99'])
                                         ->input('text', [
+                                            'placeHolder' => $add_rent->getAttributeLabel('rents_mobile'),
                                             'class' => 'form-control rents-mobile'])
                                         ->label() ?>
 
                                 <?= $form->field($add_rent, 'rents_email')
                                         ->input('text', [
+                                            'placeHolder' => $add_rent->getAttributeLabel('rents_email'),
                                             'class' => 'form-control rents-email'])
                                         ->label() ?>
 
                                 <?= $form->field($add_rent, 'password')
                                         ->input('password', [
+                                            'placeHolder' => $add_rent->getAttributeLabel('password'),
                                             'class' => 'form-control rents-hash'])
                                         ->label() ?>                                   
                                    

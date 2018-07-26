@@ -59,6 +59,10 @@ class AddPersonalAccount extends Model {
                 // 'account_client_surname', 'account_client_name', 'account_client_secondname',
                 'flat'], 'required'],
             
+            ['account_last_sum', 'string', 'min' => 2, 'max' => 7],
+            
+            ['square_flat', 'string', 'min' => 2, 'max' => 5],
+            
             ['account_rent', 'integer'],
             
             ['flat', 'integer'],

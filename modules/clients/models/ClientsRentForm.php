@@ -151,9 +151,6 @@ class ClientsRentForm extends Model {
                     throw new \yii\db\Exception('Ошибка сохранения пользователя. Ошибка: ' . join(', ', $add_user->getFirstErrors()));
                 }
                 
-//                $data_bind = new \app\models\AccountToUsers();
-//                $data_bind->link('user', $add_user);
-                
                 $transaction->commit();
                 
             } catch (Exception $ex) {
