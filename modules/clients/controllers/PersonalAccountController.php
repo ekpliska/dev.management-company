@@ -3,6 +3,7 @@
     use Yii;
     use yii\web\Controller;
     use yii\data\ActiveDataProvider;
+    use yii\web\Response;
     use app\models\PersonalAccount;
     use app\modules\clients\models\AddPersonalAccount;
     use app\models\User;
@@ -100,23 +101,30 @@ class PersonalAccountController extends Controller {
         throw new \yii\web\BadRequestHttpException('Не верный формат запроса!');   
     }
     
-    
+    /*
+     * Валидация формы "Добавление нового арендатора"
+     */
     public function actionValidateAddRentForm() {
         
-        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        
+        // Если данные пришли через пост и аякс
         if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
             
+            // Объявляем модель арендатор, задаем сценарий валидации для формы
             $model = new ClientsRentForm([
                 'scenario' => ClientsRentForm::SCENARIO_AJAX_VALIDATION,
             ]);
-
+            
+            // Если модель загружена
             if ($model->load(Yii::$app->request->post())) {
-                
+                // и прошла валидацию
                 if ($model->validate()) {
+                    // Для Ajax запроса возвращаем стутас, ок
                     return ['status' => true];
                 }
             }
+            // Инваче, запросу отдаем ответ о поваленной валидации и ошибки
             return [
                 'status' => false,
                 'errors' => $model->errors,

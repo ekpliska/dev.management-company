@@ -32,7 +32,7 @@ class PersonalAccount extends ActiveRecord
         return [
             [['account_number'], 'required'],
             [['account_balance'], 'string'],
-            // [['account_number'], 'string', 'min' => 11, 'max' => 11],
+            [['account_number'], 'string', 'min' => 11, 'max' => 11],
             [['account_organization_id'], 'integer'],
             [['account_number'], 'unique'],
             
@@ -95,6 +95,10 @@ class PersonalAccount extends ActiveRecord
                 ->one();
     }
     
+    /*
+     * Собираем ID всех пользователей, привязанных к новому лицевому счету
+     * Новым пользователем для нового лицевого счета может быть Собственник / и Арендатор
+     */
     public function setUserList($client_id, $rent_id) {
        $_list_client = ArrayHelper::map(User::find()
                ->andWhere(['user_client_id' => $client_id])
@@ -112,6 +116,7 @@ class PersonalAccount extends ActiveRecord
     
     /*
      * Этот метод вызывается в конце вставки или обновления записи
+     * Если происходит добавление нового лицевого счета, связываем талицы Пользователь и Лицевой счет через промежуточную
      */
     public function afterSave($insert, $changedAttributes) {
         parent::afterSave($insert, $changedAttributes);
@@ -124,17 +129,6 @@ class PersonalAccount extends ActiveRecord
                 $bind_date->save();
             }
         }
-//            foreach ($this->getUserList($this->personal_clients_id, $this->personal_rent_id) as $user) {
-//                $_t = new AccountToUsers();
-//                $_t->isNewRecord = true;
-//                $_t->user_id = $user;
-//                $_t->account_id = $this->account_id;
-//                $_t->save(false);
-//            }
-//            echo '<pre>'; var_dump($this->getUserList($this->personal_clients_id, $this->personal_rent_id));
-//            echo '<ht />';
-//            die;
-//        }
     }
         
     

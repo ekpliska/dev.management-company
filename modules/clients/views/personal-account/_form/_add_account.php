@@ -14,216 +14,199 @@ $this->title = 'Добавить лицевой счет';
 <div class="clients-default-index">
     <h1><?= $this->title ?></h1>
 
-
-<?php
-//    echo '<pre>';
-//    var_dump($user_info->personalAccount->client);
-?>
-    
-        <?php if (Yii::$app->session->hasFlash('form')) : ?>
-        <?php $flash = Yii::$app->session->getFlash('form'); ?>
-            <div class="alert <?= $flash['success'] ? 'alert-info' : 'alert-danger' ?>" role="alert">
-                <strong>
-                    <?php if ($flash['success'] === false): ?>
-                        <?= $flash['error'] ?>
-                    <?php else: ?>
-                        <?= $flash['message'] ?>
-                    <?php endif; ?>
-                </strong>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>                    
-            </div>
-        <?php endif; ?> 
-            
-    
-    
-        <?php
-            $form = ActiveForm::begin([
-                'id' => 'add-account',
-                'action' => [
-                    'personal-account/add-record-account', 'form' => 'add-account',
-                ],
-                'enableClientValidation' => true,
-                'enableAjaxValidation' => false,
-                'validateOnChange' => true,
-            ])
-        ?>
-
-        <div class="col-md-4">
-            
-            <div class="panel panel-default">
-                <div class="panel-heading">Информация нового лицевого счета</div>
-                <div class="panel-body">
-                    
-                    <?= $form->field($add_account, 'account_number')
-                            ->input('text', [
-                                'placeHolder' => $add_account->getAttributeLabel('account_number'),
-                                'class' => 'form-control number'])
-                            ->label() ?>
-                    
-                    <?= $form->field($add_account, 'account_last_sum')
-                            ->widget(MaskedInput::className(), [
-                                'clientOptions' => [
-                                    'alias' => 'decimal',
-                                    'digits' => 2,
-                                    'digitsOptional' => false,
-                                    'radixPoint' => ',',
-                                    'groupSeparator' => ' ',
-                                    'autoGroup' => true,
-                                    'removeMaskOnSubmit' => true,
-                                ]])
-                            ->input('text', [
-                                'placeHolder' => '0,00', 
-                                'class' => 'form-control'])
-                            ->label() ?>
-                    
-                    
-                    <?= $form->field($add_account, 'square_flat')
-                        ->input('text', [
-                            'class' => 'form-control']) 
-                    ?>
-                    
-                    <?= $form->field($add_account, 'account_organization_id')
-                            ->dropDownList($all_organizations, [
-                                'prompt' => 'Выбрать организацию из списка...',
-                                'class' => 'form-control'])
-                    ?>                    
-                    
-                </div>
-            </div>
-            
-            
+    <?php if (Yii::$app->session->hasFlash('form')) : ?>
+    <?php $flash = Yii::$app->session->getFlash('form'); ?>
+        <div class="alert <?= $flash['success'] ? 'alert-info' : 'alert-danger' ?>" role="alert">
+            <strong>
+                <?php if ($flash['success'] === false): ?>
+                    <?= $flash['error'] ?>
+                <?php else: ?>
+                    <?= $flash['message'] ?>
+                <?php endif; ?>
+            </strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>                    
         </div>
-
-        <div class="col-md-4">
+    <?php endif; ?> 
             
-            <div class="panel panel-default">
-                <div class="panel-heading">Собственник</div>
-                <div class="panel-body">
-                    
+    
+    
+    <?php
+        $form = ActiveForm::begin([
+            'id' => 'add-account',
+            'action' => [
+                'personal-account/add-record-account', 'form' => 'add-account',
+            ],
+            'enableClientValidation' => true,
+            'enableAjaxValidation' => false,
+            'validateOnChange' => true,
+        ])
+    ?>
 
-                    <?= $form->field($add_account, 'account_client_surname')
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">Информация нового лицевого счета</div>
+            <div class="panel-body">
+                    
+                <?= $form->field($add_account, 'account_number')
+                        ->input('text', [
+                            'placeHolder' => $add_account->getAttributeLabel('account_number'),
+                            'class' => 'form-control number'])
+                        ->label() ?>
+                    
+                <?= $form->field($add_account, 'account_last_sum')
+                        ->widget(MaskedInput::className(), [
+                            'clientOptions' => [
+                                'alias' => 'decimal',
+                                'digits' => 2,
+                                'digitsOptional' => false,
+                                'radixPoint' => ',',
+                                'groupSeparator' => ' ',
+                                'autoGroup' => true,
+                                'removeMaskOnSubmit' => true,
+                            ]])
+                        ->input('text', [
+                            'placeHolder' => '0,00', 
+                            'class' => 'form-control'])
+                        ->label() ?>
+                    
+                    
+                <?= $form->field($add_account, 'square_flat')
+                    ->input('text', [
+                        'class' => 'form-control']) ?>
+                    
+                <?= $form->field($add_account, 'account_organization_id')
+                        ->dropDownList($all_organizations, [
+                            'prompt' => 'Выбрать организацию из списка...',
+                            'class' => 'form-control']) ?>
+                    
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">Собственник</div>
+            <div class="panel-body">
+                <?= $form->field($add_account, 'account_client_surname')
                         ->input('text', [
                             'value' => $user_info->personalAccount->client->clients_surname,
                             'disabled' => true,
                             'class' => 'form-control',])
                         ->label() ?>
 
-                    <?= $form->field($add_account, 'account_client_name')
-                            ->input('text', [
-                                'value' => $user_info->personalAccount->client->clients_name,
-                                'disabled' => true,
-                                'class' => 'form-control'])
-                            ->label() ?>
+                <?= $form->field($add_account, 'account_client_name')
+                        ->input('text', [
+                            'value' => $user_info->personalAccount->client->clients_name,
+                            'disabled' => true,
+                            'class' => 'form-control'])
+                        ->label() ?>
 
-                    <?= $form->field($add_account, 'account_client_secondname')
-                            ->input('text', [
-                                'value' => $user_info->personalAccount->client->clients_second_name,
-                                'disabled' => true,
-                                'class' => 'form-control'])
-                            ->label() ?>
+                <?= $form->field($add_account, 'account_client_secondname')
+                        ->input('text', [
+                            'value' => $user_info->personalAccount->client->clients_second_name,
+                            'disabled' => true,
+                            'class' => 'form-control'])
+                        ->label() ?>
 
-                    <?= $form->field($add_account, 'flat')
-                            ->dropDownList($all_flat, [
-                                'prompt' => 'Выбрать адрес из списка...',
-                                'class' => 'form-control']) ?>
+                <?= $form->field($add_account, 'flat')
+                        ->dropDownList($all_flat, [
+                            'prompt' => 'Выбрать адрес из списка...',
+                            'class' => 'form-control']) ?>
                 
-                </div>
             </div>
-            
         </div>
+    </div>
 
 
 
-        <div class="col-md-4">
-            
-            <div class="panel panel-default">
-                <div class="panel-heading">Арендатор</div>
-                <div class="panel-body">
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">Арендатор</div>
+            <div class="panel-body">
                    
-                    <?= $form->field($add_account, 'is_rent')
-                            ->checkbox([
-                                'id' => 'isRent']) 
-                    ?>
+                <?= $form->field($add_account, 'is_rent')
+                        ->checkbox([
+                            'id' => 'isRent']) ?>
                     
-                    <?= $form->field($add_account, 'account_rent')
-                            ->dropDownList($all_rent, [
-                                'prompt' => 'Выбрать арендатора из списка...',
-                                'id' => 'list_rent',
-                            ])?>
+                <?= $form->field($add_account, 'account_rent')
+                        ->dropDownList($all_rent, [
+                            'prompt' => 'Выбрать арендатора из списка...',
+                            'id' => 'list_rent']) ?>
                     
-                    <hr />
+                <hr />
                     
-                    Добавить нового арендатора и создать для него новую учетную запись для входа на портал
+                Добавить нового арендатора и создать для него новую учетную запись для входа на портал
                     
-                    <?= Html::button('Добавить арендатора', [
-                            'class' => 'btn btn-primary btn-sm btn__add-rent', 
-                            'data-toggle' => 'modal', 
-                            'data-target' => '#add-rent-modal']) ?>
+                <?= Html::button('Добавить арендатора', [
+                        'class' => 'btn btn-primary btn-sm btn__add-rent', 
+                        'data-toggle' => 'modal', 
+                        'data-target' => '#add-rent-modal']) ?>
                     
                     
-                    <div id="add-rent-modal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
-                       <div class="modal-dialog">
-                           <div class="modal-content">
-                               <div class="modal-header">
-                                   <button type="button" class="close btn__modal_close" data-dismiss="modal">&times;</button>
-                                   <h4 class="modal-title">Новый арендатор</h4>
-                               </div>
-                               <div class="modal-body">
+                <div id="add-rent-modal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                               <button type="button" class="close btn__modal_close" data-dismiss="modal">&times;</button>
+                               <h4 class="modal-title">Новый арендатор</h4>
+                            </div>
+                            <div class="modal-body">
                                    
-                                   <?= $form->field($add_rent, 'rents_surname')
+                                <?= $form->field($add_rent, 'rents_surname')
                                         ->input('text', [
                                             'class' => 'form-control rents-surname'])
                                         ->label() ?>
 
-                                   <?= $form->field($add_rent, 'rents_name')
+                                <?= $form->field($add_rent, 'rents_name')
                                         ->input('text', [
                                             'class' => 'form-control rents-name'])
                                         ->label() ?>
 
-                                   <?= $form->field($add_rent, 'rents_second_name')
+                                <?= $form->field($add_rent, 'rents_second_name')
                                         ->input('text', [
                                             'class' => 'form-control rents-second-name'])
                                         ->label() ?>
 
-                                   <?= $form->field($add_rent, 'rents_mobile')
+                                <?= $form->field($add_rent, 'rents_mobile')
                                         ->widget(MaskedInput::className(), [
                                             'mask' => '+7(999) 999-99-99'])
                                         ->input('text', [
                                             'class' => 'form-control rents-mobile'])
                                         ->label() ?>
 
-                                   <?= $form->field($add_rent, 'rents_email')
+                                <?= $form->field($add_rent, 'rents_email')
                                         ->input('text', [
                                             'class' => 'form-control rents-email'])
                                         ->label() ?>
 
-                                   <?= $form->field($add_rent, 'password')
-                                        ->input('text', [
+                                <?= $form->field($add_rent, 'password')
+                                        ->input('password', [
                                             'class' => 'form-control rents-hash'])
                                         ->label() ?>                                   
                                    
-                               </div>
-                               <div class="modal-footer">
-                                   <button type="button" class="btn btn-success btn__add_rent">Добавить</button>
-                                   <button type="button" class="btn btn-default btn__modal_rent_close" data-dismiss="modal">Отмена</button>
-                               </div>
-                           </div>
-                       </div>
-                   </div>               
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-success btn__add_rent">Добавить</button>
+                                <button type="button" class="btn btn-default btn__modal_rent_close" data-dismiss="modal">Отмена</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                
             </div>
+        </div>
             
-        </div>
+    </div>
                         
-        <div class="col-md-12">
-            <div class="modal-footer">
-                <?= Html::submitButton('Добавить', ['class' => 'btn btn-danger']) ?>
-                <?= Html::submitButton('Отмена', ['class' => 'btn btn-default', 'data-dismiss' => 'modal']) ?>
-                <?php ActiveForm::end() ?>
-            </div>
+    <div class="col-md-12">
+        <div class="modal-footer">
+            <?= Html::submitButton('Добавить', ['class' => 'btn btn-danger']) ?>
+            <?= Html::submitButton('Отмена', ['class' => 'btn btn-default', 'data-dismiss' => 'modal']) ?>
+            <?php ActiveForm::end() ?>
         </div>
+    </div>
 
 </div>
 

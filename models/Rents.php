@@ -3,10 +3,11 @@
     namespace app\models;
     use Yii;
     use yii\db\ActiveRecord;
+    use yii\helpers\ArrayHelper;    
     use app\models\PersonalAccount;
-    use app\models\Clients;
     use app\models\User;
-    use yii\helpers\ArrayHelper;
+    use app\models\Clients;
+    use app\models\Rents;
 
 /**
  * Арендатор
@@ -38,26 +39,30 @@ class Rents extends ActiveRecord
     {
         return [
             [['rents_name', 'rents_second_name', 'rents_surname', 'rents_mobile'], 'required'],
+            [['rents_name', 'rents_second_name', 'rents_surname'], 'filter', 'filter' => 'trim'],
+            [['rents_name', 'rents_second_name', 'rents_surname'], 'string', 'min' => 3, 'max' => 50],
+            [
+                ['rents_name', 'rents_second_name', 'rents_surname'], 
+                'match',
+                'pattern' => '/^[А-Яа-я\ \-]+$/iu',
+                'message' => 'Поле "{attribute}" может содержать только буквы русского алфавита, и знак "-"',
+            ],
             
-            [['rents_name', 'rents_second_name', 'rents_surname', 'rents_email'], 'filter', 'filter' => 'trim'],
-            
-//            [[
-//                'rents_name', 'rents_second_name', 
-//                'rents_surname'], 'match', 'pattern' => '/^[А-я-]+$/i', 'message' => 'Поле содержит не допустимые символы'
-//            ],
+            [
+                'rents_mobile', 'unique',
+                'targetClass' => Rents::className(),
+                'targetAttribute' => 'rents_mobile',
+                'message' => 'Пользователь с введенным номером мобильного телефона в системе уже зарегистрирован',
+            ],
+            ['rents_mobile', 'match', 'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/i'],
             
             [
                 'rents_email', 'unique',
                 'targetClass' => User::className(),
                 'targetAttribute' => 'user_email',
-                'message' => 'Пользователь с введенным элетронным адресом в системе уже зарегистрирован'
+                'message' => 'Данный электронный адрес уже используется в системе'
             ],
-            
-            [['rents_name', 'rents_second_name', 'rents_surname'], 'string', 'min' => 3, 'max' => 70],
-            
-            [['rents_mobile'], 'string', 'max' => 50],
-            ['rents_mobile', 'match', 'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/i'],
-            
+            ['rents_email', 'string', 'min' => 5, 'max' => 150],
             ['rents_email', 'email'],
             
             ['isActive', 'boolean'],

@@ -36,13 +36,13 @@ class ClientsRentForm extends Model {
                 'match', 
                 'pattern' => '/^[А-Яа-я\ \-]+$/iu', 
                 'on' => self::SCENARIO_AJAX_VALIDATION,
-                'message' => 'Для заполнения поля "{attribute}" используйте только буквы русского алфавита, и знак тире'
+                'message' => 'Поле "{attribute}" может содержать только буквы русского алфавита, и знак "-"',
             ],
             
             [
                 'rents_mobile', 'unique',
-                'targetClass' => Clients::className(),
-                'targetAttribute' => 'clients_mobile',
+                'targetClass' => Rents::className(),
+                'targetAttribute' => 'rents_mobile',
                 'message' => 'Пользователь с введенным номером мобильного телефона в системе уже зарегистрирован',
                 'on' => self::SCENARIO_AJAX_VALIDATION,
             ],
@@ -56,14 +56,16 @@ class ClientsRentForm extends Model {
                 'on' => self::SCENARIO_AJAX_VALIDATION,
             ],
             ['rents_email', 'string', 'min' => 5, 'max' => 150, 'on' => self::SCENARIO_AJAX_VALIDATION],
+            ['rents_email', 'email', 'on' => self::SCENARIO_AJAX_VALIDATION],
             
             ['password', 'string', 'min' => 6, 'max' => 12, 'on' => self::SCENARIO_AJAX_VALIDATION],
             ['password', 
                 'match', 
                 'pattern' => '/^[A-Za-z0-9\_\-]+$/iu', 
-                'message' => 'Для задания пароля используйте буквы английского алфавита, цифры, знак тире и нижнее подчеркивание'],
+                'message' => 'Поле "{attribute}" может содержать только буквы английского алфавита, цифры, знаки "-", "_"',
+                'on' => self::SCENARIO_AJAX_VALIDATION,
+            ],
             
-            ['rents_email', 'email', 'on' => self::SCENARIO_AJAX_VALIDATION],
         ];
     }
     
