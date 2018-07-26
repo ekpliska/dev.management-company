@@ -30,9 +30,14 @@ class ClientsRentForm extends Model {
         return [
             [['rents_surname', 'rents_name', 'rents_second_name', 'rents_mobile', 'rents_email', 'password'], 'required', 'on' => self::SCENARIO_AJAX_VALIDATION],
             [['rents_surname', 'rents_name', 'rents_second_name'], 'filter', 'filter' => 'trim', 'on' => self::SCENARIO_AJAX_VALIDATION],
-            
             [['rents_surname', 'rents_name', 'rents_second_name'], 'string', 'min' => 3, 'max' => 50, 'on' => self::SCENARIO_AJAX_VALIDATION],
-            // [['rents_surname', 'rents_name', 'rents_second_name'], 'match', 'pattern' => '/^[А-Яа-я]?[-]{3,50}/i', 'on' => self::SCENARIO_AJAX_VALIDATION],
+            [
+                ['rents_surname', 'rents_name', 'rents_second_name'], 
+                'match', 
+                'pattern' => '/^[А-Яа-я\ \-]+$/iu', 
+                'on' => self::SCENARIO_AJAX_VALIDATION,
+                'message' => 'Для заполнения поля "{attribute}" используйте только буквы русского алфавита, и знак тире'
+            ],
             
             [
                 'rents_mobile', 'unique',
@@ -50,8 +55,13 @@ class ClientsRentForm extends Model {
                 'message' => 'Данный электронный адрес уже используется в системе',
                 'on' => self::SCENARIO_AJAX_VALIDATION,
             ],
+            ['rents_email', 'string', 'min' => 5, 'max' => 150, 'on' => self::SCENARIO_AJAX_VALIDATION],
             
             ['password', 'string', 'min' => 6, 'max' => 12, 'on' => self::SCENARIO_AJAX_VALIDATION],
+            ['password', 
+                'match', 
+                'pattern' => '/^[A-Za-z0-9\_\-]+$/iu', 
+                'message' => 'Для задания пароля используйте буквы английского алфавита, цифры, знак тире и нижнее подчеркивание'],
             
             ['rents_email', 'email', 'on' => self::SCENARIO_AJAX_VALIDATION],
         ];

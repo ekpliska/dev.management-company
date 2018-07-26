@@ -14,6 +14,8 @@
  */
 class PersonalAccount extends ActiveRecord
 {
+    
+    public $_list_user = [];
     /**
      * Таблица из БД
      */
@@ -33,6 +35,7 @@ class PersonalAccount extends ActiveRecord
             // [['account_number'], 'string', 'min' => 11, 'max' => 11],
             [['account_organization_id'], 'integer'],
             [['account_number'], 'unique'],
+            
         ];
     }
     
@@ -74,7 +77,6 @@ class PersonalAccount extends ActiveRecord
                 ->limit(1);
     }
     
-    
     /*
      * Получить список всех лицевых счетов закрепенных за данным пользователем
      */
@@ -92,6 +94,49 @@ class PersonalAccount extends ActiveRecord
                 ->select('account_number')
                 ->one();
     }
+    
+    public function setUserList($client_id, $rent_id) {
+       $_list_client = ArrayHelper::map(User::find()
+               ->andWhere(['user_client_id' => $client_id])
+               ->asArray()
+               ->all(), 'user_id', 'user_client_id');
+
+       $rent_id ? $_list_rent = ArrayHelper::map(User::find()
+               ->andWhere(['user_rent_id' => $rent_id])
+               ->asArray()
+               ->all(), 'user_id', 'user_rent_id') : $_list_rent = [];
+       
+       $this->_list_user = ArrayHelper::merge($_list_client, $_list_rent);
+       
+    }
+    
+    /*
+     * Этот метод вызывается в конце вставки или обновления записи
+     */
+    public function afterSave($insert, $changedAttributes) {
+        parent::afterSave($insert, $changedAttributes);
+        if ($insert) {
+            $this->setUserList($this->personal_clients_id, $this->personal_rent_id);
+            foreach ($this->_list_user as $key => $user) {
+                $bind_date = new AccountToUsers();
+                $bind_date->user_id = $key;
+                $bind_date->account_id = $this->account_id;
+                $bind_date->save();
+            }
+        }
+//            foreach ($this->getUserList($this->personal_clients_id, $this->personal_rent_id) as $user) {
+//                $_t = new AccountToUsers();
+//                $_t->isNewRecord = true;
+//                $_t->user_id = $user;
+//                $_t->account_id = $this->account_id;
+//                $_t->save(false);
+//            }
+//            echo '<pre>'; var_dump($this->getUserList($this->personal_clients_id, $this->personal_rent_id));
+//            echo '<ht />';
+//            die;
+//        }
+    }
+        
     
     /**
      * Метки для полей

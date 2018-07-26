@@ -57,7 +57,7 @@ class AddPersonalAccount extends Model {
                 'account_number', 'account_organization_id', 
                 'account_last_sum', 'square_flat',
                 // 'account_client_surname', 'account_client_name', 'account_client_secondname',
-                'flat'], 'required'],
+                /*'flat'*/], 'required'],
             
             ['account_rent', 'integer'],
             
