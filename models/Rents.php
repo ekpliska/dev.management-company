@@ -49,12 +49,12 @@ class Rents extends ActiveRecord
             ],
             
             [
-                'rents_mobile', 'unique',
+                ['rents_mobile', 'rents_mobile_more'], 'unique',
                 'targetClass' => Rents::className(),
                 'targetAttribute' => 'rents_mobile',
                 'message' => 'Пользователь с введенным номером мобильного телефона в системе уже зарегистрирован',
             ],
-            ['rents_mobile', 'match', 'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/i'],
+            [['rents_mobile', 'rents_mobile_more'], 'match', 'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/i'],
             
             [
                 'rents_email', 'unique',
@@ -104,6 +104,15 @@ class Rents extends ActiveRecord
     } 
     
     /*
+     * Проверям наличие арендаторов у Собственника
+     */
+    public static function isRent($client_id) {
+        return $_is_rent = self::find()
+                ->andWhere(['rents_clients_id' => $client_id, 'isActive' => self::STATUS_ENABLED])
+                ->all() ? true : false;
+    }
+    
+    /*
      * После создания новой записи Арендатора производим
      * добавление роли Арендатор к учетной записи пользователя
      */
@@ -115,6 +124,7 @@ class Rents extends ActiveRecord
             Yii::$app->authManager->assign($rentRole, $this->getId());                    
         }
     }
+        
     
     /*
      * Получить ID арендатора
@@ -152,6 +162,7 @@ class Rents extends ActiveRecord
             'rents_second_name' => 'Отчество',
             'rents_surname' => 'Фамилия',
             'rents_mobile' => 'Контактный телефон',
+            'rents_mobile_more' => 'Дополнителный номер телефона',
             'rents_email' => 'Электронная почта',
             'rents_account_id' => 'Rents Account ID',
         ];

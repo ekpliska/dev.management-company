@@ -109,13 +109,11 @@ class User extends ActiveRecord implements IdentityInterface
      * Поиск пользователя по параметрам
      * @user (ID user) / @username / @account (ID лицевого счета)
      */    
-    public static function findByUser($user, $username) {
+    public static function findByUser($user) {
         return static::find()
                 ->andWhere([
                     'user_id' => $user,
-                    'user_login' => $username,
-                    'status' => 1
-                    ])
+                    'status' => self::STATUS_ENABLED])
                 ->one();
     }
 

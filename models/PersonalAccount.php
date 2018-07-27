@@ -14,6 +14,11 @@
  */
 class PersonalAccount extends ActiveRecord
 {
+    /* Статус лицевого счета
+     * устанавливается, когда пользователь создает новый лицевой счет
+     */
+    const STATUS_DISABLED = 0;
+    const STATUS_ENABLED = 1;
     
     public $_list_user = [];
     /**
@@ -44,7 +49,7 @@ class PersonalAccount extends ActiveRecord
     }
     
     public function getRent() {
-        return $this->hasOne(Rents::className(), ['rents_account_id' => 'account_id']);
+        return $this->hasOne(Rents::className(), ['rents_id' => 'personal_rent_id']);
     }
     
     public function getHouse() {
@@ -84,6 +89,7 @@ class PersonalAccount extends ActiveRecord
         
         $account_find = static::find()
                 ->andWhere(['personal_clients_id' => $client_id])
+                ->andWhere(['isActive' => self::STATUS_ENABLED])
                 ->orderBy(['account_id' => SORT_ASC])
                 ->all();
         return $account_all = ArrayHelper::map($account_find, 'account_id', 'account_number');
@@ -93,6 +99,17 @@ class PersonalAccount extends ActiveRecord
         return static::find()
                 ->andWhere(['personal_user_id' => $user_id])
                 ->select('account_number')
+                ->one();
+    }
+    
+    /*
+     * Поиск Арендатора закрепленного за лицевым счетом
+     */
+    public static function findByRent($account_id, $client_id) {
+        return self::find()
+                ->andWhere(['account_id' => $account_id])
+                ->andWhere(['personal_clients_id' => $client_id])
+                ->andWhere(['not', ['personal_rent_id' => 'null']])
                 ->one();
     }
     

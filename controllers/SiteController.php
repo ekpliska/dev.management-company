@@ -121,7 +121,7 @@ class SiteController extends Controller
     }
 
     /*
-     * Поддтверждение регистрации
+     * Подтверждение регистрации
      */
     public function actionEmailConfirm($token) {
         try {
