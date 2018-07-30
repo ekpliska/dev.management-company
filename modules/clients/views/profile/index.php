@@ -35,6 +35,25 @@ $this->title = 'Профиль абонента';
             </button>                
         </div>
     <?php endif; ?>
+
+    <?php
+        $form = ActiveForm::begin([
+            'id' => 'profile-form',
+            'action' => ['profile/update-profile', 'form' => 'profile-form'],
+            'enableClientValidation' => true,
+            'enableAjaxValidation' => false,
+            'validateOnChange' => true,
+            'options' => [
+                'enctype' => 'multipart/form-data',
+            ],
+         ])
+    ?>  
+
+    
+    <div class="col-md-12 text-right">
+        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary']) ?>
+        <br /><br />
+    </div>
     
     <div class="col-md-4">
         <div class="panel panel-default">
@@ -43,7 +62,7 @@ $this->title = 'Профиль абонента';
                     <strong>Контактные данные</strong>                    
                 </div>
                 <div class="text-right">
-                        <?= Html::checkbox('is_rent', $is_rent ? 'checked' : '', ['id' => 'is_rent']) ?> Арендатор
+                    <?= Html::checkbox('is_rent', $is_rent ? 'checked' : '', ['id' => 'is_rent']) ?> Арендатор
                 </div>
             </div>            
             
@@ -81,7 +100,8 @@ $this->title = 'Профиль абонента';
                         
                         <p>Номер лицевого счета</p>
                         <div class="col-md-12" style="padding: 0;">
-                            <?= Html::input('text', 'account-number', $user->client->personalAccount->account_number, ['class' => 'form-control', 'disabled' => true]) ?>
+                            <?= Html::input('text', 'account-number', 
+                                    $user->client->personalAccount->account_number, ['class' => 'form-control', 'disabled' => true, 'id' => 'account-number']) ?>
                         </div>
                         
                     </div>
@@ -92,16 +112,6 @@ $this->title = 'Профиль абонента';
         </div>
     </div>
     
-    <?php
-        $form = ActiveForm::begin([
-            'id' => 'profile-form',
-            'enableClientValidation' => true,
-            'enableAjaxValidation' => false,
-            'options' => [
-                'enctype' => 'multipart/form-data',
-            ],
-         ])
-    ?>    
     <div class="col-md-4">        
         <div class="panel panel-default">
             <div class="panel-heading"><strong>Фотография</strong></div>
@@ -136,22 +146,25 @@ $this->title = 'Профиль абонента';
         </div>        
         
     </div>
-    
-
-
    
     <?php Pjax::begin() ?>
     <div class="col-md-4">
-        <?php if (count($accounts_list) > 1): ?>
+        <?php // if (count($accounts_list) > 1): ?>
             <?= Html::dropDownList('_list-account', null, $accounts_list, ['class' => 'form-control', 'id' => '_list-account']) ?>
+            <?php 
+                Yii::$app->cache->set('account-numder_dr', $accounts_list);
+            ?>
             <br />
-        <?php endif; ?>
+        <?php //  endif; ?>
         
         <div class="panel panel-default">
             <div class="panel-heading"><strong>Контактные данные арендатора</strong></div>
             <div class="panel-body info_rent">
                 <div id="content-replace">
-                    <?php echo $this->render('_form/rent-view', ['model' => $accounts_info, 'model_rent' => $model_rent]) ?>
+                    <?= $this->render('_form/rent-view', [
+                            'model' => $accounts_info, 
+                            'model_rent' => $model_rent, 
+                            'add_rent' => $add_rent]) ?>
                 </div>
             </div>
         </div>
@@ -159,14 +172,13 @@ $this->title = 'Профиль абонента';
     <?php Pjax::end() ?>    
     
     <div class="col-md-12 text-right">
-        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary']) ?>
         <?php ActiveForm::end(); ?>        
     </div>
 
 </div>
 
 
-<?php /* Модальное окно на подтверждение удаления аредатора */ ?>
+<?php /* Модальное окно на подтверждение удаления аредатора
 <div class="modal fade" id="delete_rent" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog" role="document">
         <div class="modal-content"><button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -193,7 +205,7 @@ $this->title = 'Профиль абонента';
         </div>
     </div>
 </div> 
-
+ */ ?>
 
 <?php
 $this->registerJs('
@@ -229,4 +241,17 @@ $this->registerJs('
 
     });
 ')
+?>
+
+<?php $this->registerJs('
+    $("body").on("beforeSubmit", "form#profile-form", function (e) {
+        e.preventDefault();
+        alert ("Добавляем нового арендатора");
+    });
+') ?>
+
+<?php
+//$this->registerJs('
+//    $("")
+//')
 ?>

@@ -56,15 +56,6 @@ class Rents extends ActiveRecord
             ],
             [['rents_mobile', 'rents_mobile_more'], 'match', 'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/i'],
             
-            [
-                'rents_email', 'unique',
-                'targetClass' => User::className(),
-                'targetAttribute' => 'user_email',
-                'message' => 'Данный электронный адрес уже используется в системе'
-            ],
-            ['rents_email', 'string', 'min' => 5, 'max' => 150],
-            ['rents_email', 'email'],
-            
             ['isActive', 'boolean'],
         ];
     }
@@ -162,8 +153,7 @@ class Rents extends ActiveRecord
             'rents_second_name' => 'Отчество',
             'rents_surname' => 'Фамилия',
             'rents_mobile' => 'Контактный телефон',
-            'rents_mobile_more' => 'Дополнителный номер телефона',
-            'rents_email' => 'Электронная почта',
+            'rents_mobile_more' => 'Дополнительный номер телефона',
             'rents_account_id' => 'Rents Account ID',
         ];
     }

@@ -3,6 +3,8 @@
     use yii\bootstrap\ActiveForm;
     use yii\widgets\MaskedInput;
     use yii\helpers\Html;
+    use yii\helpers\Url;
+    use app\widgets\AddRentForm;
     
 /* 
  * To change this license header, choose License Headers in Project Properties.
@@ -38,5 +40,12 @@
     <?php ActiveForm::end(); ?>
 <?php else : ?>
     <p>Арендатор отсутствует.</p>
-    <?= Html::button('Создать арендатора', ['class' => 'btn btn-default']) ?>
+    
+    <?= Html::button('Создать арендатора', [
+        'class' => 'btn btn-default', 
+        'data-target' => '#add-rent-modal', 
+        'data-toggle' => 'modal']) ?>
+    
 <?php endif; ?>
+
+<?= AddRentForm::widget(['add_rent' => $add_rent]); ?>

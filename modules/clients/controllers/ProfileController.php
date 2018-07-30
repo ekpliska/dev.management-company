@@ -44,6 +44,8 @@ class ProfileController extends Controller
             $model_rent = null;
         }
         
+        // Форма добавить Арендатора
+        $add_rent = new ClientsRentForm(['scenario' => ClientsRentForm::SCENARIO_AJAX_VALIDATION]);
         
         return $this->render('index', [
             'user' => $user_info,
@@ -51,72 +53,44 @@ class ProfileController extends Controller
             'is_rent' => $is_rent,
             'accounts_info' => $accounts_info,
             'model_rent' => $model_rent,
-            
+            'add_rent' => $add_rent,
         ]);
     }
     
-    /*
-     * Профиль пользователя
-     */
-    public function actionProfile() {
+    public function actionUpdateProfile($form) {
         
-        $user_info = $this->permisionUser();
-        var_dump($user_info); die;
+        $user_info = $this->findUser(Yii::$app->user->id);
         
-        // Статус наличия у собственника арендатора
-        $is_rent = Rents::isRent();
-        if (Rents::isRent()) {
-            echo 'yes';
-        } else {
-            echo 'no';
-        }
-        
-        
-        
-        $client = Clients::findOne(['clients_id' => $user_info->user_client_id]);
-        
-        if (!$client) {
-            throw new NotFoundHttpException('Вы обратились к несуществующей странице');
-        }
-        
-        if ($client->is_rent) {
-            $rent = Rents::findByRent($client->id);
-            $is_rent = true;
-        }
-
-        if (
-                $user_info->load(Yii::$app->request->post()) && 
-                $client->load(Yii::$app->request->post())
-            ) {
-            $isValid = $user_info->validate();
-            $isValid = $client->validate() && $isValid;
-            if ($isValid) {
-                Yii::$app->session->setFlash('success', 'Профиль обновлен');
-                $user_info->uploadPhoto($username);
-                $client->save(false);
-
-                if ($rent) {
-                    if ($rent->load(Yii::$app->request->post()) && $rent->validate()) {
-                        $rent->save();
-                        return $this->refresh();
+        if (Yii::$app->request->isPost) {
+            if ($user_info->load(Yii::$app->request->post())) {
+                
+                try {
+                    $file = UploadedFile::getInstance($user_info, 'user_photo');
+                    $user_info->uploadPhoto($file);
+                    
+                    // Заполняем массив данными нового Арендатора
+                    $data_rent = Yii::$app->request->post('ClientsRentForm');
+                    $rent_form = new ClientsRentForm($data_rent);
+                            
+                    if (array_filter($data_rent) && !empty($data_rent)) {
+                        $rent_form->saveRentToUser($data_rent, '1');
+                    } else {
+                        echo 'no';
                     }
-                }                
-                
-                return $this->refresh();
-                
-            } else {
-                Yii::$app->session->set('error', 'Произошла ошбка');
+                    
+                    Yii::$app->session->setFlash('success', 'Профиль обновлен');
+                    
+                } catch (Exception $ex) {
+                    Yii::$app->errorHandler->logException($ex);
+                    Yii::$app->session->setFlash('error', $ex->getMessage());                    
+                }
             }
+            return $this->redirect(Yii::$app->request->referrer);
         }
         
-        return $this->render('profile', [
-            'user' => $user_info,
-            'client' => $client,
-            'rent' => $rent,
-            // 'rent_new' => $rent_new,
-            'is_rent' => $is_rent,
-        ]);
+        return $this->goHome();
     }
+    
     
     /*
      * Удаление учетной записи арендатора
@@ -205,6 +179,15 @@ class ProfileController extends Controller
         }        
     }
     
+    protected function findUser($id)
+    {
+        if (($model = User::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('Вы обратились к несуществующей странице');
+        }
+    }
+    
     /*
      * Фильтр выбора лицевого счета
      */
@@ -225,8 +208,11 @@ class ProfileController extends Controller
              * Если арендатор существует, генерирем для него модель
              */
             $model_rent = Rents::findOne(['rents_id' => $model->personal_rent_id]);
+            // Форма добавить Арендатора
+            $add_rent = new ClientsRentForm(['scenario' => ClientsRentForm::SCENARIO_AJAX_VALIDATION]);
             
-            $data = $this->renderAjax('_form/rent-view',['model' => $model, 'model_rent' => $model_rent]);
+            $data = $this->renderAjax('_form/rent-view',['model' => $model, 'model_rent' => $model_rent, 'add_rent' => $add_rent]);
+            
             return ['status' => true, 'model' => $model, 'data' => $data];
             
         }
