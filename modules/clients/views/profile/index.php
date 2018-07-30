@@ -51,14 +51,16 @@ $this->title = 'Профиль абонента';
                 <div class="container-fluid">
                     <div class="row">
                         
-                        <p>Как вас зовут?</p>
                         <div class="col-md-4" style="padding: 0;">
+                            <p>Фамилия</p>
                             <?= Html::input('text', 'surname', $user->client->clients_surname, ['class' => 'form-control', 'disabled' => true]) ?>
                         </div>
                         <div class="col-md-4" style="padding: 0;">
+                            <p>Имя</p>
                             <?= Html::input('text', 'name', $user->client->clients_name, ['class' => 'form-control', 'disabled' => true]) ?>
                         </div>
                         <div class="col-md-4" style="padding: 0;">
+                            <p>Отчество</p>
                             <?= Html::input('text', 'second_name', $user->client->clients_second_name, ['class' => 'form-control', 'disabled' => true]) ?>
                         </div>
                         
@@ -135,48 +137,36 @@ $this->title = 'Профиль абонента';
         
     </div>
     
-    
-    <?php ActiveForm::end(); ?>
+
 
    
     <?php Pjax::begin() ?>
     <div class="col-md-4">
-        <?= Html::dropDownList('_list-account', null, $accounts, ['class' => 'form-control', 'id' => '_list-account']) ?>
-        <?php //  echo $this->render('_form/rent-view', ['test' =>$model]) ?>
-        
-        <br />
+        <?php if (count($accounts_list) > 1): ?>
+            <?= Html::dropDownList('_list-account', null, $accounts_list, ['class' => 'form-control', 'id' => '_list-account']) ?>
+            <br />
+        <?php endif; ?>
         
         <div class="panel panel-default">
             <div class="panel-heading"><strong>Контактные данные арендатора</strong></div>
             <div class="panel-body info_rent">
-                <div id="content-replace"></div>
-            </div>
-        </div>
-    </div>
- <?php Pjax::end() ?>    
-    
-    <div class="col-md-12 text-right">
-        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary']) ?>
-    </div>
-
-<?php /*    
-    <?php if (!$is_rent) : ?>
-        <div class="col-md-4">        
-            <div class="panel panel-default add__rent">
-                <div class="panel-heading"><strong>Добавить арендатора</strong></div>
-                <div class="panel-body info_rent">
-                    <?php Pjax::begin(['enablePushState' => false]) ?>
-                        <a href="<?= Url::to(['clients/add-form-rent', 'client_id' => $client->id]) ?>">Добавить</a>
-                    <?php Pjax::end() ?>
+                <div id="content-replace">
+                    <?php echo $this->render('_form/rent-view', ['model' => $accounts_info, 'model_rent' => $model_rent]) ?>
                 </div>
             </div>
         </div>
-    <?php endif; ?>
- */?>
+    </div>
+    <?php Pjax::end() ?>    
+    
+    <div class="col-md-12 text-right">
+        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary']) ?>
+        <?php ActiveForm::end(); ?>        
+    </div>
+
 </div>
 
 
-<?php /* Модальное окно на подтверждение удаления аредатора 
+<?php /* Модальное окно на подтверждение удаления аредатора */ ?>
 <div class="modal fade" id="delete_rent" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog" role="document">
         <div class="modal-content"><button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -203,7 +193,7 @@ $this->title = 'Профиль абонента';
         </div>
     </div>
 </div> 
-*/ ?>
+
 
 <?php
 $this->registerJs('
@@ -232,7 +222,7 @@ $this->registerJs('
                 } else {
                     $("#is_rent").attr("checked", false);
                 }                
-               // console.log(response.data);
+               console.log(response.data);
                $("#content-replace").html(response.data);
             }
         });

@@ -11,7 +11,7 @@
  */
 
 ?>
-<?php if ($model) : ?>
+<?php if ($model_rent) : ?>
     <?php
         $form = ActiveForm::begin([
             'id' => 'edit-rent',

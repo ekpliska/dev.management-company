@@ -75,12 +75,29 @@ class PersonalAccount extends ActiveRecord
                 // ->one();
     }
     
+    /*
+     * Поиск лицевого счета по ID клиента
+     * Для контроллера Лецевой счет
+     * Для DataProvider
+     */
     public static function findByClientID($client_id) {
         return static::find()
                 ->andWhere(['personal_clients_id' => $client_id])
                 ->orderBy(['account_id' => SORT_ASC])
                 ->limit(1);
     }
+
+    /*
+     * Поиск лицевого счета по ID клиента
+     * Для контроллера Профиль пользователя
+     */    
+    public static function findByClientProfile($client_id) {
+        return static::find()
+                ->andWhere(['personal_clients_id' => $client_id])
+                ->orderBy(['account_id' => SORT_ASC])
+                ->limit(1)
+                ->one();
+    }    
     
     /*
      * Получить список всех лицевых счетов закрепенных за данным пользователем

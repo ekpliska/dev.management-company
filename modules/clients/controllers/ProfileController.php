@@ -26,27 +26,32 @@ class ProfileController extends Controller
         $user_info = $this->permisionUser();
         $client = Clients::findOne(['clients_id' => $user_info->user_client_id]);
         
-        // Получаем все активные лицевые счета Собственника
-        $accounts = PersonalAccount::findByClient($user_info->user_client_id);
+        // Получаем все активные лицевые счета Собственника (для dropDownList)
+        $accounts_list = PersonalAccount::findByClient($user_info->user_client_id);
         
-        // Статус наличия у собственника арендатора
+        // Получаем ифнормацию по лицевому счету Собственника
+        $accounts_info = PersonalAccount::findByClientProfile($user_info->user_client_id); 
+        
+        /* Статус наличия у собственника арендатора
+         * Если имеется Арендатор, то загружаем данные Арендатор для формы
+         */
         $is_rent = false;
         if (Rents::isRent($client->id)) {
             $is_rent = true;
+            $model_rent = Rents::findOne(['rents_id' => $accounts_info->personal_rent_id]);
         } else {
             $is_rent = false;
+            $model_rent = null;
         }
-        
-        $_filter_form = new \app\modules\clients\models\FilterForm();
-        
-        
         
         
         return $this->render('index', [
             'user' => $user_info,
-            'accounts' => $accounts,
+            'accounts_list' => $accounts_list,
             'is_rent' => $is_rent,
-            '_filter_form' => $_filter_form,
+            'accounts_info' => $accounts_info,
+            'model_rent' => $model_rent,
+            
         ]);
     }
     
