@@ -13,6 +13,7 @@
  */
 
 ?>
+
 <?php if ($model_rent) : ?>
     <?php
         $form = ActiveForm::begin([

@@ -14,7 +14,6 @@
     
 class User extends ActiveRecord implements IdentityInterface
 {
-    public $_account;
     
     /*
      * Статусы учетной записи пользователя
@@ -52,7 +51,6 @@ class User extends ActiveRecord implements IdentityInterface
             
             [['user_check_email', 'user_check_sms'], 'boolean'],
             
-            ['_account', 'safe'],
         ];
     }
 

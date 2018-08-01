@@ -164,7 +164,8 @@ $this->title = 'Профиль абонента';
                     <?= $this->render('_form/rent-view', [
                             'model' => $accounts_info, 
                             'model_rent' => $model_rent, 
-                            'add_rent' => $add_rent]) ?>
+                            'add_rent' => $add_rent, 
+                        ]) ?>
                 </div>
             </div>
         </div>
@@ -247,6 +248,7 @@ $this->registerJs('
     $("body").on("beforeSubmit", "form#profile-form", function (e) {
         e.preventDefault();
         alert ("Добавляем нового арендатора");
+        var accountNumber = $("input[name*=account-number]");
     });
 ') ?>
 

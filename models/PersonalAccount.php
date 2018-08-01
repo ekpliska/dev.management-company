@@ -68,11 +68,15 @@ class PersonalAccount extends ActiveRecord
                 ->viaTable('account_to_users', ['account_id' => 'account_id']);
     }
     
+    /*
+     * Поиск номера лицевого счета по ID
+     */
     public static function findByNumber($account_id) {
         return static::find()
                 ->andWhere(['account_id' => $account_id])
-                ->orderBy(['account_id' => SORT_ASC]);
-                // ->one();
+                ->orderBy(['account_id' => SORT_ASC])
+                ->asArray()
+                ->one();
     }
     
     /*
@@ -163,6 +167,8 @@ class PersonalAccount extends ActiveRecord
                 $bind_date->account_id = $this->account_id;
                 $bind_date->save();
             }
+        } else {
+            
         }
     }
         

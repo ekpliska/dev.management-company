@@ -59,23 +59,29 @@ class ProfileController extends Controller
     
     public function actionUpdateProfile($form) {
         
+//        var_dump(Yii::$app->request->post('_list-account')); die;
+        
         $user_info = $this->findUser(Yii::$app->user->id);
         
         if (Yii::$app->request->isPost) {
             if ($user_info->load(Yii::$app->request->post())) {
                 
                 try {
+                    
                     $file = UploadedFile::getInstance($user_info, 'user_photo');
+                    // Сохраняем профиль
                     $user_info->uploadPhoto($file);
                     
                     // Заполняем массив данными нового Арендатора
                     $data_rent = Yii::$app->request->post('ClientsRentForm');
                     $rent_form = new ClientsRentForm($data_rent);
-                            
-                    if (array_filter($data_rent) && !empty($data_rent)) {
-                        $rent_form->saveRentToUser($data_rent, '1');
-                    } else {
-                        echo 'no';
+                    
+                    // Получаем ID выбранного лицевого счета
+                    $_account = Yii::$app->request->post('_list-account');
+                    $accoun_number = PersonalAccount::findByNumber($_account);
+                    
+                    if (!array_search('', $data_rent) && $accoun_number) {
+                        $rent_form->saveRentToUser($data_rent, $accoun_number['account_number']);
                     }
                     
                     Yii::$app->session->setFlash('success', 'Профиль обновлен');
@@ -211,7 +217,11 @@ class ProfileController extends Controller
             // Форма добавить Арендатора
             $add_rent = new ClientsRentForm(['scenario' => ClientsRentForm::SCENARIO_AJAX_VALIDATION]);
             
-            $data = $this->renderAjax('_form/rent-view',['model' => $model, 'model_rent' => $model_rent, 'add_rent' => $add_rent]);
+            $data = $this->renderAjax('_form/rent-view', [
+                'model' => $model, 
+                'model_rent' => $model_rent, 
+                'add_rent' => $add_rent, 
+            ]);
             
             return ['status' => true, 'model' => $model, 'data' => $data];
             
