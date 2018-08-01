@@ -75,9 +75,9 @@ class PersonalAccount extends ActiveRecord
         return static::find()
                 ->andWhere(['account_id' => $account_id])
                 ->orderBy(['account_id' => SORT_ASC])
-                ->asArray()
                 ->one();
     }
+    
     
     /*
      * Поиск лицевого счета по ID клиента
@@ -167,8 +167,6 @@ class PersonalAccount extends ActiveRecord
                 $bind_date->account_id = $this->account_id;
                 $bind_date->save();
             }
-        } else {
-            
         }
     }
         

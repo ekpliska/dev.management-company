@@ -7,7 +7,7 @@
     use app\models\Clients;
     use app\models\User;
     use app\models\Rents;
-    
+    use app\models\PersonalAccount;
 
 /*
  * Модель для формы добавления арендатора
@@ -120,9 +120,7 @@ class ClientsRentForm extends Model {
         if ($data) {
             try {
                 
-                $client = Clients::find()
-                        ->andWhere(['clients_id' => Yii::$app->user->identity->user_client_id])
-                        ->one();
+                $client = Clients::findOne(['clients_id' => Yii::$app->user->identity->user_client_id]);
                 
                 $add_rent = new Rents();
                 $add_rent->rents_name = $this->rents_name;
@@ -149,6 +147,12 @@ class ClientsRentForm extends Model {
                 
                 if (!$add_user->save()) {
                     throw new \yii\db\Exception('Ошибка сохранения пользователя. Ошибка: ' . join(', ', $add_user->getFirstErrors()));
+                }
+                
+                $account = PersonalAccount::findOne(['account_number' => $new_account]);
+                if ($account) {
+                    $account->personal_rent_id = $add_rent->rents_id;
+                    $account->save(false);
                 }
                 
                 $transaction->commit();

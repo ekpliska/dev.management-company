@@ -78,10 +78,11 @@ class ProfileController extends Controller
                     
                     // Получаем ID выбранного лицевого счета
                     $_account = Yii::$app->request->post('_list-account');
-                    $accoun_number = PersonalAccount::findByNumber($_account);
-                    
-                    if (!array_search('', $data_rent) && $accoun_number) {
-                        $rent_form->saveRentToUser($data_rent, $accoun_number['account_number']);
+                    // Находим запись выбранного лицевого счета
+                    $account_number = PersonalAccount::findByNumber($_account);
+                        
+                    if (!array_search('', $data_rent) && $account_number) {
+                        $rent_form->saveRentToUser($data_rent, $account_number->account_number);
                     }
                     
                     Yii::$app->session->setFlash('success', 'Профиль обновлен');
