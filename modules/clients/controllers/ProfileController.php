@@ -59,8 +59,6 @@ class ProfileController extends Controller
     
     public function actionUpdateProfile($form) {
         
-//        var_dump(Yii::$app->request->post('_list-account')); die;
-        
         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         
         $user_info = $this->findUser(Yii::$app->user->id);
@@ -74,20 +72,30 @@ class ProfileController extends Controller
                     $file = UploadedFile::getInstance($user_info, 'user_photo');
                     // Сохраняем профиль
                     $user_info->uploadPhoto($file);
-                    
-                    // Заполняем массив данными нового Арендатора
-                    $data_rent = Yii::$app->request->post('ClientsRentForm');
-                    $rent_form = new ClientsRentForm($data_rent);
-                    
+
                     // Получаем ID выбранного лицевого счета
                     $_account = Yii::$app->request->post('_list-account');
-                    
                     // Находим запись выбранного лицевого счета
                     $account_number = PersonalAccount::findByNumber($_account);
                     
-                    if ($data_rent && $account_number) {
-                        $rent_form->saveRentToUser($data_rent, $account_number->account_number);
+                    // Заполняем массив данными нового Арендатора
+                    // $data_rent_new = Yii::$app->request->post('ClientsRents');
+                    // $rent_form = new ClientsRentForm($data_rent_new);
+                    
+                    // Получаем данные арендатора
+                    $data_rent_old = Yii::$app->request->post('Rents');
+                    $rent = Rents::findOne(['rents_id' => $account_number->personal_rent_id]);
+                    
+                    // Проверяем данные пришедшие из пост для выбранного арендатора
+                    if ($data_rent_old && $account_number && $rent->load(Yii::$app->request->post())) {
+                        if ($rent->validate()) {
+                            $rent->save();
+                        }
                     }
+                    
+//                    if ($data_rent_old && $account_number) {
+//                        $rent_form->saveRentToUser($data_rent, $account_number->account_number);
+//                    }
                     
                     Yii::$app->session->setFlash('success', 'Профиль обновлен');
                     
@@ -103,75 +111,6 @@ class ProfileController extends Controller
     }
     
     
-    /*
-     * Удаление учетной записи арендатора
-     */
-    public function actionDeleteRent() {
-        
-        $rent_id = Yii::$app->request->post('rent_id');
-        
-        if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
-            $status = Yii::$app->request->post('status');
-
-            $rents_info = Rents::findOne(['rents_id' => $rent_id]);
-            $user_info = User::findOne(['user_rent_id' => $rent_id]);
-            
-            if (!$status) {
-                 $rents_info->delete();
-                 $user_info->delete();
-                return 'Удаляем запись';
-            }
-        }
-        
-    }
-
-    /*
-     * Отвязать арендатора от лицевого счета
-     * Статус учетной записи арендатора для входа на портал - заблокирован
-     */
-    public function actionUndoRent() {
-        
-        $rent_id = Yii::$app->request->post('rent_id');
-        
-        if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
-            $status = Yii::$app->request->post('status');
-
-            $rents_info = Rents::findOne(['rents_id' => $rent_id]);
-            $user_info = User::findOne(['user_rent_id' => $rent_id]);
-            
-            if (!$status) {
-                $rents_info->rents_account_id = null;
-                $rents_info->isActive = Rents::STATUS_DISABLED;
-                $user_info->status = User::STATUS_BLOCK;
-                $rents_info->save(false);
-                $user_info->save(false);
-                return 'Отвязываем запись';
-            }
-        }
-        
-    }
-    
-    /*
-     * Добавить запись арендатора
-     * Создать для него учетную запись для входа на портал
-     */
-    public function actionAddRent() {
-        
-        $model = new ClientsRentForm();
-        $client_id = Yii::$app->request->post('client_id');
-        
-        if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
-            if ($model->load(Yii::$app->request->post())) {
-                $model->addNewClient($client_id);
-                // return $rent_id;
-                return true;
-            }
-        }
-    }
-    
-    public function actionAddFormRent($client_id) {        
-        return $this->renderAjax('_rent_form', ['rent_new' => new ClientsRentForm(), 'client_id' => $client_id]);
-    }
 
     /*
      * Метод, проверяет существование пользователя по текущему ID (user->identity->user_id)
@@ -216,17 +155,17 @@ class ProfileController extends Controller
             $model = PersonalAccount::findByRent($account_id, $client_id);
             
             /*
-             * Если арендатор существует, генерирем для него модель
+             * Если арендатор существует, генерирурем для него модель
              */
             $model_rent = Rents::findOne(['rents_id' => $model->personal_rent_id]);
             // Форма добавить Арендатора
             $add_rent = new ClientsRentForm(['scenario' => ClientsRentForm::SCENARIO_AJAX_VALIDATION]);
             
-            $data = $this->renderAjax('_form/rent-view', [
+            $data = $this->renderPartial('_form/rent-view', [
                 'model' => $model, 
                 'model_rent' => $model_rent, 
                 'add_rent' => $add_rent, 
-            ]); 
+            ]);
            
             return ['status' => true, 'model' => $model, 'data' => $data];
             
@@ -236,58 +175,62 @@ class ProfileController extends Controller
     }
     
     
-    /*
-     * Валидация формы "Добавление нового арендатора"
-     */
-    public function actionValidateAddRentForm() {
-        
-        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        
-        // Если данные пришли через пост и аякс
-        if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
-            
-            // Объявляем модель арендатор, задаем сценарий валидации для формы
-            $model = new ClientsRentForm([
-                'scenario' => ClientsRentForm::SCENARIO_AJAX_VALIDATION,
-            ]);
-            
-            // Если модель загружена
-            if ($model->load(Yii::$app->request->post())) {
-                // и прошла валидацию
-                if ($model->validate()) {
-                    // Для Ajax запроса возвращаем стутас, ок
-                    return ['status' => true];
-                }
-            }
-            // Инваче, запросу отдаем ответ о проваленной валидации и ошибки
-            return [
-                'status' => false,
-                'errors' => $model->errors,
-            ];
-        }
-        return ['status' => false];
-    }
+//    /*
+//     * Валидация формы "Добавление нового арендатора"
+//     */
+//    public function actionValidateAddRentForm() {
+//        
+//        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+//        
+//        // Если данные пришли через пост и аякс
+//        if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
+//            
+//            // Объявляем модель арендатор, задаем сценарий валидации для формы
+//            $model = new ClientsRentForm([
+//                'scenario' => ClientsRentForm::SCENARIO_AJAX_VALIDATION,
+//            ]);
+//            
+//            // Если модель загружена
+//            if ($model->load(Yii::$app->request->post())) {
+//                // и прошла валидацию
+//                if ($model->validate()) {
+//                    // Для Ajax запроса возвращаем стутас, ок
+//                    return ['status' => true];
+//                }
+//            }
+//            // Инваче, запросу отдаем ответ о проваленной валидации и ошибки
+//            return [
+//                'status' => false,
+//                'errors' => $model->errors,
+//            ];
+//        }
+//        return ['status' => false];
+//    }
     
-    public function actionAddNewRent() {
-        
-        $_account = Yii::$app->request->post('_list-account');
-        $data_rent = Yii::$app->request->post('ClientsRentForm');
-        
-        $rent_form = new ClientsRentForm();
-        
-        if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
-            
-            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-            if ($rent_form->load(Yii::$app->request->post())) {
-                if ($rent_form->saveRentToUser($data_rent, '12345678900')) {
-                    return ['success' => $rent_form];
-                }
-            }
-        }
-        
-        return $this->renderAjax('_test');
-        
-    }
+//    public function actionAddNewRent() {
+//        
+//        $_account = Yii::$app->request->post('_list-account');
+//        $data_rent = Yii::$app->request->post('ClientsRentForm');
+//        
+//        $rent_form = new ClientsRentForm($data_rent);
+//        
+//        if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
+//            
+//            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+//            if ($rent_form->load(Yii::$app->request->post())) {
+//                if ($rent_form->saveRentToUser($data_rent, '12345678900')) {
+//                    return ['success' => $rent_form];
+//                }
+//            }
+//        }
+//        
+//        return $this->renderAjax('_test');
+//        
+//    }
+    
+    public function actionAddFormRent() {        
+        return $this->render('_form/add-rent');
+    }    
     
     
 }

@@ -17,7 +17,10 @@
 <?php if ($model_rent) : ?>
     <?php
         $form = ActiveForm::begin([
-            'id' => 'edit-rent',            
+            'id' => 'edit-rent',
+            'options' => [
+                'data-pjax' => true,
+            ],
         ])
     ?>
         <?= $form->field($model_rent, 'rents_surname')->input('text')->label() ?>
@@ -41,12 +44,16 @@
     <?php ActiveForm::end(); ?>
 <?php else : ?>
     <p>Арендатор отсутствует.</p>
-
-    <?= Html::button('Создать арендатора', [
+    
+    <?php \yii\widgets\Pjax::begin(['enablePushState' => false]) ?>
+        <a href="<?= Url::to(['profile/add-form-rent']) ?>">Добавить арендатора</a>
+    <?php \yii\widgets\Pjax::end() ?>
+    
+    <?php /* = Html::button('Создать арендатора', [
         'class' => 'btn btn-default', 
         'data-target' => '#add-rent-modal', 
-        'data-toggle' => 'modal']) ?>
+        'data-toggle' => 'modal']) */ ?>
+    
 <?php endif; ?>
 
     
-<?= AddRentForm::widget(['add_rent' => $add_rent]); ?>

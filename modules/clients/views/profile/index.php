@@ -4,6 +4,7 @@
     use yii\helpers\Html;
     use yii\helpers\Url;
     use yii\widgets\Pjax;
+    use yii\widgets\MaskedInput;
     
 /*
  * Профиль пользователя
@@ -63,6 +64,16 @@ $this->title = 'Профиль абонента';
                 </div>
                 <div class="text-right">
                     <?= Html::checkbox('is_rent', $is_rent ? 'checked' : '', ['id' => 'is_rent']) ?> Арендатор
+                    <?php
+                        $this->registerJs('
+                            $("#is_rent").change(function(e) {
+                                if ("' . $is_rent . '") {
+                                    alert("123 ' . $model_rent->rents_id . '");
+                                    console.log("'. $model_rent->rents_id .'");
+                                }
+                            });
+                        ');
+                    ?>
                 </div>
             </div>            
             
@@ -117,12 +128,13 @@ $this->title = 'Профиль абонента';
             <div class="panel-heading"><strong>Фотография</strong></div>
             <div class="panel-body">
                 <div class="text-center">
-
+                    
                     <?php if (empty($user->user_photo)) : ?>
                         <?= Html::img('/images/no-avatar.jpg', ['class' => 'img-circle', 'alt' => 'no-avatar', 'width' => 150]) ?>
                     <?php else: ?>
                         <?= Html::img($user->user_photo, ['id' => 'photoPreview','class' => 'img-circle', 'alt' => $user->user_login, 'width' => 150]) ?>
                     <?php endif; ?>
+
                 </div>
                     
                 <?= $form->field($user, 'user_photo')->input('file', ['id' => 'btnLoad']) ?>
@@ -147,13 +159,9 @@ $this->title = 'Профиль абонента';
         
     </div>
    
-    <?php Pjax::begin() ?>
     <div class="col-md-4">
         <?php // if (count($accounts_list) > 1): ?>
             <?= Html::dropDownList('_list-account', null, $accounts_list, ['class' => 'form-control', 'id' => '_list-account']) ?>
-            <?php 
-                Yii::$app->cache->set('account-numder_dr', $accounts_list);
-            ?>
             <br />
         <?php //  endif; ?>
         
@@ -161,19 +169,22 @@ $this->title = 'Профиль абонента';
             <div class="panel-heading"><strong>Контактные данные арендатора</strong></div>
             <div class="panel-body info_rent">
                 <div id="content-replace">
+
                     <?= $this->render('_form/rent-view', [
                             'model' => $accounts_info, 
                             'model_rent' => $model_rent, 
                             'add_rent' => $add_rent, 
                         ]) ?>
+                    
+                    
+                    
                 </div>
             </div>
         </div>
     </div>
-    <?php Pjax::end() ?>    
     
     <div class="col-md-12 text-right">
-        <?php ActiveForm::end(); ?>        
+        <?php ActiveForm::end(); ?>
     </div>
 
 </div>
@@ -246,7 +257,11 @@ $this->registerJs('
 
 <?php $this->registerJs('
     $("body").on("beforeSubmit", "form#profile-form", function (e) {
+        var yiiform = $(this);
         e.preventDefault();
         alert ("Добавляем нового арендатора");
     });
 ') ?>
+
+<?= app\widgets\AddRentForm::widget(['add_rent' => $add_rent]); ?>
+
