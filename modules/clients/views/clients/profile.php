@@ -55,7 +55,7 @@ $this->title = 'Профиль абонента';
                     <strong>Контактные данные</strong>                    
                 </div>
                 <div class="text-right">
-                    <?= $form->field($client, 'is_rent')->checkbox(['id' => 'addRent']) ?>
+                    <?php // = $form->field($client, 'is_rent')->checkbox(['id' => 'addRent']) ?>
                 </div>
             </div>            
             

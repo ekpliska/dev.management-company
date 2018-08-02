@@ -68,10 +68,9 @@ class User extends ActiveRecord implements IdentityInterface
         return $this->hasOne(Rents::className(), ['rents_id' => 'user_rent_id']);
     }
     
-    
-// return $this->hasMany(Tag::className(), ['id' => 'tag_id']) // связываем tag.id с tag_to_post_bind.tag_id
-//            ->viaTable('tag_to_post_bind', ['post_id' => 'id']); // tag_to_post_bind.post_id с post.id    
-//        
+    /*
+     * Связь через промеуточную таблицу
+     */
     public function getPersonalAccount() {
         return $this->hasMany(PersonalAccount::className(), ['account_id' => 'account_id'])
                 ->viaTable('account_to_users', ['user_id' => 'user_id']);
@@ -236,6 +235,7 @@ class User extends ActiveRecord implements IdentityInterface
         
         parent::afterSave($insert, $changedAttributes);
         if ($insert) {
+            var_dump($changedAttributes);die;
             $rentRole = Yii::$app->authManager->getRole('clients_rent');
             Yii::$app->authManager->assign($rentRole, $this->getId());                    
         }

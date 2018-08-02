@@ -109,6 +109,8 @@ class RegistrationForm extends Model {
             $model->status = User::STATUS_DISABLED;
             // Для нового пользователя генерируем ключ, для отправки на почту (Для подтверждения email)
             $model->generateEmailConfirmToken();
+            // По умолчанию включаем email оповещение
+            $model->user_check_email = true;
             
             if ($model->save()) {
                 $this->sendEmail('EmailConfirm', 'Подтверждение регистрации', ['user' => $model]);

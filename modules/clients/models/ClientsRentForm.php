@@ -22,6 +22,10 @@ class ClientsRentForm extends Model {
     public $rents_mobile;
     public $rents_email;
     public $password;
+    public $account_id;
+
+
+
 
     /*
      * Правила валидации
@@ -65,6 +69,8 @@ class ClientsRentForm extends Model {
                 'message' => 'Поле "{attribute}" может содержать только буквы английского алфавита, цифры, знаки "-", "_"',
                 'on' => self::SCENARIO_AJAX_VALIDATION,
             ],
+            
+            ['account_id', 'safe'],
             
         ];
     }

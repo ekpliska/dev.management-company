@@ -61,9 +61,12 @@ class ProfileController extends Controller
         
 //        var_dump(Yii::$app->request->post('_list-account')); die;
         
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        
         $user_info = $this->findUser(Yii::$app->user->id);
         
         if (Yii::$app->request->isPost) {
+            
             if ($user_info->load(Yii::$app->request->post())) {
                 
                 try {
@@ -78,10 +81,11 @@ class ProfileController extends Controller
                     
                     // Получаем ID выбранного лицевого счета
                     $_account = Yii::$app->request->post('_list-account');
+                    
                     // Находим запись выбранного лицевого счета
                     $account_number = PersonalAccount::findByNumber($_account);
-                        
-                    if (!array_search('', $data_rent) && $account_number) {
+                    
+                    if ($data_rent && $account_number) {
                         $rent_form->saveRentToUser($data_rent, $account_number->account_number);
                     }
                     
@@ -89,7 +93,7 @@ class ProfileController extends Controller
                     
                 } catch (Exception $ex) {
                     Yii::$app->errorHandler->logException($ex);
-                    Yii::$app->session->setFlash('error', $ex->getMessage());                    
+                    Yii::$app->session->setFlash('error', $ex->getMessage());
                 }
             }
             return $this->redirect(Yii::$app->request->referrer);
@@ -222,13 +226,68 @@ class ProfileController extends Controller
                 'model' => $model, 
                 'model_rent' => $model_rent, 
                 'add_rent' => $add_rent, 
-            ]);
-            
+            ]); 
+           
             return ['status' => true, 'model' => $model, 'data' => $data];
             
         }
         return ['status' => false];
         
     }
+    
+    
+    /*
+     * Валидация формы "Добавление нового арендатора"
+     */
+    public function actionValidateAddRentForm() {
+        
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        
+        // Если данные пришли через пост и аякс
+        if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
+            
+            // Объявляем модель арендатор, задаем сценарий валидации для формы
+            $model = new ClientsRentForm([
+                'scenario' => ClientsRentForm::SCENARIO_AJAX_VALIDATION,
+            ]);
+            
+            // Если модель загружена
+            if ($model->load(Yii::$app->request->post())) {
+                // и прошла валидацию
+                if ($model->validate()) {
+                    // Для Ajax запроса возвращаем стутас, ок
+                    return ['status' => true];
+                }
+            }
+            // Инваче, запросу отдаем ответ о проваленной валидации и ошибки
+            return [
+                'status' => false,
+                'errors' => $model->errors,
+            ];
+        }
+        return ['status' => false];
+    }
+    
+    public function actionAddNewRent() {
+        
+        $_account = Yii::$app->request->post('_list-account');
+        $data_rent = Yii::$app->request->post('ClientsRentForm');
+        
+        $rent_form = new ClientsRentForm();
+        
+        if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
+            
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            if ($rent_form->load(Yii::$app->request->post())) {
+                if ($rent_form->saveRentToUser($data_rent, '12345678900')) {
+                    return ['success' => $rent_form];
+                }
+            }
+        }
+        
+        return $this->renderAjax('_test');
+        
+    }
+    
     
 }

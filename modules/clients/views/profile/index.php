@@ -248,12 +248,5 @@ $this->registerJs('
     $("body").on("beforeSubmit", "form#profile-form", function (e) {
         e.preventDefault();
         alert ("Добавляем нового арендатора");
-        var accountNumber = $("input[name*=account-number]");
     });
 ') ?>
-
-<?php
-//$this->registerJs('
-//    $("")
-//')
-?>

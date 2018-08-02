@@ -45,10 +45,10 @@ class ClientsController extends Controller
             throw new NotFoundHttpException('Вы обратились к несуществующей странице');
         }
         
-        if ($client->is_rent) {
-            $rent = Rents::findByRent($client->id);
-            $is_rent = true;
-        }
+//        if ($client->is_rent) {
+//            $rent = Rents::findByRent($client->id);
+//            $is_rent = true;
+//        }
 
         if (
                 $user_info->load(Yii::$app->request->post()) && 
