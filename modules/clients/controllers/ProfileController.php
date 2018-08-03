@@ -200,25 +200,26 @@ class ProfileController extends Controller
         $_rent = Rents::findOne($rent);
         $_account = PersonalAccount::findOne($account);
         
+        if ($_rent && $_account) {
+            Yii::$app->session->setFlash('error', 'При передаче параметров произошла ошибка. Перезагрухите страницу');
+            return $this->render('index');
+        }
+        
         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         
         if (Yii::$app->request->isGet) {
             
             switch ($action) {
                 case 'delete':
-                    if ($_rent) {
-                        $_rent->delete();
-                        return $this->redirect(Yii::$app->request->referrer);
-                    } else {
-                        Yii::$app->session->setFlash('error', 'Возникла ошибка (запрос удаления арендатора)');
-                        return $this->refresh();
-                    }
+                    $_rent->delete();
+                    return $this->redirect(Yii::$app->request->referrer);
                     break;
 
                 case 'undo': 
                     $_rent->updateRent($rent, $account);
                     return $this->redirect(Yii::$app->request->referrer);
                     break;
+                
                 default:
                     Yii::$app->session->setFlash('error', 'Ошибка удаления арендатора');
                     return $this->render(Yii::$app->request->referrer);
