@@ -197,15 +197,15 @@ class ProfileController extends Controller
     
     public function actionChangeRentProfile($action, $rent, $account) {
         
+        $_rent = Rents::findOne($rent);
+        $_account = PersonalAccount::findOne($account);
+        
         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         
-        if (Yii::$app->request->isAjax) {
+        if (Yii::$app->request->isGet) {
             
             switch ($action) {
-                
                 case 'delete':
-                    $_rent = Rents::findOne($rent);
-                    $_account = PersonalAccount::findOne($account);
                     if ($_rent) {
                         $_rent->delete();
                         return $this->redirect(Yii::$app->request->referrer);
@@ -216,7 +216,8 @@ class ProfileController extends Controller
                     break;
 
                 case 'undo': 
-                    return ['status' => true, 'action' => $action, 'rent' => $rent, 'account' => $account];
+                    $_rent->updateRent($rent, $account);
+                    return $this->redirect(Yii::$app->request->referrer);
                     break;
                 default:
                     Yii::$app->session->setFlash('error', 'Ошибка удаления арендатора');

@@ -113,6 +113,7 @@ class AddPersonalAccount extends Model {
             $new_account->account_organization_id = $this->account_organization_id;
             $new_account->account_balance = $this->account_last_sum;
             $new_account->personal_clients_id = $id_client['user_client_id'];
+            $new_account->isActive = PersonalAccount::STATUS_ENABLED;
             
             /*
              * Если при создании нового лицевого счета, арендатор выбран из списка, то

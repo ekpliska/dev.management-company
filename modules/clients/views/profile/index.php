@@ -257,11 +257,9 @@ $this->registerJs('
     
         var rentsId = $("input[id=_rents]").val();
         var accountId = $("#_list-account :selected").text();
-        alert(accountId);
-        
-        $.ajax({
+        $.get({
             url: "change-rent-profile?action=delete&rent=" + rentsId + "&account=" + accountId,
-            method: "POST",
+            method: "GET",
             dataType: "json",
             data: {
                 action: "delete",
@@ -282,14 +280,12 @@ $this->registerJs('
     
         var rentsId = $("input[id=_rents]").val();
         var accountId = $("#_list-account :selected").text();
-        alert(accountId);
-        
-        $.ajax({
+        $.get({
             url: "change-rent-profile?action=undo&rent=" + rentsId + "&account=" + accountId,
-            method: "POST",
+            method: "GET",
             dataType: "json",
             data: {
-                action: "delete",
+                action: "undo",
                 rent_id: rentsId,
                 account: accountId,
             },

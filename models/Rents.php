@@ -142,6 +142,27 @@ class Rents extends ActiveRecord
         $this->rents_account_id = $id['account_id'];
     }
     
+    public function updateRent($rent, $account) {
+        
+        $_user = User::findOne(['user_rent_id' => $rent]);
+        $_account = PersonalAccount::findOne(['account_number' => $account]);
+        
+        if ($_user) {
+            $this->isActive = self::STATUS_DISABLED;
+            
+            $_user->user_login = $_user->user_login . '_block';
+            $_user->status = User::STATUS_BLOCK;
+            
+            $_account->personal_rent_id = null;
+            
+            $this->save(false);
+            $_user->save(false);
+            $_account->save(false);
+            
+            return true;
+        }
+    }
+    
     public function afterDelete() {
         parent::afterDelete();
         $_user = User::findOne(['user_rent_id' => $this->rents_id]);
@@ -165,7 +186,6 @@ class Rents extends ActiveRecord
             'rents_surname' => 'Фамилия',
             'rents_mobile' => 'Контактный телефон',
             'rents_mobile_more' => 'Дополнительный номер телефона',
-            'rents_account_id' => 'Rents Account ID',
         ];
     }
 }
