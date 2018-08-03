@@ -141,6 +141,17 @@ class Rents extends ActiveRecord
                 ->one();
         $this->rents_account_id = $id['account_id'];
     }
+    
+    public function afterDelete() {
+        parent::afterDelete();
+        $_user = User::findOne(['user_rent_id' => $this->rents_id]);
+        $_account = PersonalAccount::findOne(['personal_rent_id' => $this->rents_id]);
+        if ($_user && $_account) {
+            $_user->delete();
+            $_account->personal_rent_id = null;
+            $_account->save(false);
+        }
+    }
 
     /**
      * Настройка полей для форм

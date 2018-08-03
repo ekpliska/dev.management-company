@@ -23,6 +23,9 @@
             ],
         ])
     ?>
+
+        <?= $form->field($model_rent, 'rents_id')->input('text', ['id' => '_rents'])->label(false) ?>
+
         <?= $form->field($model_rent, 'rents_surname')->input('text')->label() ?>
 
         <?= $form->field($model_rent, 'rents_name')->input('text')->label() ?>
@@ -56,4 +59,5 @@
     
 <?php endif; ?>
 
-    
+
+   

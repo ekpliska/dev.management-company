@@ -65,18 +65,39 @@ $this->title = 'Профиль абонента';
                 <div class="text-right">
                     <?= Html::checkbox('is_rent', $is_rent ? 'checked' : '', ['id' => 'is_rent']) ?> Арендатор
                     <?php
+                        /* Обработка события при клике на checkBox "Арендатор"
+                         * Если за лицевым счетом закреплен арендатор, то 
+                         * выводим модальное окно для управления учетной записью арендатора
+                         */
                         $this->registerJs('
                             $("#is_rent").change(function(e) {
-                                if ("' . $is_rent . '") {
-                                    alert("123 ' . $model_rent->rents_id . '");
-                                    console.log("'. $model_rent->rents_id .'");
+                                var rentsId = $("input[id=_rents]").val();
+                                if ($("input").is("#_rents")) {
+                                    $("#changes_rent").modal("show");
+                                    
+                                    $.ajax({
+                                        url: "get-rent-info?rent=" + rentsId,
+                                        method: "POST",
+                                        dataType: "json",
+                                        data: {
+                                            rent_id: rentsId,
+                                        },
+                                        success: function(response) {
+                                            if (response.status) {
+                                                $("#changes_rent #rent-surname").text(response.rent.rents_surname);
+                                                $("#changes_rent #rent-name").text(response.rent.rents_name);
+                                                $("#changes_rent #rent-second-name").text(response.rent.rents_second_name);
+                                            } else {
+                                                console.log("Ошибка при получении данных арендатора");
+                                            }
+                                        }
+                                    });
                                 }
                             });
                         ');
                     ?>
                 </div>
             </div>            
-            
             <div class="panel-body">                
                 <div class="container-fluid">
                     <div class="row">
@@ -190,34 +211,100 @@ $this->title = 'Профиль абонента';
 </div>
 
 
-<?php /* Модальное окно на подтверждение удаления аредатора
-<div class="modal fade" id="delete_rent" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
+<?php /* Модальное окно на подтверждение удаления аредатора */ ?>
+<div class="modal fade" id="changes_rent" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog" role="document">
-        <div class="modal-content"><button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="modal-content"><button class="close changes_rent__close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <div class="modal-header">
                 <h4 class="modal-title">
-                    Подтверждение удаления
+                    Дальнейшее действия с учетной записью арендатора
                 </h4>
             </div>
             <div class="modal-body">
                 <div class="modal__text">
                     Какое действие вы хотите совершить с учетной записью арендатора? 
-                    <?php if ($is_rent && isset($rent)) : ?>
-                        Арендатор: <strong><?= $rent->fullName ?></strong>
-                    <?php endif; ?>
+                    <br />
+                    <span id="rent"></span>
+                    <span id="rent-surname"></span>
+                    <span id="rent-name"></span>
+                    <span id="rent-second-name"></span>
                     <br />
                     *** Внимание, при удалении арендатора так же будет удалена его учетная запись на портале
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-danger delete_yes" data-dismiss="modal">Удалить</button>
-                <button class="btn btn-success undo_yes" data-dismiss="modal">Отвязать от лицевого счета</button>
-                <button class="btn btn-primary delete_no" data-dismiss="modal">Отмена</button>
+                <button class="btn btn-danger changes_rent__del" data-dismiss="modal">Удалить</button>
+                <button class="btn btn-success changes_rent__undo" data-dismiss="modal">Отвязать от лицевого счета</button>
+                <button class="btn btn-primary changes_rent__close" data-dismiss="modal">Отмена</button>
             </div>
         </div>
     </div>
 </div> 
- */ ?>
+
+<?php
+/* Обработка событий в модальном окне "Дальнейшие действия с учетной записью арендатора" */
+
+$this->registerJs('
+    
+   
+    // Закрыть модальное окно
+    $(".changes_rent__close").on("click", function() {
+        $("#is_rent").prop("checked", true);
+    });
+    
+    // Удалить данные арендатора из системы
+    $(".changes_rent__del").on("click", function() {
+    
+        var rentsId = $("input[id=_rents]").val();
+        var accountId = $("#_list-account :selected").text();
+        alert(accountId);
+        
+        $.ajax({
+            url: "change-rent-profile?action=delete&rent=" + rentsId + "&account=" + accountId,
+            method: "POST",
+            dataType: "json",
+            data: {
+                action: "delete",
+                rent_id: rentsId,
+                account: accountId,
+            },
+            success: function(response) {
+                console.log(response.action + " " + response.rent + " " + response.account);
+            },
+            error: function() {
+                console.log("Error");
+            }
+        });
+    });
+    
+    // Отвязать арендатора от лицевого счета
+    $(".changes_rent__undo").on("click", function() {
+    
+        var rentsId = $("input[id=_rents]").val();
+        var accountId = $("#_list-account :selected").text();
+        alert(accountId);
+        
+        $.ajax({
+            url: "change-rent-profile?action=undo&rent=" + rentsId + "&account=" + accountId,
+            method: "POST",
+            dataType: "json",
+            data: {
+                action: "delete",
+                rent_id: rentsId,
+                account: accountId,
+            },
+            success: function(response) {
+                console.log(response.action + " " + response.rent + " " + response.account);
+            },
+            error: function() {
+                console.log("Error");
+            }
+        });
+    });
+
+
+')
+?>
 
 <?php
 $this->registerJs('
@@ -241,12 +328,12 @@ $this->registerJs('
             dataType: "json",
             type: "POST",
             success: function(response) {
-                if (response.model) {
-                    $("#is_rent").attr("checked", true);
+                if (response.is_rent) {
+                    $("#is_rent").prop("checked", true);
                 } else {
-                    $("#is_rent").attr("checked", false);
+                    $("#is_rent").prop("checked", false);
                 }                
-               console.log(response.data);
+               console.log(response.model);
                $("#content-replace").html(response.data);
             }
         });

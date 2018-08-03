@@ -18,6 +18,10 @@
  */
 class ProfileController extends Controller
 {
+    
+    public $_is_rent = false;
+
+
     /**
      * Главная страница
      */
@@ -158,6 +162,10 @@ class ProfileController extends Controller
              * Если арендатор существует, генерирурем для него модель
              */
             $model_rent = Rents::findOne(['rents_id' => $model->personal_rent_id]);
+            if ($model_rent) {
+                $this->_is_rent = true;
+            }
+            
             // Форма добавить Арендатора
             $add_rent = new ClientsRentForm(['scenario' => ClientsRentForm::SCENARIO_AJAX_VALIDATION]);
             
@@ -167,11 +175,61 @@ class ProfileController extends Controller
                 'add_rent' => $add_rent, 
             ]);
            
-            return ['status' => true, 'model' => $model, 'data' => $data];
+            return ['status' => true, 'model' => $model, 'data' => $data, 'is_rent' => $this->_is_rent];
             
         }
         return ['status' => false];
         
+    }
+    
+    public function actionGetRentInfo($rent) {
+        
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        
+        if (Yii::$app->request->isAjax) {
+            $_rent = Rents::findOne($rent);
+            if ($_rent) {
+                return ['status' => true, 'rent' => $_rent];                
+            }
+        }
+        return ['status' => false];
+    }
+    
+    public function actionChangeRentProfile($action, $rent, $account) {
+        
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        
+        if (Yii::$app->request->isAjax) {
+            
+            switch ($action) {
+                
+                case 'delete':
+                    $_rent = Rents::findOne($rent);
+                    $_account = PersonalAccount::findOne($account);
+                    if ($_rent) {
+                        $_rent->delete();
+                        return $this->redirect(Yii::$app->request->referrer);
+                    } else {
+                        Yii::$app->session->setFlash('error', 'Возникла ошибка (запрос удаления арендатора)');
+                        return $this->refresh();
+                    }
+                    break;
+
+                case 'undo': 
+                    return ['status' => true, 'action' => $action, 'rent' => $rent, 'account' => $account];
+                    break;
+                default:
+                    Yii::$app->session->setFlash('error', 'Ошибка удаления арендатора');
+                    return $this->render(Yii::$app->request->referrer);
+            }
+        }
+        
+        return ['status' => false];
+        
+    }
+
+    public function actionDeleteRent($rent) {
+        return 'ID - ' . $rent;
     }
     
     

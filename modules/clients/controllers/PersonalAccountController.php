@@ -173,7 +173,7 @@ class PersonalAccountController extends Controller {
             $new_account = $account_form->account_number;
             
             if ($account_form->hasErrors()) {
-                var_dump($account_form->getFirstErrors());die;
+                
                 Yii::$app->session->setFlash('form', ['success' => false, 'error' => 'При отправке формы возникла ошибка, попробуйте заполнить форму заново']);
                 if (Yii::$app->request->referrer) {
                     Yii::$app->response->setStatusCode(400);

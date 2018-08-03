@@ -235,7 +235,6 @@ class User extends ActiveRecord implements IdentityInterface
         
         parent::afterSave($insert, $changedAttributes);
         if ($insert) {
-            var_dump($changedAttributes);die;
             $rentRole = Yii::$app->authManager->getRole('clients_rent');
             Yii::$app->authManager->assign($rentRole, $this->getId());                    
         }
