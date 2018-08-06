@@ -66,6 +66,10 @@ class Rents extends ActiveRecord
         return $this->hasOne(Clients::className(), ['clients_id' => 'rents_clients_id']);
     }
     
+    public function getUser() {
+        return $this->hasOne(User::className(), ['user_rent_id' => 'rents_id']);
+    }
+    
     /*
      * Найти собсвенника по ID
      */
@@ -108,6 +112,7 @@ class Rents extends ActiveRecord
     public static function getNotActiveRents($client_id) {
         return $not_active_rent = self::find()
                 ->andWhere(['rents_clients_id' => $client_id, 'isActive' => self::STATUS_DISABLED])
+                ->with('user')
                 ->all();
     }
     

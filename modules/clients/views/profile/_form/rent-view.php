@@ -47,14 +47,4 @@
     <?php ActiveForm::end(); ?>
 <?php else : ?>
     <p>Арендатор отсутствует.</p>
-    
-    <?php \yii\widgets\Pjax::begin(['enablePushState' => false]) ?>
-        <a href="<?= Url::to(['profile/add-form-rent']) ?>">Добавить арендатора</a>
-    <?php \yii\widgets\Pjax::end() ?>
-    
-    <?php /* = Html::button('Создать арендатора', [
-        'class' => 'btn btn-default', 
-        'data-target' => '#add-rent-modal', 
-        'data-toggle' => 'modal']) */ ?>
-    
 <?php endif; ?>

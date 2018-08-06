@@ -3,10 +3,8 @@
     use yii\helpers\Html;
     use app\assets\AppAsset;
     use yii\widgets\Breadcrumbs;
-    use app\modules\clients\assets\ClientsAsset;
 
 AppAsset::register($this);
-ClientsAsset::register($this);
 
 ?>
 <?php $this->beginPage() ?>

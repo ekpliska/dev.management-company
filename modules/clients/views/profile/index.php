@@ -4,6 +4,7 @@
     use yii\helpers\Html;
     use yii\helpers\Url;
     use yii\widgets\MaskedInput;
+    use app\widgets\AddRentForm;
     
 /*
  * Профиль пользователя
@@ -13,6 +14,13 @@ $this->title = 'Профиль абонента';
 
 <div class="clients-default-index">
     <h1><?= $this->title ?></h1>
+    
+
+    <ul class="pager">
+        <li><a class="active" href="#">Профиль</a></li>
+        <li><a href="#">Настройки</a></li>
+        <li><a href="#">История</a></li>
+    </ul>
     
     <?php if (Yii::$app->session->hasFlash('success')) : ?>
         <div class="alert alert-info" role="alert">
@@ -180,13 +188,16 @@ $this->title = 'Профиль абонента';
     </div>
    
     <div class="col-md-4">
-        <?php // if (count($accounts_list) > 1): ?>
+        <?php if (count($accounts_list) > 1): ?>
             <?= Html::dropDownList('_list-account', null, $accounts_list, ['class' => 'form-control', 'id' => '_list-account']) ?>
             <br />
-        <?php //  endif; ?>
+        <?php endif; ?>
         
         <div class="panel panel-default">
-            <div class="panel-heading"><strong>Контактные данные арендатора</strong></div>
+            <div class="panel-heading">
+                <strong>Контактные данные арендатора</strong>
+                <?= Html::button('+', ['class' => 'btn btn-default', 'data-toggle' => 'modal', 'data-target' => '#add-rent-modal']) ?>
+            </div>
             <div class="panel-body info_rent">
                 <div id="content-replace">
 
@@ -195,8 +206,6 @@ $this->title = 'Профиль абонента';
                             'model_rent' => $model_rent, 
                             'add_rent' => $add_rent, 
                         ]) ?>
-                    
-                    
                     
                 </div>
             </div>
@@ -207,16 +216,45 @@ $this->title = 'Профиль абонента';
                 <div class="panel-heading"><strong>Не активные арендаторы</strong></div>
                 <div class="panel-body info_rent">
                     <div id="content-replace">
-                        У вас имеются неактивные арендаторы:
+                        У вас имеются неактивные арендаторы. Арендатор считается неактивным, если не зареплен ни за одним лицевым счетом.
                         <br />
                         <span class="glyphicon glyphicon-remove-circle"></span> - Удалить
                         <span class="glyphicon glyphicon-ok-circle"></span> - Связать с лицевым счетом
-                        <br />
+                        <br /><br />
                         <?php foreach ($not_active_rents as $rent) : ?>
-                            <br />
-                            <?= $rent->fullName ?> 
-                            <a href="<?= Url::to(['change-rent-profile', 'action' => 'delete', 'rent' => $rent->rents_id]) ?>"><span class="glyphicon glyphicon-remove-circle"></span></a>
-                            <a href="#"><span class="glyphicon glyphicon-ok-circle"></span></a>
+                        <div class="row">
+                            <div class="col-8 col-sm-2">
+                                <?php if ($rent->user->user_photo) : ?>
+                                    <?= Html::img($rent->user->user_photo, ['style' => 'width: 50px;']) ?>
+                                <?php else: ?>
+                                    <?= Html::img('@web/images/no-avatar.jpg', ['style' => 'width: 50px;']) ?>
+                                <?php endif; ?>
+                            </div>
+                            <div class="col-8 col-sm-10" style="padding-left: 15px; border-radius: 5px; position: relative; top: 5px;">
+                                
+                                <?= $rent->user->user_id ?>
+                                <?= $rent->fullName ?>
+                                <br />
+                                <?= $rent->rents_mobile ?>
+                                <br />
+                                
+                                <?= Html::button('<span class="glyphicon glyphicon-remove-circle"></span>', [
+                                    'data-record-id' => $rent->rents_id,
+                                    'data-record-title' => $rent->fullName,
+                                    'data-toggle' => 'modal',
+                                    'data-target' => '#confirm-delete',
+                                ]) ?>
+
+                                <?= Html::button('<span class="glyphicon glyphicon-ok-circle"></span>', [
+                                    'data-record-id' => $rent->rents_id,
+                                    'data-record-title' => $rent->fullName,
+                                    'data-toggle' => 'modal',
+                                    'data-target' => '#confirm-delete',
+                                ]) ?>
+                          
+                                <hr />
+                            </div>
+                        </div>                       
                         <?php endforeach; ?>
                     </div>
                 </div>
@@ -232,7 +270,7 @@ $this->title = 'Профиль абонента';
 </div>
 
 
-<?php /* Модальное окно на подтверждение удаления аредатора */ ?>
+<?php /* Модальное окно, активизируется, когда нажат checkbox Арендатор */ ?>
 <div class="modal fade" id="changes_rent" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog" role="document">
         <div class="modal-content"><button class="close changes_rent__close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -260,11 +298,77 @@ $this->title = 'Профиль абонента';
             </div>
         </div>
     </div>
-</div> 
+</div>
+
+
+<?php /* Модальное окно, появляется при нажатиии на checkBox Арендатор */ ?>
+<div class="modal fade" id="delete_rent_modal" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content"><button class="close changes_rent__close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    Вы действительно хотите удалить арендатора?
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="modal__text">
+                    Какое действие вы хотите совершить с учетной записью арендатора? 
+                    <br />
+                    <span id="rent"></span>
+                    <span id="rent-surname"></span>
+                    <span id="rent-name"></span>
+                    <span id="rent-second-name"></span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger changes_rent__del" data-dismiss="modal">Удалить</button>
+                <button class="btn btn-primary changes_rent__close" data-dismiss="modal">Отмена</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php /* Модальное окно на подтверждение удаления аредатора */ ?>
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">Подтверждение удаления</h4>
+            </div>
+            <div class="modal-body">
+                <p>Вы собираетесь удалить арендатора <b><i class="title"></i></b> и его учетную запись на портале.</p>
+                <p>Продолжить?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-ok">Удалить</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?= AddRentForm::widget(['add_rent' => $add_rent]) ?>
+
+
+<?php
+/* Подтверждение удаления арендатора */
+$this->registerJs("
+    $('#confirm-delete').on('click', '.btn-ok', function(e) {
+        var id = $(this).data('recordId');
+        $.ajax({url: 'change-rent-profile?action=delete&rent=' + id})
+    });
+    
+    $('#confirm-delete').on('show.bs.modal', function(e) {
+        var data = $(e.relatedTarget).data();
+        $('.title', this).text(data.recordTitle);
+        $('.btn-ok', this).data('recordId', data.recordId);
+    });
+")
+?>
 
 <?php
 /* Обработка событий в модальном окне "Дальнейшие действия с учетной записью арендатора" */
-
 $this->registerJs('
     
    
