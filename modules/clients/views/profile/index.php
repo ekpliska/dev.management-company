@@ -240,16 +240,16 @@ $this->title = 'Профиль абонента';
                                 
                                 <?= Html::button('<span class="glyphicon glyphicon-remove-circle"></span>', [
                                     'data-record-id' => $rent->rents_id,
-                                    'data-record-title' => $rent->fullName,
+                                    'data-record-fullname' => $rent->fullName,
                                     'data-toggle' => 'modal',
                                     'data-target' => '#confirm-delete',
                                 ]) ?>
 
                                 <?= Html::button('<span class="glyphicon glyphicon-ok-circle"></span>', [
                                     'data-record-id' => $rent->rents_id,
-                                    'data-record-title' => $rent->fullName,
+                                    'data-record-fullname' => $rent->fullName,
                                     'data-toggle' => 'modal',
-                                    'data-target' => '#confirm-delete',
+                                    'data-target' => '#bind-rent-modal',
                                 ]) ?>
                           
                                 <hr />
@@ -302,7 +302,7 @@ $this->title = 'Профиль абонента';
 
 
 <?php /* Модальное окно, появляется при нажатиии на checkBox Арендатор */ ?>
-<div class="modal fade" id="delete_rent_modal" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
+<div class="modal fade" id="delete_rent_modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog" role="document">
         <div class="modal-content"><button class="close changes_rent__close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <div class="modal-header">
@@ -329,7 +329,7 @@ $this->title = 'Профиль абонента';
 </div>
 
 <?php /* Модальное окно на подтверждение удаления аредатора */ ?>
-<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -341,7 +341,38 @@ $this->title = 'Профиль абонента';
                 <p>Продолжить?</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger btn-ok">Удалить</button>
+                <button type="button" class="btn btn-danger btn-ok-delete">Удалить</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<?php /* Модальное окно объединить арендатора с лицевым счетом */ ?>
+<div class="modal fade" id="bind-rent-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">Объеденить арендатора с лицевым счетом</h4>
+            </div>
+            <div class="modal-body">
+                <p>Для продолжения процедуры объединения арендатора с лицевым счетом выберите из списка необходимый лицевой счет.</p>
+                <div class="row">
+                    <div class="col-md-5">
+                        <span class="fullname"></span>
+                    </div>
+                    <div class="col-md-2">
+                        <span class="glyphicon glyphicon-random"></span>
+                    </div>
+                    <div class="col-md-5">
+                        <?= Html::dropDownList('_list-account-rent', null, $accounts_list_rent, ['class' => 'form-control', 'id' => '_list-account-rent']) ?>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-ok-bind">Объединить</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
             </div>
         </div>
@@ -353,18 +384,31 @@ $this->title = 'Профиль абонента';
 
 <?php
 /* Подтверждение удаления арендатора */
-$this->registerJs("
-    $('#confirm-delete').on('click', '.btn-ok', function(e) {
-        var id = $(this).data('recordId');
-        $.ajax({url: 'change-rent-profile?action=delete&rent=' + id})
+$this->registerJs('
+    $("#confirm-delete").on("click", ".btn-ok-delete", function(e) {
+        var id = $(this).data("recordId");
+        $.ajax({url: "change-rent-profile?action=delete&rent=" + id})
     });
     
-    $('#confirm-delete').on('show.bs.modal', function(e) {
+    $("#confirm-delete").on("show.bs.modal", function(e) {
         var data = $(e.relatedTarget).data();
-        $('.title', this).text(data.recordTitle);
-        $('.btn-ok', this).data('recordId', data.recordId);
+        $(".title", this).text(data.recordFullname);
+        $(".btn-ok-delete", this).data("recordId", data.recordId);
     });
-")
+')
+?>
+
+<?php
+$this->registerJs('
+    $("#bind-rent-modal").on("click", ".btn-ok-bind", function(e) {
+        alert ("bint rent with account");
+    });
+    
+    $("#bind-rent-modal").on("show.bs.modal", function(e) {
+        var data = $(e.relatedTarget).data();
+        $(".fullname", this).text(data.recordFullname);
+    })
+')
 ?>
 
 <?php

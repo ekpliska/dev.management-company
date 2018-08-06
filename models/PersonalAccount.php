@@ -1,6 +1,7 @@
 <?php
     namespace app\models;
     use Yii;
+    use yii\db\Expression;
     use yii\db\ActiveRecord;
     use app\models\Clients;
     use app\models\Rents;
@@ -114,6 +115,21 @@ class PersonalAccount extends ActiveRecord
                 ->orderBy(['account_id' => SORT_ASC])
                 ->all();
         return $account_all = ArrayHelper::map($account_find, 'account_id', 'account_number');
+    }
+
+    /*
+     * Получить список всех лицевых счетов закрепенных за данным пользователем
+     * Метод возвращает массив лицевых счетов, которые не связаны с арендаторами
+     */
+    public static function findByClientForBind($client_id) {
+        
+        $account_find_rent = static::find()
+                ->andWhere(['personal_clients_id' => $client_id])
+                ->andWhere(['isActive' => self::STATUS_ENABLED])
+                ->andwhere(['IS', 'personal_rent_id', (new Expression('Null'))])
+                ->orderBy(['account_id' => SORT_ASC])
+                ->all();
+        return $account_all = ArrayHelper::map($account_find_rent, 'account_id', 'account_number');
     }
     
     public static function findByAccountNumber($user_id) {

@@ -32,6 +32,9 @@ class ProfileController extends Controller
         
         // Получаем все активные лицевые счета Собственника (для dropDownList)
         $accounts_list = PersonalAccount::findByClient($user_info->user_client_id);
+
+        // Получаем все лицевые счета Собственника не связанны с арендаторами (для dropDownList)
+        $accounts_list_rent = PersonalAccount::findByClientForBind($user_info->user_client_id);
         
         // Получаем ифнормацию по лицевому счету Собственника
         $accounts_info = PersonalAccount::findByClientProfile($user_info->user_client_id); 
@@ -54,6 +57,7 @@ class ProfileController extends Controller
         return $this->render('index', [
             'user' => $user_info,
             'accounts_list' => $accounts_list,
+            'accounts_list_rent' => $accounts_list_rent,
             'is_rent' => $is_rent,
             'accounts_info' => $accounts_info,
             'model_rent' => $model_rent,
