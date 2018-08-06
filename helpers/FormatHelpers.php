@@ -32,7 +32,7 @@ class FormatHelpers {
     
     /*
      * Форматирование вывода даты в комментариях на странице заявки
-     * число месяц год г. часы:минуты:секунды
+     * число месяц г. часы:минуты:секунды
      */
     public static function formatDate($date_int) {
         $_date_int = Yii::$app->formatter->asDate($date_int, 'dd.MMMM.yyyy');

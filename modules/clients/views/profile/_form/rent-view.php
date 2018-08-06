@@ -58,6 +58,3 @@
         'data-toggle' => 'modal']) */ ?>
     
 <?php endif; ?>
-
-
-   

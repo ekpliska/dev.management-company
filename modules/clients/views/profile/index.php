@@ -3,7 +3,6 @@
     use yii\bootstrap\ActiveForm;
     use yii\helpers\Html;
     use yii\helpers\Url;
-    use yii\widgets\Pjax;
     use yii\widgets\MaskedInput;
     
 /*
@@ -202,6 +201,28 @@ $this->title = 'Профиль абонента';
                 </div>
             </div>
         </div>
+        
+        <?php if ($not_active_rents) : ?>
+            <div class="panel panel-default">
+                <div class="panel-heading"><strong>Не активные арендаторы</strong></div>
+                <div class="panel-body info_rent">
+                    <div id="content-replace">
+                        У вас имеются неактивные арендаторы:
+                        <br />
+                        <span class="glyphicon glyphicon-remove-circle"></span> - Удалить
+                        <span class="glyphicon glyphicon-ok-circle"></span> - Связать с лицевым счетом
+                        <br />
+                        <?php foreach ($not_active_rents as $rent) : ?>
+                            <br />
+                            <?= $rent->fullName ?> 
+                            <a href="<?= Url::to(['change-rent-profile', 'action' => 'delete', 'rent' => $rent->rents_id]) ?>"><span class="glyphicon glyphicon-remove-circle"></span></a>
+                            <a href="#"><span class="glyphicon glyphicon-ok-circle"></span></a>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
+            
     </div>
     
     <div class="col-md-12 text-right">
@@ -346,5 +367,4 @@ $this->registerJs('
     });
 ') ?>
 
-<?= app\widgets\AddRentForm::widget(['add_rent' => $add_rent]); ?>
 

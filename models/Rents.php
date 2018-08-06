@@ -17,12 +17,11 @@ class Rents extends ActiveRecord
     
     /*
      * Статусы арендатора
-     * STATUS_DISABLED - арендатор не закреплен за лицевым счетом
-     * STATUS_ENABLED - арендатор закреплен за лицевым счетом
+     * STATUS_DISABLED - арендатор не активен, не закреплен за лицевым счетом
+     * STATUS_ENABLED - арендатор ативен, закреплен за лицевым счетом
      */
     const STATUS_DISABLED = 0;
     const STATUS_ENABLED = 1;
-
 
     /**
      * Таблица из БД
@@ -95,13 +94,23 @@ class Rents extends ActiveRecord
     } 
     
     /*
-     * Проверям наличие арендаторов у Собственника
+     * Проверям наличие активных арендаторов у Собственника
      */
-    public static function isRent($client_id) {
-        return $_is_rent = self::find()
+    public static function isActiveRents($client_id) {
+        return $active_rent = self::find()
                 ->andWhere(['rents_clients_id' => $client_id, 'isActive' => self::STATUS_ENABLED])
-                ->all() ? true : false;
+                ->all();
     }
+
+    /*
+     * Проверям наличие не активных арендаторов у Собственника
+     */
+    public static function getNotActiveRents($client_id) {
+        return $not_active_rent = self::find()
+                ->andWhere(['rents_clients_id' => $client_id, 'isActive' => self::STATUS_DISABLED])
+                ->all();
+    }
+    
     
     /*
      * После создания новой записи Арендатора производим
@@ -167,10 +176,12 @@ class Rents extends ActiveRecord
         parent::afterDelete();
         $_user = User::findOne(['user_rent_id' => $this->rents_id]);
         $_account = PersonalAccount::findOne(['personal_rent_id' => $this->rents_id]);
-        if ($_user && $_account) {
+        if ($_user) {
             $_user->delete();
-            $_account->personal_rent_id = null;
-            $_account->save(false);
+            if ($_account) {
+                $_account->personal_rent_id = null;
+                $_account->save(false);
+            }
         }
     }
 

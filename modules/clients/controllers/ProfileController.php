@@ -40,7 +40,7 @@ class ProfileController extends Controller
          * Если имеется Арендатор, то загружаем данные Арендатор для формы
          */
         $is_rent = false;
-        if (Rents::isRent($client->id)) {
+        if (Rents::isActiveRents($client->id)) {
             $is_rent = true;
             $model_rent = Rents::findOne(['rents_id' => $accounts_info->personal_rent_id]);
         } else {
@@ -58,7 +58,9 @@ class ProfileController extends Controller
             'accounts_info' => $accounts_info,
             'model_rent' => $model_rent,
             'add_rent' => $add_rent,
+            'not_active_rents' => Rents::getNotActiveRents($client->id),
         ]);
+        
     }
     
     public function actionUpdateProfile($form) {
@@ -195,7 +197,8 @@ class ProfileController extends Controller
         return ['status' => false];
     }
     
-    public function actionChangeRentProfile($action, $rent, $account) {
+    
+    public function actionChangeRentProfile($action, $rent, $account = null) {
         
         $_rent = Rents::findOne($rent);
         $_account = PersonalAccount::findOne($account);
@@ -211,13 +214,22 @@ class ProfileController extends Controller
             
             switch ($action) {
                 case 'delete':
-                    $_rent->delete();
-                    return $this->redirect(Yii::$app->request->referrer);
+                    if ($_rent) {
+                        $_rent->delete();
+                        return $this->redirect(Yii::$app->request->referrer);
+                    } else {
+                        Yii::$app->session->setFlash('error', 'Возникла ошибка (запрос удаления арендатора)');
+                        return $this->refresh();
+                    }
                     break;
 
                 case 'undo': 
                     $_rent->updateRent($rent, $account);
                     return $this->redirect(Yii::$app->request->referrer);
+                    break;
+                
+                case 'bind':
+                    // Привязываем арендатора к лицевому счету
                     break;
                 
                 default:
