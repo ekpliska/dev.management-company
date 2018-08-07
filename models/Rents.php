@@ -156,7 +156,7 @@ class Rents extends ActiveRecord
         $this->rents_account_id = $id['account_id'];
     }
     
-    public function updateRent($rent, $account) {
+    public function undoRentWithAccount($rent, $account) {
         
         $_user = User::findOne(['user_rent_id' => $rent]);
         $_account = PersonalAccount::findOne(['account_number' => $account]);
@@ -173,8 +173,43 @@ class Rents extends ActiveRecord
             $_user->save(false);
             $_account->save(false);
             
+            Yii::$app->session->setFlash('success', 'Арендатор ' . $this->fullName . ' был отвязан от лицевого счета №' . $_account->account_number);
+            
             return true;
         }
+        
+        Yii::$app->session->setFlash('error', 'При отвязывании лицевого счета и арендатора возникла ощшибка. Повторите операцию еще раз');
+        return false;
+    }
+    
+    public function bindRentWithAccount($rent, $account) {
+        
+        $_user = User::findOne(['user_rent_id' => $rent]);
+        $_account = PersonalAccount::findOne(['account_number' => $account]);
+        
+        if ($_user && $_account) {
+            $this->isActive = self::STATUS_ENABLED;
+            $this->save(false);
+            
+            $_user->status = User::STATUS_ENABLED;
+            $_user->user_login = $_account->account_number . 'r';
+            $_user->save(false);
+            
+            $_account->personal_rent_id = $this->id;
+            $_account->save(false);
+            
+            Yii::$app->session->setFlash('success', 
+                    'За лицевым счетом №' . $_account->account_number . 
+                    ' закреплен арендатор ' . $this->fullName . 
+                    '<br />  Логин учетной записи арендатора: ' . $_user->user_login .
+                    '<br />  Пароль учетной записи арендатора: остался без изменений');
+            
+            return true;
+        }
+        
+        Yii::$app->session->setFlash('error', 'При объединении лицевого счета и арендатора возникла ощшибка. Повторите операцию еще раз');
+        return false;
+        
     }
     
     public function afterDelete() {
@@ -186,6 +221,8 @@ class Rents extends ActiveRecord
             if ($_account) {
                 $_account->personal_rent_id = null;
                 $_account->save(false);
+                
+                Yii::$app->session->setFlash('success', 'Арендатор ' . $this->fullName . ' и его учетная запись удалены с порта');
             }
         }
     }

@@ -213,7 +213,7 @@ $this->title = 'Профиль абонента';
         
         <?php if ($not_active_rents) : ?>
             <div class="panel panel-default">
-                <div class="panel-heading"><strong>Не активные арендаторы</strong></div>
+                <div class="panel-heading"><strong>Неактивные арендаторы</strong></div>
                 <div class="panel-body info_rent">
                     <div id="content-replace">
                         У вас имеются неактивные арендаторы. Арендатор считается неактивным, если не зареплен ни за одним лицевым счетом.
@@ -246,8 +246,8 @@ $this->title = 'Профиль абонента';
                                 ]) ?>
 
                                 <?= Html::button('<span class="glyphicon glyphicon-ok-circle"></span>', [
-                                    'data-record-id' => $rent->rents_id,
-                                    'data-record-fullname' => $rent->fullName,
+                                    'data-rent' => $rent->rents_id,
+                                    'data-rent-fullname' => $rent->fullName,
                                     'data-toggle' => 'modal',
                                     'data-target' => '#bind-rent-modal',
                                 ]) ?>
@@ -302,7 +302,7 @@ $this->title = 'Профиль абонента';
 
 
 <?php /* Модальное окно, появляется при нажатиии на checkBox Арендатор */ ?>
-<div class="modal fade" id="delete_rent_modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+<!--<div class="modal fade" id="delete_rent_modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog" role="document">
         <div class="modal-content"><button class="close changes_rent__close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <div class="modal-header">
@@ -326,7 +326,7 @@ $this->title = 'Профиль абонента';
             </div>
         </div>
     </div>
-</div>
+</div>-->
 
 <?php /* Модальное окно на подтверждение удаления аредатора */ ?>
 <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
@@ -399,15 +399,29 @@ $this->registerJs('
 ?>
 
 <?php
+/* Объединение арендатора с лицвым счетом */
 $this->registerJs('
     $("#bind-rent-modal").on("click", ".btn-ok-bind", function(e) {
-        alert ("bint rent with account");
+        var rentId = $(this).data("rent");
+        var accountId = $("#_list-account-rent :selected").text();
+        console.log(rentId + " " + accountId);
+        $.ajax({
+            url: "change-rent-profile?action=bind&rent=" + rentId + "&account=" + accountId,
+            method: "GET",
+            success: function(response) {
+                console.log("Объединение арендатора с лицвым счетом OK");
+            },
+            error: function() {
+                console.log("Объединение арендатора с лицвым счетом error");
+            }
+        })
     });
     
     $("#bind-rent-modal").on("show.bs.modal", function(e) {
         var data = $(e.relatedTarget).data();
-        $(".fullname", this).text(data.recordFullname);
-    })
+        $(".fullname", this).text(data.rentFullname);
+        $(".btn-ok-bind", this).data("rent", data.rent);
+    });
 ')
 ?>
 
@@ -429,17 +443,16 @@ $this->registerJs('
         $.get({
             url: "change-rent-profile?action=delete&rent=" + rentsId + "&account=" + accountId,
             method: "GET",
-            dataType: "json",
             data: {
                 action: "delete",
                 rent_id: rentsId,
                 account: accountId,
             },
             success: function(response) {
-                console.log(response.action + " " + response.rent + " " + response.account);
+                console.log("Удаление арендатора OK");
             },
             error: function() {
-                console.log("Error");
+                console.log("Удаление арендатора Error");
             }
         });
     });
@@ -452,17 +465,11 @@ $this->registerJs('
         $.get({
             url: "change-rent-profile?action=undo&rent=" + rentsId + "&account=" + accountId,
             method: "GET",
-            dataType: "json",
-            data: {
-                action: "undo",
-                rent_id: rentsId,
-                account: accountId,
-            },
             success: function(response) {
-                console.log(response.action + " " + response.rent + " " + response.account);
+                console.log("Отвязать арендатора OK");
             },
             error: function() {
-                console.log("Error");
+                console.log("Отвязать арендатора Error");
             }
         });
     });
@@ -498,7 +505,7 @@ $this->registerJs('
                 } else {
                     $("#is_rent").prop("checked", false);
                 }                
-               console.log(response.model);
+               // console.log(response.model);
                $("#content-replace").html(response.data);
             }
         });

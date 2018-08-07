@@ -204,17 +204,16 @@ class ProfileController extends Controller
     
     public function actionChangeRentProfile($action, $rent, $account = null) {
         
-        $_rent = Rents::findOne($rent);
-        $_account = PersonalAccount::findOne($account);
-        
-        if ($_rent && $_account) {
-            Yii::$app->session->setFlash('error', 'При передаче параметров произошла ошибка. Перезагрухите страницу');
-            return $this->render('index');
-        }
-        
         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         
         if (Yii::$app->request->isGet) {
+            
+            $_rent = Rents::findOne($rent);
+//            $_account = PersonalAccount::findOne($account);
+//            if ($_rent && $_account) {
+//                Yii::$app->session->setFlash('error', 'При передаче параметров произошла ошибка. Перезагрухите страницу');
+//                return $this->render('index');
+//            }
             
             switch ($action) {
                 case 'delete':
@@ -228,12 +227,17 @@ class ProfileController extends Controller
                     break;
 
                 case 'undo': 
-                    $_rent->updateRent($rent, $account);
-                    return $this->redirect(Yii::$app->request->referrer);
+                    if ($_rent) {
+                        $_rent->undoRentWithAccount($rent, $account);
+                        return $this->redirect(Yii::$app->request->referrer);
+                    }
                     break;
                 
                 case 'bind':
-                    // Привязываем арендатора к лицевому счету
+                    if ($_rent) {
+                        $_rent->bindRentWithAccount($rent, $account);
+                        return $this->redirect(Yii::$app->request->referrer);
+                    }
                     break;
                 
                 default:
@@ -246,10 +250,6 @@ class ProfileController extends Controller
         
     }
 
-    public function actionDeleteRent($rent) {
-        return 'ID - ' . $rent;
-    }
-    
     
 //    /*
 //     * Валидация формы "Добавление нового арендатора"
