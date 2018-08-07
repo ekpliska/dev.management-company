@@ -18,12 +18,21 @@
  */
 class ProfileController extends Controller
 {
-    
+    // Флаг наличия арендатора у собственника
     public $_is_rent = false;
 
 
     /**
      * Главная страница
+     * @param array $user_info Учетная запись пользователя
+     * @param array $accounts_list Список всех лицевых счетов
+     * @param array $accounts_list_rent Список всех лицевых счетов не имеющие арендаторов
+     * @param array $_is_rent Флаг наличия арендатора у собственника
+     * @param array $accounts_info Информация по лицевому счету Собственника
+     * @param array $model_rent Данные арендатора для формы
+     * @param array $add_rent Модель для формы "Новый арендатор"
+     * @param array $not_active_rents Получаем данные о нективных арендаторах
+     * 
      */
     public function actionIndex() {
         
@@ -36,18 +45,22 @@ class ProfileController extends Controller
         // Получаем все лицевые счета Собственника не связанны с арендаторами (для dropDownList)
         $accounts_list_rent = PersonalAccount::findByClientForBind($user_info->user_client_id);
         
-        // Получаем ифнормацию по лицевому счету Собственника
+        // Получаем информация по лицевому счету Собственника
         $accounts_info = PersonalAccount::findByClientProfile($user_info->user_client_id); 
+        
+        // Получаем данные о нективных арендаторах
+        $not_active_rents = Rents::getNotActiveRents($client->id);
         
         /* Статус наличия у собственника арендатора
          * Если имеется Арендатор, то загружаем данные Арендатор для формы
          */
-        $is_rent = false;
+        
+        // $is_ren = false;
         if (Rents::isActiveRents($client->id)) {
-            $is_rent = true;
+            $this->_is_rent = true;
             $model_rent = Rents::findOne(['rents_id' => $accounts_info->personal_rent_id]);
         } else {
-            $is_rent = false;
+            $this->_is_rent = false;
             $model_rent = null;
         }
         
@@ -58,16 +71,23 @@ class ProfileController extends Controller
             'user' => $user_info,
             'accounts_list' => $accounts_list,
             'accounts_list_rent' => $accounts_list_rent,
-            'is_rent' => $is_rent,
+            'is_rent' => $this->_is_rent,
             'accounts_info' => $accounts_info,
             'model_rent' => $model_rent,
             'add_rent' => $add_rent,
-            'not_active_rents' => Rents::getNotActiveRents($client->id),
+            'not_active_rents' => $not_active_rents,
         ]);
         
     }
     
+    /*
+     * Метод обновления профиля пользователя
+     */
     public function actionUpdateProfile($form) {
+        
+        if (empty($form)) {
+            throw new NotFoundHttpException('При сохранении профиля возникла ошибка. Повторите операцию еще раз');
+        }
         
         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         
@@ -83,6 +103,7 @@ class ProfileController extends Controller
                     // Сохраняем профиль
                     $user_info->uploadPhoto($file);
 
+                    /*
                     // Получаем ID выбранного лицевого счета
                     $_account = Yii::$app->request->post('_list-account');
                     // Находим запись выбранного лицевого счета
@@ -106,6 +127,7 @@ class ProfileController extends Controller
 //                    if ($data_rent_old && $account_number) {
 //                        $rent_form->saveRentToUser($data_rent, $account_number->account_number);
 //                    }
+                    */
                     
                     Yii::$app->session->setFlash('success', 'Профиль обновлен');
                     
@@ -122,34 +144,11 @@ class ProfileController extends Controller
     
     
 
-    /*
-     * Метод, проверяет существование пользователя по текущему ID (user->identity->user_id)
-     * Пользователь имеет доступ только к странице своего профиля
-     * В противном случае выводим исключение
-     */
-    public function permisionUser() {
-        
-        $_user_id = Yii::$app->user->identity->user_id;
-        $user_info = User::findByUser($_user_id);
-        
-        if ($user_info) {
-            return $user_info;
-        } else {
-            throw new NotFoundHttpException('Вы обратились к несуществующей странице');
-        }        
-    }
-    
-    protected function findUser($id)
-    {
-        if (($model = User::findOne($id)) !== null) {
-            return $model;
-        } else {
-            throw new NotFoundHttpException('Вы обратились к несуществующей странице');
-        }
-    }
+
     
     /*
      * Фильтр выбора лицевого счета
+     * dropDownList Лицевой счет
      */
     public function actionCheckAccount() {
         
@@ -188,6 +187,10 @@ class ProfileController extends Controller
         
     }
     
+    /*
+     * Получить информацию об арендаторе
+     * checkBox "Арендатор"
+     */
     public function actionGetRentInfo($rent) {
         
         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
@@ -309,5 +312,63 @@ class ProfileController extends Controller
 //        return $this->renderAjax('_test');
 //        
 //    }
+    
+    
+    /*
+     * Сохранение данных арендатора
+     */
+    public function actionSaveRentInfo() {
+        
+        $_rent_post = Yii::$app->request->post('Rents');
+        $_rent = Rents::find()->andWhere(['rents_id' => $_rent_post['rents_id']])->one();
+        
+        if (Yii::$app->request->isAjax) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            if ($_rent->load(Yii::$app->request->post()) && $_rent->validate()) {
+                $_rent->save();
+            }
+            return ['status' => true];
+        }
+        return ['status' => false];
+    }
+    
+    /*
+     * Раздел - Настройки профиля
+     */
+    public function actionSettingsProfile() {
+        
+        $user_info = $this->permisionUser();
+        
+        return $this->render('settings-profile');
+    }
+    
+    /*
+     * Метод, проверяет существование пользователя по текущему ID (user->identity->user_id)
+     * Пользователь имеет доступ только к странице своего профиля
+     * В противном случае выводим исключение
+     */
+    public function permisionUser() {
+        
+        $_user_id = Yii::$app->user->identity->user_id;
+        $user_info = User::findByUser($_user_id);
+        
+        if ($user_info) {
+            return $user_info;
+        } else {
+            throw new NotFoundHttpException('Вы обратились к несуществующей странице');
+        }        
+    }
+    
+    /*
+     * Поиск пользователя по ID
+     */
+    protected function findUser($id)
+    {
+        if (($model = User::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('Вы обратились к несуществующей странице');
+        }
+    }    
     
 }

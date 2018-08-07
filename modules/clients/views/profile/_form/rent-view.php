@@ -15,13 +15,12 @@
     <?php
         $form = ActiveForm::begin([
             'id' => 'edit-rent',
-            'options' => [
-                'data-pjax' => true,
-            ],
         ])
     ?>
 
-        <?= $form->field($model_rent, 'rents_id')->hiddenInput(['value' => $model_rent->rents_id, 'id' => '_rents'])->label(false) ?>
+        <div class="error-message"></div>
+    
+        <?= $form->field($model_rent, 'rents_id', ['options' => ['class' => 'hidden']])->hiddenInput(['value' => $model_rent->rents_id, 'id' => '_rents'])->label(false) ?>
 
         <?= $form->field($model_rent, 'rents_surname')->input('text')->label() ?>
 

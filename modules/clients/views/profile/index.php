@@ -15,13 +15,14 @@ $this->title = 'Профиль абонента';
 <div class="clients-default-index">
     <h1><?= $this->title ?></h1>
     
-
+    <!-- Nav menu at block of profile -->
     <ul class="pager">
-        <li><a class="active" href="#">Профиль</a></li>
-        <li><a href="#">Настройки</a></li>
-        <li><a href="#">История</a></li>
+        <li><a class="active" href="<?= Url::to(['profile/index']) ?>">Профиль</a></li>
+        <li><a href="<?= Url::to(['profile/settings-profile']) ?>">Настройки</a></li>
+        <li><a href="<?= Url::to(['profile/history']) ?>">История</a></li>
     </ul>
-    
+    <!-- End nav menu at block of profile -->
+
     <?php if (Yii::$app->session->hasFlash('success')) : ?>
         <div class="alert alert-info" role="alert">
             <strong>
@@ -63,6 +64,7 @@ $this->title = 'Профиль абонента';
         <br /><br />
     </div>
     
+    <!-- Block of customer -->
     <div class="col-md-4">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -150,7 +152,9 @@ $this->title = 'Профиль абонента';
             
         </div>
     </div>
+    <!-- End block of customer -->
     
+    <!-- Block of avatar and notifications -->
     <div class="col-md-4">        
         <div class="panel panel-default">
             <div class="panel-heading"><strong>Фотография</strong></div>
@@ -183,10 +187,12 @@ $this->title = 'Профиль абонента';
                 <?= Html::a('Изменить пароль', ['/'], ['class' => 'btn btn-default']) ?>
                 <?= Html::a('Привязать арендатора', ['/'], ['class' => 'btn btn-default']) ?>
             </div>
-        </div>        
-        
+        </div>                
     </div>
+    <!-- End block of avatar and notifications -->
    
+    <?php ActiveForm::end(); ?>    
+    
     <div class="col-md-4">
         <?php if (count($accounts_list) > 1): ?>
             <?= Html::dropDownList('_list-account', null, $accounts_list, ['class' => 'form-control', 'id' => '_list-account']) ?>
@@ -232,7 +238,6 @@ $this->title = 'Профиль абонента';
                             </div>
                             <div class="col-8 col-sm-10" style="padding-left: 15px; border-radius: 5px; position: relative; top: 5px;">
                                 
-                                <?= $rent->user->user_id ?>
                                 <?= $rent->fullName ?>
                                 <br />
                                 <?= $rent->rents_mobile ?>
@@ -264,7 +269,7 @@ $this->title = 'Профиль абонента';
     </div>
     
     <div class="col-md-12 text-right">
-        <?php ActiveForm::end(); ?>
+        
     </div>
 
 </div>
@@ -514,11 +519,35 @@ $this->registerJs('
 ')
 ?>
 
-<?php $this->registerJs('
+<?php 
+/* Отправка основной формы сохранения профиля пользователя */
+$this->registerJs('
     $("body").on("beforeSubmit", "form#profile-form", function (e) {
-        var yiiform = $(this);
         e.preventDefault();
-        alert ("Добавляем нового арендатора");
+        // Получаем данные из формы Арендатор
+        var rentForm = $("#edit-rent").serialize();
+        // Получаем количество ошибок на форме Арендатор
+        var countError = $("#edit-rent").find(".has-error").length;
+        
+        // Если имеются ошибки и форма Арендатора существует, отправку основной формы профиля останавливаем
+        if (countError > 0 && rentForm) {
+            return false;
+        } else if (countError === 0 && rentForm) {
+            $.ajax({
+                url: "save-rent-info",
+                data: rentForm,
+                method: "POST",
+                typeData: "json",
+                success: function(data) {
+                    if (data.status == false) {
+                        $(".error-message").text("Заполните поля корректными данными");
+                    }
+                },
+                error: function(data) {
+                    console.log("error for save rent info");
+                }
+            });
+        }
     });
 ') ?>
 
