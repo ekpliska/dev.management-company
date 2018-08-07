@@ -2,9 +2,6 @@
 
     use yii\bootstrap\ActiveForm;
     use yii\widgets\MaskedInput;
-    use yii\helpers\Html;
-    use yii\helpers\Url;
-    use app\widgets\AddRentForm;
     
 /* 
  * To change this license header, choose License Headers in Project Properties.
@@ -24,7 +21,7 @@
         ])
     ?>
 
-        <?= $form->field($model_rent, 'rents_id')->input('text', ['id' => '_rents'])->label(false) ?>
+        <?= $form->field($model_rent, 'rents_id')->hiddenInput(['value' => $model_rent->rents_id, 'id' => '_rents'])->label(false) ?>
 
         <?= $form->field($model_rent, 'rents_surname')->input('text')->label() ?>
 

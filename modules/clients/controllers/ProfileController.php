@@ -201,7 +201,13 @@ class ProfileController extends Controller
         return ['status' => false];
     }
     
-    
+
+    /*
+     * Методы:
+     *      delete Удалить - арендатора
+     *      undo Отвязать - арендатора от лицевоого счета
+     *      bind Объединить - арендатора с лицвым счетом
+     */
     public function actionChangeRentProfile($action, $rent, $account = null) {
         
         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
@@ -303,10 +309,5 @@ class ProfileController extends Controller
 //        return $this->renderAjax('_test');
 //        
 //    }
-    
-    public function actionAddFormRent() {        
-        return $this->render('_form/add-rent');
-    }    
-    
     
 }
