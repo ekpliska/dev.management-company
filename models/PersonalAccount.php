@@ -177,7 +177,6 @@ class PersonalAccount extends ActiveRecord
         
         parent::afterSave($insert, $changedAttributes);
         
-        
         $bind_date = new AccountToUsers();
         
         if ($insert) {

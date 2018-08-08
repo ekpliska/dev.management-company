@@ -8,6 +8,7 @@
     use app\models\User;
     use app\models\Clients;
     use app\models\Rents;
+    use app\models\AccountToUsers;
 
 /**
  * Арендатор
@@ -176,6 +177,8 @@ class Rents extends ActiveRecord
             $_user->save(false);
             $_account->save(false);
             
+            $this->checkBindRentWithAccount($_user->user_id, null);
+            
             Yii::$app->session->setFlash('success', 'Арендатор ' . $this->fullName . ' был отвязан от лицевого счета №' . $_account->account_number);
             
             return true;
@@ -201,6 +204,8 @@ class Rents extends ActiveRecord
             $_account->personal_rent_id = $this->id;
             $_account->save(false);
             
+            $this->checkBindRentWithAccount($_user->user_id, $_account->account_id);
+            
             Yii::$app->session->setFlash('success', 
                     'За лицевым счетом №' . $_account->account_number . 
                     ' закреплен арендатор ' . $this->fullName . 
@@ -212,6 +217,19 @@ class Rents extends ActiveRecord
         
         Yii::$app->session->setFlash('error', 'При объединении лицевого счета и арендатора возникла ощшибка. Повторите операцию еще раз');
         return false;
+        
+    }
+    
+    public function checkBindRentWithAccount($user_id, $account_id = null) {
+        
+        $data_bind = AccountToUsers::findByUserID($user_id);
+        
+        if (empty($account_id)) {
+            return $data_bind->delete() ? true : false;
+        } else {
+            $data_bind->account_id = $account_id;
+            return $data_bind->save(false);
+        }
         
     }
     

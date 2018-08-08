@@ -83,7 +83,6 @@ $this->title = 'Профиль абонента';
                                 var rentsId = $("input[id=_rents]").val();
                                 if ($("input").is("#_rents")) {
                                     $("#changes_rent").modal("show");
-                                    
                                     $.ajax({
                                         url: "get-rent-info?rent=" + rentsId,
                                         method: "POST",
@@ -101,6 +100,8 @@ $this->title = 'Профиль абонента';
                                             }
                                         }
                                     });
+                                } else {
+                                    $("#add-rent-modal").modal("show");
                                 }
                             });
                         ');
@@ -201,8 +202,7 @@ $this->title = 'Профиль абонента';
         
         <div class="panel panel-default">
             <div class="panel-heading">
-                <strong>Контактные данные арендатора</strong>
-                <?= Html::button('+', ['class' => 'btn btn-default', 'data-toggle' => 'modal', 'data-target' => '#add-rent-modal']) ?>
+                <strong>Контактные данные арендатора</strong>                
             </div>
             <div class="panel-body info_rent">
                 <div id="content-replace">
@@ -304,34 +304,6 @@ $this->title = 'Профиль абонента';
         </div>
     </div>
 </div>
-
-
-<?php /* Модальное окно, появляется при нажатиии на checkBox Арендатор */ ?>
-<!--<div class="modal fade" id="delete_rent_modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content"><button class="close changes_rent__close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <div class="modal-header">
-                <h4 class="modal-title">
-                    Вы действительно хотите удалить арендатора?
-                </h4>
-            </div>
-            <div class="modal-body">
-                <div class="modal__text">
-                    Какое действие вы хотите совершить с учетной записью арендатора? 
-                    <br />
-                    <span id="rent"></span>
-                    <span id="rent-surname"></span>
-                    <span id="rent-name"></span>
-                    <span id="rent-second-name"></span>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-danger changes_rent__del" data-dismiss="modal">Удалить</button>
-                <button class="btn btn-primary changes_rent__close" data-dismiss="modal">Отмена</button>
-            </div>
-        </div>
-    </div>
-</div>-->
 
 <?php /* Модальное окно на подтверждение удаления аредатора */ ?>
 <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
@@ -448,11 +420,6 @@ $this->registerJs('
         $.get({
             url: "change-rent-profile?action=delete&rent=" + rentsId + "&account=" + accountId,
             method: "GET",
-            data: {
-                action: "delete",
-                rent_id: rentsId,
-                account: accountId,
-            },
             success: function(response) {
                 console.log("Удаление арендатора OK");
             },

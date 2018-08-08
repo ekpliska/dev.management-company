@@ -2,6 +2,7 @@
 
     use yii\bootstrap\ActiveForm;
     use yii\widgets\MaskedInput;
+    use yii\helpers\Html;
     
 /* 
  * Форма Арендатор
@@ -41,4 +42,5 @@
     <?php ActiveForm::end(); ?>
 <?php else : ?>
     <p>Арендатор отсутствует.</p>
+    <?= Html::button('+', ['class' => 'btn btn-default', 'data-toggle' => 'modal', 'data-target' => '#add-rent-modal']) ?>
 <?php endif; ?>

@@ -25,7 +25,7 @@
                     ])
                 ?>
                 
-                    <?= $form_add_rent->field($add_rent, 'account_id')->input('text', ['id' => '_personal-account']) ?>
+                    <?= $form_add_rent->field($add_rent, 'account_id')->hiddenInput(['value' => $add_rent->account_id, 'id' => '_personal-account'])->label(false) ?>
                 
                     <?= $form_add_rent->field($add_rent, 'rents_surname')
                             ->input('text', [
