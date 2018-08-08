@@ -6,6 +6,7 @@
 
 /**
  * Смена пароля учетной записи
+ * 
  * @param string $current_password Текущий пароль
  * @param string $new_password Новый пароль
  * @param string $new_password Новый пароль повторно

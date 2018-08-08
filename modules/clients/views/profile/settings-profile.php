@@ -75,7 +75,7 @@ $this->registerJs('
         var isShow = $(this);
         if (isShow.is(":checked")) {
             $(".show_password").attr("type", "text");
-            $(".show_password__text").text("Скрыть пароли");
+            $(".show_password__text").text("Скрыть отображение паролей");
         } else {
             $(".show_password").attr("type", "password");
             $(".show_password__text").text("Показать пароли");            
