@@ -30,7 +30,6 @@ $username = Yii::$app->user->identity->user_login;
         'items' => [
             ['label' => 'Главная', 'url' => ['clients/index']],
             ['label' => 'Голосование', 'url' => ['']],
-            ['label' => 'Профиль_old', 'url' => ['clients/profile', 'user' => $user, 'username' => $username]],
             ['label' => 'Профиль', 'url' => ['profile/index']],
             [
                 'label' => 'Лицевой счет',

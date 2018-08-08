@@ -3,7 +3,6 @@
     namespace app\modules\clients\models;
     use yii\base\Model;
     use Yii;
-    use yii\web\UploadedFile;
     use app\models\Clients;
     use app\models\User;
     use app\models\Rents;
@@ -23,9 +22,6 @@ class ClientsRentForm extends Model {
     public $rents_email;
     public $password;
     public $account_id;
-
-
-
 
     /*
      * Правила валидации
@@ -73,45 +69,6 @@ class ClientsRentForm extends Model {
             ['account_id', 'safe'],
             
         ];
-    }
-    
-    /*
-     * Добавление арендатора прикрепленного к заданному собственнику
-     * Для арендатора создаем новую учетную запись
-     * Новому арендатору присваиваем статус - Активный
-     */
-    public function addNewClient($client_id) {
-        
-        $transaction = Yii::$app->db->beginTransaction();
-        
-        try {
-            
-            if ($this->validate()) {
-                $rent_new = new Rents();
-                $rent_new->rents_name = $this->rents_name;
-                $rent_new->rents_second_name = $this->rents_second_name;
-                $rent_new->rents_surname = $this->rents_surname;
-                $rent_new->rents_mobile = $this->rents_mobile;
-                $rent_new->setAccountId(Yii::$app->user->identity->user_login);
-                $rent_new->rents_clients_id = $client_id;
-                $rent_new->rents_email = $this->rents_email;
-                $rent_new->isActive = true;
-                $rent_new->save();
-                
-                $user_new = new User();
-                $user_new->user_login = Yii::$app->user->identity->user_login . '_rent';
-                $user_new->user_password = Yii::$app->security->generatePasswordHash($this->password);
-                $user_new->user_mobile = $this->rents_mobile;
-                $user_new->user_email = $this->rents_email;
-                $user_new->status = User::STATUS_ENABLED;
-                $user_new->user_rent_id = $rent_new->id;
-                $user_new->save();
-                
-                $transaction->commit();
-            }            
-        } catch (Exception $e) {
-            $transaction->rollBack();                
-        }
     }
     
     /*

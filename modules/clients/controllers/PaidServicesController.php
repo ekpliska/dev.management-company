@@ -10,9 +10,7 @@
     use app\models\PaidServices;
 
 /**
- * Description of PaidServicesController
- *
- * @author Ekaterina
+ * Платные заявки
  */
 class PaidServicesController extends Controller {
     

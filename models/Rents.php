@@ -121,20 +121,6 @@ class Rents extends ActiveRecord
                 ->all();
     }
     
-    
-//    /*
-//     * После создания новой записи Арендатора производим
-//     * добавление роли Арендатор к учетной записи пользователя
-//     */
-//    public function afterSave($insert, $changedAttributes) {
-//        
-//        parent::afterSave($insert, $changedAttributes);
-//        if ($insert) {
-//            var_dump($changedAttributes); die();
-//        }
-//    }
-        
-    
     /*
      * Получить ID арендатора
      */
@@ -150,16 +136,20 @@ class Rents extends ActiveRecord
                 $this->rents_name . ' ' .
                 $this->rents_second_name;
     }
-
-    public function setAccountId($account_id) {
-        $id = PersonalAccount::find()
-                ->andWhere(['account_number' => $account_id])
-                ->select('account_id')
-                ->asArray()
-                ->one();
-        $this->rents_account_id = $id['account_id'];
-    }
     
+//    public function setAccountId($account_id) {
+//        $id = PersonalAccount::find()
+//                ->andWhere(['account_number' => $account_id])
+//                ->select('account_id')
+//                ->asArray()
+//                ->one();
+//        $this->rents_account_id = $id['account_id'];
+//    }
+    
+    /*
+     * Отвязать арендатора от лицевого счета собственника
+     * При этом учетная запись арендатора для входа на портал блокируется
+     */
     public function undoRentWithAccount($rent, $account) {
         
         $_user = User::findOne(['user_rent_id' => $rent]);
@@ -188,6 +178,11 @@ class Rents extends ActiveRecord
         return false;
     }
     
+    /*
+     * Объединить арендатора с выбранным лицевым счетом
+     * В этом случае учетная запись арендатора для входа на портал становится активной
+     * (Происходит смена логина арендатора, если лицевой счет объединения изменился)
+     */
     public function bindRentWithAccount($rent, $account) {
         
         $_user = User::findOne(['user_rent_id' => $rent]);
@@ -220,6 +215,10 @@ class Rents extends ActiveRecord
         
     }
     
+    /*
+     * Метод органицует установление связей 
+     * через промежуточную таблицу Лицевой счет - Пользователь
+     */
     public function checkBindRentWithAccount($user_id, $account_id = null) {
         
         $data_bind = AccountToUsers::findByUserID($user_id);
@@ -233,6 +232,11 @@ class Rents extends ActiveRecord
         
     }
     
+    /*
+     * После удаления Арендтора из системы
+     * Удалить учетную запись Арендатора
+     * Снять связь между удаленным Арендатором и Лицевым счетом
+     */
     public function afterDelete() {
         parent::afterDelete();
         $_user = User::findOne(['user_rent_id' => $this->rents_id]);
