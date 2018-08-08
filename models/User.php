@@ -162,6 +162,12 @@ class User extends ActiveRecord implements IdentityInterface
     }
     
     /*
+     * Создаем хешь пароля четной записи
+     */
+    public function setUserPassword($password) {
+        return $this->user_password = Yii::$app->security->generatePasswordHash($password);
+    }
+    /*
      * Поиск пользователя по сгенерированному ключу
      * Если запрашиваемы ключ найден, то меняем статус пользователя на STATUS_ENABLED
      */

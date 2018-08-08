@@ -10,6 +10,7 @@
     use app\models\Clients;
     use app\models\Rents;
     use app\models\PersonalAccount;
+    use app\modules\clients\models\ChangePasswordForm;
     
     
 
@@ -311,12 +312,26 @@ class ProfileController extends Controller
     
     /*
      * Раздел - Настройки профиля
+     * @param array $model_password Модель смены пароля учетной записи
      */
     public function actionSettingsProfile() {
         
         $user_info = $this->permisionUser();
         
-        return $this->render('settings-profile');
+        $model_password = new ChangePasswordForm($user_info);
+        
+        if ($model_password->load(Yii::$app->request->post())) {
+            if ($model_password->changePassword()) {
+                Yii::$app->session->setFlash('success', 'Пароль от учетной записи успешно сохранен');
+                return $this->refresh();
+            } else {
+                Yii::$app->session->setFlash('error', 'При смене пароля произошла ошибка');
+            }
+        }
+        
+        return $this->render('settings-profile', [
+            'model_password' => $model_password,
+        ]);
     }
     
     /*
