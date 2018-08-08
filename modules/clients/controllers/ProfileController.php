@@ -260,58 +260,61 @@ class ProfileController extends Controller
     }
 
     
-//    /*
-//     * Валидация формы "Добавление нового арендатора"
-//     */
-//    public function actionValidateAddRentForm() {
-//        
-//        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-//        
-//        // Если данные пришли через пост и аякс
-//        if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
-//            
-//            // Объявляем модель арендатор, задаем сценарий валидации для формы
-//            $model = new ClientsRentForm([
-//                'scenario' => ClientsRentForm::SCENARIO_AJAX_VALIDATION,
-//            ]);
-//            
-//            // Если модель загружена
-//            if ($model->load(Yii::$app->request->post())) {
-//                // и прошла валидацию
-//                if ($model->validate()) {
-//                    // Для Ajax запроса возвращаем стутас, ок
-//                    return ['status' => true];
-//                }
-//            }
-//            // Инваче, запросу отдаем ответ о проваленной валидации и ошибки
-//            return [
-//                'status' => false,
-//                'errors' => $model->errors,
-//            ];
-//        }
-//        return ['status' => false];
-//    }
+    /*
+     * Валидация формы "Добавление нового арендатора"
+     */
+    public function actionValidateAddRentForm() {
+        
+        $model = new ClientsRentForm([
+            'scenario' => ClientsRentForm::SCENARIO_AJAX_VALIDATION
+        ]);
+        
+        if (Yii::$app->request->isPost && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return \yii\widgets\ActiveForm::validate($model);
+        }
+        
+    }
     
-//    public function actionAddNewRent() {
-//        
-//        $_account = Yii::$app->request->post('_list-account');
-//        $data_rent = Yii::$app->request->post('ClientsRentForm');
-//        
-//        $rent_form = new ClientsRentForm($data_rent);
-//        
-//        if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
-//            
-//            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-//            if ($rent_form->load(Yii::$app->request->post())) {
-//                if ($rent_form->saveRentToUser($data_rent, '12345678900')) {
-//                    return ['success' => $rent_form];
-//                }
-//            }
-//        }
-//        
-//        return $this->renderAjax('_test');
-//        
-//    }
+    /*
+     * Метод добавления нового арендатора
+     * объединить с указанным лицевым счетом
+     * @param array $data_rent Массив данных о новом арендаторе
+     * @param integer $account_number Номер лицвого счета из пост
+     */
+    public function actionAddNewRent() {
+        
+        $data_rent = Yii::$app->request->post('ClientsRentForm');
+        $account_number = $data_rent['account_id'];
+        
+        // Проверям корректность полученных данных
+        if (!$data_rent && is_int($account_number)) {
+            throw new \yii\base\InvalidConfigException('Ошибка передачи данных');
+        }
+        
+        $rent_form = new ClientsRentForm($data_rent);
+        
+        if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
+            
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            
+            if ($rent_form->load(Yii::$app->request->post()) && $rent_form->validate()) {
+                
+                $rent_form->saveRentToUser($data_rent, $account_number);
+                Yii::$app->session->setFlash('success', 'Для лицевого счета №' . $account_number . ' был создан новый арендатор');
+                return ['success' => true];
+                
+            }
+            
+            Yii::$app->session->setFlash('error', 'Произошла ошибка при создании нового арендатора. Повторите действие еще раз');
+            return ['success' => false];
+            
+        }
+        
+        Yii::$app->session->setFlash('error', 'Произошла ошибка при создании нового арендатора. Повторите действие еще раз');
+        return $this->render(Yii::$app->request->referrer);
+        
+    }
     
     
     /*

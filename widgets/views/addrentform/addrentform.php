@@ -20,13 +20,12 @@
                 <?php
                     $form_add_rent = ActiveForm::begin([
                         'id' => 'add-rent',
-                        'action' => ['profile/add-new-rent'],
                         'enableAjaxValidation' => true,
                         'validationUrl' => ['profile/validate-add-rent-form'],
                     ])
                 ?>
                 
-                    <?= $form_add_rent->field($add_rent, 'account_id')->input('text') ?>
+                    <?= $form_add_rent->field($add_rent, 'account_id')->input('text', ['id' => '_personal-account']) ?>
                 
                     <?= $form_add_rent->field($add_rent, 'rents_surname')
                             ->input('text', [
@@ -69,9 +68,8 @@
                 
             </div>
             <div class="modal-footer">
-                <!--<button type="button" class="btn btn-success btn__add_rent">Добавить</button>-->
+                <?= Html::submitButton('Добавить', ['class' => 'btn btn-success btn__add_rent']) ?>
                 <button type="button" class="btn btn-default btn__modal_rent_close" data-dismiss="modal">Отмена</button>
-                <?= Html::submitButton('add', ['class' => 'btn btn-success btn__add_rent']) ?>
                 <?php ActiveForm::end() ?>
             </div>
         </div>
@@ -79,126 +77,57 @@
 </div>
 
 <?php
-$this->registerJs("
-        
-$('#add-rent').on('beforeSubmit', function (e) {
-    e.preventDefault();
-    var yiiform = $(this);
-    console.log('отправляем данные на сервер');
-    $.ajax({
-            type: yiiform.attr('method'),
-            url: yiiform.attr('action'),
-            data: yiiform.serializeArray(),
-    })
-    
-    .done(function(data) {
-       if(data.success) {
-          console.log('данные сохранены');
-        } else {
-            console.log(data);
-        }
-    })
-    .fail(function () {
-         console.log('не удалось выполнить запрос к серверу');
-    })
+/* Получаем ID вбранного лицевого счета */
+$this->registerJs('
+    $("#add-rent-modal").on("show.bs.modal", function(e) {
+        var accountId = $("#_list-account :selected").text();
+        $("#_personal-account").val(accountId);
+        $(".btn__add_rent", this).data("accountId", accountId);
+    });
+')    
+?>
 
-    return false; // отменяем отправку данных формы
-})
-        
-")
+<?php
+$this->registerJs('
+    $("#add-rent").on("beforeSubmit", function() {
+        var addRentForm = $(this);
+        $.ajax({
+            url: "add-new-rent",
+            type: "POST",
+            data: addRentForm.serializeArray(),
+            succeess: function(response) {
+                if (response.status === false) {
+                    console.log("Error when data try to saved (add rent form)");
+                }
+            },
+            error: function() {
+                console.log("Error #1 when data try to saved (add rent form)");
+            },
+        });
+    });
+')
 ?>
 
 <?php
 //$this->registerJs('
-//    $("#add-rent-modal .btn__add_rent").on("click", function(e) {
-//        e.preventDefault();
-//        
-//        var rentSurname = $("#add-rent-modal .rents-surname").val();
-//        var rentName = $("#add-rent-modal .rents-name").val();
-//        var rentSecondName = $("#add-rent-modal .rents-second-name").val();
-//        var rentMobile = $("#add-rent-modal .rents-mobile").val();
-//        var rentsEmail = $("#add-rent-modal .rents-email").val();
-//        var rentsHash = $("#add-rent-modal .rents-hash").val();
-//
+//    $("#add-rent").on("beforeSubmit", function() {
+//        var addRentForm = $(this);
 //        $.ajax({
-//            url: "' . Url::to(['profile/validate-add-rent-form']) . '",
-//            method: "POST",
-//            data: {
-//                "' . Html::getInputName($add_rent, 'rents_surname') . '": rentSurname,
-//                "' . Html::getInputName($add_rent, 'rents_name') . '": rentName,
-//                "' . Html::getInputName($add_rent, 'rents_second_name') . '": rentSecondName,
-//                "' . Html::getInputName($add_rent, 'rents_mobile') . '": rentMobile,
-//                "' . Html::getInputName($add_rent, 'rents_email') . '": rentsEmail,
-//                "' . Html::getInputName($add_rent, 'password') . '": rentsHash,
-//                _csrf : "' . Yii::$app->request->getCsrfToken() . '",
-//            },
-//            success: function(response) {
-//                console.log(response.status);
-//                console.log(response.errors);
-//                if (response.status == true) {
-//                    console.log(rentSurname + " " + rentName + " " + rentSecondName + " " + rentMobile + " " + rentsEmail + " " + rentsHash);
-//                    $("#add-rent-modal").modal("hide");
-//                } else {
-//                    if (typeof response.errors != "undefined") {
-//                        var errors = response.errors;
-//                        
-//                        var parentContainer = $("#add-rent-modal .rents-surname").parent().parent();
-//                        if (errors.rents_surname) {
-//                            $(parentContainer).removeClass("has-success").addClass("has-error");
-//                            $(parentContainer).find(".help-block").text(errors.rents_surname);
-//                        } else {
-//                            $(parentContainer).removeClass("has-error").addClass("has-success");
-//                            $(parentContainer).find(".help-block").text("");
-//                        }
-//                        
-//                        var parentContainer = $("#add-rent-modal .rents-name").parent();
-//                        if (errors.rents_name) {
-//                            $(parentContainer).removeClass("has-success").addClass("has-error");
-//                            $(parentContainer).find(".help-block").text(errors.rents_name);
-//                        } else {
-//                            $(parentContainer).removeClass("has-error").addClass("has-success");
-//                            $(parentContainer).find(".help-block").text("");
-//                        }
-//                        
-//                        var parentContainer = $("#add-rent-modal .rents-second-name").parent();
-//                        if (errors.rents_second_name) {
-//                            $(parentContainer).removeClass("has-success").addClass("has-error");
-//                            $(parentContainer).find("help-block").text(errors.rents_second_name);
-//                        } else {
-//                            $(parentContainer).removeClass("has-error").addClass("has-success");
-//                            $(parentContainer).find(".help-block").text("");
-//                        }
-//                        
-//                        var parentContainer = $("#add-rent-modal .rents-mobile").parent();
-//                        if (errors.rents_mobile) {
-//                            $(parentContainer).removeClass("has-success").addClass("has-error");
-//                            $(parentContainer).find(".help-block").text(errors.rents_mobile);
-//                        } else {
-//                            $(parentContainer).removeClass("has-error").addClass("has-success");
-//                            $(parentContainer).find(".help-block").text("");
-//                        }
-//                        
-//                        var parentContainer = $("#add-rent-modal .rents-email").parent();
-//                        if (errors.rents_email) {
-//                            $(parentContainer).removeClass("has-success").addClass("has-error");
-//                            $(parentContainer).find(".help-block").text(errors.rents_email);
-//                        } else {
-//                            $(parentContainer).removeClass("has-error").addClass("has-success");
-//                            $(parentContainer).find(".help-block").text("");
-//                        }
-//                        
-//                        var parentContainer = $("#add-rent-modal .rents-hash").parent();
-//                        if (errors.password) {
-//                            $(parentContainer).removeClass("has-success").addClass("has-error");
-//                            $(parentContainer).find(".help-block").text(errors.password);
-//                        } else {
-//                            $(parentContainer).removeClass("has-error").addClass("has-success");
-//                            $(parentContainer).find(".help-block").text("");
-//                        }
-//                    }
-//                }
-//            },
-//        });
+//            url: "add-new-rent",
+//            type: "POST",
+//            data: addRentForm.serializeArray(),
+//            
+//        })
+//        .done(function(data) {
+//            if (data.success === true) {
+//                console.log("data saved");
+//            } else {
+//                console.log("error when data try to saved");
+//            }
+//        })
+//        .fail(function() {
+//            console.log("123");
+//        })
 //    });
 //')
 ?>

@@ -47,7 +47,7 @@ class ClientsRentForm extends Model {
                 'rents_mobile', 'unique',
                 'targetClass' => Rents::className(),
                 'targetAttribute' => 'rents_mobile',
-                'message' => 'Пользователь с введенным номером мобильного телефона в системе уже зарегистрирован',
+                'message' => 'Пользователь с введенным номером мобильного телефона в системе уже зарегистрирован 321',
                 'on' => self::SCENARIO_AJAX_VALIDATION,
             ],
             ['rents_mobile', 'match', 'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/i', 'on' => self::SCENARIO_AJAX_VALIDATION],

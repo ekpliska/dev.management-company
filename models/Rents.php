@@ -22,6 +22,8 @@ class Rents extends ActiveRecord
      */
     const STATUS_DISABLED = 0;
     const STATUS_ENABLED = 1;
+    
+    const SCENARIO_EDIT_VALIDATION = 'required fields';
 
     /**
      * Таблица из БД
@@ -48,11 +50,13 @@ class Rents extends ActiveRecord
             ],
             
             [
-                ['rents_mobile', 'rents_mobile_more'], 'unique',
-                'targetClass' => Rents::className(),
+                'rents_mobile', 'unique',
+                'targetClass' => self::className(),
                 'targetAttribute' => 'rents_mobile',
                 'message' => 'Пользователь с введенным номером мобильного телефона в системе уже зарегистрирован',
+                'on' => self::SCENARIO_EDIT_VALIDATION,
             ],
+            
             [['rents_mobile', 'rents_mobile_more'], 'match', 'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/i'],
             
             ['isActive', 'boolean'],
