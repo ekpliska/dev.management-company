@@ -154,11 +154,11 @@ class PersonalAccount extends ActiveRecord
      * Собираем ID всех пользователей, привязанных к новому лицевому счету
      * Новым пользователем для нового лицевого счета может быть Собственник / и Арендатор
      */
-    public function setUserList($client_id, $rent_id) {
-       $_list_client = ArrayHelper::map(User::find()
+    public function setUserList($client_id = null, $rent_id) {
+       $client_id ? $_list_client = ArrayHelper::map(User::find()
                ->andWhere(['user_client_id' => $client_id])
                ->asArray()
-               ->all(), 'user_id', 'user_client_id');
+               ->all(), 'user_id', 'user_client_id') : $_list_client = [];
 
        $rent_id ? $_list_rent = ArrayHelper::map(User::find()
                ->andWhere(['user_rent_id' => $rent_id])
@@ -174,9 +174,21 @@ class PersonalAccount extends ActiveRecord
      * Если происходит добавление нового лицевого счета, связываем талицы Пользователь и Лицевой счет через промежуточную
      */
     public function afterSave($insert, $changedAttributes) {
+        
         parent::afterSave($insert, $changedAttributes);
+        
+        
+        $bind_date = new AccountToUsers();
+        
         if ($insert) {
-            $this->setUserList($this->personal_clients_id, $this->personal_rent_id);
+            foreach ($this->_list_user as $key => $user) {
+                $this->setUserList($this->personal_clients_id, $this->personal_rent_id);
+                $bind_date->user_id = $key;
+                $bind_date->account_id = $this->account_id;
+                $bind_date->save();
+            }
+        } else {
+            $this->setUserList(null, $this->personal_rent_id);
             foreach ($this->_list_user as $key => $user) {
                 $bind_date = new AccountToUsers();
                 $bind_date->user_id = $key;

@@ -103,32 +103,6 @@ class ProfileController extends Controller
                     // Сохраняем профиль
                     $user_info->uploadPhoto($file);
 
-                    /*
-                    // Получаем ID выбранного лицевого счета
-                    $_account = Yii::$app->request->post('_list-account');
-                    // Находим запись выбранного лицевого счета
-                    $account_number = PersonalAccount::findByNumber($_account);
-                    
-                    // Заполняем массив данными нового Арендатора
-                    // $data_rent_new = Yii::$app->request->post('ClientsRents');
-                    // $rent_form = new ClientsRentForm($data_rent_new);
-                    
-                    // Получаем данные арендатора
-                    $data_rent_old = Yii::$app->request->post('Rents');
-                    $rent = Rents::findOne(['rents_id' => $account_number->personal_rent_id]);
-                    
-                    // Проверяем данные пришедшие из пост для выбранного арендатора
-                    if ($data_rent_old && $account_number && $rent->load(Yii::$app->request->post())) {
-                        if ($rent->validate()) {
-                            $rent->save();
-                        }
-                    }
-                    
-//                    if ($data_rent_old && $account_number) {
-//                        $rent_form->saveRentToUser($data_rent, $account_number->account_number);
-//                    }
-                    */
-                    
                     Yii::$app->session->setFlash('success', 'Профиль обновлен');
                     
                 } catch (Exception $ex) {

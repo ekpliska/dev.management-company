@@ -121,19 +121,18 @@ class Rents extends ActiveRecord
     }
     
     
-    /*
-     * После создания новой записи Арендатора производим
-     * добавление роли Арендатор к учетной записи пользователя
-     */
+//    /*
+//     * После создания новой записи Арендатора производим
+//     * добавление роли Арендатор к учетной записи пользователя
+//     */
 //    public function afterSave($insert, $changedAttributes) {
 //        
 //        parent::afterSave($insert, $changedAttributes);
 //        if ($insert) {
-//            $rentRole = Yii::$app->authManager->getRole('clients_rent');
-//            Yii::$app->authManager->assign($rentRole, $this->getId());                    
+//            var_dump($changedAttributes); die();
 //        }
 //    }
-//        
+        
     
     /*
      * Получить ID арендатора

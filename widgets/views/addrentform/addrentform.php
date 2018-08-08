@@ -107,27 +107,3 @@ $this->registerJs('
     });
 ')
 ?>
-
-<?php
-//$this->registerJs('
-//    $("#add-rent").on("beforeSubmit", function() {
-//        var addRentForm = $(this);
-//        $.ajax({
-//            url: "add-new-rent",
-//            type: "POST",
-//            data: addRentForm.serializeArray(),
-//            
-//        })
-//        .done(function(data) {
-//            if (data.success === true) {
-//                console.log("data saved");
-//            } else {
-//                console.log("error when data try to saved");
-//            }
-//        })
-//        .fail(function() {
-//            console.log("123");
-//        })
-//    });
-//')
-?>
