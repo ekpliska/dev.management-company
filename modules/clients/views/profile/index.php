@@ -73,39 +73,6 @@ $this->title = 'Профиль абонента';
                 </div>
                 <div class="text-right">
                     <?= Html::checkbox('is_rent', $is_rent ? 'checked' : '', ['id' => 'is_rent']) ?> Арендатор
-                    <?php
-                        /* Обработка события при клике на checkBox "Арендатор"
-                         * Если за лицевым счетом закреплен арендатор, то 
-                         * выводим модальное окно для управления учетной записью арендатора
-                         */
-//                        $this->registerJs('
-//                            $("#is_rent").change(function(e) {
-//                                var rentsId = $("input[id=_rents]").val();
-//                                if ($("input").is("#_rents")) {
-//                                    $("#changes_rent").modal("show");
-//                                    $.ajax({
-//                                        url: "get-rent-info?rent=" + rentsId,
-//                                        method: "POST",
-//                                        dataType: "json",
-//                                        data: {
-//                                            rent_id: rentsId,
-//                                        },
-//                                        success: function(response) {
-//                                            if (response.status) {
-//                                                $("#changes_rent #rent-surname").text(response.rent.rents_surname);
-//                                                $("#changes_rent #rent-name").text(response.rent.rents_name);
-//                                                $("#changes_rent #rent-second-name").text(response.rent.rents_second_name);
-//                                            } else {
-//                                                console.log("Ошибка при получении данных арендатора");
-//                                            }
-//                                        }
-//                                    });
-//                                } else {
-//                                    $("#add-rent-modal").modal("show");
-//                                }
-//                            });
-//                        ');
-                    ?>
                 </div>
             </div>            
             <div class="panel-body">                

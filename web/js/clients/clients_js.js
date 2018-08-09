@@ -4,7 +4,9 @@
 
 $(document).ready(function() {
 
-/* Start Block of Profile */
+/*--------------------------------
+ *  Start Block of Profile 
+ --------------------------------*/
 
 /* Обработка события при клике на checkBox "Арендатор"
  * Если за лицевым счетом закреплен арендатор, то 
@@ -196,9 +198,34 @@ $(document).ready(function() {
             },
         });
     });
-    
+   
 
 /* End Block of Profile*/
+
+/*--------------------------------
+ *  Start Block of Personal Account 
+ --------------------------------*/
+/*
+ * Смена информации о лицевом счете,
+ * dropDownList _list-account-all
+ */    
+    $("._list-account-all").on("change", function(){
+        var accountId = $(this).val();
+        $.ajax({
+            url: "list?account=" + accountId,
+            method: "GET",
+            type: "json",
+            success: function(response) {
+                $("#account-info").html(response.data);
+            },
+            error: function() {
+                console.log("Error");
+            },
+        });
+    });
+
+/* End Block of Personal Account */
+
 
 })
 

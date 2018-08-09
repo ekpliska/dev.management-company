@@ -1,8 +1,10 @@
 <?php
     use yii\helpers\Html;
     use yii\helpers\HtmlPurifier;
+    
 ?>
-<div class="account-item">
+
+<div class="account-item" id="account-info">
  <table class="table table-bordered">
     <tbody>
         <tr>

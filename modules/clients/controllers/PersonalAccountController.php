@@ -2,7 +2,7 @@
     namespace app\modules\clients\controllers;
     use Yii;
     use yii\web\Controller;
-    use yii\data\ActiveDataProvider;
+    use yii\base\InvalidConfigException;
     use yii\web\Response;
     use app\models\PersonalAccount;
     use app\modules\clients\models\AddPersonalAccount;
@@ -19,75 +19,48 @@
  */
 class PersonalAccountController extends Controller {
     
-
-    public function actionIndex($user, $username) {
+    /*
+     * Главная страница
+     * @param array $account_info Информация по лицевому счету Собственника
+     * @param array $account_all Список всех лицевых счетов Собственника
+     */
+    public function actionIndex() {
         
-        $user_info = User::findByUser($user, $username);
+        $user_info = $this->permisionUser();
         
-        if ($user_info === null) {
-            throw new NotFoundHttpException('Вы обратились к несуществующей странице');
-        }
-        
-        // Загружаем форму для добавления лицевого счета
-        $add_account = new AddPersonalAccount();
-        
-        // Загружаем в провайдер данных информацию об основном лицевом счете
-        $dataProvider = new ActiveDataProvider([
-            'query' => PersonalAccount::findByClientID($user_info->user_client_id),
-            'pagination' => false,
-        ]);
-        
-        // Форма для фильтрации лицевых счетов
-        $_filter = new FilterForm();
+        // Получаем информация по лицевому счету Собственника
+        $account_info = PersonalAccount::findByClientProfile($user_info->user_client_id);
         
         // Получить список всех лицевых счетов пользователя        
         $account_all = PersonalAccount::findByClient($user_info->user_client_id);
         
-        // Получить список всех арендаторов собственника со статусом "Не активен"
-        $all_rent = Rents::findByClientID($user_info->user_client_id);
-        
-        // Получить список всех домов закрепленных за собственником
-        $all_house = Houses::findByClientID($user_info->user_client_id);
-        
         return $this->render('index', [
             'user_info' => $user_info,
-            'add_account' => $add_account, 
+            'account_info' => $account_info,
             'account_all' => $account_all,
-            '_filter' => $_filter,
-            'dataProvider' => $dataProvider,
-            'all_rent' => $all_rent,
-            'all_house' => $all_house,
         ]);
         
     }
 
     /*
-     * Метод для фильтра лицевых счетов
+     * Метод фильтра лицевых счетов
+     * dropDownList
      */
-    public function actionList($id) {
-        if (isset($_POST['id'])) {
-            return $this->refresh();
-        } else {
-            if (Yii::$app->request->isAjax) {
-                $account_number = PersonalAccount::findOne(['account_id' => $id]);
-                return $this->renderAjax('list', ['model' => $account_number]);
-            }
+    public function actionList($account) {
+        
+        if (empty($account)) {
+            throw new InvalidConfigException('При передаче параметров произошла ошибка');
         }
         
-//        if (isset($_POST['id']))
-//        {
-//            return $this->render('index');
-//        }else{
-//            $searchModel = new LocationSearch();
-//            $model = new Location();
-//            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-//
-//            return $this->render('list',[
-//                'model' => $model,
-//                'searchModel' => $searchModel,
-//                'dataProvider' => $dataProvider,
-//            ]);
-//        }
+        if (Yii::$app->request->isGet && Yii::$app->request->isAjax) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            $account_info = PersonalAccount::findOne(['account_id' => $account]);
+            // return ['success' => true, 'message' => $account_info];
+            $data = $this->renderAjax('list', ['model' => $account_info]);
+            return ['success' => true, 'data' => $data];
+        }
+        return ['success' => false];
+
     }
     
     /*
@@ -218,5 +191,23 @@ class PersonalAccountController extends Controller {
         return $this->goHome();
         
     }
+    
+    /*
+     * Метод, проверяет существование пользователя по текущему ID (user->identity->user_id)
+     * Пользователь имеет доступ только к странице своего профиля
+     * В противном случае выводим исключение
+     */
+    public function permisionUser() {
+        
+        $_user_id = Yii::$app->user->identity->user_id;
+        $user_info = User::findByUser($_user_id);
+        
+        if ($user_info) {
+            return $user_info;
+        } else {
+            throw new NotFoundHttpException('Вы обратились к несуществующей странице');
+        }        
+    }
+    
      
 }
