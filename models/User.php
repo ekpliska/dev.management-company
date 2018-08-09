@@ -3,9 +3,9 @@
     use yii\db\ActiveRecord;
     use yii\web\IdentityInterface;
     use Yii;
+    use yii\helpers\ArrayHelper;
     use yii\behaviors\TimestampBehavior;
     use app\models\PersonalAccount;
-    use yii\web\UploadedFile;
     
 
 /**
@@ -23,7 +23,10 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_DISABLED = 0;
     const STATUS_ENABLED = 1;
     const STATUS_BLOCK = 2;
-
+    
+    const SCENARIO_EDIT_PROFILE = 'edit user profile';
+    
+    public $status_list;
 
     public function behaviors() {
         return [
@@ -48,6 +51,32 @@ class User extends ActiveRecord implements IdentityInterface
             
             [['user_photo'], 'file', 'extensions' => 'png, jpg, jpeg'],
             [['user_photo'], 'image', 'maxWidth' => 510, 'maxHeight' => 510],
+            
+            ['user_email', 'string', 'min' => 5, 'max' => 150, 'on' => self::SCENARIO_EDIT_PROFILE],
+            ['user_email', 'email'],
+            ['user_email', 'unique', 
+                'targetClass' => self::className(),
+                'targetAttribute' => 'user_email',
+                'message' => 'Данный электронный адрес уже используется в системе',
+                'on' => self::SCENARIO_EDIT_PROFILE,
+            ],
+            ['user_email', 'match',
+                'pattern' => '/^[A-Za-z0-9\_\-\@\.]+$/iu',
+                'message' => 'Поле "{attribute}" может содержать только буквы английского алфавита, цифры, знаки "-", "_"',
+                'on' => self::SCENARIO_EDIT_PROFILE,
+            ],
+            
+            ['user_mobile', 
+                'match', 
+                'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/i', 
+                'on' => self::SCENARIO_EDIT_PROFILE,
+            ],
+            ['user_mobile', 'unique', 
+                'targetClass' => self::className(),
+                'targetAttribute' => 'user_mobile',
+                'message' => 'Пользователь с введенным номером мобильного телефона в системе уже зарегистрирован',
+                'on' => self::SCENARIO_EDIT_PROFILE,
+            ],
             
             [['user_check_email', 'user_check_sms'], 'boolean'],
             
@@ -182,29 +211,10 @@ class User extends ActiveRecord implements IdentityInterface
         return static::findOne(['' => $user_id]);
     }
     
-//    /*
-//     * Для связи таблицы пользователь и лицевой счет
-//     */
-//    public function setUserAccountId($account_id) {
-//        $id = PersonalAccount::find()
-//                ->andWhere(['account_number' => $account_id])
-//                ->select('account_id')
-//                ->asArray()
-//                ->one();
-//        
-//        $this->user_account_id = $id['account_id'];
-//    }
-
     /*
      * Для связи таблицы пользователь и собственник (поиск по номеру телефона)
      */
     public function setClientByPhone($account_number) {
-//        $id = Clients::find()
-//                ->andWhere(['clients_mobile' => $phone])
-//                ->select('clients_id')
-//                ->asArray()
-//                ->one();
-        
         $id = PersonalAccount::find()
                 ->andWhere(['account_number' => $account_number])
                 ->select('personal_clients_id')
@@ -212,7 +222,25 @@ class User extends ActiveRecord implements IdentityInterface
                 ->one();
         
         $this->user_client_id = $id['personal_clients_id'];
-    }    
+    }
+    
+    /*
+     * Массив статусов учетной записи
+     */
+    public static function arrayUserStatus() {
+        return [
+            self::STATUS_ENABLED => 'Активен',
+            self::STATUS_DISABLED => 'Не авторизирован',
+            self::STATUS_BLOCK => 'Заблокирован собственником',
+        ];
+    }
+    /*
+     * Статус учетной записи пользователя
+     */
+    public function getUserStatus() {
+        
+        return ArrayHelper::getValue(self::arrayUserStatus(), $this->status);
+    }
     
     /*
      * Загрузка фотографии в профиле пользователя
@@ -237,6 +265,22 @@ class User extends ActiveRecord implements IdentityInterface
         }
     }
     
+    /*
+     * Метод сохранения электронной почты
+     * 
+     */
+    public function updateEmailProfile() {
+        
+        if ($this->validate()) {
+            $this->client->clients_mobile = $this->user_mobile;
+            $this->save();
+            $this->client->save();
+            return true;
+        }
+        return false;
+        
+    }
+    
     public function afterSave($insert, $changedAttributes) {
         
         parent::afterSave($insert, $changedAttributes);
@@ -254,12 +298,16 @@ class User extends ActiveRecord implements IdentityInterface
             'user_id' => 'User Id',
             'user_login' => 'Логин пользователя',
             'user_password' => 'Пароль пользователя',
+            'user_email' => 'Электронная почта',
+            'user_mobile' => 'Мобильный телефон',
             'user_photo' => 'Аватар',
             'user_check_email' => 'Разрешить e-mail оповещения',
             'user_check_sms' => 'Разрешить SMS оповещения',
             'user_authkey' => 'User Authkey',
             'date_create' => 'Дата регистрации',
-            'date_last_login' => 'Дата последнего логина',
+            'updated_at' => 'Дата редактирования',
+            'status' => 'Статус',
+            'date_login' => 'Дата последнего входа',
         ];
     }
     

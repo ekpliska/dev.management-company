@@ -41,9 +41,9 @@ class ClientsRentForm extends Model {
             
             [
                 'rents_mobile', 'unique',
-                'targetClass' => Rents::className(),
-                'targetAttribute' => 'rents_mobile',
-                'message' => 'Пользователь с введенным номером мобильного телефона в системе уже зарегистрирован 321',
+                'targetClass' => User::className(),
+                'targetAttribute' => 'user_mobile',
+                'message' => 'Пользователь с введенным номером мобильного телефона в системе уже зарегистрирован',
                 'on' => self::SCENARIO_AJAX_VALIDATION,
             ],
             ['rents_mobile', 'match', 'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/i', 'on' => self::SCENARIO_AJAX_VALIDATION],
@@ -57,6 +57,12 @@ class ClientsRentForm extends Model {
             ],
             ['rents_email', 'string', 'min' => 5, 'max' => 150, 'on' => self::SCENARIO_AJAX_VALIDATION],
             ['rents_email', 'email', 'on' => self::SCENARIO_AJAX_VALIDATION],
+            
+            ['rents_email', 'match',
+                'pattern' => '/^[A-Za-z0-9\_\-\@\.]+$/iu',
+                'message' => 'Поле "{attribute}" может содержать только буквы английского алфавита, цифры, знаки "-", "_"',
+                'on' => self::SCENARIO_AJAX_VALIDATION,
+            ],            
             
             ['password', 'string', 'min' => 6, 'max' => 12, 'on' => self::SCENARIO_AJAX_VALIDATION],
             ['password', 

@@ -117,10 +117,6 @@ class ProfileController extends Controller
         return $this->goHome();
     }
     
-    
-
-
-    
     /*
      * Фильтр выбора лицевого счета
      * dropDownList Лицевой счет
@@ -317,7 +313,9 @@ class ProfileController extends Controller
     public function actionSettingsProfile() {
         
         $user_info = $this->permisionUser();
+        $user_info->scenario = User::SCENARIO_EDIT_PROFILE;
         
+        // Загружаем модель смены пароля
         $model_password = new ChangePasswordForm($user_info);
         
         if ($model_password->load(Yii::$app->request->post())) {
@@ -325,11 +323,20 @@ class ProfileController extends Controller
                 Yii::$app->session->setFlash('success', 'Пароль от учетной записи успешно сохранен');
                 return $this->refresh();
             } else {
-                Yii::$app->session->setFlash('error', 'При смене пароля произошла ошибка');
+                Yii::$app->session->setFlash('error', 'При обновлении настроек профиль произошла ошибка');
+            }
+        }
+        
+        if ($user_info->load(Yii::$app->request->post())) {
+            if ($user_info->updateEmailProfile()) {
+                Yii::$app->session->setFlash('success', 'Даные электронной почты / мобильный номер телефона были обновлены');
+            } else {
+                Yii::$app->session->setFlash('error', 'При обновлении настроек профиль произошла ошибка');
             }
         }
         
         return $this->render('settings-profile', [
+            'user_info' => $user_info,
             'model_password' => $model_password,
         ]);
     }
