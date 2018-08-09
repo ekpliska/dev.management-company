@@ -1,7 +1,6 @@
 <?php
     
     use yii\bootstrap\ActiveForm;
-    use yii\helpers\Url;
     use yii\helpers\Html;
     use yii\widgets\MaskedInput;
 /*
@@ -13,14 +12,17 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button type="button" class="close add-rent-modal__close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Новый арендатор</h4>
             </div>
             <div class="modal-body">
                 <?php
                     $form_add_rent = ActiveForm::begin([
                         'id' => 'add-rent',
-                        'enableAjaxValidation' => true,
+                        'validateOnSubmit' => true,
+                        'validateOnBlur' => false,
+                        'validateOnChange' => false,                        
+                        'enableAjaxValidation' => true,                        
                         'validationUrl' => ['profile/validate-add-rent-form'],
                     ])
                 ?>
@@ -62,48 +64,17 @@
                     <?= $form_add_rent->field($add_rent, 'password')
                             ->input('password', [
                                 'placeHolder' => $add_rent->getAttributeLabel('password'),
-                                'class' => 'form-control rents-hash'])
+                                'class' => 'form-control rents-hash show_password'])
                             ->label() ?>                                   
-                
+                    
+                    <?= Html::checkbox('show_password', false) ?> <span class="show_password__text">Показать пароли</span>
                 
             </div>
             <div class="modal-footer">
                 <?= Html::submitButton('Добавить', ['class' => 'btn btn-success btn__add_rent']) ?>
-                <button type="button" class="btn btn-default btn__modal_rent_close" data-dismiss="modal">Отмена</button>
+                <button type="button" class="btn btn-default add-rent-modal__close" data-dismiss="modal">Отмена</button>
                 <?php ActiveForm::end() ?>
             </div>
         </div>
     </div>
 </div>
-
-<?php
-/* Получаем ID вбранного лицевого счета */
-$this->registerJs('
-    $("#add-rent-modal").on("show.bs.modal", function(e) {
-        var accountId = $("#_list-account :selected").text();
-        $("#_personal-account").val(accountId);
-        $(".btn__add_rent", this).data("accountId", accountId);
-    });
-')    
-?>
-
-<?php
-$this->registerJs('
-    $("#add-rent").on("beforeSubmit", function() {
-        var addRentForm = $(this);
-        $.ajax({
-            url: "add-new-rent",
-            type: "POST",
-            data: addRentForm.serializeArray(),
-            succeess: function(response) {
-                if (response.status === false) {
-                    console.log("Error when data try to saved (add rent form)");
-                }
-            },
-            error: function() {
-                console.log("Error #1 when data try to saved (add rent form)");
-            },
-        });
-    });
-')
-?>

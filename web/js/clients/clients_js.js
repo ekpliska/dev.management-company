@@ -156,7 +156,47 @@ $(document).ready(function() {
         }
     });
 
-
+/*
+ * Форма "Добавить нового Арендатора"
+ */
+    /*
+     * При загрузке модального окна, получаем
+     * ID выбранного лицевого счета
+     */
+    $("#add-rent-modal").on("show.bs.modal", function(e) {
+        var accountId = $("#_list-account :selected").text();
+        $("#_personal-account").val(accountId);
+        $(".btn__add_rent", this).data("accountId", accountId);
+    });
+    
+    // Очистить поля ввода, клик по кнопкам "Отмена", "x"
+    $("#add-rent-modal .add-rent-modal__close").on("click", function() {
+        $("#add-rent input").val("");
+        $("#add-rent-modal .modal-body").removeClass("has-error");
+        $("#add-rent-modal .modal-body").removeClass("has-success");
+        $("#add-rent-modal .form-group").removeClass("has-success"); 
+        $("#add-rent-modal .form-group").removeClass("has-error");
+        $("#add-rent-modal").find(".help-block").text("");
+     });
+    
+    // Сохраняем нового Арендатора
+    $("#add-rent").on("beforeSubmit", function() {
+        var addRentForm = $(this);
+        $.ajax({
+            url: "add-new-rent",
+            type: "POST",
+            data: addRentForm.serializeArray(),
+            succeess: function(response) {
+                if (response.status === false) {
+                    console.log("Error when data try to saved (add rent form)");
+                }
+            },
+            error: function() {
+                console.log("Error #1 when data try to saved (add rent form)");
+            },
+        });
+    });
+    
 
 /* End Block of Profile*/
 
