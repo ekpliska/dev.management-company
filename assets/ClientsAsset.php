@@ -1,6 +1,6 @@
 <?php
 
-    namespace app\modules\clients\assets;
+    namespace app\assets;
     use yii\web\AssetBundle;
 
 /*
@@ -9,11 +9,15 @@
  */
 class ClientsAsset extends AssetBundle {
     
-    public $sourcePath = '@app/modules/clients/web';
+    public $basePath = '@webroot';
+    public $baseUrl = '@web';
     
     public $css = [];
     
     public $js = [
-        'js/validation_forms.js',
+        'js/clients/clients_js.js',
     ];
+    
+    public $depends = [];
+
 }

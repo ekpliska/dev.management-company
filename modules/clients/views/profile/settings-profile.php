@@ -3,6 +3,7 @@
     use yii\helpers\Url;
     use yii\helpers\Html;
     use yii\widgets\ActiveForm;
+    use yii\widgets\MaskedInput;
     use app\helpers\FormatHelpers;
     
 /* 
@@ -89,9 +90,24 @@ $this->title = 'Настройки';
                     ]);
                 ?>
                 
-                    <?= $form_psw->field($model_password, 'current_password')->input('password', ['class' => 'form-control show_password']) ?>
-                    <?= $form_psw->field($model_password, 'new_password')->input('password', ['class' => 'form-control show_password']) ?>
-                    <?= $form_psw->field($model_password, 'new_password_repeat')->input('password', ['class' => 'form-control show_password']) ?>
+                    <?= $form_psw->field($model_password, 'current_password')
+                            ->input('password', [
+                                'placeHolder' => $model_password->getAttributeLabel('current_password'),
+                                'class' => 'form-control show_password'
+                            ]) 
+                    ?>
+                
+                    <?= $form_psw->field($model_password, 'new_password')
+                            ->input('password', [
+                                'placeHolder' => $model_password->getAttributeLabel('new_password'),
+                                'class' => 'form-control show_password'])
+                    ?>
+                
+                    <?= $form_psw->field($model_password, 'new_password_repeat')
+                            ->input('password', [
+                                'placeHolder' => $model_password->getAttributeLabel('new_password_repeat'),
+                                'class' => 'form-control show_password']) 
+                    ?>
                     
                     <div class="form-group">
                         <?= Html::checkbox('show_password', false) ?> <span class="show_password__text">Показать пароли</span>
@@ -100,20 +116,6 @@ $this->title = 'Настройки';
                     <div class="form-group text-right">
                         <?= Html::submitButton('Изменить', ['class' => 'btn btn-primary']) ?>
                     </div>
-<?php
-$this->registerJs('
-    $("input[type=checkbox]").on("change", function() {
-        var isShow = $(this);
-        if (isShow.is(":checked")) {
-            $(".show_password").attr("type", "text");
-            $(".show_password__text").text("Скрыть отображение паролей");
-        } else {
-            $(".show_password").attr("type", "password");
-            $(".show_password__text").text("Показать пароли");            
-        }
-    })
-')
-?>
                 
                 <?php ActiveForm::end(); ?>
             </div>
@@ -141,7 +143,13 @@ $this->registerJs('
                 
                     <?= $form_email->field($user_info, 'user_email')->input('text')->label() ?>
                 
-                    <?= $form_email->field($user_info, 'user_mobile')->input('text')->label() ?>
+                    <?= $form_email->field($user_info, 'user_mobile')
+                        ->widget(MaskedInput::className(), [
+                            'mask' => '+7 (999) 999-99-99'])
+                        ->input('text', [
+                            'placeHolder' => $user_info->getAttributeLabel('user_mobile')])
+                        ->label() 
+                    ?>
                 
                     <div class="form-group text-right">
                         <?= Html::submitButton('Изменить', ['class' => 'btn btn-primary']) ?>
@@ -153,6 +161,4 @@ $this->registerJs('
         
     </div>
 
-    
-    
 </div>

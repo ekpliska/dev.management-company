@@ -49,6 +49,8 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             ['user_login', 'required'],
             
+            [['user_email', 'user_mobile'], 'required', 'on' => self::SCENARIO_EDIT_PROFILE],            
+            
             [['user_photo'], 'file', 'extensions' => 'png, jpg, jpeg'],
             [['user_photo'], 'image', 'maxWidth' => 510, 'maxHeight' => 510],
             

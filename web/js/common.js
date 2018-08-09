@@ -1,20 +1,12 @@
+/*
+ * Generall JS File
+ */
+
 $(document).ready(function() {
-//    $('.add__rent').hide();
-//    
-//    
-//    $("#addRent").change(function(){
-//        if ($(this).attr("checked")) {
-//            $('.add__rent').fadeIn().show();
-//        } else {
-//            $('.add__rent').fadeOut(300); 
-//        }
-//    });
- 
     
-    
-    /*
-     * Предварительная загрузка превью аватара
-     */
+/*
+ * Предварительная загрузка превью аватара
+ */
     function readURL(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();            
@@ -29,36 +21,19 @@ $(document).ready(function() {
     $("#btnLoad").change(function(){
         readURL(this);
     });
-    
-    
-    
-    /*
-     * Раздел "Лицевой счет"
-     * Форма - Добавить лицевой счет
-     */
-    // Блокируем список доступных арендаторов, и кнопку добавить арендатора
-    $('#list_rent').prop('disabled', true);
-    $('.btn__add-rent').prop('disabled', true);
-    
-    // В зависимости от checkBox "Арендатор" скрываем/показываем элементы
-    $('#isRent').change(function() {
-        if (this.checked) {
-            $('#list_rent').prop('disabled', false);
-            $('.btn__add-rent').prop('disabled', false);
+   
+/*
+ * Показывать/Скрывать символы в поле ввода пароля
+ */    
+    $("input[type=checkbox]").on("change", function() {
+        var isShow = $(this);
+        if (isShow.is(":checked")) {
+            $(".show_password").attr("type", "text");
+            $(".show_password__text").text("Скрыть отображение паролей");
         } else {
-            $('#list_rent').prop('disabled', true);
-            $('.btn__add-rent').prop('disabled', true);            
+            $(".show_password").attr("type", "password");
+            $(".show_password__text").text("Показать пароли");            
         }
     });
-    
-    // Если арендатор выбран из списка, то кнопку "Добавить арендатора" блокируем
-    $('#list_rent').change(function() {
-        if (!$(this).val()) {
-            $('.btn__add-rent').prop('disabled', false);
-        } else {
-            $('.btn__add-rent').prop('disabled', true);            
-        }
-    });
-    
     
 });

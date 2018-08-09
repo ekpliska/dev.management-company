@@ -78,33 +78,33 @@ $this->title = 'Профиль абонента';
                          * Если за лицевым счетом закреплен арендатор, то 
                          * выводим модальное окно для управления учетной записью арендатора
                          */
-                        $this->registerJs('
-                            $("#is_rent").change(function(e) {
-                                var rentsId = $("input[id=_rents]").val();
-                                if ($("input").is("#_rents")) {
-                                    $("#changes_rent").modal("show");
-                                    $.ajax({
-                                        url: "get-rent-info?rent=" + rentsId,
-                                        method: "POST",
-                                        dataType: "json",
-                                        data: {
-                                            rent_id: rentsId,
-                                        },
-                                        success: function(response) {
-                                            if (response.status) {
-                                                $("#changes_rent #rent-surname").text(response.rent.rents_surname);
-                                                $("#changes_rent #rent-name").text(response.rent.rents_name);
-                                                $("#changes_rent #rent-second-name").text(response.rent.rents_second_name);
-                                            } else {
-                                                console.log("Ошибка при получении данных арендатора");
-                                            }
-                                        }
-                                    });
-                                } else {
-                                    $("#add-rent-modal").modal("show");
-                                }
-                            });
-                        ');
+//                        $this->registerJs('
+//                            $("#is_rent").change(function(e) {
+//                                var rentsId = $("input[id=_rents]").val();
+//                                if ($("input").is("#_rents")) {
+//                                    $("#changes_rent").modal("show");
+//                                    $.ajax({
+//                                        url: "get-rent-info?rent=" + rentsId,
+//                                        method: "POST",
+//                                        dataType: "json",
+//                                        data: {
+//                                            rent_id: rentsId,
+//                                        },
+//                                        success: function(response) {
+//                                            if (response.status) {
+//                                                $("#changes_rent #rent-surname").text(response.rent.rents_surname);
+//                                                $("#changes_rent #rent-name").text(response.rent.rents_name);
+//                                                $("#changes_rent #rent-second-name").text(response.rent.rents_second_name);
+//                                            } else {
+//                                                console.log("Ошибка при получении данных арендатора");
+//                                            }
+//                                        }
+//                                    });
+//                                } else {
+//                                    $("#add-rent-modal").modal("show");
+//                                }
+//                            });
+//                        ');
                     ?>
                 </div>
             </div>            
@@ -182,13 +182,6 @@ $this->title = 'Профиль абонента';
             </div>
         </div>
         
-        <div class="panel panel-default">
-            <div class="panel-heading"><strong>Настройки учетной записи</strong></div>
-            <div class="panel-body">
-                <?= Html::a('Изменить пароль', ['/'], ['class' => 'btn btn-default']) ?>
-                <?= Html::a('Привязать арендатора', ['/'], ['class' => 'btn btn-default']) ?>
-            </div>
-        </div>                
     </div>
     <!-- End block of avatar and notifications -->
    
@@ -358,99 +351,8 @@ $this->title = 'Профиль абонента';
 
 <?= AddRentForm::widget(['add_rent' => $add_rent]) ?>
 
-
 <?php
-/* Подтверждение удаления арендатора */
-$this->registerJs('
-    $("#confirm-delete").on("click", ".btn-ok-delete", function(e) {
-        var id = $(this).data("recordId");
-        $.ajax({url: "change-rent-profile?action=delete&rent=" + id})
-    });
-    
-    $("#confirm-delete").on("show.bs.modal", function(e) {
-        var data = $(e.relatedTarget).data();
-        $(".title", this).text(data.recordFullname);
-        $(".btn-ok-delete", this).data("recordId", data.recordId);
-    });
-')
-?>
 
-<?php
-/* Объединение арендатора с лицвым счетом */
-$this->registerJs('
-    $("#bind-rent-modal").on("click", ".btn-ok-bind", function(e) {
-        var rentId = $(this).data("rent");
-        var accountId = $("#_list-account-rent :selected").text();
-        console.log(rentId + " " + accountId);
-        $.ajax({
-            url: "change-rent-profile?action=bind&rent=" + rentId + "&account=" + accountId,
-            method: "GET",
-            success: function(response) {
-                console.log("Объединение арендатора с лицвым счетом OK");
-            },
-            error: function() {
-                console.log("Объединение арендатора с лицвым счетом error");
-            }
-        })
-    });
-    
-    $("#bind-rent-modal").on("show.bs.modal", function(e) {
-        var data = $(e.relatedTarget).data();
-        $(".fullname", this).text(data.rentFullname);
-        $(".btn-ok-bind", this).data("rent", data.rent);
-    });
-')
-?>
-
-<?php
-/* Обработка событий в модальном окне "Дальнейшие действия с учетной записью арендатора" */
-$this->registerJs('
-    
-   
-    // Закрыть модальное окно
-    $(".changes_rent__close").on("click", function() {
-        $("#is_rent").prop("checked", true);
-    });
-    
-    // Удалить данные арендатора из системы
-    $(".changes_rent__del").on("click", function() {
-    
-        var rentsId = $("input[id=_rents]").val();
-        var accountId = $("#_list-account :selected").text();
-        $.get({
-            url: "change-rent-profile?action=delete&rent=" + rentsId + "&account=" + accountId,
-            method: "GET",
-            success: function(response) {
-                console.log("Удаление арендатора OK");
-            },
-            error: function() {
-                console.log("Удаление арендатора Error");
-            }
-        });
-    });
-    
-    // Отвязать арендатора от лицевого счета
-    $(".changes_rent__undo").on("click", function() {
-    
-        var rentsId = $("input[id=_rents]").val();
-        var accountId = $("#_list-account :selected").text();
-        $.get({
-            url: "change-rent-profile?action=undo&rent=" + rentsId + "&account=" + accountId,
-            method: "GET",
-            success: function(response) {
-                console.log("Отвязать арендатора OK");
-            },
-            error: function() {
-                console.log("Отвязать арендатора Error");
-            }
-        });
-    });
-
-
-')
-?>
-
-<?php
 $this->registerJs('
     $("#_list-account").on("change", function() {
     
@@ -486,36 +388,5 @@ $this->registerJs('
 ')
 ?>
 
-<?php 
-/* Отправка основной формы сохранения профиля пользователя */
-$this->registerJs('
-    $("body").on("beforeSubmit", "form#profile-form", function (e) {
-        e.preventDefault();
-        // Получаем данные из формы Арендатор
-        var rentForm = $("#edit-rent").serialize();
-        // Получаем количество ошибок на форме Арендатор
-        var countError = $("#edit-rent").find(".has-error").length;
-        
-        // Если имеются ошибки и форма Арендатора существует, отправку основной формы профиля останавливаем
-        if (countError > 0 && rentForm) {
-            return false;
-        } else if (countError === 0 && rentForm) {
-            $.ajax({
-                url: "save-rent-info",
-                data: rentForm,
-                method: "POST",
-                typeData: "json",
-                success: function(data) {
-                    if (data.status == false) {
-                        $(".error-message").text("Заполните поля корректными данными");
-                    }
-                },
-                error: function(data) {
-                    console.log("error for save rent info");
-                }
-            });
-        }
-    });
-') ?>
 
 
