@@ -41,7 +41,31 @@ class PersonalAccountController extends Controller {
         ]);
         
     }
-
+    
+    /*
+     * Страница "Квитанции ЖКУ"
+     * receipts of housing and public utilities
+     */
+    public function actionReceiptsOfHapu() {
+        $user_info = $this->permisionUser();
+        
+        // Получить список всех лицевых счетов пользователя        
+        $account_all = PersonalAccount::findByClient($user_info->user_client_id);
+        
+        return $this->render('receipts-of-hapu', [
+            'account_all' => $account_all,
+        ]);
+    }
+    
+    /*
+     * Страница "Платеж"
+     */
+    public function actionPayment() {
+        
+        return $this->render('payment');
+        
+    }
+    
     /*
      * Метод фильтра лицевых счетов
      * dropDownList
@@ -56,7 +80,7 @@ class PersonalAccountController extends Controller {
             Yii::$app->response->format = Response::FORMAT_JSON;
             $account_info = PersonalAccount::findOne(['account_id' => $account]);
             // return ['success' => true, 'message' => $account_info];
-            $data = $this->renderAjax('list', ['model' => $account_info]);
+            $data = $this->renderAjax('_data-filter/list', ['model' => $account_info]);
             return ['success' => true, 'data' => $data];
         }
         return ['success' => false];

@@ -49,7 +49,7 @@ $this->title = 'Общая информация';
         <div class="panel panel-default">
             <div class="panel-heading"><strong>Информация по лицевому счету</strong></div>
             <div class="panel-body">
-                <?= $this->render('list', ['model' => $account_info]); ?>
+                <?= $this->render('_data-filter/list', ['model' => $account_info]); ?>
             </div>
         </div>
     </div>
@@ -63,7 +63,17 @@ $this->title = 'Общая информация';
                 </div>
             </div>            
             <div class="panel-body">
-                test
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td>Китанция № 00/0000</td>
+                            <td>Сумма: 0 000,00</td>
+                            <td>
+                                <?= Html::button('Оплатить', ['class' => 'btn btn-success']) ?>
+                            </td>
+                        </tr>          
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>    
