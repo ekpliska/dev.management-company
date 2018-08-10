@@ -47,6 +47,7 @@ class PersonalAccountController extends Controller {
      * receipts of housing and public utilities
      */
     public function actionReceiptsOfHapu() {
+        
         $user_info = $this->permisionUser();
         
         // Получить список всех лицевых счетов пользователя        
@@ -63,6 +64,19 @@ class PersonalAccountController extends Controller {
     public function actionPayment() {
         
         return $this->render('payment');
+        
+    }
+
+    /*
+     * Страница "Приборы учета"
+     */
+    public function actionCounters() {
+        
+        $user_info = $this->permisionUser();
+        
+        
+        
+        return $this->render('counters');
         
     }
     

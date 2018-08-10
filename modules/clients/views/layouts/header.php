@@ -36,7 +36,7 @@ $username = Yii::$app->user->identity->user_login;
                 'items' => [
                     ['label' => 'Общая информация', 'url' => ['personal-account/index']],
                     ['label' => 'Квитанции ЖКУ', 'url' => ['personal-account/receipts-of-hapu']],
-                    ['label' => 'Показания приборов учета', 'url' => ['']],
+                    ['label' => 'Показания приборов учета', 'url' => ['personal-account/counters']],
                     ['label' => 'Платежи', 'url' => ['']],
                 ],
             ],
