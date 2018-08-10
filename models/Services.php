@@ -28,6 +28,7 @@ class Services extends ActiveRecord
         return [
             [['services_category_id', 'isPay', 'isServices'], 'integer'],
             [['services_name', 'services_image'], 'string', 'max' => 255],
+            ['services_description', 'string', 'min' => 10, 'max' => 1000],
         ];
     }
     
@@ -51,7 +52,7 @@ class Services extends ActiveRecord
     public static function getServicesNameArray() {
         $array = static::find()->asArray()->all();
         return ArrayHelper::map($array, 'services_id', 'services_name');
-    }    
+    }
 
     /*
      * Получаем только платные услуги
@@ -64,7 +65,7 @@ class Services extends ActiveRecord
         
         return ArrayHelper::map($pay_services, 'services_id', 'services_name');
     }
-    
+
     /**
      * Массив статусов заявок
      */
@@ -77,6 +78,7 @@ class Services extends ActiveRecord
             'isPay' => 'Is Pay',
             'isServices' => 'Is Services',
             'services_image' => 'Services Image',
+            'services_description' => 'Services Description',
         ];
     }
 }
