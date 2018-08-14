@@ -18,7 +18,7 @@ class FormatHelpers {
         $array_exension = [
             'jpg' => '1',
             'png' => '2',
-            'jepg' => '3'
+            'jpeg' => '3'
         ];
         
         $extension = pathinfo($file, PATHINFO_EXTENSION);
@@ -40,5 +40,13 @@ class FormatHelpers {
         list($day, $month, $year) = explode('.', $_date_int);
         $date_full = $day .' '. $month .' '. $year . ' г. ' . $_time;
         return $date_full;
+    }
+    
+    /*
+     * Форматирование вывода даты
+     * Лицевой счет / Приборы учета
+     */
+    public static function formatDateCounter($date_int) {
+        return Yii::$app->formatter->asDate($date_int, 'd MMMM Y');
     }
 }

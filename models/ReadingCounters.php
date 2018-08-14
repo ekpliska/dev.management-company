@@ -23,7 +23,7 @@ class ReadingCounters extends ActiveRecord
     public function rules() {
         return [
             [['reading_counter_id', 'date_reading', 'user_id'], 'integer'],
-            [['readings_info'], 'string', 'max' => 50],
+            [['readings_indication'], 'string', 'max' => 50],
         ];
     }
     
@@ -33,7 +33,7 @@ class ReadingCounters extends ActiveRecord
     public function getCounter() {
         return $this->hasOne(Counters::className(), ['counters_id' => 'reading_counter_id']);
     }
-
+    
     /**
      * Метки для полей
      */
@@ -41,7 +41,7 @@ class ReadingCounters extends ActiveRecord
         return [
             'reading_id' => 'Reading ID',
             'reading_counter_id' => 'Reading Counter ID',
-            'readings_info' => 'Readings Info',
+            'readings_indication' => 'Readings Info',
             'date_reading' => 'Date Reading',
             'user_id' => 'User ID',
         ];

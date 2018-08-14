@@ -4,15 +4,17 @@
     use yii\web\Controller;
     use yii\base\InvalidConfigException;
     use yii\web\Response;
+    use yii\data\ActiveDataProvider;
     use app\models\PersonalAccount;
     use app\modules\clients\models\AddPersonalAccount;
     use app\models\User;
-    use app\modules\clients\models\FilterForm;
     use app\models\Rents;
     use app\models\Organizations;
     use app\models\AccountToUsers;
     use app\modules\clients\models\ClientsRentForm;
     use app\models\Houses;
+    use app\models\Counters;
+    use app\modules\clients\models\IndicationCounters;
 
 /**
  * Контроллер по работе с разделом "Лицевой счет"
@@ -71,12 +73,26 @@ class PersonalAccountController extends Controller {
      * Страница "Приборы учета"
      */
     public function actionCounters() {
-        
+
         $user_info = $this->permisionUser();
         
+        // Получаем текущую дату
+        $current_date = date('n');
         
+        // Получить список всех лицевых счетов пользователя        
+        $account_all = PersonalAccount::findByClient($user_info->user_client_id);
         
-        return $this->render('counters');
+        $account_info = PersonalAccount::findByClientProfile($user_info->user_client_id);
+        
+        $counters = new ActiveDataProvider([
+            'query' => Counters::getReadingCurrent($account_info->account_id, $current_date),
+        ]);
+        
+        return $this->render('counters', [
+            'current_date' => $current_date,
+            'account_all' => $account_all,
+            'counters' => $counters,
+        ]);
         
     }
     
