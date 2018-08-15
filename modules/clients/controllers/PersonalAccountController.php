@@ -14,7 +14,6 @@
     use app\modules\clients\models\ClientsRentForm;
     use app\models\Houses;
     use app\models\Counters;
-    use app\modules\clients\models\IndicationCounters;
 
 /**
  * Контроллер по работе с разделом "Лицевой счет"
