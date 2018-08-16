@@ -47,8 +47,7 @@ class AccountToUsers extends ActiveRecord
                 ->andWhere(['user_id' => $user_id])
                 // ->select(['user_id', 'account_id'])
                 ->one();
-    }
-    
+    }    
 
     public function attributeLabels()
     {

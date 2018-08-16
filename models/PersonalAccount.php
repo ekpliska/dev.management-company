@@ -116,6 +116,20 @@ class PersonalAccount extends ActiveRecord
                 ->all();
         return $account_all = ArrayHelper::map($account_find, 'account_id', 'account_number');
     }
+    
+    /*
+     * Получить список лицевых счетов по ID пользователя
+     */
+    public static function getListAccountByUserID($user_id) {
+        
+        $_list = self::find()
+                ->select('account_number')
+                ->joinWith('user', false)
+                ->where(['user.user_id' => 30])
+                ->all();
+        
+        return ArrayHelper::map($_list, 'account_number', 'account_number');
+    }
 
     /*
      * Получить список всех лицевых счетов закрепенных за данным пользователем

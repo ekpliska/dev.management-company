@@ -2,7 +2,7 @@
     use yii\bootstrap\Nav;
     use yii\bootstrap\NavBar;
     use yii\helpers\Html;
-    
+    use app\widgets\PersonalAccountsList;
 /*
  * Шапка, меню, хлебные крошки
  */
@@ -45,7 +45,7 @@
                     ['label' => 'История услуг', 'url' => ['paid-services/index']],
                     ['label' => 'Заказать услугу', 'url' => ['paid-services/order-services']],
                 ],
-            ],
+            ],            
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (
@@ -57,7 +57,12 @@
                 )
                 . Html::endForm()
                 . '</li>'
-            )
+            ),
+            '<li>'
+                . Html::beginForm(['/'], 'post')
+                . PersonalAccountsList::widget(['_user' => Yii::$app->user->identity->id])
+                . Html::endForm()                
+            . '</li>',            
         ],
     ]);
     NavBar::end();
