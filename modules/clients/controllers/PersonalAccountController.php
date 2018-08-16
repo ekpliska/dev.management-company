@@ -46,7 +46,7 @@ class PersonalAccountController extends Controller {
     
     /*
      * Страница "Квитанции ЖКУ"
-     * receipts of housing and public utilities
+     * receipts of housing and public utilities (receipts-of-hapu)
      */
     public function actionReceiptsOfHapu() {
         

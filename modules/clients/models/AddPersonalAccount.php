@@ -100,8 +100,7 @@ class AddPersonalAccount extends Model {
         
         $transaction = $connection->beginTransaction();
         
-        try {        
-            
+        try {
             
             $id_client = User::find()
                 ->andWhere(['user_id' => Yii::$app->user->identity->user_id])
