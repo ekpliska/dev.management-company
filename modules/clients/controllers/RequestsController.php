@@ -6,7 +6,6 @@
     use yii\web\NotFoundHttpException;
     use yii\data\ActiveDataProvider;
     use app\models\Requests;
-    use app\modules\clients\models\AddRequest;
     use app\models\User;
     use app\models\Houses;
     use app\modules\clients\models\FilterForm;
@@ -22,18 +21,20 @@ class RequestsController extends Controller
     /**
      * Главная страница
      */
-    public function actionIndex($user, $username)
+    public function actionIndex()
     {
-        // Делаем проверку, правильности переданных параметров в запросе url
-        $user_info = User::findByUser($user, $username);
         
-        $client_id = $user_info->client->clients_id;
-        $rent_id = $user_info->rent->rents_id;
-        
-        // Если запрос пустой, кидаем исключение
-        if ($user_info === null) {
-            throw new NotFoundHttpException('Вы обратились к несуществующей странице');
-        }
+        $user_info = $this->permisionUser();
+//        // Делаем проверку, правильности переданных параметров в запросе url
+//        $user_info = User::findByUser($user, $username);
+//        
+//        $client_id = $user_info->client->clients_id;
+//        $rent_id = $user_info->rent->rents_id;
+//        
+//        // Если запрос пустой, кидаем исключение
+//        if ($user_info === null) {
+//            throw new NotFoundHttpException('Вы обратились к несуществующей странице');
+//        }
         
         // Получаем виды заявок
         $type_requests = TypeRequests::getTypeNameArray();
@@ -43,7 +44,7 @@ class RequestsController extends Controller
         
         // В датапровайдер собираем все заявки по текущему пользователю
         $all_requests = new ActiveDataProvider([
-            'query' => Requests::findByUser($user),
+            'query' => Requests::findByUser($user_info),
             'pagination' => [
                 'forcePageParam' => false,
                 'pageSizeParam' => false,
@@ -160,5 +161,23 @@ class RequestsController extends Controller
 //        
         
     }
+    
+    /*
+     * Метод, проверяет существование пользователя по текущему ID (user->identity->user_id)
+     * Пользователь имеет доступ только к странице своего профиля
+     * В противном случае выводим исключение
+     */
+    public function permisionUser() {
+        
+        $_user_id = Yii::$app->user->identity->user_id;
+        $user_info = User::findByUser($_user_id);
+        $user_info = \app\models\AccountToUsers::find()->andWhere([])->one();
+        
+        if ($user_info) {
+            return $user_info;
+        } else {
+            throw new NotFoundHttpException('Вы обратились к несуществующей странице');
+        }        
+    }    
             
  }

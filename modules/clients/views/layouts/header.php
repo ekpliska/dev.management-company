@@ -13,8 +13,6 @@
  * @username - Логин пользователя
  * @account - ID Лицевого счета
  */    
-$user = Yii::$app->user->identity->user_id; 
-$username = Yii::$app->user->identity->user_login;
 ?>
 
 <?php
@@ -40,7 +38,7 @@ $username = Yii::$app->user->identity->user_login;
                     ['label' => 'Платежи', 'url' => ['']],
                 ],
             ],
-            ['label' => 'Заявки', 'url' => ['requests/index', 'user' => $user, 'username' => $username]],
+            ['label' => 'Заявки', 'url' => ['requests/index']],
             [
                 'label' => 'Платные услуги', 
                 'items' => [

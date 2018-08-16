@@ -14,6 +14,7 @@
     use app\modules\clients\models\ClientsRentForm;
     use app\models\Houses;
     use app\models\Counters;
+    use app\modules\clients\models\IndicationCounters;
 
 /**
  * Контроллер по работе с разделом "Лицевой счет"
@@ -74,9 +75,12 @@ class PersonalAccountController extends Controller {
     public function actionCounters() {
 
         $user_info = $this->permisionUser();
-        
+
         // Получаем текущую дату
-        $current_date = date('n');
+        $current_date = time();        
+        
+        // Получаем номер текущего месяца
+        $current_month = date('n');
         
         // Получить список всех лицевых счетов пользователя        
         $account_all = PersonalAccount::findByClient($user_info->user_client_id);
@@ -84,7 +88,7 @@ class PersonalAccountController extends Controller {
         $account_info = PersonalAccount::findByClientProfile($user_info->user_client_id);
         
         $counters = new ActiveDataProvider([
-            'query' => Counters::getReadingCurrent($account_info->account_id, $current_date),
+            'query' => Counters::getReadingCurrent($account_info->account_id, $current_month),
         ]);
         
         return $this->render('counters', [

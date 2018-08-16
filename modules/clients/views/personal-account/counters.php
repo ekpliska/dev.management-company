@@ -13,7 +13,7 @@ $this->title = 'Приборы учета';
 <div class="clients-default-index">
     <h1><?= $this->title ?></h1>
 
-    <div class="col-md-5">
+    <div class="col-md-3">
         <div class="input-group">
             <span class="input-group-addon">Лицевой счет</span>
             <?= Html::dropDownList('_list-account-all', null, $account_all, [
@@ -23,9 +23,10 @@ $this->title = 'Приборы учета';
             ?>
         </div>
     </div>
-    <div class="col-md-5">
+    
+    <div class="col-md-3">
         <div class="input-group">
-            <span class="input-group-addon">Месяц</span>
+            <span class="input-group-addon">Год</span>
             <?= Html::dropDownList('_list-account-all', null, $account_all, [
                     'class' => 'form-control _list-account-all',
                     'prompt' => 'Выбрать период из списка...'
@@ -34,7 +35,18 @@ $this->title = 'Приборы учета';
         </div>
     </div>
 
-    <div class="col-md-2">
+    <div class="col-md-3">
+        <div class="input-group">
+            <span class="input-group-addon">Месяц</span>
+            <?= Html::dropDownList('_list-account-all', null, $account_all, [
+                    'class' => 'form-control _list-account-all',
+                    'prompt' => 'Выбрать период из списка...'
+                ]) 
+            ?>
+        </div>
+    </div>    
+    
+    <div class="col-md-3">
         <div class="input-group">
             <?= Html::button('Поиск', ['class' => 'btn btn-primary']) ?>
         </div>
@@ -43,7 +55,7 @@ $this->title = 'Приборы учета';
     
 <?php
 //echo '<pre>';
-//var_dump ($counters);
+//var_dump (time());
 ?>
     
     <div class="col-md-12">
@@ -68,8 +80,16 @@ $this->title = 'Приборы учета';
                     'attribute' => 'date_check',
                     'label' => 'Дата <br /> следующей поверки',
                     'encodeLabel' => false,                     
-                    'value' => function($data) {
-                        return FormatHelpers::formatDateCounter($data['date_check']);
+                    'value' => function($data) use ($current_date) {
+            
+                        if ($data['date_check'] < $current_date) {
+                            $value = '<span style="color: red">' . FormatHelpers::formatDateCounter($data['date_check']) . '</span>';
+                            $value .= '<br />' . Html::a('Заказать поверку', ['/']);
+                        } else {
+                            $value = '<span>' . FormatHelpers::formatDateCounter($data['date_check']) . '</span>';
+                        }
+                        
+                        return $value;
                     },
                     'format' => 'raw',
                 ],
@@ -101,12 +121,22 @@ $this->title = 'Приборы учета';
                     'attribute' => 'Текущее показание',
                     'label' => 'Текущее показание',
                     'encodeLabel' => false,
-                    'value' => function($data) {
-                        return Html::textInput('curr_indication', $data['current_ind'], [
-                                    'class' => 'form-control', 
+                    'value' => function($data) use ($current_date) {
+                        
+                        if ($data['date_check'] < $current_date) {
+                            return '<span style="color: red">' . 'Ввод показаний ЗАБЛОКИРОВАН' . '</span><br />' . Html::a('Что делать?', ['/']);
+                        } else 
+                            if ($data['current_ind']) {
+                                return Html::textInput('curr_indication', $data['current_ind'], [
+                                    'class' => 'form-control indication_val',
                                     'dir' => 'rtl']) 
-                                . $data['current_ind'];
-                    },
+                                    . $data['current_ind'];
+                            } else {
+                                return Html::textInput('curr_indication', null, [
+                                    'class' => 'form-control indication_val',
+                                    'dir' => 'rtl']);
+                            }
+                        },
                     'format' => 'raw',
                 ],
                 [
@@ -133,7 +163,7 @@ $this->title = 'Приборы учета';
     </div>    
     
     <div class="col-md-12 text-right">
-        <?= Html::button('Ввести показания', ['class' => 'btn btn-primary']) ?>
+        <?= Html::button('Ввести показания', ['class' => 'btn btn-primary btn__add_indication']) ?>
         <?= Html::button('Сохранить', ['class' => 'btn btn-success']) ?>
     </div>    
 

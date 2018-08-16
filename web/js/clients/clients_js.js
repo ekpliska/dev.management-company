@@ -209,7 +209,7 @@ $(document).ready(function() {
  * Смена информации о лицевом счете,
  * dropDownList _list-account-all
  */    
-    $("._list-account-all").on("change", function(){
+    $("._list-account-all").on("change", function() {
         var accountId = $(this).val();
         $.ajax({
             url: "list?account=" + accountId,
@@ -222,6 +222,26 @@ $(document).ready(function() {
                 console.log("Error");
             },
         });
+    });
+
+
+/*
+ * Раздел "Приборы учета"
+ */
+    // $(".btn__add_indication").prop("disabled", true);
+    
+    /*
+     * Поля ввода для показания приборов учета блокируем
+     */ 
+    var ind = $(".indication_val");
+    ind.prop("disabled", true);
+
+    /*
+     * Если нажата кнопка "Ввести показания"
+     * текстовые поля для ввода показаний делаем доступными
+     */
+    $(".btn__add_indication").on("click", function() {
+        ind.prop("disabled", false);
     });
 
 /* End Block of Personal Account */
