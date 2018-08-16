@@ -169,6 +169,7 @@ class PersonalAccount extends ActiveRecord
      * Новым пользователем для нового лицевого счета может быть Собственник / и Арендатор
      */
     public function setUserList($client_id = null, $rent_id) {
+        
        $client_id ? $_list_client = ArrayHelper::map(User::find()
                ->andWhere(['user_client_id' => $client_id])
                ->asArray()
@@ -191,15 +192,16 @@ class PersonalAccount extends ActiveRecord
         
         parent::afterSave($insert, $changedAttributes);
         
-        $bind_date = new AccountToUsers();
-        
         if ($insert) {
+            $this->setUserList($this->personal_clients_id, $this->personal_rent_id);
+            
             foreach ($this->_list_user as $key => $user) {
-                $this->setUserList($this->personal_clients_id, $this->personal_rent_id);
+                $bind_date = new AccountToUsers();
                 $bind_date->user_id = $key;
                 $bind_date->account_id = $this->account_id;
-                $bind_date->save();
-            }
+                $bind_date->save(false);
+            } 
+            
         } else {
             $this->setUserList(null, $this->personal_rent_id);
             foreach ($this->_list_user as $key => $user) {

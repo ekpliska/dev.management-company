@@ -14,7 +14,6 @@
     use app\modules\clients\models\ClientsRentForm;
     use app\models\Houses;
     use app\models\Counters;
-    use app\modules\clients\models\IndicationCounters;
 
 /**
  * Контроллер по работе с разделом "Лицевой счет"
@@ -204,7 +203,7 @@ class PersonalAccountController extends Controller {
             
             if ($account_form->hasErrors()) {
                 
-                Yii::$app->session->setFlash('form', ['success' => false, 'error' => 'При отправке формы возникла ошибка, попробуйте заполнить форму заново']);
+                Yii::$app->session->setFlash('form', ['success' => false, 'error' => 'При отправке формы возникла ошибка, попробуйте заполнить форму заново (*) ']);
                 if (Yii::$app->request->referrer) {
                     Yii::$app->response->setStatusCode(400);
                     return Yii::$app->request->isAjax ? \yii\helpers\Json::encode(['success' => false]) : $this->redirect(Yii::$app->request->referrer);
@@ -221,7 +220,7 @@ class PersonalAccountController extends Controller {
                 
                 // Выводим ошибки в случае неудачной валидации
                 if (!$rent_form->validate()) {
-                    Yii::$app->session->setFlash('form', ['success' => false, 'error' => 'При отправке формы возникла ошибка, попробуйте заполнить форму заново (*) ']);
+                    Yii::$app->session->setFlash('form', ['success' => false, 'error' => 'При отправке формы возникла ошибка, попробуйте заполнить форму заново (**) ']);
                     if (Yii::$app->request->referrer) {
                         Yii::$app->response->setStatusCode(400);
                         return Yii::$app->request->isAjax ? \yii\helpers\Json::encode(['success' => false]) : $this->redirect(Yii::$app->request->referrer);                        
