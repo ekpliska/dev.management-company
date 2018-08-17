@@ -27,13 +27,9 @@ class ClientsModule extends \yii\base\Module
 
     // Простаранство имен
     public $controllerNamespace = 'app\modules\clients\controllers';
+
+    public function init() {
+        parent::init();       
+    }   
     
-    public $account_list;
-
-    public function init()
-    {
-        parent::init();
-        
-    }
-
 }

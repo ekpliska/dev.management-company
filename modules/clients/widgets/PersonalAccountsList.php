@@ -1,6 +1,7 @@
 <?php
 
-    namespace app\widgets;
+    namespace app\modules\clients\widgets;
+    use Yii;
     use yii\base\Widget;
     use app\models\PersonalAccount;
 
@@ -19,6 +20,7 @@ class PersonalAccountsList extends Widget {
             throw new \yii\base\InvalidConfigException('Отсутствует обязательный параметр $_user');
         }
         $this->_list = PersonalAccount::getListAccountByUserID($this->_user);
+        
         parent::init();
         
     }

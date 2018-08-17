@@ -42,6 +42,16 @@ $config = [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+        
+        /*
+         * Настройка сессий
+         */
+        'session' => [
+            'timeout' => 32400,
+            'class' => 'yii\web\DbSession',
+            'sessionTable' => 'user_session',
+        ],
+                
         'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,

@@ -1,10 +1,10 @@
 <?php
 
     namespace app\modules\clients\controllers;
-    use yii\web\Controller;
     use Yii;
     use yii\web\NotFoundHttpException;
     use yii\data\ActiveDataProvider;
+    use app\modules\clients\controllers\AppClientsController;
     use app\models\Requests;
     use app\models\User;
     use app\models\Houses;
@@ -16,7 +16,7 @@
 /**
  * Заявки
  */
-class RequestsController extends Controller
+class RequestsController extends AppClientsController
 {
     
     /**

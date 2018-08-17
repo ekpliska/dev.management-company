@@ -1,13 +1,13 @@
 <?php
 
     namespace app\modules\clients\controllers;
-    use yii\web\Controller;
+    use app\modules\clients\controllers\AppClientsController;
     
 
 /**
  * Default controller for the `clients` module
  */
-class ClientsController extends Controller
+class ClientsController extends AppClientsController
 {
     
     /**

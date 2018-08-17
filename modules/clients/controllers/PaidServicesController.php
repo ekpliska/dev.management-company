@@ -3,8 +3,8 @@
     namespace app\modules\clients\controllers;
     use Yii;
     use yii\data\ActiveDataProvider;
-    use yii\web\Controller;
     use yii\web\Response;
+    use app\modules\clients\controllers\AppClientsController;
     use app\models\Services;
     use app\models\CategoryServices;
     use app\models\PaidServices;
@@ -12,7 +12,7 @@
 /**
  * Платные заявки
  */
-class PaidServicesController extends Controller {
+class PaidServicesController extends AppClientsController {
     
     /*
      * Страница "Заказать слугу"

@@ -123,12 +123,11 @@ class PersonalAccount extends ActiveRecord
     public static function getListAccountByUserID($user_id) {
         
         $_list = self::find()
-                ->select('account_number')
                 ->joinWith('user', false)
-                ->where(['user.user_id' => 30])
+                ->where(['user.user_id' => $user_id])
                 ->all();
         
-        return ArrayHelper::map($_list, 'account_number', 'account_number');
+        return ArrayHelper::map($_list, 'account_id', 'account_number');
     }
 
     /*

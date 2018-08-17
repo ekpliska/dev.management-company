@@ -2,7 +2,6 @@
     use yii\bootstrap\Nav;
     use yii\bootstrap\NavBar;
     use yii\helpers\Html;
-    use app\widgets\PersonalAccountsList;
 /*
  * Шапка, меню, хлебные крошки
  */
@@ -60,10 +59,36 @@
             ),
             '<li>'
                 . Html::beginForm(['/'], 'post')
-                . PersonalAccountsList::widget(['_user' => Yii::$app->user->identity->id])
+                . Html::dropDownList('current__account_list', $this->context->_choosing, $this->context->getListAccount(Yii::$app->user->identity->id), [
+                    'class' => 'form-control current__account_list',
+                    'style' => 'margin-top: 7px'])
                 . Html::endForm()                
             . '</li>',            
         ],
     ]);
     NavBar::end();
+?>
+
+<?php
+$this->registerJs('
+    $(".current__account_list").on("change", function() {
+        var idAccount = $(this).val();
+        
+        $.ajax({
+            url: "' . yii\helpers\Url::to(['app/current-account']) . '",
+            method: "POST",
+            typeData: "json",
+            data: {
+                idAccount: idAccount,
+            },
+            error: function() {
+                console.log("error ajax");            
+            },
+            success: function(response) {
+                console.log(response.success);
+            }
+        });
+
+    })
+')
 ?>

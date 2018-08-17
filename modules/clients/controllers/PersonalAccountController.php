@@ -1,10 +1,11 @@
 <?php
+
     namespace app\modules\clients\controllers;
     use Yii;
-    use yii\web\Controller;
     use yii\base\InvalidConfigException;
     use yii\web\Response;
     use yii\data\ActiveDataProvider;
+    use app\modules\clients\controllers\AppClientsController;
     use app\models\PersonalAccount;
     use app\modules\clients\models\AddPersonalAccount;
     use app\models\User;
@@ -18,7 +19,7 @@
 /**
  * Контроллер по работе с разделом "Лицевой счет"
  */
-class PersonalAccountController extends Controller {
+class PersonalAccountController extends AppClientsController {
     
     /*
      * Главная страница

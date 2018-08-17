@@ -1,10 +1,10 @@
 <?php
 
     namespace app\modules\clients\controllers;
-    use yii\web\Controller;
     use Yii;
     use yii\web\UploadedFile;
     use yii\web\NotFoundHttpException;
+    use app\modules\clients\controllers\AppClientsController;
     use app\models\User;
     use app\modules\clients\models\ClientsRentForm;
     use app\models\Clients;
@@ -17,7 +17,7 @@
 /**
  * Default controller for the `clients` module
  */
-class ProfileController extends Controller
+class ProfileController extends AppClientsController
 {
     // Флаг наличия арендатора у собственника
     public $_is_rent = false;
@@ -25,6 +25,7 @@ class ProfileController extends Controller
 
     /**
      * Главная страница
+     * 
      * @param array $user_info Учетная запись пользователя
      * @param array $accounts_list Список всех лицевых счетов
      * @param array $accounts_list_rent Список всех лицевых счетов не имеющие арендаторов
@@ -40,17 +41,10 @@ class ProfileController extends Controller
         $user_info = $this->permisionUser();
         $client = Clients::findOne(['clients_id' => $user_info->user_client_id]);
         
-        // Получаем все активные лицевые счета Собственника (для dropDownList)
         $accounts_list = PersonalAccount::findByClient($user_info->user_client_id);
-
-        // Получаем все лицевые счета Собственника не связанны с арендаторами (для dropDownList)
         $accounts_list_rent = PersonalAccount::findByClientForBind($user_info->user_client_id);
-        
-        // Получаем информация по лицевому счету Собственника
         $accounts_info = PersonalAccount::findByClientProfile($user_info->user_client_id); 
-        
-        // Получаем данные о нективных арендаторах
-        $not_active_rents = Rents::getNotActiveRents($client->id);
+        $not_active_rents = Rents::getNotActiveRents($client->id);        
         
         /* Статус наличия у собственника арендатора
          * Если имеется Арендатор, то загружаем данные Арендатор для формы
