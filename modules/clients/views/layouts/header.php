@@ -75,7 +75,7 @@ $this->registerJs('
         var idAccount = $(this).val();
         
         $.ajax({
-            url: "' . yii\helpers\Url::to(['app/current-account']) . '",
+            url: "' . yii\helpers\Url::to(['app-clients/current-account']) . '",
             method: "POST",
             typeData: "json",
             data: {

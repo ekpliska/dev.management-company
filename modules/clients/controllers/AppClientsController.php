@@ -4,7 +4,7 @@
     use Yii;
     use yii\web\Controller;
     use yii\filters\AccessControl;
-    use app\models\PersonalAccount;
+    use app\modules\clients\components\checkPersonalAccount;
         
 /*
  * Общий контроллер модуля Clients
@@ -13,15 +13,11 @@
     
 class AppClientsController extends Controller {
     
-    public $_list;
-    public $_choosing;
-
-    
     /*
      * Назначение прав доступа к модулю "Клиенты"
      */
     public function behaviors() {
-       return [
+        return [
             'access' => [
                 'class' => AccessControl::className(),
                 'rules' => [
@@ -30,6 +26,11 @@ class AppClientsController extends Controller {
                         'roles' => ['clients'],
                     ],
                 ],
+            ],
+            'accountList' => [
+                'class' => checkPersonalAccount::className(),
+                '_list' => '_list',
+                '_choosing' => '_choosing',
             ],
         ];
     }
@@ -41,36 +42,7 @@ class AppClientsController extends Controller {
             ],
         ];
     }
-    
-    public function init() {
         
-        $session = Yii::$app->session;
-        // $session->destroy();
-        
-        $_choosing_account = $session->get('choosingAccount');
-        
-        if (!$session->isActive) {
-            $session->open();
-        }
-        
-        // Проверяем ключ сессии для dropDownList
-        if (!$_choosing_account) {
-            $session->set('choosingAccount', key($this->getListAccount(30)));
-        }
-        
-        return $this->_choosing = $session->get('choosingAccount');
-        
-    }
-
-    /*
-     * Получить список всех лицевых счетов
-     */
-    public function getListAccount($user) {
-        
-        return $this->_list = PersonalAccount::getListAccountByUserID($user);
-        
-    }
-    
     /*
      * Метод получает ID лицевого счета из глобального списка
      * 
@@ -83,6 +55,10 @@ class AppClientsController extends Controller {
         
         if (Yii::$app->request->isAjax) {
             Yii::$app->session->set('choosingAccount', $account_id);
+            Yii::$app->response->cookies->add(new \yii\web\Cookie([
+                'name' => 'choosingAccount',
+                'value' => $account_id,
+            ]));
             return ['success' => $account_id];
         }
         return ['success' => false];;

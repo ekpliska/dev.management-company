@@ -56,6 +56,21 @@ $config = [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
         ],
+        
+        'user' => [
+            'class' => 'yii\web\User',
+            'identityClass' => 'app\models\User',
+            'enableAutoLogin' => true,
+            /*
+            'loginUrl' => '/user/login',
+            'identityCookie' => [
+                'name' => '_identity',
+                'httpOnly' => true,
+                'domain' => '.example.com',
+            ],
+             */
+        ],        
+        
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
