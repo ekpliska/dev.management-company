@@ -84,7 +84,7 @@ $this->title = 'Мои заявки';
                                 ->widget(MaskedInput::className(), [
                                     'mask' => '+7 (999) 999-99-99',
                                 ])
-                                ->input('text', ['placeHolder' => $model->getAttributeLabel('request_phone')])->label() ?>
+                                ->input('text', ['placeHolder' => $model->getAttributeLabel('requests_phone')])->label() ?>
                     
                         <?= $form->field($model, 'requests_comment')
                                 ->textarea(['rows' => 10]) ?>
@@ -94,7 +94,7 @@ $this->title = 'Мои заявки';
             </div>
             <div class="modal-footer">
                     <?= Html::submitButton('Добавить', ['class' => 'btn btn-danger']) ?>
-                    <?= Html::submitButton('Отмена', ['class' => 'btn btn-default', 'data-dismiss' => 'modal']) ?>
+                    <?= Html::submitButton('Отмена', ['class' => 'btn btn-default request__btn_close', 'data-dismiss' => 'modal']) ?>
                 <?php ActiveForm::end(); ?>
             </div>
         </div>

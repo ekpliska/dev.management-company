@@ -280,5 +280,18 @@ $(document).ready(function() {
 /* End Block of Personal Account */
 
 
+
+/*--------------------------------
+ *  Start Block of Requests
+ --------------------------------*/
+    
+    // Очистить форму заполнения заявки, если пользователь нажал в модальном окне "Отмена"
+    $(".request__btn_close").on("click", function () {
+        $('#add-request')[0].reset();
+    });
+    
+/* End Block of Requests */
+
+
 })
 

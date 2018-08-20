@@ -4,6 +4,7 @@
     use Yii;
     use yii\web\NotFoundHttpException;
     use yii\data\ActiveDataProvider;
+    use yii\web\UploadedFile;
     use app\modules\clients\controllers\AppClientsController;
     use app\models\Requests;
     use app\models\User;
@@ -26,16 +27,6 @@ class RequestsController extends AppClientsController
     {
         
         $user_info = $this->permisionUser();
-//        // Делаем проверку, правильности переданных параметров в запросе url
-//        $user_info = User::findByUser($user, $username);
-//        
-//        $client_id = $user_info->client->clients_id;
-//        $rent_id = $user_info->rent->rents_id;
-//        
-//        // Если запрос пустой, кидаем исключение
-//        if ($user_info === null) {
-//            throw new NotFoundHttpException('Вы обратились к несуществующей странице');
-//        }
         
         // Получаем виды заявок
         $type_requests = TypeRequests::getTypeNameArray();
@@ -45,7 +36,7 @@ class RequestsController extends AppClientsController
         
         // В датапровайдер собираем все заявки по текущему пользователю
         $all_requests = new ActiveDataProvider([
-            'query' => Requests::findByUser($user_info),
+            'query' => Requests::findByAccountID($this->_choosing),
             'pagination' => [
                 'forcePageParam' => false,
                 'pageSizeParam' => false,
@@ -62,14 +53,13 @@ class RequestsController extends AppClientsController
                 'scenario' => Requests::SCENARIO_ADD_REQUEST,
             ]);
         
+        // Получить ID выбранного лицевого счета из глобального списка dropDownList
+        $accoint_id = $this->_choosing;
+        
         if ($model->load(Yii::$app->request->post())) {
-            if ($model->addRequest($user, $client_id, $rent_id)) {
-                    $model->gallery = \yii\web\UploadedFile::getInstances($model, 'gallery');
-                    $model->uploadGallery();
-                
-                Yii::$app->session->setFlash('success', 'Заявка создана');                
-            } else {
-                Yii::$app->session->setFlash('error', 'Возникла ошибка');
+            if ($model->addRequest($accoint_id)) {
+                $model->gallery = UploadedFile::getInstances($model, 'gallery');
+                $model->uploadGallery();
             }
             return $this->refresh();
         }
@@ -172,7 +162,6 @@ class RequestsController extends AppClientsController
         
         $_user_id = Yii::$app->user->identity->user_id;
         $user_info = User::findByUser($_user_id);
-        $user_info = \app\models\AccountToUsers::find()->andWhere([])->one();
         
         if ($user_info) {
             return $user_info;

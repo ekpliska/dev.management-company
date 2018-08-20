@@ -55,7 +55,15 @@ class Requests extends ActiveRecord
     {
         return [
             
-            [['requests_type_id', 'requests_comment', 'requests_phone'], 'required', 'on' => self::SCENARIO_ADD_REQUEST],
+            [['requests_account_id', 'requests_type_id', 'requests_comment', 'requests_phone'], 'required', 'on' => self::SCENARIO_ADD_REQUEST],
+            
+            [
+                'requests_phone', 
+                'match', 
+                'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/i',
+                'on' => self::SCENARIO_ADD_REQUEST,
+            ],
+            
             [['gallery'], 'file', 
                 'extensions' => 'png, jpg, jpeg', 
                 'maxFiles' => 4, 
@@ -86,6 +94,13 @@ class Requests extends ActiveRecord
     }
     
     /*
+     * Связь с талиблицей Виды заявок
+     */
+    public function getTypeRequest() {
+        return $this->hasOne(TypeRequests::className(), ['type_requests_id' => 'requests_type_id']);
+    }       
+    
+    /*
      * Связь с таблицей комментариев к заявке
      */
     public function getComment() {
@@ -95,9 +110,14 @@ class Requests extends ActiveRecord
     /*
      * Сохранение новой заявки
      */
-    public function addRequest($user, $client_id, $rent_id) {
+    public function addRequest($accoint_id) {
         
-        $account = PersonalAccount::findByAccountNumber($user);
+        if (!is_numeric($accoint_id)) {
+            Yii::$app->session->setFlash('error', 'При формировании заявки возникла ошибка. Обновите страницу и повторите действия еще раз');
+            return false;
+        }
+        
+        $account = PersonalAccount::findByAccountID($accoint_id);
         
         /* Формирование идентификатора для заявки:
          *      последние 7 символов лицевого счета - 
@@ -108,18 +128,21 @@ class Requests extends ActiveRecord
         $date = new \DateTime();
         $int = $date->getTimestamp();
         
-        $request_numder = substr($account->account_number, 4) . '-' . substr($int, 5) . '-' . str_pad($this->requests_type_id, 2, 0, STR_PAD_LEFT);
+        $request_numder = substr($account->account_number, 4) . '-' . substr($int, 5) . '-' . str_pad($this->requests_type_id, 2, 0, STR_PAD_LEFT);      
         
         if ($this->validate()) {
             $this->requests_ident = $request_numder;
-            $this->requests_user_id = $user;
-            $this->requests_client_id = (!empty($client_id)) ? $client_id : null;
-            $this->requests_rent_id = (!empty($rent_id)) ? $rent_id : null;
+            $this->requests_account_id = $accoint_id;
             $this->status = Requests::STATUS_NEW;
             $this->is_accept = false;
-//            $this->save();
-            return $this->save() ? true : $this->hasErrors();
+            Yii::$app->session->setFlash('success', 'Ваша заявка была успешно  сформирована на лицевой счет №' . $account->account_number . '<br />'
+                    . 'Номер вашей заявки №' . $request_numder . '<br />'
+                    . 'Ознакомиться с деталями заявки можно пройдя по ' . \yii\helpers\Html::a('ссылке', ['requests/view-request', 'request_numder' => $request_numder]));
+            return $this->save() ? true : false;
         }
+        
+        Yii::$app->session->setFlash('error', 'При формировании заявки возникла ошибка. Обновите страницу и повторите действия еще раз');
+        return false;
     }    
     
     /*
@@ -144,20 +167,14 @@ class Requests extends ActiveRecord
                 ->andWhere(['requests_ident' => $request_numder])
                 ->one();
     }
-    
+
     /*
-     * Связь с талиблицей Виды заявок
+     * Поиск заявки по ID лицевого счета
+     * @param ActiveQuery
      */
-    public function getTypeRequest() {
-        return $this->hasOne(TypeRequests::className(), ['type_requests_id' => 'requests_type_id']);
-    }
-    
-    /*
-     * Поиск заявки по ID пользователя
-     */
-    public static function findByUser($user_id) {
+    public static function findByAccountID($account_id) {
         return self::find()
-                ->andWhere(['requests_user_id' => $user_id])
+                ->andWhere(['requests_account_id' => $account_id])
                 ->orderBy(['created_at' => SORT_DESC]);
     }
 
@@ -195,10 +212,10 @@ class Requests extends ActiveRecord
             'created_at' => 'Дата создания',
             'updated_at' => 'Дата закрытия',
             'status' => 'Статус',
-            'requests_client_id' => 'Requests Client ID',
-            'requests_rent_id' => 'Requests Rent ID',
+            'requests_account_id' => 'Номер лицевого счета',
             'requests_phone' => 'Контактный телефон',
             'gallery' => 'Прикрепить файлы',
+            'is_accept' => 'Принято на рассмотрение',
         ];
     }
 }
