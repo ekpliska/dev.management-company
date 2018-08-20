@@ -52,9 +52,9 @@ $this->title = 'Мои заявки';
             </div>
         <?php endif; ?>         
         
-        <?php echo $this->render('_filter', ['model_filter' => $model_filter, 'type_requests' => $type_requests]); ?>
+        <?= $this->render('_filter', ['model_filter' => $model_filter, 'type_requests' => $type_requests]); ?>
         
-        <?php echo $this->render('grid', ['all_requests' => $all_requests]); ?>
+        <?= $this->render('grid', ['all_requests' => $all_requests]); ?>
 
     </div>
 </div>

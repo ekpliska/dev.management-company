@@ -290,6 +290,28 @@ $(document).ready(function() {
         $('#add-request')[0].reset();
     });
     
+/*
+ * Фильтр заявок пользователя по ID лицевого счета и типу заявок
+ */
+    $('#account_number').on('change', function(){
+        var type_id = $(this).val();
+        var account_id = $('.current__account_list').val();
+        $.ajax({
+            url: 'filter-by-type-request?type_id=' + type_id + '&account_id=' + account_id,
+            method: 'POST',
+            data: {
+                type_id: type_id,
+                account_id: account_id,
+            },
+            success: function(data){
+                // console.log(data);
+                $('.grid-view').html(data);
+            }
+        });
+    });
+    
+    
+    
 /* End Block of Requests */
 
 

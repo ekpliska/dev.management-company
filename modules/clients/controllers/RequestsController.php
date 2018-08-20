@@ -119,14 +119,12 @@ class RequestsController extends AppClientsController
     /*
      * Фильтр заявок по типу заявки
      */
-    public function actionFilterByTypeRequest() {
-        
-        $rent_id = Yii::$app->request->post('rent_id');
+    public function actionFilterByTypeRequest($type_id, $account_id) {
         
         if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
             
             $model_filter = new FilterForm();
-            $all_requests = $model_filter->searchRequest($rent_id);
+            $all_requests = $model_filter->searchRequest($type_id, $account_id);
             return $this->renderAjax('grid', ['all_requests' => $all_requests]);
         }
     }

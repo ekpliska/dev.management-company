@@ -24,9 +24,11 @@ class FilterForm extends Model {
     /*
      * Фильтр заявок по типу заявки
      */
-    public function searchRequest($type_id) {
+    public function searchRequest($type_id, $account_id) {
         
-        $query = Requests::find()->orderBy(['created_at' => SORT_DESC]);
+        $query = Requests::find()
+                ->andWhere(['requests_account_id' => $account_id])
+                ->orderBy(['created_at' => SORT_DESC]);
         
         if (empty($type_id)) {
             $dataProvider = new ActiveDataProvider([
@@ -39,7 +41,7 @@ class FilterForm extends Model {
             ]);
         } else {
             $dataProvider = new ActiveDataProvider([
-                'query' => $query->andWhere(['requests_type_id' => $type_id]),
+                'query' => $query->andWhere(['requests_type_id' => $type_id, 'requests_account_id' => $account_id]),
                 'pagination' => [
                     'forcePageParam' => false,
                     'pageSizeParam' => false,
@@ -57,4 +59,5 @@ class FilterForm extends Model {
         return $dataProvider;
         
     }
+    
 }

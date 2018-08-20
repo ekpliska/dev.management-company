@@ -1,7 +1,5 @@
 <?php
 
-    use yii\helpers\Html;
-    use yii\helpers\Url;
     use yii\widgets\ActiveForm;
 ?>
 
@@ -20,22 +18,3 @@
 
     <?php ActiveForm::end(); ?>
 </div>
-
-<?php
-$this->registerJS("
-    $('#account_number').on('change', function(){
-        var type_id = $(this).val();
-        $.ajax({
-            url:'" . Url::toRoute(['requests/filter-by-type-request']) . "',
-            method: 'POST',
-            data: {
-                rent_id: type_id,
-            },
-            success: function(data){
-                // console.log(data);
-                $('.grid-view').html(data);
-            }
-        });
-    });
-        ")
-?>

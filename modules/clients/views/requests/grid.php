@@ -34,6 +34,7 @@ use yii\grid\GridView;
             ],
             [
                 'class' => 'yii\grid\ActionColumn',
+                'controller' => 'requests',
                 'template' => '{view-request}',
                 'buttons' => [
                     'view-request' => function ($url, $data) {
@@ -42,7 +43,6 @@ use yii\grid\GridView;
                     },
                 ],
             ],
-
         ],
     ]); ?>
 <?php Pjax::end() ?>
