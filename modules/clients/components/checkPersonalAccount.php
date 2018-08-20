@@ -69,13 +69,11 @@ class checkPersonalAccount extends Behavior {
                 $cookies->add(new \yii\web\Cookie ([
                     'name' => 'choosingAccount',
                     'value' => $first_account,
+                    'expire' => time() + 60*60*24*7,
                 ]));
             }
         
         return $this->_choosing = $choosing;
         
     }
-    
-    
-    
 }

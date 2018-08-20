@@ -58,6 +58,7 @@ class AppClientsController extends Controller {
             Yii::$app->response->cookies->add(new \yii\web\Cookie([
                 'name' => 'choosingAccount',
                 'value' => $account_id,
+                'expire' => time() + 60*60*24*7,
             ]));
             return ['success' => $account_id];
         }

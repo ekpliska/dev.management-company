@@ -44,17 +44,24 @@ $config = [
         ],
         
         /*
-         * Настройка сессий
+         * Настройка session и cookie
          */
         'session' => [
             'timeout' => 32400,
             'class' => 'yii\web\DbSession',
             'sessionTable' => 'user_session',
-        ],
-                
-        'user' => [
-            'identityClass' => 'app\models\User',
-            'enableAutoLogin' => true,
+            /*
+             * Настройка параметров cookie
+             */
+            'cookieParams' => [
+                // Если true, cookie будет недоступен через JavaScript
+                'httpOnly' => false,
+                /*
+                 * Путь на сервере, на котором будут доступены cookie
+                 * По умолчанию '/' куки будут доступны для всего домена
+                 */
+                'path' => '/',
+            ],
         ],
         
         'user' => [
