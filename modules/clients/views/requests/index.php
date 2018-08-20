@@ -1,12 +1,9 @@
 <?php
     
-    use yii\grid\GridView;
     use yii\helpers\Html;
     use yii\widgets\ActiveForm;
-    use yii\helpers\ArrayHelper;
     use yii\widgets\MaskedInput;
     use yii\helpers\Url;
-    use yii\widgets\Pjax;
     
 /* 
  * Заявки (Обзая страница)

@@ -7,7 +7,6 @@
     <?php $form = ActiveForm::begin([
         'id' => 'filter-form',
         'options' => ['data-pjax' => true],
-        'method' => 'get',
     ]); ?>
 
     <?= $form->field($model_filter, '_value')

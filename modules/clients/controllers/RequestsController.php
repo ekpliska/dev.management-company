@@ -129,7 +129,6 @@ class RequestsController extends AppClientsController
         }
     }
     
-    
     public function actionAddComment() {
         
         $model = new CommentsToRequest();

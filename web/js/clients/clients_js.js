@@ -293,8 +293,8 @@ $(document).ready(function() {
 /*
  * Фильтр заявок пользователя по ID лицевого счета и типу заявок
  */
-    $('#account_number').on('change', function(){
-        var type_id = $(this).val();
+    $('#account_number, .current__account_list').on('change', function(){
+        var type_id = $('#account_number').val();
         var account_id = $('.current__account_list').val();
         $.ajax({
             url: 'filter-by-type-request?type_id=' + type_id + '&account_id=' + account_id,
