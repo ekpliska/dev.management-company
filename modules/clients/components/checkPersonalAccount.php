@@ -59,15 +59,15 @@ class checkPersonalAccount extends Behavior {
          * Проверяем наличие выбранного лицевого счета в куке
          * Если кука есть, то получаем из нее значение лицевого счета
          */
-        if (Yii::$app->request->cookies->has('choosingAccount')) {
-            $choosing = Yii::$app->request->cookies->get('choosingAccount')->value;
+        if (Yii::$app->request->cookies->has('_userAccount')) {
+            $choosing = Yii::$app->request->cookies->get('_userAccount')->value;
         } else 
-            if ($session->has('choosingAccount')) {
-                $choosing = $session->get('choosingAccount');
+            if ($session->has('_userAccount')) {
+                $choosing = $session->get('_userAccount');
             } else {
-                $session->set('choosingAccount', $first_account);    
+                $session->set('_userAccount', $first_account);    
                 $cookies->add(new \yii\web\Cookie ([
-                    'name' => 'choosingAccount',
+                    'name' => '_userAccount',
                     'value' => $first_account,
                     'expire' => time() + 60*60*24*7,
                 ]));

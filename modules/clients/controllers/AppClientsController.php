@@ -54,9 +54,9 @@ class AppClientsController extends Controller {
         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         
         if (Yii::$app->request->isAjax) {
-            Yii::$app->session->set('choosingAccount', $account_id);
+            Yii::$app->session->set('_userAccount', $account_id);
             Yii::$app->response->cookies->add(new \yii\web\Cookie([
-                'name' => 'choosingAccount',
+                'name' => '_userAccount',
                 'value' => $account_id,
                 'expire' => time() + 60*60*24*7,
             ]));

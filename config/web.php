@@ -15,6 +15,7 @@ $config = [
     'language' => 'ru',
     // Подключение модулей
     'modules' => [
+        // Модуль для Собственников и Арендаторов
         'clients' => [
             'class' => 'app\modules\clients\ClientsModule',
             'layout' => 'main-clients',

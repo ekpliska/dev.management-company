@@ -102,7 +102,16 @@ class PersonalAccount extends ActiveRecord
                 ->orderBy(['account_id' => SORT_ASC])
                 ->limit(1)
                 ->one();
-    }    
+    }
+    
+    /*
+     * Поиск лицевого счета по ID
+     */
+    public static function findByAccountID($account_id) {
+        return static::find()
+                ->andWhere(['account_id' => $account_id])
+                ->one();
+    }
     
     /*
      * Получить список всех лицевых счетов закрепенных за данным пользователем
@@ -145,6 +154,9 @@ class PersonalAccount extends ActiveRecord
         return $account_all = ArrayHelper::map($account_find_rent, 'account_id', 'account_number');
     }
     
+    /*
+     * Поиск номеру лицевого счета
+     */
     public static function findByAccountNumber($user_id) {
         return static::find()
                 ->andWhere(['personal_user_id' => $user_id])

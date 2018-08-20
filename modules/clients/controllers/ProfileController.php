@@ -34,7 +34,6 @@ class ProfileController extends AppClientsController
      * @param array $model_rent Данные арендатора для формы
      * @param array $add_rent Модель для формы "Новый арендатор"
      * @param array $not_active_rents Получаем данные о нективных арендаторах
-     * 
      */
     public function actionIndex() {
         
@@ -43,14 +42,19 @@ class ProfileController extends AppClientsController
         
         $accounts_list = PersonalAccount::findByClient($user_info->user_client_id);
         $accounts_list_rent = PersonalAccount::findByClientForBind($user_info->user_client_id);
-        $accounts_info = PersonalAccount::findByClientProfile($user_info->user_client_id); 
+        
+        /*
+         * @param integer $this->_choosing ID выбранного лицевого счета 
+         *      из глобального списка dropDownList
+         */
+        $accounts_info = PersonalAccount::findByAccountID($this->_choosing); 
+        
         $not_active_rents = Rents::getNotActiveRents($client->id);        
         
         /* Статус наличия у собственника арендатора
          * Если имеется Арендатор, то загружаем данные Арендатор для формы
          */
         
-        // $is_ren = false;
         if (Rents::isActiveRents($client->id)) {
             $this->_is_rent = true;
             $model_rent = Rents::findOne(['rents_id' => $accounts_info->personal_rent_id]);

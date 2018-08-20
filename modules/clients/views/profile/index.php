@@ -156,7 +156,7 @@ $this->title = 'Профиль абонента';
     
     <div class="col-md-4">
         <?php if (count($accounts_list) > 1): ?>
-            <?= Html::dropDownList('_list-account', null, $accounts_list, ['class' => 'form-control', 'id' => '_list-account']) ?>
+            <?= Html::dropDownList('_list-account', $this->context->_choosing, $accounts_list, ['class' => 'form-control', 'id' => '_list-account']) ?>
             <br />
         <?php endif; ?>
         
