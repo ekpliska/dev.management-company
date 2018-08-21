@@ -5,6 +5,7 @@
     use yii\db\ActiveRecord;
     use yii\helpers\ArrayHelper;
     use yii\behaviors\TimestampBehavior;
+    use yii\helpers\Html;
     use app\models\TypeRequests;
     use app\models\CommentsToRequest;
 
@@ -55,7 +56,7 @@ class Requests extends ActiveRecord
     {
         return [
             
-            [['requests_account_id', 'requests_type_id', 'requests_comment', 'requests_phone'], 'required', 'on' => self::SCENARIO_ADD_REQUEST],
+            [['requests_type_id', 'requests_comment', 'requests_phone'], 'required', 'on' => self::SCENARIO_ADD_REQUEST],
             
             [
                 'requests_phone', 
@@ -150,10 +151,9 @@ class Requests extends ActiveRecord
             $this->is_accept = false;
             Yii::$app->session->setFlash('success', 'Ваша заявка была успешно  сформирована на лицевой счет №' . $account->account_number . '<br />'
                     . 'Номер вашей заявки №' . $request_numder . '<br />'
-                    . 'Ознакомиться с деталями заявки можно пройдя по ' . \yii\helpers\Html::a('ссылке', ['requests/view-request', 'request_numder' => $request_numder]));
+                    . 'Ознакомиться с деталями заявки можно пройдя по ' . Html::a('ссылке', ['requests/view-request', 'request_numder' => $request_numder]));
             return $this->save() ? true : false;
         }
-        
         Yii::$app->session->setFlash('error', 'При формировании заявки возникла ошибка. Обновите страницу и повторите действия еще раз');
         return false;
     }    

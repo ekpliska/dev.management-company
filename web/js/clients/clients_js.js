@@ -291,13 +291,17 @@ $(document).ready(function() {
     });
     
 /*
- * Сортировка заявок по статусу
+ * Сортировка заявок по статусу 
+ * Не зависит от типа заявок
  */    
     $('.list-group-item').on('click', function(e) {
         e.preventDefault();
         
         var status = $(this).data('status');
-        var account_id = $('.current__account_list').val();        
+        var account_id = $('.current__account_list').val();
+        
+        // Сбрасываем выбранный тип заявки
+        $('#account_number').val(null);
         
         $('.list-group-item').each(function() {
             $(this).removeClass('active');
@@ -305,7 +309,7 @@ $(document).ready(function() {
         $(this).addClass('active');
         
         $.ajax({
-            url: 'filter-test?account_id=' + account_id + '&status=' + status,
+            url: 'filter-by-status?account_id=' + account_id + '&status=' + status,
             method: 'GET',
             success: function(data){
                 // console.log(data);

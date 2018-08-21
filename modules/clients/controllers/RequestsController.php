@@ -119,32 +119,28 @@ class RequestsController extends AppClientsController
         ]);
     }
     
-    
     /*
      * Фильтр заявок по типу заявки
      */
     public function actionFilterByTypeRequest($type_id, $account_id) {
         
         if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
-            
             $model_filter = new FilterForm();
             $all_requests = $model_filter->searchRequest($type_id, $account_id);
             return $this->renderAjax('grid', ['all_requests' => $all_requests]);
         }
     }
     
-    public function actionFilterTest($account_id, $status) {
+    /*
+     * Фильтр заявок по статусу
+     */
+    public function actionFilterByStatus($account_id, $status) {
         
         if (Yii::$app->request->isGet && Yii::$app->request->isAjax) {
-            
             $model_filter = new FilterForm();
             $all_requests = $model_filter->searchStatusRequest($account_id, $status);
             return $this->renderAjax('grid', ['all_requests' => $all_requests]);
-            
-            
-            return $account_id . $status;
         }
-        
     }
     
     public function actionAddComment() {
