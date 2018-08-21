@@ -133,6 +133,20 @@ class RequestsController extends AppClientsController
         }
     }
     
+    public function actionFilterTest($account_id, $status) {
+        
+        if (Yii::$app->request->isGet && Yii::$app->request->isAjax) {
+            
+            $model_filter = new FilterForm();
+            $all_requests = $model_filter->searchStatusRequest($account_id, $status);
+            return $this->renderAjax('grid', ['all_requests' => $all_requests]);
+            
+            
+            return $account_id . $status;
+        }
+        
+    }
+    
     public function actionAddComment() {
         
         $model = new CommentsToRequest();

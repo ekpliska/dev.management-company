@@ -16,13 +16,16 @@ $this->title = 'Мои заявки';
     <div class="col-md-3">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-account-modal">Добавить заявку</button>
         <h4>Статусы заявок</h4>
+        
         <div class="list-group">
-            <a href="#" class="list-group-item">Все</a>
+            <a href="#" class="list-group-item active" data-status="-1">Все</a>
             
             <?php foreach ($status_requests as $key => $status) : ?>
-                <a href="<?= Url::to(['requests/index', 'status' => $key]) ?>" class="list-group-item"><?= $status ?></a>
+                <a href="<?= Url::to(['requests/index']) ?>" class="list-group-item" data-status="<?= $key ?>"><?= $status ?></a>
             <?php endforeach; ?>
+                
         </div>
+        
     </div>
     <div class="col-md-9">
         
@@ -96,3 +99,25 @@ $this->title = 'Мои заявки';
         </div>
     </div>
 </div>
+
+<?php
+// Фильтр заявок пользователя по ID лицевого счета и типу заявок
+$this->registerJs("    
+    $('#account_number, .current__account_list').on('change', function(){
+        var type_id = $('#account_number').val();
+        var account_id = $('.current__account_list').val();
+        $.ajax({
+            url: 'filter-by-type-request?type_id=' + type_id + '&account_id=' + account_id,
+            method: 'POST',
+            data: {
+                type_id: type_id,
+                account_id: account_id,
+            },
+            success: function(data){
+                // console.log(data);
+                $('.grid-view').html(data);
+            }
+        });
+    });
+");
+?>

@@ -8,33 +8,33 @@ $(document).ready(function() {
  *  Start Block of Profile 
  --------------------------------*/
 
-/* Обработка события при клике на checkBox "Арендатор"
+/* Обработка события при клике на checkBox 'Арендатор'
  * Если за лицевым счетом закреплен арендатор, то 
  * выводим модальное окно для управления учетной записью арендатора
  */
-    $("#is_rent").change(function(e) {
-        var rentsId = $("input[id=_rents]").val();
-        if ($("input").is("#_rents")) {
-            $("#changes_rent").modal("show");
+    $('#is_rent').change(function(e) {
+        var rentsId = $('input[id=_rents]').val();
+        if ($('input').is('#_rents')) {
+            $('#changes_rent').modal('show');
             $.ajax({
-                url: "get-rent-info?rent=" + rentsId,
-                method: "POST",
-                dataType: "json",
+                url: 'get-rent-info?rent=' + rentsId,
+                method: 'POST',
+                dataType: 'json',
                 data: {
                     rent_id: rentsId,
                 },
                 success: function(response) {
                     if (response.status) {
-                        $("#changes_rent #rent-surname").text(response.rent.rents_surname);
-                        $("#changes_rent #rent-name").text(response.rent.rents_name);
-                        $("#changes_rent #rent-second-name").text(response.rent.rents_second_name);
+                        $('#changes_rent #rent-surname').text(response.rent.rents_surname);
+                        $('#changes_rent #rent-name').text(response.rent.rents_name);
+                        $('#changes_rent #rent-second-name').text(response.rent.rents_second_name);
                     } else {
-                        console.log("Ошибка при получении данных арендатора");
+                        console.log('Ошибка при получении данных арендатора');
                     }
                 }
             });
         } else {
-            $("#add-rent-modal").modal("show");
+            $('#add-rent-modal').modal('show');
         }
     });
 
@@ -42,33 +42,33 @@ $(document).ready(function() {
 /* 
  * Подтверждение удаления арендатора 
  */
-    $("#confirm-delete").on("click", ".btn-ok-delete", function(e) {
-        var id = $(this).data("recordId");
-        $.ajax({url: "change-rent-profile?action=delete&rent=" + id})
+    $('#confirm-delete').on('click', '.btn-ok-delete', function(e) {
+        var id = $(this).data('recordId');
+        $.ajax({url: 'change-rent-profile?action=delete&rent=' + id})
     });
     
-    $("#confirm-delete").on("show.bs.modal", function(e) {
+    $('#confirm-delete').on('show.bs.modal', function(e) {
         var data = $(e.relatedTarget).data();
-        $(".title", this).text(data.recordFullname);
-        $(".btn-ok-delete", this).data("recordId", data.recordId);
+        $('.title', this).text(data.recordFullname);
+        $('.btn-ok-delete', this).data('recordId', data.recordId);
     });
 
 
 /*
  * Объединение арендатора с лицевым счетом
  */
-    $("#bind-rent-modal").on("click", ".btn-ok-bind", function(e) {
-        var rentId = $(this).data("rent");
-        var accountId = $("#_list-account-rent :selected").text();
-        console.log(rentId + " " + accountId);
+    $('#bind-rent-modal').on('click', '.btn-ok-bind', function(e) {
+        var rentId = $(this).data('rent');
+        var accountId = $('#_list-account-rent :selected').text();
+        console.log(rentId + ' ' + accountId);
         $.ajax({
-            url: "change-rent-profile?action=bind&rent=" + rentId + "&account=" + accountId,
-            method: "GET",
+            url: 'change-rent-profile?action=bind&rent=' + rentId + '&account=' + accountId,
+            method: 'GET',
             success: function(response) {
-                console.log("Объединение арендатора с лицвым счетом OK");
+                console.log('Объединение арендатора с лицвым счетом OK');
             },
             error: function() {
-                console.log("Объединение арендатора с лицвым счетом error");
+                console.log('Объединение арендатора с лицвым счетом error');
             }
         })
     });
@@ -76,51 +76,51 @@ $(document).ready(function() {
      * Перед загрузкой модального окна подтвержадения удаления арендатора
      * получаем data параметры
      */ 
-    $("#bind-rent-modal").on("show.bs.modal", function(e) {
+    $('#bind-rent-modal').on('show.bs.modal', function(e) {
         var data = $(e.relatedTarget).data();
-        $(".fullname", this).text(data.rentFullname);
-        $(".btn-ok-bind", this).data("rent", data.rent);
+        $('.fullname', this).text(data.rentFullname);
+        $('.btn-ok-bind', this).data('rent', data.rent);
     });
 
 
 /*
- * Обработка событий в модальном окне "Дальнейшие действия с учетной записью арендатора"
+ * Обработка событий в модальном окне 'Дальнейшие действия с учетной записью арендатора'
  */
     // Закрыть модальное окно
-    $(".changes_rent__close").on("click", function() {
-        $("#is_rent").prop("checked", true);
+    $('.changes_rent__close').on('click', function() {
+        $('#is_rent').prop('checked', true);
     });
     
     // Удалить данные арендатора из системы
-    $(".changes_rent__del").on("click", function() {
+    $('.changes_rent__del').on('click', function() {
     
-        var rentsId = $("input[id=_rents]").val();
-        var accountId = $("#_list-account :selected").text();
+        var rentsId = $('input[id=_rents]').val();
+        var accountId = $('#_list-account :selected').text();
         $.get({
-            url: "change-rent-profile?action=delete&rent=" + rentsId + "&account=" + accountId,
-            method: "GET",
+            url: 'change-rent-profile?action=delete&rent=' + rentsId + '&account=' + accountId,
+            method: 'GET',
             success: function(response) {
-                console.log("Удаление арендатора OK");
+                console.log('Удаление арендатора OK');
             },
             error: function() {
-                console.log("Удаление арендатора Error");
+                console.log('Удаление арендатора Error');
             }
         });
     });
     
     // Отвязать арендатора от лицевого счета
-    $(".changes_rent__undo").on("click", function() {
+    $('.changes_rent__undo').on('click', function() {
     
-        var rentsId = $("input[id=_rents]").val();
-        var accountId = $("#_list-account :selected").text();
+        var rentsId = $('input[id=_rents]').val();
+        var accountId = $('#_list-account :selected').text();
         $.get({
-            url: "change-rent-profile?action=undo&rent=" + rentsId + "&account=" + accountId,
-            method: "GET",
+            url: 'change-rent-profile?action=undo&rent=' + rentsId + '&account=' + accountId,
+            method: 'GET',
             success: function(response) {
-                console.log("Отвязать арендатора OK");
+                console.log('Отвязать арендатора OK');
             },
             error: function() {
-                console.log("Отвязать арендатора Error");
+                console.log('Отвязать арендатора Error');
             }
         });
     });
@@ -128,79 +128,79 @@ $(document).ready(function() {
 
 /*
  * Сабмит основной формы профиля
- * Перед отправкой проверяем валидацию формы "Аренадатор"
+ * Перед отправкой проверяем валидацию формы 'Аренадатор'
  */
-    $("body").on("beforeSubmit", "form#profile-form", function (e) {
+    $('body').on('beforeSubmit', 'form#profile-form', function (e) {
         e.preventDefault();
         // Получаем данные из формы Арендатор
-        var rentForm = $("#edit-rent").serialize();
+        var rentForm = $('#edit-rent').serialize();
         // Получаем количество ошибок на форме Арендатор
-        var countError = $("#edit-rent").find(".has-error").length;
+        var countError = $('#edit-rent').find('.has-error').length;
         
         // Если имеются ошибки и форма Арендатора существует, отправку основной формы профиля останавливаем
         if (countError > 0 && rentForm) {
             return false;
         } else if (countError === 0 && rentForm) {
             $.ajax({
-                url: "save-rent-info",
+                url: 'save-rent-info',
                 data: rentForm,
-                method: "POST",
-                typeData: "json",
+                method: 'POST',
+                typeData: 'json',
                 success: function(data) {
                     if (data.status == false) {
-                        $(".error-message").text("Заполните поля корректными данными");
+                        $('.error-message').text('Заполните поля корректными данными');
                     }
                 },
                 error: function(data) {
-                    console.log("error for save rent info");
+                    console.log('error for save rent info');
                 }
             });
         }
     });
 
 /*
- * Форма "Добавить нового Арендатора"
+ * Форма 'Добавить нового Арендатора'
  */
     /*
      * При загрузке модального окна, получаем
      * ID выбранного лицевого счета
      */
-    $("#add-rent-modal").on("show.bs.modal", function(e) {
-        var accountId = $("#_list-account :selected").text();
-        $("#_personal-account").val(accountId);
-        $(".btn__add_rent", this).data("accountId", accountId);
+    $('#add-rent-modal').on('show.bs.modal', function(e) {
+        var accountId = $('#_list-account :selected').text();
+        $('#_personal-account').val(accountId);
+        $('.btn__add_rent', this).data('accountId', accountId);
     });
     
-    // Очистить поля ввода, клик по кнопкам "Отмена", "x"
-    $("#add-rent-modal .add-rent-modal__close").on("click", function() {
-        $("#add-rent input").val("");
-        $("#add-rent-modal .modal-body").removeClass("has-error");
-        $("#add-rent-modal .modal-body").removeClass("has-success");
-        $("#add-rent-modal .form-group").removeClass("has-success"); 
-        $("#add-rent-modal .form-group").removeClass("has-error");
-        $("#add-rent-modal").find(".help-block").text("");
+    // Очистить поля ввода, клик по кнопкам 'Отмена', 'x'
+    $('#add-rent-modal .add-rent-modal__close').on('click', function() {
+        $('#add-rent input').val('');
+        $('#add-rent-modal .modal-body').removeClass('has-error');
+        $('#add-rent-modal .modal-body').removeClass('has-success');
+        $('#add-rent-modal .form-group').removeClass('has-success'); 
+        $('#add-rent-modal .form-group').removeClass('has-error');
+        $('#add-rent-modal').find('.help-block').text('');
      });
     
     // Сохраняем нового Арендатора
-    $("#add-rent").on("beforeSubmit", function() {
+    $('#add-rent').on('beforeSubmit', function() {
         var addRentForm = $(this);
         $.ajax({
-            url: "add-new-rent",
-            type: "POST",
+            url: 'add-new-rent',
+            type: 'POST',
             data: addRentForm.serializeArray(),
             succeess: function(response) {
                 if (response.status === false) {
-                    console.log("Error when data try to saved (add rent form)");
+                    console.log('Error when data try to saved (add rent form)');
                 }
             },
             error: function() {
-                console.log("Error #1 when data try to saved (add rent form)");
+                console.log('Error #1 when data try to saved (add rent form)');
             },
         });
     });
    
 
-/* End Block of Profile*/
+/* End Block of Profile */
 
 /*--------------------------------
  *  Start Block of Personal Account 
@@ -209,31 +209,31 @@ $(document).ready(function() {
  * Смена информации о лицевом счете,
  * dropDownList _list-account-all
  */    
-    $("._list-account-all").on("change", function() {
+    $('._list-account-all').on('change', function() {
         var accountId = $(this).val();
         $.ajax({
-            url: "list?account=" + accountId,
-            method: "GET",
-            type: "json",
+            url: 'list?account=' + accountId,
+            method: 'GET',
+            type: 'json',
             success: function(response) {
-                $("#account-info").html(response.data);
+                $('#account-info').html(response.data);
             },
             error: function() {
-                console.log("Error");
+                console.log('Error');
             },
         });
     });
     
     
     /*
-     * Раздел "Лицевой счет"
+     * Раздел 'Лицевой счет'
      * Форма - Добавить лицевой счет
      */
     // Блокируем список доступных арендаторов, и кнопку добавить арендатора
     $('#list_rent').prop('disabled', true);
     $('.btn__add-rent').prop('disabled', true);
     
-    // В зависимости от checkBox "Арендатор" скрываем/показываем элементы
+    // В зависимости от checkBox 'Арендатор' скрываем/показываем элементы
     $('#isRent').change(function() {
         if (this.checked) {
             $('#list_rent').prop('disabled', false);
@@ -246,7 +246,7 @@ $(document).ready(function() {
     
     /*
      * Если при создании лицевого счета 
-     * арендатор выбран из списка, блокируем кнопку "Добавить арендатора"
+     * арендатор выбран из списка, блокируем кнопку 'Добавить арендатора'
      */
     $('#list_rent').change(function() {
         if (!$(this).val()) {
@@ -259,22 +259,22 @@ $(document).ready(function() {
 
 
 /*
- * Раздел "Приборы учета"
+ * Раздел 'Приборы учета'
  */
-    // $(".btn__add_indication").prop("disabled", true);
+    // $('.btn__add_indication').prop('disabled', true);
     
     /*
      * Поля ввода для показания приборов учета блокируем
      */ 
-    var ind = $(".indication_val");
-    ind.prop("disabled", true);
+    var ind = $('.indication_val');
+    ind.prop('disabled', true);
 
     /*
-     * Если нажата кнопка "Ввести показания"
+     * Если нажата кнопка 'Ввести показания'
      * текстовые поля для ввода показаний делаем доступными
      */
-    $(".btn__add_indication").on("click", function() {
-        ind.prop("disabled", false);
+    $('.btn__add_indication').on('click', function() {
+        ind.prop('disabled', false);
     });
 
 /* End Block of Personal Account */
@@ -285,35 +285,39 @@ $(document).ready(function() {
  *  Start Block of Requests
  --------------------------------*/
     
-    // Очистить форму заполнения заявки, если пользователь нажал в модальном окне "Отмена"
-    $(".request__btn_close").on("click", function () {
+    // Очистить форму заполнения заявки, если пользователь нажал в модальном окне 'Отмена'
+    $('.request__btn_close').on('click', function () {
         $('#add-request')[0].reset();
     });
     
 /*
- * Фильтр заявок пользователя по ID лицевого счета и типу заявок
- */
-    $('#account_number, .current__account_list').on('change', function(){
-        var type_id = $('#account_number').val();
-        var account_id = $('.current__account_list').val();
+ * Сортировка заявок по статусу
+ */    
+    $('.list-group-item').on('click', function(e) {
+        e.preventDefault();
+        
+        var status = $(this).data('status');
+        var account_id = $('.current__account_list').val();        
+        
+        $('.list-group-item').each(function() {
+            $(this).removeClass('active');
+        });
+        $(this).addClass('active');
+        
         $.ajax({
-            url: 'filter-by-type-request?type_id=' + type_id + '&account_id=' + account_id,
-            method: 'POST',
-            data: {
-                type_id: type_id,
-                account_id: account_id,
-            },
+            url: 'filter-test?account_id=' + account_id + '&status=' + status,
+            method: 'GET',
             success: function(data){
                 // console.log(data);
                 $('.grid-view').html(data);
             }
-        });
+        });        
+        
     });
-    
-    
+
     
 /* End Block of Requests */
 
 
-})
+});
 

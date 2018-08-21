@@ -1,9 +1,8 @@
 <?php
 use yii\grid\GridView;
     use yii\helpers\Url;
-    use yii\widgets\Pjax;
 ?>
-<?php Pjax::begin(['enablePushState' => false]); ?>
+
     <?= GridView::widget([
         'dataProvider' => $all_requests,
         'columns' => [
@@ -44,4 +43,3 @@ use yii\grid\GridView;
             ],
         ],
     ]); ?>
-<?php Pjax::end(); ?>

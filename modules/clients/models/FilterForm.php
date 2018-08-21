@@ -41,7 +41,9 @@ class FilterForm extends Model {
             ]);
         } else {
             $dataProvider = new ActiveDataProvider([
-                'query' => $query->andWhere(['requests_type_id' => $type_id, 'requests_account_id' => $account_id]),
+                'query' => $query
+                    ->andWhere(['requests_type_id' => $type_id])
+                    ->andWhere(['requests_account_id' => $account_id]),
                 'pagination' => [
                     'forcePageParam' => false,
                     'pageSizeParam' => false,
@@ -50,7 +52,7 @@ class FilterForm extends Model {
             ]);
         }
 
-        $this->load($type_id);
+        $this->load($type_id, $account_id);
 
         if (!$this->validate()) {
             return $query;
@@ -59,5 +61,47 @@ class FilterForm extends Model {
         return $dataProvider;
         
     }
+
+    /*
+     * Фильтр заявок по статусу
+     */
+    public function searchStatusRequest($account_id, $status) {
+        
+        $query = Requests::find()
+                ->andWhere(['requests_account_id' => $account_id])
+                ->orderBy(['created_at' => SORT_DESC]);
+        
+        if ($status == -1) {
+            $dataProvider = new ActiveDataProvider([
+                'query' => $query,
+                'pagination' => [
+                    'forcePageParam' => false,
+                    'pageSizeParam' => false,
+                    'pageSize' => 15,
+                ],
+            ]);
+        } else {
+            $dataProvider = new ActiveDataProvider([
+                'query' => $query
+                    ->andWhere(['status' => $status])
+                    ->andWhere(['requests_account_id' => $account_id]),
+                'pagination' => [
+                    'forcePageParam' => false,
+                    'pageSizeParam' => false,
+                    'pageSize' => 15,
+                ],
+            ]);
+        }
+
+        $this->load($account_id, $status);
+
+        if (!$this->validate()) {
+            return $query;
+        }
+
+        return $dataProvider;
+        
+    }
+
     
 }
