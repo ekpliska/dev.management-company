@@ -14,7 +14,6 @@ use yii\grid\GridView;
                     return $data->getNameRequest();            
                 },
             ],
-            'requests_comment',
             'requests_specialist_id',
             [
                 'attribute' => 'created_at',

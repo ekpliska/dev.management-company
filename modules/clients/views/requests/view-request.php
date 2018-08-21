@@ -86,8 +86,5 @@ $username = Yii::$app->user->identity->user_login;
     <div class="col-md-5">
         <?= $this->render('form/_comment', ['model' => $comments, 'comments_find' => $comments_find]); ?>
     </div>
-    <div class="col-md-12 text-right">
-        <a href="<?= Url::to(['requests/index', 'user' => $user, 'username' => $username]) ?>" class="btn btn-primary">Вернуться к списку заявок</a>
-    </div>
     
 </div>

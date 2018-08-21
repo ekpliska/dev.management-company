@@ -40,7 +40,7 @@ class FilterForm extends Model {
                 $value_query = $query->andWhere(['status' => $status]);
             } else 
                 if ($type_id && $status == -1) {
-                    // Тип = Выбран и Статус = Все
+                    // Тип = Выбор и Статус = Все
                     $value_query = $query->andWhere(['requests_type_id' => $type_id]);
             } else {
                 $value_query = $query

@@ -120,7 +120,7 @@ class RequestsController extends AppClientsController
     }
     
     /*
-     * Сортировка заявков по
+     * Сортировка заявок по
      * @param integer $type_id ID тип заявки, 
      * @param integer $account_id ID лицевого счета, 
      * @param integer $status ID статус заявки
@@ -136,7 +136,7 @@ class RequestsController extends AppClientsController
         if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
             $model_filter = new FilterForm();
             $all_requests = $model_filter->searchRequest($type_id, $account_id, $status);
-            return $this->renderAjax('grid', ['all_requests' => $all_requests]);
+            return $this->renderAjax('grid/grid', ['all_requests' => $all_requests]);
         }
         
         return ['status' => false];
