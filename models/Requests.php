@@ -78,7 +78,7 @@ class Requests extends ActiveRecord
     }
     
     /*
-     * Массив статусов заявок
+     * Массив всех статусов заявок
      */
     public static function getStatusNameArray() {
         return [
@@ -87,10 +87,23 @@ class Requests extends ActiveRecord
             self::STATUS_PERFORM => 'На исполнении',
             self::STATUS_FEEDBAK => 'На уточнении',
             self::STATUS_CLOSE => 'Закрыто',
-            self::STATUS_REJECT => 'Отклонена',
-            self::STATUS_CONFIRM => 'Подтверждена пользователем',
+            self::STATUS_REJECT => 'Отклонено',
+            self::STATUS_CONFIRM => 'Подтверждено пользователем',
             self::STATUS_ON_VIEW => 'На рассмотрении',
         ];
+    }
+    
+    /*
+     * Массив статусов заявок для пользователя
+     */
+    public static function getUserStatusRequests() {
+        return [
+            self::STATUS_NEW => 'Новая',
+            self::STATUS_IN_WORK => 'В работе',
+            self::STATUS_PERFORM => 'На исполнении',
+            self::STATUS_FEEDBAK => 'На уточнении',
+            self::STATUS_CLOSE => 'Закрыто',
+        ];       
     }
     
     /*
@@ -173,6 +186,7 @@ class Requests extends ActiveRecord
      * @param ActiveQuery
      */
     public static function findByAccountID($account_id) {
+        
         return self::find()
                 ->andWhere(['requests_account_id' => $account_id])
                 ->orderBy(['created_at' => SORT_DESC]);

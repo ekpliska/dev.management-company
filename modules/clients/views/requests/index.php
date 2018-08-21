@@ -18,11 +18,10 @@ $this->title = 'Мои заявки';
         <h4>Статусы заявок</h4>
         <div class="list-group">
             <a href="#" class="list-group-item">Все</a>
-            <a href="#" class="list-group-item">Новые</a>
-            <a href="#" class="list-group-item">В работе</a>
-            <a href="#" class="list-group-item">Исполненные</a>
-            <a href="#" class="list-group-item">На уточнении</a>
-            <a href="#" class="list-group-item">Закрытые</a>
+            
+            <?php foreach ($status_requests as $key => $status) : ?>
+                <a href="<?= Url::to(['requests/index', 'status' => $key]) ?>" class="list-group-item"><?= $status ?></a>
+            <?php endforeach; ?>
         </div>
     </div>
     <div class="col-md-9">

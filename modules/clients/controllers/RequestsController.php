@@ -30,6 +30,9 @@ class RequestsController extends AppClientsController
         
         // Получаем виды заявок
         $type_requests = TypeRequests::getTypeNameArray();
+        
+        // Получаем пользовательские статусы для заявок
+        $status_requests = Requests::getUserStatusRequests();
        
         // Модель для фильтра по типу заявок
         $model_filter = new FilterForm();
@@ -67,6 +70,7 @@ class RequestsController extends AppClientsController
         return $this->render('index', [
             'all_requests' => $all_requests,
             'type_requests' => $type_requests,
+            'status_requests' => $status_requests,
             'model' => $model,
             'model_filter' => $model_filter,
         ]);

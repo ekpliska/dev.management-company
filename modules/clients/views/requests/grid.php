@@ -3,7 +3,6 @@ use yii\grid\GridView;
     use yii\helpers\Url;
     use yii\widgets\Pjax;
 ?>
-
 <?php Pjax::begin(['enablePushState' => false]); ?>
     <?= GridView::widget([
         'dataProvider' => $all_requests,
@@ -34,7 +33,7 @@ use yii\grid\GridView;
             ],
             [
                 'class' => 'yii\grid\ActionColumn',
-                'controller' => 'requests',
+                'controller' => 'requests/index',
                 'template' => '{view-request}',
                 'buttons' => [
                     'view-request' => function ($url, $data) {
@@ -45,4 +44,4 @@ use yii\grid\GridView;
             ],
         ],
     ]); ?>
-<?php Pjax::end() ?>
+<?php Pjax::end(); ?>
