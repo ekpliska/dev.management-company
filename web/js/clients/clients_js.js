@@ -291,17 +291,16 @@ $(document).ready(function() {
     });
     
 /*
- * Сортировка заявок по статусу 
- * Не зависит от типа заявок
- */    
+ * Сортировка заявок по
+ * ID лицевого счета, типу и статусу заявки
+ */
+
     $('.list-group-item').on('click', function(e) {
         e.preventDefault();
         
         var status = $(this).data('status');
         var account_id = $('.current__account_list').val();
-        
-        // Сбрасываем выбранный тип заявки
-        $('#account_number').val(null);
+        var type_id = $('#account_number').val();
         
         $('.list-group-item').each(function() {
             $(this).removeClass('active');
@@ -309,12 +308,20 @@ $(document).ready(function() {
         $(this).addClass('active');
         
         $.ajax({
-            url: 'filter-by-status?account_id=' + account_id + '&status=' + status,
-            method: 'GET',
+            url: 'filter-by-type-request?type_id=' + type_id + '&account_id=' + account_id + '&status=' + status,
+            method: 'POST',
+            data: {
+                type_id: type_id,
+                account_id: account_id,
+                status: status,
+            },
             success: function(data){
-                // console.log(data);
-                $('.grid-view').html(data);
-            }
+                if (data.status === false) {
+                    console.log('Ошибка при передаче данных');
+                } else {
+                    $('.grid-view').html(data);
+                }
+            },
         });        
         
     });

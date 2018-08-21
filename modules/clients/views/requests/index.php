@@ -101,21 +101,32 @@ $this->title = 'Мои заявки';
 </div>
 
 <?php
-// Фильтр заявок пользователя по ID лицевого счета и типу заявок
+/* Фильтр заявок пользователя по 
+ * ID лицевого счета, типу и статусу заявки
+ */
 $this->registerJs("    
-    $('#account_number, .current__account_list').on('change', function(){
+    $('#account_number, .current__account_list').on('change', function(e) {
+        
+        e.preventDefault();
+        
         var type_id = $('#account_number').val();
         var account_id = $('.current__account_list').val();
+        var status = $('.list-group-item.active').data('status');
+
         $.ajax({
-            url: 'filter-by-type-request?type_id=' + type_id + '&account_id=' + account_id,
+            url: 'filter-by-type-request?type_id=' + type_id + '&account_id=' + account_id + '&status=' + status,
             method: 'POST',
             data: {
                 type_id: type_id,
                 account_id: account_id,
+                status: status,
             },
             success: function(data){
-                // console.log(data);
-                $('.grid-view').html(data);
+                if (data.status === false) {
+                    console.log('Ошибка при передаче данных');
+                } else {
+                    $('.grid-view').html(data);
+                }
             }
         });
     });

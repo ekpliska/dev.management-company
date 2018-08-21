@@ -24,84 +24,47 @@ class FilterForm extends Model {
     /*
      * Фильтр заявок по типу заявки
      */
-    public function searchRequest($type_id, $account_id) {
+    public function searchRequest($type_id, $account_id, $status) {
         
         $query = Requests::find()
                 ->andWhere(['requests_account_id' => $account_id])
                 ->orderBy(['created_at' => SORT_DESC]);
         
-        if (empty($type_id)) {
-            $dataProvider = new ActiveDataProvider([
-                'query' => $query,
-                'pagination' => [
-                    'forcePageParam' => false,
-                    'pageSizeParam' => false,
-                    'pageSize' => 15,
-                ],
-            ]);
-        } else {
-            $dataProvider = new ActiveDataProvider([
-                'query' => $query
-                    ->andWhere(['requests_type_id' => $type_id])
-                    ->andWhere(['requests_account_id' => $account_id]),
-                'pagination' => [
-                    'forcePageParam' => false,
-                    'pageSizeParam' => false,
-                    'pageSize' => 15,
-                ],
-            ]);
-        }
-
-        $this->load($type_id, $account_id);
+        
+        if (empty($type_id) && $status == -1) {
+            // Тип = Все и Статус = Все
+            $value_query = $query;
+        } else 
+            if (empty($type_id) && $status !== -1) {
+                // Тип = Все и Статус = Выбор
+                $value_query = $query->andWhere(['status' => $status]);
+            } else 
+                if ($type_id && $status == -1) {
+                    // Тип = Выбран и Статус = Все
+                    $value_query = $query->andWhere(['requests_type_id' => $type_id]);
+            } else {
+                $value_query = $query
+                        ->andWhere(['requests_type_id' => $type_id])
+                        ->andWhere(['status' => $status]);
+            }
+            
+        $this->load($type_id, $account_id, $status);
 
         if (!$this->validate()) {
             return $query;
         }
+        
+        $dataProvider = new ActiveDataProvider([
+            'query' => $value_query,
+            'pagination' => [
+                'forcePageParam' => false,
+                'pageSizeParam' => false,
+                'pageSize' => 15,
+            ],
+        ]);
 
         return $dataProvider;
         
     }
-
-    /*
-     * Фильтр заявок по статусу
-     */
-    public function searchStatusRequest($account_id, $status) {
-        
-        $query = Requests::find()
-                ->andWhere(['requests_account_id' => $account_id])
-                ->orderBy(['created_at' => SORT_DESC]);
-        
-        if ($status == -1) {
-            $dataProvider = new ActiveDataProvider([
-                'query' => $query,
-                'pagination' => [
-                    'forcePageParam' => false,
-                    'pageSizeParam' => false,
-                    'pageSize' => 15,
-                ],
-            ]);
-        } else {
-            $dataProvider = new ActiveDataProvider([
-                'query' => $query
-                    ->andWhere(['status' => $status])
-                    ->andWhere(['requests_account_id' => $account_id]),
-                'pagination' => [
-                    'forcePageParam' => false,
-                    'pageSizeParam' => false,
-                    'pageSize' => 15,
-                ],
-            ]);
-        }
-
-        $this->load($account_id, $status);
-
-        if (!$this->validate()) {
-            return $query;
-        }
-
-        return $dataProvider;
-        
-    }
-
     
 }

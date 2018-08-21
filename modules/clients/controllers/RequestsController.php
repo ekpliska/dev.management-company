@@ -120,27 +120,26 @@ class RequestsController extends AppClientsController
     }
     
     /*
-     * Фильтр заявок по типу заявки
+     * Сортировка заявков по
+     * @param integer $type_id ID тип заявки, 
+     * @param integer $account_id ID лицевого счета, 
+     * @param integer $status ID статус заявки
      */
-    public function actionFilterByTypeRequest($type_id, $account_id) {
+    public function actionFilterByTypeRequest($type_id, $account_id, $status) {
+        
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        
+        if (!is_numeric($type_id) && !is_numeric($account_id) && !is_numeric($status)) {
+            return ['status' => false];
+        }
         
         if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
             $model_filter = new FilterForm();
-            $all_requests = $model_filter->searchRequest($type_id, $account_id);
+            $all_requests = $model_filter->searchRequest($type_id, $account_id, $status);
             return $this->renderAjax('grid', ['all_requests' => $all_requests]);
         }
-    }
-    
-    /*
-     * Фильтр заявок по статусу
-     */
-    public function actionFilterByStatus($account_id, $status) {
         
-        if (Yii::$app->request->isGet && Yii::$app->request->isAjax) {
-            $model_filter = new FilterForm();
-            $all_requests = $model_filter->searchStatusRequest($account_id, $status);
-            return $this->renderAjax('grid', ['all_requests' => $all_requests]);
-        }
+        return ['status' => false];
     }
     
     public function actionAddComment() {
