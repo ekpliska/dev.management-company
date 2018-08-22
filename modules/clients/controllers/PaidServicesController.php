@@ -14,6 +14,21 @@
  */
 class PaidServicesController extends AppClientsController {
     
+    
+    /*
+     * Страница "История услуг"
+     */
+    public function actionIndex() {
+        
+        $this->permisionUser();
+        
+        $all_orders = new ActiveDataProvider([
+            'query' => PaidServices::find(Yii::$app->user->identity->user_id)->orderBy(['created_at' => SORT_DESC])
+        ]);
+        
+        return $this->render('index', ['all_orders' => $all_orders]);
+    }
+    
     /*
      * Страница "Заказать слугу"
      */
@@ -33,19 +48,6 @@ class PaidServicesController extends AppClientsController {
         return $this->render('order-services', ['categorys' => $categorys, 'new_order' => $new_order, 'pay_services' => $pay_services]);
         
     }
-    
-    /*
-     * Страница "История услуг"
-     */
-    public function actionIndex() {
-        
-        $all_orders = new ActiveDataProvider([
-            'query' => PaidServices::find(Yii::$app->user->identity->user_id)->orderBy(['created_at' => SORT_DESC])
-        ]);
-        
-        return $this->render('index', ['all_orders' => $all_orders]);
-    }
-    
     
     /*
      * Метод сохранения заявки

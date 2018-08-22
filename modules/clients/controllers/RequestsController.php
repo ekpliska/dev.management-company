@@ -149,22 +149,5 @@ class RequestsController extends AppClientsController
         
         return ['status' => false];
     }
-    
-    /*
-     * Метод, проверяет существование пользователя по текущему ID (user->identity->user_id)
-     * Пользователь имеет доступ только к странице своего профиля
-     * В противном случае выводим исключение
-     */
-    public function permisionUser() {
-        
-        $_user_id = Yii::$app->user->identity->user_id;
-        $user_info = User::findByUser($_user_id);
-        
-        if ($user_info) {
-            return $user_info;
-        } else {
-            throw new NotFoundHttpException('Вы обратились к несуществующей странице');
-        }        
-    }    
-            
+                
  }
