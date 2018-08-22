@@ -329,6 +329,30 @@ $(document).ready(function() {
     
 /* End Block of Requests */
 
+/*--------------------------------
+ *  Start Block of Paid Services
+ --------------------------------*/
+/*
+ * Загрузка модального окна "Добавить платную услугу"
+ * В dropDownList, hiddenInput загружаем ID выбранной услуги
+ */
+    $(".new-rec").on("click", function(){
+        var idService = $(this).data("record");
+        $("#add-record-modal").modal("show");
+        $("#add-record-modal").find("#name_services").val(idService);
+        $("#secret").val(idService);
+    });    
+
+
+/*
+ * Сбросить заполненные поля формы в случае, 
+ * если модальное окно "Добавить платную услугу" закрыто через кнопку "Отмена" / x
+ */
+    $('.btn__paid_service_close').on('click', function() {
+        $('#add-paid-service')[0].reset();
+    });
+
+/* End Block of Paid Services */
 
 });
 

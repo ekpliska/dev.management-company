@@ -5,6 +5,7 @@
     use yii\db\ActiveRecord;
     use yii\behaviors\TimestampBehavior;
     use yii\helpers\ArrayHelper;
+    use yii\helpers\Html;
     use app\models\StatusRequest;
 
 /**
@@ -36,9 +37,9 @@ class PaidServices extends ActiveRecord
     {
         return [
             
-            [['services_phone', 'services_comment'], 'required', 'on' => self::SCENARIO_ADD_SERVICE],
+            [['services_name_services_id', 'services_phone', 'services_comment'], 'required', 'on' => self::SCENARIO_ADD_SERVICE],
             
-            [['services_name_services_id', 'created_at', 'updated_at', 'status', 'services_dispatcher_id', 'services_specialist_id', 'services_user_id'], 'integer'],
+            [['services_name_services_id', 'created_at', 'updated_at', 'status', 'services_dispatcher_id', 'services_specialist_id', 'services_account_id'], 'integer'],
             [['services_number'], 'string', 'max' => 16],
             [['services_comment'], 'string', 'max' => 255],
             [['services_phone'], 'string', 'max' => 50],
@@ -81,14 +82,7 @@ class PaidServices extends ActiveRecord
                 ->join('LEFT JOIN', 'services as s', 's.services_id = p.services_name_services_id')
                 ->join('LEFT JOIN', 'category_services as c', 'c.category_id = s.services_category_id')
                 ->andWhere(['services_account_id' => $account_id])
-                ->orderBy(['created_at' => SORT_DESC])
-                // ->all()
-                ;
-//        
-//        echo '<pre>';
-//        var_dump($_list);
-//        die();
-//        
+                ->orderBy(['created_at' => SORT_DESC]);
         
         return $_list;
     }
@@ -96,25 +90,39 @@ class PaidServices extends ActiveRecord
     /*
      * Сохранение новой платной заявки
      */
-    public function addOrder() {
+    public function addOrder($accoint_id) {
         
-        /* Формирование идентификатора для заявки:
-         *      последние 7 символов лицевого счета - 
-         *      последние 6 символов даты в unix - 
-         *      тип платной заявки
-         */
+        if ($this->validate()) {
         
-        $account = PersonalAccount::findByAccountNumber(Yii::$app->user->identity->user_id);
+            /* Формирование идентификатора для заявки:
+             *      последние 7 символов лицевого счета - 
+             *      последние 6 символов даты в unix - 
+             *      тип платной заявки
+             */
+
+            $account = PersonalAccount::findByAccountID($accoint_id);
+
+            $date = new \DateTime();
+            $int = $date->getTimestamp();
+
+            $order_numder = substr($account->account_number, 4) . '-' . substr($int, 5) . '-' . str_pad($this->services_name_services_id, 2, 0, STR_PAD_LEFT);
+
+            $this->services_number = $order_numder;
+            $this->status = StatusRequest::STATUS_NEW;
+            $this->services_account_id = $accoint_id;
+            $this->save();
+            
+            Yii::$app->session->setFlash('success', 'Ваша заявка была успешно сформирована на лицевой счет №' . $account->account_number . '<br />' .
+                    'Номер вашей заявки №' . $order_numder . '<br />' .
+                    'Ознакомиться со списков ваших платных заявок можно пройдя по ' . Html::a('ссылке', ['paid-services/index']));
+            
+            return true;
+            
+        }
+
+            Yii::$app->session->setFlash('error', 'При формировании заявки возникла ошибка. Обновите страницу и повторите действия еще раз');        
         
-        $date = new \DateTime();
-        $int = $date->getTimestamp();
-        
-        $order_numder = substr($account->account_number, 4) . '-' . substr($int, 5) . '-' . str_pad($this->services_name_services_id, 2, 0, STR_PAD_LEFT);
-        
-        $this->services_number = $order_numder;
-        $this->status = StatusRequest::STATUS_NEW;
-        $this->services_user_id = Yii::$app->user->identity->user_id;
-        return $this->save() ? true : false;
+        return false;
         
     }
     

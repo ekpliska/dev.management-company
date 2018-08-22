@@ -26,7 +26,6 @@ class PaidServicesController extends AppClientsController {
         $accoint_id = $this->_choosing;
         
         $all_orders = new ActiveDataProvider([
-            //'query' => PaidServices::find(Yii::$app->user->identity->user_id)->orderBy(['created_at' => SORT_DESC])
             'query' => PaidServices::getOrderByUder($accoint_id)
         ]);
         
@@ -38,10 +37,18 @@ class PaidServicesController extends AppClientsController {
      */
     public function actionOrderServices() {
         
+        $accoint_id = $this->_choosing;
+        
         // Модель создания новой заявки
         $new_order = new PaidServices([
             'scenario' => PaidServices::SCENARIO_ADD_SERVICE,
         ]);
+        
+        if ($new_order->load(Yii::$app->request->post())) {
+            if ($new_order->addOrder($accoint_id)) {
+                return $this->refresh();
+            }
+        }
         
         // Получаем список все платных заявок
         $pay_services = Services::getPayServices();
@@ -53,36 +60,38 @@ class PaidServicesController extends AppClientsController {
         
     }
     
-    /*
-     * Метод сохранения заявки
-     */
-    public function actionAddRecord() {
-        
-        Yii::$app->response->format = Response::FORMAT_JSON;
-
-        $new_order = new PaidServices([
-            'scenario' => PaidServices::SCENARIO_ADD_SERVICE,
-        ]);
-        /*
-         * Если данные с формы добавления новой заявки загружены,
-         * то вызываем метод сохранения данных
-         */
-        if (Yii::$app->request->isAjax) {
-            if ($new_order->load(Yii::$app->request->post())) {
-                if ($new_order->validate()) {
-                    Yii::$app->session->setFlash('success', 'Ваша заявка создана');
-                    $new_order->addOrder();
-                    return $this->asJson(['status' => true]);
-                }
-            }
-            Yii::$app->session->setFlash('success', 'При создании заявки возникла ошика');
-            return $this->asJson([
-                'status' => false,
-                'errors' => $new_order->errors,
-            ]);
-        }        
-
-        return $this->asJson(['status' => false]);
-    }
+//    /*
+//     * Метод сохранения заявки
+//     */
+//    public function actionAddRecord() {
+//        
+//        $accoint_id = $this->_choosing;
+//        
+//        Yii::$app->response->format = Response::FORMAT_JSON;
+//
+//        $new_order = new PaidServices([
+//            'scenario' => PaidServices::SCENARIO_ADD_SERVICE,
+//        ]);
+//        /*
+//         * Если данные с формы добавления новой заявки загружены,
+//         * то вызываем метод сохранения данных
+//         */
+//        if (Yii::$app->request->isAjax) {
+//            if ($new_order->load(Yii::$app->request->post())) {
+//                if ($new_order->validate()) {
+//                    Yii::$app->session->setFlash('success', 'Ваша заявка создана');
+//                    $new_order->addOrder($accoint_id);
+//                    return $this->asJson(['status' => true]);
+//                }
+//            }
+//            Yii::$app->session->setFlash('success', 'При создании заявки возникла ошика');
+//            return $this->asJson([
+//                'status' => false,
+//                'errors' => $new_order->errors,
+//            ]);
+//        }        
+//
+//        return $this->asJson(['status' => false]);
+//    }
     
 }

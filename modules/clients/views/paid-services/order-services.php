@@ -65,19 +65,24 @@ $this->title = 'Заказать услугу';
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button type="button" class="close btn__paid_service_close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Создать заявку</h4>
             </div>
             <div class="modal-body">
                 <?php
                     $form = ActiveForm::begin([
-                        'id' => 'add-record',
+                        'id' => 'add-paid-service',
                         
                     ])
                 ?>
                 
                     <p>Вы находитесь в окне оформления платной услуги, ваша услуга:</p>
-                
+                    
+                    <?= $form->field($new_order, 'services_name_services_id')
+                            ->hiddenInput(['id' => 'secret', 'value' => 'hidden value'])
+                            ->label(false);
+                    ?>
+                    
                     <?= $form->field($new_order, 'services_name_services_id')
                             ->dropDownList($pay_services, [
                                 'id' => 'name_services',
@@ -99,7 +104,7 @@ $this->title = 'Заказать услугу';
             </div>
             <div class="modal-footer">
                     <?= Html::submitButton('Добавить', ['class' => 'btn btn-danger']) ?>
-                    <?= Html::submitButton('Отмена', ['class' => 'btn btn-default', 'data-dismiss' => 'modal']) ?>
+                    <?= Html::submitButton('Отмена', ['class' => 'btn btn-default btn__paid_service_close', 'data-dismiss' => 'modal']) ?>
                 <?php ActiveForm::end() ?>
             </div>
         </div>
@@ -112,30 +117,7 @@ $this->registerJs('
         var idService = $(this).data("record");
         $("#add-record-modal").modal("show");
         $("#add-record-modal").find("#name_services").val(idService);
-    });
-    
-    $("body").on("beforeSubmit", "form#add-record", function(e){
-        e.preventDefault();
-
-        var name_services = $("#add-record .name_services").val();
-        var phone = $("#add-record .phone").val();
-        var comment = $("#add-record .comment").val();
-
-        $.ajax({
-            url:"' . Url::toRoute(['paid-services/add-record']) . '",
-            method: "POST",
-            data: {
-                "' . Html::getInputName($new_order, "services_name_services_id") . '": name_services,
-                "' . Html::getInputName($new_order, "services_phone") . '": phone,  
-                "' . Html::getInputName($new_order, "services_comment") . '": comment,
-            },
-            success: function(response) {
-                alert("Ok");
-            },
-            error: function () {
-                alert("Error");
-            },
-        });
+        $("#secret").val(idService);
     });    
 ')
 ?>

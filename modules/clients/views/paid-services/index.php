@@ -10,9 +10,6 @@ $this->title = 'История услуг';
 <div class="paid-services-default-index">
     <h1><?= $this->title ?></h1>
     
-    // UPD: В платных заявках иправить связь сформированных заявок
-    // Связь по лицевой_счет_ИД
-    
     <?= GridView::widget([
         'dataProvider' => $all_orders,
         'columns' => [

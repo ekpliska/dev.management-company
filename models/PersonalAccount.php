@@ -154,15 +154,14 @@ class PersonalAccount extends ActiveRecord
         return $account_all = ArrayHelper::map($account_find_rent, 'account_id', 'account_number');
     }
     
-    /*
-     * Поиск номеру лицевого счета
-     */
-    public static function findByAccountNumber($user_id) {
-        return static::find()
-                ->andWhere(['personal_user_id' => $user_id])
-                ->select('account_number')
-                ->one();
-    }
+//    /*
+//     * Поиск номеру лицевого счета
+//     */
+//    public static function findByAccountNumber($user_id) {
+//        return static::find()
+//                ->andWhere(['personal_user_id' => $user_id])
+//                ->one();
+//    }
     
     /*
      * Поиск Арендатора закрепленного за лицевым счетом
