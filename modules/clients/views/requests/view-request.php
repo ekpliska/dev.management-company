@@ -84,7 +84,11 @@ $username = Yii::$app->user->identity->user_login;
     </div>
     
     <div class="col-md-5">
-        <?= $this->render('form/_comment', ['model' => $comments, 'comments_find' => $comments_find]); ?>
+        <?= $this->render('form/_comment', [
+            'model' => $comments, 
+            'comments_find' => $comments_find, 
+            'request_id' => $request_info->id
+        ]); ?>
     </div>
     
 </div>

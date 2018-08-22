@@ -8,14 +8,14 @@
  * Форма добавления комментариев
  */
 ?>
-
 <?php Pjax::begin(['id' => 'comments']) ?>
+<div class="comments">
     <div class="panel panel-default">
         <div class="panel-heading">Комментарии</div>
         <div class="panel-body">
             <div class="container-fluid">
-                    <?php if (isset($comments_find)) : ?>
-
+                
+                <?php if (isset($comments_find)) : ?>
                     <?php foreach ($comments_find as $key => $comment) : ?>
                         <div class="row">
                             
@@ -58,16 +58,30 @@
                         </div>
                     <?php endforeach; ?>
                 <?php endif; ?>
-                <br />
-                <hr />
+                
+            </div>
+        </div>
+    </div>
+</div>
+<?php Pjax::end() ?>
+
+
+<?php Pjax::begin(['id' => 'new_note']) ?>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="container-fluid">
+
                 <?php
                     $form = ActiveForm::begin([
-                        'id' => 'add-comment',                    
+                        'id' => 'add-comment',
                         'options' => [
                             'data-pjax' => true,
-                        ]
-                    ])
+                        ],
+                    ]);
                 ?>
+                
+                    <div class="alert alert-danger message_error" style="display: none"></div>
+                    
                     <?= $form->field($model, 'comments_text')
                             ->textarea([
                                 'placeHolder' => $model->getAttributeLabel('comments_text'), 
@@ -75,22 +89,21 @@
                             ->label(false) ?>
                 
                     <div class="form-group text-right"> 
-                        <?= Html::submitButton('Отправить', ['class' => 'btn btn-success']) ?>
+                        <?= Html::submitButton('Отправить', ['class' => 'btn btn-success btn__add_comment']) ?>
                     </div>
 
                 <?php ActiveForm::end() ?>
             </div>
         </div>
     </div>
-<?php Pjax::end() ?>
+<?php Pjax::end(); ?>
 
 <?php
-$this->registerJs(
-   '$("document").ready(function(){
-        $("#comments").on("pjax:end", function(e) {
-            e.preventDefault();
-            $.pjax.reload({container:"#comments"});  
-	});
+    $this->registerJs(
+        '$("document").ready(function(){
+            $("#new_note").on("pjax:end", function() {
+            $.pjax.reload({container:"#comments"});
+        });
     });'
-);
+    );
 ?>

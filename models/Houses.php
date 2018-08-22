@@ -67,10 +67,10 @@ class Houses extends ActiveRecord
     }
     
     public function getAdress() {
-        return $this->houses_town . ' ' .
-                $this->houses_street . ' ' .
-                $this->houses_number_house . ' ' .
-                $this->houses_flat;
+        return $this->houses_town . ' г., ' .
+                $this->houses_street . ' ул., ' .
+                $this->houses_number_house . ' д., ' .
+                $this->houses_flat . ' кв.';
     }
     
     public function getPorch() {

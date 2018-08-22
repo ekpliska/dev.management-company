@@ -5,6 +5,7 @@
     use yii\web\NotFoundHttpException;
     use yii\data\ActiveDataProvider;
     use yii\web\UploadedFile;
+    use yii\helpers\ArrayHelper;
     use app\modules\clients\controllers\AppClientsController;
     use app\models\Requests;
     use app\models\User;
@@ -81,34 +82,43 @@ class RequestsController extends AppClientsController
      */    
     public function actionViewRequest($request_numder) {
         
+        $user_info = $this->permisionUser();
+
         // Ищем заявку по уникальному номеру
         $request_info = Requests::findRequestByIdent($request_numder);
-
-        // Если заявка не найдена, кидаем исключение
-        if ($request_info === null) {
+        
+        /*
+         * Если заявка не найдена или передан номер заявки не принадлежащий пользователю, 
+         * кидаем исключение
+         */
+        if ($request_info === null || !ArrayHelper::keyExists($request_info->account, $this->_list)) {
             throw new NotFoundHttpException('Вы обратились к несуществующей странице');
         }
-
+        
         // Получаем прикрепленные к заявке файлы
-        $images = Image::find()->andWhere(['itemId' => $request_info->requests_id])->all();
+        $images = Image::find()->andWhere(['itemId' => $request_info->id])->all();
         
         /*
          * Для комментариев к заявке
          */
-        $comments = new CommentsToRequest();
-        $comments_find = CommentsToRequest::findCommentsById($request_info->requests_id);
+        $comments = new CommentsToRequest([
+            'scenario' => CommentsToRequest::SCENARIO_ADD_COMMENTS
+        ]);
+        $comments_find = CommentsToRequest::findCommentsById($request_info->id);        
+        $user_house = Houses::findByAccountId($request_info->account);
         
-        // $account_id = Yii::$app->user->identity->user_account_id;        
-        $user_house = Houses::findByAccountId('1');
-        
-        
-        $model = new CommentsToRequest();
-		
-        if ($model->load(Yii::$app->request->post()))
-        {
-            $model->sendComment($request_info->requests_id);
+        /*
+         * Загружаем модель для добавления комментрария к задаче
+         * Pjax
+         */
+        if (Yii::$app->request->isPjax) {
+            $model = new CommentsToRequest([
+                'scenario' => CommentsToRequest::SCENARIO_ADD_COMMENTS
+            ]);        
+            if ($model->load(Yii::$app->request->post())) {
+                $model->sendComment($request_info->id);
+            }
         }
-        
         
         return $this->render('view-request', [
             'request_info' => $request_info, 
@@ -140,27 +150,6 @@ class RequestsController extends AppClientsController
         }
         
         return ['status' => false];
-    }
-    
-    public function actionAddComment() {
-        
-        $model = new CommentsToRequest();
-        $client_id = Yii::$app->request->post('request_id');
-        
-        return $client_id;
-//        $model = new ClientsRentForm();
-//        
-//        $client_id = Yii::$app->request->post('client_id');
-//        
-//        if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
-//            if ($model->load(Yii::$app->request->post())) {
-//                $model->addNewClient($client_id);
-//                // return $rent_id;
-//                return true;
-//            }
-//        }
-//        
-        
     }
     
     /*

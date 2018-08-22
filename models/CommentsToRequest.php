@@ -11,6 +11,7 @@
  */
 class CommentsToRequest extends ActiveRecord
 {
+    const SCENARIO_ADD_COMMENTS = 'add_comments_to_requests';
     
     public function behaviors() {
         return [
@@ -32,9 +33,9 @@ class CommentsToRequest extends ActiveRecord
     public function rules()
     {
         return [
-            ['comments_text', 'required'],
+            ['comments_text', 'required', 'on' => self::SCENARIO_ADD_COMMENTS],
             [['comments_request_id', 'comments_user_id', 'created_at'], 'integer'],
-            [['comments_text'], 'string', 'min' => 10, 'max' => 255],
+            [['comments_text'], 'string', 'min' => 10, 'max' => 255, 'on' => self::SCENARIO_ADD_COMMENTS],
         ];
     }
     
@@ -63,10 +64,13 @@ class CommentsToRequest extends ActiveRecord
     public function sendComment($request_id) {
         
         if ($this->validate()) {
+            
             $this->comments_request_id = $request_id;
-            $this->comments_user_id = Yii::$app->user->identity->user_id;
-            return $this->save() ? true : null;
+            $this->comments_user_id = Yii::$app->user->identity->id;
+            return $this->save() ? true : false;
+            
         }
+        return false;
     }
 
     /**
@@ -77,9 +81,10 @@ class CommentsToRequest extends ActiveRecord
         return [
             'comments_id' => 'Comments ID',
             'comments_request_id' => 'Comments Request ID',
-            'comments_user_id' => 'Comments User ID',
+            'comments_user_id' => 'Пользователь',
             'comments_text' => 'Ваш комментарий...',
-            'created_at' => 'Created At',
+            'created_at' => 'Дата создания',
+            'updated_at' => 'Дата редактирования',
         ];
     }
 }

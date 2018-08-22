@@ -208,7 +208,21 @@ class Requests extends ActiveRecord
         } else {
             return false;
         }
-    }    
+    }
+    
+    /*
+     * @param integer ID заявки
+     */
+    public function getId() {
+        return $this->requests_id;
+    }
+    
+    /*
+     * @param integet ID Лицевого счета заявки
+     */
+    public function getAccount() {
+        return $this->requests_account_id;
+    }
     
     
     /**

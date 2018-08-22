@@ -143,7 +143,7 @@ class PersonalAccountController extends AppClientsController {
                     return ['status' => true];
                 }
             }
-            // Инваче, запросу отдаем ответ о поваленной валидации и ошибки
+            // Инваче, запросу отдаем ответ о проваленной валидации и ошибки
             return [
                 'status' => false,
                 'errors' => $model->errors,
