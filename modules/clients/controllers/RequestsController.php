@@ -23,16 +23,17 @@ class RequestsController extends AppClientsController
     
     /**
      * Главная страница
+     * @param array $type_requests Массив всех видом зявок
+     * @param array $status_requests Пользовательские статусы заявок
+     * @param integer $accoint_id Значение ID лицевого счета из глобального dropDownList (хеддер)
      */
-    public function actionIndex()
-    {
+    public function actionIndex() {
         
         $user_info = $this->permisionUser();
         
-        // Получаем виды заявок
-        $type_requests = TypeRequests::getTypeNameArray();
+        $accoint_id = $this->_choosing;        
         
-        // Получаем пользовательские статусы для заявок
+        $type_requests = TypeRequests::getTypeNameArray();
         $status_requests = Requests::getUserStatusRequests();
        
         // Модель для фильтра по типу заявок
@@ -40,7 +41,7 @@ class RequestsController extends AppClientsController
         
         // В датапровайдер собираем все заявки по текущему пользователю
         $all_requests = new ActiveDataProvider([
-            'query' => Requests::findByAccountID($this->_choosing),
+            'query' => Requests::findByAccountID($accoint_id),
             'pagination' => [
                 'forcePageParam' => false,
                 'pageSizeParam' => false,
@@ -52,13 +53,10 @@ class RequestsController extends AppClientsController
          * Определяем модель добавления новой заявки
          * Если данные получены и провалидированы сохраняем заявку
          */
-        // $model = new AddRequest();
+        
         $model = new Requests([
                 'scenario' => Requests::SCENARIO_ADD_REQUEST,
             ]);
-        
-        // Получить ID выбранного лицевого счета из глобального списка dropDownList
-        $accoint_id = $this->_choosing;
         
         if ($model->load(Yii::$app->request->post())) {
             if ($model->addRequest($accoint_id)) {
