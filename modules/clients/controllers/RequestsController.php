@@ -31,7 +31,7 @@ class RequestsController extends AppClientsController
         
         $user_info = $this->permisionUser();
         
-        $accoint_id = $this->_choosing;        
+        $accoint_id = $this->_choosing;
         
         $type_requests = TypeRequests::getTypeNameArray();
         $status_requests = Requests::getUserStatusRequests();

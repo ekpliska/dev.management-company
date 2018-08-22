@@ -5,6 +5,7 @@
     use yii\db\ActiveRecord;
     use yii\behaviors\TimestampBehavior;
     use yii\helpers\ArrayHelper;
+    use app\models\StatusRequest;
 
 /**
  * Платные услуги
@@ -12,15 +13,6 @@
 class PaidServices extends ActiveRecord
 {
     
-    const STATUS_NEW = 0;
-    const STATUS_IN_WORK = 1;
-    const STATUS_PERFORM = 2;
-    const STATUS_FEEDBAK = 3;
-    const STATUS_CLOSE = 4;
-    const STATUS_REJECT = 5;
-    const STATUS_CONFIRM = 6;
-    const STATUS_ON_VIEW = 7;    
-
     const SCENARIO_ADD_SERVICE = 'add_record';
     
     public function behaviors() {
@@ -58,29 +50,6 @@ class PaidServices extends ActiveRecord
     }
 
     /*
-     * Массив статусов заявок
-     */
-    public static function getStatusNameArray() {
-        return [
-            self::STATUS_NEW => 'Новая',
-            self::STATUS_IN_WORK => 'В работе',
-            self::STATUS_PERFORM => 'На исполнении',
-            self::STATUS_FEEDBAK => 'На уточнении',
-            self::STATUS_CLOSE => 'Закрыто',
-            self::STATUS_REJECT => 'Отклонена',
-            self::STATUS_CONFIRM => 'Подтверждена пользователем',
-            self::STATUS_ON_VIEW => 'На рассмотрении',
-        ];
-    }
-
-    /*
-     * Получить название статуса по его номеру
-     */
-    public function getStatusName() {
-        return ArrayHelper::getValue(self::getStatusNameArray(), $this->status);
-    }
-    
-    /*
      * Получить название категории по ID услуги
      */
     public function getNameCategory() {
@@ -96,12 +65,32 @@ class PaidServices extends ActiveRecord
     }    
 
     /*
-     * Получить все заявки, заданного пользователя
+     * Получить все заявки, текущего пользователя
      */
-    public static function getOrderByUder($user_id) {
-        return self::find()
-                ->andWhere(['services_user_id' => $user_id])
-                ->orderBy(['created_at' => SORT_DESC]);
+    public static function getOrderByUder($account_id) {
+        
+        $_list = (new \yii\db\Query())
+                ->select('p.services_number, '
+                        . 'c.category_name, '
+                        . 's.services_name, '
+                        . 'p.created_at, p.services_comment, '
+                        . 'p.services_specialist_id,'
+                        . 'p.status,'
+                        . 'p.updated_at')
+                ->from('paid_services as p')
+                ->join('LEFT JOIN', 'services as s', 's.services_id = p.services_name_services_id')
+                ->join('LEFT JOIN', 'category_services as c', 'c.category_id = s.services_category_id')
+                ->andWhere(['services_account_id' => $account_id])
+                ->orderBy(['created_at' => SORT_DESC])
+                // ->all()
+                ;
+//        
+//        echo '<pre>';
+//        var_dump($_list);
+//        die();
+//        
+        
+        return $_list;
     }
     
     /*
@@ -123,7 +112,7 @@ class PaidServices extends ActiveRecord
         $order_numder = substr($account->account_number, 4) . '-' . substr($int, 5) . '-' . str_pad($this->services_name_services_id, 2, 0, STR_PAD_LEFT);
         
         $this->services_number = $order_numder;
-        $this->status = self::STATUS_NEW;
+        $this->status = StatusRequest::STATUS_NEW;
         $this->services_user_id = Yii::$app->user->identity->user_id;
         return $this->save() ? true : false;
         
@@ -146,7 +135,7 @@ class PaidServices extends ActiveRecord
             'status' => 'Статус',
             'services_dispatcher_id' => 'Диспетчер',
             'services_specialist_id' => 'Специалист',
-            'services_user_id' => 'Services User ID',
+            'services_account_id' => 'Services Account ID',
         ];
     }
 }

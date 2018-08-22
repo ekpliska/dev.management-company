@@ -3,6 +3,7 @@
     use Yii;
     use yii\helpers\ArrayHelper;
     use yii\helpers\Html;
+    use app\models\StatusRequest;
 
 /*
  * Внутренний хелпер,
@@ -49,4 +50,14 @@ class FormatHelpers {
     public static function formatDateCounter($date_int) {
         return Yii::$app->formatter->asDate($date_int, 'd MMMM Y');
     }
+    
+    /*
+     * Вывод текстового значения статусов для платных и бесплатных заявок
+     */
+    public static function statusName($status) {
+        
+        return ArrayHelper::getValue(StatusRequest::getStatusNameArray(), $status);
+        
+    }
+    
 }

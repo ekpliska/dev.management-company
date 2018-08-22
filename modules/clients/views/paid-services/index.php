@@ -1,5 +1,7 @@
 <?php
     use yii\grid\GridView;
+    use app\helpers\FormatHelpers;
+    
 /* 
  * Заявки (Обзая страница)
  */
@@ -15,37 +17,50 @@ $this->title = 'История услуг';
         'dataProvider' => $all_orders,
         'columns' => [
             
-            'services_number',
             [
-                'attribute' => 'Категория',
-                'value' => function ($data) {
-                    return $data->getNameCategory();
-                },
+                'attribute' => 'services_number',
+                'label' => 'Номер',
+                'value' => 'services_number',
             ],
             [
-                'attribute' => 'services_name_services_id',
-                'value' => function ($data) {
-                    return $data->getNameServices();
-                },
+                'attribute' => 'category_name',
+                'label' => 'Категория',
+                'value' => 'category_name',
+            ],
+            [
+                'attribute' => 'services_name',
+                'label' => 'Наименование услуги',
+                'value' => 'services_name',
             ],
             [
                 'attribute' => 'created_at',
+                'label' => 'Дата заявки',
                 'value' => function ($data) {
-                    return Yii::$app->formatter->asDate($data->created_at, 'php:d.m.Y H:m:i');
+                    return FormatHelpers::formatDateCounter($data['created_at']);
                 },
             ],
-            'services_comment',
-            'services_specialist_id',
+            [
+                'attribute' => 'services_comment',
+                'label' => 'Текст заявки',
+                'value' => 'services_comment',
+            ],
+            [
+                'attribute' => 'services_specialist_id',
+                'label' => 'Исполнитель',
+                'value' => 'services_specialist_id',
+            ],
             [
                 'attribute' => 'status',
+                'label' => 'Статус',
                 'value' => function ($data) {
-                    return $data->getStatusName();
+                    return FormatHelpers::statusName($data['status']);
                 },
             ],
             [
                 'attribute' => 'updated_at',
+                'label' => 'Дата закрытия',
                 'value' => function ($data) {
-                    return $data->status == 4 ? Yii::$app->formatter->asDate($data->updated_at, 'php:d.m.Y H:m:i') : '';
+                    return FormatHelpers::formatDateCounter($data['updated_at']);
                 },
             ],
         ],

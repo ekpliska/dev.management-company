@@ -17,13 +17,17 @@ class PaidServicesController extends AppClientsController {
     
     /*
      * Страница "История услуг"
+     * @param ActiveQuery Все платные услуги для текущего пользователя
+     * @param intereg $accoint_id Значение ID лицевого счета из глобального dropDownList (хеддер)
      */
     public function actionIndex() {
         
         $this->permisionUser();
+        $accoint_id = $this->_choosing;
         
         $all_orders = new ActiveDataProvider([
-            'query' => PaidServices::find(Yii::$app->user->identity->user_id)->orderBy(['created_at' => SORT_DESC])
+            //'query' => PaidServices::find(Yii::$app->user->identity->user_id)->orderBy(['created_at' => SORT_DESC])
+            'query' => PaidServices::getOrderByUder($accoint_id)
         ]);
         
         return $this->render('index', ['all_orders' => $all_orders]);
