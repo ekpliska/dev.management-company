@@ -6,6 +6,7 @@
     use yii\behaviors\TimestampBehavior;
     use yii\helpers\ArrayHelper;
     use yii\helpers\Html;
+    use yii\data\ActiveDataProvider;
     use app\models\StatusRequest;
 
 /**
@@ -76,10 +77,11 @@ class PaidServices extends ActiveRecord
 
     /*
      * Получить все заявки, текущего пользователя
+     * @param ActiveQuery $all_orders
      */
     public static function getOrderByUder($account_id) {
         
-        $_list = (new \yii\db\Query())
+        $query = (new \yii\db\Query())
                 ->select('p.services_number, '
                         . 'c.category_name, '
                         . 's.services_name, '
@@ -93,18 +95,19 @@ class PaidServices extends ActiveRecord
                 ->andWhere(['services_account_id' => $account_id])
                 ->orderBy(['created_at' => SORT_DESC]);
         
-        return $_list;
-    }
-    
-    /*
-     * 
-     */
-    public function filterByAccount($account_id) {
-        //
+        $all_orders = new ActiveDataProvider([
+                'query' => $query,
+                'pagination' => [
+                    'forcePageParam' => false,
+                    'pageSizeParam' => false,
+                    'pageSize' => (Yii::$app->params['countRec']['client']) ? Yii::$app->params['countRec']['client'] : 15,
+                ],
+            ]);
+        
+        return $all_orders;
         
     }
-
-
+    
     /*
      * Сохранение новой платной заявки
      */

@@ -2,7 +2,6 @@
 
     namespace app\modules\clients\controllers;
     use Yii;
-    use yii\data\ActiveDataProvider;
     use yii\web\Response;
     use app\modules\clients\controllers\AppClientsController;
     use app\models\Services;
@@ -28,14 +27,7 @@ class PaidServicesController extends AppClientsController {
         
         $_search = new searchInPaidServices();
         
-        $all_orders = new ActiveDataProvider([
-            'query' => PaidServices::getOrderByUder($account_id),
-                'pagination' => [
-                    'forcePageParam' => false,
-                    'pageSizeParam' => false,
-                    'pageSize' => Yii::$app->params['countRec']['client'] ? Yii::$app->params['countRec']['client'] : 15,
-                ],            
-        ]);
+        $all_orders = PaidServices::getOrderByUder($account_id);
         
         return $this->render('index', ['all_orders' => $all_orders, '_search' => $_search]);
     }
@@ -68,6 +60,10 @@ class PaidServicesController extends AppClientsController {
         
     }
     
+    /*
+     * Метод переключения текущего лицевого счета
+     * dropDownList в хеддере
+     */
     public function actionFilterByAccount($account_id) {
         
         Yii::$app->response->format = Response::FORMAT_JSON;
@@ -78,18 +74,10 @@ class PaidServicesController extends AppClientsController {
         
         if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
             
-            $all_orders = new ActiveDataProvider([
-                'query' => PaidServices::getOrderByUder($account_id),
-                'pagination' => [
-                    'forcePageParam' => false,
-                    'pageSizeParam' => false,
-                    'pageSize' => (Yii::$app->params['countRec']['client']) ? Yii::$app->params['countRec']['client'] : 15,
-                ],
-            ]);
+            $all_orders = PaidServices::getOrderByUder($account_id);
             
+            $data = $this->renderAjax('data/grid', ['all_orders' => $all_orders]);
             
-            
-            $data = $this->renderAjax('grid/grid', ['all_orders' => $all_orders]);
             return ['status' => true, 'data' => $data];
             
         }
@@ -97,18 +85,25 @@ class PaidServicesController extends AppClientsController {
         return ['status' => false];
     }
     
+    /*
+     * Поиск заявок по исполнителю
+     */
     public function actionSearchBySpecialist() {
         
         Yii::$app->response->format = Response::FORMAT_JSON;
         
         $value = Yii::$app->request->post('searchValue');
-        $account = Yii::$app->request->post('accountId');        
+        $account = Yii::$app->request->post('accountId');
         
         if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
             
+            // Загружаем модель поиска
             $model = new searchInPaidServices();
+            
             $all_orders = $model->search($value, $account);
-            $data = $this->renderAjax('grid/grid', ['all_orders' => $all_orders]);
+            
+            $data = $this->renderAjax('data/grid', ['all_orders' => $all_orders]);
+            
             return ['status' => true, 'data' => $data];
             
         }

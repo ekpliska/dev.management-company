@@ -34,7 +34,7 @@ $this->title = 'История услуг';
     <?php ActiveForm::end(); ?>
     
     <div class="grid-view">
-        <?= $this->render('grid/grid', ['all_orders' => $all_orders]) ?>
+        <?= $this->render('data/grid', ['all_orders' => $all_orders]) ?>
     </div>
     
 </div>
@@ -54,9 +54,9 @@ $this->registerJs("
             data: {
                 account_id: account_id,
             },
-            success: function(response){
+            success: function(response) {
                 if (response.status === false) {
-                    $('.grid-view').html('Возникла ошибка при передаче данных. Обновите страницу нажав на клавиатуре клавишу F5');
+                    $('.grid-view').html('Возникла ошибка при передаче данных. Обновите страницу, нажав на клавиатуре клавишу F5');
                 } else {
                     $('.grid-view').html(response.data);
                 }

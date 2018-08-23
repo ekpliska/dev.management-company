@@ -60,4 +60,16 @@ class FormatHelpers {
         
     }
     
+    /*
+     * Форматированный вывод текста комментария к заявке в таблице
+     * 
+     * @param integer $count Количество символов
+     * @param string $comment Комментарий к заявке
+     */
+    public function smallTextComment($comment, $count) {
+        
+        
+        
+    }
+    
 }
