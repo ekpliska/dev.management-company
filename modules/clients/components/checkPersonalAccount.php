@@ -25,7 +25,7 @@ class checkPersonalAccount extends Behavior {
     public function events() {
         return [
             Controller::EVENT_AFTER_ACTION => 'getListAccount',
-            Controller::EVENT_BEFORE_ACTION => 'sessionAccound',
+            Controller::EVENT_BEFORE_ACTION => 'sessionAccount',
         ];
     }
     
@@ -42,7 +42,7 @@ class checkPersonalAccount extends Behavior {
      * Если кука пустая, то берем значение из сессии
      * В противном случае для куки и сесси устанавливаем параметром первый ID лицевого счета из списка dorpDownList
      */
-    public function sessionAccound() {
+    public function sessionAccount() {
         
         $session = Yii::$app->session;
         $cookies = Yii::$app->response->cookies;

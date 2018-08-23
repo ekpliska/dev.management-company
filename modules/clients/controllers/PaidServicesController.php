@@ -23,10 +23,15 @@ class PaidServicesController extends AppClientsController {
     public function actionIndex() {
         
         $this->permisionUser();
-        $accoint_id = $this->_choosing;
+        $account_id = $this->_choosing;
         
         $all_orders = new ActiveDataProvider([
-            'query' => PaidServices::getOrderByUder($accoint_id)
+            'query' => PaidServices::getOrderByUder($account_id),
+                'pagination' => [
+                    'forcePageParam' => false,
+                    'pageSizeParam' => false,
+                    'pageSize' => Yii::$app->params['countRec']['client'] ? Yii::$app->params['countRec']['client'] : 15,
+                ],            
         ]);
         
         return $this->render('index', ['all_orders' => $all_orders]);
@@ -39,7 +44,7 @@ class PaidServicesController extends AppClientsController {
         
         $accoint_id = $this->_choosing;
         
-        // Модель создания новой заявки
+        // Загружаем модель добавления новой заявки
         $new_order = new PaidServices([
             'scenario' => PaidServices::SCENARIO_ADD_SERVICE,
         ]);
@@ -60,38 +65,33 @@ class PaidServicesController extends AppClientsController {
         
     }
     
-//    /*
-//     * Метод сохранения заявки
-//     */
-//    public function actionAddRecord() {
-//        
-//        $accoint_id = $this->_choosing;
-//        
-//        Yii::$app->response->format = Response::FORMAT_JSON;
-//
-//        $new_order = new PaidServices([
-//            'scenario' => PaidServices::SCENARIO_ADD_SERVICE,
-//        ]);
-//        /*
-//         * Если данные с формы добавления новой заявки загружены,
-//         * то вызываем метод сохранения данных
-//         */
-//        if (Yii::$app->request->isAjax) {
-//            if ($new_order->load(Yii::$app->request->post())) {
-//                if ($new_order->validate()) {
-//                    Yii::$app->session->setFlash('success', 'Ваша заявка создана');
-//                    $new_order->addOrder($accoint_id);
-//                    return $this->asJson(['status' => true]);
-//                }
-//            }
-//            Yii::$app->session->setFlash('success', 'При создании заявки возникла ошика');
-//            return $this->asJson([
-//                'status' => false,
-//                'errors' => $new_order->errors,
-//            ]);
-//        }        
-//
-//        return $this->asJson(['status' => false]);
-//    }
-    
+    public function actionFilterByAccount($account_id) {
+        
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        
+        if (!is_numeric($account_id)) {
+            return ['status' => false];
+        }
+        
+        if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
+            
+            $all_orders = new ActiveDataProvider([
+                'query' => PaidServices::getOrderByUder($account_id),
+                'pagination' => [
+                    'forcePageParam' => false,
+                    'pageSizeParam' => false,
+                    'pageSize' => (Yii::$app->params['countRec']['client']) ? Yii::$app->params['countRec']['client'] : 15,
+                ],
+            ]);
+            
+            
+            
+            $data = $this->renderAjax('grid/grid', ['all_orders' => $all_orders]);
+            return ['status' => true, 'data' => $data];
+            
+        }
+        
+        return ['status' => false];
+    }
+        
 }

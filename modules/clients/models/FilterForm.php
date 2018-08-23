@@ -2,7 +2,6 @@
     
     namespace app\modules\clients\models;
     use yii\base\Model;
-    use app\models\PersonalAccount;
     use app\models\Requests;
     use yii\data\ActiveDataProvider;
 
@@ -22,7 +21,10 @@ class FilterForm extends Model {
     }
     
     /*
-     * Фильтр заявок по типу заявки
+     * Фильтр заявок 
+     * @param integer $type_id по лицевому счету
+     * @param integer $account_id по типу заявки 
+     * @param integer $status по статусу
      */
     public function searchRequest($type_id, $account_id, $status) {
         
@@ -59,7 +61,7 @@ class FilterForm extends Model {
             'pagination' => [
                 'forcePageParam' => false,
                 'pageSizeParam' => false,
-                'pageSize' => 15,
+                'pageSize' => Yii::$app->params['countRec']['client'] ? Yii::$app->params['countRec']['client'] : 15,
             ],
         ]);
 

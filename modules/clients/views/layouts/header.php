@@ -82,10 +82,10 @@ $this->registerJs('
                 idAccount: idAccount,
             },
             error: function() {
-                console.log("error ajax");            
+                console.log("#1001 - Ошибка Ajax запроса");
             },
             success: function(response) {
-                console.log(response.success);
+                // console.log(response.success);
             }
         });
 

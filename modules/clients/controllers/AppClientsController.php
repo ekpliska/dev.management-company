@@ -4,6 +4,7 @@
     use Yii;
     use yii\web\Controller;
     use yii\filters\AccessControl;
+    use yii\web\Response;
     use app\models\User;
     use app\modules\clients\components\checkPersonalAccount;
         
@@ -70,8 +71,16 @@ class AppClientsController extends Controller {
     public function actionCurrentAccount() {
         
         $account_id = Yii::$app->request->post('idAccount');
+        Yii::$app->response->format = Response::FORMAT_JSON;
         
-        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        /*
+         * Если в $account_id пришел не верный ID лицевого счета
+         * то в куку и сессию его не записываем
+         * Возвращается предыдущее выбранное значение
+         */
+        if (!is_numeric($account_id)) {
+            return ['status' => false];
+        }
         
         if (Yii::$app->request->isAjax) {
             Yii::$app->session->set('_userAccount', $account_id);
@@ -80,9 +89,9 @@ class AppClientsController extends Controller {
                 'value' => $account_id,
                 'expire' => time() + 60*60*24*7,
             ]));
-            return ['success' => $account_id];
+            return ['status' => true];
         }
-        return ['success' => false];;
+        return ['status' => false];;
     }
     
 }

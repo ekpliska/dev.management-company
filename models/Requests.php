@@ -73,7 +73,7 @@ class Requests extends ActiveRecord
                 'on' => self::SCENARIO_ADD_REQUEST,
             ],
             [['requests_comment'], 'string', 'on' => self::SCENARIO_ADD_REQUEST],
-            [['requests_ident'], 'string', 'min' => 10, 'max' => 255, 'on' => self::SCENARIO_ADD_REQUEST],
+            [['requests_comment'], 'string', 'min' => 10, 'max' => 255, 'on' => self::SCENARIO_ADD_REQUEST],
             
         ];
     }

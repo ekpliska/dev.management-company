@@ -39,9 +39,18 @@ class PaidServices extends ActiveRecord
             
             [['services_name_services_id', 'services_phone', 'services_comment'], 'required', 'on' => self::SCENARIO_ADD_SERVICE],
             
+            [
+                'services_phone', 
+                'match', 
+                'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/i',
+                'on' => self::SCENARIO_ADD_SERVICE,
+            ],
+
+            [['services_comment'], 'string', 'on' => self::SCENARIO_ADD_SERVICE],
+            [['services_comment'], 'string', 'min' => 10, 'max' => 255, 'on' => self::SCENARIO_ADD_SERVICE],
+            
             [['services_name_services_id', 'created_at', 'updated_at', 'status', 'services_dispatcher_id', 'services_specialist_id', 'services_account_id'], 'integer'],
             [['services_number'], 'string', 'max' => 16],
-            [['services_comment'], 'string', 'max' => 255],
             [['services_phone'], 'string', 'max' => 50],
         ];
     }
@@ -88,6 +97,15 @@ class PaidServices extends ActiveRecord
     }
     
     /*
+     * 
+     */
+    public function filterByAccount($account_id) {
+        //
+        
+    }
+
+
+    /*
      * Сохранение новой платной заявки
      */
     public function addOrder($accoint_id) {
@@ -120,8 +138,7 @@ class PaidServices extends ActiveRecord
             
         }
 
-            Yii::$app->session->setFlash('error', 'При формировании заявки возникла ошибка. Обновите страницу и повторите действия еще раз');        
-        
+        Yii::$app->session->setFlash('error', 'При формировании заявки возникла ошибка. Обновите страницу и повторите действия еще раз');
         return false;
         
     }
@@ -143,7 +160,7 @@ class PaidServices extends ActiveRecord
             'status' => 'Статус',
             'services_dispatcher_id' => 'Диспетчер',
             'services_specialist_id' => 'Специалист',
-            'services_account_id' => 'Services Account ID',
+            'services_account_id' => 'Лицевой счет',
         ];
     }
 }
