@@ -2,6 +2,7 @@
 
     use yii\grid\GridView;
     use app\helpers\FormatHelpers;
+    use yii\widgets\Pjax;    
     
 /*
  * Вывод истории платных услуг
@@ -9,10 +10,12 @@
 ?>
 
 <div class="grid-view">
+    
+    <?php Pjax::begin() ?>
+    
     <?= GridView::widget([
         'dataProvider' => $all_orders,
         'columns' => [
-            
             [
                 'attribute' => 'services_number',
                 'label' => 'Номер',
@@ -61,4 +64,7 @@
             ],
         ],
     ]); ?>
+    
+    <?php Pjax::end() ?>
+    
 </div>

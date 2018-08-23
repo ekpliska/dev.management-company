@@ -352,6 +352,31 @@ $(document).ready(function() {
         $('#add-paid-service')[0].reset();
     });
 
+/*
+ * Поиск по исполнителю
+ */
+    $('#_search-input').on('input', function() {
+    
+        var searchValue = $(this).val();
+        var accountId = $('.current__account_list').val();
+        
+        $.ajax({
+            url: 'search-by-specialist',
+            method: 'POST',
+            data: {
+                searchValue: searchValue,
+                accountId: accountId,
+            },
+            success: function(response) {
+                $('.grid-view').html(response.data);
+            },
+            error: function() {
+                console.log('error');
+            }
+        });
+    });
+
+
 /* End Block of Paid Services */
 
 });

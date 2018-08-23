@@ -17,13 +17,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'houses_id') ?>
 
-    <?= $form->field($model, 'houses_name') ?>
+    <?php // = $form->field($model, 'houses_name') ?>
 
-    <?= $form->field($model, 'houses_town') ?>
+    <?php // = $form->field($model, 'houses_town') ?>
 
-    <?= $form->field($model, 'houses_street') ?>
+    <?php // = $form->field($model, 'houses_street') ?>
 
-    <?= $form->field($model, 'houses_number_house') ?>
+    <?php // = $form->field($model, 'houses_number_house') ?>
 
     <?php // echo $form->field($model, 'houses_porch') ?>
 

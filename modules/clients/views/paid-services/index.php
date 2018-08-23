@@ -1,4 +1,6 @@
 <?php
+
+    use yii\widgets\ActiveForm;
     
 /* 
  * Заявки (Обзая страница)
@@ -8,6 +10,28 @@ $this->title = 'История услуг';
 
 <div class="paid-services-default-index">
     <h1><?= $this->title ?></h1>
+    
+    <?php
+        $form = ActiveForm::begin([
+            'id' => 'search-form',
+            'options' => [
+                'class' => 'form-horizontal',
+            ]
+        ]);
+    ?>
+    
+    <div class="form-group">
+        <label class="control-label col-sm-9" for="email">Поиск по исполнителю</label>
+        <div class="col-sm-3 text-right">
+            <?= $form->field($_search, '_input')
+                    ->input('text', [
+                        'placeHolder' => $_search->getAttributeLabel('_input'),
+                        'id' => '_search-input'])
+                    ->label(false) ?>
+        </div>
+    </div>
+    
+    <?php ActiveForm::end(); ?>
     
     <div class="grid-view">
         <?= $this->render('grid/grid', ['all_orders' => $all_orders]) ?>

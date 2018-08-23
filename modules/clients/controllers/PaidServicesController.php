@@ -8,6 +8,7 @@
     use app\models\Services;
     use app\models\CategoryServices;
     use app\models\PaidServices;
+    use app\modules\clients\models\_searchForm\searchInPaidServices;
 
 /**
  * Платные заявки
@@ -25,6 +26,8 @@ class PaidServicesController extends AppClientsController {
         $this->permisionUser();
         $account_id = $this->_choosing;
         
+        $_search = new searchInPaidServices();
+        
         $all_orders = new ActiveDataProvider([
             'query' => PaidServices::getOrderByUder($account_id),
                 'pagination' => [
@@ -34,7 +37,7 @@ class PaidServicesController extends AppClientsController {
                 ],            
         ]);
         
-        return $this->render('index', ['all_orders' => $all_orders]);
+        return $this->render('index', ['all_orders' => $all_orders, '_search' => $_search]);
     }
     
     /*
@@ -92,6 +95,26 @@ class PaidServicesController extends AppClientsController {
         }
         
         return ['status' => false];
+    }
+    
+    public function actionSearchBySpecialist() {
+        
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        
+        $value = Yii::$app->request->post('searchValue');
+        $account = Yii::$app->request->post('accountId');        
+        
+        if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
+            
+            $model = new searchInPaidServices();
+            $all_orders = $model->search($value, $account);
+            $data = $this->renderAjax('grid/grid', ['all_orders' => $all_orders]);
+            return ['status' => true, 'data' => $data];
+            
+        }
+        
+        return ['status' => false];
+        
     }
         
 }
