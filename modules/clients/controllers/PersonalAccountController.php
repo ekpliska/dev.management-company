@@ -71,10 +71,12 @@ class PersonalAccountController extends AppClientsController {
 
     /*
      * Страница "Приборы учета"
+     * @param intereg $accoint_id Значение ID лицевого счета из глобального dropDownList (хеддер)
      */
     public function actionCounters() {
 
         $user_info = $this->permisionUser();
+        $account_id = $this->_choosing;
 
         // Получаем текущую дату
         $current_date = time();        
@@ -83,7 +85,7 @@ class PersonalAccountController extends AppClientsController {
         $current_year = date('Y');
         
         $counters = new ActiveDataProvider([
-            'query' => Counters::getReadingCurrent(1, $current_month = 9, $current_year),            
+            'query' => Counters::getReadingCurrent($account_id, $current_month = 9, $current_year),            
         ]);
         
         return $this->render('counters', [
@@ -242,5 +244,34 @@ class PersonalAccountController extends AppClientsController {
         return $this->goHome();
         
     }
-         
+
+    
+    /*
+     * Метод переключения текущего лицевого счета для страницы "Показания приборов"
+     * dropDownList в хеддере
+     */
+    public function actionFilterByAccount($account_id) {
+        
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        
+        if (!is_numeric($account_id)) {
+            return ['status' => false];
+        }
+        
+        if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
+            
+            $counters = new ActiveDataProvider([
+                'query' => Counters::getReadingCurrent($account_id, $current_month = 9, $current_year = 2018),            
+            ]);
+            
+            $data = $this->renderAjax('data/grid', ['counters' => $counters]);
+            
+            return ['status' => true, 'data' => $data];
+            
+        }
+        
+        return ['status' => false];
+    }
+    
+    
 }
