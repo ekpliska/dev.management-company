@@ -53,7 +53,7 @@ $this->title = 'Мои заявки';
         
         <?= $this->render('form/_filter', ['model_filter' => $model_filter, 'type_requests' => $type_requests]); ?>
         
-        <?= $this->render('grid/grid', ['all_requests' => $all_requests]); ?>
+        <?= $this->render('data/grid', ['all_requests' => $all_requests]); ?>
 
     </div>
 </div>

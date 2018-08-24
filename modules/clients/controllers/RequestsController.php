@@ -145,7 +145,7 @@ class RequestsController extends AppClientsController
         if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
             $model_filter = new FilterForm();
             $all_requests = $model_filter->searchRequest($type_id, $account_id, $status);
-            return $this->renderAjax('grid/grid', ['all_requests' => $all_requests]);
+            return $this->renderAjax('data/grid', ['all_requests' => $all_requests]);
         }
         
         return ['status' => false];
