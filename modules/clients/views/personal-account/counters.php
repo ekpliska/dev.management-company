@@ -15,48 +15,17 @@ $this->title = 'Приборы учета';
 
     <div class="col-md-3">
         <div class="input-group">
-            <span class="input-group-addon">Лицевой счет</span>
-            <?= Html::dropDownList('_list-account-all', null, $account_all, [
-                    'class' => 'form-control _list-account-all',
-                    'prompt' => 'Выбрать лицевой счет из списка...',
-                ]) 
-            ?>
-        </div>
-    </div>
-    
-    <div class="col-md-3">
-        <div class="input-group">
-            <span class="input-group-addon">Год</span>
-            <?= Html::dropDownList('_list-account-all', null, $account_all, [
-                    'class' => 'form-control _list-account-all',
-                    'prompt' => 'Выбрать период из списка...'
-                ]) 
-            ?>
-        </div>
-    </div>
-
-    <div class="col-md-3">
-        <div class="input-group">
             <span class="input-group-addon">Месяц</span>
-            <?= Html::dropDownList('_list-account-all', null, $account_all, [
+            
+            <input name="startDate" id="startDate" class="date-picker" />
+            
+            <?php /* = Html::dropDownList('_list-account-all', null, ['1' => 'ЯНВ 2018'], [
                     'class' => 'form-control _list-account-all',
                     'prompt' => 'Выбрать период из списка...'
-                ]) 
+                ]) */
             ?>
         </div>
     </div>    
-    
-    <div class="col-md-3">
-        <div class="input-group">
-            <?= Html::button('Поиск', ['class' => 'btn btn-primary']) ?>
-        </div>
-    </div>
-
-    
-<?php
-//echo '<pre>';
-//var_dump (time());
-?>
     
     <div class="col-md-12">
         <?= GridView::widget([
@@ -113,7 +82,8 @@ $this->title = 'Приборы учета';
                     'label' => 'Дата снятия <br /> следующего показания',
                     'encodeLabel' => false,
                     'value' => function($data) {
-                        return FormatHelpers::formatDateCounter($data['current_date']);
+                        $date = $data['current_date'] ? $data['current_date'] : date('Y-m-01');
+                        return FormatHelpers::formatDateCounter($date);
                     },
                     'format' => 'raw',
                 ],
@@ -122,21 +92,19 @@ $this->title = 'Приборы учета';
                     'label' => 'Текущее показание',
                     'encodeLabel' => false,
                     'value' => function($data) use ($current_date) {
-                        
+                        $indication = $data['current_ind'] ? $data['current_ind'] : '';
+                        // Если дата поверки прибора учета истекла (сравнения даты поверки с текущей датой)
                         if ($data['date_check'] < $current_date) {
+                            // Блокируем ввод показаний
                             return '<span style="color: red">' . 'Ввод показаний ЗАБЛОКИРОВАН' . '</span><br />' . Html::a('Что делать?', ['/']);
-                        } else 
-                            if ($data['current_ind']) {
-                                return Html::textInput('curr_indication', $data['current_ind'], [
-                                    'class' => 'form-control indication_val',
-                                    'dir' => 'rtl']) 
-                                    . $data['current_ind'];
-                            } else {
-                                return Html::textInput('curr_indication', null, [
-                                    'class' => 'form-control indication_val',
-                                    'dir' => 'rtl']);
-                            }
-                        },
+                        } else {
+                            // Иначе выводим инпут + метка со значениями текущих показаний
+                            return Html::textInput('curr_indication', $indication, [
+                                'class' => 'form-control indication_val',
+                                'dir' => 'rtl']) 
+                                . $indication;
+                        }
+                    },
                     'format' => 'raw',
                 ],
                 [

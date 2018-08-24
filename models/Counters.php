@@ -60,23 +60,36 @@ class Counters extends ActiveRecord
      * --------------------------------> ВРЕМЕННЫЙ КОСТЫЛЬ
      * 
      */
-    public static function getReadingCurrent($account_id, $month) {
+    public static function getReadingCurrent($account_id, $month, $year) {
         
-//        $last_indication = (new \yii\db\Query())
-//                ->select('reading_counter_id, date_reading, readings_indication')
-//                ->from('reading_counters')
-//                ->where(['=', 'MONTH(FROM_UNIXTIME(date_reading))',  $month - 1])
-//                ;
- 
+//        if ($month == 1) {
+//            $current_month = $month + 11;
+//            $current_year = $year - 1;
+//            $last_month = $month + 10;
+//            $last_year = $year - 1;
+//        } else if ($month == 12) {
+//            $current_month = $month - 11;
+//            $current_year = $year + 1;
+//            $last_month = $month - 10;
+//            $last_year = $year + 1;
+//        }
+     
         $current_indication = (new \yii\db\Query())
                 ->select("reading_counter_id, date_reading, readings_indication")
                 ->from('reading_counters')
-                ->where(['=', 'MONTH(FROM_UNIXTIME(date_reading))',  $month - 1])
-                ;
+                ->where([
+                    'MONTH(FROM_UNIXTIME(date_reading))' => $month - 1,
+                    'YEAR(FROM_UNIXTIME(date_reading))' => $year,
+                ]);
         
-        
-        
-        $query_indication = (new \yii\db\Query())
+        // Проверяем есть ли показания за текущий месяц
+        if ($current_indication->all()) {
+            /* 
+             * Если показания за текущий месяц есть, то формируем запрос на получение даннах 
+             * за текущий и предыдущий месяца
+             */
+
+            $query_indication = (new \yii\db\Query())
                 ->select('t1.counters_number, t1.counters_id, t1.date_check, t4.type_counters_name,'
                         . 't2.date_reading as last_date, t2.readings_indication as last_ind,'
                         . 't3.date_reading as current_date, t3.readings_indication as current_ind')
@@ -85,74 +98,36 @@ class Counters extends ActiveRecord
                 ->join('LEFT JOIN', 'reading_counters as t3', 't1.counters_id = t3.reading_counter_id')
                 ->join('LEFT JOIN', 'type_counters AS t4', 't1.counters_id = t4.type_counters_id')
                 ->where(['t1.counters_account_id' => $account_id])
-                ->andWhere(['=', 'MONTH(FROM_UNIXTIME(t2.date_reading))',  $month - 2])
-                ->andWhere(['=', 'MONTH(FROM_UNIXTIME(t3.date_reading))',  $month - 1])
+                ->andWhere([
+                    'MONTH(FROM_UNIXTIME(t2.date_reading))' => $month - 2,
+                    'YEAR(FROM_UNIXTIME(t2.date_reading))' => $year,
+                    'MONTH(FROM_UNIXTIME(t3.date_reading))' => $month - 1,
+                    'YEAR(FROM_UNIXTIME(t3.date_reading))' => $year])
                 ->groupBy('counters_id');
-        
-        
-//        echo '<pre>';
-//        var_dump($current_indication->all());
-//        die();
 
-         /*
-         *  Проверяем наличие показаний за текущий месяц
-         */
-        if ($current_indication->all()) {
-            // Показания за текущий месяц существуют
-            $query_indication = (new \yii\db\Query())
-                    ->select('t1.counters_number, t1.counters_id, t1.date_check, t4.type_counters_name,'
-                            . 't2.date_reading as last_date, t2.readings_indication as last_ind,'
-                            . 't3.date_reading as current_date, t3.readings_indication as current_ind')
-                    ->from('counters AS t1')
-                    ->join('LEFT JOIN', 'reading_counters as t2', 't1.counters_id = t2.reading_counter_id')
-                    ->join('LEFT JOIN', 'reading_counters as t3', 't1.counters_id = t3.reading_counter_id')
-                    ->join('LEFT JOIN', 'type_counters AS t4', 't1.counters_id = t4.type_counters_id')
-                    ->where(['t1.counters_account_id' => $account_id])
-                    ->where(['=', 'MONTH(FROM_UNIXTIME(t2.date_reading))',  $month - 2])
-                    ->where(['=', 'MONTH(FROM_UNIXTIME(t3.date_reading))',  $month - 1])
-                    ->groupBy('counters_id');
         } else {
-            
+            /* 
+             * Если показания за текущий месяц не внесены, то формируем запрос на получение даннах 
+             * только за предыдущий месяц
+             */
+
             $query_indication = (new \yii\db\Query())
-                    ->select('t1.counters_number, t1.counters_id, t1.date_check, t4.type_counters_name,'
-                            . 't2.date_reading as last_date, t2.readings_indication as last_ind,')
-                    ->from('counters AS t1')
-                    ->join('LEFT JOIN', 'reading_counters as t2', 't1.counters_id = t2.reading_counter_id')
-                    ->join('LEFT JOIN', 'type_counters AS t4', 't1.counters_id = t4.type_counters_id')
-                    ->where(['t1.counters_account_id' => $account_id])
-                    ->where(['=', 'MONTH(FROM_UNIXTIME(t2.date_reading))',  $month - 1])
-                    ->groupBy('counters_id');
+                ->select('t1.counters_number, t1.counters_id, t1.date_check, t4.type_counters_name,'
+                        . 't2.date_reading as last_date, t2.readings_indication as last_ind,')
+                ->from('counters AS t1')
+                ->join('LEFT JOIN', 'reading_counters as t2', 't1.counters_id = t2.reading_counter_id')
+                ->join('LEFT JOIN', 'type_counters AS t4', 't1.counters_id = t4.type_counters_id')
+                ->where(['t1.counters_account_id' => $account_id])
+                ->andWhere([
+                    'MONTH(FROM_UNIXTIME(t2.date_reading))' =>  $month - 2
+                ])
+                ->groupBy('counters_id');
 
         }
-//            
-//        $unionQuery = (new \yii\db\Query())
-//                ->select($select_param)
-//                ->from($from_param)
-//                ->where(['info.counters_account_id' => $account_id])
-//                ->where('name.type_counters_id = info.counters_id')
-//                ->groupBy('r1.reading_counter_id')
-//                ;
-
-        //return $unionQuery;
         
         return $query_indication;
 
     }
-
-    /*
-     * Получить показания приборов учетов за текущий месяц
-     */
-    public static function getReadingCurrentMonth($account_id) {
-
-        $current_date = date('n');
-        
-        return self::find()
-                ->joinWith('typeCounter as t')
-                ->joinWith('readingCounter as r')
-                ->andWhere(['counters_account_id' => $account_id])
-                ->andWhere(['=', 'MONTH(FROM_UNIXTIME(r.date_reading))', $current_date]);
-    }
-    
     
     /**
      * Метки для полей

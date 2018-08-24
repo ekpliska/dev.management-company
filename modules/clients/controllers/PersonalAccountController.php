@@ -78,22 +78,16 @@ class PersonalAccountController extends AppClientsController {
 
         // Получаем текущую дату
         $current_date = time();        
-        
         // Получаем номер текущего месяца
         $current_month = date('n');
-        
-        // Получить список всех лицевых счетов пользователя        
-        $account_all = PersonalAccount::findByClient($user_info->user_client_id);
-        
-        $account_info = PersonalAccount::findByClientProfile($user_info->user_client_id);
+        $current_year = date('Y');
         
         $counters = new ActiveDataProvider([
-            'query' => Counters::getReadingCurrent($account_info->account_id, $current_month),
+            'query' => Counters::getReadingCurrent(1, $current_month = 9, $current_year),            
         ]);
         
         return $this->render('counters', [
             'current_date' => $current_date,
-            'account_all' => $account_all,
             'counters' => $counters,
         ]);
         
