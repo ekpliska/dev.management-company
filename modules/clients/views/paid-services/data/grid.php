@@ -34,9 +34,7 @@
                 [
                     'attribute' => 'created_at',
                     'label' => 'Дата заявки',
-                    'value' => function ($data) {
-                        return FormatHelpers::formatDateCounter($data['created_at']);
-                    },
+                    'format' => ['date', 'php:d.m.Y H:m:i'],
                 ],
                             
                             
@@ -66,9 +64,7 @@
                 [
                     'attribute' => 'updated_at',
                     'label' => 'Дата закрытия',
-                    'value' => function ($data) {
-                        return FormatHelpers::formatDateCounter($data['updated_at']);
-                    },
+                    'format' => ['date', 'php:d.m.Y'],
                 ],
             ],
         ]); ?>

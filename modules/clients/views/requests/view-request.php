@@ -1,5 +1,5 @@
 <?php
-    use yii\helpers\Url;
+
     use app\helpers\FormatHelpers;
 
 /* 
@@ -42,7 +42,7 @@ $username = Yii::$app->user->identity->user_login;
                     </tr>
                     <tr>
                         <td>Статус заявки</td>
-                        <td><?= $request_info->getStatusName() ?></td>
+                        <td><?= FormatHelpers::statusName($request_info->status) ?></td>
                     </tr>
                     <tr>
                         <td>Дата закрытия заявки</td>

@@ -31,6 +31,19 @@ class StatusRequest {
             self::STATUS_CONFIRM => 'Подтверждена пользователем',
             self::STATUS_ON_VIEW => 'На рассмотрении',
         ];
+    }
+    
+    /*
+     * Массив статусов заявок для пользователя
+     */
+    public static function getUserStatusRequests() {
+        return [
+            self::STATUS_NEW => 'Новая',
+            self::STATUS_IN_WORK => 'В работе',
+            self::STATUS_PERFORM => 'На исполнении',
+            self::STATUS_FEEDBAK => 'На уточнении',
+            self::STATUS_CLOSE => 'Закрыто',
+        ];       
     }    
     
     /*

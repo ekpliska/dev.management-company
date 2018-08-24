@@ -8,6 +8,7 @@
     use yii\helpers\Html;
     use app\models\TypeRequests;
     use app\models\CommentsToRequest;
+    use app\models\StatusRequest;
 
 /**
  * Заяки
@@ -15,15 +16,6 @@
 class Requests extends ActiveRecord
 {
 
-    const STATUS_NEW = 0;
-    const STATUS_IN_WORK = 1;
-    const STATUS_PERFORM = 2;
-    const STATUS_FEEDBAK = 3;
-    const STATUS_CLOSE = 4;
-    const STATUS_REJECT = 5;
-    const STATUS_CONFIRM = 6;
-    const STATUS_ON_VIEW = 7;
-    
     const SCENARIO_ADD_REQUEST = 'add_record';
     
     // Для загружаемых файлов
@@ -79,35 +71,6 @@ class Requests extends ActiveRecord
     }
     
     /*
-     * Массив всех статусов заявок
-     */
-    public static function getStatusNameArray() {
-        return [
-            self::STATUS_NEW => 'Новая',
-            self::STATUS_IN_WORK => 'В работе',
-            self::STATUS_PERFORM => 'На исполнении',
-            self::STATUS_FEEDBAK => 'На уточнении',
-            self::STATUS_CLOSE => 'Закрыто',
-            self::STATUS_REJECT => 'Отклонено',
-            self::STATUS_CONFIRM => 'Подтверждено пользователем',
-            self::STATUS_ON_VIEW => 'На рассмотрении',
-        ];
-    }
-    
-    /*
-     * Массив статусов заявок для пользователя
-     */
-    public static function getUserStatusRequests() {
-        return [
-            self::STATUS_NEW => 'Новая',
-            self::STATUS_IN_WORK => 'В работе',
-            self::STATUS_PERFORM => 'На исполнении',
-            self::STATUS_FEEDBAK => 'На уточнении',
-            self::STATUS_CLOSE => 'Закрыто',
-        ];       
-    }
-    
-    /*
      * Связь с талиблицей Виды заявок
      */
     public function getTypeRequest() {
@@ -147,7 +110,7 @@ class Requests extends ActiveRecord
         if ($this->validate()) {
             $this->requests_ident = $request_numder;
             $this->requests_account_id = $accoint_id;
-            $this->status = Requests::STATUS_NEW;
+            $this->status = StatusRequest::STATUS_NEW;
             $this->is_accept = false;
             Yii::$app->session->setFlash('success', 'Ваша заявка была успешно  сформирована на лицевой счет №' . $account->account_number . '<br />'
                     . 'Номер вашей заявки №' . $request_numder . '<br />'

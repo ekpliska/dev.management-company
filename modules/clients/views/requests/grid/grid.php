@@ -1,6 +1,11 @@
 <?php
-use yii\grid\GridView;
+    use yii\grid\GridView;
     use yii\helpers\Url;
+    use app\helpers\FormatHelpers;
+
+/*
+ * Вывод таблицы заявок текущего пользователя
+ */
 ?>
 
     <?= GridView::widget([
@@ -17,7 +22,7 @@ use yii\grid\GridView;
             'requests_specialist_id',
             [
                 'attribute' => 'created_at',
-                'format' => ['date', 'php:d.m.Y H:m:i'],
+                'format' => ['date', 'php:d.m.Y'],
             ],
             [
                 'attribute' => 'requests_comment',
@@ -31,13 +36,14 @@ use yii\grid\GridView;
             ],
             [
                 'attribute' => 'updated_at',
-                'format' => ['date', 'php:d.m.Y H:m:i'],
+                'format' => ['date', 'php:d.m.Y'],
             ],
             [
                 'attribute' => 'status',
+                'label' => 'Статус',
                 'value' => function ($data) {
-                    return $data->getStatusName();
-                }
+                    return FormatHelpers::statusName($data['status']);
+                },
             ],
             [
                 'class' => 'yii\grid\ActionColumn',

@@ -10,10 +10,11 @@
     use app\models\Requests;
     use app\models\User;
     use app\models\Houses;
-    use app\modules\clients\models\FilterForm;
+    use app\modules\clients\models\_searchForm\FilterForm;
     use app\models\CommentsToRequest;
     use app\models\Image;
     use app\models\TypeRequests;
+    use app\models\StatusRequest;
 
 /**
  * Заявки
@@ -34,7 +35,7 @@ class RequestsController extends AppClientsController
         $accoint_id = $this->_choosing;
         
         $type_requests = TypeRequests::getTypeNameArray();
-        $status_requests = Requests::getUserStatusRequests();
+        $status_requests = StatusRequest::getUserStatusRequests();
        
         // Модель для фильтра по типу заявок
         $model_filter = new FilterForm();
