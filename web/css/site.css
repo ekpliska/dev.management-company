@@ -114,3 +114,8 @@ a.desc:after {
     outline: none;
 }
 
+/* Вывод текста Показать/Скрыть в виде ссылки */
+.cutstring-toggle {
+    color: blue;
+    cursor: pointer;
+}

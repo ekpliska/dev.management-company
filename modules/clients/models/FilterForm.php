@@ -2,6 +2,7 @@
     
     namespace app\modules\clients\models;
     use yii\base\Model;
+    use Yii;
     use app\models\Requests;
     use yii\data\ActiveDataProvider;
 

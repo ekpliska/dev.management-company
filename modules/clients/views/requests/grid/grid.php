@@ -20,6 +20,16 @@ use yii\grid\GridView;
                 'format' => ['date', 'php:d.m.Y H:m:i'],
             ],
             [
+                'attribute' => 'requests_comment',
+                'value' => function ($data) {
+                    return
+                        '<div class="cutstring" data-display="none" data-max-length="70">'
+                            . $data->requests_comment
+                        . '</div>';
+                },
+                'format' => 'raw',
+            ],
+            [
                 'attribute' => 'updated_at',
                 'format' => ['date', 'php:d.m.Y H:m:i'],
             ],

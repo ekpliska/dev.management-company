@@ -374,8 +374,6 @@ $(document).ready(function() {
         });
     });
 
-
     /* End Block of Paid Services */
 
 });
-

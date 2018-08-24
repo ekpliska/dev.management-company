@@ -2,6 +2,7 @@
     namespace app\helpers;
     use Yii;
     use yii\helpers\ArrayHelper;
+    use yii\helpers\StringHelper;
     use yii\helpers\Html;
     use app\models\StatusRequest;
 
@@ -57,18 +58,6 @@ class FormatHelpers {
     public static function statusName($status) {
         
         return ArrayHelper::getValue(StatusRequest::getStatusNameArray(), $status);
-        
-    }
-    
-    /*
-     * Форматированный вывод текста комментария к заявке в таблице
-     * 
-     * @param integer $count Количество символов
-     * @param string $comment Комментарий к заявке
-     */
-    public function smallTextComment($comment, $count) {
-        
-        
         
     }
     
