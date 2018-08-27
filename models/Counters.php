@@ -62,24 +62,42 @@ class Counters extends ActiveRecord
      */
     public static function getReadingCurrent($account_id, $month, $year) {
         
-//        if ($month == 1) {
-//            $current_month = $month + 11;
-//            $current_year = $year - 1;
-//            $last_month = $month + 10;
-//            $last_year = $year - 1;
-//        } else if ($month == 12) {
-//            $current_month = $month - 11;
-//            $current_year = $year + 1;
-//            $last_month = $month - 10;
-//            $last_year = $year + 1;
-//        }
-     
+        /*
+         * Есди выбранный месяц == 1,
+         * то предыдущий месяц 12, а год на 1 меньше
+         */
+        
+        if ($month == 1) {
+            $current_month = $month + 11;
+            $current_year = $year - 1;
+            $last_month = $month + 10;
+            $last_year = $year - 1;
+        } else 
+            if ($month == 2) {
+            $current_month = $month - 1;
+            $current_year = $year;
+            $last_month = $month + 10;
+            $last_year = $year - 1;
+        } else {
+            $current_month = $month - 1;
+            $current_year = $year;
+            $last_month = $month - 2;
+            $last_year = $year;
+        }
+        
+        
+//        echo $current_month . ' / ' . $current_year;
+//        echo '<br />';
+//        echo $last_month . ' / ' . $last_year;
+//        die();
+
+        
         $current_indication = (new \yii\db\Query())
                 ->select("reading_counter_id, date_reading, readings_indication")
                 ->from('reading_counters')
                 ->where([
-                    'MONTH(FROM_UNIXTIME(date_reading))' => $month - 1,
-                    'YEAR(FROM_UNIXTIME(date_reading))' => $year,
+                    'MONTH(FROM_UNIXTIME(date_reading))' => $current_month,
+                    'YEAR(FROM_UNIXTIME(date_reading))' => $current_year,
                 ]);
         
         // Проверяем есть ли показания за текущий месяц
@@ -99,10 +117,10 @@ class Counters extends ActiveRecord
                 ->join('LEFT JOIN', 'type_counters AS t4', 't1.counters_id = t4.type_counters_id')
                 ->where(['t1.counters_account_id' => $account_id])
                 ->andWhere([
-                    'MONTH(FROM_UNIXTIME(t2.date_reading))' => $month - 2,
-                    'YEAR(FROM_UNIXTIME(t2.date_reading))' => $year,
-                    'MONTH(FROM_UNIXTIME(t3.date_reading))' => $month - 1,
-                    'YEAR(FROM_UNIXTIME(t3.date_reading))' => $year])
+                    'MONTH(FROM_UNIXTIME(t2.date_reading))' => $last_month,
+                    'YEAR(FROM_UNIXTIME(t2.date_reading))' => $last_year,
+                    'MONTH(FROM_UNIXTIME(t3.date_reading))' => $current_month,
+                    'YEAR(FROM_UNIXTIME(t3.date_reading))' => $current_year])
                 ->groupBy('counters_id');
 
         } else {
@@ -119,7 +137,8 @@ class Counters extends ActiveRecord
                 ->join('LEFT JOIN', 'type_counters AS t4', 't1.counters_id = t4.type_counters_id')
                 ->where(['t1.counters_account_id' => $account_id])
                 ->andWhere([
-                    'MONTH(FROM_UNIXTIME(t2.date_reading))' =>  $month - 2
+                    'MONTH(FROM_UNIXTIME(t2.date_reading))' => $last_month,
+                    'YEAR(FROM_UNIXTIME(t2.date_reading))' => $last_year,
                 ])
                 ->groupBy('counters_id');
 
