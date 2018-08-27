@@ -25,22 +25,26 @@ $this->title = 'Приборы учета';
     </div>    
     
     <div class="col-md-12">
-        <?= $this->render('data/grid', ['counters' => $counters]) ?>
+        <?= Html::beginForm([
+            'id' => 'indication-form',
+            'method' => 'POST',
+        ]) ?>
+            <?= $this->render('data/grid', ['counters' => $counters]) ?>
+            
+            <!-- Блок условных обозначений для таблицы  -->
+            <br />
+            <span class="glyphicon glyphicon-flash"></span> - Вы не указали показания приборов учета в текущем месяце
+            <br />
+        
+            <div class="text-right">
+                <?= Html::button('Ввести показания', ['class' => 'btn btn-primary btn__add_indication']) ?>
+                <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
+            </div>
+            
+        <?= Html::endForm(); ?>
+        
     </div>
     
-    
-    <!-- Блок условных обозначений для таблицы  -->
-    <div class="col-md-12">
-        <br />        
-        <span class="glyphicon glyphicon-flash"></span> - Вы не указали показания приборов учета в текущем месяце
-        <br />
-    </div>    
-    
-    <div class="col-md-12 text-right">
-        <?= Html::button('Ввести показания', ['class' => 'btn btn-primary btn__add_indication']) ?>
-        <?= Html::button('Сохранить', ['class' => 'btn btn-success']) ?>
-    </div>    
-
 </div>
 
 <?php

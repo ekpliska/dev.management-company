@@ -77,11 +77,12 @@ class PersonalAccountController extends AppClientsController {
 
         $user_info = $this->permisionUser();
         $account_id = $this->_choosing;
-
+        
         // Получаем текущую дату
         $current_date = time();        
         // Получаем номер текущего месяца
         $current_month = date('n');
+        // Получаем номер текущего года
         $current_year = date('Y');
         
         $counters = new ActiveDataProvider([
@@ -91,6 +92,7 @@ class PersonalAccountController extends AppClientsController {
         return $this->render('counters', [
             'current_date' => $current_date,
             'counters' => $counters,
+            'model' => $model,
         ]);
         
     }

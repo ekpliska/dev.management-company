@@ -8,6 +8,7 @@
  * Вывод таблицы показания приборов учета
  */
 ?>
+
 <div class="grid-counters">
     <?= GridView::widget([
         'dataProvider' => $counters,
@@ -80,7 +81,7 @@
                         return '<span style="color: red">' . 'Ввод показаний ЗАБЛОКИРОВАН' . '</span><br />' . Html::a('Что делать?', ['/']);
                     } else {
                         // Иначе выводим инпут + метка со значениями текущих показаний
-                        return Html::textInput('curr_indication', $indication, [
+                        return Html::textInput('curr_indication[' . $data['counters_id'] . ']', $indication, [
                             'class' => 'form-control indication_val',
                             'dir' => 'rtl']) 
                             . $indication;

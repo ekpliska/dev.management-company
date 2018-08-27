@@ -63,34 +63,36 @@ class Counters extends ActiveRecord
     public static function getReadingCurrent($account_id, $month, $year) {
         
         /*
-         * Есди выбранный месяц == 1,
-         * то предыдущий месяц 12, а год на 1 меньше
+         * Период запрошенных даных по показаниям прибород (текущий месяц, предыдущий месяц)
+         * Если из dropDownList выбран текущий месяц Январь == 1, то 
+         *      - данные должны быть за Декабрь предыдущего года - Ноябрь предыдущего года
          */
-        
         if ($month == 1) {
             $current_month = $month + 11;
             $current_year = $year - 1;
             $last_month = $month + 10;
             $last_year = $year - 1;
         } else 
+            /*
+             * Если из dropDownList выбран текущий месяц Февраль == 2, то 
+             *      - данные должны быть за Январь текущего года - Декабрь предыдущего года
+             */
             if ($month == 2) {
             $current_month = $month - 1;
             $current_year = $year;
             $last_month = $month + 10;
             $last_year = $year - 1;
         } else {
+            /*
+             * В остальных случаях текущий месяц на 1 меньше выбранного,
+             *      а предыдущий на 2 меньше выбранного
+             *      год без изменений
+             */
             $current_month = $month - 1;
             $current_year = $year;
             $last_month = $month - 2;
             $last_year = $year;
         }
-        
-        
-//        echo $current_month . ' / ' . $current_year;
-//        echo '<br />';
-//        echo $last_month . ' / ' . $last_year;
-//        die();
-
         
         $current_indication = (new \yii\db\Query())
                 ->select("reading_counter_id, date_reading, readings_indication")

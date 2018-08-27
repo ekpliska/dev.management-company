@@ -12,12 +12,12 @@ class IndicationCounters extends Model {
     public $date_reading;
     public $indication;
     
-    public function rules() {
-        return [
-            [['couinter_id', 'date_reading', 'indication'], 'required'],
-            ['indication', 'string', 'min' => 1, 'max' => 12],
-        ];
-    }
+//    public function rules() {
+//        return [
+//            [['couinter_id', 'date_reading', 'indication'], 'required'],
+//            ['indication', 'string', 'min' => 1, 'max' => 12],
+//        ];
+//    }
     
     
     
