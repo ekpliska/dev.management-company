@@ -32,11 +32,16 @@ class RatingRequest extends Widget {
     
     public function run() {
         
-        // $this->_score ? $score = $this->_score : $score = null;
+        $score = $this->_score ? $this->_score : 0;
         
         // Вид виждета отрисовываем только для заявок со статусом закрыто
         if ($this->_status == StatusRequest::STATUS_CLOSE) {
-            return $this->render('ratingrequest/rating_view', ['status' => $this->_status, 'request_id' => $this->_request_id, 'score' => $this->_score]);
+            
+            return $this->render('ratingrequest/rating_view', [
+                'status' => $this->_status, 
+                'request_id' => $this->_request_id, 
+                'score' => $score]);
+            
         }
         
     }

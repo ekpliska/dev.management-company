@@ -52,7 +52,7 @@ $this->title = 'Детали заявки';
                         </td>
                     </tr>
                     <tr>
-                        <td>Оценка: <?= $request_info->requests_grade ?></td>
+                        <td>Оценка</td>
                         <td>
                             <?= RatingRequest::widget([
                                 '_status' => $request_info->status, 

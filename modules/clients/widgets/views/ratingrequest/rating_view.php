@@ -1,30 +1,30 @@
 <?php
 
+    use yii\helpers\Html;
 
 /* 
  * Оценка заявок
  */
 ?>
-<p>
-    <span class="label label-info">Вам доступна система оценки </span>
-    Оценка: <?= $scrore ?>
-    <br />
-    Для закрытых заявок предусмотрена система оценивания. Оценивание происходит по 5ти баольной шкале:
-</p>
+<?php if ($score == 0) : ?>
+    <?= Html::button('? Вам доступна система оценки', [
+        'class' => 'btn btn-info btn-sm',
+        'title' => 'Система оценки заявки',
+        'data-toggle' => 'popover',
+        'data-trigger' => 'focus',
+        'data-content' => 'Для закрытых заявок доступна система оценки заявки по пятибоальной системе'
+    ]) ?>
+<?php endif; ?>
 <div id="star" data-request="<?= $request_id ?>"></div>
 
 <?php
 $this->registerJs("
-    var scoreRequest = '" . $scrore . "';
-    if (scoreRequest) {
-        $('div#star').raty('score', scoreRequest);
-    }
-")
-?>
-<?php
-$this->registerJs("
+    $('[data-toggle=\'popover\']').popover();
     var request_id = $('div#star').data('request');
+    var scoreRequest = " . $score . ";
     $('div#star').raty({
+        score: scoreRequest,
+        readOnly: scoreRequest === 0 ? false : true,
         click: function(score) {
             $.ajax({
                 url: 'add-score-request',
@@ -50,17 +50,17 @@ $this->registerJs("
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Оценка</h4>
+                <h4 class="modal-title">Оценка заявки</h4>
             </div>
             <div class="modal-body">
-                <p>Спасибо за вашу оценку</p>
+                <p>Спасибо! Ваша оценка принята</p>
                 <p>
-                    Предлагаем вам ответить на ряд вопросов:
+                    Так же предлагаем вам ответить на ряд вопросов:
                 </p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Ответить</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
             </div>
         </div>
     </div>
