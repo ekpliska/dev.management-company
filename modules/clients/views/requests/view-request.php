@@ -1,6 +1,7 @@
 <?php
 
     use app\helpers\FormatHelpers;
+    use app\modules\clients\widgets\RatingRequest;
 
 /* 
  * Детали заявки
@@ -56,15 +57,17 @@ $username = Yii::$app->user->identity->user_login;
                     </tr>
                     <tr>
                         <td>Оценка</td>
-                        <td></td>
+                        <td>
+                            <?= RatingRequest::widget(['_status' => $request_info->status, '_request_id' => $request_info->id]) ?>
+                        </td>
                     </tr>
                     <tr>
                         <td>Время создания</td>
-                        <td><?= Yii::$app->formatter->asDatetime($request_info->created_at, "php:d.m.Y H:i:s") ?></td>
+                        <td><?= Yii::$app->formatter->asDatetime($request_info->created_at, 'php:d.m.Y H:i:s') ?></td>
                     </tr>
                     <tr>
                         <td>Время изменения</td>
-                        <td><?= Yii::$app->formatter->asDatetime($request_info->updated_at, "php:d.m.Y H:i:s") ?></td>
+                        <td><?= Yii::$app->formatter->asDatetime($request_info->updated_at, 'php:d.m.Y H:i:s') ?></td>
                     </tr>
                     <tr>
                         <td>Прикрепленные файлы</td>

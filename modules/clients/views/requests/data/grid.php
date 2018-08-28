@@ -7,9 +7,9 @@
  * Вывод таблицы заявок текущего пользователя
  */
 ?>
-
     <?= GridView::widget([
         'dataProvider' => $all_requests,
+        'filterUrl' => Url::to(['requests/index']),
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'requests_ident',

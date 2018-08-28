@@ -145,10 +145,23 @@ class RequestsController extends AppClientsController
         if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
             $model_filter = new FilterForm();
             $all_requests = $model_filter->searchRequest($type_id, $account_id, $status);
-            return $this->renderAjax('data/grid', ['all_requests' => $all_requests]);
+            return $this->renderPartial('data/grid', ['all_requests' => $all_requests]);
         }
         
         return ['status' => false];
     }
-                
+    
+    public function actionAddScoreRequest() {
+        
+        $score = Yii::$app->request->post('score');
+        
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        
+        if ($score && Yii::$app->request->isAjax) {
+            return ['status' => true, 'score' => $score];
+        }
+        
+        return ['status' => false];
+        
+    }
  }
