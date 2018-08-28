@@ -67,6 +67,8 @@ class Requests extends ActiveRecord
             [['requests_comment'], 'string', 'on' => self::SCENARIO_ADD_REQUEST],
             [['requests_comment'], 'string', 'min' => 10, 'max' => 255, 'on' => self::SCENARIO_ADD_REQUEST],
             
+            ['requests_grade', 'integer'],
+            
         ];
     }
     
@@ -86,6 +88,8 @@ class Requests extends ActiveRecord
     
     /*
      * Сохранение новой заявки
+     * 
+     * @param integer $accoint_id ID заявки
      */
     public function addRequest($accoint_id) {
         
@@ -119,20 +123,46 @@ class Requests extends ActiveRecord
         }
         Yii::$app->session->setFlash('error', 'При формировании заявки возникла ошибка. Обновите страницу и повторите действия еще раз');
         return false;
-    }    
+    }
     
     /*
-     * Получить название статуса по его номеру
+     * Добавление оценки для заявки
+     * 
+     * @param integer $score Оценка
      */
-    public function getStatusName() {
-        return ArrayHelper::getValue(self::getStatusNameArray(), $this->status);
+    public function addGrade($score) {
+
+        if (!is_numeric($score)) {
+            return false;
+        }
+        
+        $this->requests_grade = $score;
+        $this->save(false);
+        return true;
+        
     }
+    
+//    /*
+//     * Получить название статуса по его номеру
+//     */
+//    public function getStatusName() {
+//        return ArrayHelper::getValue(self::getStatusNameArray(), $this->status);
+//    }
 
     /*
      * Получить тип заявки по ID
      */
     public function getNameRequest() {
         return ArrayHelper::getValue(TypeRequests::getTypeNameArray(), $this->requests_type_id);
+    }
+    
+    /*
+     * Поиск заявки по ID
+     */
+    public static function findByID($request_id) {
+        return self::find()
+                ->andWhere(['requests_id' => $request_id])
+                ->one();
     }
     
     /*
@@ -207,6 +237,7 @@ class Requests extends ActiveRecord
             'requests_phone' => 'Контактный телефон',
             'gallery' => 'Прикрепить файлы',
             'is_accept' => 'Принято на рассмотрение',
+            'requests_grade' => 'Оценка',
         ];
     }
 }

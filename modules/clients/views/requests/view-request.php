@@ -7,10 +7,6 @@
  * Детали заявки
  */
 $this->title = 'Детали заявки';
-
-$user = Yii::$app->user->identity->user_id; 
-$username = Yii::$app->user->identity->user_login;
-// $account = Yii::$app->user->identity->user_account_id;
 ?>
 <div class="clients-default-index">
     <h1><?= $this->title ?></h1>
@@ -52,13 +48,16 @@ $username = Yii::$app->user->identity->user_login;
                     <tr>
                         <td>Заявка принята</td>
                         <td>
-                            <?= $request_info->is_accept ? '<span style="color: #ab1a1a" class="glyphicon glyphicon-ok"></span>' : '<span style="color: #c1c1c1;" class="glyphicon glyphicon-ok"></span>' ?>
+                            <?= $request_info->is_accept ? '<span style="color: #5cb85c" class="glyphicon glyphicon-ok"></span>' : '<span style="color: #c1c1c1;" class="glyphicon glyphicon-ok"></span>' ?>
                         </td>
                     </tr>
                     <tr>
-                        <td>Оценка</td>
+                        <td>Оценка: <?= $request_info->requests_grade ?></td>
                         <td>
-                            <?= RatingRequest::widget(['_status' => $request_info->status, '_request_id' => $request_info->id]) ?>
+                            <?= RatingRequest::widget([
+                                '_status' => $request_info->status, 
+                                '_request_id' => $request_info->id,
+                                '_score' => $request_info->requests_grade]) ?>
                         </td>
                     </tr>
                     <tr>

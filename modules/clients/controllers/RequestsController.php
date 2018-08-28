@@ -8,7 +8,6 @@
     use yii\helpers\ArrayHelper;
     use app\modules\clients\controllers\AppClientsController;
     use app\models\Requests;
-    use app\models\User;
     use app\models\Houses;
     use app\modules\clients\models\_searchForm\FilterForm;
     use app\models\CommentsToRequest;
@@ -151,14 +150,30 @@ class RequestsController extends AppClientsController
         return ['status' => false];
     }
     
+    /*
+     * Обработка Ajax запроса на добавления оценки для заявки
+     */
     public function actionAddScoreRequest() {
-        
-        $score = Yii::$app->request->post('score');
-        
+
         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         
-        if ($score && Yii::$app->request->isAjax) {
-            return ['status' => true, 'score' => $score];
+        // Получаем с пост запроса оценку и ID заявки
+        $score = Yii::$app->request->post('score');
+        $request_id = Yii::$app->request->post('request_id');
+        
+        // Проверяем на корректность пришедшие данные
+        if (!is_numeric($score) || !is_numeric($score)) {
+            return ['status' => false];
+        }
+
+        // Проверяем на прием ajax запроса
+        if ($score && $request_id && Yii::$app->request->isAjax) {
+            $request = Requests::findByID($request_id);
+            // Вызываем метод добвления оценки из модели
+            if ($request->addGrade($score)) {
+                return ['status' => true];
+            }
+            return ['status' => true, 'error' => 'Error with save data'];
         }
         
         return ['status' => false];

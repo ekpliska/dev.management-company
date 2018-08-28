@@ -3,12 +3,11 @@
     namespace app\modules\clients\widgets;
     use yii\base\Widget;
     use yii\helpers\ArrayHelper;
+    use yii\base\UnknownPropertyException;
     use app\models\StatusRequest;
 
 /**
- * Description of RatingRequest
- *
- * @author Ekaterina
+ * Виджет формирования оценки для заявок
  */
 class RatingRequest extends Widget {
     
@@ -16,12 +15,15 @@ class RatingRequest extends Widget {
     public $_status = 0;
     // ID заявки
     public $_request_id;
-    
+    // Оценка
+    public $_score;
+
+
     public function init() {
         
         // Если передан не верный статус или ID заявки, кидаем исключение
         if (!ArrayHelper::keyExists($this->_status, StatusRequest::getStatusNameArray()) || empty($this->_request_id)) {
-            throw new \yii\base\UnknownPropertyException('Ошибка при передаче параметра');
+            throw new UnknownPropertyException('Ошибка при передаче параметра');
         }
         
         parent::init();
@@ -30,9 +32,11 @@ class RatingRequest extends Widget {
     
     public function run() {
         
+        // $this->_score ? $score = $this->_score : $score = null;
+        
         // Вид виждета отрисовываем только для заявок со статусом закрыто
         if ($this->_status == StatusRequest::STATUS_CLOSE) {
-            return $this->render('ratingrequest/rating_view', ['status' => $this->_status]);
+            return $this->render('ratingrequest/rating_view', ['status' => $this->_status, 'request_id' => $this->_request_id, 'score' => $this->_score]);
         }
         
     }
