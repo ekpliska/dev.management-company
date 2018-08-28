@@ -322,7 +322,47 @@ $(document).ready(function() {
         });        
         
     });
-
+    
+    /*
+     * Добавление оценки для закрытой заявки
+     */
+    // Получаем ID заявки через data
+    var request_id = $('div#star').data('request');
+    // Получаем оценку текущей заявки
+    var scoreRequest = $('div#star').data('scoreReguest');
+    // Вызываем функцию raty из библиотеки плагина по голосованию
+    $('div#star').raty({
+        score: scoreRequest, // Оценка
+        readOnly: scoreRequest === 0 ? false : true, // Если оценка высталена, то возможность голосования закрываем
+        click: function(score) {
+            $.ajax({
+                url: 'add-score-request',
+                method: 'POST',
+                data: {
+                    score: score,
+                    request_id: request_id,
+                },
+                success: function(response) {
+                    if (response.status === true) {
+                        $('#score-modal-message').modal('show');
+                        $('div#star').raty({
+                            score: score,
+                            readOnly: true,
+                        });
+                    }
+                },
+                error: function() {
+                    console.log('Error #1002 - ошибка оценки заявки');
+                }
+            });
+        }
+    });    
+    
+    /*
+     * Всплывающая подсказка для кнопки "Вам доступна система оценки"
+     */
+    $('[data-toggle="popover"]').popover();
+    
     
     /* End Block of Requests */
 

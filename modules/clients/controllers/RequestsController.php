@@ -166,14 +166,12 @@ class RequestsController extends AppClientsController
             return ['status' => false];
         }
 
-        // Проверяем на прием ajax запроса
+        // Если пришел ajax запрос
         if ($score && $request_id && Yii::$app->request->isAjax) {
             $request = Requests::findByID($request_id);
-            // Вызываем метод добвления оценки из модели
-            if ($request->addGrade($score)) {
-                return ['status' => true];
-            }
-            return ['status' => true, 'error' => 'Error with save data'];
+            // Вызываем метод добавления оценки из модели
+            $request->addGrade($score);
+            return ['status' => true];
         }
         
         return ['status' => false];

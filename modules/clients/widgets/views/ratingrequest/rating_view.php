@@ -6,8 +6,9 @@
  * Оценка заявок
  */
 ?>
+
 <?php if ($score == 0) : ?>
-    <?= Html::button('? Вам доступна система оценки', [
+    <?= Html::button('Вам доступна система оценки <i class="glyphicon glyphicon-question-sign"></i>', [
         'class' => 'btn btn-info btn-sm',
         'title' => 'Система оценки заявки',
         'data-toggle' => 'popover',
@@ -15,37 +16,9 @@
         'data-content' => 'Для закрытых заявок доступна система оценки заявки по пятибоальной системе'
     ]) ?>
 <?php endif; ?>
-<div id="star" data-request="<?= $request_id ?>"></div>
 
-<?php
-$this->registerJs("
-    $('[data-toggle=\'popover\']').popover();
-    var request_id = $('div#star').data('request');
-    var scoreRequest = " . $score . ";
-    $('div#star').raty({
-        score: scoreRequest,
-        readOnly: scoreRequest === 0 ? false : true,
-        click: function(score) {
-            $.ajax({
-                url: 'add-score-request',
-                method: 'POST',
-                data: {
-                    score: score,
-                    request_id: request_id,
-                },
-                success: function(data) {
-                    console.log('thanks for score, you score is ' + data.score);
-                    $('#score-modal-message').modal('show');
-                },
-                error: function() {
-                    console.log('Error');
-                }
-            });
-        }
-    });
-    
-");
-?>
+<div id="star" data-request="<?= $request_id ?>" data-score-reguest="<?= $score ?>"></div>
+
 <div id="score-modal-message" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">

@@ -31,7 +31,11 @@ $this->title = 'Детали заявки';
                     </tr>
                     <tr>
                         <td>Описание</td>
-                        <td><?= $request_info->requests_comment ?></td>
+                        <td>
+                            <div class="cutstring" data-display="none" data-max-length="70">
+                                <?= $request_info->requests_comment ?>
+                            </div>
+                        </td>
                     </tr>
                     <tr>
                         <td>Контактный телефон</td>

@@ -44,6 +44,7 @@
                 'value' => function ($data) {
                     return FormatHelpers::statusName($data['status']);
                 },
+                'format' => 'raw',
             ],
             [
                 'class' => 'yii\grid\ActionColumn',
