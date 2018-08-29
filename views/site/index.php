@@ -15,12 +15,11 @@ $this->title = 'Customers | Вход';
                 <h2>Главная</h2>
                 <br />
                 <p>Имя пользователя: <?= Yii::$app->user->identity->user_login ?></p>
-                <p>Роль: <?= (Yii::$app->authManager->getRole('clients')->description) ?></p>
             </div>
             <div class="col-lg-7">
                 <h2>Модули</h2>
                 <a href="<?= Url::to(['clients/clients']) ?>" class="btn btn-default">Клиенты</a>
-                <a href="<?= Url::to(['houses/index']) ?>" class="btn btn-default">Клиенты</a>
+                <a href="<?= Url::to(['houses/index']) ?>" style="display: none;" class="btn btn-default">Клиенты</a>
             </div>
         </div>
 

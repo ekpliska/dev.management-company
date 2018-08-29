@@ -29,7 +29,7 @@ $(document).ready(function() {
                         $('#changes_rent #rent-name').text(response.rent.rents_name);
                         $('#changes_rent #rent-second-name').text(response.rent.rents_second_name);
                     } else {
-                        console.log('Ошибка при получении данных арендатора');
+                        console.log('Error #1000-01');
                     }
                 }
             });
@@ -65,10 +65,10 @@ $(document).ready(function() {
             url: 'change-rent-profile?action=bind&rent=' + rentId + '&account=' + accountId,
             method: 'GET',
             success: function(response) {
-                console.log('Объединение арендатора с лицвым счетом OK');
+                // console.log('Объединение арендатора с лицвым счетом OK');
             },
             error: function() {
-                console.log('Объединение арендатора с лицвым счетом error');
+                console.log('Error #1000-02');
             }
         })
     });
@@ -100,10 +100,10 @@ $(document).ready(function() {
             url: 'change-rent-profile?action=delete&rent=' + rentsId + '&account=' + accountId,
             method: 'GET',
             success: function(response) {
-                console.log('Удаление арендатора OK');
+                // console.log('Удаление арендатора OK');
             },
             error: function() {
-                console.log('Удаление арендатора Error');
+                console.log('Error #1000-03');
             }
         });
     });
@@ -117,10 +117,10 @@ $(document).ready(function() {
             url: 'change-rent-profile?action=undo&rent=' + rentsId + '&account=' + accountId,
             method: 'GET',
             success: function(response) {
-                console.log('Отвязать арендатора OK');
+                // console.log('Отвязать арендатора OK');
             },
             error: function() {
-                console.log('Отвязать арендатора Error');
+                console.log('Error #1000-04');
             }
         });
     });
@@ -152,7 +152,7 @@ $(document).ready(function() {
                     }
                 },
                 error: function(data) {
-                    console.log('error for save rent info');
+                    console.log('Error #1000-05');
                 }
             });
         }
@@ -190,11 +190,11 @@ $(document).ready(function() {
             data: addRentForm.serializeArray(),
             succeess: function(response) {
                 if (response.status === false) {
-                    console.log('Error when data try to saved (add rent form)');
+                    console.log('Error #1000-06-1');
                 }
             },
             error: function() {
-                console.log('Error #1 when data try to saved (add rent form)');
+                console.log('Error #1000-06-2');
             },
         });
     });
@@ -221,7 +221,7 @@ $(document).ready(function() {
                 $('#account-info').html(response.data);
             },
             error: function() {
-                console.log('Error');
+                console.log('Error #1000-07');
             },
         });
     });
@@ -314,7 +314,7 @@ $(document).ready(function() {
             },
             success: function(data){
                 if (data.status === false) {
-                    console.log('Ошибка при передаче данных');
+                    console.log('Error #1000-08');
                 } else {
                     $('.grid-view').html(data);
                 }
@@ -352,7 +352,7 @@ $(document).ready(function() {
                     }
                 },
                 error: function() {
-                    console.log('Error #1002 - ошибка оценки заявки');
+                    console.log('Error #1000-09');
                 }
             });
         }
@@ -409,7 +409,7 @@ $(document).ready(function() {
                 $('.grid-view').html(response.data);
             },
             error: function() {
-                console.log('error');
+                console.log('Error #1000-10');
             }
         });
     });

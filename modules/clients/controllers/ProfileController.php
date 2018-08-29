@@ -135,9 +135,13 @@ class ProfileController extends AppClientsController
             /*
              * Если арендатор существует, генерирурем для него модель
              */
-            $model_rent = Rents::findOne(['rents_id' => $model->personal_rent_id]);
-            if ($model_rent) {
-                $this->_is_rent = true;
+            if ($model->personal_rent_id) {
+                $model_rent = Rents::findOne(['rents_id' => $model->personal_rent_id]);
+                if ($model_rent) {
+                    $this->_is_rent = true;
+                }
+            } else {
+                $model_rent = [];
             }
             
             // Форма добавить Арендатора
