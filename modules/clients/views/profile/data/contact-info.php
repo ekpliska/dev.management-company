@@ -11,21 +11,21 @@
 
 <div class="col-md-4" style="padding: 0;">
     <p>Фамилия</p>
-    <?= Html::input('text', 'surname', $user->client->clients_surname, [
+    <?= Html::input('text', 'surname', $info['surname'], [
         'class' => 'form-control', 
         'disabled' => true]) 
     ?>
 </div>
 <div class="col-md-4" style="padding: 0;">
     <p>Имя</p>
-    <?= Html::input('text', 'name', $user->client->clients_name, [
+    <?= Html::input('text', 'name', $info['name'], [
         'class' => 'form-control', 
         'disabled' => true]) 
     ?>
 </div>
 <div class="col-md-4" style="padding: 0;">
     <p>Отчество</p>
-    <?= Html::input('text', 'second_name', $user->client->clients_second_name, [
+    <?= Html::input('text', 'second_name', $info['second_name'], [
         'class' => 'form-control', 
         'disabled' => true]) 
     ?>
@@ -33,7 +33,7 @@
                         
 <p>Домашний телефон</p>
 <div class="col-md-12" style="padding: 0;">
-    <?= Html::input('text', 'phone', $user->client->clients_phone, [
+    <?= Html::input('text', 'phone', $info['phone'], [
         'class' => 'form-control', 
         'disabled' => true]) 
     ?>
@@ -41,7 +41,7 @@
                         
 <p>Мобильный телефон</p>
 <div class="col-md-12" style="padding: 0;">
-    <?= Html::input('text', 'mobile', $user->client->clients_mobile, [
+    <?= Html::input('text', 'mobile', $info['mobile'], [
         'class' => 'form-control', 
         'disabled' => true]) 
     ?>
@@ -49,19 +49,19 @@
                         
 <p>Электронная почта</p>
     <div class="col-md-12" style="padding: 0;">
-    <?= Html::input('text', 'email', $user->user_email, [
+    <?= Html::input('text', 'email', $info['email'], [
         'class' => 'form-control', 
-        'disabled' => true]) 
+        'disabled' => true])
     ?>
 </div>
                         
 <p>Номер лицевого счета</p>
     <div class="col-md-12" style="padding: 0;">
     <?= Html::input('text', 'account-number',
-            $user->client->personalAccount->account_number, [
+            $info['account'], [
                 'class' => 'form-control', 
                 'disabled' => true, 
                 'id' => 'account-number'
-        ]) 
+        ])
     ?>
 </div>

@@ -137,14 +137,25 @@ class Rents extends ActiveRecord
                 $this->rents_second_name;
     }
     
-//    public function setAccountId($account_id) {
-//        $id = PersonalAccount::find()
-//                ->andWhere(['account_number' => $account_id])
-//                ->select('account_id')
-//                ->asArray()
-//                ->one();
-//        $this->rents_account_id = $id['account_id'];
-//    }
+    /*
+     * Получить информацию о Собственнике
+     */
+    public static function getInfoByRent($rents_id) {
+
+        $info = (new \yii\db\Query)
+                ->select('t1.rents_id as id, t1.rents_name as name, t1.rents_second_name as second_name, t1.rents_surname as surname, '
+                        . 't1.rents_mobile as mobile, t1.rents_mobile_more as phone, '
+                        . 't2.account_number as account, '
+                        . 't3.user_email as email')
+                ->from('rents as t1')
+                ->join('LEFT JOIN', 'personal_account as t2', 't1.rents_id = t2.personal_rent_id')
+                ->join('LEFT JOIN', 'user as t3', 't1.rents_id = t3.user_rent_id')
+                ->where(['t1.rents_id' => $rents_id])
+                ->one();
+        
+        return $info;
+        
+    }
     
     /*
      * Отвязать арендатора от лицевого счета собственника

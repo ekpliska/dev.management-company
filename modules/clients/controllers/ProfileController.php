@@ -22,7 +22,6 @@ class ProfileController extends AppClientsController
     // Флаг наличия арендатора у собственника
     public $_is_rent = false;
 
-
     /**
      * Главная страница
      * 
@@ -38,44 +37,12 @@ class ProfileController extends AppClientsController
     public function actionIndex() {
         
         $user_info = $this->permisionUser();
-        $client = Clients::findOne(['clients_id' => $user_info->user_client_id]);
         
-        $accounts_list = PersonalAccount::findByClient($user_info->user_client_id);
-        $accounts_list_rent = PersonalAccount::findByClientForBind($user_info->user_client_id);
-        
-        /*
-         * @param integer $this->_choosing ID выбранного лицевого счета 
-         *      из глобального списка dropDownList
-         */
-        $accounts_info = PersonalAccount::findByAccountID($this->_choosing); 
-        
-        $not_active_rents = Rents::getNotActiveRents($client->id);        
-        
-        /* Статус наличия у собственника арендатора
-         * Если имеется Арендатор, то загружаем данные Арендатор для формы
-         */
-        
-        if (Rents::isActiveRents($client->id)) {
-            $this->_is_rent = true;
-            $model_rent = Rents::findOne(['rents_id' => $accounts_info->personal_rent_id]);
+        if (Yii::$app->user->can('AddNewRent')) {
+            return $this->client($user_info);
         } else {
-            $this->_is_rent = false;
-            $model_rent = null;
+            return $this->rent($user_info);
         }
-        
-        // Форма добавить Арендатора
-        $add_rent = new ClientsRentForm(['scenario' => ClientsRentForm::SCENARIO_AJAX_VALIDATION]);
-        
-        return $this->render('index', [
-            'user' => $user_info,
-            'accounts_list' => $accounts_list,
-            'accounts_list_rent' => $accounts_list_rent,
-            'is_rent' => $this->_is_rent,
-            'accounts_info' => $accounts_info,
-            'model_rent' => $model_rent,
-            'add_rent' => $add_rent,
-            'not_active_rents' => $not_active_rents,
-        ]);
         
     }
     
@@ -191,11 +158,6 @@ class ProfileController extends AppClientsController
         if (Yii::$app->request->isGet) {
             
             $_rent = Rents::findOne($rent);
-//            $_account = PersonalAccount::findOne($account);
-//            if ($_rent && $_account) {
-//                Yii::$app->session->setFlash('error', 'При передаче параметров произошла ошибка. Перезагрухите страницу');
-//                return $this->render('index');
-//            }
             
             switch ($action) {
                 case 'delete':
@@ -354,5 +316,98 @@ class ProfileController extends AppClientsController
             throw new NotFoundHttpException('Вы обратились к несуществующей странице');
         }
     }    
+    
+    
+    /*
+     * Метод формирования вывода Профиля Собственника
+     * @param integer $accoint_id Значение ID лицевого счета из глобального dropDownList (хеддер)
+     * @param array $user_info Информация о текущем пользователе
+     * @param array $accounts_list Получить список всех лицевых счетов закрепленны за Собственником
+     * @param array $accounts_list_rent Получить все лицевые счета не связанные с Арендатором
+     */
+    protected function client($user_info) {
+        
+        $accoint_id = $this->_choosing;
+        $client = Clients::getInfoByClient($user_info->user_client_id);
+        
+        $accounts_list = PersonalAccount::findByClient($user_info->user_client_id, $all = true);
+        $accounts_list_rent = PersonalAccount::findByClient($user_info->user_client_id, $all = false);
+        
+        $accounts_info = PersonalAccount::findByAccountID($accoint_id); 
+        
+        $not_active_rents = Rents::getNotActiveRents($client['clients_id']);
+        
+        /* Статус наличия у собственника арендатора
+         * Если имеется Арендатор, то загружаем данные Арендатор для формы
+         */
+        
+        if (Rents::isActiveRents($client['clients_id'])) {
+            $this->_is_rent = true;
+            $model_rent = Rents::findOne(['rents_id' => $accounts_info->personal_rent_id]);
+        } else {
+            $this->_is_rent = false;
+            $model_rent = null;
+        }
+        
+        // Форма добавить Арендатора
+        $add_rent = new ClientsRentForm(['scenario' => ClientsRentForm::SCENARIO_AJAX_VALIDATION]);
+        
+        return $this->render('index', [
+            'info' => $client,
+            'user' => $user_info,
+            'accounts_list' => $accounts_list,
+            'accounts_list_rent' => $accounts_list_rent,
+            'is_rent' => $this->_is_rent,
+            'accounts_info' => $accounts_info,
+            'model_rent' => $model_rent,
+            'add_rent' => $add_rent,
+            'not_active_rents' => $not_active_rents,
+        ]);
+        
+    }
+    
+    /*
+     * Метод формирования вывода Профиля Арендатора
+     */
+    protected function rent($user_info) {
+        
+        $accoint_id = $this->_choosing;
+        $rent = Rents::getInfoByRent($user_info->user_rent_id);
+        
+//        $accounts_list = PersonalAccount::findByClient($user_info->user_client_id, $all = true);
+//        $accounts_list_rent = PersonalAccount::findByClient($user_info->user_client_id, $all = false);
+//        
+//        $accounts_info = PersonalAccount::findByAccountID($accoint_id); 
+//        
+//        $not_active_rents = Rents::getNotActiveRents($client['clients_id']);
+//        
+//        /* Статус наличия у собственника арендатора
+//         * Если имеется Арендатор, то загружаем данные Арендатор для формы
+//         */
+//        
+//        if (Rents::isActiveRents($client['clients_id'])) {
+//            $this->_is_rent = true;
+//            $model_rent = Rents::findOne(['rents_id' => $accounts_info->personal_rent_id]);
+//        } else {
+//            $this->_is_rent = false;
+//            $model_rent = null;
+//        }
+//        
+//        // Форма добавить Арендатора
+//        $add_rent = new ClientsRentForm(['scenario' => ClientsRentForm::SCENARIO_AJAX_VALIDATION]);
+        
+        return $this->render('index', [
+            'info' => $rent,
+            'user' => $user_info,
+//            'accounts_list' => $accounts_list,
+//            'accounts_list_rent' => $accounts_list_rent,
+//            'is_rent' => $this->_is_rent,
+//            'accounts_info' => $accounts_info,
+//            'model_rent' => $model_rent,
+//            'add_rent' => $add_rent,
+//            'not_active_rents' => $not_active_rents,
+        ]);
+        
+    }
     
 }

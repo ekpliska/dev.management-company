@@ -35,6 +35,26 @@ class Clients extends ActiveRecord
         return $this->hasOne(PersonalAccount::className(), ['personal_clients_id' => 'clients_id']);
     }
     
+    /*
+     * Получить информацию о Собственнике
+     */
+    public static function getInfoByClient($clients_id) {
+        
+        $info = (new \yii\db\Query)
+                ->select('t1.clients_id as id, t1.clients_name as name, t1.clients_second_name as second_name, t1.clients_surname as surname, '
+                        . 't1.clients_mobile as mobile, t1.clients_phone as phone, '
+                        . 't2.account_number as account, '
+                        . 't3.user_email as email')
+                ->from('clients as t1')
+                ->join('LEFT JOIN', 'personal_account as t2', 't1.clients_id = t2.personal_clients_id')
+                ->join('LEFT JOIN', 'user as t3', 't1.clients_id = t3.user_client_id')
+                ->where(['t1.clients_id' => $clients_id])
+                ->one();
+        
+        return $info;
+        
+    }
+    
     public function getRent() {
         return $this->hasOne(Rents::className(), ['rents_clients_id' => 'clients_id']);
     }

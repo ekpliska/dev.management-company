@@ -2,7 +2,6 @@
     
     use yii\bootstrap\ActiveForm;
     use yii\helpers\Html;
-    use yii\helpers\Url;
     use app\modules\clients\widgets\AddRentForm;
     use app\modules\clients\widgets\SubMenuProfile;
     use app\modules\clients\widgets\AlertsShow;
@@ -51,13 +50,13 @@ $col = Yii::$app->user->can('AddNewRent') ? 3 : 2;
                     <strong>Контактные данные</strong>                    
                 </div>
                 <div class="text-right">
-                    <?= Html::checkbox('is_rent', $is_rent ? 'checked' : '', ['id' => 'is_rent']) ?> Арендатор
+                    <?= Html::checkbox('is_rent', 'checked', ['disabled' => true]) ?> Арендатор
                 </div>
             </div>            
             <div class="panel-body">                
                 <div class="container-fluid">
                     <div class="row">
-                        <?= $this->render('data/contact-info', ['user' => $user]); ?>                        
+                        <?= $this->render('data/contact-info', ['info' => $info, 'user' => $user]); ?>                        
                     </div>
                     
                 </div>
@@ -108,7 +107,7 @@ $col = Yii::$app->user->can('AddNewRent') ? 3 : 2;
                         $accounts_list, [
                             'class' => 'form-control', 
                             'id' => '_list-account',
-                            'data-client' => $user->client->clients_id]) 
+                            'data-client' => $client->id]) 
                 ?>
                 <br />
             <?php endif; ?>
