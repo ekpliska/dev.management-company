@@ -1,6 +1,6 @@
 <?php
     
-    namespace app\widgets;
+    namespace app\modules\clients\widgets;
     use yii\base\InvalidConfigException;
     use yii\base\Widget;
 

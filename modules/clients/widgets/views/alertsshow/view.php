@@ -2,6 +2,9 @@
 
     use kartik\alert\Alert;
 
+/*
+ * Вид вывода сообщений для пользователей
+ */    
 ?>
 
 <?php if (Yii::$app->session->hasFlash('success')) : ?>    
@@ -21,7 +24,7 @@
     <?=
         Alert::widget([
             'type' => Alert::TYPE_DANGER,
-            'title' => 'Профиль обновлен',
+            'title' => 'Ошибка обновления профиля',
             'icon' => 'glyphicon glyphicon-ok-sign',
             'body' => Yii::$app->session->getFlash('error', false),
             'showSeparator' => true,
