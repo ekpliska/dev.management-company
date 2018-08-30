@@ -37,7 +37,37 @@ $(document).ready(function() {
             $('#add-rent-modal').modal('show');
         }
     });
+    
+    /* Обработка события при клике на dropDownList "Список лицевых счетов собственника"
+     * Профиль, блок "Контактные данные арендатора"
+     */
+    $('#_list-account').on('change', function() {
+        var accountNumber = $('input[name*=account-number]');
+        var client = $(this).data('client');
+        var account = $(this).val();
+        accountNumber.val($('#_list-account :selected').text());
+        $.ajax({
+            url: 'check-account',
+            data: {
+                dataClient: client,
+                dataAccount: account,
+            },
+            error: function() {
+                console.log('Error #1000-11');
+            },
+            dataType: 'json',
+            type: 'POST',
+            success: function(response) {
+                if (response.is_rent) {
+                    $('#is_rent').prop('checked', true);
+                } else {
+                    $('#is_rent').prop('checked', false);
+                }                
+               $("#content-replace").html(response.data);
+            }
+        });
 
+    });
 
     /* 
      * Подтверждение удаления арендатора 
@@ -65,7 +95,7 @@ $(document).ready(function() {
             url: 'change-rent-profile?action=bind&rent=' + rentId + '&account=' + accountId,
             method: 'GET',
             success: function(response) {
-                // console.log('Объединение арендатора с лицвым счетом OK');
+                // console.log('Объединение арендатора с лицевым счетом OK');
             },
             error: function() {
                 console.log('Error #1000-02');

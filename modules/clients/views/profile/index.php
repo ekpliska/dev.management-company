@@ -103,7 +103,13 @@ $col = Yii::$app->user->can('AddNewRent') ? 3 : 2;
     
         <div class="col-md-<?= 12/$col ?>">
             <?php if (count($accounts_list) > 1): ?>
-                <?= Html::dropDownList('_list-account', $this->context->_choosing, $accounts_list, ['class' => 'form-control', 'id' => '_list-account']) ?>
+                <?= Html::dropDownList('_list-account', 
+                        $this->context->_choosing, 
+                        $accounts_list, [
+                            'class' => 'form-control', 
+                            'id' => '_list-account',
+                            'data-client' => $user->client->clients_id]) 
+                ?>
                 <br />
             <?php endif; ?>
 
@@ -183,44 +189,4 @@ $col = Yii::$app->user->can('AddNewRent') ? 3 : 2;
     
     <?php endif; ?>
 
-</div>    
-
-<?php
-
-$this->registerJs('
-    $("#_list-account").on("change", function() {
-    
-        var accountNumber = $("input[name*=account-number]");
-        var client = ' . $user->client->clients_id . ';
-        var account = $(this).val();
-        
-        accountNumber.val($("#_list-account :selected").text());
-        
-        $.ajax({
-            url: "' . Url::to(['profile/check-account']) . '",
-            data: {
-                dataClient: client,
-                dataAccount: account,
-            },
-            error: function() {
-                console.log("error ajax");            
-            },
-            dataType: "json",
-            type: "POST",
-            success: function(response) {
-                if (response.is_rent) {
-                    $("#is_rent").prop("checked", true);
-                } else {
-                    $("#is_rent").prop("checked", false);
-                }                
-               // console.log(response.model);
-               $("#content-replace").html(response.data);
-            }
-        });
-
-    });
-')
-?>
-
-
-
+</div>
