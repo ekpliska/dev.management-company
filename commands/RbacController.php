@@ -61,10 +61,21 @@ class RbacController extends Controller {
         $addNewRent->description = 'Добавить нового аредатора';
         $auth->add($addNewRent);
 
-        $viewInfoRent = $auth->createPermission('ViewInfoRent');
-        $viewInfoRent->description = 'Редактирование информации об Арендаторе (блок Контактные даныые арендатора)';
-        $auth->add($viewInfoRent);
+//        $viewInfoRent = $auth->createPermission('ViewInfoRent');
+//        $viewInfoRent->description = 'Редактирование информации об Арендаторе (блок Контактные даныые арендатора)';
+//        $auth->add($viewInfoRent);
 
+        $vote = $auth->createPermission('Vote');
+        $viewInfoRent->description = 'Участие в голосовании';
+        $auth->add($vote);
+        
+        /*
+         * Назначаем разрешения добавлять/радактировать информацию об Арендаторе
+         * только для роли Собсвенник
+         */
+        $auth->addChild($clients, $addNewRent);
+        $auth->addChild($clients, $viewInfoRent);
+        $auth->addChild($clients, $vote);
         
         // Администратор обладает правами всех других пользователей
         /*

@@ -3,25 +3,22 @@
     use yii\bootstrap\ActiveForm;
     use yii\helpers\Html;
     use yii\helpers\Url;
-    use yii\widgets\MaskedInput;
     use app\widgets\AddRentForm;
+    use app\modules\clients\widgets\SubMenuProfile;
     
 /*
  * Профиль пользователя
  */
 $this->title = 'Профиль абонента';
+
+// Если пользователь Собственник, то меняем разметку блоков профиля
+$col = Yii::$app->user->can('AddNewRent') ? 3 : 2;
 ?>
 
 <div class="clients-default-index">
     <h1><?= $this->title ?></h1>
     
-    <!-- Nav menu at block of profile -->
-    <ul class="pager">
-        <li><a class="active" href="<?= Url::to(['profile/index']) ?>">Профиль</a></li>
-        <li><a href="<?= Url::to(['profile/settings-profile']) ?>">Настройки</a></li>
-        <li><a href="<?= Url::to(['profile/history']) ?>">История</a></li>
-    </ul>
-    <!-- End nav menu at block of profile -->
+    <?= SubMenuProfile::widget() ?>
 
     <?php if (Yii::$app->session->hasFlash('success')) : ?>
         <div class="alert alert-info" role="alert">
@@ -65,7 +62,7 @@ $this->title = 'Профиль абонента';
     </div>
     
     <!-- Block of customer -->
-    <div class="col-md-4">
+    <div class="col-md-<?= 12/$col ?>">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div class="text-left">
@@ -123,7 +120,7 @@ $this->title = 'Профиль абонента';
     <!-- End block of customer -->
     
     <!-- Block of avatar and notifications -->
-    <div class="col-md-4">        
+    <div class="col-md-<?= 12/$col ?>">        
         <div class="panel panel-default">
             <div class="panel-heading"><strong>Фотография</strong></div>
             <div class="panel-body">
@@ -154,7 +151,9 @@ $this->title = 'Профиль абонента';
    
     <?php ActiveForm::end(); ?>    
     
-    <div class="col-md-4">
+    <?php if (Yii::$app->user->can('AddNewRent')) : ?>
+    
+    <div class="col-md-<?= 12/$col ?>">
         <?php if (count($accounts_list) > 1): ?>
             <?= Html::dropDownList('_list-account', $this->context->_choosing, $accounts_list, ['class' => 'form-control', 'id' => '_list-account']) ?>
             <br />
@@ -228,9 +227,8 @@ $this->title = 'Профиль абонента';
             
     </div>
     
-    <div class="col-md-12 text-right">
-        
-    </div>
+    <?php endif; ?>
+
 
 </div>
 
