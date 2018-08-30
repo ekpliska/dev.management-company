@@ -5,6 +5,7 @@
     use yii\widgets\MaskedInput;
     use app\helpers\FormatHelpers;
     use app\modules\clients\widgets\SubMenuProfile;
+    use app\modules\clients\widgets\AlertsShow;
     
 /* 
  * Настройки профиля
@@ -16,28 +17,7 @@ $this->title = 'Настройки';
     <h1><?= $this->title ?></h1>
     
     <?= SubMenuProfile::widget() ?>
-    
-    <?php if (Yii::$app->session->hasFlash('success')) : ?>
-        <div class="alert alert-info" role="alert">
-            <strong>
-                <?= Yii::$app->session->getFlash('success', false); ?>
-            </strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>                    
-        </div>
-    <?php endif; ?>
-    
-    <?php if (Yii::$app->session->hasFlash('error')) : ?>
-        <div class="alert alert-error" role="alert">
-            <strong>
-                <?= Yii::$app->session->getFlash('error', false); ?>
-            </strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>                
-        </div>
-    <?php endif; ?>
+    <?= AlertsShow::widget() ?>
 
     <div class="col-md-4">
         <div class="panel panel-default">

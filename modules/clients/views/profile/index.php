@@ -5,6 +5,7 @@
     use yii\helpers\Url;
     use app\widgets\AddRentForm;
     use app\modules\clients\widgets\SubMenuProfile;
+    use app\modules\clients\widgets\AlertsShow;
     
 /*
  * Профиль пользователя
@@ -19,28 +20,8 @@ $col = Yii::$app->user->can('AddNewRent') ? 3 : 2;
     <h1><?= $this->title ?></h1>
     
     <?= SubMenuProfile::widget() ?>
-
-    <?php if (Yii::$app->session->hasFlash('success')) : ?>
-        <div class="alert alert-info" role="alert">
-            <strong>
-                <?= Yii::$app->session->getFlash('success', false); ?>
-            </strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>                    
-        </div>
-    <?php endif; ?>
     
-    <?php if (Yii::$app->session->hasFlash('error')) : ?>
-        <div class="alert alert-error" role="alert">
-            <strong>
-                <?= Yii::$app->session->getFlash('error', false); ?>
-            </strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>                
-        </div>
-    <?php endif; ?>
+    <?= AlertsShow::widget() ?>
 
     <?php
         $form = ActiveForm::begin([

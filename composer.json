@@ -19,7 +19,8 @@
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0",
         "costa-rico/yii2-images": "dev-master",
-        "bower-asset/bootbox": "~4.3.0"
+        "bower-asset/bootbox": "~4.3.0",
+        "kartik-v/yii2-widget-alert": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
