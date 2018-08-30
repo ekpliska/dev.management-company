@@ -12,7 +12,7 @@
 /*
  * Инициация RBAC через консоль
  * Добавление ролей для пользователей:
- * clients - Жилец
+ * clients - Собственник
  * clients_rent - Аредатор
  * dispatcher - Сотрудник (Диспетчер)
  * specialist - Специалист
@@ -31,6 +31,9 @@ class RbacController extends Controller {
         
         $auth->removeAll();
 
+        /*
+         * Роли
+         */
         $clients = $auth->createRole('clients');
         $clients->description = 'Собственник';
         $auth->add($clients);
@@ -51,12 +54,17 @@ class RbacController extends Controller {
         $administrator->description = 'Администратор';
         $auth->add($administrator);
 
-        // Разрешение adminPanel - проверяет доступ к панеле управления 
         /*
-        $adminPanel = $auth->createPermission('AdminPanel');
-        $adminPanel->description = 'Панель администратора';
-        $auth->add($adminPanel);
+         *  Разрешение для Собственников и Арендаторов
          */
+        $addNewRent = $auth->createPermission('AddNewRent');
+        $addNewRent->description = 'Добавить нового аредатора';
+        $auth->add($addNewRent);
+
+        $viewInfoRent = $auth->createPermission('ViewInfoRent');
+        $viewInfoRent->description = 'Редактирование информации об Арендаторе (блок Контактные даныые арендатора)';
+        $auth->add($viewInfoRent);
+
         
         // Администратор обладает правами всех других пользователей
         /*
@@ -64,7 +72,8 @@ class RbacController extends Controller {
         $auth->addChild($administrator, $clients_rent);
         $auth->addChild($administrator, $dispatcher);
         $auth->addChild($administrator, $specialist);
-        $auth->addChild($administrator, $adminPanel);
+        $auth->addChild($administrator, $addNewRent);
+        $auth->addChild($administrator, $viewInfoRent);
          */
         
         $this->stdout('Формирование ролей и разрешений выполнено!', PHP_EOL);

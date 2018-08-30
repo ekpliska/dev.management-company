@@ -25,7 +25,7 @@ class AppClientsController extends Controller {
                 'rules' => [
                     [
                         'allow' => true,
-                        'roles' => ['clients'],
+                        'roles' => ['clients', 'clients_rent'],
                     ],
                 ],
             ],

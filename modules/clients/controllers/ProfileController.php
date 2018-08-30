@@ -333,7 +333,7 @@ class ProfileController extends AppClientsController
             if ($user_info->updateEmailProfile()) {
                 Yii::$app->session->setFlash('success', 'Даные электронной почты / мобильный номер телефона были обновлены');
             } else {
-                Yii::$app->session->setFlash('error', 'При обновлении настроек профиль произошла ошибка');
+                Yii::$app->session->setFlash('error', 'При обновлении настроек профиля произошла ошибка');
             }
         }
         
