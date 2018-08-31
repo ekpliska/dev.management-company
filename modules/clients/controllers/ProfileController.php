@@ -37,6 +37,8 @@ class ProfileController extends AppClientsController
     public function actionIndex() {
         
         $user_info = $this->permisionUser();
+//        var_dump($user_info['user']);
+//        die();
         
         if (Yii::$app->user->can('AddNewRent')) {
             return $this->client($user_info);
@@ -276,7 +278,7 @@ class ProfileController extends AppClientsController
      */
     public function actionSettingsProfile() {
         
-        $user_info = $this->permisionUser();
+        $user_info = $this->permisionUser()['user'];
         $user_info->scenario = User::SCENARIO_EDIT_PROFILE;
         
         // Загружаем модель смены пароля
@@ -320,28 +322,32 @@ class ProfileController extends AppClientsController
     
     /*
      * Метод формирования вывода Профиля Собственника
+     * 
+     * @param array $user_info Ифнормация о текущем пользователе (Пользователь + Собственник)
+     * @param model $_user['user'] Модель Пользователь
      * @param integer $accoint_id Значение ID лицевого счета из глобального dropDownList (хеддер)
-     * @param array $user_info Информация о текущем пользователе
      * @param array $accounts_list Получить список всех лицевых счетов закрепленны за Собственником
      * @param array $accounts_list_rent Получить все лицевые счета не связанные с Арендатором
      */
-    protected function client($user_info) {
+    protected function client($_user) {
         
         $accoint_id = $this->_choosing;
-        $client = Clients::getInfoByClient($user_info->user_client_id);
+        $user_info = $_user['user_info'];
         
-        $accounts_list = PersonalAccount::findByClient($user_info->user_client_id, $all = true);
-        $accounts_list_rent = PersonalAccount::findByClient($user_info->user_client_id, $all = false);
+        $accounts_list = PersonalAccount::findByClient($user_info['client_id'], $all = true);
+        $accounts_list_rent = PersonalAccount::findByClient($user_info['client_id'], $all = false);
         
+        // Поучить ифнормацию по текущему лицевому счету
         $accounts_info = PersonalAccount::findByAccountID($accoint_id); 
         
-        $not_active_rents = Rents::getNotActiveRents($client['id']);
+        // Есть ли у Собсвенника неактивные Арендаторы
+        $not_active_rents = Rents::getNotActiveRents($user_info['client_id']);
         
         /* Статус наличия у собственника арендатора
          * Если имеется Арендатор, то загружаем данные Арендатор для формы
          */
         
-        if (Rents::isActiveRents($client['id'])) {
+        if (Rents::isActiveRents($user_info['client_id'])) {
             $this->_is_rent = true;
             $model_rent = Rents::findOne(['rents_id' => $accounts_info->personal_rent_id]);
         } else {
@@ -353,8 +359,8 @@ class ProfileController extends AppClientsController
         $add_rent = new ClientsRentForm(['scenario' => ClientsRentForm::SCENARIO_AJAX_VALIDATION]);
         
         return $this->render('index', [
-            'info' => $client,
-            'user' => $user_info,
+            'user' => $_user['user'],
+            'user_info' => $user_info,
             'accounts_list' => $accounts_list,
             'accounts_list_rent' => $accounts_list_rent,
             'is_rent' => $this->_is_rent,
@@ -369,43 +375,13 @@ class ProfileController extends AppClientsController
     /*
      * Метод формирования вывода Профиля Арендатора
      */
-    protected function rent($user_info) {
+    protected function rent($_user) {
         
-        $accoint_id = $this->_choosing;
-        $rent = Rents::getInfoByRent($user_info->user_rent_id);
-        
-//        $accounts_list = PersonalAccount::findByClient($user_info->user_client_id, $all = true);
-//        $accounts_list_rent = PersonalAccount::findByClient($user_info->user_client_id, $all = false);
-//        
-//        $accounts_info = PersonalAccount::findByAccountID($accoint_id); 
-//        
-//        $not_active_rents = Rents::getNotActiveRents($client['clients_id']);
-//        
-//        /* Статус наличия у собственника арендатора
-//         * Если имеется Арендатор, то загружаем данные Арендатор для формы
-//         */
-//        
-//        if (Rents::isActiveRents($client['clients_id'])) {
-//            $this->_is_rent = true;
-//            $model_rent = Rents::findOne(['rents_id' => $accounts_info->personal_rent_id]);
-//        } else {
-//            $this->_is_rent = false;
-//            $model_rent = null;
-//        }
-//        
-//        // Форма добавить Арендатора
-//        $add_rent = new ClientsRentForm(['scenario' => ClientsRentForm::SCENARIO_AJAX_VALIDATION]);
+        $user_info = $_user['user_info'];
         
         return $this->render('index', [
-            'info' => $rent,
-            'user' => $user_info,
-//            'accounts_list' => $accounts_list,
-//            'accounts_list_rent' => $accounts_list_rent,
-//            'is_rent' => $this->_is_rent,
-//            'accounts_info' => $accounts_info,
-//            'model_rent' => $model_rent,
-//            'add_rent' => $add_rent,
-//            'not_active_rents' => $not_active_rents,
+            'user' => $_user['user'],
+            'user_info' => $user_info,
         ]);
         
     }

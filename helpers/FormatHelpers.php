@@ -61,4 +61,17 @@ class FormatHelpers {
         
     }
     
+    /*
+     * Форматирование полного имени пользователя
+     * Фамилия И. О.
+     */
+    public static function formatFullUserName($surname, $name, $second_name) {
+        
+        $_name = mb_substr($name, 0, 1, 'UTF-8');
+        $_second_name = mb_substr($second_name, 0, 1, 'UTF-8');
+        
+        return $surname . ' ' . $_name . '. ' . $_second_name . '.';
+        
+    }
+    
 }

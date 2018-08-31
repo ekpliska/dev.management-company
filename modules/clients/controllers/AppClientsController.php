@@ -6,6 +6,7 @@
     use yii\filters\AccessControl;
     use yii\web\Response;
     use app\models\User;
+    use app\modules\clients\models\UserInfo;
     use app\modules\clients\components\checkPersonalAccount;
         
 /*
@@ -54,10 +55,12 @@ class AppClientsController extends Controller {
     public function permisionUser() {
         
         $user_id = Yii::$app->user->identity->user_id;
-        $user_info = User::findByUser($user_id);
+        $user = User::findByUser($user_id);
+        
+        $user_info = UserInfo::getUserInfo();
         
         if ($user_info) {
-            return $user_info;
+            return ['user_info' => $user_info, 'user' => $user];
         } else {
             throw new NotFoundHttpException('Вы обратились к несуществующей странице');
         }        

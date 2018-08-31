@@ -56,7 +56,7 @@ $col = Yii::$app->user->can('AddNewRent') ? 3 : 2;
             <div class="panel-body">                
                 <div class="container-fluid">
                     <div class="row">
-                        <?= $this->render('data/contact-info', ['info' => $info, 'user' => $user]); ?>                        
+                        <?= $this->render('data/contact-info', ['user_info' => $user_info]); ?>                        
                     </div>
                     
                 </div>
@@ -73,10 +73,10 @@ $col = Yii::$app->user->can('AddNewRent') ? 3 : 2;
             <div class="panel-body">
                 <div class="text-center">
                     
-                    <?php if (empty($user->user_photo)) : ?>
+                    <?php if (empty($user_info['photo'])) : ?>
                         <?= Html::img('/images/no-avatar.jpg', ['class' => 'img-circle', 'alt' => 'no-avatar', 'width' => 150]) ?>
                     <?php else: ?>
-                        <?= Html::img($user->user_photo, ['id' => 'photoPreview','class' => 'img-circle', 'alt' => $user->user_login, 'width' => 150]) ?>
+                        <?= Html::img($user_info['photo'], ['id' => 'photoPreview','class' => 'img-circle', 'alt' => $user_info['login'], 'width' => 150]) ?>
                     <?php endif; ?>
 
                 </div>
@@ -107,7 +107,7 @@ $col = Yii::$app->user->can('AddNewRent') ? 3 : 2;
                         $accounts_list, [
                             'class' => 'form-control', 
                             'id' => '_list-account',
-                            'data-client' => $info['id']]) 
+                            'data-client' => $user_info['client_id']]) 
                 ?>
                 <br />
             <?php endif; ?>

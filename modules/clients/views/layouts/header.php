@@ -2,6 +2,7 @@
     use yii\bootstrap\Nav;
     use yii\bootstrap\NavBar;
     use yii\helpers\Html;
+    use app\modules\clients\widgets\UserInfo;
 /*
  * Шапка, меню, хлебные крошки
  */
@@ -48,23 +49,13 @@
             ],            
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
-            ) : (
-                '<li>'
-                . Html::beginForm(['/site/logout'], 'post')
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->user_login . ')',
-                    ['class' => 'btn btn-link logout']
-                )
-                . Html::endForm()
-                . '</li>'
-            ),
+            ) : '',
             '<li>'
-                . Html::beginForm(['/'], 'post')
-                . Html::dropDownList('current__account_list', $this->context->_choosing, $this->context->getListAccount(Yii::$app->user->identity->id), [
-                    'class' => 'form-control current__account_list',
-                    'style' => 'margin-top: 7px'])
-                . Html::endForm()                
-            . '</li>',            
+                . UserInfo::widget([
+                    '_user' => $this->context->permisionUser()['user_info'],
+                    '_choosing' => $this->context->_choosing, 
+                    '_list' => $this->context->getListAccount(Yii::$app->user->identity->id)]) .
+            '</li>'
         ],
     ]);
     NavBar::end();
