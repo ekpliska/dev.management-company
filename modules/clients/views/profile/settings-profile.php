@@ -27,22 +27,25 @@ $this->title = 'Настройки';
             <div class="panel-body">
                 
                 <div class="text-center">
-                    <?php if (empty($user_info->user_photo)) : ?>
+                    <?php if (empty($user_info['photo'])) : ?>
                         <?= Html::img('/images/no-avatar.jpg', ['class' => 'img-circle', 'alt' => 'no-avatar', 'width' => 150]) ?>
                     <?php else: ?>
-                        <?= Html::img($user_info->user_photo, ['id' => 'photoPreview','class' => 'img-circle', 'alt' => $user_info->user_login, 'width' => 150]) ?>
+                        <?= Html::img($user_info['photo'], ['id' => 'photoPreview','class' => 'img-circle', 'alt' => $user_info['login'], 'width' => 150]) ?>
                     <?php endif; ?>
                 </div>
 
                 <hr />
-                
                 <div class="col-md-12">
-                    <p>Фамилия имя отчество: <?= $user_info->client->fullName ?></p>
-                    <p>Роль: <?= Yii::$app->authManager->getRolesByUser($user_info->id)['clients']->description ?></p>                    
-                    <p>Логин: <?= $user_info->user_login ?></p>
-                    <p>Дата регистрации: <?= FormatHelpers::formatDate($user_info->created_at) ?></p>
-                    <p>Дата последнего входа на портал: <?= FormatHelpers::formatDate($user_info->updated_at) ?></p>
-                    <p>Статус: <?= $user_info->getUserStatus() ?></p>
+                    <p>
+                        Фамилия имя отчество: 
+                        <?= 
+                            $user_info['surname'] . ' '. $user_info['name'] . ' ' . $user_info['second_name'] ?>
+                    </p>
+                    <?php /* <p>Роль: <?= Yii::$app->authManager->getRolesByUser($user_info['id'])['clients']->description ?></p> */ ?> 
+                    <p>Логин: <?= $user_info['login'] ?></p>
+                    <p>Дата регистрации: <?= FormatHelpers::formatDate($user_info['date_created']) ?></p>
+                    <p>Дата последнего входа на портал: <?= FormatHelpers::formatDate($user_info['last_login']) ?></p>
+                    <p>Статус: <?= $user->getUserStatus($user_info['status']) ?></p>
                 </div>
                 
             </div>
@@ -115,13 +118,13 @@ $this->title = 'Настройки';
                     ]);
                 ?>
                 
-                    <?= $form_email->field($user_info, 'user_email')->input('text')->label() ?>
+                    <?= $form_email->field($user, 'user_email')->input('text')->label() ?>
                 
-                    <?= $form_email->field($user_info, 'user_mobile')
+                    <?= $form_email->field($user, 'user_mobile')
                         ->widget(MaskedInput::className(), [
                             'mask' => '+7 (999) 999-99-99'])
                         ->input('text', [
-                            'placeHolder' => $user_info->getAttributeLabel('user_mobile')])
+                            'placeHolder' => $user->getAttributeLabel('user_mobile')])
                         ->label() 
                     ?>
                 

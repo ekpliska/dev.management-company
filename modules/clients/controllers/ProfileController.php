@@ -278,11 +278,13 @@ class ProfileController extends AppClientsController
      */
     public function actionSettingsProfile() {
         
-        $user_info = $this->permisionUser()['user'];
-        $user_info->scenario = User::SCENARIO_EDIT_PROFILE;
+        $user_info = $this->permisionUser()['user_info'];
+        
+        $user = $this->permisionUser()['user'];
+        $user->scenario = User::SCENARIO_EDIT_PROFILE;
         
         // Загружаем модель смены пароля
-        $model_password = new ChangePasswordForm($user_info);
+        $model_password = new ChangePasswordForm($user);
         
         if ($model_password->load(Yii::$app->request->post())) {
             if ($model_password->changePassword()) {
@@ -293,8 +295,8 @@ class ProfileController extends AppClientsController
             }
         }
         
-        if ($user_info->load(Yii::$app->request->post())) {
-            if ($user_info->updateEmailProfile()) {
+        if ($user->load(Yii::$app->request->post())) {
+            if ($user->updateEmailProfile()) {
                 Yii::$app->session->setFlash('success', 'Даные электронной почты / мобильный номер телефона были обновлены');
             } else {
                 Yii::$app->session->setFlash('error', 'При обновлении настроек профиля произошла ошибка');
@@ -303,6 +305,7 @@ class ProfileController extends AppClientsController
         
         return $this->render('settings-profile', [
             'user_info' => $user_info,
+            'user' => $user,
             'model_password' => $model_password,
         ]);
     }

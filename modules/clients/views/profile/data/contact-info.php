@@ -8,7 +8,6 @@
  */
 
 ?>
-
 <div class="col-md-4" style="padding: 0;">
     <p>Фамилия</p>
     <?= Html::input('text', 'surname', $user_info['surname'], [
@@ -57,11 +56,11 @@
                         
 <p>Номер лицевого счета</p>
     <div class="col-md-12" style="padding: 0;">
-    <?= Html::input('text', 'account-number',
+    <?php /*= Html::input('text', 'account-number',
             $info['account'], [
                 'class' => 'form-control', 
                 'disabled' => true, 
                 'id' => 'account-number'
-        ])
+        ]) */
     ?>
 </div>

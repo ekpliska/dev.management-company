@@ -9,31 +9,6 @@
 
 ?>
 
-<style>
-.navbar-content {
-    width:320px;
-    padding: 15px;
-    padding-bottom: 5px;
-}
-.navbar-content:before, .navbar-content:after {
-    display: table;
-    content: "";
-    line-height: 0;
-}
-.navbar-nav.navbar-right:last-child {
-    margin-right: 15px !important;
-}
-.navbar-footer {
-    background-color:#DDD;
-}
-.navbar-footer-content { 
-    padding:15px 15px 15px 15px; 
-}
-.dropdown-menu {
-    padding: 0px;
-    overflow: hidden;
-}
-</style>
 
 <ul class="nav navbar-nav navbar-right">
     <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
