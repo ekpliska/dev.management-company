@@ -30,7 +30,7 @@ class PersonalAccountController extends AppClientsController {
         $user_info = $this->permisionUser()['user_info'];
         
         // Получаем информация по лицевому счету Собственника
-        $account_info = PersonalAccount::findByClientProfile($user_info['client_id']);
+        $account_info = PersonalAccount::findByClientProfile($user_info['client_id']);        
         
         // Получить список всех лицевых счетов пользователя        
         $account_all = PersonalAccount::findByClient($user_info['client_id'], $all = true);

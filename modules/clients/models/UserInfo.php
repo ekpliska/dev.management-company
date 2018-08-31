@@ -20,9 +20,11 @@ class UserInfo extends User {
                         . 'u.user_id as user_id, u.user_login as login, '
                         . 'u.user_email as email, u.user_photo as photo, '
                         . 'u.created_at as date_created , u.date_login as last_login, '
-                        . 'u.status')
+                        . 'u.status, '
+                        . 'pa.account_number as account')
                     ->from('user as u')
                     ->join('LEFT JOIN', 'clients as c', 'u.user_client_id = c.clients_id')
+                    ->join('LEFT JOIN', 'personal_account as pa', 'u.user_client_id = pa.personal_clients_id')
                     ->where(['u.user_id' => Yii::$app->user->identity->user_id])
                     ->one();
         } else {
@@ -32,9 +34,11 @@ class UserInfo extends User {
                         . 'u.user_id as user_id, u.user_login as login, '
                         . 'u.user_email as email, u.user_photo as photo, '
                         . 'u.created_at as date_created , u.date_login as last_login, '
-                        . 'u.status')                            
+                        . 'u.status, '
+                        . 'pa.account_number as account')
                     ->from('user as u')
                     ->join('LEFT JOIN', 'rents as r', 'u.user_rent_id = r.rents_id')
+                    ->join('LEFT JOIN', 'personal_account as pa', 'u.user_rent_id = pa.personal_rent_id')
                     ->where(['u.user_id' => Yii::$app->user->identity->user_id])
                     ->one();
         }

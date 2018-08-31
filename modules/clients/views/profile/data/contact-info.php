@@ -30,37 +30,35 @@
     ?>
 </div>
                         
-<p>Домашний телефон</p>
 <div class="col-md-12" style="padding: 0;">
+    <p>Домашний телефон</p>    
     <?= Html::input('text', 'phone', $user_info['phone'], [
         'class' => 'form-control', 
         'disabled' => true]) 
     ?>
 </div>
                         
-<p>Мобильный телефон</p>
 <div class="col-md-12" style="padding: 0;">
+    <p>Мобильный телефон</p>
     <?= Html::input('text', 'mobile', $user_info['mobile'], [
         'class' => 'form-control', 
         'disabled' => true]) 
     ?>
 </div>
                         
-<p>Электронная почта</p>
-    <div class="col-md-12" style="padding: 0;">
+<div class="col-md-12" style="padding: 0;">
+    <p>Электронная почта</p>    
     <?= Html::input('text', 'email', $user_info['email'], [
         'class' => 'form-control', 
         'disabled' => true])
     ?>
 </div>
                         
-<p>Номер лицевого счета</p>
-    <div class="col-md-12" style="padding: 0;">
-    <?php /*= Html::input('text', 'account-number',
-            $info['account'], [
-                'class' => 'form-control', 
-                'disabled' => true, 
-                'id' => 'account-number'
-        ]) */
-    ?>
+<div class="col-md-12" style="padding: 0;">
+    <p>Номер лицевого счета</p>
+    <?= Html::input('text', 'account-number', $user_info['account'], [
+        'class' => 'form-control', 
+        'disabled' => true, 
+        'id' => 'account-number'
+    ]) ?>
 </div>

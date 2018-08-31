@@ -37,8 +37,6 @@ class ProfileController extends AppClientsController
     public function actionIndex() {
         
         $user_info = $this->permisionUser();
-//        var_dump($user_info['user']);
-//        die();
         
         if (Yii::$app->user->can('AddNewRent')) {
             return $this->client($user_info);
@@ -104,7 +102,7 @@ class ProfileController extends AppClientsController
             /*
              * Если арендатор существует, генерирурем для него модель
              */
-            if ($model->personal_rent_id) {
+            if (!empty($model->personal_rent_id)) {
                 $model_rent = Rents::findOne(['rents_id' => $model->personal_rent_id]);
                 if ($model_rent) {
                     $this->_is_rent = true;
