@@ -45,6 +45,7 @@ $(document).ready(function() {
         var accountNumber = $('input[name*=account-number]');
         var client = $(this).data('client');
         var account = $(this).val();
+        
         accountNumber.val($('#_list-account :selected').text());
         $.ajax({
             url: 'check-account',

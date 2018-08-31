@@ -38,7 +38,7 @@ $this->title = 'Настройки';
                 
                 <div class="col-md-12">
                     <p>Фамилия имя отчество: <?= $user_info->client->fullName ?></p>
-                    <p>Роль: <?= Yii::$app->authManager->getRolesByUser($user_info->id)["clients"]->description ?></p>                    
+                    <p>Роль: <?= Yii::$app->authManager->getRolesByUser($user_info->id)['clients']->description ?></p>                    
                     <p>Логин: <?= $user_info->user_login ?></p>
                     <p>Дата регистрации: <?= FormatHelpers::formatDate($user_info->created_at) ?></p>
                     <p>Дата последнего входа на портал: <?= FormatHelpers::formatDate($user_info->updated_at) ?></p>

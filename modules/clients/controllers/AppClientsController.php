@@ -53,8 +53,8 @@ class AppClientsController extends Controller {
      */
     public function permisionUser() {
         
-        $_user_id = Yii::$app->user->identity->user_id;
-        $user_info = User::findByUser($_user_id);
+        $user_id = Yii::$app->user->identity->user_id;
+        $user_info = User::findByUser($user_id);
         
         if ($user_info) {
             return $user_info;

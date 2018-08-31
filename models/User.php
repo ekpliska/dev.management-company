@@ -268,15 +268,23 @@ class User extends ActiveRecord implements IdentityInterface
     }
     
     /*
-     * Метод сохранения электронной почты
+     * Метод сохранения электронной почты/мобильного телефона
+     * 
+     * Если пользователь меняет мобильный телефон, то 
+     * номер меняется у сущности Пользователь/Собственник/Арендатор
      * 
      */
     public function updateEmailProfile() {
         
         if ($this->validate()) {
-            $this->client->clients_mobile = $this->user_mobile;
+            if (Yii::$app->user->can('AddNewRent')) {
+                $this->client->clients_mobile = $this->user_mobile;
+                $this->client->save();                
+            } else {
+                $this->rent->rents_mobile = $this->user_mobile;
+                $this->rent->save();
+            }
             $this->save();
-            $this->client->save();
             return true;
         }
         return false;

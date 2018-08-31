@@ -8,7 +8,6 @@
     use app\modules\clients\controllers\AppClientsController;
     use app\models\PersonalAccount;
     use app\modules\clients\models\AddPersonalAccount;
-    use app\models\User;
     use app\models\Rents;
     use app\models\Organizations;
     use app\models\AccountToUsers;
@@ -34,7 +33,7 @@ class PersonalAccountController extends AppClientsController {
         $account_info = PersonalAccount::findByClientProfile($user_info->user_client_id);
         
         // Получить список всех лицевых счетов пользователя        
-        $account_all = PersonalAccount::findByClient($user_info->user_client_id);
+        $account_all = PersonalAccount::findByClient($user_info->user_client_id, $all = true);
         
         return $this->render('index', [
             'user_info' => $user_info,

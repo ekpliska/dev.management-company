@@ -335,13 +335,13 @@ class ProfileController extends AppClientsController
         
         $accounts_info = PersonalAccount::findByAccountID($accoint_id); 
         
-        $not_active_rents = Rents::getNotActiveRents($client['clients_id']);
+        $not_active_rents = Rents::getNotActiveRents($client['id']);
         
         /* Статус наличия у собственника арендатора
          * Если имеется Арендатор, то загружаем данные Арендатор для формы
          */
         
-        if (Rents::isActiveRents($client['clients_id'])) {
+        if (Rents::isActiveRents($client['id'])) {
             $this->_is_rent = true;
             $model_rent = Rents::findOne(['rents_id' => $accounts_info->personal_rent_id]);
         } else {

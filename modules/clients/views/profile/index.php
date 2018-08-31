@@ -50,7 +50,7 @@ $col = Yii::$app->user->can('AddNewRent') ? 3 : 2;
                     <strong>Контактные данные</strong>                    
                 </div>
                 <div class="text-right">
-                    <?= Html::checkbox('is_rent', 'checked', ['disabled' => true]) ?> Арендатор
+                    <?= Html::checkbox('is_rent', $is_rent ? 'checked' : '', ['id' => 'is_rent']) ?> Арендатор
                 </div>
             </div>            
             <div class="panel-body">                
@@ -107,7 +107,7 @@ $col = Yii::$app->user->can('AddNewRent') ? 3 : 2;
                         $accounts_list, [
                             'class' => 'form-control', 
                             'id' => '_list-account',
-                            'data-client' => $client->id]) 
+                            'data-client' => $info['id']]) 
                 ?>
                 <br />
             <?php endif; ?>
