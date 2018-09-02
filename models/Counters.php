@@ -11,6 +11,8 @@
  */
 class Counters extends ActiveRecord
 {
+    const STATUS_ACTIVE = 1;
+    const STATUS_NOT_ACTIVE = 0;
 
     /**
      * Таблица из БД

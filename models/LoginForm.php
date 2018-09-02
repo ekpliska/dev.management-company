@@ -72,7 +72,7 @@ class LoginForm extends Model
                 // Записываем в БД снегерированный ключ для аутентивикации по cookie
                 $user->generateAuthKey();
                 // Дата последнего входа на портал
-                $user->date_login = time();
+//                $user->date_login = time();
                 $user->save();
             }            
             return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600*24*30 : 0);

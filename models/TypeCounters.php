@@ -22,7 +22,7 @@ class TypeCounters extends ActiveRecord
      */
     public function rules() {
         return [
-            [['type_counters_name'], 'string', 'max' => 70],
+            [['type_counters_name'], 'string', 'max' => 100],
         ];
     }
     

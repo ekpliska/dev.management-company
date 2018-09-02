@@ -66,7 +66,7 @@ class RbacController extends Controller {
 //        $auth->add($viewInfoRent);
 
         $vote = $auth->createPermission('Vote');
-        $viewInfoRent->description = 'Участие в голосовании';
+        $vote->description = 'Участие в голосовании';
         $auth->add($vote);
         
         /*
