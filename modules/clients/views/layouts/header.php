@@ -52,7 +52,7 @@
             ) : '',
             '<li>'
                 . UserInfo::widget([
-                    '_user' => $this->context->permisionUser()['user_info'],
+                    '_user' => $this->context->permisionUser(),
                     '_choosing' => $this->context->_choosing, 
                     '_list' => $this->context->getListAccount(Yii::$app->user->identity->id)]) .
             '</li>'

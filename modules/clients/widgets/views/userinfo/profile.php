@@ -12,28 +12,24 @@
 
 <ul class="nav navbar-nav navbar-right">
     <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
-        <?= FormatHelpers::formatFullUserName($user_info['surname'], $user_info['name'], $user_info['second_name']) ?>
+        <?= $user_info->fullNameClient ?>
         <b class="caret"></b></a>
         <ul class="dropdown-menu">
             <li>
                 <div class="navbar-content">
                     <div class="row">
                         <div class="col-md-5">
-                            <?php if ($user_info['photo']) : ?>
-                                <?= Html::img($user_info['photo'], ['alt' => $user_info['surname'], 'class' => 'img-responsive']) ?>
-                            <?php else : ?>
-                                <?= Html::img('/images/no-avatar.jpg', ['class' => 'img-responsive', 'alt' => 'no-avatar']) ?>
-                            <?php endif; ?>
+                                <?= Html::img($user_info->photo, ['alt' => $user_info->username, 'class' => 'img-responsive']) ?>
                             <p class="text-center small">
                                 ...
                             </p>
                         </div>
                         <div class="col-md-7">
                             <span>
-                                <?= FormatHelpers::formatFullUserName($user_info['surname'], $user_info['name'], $user_info['second_name']) ?>
+                                <?= $user_info->fullNameClient ?>
                             </span>
                             <p class="text-muted small">
-                                <?= $user_info['email'] ?>
+                                <?= $user_info->email ?>
                             </p>
                             <p class="text-muted small">
                                 <?= Html::beginForm(['/'], 'post') ?>

@@ -17,7 +17,7 @@ class UserInfo extends Widget {
 
     public function init() {
         
-        if ($this->_choosing == null && $this->_list == null && $this->_user == null) {
+        if ($this->_choosing == null && $this->_list == null) {
             throw new InvalidConfigException('Ошибка передачи параметров');
         }
         

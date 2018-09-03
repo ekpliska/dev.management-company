@@ -157,8 +157,8 @@ class UserProfile extends BaseObject {
      */
     public function getFullNameClient() {
         $_name = mb_substr($this->_user['name'], 0, 1, 'UTF-8');
-        $_second_name = mb_substr($$this->_user['second_name'], 0, 1, 'UTF-8');
-        return $$this->_user['surname'] . ' ' . $_name . '. ' . $_second_name . '.';
+        $_second_name = mb_substr($this->_user['second_name'], 0, 1, 'UTF-8');
+        return $this->_user['surname'] . ' ' . $_name . '. ' . $_second_name . '.';
     }
     
     /*
