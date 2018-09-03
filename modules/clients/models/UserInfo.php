@@ -19,7 +19,7 @@ class UserInfo extends User {
                         . 'c.clients_mobile as mobile, c.clients_phone as phone, '
                         . 'u.user_id as user_id, u.user_login as login, '
                         . 'u.user_email as email, u.user_photo as photo, '
-                        . 'u.created_at as date_created , u.date_login as last_login, '
+                        . 'u.created_at as date_created , u.last_login as last_login, '
                         . 'u.status, '
                         . 'pa.account_number as account')
                     ->from('user as u')
@@ -33,7 +33,7 @@ class UserInfo extends User {
                         . 'r.rents_mobile as mobile, r.rents_mobile_more as phone, '
                         . 'u.user_id as user_id, u.user_login as login, '
                         . 'u.user_email as email, u.user_photo as photo, '
-                        . 'u.created_at as date_created , u.date_login as last_login, '
+                        . 'u.created_at as date_created , u.last_login as last_login, '
                         . 'u.status, '
                         . 'pa.account_number as account')
                     ->from('user as u')

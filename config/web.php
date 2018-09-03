@@ -37,6 +37,14 @@ $config = [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'LPpnZwt-SMNcuRhZ-S24tU9dMRSkvSkF',
         ],
+        
+        /*
+         * Компонент Профиль пользователя
+         */
+        'userProfile' => [
+            'class' => 'app\modules\clients\components\UserProfile',
+        ],
+        
         'authManager' => [
             'class' => 'yii\rbac\DbManager',
         ],        
