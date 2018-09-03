@@ -1,6 +1,7 @@
 <?php
 
     use yii\db\Migration;
+    use app\models\Rents;
 
 /**
  * Арендаторы
@@ -26,6 +27,7 @@ class m180901_090529_table_rents extends Migration
             'rents_mobile' => $this->string(70)->unique()->notNull(),
             'rents_mobile_more' => $this->string(70)->unique(),
             'rents_clients_id' => $this->integer()->notNull(),
+            'isActive' => $this->tinyInteger()->defaultValue(Rents::STATUS_ENABLED),
         ], $table_options);
         
         $this->createIndex('idx-rents-rents_id', '{{%rents}}', 'rents_id');

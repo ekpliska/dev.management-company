@@ -16,12 +16,17 @@ class UserProfile extends BaseObject {
     
     public $_user;
     public $_user_id;
+    public $_model;
 
     public function init() {
+        
         $this->_user_id = Yii::$app->user->identity->id;
-        if (User::findByUser($this->_user_id) == null) {
+        $this->_model = User::findByUser($this->_user_id);
+        
+        if ($this->_model == null) {
             throw new NotFoundHttpException('Вы обратились к несуществующей странице');
         }
+        
         return $this->info();
     }
     
@@ -104,7 +109,7 @@ class UserProfile extends BaseObject {
      * Аватар пользователя
      */
     public function getPhoto() {
-        if (!empty($this->_user['photo'])) {
+        if (empty($this->_user['photo'])) {
             return Yii::getAlias('@web') . '/images/no-avatar.jpg';
         }
         return Yii::getAlias('@web') . $this->_user['photo'];
@@ -152,6 +157,27 @@ class UserProfile extends BaseObject {
     }
     
     /*
+     * Имя
+     */
+    public function getName() {
+        return $this->_user['name'];
+    }
+
+    /*
+     * Фамилия
+     */
+    public function getSurname() {
+        return $this->_user['surname'];
+    }    
+
+    /*
+     * Фамилия
+     */
+    public function getSecondName() {
+        return $this->_user['second_name'];
+    }       
+    
+    /*
      * Фамилия имя отчество Собственника/Аренедтора
      * Формат: Фамилия И.О.
      */
@@ -181,5 +207,5 @@ class UserProfile extends BaseObject {
     public function getAccount() {
         return $this->_user['account'];
     }
-    
+        
 }

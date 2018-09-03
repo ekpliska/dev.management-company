@@ -74,13 +74,7 @@ $col = Yii::$app->user->can('AddNewRent') ? 3 : 2;
             <div class="panel-heading"><strong>Фотография</strong></div>
             <div class="panel-body">
                 <div class="text-center">
-                    
-                    <?php if (empty($user_info['photo'])) : ?>
-                        <?= Html::img('/images/no-avatar.jpg', ['class' => 'img-circle', 'alt' => 'no-avatar', 'width' => 150]) ?>
-                    <?php else: ?>
-                        <?= Html::img($user_info['photo'], ['id' => 'photoPreview','class' => 'img-circle', 'alt' => $user_info['login'], 'width' => 150]) ?>
-                    <?php endif; ?>
-
+                    <?= Html::img($user_info->photo, ['id' => 'photoPreview','class' => 'img-circle', 'alt' => $user_info->username, 'width' => 150]) ?>
                 </div>
                     
                 <?= $form->field($user, 'user_photo')->input('file', ['id' => 'btnLoad']) ?>
@@ -90,7 +84,6 @@ $col = Yii::$app->user->can('AddNewRent') ? 3 : 2;
         <div class="panel panel-default">
             <div class="panel-heading"><strong>Оповещения</strong></div>
             <div class="panel-body">
-                <?= $form->field($user, 'user_check_sms')->checkbox() ?>
                 <?= $form->field($user, 'user_check_email')->checkbox() ?>
             </div>
         </div>
@@ -109,7 +102,7 @@ $col = Yii::$app->user->can('AddNewRent') ? 3 : 2;
                         $accounts_list, [
                             'class' => 'form-control', 
                             'id' => '_list-account',
-                            'data-client' => $user_info['client_id']]) 
+                            'data-client' => $user_info->clientID]) 
                 ?>
                 <br />
             <?php endif; ?>

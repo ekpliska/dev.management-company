@@ -38,7 +38,7 @@ class ProfileController extends AppClientsController
         
         $user_info = $this->permisionUser();
         
-        if (Yii::$app->user->can('AddNewRent')) {
+        if (Yii::$app->user->can('clients')) {
             return $this->client($user_info);
         } else {
             return $this->rent($user_info);
@@ -333,22 +333,23 @@ class ProfileController extends AppClientsController
     protected function client($_user) {
         
         $accoint_id = $this->_choosing;
-        $user_info = $_user['user_info'];
+        $user_info = $_user;
+        $model = $user_info->_model;
         
-        $accounts_list = PersonalAccount::findByClient($user_info['client_id'], $all = true);
-        $accounts_list_rent = PersonalAccount::findByClient($user_info['client_id'], $all = false);
+        $accounts_list = PersonalAccount::findByClient($user_info->clientID, $all = true);
+        $accounts_list_rent = PersonalAccount::findByClient($user_info->clientID, $all = false);
         
         // Поучить ифнормацию по текущему лицевому счету
         $accounts_info = PersonalAccount::findByAccountID($accoint_id); 
         
         // Есть ли у Собсвенника неактивные Арендаторы
-        $not_active_rents = Rents::getNotActiveRents($user_info['client_id']);
+        $not_active_rents = Rents::getNotActiveRents($user_info->clientID);
         
         /* Статус наличия у собственника арендатора
          * Если имеется Арендатор, то загружаем данные Арендатор для формы
          */
         
-        if (Rents::isActiveRents($user_info['client_id'])) {
+        if (Rents::isActiveRents($user_info->clientID)) {
             $this->_is_rent = true;
             $model_rent = Rents::findOne(['rents_id' => $accounts_info->personal_rent_id]);
         } else {
@@ -360,7 +361,7 @@ class ProfileController extends AppClientsController
         $add_rent = new ClientsRentForm(['scenario' => ClientsRentForm::SCENARIO_AJAX_VALIDATION]);
         
         return $this->render('index', [
-            'user' => $_user['user'],
+            'user' => $model,
             'user_info' => $user_info,
             'accounts_list' => $accounts_list,
             'accounts_list_rent' => $accounts_list_rent,
