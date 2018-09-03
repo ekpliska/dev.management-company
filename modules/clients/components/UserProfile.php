@@ -43,7 +43,7 @@ class UserProfile extends BaseObject {
                         . 'u.user_id as user_id, u.user_login as login, '
                         . 'u.user_email as email, u.user_photo as photo, '
                         . 'u.created_at as date_created , u.last_login as last_login, '
-                        . 'u.status, '
+                        . 'u.status as status, '
                         . 'pa.account_number as account')
                     ->from('user as u')
                     ->join('LEFT JOIN', 'clients as c', 'u.user_client_id = c.clients_id')
@@ -62,7 +62,7 @@ class UserProfile extends BaseObject {
                         . 'u.user_id as user_id, u.user_login as login, '
                         . 'u.user_email as email, u.user_photo as photo, '
                         . 'u.created_at as date_created , u.last_login as last_login, '
-                        . 'u.status, '
+                        . 'u.status as status, '
                         . 'pa.account_number as account')
                     ->from('user as u')
                     ->join('LEFT JOIN', 'rents as r', 'u.user_rent_id = r.rents_id')
@@ -135,8 +135,8 @@ class UserProfile extends BaseObject {
     /*
      * Статус учетной записи пользователя
      */
-    public function getStatus($status) {
-        return User::className()->getUserStatus($status);
+    public function getStatus() {
+        return \yii\helpers\ArrayHelper::getValue(User::arrayUserStatus(), $this->_user['status']);
     }
     
     /*

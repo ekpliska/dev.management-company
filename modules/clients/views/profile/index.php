@@ -93,7 +93,7 @@ $col = Yii::$app->user->can('AddNewRent') ? 3 : 2;
    
     <?php ActiveForm::end(); ?>    
     
-    <?php if (Yii::$app->user->can('AddNewRent')) : ?>
+    <?php if (Yii::$app->user->can('clients')) : ?>
     
         <div class="col-md-<?= 12/$col ?>">
             <?php if (count($accounts_list) > 1): ?>
@@ -115,7 +115,7 @@ $col = Yii::$app->user->can('AddNewRent') ? 3 : 2;
                     <div id="content-replace">
 
                         <?= $this->render('_form/rent-view', [
-                                'model' => $accounts_info, 
+                                // 'model' => $accounts_info, 
                                 'model_rent' => $model_rent, 
                                 'add_rent' => $add_rent, 
                             ]) ?>

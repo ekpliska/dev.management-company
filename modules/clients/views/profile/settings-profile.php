@@ -27,11 +27,7 @@ $this->title = 'Настройки';
             <div class="panel-body">
                 
                 <div class="text-center">
-                    <?php if (empty($user_info['photo'])) : ?>
-                        <?= Html::img('/images/no-avatar.jpg', ['class' => 'img-circle', 'alt' => 'no-avatar', 'width' => 150]) ?>
-                    <?php else: ?>
-                        <?= Html::img($user_info['photo'], ['id' => 'photoPreview','class' => 'img-circle', 'alt' => $user_info['login'], 'width' => 150]) ?>
-                    <?php endif; ?>
+                    <?= Html::img($user_info->photo, ['id' => 'photoPreview','class' => 'img-circle', 'alt' => $user_info->username, 'width' => 150]) ?>
                 </div>
 
                 <hr />
@@ -39,13 +35,13 @@ $this->title = 'Настройки';
                     <p>
                         Фамилия имя отчество: 
                         <?= 
-                            $user_info['surname'] . ' '. $user_info['name'] . ' ' . $user_info['second_name'] ?>
+                            $user_info->surname . ' '. $user_info->name . ' ' . $user_info->secondName ?>
                     </p>
-                    <?php /* <p>Роль: <?= Yii::$app->authManager->getRolesByUser($user_info['id'])['clients']->description ?></p> */ ?> 
-                    <p>Логин: <?= $user_info['login'] ?></p>
-                    <p>Дата регистрации: <?= FormatHelpers::formatDate($user_info['date_created']) ?></p>
-                    <p>Дата последнего входа на портал: <?= FormatHelpers::formatDate($user_info['last_login']) ?></p>
-                    <p>Статус: <?= $user->getUserStatus($user_info['status']) ?></p>
+                    <p>Роль: <?= $user_info->role ?></p>
+                    <p>Логин: <?= $user_info->username ?></p>
+                    <p>Дата регистрации: <?= FormatHelpers::formatDate($user_info->dateRegister) ?></p>
+                    <p>Дата последнего входа на портал: <?= FormatHelpers::formatDate($user_info->lastLogin) ?></p>
+                    <p>Статус: <?= $user_info->getStatus() ?></p>
                 </div>
                 
             </div>

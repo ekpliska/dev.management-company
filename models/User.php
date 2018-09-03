@@ -239,9 +239,9 @@ class User extends ActiveRecord implements IdentityInterface
     /*
      * Статус учетной записи пользователя
      */
-    public function getUserStatus($status) {
+    public function getUserStatus() {
         
-        return ArrayHelper::getValue(self::arrayUserStatus(), $status);
+        return ArrayHelper::getValue(self::arrayUserStatus(), $this->status);
     }
     
     /*

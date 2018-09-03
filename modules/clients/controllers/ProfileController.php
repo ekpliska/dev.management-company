@@ -276,9 +276,9 @@ class ProfileController extends AppClientsController
      */
     public function actionSettingsProfile() {
         
-        $user_info = $this->permisionUser()['user_info'];
+        $user_info = $this->permisionUser();
         
-        $user = $this->permisionUser()['user'];
+        $user = $user_info->_model;
         $user->scenario = User::SCENARIO_EDIT_PROFILE;
         
         // Загружаем модель смены пароля
@@ -330,19 +330,21 @@ class ProfileController extends AppClientsController
      * @param array $accounts_list Получить список всех лицевых счетов закрепленны за Собственником
      * @param array $accounts_list_rent Получить все лицевые счета не связанные с Арендатором
      */
-    protected function client($_user) {
+    protected function client($user_info) {
         
         $accoint_id = $this->_choosing;
-        $user_info = $_user;
         $model = $user_info->_model;
+        $accounts_list = $this->_list;
+
+        // Поучить информацию по текущему лицевому счету
+        $accounts_info = PersonalAccount::findByAccountID($accoint_id);
         
-        $accounts_list = PersonalAccount::findByClient($user_info->clientID, $all = true);
+        /*
+         * Все лицевые счета, которые связаны с арендатором
+         */
         $accounts_list_rent = PersonalAccount::findByClient($user_info->clientID, $all = false);
         
-        // Поучить ифнормацию по текущему лицевому счету
-        $accounts_info = PersonalAccount::findByAccountID($accoint_id); 
-        
-        // Есть ли у Собсвенника неактивные Арендаторы
+        // Есть ли у Собственника неактивные Арендаторы
         $not_active_rents = Rents::getNotActiveRents($user_info->clientID);
         
         /* Статус наличия у собственника арендатора
@@ -377,12 +379,12 @@ class ProfileController extends AppClientsController
     /*
      * Метод формирования вывода Профиля Арендатора
      */
-    protected function rent($_user) {
+    protected function rent($user_info) {
         
-        $user_info = $_user['user_info'];
+        $model = $user_info->_model;
         
         return $this->render('index', [
-            'user' => $_user['user'],
+            'user' => $model,
             'user_info' => $user_info,
         ]);
         
