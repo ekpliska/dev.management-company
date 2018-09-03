@@ -4,6 +4,7 @@
     use yii\base\BaseObject;
     use yii\base\InvalidConfigException;
     use Yii;
+    use yii\helpers\ArrayHelper;
     use app\models\User;
 
 /* 
@@ -136,7 +137,7 @@ class UserProfile extends BaseObject {
      * Статус учетной записи пользователя
      */
     public function getStatus() {
-        return \yii\helpers\ArrayHelper::getValue(User::arrayUserStatus(), $this->_user['status']);
+        return ArrayHelper::getValue(User::arrayUserStatus(), $this->_user['status']);
     }
     
     /*

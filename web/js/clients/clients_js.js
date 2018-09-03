@@ -242,12 +242,18 @@ $(document).ready(function() {
      * Смена информации о лицевом счете,
      * dropDownList _list-account-all
      */    
-    $('._list-account-all').on('change', function() {
+    $('.current__account_list, ._list-account-all').on('change', function() {
         var accountId = $(this).val();
+        var clientId = $(this).data('client');
+        
         $.ajax({
-            url: 'list?account=' + accountId,
-            method: 'GET',
+            url: 'list',
+            method: 'POST',
             type: 'json',
+            data: {
+                accountId: accountId,
+                clientId: clientId
+            },
             success: function(response) {
                 $('#account-info').html(response.data);
             },

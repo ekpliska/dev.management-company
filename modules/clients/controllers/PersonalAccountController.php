@@ -27,13 +27,14 @@ class PersonalAccountController extends AppClientsController {
      */
     public function actionIndex() {
         
-        $user_info = $this->permisionUser()['user_info'];
+        $user_info = $this->permisionUser();
+        $accoint_id = $this->_choosing;
         
         // Получаем информация по лицевому счету Собственника
-        $account_info = PersonalAccount::findByClientProfile($user_info['client_id']);        
+        $account_info = PersonalAccount::getAccountInfo($accoint_id, $user_info->clientID);
         
         // Получить список всех лицевых счетов пользователя        
-        $account_all = PersonalAccount::findByClient($user_info['client_id'], $all = true);
+        $account_all = $this->_list;
         
         return $this->render('index', [
             'user_info' => $user_info,
@@ -100,17 +101,16 @@ class PersonalAccountController extends AppClientsController {
      * Метод фильтра лицевых счетов
      * dropDownList
      */
-    public function actionList($account) {
+    public function actionList() {
         
-        if (empty($account)) {
-            throw new InvalidConfigException('При передаче параметров произошла ошибка');
-        }
+        Yii::$app->response->format = Response::FORMAT_JSON;
         
-        if (Yii::$app->request->isGet && Yii::$app->request->isAjax) {
-            Yii::$app->response->format = Response::FORMAT_JSON;
-            $account_info = PersonalAccount::findOne(['account_id' => $account]);
-            // return ['success' => true, 'message' => $account_info];
-            $data = $this->renderAjax('_data-filter/list', ['model' => $account_info]);
+        $account_id = Yii::$app->request->post('accountId');
+        $client_id = Yii::$app->request->post('clientId');
+        
+        if (Yii::$app->request->isAjax) {
+            $account_info = PersonalAccount::getAccountInfo($account_id, $client_id);
+            $data = $this->renderPartial('_data-filter/list', ['account_info' => $account_info]);
             return ['success' => true, 'data' => $data];
         }
         return ['success' => false];

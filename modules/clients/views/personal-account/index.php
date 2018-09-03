@@ -11,32 +11,10 @@ $this->title = 'Общая информация';
 <div class="clients-default-index">
     <h1><?= $this->title ?></h1>
 
-        <?php if (Yii::$app->session->hasFlash('form')) : ?>
-            <div class="alert alert-info" role="alert">
-                <strong>
-                    <?= Yii::$app->session->getFlash('form', false); ?>
-                </strong>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>                    
-            </div>
-        <?php endif; ?>
-
-        <?php if (Yii::$app->session->hasFlash('error')) : ?>
-            <div class="alert alert-error" role="alert">
-                <strong>
-                    <?= Yii::$app->session->getFlash('error', false); ?>
-                </strong>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>                
-            </div>
-        <?php endif; ?>
-    
     <div class="col-md-6">
-        
-        <?= Html::dropDownList('_list-account-all', null, $account_all, ['class' => 'form-control _list-account-all']) ?>
-        
+        <?= Html::dropDownList('_list-account-all', $this->context->_choosing, $account_all, [
+            'class' => 'form-control _list-account-all',
+            'data-client' => $account_info['clients_id']]) ?>
         <br />
     </div>
     
@@ -49,7 +27,7 @@ $this->title = 'Общая информация';
         <div class="panel panel-default">
             <div class="panel-heading"><strong>Информация по лицевому счету</strong></div>
             <div class="panel-body">
-                <?= $this->render('_data-filter/list', ['model' => $account_info]); ?>
+                <?= $this->render('_data-filter/list', ['account_info' => $account_info]); ?>
             </div>
         </div>
     </div>

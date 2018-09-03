@@ -96,13 +96,35 @@ class PersonalAccount extends ActiveRecord
      * Поиск лицевого счета по ID клиента
      * Для контроллера Профиль пользователя
      */    
-    public static function findByClientProfile($client_id) {
-        return static::find()
+//    public static function findByClientProfile($client_id) {
+//        return static::find()
+//                ->andWhere(['personal_clients_id' => $client_id])
+//                ->orderBy(['account_id' => SORT_ASC])
+//                ->limit(1)
+//                ->one();
+//    }
+
+    /*
+     * Информация по лицевому счету
+     * 
+     * @param array $info Информация по текущему лицевому счету/собственник/жилой массив
+     */
+    public static function getAccountInfo($account_id, $client_id) {
+        
+        $info = (new \yii\db\Query)
+                ->from('personal_account')
+                ->join('LEFT JOIN', 'clients', 'personal_clients_id = clients_id')
+                ->join('LEFT JOIN', 'houses', 'personal_house_id = houses_id')
+                ->join('LEFT JOIN', 'rents', 'personal_house_id = rents_id')
+                ->join('LEFT JOIN', 'organizations', 'account_organization_id = organizations_id')
+                ->where(['account_id' => $account_id])
                 ->andWhere(['personal_clients_id' => $client_id])
-                ->orderBy(['account_id' => SORT_ASC])
-                ->limit(1)
                 ->one();
+        
+        return $info;
+        
     }
+    
     
     /*
      * Поиск лицевого счета по ID
