@@ -33,6 +33,7 @@ class m180901_131651_table_requests extends Migration
             'requests_specialist_id' => $this->integer(),
             'requests_account_id' => $this->integer(),
             'requests_account_id' => $this->integer(),
+            'date_closed' => $this->integer(),
         ], $table_options);
         $this->createIndex('idx-requests-requests_id', '{{%requests}}', 'requests_id');
         $this->createIndex('idx-requests-requests_ident', '{{%requests}}', 'requests_ident');

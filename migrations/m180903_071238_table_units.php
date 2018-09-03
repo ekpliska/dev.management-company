@@ -3,9 +3,9 @@
     use yii\db\Migration;
 
 /**
- * Сессия пользователя
+ * Единицы измерения
  */
-class m180901_211206_user_session extends Migration
+class m180903_071238_table_units extends Migration
 {
     /**
      * {@inheritdoc}
@@ -16,13 +16,12 @@ class m180901_211206_user_session extends Migration
         if ($this->db->driverName === 'mysql') {
             $table_options = 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB';
         }
-        
-        $this->createTable('{{%user_session}}', [
-            'id' => $this->primaryKey(),
-            'expire' => $this->integer(),
-            'data' => $this->text(),
-        ], $table_options);
 
+        $this->createTable('{{%units}}', [
+            'units_id' => $this->primaryKey(),
+            'units_name' => $this->integer()->notNull(),
+        ]);
+        
     }
 
     /**
@@ -30,7 +29,7 @@ class m180901_211206_user_session extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('{{%user_session}}');
+        $this->dropTable('{{%units}}');
     }
 
 }

@@ -25,7 +25,7 @@ class m180901_115120_table_services extends Migration
             'isPay' => $this->tinyInteger(),
             'isServices' => $this->tinyInteger(),
             'services_image' => $this->string(255)->notNull(),
-            'services_description' => $this->integer(),
+            'services_description' => $this->text(1000),
         ], $table_options);
         $this->createIndex('idx-services-services_id', '{{%services}}', 'services_id');
         $this->createIndex('idx-services-services_name', '{{%services}}', 'services_name');

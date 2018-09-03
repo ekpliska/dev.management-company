@@ -21,7 +21,7 @@ class m180901_114651_table_image extends Migration
             'id' => $this->primaryKey(),
             'filePath' => $this->text(400),
             'itemId' => $this->integer(),
-            'isMain' => $this->integer(),
+            'isMain' => $this->tinyInteger(),
             'modelName' => $this->string(150),
             'urlAlias' => $this->text(400),
             'name' => $this->string(70),

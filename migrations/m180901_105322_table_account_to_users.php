@@ -18,6 +18,7 @@ class m180901_105322_table_account_to_users extends Migration
         }
         
         $this->createTable('{{%account_to_users}}', [
+            'id' => $this->primaryKey(),
             'account_id' => $this->integer(),
             'user_id' => $this->integer(),
         ], $table_options);

@@ -24,6 +24,7 @@ class m180901_111400_table_counters extends Migration
             'counters_number' => $this->integer()->notNull(),
             'counters_description' => $this->string(255),
             'counters_account_id' => $this->integer()->notNull(),
+            'counters_house_id' => $this->integer()->notNull(),
             'date_check' => $this->integer()->notNull(),
             'isActive' => $this->tinyInteger()->notNull()->defaultValue(Counters::STATUS_ACTIVE),
         ], $table_options);

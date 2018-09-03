@@ -1,6 +1,7 @@
 <?php
 
-use yii\db\Migration;
+    use yii\db\Migration;
+    use app\models\PersonalAccount;
 
 /**
  * Лицевой счет
@@ -22,11 +23,12 @@ class m180901_095338_table_personal_account extends Migration
         $this->createTable('{{%personal_account}}', [
             'account_id' => $this->primaryKey(),
             'account_number' => $this->string(70)->unique()->notNull(),
-            'account_balance' => $this->string(70)->notNull(),
+            'account_balance' => $this->decimal(10,2)->notNull(),
             'account_organization_id' => $this->integer(),
             'personal_clients_id' => $this->integer(),
             'personal_rent_id' => $this->integer(),
             'personal_house_id' => $this->integer(),
+            'isActive' => $this->tinyInteger()->defaultValue(PersonalAccount::STATUS_DISABLED),
         ], $table_options);
         
         $this->createIndex('idx-personal_account-account_id', '{{%personal_account}}', 'account_id');

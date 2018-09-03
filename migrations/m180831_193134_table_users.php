@@ -22,7 +22,7 @@ class m180831_193134_table_users extends Migration
         $this->createTable('{{%user}}', [
             'user_id' => $this->primaryKey(),
             'user_login' => $this->string(70)->unique()->notNull(),
-            'user_password' => $this->string(12)->notNull(),
+            'user_password' => $this->string(255)->notNull(),
             'user_email' => $this->string(150)->unique()->notNull(),
             'user_mobile' => $this->string(70)->unique()->notNull(),
             'user_photo' => $this->string(255),
