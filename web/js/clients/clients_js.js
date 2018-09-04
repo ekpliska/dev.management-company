@@ -272,6 +272,51 @@ $(document).ready(function() {
         $(".btn__add-rent").prop("disabled", true);
     });
     
+    /*
+     * Метод контрольной проверки заполнения формы "Новый лицевой счет"
+     * до того, как была нажала кнопка "Добавить лицевой счет"
+     */
+    $("#add-account").on("beforeSubmit.yii", function (e) {
+
+        // Форма "Новый арендатор" по умолчанию считается не заполненной
+        var isCheck = false;
+        // Поиск в модальном окне создания арендатора поля для заполнения
+        var form = $("#add-rent-modal").find("input[id*=clientsrentform]");
+        // Количество полей на форме "Новый арендатор"
+        var field = [];
+
+        // Проверяем каждое поле на форме "Новый арендатор" на заполнение
+        form.each(function() {
+            field.push("input[id*=clientsrentform]");
+            var value = $(this).val();
+            console.log(value);
+            for (var i = 1; i < field.length; i++) {
+                // Если втречается заполненное поле, то статус заполнения формы меням на положительный
+                if (value) {
+                    isCheck = true;
+                }
+            }
+            console.log(field.length);
+        });
+    
+        /*
+        *   Перед отправкой формы, проверяем чекбокс "Арендатор"
+        *   Если переключатель установлен, то проверяем наличие выбранного арендатора из списка
+        *   или наличее добавленного арендатора
+        */
+        if (!$("#isRent").is(":checked")) {
+            $("#add-rent-modal input").val("");
+            $("#add-rent-modal .modal-body").removeClass("has-error");
+            $("#add-rent-modal .modal-body").removeClass("has-success");
+            $("#add-rent-modal .form-group").removeClass("has-success"); 
+            $("#add-rent-modal .form-group").removeClass("has-error");
+            $("#add-rent-modal").find(".help-block").text("");
+            $("#isRent").prop("checked", false);
+            $(".btn__add-rent").prop("disabled", true);
+            e.preventDefault();    
+        }
+    });
+    
 
     /*
      * Раздел 'Приборы учета'

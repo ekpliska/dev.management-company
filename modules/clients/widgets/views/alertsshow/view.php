@@ -32,3 +32,17 @@
         ]);
     ?>
 <?php endif; ?> 
+
+<?php if (Yii::$app->session->hasFlash('form')) : ?>
+<?php $flash = Yii::$app->session->getFlash('form'); ?>
+    <?=
+        Alert::widget([
+            'type' => $flash['success'] ? Alert::TYPE_INFO : Alert::TYPE_DANGER,
+            'title' => 'Лицевой счет',
+            'icon' => 'glyphicon glyphicon-ok-sign',
+            'body' => $flash['message'],
+            'showSeparator' => true,
+            'delay' => 0,
+        ]);
+    ?>
+<?php endif; ?>

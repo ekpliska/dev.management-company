@@ -50,7 +50,6 @@ class PersonalAccountController extends AppClientsController {
      * 
      */
     public function actionShowAddForm() {
-        
         $user_info = $this->permisionUser();
         $all_organizations = Organizations::getOrganizations();
         $all_flat = Houses::findByClientID($user_info->clientID);

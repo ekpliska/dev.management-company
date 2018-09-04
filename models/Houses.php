@@ -57,9 +57,9 @@ class Houses extends ActiveRecord
         return
             ArrayHelper::map($_list, 'houses_id', function ($array) {
                 return 
-                    $array['houses_town'] . ' ' .
-                    $array['houses_street'] . ' ' .
-                    $array['houses_number_house'] . ' ' .
+                    'г. ' . $array['houses_town'] . ', ул.' .
+                    $array['houses_street'] . ', д. ' .
+                    $array['houses_number_house'] . ', кв. ' .
                     $array['houses_flat'];
             });
         

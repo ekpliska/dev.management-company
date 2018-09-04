@@ -3,7 +3,8 @@
     use yii\widgets\ActiveForm;
     use yii\widgets\MaskedInput;
     use yii\helpers\Html;
-    use yii\helpers\Url;    
+    use yii\helpers\Url;
+    use app\modules\clients\widgets\AlertsShow;
 
 
 /* 
@@ -14,23 +15,7 @@ $this->title = 'Добавить лицевой счет';
 <div class="clients-default-index">
     <h1><?= $this->title ?></h1>
 
-    <?php if (Yii::$app->session->hasFlash('form')) : ?>
-    <?php $flash = Yii::$app->session->getFlash('form'); ?>
-        <div class="alert <?= $flash['success'] ? 'alert-info' : 'alert-danger' ?>" role="alert">
-            <strong>
-                <?php if ($flash['success'] === false): ?>
-                    <?= $flash['error'] ?>
-                <?php else: ?>
-                    <?= $flash['message'] ?>
-                <?php endif; ?>
-            </strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>                    
-        </div>
-    <?php endif; ?> 
-            
-    
+     <?= AlertsShow::widget() ?>
     
     <?php
         $form = ActiveForm::begin([
@@ -309,83 +294,3 @@ $this->registerJs('
     });
 ')
 ?>
-
-<?php
-$this->registerJs('
-    $("#add-account").on("beforeSubmit.yii", function (e) {
-
-        // Форма "Новый арендатор" по умолчанию считается не заполненной
-        var isCheck = false;
-        // Поиск в модальном окне создания арендатора поля для заполнения
-        var form = $("#add-rent-modal").find("input[id*=clientsrentform]");
-        // Количество полей на форме "Новый арендатор"
-        var field = [];
-
-        // Проверяем каждое поле на форме "Новый арендатор" на заполнение
-        form.each(function() {
-            field.push("input[id*=clientsrentform]");
-            var value = $(this).val();
-            console.log(value);
-            for (var i = 1; i < field.length; i++) {
-                // Если втречается заполненное поле, то статус заполнения формы меням на положительный
-                if (value) {
-                    isCheck = true;
-                }
-            }
-            console.log(field.length);
-        });
-    
-        console.log("форма заполнена" + isCheck);
-
-        /*
-        *   Перед отправкой формы, проверяем чекбокс "Арендатор"
-        *   Если переключатель установлен, то проверяем наличие выбранного арендатора из списка
-        *   или наличее добавленного арендатора
-        */
-        if ($("#isRent").is(":checked")) {
-            var form = $("#add-rent-modal").find(":input");
-            console.log(form);
-            if (!$("#list_rent").val()) {
-                if (!isCheck) {
-                    // Выводим предупреждение пользователю, при наличии ошибки заполнения формы
-                    $("#modal-error-message").modal("show");
-                } else {
-                    return true;
-                }
-                e.preventDefault();
-                return false;
-            }
-        } else {
-            alert("Лицевой счет без арендатора");
-            e.preventDefault();    
-        }
-    
-
-    });
-');
-?>
-
-
-
-<div id="modal-error-message" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Ошибка привязки арндатора к лицевому счету</h4>
-            </div>
-            <div class="modal-body">
-                <p>
-                    Вы не указали информацию об арендаторе.
-                </p>
-                <p>
-                    Выберите арендатора из списка, или создайте нового, нажав на кнопку "Добавить арендатора". 
-                    В противном случае для продолжения создания лицевого счета, снимите чекбокс Арендатор
-                </p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Согласен</button>
-            </div>
-        </div>
-    </div>
-</div>
