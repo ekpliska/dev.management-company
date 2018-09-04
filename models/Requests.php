@@ -142,13 +142,6 @@ class Requests extends ActiveRecord
         
     }
     
-//    /*
-//     * Получить название статуса по его номеру
-//     */
-//    public function getStatusName() {
-//        return ArrayHelper::getValue(self::getStatusNameArray(), $this->status);
-//    }
-
     /*
      * Получить тип заявки по ID
      */
@@ -168,10 +161,17 @@ class Requests extends ActiveRecord
     /*
      * Поиск заявки по его уникальному номеру
      */
-    public static function findRequestByIdent($request_numder) {
-        return self::find()
-                ->andWhere(['requests_ident' => $request_numder])
+    public function findRequestByIdent($request_numder) {
+        
+        $request = (new \yii\db\Query)
+                ->from('requests')
+                ->join('LEFT JOIN', 'houses', 'requests_account_id = houses_id')
+                ->join('LEFT JOIN', 'type_requests', 'requests_type_id = type_requests_id')
+                ->where(['requests_ident' => $request_numder])
                 ->one();
+        
+        return $request;
+        
     }
 
     /*

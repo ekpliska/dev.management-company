@@ -29,8 +29,6 @@ class RequestsController extends AppClientsController
      */
     public function actionIndex() {
         
-        $user_info = $this->permisionUser();
-        
         $accoint_id = $this->_choosing;
         
         $type_requests = TypeRequests::getTypeNameArray();
@@ -80,8 +78,6 @@ class RequestsController extends AppClientsController
      */    
     public function actionViewRequest($request_numder) {
         
-        $user_info = $this->permisionUser();
-
         // Ищем заявку по уникальному номеру
         $request_info = Requests::findRequestByIdent($request_numder);
         
@@ -89,12 +85,12 @@ class RequestsController extends AppClientsController
          * Если заявка не найдена или передан номер заявки не принадлежащий пользователю, 
          * кидаем исключение
          */
-        if ($request_info === null || !ArrayHelper::keyExists($request_info->account, $this->_list)) {
+        if ($request_info === null || !ArrayHelper::keyExists($request_info['requests_account_id'], $this->_list)) {
             throw new NotFoundHttpException('Вы обратились к несуществующей странице');
         }
         
         // Получаем прикрепленные к заявке файлы
-        $images = Image::find()->andWhere(['itemId' => $request_info->id])->all();
+        $images = Image::find()->andWhere(['itemId' => $request_info['requests_id']])->all();
         
         /*
          * Для комментариев к заявке
@@ -102,8 +98,7 @@ class RequestsController extends AppClientsController
         $comments = new CommentsToRequest([
             'scenario' => CommentsToRequest::SCENARIO_ADD_COMMENTS
         ]);
-        $comments_find = CommentsToRequest::findCommentsById($request_info->id);        
-        $user_house = Houses::findByAccountId($request_info->account);
+        $comments_find = CommentsToRequest::findCommentsById($request_info['requests_id']);        
         
         /*
          * Загружаем модель для добавления комментрария к задаче
@@ -114,13 +109,13 @@ class RequestsController extends AppClientsController
                 'scenario' => CommentsToRequest::SCENARIO_ADD_COMMENTS
             ]);        
             if ($model->load(Yii::$app->request->post())) {
-                $model->sendComment($request_info->id);
+                $model->sendComment($request_info['requests_id']);
             }
         }
         
         return $this->render('view-request', [
             'request_info' => $request_info, 
-            'user_house' => $user_house, 
+            // 'user_house' => $user_house, 
             'all_images' => $images,
             'comments' => $comments,
             'comments_find' => $comments_find,
@@ -136,6 +131,15 @@ class RequestsController extends AppClientsController
     public function actionFilterByTypeRequest($type_id, $account_id, $status) {
         
         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        
+        /*
+         * Проверяем на актуальность параметр ID лицевого счета
+         * Если лицевой счет не входит в список лицевых счетов пользователя
+         * Кидаем исключение
+         */
+        if (!ArrayHelper::keyExists($account_id, $this->_list)) {
+            return ['status' => false];            
+        }
         
         if (!is_numeric($type_id) && !is_numeric($account_id) && !is_numeric($status)) {
             return ['status' => false];
