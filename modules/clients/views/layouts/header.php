@@ -27,8 +27,8 @@
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             ['label' => 'Главная', 'url' => ['clients/index']],
-            Yii::$app->user->can('Vote') ?
-                (['label' => 'Голосование', 'url' => ['vote/index']]) : '',
+            Yii::$app->user->can('clients') ?
+                (['label' => 'Голосование', 'url' => ['clients/vote']]) : '',
             ['label' => 'Профиль', 'url' => ['profile/index']],
             [
                 'label' => 'Лицевой счет',

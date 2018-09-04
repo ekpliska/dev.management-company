@@ -230,7 +230,7 @@ $this->registerJs('
                 console.log(response.status);
                 console.log(response.errors);
                 if (response.status == true) {
-                    console.log(rentSurname + " " + rentName + " " + rentSecondName + " " + rentMobile + " " + rentsEmail + " " + rentsHash);
+                    // console.log(rentSurname + " " + rentName + " " + rentSecondName + " " + rentMobile + " " + rentsEmail + " " + rentsHash);
                     $("#add-rent-modal").modal("hide");
                 } else {
                     if (typeof response.errors != "undefined") {

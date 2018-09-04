@@ -1,7 +1,5 @@
 <?php
     use yii\helpers\Html;
-    use yii\widgets\Pjax;
-    use yii\widgets\ListView;
     use yii\helpers\Url;
 /* 
  * Лицевой счет / Общая информация
@@ -19,7 +17,9 @@ $this->title = 'Общая информация';
     </div>
     
     <div class="col-md-6 text-right">
-        <?= Html::a('Добавить лицевой счет', Url::to(['personal-account/show-add-form']), ['class' => 'btn btn-primary']) ?>
+        <?php if (Yii::$app->user->can('clients')) : ?>
+            <?= Html::a('Добавить лицевой счет', Url::to(['personal-account/show-add-form']), ['class' => 'btn btn-primary']) ?>
+        <?php endif; ?>
     </div>
     <div class="clearfix"></div>    
     

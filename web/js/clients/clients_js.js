@@ -159,7 +159,7 @@ $(document).ready(function() {
 
     /*
      * Сабмит основной формы профиля
-     * Перед отправкой проверяем валидацию формы 'Аренадатор'
+     * Перед отправкой проверяем валидацию формы 'Арендатор'
      */
     $('body').on('beforeSubmit', 'form#profile-form', function (e) {
         e.preventDefault();
@@ -289,14 +289,14 @@ $(document).ready(function() {
         form.each(function() {
             field.push("input[id*=clientsrentform]");
             var value = $(this).val();
-            console.log(value);
+            // console.log(value);
             for (var i = 1; i < field.length; i++) {
                 // Если втречается заполненное поле, то статус заполнения формы меням на положительный
                 if (value) {
                     isCheck = true;
                 }
             }
-            console.log(field.length);
+            // console.log(field.length);
         });
     
         /*

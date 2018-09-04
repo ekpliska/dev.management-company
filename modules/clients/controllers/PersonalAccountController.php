@@ -2,13 +2,12 @@
 
     namespace app\modules\clients\controllers;
     use Yii;
-    use yii\base\InvalidConfigException;
+    use yii\web\NotFoundHttpException;
     use yii\web\Response;
     use yii\data\ActiveDataProvider;
     use app\modules\clients\controllers\AppClientsController;
     use app\models\PersonalAccount;
     use app\modules\clients\models\AddPersonalAccount;
-    use app\models\Rents;
     use app\models\Organizations;
     use app\models\AccountToUsers;
     use app\modules\clients\models\ClientsRentForm;
@@ -50,6 +49,11 @@ class PersonalAccountController extends AppClientsController {
      * 
      */
     public function actionShowAddForm() {
+        
+        if (!Yii::$app->user->can('clients')) {
+            throw new NotFoundHttpException('Пользователю с учетной записью Арендатор, доступ к данной странице запрещен');
+        }        
+        
         $user_info = $this->permisionUser();
         $all_organizations = Organizations::getOrganizations();
         $all_flat = Houses::findByClientID($user_info->clientID);
@@ -77,7 +81,7 @@ class PersonalAccountController extends AppClientsController {
         $user_info = $this->permisionUser();
         
         // Получить список всех лицевых счетов пользователя        
-        $account_all = PersonalAccount::findByClient($user_info->user_client_id);
+        $account_all = $this->_list;
         
         return $this->render('receipts-of-hapu', [
             'account_all' => $account_all,
@@ -116,7 +120,6 @@ class PersonalAccountController extends AppClientsController {
         return $this->render('counters', [
             'current_date' => $current_date,
             'counters' => $counters,
-            'model' => $model,
         ]);
         
     }
@@ -245,23 +248,16 @@ class PersonalAccountController extends AppClientsController {
     public function actionFilterByAccount($account_id) {
         
         Yii::$app->response->format = Response::FORMAT_JSON;
-        
         if (!is_numeric($account_id)) {
             return ['status' => false];
         }
-        
         if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
-            
             $counters = new ActiveDataProvider([
                 'query' => Counters::getReadingCurrent($account_id, $current_month = 9, $current_year = 2018),            
             ]);
-            
             $data = $this->renderAjax('data/grid', ['counters' => $counters]);
-            
             return ['status' => true, 'data' => $data];
-            
         }
-        
         return ['status' => false];
     }
     
