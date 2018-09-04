@@ -7,7 +7,6 @@
     use app\modules\clients\controllers\AppClientsController;
     use app\models\User;
     use app\modules\clients\models\ClientsRentForm;
-    use app\models\Clients;
     use app\models\Rents;
     use app\models\PersonalAccount;
     use app\modules\clients\models\ChangePasswordForm;
@@ -26,13 +25,6 @@ class ProfileController extends AppClientsController
      * Главная страница
      * 
      * @param array $user_info Учетная запись пользователя
-     * @param array $accounts_list Список всех лицевых счетов
-     * @param array $accounts_list_rent Список всех лицевых счетов не имеющие арендаторов
-     * @param array $_is_rent Флаг наличия арендатора у собственника
-     * @param array $accounts_info Информация по лицевому счету Собственника
-     * @param array $model_rent Данные арендатора для формы
-     * @param array $add_rent Модель для формы "Новый арендатор"
-     * @param array $not_active_rents Получаем данные о нективных арендаторах
      */
     public function actionIndex() {
         
@@ -224,7 +216,7 @@ class ProfileController extends AppClientsController
         
         // Проверям корректность полученных данных
         if (!$data_rent && is_int($account_number)) {
-            throw new \yii\base\InvalidConfigException('Ошибка передачи данных');
+            return ['success' => false];
         }
         
         $rent_form = new ClientsRentForm($data_rent);
@@ -324,7 +316,7 @@ class ProfileController extends AppClientsController
     /*
      * Метод формирования вывода Профиля Собственника
      * 
-     * @param array $user_info Ифнормация о текущем пользователе (Пользователь + Собственник)
+     * @param array $user_info Информация текущем пользователе (Пользователь + Собственник)
      * @param model $_user['user'] Модель Пользователь
      * @param integer $accoint_id Значение ID лицевого счета из глобального dropDownList (хеддер)
      * @param array $accounts_list Получить список всех лицевых счетов закрепленны за Собственником
@@ -339,19 +331,10 @@ class ProfileController extends AppClientsController
         // Поучить информацию по текущему лицевому счету
         $accounts_info = PersonalAccount::findByAccountID($accoint_id);
         
-        /*
-         * Все лицевые счета, которые связаны с арендатором
+        /* Если у текущего лицевого счета есть арендатор, передаем в глабальный параметр _is_rent значение true;
+         * Если у текущего лицевого счета арендатора нет, то формируем модель на добавление нового Арендатора
          */
-        $accounts_list_rent = PersonalAccount::findByClient($user_info->clientID, $all = false);
-        
-        // Есть ли у Собственника неактивные Арендаторы
-        $not_active_rents = Rents::getNotActiveRents($user_info->clientID);
-        
-        /* Статус наличия у собственника арендатора
-         * Если имеется Арендатор, то загружаем данные Арендатор для формы
-         */
-        
-        if (Rents::isActiveRents($user_info->clientID)) {
+        if (!empty($accounts_info->personal_rent_id)) {
             $this->_is_rent = true;
             $model_rent = Rents::findOne(['rents_id' => $accounts_info->personal_rent_id]);
         } else {
@@ -359,19 +342,16 @@ class ProfileController extends AppClientsController
             $model_rent = null;
         }
         
-        // Форма добавить Арендатора
         $add_rent = new ClientsRentForm(['scenario' => ClientsRentForm::SCENARIO_AJAX_VALIDATION]);
         
         return $this->render('index', [
             'user' => $model,
             'user_info' => $user_info,
             'accounts_list' => $accounts_list,
-            'accounts_list_rent' => $accounts_list_rent,
             'is_rent' => $this->_is_rent,
             'accounts_info' => $accounts_info,
             'model_rent' => $model_rent,
             'add_rent' => $add_rent,
-            'not_active_rents' => $not_active_rents,
         ]);
         
     }

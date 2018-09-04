@@ -4,6 +4,7 @@
     use yii\helpers\Url;
     use yii\widgets\ActiveForm;
     use yii\widgets\MaskedInput;
+    use app\modules\clients\widgets\AlertsShow;
     
 /* 
  * Платные заявки (Заказать услугу)
@@ -13,28 +14,7 @@ $this->title = 'Заказать услугу';
 <div class="paid-services-default-index">
     <h1><?= $this->title ?></h1>
 
-    <?php if (Yii::$app->session->hasFlash('success')) : ?>
-        <div class="alert alert-info" role="alert">
-            <strong>
-                <?= Yii::$app->session->getFlash('success', false); ?>
-            </strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>                    
-        </div>
-    <?php endif; ?>
-
-    <?php if (Yii::$app->session->hasFlash('error')) : ?>
-        <div class="alert alert-error" role="alert">
-            <strong>
-                <?= Yii::$app->session->getFlash('error', false); ?>
-            </strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>                
-        </div>
-    <?php endif; ?>         
-
+    <?= AlertsShow::widget() ?>         
     
     <?php foreach ($categorys as $category) : ?>
         <div class="col-md-12 text-left" style="margin-bottom: 20px; margin-top: 20px;">

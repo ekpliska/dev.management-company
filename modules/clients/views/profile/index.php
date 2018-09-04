@@ -124,61 +124,9 @@ $col = Yii::$app->user->can('AddNewRent') ? 3 : 2;
                 </div>
             </div>
 
-            <?php if ($not_active_rents) : ?>
-                <div class="panel panel-default">
-                    <div class="panel-heading"><strong>Неактивные арендаторы</strong></div>
-                    <div class="panel-body info_rent">
-                        <div id="content-replace">
-                            У вас имеются неактивные арендаторы. Арендатор считается неактивным, если не зареплен ни за одним лицевым счетом.
-                            <br />
-                            <span class="glyphicon glyphicon-remove-circle"></span> - Удалить
-                            <span class="glyphicon glyphicon-ok-circle"></span> - Связать с лицевым счетом
-                            <br /><br />
-                            <?php foreach ($not_active_rents as $rent) : ?>
-                            <div class="row">
-                                <div class="col-8 col-sm-2">
-                                    <?php if ($rent->user->user_photo) : ?>
-                                        <?= Html::img($rent->user->user_photo, ['style' => 'width: 50px;']) ?>
-                                    <?php else: ?>
-                                        <?= Html::img('@web/images/no-avatar.jpg', ['style' => 'width: 50px;']) ?>
-                                    <?php endif; ?>
-                                </div>
-                                <div class="col-8 col-sm-10" style="padding-left: 15px; border-radius: 5px; position: relative; top: 5px;">
-
-                                    <?= $rent->fullName ?>
-                                    <br />
-                                    <?= $rent->rents_mobile ?>
-                                    <br />
-
-                                    <?= Html::button('<span class="glyphicon glyphicon-remove-circle"></span>', [
-                                        'data-record-id' => $rent->rents_id,
-                                        'data-record-fullname' => $rent->fullName,
-                                        'data-toggle' => 'modal',
-                                        'data-target' => '#confirm-delete',
-                                    ]) ?>
-
-                                    <?= Html::button('<span class="glyphicon glyphicon-ok-circle"></span>', [
-                                        'data-rent' => $rent->rents_id,
-                                        'data-rent-fullname' => $rent->fullName,
-                                        'data-toggle' => 'modal',
-                                        'data-target' => '#bind-rent-modal',
-                                    ]) ?>
-
-                                    <hr />
-                                </div>
-                            </div>                       
-                            <?php endforeach; ?>
-                        </div>
-                    </div>
-                </div>
-            <?php endif; ?>
-
         </div>
 
         <?= ModalWindows::widget(['modal_view' => 'changes_rent']) ?>
-        <?= ModalWindows::widget(['modal_view' => 'confirm-delete']) ?>
-        <?= ModalWindows::widget(['modal_view' => 'bind-rent-modal', 'list_account' => $accounts_list_rent]) ?>
-    
         <?= AddRentForm::widget(['add_rent' => $add_rent]) ?>
     
     <?php endif; ?>

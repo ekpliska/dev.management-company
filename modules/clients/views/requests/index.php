@@ -4,6 +4,7 @@
     use yii\widgets\ActiveForm;
     use yii\widgets\MaskedInput;
     use yii\helpers\Url;
+    use app\modules\clients\widgets\AlertsShow;
     
 /* 
  * Заявки (Обзая страница)
@@ -29,27 +30,7 @@ $this->title = 'Мои заявки';
     </div>
     <div class="col-md-9">
         
-        <?php if (Yii::$app->session->hasFlash('success')) : ?>
-            <div class="alert alert-info" role="alert">
-                <strong>
-                    <?= Yii::$app->session->getFlash('success', false); ?>
-                </strong>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>                    
-            </div>
-        <?php endif; ?>
-
-        <?php if (Yii::$app->session->hasFlash('error')) : ?>
-            <div class="alert alert-error" role="alert">
-                <strong>
-                    <?= Yii::$app->session->getFlash('error', false); ?>
-                </strong>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>                
-            </div>
-        <?php endif; ?>         
+        <?= AlertsShow::widget() ?>
         
         <?= $this->render('form/_filter', ['model_filter' => $model_filter, 'type_requests' => $type_requests]); ?>
         <?= $this->render('data/grid', ['all_requests' => $all_requests]); ?>

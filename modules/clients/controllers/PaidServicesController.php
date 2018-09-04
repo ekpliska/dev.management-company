@@ -3,6 +3,7 @@
     namespace app\modules\clients\controllers;
     use Yii;
     use yii\web\Response;
+    use yii\helpers\ArrayHelper;
     use app\modules\clients\controllers\AppClientsController;
     use app\models\Services;
     use app\models\CategoryServices;
@@ -68,7 +69,12 @@ class PaidServicesController extends AppClientsController {
         
         Yii::$app->response->format = Response::FORMAT_JSON;
         
-        if (!is_numeric($account_id)) {
+        /*
+         * Проверяем на актуальность параметр ID лицевого счета
+         * Если лицевой счет не входит в список лицевых счетов пользователя
+         * Кидаем исключение
+         */
+        if (!is_numeric($account_id) || !ArrayHelper::keyExists($account_id, $this->_list)) {
             return ['status' => false];
         }
         

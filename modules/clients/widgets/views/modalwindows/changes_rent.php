@@ -27,7 +27,6 @@
             </div>
             <div class="modal-footer">
                 <button class="btn btn-danger changes_rent__del" data-dismiss="modal">Удалить</button>
-                <button class="btn btn-success changes_rent__undo" data-dismiss="modal">Отвязать от лицевого счета</button>
                 <button class="btn btn-primary changes_rent__close" data-dismiss="modal">Отмена</button>
             </div>
         </div>
