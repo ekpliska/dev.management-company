@@ -141,7 +141,7 @@ $this->title = 'Добавить лицевой счет';
                                    
                                 <?= $form->field($add_rent, 'rents_surname')
                                         ->input('text', [
-                                            'placeHolder' => $add_account->getAttributeLabel('rents_surname'),
+                                            'placeHolder' => $add_rent->getAttributeLabel('rents_surname'),
                                             'class' => 'form-control rents-surname'])
                                         ->label() ?>
 
@@ -174,8 +174,10 @@ $this->title = 'Добавить лицевой счет';
                                 <?= $form->field($add_rent, 'password')
                                         ->input('password', [
                                             'placeHolder' => $add_rent->getAttributeLabel('password'),
-                                            'class' => 'form-control rents-hash'])
-                                        ->label() ?>                                   
+                                            'class' => 'form-control rents-hash show_password'])
+                                        ->label() ?>
+                                
+                                <?= Html::checkbox('show_password_ch', false) ?> <span class="show_password__text">Показать пароль</span>
                                    
                             </div>
                             <div class="modal-footer">

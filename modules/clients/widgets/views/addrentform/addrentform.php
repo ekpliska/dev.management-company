@@ -67,7 +67,7 @@
                                 'class' => 'form-control rents-hash show_password'])
                             ->label() ?>                                   
                     
-                    <?= Html::checkbox('show_password', false) ?> <span class="show_password__text">Показать пароли</span>
+                    <?= Html::checkbox('show_password_ch', false) ?> <span class="show_password__text">Показать пароль</span>
                 
             </div>
             <div class="modal-footer">

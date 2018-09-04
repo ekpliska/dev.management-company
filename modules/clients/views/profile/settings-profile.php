@@ -83,7 +83,7 @@ $this->title = 'Настройки';
                     ?>
                     
                     <div class="form-group">
-                        <?= Html::checkbox('show_password', false) ?> <span class="show_password__text">Показать пароли</span>
+                        <?= Html::checkbox('show_password_ch', false) ?> <span class="show_password__text">Показать пароли</span>
                     </div>
                     
                     <div class="form-group text-right">

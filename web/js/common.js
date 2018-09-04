@@ -25,14 +25,14 @@ $(document).ready(function() {
 /*
  * Показывать/Скрывать символы в поле ввода пароля
  */    
-    $("input[type=checkbox]").on("change", function() {
+    $("input[name=show_password_ch]").on("change", function() {
         var isShow = $(this);
         if (isShow.is(":checked")) {
             $(".show_password").attr("type", "text");
-            $(".show_password__text").text("Скрыть отображение паролей");
+            $(".show_password__text").text("Скрыть пароль");
         } else {
             $(".show_password").attr("type", "password");
-            $(".show_password__text").text("Показать пароли");            
+            $(".show_password__text").text("Показать пароль");
         }
     });
     
