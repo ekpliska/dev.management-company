@@ -10,7 +10,7 @@
         <tbody>
             <tr>
                 <td>Лицевой счет</td>
-                <td><?= Html::encode($account_info['account_number']) ?></td>
+                <td><?= HtmlPurifier::process($account_info['account_number']) ?></td>
             </tr>
             <tr>
                 <td>Организация</td>
@@ -34,21 +34,23 @@
             <tr>
                 <td>Арендатор</td>
                 <td>
-                    <?php $account_info['rents_id'] ?
+                    <?= !empty($account_info['personal_rent_id']) ?
                             HtmlPurifier::process(FormatHelpers::formatFullUserName(
                                     $account_info['rents_surname'], 
                                     $account_info['rents_name'], 
                                     $account_info['rents_second_name']
-                            )) : '' ?>
+                            )) : 'Арендатор отсутствует' ?>
                 </td>
             </tr>        
             <tr>
                 <td>Адрес</td>
                 <td><?= HtmlPurifier::process(
-                        $account_info['houses_town'] . 
-                        $account_info['houses_street'] .
-                        $account_info['houses_number_house'] .
-                        $account_info['houses_flat']) 
+                            FormatHelpers::formatFullAdress(
+                                $account_info['houses_town'],  
+                                $account_info['houses_street'], 
+                                $account_info['houses_number_house'], 
+                                $account_info['houses_flat'])
+                        )
                     ?>
                 </td>
             </tr>        

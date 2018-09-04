@@ -56,3 +56,32 @@ $this->title = 'Общая информация';
         </div>
     </div>    
 </div>
+
+<?php
+/*
+ * Смена информации о лицевом счете,*
+ * dropDownList _list-account-all
+ */    
+$this->registerJs("
+    $('.current__account_list, ._list-account-all').on('change', function() {
+        var accountId = $(this).val();
+        var clientId = $('._list-account-all').data('client');
+        
+        $.ajax({
+            url: 'list',
+            method: 'POST',
+            type: 'json',
+            data: {
+                accountId: accountId,
+                clientId: clientId
+            },
+            success: function(response) {
+                $('#account-info').html(response.data);
+            },
+            error: function() {
+                console.log('Error #1000-07');
+            },
+        });
+    });
+")
+?>

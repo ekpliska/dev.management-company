@@ -22,20 +22,18 @@ class PersonalAccountController extends AppClientsController {
     
     /*
      * Главная страница
-     * @param array $account_info Информация по лицевому счету Собственника
+     * 
+     * @param integer $accoint_id Значение ID лицевого счета из глобального dropDownList (хеддер)
      * @param array $account_all Список всех лицевых счетов Собственника
+     * @param array $account_info Информация по лицевому счету Собственника
      */
     public function actionIndex() {
         
         $user_info = $this->permisionUser();
         $accoint_id = $this->_choosing;
-        
-        // Получаем информация по лицевому счету Собственника
-        $account_info = PersonalAccount::getAccountInfo($accoint_id, $user_info->clientID);
-        
-        // Получить список всех лицевых счетов пользователя        
         $account_all = $this->_list;
-        
+        $account_info = PersonalAccount::getAccountInfo($accoint_id, $user_info->clientID);
+
         return $this->render('index', [
             'user_info' => $user_info,
             'account_info' => $account_info,
@@ -43,6 +41,33 @@ class PersonalAccountController extends AppClientsController {
         ]);
         
     }
+    
+    /*
+     * Добавление нового лицевого счета
+     * 
+     * @param array $all_organizations Органицация
+     * @param array $all_flat Список жилой прощади, принадлежащей собственнику
+     * 
+     */
+    public function actionShowAddForm() {
+        
+        $user_info = $this->permisionUser();
+        $all_organizations = Organizations::getOrganizations();
+        $all_flat = Houses::findByClientID($user_info->clientID);
+
+        // Загружаем модель добавления лицевого счета
+        $add_account = new AddPersonalAccount();
+        // Загружаем модель добавления нового Арендатора
+        $add_rent = new ClientsRentForm();
+        
+        return $this->render('_form/_add_account', [
+            'user_info' => $user_info,
+            'all_organizations' => $all_organizations,
+            'all_flat' => $all_flat,
+            'add_account' => $add_account,
+            'add_rent' => $add_rent,
+        ]);
+    }    
     
     /*
      * Страница "Квитанции ЖКУ"
@@ -126,12 +151,10 @@ class PersonalAccountController extends AppClientsController {
         
         // Если данные пришли через пост и аякс
         if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
-            
             // Объявляем модель арендатор, задаем сценарий валидации для формы
             $model = new ClientsRentForm([
                 'scenario' => ClientsRentForm::SCENARIO_AJAX_VALIDATION,
             ]);
-            
             // Если модель загружена
             if ($model->load(Yii::$app->request->post())) {
                 // и прошла валидацию
@@ -147,37 +170,6 @@ class PersonalAccountController extends AppClientsController {
             ];
         }
         return ['status' => false];
-    }
-    
-    
-    /*
-     * Вызов формы добавления нового лицевого счета
-     */
-    public function actionShowAddForm() {
-        
-        $all_organizations = Organizations::getOrganizations();
-        $user_info = AccountToUsers::findByUserID(Yii::$app->user->identity->user_id);
-        
-        // Получить список всех арендаторов собственника со статусом "Не активен"
-        $all_rent = Rents::findByClientID($user_info->personalAccount->client->clients_id);
-
-        // Получить список жилой прощади, принадлежание собственнику
-        $all_flat = Houses::findByClientID($user_info->personalAccount->client->clients_id);
-
-        
-        // Форма Лицевой счет
-        $add_account = new AddPersonalAccount();
-        // Форма добавить Арендатора
-        $add_rent = new ClientsRentForm();
-        
-        return $this->render('_form/_add_account', [
-            'all_organizations' => $all_organizations,
-            'user_info' => $user_info,
-            'all_rent' => $all_rent,
-            'all_flat' => $all_flat,
-            'add_account' => $add_account,
-            'add_rent' => $add_rent,
-        ]);
     }
     
     /*

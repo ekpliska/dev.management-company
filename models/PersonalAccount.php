@@ -115,7 +115,7 @@ class PersonalAccount extends ActiveRecord
                 ->from('personal_account')
                 ->join('LEFT JOIN', 'clients', 'personal_clients_id = clients_id')
                 ->join('LEFT JOIN', 'houses', 'personal_house_id = houses_id')
-                ->join('LEFT JOIN', 'rents', 'personal_house_id = rents_id')
+                ->join('LEFT JOIN', 'rents', 'personal_rent_id = rents_id')
                 ->join('LEFT JOIN', 'organizations', 'account_organization_id = organizations_id')
                 ->where(['account_id' => $account_id])
                 ->andWhere(['personal_clients_id' => $client_id])

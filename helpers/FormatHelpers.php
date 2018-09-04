@@ -74,4 +74,18 @@ class FormatHelpers {
         
     }
     
+    /*
+     * Форматирование полного адреса проживания
+     * г. Город, ул. Улица, д. Номер, кв. Номер
+     */
+    public static function formatFullAdress($town, $street, $house, $flat) {
+        
+        $town = 'г. ' . $town;
+        $street = 'ул. '  . $street;
+        $house = 'д. ' . $house;
+        $flat = 'кв. ' . $flat;
+        
+        return $town .  ', ' . $street . ', ' . $house . ', ' . $flat;
+    }
+    
 }

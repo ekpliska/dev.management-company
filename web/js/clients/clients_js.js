@@ -239,61 +239,39 @@ $(document).ready(function() {
     // *************************************************************** //
 
     /*
-     * Смена информации о лицевом счете,
-     * dropDownList _list-account-all
-     */    
-    $('.current__account_list, ._list-account-all').on('change', function() {
-        var accountId = $(this).val();
-        var clientId = $(this).data('client');
-        
-        $.ajax({
-            url: 'list',
-            method: 'POST',
-            type: 'json',
-            data: {
-                accountId: accountId,
-                clientId: clientId
-            },
-            success: function(response) {
-                $('#account-info').html(response.data);
-            },
-            error: function() {
-                console.log('Error #1000-07');
-            },
-        });
-    });
-    
-    
-    /*
-     * Раздел 'Лицевой счет'
+     * Раздел "Лицевой счет"
      * Форма - Добавить лицевой счет
      */
-    // Блокируем список доступных арендаторов, и кнопку добавить арендатора
-    $('#list_rent').prop('disabled', true);
+    // Блокируем кнопку добавить арендатора
     $('.btn__add-rent').prop('disabled', true);
     
     // В зависимости от checkBox 'Арендатор' скрываем/показываем элементы
     $('#isRent').change(function() {
         if (this.checked) {
-            $('#list_rent').prop('disabled', false);
-            $('.btn__add-rent').prop('disabled', false);
-        } else {
-            $('#list_rent').prop('disabled', true);
-            $('.btn__add-rent').prop('disabled', true);            
-        }
-    });    
-    
-    /*
-     * Если при создании лицевого счета 
-     * арендатор выбран из списка, блокируем кнопку 'Добавить арендатора'
-     */
-    $('#list_rent').change(function() {
-        if (!$(this).val()) {
             $('.btn__add-rent').prop('disabled', false);
         } else {
             $('.btn__add-rent').prop('disabled', true);            
         }
     });
+    
+    /*
+     * Если в модальном окне "Новый арендатор" нажата нопка Отмена/х
+     * Сбрасываем заполненный поля
+     * Снимаем чекбокс Арендатор
+     * Блокирем кнопку "Добавить арендатора"
+     * 
+     */
+    $("#add-rent-modal .btn__modal_rent_close, .btn__modal_close").on("click", function() {
+        $("#add-rent-modal input").val("");
+        $("#add-rent-modal .modal-body").removeClass("has-error");
+        $("#add-rent-modal .modal-body").removeClass("has-success");
+        $("#add-rent-modal .form-group").removeClass("has-success"); 
+        $("#add-rent-modal .form-group").removeClass("has-error");
+        $("#add-rent-modal").find(".help-block").text("");
+        $("#isRent").prop("checked", false);
+        $(".btn__add-rent").prop("disabled", true);
+    });
+    
 
     /*
      * Раздел 'Приборы учета'

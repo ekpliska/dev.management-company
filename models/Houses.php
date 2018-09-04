@@ -2,7 +2,6 @@
 
     namespace app\models;
     use Yii;
-    use yii\db\Expression;
     use yii\db\ActiveRecord;
     use app\models\Clients;
     use yii\helpers\ArrayHelper;
@@ -51,7 +50,7 @@ class Houses extends ActiveRecord
     public static function findByClientID($client_id) {
         $_list = self::find()
                 ->andWhere(['houses_client_id' => $client_id])
-                ->andWhere(['IS', 'houses_account_id', (new Expression('Null'))])
+                ->andWhere(['isAccount' => false])
                 ->asArray()
                 ->all();
         

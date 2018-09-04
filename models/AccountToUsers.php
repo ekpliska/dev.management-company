@@ -45,7 +45,6 @@ class AccountToUsers extends ActiveRecord
     public static function findByUserID($user_id) {
         return self::find()
                 ->andWhere(['user_id' => $user_id])
-                // ->select(['user_id', 'account_id'])
                 ->one();
     }    
 

@@ -98,21 +98,21 @@ $this->title = 'Добавить лицевой счет';
             <div class="panel-body">
                 <?= $form->field($add_account, 'account_client_surname')
                         ->input('text', [
-                            'value' => $user_info->personalAccount->client->clients_surname,
+                            'value' => $user_info->surname,
                             'disabled' => true,
                             'class' => 'form-control',])
                         ->label() ?>
 
                 <?= $form->field($add_account, 'account_client_name')
                         ->input('text', [
-                            'value' => $user_info->personalAccount->client->clients_name,
+                            'value' => $user_info->name,
                             'disabled' => true,
                             'class' => 'form-control'])
                         ->label() ?>
 
                 <?= $form->field($add_account, 'account_client_secondname')
                         ->input('text', [
-                            'value' => $user_info->personalAccount->client->clients_second_name,
+                            'value' => $user_info->secondName,
                             'disabled' => true,
                             'class' => 'form-control'])
                         ->label() ?>
@@ -136,13 +136,6 @@ $this->title = 'Добавить лицевой счет';
                 <?= $form->field($add_account, 'is_rent')
                         ->checkbox([
                             'id' => 'isRent']) ?>
-                    
-                <?= $form->field($add_account, 'account_rent')
-                        ->dropDownList($all_rent, [
-                            'prompt' => 'Выбрать арендатора из списка...',
-                            'id' => 'list_rent']) ?>
-                    
-                <hr />
                     
                 Добавить нового арендатора и создать для него новую учетную запись для входа на портал
                     
@@ -222,19 +215,6 @@ $this->title = 'Добавить лицевой счет';
     </div>
 
 </div>
-
-<?php
-$this->registerJs('
-    $("#add-rent-modal .btn__modal_rent_close, .btn__modal_close").on("click", function() {
-        $("#add-rent-modal input").val("");
-        $("#add-rent-modal .modal-body").removeClass("has-error");
-        $("#add-rent-modal .modal-body").removeClass("has-success");
-        $("#add-rent-modal .form-group").removeClass("has-success"); 
-        $("#add-rent-modal .form-group").removeClass("has-error");
-        $("#add-rent-modal").find(".help-block").text("");
-    });
-')
-?>
 
 <?php
 $this->registerJs('
@@ -334,55 +314,51 @@ $this->registerJs('
 $this->registerJs('
     $("#add-account").on("beforeSubmit.yii", function (e) {
 
-    // Форма "Новый арендатор" по умолчанию считается не заполненной
-    var isCheck = false;
-    
-    // Поиск в модальном окне создания арендатора поля для заполнения
-    var form = $("#add-rent-modal").find("input[id*=clientsrentform]");
-    
-    // Количество полей на форме "Новый арендатор"
-    var field = [];
-    
-    /*
-    *   Проверяем каждое поле на форме "Новый арендатор на заполнения"
-    */
-    form.each(function() {
-        field.push("input[id*=clientsrentform]");
-        var value = $(this).val();
-        console.log(value);
-        for (var i = 1; i < field.length; i++) {
-            // Если втречается заполненное поле, то статус заполнения формы меням на положительный
-            if (value) {
-                isCheck = true;
-            }
-        }
-        console.log(field.length);
-    });
-    
-    console.log("форма заполнена" + isCheck);
+        // Форма "Новый арендатор" по умолчанию считается не заполненной
+        var isCheck = false;
+        // Поиск в модальном окне создания арендатора поля для заполнения
+        var form = $("#add-rent-modal").find("input[id*=clientsrentform]");
+        // Количество полей на форме "Новый арендатор"
+        var field = [];
 
-    /*
-    *   Перед отправкой формы, проверяем чекбокс "Арендатор"
-    *   Если переключатель установлен, то проверяем наличие выбранного арендатора из списка
-    *   или наличее добавленного арендатора
-    */
-    if ($("#isRent").is(":checked")) {
-        var form = $("#add-rent-modal").find(":input");
-        console.log(form);
-        if (!$("#list_rent").val()) {
-            if (!isCheck) {
-                // Выводим предупреждение пользователю, при наличии ошибки заполнения формы
-                $("#modal-error-message").modal("show");
-            } else {
-                return true;
+        // Проверяем каждое поле на форме "Новый арендатор" на заполнение
+        form.each(function() {
+            field.push("input[id*=clientsrentform]");
+            var value = $(this).val();
+            console.log(value);
+            for (var i = 1; i < field.length; i++) {
+                // Если втречается заполненное поле, то статус заполнения формы меням на положительный
+                if (value) {
+                    isCheck = true;
+                }
             }
-            e.preventDefault();
-            return false;
+            console.log(field.length);
+        });
+    
+        console.log("форма заполнена" + isCheck);
+
+        /*
+        *   Перед отправкой формы, проверяем чекбокс "Арендатор"
+        *   Если переключатель установлен, то проверяем наличие выбранного арендатора из списка
+        *   или наличее добавленного арендатора
+        */
+        if ($("#isRent").is(":checked")) {
+            var form = $("#add-rent-modal").find(":input");
+            console.log(form);
+            if (!$("#list_rent").val()) {
+                if (!isCheck) {
+                    // Выводим предупреждение пользователю, при наличии ошибки заполнения формы
+                    $("#modal-error-message").modal("show");
+                } else {
+                    return true;
+                }
+                e.preventDefault();
+                return false;
+            }
+        } else {
+            alert("Лицевой счет без арендатора");
+            e.preventDefault();    
         }
-    } else {
-        alert("Лицевой счет без арендатора");
-        e.preventDefault();    
-    }
     
 
     });

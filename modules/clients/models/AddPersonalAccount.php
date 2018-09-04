@@ -30,9 +30,6 @@ class AddPersonalAccount extends Model {
     // Собственник - Наличие арендатора
     public $is_rent;
 
-    // Арендатор из списка (закрепленные арендаторы собственника)
-    public $account_rent;
-    
 /* 
     // Арендатор - Фамилия
     public $rent_surname;
@@ -62,8 +59,6 @@ class AddPersonalAccount extends Model {
             ['account_last_sum', 'string', 'min' => 2, 'max' => 7],
             
             ['square_flat', 'string', 'min' => 2, 'max' => 5],
-            
-            ['account_rent', 'integer'],
             
             ['flat', 'integer'],
             
