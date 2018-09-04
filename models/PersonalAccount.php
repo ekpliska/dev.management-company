@@ -111,6 +111,12 @@ class PersonalAccount extends ActiveRecord
      */
     public static function getAccountInfo($account_id, $client_id) {
         
+        if (Yii::$app->user->can('clients')) {
+            $_where = ['personal_clients_id' => $client_id];
+        } else if (Yii::$app->user->can('clients_rent')) {
+            $_where = ['personal_rent_id' => $client_id];            
+        }
+        
         $info = (new \yii\db\Query)
                 ->from('personal_account')
                 ->join('LEFT JOIN', 'clients', 'personal_clients_id = clients_id')
@@ -118,7 +124,7 @@ class PersonalAccount extends ActiveRecord
                 ->join('LEFT JOIN', 'rents', 'personal_rent_id = rents_id')
                 ->join('LEFT JOIN', 'organizations', 'account_organization_id = organizations_id')
                 ->where(['account_id' => $account_id])
-                ->andWhere(['personal_clients_id' => $client_id])
+                ->andWhere($_where)
                 ->one();
         
         return $info;
