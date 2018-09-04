@@ -70,54 +70,11 @@ $(document).ready(function() {
 
     });
 
-    /* 
-     * Подтверждение удаления арендатора 
-     */
-    $('#confirm-delete').on('click', '.btn-ok-delete', function(e) {
-        var id = $(this).data('recordId');
-        $.ajax({url: 'change-rent-profile?action=delete&rent=' + id})
-    });
-    
-    $('#confirm-delete').on('show.bs.modal', function(e) {
-        var data = $(e.relatedTarget).data();
-        $('.title', this).text(data.recordFullname);
-        $('.btn-ok-delete', this).data('recordId', data.recordId);
-    });
-
-
-    /*
-     * Объединение арендатора с лицевым счетом
-     */
-    $('#bind-rent-modal').on('click', '.btn-ok-bind', function(e) {
-        var rentId = $(this).data('rent');
-        var accountId = $('#_list-account-rent :selected').text();
-        console.log(rentId + ' ' + accountId);
-        $.ajax({
-            url: 'change-rent-profile?action=bind&rent=' + rentId + '&account=' + accountId,
-            method: 'GET',
-            success: function(response) {
-                // console.log('Объединение арендатора с лицевым счетом OK');
-            },
-            error: function() {
-                console.log('Error #1000-02');
-            }
-        })
-    });
-    
-    /*
-     * Перед загрузкой модального окна подтвержадения удаления арендатора
-     * получаем data параметры
-     */ 
-    $('#bind-rent-modal').on('show.bs.modal', function(e) {
-        var data = $(e.relatedTarget).data();
-        $('.fullname', this).text(data.rentFullname);
-        $('.btn-ok-bind', this).data('rent', data.rent);
-    });
-
     /*
      * Обработка событий в модальном окне 'Дальнейшие действия с учетной записью арендатора'
+     * 
+     * Закрыть модальное окно
      */
-    // Закрыть модальное окно
     $('.changes_rent__close').on('click', function() {
         $('#is_rent').prop('checked', true);
     });
@@ -139,24 +96,6 @@ $(document).ready(function() {
         });
     });
     
-    // Отвязать арендатора от лицевого счета
-    $('.changes_rent__undo').on('click', function() {
-    
-        var rentsId = $('input[id=_rents]').val();
-        var accountId = $('#_list-account :selected').text();
-        $.get({
-            url: 'change-rent-profile?action=undo&rent=' + rentsId + '&account=' + accountId,
-            method: 'GET',
-            success: function(response) {
-                // console.log('Отвязать арендатора OK');
-            },
-            error: function() {
-                console.log('Error #1000-04');
-            }
-        });
-    });
-
-
     /*
      * Сабмит основной формы профиля
      * Перед отправкой проверяем валидацию формы 'Арендатор'
