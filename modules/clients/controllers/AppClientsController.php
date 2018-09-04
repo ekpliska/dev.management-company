@@ -5,8 +5,7 @@
     use yii\web\Controller;
     use yii\filters\AccessControl;
     use yii\web\Response;
-    use app\models\User;
-    use app\modules\clients\models\UserInfo;
+    use yii\helpers\ArrayHelper;
     use app\modules\clients\components\checkPersonalAccount;
         
 /*
@@ -48,42 +47,28 @@ class AppClientsController extends Controller {
     
     
     /*
-     * Метод, проверяет существование пользователя по текущему ID (user->identity->user_id)
-     * Пользователь имеет доступ только к странице своего профиля
-     * В противном случае выводим исключение
+     * Метод, формирования полного профиля для текущего пользователя
      */
     public function permisionUser() {
-        
         return Yii::$app->userProfile;
-        
-//        $user_id = Yii::$app->user->identity->user_id;
-//        $user = User::findByUser($user_id);
-//        
-//        $user_info = UserInfo::getUserInfo();
-//        
-//        if ($user_info) {
-//            return ['user_info' => $user_info, 'user' => $user];
-//        } else {
-//            throw new NotFoundHttpException('Вы обратились к несуществующей странице');
-//        }        
     }    
     
         
     /*
-     * Метод получает ID лицевого счета из глобального списка
+     * Метод смены лицевого счета из глобально списка в хеддере,
+     * и последующая запись в сесии и куки
      * 
      */
     public function actionCurrentAccount() {
         
         $account_id = Yii::$app->request->post('idAccount');
         Yii::$app->response->format = Response::FORMAT_JSON;
-        
         /*
          * Если в $account_id пришел не верный ID лицевого счета
          * то в куку и сессию его не записываем
          * Возвращается предыдущее выбранное значение
          */
-        if (!is_numeric($account_id)) {
+        if (!is_numeric($account_id) || !ArrayHelper::keyExists($account_id, $this->_list)) {
             return ['status' => false];
         }
         
@@ -96,7 +81,7 @@ class AppClientsController extends Controller {
             ]));
             return ['status' => true];
         }
-        return ['status' => false];;
+        return ['status' => false];
     }
     
 }

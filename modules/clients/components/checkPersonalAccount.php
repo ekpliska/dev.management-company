@@ -47,9 +47,10 @@ class checkPersonalAccount extends Behavior {
         $session = Yii::$app->session;
         $cookies = Yii::$app->response->cookies;
         $choosing = '';
+        $array_account = $this->getListAccount(Yii::$app->user->identity->id);
         
         // Получить первый ID лицевого счета из списка dropDownList
-        $first_account = key($this->getListAccount(Yii::$app->user->identity->id));
+        $first_account = key($array_account);
         
         if (!$session->isActive) {
             $session->open();
