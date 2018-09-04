@@ -123,7 +123,6 @@ class ClientsRentForm extends Model {
                     $account->personal_rent_id = $add_rent->rents_id;
                     $account->save(false);
                 }
-                
                 $transaction->commit();
                 
             } catch (Exception $ex) {

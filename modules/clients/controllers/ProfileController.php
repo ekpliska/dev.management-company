@@ -4,6 +4,7 @@
     use Yii;
     use yii\web\UploadedFile;
     use yii\web\NotFoundHttpException;
+    use yii\widgets\ActiveForm;
     use app\modules\clients\controllers\AppClientsController;
     use app\models\User;
     use app\modules\clients\models\ClientsRentForm;
@@ -56,16 +57,12 @@ class ProfileController extends AppClientsController
             if ($user_info->load(Yii::$app->request->post())) {
                 
                 try {
-                    
                     $file = UploadedFile::getInstance($user_info, 'user_photo');
                     // Сохраняем профиль
                     $user_info->uploadPhoto($file);
-
-                    Yii::$app->session->setFlash('success', 'Профиль обновлен');
-                    
                 } catch (Exception $ex) {
                     Yii::$app->errorHandler->logException($ex);
-                    Yii::$app->session->setFlash('error', $ex->getMessage());
+                    Yii::$app->session->setFlash('profile', ['succes' => false, 'error' => $ex->getMessage()]);                    
                 }
             }
             return $this->redirect(Yii::$app->request->referrer);
@@ -139,9 +136,8 @@ class ProfileController extends AppClientsController
 
     /*
      * Методы:
+     * 
      *      delete Удалить - арендатора
-     *      undo Отвязать - арендатора от лицевоого счета
-     *      bind Объединить - арендатора с лицвым счетом
      */
     public function actionChangeRentProfile($action, $rent, $account = null) {
         
@@ -159,20 +155,6 @@ class ProfileController extends AppClientsController
                     } else {
                         Yii::$app->session->setFlash('error', 'Возникла ошибка (запрос удаления арендатора)');
                         return $this->refresh();
-                    }
-                    break;
-
-                case 'undo': 
-                    if ($_rent) {
-                        $_rent->undoRentWithAccount($rent, $account);
-                        return $this->redirect(Yii::$app->request->referrer);
-                    }
-                    break;
-                
-                case 'bind':
-                    if ($_rent) {
-                        $_rent->bindRentWithAccount($rent, $account);
-                        return $this->redirect(Yii::$app->request->referrer);
                     }
                     break;
                 
@@ -198,16 +180,16 @@ class ProfileController extends AppClientsController
         
         if (Yii::$app->request->isPost && $model->load(Yii::$app->request->post())) {
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-            return \yii\widgets\ActiveForm::validate($model);
+            return ActiveForm::validate($model);
         }
         
     }
     
     /*
      * Метод добавления нового арендатора
-     * объединить с указанным лицевым счетом
+     * 
      * @param array $data_rent Массив данных о новом арендаторе
-     * @param integer $account_number Номер лицвого счета из пост
+     * @param integer $account_number Номер лицвого счета из $_['POST']
      */
     public function actionAddNewRent() {
         
@@ -222,23 +204,22 @@ class ProfileController extends AppClientsController
         $rent_form = new ClientsRentForm($data_rent);
         
         if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
-            
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
             
             if ($rent_form->load(Yii::$app->request->post()) && $rent_form->validate()) {
                 
                 $rent_form->saveRentToUser($data_rent, $account_number);
-                Yii::$app->session->setFlash('success', 'Для лицевого счета №' . $account_number . ' был создан новый арендатор');
-                return ['success' => true];
-                
+                Yii::$app->session->setFlash('profile', ['success' => true, 'message' => 'Для лицевого счета №' . $account_number . ' был создан новый арендатор']);
+                if(Yii::$app->request->referrer) {
+                    return $this->redirect(Yii::$app->request->referrer);
+                }
             }
-            
-            Yii::$app->session->setFlash('error', 'Произошла ошибка при создании нового арендатора. Повторите действие еще раз');
+            Yii::$app->session->setFlash('profile', ['success' => false, 'error' => 'При создании нового арендатора произошла ошибка. Повторите действие еще раз']);
             return ['success' => false];
             
         }
         
-        Yii::$app->session->setFlash('error', 'Произошла ошибка при создании нового арендатора. Повторите действие еще раз');
+        Yii::$app->session->setFlash('error', 'При создании нового арендатора произошла ошибка. Повторите действие еще раз');
         return $this->render(Yii::$app->request->referrer);
         
     }

@@ -13,7 +13,7 @@
 $this->title = 'Профиль абонента';
 
 // Если пользователь Собственник, то меняем разметку блоков профиля
-$col = Yii::$app->user->can('AddNewRent') ? 3 : 2;
+$col = Yii::$app->user->can('clients') ? 3 : 2;
 ?>
 
 <div class="clients-default-index">
@@ -47,7 +47,7 @@ $col = Yii::$app->user->can('AddNewRent') ? 3 : 2;
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div class="text-left">
-                    <strong>Контактные данные</strong>                    
+                    <strong>Контактные данные</strong>
                 </div>
                 <div class="text-right">
                     <?php if (isset($is_rent)) : ?>
@@ -115,7 +115,6 @@ $col = Yii::$app->user->can('AddNewRent') ? 3 : 2;
                     <div id="content-replace">
 
                         <?= $this->render('_form/rent-view', [
-                                // 'model' => $accounts_info, 
                                 'model_rent' => $model_rent, 
                                 'add_rent' => $add_rent, 
                             ]) ?>

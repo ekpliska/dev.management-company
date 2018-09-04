@@ -158,93 +158,8 @@ class Rents extends ActiveRecord
     }
     
     /*
-     * Отвязать арендатора от лицевого счета собственника
-     * При этом учетная запись арендатора для входа на портал блокируется
-     */
-    public function undoRentWithAccount($rent, $account) {
-        
-        $_user = User::findOne(['user_rent_id' => $rent]);
-        $_account = PersonalAccount::findOne(['account_number' => $account]);
-        
-        if ($_user) {
-            $this->isActive = self::STATUS_DISABLED;
-            
-            $_user->user_login = $_user->user_login . '_block';
-            $_user->status = User::STATUS_BLOCK;
-            
-            $_account->personal_rent_id = null;
-            
-            $this->save(false);
-            $_user->save(false);
-            $_account->save(false);
-            
-            $this->checkBindRentWithAccount($_user->user_id, null);
-            
-            Yii::$app->session->setFlash('success', 'Арендатор ' . $this->fullName . ' был отвязан от лицевого счета №' . $_account->account_number);
-            
-            return true;
-        }
-        
-        Yii::$app->session->setFlash('error', 'При отвязывании лицевого счета и арендатора возникла ощшибка. Повторите операцию еще раз');
-        return false;
-    }
-    
-    /*
-     * Объединить арендатора с выбранным лицевым счетом
-     * В этом случае учетная запись арендатора для входа на портал становится активной
-     * (Происходит смена логина арендатора, если лицевой счет объединения изменился)
-     */
-    public function bindRentWithAccount($rent, $account) {
-        
-        $_user = User::findOne(['user_rent_id' => $rent]);
-        $_account = PersonalAccount::findOne(['account_number' => $account]);
-        
-        if ($_user && $_account) {
-            $this->isActive = self::STATUS_ENABLED;
-            $this->save(false);
-            
-            $_user->status = User::STATUS_ENABLED;
-            $_user->user_login = $_account->account_number . 'r';
-            $_user->save(false);
-            
-            $_account->personal_rent_id = $this->id;
-            $_account->save(false);
-            
-            $this->checkBindRentWithAccount($_user->user_id, $_account->account_id);
-            
-            Yii::$app->session->setFlash('success', 
-                    'За лицевым счетом №' . $_account->account_number . 
-                    ' закреплен арендатор ' . $this->fullName . 
-                    '<br />  Логин учетной записи арендатора: ' . $_user->user_login .
-                    '<br />  Пароль учетной записи арендатора: остался без изменений');
-            
-            return true;
-        }
-        
-        Yii::$app->session->setFlash('error', 'При объединении лицевого счета и арендатора возникла ощшибка. Повторите операцию еще раз');
-        return false;
-        
-    }
-    
-    /*
-     * Метод органицует установление связей 
-     * через промежуточную таблицу Лицевой счет - Пользователь
-     */
-    public function checkBindRentWithAccount($user_id, $account_id = null) {
-        
-        $data_bind = AccountToUsers::findByUserID($user_id);
-        
-        if (empty($account_id)) {
-            return $data_bind->delete() ? true : false;
-        } else {
-            $data_bind->account_id = $account_id;
-            return $data_bind->save(false);
-        }
-        
-    }
-    
-    /*
      * После удаления Арендтора из системы
+     * 
      * Удалить учетную запись Арендатора
      * Снять связь между удаленным Арендатором и Лицевым счетом
      */
@@ -258,7 +173,10 @@ class Rents extends ActiveRecord
                 $_account->personal_rent_id = null;
                 $_account->save(false);
                 
-                Yii::$app->session->setFlash('success', 'Арендатор ' . $this->fullName . ' и его учетная запись удалены с порта');
+                Yii::$app->session->setFlash('profile', [
+                    'success' => true, 
+                    'message' => 'Арендатор ' . $this->fullName . ' и его учетная запись удалены с портала'
+                ]);
             }
         }
     }
