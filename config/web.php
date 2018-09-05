@@ -77,8 +77,9 @@ $config = [
             'class' => 'yii\web\User',
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
+            'loginUrl' => ['site/login'],
+            'as afterLogin' => 'app\behaviors\LoginTimestampBehavior',
             /*
-            'loginUrl' => '/user/login',
             'identityCookie' => [
                 'name' => '_identity',
                 'httpOnly' => true,

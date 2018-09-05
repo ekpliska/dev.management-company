@@ -38,6 +38,8 @@ $(document).ready(function() {
         }
     });
     
+    $('input[name*=account-number]').val($('.current__account_list :selected').text());
+    
     /* Обработка события при клике на dropDownList "Список лицевых счетов собственника"
      * Профиль, блок "Контактные данные арендатора"
      */

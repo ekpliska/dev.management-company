@@ -1,13 +1,14 @@
 <?php
     
-    namespace app\modules\clients\components;
+    namespace app\modules\clients\behaviors;
     use yii\web\Controller;
     use yii\base\Behavior;
     use Yii;
     use app\models\PersonalAccount;
     
 /*
- * 
+ * Поведение формирует список лицевых счетов текушего пользователя
+ * после авторизации
  */
 class checkPersonalAccount extends Behavior {
     

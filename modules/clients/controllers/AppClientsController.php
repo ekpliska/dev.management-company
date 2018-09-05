@@ -6,7 +6,7 @@
     use yii\filters\AccessControl;
     use yii\web\Response;
     use yii\helpers\ArrayHelper;
-    use app\modules\clients\components\checkPersonalAccount;
+    use app\modules\clients\behaviors\checkPersonalAccount;
         
 /*
  * Общий контроллер модуля Clients
