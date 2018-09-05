@@ -110,7 +110,7 @@ $(document).ready(function() {
         // Если имеются ошибки и форма Арендатора существует, отправку основной формы профиля останавливаем
         if (countError > 0 && rentForm) {
             return false;
-        } else if (countError === 0 && rentForm) {
+        } else if (countError === 0 && rentForm) {  // Отправляем Ajax запрос на сохранение данных арендатора, есть форма заоплнена и не содержит ошибок
             $.ajax({
                 url: 'save-rent-info',
                 data: rentForm,
@@ -152,16 +152,15 @@ $(document).ready(function() {
      });
     
     // Сохраняем нового Арендатора
-    $('#add-rent').on('beforeSubmit', function() {
+    $('body').on('beforeSubmit', 'form#add-rent', function (e) {
+        e.preventDefault();
         var addRentForm = $(this);
         $.ajax({
             url: 'add-new-rent',
             type: 'POST',
             data: addRentForm.serializeArray(),
             succeess: function(response) {
-                if (response.status === false) {
-                    console.log('Error #1000-06-1');
-                }
+                console.log(response);
             },
             error: function() {
                 console.log('Error #1000-06-2');

@@ -45,12 +45,12 @@ class ProfileController extends AppClientsController
     public function actionUpdateProfile($form) {
         
         if (empty($form)) {
-            throw new NotFoundHttpException('При сохранении профиля возникла ошибка. Повторите операцию еще раз');
+            throw new NotFoundHttpException('При сохранении профиля возникла ошибка. Повторите действие еще раз');
         }
         
         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         
-        $user_info = $this->findUser(Yii::$app->user->id);
+        $user_info = $this->permisionUser()->_model;
         
         if (Yii::$app->request->isPost) {
             
@@ -159,8 +159,11 @@ class ProfileController extends AppClientsController
                     break;
                 
                 default:
-                    Yii::$app->session->setFlash('error', 'Ошибка удаления арендатора');
-                    return $this->render(Yii::$app->request->referrer);
+                    Yii::$app->session->setFlash('profile', [
+                        'success' => false, 
+                        'error' => 'При удалении учетной записи арендатора произошла ошибка. Повторите действие еще раз'
+                    ]);
+                    return $this->redirect(Yii::$app->request->referrer);
             }
         }
         
@@ -197,30 +200,21 @@ class ProfileController extends AppClientsController
         $account_number = $data_rent['account_id'];
         
         // Проверям корректность полученных данных
-        if (!$data_rent && is_int($account_number)) {
-            return ['success' => false];
+        if (!$data_rent && !is_numeric($account_number)) {
+            Yii::$app->session->setFlash('error', 'При создании нового арендатора произошла ошибка. Повторите действие еще раз');
+            return $this->redirect(Yii::$app->request->referrer);
         }
-        
-        $rent_form = new ClientsRentForm($data_rent);
         
         if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
             
+            $rent_form = new ClientsRentForm($data_rent);
             if ($rent_form->load(Yii::$app->request->post()) && $rent_form->validate()) {
-                
-                $rent_form->saveRentToUser($data_rent, $account_number);
-                Yii::$app->session->setFlash('profile', ['success' => true, 'message' => 'Для лицевого счета №' . $account_number . ' был создан новый арендатор']);
-                if(Yii::$app->request->referrer) {
-                    return $this->redirect(Yii::$app->request->referrer);
-                }
+                $rent_form->saveRentToUser($account_number);
+                Yii::$app->session->setFlash('success', 'Для лицевого счета №' . $account_number . ' был создан новый арендатор');
+                return ['data' => 'here'];
             }
-            Yii::$app->session->setFlash('profile', ['success' => false, 'error' => 'При создании нового арендатора произошла ошибка. Повторите действие еще раз']);
-            return ['success' => false];
-            
         }
-        
-        Yii::$app->session->setFlash('error', 'При создании нового арендатора произошла ошибка. Повторите действие еще раз');
-        return $this->render(Yii::$app->request->referrer);
         
     }
     
@@ -236,15 +230,24 @@ class ProfileController extends AppClientsController
         if (Yii::$app->request->isAjax) {
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
             if ($_rent->load(Yii::$app->request->post()) && $_rent->validate()) {
-                $_rent->save();
+                $_rent->save();                
             }
+            Yii::$app->session->setFlash('profile', [
+                'success' => true, 
+                'message' => 'Ваш профиль был успешно обновлен'
+            ]);
             return ['status' => true];
         }
+        Yii::$app->session->setFlash('profile', [
+            'success' => false, 
+            'error' => 'При обновлении профиля произошла ошибка. Повторите действие еще раз'
+        ]);
         return ['status' => false];
     }
     
     /*
      * Раздел - Настройки профиля
+     * 
      * @param array $model_password Модель смены пароля учетной записи
      */
     public function actionSettingsProfile() {
@@ -259,18 +262,30 @@ class ProfileController extends AppClientsController
         
         if ($model_password->load(Yii::$app->request->post())) {
             if ($model_password->changePassword()) {
-                Yii::$app->session->setFlash('success', 'Пароль от учетной записи успешно сохранен');
+                Yii::$app->session->setFlash('profile', [
+                        'success' => true, 
+                        'error' => 'Пароль от вашей учетной записи успешно изменен'
+                ]);
                 return $this->refresh();
             } else {
-                Yii::$app->session->setFlash('error', 'При обновлении настроек профиль произошла ошибка');
+                Yii::$app->session->setFlash('profile', [
+                        'success' => false, 
+                        'error' => 'При обновлении настроек профиль произошла ошибка. Повторите действие еще раз'
+                ]);
             }
         }
         
         if ($user->load(Yii::$app->request->post())) {
             if ($user->updateEmailProfile()) {
-                Yii::$app->session->setFlash('success', 'Даные электронной почты / мобильный номер телефона были обновлены');
+                Yii::$app->session->setFlash('profile', [
+                        'success' => true, 
+                        'error' => 'Даные электронной почты и/или мобильный номер телефона успешно изменены'
+                ]);
             } else {
-                Yii::$app->session->setFlash('error', 'При обновлении настроек профиля произошла ошибка');
+                Yii::$app->session->setFlash('profile', [
+                        'success' => true, 
+                        'error' => 'При обновлении настроек профиль произошла ошибка. Повторите действие еще раз'
+                ]);                
             }
         }
         

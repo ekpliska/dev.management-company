@@ -82,56 +82,55 @@ class ClientsRentForm extends Model {
      * Для арендатора создаем новую учетную запись
      * Новому арендатору присваиваем статус - Активный
      */
-    public function saveRentToUser($data, $new_account) {
+    public function saveRentToUser($new_account) {
         
         $transaction = Yii::$app->db->beginTransaction();
-        
-        if ($data) {
-            try {
-                
-                $client = Clients::findOne(['clients_id' => Yii::$app->user->identity->user_client_id]);
-                
-                $add_rent = new Rents();
-                $add_rent->rents_name = $this->rents_name;
-                $add_rent->rents_second_name = $this->rents_second_name;
-                $add_rent->rents_surname = $this->rents_surname;
-                $add_rent->rents_mobile = $this->rents_mobile;
-                // Записываем связь Арендатора с Собственником
-                $add_rent->link('client', $client);
-                $add_rent->isActive = Rents::STATUS_ENABLED;
+        try {
+            
+            $client = Clients::findOne(['clients_id' => Yii::$app->user->identity->user_client_id]);
+            $add_rent = new Rents();
+            $add_rent->rents_name = $this->rents_name;
+            $add_rent->rents_second_name = $this->rents_second_name;
+            $add_rent->rents_surname = $this->rents_surname;
+            $add_rent->rents_mobile = $this->rents_mobile;
+            // Записываем связь Арендатора с Собственником
+            $add_rent->link('client', $client);
+            $add_rent->isActive = Rents::STATUS_ENABLED;
 
-                if(!$add_rent->save()) {
-                    throw new \yii\db\Exception('Ошибка сохранения арендатора. Ошибка: ' . join(', ', $add_rent->getFirstErrors()));
-                }
-                
-                $add_user = new User();
-                $add_user->user_login = $new_account . 'r';
-                $add_user->user_password = Yii::$app->security->generatePasswordHash($this->password);
-                $add_user->user_email = $this->rents_email;
-                $add_user->user_mobile = $this->rents_mobile;
-                $add_user->status = User::STATUS_ENABLED;
-                // Записываем связь Пользователя с Арендатором
-                $add_user->link('rent', $add_rent);
-                $add_user->save();
-                
-                if (!$add_user->save()) {
-                    throw new \yii\db\Exception('Ошибка сохранения пользователя. Ошибка: ' . join(', ', $add_user->getFirstErrors()));
-                }
-                
-                $account = PersonalAccount::findOne(['account_number' => $new_account]);
-                if ($account) {
-                    $account->personal_rent_id = $add_rent->rents_id;
-                    $account->save(false);
-                }
-                $transaction->commit();
-                
-            } catch (Exception $ex) {
-                $transaction->rollBack();
-                // $ex->getMessage();
+            if(!$add_rent->save()) {
+                throw new \yii\db\Exception('Ошибка сохранения арендатора. Ошибка: ' . join(', ', $add_rent->getFirstErrors()));
             }
+                
+            $add_user = new User();
+            $add_user->user_login = $new_account . 'r';
+            $add_user->user_password = Yii::$app->security->generatePasswordHash($this->password);
+            $add_user->user_email = $this->rents_email;
+            $add_user->user_mobile = $this->rents_mobile;
+            $add_user->status = User::STATUS_ENABLED;
+            // Записываем связь Пользователя с Арендатором
+            $add_user->link('rent', $add_rent);
+            $add_user->save();
+                
+            if (!$add_user->save()) {
+                throw new \yii\db\Exception('Ошибка сохранения пользователя. Ошибка: ' . join(', ', $add_user->getFirstErrors()));
+            }
+                
+            $account = PersonalAccount::findOne(['account_number' => $new_account]);
+            if ($account) {
+                $account->personal_rent_id = $add_rent->rents_id;
+                $account->save(false);
+            }
+            $transaction->commit();
+            
             return ['rent' => $add_rent->rents_id];
+                
+        } catch (Exception $ex) {
+            $transaction->rollBack();
+            // $ex->getMessage();
+            return false;
         }
-        return false;
+        
+        
     }
         
     public function attributeLabels() {
