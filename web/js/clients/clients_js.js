@@ -71,10 +71,16 @@ $(document).ready(function() {
         });
 
     });
+    
+    /*
+     * Спять чекбокс Арендатор, если пользователь закрыл модальное окно "Новый арендатор"
+     */
+    $('.add-rent-modal__close').on('click', function() {
+        $('#is_rent').prop('checked', false);
+    });    
 
     /*
      * Обработка событий в модальном окне 'Дальнейшие действия с учетной записью арендатора'
-     * 
      * Закрыть модальное окно
      */
     $('.changes_rent__close').on('click', function() {
@@ -168,7 +174,6 @@ $(document).ready(function() {
                 console.log('Error #1000-06-2');
             },
         });
-        $('.alert').animate({opacity: 1.0}, 3000).fadeOut('slow');
     });
    
 

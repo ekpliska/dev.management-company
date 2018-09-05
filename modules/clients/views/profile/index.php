@@ -26,7 +26,6 @@ $col = Yii::$app->user->can('clients') ? 3 : 2;
     <?php
         $form = ActiveForm::begin([
             'id' => 'profile-form',
-            'action' => ['profile/update-profile', 'form' => 'profile-form'],
             'enableClientValidation' => true,
             'enableAjaxValidation' => false,
             'validateOnChange' => true,
@@ -96,16 +95,14 @@ $col = Yii::$app->user->can('clients') ? 3 : 2;
     <?php if (Yii::$app->user->can('clients')) : ?>
     
         <div class="col-md-<?= 12/$col ?>">
-            <?php if (count($accounts_list) > 1): ?>
-                <?= Html::dropDownList('_list-account', 
-                        $this->context->_choosing, 
-                        $accounts_list, [
-                            'class' => 'form-control', 
-                            'id' => '_list-account',
-                            'data-client' => $user_info->clientID]) 
-                ?>
-                <br />
-            <?php endif; ?>
+            <?= Html::dropDownList('_list-account', 
+                    $this->context->_choosing, 
+                    $accounts_list, [
+                        'class' => 'form-control', 
+                        'id' => '_list-account',
+                        'data-client' => $user_info->clientID]) 
+            ?>
+            <br />
 
             <div class="panel panel-default">
                 <div class="panel-heading">

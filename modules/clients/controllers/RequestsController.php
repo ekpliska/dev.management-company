@@ -23,6 +23,7 @@ class RequestsController extends AppClientsController
     
     /**
      * Главная страница
+     * 
      * @param array $type_requests Массив всех видом зявок
      * @param array $status_requests Пользовательские статусы заявок
      * @param integer $accoint_id Значение ID лицевого счета из глобального dropDownList (хеддер)

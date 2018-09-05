@@ -8,7 +8,7 @@ $this->title ="Главная страница"
     <h1><?= $this->title ?></h1>
     <?php
         echo '<pre>';
-        var_dump(Yii::$app->userProfile);
+        // var_dump(Yii::$app->userProfile);
     ?>
     
 </div>

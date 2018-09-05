@@ -19,6 +19,7 @@
                 <?php
                     $form_add_rent = ActiveForm::begin([
                         'id' => 'add-rent',
+                        'action' => ['profile/add-new-rent'],
                         'validateOnSubmit' => true,
                         'validateOnBlur' => false,
                         'validateOnChange' => false,                        

@@ -199,22 +199,19 @@ class ProfileController extends AppClientsController
         $account_number = $data_rent['account_id'];
         
         // Проверям корректность полученных данных
-        if (!$data_rent && !is_numeric($account_number)) {
+        if (!$data_rent || !is_numeric($account_number)) {
             Yii::$app->session->setFlash('error', 'При создании нового арендатора произошла ошибка. Повторите действие еще раз');
             return $this->redirect(Yii::$app->request->referrer);
         }
         
         if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
-            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-            
             $rent_form = new ClientsRentForm($data_rent);
             if ($rent_form->load(Yii::$app->request->post()) && $rent_form->validate()) {
                 $rent_form->saveRentToUser($account_number);
-                Yii::$app->session->setFlash('success', 'Для лицевого счета №' . $account_number . ' был создан новый арендатор');
-                return ['data' => 'here'];
-            }
+           }
+            Yii::$app->session->setFlash('success', 'Для лицевого счета №' . $account_number . ' был создан новый арендатор');
+            return $this->redirect(Yii::$app->request->referrer);           
         }
-        
     }
     
     
