@@ -80,7 +80,7 @@ class User extends ActiveRecord implements IdentityInterface
                 'on' => self::SCENARIO_EDIT_PROFILE,
             ],
             
-            [['user_check_email', 'user_check_sms'], 'boolean'],
+            [['user_check_email'], 'boolean'],
             
         ];
     }

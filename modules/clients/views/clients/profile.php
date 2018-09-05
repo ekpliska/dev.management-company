@@ -155,7 +155,6 @@ $this->title = 'Профиль абонента';
         <div class="panel panel-default">
             <div class="panel-heading"><strong>Оповещения</strong></div>
             <div class="panel-body">
-                <?= $form->field($user, 'user_check_sms')->checkbox() ?>
                 <?= $form->field($user, 'user_check_email')->checkbox() ?>                    
             </div>            
         </div>        

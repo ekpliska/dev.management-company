@@ -104,7 +104,6 @@ class ProfileController extends AppClientsController
             $add_rent = new ClientsRentForm(['scenario' => ClientsRentForm::SCENARIO_AJAX_VALIDATION]);
             
             $data = $this->renderPartial('_form/rent-view', [
-                'model' => $model, 
                 'model_rent' => $model_rent, 
                 'add_rent' => $add_rent, 
             ]);

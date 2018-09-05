@@ -168,6 +168,7 @@ $(document).ready(function() {
                 console.log('Error #1000-06-2');
             },
         });
+        $('.alert').animate({opacity: 1.0}, 3000).fadeOut('slow');
     });
    
 

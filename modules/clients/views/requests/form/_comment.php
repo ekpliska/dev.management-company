@@ -1,7 +1,6 @@
 <?php
     use yii\widgets\ActiveForm;
     use yii\helpers\Html;
-    use yii\helpers\Url;
     use yii\widgets\Pjax;
     use app\helpers\FormatHelpers;
 /* 
@@ -99,11 +98,11 @@
 <?php Pjax::end(); ?>
 
 <?php
-    $this->registerJs(
-        '$("document").ready(function(){
+    $this->registerJs('
+        $("document").ready(function(){
             $("#new_note").on("pjax:end", function() {
-            $.pjax.reload({container:"#comments"});
+                $.pjax.reload({container:"#comments"});
+            });
         });
-    });'
-    );
+    ');
 ?>
