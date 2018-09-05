@@ -56,7 +56,7 @@
                         
 <div class="col-md-12" style="padding: 0;">
     <p>Номер лицевого счета</p>
-    <?= Html::input('text', 'account-number', $this->context->_choosing, [
+    <?= Html::input('text', 'account-number', '',[
         'class' => 'form-control', 
         'disabled' => true, 
         'id' => 'account-number'

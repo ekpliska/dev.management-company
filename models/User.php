@@ -315,7 +315,6 @@ class User extends ActiveRecord implements IdentityInterface
             'user_mobile' => 'Мобильный телефон',
             'user_photo' => 'Аватар',
             'user_check_email' => 'Разрешить e-mail оповещения',
-            'user_check_sms' => 'Разрешить SMS оповещения',
             'user_authkey' => 'User Authkey',
             'date_create' => 'Дата регистрации',
             'updated_at' => 'Дата редактирования',

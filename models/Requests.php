@@ -94,7 +94,10 @@ class Requests extends ActiveRecord
     public function addRequest($accoint_id) {
         
         if (!is_numeric($accoint_id)) {
-            Yii::$app->session->setFlash('error', 'При формировании заявки возникла ошибка. Обновите страницу и повторите действия еще раз');
+            Yii::$app->session->setFlash('request', [
+                'success' => false,
+                'error' => 'При формировании заявки возникла ошибка. Обновите страницу и повторите действия еще раз',
+            ]);
             return false;
         }
         
@@ -116,12 +119,18 @@ class Requests extends ActiveRecord
             $this->requests_account_id = $accoint_id;
             $this->status = StatusRequest::STATUS_NEW;
             $this->is_accept = false;
-            Yii::$app->session->setFlash('success', 'Ваша заявка была успешно  сформирована на лицевой счет №' . $account->account_number . '<br />'
+            Yii::$app->session->setFlash('request', [
+                'success' => true,
+                'message' => 'Ваша заявка была успешно  сформирована на лицевой счет №' . $account->account_number . '<br />'
                     . 'Номер вашей заявки №' . $request_numder . '<br />'
-                    . 'Ознакомиться с деталями заявки можно пройдя по ' . Html::a('ссылке', ['requests/view-request', 'request_numder' => $request_numder]));
+                    . 'Ознакомиться с деталями заявки можно пройдя по ' . Html::a('ссылке', ['requests/view-request', 'request_numder' => $request_numder])
+            ]);
             return $this->save() ? true : false;
         }
-        Yii::$app->session->setFlash('error', 'При формировании заявки возникла ошибка. Обновите страницу и повторите действия еще раз');
+        Yii::$app->session->setFlash('request', [
+                'success' => false,
+                'error' => 'При формировании заявки возникла ошибка. Обновите страницу и повторите действия еще раз',
+        ]);
         return false;
     }
     

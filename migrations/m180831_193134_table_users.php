@@ -27,7 +27,6 @@ class m180831_193134_table_users extends Migration
             'user_mobile' => $this->string(70)->unique()->notNull(),
             'user_photo' => $this->string(255),
             'user_check_email' => $this->tinyInteger()->defaultValue('1'),
-            'user_check_sms' => $this->tinyInteger(),
             'user_authkey' => $this->string(255),
             'created_at' => $this->integer(),
             'updated_at' => $this->integer(),
