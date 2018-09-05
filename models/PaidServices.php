@@ -133,15 +133,21 @@ class PaidServices extends ActiveRecord
             $this->services_account_id = $accoint_id;
             $this->save();
             
-            Yii::$app->session->setFlash('success', 'Ваша заявка была успешно сформирована на лицевой счет №' . $account->account_number . '<br />' .
+            Yii::$app->session->setFlash('paid-services', [
+                'success' => true,
+                'message' => 'Ваша заявка на платную услугу была успешно сформирована на лицевой счет №' . $account->account_number . '<br />' .
                     'Номер вашей заявки №' . $order_numder . '<br />' .
-                    'Ознакомиться со списков ваших платных заявок можно пройдя по ' . Html::a('ссылке', ['paid-services/index']));
+                    'Ознакомиться со списков ваших платных заявок можно пройдя по ' . Html::a('ссылке', ['paid-services/index'])
+            ]);
             
             return true;
             
         }
 
-        Yii::$app->session->setFlash('error', 'При формировании заявки возникла ошибка. Обновите страницу и повторите действия еще раз');
+        Yii::$app->session->setFlash('paid-services', [
+                'success' => false,
+                'error' => 'При формировании заявки на платную услугу возникла ошибка. Обновите страницу и повторите действия еще раз',
+        ]);
         return false;
         
     }

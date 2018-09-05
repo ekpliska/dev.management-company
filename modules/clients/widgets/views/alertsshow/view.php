@@ -62,6 +62,20 @@
     ?>
 <?php endif; ?>
 
+<?php if (Yii::$app->session->hasFlash('paid-services')) : ?>
+<?php $flash = Yii::$app->session->getFlash('paid-services'); ?>
+    <?=
+        Alert::widget([
+            'type' => $flash['success'] ? Alert::TYPE_INFO : Alert::TYPE_DANGER,
+            'title' => 'Платные услуги',
+            'icon' => 'glyphicon glyphicon-ok-sign',
+            'body' => $flash['success'] ? $flash['message'] : $flash['error'],
+            'showSeparator' => true,
+            'delay' => 0,
+        ]);
+    ?>
+<?php endif; ?>
+
 <?php if (Yii::$app->session->hasFlash('form')) : ?>
 <?php $flash = Yii::$app->session->getFlash('form'); ?>
     <?=
