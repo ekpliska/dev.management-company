@@ -122,13 +122,11 @@ class ClientsRentForm extends Model {
             }
             $transaction->commit();
             
-            Yii::$app->session->setFlash('success', 'Для лицевого счета № был создан новый арендатор');
             return ['rent' => $add_rent->rents_id];
                 
         } catch (Exception $ex) {
             $transaction->rollBack();
             // $ex->getMessage();
-            return false;
         }
         
         

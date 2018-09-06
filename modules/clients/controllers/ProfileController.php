@@ -208,6 +208,7 @@ class ProfileController extends AppClientsController
             $rent_form = new ClientsRentForm($data_rent);
             if ($rent_form->load(Yii::$app->request->post()) && $rent_form->validate()) {
                 $rent_form->saveRentToUser($account_number);
+                return $this->redirect(Yii::$app->request->referrer);
            }
             Yii::$app->session->setFlash('success', 'Для лицевого счета №' . $account_number . ' был создан новый арендатор');
             return $this->redirect(Yii::$app->request->referrer);           
@@ -260,7 +261,7 @@ class ProfileController extends AppClientsController
             if ($model_password->changePassword()) {
                 Yii::$app->session->setFlash('profile', [
                         'success' => true, 
-                        'error' => 'Пароль от вашей учетной записи успешно изменен'
+                        'message' => 'Пароль от вашей учетной записи успешно изменен'
                 ]);
                 return $this->refresh();
             } else {
@@ -275,11 +276,11 @@ class ProfileController extends AppClientsController
             if ($user->updateEmailProfile()) {
                 Yii::$app->session->setFlash('profile', [
                         'success' => true, 
-                        'error' => 'Даные электронной почты и/или мобильный номер телефона успешно изменены'
+                        'message' => 'Даные электронной почты и/или мобильный номер телефона успешно изменены'
                 ]);
             } else {
                 Yii::$app->session->setFlash('profile', [
-                        'success' => true, 
+                        'success' => false, 
                         'error' => 'При обновлении настроек профиль произошла ошибка. Повторите действие еще раз'
                 ]);                
             }

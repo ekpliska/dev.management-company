@@ -118,7 +118,7 @@ $(document).ready(function() {
         // Если имеются ошибки и форма Арендатора существует, отправку основной формы профиля останавливаем
         if (countError > 0 && rentForm) {
             return false;
-        } else if (countError === 0 && rentForm) {  // Отправляем Ajax запрос на сохранение данных арендатора, есть форма заоплнена и не содержит ошибок
+        } else if (countError === 0 && rentForm) {  // Отправляем Ajax запрос на сохранение данных арендатора, если форма заполнена и не содержит ошибок
             $.ajax({
                 url: 'save-rent-info',
                 data: rentForm,

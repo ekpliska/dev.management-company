@@ -26,6 +26,7 @@ $col = Yii::$app->user->can('clients') ? 3 : 2;
     <?php
         $form = ActiveForm::begin([
             'id' => 'profile-form',
+            'action' => ['profile/update-profile', 'form' => 'profile-form'],
             'enableClientValidation' => true,
             'enableAjaxValidation' => false,
             'validateOnChange' => true,
