@@ -47,27 +47,43 @@ class ProfileController extends AppClientsController
         if (empty($form)) {
             throw new NotFoundHttpException('При сохранении профиля возникла ошибка. Повторите действие еще раз');
         }
-        
-        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        
+        // Загружаем модель пользователя
         $user_info = $this->permisionUser()->_model;
+        // Загружаем модель для Добавления Нового арендатора
+        $add_rent = new ClientsRentForm(['scenario' => ClientsRentForm::SCENARIO_AJAX_VALIDATION]);
         
-        if (Yii::$app->request->isPost) {
-            
-            if ($user_info->load(Yii::$app->request->post())) {
-                
-                try {
+        if ($user_info->load(Yii::$app->request->post())) {
+            if ($add_rent->load(Yii::$app->request->post())) {
+                if ($add_rent->hasErrors()) {
+                    Yii::$app->session->setFlash('profile', ['succes' => false, 'error' => 'Ошибка 1']);
+                    return $this->redirect(Yii::$app->request->referrer);
+                }
+                if ($add_rent->validate()) {
+                    $add_rent->saveRentToUser();
                     $file = UploadedFile::getInstance($user_info, 'user_photo');
-                    // Сохраняем профиль
                     $user_info->uploadPhoto($file);
-                } catch (Exception $ex) {
-                    Yii::$app->errorHandler->logException($ex);
-                    Yii::$app->session->setFlash('profile', ['succes' => false, 'error' => $ex->getMessage()]);                    
+                    return $this->redirect(Yii::$app->request->referrer);
                 }
             }
             return $this->redirect(Yii::$app->request->referrer);
         }
-        
+            
+//            try {
+//                $file = UploadedFile::getInstance($user_info, 'user_photo');
+//                // Сохраняем профиль
+//                $user_info->uploadPhoto($file);
+//            } catch (Exception $ex) {
+//                Yii::$app->errorHandler->logException($ex);
+//                Yii::$app->session->setFlash('profile', ['succes' => false, 'error' => $ex->getMessage()]);                    
+//            }
+//            return $this->redirect(Yii::$app->request->referrer);
+//        }
+//        
+//        
+//        if ($add_rent->load(Yii::$app->request->post())) {
+//            Yii::$app->session->setFlash('profile', ['succes' => true, 'message' => 'new rent is save']); 
+//        }
+            
         return $this->goHome();
     }
     
@@ -105,7 +121,6 @@ class ProfileController extends AppClientsController
             
             $data = $this->renderPartial('_form/rent-view', [
                 'model_rent' => $model_rent, 
-                'add_rent' => $add_rent, 
             ]);
            
             return ['status' => true, 'model' => $model, 'data' => $data, 'is_rent' => $this->_is_rent];
@@ -208,10 +223,10 @@ class ProfileController extends AppClientsController
             $rent_form = new ClientsRentForm($data_rent);
             if ($rent_form->load(Yii::$app->request->post()) && $rent_form->validate()) {
                 $rent_form->saveRentToUser($account_number);
-                return $this->redirect(Yii::$app->request->referrer);
+                return $this->refresh();
            }
             Yii::$app->session->setFlash('success', 'Для лицевого счета №' . $account_number . ' был создан новый арендатор');
-            return $this->redirect(Yii::$app->request->referrer);           
+            return $this->refresh();
         }
     }
     
@@ -321,7 +336,7 @@ class ProfileController extends AppClientsController
         $model = $user_info->_model;
         $accounts_list = $this->_list;
 
-        // Поучить информацию по текущему лицевому счету
+        // Получить информацию по текущему лицевому счету
         $accounts_info = PersonalAccount::findByAccountID($accoint_id);
         
         /* Если у текущего лицевого счета есть арендатор, передаем в глабальный параметр _is_rent значение true;
@@ -330,22 +345,29 @@ class ProfileController extends AppClientsController
         if (!empty($accounts_info->personal_rent_id)) {
             $this->_is_rent = true;
             $model_rent = Rents::findOne(['rents_id' => $accounts_info->personal_rent_id]);
+            
+            return $this->render('index', [
+                'user' => $model,
+                'user_info' => $user_info,
+                'accounts_list' => $accounts_list,
+                'is_rent' => $this->_is_rent,
+                'accounts_info' => $accounts_info,
+                'model_rent' => $model_rent,
+            ]);
         } else {
             $this->_is_rent = false;
             $model_rent = null;
+            $add_rent = new ClientsRentForm(['scenario' => ClientsRentForm::SCENARIO_AJAX_VALIDATION]);
+        
+            return $this->render('index', [
+                'user' => $model,
+                'user_info' => $user_info,
+                'accounts_list' => $accounts_list,
+                'is_rent' => $this->_is_rent,
+                'accounts_info' => $accounts_info,
+                'add_rent' => $add_rent,
+            ]);
         }
-        
-        $add_rent = new ClientsRentForm(['scenario' => ClientsRentForm::SCENARIO_AJAX_VALIDATION]);
-        
-        return $this->render('index', [
-            'user' => $model,
-            'user_info' => $user_info,
-            'accounts_list' => $accounts_list,
-            'is_rent' => $this->_is_rent,
-            'accounts_info' => $accounts_info,
-            'model_rent' => $model_rent,
-            'add_rent' => $add_rent,
-        ]);
         
     }
     

@@ -2,6 +2,7 @@
     
     use yii\bootstrap\ActiveForm;
     use yii\helpers\Html;
+    use yii\widgets\MaskedInput;
     use app\modules\clients\widgets\AddRentForm;
     use app\modules\clients\widgets\SubMenuProfile;
     use app\modules\clients\widgets\AlertsShow;
@@ -90,8 +91,6 @@ $col = Yii::$app->user->can('clients') ? 3 : 2;
         
     </div>
     <!-- End block of avatar and notifications -->
-   
-    <?php ActiveForm::end(); ?>    
     
     <?php if (Yii::$app->user->can('clients')) : ?>
     
@@ -111,21 +110,71 @@ $col = Yii::$app->user->can('clients') ? 3 : 2;
                 </div>
                 <div class="panel-body info_rent">
                     <div id="content-replace">
+                        <?php if (isset($is_rent) && $is_rent) : ?>
+                            <?= $this->render('_form/rent-view', [
+                                    'model_rent' => $model_rent]) 
+                            ?>
+                        <?php else : ?>
+                            <?= $this->render('_form/rent-add') ?>
+                        
+                            <?= $form->field($add_rent, "account_id", ['options' => ['class' => 'hidden']])
+                                ->hiddenInput([
+                                    'value' => $accounts_info->account_number,
+                                    'class' => 'hidden nomination-input',
+                                ])->label(false) ?>                            
+                        
+                            <?= $form->field($add_rent, 'rents_surname')
+                                    ->input('text', [
+                                        'placeHolder' => $add_rent->getAttributeLabel('rents_surname'),
+                                        'class' => 'form-control rents-surname'])
+                                    ->label() ?>
 
-                        <?= $this->render('_form/rent-view', [
-                                'model_rent' => $model_rent, 
-                                'add_rent' => $add_rent, 
-                            ]) ?>
+                            <?= $form->field($add_rent, 'rents_name')
+                                    ->input('text', [
+                                        'placeHolder' => $add_rent->getAttributeLabel('rents_name'),
+                                        'class' => 'form-control rents-name'])
+                                    ->label() ?>
 
+                            <?= $form->field($add_rent, 'rents_second_name')
+                                    ->input('text', [
+                                        'placeHolder' => $add_rent->getAttributeLabel('rents_second_name'),
+                                        'class' => 'form-control rents-second-name'])
+                                    ->label() ?>
+
+                            <?= $form->field($add_rent, 'rents_mobile')
+                                    ->widget(MaskedInput::className(), [
+                                        'mask' => '+7(999) 999-99-99'])
+                                    ->input('text', [
+                                        'placeHolder' => $add_rent->getAttributeLabel('rents_mobile'),
+                                        'class' => 'form-control rents-mobile'])
+                                    ->label() ?>
+
+                            <?= $form->field($add_rent, 'rents_email')
+                                    ->input('text', [
+                                        'placeHolder' => $add_rent->getAttributeLabel('rents_email'),
+                                        'class' => 'form-control rents-email'])
+                                    ->label() ?>
+
+                            <?= $form->field($add_rent, 'password')
+                                    ->input('password', [
+                                        'placeHolder' => $add_rent->getAttributeLabel('password'),
+                                        'class' => 'form-control rents-hash show_password'])
+                                    ->label() ?>                                   
+
+                            <?= Html::checkbox('show_password_ch', false) ?> <span class="show_password__text">Показать пароль</span>                        
+                        
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
 
         </div>
+    
 
-        <?= ModalWindows::widget(['modal_view' => 'changes_rent']) ?>
-        <?= AddRentForm::widget(['add_rent' => $add_rent]) ?>
+    
+    <?= ModalWindows::widget(['modal_view' => 'changes_rent']) ?>
     
     <?php endif; ?>
 
+    <?php ActiveForm::end(); ?>
 </div>

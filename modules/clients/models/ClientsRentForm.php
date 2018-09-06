@@ -82,7 +82,7 @@ class ClientsRentForm extends Model {
      * Для арендатора создаем новую учетную запись
      * Новому арендатору присваиваем статус - Активный
      */
-    public function saveRentToUser($new_account) {
+    public function saveRentToUser() {
         
         $transaction = Yii::$app->db->beginTransaction();
         try {
@@ -102,7 +102,7 @@ class ClientsRentForm extends Model {
             }
                 
             $add_user = new User();
-            $add_user->user_login = $new_account . 'r';
+            $add_user->user_login = $this->account_id . 'r';
             $add_user->user_password = Yii::$app->security->generatePasswordHash($this->password);
             $add_user->user_email = $this->rents_email;
             $add_user->user_mobile = $this->rents_mobile;
@@ -115,7 +115,7 @@ class ClientsRentForm extends Model {
                 throw new \yii\db\Exception('Ошибка сохранения пользователя. Ошибка: ' . join(', ', $add_user->getFirstErrors()));
             }
                 
-            $account = PersonalAccount::findOne(['account_number' => $new_account]);
+            $account = PersonalAccount::findOne(['account_number' => $this->account_id]);
             if ($account) {
                 $account->personal_rent_id = $add_rent->rents_id;
                 $account->save(false);
