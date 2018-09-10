@@ -43,47 +43,44 @@ class ProfileController extends AppClientsController
      * Метод обновления профиля пользователя
      */
     public function actionUpdateProfile($form) {
-        
+
         if (empty($form)) {
             throw new NotFoundHttpException('При сохранении профиля возникла ошибка. Повторите действие еще раз');
-        }
-        // Загружаем модель пользователя
-        $user_info = $this->permisionUser()->_model;
-        // Загружаем модель для Добавления Нового арендатора
-        $add_rent = new ClientsRentForm(['scenario' => ClientsRentForm::SCENARIO_AJAX_VALIDATION]);
-        
-        if ($user_info->load(Yii::$app->request->post())) {
-            if ($add_rent->load(Yii::$app->request->post())) {
-                if ($add_rent->hasErrors()) {
-                    Yii::$app->session->setFlash('profile', ['succes' => false, 'error' => 'Ошибка 1']);
-                    return $this->redirect(Yii::$app->request->referrer);
+        }        
+        // $is_rent = Yii::$app->request->post('is_rent');
+        if (Yii::$app->request->isPost) {
+            if (isset($_POST['is_rent'])) {
+                // Загружаем модель пользователя
+                $user_info = $this->permisionUser()->_model;
+                // Загружаем модель для Добавления Нового арендатора
+                $add_rent = new ClientsRentForm(['scenario' => ClientsRentForm::SCENARIO_AJAX_VALIDATION]);
+                
+                if ($user_info->load(Yii::$app->request->post())) {                    
+                    if ($add_rent->load(Yii::$app->request->post())) {              
+                        if ($add_rent->hasErrors()) {
+                            Yii::$app->session->setFlash('profile', ['succes' => false, 'error' => 'Ошибка 1']);
+                            return $this->redirect(Yii::$app->request->referrer);
+                        }
+                        if ($add_rent->validate()) {
+                            $add_rent->saveRentToUser();
+                            $file = UploadedFile::getInstance($user_info, 'user_photo');
+                            $user_info->uploadPhoto($file);
+                            return $this->redirect(Yii::$app->request->referrer);
+                        }
+                    }
+                return $this->redirect(Yii::$app->request->referrer);
                 }
-                if ($add_rent->validate()) {
-                    $add_rent->saveRentToUser();
+            } else {
+                $user_info = $this->permisionUser()->_model;
+                
+                if ($user_info->load(Yii::$app->request->post())) {
                     $file = UploadedFile::getInstance($user_info, 'user_photo');
                     $user_info->uploadPhoto($file);
                     return $this->redirect(Yii::$app->request->referrer);
                 }
             }
-            return $this->redirect(Yii::$app->request->referrer);
         }
-            
-//            try {
-//                $file = UploadedFile::getInstance($user_info, 'user_photo');
-//                // Сохраняем профиль
-//                $user_info->uploadPhoto($file);
-//            } catch (Exception $ex) {
-//                Yii::$app->errorHandler->logException($ex);
-//                Yii::$app->session->setFlash('profile', ['succes' => false, 'error' => $ex->getMessage()]);                    
-//            }
-//            return $this->redirect(Yii::$app->request->referrer);
-//        }
-//        
-//        
-//        if ($add_rent->load(Yii::$app->request->post())) {
-//            Yii::$app->session->setFlash('profile', ['succes' => true, 'message' => 'new rent is save']); 
-//        }
-            
+        
         return $this->goHome();
     }
     
@@ -382,6 +379,28 @@ class ProfileController extends AppClientsController
             'user' => $model,
             'user_info' => $user_info,
         ]);
+        
+    }
+    
+    public function actionShow() {
+               
+        $_show = Yii::$app->request->post('_show');
+        if (Yii::$app->request->isAjax) {
+            if ($_show) {
+                $add_rent = new ClientsRentForm([
+                    'scenario' => ClientsRentForm::SCENARIO_AJAX_VALIDATION
+                ]);
+                
+                $data = $this->renderAjax('_form/rent-add', [
+                    'form' => ActiveForm::begin(),
+                    'account_number' => Yii::$app->request->post('accountNumber'), 
+                    'add_rent' => $add_rent]);
+                Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+                return ['show' => true, 'data' => $data];
+            } else {
+                return ['show' => false];
+            }
+        }
         
     }
     

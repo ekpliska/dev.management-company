@@ -26,8 +26,6 @@ class User extends ActiveRecord implements IdentityInterface
     
     const SCENARIO_EDIT_PROFILE = 'edit user profile';
     
-    public $status_list;
-
     public function behaviors() {
         return [
             TimestampBehavior::className(),

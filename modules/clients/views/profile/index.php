@@ -2,8 +2,6 @@
     
     use yii\bootstrap\ActiveForm;
     use yii\helpers\Html;
-    use yii\widgets\MaskedInput;
-    use app\modules\clients\widgets\AddRentForm;
     use app\modules\clients\widgets\SubMenuProfile;
     use app\modules\clients\widgets\AlertsShow;
     use app\modules\clients\widgets\ModalWindows;
@@ -12,7 +10,6 @@
  * Профиль пользователя
  */
 $this->title = 'Профиль абонента';
-
 // Если пользователь Собственник, то меняем разметку блоков профиля
 $col = Yii::$app->user->can('clients') ? 3 : 2;
 ?>
@@ -35,9 +32,7 @@ $col = Yii::$app->user->can('clients') ? 3 : 2;
                 'enctype' => 'multipart/form-data',
             ],
          ])
-    ?>  
-
-    
+    ?>
     <div class="col-md-12 text-right">
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary']) ?>
         <br /><br />
@@ -115,54 +110,9 @@ $col = Yii::$app->user->can('clients') ? 3 : 2;
                                     'model_rent' => $model_rent]) 
                             ?>
                         <?php else : ?>
-                            <?= $this->render('_form/rent-add') ?>
-                        
-                            <?= $form->field($add_rent, "account_id", ['options' => ['class' => 'hidden']])
-                                ->hiddenInput([
-                                    'value' => $accounts_info->account_number,
-                                    'class' => 'hidden nomination-input',
-                                ])->label(false) ?>                            
-                        
-                            <?= $form->field($add_rent, 'rents_surname')
-                                    ->input('text', [
-                                        'placeHolder' => $add_rent->getAttributeLabel('rents_surname'),
-                                        'class' => 'form-control rents-surname'])
-                                    ->label() ?>
-
-                            <?= $form->field($add_rent, 'rents_name')
-                                    ->input('text', [
-                                        'placeHolder' => $add_rent->getAttributeLabel('rents_name'),
-                                        'class' => 'form-control rents-name'])
-                                    ->label() ?>
-
-                            <?= $form->field($add_rent, 'rents_second_name')
-                                    ->input('text', [
-                                        'placeHolder' => $add_rent->getAttributeLabel('rents_second_name'),
-                                        'class' => 'form-control rents-second-name'])
-                                    ->label() ?>
-
-                            <?= $form->field($add_rent, 'rents_mobile')
-                                    ->widget(MaskedInput::className(), [
-                                        'mask' => '+7(999) 999-99-99'])
-                                    ->input('text', [
-                                        'placeHolder' => $add_rent->getAttributeLabel('rents_mobile'),
-                                        'class' => 'form-control rents-mobile'])
-                                    ->label() ?>
-
-                            <?= $form->field($add_rent, 'rents_email')
-                                    ->input('text', [
-                                        'placeHolder' => $add_rent->getAttributeLabel('rents_email'),
-                                        'class' => 'form-control rents-email'])
-                                    ->label() ?>
-
-                            <?= $form->field($add_rent, 'password')
-                                    ->input('password', [
-                                        'placeHolder' => $add_rent->getAttributeLabel('password'),
-                                        'class' => 'form-control rents-hash show_password'])
-                                    ->label() ?>                                   
-
-                            <?= Html::checkbox('show_password_ch', false) ?> <span class="show_password__text">Показать пароль</span>                        
-                        
+                            <div class="form-add-rent">
+                                Арендатор отсутствует
+                            </div>
                         <?php endif; ?>
                     </div>
                 </div>
@@ -177,4 +127,57 @@ $col = Yii::$app->user->can('clients') ? 3 : 2;
     <?php endif; ?>
 
     <?php ActiveForm::end(); ?>
+    
 </div>
+
+
+<?php
+$this->registerJs("
+    $('#is_rent').on('change', function(e) {
+        var rentsId = $('input[id=_rents]').val();
+        if ($('input').is('#_rents')) {
+            $('#changes_rent').modal('show');
+            $.ajax({
+                url: 'get-rent-info?rent=' + rentsId,
+                method: 'POST',
+                dataType: 'json',
+                data: {
+                    rent_id: rentsId,
+                },
+                success: function(response) {
+                    if (response.status) {
+                        $('#changes_rent #rent-surname').text(response.rent.rents_surname);
+                        $('#changes_rent #rent-name').text(response.rent.rents_name);
+                        $('#changes_rent #rent-second-name').text(response.rent.rents_second_name);
+                    } else {
+                        console.log('Error #1000-01');
+                    }
+                }
+            });
+        } else {
+            // Показать форму Добавление нового арендатора
+            if ($('#is_rent').is(':checked')) {
+                $.ajax({
+                    url: 'show',
+                    method: 'POST',
+                    data: {
+                        accountNumber: '" . $accounts_info->account_number . "',
+                        _show: $(this).val()
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.show) {
+                            console.log(response.show);
+                            $('.form-add-rent').html(response.data);
+                        } else {
+                            $('.form-add-rent').html('Арендатор отсутствует');
+                        }
+                    }
+                });
+            } else {
+                $('.form-add-rent').html('Арендатор отсутствует');
+            }
+        }
+    });    
+")
+?>

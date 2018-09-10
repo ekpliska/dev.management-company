@@ -12,31 +12,44 @@ $(document).ready(function() {
      * Если за лицевым счетом закреплен арендатор, то 
      * выводим модальное окно для управления учетной записью арендатора
      */
-    $('#is_rent').change(function(e) {
-        var rentsId = $('input[id=_rents]').val();
-        if ($('input').is('#_rents')) {
-            $('#changes_rent').modal('show');
-            $.ajax({
-                url: 'get-rent-info?rent=' + rentsId,
-                method: 'POST',
-                dataType: 'json',
-                data: {
-                    rent_id: rentsId,
-                },
-                success: function(response) {
-                    if (response.status) {
-                        $('#changes_rent #rent-surname').text(response.rent.rents_surname);
-                        $('#changes_rent #rent-name').text(response.rent.rents_name);
-                        $('#changes_rent #rent-second-name').text(response.rent.rents_second_name);
-                    } else {
-                        console.log('Error #1000-01');
-                    }
-                }
-            });
-        } else {
-            $('#add-rent-modal').modal('show');
-        }
-    });
+//    $('#is_rent').change(function(e) {
+//        var rentsId = $('input[id=_rents]').val();
+//        if ($('input').is('#_rents')) {
+//            $('#changes_rent').modal('show');
+//            $.ajax({
+//                url: 'get-rent-info?rent=' + rentsId,
+//                method: 'POST',
+//                dataType: 'json',
+//                data: {
+//                    rent_id: rentsId,
+//                },
+//                success: function(response) {
+//                    if (response.status) {
+//                        $('#changes_rent #rent-surname').text(response.rent.rents_surname);
+//                        $('#changes_rent #rent-name').text(response.rent.rents_name);
+//                        $('#changes_rent #rent-second-name').text(response.rent.rents_second_name);
+//                    } else {
+//                        console.log('Error #1000-01');
+//                    }
+//                }
+//            });
+//        } else {
+//            // Показать форму Добавление нового арендатора
+//            if ($('#is_rent').is(':checked')) {
+//                $.ajax({
+//                    url: 'show',
+//                    method: 'POST',
+//                    data: data,
+//                    typeData: 'json',
+//                    success: function(response) {
+//                        console.log('show form');
+//                    }
+//                });
+//            } else {
+//                console.log('hide form');
+//            }
+//        }
+//    });
     
     $('input[name*=account-number]').val($('.current__account_list :selected').text());
     
