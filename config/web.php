@@ -49,6 +49,13 @@ $config = [
         'userProfile' => [
             'class' => 'app\modules\clients\components\UserProfile',
         ],
+
+        /*
+         * Компонент Профиль пользователя
+         */
+        'userProfileCompany' => [
+            'class' => 'app\modules\managers\components\UserProfileCompany',
+        ],        
         
         'authManager' => [
             'class' => 'yii\rbac\DbManager',

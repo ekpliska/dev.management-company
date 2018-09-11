@@ -1,6 +1,6 @@
 <?php
 
-    namespace app\modules\clients\components;
+    namespace app\modules\managers\components;
     use yii\base\BaseObject;
     use yii\base\InvalidConfigException;
     use Yii;
@@ -13,7 +13,7 @@
  * Данный компоненнт предназвачен для получения полной информации о текущем пользователе
  */
 
-class UserProfile extends BaseObject {
+class UserProfileCompany extends BaseObject {
     
     public $_user;
     public $_user_id;
@@ -37,43 +37,25 @@ class UserProfile extends BaseObject {
             throw new InvalidConfigException('Ошибка в передаче аргументов. При вызове компонента не был задан ID пользователя');
         }
         
-        if (Yii::$app->user->can('clients')) {
+        if (Yii::$app->user->can('administrator')) {
             $info = (new \yii\db\Query)
-                    ->select('c.clients_id as client_id, c.clients_name as name, c.clients_second_name as second_name, c.clients_surname as surname, '
-                        . 'c.clients_mobile as mobile, c.clients_phone as phone, '
+                    ->select('e.employers_id as employer_id, '
+                        . 'e.employers_name as name, e.employers_second_name as second_name, e.employers_surname as surname, '
+                        . 'd.departments_name as departments_name, '
                         . 'u.user_id as user_id, u.user_login as login, '
                         . 'u.user_email as email, u.user_photo as photo, '
+                        . 'u.user_mobile as mobile, '
                         . 'u.created_at as date_created , u.last_login as last_login, '
-                        . 'u.status as status, '
-                        . 'pa.account_number as account')
+                        . 'u.status as status')
                     ->from('user as u')
-                    ->join('LEFT JOIN', 'clients as c', 'u.user_client_id = c.clients_id')
-                    ->join('LEFT JOIN', 'personal_account as pa', 'u.user_client_id = pa.personal_clients_id')
+                    ->join('LEFT JOIN', 'employers as e', 'u.user_employee_id = e.employers_id')
+                    ->join('LEFT JOIN', 'departments as d', 'e.employers_department_id = d.departments_id')
                     ->where(['u.user_id' => $this->_user_id])
                     ->one();
             
             return $this->_user = $info;
             
-        };
-        
-        if (Yii::$app->user->can('clients_rent')) {
-            $info = (new \yii\db\Query)
-                    ->select('r.rents_id as client_id, r.rents_name as name, r.rents_second_name as second_name, r.rents_surname as surname, '
-                        . 'r.rents_mobile as mobile, r.rents_mobile_more as phone, '
-                        . 'u.user_id as user_id, u.user_login as login, '
-                        . 'u.user_email as email, u.user_photo as photo, '
-                        . 'u.created_at as date_created , u.last_login as last_login, '
-                        . 'u.status as status, '
-                        . 'pa.account_number as account')
-                    ->from('user as u')
-                    ->join('LEFT JOIN', 'rents as r', 'u.user_rent_id = r.rents_id')
-                    ->join('LEFT JOIN', 'personal_account as pa', 'u.user_rent_id = pa.personal_rent_id')
-                    ->where(['u.user_id' => $this->_user_id])
-                    ->one();
-            
-            return $this->_user = $info;
-        }
-        
+        };        
     }
     
     /*
@@ -144,17 +126,21 @@ class UserProfile extends BaseObject {
      * Получить роль пользователя
      */
     public function getRole() {
-        if (Yii::$app->user->can('clients')) {
-            return Yii::$app->authManager->getRole('clients')->description;
+        if (Yii::$app->user->can('administrator')) {
+            return Yii::$app->authManager->getRole('administrator')->description;
+        } elseif (Yii::$app->user->can('dispatcher')) {
+            return Yii::$app->authManager->getRole('dispatcher')->description;
+        } elseif (Yii::$app->user->can('specialist')) {
+            return Yii::$app->authManager->getRole('specialist')->description;
         }
-        return Yii::$app->authManager->getRole('clients_rent')->description;
+        return 'Роль ползователя не определена';
     }
     
     /*
      * ID Собственника/Арендатора
      */
-    public function getClientID() {
-        return $this->_user['client_id'];
+    public function getEmployerID() {
+        return $this->_user['employer_id'];
     }
     
     /*
@@ -179,34 +165,24 @@ class UserProfile extends BaseObject {
     }       
     
     /*
-     * Фамилия имя отчество Собственника/Аренедтора
+     * Фамилия имя отчество Сотрудника
      * Формат: Фамилия И.О.
      */
-    public function getFullNameClient() {
+    public function getFullNameEmployer() {
         $_name = mb_substr($this->_user['name'], 0, 1, 'UTF-8');
         $_second_name = mb_substr($this->_user['second_name'], 0, 1, 'UTF-8');
         return $this->_user['surname'] . ' ' . $_name . '. ' . $_second_name . '.';
     }
     
     /*
-     * Мобальный телефон Собственника/Аренедтора
+     * Мобальный телефон Сотрудника
      */
     public function getMobile() {
         return $this->_user['mobile'];
     }
-    
-    /*
-     * Дополнительный телефон Собственника/Аренедтора
-     */
-    public function getOtherPhone() {
-        return $this->_user['phone'];
-    }
-    
-    /*
-     * Лицевой счет Собственника/Аренедтора
-     */
-    public function getAccount() {
-        return $this->_user['account'];
+
+    public function getDepartment() {
+        return $this->_user['departments_name'];
     }
         
 }

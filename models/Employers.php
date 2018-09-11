@@ -11,6 +11,12 @@
  */
 class Employers extends ActiveRecord
 {
+    // Мужской
+    const GENDER_MALE = 0;
+    // Женский
+    const GENDER_FEMALE = 1;
+    
+    
     /**
      * Таблица из БД
      */
@@ -23,7 +29,7 @@ class Employers extends ActiveRecord
      */
     public function rules() {
         return [
-            [['employers_department_id', 'isMale', 'isFemale'], 'integer'],
+            [['employers_department_id', 'employers_gender'], 'integer'],
             [['employers_name', 'employers_surname', 'employers_second_name'], 'string', 'max' => 70],
         ];
     }
@@ -40,7 +46,18 @@ class Employers extends ActiveRecord
      */
     public function getDepartment() {
         return $this->hasOne(Departments::className(), ['departments_id' => 'employers_department_id']);
-    }    
+    }
+    
+    public static function getGenderArray() {
+        return [
+            self::GENDER_MALE => 'Мужской',
+            self::GENDER_FEMALE => 'Женский',
+        ];
+    }
+    
+    public function getGenderName() {
+        return \yii\helpers\ArrayHelper::getValue(self::getGenderArray(), $this->gender);
+    }
     
     /**
      * Метки для полей
@@ -48,12 +65,11 @@ class Employers extends ActiveRecord
     public function attributeLabels() {
         return [
             'employers_id' => 'Employers ID',
-            'employers_name' => 'Имф',
+            'employers_name' => 'Имя',
             'employers_surname' => 'Фамилия',
             'employers_second_name' => 'Отчество',
             'employers_department_id' => 'Подразделение',
-            'isMale' => 'Мужской пол',
-            'isFemale' => 'Женский пол',
+            'employers_gender' => 'Пол',
         ];
     }
 }

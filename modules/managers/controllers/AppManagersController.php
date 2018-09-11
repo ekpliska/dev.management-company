@@ -3,6 +3,7 @@
     namespace app\modules\managers\controllers;
     use yii\web\Controller;
     use yii\filters\AccessControl;
+    use Yii;
 
 /*
  * Общий контроллер модуля Managers
@@ -28,5 +29,8 @@ class AppManagersController extends Controller {
         ];
     }
     
+    public function permisionUser() {
+        return Yii::$app->userProfileCompany;
+    }
     
 }
