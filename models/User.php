@@ -95,7 +95,7 @@ class User extends ActiveRecord implements IdentityInterface
      */    
     public function getRent() {
         return $this->hasOne(Rents::className(), ['rents_id' => 'user_rent_id']);
-    }
+    }  
     
     /*
      * Связь через промеуточную таблицу
