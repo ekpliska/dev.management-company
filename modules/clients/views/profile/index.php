@@ -104,15 +104,13 @@ $col = Yii::$app->user->can('clients') ? 3 : 2;
                     <strong>Контактные данные арендатора</strong>                
                 </div>
                 <div class="panel-body info_rent">
-                    <div id="content-replace">
+                    <div id="content-replace" class="form-add-rent">
                         <?php if (isset($is_rent) && $is_rent) : ?>
                             <?= $this->render('_form/rent-view', [
                                     'model_rent' => $model_rent]) 
                             ?>
                         <?php else : ?>
-                            <div class="form-add-rent">
-                                Арендатор отсутствует
-                            </div>
+                            <p>Арендатор отсутствует</p>
                         <?php endif; ?>
                     </div>
                 </div>
@@ -129,55 +127,3 @@ $col = Yii::$app->user->can('clients') ? 3 : 2;
     <?php ActiveForm::end(); ?>
     
 </div>
-
-
-<?php
-$this->registerJs("
-    $('#is_rent').on('change', function(e) {
-        var rentsId = $('input[id=_rents]').val();
-        if ($('input').is('#_rents')) {
-            $('#changes_rent').modal('show');
-            $.ajax({
-                url: 'get-rent-info?rent=' + rentsId,
-                method: 'POST',
-                dataType: 'json',
-                data: {
-                    rent_id: rentsId,
-                },
-                success: function(response) {
-                    if (response.status) {
-                        $('#changes_rent #rent-surname').text(response.rent.rents_surname);
-                        $('#changes_rent #rent-name').text(response.rent.rents_name);
-                        $('#changes_rent #rent-second-name').text(response.rent.rents_second_name);
-                    } else {
-                        console.log('Error #1000-01');
-                    }
-                }
-            });
-        } else {
-            // Показать форму Добавление нового арендатора
-            if ($('#is_rent').is(':checked')) {
-                $.ajax({
-                    url: 'show',
-                    method: 'POST',
-                    data: {
-                        accountNumber: '" . $accounts_info->account_number . "',
-                        _show: $(this).val()
-                    },
-                    dataType: 'json',
-                    success: function(response) {
-                        if (response.show) {
-                            console.log(response.show);
-                            $('.form-add-rent').html(response.data);
-                        } else {
-                            $('.form-add-rent').html('Арендатор отсутствует');
-                        }
-                    }
-                });
-            } else {
-                $('.form-add-rent').html('Арендатор отсутствует');
-            }
-        }
-    });    
-")
-?>

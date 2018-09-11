@@ -2,6 +2,7 @@
     
     use yii\helpers\Html;
     use yii\widgets\MaskedInput;
+    
 /* 
  * Форма добавить арендатора
  */
@@ -52,6 +53,4 @@
             ->label() ?>                                   
 
     <?= Html::checkbox('show_password_ch', false) ?> <span class="show_password__text">Показать пароль</span>
-    
-    <!--<p>Арендатор отсутствует.</p>-->
     

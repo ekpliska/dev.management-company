@@ -382,26 +382,42 @@ class ProfileController extends AppClientsController
         
     }
     
-    public function actionShow() {
+    /*
+     * Показать/Скрыть форму "Добавить арендатора"
+     */
+    public function actionShowForm() {
                
         $_show = Yii::$app->request->post('_show');
+        $account_number = Yii::$app->request->post('accountNumber');
+        
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        
+        // Проверяем данные пришедшие из пост
+        if (!$_show && !is_numeric($account_number)) {
+            return ['status' => false, 'message' => 'Ошибка передачи параметров'];
+        }
+        
+        // Если был ajax запрос
         if (Yii::$app->request->isAjax) {
+            // Если чекбокс "Арендатор" true
             if ($_show) {
+                // Загружаем подель формы на добавление нового арендатора
                 $add_rent = new ClientsRentForm([
                     'scenario' => ClientsRentForm::SCENARIO_AJAX_VALIDATION
                 ]);
                 
+                // Формируем рендер вида формы "Добавить арендатора"
                 $data = $this->renderAjax('_form/rent-add', [
                     'form' => ActiveForm::begin(),
-                    'account_number' => Yii::$app->request->post('accountNumber'), 
+                    'account_number' => $account_number, 
                     'add_rent' => $add_rent]);
-                Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-                return ['show' => true, 'data' => $data];
+                
+                return ['status' => true, 'show' => true, 'data' => $data];
             } else {
-                return ['show' => false];
+                return ['status' => false, 'show' => false];
             }
         }
-        
+        return ['status' => false, 'message' => 'Ошибка передачи параметров'];
     }
     
 }
