@@ -20,6 +20,11 @@ $config = [
             'class' => 'app\modules\clients\ClientsModule',
             'layout' => 'main-clients',
         ],
+        // Модуль для Администратора
+        'managers' => [
+            'class' => 'app\modules\managers\Modules',
+            'layout' => 'main-managers',
+        ],
         /*
          * Расширение использует загрузку файлов
          */

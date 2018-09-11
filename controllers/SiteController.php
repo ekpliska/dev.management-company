@@ -31,7 +31,7 @@ class SiteController extends Controller
                     [
                         'actions' => ['index'],
                         'allow' => true,
-                        'roles' => ['clients', 'clients_rent'],
+                        'roles' => ['clients', 'clients_rent', 'administrator'],
                     ],
                 ],
             ],
