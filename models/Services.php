@@ -5,7 +5,6 @@
     use yii\db\ActiveRecord;
     use app\models\Rates;
     use app\models\CategoryServices;
-    use yii\helpers\ArrayHelper;
 
 /**
  * Услуги
@@ -64,8 +63,8 @@ class Services extends ActiveRecord
                 ->all();
         
         return ArrayHelper::map($pay_services, 'services_id', 'services_name');
-    }
-
+    }    
+    
     /**
      * Массив статусов заявок
      */

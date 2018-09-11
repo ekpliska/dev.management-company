@@ -9,7 +9,6 @@
     use app\models\PersonalAccount;
     use app\modules\clients\models\AddPersonalAccount;
     use app\models\Organizations;
-    use app\models\AccountToUsers;
     use app\modules\clients\models\ClientsRentForm;
     use app\models\Houses;
     use app\models\Counters;
@@ -18,7 +17,7 @@
  * Контроллер по работе с разделом "Лицевой счет"
  */
 class PersonalAccountController extends AppClientsController {
-    
+
     /*
      * Главная страница
      * 
@@ -180,13 +179,9 @@ class PersonalAccountController extends AppClientsController {
      */
     public function actionAddRecordAccount($form) {
         
-        // Получить ID пользователя
-        $user_client_id = AccountToUsers::find()
-                ->andWhere(['user_id' => Yii::$app->user->identity->user_id])
-                ->with(['user'])
-                ->one();
+        $user_info = $this->permisionUser();
 
-        if (Yii::$app->request->isPost && $user_client_id->user->user_client_id) {
+        if (Yii::$app->request->isPost && $user_info->_user['client_id']) {
             
             $account_form = new AddPersonalAccount();
             $account_form->load(Yii::$app->request->post());

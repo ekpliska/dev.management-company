@@ -28,6 +28,9 @@ class CategoryServices extends ActiveRecord
         ];
     }
     
+    /*
+     * Связь с таблице Услуги
+     */
     public function getService() {
         return $this->hasMany(Services::className(), ['services_category_id' => 'category_id']);
     }
@@ -48,8 +51,8 @@ class CategoryServices extends ActiveRecord
                 ->joinWith(['service'])
                 ->andWhere(['services.isPay' => 1])
                 ->all();
-    }
-
+    }    
+    
     /**
      * Массив статусов заявок
      */
