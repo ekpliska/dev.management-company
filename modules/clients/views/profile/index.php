@@ -107,6 +107,7 @@ $col = Yii::$app->user->can('clients') ? 3 : 2;
                     <div id="content-replace" class="form-add-rent">
                         <?php if (isset($is_rent) && $is_rent) : ?>
                             <?= $this->render('_form/rent-view', [
+                                    'form' => $form,
                                     'model_rent' => $model_rent]) 
                             ?>
                         <?php else : ?>

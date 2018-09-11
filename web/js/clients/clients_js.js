@@ -15,6 +15,8 @@ $(document).ready(function() {
     $('#is_rent').on('change', function(e) {
         var rentsId = $('input[id=_rents]').val();
         var accountNumber = $('#_list-account :selected').text();
+        var checkShow = $(this).val();
+        accountNumber = parseInt(accountNumber, 10);
         if ($('input').is('#_rents')) {
             $('#changes_rent').modal('show');
             $.ajax({
@@ -37,18 +39,16 @@ $(document).ready(function() {
         } else {
             // Показать форму Добавление нового арендатора
             if ($('#is_rent').is(':checked')) {
-                accountNumber = parseInt(accountNumber, 10);
                 $.ajax({
                     url: 'show-form',
                     method: 'POST',
                     async: false,
                     data: {
                         accountNumber: accountNumber,
-                        _show: $(this).val(),
+                        _show: checkShow,
                     },
                     success: function(response) {
                         if (response.status && response.show) {
-                            console.log(response.show);
                             $('.form-add-rent').html(response.data);
                         } else {
                             $('.form-add-rent').html(response.message);
@@ -129,38 +129,6 @@ $(document).ready(function() {
     });
     
     /*
-     * Сабмит основной формы профиля
-     * Перед отправкой проверяем валидацию формы 'Арендатор'
-     */
-    $('body').on('beforeSubmit', 'form#profile-form', function (e) {
-        e.preventDefault();
-        // Получаем данные из формы Арендатор
-        var rentForm = $('#edit-rent').serialize();
-        // Получаем количество ошибок на форме Арендатор
-        var countError = $('#edit-rent').find('.has-error').length;
-        
-        // Если имеются ошибки и форма Арендатора существует, отправку основной формы профиля останавливаем
-        if (countError > 0 && rentForm) {
-            return false;
-        } else if (countError === 0 && rentForm) {  // Отправляем Ajax запрос на сохранение данных арендатора, если форма заполнена и не содержит ошибок
-            $.ajax({
-                url: 'save-rent-info',
-                data: rentForm,
-                method: 'POST',
-                typeData: 'json',
-                success: function(data) {
-                    if (data.status == false) {
-                        $('.error-message').text('Заполните поля корректными данными');
-                    }
-                },
-                error: function(data) {
-                    console.log('Error #1000-05');
-                }
-            });
-        }
-    });
-
-    /*
      * Форма 'Добавить нового Арендатора'
      */
     /*
@@ -183,24 +151,6 @@ $(document).ready(function() {
         $('#add-rent-modal').find('.help-block').text('');
      });
     
-    // Сохраняем нового Арендатора
-    $('body').on('beforeSubmit', 'form#add-rent', function (e) {
-        e.preventDefault();
-        var addRentForm = $(this);
-        $.ajax({
-            url: 'add-new-rent',
-            type: 'POST',
-            data: addRentForm.serializeArray(),
-            succeess: function(response) {
-                console.log(response);
-            },
-            error: function() {
-                console.log('Error #1000-06-2');
-            },
-        });
-    });
-   
-
     /* End Block of Profile */
 
 
