@@ -43,7 +43,7 @@ $this->title = "Профиль";
                 <p>Последний визит: <?= FormatHelpers::formatDate($user_info->lastLogin) ?></p>
                 <p>Статус: <?= $user_info->getStatus() ?></p>
                 <br />
-                <?= Html::button('Сменить пароль', ['class' => 'btn btn-danger']) ?>
+                <?= Html::a('Сменить пароль', ['managers/settings-profile'], ['class' => 'btn btn-danger']) ?>
             </div>
         </div>
         <div class="col-md-6">

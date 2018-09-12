@@ -7,7 +7,7 @@
     use app\models\Employers;
     use app\models\Departments;
     use app\modules\managers\models\Posts;
-    
+    use app\models\ChangePasswordForm;
 
 /**
  * Профиль Админимтратора
@@ -58,6 +58,35 @@ class ManagersController extends AppManagersController {
             'department_list' => $department_list,
             'post_list' => $post_list,
         ]);
+    }
+    
+    public function actionSettingsProfile() {
+        
+        $user_info = $this->permisionUser();
+        $user_model = $user_info->_model;
+        
+        // Загружаем модель смены пароля
+        $model_password = new ChangePasswordForm($user_model);
+        
+        if ($model_password->load(Yii::$app->request->post())) {
+            if ($model_password->changePassword()) {
+                Yii::$app->session->setFlash('profile', [
+                        'success' => true, 
+                        'message' => 'Пароль от вашей учетной записи успешно изменен'
+                ]);
+                return $this->refresh();
+            } else {
+                Yii::$app->session->setFlash('profile', [
+                        'success' => false, 
+                        'error' => 'При обновлении настроек профиль произошла ошибка. Повторите действие еще раз'
+                ]);
+            }
+        }
+        
+        return $this->render('settings-profile', [
+            'model_password' => $model_password,
+        ]);
+        
     }
     
     public function actionShowPost($departmentId) {
