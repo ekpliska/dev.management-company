@@ -25,6 +25,7 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_BLOCK = 2;
     
     const SCENARIO_EDIT_PROFILE = 'edit user profile';
+    const SCENARIO_EDIT_ADMINISTRATION_PROFILE = 'edit administration profile';
     
     public function behaviors() {
         return [
@@ -47,7 +48,7 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             ['user_login', 'required'],
             
-            [['user_email', 'user_mobile'], 'required', 'on' => self::SCENARIO_EDIT_PROFILE],            
+            [['user_email', 'user_mobile'], 'required', 'on' => self::SCENARIO_EDIT_PROFILE],
             
             [['user_photo'], 'file', 'extensions' => 'png, jpg, jpeg'],
             [['user_photo'], 'image', 'maxWidth' => 510, 'maxHeight' => 510],
@@ -78,6 +79,21 @@ class User extends ActiveRecord implements IdentityInterface
                 'message' => 'Пользователь с введенным номером мобильного телефона в системе уже зарегистрирован',
                 'on' => self::SCENARIO_EDIT_PROFILE,
             ],
+            
+            [['user_mobile'], 'required', 'on' => self::SCENARIO_EDIT_ADMINISTRATION_PROFILE],
+            
+            ['user_mobile', 
+                'match', 
+                'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/i', 
+                'on' => self::SCENARIO_EDIT_ADMINISTRATION_PROFILE,
+            ],
+            
+            ['user_mobile', 'unique', 
+                'targetClass' => self::className(),
+                'targetAttribute' => 'user_mobile',
+                'message' => 'Пользователь с введенным номером мобильного телефона в системе уже зарегистрирован',
+                'on' => self::SCENARIO_EDIT_ADMINISTRATION_PROFILE,
+            ],            
             
             [['user_check_email'], 'boolean'],
             

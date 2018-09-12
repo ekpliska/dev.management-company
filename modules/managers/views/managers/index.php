@@ -2,9 +2,10 @@
     
     use yii\widgets\ActiveForm;
     use yii\helpers\Html;
-    use app\helpers\FormatHelpers;
     use yii\helpers\ArrayHelper;
     use yii\widgets\MaskedInput;
+    use app\helpers\FormatHelpers;
+    use app\modules\clients\widgets\AlertsShow;
 
 /*
  * Профиль Администратора
@@ -14,9 +15,19 @@ $this->title = "Профиль";
 ?>
 <div class="managers-default-index">
     <h1><?= $this->title ?></h1>
+    
+    <?= AlertsShow::widget() ?>
+    
     <?php
         $form = ActiveForm::begin([
-            'id' => 'edit-profile-employer'
+            'id' => 'edit-profile-employer',
+            'enableClientValidation' => true,
+            'enableAjaxValidation' => false,
+            'validateOnChange' => true,
+            'options' => [
+                'enctype' => 'multipart/form-data',
+            ],
+            
         ]);
     ?>
         <div class="col-md-4">
