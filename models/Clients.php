@@ -28,6 +28,7 @@ class Clients extends ActiveRecord
         return [
             [['clients_name', 'clients_second_name', 'clients_surname'], 'string', 'max' => 70],
             [['clients_mobile', 'clients_phone'], 'string', 'max' => 50],
+            ['isActive', 'integer'],
         ];
     }
     
@@ -94,6 +95,7 @@ class Clients extends ActiveRecord
             'clients_surname' => 'Clients Surname',
             'clients_mobile' => 'Clients Mobile',
             'clients_phone' => 'Clients Phone',
+            'isActive' => 'Активный',
         ];
     }
 }

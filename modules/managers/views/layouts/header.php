@@ -136,7 +136,7 @@
         'options' => ['class' => 'collapse navbar-collapse navbar-primary-menu'],
         'items' => [
             ['label' => 'Профиль', 'url' => ['managers/index']],
-            ['label' => 'Клиенты', 'url' => ['']],
+            ['label' => 'Клиенты', 'url' => ['clients/index']],
             ['label' => 'Диспетчеры', 'url' => ['']],
             ['label' => 'Специалисты', 'url' => ['']],
             ['label' => 'Услуги', 'url' => ['']],

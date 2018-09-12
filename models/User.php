@@ -225,7 +225,7 @@ class User extends ActiveRecord implements IdentityInterface
      * Поиск ID клиента
      */
     public static function findByClientId($user_id) {
-        return static::findOne(['' => $user_id]);
+        return static::findOne(['user_client_id' => $user_id]);
     }
     
     /*
