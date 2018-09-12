@@ -4,6 +4,7 @@
     use Yii;
     use yii\db\ActiveRecord;
     use app\models\Employers;
+    use app\models\Posts;
 
 /**
  * Подразделения
@@ -35,6 +36,13 @@ class Departments extends ActiveRecord
         return $this->hasMany(Employers::className(), ['employers_department_id' => 'departments_id']);
     }     
 
+    /*
+     * Связь с таблицей Должности
+     */
+    public function getPost() {
+        return $this->hasMany(Posts::className(), ['posts_department_id' => 'departments_id']);
+    }    
+    
     /**
      * {@inheritdoc}
      */

@@ -5,15 +5,14 @@
     use yii\db\ActiveRecord;
     use app\models\User;
     use app\models\Departments;
+    use app\models\Posts;
 
 /**
  * Сотрудники
  */
 class Employers extends ActiveRecord
 {
-    // Мужской
     const GENDER_MALE = 0;
-    // Женский
     const GENDER_FEMALE = 1;
     
     
@@ -29,7 +28,7 @@ class Employers extends ActiveRecord
      */
     public function rules() {
         return [
-            [['employers_department_id', 'employers_gender'], 'integer'],
+            [['employers_department_id', 'employers_posts_id', 'employers_gender'], 'integer'],
             [['employers_name', 'employers_surname', 'employers_second_name'], 'string', 'max' => 70],
         ];
     }
@@ -47,11 +46,18 @@ class Employers extends ActiveRecord
     public function getDepartment() {
         return $this->hasOne(Departments::className(), ['departments_id' => 'employers_department_id']);
     }
+
+    /*
+     * Свзяь с таблицей Должности
+     */
+    public function getPost() {
+        return $this->hasOne(Posts::className(), ['posts_id' => 'employers_posts_id']);
+    }    
     
     public static function getGenderArray() {
         return [
-            self::GENDER_MALE => 'Мужской',
-            self::GENDER_FEMALE => 'Женский',
+            ['id' => self::GENDER_MALE, 'name' => 'Мужской'],
+            ['id' => self::GENDER_FEMALE, 'name' => 'Женский'],
         ];
     }
     
@@ -69,6 +75,7 @@ class Employers extends ActiveRecord
             'employers_surname' => 'Фамилия',
             'employers_second_name' => 'Отчество',
             'employers_department_id' => 'Подразделение',
+            'employers_posts_id' => 'Должность',
             'employers_gender' => 'Пол',
         ];
     }

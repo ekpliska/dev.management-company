@@ -3,6 +3,7 @@
     use yii\widgets\ActiveForm;
     use yii\helpers\Html;
     use app\helpers\FormatHelpers;
+    use yii\helpers\ArrayHelper;
 
 /*
  * Профиль Администратора
@@ -51,9 +52,14 @@ $this->title = "Профиль";
                 ->input('text', [
                     'placeHolder' => $employer_info->getAttributeLabel('employers_department_id')])
                 ->label() ?>
+            
+            <?= $form->field($employer_info, 'employers_posts_id')
+                ->input('text', [
+                    'placeHolder' => $employer_info->getAttributeLabel('employers_posts_id')])
+                ->label() ?>
 
-            <?php /* = $form->field($employer_info, 'employers_gender')
-                ->radioList(\yii\helpers\ArrayHelper::map(app\models\Employers::getGenderArray(), 'id', 'name'))->label(); */ ?>
+            <?= $form->field($employer_info, 'employers_gender')
+                ->radioList(ArrayHelper::map($gender_list, 'id', 'name'))->label(); ?>
             
             <?= $form->field($user_model, 'user_mobile')
                 ->input('text', [
