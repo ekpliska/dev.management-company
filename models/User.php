@@ -71,6 +71,7 @@ class User extends ActiveRecord implements IdentityInterface
                 'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/i', 
                 'on' => self::SCENARIO_EDIT_PROFILE,
             ],
+            
             ['user_mobile', 'unique', 
                 'targetClass' => self::className(),
                 'targetAttribute' => 'user_mobile',

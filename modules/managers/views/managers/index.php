@@ -4,6 +4,7 @@
     use yii\helpers\Html;
     use app\helpers\FormatHelpers;
     use yii\helpers\ArrayHelper;
+    use yii\widgets\MaskedInput;
 
 /*
  * Профиль Администратора
@@ -30,41 +31,45 @@ $this->title = "Профиль";
                 <p>Дата регистрации: <?= FormatHelpers::formatDate($user_info->dateRegister) ?></p>
                 <p>Последний визит: <?= FormatHelpers::formatDate($user_info->lastLogin) ?></p>
                 <p>Статус: <?= $user_info->getStatus() ?></p>
+                <br />
+                <?= Html::button('Сменить пароль', ['class' => 'btn btn-danger']) ?>
             </div>
         </div>
         <div class="col-md-6">
             <?= $form->field($employer_info, 'employers_surname')
-                ->input('text', [
-                    'placeHolder' => $employer_info->getAttributeLabel('employers_surname')])
-                ->label() ?>
+                    ->input('text', [
+                        'placeHolder' => $employer_info->getAttributeLabel('employers_surname')])
+                    ->label() ?>
             
             <?= $form->field($employer_info, 'employers_name')
-                ->input('text', [
-                    'placeHolder' => $employer_info->getAttributeLabel('employers_surname')])
-                ->label() ?>
+                    ->input('text', [
+                        'placeHolder' => $employer_info->getAttributeLabel('employers_surname')])
+                    ->label() ?>
             
             <?= $form->field($employer_info, 'employers_second_name')
-                ->input('text', [
-                    'placeHolder' => $employer_info->getAttributeLabel('employers_surname')])
-                ->label() ?>
+                    ->input('text', [
+                        'placeHolder' => $employer_info->getAttributeLabel('employers_surname')])
+                    ->label() ?>
+            
+            <?= $form->field($employer_info, 'employers_gender')
+                    ->radioList(ArrayHelper::map($gender_list, 'id', 'name'))->label(); ?>
             
             <?= $form->field($employer_info, 'employers_department_id')
-                ->input('text', [
-                    'placeHolder' => $employer_info->getAttributeLabel('employers_department_id')])
-                ->label() ?>
+                    ->dropDownList($department_list, [
+                        'prompt' => 'Выберите подразделение из списка...',])
+                    ->label() ?>
             
             <?= $form->field($employer_info, 'employers_posts_id')
-                ->input('text', [
-                    'placeHolder' => $employer_info->getAttributeLabel('employers_posts_id')])
-                ->label() ?>
-
-            <?= $form->field($employer_info, 'employers_gender')
-                ->radioList(ArrayHelper::map($gender_list, 'id', 'name'))->label(); ?>
+                    ->dropDownList($post_list, [
+                        'prompt' => 'Выберите должность из списка...',])
+                    ->label() ?>
             
             <?= $form->field($user_model, 'user_mobile')
-                ->input('text', [
-                    'placeHolder' => $user_model->getAttributeLabel('user_mobile')])
-                ->label() ?>
+                    ->widget(MaskedInput::className(), [
+                        'mask' => '+7(999) 999-99-99'])
+                    ->input('text', [
+                        'placeHolder' => $user_model->getAttributeLabel('user_mobile')])
+                    ->label() ?>
             
         </div>
         <div class="col-md-12 text-right">

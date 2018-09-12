@@ -3,6 +3,7 @@
     namespace app\models;
     use Yii;
     use yii\db\ActiveRecord;
+    use yii\helpers\ArrayHelper;
     use app\models\User;
     use app\models\Departments;
     use app\models\Posts;
@@ -12,9 +13,9 @@
  */
 class Employers extends ActiveRecord
 {
+    
     const GENDER_MALE = 0;
     const GENDER_FEMALE = 1;
-    
     
     /**
      * Таблица из БД
@@ -28,8 +29,23 @@ class Employers extends ActiveRecord
      */
     public function rules() {
         return [
+            
+            [[
+                'employers_department_id', 'employers_posts_id', 'employers_gender',
+                'employers_name', 'employers_surname', 'employers_second_name'], 'required'],
+            
+            [['employers_name', 'employers_surname', 'employers_second_name'], 'filter', 'filter' => 'trim'],
+
+            [['employers_name', 'employers_surname', 'employers_second_name'], 'string', 'min' => 3, 'max' => 70],
+            
+            [
+                ['employers_name', 'employers_surname', 'employers_second_name'], 
+                'match',
+                'pattern' => '/^[А-Яа-я\ \-]+$/iu',
+                'message' => 'Поле "{attribute}" может содержать только буквы русского алфавита, и знак "-"',
+            ],
+            
             [['employers_department_id', 'employers_posts_id', 'employers_gender'], 'integer'],
-            [['employers_name', 'employers_surname', 'employers_second_name'], 'string', 'max' => 70],
         ];
     }
 
@@ -62,7 +78,7 @@ class Employers extends ActiveRecord
     }
     
     public function getGenderName() {
-        return \yii\helpers\ArrayHelper::getValue(self::getGenderArray(), $this->gender);
+        return ArrayHelper::getValue(self::getGenderArray(), $this->gender);
     }
     
     /**

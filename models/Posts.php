@@ -3,6 +3,7 @@
     namespace app\models;
     use Yii;
     use yii\db\ActiveRecord;
+    use yii\helpers\ArrayHelper;
     use app\models\Departments;
 
 /**
@@ -34,6 +35,11 @@ class Posts extends ActiveRecord
      */
     public function getDepartment() {
         return $this->hasOne(Departments::className(), ['departments_id' => 'posts_department_id']);
+    }
+    
+    public static function getArrayPosts() {
+        $array = self::find()->asArray()->all();
+        return ArrayHelper::map($array, 'posts_id', 'posts_name');
     }
 
     /**
