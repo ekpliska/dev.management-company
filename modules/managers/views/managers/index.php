@@ -67,12 +67,13 @@ $this->title = "Профиль";
             
             <?= $form->field($employer_info, 'employers_department_id')
                     ->dropDownList($department_list, [
+                        'class' => 'form-control department_list',
                         'prompt' => 'Выберите подразделение из списка...',])
                     ->label() ?>
             
             <?= $form->field($employer_info, 'employers_posts_id')
                     ->dropDownList($post_list, [
-                        'prompt' => 'Выберите должность из списка...',])
+                        'class' => 'form-control posts_list',])
                     ->label() ?>
             
             <?= $form->field($user_model, 'user_mobile')

@@ -6,16 +6,25 @@
     use app\modules\managers\controllers\AppManagersController;
     use app\models\Employers;
     use app\models\Departments;
-    use app\models\Posts;
+    use app\modules\managers\models\Posts;
     
 
 /**
- * Description of ManagersController
+ * Профиль Админимтратора
  *
- * @author Ekaterina
  */
 class ManagersController extends AppManagersController {
     
+    /*
+     * Главная страница - Профиль Администратора
+     * 
+     * @param array $user_info Информация о текущем пользователе
+     * @param object $user_model Модель профиля пользователя
+     * @param array $employer_info Информация о сотруднике
+     * @param array $gender_list Пол /Мужской, женский/
+     * @param array $department_list Список подразделений
+     * @param array $post_lis Списко должностей
+     */
     public function actionIndex() {
         
         $user_info = $this->permisionUser();
@@ -26,7 +35,7 @@ class ManagersController extends AppManagersController {
         
         $gender_list = Employers::getGenderArray();
         $department_list = Departments::getArrayDepartments();
-        $post_list = Posts::getArrayPosts();
+        $post_list = Posts::getPostList($employer_info->employers_department_id);
         
         if ($user_model->load(Yii::$app->request->post()) && $employer_info->load(Yii::$app->request->post())) {
             
@@ -38,7 +47,7 @@ class ManagersController extends AppManagersController {
                 $user_model->uploadPhoto($file);
                 $employer_info->save();
             }
-            
+            return $this->redirect(Yii::$app->request->referrer);
         }
         
         return $this->render('index', [
@@ -49,6 +58,27 @@ class ManagersController extends AppManagersController {
             'department_list' => $department_list,
             'post_list' => $post_list,
         ]);
+    }
+    
+    public function actionShowPost($departmentId) {
+        
+        $department_list = Departments::find()
+                ->andWhere(['departments_id' => $departmentId])
+                ->asArray()
+                ->count();
+        $post_list = Posts::find()
+                ->andWhere(['posts_department_id' => $departmentId])
+                ->asArray()
+                ->all();
+        
+        if ($department_list > 0) {
+            foreach ($post_list as $post) {
+                echo '<option value="' . $post['posts_id'] . '">' . $post['posts_name'] . '</option>';
+            }
+        } else {
+            echo '<option>-</option>';
+        }
+        
     }
 
 }

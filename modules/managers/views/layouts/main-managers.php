@@ -2,8 +2,10 @@
 
     use yii\helpers\Html;
     use app\assets\AppAsset;
+    use app\assets\ManagersAsset;
 
 AppAsset::register($this);
+ManagersAsset::register($this);
 
 ?>
 <?php $this->beginPage() ?>
