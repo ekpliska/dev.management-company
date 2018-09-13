@@ -40,7 +40,7 @@ class ClientsController extends AppManagersController {
         if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
             $user_info = User::findByClientId($client_id);
             $user_info->block($client_id, $status);
-            return ['status' => $status];
+            return ['status' => $status, 'client_id' => $client_id];
         }
         
         return ['status' => false];

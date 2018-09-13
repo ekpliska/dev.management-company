@@ -2,6 +2,7 @@
     use yii\grid\GridView;
     use yii\helpers\Url;
     use app\helpers\FormatHelpers;
+    use app\modules\managers\components\BlockClientColumn;
 
 /*
  * Вывод таблицы заявок текущего пользователя
@@ -38,13 +39,13 @@
             [
                 'attribute' => 'balance',
                 'header' => 'Баланс',
+                'value' => function ($data) {
+                    return FormatHelpers::formatBalance($data['balance']);
+                },
+                'format' => 'raw',
             ],
             [
-                'attribute' => 'status',
-                'header' => 'Статус',
-            ],
-            [
-                'class' => \app\modules\managers\components\BlockClientColumn::className()
+                'class' => BlockClientColumn::className(),
             ],
             [
                 'class' => 'yii\grid\ActionColumn',

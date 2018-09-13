@@ -12,26 +12,32 @@ class BlockClientColumn extends DataColumn {
     
     // Название поля  БД
     public $attribute = 'status';
+    // Заголовок колонки
+    public $header = 'Статус';
     // Действие контроллера
     public $action = 'block-client';
-    
+    // Пост параметр
     public $client_key = 'clientId';
+    // Пост параметр
     public $status_key = 'statusClient';
+    // Метод передачи ajax
     public $ajax_method = 'POST';
 
+    /*
+     * Формируем ajax запрос на каждый элемент чекбокса в колонке таблицы
+     */
     public function init() {
         
         $this->grid->view->registerJs("
-            $('body').on('click', 'button[type=button]', function(e) {
+            $('body').on('change', 'input[type=checkbox]', function(e) {
                 e.preventDefault();
+                // Получаем data атрибут ID собственика
                 var clientId = $(this).data('clientId');
+                // Получаем data атрибут статус собственика
                 var statusClient = $(this).data('status');
-                var btnValue = $('[data-client-id=' + clientId + '] .glyphicon');
+                // Собираем все элементы, которые содержат одинаковые data атрибут ID собственика
+                var btnValue = $('[data-client-id=' + clientId + ']');
                 
-                console.log(statusClient);
-                //console.log(btnValue);
-                //console.log(clientId + ' ' + statusClient);
-
                 $.ajax({
                     url: '" . $this->action . "',
                     type: '" . $this->ajax_method . "',
@@ -40,53 +46,59 @@ class BlockClientColumn extends DataColumn {
                         {$this->status_key} : statusClient,
                     },
                     success: function(response) {
-                        console.log('ajax ' + response.status);
                         if (response.status == " . User::STATUS_BLOCK . ") {
-                            console.log('block to unblok');
-                            btnValue.removeClass('glyphicon-lock');
-                            btnValue.addClass('glyphicon-ok-circle');
+                            btnValue.prop('checked', true);
+                            btnValue.data('status', 1);
                         } else {
                             if (response.status == " . User::STATUS_ENABLED . ") {
-                                console.log('unblok to block');
-                                btnValue.removeClass('glyphicon-ok-circle');
-                                btnValue.addClass('glyphicon-lock');
+                                btnValue.prop('checked', false);
+                                btnValue.data('status', 2);
                             }
                         }
                     },
                     error: function() {
-                        console.log('error');
+                        console.log('#2000 - 01: Ошибка Ajax запроса');
                     },
                 });
                 
-                // return false;
+                return false;
                 
             });
         ");
         
     }
 
+    /*
+     *  Формируем колонку checkbox Блокировать/Разблокировать учетную запись Собственника 
+     * 
+     * @param integer $data['status'] == User::STATUS_ENABLED (1) Собственник активен
+     * @param integer $data['status'] == User::STATUS_BLOCK (2) Собственник заблокирован
+     */
+    
     protected function renderDataCellContent($data) {
-        if ($data['status'] == 1) {
+        
+        if ($data['status'] == User::STATUS_ENABLED) {
             return 
-                Html::button('<span class="glyphicon glyphicon-ok-circle"></span>', 
-                        [
-                            'class' => 'form-control status_btn',
-                            'data' => [
-                                'client-id' => $data['client_id'],
-                                'status' => User::STATUS_ENABLED,
-                            ],
-                        ]);
-        } elseif ($data['status'] == 2) {
-            return 
-                Html::button('<span class="glyphicon glyphicon-lock"></span>', 
+                Html::checkbox('', false,
                         [
                             'class' => 'form-control status_btn',
                             'data' => [
                                 'client-id' => $data['client_id'],
                                 'status' => User::STATUS_BLOCK,
                             ],
+                        ]);
+        } elseif ($data['status'] == User::STATUS_BLOCK) {
+            return 
+                Html::checkbox('', true,
+                        [
+                            'class' => 'form-control status_btn',
+                            'data' => [
+                                'client-id' => $data['client_id'],
+                                'status' => User::STATUS_ENABLED,
+                            ],
                         ]);          
         }
+        
     }
     
     

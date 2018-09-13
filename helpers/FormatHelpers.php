@@ -88,4 +88,20 @@ class FormatHelpers {
         return $town .  ', ' . $street . ', ' . $house . ', ' . $flat;
     }
     
+    /*
+     * Форматирование суммы баланса Собственика лицевого счета
+     * 
+     * 
+     * Отрицательный баланс, для наглядности, подсвечиваем другим цветом
+     */
+    public static function formatBalance($balance) {
+        
+        if ($balance < 0) {
+            return '<span style="color: red">' . $balance . '</span>';
+        }
+        
+        return $balance;
+        
+    }
+    
 }
