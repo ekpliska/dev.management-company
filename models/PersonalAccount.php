@@ -72,10 +72,9 @@ class PersonalAccount extends ActiveRecord
     /*
      * Поиск номера лицевого счета по ID
      */
-    public static function findByNumber($account_id) {
+    public static function findByNumber($account_number) {
         return static::find()
-                ->andWhere(['account_id' => $account_id])
-                ->orderBy(['account_id' => SORT_ASC])
+                ->andWhere(['account_number' => $account_number])
                 ->one();
     }
     

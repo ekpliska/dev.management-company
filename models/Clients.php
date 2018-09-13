@@ -12,6 +12,8 @@
  */
 class Clients extends ActiveRecord
 {
+    const SCENARIO_EDIT_INFO = 'edit info about client';
+    
     /**
      * Таблица из БД
      */
@@ -26,8 +28,29 @@ class Clients extends ActiveRecord
     public function rules()
     {
         return [
-            [['clients_name', 'clients_second_name', 'clients_surname'], 'string', 'max' => 70],
+            
+            [[
+                'clients_name', 'clients_second_name', 'clients_surname', 
+                'clients_mobile', 'clients_phone'], 'required'],
+            
+            [['clients_name', 'clients_second_name', 'clients_surname'], 'filter', 'filter' => 'trim'],
+            
+            [['clients_name', 'clients_second_name', 'clients_surname'], 'string', 'min' => 3, 'max' => 70],
+            
+            [['clients_mobile', 'clients_phone'],
+                'match', 
+                'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/i', 
+            ],
+            
+            [[
+                'clients_name', 'clients_second_name', 'clients_surname'], 
+                'match',
+                'pattern' => '/^[А-Яа-яЁё\ \-]+$/iu',
+                'message' => 'Поле "{attribute}" может содержать только буквы русского алфавита, и знак "-"',
+            ],
+            
             [['clients_mobile', 'clients_phone'], 'string', 'max' => 50],
+            
             ['isActive', 'integer'],
         ];
     }
@@ -69,6 +92,15 @@ class Clients extends ActiveRecord
         return $user;
     }
     
+    /*
+     * Получить Собственника по ID
+     */
+    public static function findById($client_id) {
+        return self::find()
+                ->where(['clients_id' => $client_id])
+                ->one();
+    }
+    
     public function getId() {
         return $this->clients_id;
     }
@@ -90,11 +122,11 @@ class Clients extends ActiveRecord
     {
         return [
             'clients_id' => 'Clients ID',
-            'clients_name' => 'Clients Name',
-            'clients_second_name' => 'Clients Second Name',
-            'clients_surname' => 'Clients Surname',
-            'clients_mobile' => 'Clients Mobile',
-            'clients_phone' => 'Clients Phone',
+            'clients_name' => 'Имя',
+            'clients_second_name' => 'Отчество',
+            'clients_surname' => 'Фамилия',
+            'clients_mobile' => 'Мобильный телефон',
+            'clients_phone' => 'Дополнительный номер телефона',
             'isActive' => 'Активный',
         ];
     }

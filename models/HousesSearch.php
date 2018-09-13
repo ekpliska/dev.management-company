@@ -18,7 +18,7 @@ class HousesSearch extends Houses
     public function rules()
     {
         return [
-            [['houses_id', 'houses_porch', 'houses_floor', 'houses_flat', 'houses_rooms', 'houses_square', 'houses_account_id', 'houses_client_id'], 'integer'],
+            [['houses_id', 'houses_porch', 'houses_floor', 'houses_flat', 'houses_rooms', 'houses_square', 'houses_client_id'], 'integer'],
             [['houses_name', 'houses_town', 'houses_street', 'houses_number_house'], 'safe'],
         ];
     }
@@ -65,7 +65,6 @@ class HousesSearch extends Houses
             'houses_flat' => $this->houses_flat,
             'houses_rooms' => $this->houses_rooms,
             'houses_square' => $this->houses_square,
-            'houses_account_id' => $this->houses_account_id,
             'houses_client_id' => $this->houses_client_id,
         ]);
 

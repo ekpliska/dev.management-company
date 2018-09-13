@@ -1,5 +1,6 @@
 <?php
     use yii\grid\GridView;
+    use yii\helpers\Html;
     use yii\helpers\Url;
     use app\helpers\FormatHelpers;
     use app\modules\managers\components\BlockClientColumn;
@@ -49,12 +50,28 @@
             ],
             [
                 'class' => 'yii\grid\ActionColumn',
-                'controller' => 'requests/block-client',
-                'template' => '{view-request}',
+                'template' => '{view-client} {delete-client}',
                 'buttons' => [
-                    'view-request' => function ($url, $data) {
-                        $url = ['request_numder' => $data['client_id']];
-                        return '<a href="#" data-pjax="0" class="btn btn-info">Подробнее</a>';
+                    'view-client' => function ($url, $data) {
+                        return 
+                            Html::a('Просмотр', 
+                                    [
+                                        'clients/view-client',
+                                        'client_id' => $data['client_id'],
+                                        'account_number' => $data['number'],
+                                    ], 
+                                    [
+                                        'data-pjax' => false,
+                                        'class' => 'btn btn-info btn-sm',
+                                    ]
+                            );
+                    },
+                    'delete-client' => function ($url, $data) {
+                        return 
+                            Html::a('Удалить', ['clients/delete-client', 'client_id' => $data['client_id']], [
+                                'data-pjax' => false,
+                                'class' => 'btn btn-danger btn-sm',
+                            ]);
                     },
                 ],
             ],

@@ -2,7 +2,6 @@
 
     namespace app\modules\managers\models;
     use app\models\Clients as BaseClients;
-    use app\models\User;
 
 /*
  * Клиенты
