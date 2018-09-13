@@ -26,6 +26,7 @@ class User extends ActiveRecord implements IdentityInterface
     
     const SCENARIO_EDIT_PROFILE = 'edit user profile';
     const SCENARIO_EDIT_ADMINISTRATION_PROFILE = 'edit administration profile';
+    const SCENARIO_EDIT_CLIENT_PROFILE = 'edit client profile';
     
     public function behaviors() {
         return [
@@ -93,7 +94,9 @@ class User extends ActiveRecord implements IdentityInterface
                 'targetAttribute' => 'user_mobile',
                 'message' => 'Пользователь с введенным номером мобильного телефона в системе уже зарегистрирован',
                 'on' => self::SCENARIO_EDIT_ADMINISTRATION_PROFILE,
-            ],            
+            ],
+            
+            [['user_email'], 'required', 'on' => self::SCENARIO_EDIT_CLIENT_PROFILE],
             
             [['user_check_email'], 'boolean'],
             

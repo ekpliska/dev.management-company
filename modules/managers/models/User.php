@@ -24,6 +24,22 @@ class User extends BaseUser {
         
         return $user_info->save() ? true : false;
         
-    }    
+    }
+    
+    public function blockInView($user_id, $status) {
+        
+        $user_info = self::find()
+                ->where(['user_id' => $user_id])
+                ->one();
+        
+        if ($status == User::STATUS_BLOCK) {
+            $user_info->status = User::STATUS_BLOCK;
+        } elseif ($status == User::STATUS_ENABLED) {
+            $user_info->status = User::STATUS_ENABLED;
+        }
+        
+        return $user_info->save() ? true : false;
+        
+    }     
     
 }

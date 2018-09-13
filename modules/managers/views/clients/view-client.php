@@ -18,6 +18,12 @@ $this->title = 'Собственник ' . $client_info->fullName;
     <?php
         $form = ActiveForm::begin([
             'id' => 'view-client-info',
+            'method' => 'POST',
+            'validateOnChange' => false,
+            'validateOnBlur' => false,
+            'options' => [
+                'enctype' => 'multipart/form-data',
+            ],
         ]);
     ?>
     
@@ -85,8 +91,23 @@ $this->title = 'Собственник ' . $client_info->fullName;
                                 'width' => 150]) ?>
                     <?php endif; ?>
                 </div>
+                
                 <?= $form->field($user_info, 'user_photo')->input('file', ['id' => 'btnLoad']) ?>
                 <?= $form->field($user_info, 'user_check_email')->checkbox() ?>
+                
+                <?php if ($user_info->status == 1) : ?>
+                    <?= Html::button('Заблокировать', [
+                            'class' => 'btn btn-danger block_user',
+                            'data-user' => $user_info->user_id,
+                            'data-status' => 2]) 
+                    ?>
+                <?php elseif ($user_info->status == 2)  : ?>
+                    <?= Html::button('Разблокировать', [
+                            'class' => 'btn btn-success block_user',
+                            'data-user' => $user_info->user_id,
+                            'data-status' => 1]) 
+                    ?>
+                <?php endif; ?>
             </div>
         </div>
     </div>
@@ -118,8 +139,6 @@ $this->title = 'Собственник ' . $client_info->fullName;
     </div>
     
     <div class="col-md-12 text-right">
-        <?= Html::submitButton('Разблокировать', ['class' => 'btn btn-success']) ?>
-        <?= Html::submitButton('Заблокировать', ['class' => 'btn btn-danger']) ?>
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary']) ?>
     </div>
         

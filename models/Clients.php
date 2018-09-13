@@ -12,7 +12,6 @@
  */
 class Clients extends ActiveRecord
 {
-    const SCENARIO_EDIT_INFO = 'edit info about client';
     
     /**
      * Таблица из БД
@@ -51,7 +50,6 @@ class Clients extends ActiveRecord
             
             [['clients_mobile', 'clients_phone'], 'string', 'max' => 50],
             
-            ['isActive', 'integer'],
         ];
     }
     
@@ -127,7 +125,6 @@ class Clients extends ActiveRecord
             'clients_surname' => 'Фамилия',
             'clients_mobile' => 'Мобильный телефон',
             'clients_phone' => 'Дополнительный номер телефона',
-            'isActive' => 'Активный',
         ];
     }
 }
