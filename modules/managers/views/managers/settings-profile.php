@@ -2,7 +2,7 @@
 
     use yii\widgets\ActiveForm;
     use yii\helpers\Html;
-    use app\modules\clients\widgets\AlertsShow;
+    use app\modules\managers\widgets\AlertsShow;
 
 /* 
  * Настройки профиля Администратора

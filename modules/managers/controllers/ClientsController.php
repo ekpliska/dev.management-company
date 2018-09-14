@@ -89,23 +89,32 @@ class ClientsController extends AppManagersController {
     
     public function updateClientInfo($client_info, $rent_info) {
         
+        // Если переключатель Арендатор пришел из пост
         if (isset($_POST['is_rent'])) {
             if ($client_info->load(Yii::$app->request->post())) {
-                $data_rent = Yii::$app->request->post('Rents');
-                if ($data_rent) {
-                    $rent_edit = Rents::findByRentId($data_rent['rents_id']);
-                    if ($rent_edit->load(Yii::$app->request->post()) && $rent_edit->validate()) {
-                        $rent_edit->save();
+                // Сохраняем данные существующего арендатора
+                if ($rent_info !== null) {
+                    if ($rent_info->load(Yii::$app->request->post())) {
+                        // Если есть ошибки валидации
+                        if ($rent_info->hasErrors()) {
+                            Yii::$app->session->setFlash('profile-admin-error');
+                            return $this->redirect(Yii::$app->request->referrer);
+                        }
+                        $rent_info->save();
                     }
                 } else {
+                    // Сохраняем данные нового арендатора
                     echo 'rent new';
                 }
+                Yii::$app->session->setFlash('profile-admin');
                 $client_info->save();
             }
         } else {
+            // Если переключатель Арендатор, не пришли из пост, сохраняем данные только собственника
             if ($client_info->load(Yii::$app->request->post())) {
+                Yii::$app->session->setFlash('profile-admin');
                 $client_info->save();
-            }            
+            }
         }
     }
     

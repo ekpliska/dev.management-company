@@ -33,7 +33,8 @@
     ?>
 <?php endif; ?> 
 
-<?php if (Yii::$app->session->hasFlash('profile')) : ?>
+<?php /* Профиль пользователя */
+    if (Yii::$app->session->hasFlash('profile')) : ?>
     <?=
         Alert::widget([
             'type' => Alert::TYPE_INFO,
@@ -59,8 +60,8 @@
 
 
 
-<?php if (Yii::$app->session->hasFlash('request')) : ?>
-<?php $flash = Yii::$app->session->getFlash('request'); ?>
+<?php /* Заявки */
+    if (Yii::$app->session->hasFlash('request')) : ?>
     <?=
         Alert::widget([
             'type' => $flash['success'] ? Alert::TYPE_INFO : Alert::TYPE_DANGER,

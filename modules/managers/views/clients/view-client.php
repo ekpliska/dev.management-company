@@ -3,7 +3,7 @@
     use yii\widgets\ActiveForm;
     use yii\helpers\Html;
     use yii\widgets\MaskedInput;
-    use app\modules\clients\widgets\AlertsShow;
+    use app\modules\managers\widgets\AlertsShow;
 
 /* 
  * Просмотр инофрмации о Собственнике

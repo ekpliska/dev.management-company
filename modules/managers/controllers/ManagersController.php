@@ -46,7 +46,10 @@ class ManagersController extends AppManagersController {
                 $file = UploadedFile::getInstance($user_model, 'user_photo');
                 $user_model->uploadPhoto($file);
                 $employer_info->save();
+            } else {
+                Yii::$app->session->setFlash('profile-admin-error');
             }
+            Yii::$app->session->setFlash('profile-admin');
             return $this->redirect(Yii::$app->request->referrer);
         }
         
@@ -70,16 +73,10 @@ class ManagersController extends AppManagersController {
         
         if ($model_password->load(Yii::$app->request->post())) {
             if ($model_password->changePassword()) {
-                Yii::$app->session->setFlash('profile', [
-                        'success' => true, 
-                        'message' => 'Пароль от вашей учетной записи успешно изменен'
-                ]);
+                Yii::$app->session->setFlash('profile-admin');
                 return $this->refresh();
             } else {
-                Yii::$app->session->setFlash('profile', [
-                        'success' => false, 
-                        'error' => 'При обновлении настроек профиль произошла ошибка. Повторите действие еще раз'
-                ]);
+                Yii::$app->session->setFlash('profile-admin-error');
             }
         }
         

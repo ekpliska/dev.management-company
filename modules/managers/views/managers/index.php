@@ -5,7 +5,7 @@
     use yii\helpers\ArrayHelper;
     use yii\widgets\MaskedInput;
     use app\helpers\FormatHelpers;
-    use app\modules\clients\widgets\AlertsShow;
+    use app\modules\managers\widgets\AlertsShow;
 
 /*
  * Профиль Администратора
