@@ -13,7 +13,7 @@
  */     
 class ClientsRentForm extends Model {
     
-    const SCENARIO_AJAX_VALIDATION = 'required fields';
+    const SCENARIO_AJAX_VALIDATION = 'add new rent';
     
     public $rents_surname;
     public $rents_name;

@@ -11,6 +11,7 @@
     use app\modules\managers\models\User;
     use app\models\PersonalAccount;
     use app\models\Rents;
+    use app\modules\managers\models\AddRent;
 
 /**
  * Клиенты
@@ -58,12 +59,14 @@ class ClientsController extends AppManagersController {
         
         $user_info->scenario = User::SCENARIO_EDIT_CLIENT_PROFILE;
         
+        $add_rent = new AddRent();
+        
         if ($account_info->personal_rent_id) {
             $is_rent = true;
-            $rent_info = Rents::findOne(['rents_id' => $account_info->personal_rent_id]);
+            $edit_rent = Rents::findOne(['rents_id' => $account_info->personal_rent_id]);
         } else {
             $is_rent = false;
-            $rent_info = null;
+            $edit_rent = null;
         }
         
         if ($client_info == null || $account_info == null) {
@@ -73,7 +76,8 @@ class ClientsController extends AppManagersController {
         if ($user_info->load(Yii::$app->request->post())) {
             $file = UploadedFile::getInstance($user_info, 'user_photo');
             $user_info->uploadPhoto($file);
-            $this->updateClientInfo($client_info, $rent_info);
+            $this->updateClientInfo($client_info, $edit_rent);
+            return $this->redirect(Yii::$app->request->referrer);
         }
         
         return $this->render('view-client', [
@@ -82,30 +86,43 @@ class ClientsController extends AppManagersController {
             'user_info' => $user_info,
             'account_choosing' => $account_info->account_id,
             'list_account' => $list_account,
-            'rent_info' => $rent_info,
+            'rent_info' => $edit_rent,
+            'add_rent' => $add_rent,
         ]);
         
     }
     
-    public function updateClientInfo($client_info, $rent_info) {
+    public function updateClientInfo($client_info, $edit_rent) {
         
         // Если переключатель Арендатор пришел из пост
         if (isset($_POST['is_rent'])) {
             if ($client_info->load(Yii::$app->request->post())) {
+                
+                $add_rent = Yii::$app->request->post('AddRent');
+                
                 // Сохраняем данные существующего арендатора
-                if ($rent_info !== null) {
-                    if ($rent_info->load(Yii::$app->request->post())) {
+                if ($edit_rent !== null) {
+                    if ($edit_rent->load(Yii::$app->request->post())) {
                         // Если есть ошибки валидации
-                        if ($rent_info->hasErrors()) {
+                        if ($edit_rent->hasErrors()) {
                             Yii::$app->session->setFlash('profile-admin-error');
                             return $this->redirect(Yii::$app->request->referrer);
                         }
-                        $rent_info->save();
+                        $edit_rent->save();
                     }
-                } else {
-                    // Сохраняем данные нового арендатора
-                    echo 'rent new';
                 }
+                
+                if ($add_rent !== null) {
+                    $rent = new AddRent();
+                    if ($rent->load(Yii::$app->request->post())) {
+                        if ($rent->hasErrors()) {
+                            Yii::$app->session->setFlash('profile-admin-error');
+                            return $this->redirect(Yii::$app->request->referrer);
+                        }
+                        $rent->addNewRent();
+                    }
+                }
+                
                 Yii::$app->session->setFlash('profile-admin');
                 $client_info->save();
             }
@@ -116,6 +133,7 @@ class ClientsController extends AppManagersController {
                 $client_info->save();
             }
         }
+        
     }
     
     /*

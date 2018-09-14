@@ -8,12 +8,13 @@
  */
 
 ?>
-    <?= $form->field($add_rent, "account_id", ['options' => ['class' => 'hidden']])
+
+    <?= $form->field($add_rent, 'client_id', ['options' => ['class' => 'hidden']])
         ->hiddenInput([
-            'value' => $account_number,
+            'value' => $client_id,
             'class' => 'hidden',
-        ])->label(false) ?>                            
-                        
+        ])->label(false) ?>
+
     <?= $form->field($add_rent, 'rents_surname')
             ->input('text', [
                 'placeHolder' => $add_rent->getAttributeLabel('rents_surname'),
