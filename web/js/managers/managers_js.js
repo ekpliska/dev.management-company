@@ -59,7 +59,7 @@ $(document).ready(function() {
      * выводим модальное окно для управления учетной записью арендатора
      */
     $('#is_rent').on('change', function(e) {
-        var rentsId = $('input[id=_rents]').val();
+        //var rentsId = $('input[id=_rents]').val();
         var accountNumber = $('#_list-account :selected').text();
         var checkShow = $(this).val();
         accountNumber = parseInt(accountNumber, 10);
@@ -116,15 +116,11 @@ $(document).ready(function() {
         $.post({
             url: 'delete-rent-profile?rent=' + rentsId + '&account=' + accountId,
             method: 'POST',
-            success: function(response) {
-                // console.log('Удаление арендатора OK');
-            },
             error: function() {
                 console.log('Error #1000-03');
             }
         });
     });
-
 
 });
     

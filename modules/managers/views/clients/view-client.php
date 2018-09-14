@@ -134,10 +134,10 @@ $this->title = 'Собственник ' . $client_info->fullName;
                         ?>
                     <?php else : ?>
                         <p>Арендатор отсутствует</p>
+                        <div class="form-add-rent"></div>
                         <?= $this->render('_form/add-rent', [
                             'form' => $form, 
                             'add_rent' => $add_rent, 
-                            'account_number' => '000',
                             'client_id' => $client_info->id]) ?>
                     <?php endif; ?>
                 </div>
@@ -156,8 +156,10 @@ $this->title = 'Собственник ' . $client_info->fullName;
 
 <?= ModalWindowsManager::widget(['modal_view' => 'delete_rent']) ?>
 
+
+
 <?php
-//$this->registerJs("
+$this->registerJs("
 //    $('body').on('beforeSubmit.yii', 'form#view-client-info', function(e) {
 //        e.preventDefault();
 //        if () {
@@ -165,5 +167,5 @@ $this->title = 'Собственник ' . $client_info->fullName;
 //        }
 //        return false;
 //    });
-//")
+")
 ?>
