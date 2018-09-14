@@ -6,6 +6,12 @@
  * Данные арендатора
  */
 ?>
+<?= $form->field($rent_info, 'rents_id', ['options' => ['class' => 'hidden']])
+        ->hiddenInput([
+            'value' => $model_rent->rents_id, 
+            'id' => '_rents'])
+        ->label(false) ?>
+        
 <?= $form->field($rent_info, 'rents_surname')
         ->input('text', [
             'placeHolder' => $rent_info->getAttributeLabel('rents_surname')])

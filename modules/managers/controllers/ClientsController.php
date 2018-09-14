@@ -91,6 +91,15 @@ class ClientsController extends AppManagersController {
         
         if (isset($_POST['is_rent'])) {
             if ($client_info->load(Yii::$app->request->post())) {
+                $data_rent = Yii::$app->request->post('Rents');
+                if ($data_rent) {
+                    $rent_edit = Rents::findByRentId($data_rent['rents_id']);
+                    if ($rent_edit->load(Yii::$app->request->post()) && $rent_edit->validate()) {
+                        $rent_edit->save();
+                    }
+                } else {
+                    echo 'rent new';
+                }
                 $client_info->save();
             }
         } else {

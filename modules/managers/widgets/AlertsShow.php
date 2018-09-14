@@ -1,12 +1,11 @@
 <?php
 
-    namespace app\modules\clients\widgets;
+    namespace app\modules\managers\widgets;
     use yii\base\Widget;
 
 /**
- * Виджет вывода сообщений для модуля Собственник, Арендатор
+ * Виджет вывода сообщений для модуля Администратор
  */
-
 class AlertsShow extends Widget {
     
     public function run() {

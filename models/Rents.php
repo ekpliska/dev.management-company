@@ -75,6 +75,12 @@ class Rents extends ActiveRecord
         return $this->hasOne(User::className(), ['user_rent_id' => 'rents_id']);
     }
     
+    public static function findByRentId($rent_id) {
+        return static::find()
+                ->where(['rents_id' => $rent_id])
+                ->one();
+    }
+    
     /*
      * Найти собсвенника по ID
      */
