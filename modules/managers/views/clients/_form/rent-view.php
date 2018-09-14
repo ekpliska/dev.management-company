@@ -14,17 +14,23 @@
         
 <?= $form->field($rent_info, 'rents_surname')
         ->input('text', [
-            'placeHolder' => $rent_info->getAttributeLabel('rents_surname')])
+            'id' => 'rents_surname',
+            'placeHolder' => $rent_info->getAttributeLabel('rents_surname'),
+            'data-surname' => $rent_info->rents_surname,])
         ->label() ?>
 
 <?= $form->field($rent_info, 'rents_name')
         ->input('text', [
-            'placeHolder' => $rent_info->getAttributeLabel('rents_name')])
+            'id' => 'rents_name',
+            'placeHolder' => $rent_info->getAttributeLabel('rents_name'),
+            'data-name' => $rent_info->rents_name])
         ->label() ?>
 
 <?= $form->field($rent_info, 'rents_second_name')
         ->input('text', [
-            'placeHolder' => $rent_info->getAttributeLabel('rents_second_name')])
+            'id' => 'rents_second_name',            
+            'placeHolder' => $rent_info->getAttributeLabel('rents_second_name'),
+            'data-second-name' => $rent_info->rents_second_name])
         ->label() ?>
 
 <?= $form->field($rent_info, 'rents_mobile')

@@ -32,7 +32,7 @@ $(document).ready(function() {
                 userId: userId,
                 statusClient: statusClient,
             },
-            success: function(response) {                
+            success: function(response) {
                 if (response.status == 2) {
                     $('.block_user').text('Разблокировать');
                     $('.block_user').removeClass('btn-danger');
@@ -54,6 +54,77 @@ $(document).ready(function() {
         return false;
     });
     
+    /* Обработка события при клике на checkBox 'Арендатор'
+     * Если за лицевым счетом закреплен арендатор, то 
+     * выводим модальное окно для управления учетной записью арендатора
+     */
+    $('#is_rent').on('change', function(e) {
+        var rentsId = $('input[id=_rents]').val();
+        var accountNumber = $('#_list-account :selected').text();
+        var checkShow = $(this).val();
+        accountNumber = parseInt(accountNumber, 10);
+        // Если на форме есть скрытое поле, содеражащее ID арендатора
+        if ($('input').is('#_rents')) {
+            // Выводим модальное окно на удаление учетной записи Арендатора
+            $('#delete_rent_manager').modal('show');
+        } else {
+            // Показать форму Добавление нового арендатора
+            if ($('#is_rent').is(':checked')) {
+                $.ajax({
+                    url: 'show-form',
+                    method: 'POST',
+                    async: false,
+                    data: {
+                        accountNumber: accountNumber,
+                        _show: checkShow,
+                    },
+                    success: function(response) {
+                        if (response.status && response.show) {
+                            $('.form-add-rent').html(response.data);
+                        } else {
+                            $('.form-add-rent').html(response.message);
+                        }
+                    }
+                });
+            } else {
+                $('.form-add-rent').html('Арендатор отсутствует');
+            }
+        }
+    });    
+
+    /*
+     * Обработка событий в модальном окне 'Дальнейшие действия с учетной записью арендатора'
+     * Закрыть модальное окно
+     */
+    $('.delete_rent__close').on('click', function() {
+        $('#is_rent').prop('checked', true);
+    });
+    
+    /*
+     * Загрузка данных Арендатора в модальное окно 'Дальнейшие действия с учетной записью арендатора'
+     */
+    $('#delete_rent_manager').on('show.bs.modal', function(){
+        $(this).find('#rent-surname').text($('#rents_surname').data('surname'));
+        $(this).find('#rent-name').text($('#rents_name').data('name'));
+        $(this).find('#rent-second-name').text($('#rents_second_name').data('second-name'));
+    });
+    
+    // Удалить данные арендатора из системы
+    $('.delete_rent__ok').on('click', function() {
+        var rentsId = $('input[id=_rents]').val();
+        var accountId = $('#_list-account :selected').text();
+        $.post({
+            url: 'delete-rent-profile?rent=' + rentsId + '&account=' + accountId,
+            method: 'POST',
+            success: function(response) {
+                // console.log('Удаление арендатора OK');
+            },
+            error: function() {
+                console.log('Error #1000-03');
+            }
+        });
+    });
+
 
 });
     

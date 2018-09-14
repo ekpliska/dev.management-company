@@ -30,3 +30,17 @@
         ]);
     ?>
 <?php endif; ?>
+
+<?php if (Yii::$app->session->hasFlash('delete-rent')) : ?>
+<?php $flash = Yii::$app->session->getFlash('delete-rent'); ?>
+    <?=
+        Alert::widget([
+            'type' => $flash['success'] ? Alert::TYPE_INFO : Alert::TYPE_DANGER,
+            'title' => 'Удаление ученой записи арендатора',
+            'icon' => 'glyphicon glyphicon-ok-sign',
+            'body' => $flash['success'] ? $flash['message'] : $flash['error'],
+            'showSeparator' => true,
+            'delay' => 0,
+        ]);
+    ?>
+<?php endif; ?>

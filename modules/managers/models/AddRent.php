@@ -131,7 +131,7 @@ class AddRent extends Model {
             'rents_mobile' => 'Мобильный телефон',
             'rents_email' => 'Электронная почта',
             'password' => 'Пароль',
-            'account_id' => 'ID лицевого счета',
+            'account_id' => 'Лицевой счет',
             'client_id' => 'ID собственника',
         ];
     }

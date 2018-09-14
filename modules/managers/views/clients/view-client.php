@@ -4,6 +4,7 @@
     use yii\helpers\Html;
     use yii\widgets\MaskedInput;
     use app\modules\managers\widgets\AlertsShow;
+    use app\modules\managers\widgets\ModalWindowsManager;
 
 /* 
  * Просмотр инофрмации о Собственнике
@@ -115,6 +116,7 @@ $this->title = 'Собственник ' . $client_info->fullName;
     <div class="col-md-4">
         
         <?= $form->field($add_rent, 'account_id')->dropDownList($list_account, [
+                'value' => $account_choosing,
                 'class' => 'form-control']) ?>
         
         <div class="panel panel-default">
@@ -151,3 +153,17 @@ $this->title = 'Собственник ' . $client_info->fullName;
     <?php ActiveForm::end() ?>
     
 </div>
+
+<?= ModalWindowsManager::widget(['modal_view' => 'delete_rent']) ?>
+
+<?php
+//$this->registerJs("
+//    $('body').on('beforeSubmit.yii', 'form#view-client-info', function(e) {
+//        e.preventDefault();
+//        if () {
+//            
+//        }
+//        return false;
+//    });
+//")
+?>

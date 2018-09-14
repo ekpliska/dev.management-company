@@ -137,7 +137,7 @@ class ClientsController extends AppManagersController {
     }
     
     /*
-     * Блокировать/Разблокировать Собсвенника
+     * Блокировать/Разблокировать Собственника
      * 
      * На главной странице, для талицы
      */
@@ -178,5 +178,23 @@ class ClientsController extends AppManagersController {
         return ['status' => false];
     }
     
+    /*
+     * Удалить профиль Арендатора
+     */
+    public function actionDeleteRentProfile($rent, $account) {
+        
+        if (Yii::$app->request->isPost) {
+            $_rent = Rents::findOne($rent);
+            $_rent->delete();
+            Yii::$app->session->setFlash('delete-rent', [
+                'success' => true, 
+                'message' => 'Арендатор ' . $_rent->fullName . ' и его учетная запись успешно удалены с портала',]);
+            return $this->redirect(Yii::$app->request->referrer);
+        }
+        Yii::$app->session->setFlash('delete-rent', [
+            'success' => false,
+            'error' => 'Извините, при обработке запроса произошел сбой. Обновите страницу и повторите действие еще раз']);
+        return $this->redirect(Yii::$app->request->referrer);
+    }
     
 }
