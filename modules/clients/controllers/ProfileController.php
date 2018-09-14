@@ -46,8 +46,8 @@ class ProfileController extends AppClientsController
 
         if (empty($form)) {
             throw new NotFoundHttpException('При сохранении профиля возникла ошибка. Повторите действие еще раз');
-        }        
-        // $is_rent = Yii::$app->request->post('is_rent');
+        }
+        
         if (Yii::$app->request->isPost) {
             if (isset($_POST['is_rent'])) {
                 // Загружаем модель пользователя
@@ -71,7 +71,7 @@ class ProfileController extends AppClientsController
                     if ($add_rent->load(Yii::$app->request->post())) {
                         // Проверяем на ошибки
                         if ($add_rent->hasErrors()) {
-                            Yii::$app->session->setFlash('profile', ['succes' => false, 'error' => 'Ошибка 1']);
+                            Yii::$app->session->setFlash('profile-error');
                             return $this->redirect(Yii::$app->request->referrer);
                         }
                         // на валидацию
@@ -80,7 +80,7 @@ class ProfileController extends AppClientsController
                             $add_rent->saveRentToUser();
                         }
                     }
-                    
+                    Yii::$app->session->setFlash('profile');
                     return $this->redirect(Yii::$app->request->referrer);
                 }
             } else {
@@ -89,12 +89,14 @@ class ProfileController extends AppClientsController
                 if ($user_info->load(Yii::$app->request->post())) {
                     $file = UploadedFile::getInstance($user_info, 'user_photo');
                     $user_info->uploadPhoto($file);
+                    Yii::$app->session->setFlash('profile');
                     return $this->redirect(Yii::$app->request->referrer);
                 }
             }
         }
         
-        return $this->goHome();
+        Yii::$app->session->setFlash('profile-error');
+        return $this->redirect(Yii::$app->request->referrer);
     }
     
     /*
@@ -177,16 +179,13 @@ class ProfileController extends AppClientsController
                         $_rent->delete();
                         return $this->redirect(Yii::$app->request->referrer);
                     } else {
-                        Yii::$app->session->setFlash('error', 'Возникла ошибка (запрос удаления арендатора)');
+                        Yii::$app->session->setFlash('profile-error');
                         return $this->refresh();
                     }
                     break;
                 
                 default:
-                    Yii::$app->session->setFlash('profile', [
-                        'success' => false, 
-                        'error' => 'При удалении учетной записи арендатора произошла ошибка. Повторите действие еще раз'
-                    ]);
+                    Yii::$app->session->setFlash('profile-error');
                     return $this->redirect(Yii::$app->request->referrer);
             }
         }
@@ -203,10 +202,7 @@ class ProfileController extends AppClientsController
     public function saveRentInfo($data_rent) {
         
         if ($data_rent == null) {
-            return Yii::$app->session->setFlash('profile', [
-                'success' => false, 
-                'error' => 'При обновлении профиля произошла ошибка. Повторите действие еще раз'
-            ]);            
+            return Yii::$app->session->setFlash('profile-error');            
         }
         
         $_rent = Rents::find()->andWhere(['rents_id' => $data_rent['rents_id']])->one();
@@ -214,16 +210,10 @@ class ProfileController extends AppClientsController
         if ($_rent->load(Yii::$app->request->post()) && $_rent->validate()) {
             $_rent->save();
             
-            return Yii::$app->session->setFlash('profile', [
-                'success' => true, 
-                'message' => 'Ваш профиль был успешно обновлен'
-            ]);
+            return Yii::$app->session->setFlash('profile');
         }
         
-        return Yii::$app->session->setFlash('profile', [
-            'success' => false, 
-            'error' => 'При обновлении профиля произошла ошибка. Повторите действие еще раз'
-        ]);
+        return Yii::$app->session->setFlash('profile-error');
     }
     
     /*

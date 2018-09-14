@@ -280,11 +280,9 @@ class User extends ActiveRecord implements IdentityInterface
             } else {
                 $this->user_photo = $current_image;
             }
-            Yii::$app->session->setFlash('profile', ['success' => true, 'message' => 'Ваш профиль был успешно обновлен']);
             return $this->save() ? true : false;
         }
         
-        Yii::$app->session->setFlash('profile', ['success' => false, 'error' => 'При обновлении профиля произошла ошибка. Повторите действие еще раз']);
         return false;
     }
     

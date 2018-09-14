@@ -29,14 +29,7 @@ class Departments extends ActiveRecord
             [['departments_name'], 'string', 'max' => 150],
         ];
     }
-    
-//    /*
-//     * Свзяь с таблицей Сотрудники
-//     */
-//    public function getEmployer() {
-//        return $this->hasMany(Employers::className(), ['employers_department_id' => 'departments_id']);
-//    }     
-//
+
     /*
      * Связь с таблицей Должности
      */
