@@ -27,7 +27,6 @@ $this->title = "Профиль";
             'options' => [
                 'enctype' => 'multipart/form-data',
             ],
-            
         ]);
     ?>
         <div class="col-md-4">

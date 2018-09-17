@@ -2,6 +2,8 @@
 
     use yii\widgets\ActiveForm;
     use yii\helpers\ArrayHelper;
+    use yii\helpers\Html;
+    use yii\widgets\MaskedInput;
 
 /* 
  * Форма
@@ -17,9 +19,14 @@ $this->title = 'Диспетчер (+)';
     <?php
         $form = ActiveForm::begin([
             'id' => 'add-dispatcher',
+            'enableClientValidation' => true,
+            'enableAjaxValidation' => false,
+            'validateOnChange' => true,
+            'options' => [
+                'enctype' => 'multipart/form-data',
+            ],            
         ]);
     ?>
-    
         <div class="col-md-4">
             <div class="panel panel-default">
                 <div class="panel-heading">Информация о сотруднике</div>
@@ -39,8 +46,16 @@ $this->title = 'Диспетчер (+)';
                             ->input('text', [
                                 'placeHolder' => $model->getAttributeLabel('second_name'),])
                             ->label() ?>
+                    
                     <?= $form->field($model, 'gender')
                             ->radioList(ArrayHelper::map($gender_list, 'id', 'name'))->label(); ?>
+                    
+                    <?= $form->field($model, 'mobile')
+                            ->widget(MaskedInput::className(), [
+                                'mask' => '+7(999) 999-99-99'])
+                            ->input('text', [
+                                'placeHolder' => $model->getAttributeLabel('mobile'),])
+                            ->label() ?>                    
                     
                     <?= $form->field($model, 'department')
                             ->dropDownList($department_list, [
@@ -62,7 +77,19 @@ $this->title = 'Диспетчер (+)';
             <div class="panel panel-default">
                 <div class="panel-heading">Фотография</div>
                 <div class="panel-body">
-                    фото
+                    <div class="text-center">
+                        <?= Html::img($model->photo, ['id' => 'photoPreview','class' => 'img-circle', 'alt' => $model->username, 'width' => 150]) ?>
+                        <br />
+                        <?= $form->field($model, 'photo')->input('file', ['id' => 'btnLoad'])->label(false) ?>
+                    </div>
+                    <?= $form->field($model, 'role')
+                            ->dropDownList($roles, [
+                                'value' => 'dispatcher',
+                                'disabled' => true,])
+                            ->label() ?>
+                    
+                    <?= $form->field($model, 'is_new')->checkbox() ?>
+                    
                 </div>
             </div>
         </div>
@@ -71,9 +98,37 @@ $this->title = 'Диспетчер (+)';
             <div class="panel panel-default">
                 <div class="panel-heading">Информация о пользователе</div>
                 <div class="panel-body">
-                    фото
+                    
+                    <?= $form->field($model, 'username')
+                            ->input('text', [
+                                'placeHolder' => $model->getAttributeLabel('username'),])
+                            ->label() ?>
+                    
+                    <?= $form->field($model, 'email')
+                            ->input('text', [
+                                'placeHolder' => $model->getAttributeLabel('email'),])
+                            ->label() ?>
+                    
+                    <?= $form->field($model, 'password')
+                            ->input('password', [
+                                'placeHolder' => $model->getAttributeLabel('email'),
+                                'class' => 'form-control show_password',])
+                            ->label() ?>
+                    
+                    <?= $form->field($model, 'password_repeat')
+                            ->input('password', [
+                                'placeHolder' => $model->getAttributeLabel('password_repeat'),
+                                'class' => 'form-control show_password',])
+                            ->label() ?>                    
+                    
+                    <?= Html::checkbox('show_password_ch', false) ?> <span class="show_password__text">Показать пароль</span>
+                    
                 </div>
             </div>
+        </div>
+    
+        <div class="col-md-12 text-right">
+            <?= Html::submitButton('Добавить', ['class' => 'btn btn-primary']) ?>
         </div>
     
     <?php ActiveForm::end() ?>

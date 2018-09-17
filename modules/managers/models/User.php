@@ -1,6 +1,8 @@
 <?php
 
     namespace app\modules\managers\models;
+    use Yii;
+    use yii\helpers\ArrayHelper;
     use app\models\User as BaseUser;
 
 /**
@@ -9,6 +11,17 @@
  * Наследуется от основной модели Пользователи
  */
 class User extends BaseUser {
+    
+    
+    /*
+     * Получить списко всех доступнвых ролей
+     */
+    public static function getRole() {
+        
+        $list = Yii::$app->authManager->getRoles();
+        return ArrayHelper::map($list, 'name', 'description');
+        
+    }    
     
     public function block($client_id, $status) {
         

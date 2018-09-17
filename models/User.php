@@ -6,6 +6,7 @@
     use yii\helpers\ArrayHelper;
     use yii\behaviors\TimestampBehavior;
     use app\models\PersonalAccount;
+    use app\models\Employers;
     
 
 /**
@@ -123,6 +124,13 @@ class User extends ActiveRecord implements IdentityInterface
     public function getPersonalAccount() {
         return $this->hasMany(PersonalAccount::className(), ['account_id' => 'account_id'])
                 ->viaTable('account_to_users', ['user_id' => 'user_id']);
+    }
+    
+    /*
+     * Свзяь с таблицей Сотрудники
+     */
+    public function getEmployer() {
+        return $this->hasOne(Employers::className(), ['employers_id' => 'user_employee_id']);
     }
     
     /*

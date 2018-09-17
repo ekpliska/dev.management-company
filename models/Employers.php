@@ -70,6 +70,9 @@ class Employers extends ActiveRecord
         return $this->hasOne(Posts::className(), ['posts_id' => 'employers_posts_id']);
     }    
     
+    /*
+     * Сформировать массив
+     */
     public static function getGenderArray() {
         return [
             ['id' => self::GENDER_MALE, 'name' => 'Мужской'],
@@ -77,9 +80,30 @@ class Employers extends ActiveRecord
         ];
     }
     
+    /*
+     * Выводим текстовое обознаечние пола
+     */
     public function getGenderName() {
         return ArrayHelper::getValue(self::getGenderArray(), $this->gender);
     }
+    
+    /*
+     * После создания нового записи нового сотрудника
+     * 
+     * Создаем для него учетную запись
+     */
+//    public function afterSave($insert, $changedAttributes) {
+//        parent::afterSave($insert, $changedAttributes);
+//        
+//        if ($insert) {
+//            $new_user = new User();
+//            echo '<pre>';
+//            var_dump($insert);
+//            echo '<pre>';
+//            var_dump($changedAttributes);
+//            die();
+//        }
+//    }
     
     /**
      * Метки для полей
