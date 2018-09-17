@@ -24,6 +24,7 @@ $this->title = 'Собственник ' . $client_info->fullName;
             'validateOnBlur' => false,
             'options' => [
                 'enctype' => 'multipart/form-data',
+                'data-pjax' => true,
             ],
         ]);
     ?>
@@ -117,6 +118,7 @@ $this->title = 'Собственник ' . $client_info->fullName;
         
         <?= $form->field($add_rent, 'account_id')->dropDownList($list_account, [
                 'value' => $account_choosing,
+                'id' => '_list-account',
                 'class' => 'form-control']) ?>
         
         <div class="panel panel-default">
@@ -155,17 +157,3 @@ $this->title = 'Собственник ' . $client_info->fullName;
 </div>
 
 <?= ModalWindowsManager::widget(['modal_view' => 'delete_rent']) ?>
-
-
-
-<?php
-$this->registerJs("
-//    $('body').on('beforeSubmit.yii', 'form#view-client-info', function(e) {
-//        e.preventDefault();
-//        if () {
-//            
-//        }
-//        return false;
-//    });
-")
-?>

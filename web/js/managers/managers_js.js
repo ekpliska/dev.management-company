@@ -70,22 +70,22 @@ $(document).ready(function() {
         } else {
             // Показать форму Добавление нового арендатора
             if ($('#is_rent').is(':checked')) {
-                $.ajax({
-                    url: 'show-form',
-                    method: 'POST',
-                    async: false,
-                    data: {
-                        accountNumber: accountNumber,
-                        _show: checkShow,
-                    },
-                    success: function(response) {
-                        if (response.status && response.show) {
-                            $('.form-add-rent').html(response.data);
-                        } else {
-                            $('.form-add-rent').html(response.message);
-                        }
-                    }
-                });
+//                $.ajax({
+//                    url: 'show-form',
+//                    method: 'POST',
+//                    async: false,
+//                    data: {
+//                        accountNumber: accountNumber,
+//                        _show: checkShow,
+//                    },
+//                    success: function(response) {
+//                        if (response.status && response.show) {
+//                            $('.form-add-rent').html(response.data);
+//                        } else {
+//                            $('.form-add-rent').html(response.message);
+//                        }
+//                    }
+//                });
             } else {
                 $('.form-add-rent').html('Арендатор отсутствует');
             }
