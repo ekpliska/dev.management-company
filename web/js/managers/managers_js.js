@@ -117,10 +117,46 @@ $(document).ready(function() {
             url: 'delete-rent-profile?rent=' + rentsId + '&account=' + accountId,
             method: 'POST',
             error: function() {
-                console.log('Error #1000-03');
+                console.log('Error #2000-03');
             }
         });
     });
+    
+    
+    /* Обработка события при клике на dropDownList "Список лицевых счетов собственника"
+     * Профиль Собственника, блок "Контактные данные арендатора"
+     */
+    $('#_list-account').on('change', function() {
+        var accountNumber = $('input[name*=account-number]');
+        var client = $(this).data('client');
+        var account = $(this).val();
+        
+        accountNumber.val($('#_list-account :selected').text());
+        $.ajax({
+            url: 'check-account',
+            data: {
+                dataClient: client,
+                dataAccount: account,
+            },
+            error: function() {
+                console.log('Error #2000-11');
+            },
+            dataType: 'json',
+            type: 'POST',
+            success: function(response) {
+                console.log(response.account);
+                console.log(response.client);
+                if (response.is_rent) {
+                    $('#is_rent').prop('checked', true);
+                } else {
+                    $('#is_rent').prop('checked', false);
+                }                
+               $("#content-replace").html(response.data);
+            }
+        });
+
+    });
+    
 
 });
     

@@ -119,7 +119,8 @@ $this->title = 'Собственник ' . $client_info->fullName;
         <?= $form->field($add_rent, 'account_id')->dropDownList($list_account, [
                 'value' => $account_choosing,
                 'id' => '_list-account',
-                'class' => 'form-control']) ?>
+                'class' => 'form-control',
+                'data-client' => $client_info->clients_id]) ?>
         
         <div class="panel panel-default">
             <div class="panel-heading">Данные об арендаторе</div>
@@ -136,11 +137,10 @@ $this->title = 'Собственник ' . $client_info->fullName;
                         ?>
                     <?php else : ?>
                         <p>Арендатор отсутствует</p>
-                        <div class="form-add-rent"></div>
-                        <?= $this->render('_form/add-rent', [
+                        <?php /* = $this->render('_form/add-rent', [
                             'form' => $form, 
                             'add_rent' => $add_rent, 
-                            'client_id' => $client_info->id]) ?>
+                            'client_id' => $client_info->id]) */ ?>
                     <?php endif; ?>
                 </div>
                     

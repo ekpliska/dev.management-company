@@ -179,6 +179,48 @@ class ClientsController extends AppManagersController {
     }
     
     /*
+     * Фильтр выбора лицевого счета
+     * 
+     * dropDownList Лицевой счет
+     */
+    public function actionCheckAccount() {
+        
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        
+        if (Yii::$app->request->isAjax) {
+            
+            // Из пост запроса получаем ID лицевого счета и собственника
+            $account_id = Yii::$app->request->post('dataAccount');
+            $client_id = Yii::$app->request->post('dataClient');
+            
+            // Ищем арендатора, закрепленного за указанным лицевым счетом
+            $model = PersonalAccount::findByRent($account_id, $client_id);
+            
+            /*
+             * Если арендатор существует, генерирурем для него модель
+             */
+            if (!empty($model->personal_rent_id)) {
+                $rent_info = Rents::findOne(['rents_id' => $model->personal_rent_id]);
+                if ($rent_info) {
+                    $is_rent = true;
+                }
+            } else {
+                $rent_info = [];
+            }
+            
+            $data = $this->renderPartial('_form/rent-view', [
+                'form' => \yii\widgets\ActiveForm::begin(),
+                'rent_info' => $rent_info, 
+            ]);
+            
+            return ['status' => true, 'data' => $data, 'is_rent' => $is_rent];
+            
+        }
+        return ['status' => false];
+        
+    }    
+    
+    /*
      * Удалить профиль Арендатора
      */
     public function actionDeleteRentProfile($rent, $account) {
