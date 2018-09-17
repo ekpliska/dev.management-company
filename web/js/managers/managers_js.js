@@ -7,12 +7,12 @@ $(document).ready(function() {
     // ******************************************************** //
     // ************    Start Block of Profile    ************** //
     // ******************************************************** //
-    
+    // /module/controller/action
     /*
      * Формирование зависимых списков выбора Подразделения и Должности Администратора
      */
     $('.department_list').on('change', function(e) {
-        $.post('show-post?departmentId=' + $(this).val(),
+        $.post('/web/managers/app-managers/show-post?departmentId=' + $(this).val(),
         function(data) {
             $('.posts_list').html(data);
         });

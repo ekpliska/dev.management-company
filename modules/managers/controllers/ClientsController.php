@@ -6,12 +6,13 @@
     use yii\web\NotFoundHttpException;
     use yii\data\ActiveDataProvider;
     use yii\web\UploadedFile;
+    use yii\widgets\ActiveForm;
     use app\modules\managers\controllers\AppManagersController;
     use app\modules\managers\models\Clients;
     use app\modules\managers\models\User;
     use app\models\PersonalAccount;
     use app\models\Rents;
-    use app\modules\managers\models\AddRent;
+    use app\modules\managers\models\AddRent;    
 
 /**
  * Клиенты
@@ -209,7 +210,7 @@ class ClientsController extends AppManagersController {
             }
             
             $data = $this->renderPartial('_form/rent-view', [
-                'form' => \yii\widgets\ActiveForm::begin(),
+                'form' => ActiveForm::begin(),
                 'rent_info' => $rent_info, 
             ]);
             

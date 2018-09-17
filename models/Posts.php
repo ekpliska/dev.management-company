@@ -7,7 +7,7 @@
     use app\models\Departments;
 
 /**
- * Должности
+ * Должности/Специализации
  */
 class Posts extends ActiveRecord
 {

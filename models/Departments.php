@@ -4,7 +4,6 @@
     use Yii;
     use yii\db\ActiveRecord;
     use yii\helpers\ArrayHelper;
-    use app\models\Employers;
     use app\models\Posts;
 
 /**

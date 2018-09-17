@@ -85,26 +85,5 @@ class ManagersController extends AppManagersController {
         ]);
         
     }
-    
-    public function actionShowPost($departmentId) {
-        
-        $department_list = Departments::find()
-                ->andWhere(['departments_id' => $departmentId])
-                ->asArray()
-                ->count();
-        $post_list = Posts::find()
-                ->andWhere(['posts_department_id' => $departmentId])
-                ->asArray()
-                ->all();
-        
-        if ($department_list > 0) {
-            foreach ($post_list as $post) {
-                echo '<option value="' . $post['posts_id'] . '">' . $post['posts_name'] . '</option>';
-            }
-        } else {
-            echo '<option>-</option>';
-        }
-        
-    }
 
 }
