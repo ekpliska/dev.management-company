@@ -60,11 +60,12 @@ class DispatchersController extends AppManagersController {
             return $this->redirect('edit-profile');
         }
         
-        return $this->render('add-employer', [
+        return $this->render('add-dispatcher', [
             'model' => $model,
             'department_list' => $department_list,
             'post_list' => $post_list,
             'roles' => $roles,
         ]);
     }
+    
 }

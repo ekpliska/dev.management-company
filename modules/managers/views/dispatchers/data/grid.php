@@ -28,13 +28,13 @@
             ],
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{edit-client} {delete-client}',
+                'template' => '{edit-dispatcher} {delete-dispatcher}',
                 'buttons' => [
-                    'view-client' => function ($url, $data) {
+                    'edit-dispatcher' => function ($url, $data) {
                         return 
                             Html::a('Просмотр', 
                                     [
-                                        'dispatchers/edit-client',
+                                        'dispatchers/edit-dispatcher',
                                         'employer_id' => $data['id'],
                                     ], 
                                     [
@@ -43,9 +43,9 @@
                                     ]
                             );
                     },
-                    'delete-client' => function ($url, $data) {
+                    'delete-dispatcher' => function ($url, $data) {
                         return 
-                            Html::a('Удалить', ['dispatchers/delete-client', 'client_id' => $data['id']], [
+                            Html::a('Удалить', ['delete-dispatchers', 'employer_id' => $data['id']], [
                                 'data-pjax' => false,
                                 'class' => 'btn btn-danger btn-sm',
                             ]);
