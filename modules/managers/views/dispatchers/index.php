@@ -20,7 +20,11 @@ $this->title = 'Диспетчеры';
         ]);
     ?>
         
-        <?= $form->field($search_model, '_input')->input('text')->label() ?>
+        <?= $form->field($search_model, '_input')
+                ->input('text', [
+                    'placeHolder' => 'Поиск...',
+                    'id' => '_search-dispatcher',])
+                ->label() ?>
     
     <?php ActiveForm::end(); ?>
     

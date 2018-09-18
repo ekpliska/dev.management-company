@@ -157,6 +157,29 @@ $(document).ready(function() {
 
     });
     
+    /*
+     * Поиск по Диспетчерам
+     */
+    $('#_search-dispatcher').on('input', function() {
+    
+        var searchValue = $(this).val();
+        
+        $.ajax({
+            url: 'search-dispatcher',
+            method: 'POST',
+            data: {
+                searchValue: searchValue,
+            },
+            success: function(response) {
+                $('.grid-view').html(response.data);
+            },
+            error: function() {
+                console.log('Error #2000-10');
+            }
+        });
+    });
+
+    
 
 });
     

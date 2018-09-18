@@ -3,6 +3,7 @@
     namespace app\modules\managers\controllers;
     use Yii;
     use yii\web\UploadedFile;
+    use yii\web\Response;
     use app\modules\managers\controllers\AppManagersController;
     use app\modules\managers\models\form\EmployerForm;
     use app\models\Departments;
@@ -72,4 +73,19 @@ class DispatchersController extends AppManagersController {
         ]);
     }
     
+    public function actionSearchDispatcher() {
+        
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $value = Yii::$app->request->post('searchValue');
+        
+        if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
+            // Загружаем модель поиска
+            $model = new searchEmployer();
+            $dispatchers = $model->searshDispatcer($value);
+            $data = $this->renderAjax('data/grid', ['dispatchers' => $dispatchers]);
+            return ['status' => true, 'data' => $data];
+        }
+        return ['status' => false];
+        
+    }
 }

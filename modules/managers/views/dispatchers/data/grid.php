@@ -6,6 +6,7 @@
  * Вывод таблицы зарегистрированных пользователей с ролью Диспетчер
  */
 ?>
+<div class="grid-view">
     <?= GridView::widget([
         'dataProvider' => $dispatchers,
         'columns' => [
@@ -54,3 +55,4 @@
             ],
         ],
     ]); ?>
+</div>

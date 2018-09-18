@@ -18,7 +18,8 @@ class Dispatchers extends Employers {
                 ->from('employers as e')
                 ->join('LEFT JOIN', 'user as u', 'e.employers_id = u.user_employee_id')                
                 ->join('LEFT JOIN','auth_assignment as au','au.user_id = u.user_id')
-                ->where(['au.item_name' => 'dispatcher']);
+                ->where(['au.item_name' => 'dispatcher'])
+                ->orderBy(['e.employers_surname' => SORT_ASC]);
         
         return $query;
         
