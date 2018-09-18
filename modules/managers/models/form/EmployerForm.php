@@ -5,7 +5,6 @@
     use yii\base\Model;
     use app\models\User;
     use app\models\Employers;
-    use yii\widgets\ActiveForm;
 
 /**
  * Новый Диспетчер
@@ -13,7 +12,7 @@
 
 class EmployerForm extends Model {
     
-    // User info
+    // Данные пользователя
     public $username;
     public $password;
     public $password_repeat;
@@ -23,7 +22,7 @@ class EmployerForm extends Model {
     public $role;
     public $rule;
     
-    // dispatcher info
+    // Данные сотрудника
     public $surname;
     public $name;
     public $second_name;
@@ -31,9 +30,12 @@ class EmployerForm extends Model {
     public $department;
     public $post;
     
-    // rules
+    // Разрешение на добавление новостей
     public $is_new = false;
     
+    /*
+     * Правила валидации
+     */
     public function rules() {
         return [
             
@@ -96,6 +98,9 @@ class EmployerForm extends Model {
         ];
     }
     
+    /*
+     * Метод отвечает за добавление сведений о новом сотруднике и создание учетной записи для него
+     */
     public function addDispatcher($file) {
         
         $transaction = Yii::$app->db->beginTransaction();
@@ -122,8 +127,8 @@ class EmployerForm extends Model {
                 $user->user_email = $this->email;
                 $user->user_mobile = $this->mobile;
                 $user->status = User::STATUS_ENABLED;
+                // Загрузка фотографии
                 $user->uploadPhoto($file);
-                // $user->user_employee_id = $employer->employers_id;
                 $user->link('employer', $employer);
 
                 if(!$user->save(false)) {

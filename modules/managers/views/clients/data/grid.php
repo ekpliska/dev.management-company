@@ -6,7 +6,7 @@
     use app\modules\managers\components\BlockClientColumn;
 
 /*
- * Вывод таблицы заявок текущего пользователя
+ * Вывод таблицы зарегистрированных собственников
  */
 ?>
     <?= GridView::widget([

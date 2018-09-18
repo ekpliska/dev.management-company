@@ -8,9 +8,8 @@
 /* 
  * Форма
  * 
- * Новый диспетчер
+ * Новый сотрудник
  */
-$this->title = 'Диспетчер (+)';
 ?>
 <div class="dispatchers-default-index">
     <h1><?= $this->title ?></h1>

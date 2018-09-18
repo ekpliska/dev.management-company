@@ -7,6 +7,7 @@
     use app\modules\managers\models\form\EmployerForm;
     use app\models\Departments;
     use app\modules\managers\models\User;
+    use app\modules\managers\models\Dispatchers;
 
 /**
  * Диспетчеры
@@ -19,13 +20,31 @@ class DispatchersController extends AppManagersController {
      * Все Лиспетчеры
      */
     public function actionIndex() {
-        return $this->render('index');
+        
+        $dispatchers = new \yii\data\ActiveDataProvider([
+            'query' => Dispatchers::getListDispatchers(),
+            'pagination' => [
+                'forcePageParam' => false,
+                'pageSizeParam' => false,
+                'pageSize' => 30,
+            ]            
+        ]);
+        
+        return $this->render('index', [
+            'dispatchers' => $dispatchers,
+        ]);
     }
     
     /*
      * Создать нового диспетчера
+     * 
+     * @param model $model Модель Новый сотрудник
+     * @param array $department_list Списко подраздерений
+     * @param array $roles Роли пользователя
      */
-    public function actionAddEmployer() {
+    public function actionAddDispatcher() {
+        
+        $this->view->title = 'Диспетчер (+)';
         
         $model = new EmployerForm();
         
@@ -38,7 +57,7 @@ class DispatchersController extends AppManagersController {
             $file = UploadedFile::getInstance($model, 'photo');
             $model->photo = $file;
             $model->addDispatcher($file);
-            return $this->redirect('index');
+            return $this->redirect('edit-profile');
         }
         
         return $this->render('add-employer', [
