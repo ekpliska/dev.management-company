@@ -1,85 +1,56 @@
 <?php
 
-    namespace app\models;
-    use Yii;
-    use yii\db\ActiveRecord;
-    use app\models\User;
-    use app\models\Departments;
-    use app\models\Posts;
+namespace app\models;
+
+use Yii;
 
 /**
- * Сотрудники
+ * This is the model class for table "employers".
+ *
+ * @property int $employers_id
+ * @property string $employers_name
+ * @property string $employers_surname
+ * @property string $employers_second_name
+ * @property int $employers_department_id
+ * @property int $employers_posts_id
+ * @property string $employers_birthday
  */
-class Employers extends ActiveRecord
+class Employers extends \yii\db\ActiveRecord
 {
-    
     /**
-     * Таблица из БД
+     * {@inheritdoc}
      */
-    public static function tableName() {
+    public static function tableName()
+    {
         return 'employers';
     }
 
     /**
-     * Правила валидации
+     * {@inheritdoc}
      */
-    public function rules() {
+    public function rules()
+    {
         return [
-            
-            [[
-                'employers_department_id', 'employers_posts_id', 'employers_birthday',
-                'employers_name', 'employers_surname', 'employers_second_name'], 'required'],
-            
-            [['employers_name', 'employers_surname', 'employers_second_name'], 'filter', 'filter' => 'trim'],
-
-            [['employers_name', 'employers_surname', 'employers_second_name'], 'string', 'min' => 3, 'max' => 70],
-            
-            [
-                ['employers_name', 'employers_surname', 'employers_second_name'], 
-                'match',
-                'pattern' => '/^[А-Яа-я\ \-]+$/iu',
-                'message' => 'Поле "{attribute}" может содержать только буквы русского алфавита, и знак "-"',
-            ],
-            
+            [['employers_name', 'employers_surname', 'employers_second_name', 'employers_department_id', 'employers_posts_id', 'employers_birthday'], 'required'],
             [['employers_department_id', 'employers_posts_id'], 'integer'],
-            
-            ['employers_birthday', 'date', 'format' => 'php:Y-m-d'],
+            [['employers_birthday'], 'safe'],
+            [['employers_name', 'employers_surname', 'employers_second_name'], 'string', 'max' => 70],
         ];
     }
 
-    /*
-     * Свзяь с таблицей Пользователи
-     */
-    public function getUser() {
-        return $this->hasOne(User::className(), ['user_employee_id' => 'employers_id']);
-    }    
-
-    /*
-     * Свзяь с таблицей Подразделения
-     */
-    public function getDepartment() {
-        return $this->hasOne(Departments::className(), ['departments_id' => 'employers_department_id']);
-    }
-
-    /*
-     * Свзяь с таблицей Должности
-     */
-    public function getPost() {
-        return $this->hasOne(Posts::className(), ['posts_id' => 'employers_posts_id']);
-    }    
-    
     /**
-     * Метки для полей
+     * {@inheritdoc}
      */
-    public function attributeLabels() {
+    public function attributeLabels()
+    {
         return [
             'employers_id' => 'Employers ID',
-            'employers_name' => 'Имя',
-            'employers_surname' => 'Фамилия',
-            'employers_second_name' => 'Отчество',
-            'employers_department_id' => 'Подразделение',
-            'employers_posts_id' => 'Должность',
-            'employers_birthday' => 'Дата рождения',
+            'employers_name' => 'Employers Name',
+            'employers_surname' => 'Employers Surname',
+            'employers_second_name' => 'Employers Second Name',
+            'employers_department_id' => 'Employers Department ID',
+            'employers_posts_id' => 'Employers Posts ID',
+            'employers_birthday' => 'Employers Birthday',
         ];
     }
 }

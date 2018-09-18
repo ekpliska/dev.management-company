@@ -28,7 +28,11 @@ class User extends ActiveRecord implements IdentityInterface
     const SCENARIO_EDIT_PROFILE = 'edit user profile';
     const SCENARIO_EDIT_ADMINISTRATION_PROFILE = 'edit administration profile';
     const SCENARIO_EDIT_CLIENT_PROFILE = 'edit client profile';
+    const SCENARIO_ADD_USER = 'add new user';
     
+    public $add_news = false;
+
+
     public function behaviors() {
         return [
             TimestampBehavior::className(),
@@ -344,6 +348,7 @@ class User extends ActiveRecord implements IdentityInterface
             'updated_at' => 'Дата редактирования',
             'status' => 'Статус',
             'date_login' => 'Дата последнего входа',
+            'add_news' => 'Добавлять новости',
         ];
     }
     

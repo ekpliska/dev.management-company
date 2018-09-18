@@ -4,6 +4,7 @@
     use yii\helpers\ArrayHelper;
     use yii\helpers\Html;
     use yii\widgets\MaskedInput;
+    use kartik\date\DatePicker;
 
 /* 
  * Форма
@@ -47,8 +48,18 @@ $this->title = 'Диспетчер (+)';
                                 'placeHolder' => $model->getAttributeLabel('second_name'),])
                             ->label() ?>
                     
-                    <?= $form->field($model, 'gender')
-                            ->radioList(ArrayHelper::map($gender_list, 'id', 'name'))->label(); ?>
+                    <?= $form->field($model, 'birthday')
+                            ->widget(DatePicker::className(), [
+                                'language' => 'ru',
+                                'options' => [
+                                    'placeHolder' => 'Дата рождения',
+                                ],
+                                'type' => DatePicker::TYPE_COMPONENT_APPEND,
+                                'pluginOptions' => [
+                                    'autoClose' => true,
+                                    'format' => 'yyyy-mm-dd',
+                                ],
+                            ]) ?>
                     
                     <?= $form->field($model, 'mobile')
                             ->widget(MaskedInput::className(), [
@@ -85,7 +96,7 @@ $this->title = 'Диспетчер (+)';
                     <?= $form->field($model, 'role')
                             ->dropDownList($roles, [
                                 'value' => 'dispatcher',
-                                'disabled' => true,])
+                                'disabled' => false,])
                             ->label() ?>
                     
                     <?= $form->field($model, 'is_new')->checkbox() ?>

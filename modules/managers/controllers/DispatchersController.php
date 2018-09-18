@@ -29,25 +29,19 @@ class DispatchersController extends AppManagersController {
     public function actionAddDispatcher() {
         
         $model = new EmployerForm();
-        $gender_list = Employers::getGenderArray();
+        
         $department_list = Departments::getArrayDepartments();
         $post_list = [];
         $roles = User::getRole();
         
         
-        if ($model->load(Yii::$app->request->post())) {
-            if ($model->hasErrors()) {
-                Yii::$app->session->setFlash('profile-admin');
-                return $this->redirect(Yii::$app->request->referrer);
-            }
-            Yii::$app->session->setFlash('profile-admin');
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $model->addDispatcher();
             return $this->redirect('index');
         }
         
         return $this->render('add-dispatcher', [
             'model' => $model,
-            'gender_list' => $gender_list,
             'department_list' => $department_list,
             'post_list' => $post_list,
             'roles' => $roles,

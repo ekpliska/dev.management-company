@@ -5,10 +5,12 @@
     use yii\base\Model;
     use app\models\User;
     use app\models\Employers;
+    use yii\widgets\ActiveForm;
 
 /**
  * Новый Диспетчер
  */
+
 class EmployerForm extends Model {
     
     // User info
@@ -25,7 +27,7 @@ class EmployerForm extends Model {
     public $surname;
     public $name;
     public $second_name;
-    public $gender;
+    public $birthday;
     public $department;
     public $post;
     
@@ -36,9 +38,19 @@ class EmployerForm extends Model {
         return [
             
             [[
-                'username', 'password', 'password_repeat', 'mobile', 'email', 'role', 'rule' ,
-                'surname', 'name', 'second_name', 'gender', 'department', 'post',], 
+                'username', 'password', 'password_repeat', 'mobile', 'email',
+                'surname', 'name', 'second_name', 'birthday', 'department', 'post',
+                ], 
                 'required'],
+            
+            [['surname', 'name', 'second_name'], 'filter', 'filter' => 'trim'],
+            [['surname', 'name', 'second_name'], 'string', 'min' => 3, 'max' => 50],
+            [
+                ['surname', 'name', 'second_name'], 
+                'match', 
+                'pattern' => '/^[А-Яа-я\ \-]+$/iu', 
+                'message' => 'Поле "{attribute}" может содержать только буквы русского алфавита, и знак "-"',
+            ],            
             
             ['username', 'string', 'min' => 3, 'max' => 50],
             
@@ -74,14 +86,6 @@ class EmployerForm extends Model {
             [['photo'], 'file', 'extensions' => 'png, jpg, jpeg'],
             [['photo'], 'image', 'maxWidth' => 510, 'maxHeight' => 510],
             
-            [['surname', 'name', 'second_name'], 'filter', 'filter' => 'trim'],
-            [['surname', 'name', 'second_name'], 'string', 'min' => 3, 'max' => 50],
-            [
-                ['surname', 'name', 'second_name'], 
-                'match', 
-                'pattern' => '/^[А-Яа-я\ \-]+$/iu', 
-                'message' => 'Поле "{attribute}" может содержать только буквы русского алфавита, и знак "-"',
-            ],
             
         ];
     }
@@ -100,10 +104,9 @@ class EmployerForm extends Model {
                 $employer->employers_second_name = $this->surname;
                 $employer->employers_department_id = $this->department;
                 $employer->employers_posts_id = $this->post;
-                $employer->employers_gender = $this->gender;
+                $employer->employers_birthday = $this->birthday;
                 
                 if(!$employer->save()) {
-                    Yii::$app->session->setFlash('profile-admin-error');
                     throw new \yii\db\Exception('Ошибка сохранения арендатора. Ошибка: ' . join(', ', $employer->getFirstErrors()));
                 }
                 
@@ -115,7 +118,6 @@ class EmployerForm extends Model {
                 $user->status = User::STATUS_ENABLED;
 
                 if(!$user->save(false)) {
-                    Yii::$app->session->setFlash('profile-admin-error');
                     throw new \yii\db\Exception('Ошибка сохранения арендатора. Ошибка: ' . join(', ', $user->getFirstErrors()));
                 }
                 
