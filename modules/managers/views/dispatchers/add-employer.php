@@ -1,7 +1,6 @@
 <?php
 
     use yii\widgets\ActiveForm;
-    use yii\helpers\ArrayHelper;
     use yii\helpers\Html;
     use yii\widgets\MaskedInput;
     use kartik\date\DatePicker;
@@ -89,7 +88,7 @@ $this->title = 'Диспетчер (+)';
                 <div class="panel-heading">Фотография</div>
                 <div class="panel-body">
                     <div class="text-center">
-                        <?= Html::img($model->photo, ['id' => 'photoPreview','class' => 'img-circle', 'alt' => $model->username, 'width' => 150]) ?>
+                        <?= Html::img($model->photo, ['id' => 'photoPreview', 'class' => 'img-circle', 'alt' => $model->username, 'width' => 150]) ?>
                         <br />
                         <?= $form->field($model, 'photo')->input('file', ['id' => 'btnLoad'])->label(false) ?>
                     </div>
@@ -122,7 +121,7 @@ $this->title = 'Диспетчер (+)';
                     
                     <?= $form->field($model, 'password')
                             ->input('password', [
-                                'placeHolder' => $model->getAttributeLabel('email'),
+                                'placeHolder' => $model->getAttributeLabel('password'),
                                 'class' => 'form-control show_password',])
                             ->label() ?>
                     

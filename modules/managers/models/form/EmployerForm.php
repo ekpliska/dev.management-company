@@ -43,6 +43,8 @@ class EmployerForm extends Model {
                 ], 
                 'required'],
             
+            ['role', 'string'],
+            
             [['surname', 'name', 'second_name'], 'filter', 'filter' => 'trim'],
             [['surname', 'name', 'second_name'], 'string', 'min' => 3, 'max' => 50],
             [
@@ -91,7 +93,7 @@ class EmployerForm extends Model {
     }
     
     public function addDispatcher() {
-        
+
         $transaction = Yii::$app->db->beginTransaction();
         try {
             if ($this->validate()) {
@@ -123,11 +125,10 @@ class EmployerForm extends Model {
                     throw new \yii\db\Exception('Ошибка сохранения арендатора. Ошибка: ' . join(', ', $user->getFirstErrors()));
                 }
                 
-                // Назначаем сотруднику роль
-                $role = Yii::$app->authManager->getRole('dispatcher');
-                Yii::$app->authManager->assign($role, $user->user_id);
+                // Назначение роли пользователю
+                $user->setRole($this->role, $user->user_id);
                 
-                // Устанавливаем права на добавления новостей
+                // Устанавливаем права на добавление новостей
                 if ($this->is_new === 1) {
                     $permission_news = Yii::$app->authManager->getPermission('AddNews');
                     Yii::$app->authManager->assign($permission_news, $user->user_id);

@@ -299,6 +299,17 @@ class User extends ActiveRecord implements IdentityInterface
     }
     
     /*
+     * Назначение роли пользователю
+     * 
+     * @param string $role Роль
+     * @param integer $user_id ID пользователя
+     */
+    public function setRole($role, $user_id) {
+        $_role = Yii::$app->authManager->getRole($role);
+        Yii::$app->authManager->assign($_role, $user_id);
+    }
+    
+    /*
      * Метод сохранения электронной почты/мобильного телефона
      * 
      * Если пользователь меняет мобильный телефон, то 

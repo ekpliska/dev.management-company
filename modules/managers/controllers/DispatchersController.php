@@ -3,9 +3,7 @@
     namespace app\modules\managers\controllers;
     use Yii;
     use app\modules\managers\controllers\AppManagersController;
-    use app\modules\managers\models\Dispatchers;
     use app\modules\managers\models\form\EmployerForm;
-    use app\models\Employers;
     use app\models\Departments;
     use app\modules\managers\models\User;
 
@@ -26,7 +24,7 @@ class DispatchersController extends AppManagersController {
     /*
      * Создать нового диспетчера
      */
-    public function actionAddDispatcher() {
+    public function actionAddEmployer() {
         
         $model = new EmployerForm();
         
@@ -40,7 +38,7 @@ class DispatchersController extends AppManagersController {
             return $this->redirect('index');
         }
         
-        return $this->render('add-dispatcher', [
+        return $this->render('add-employer', [
             'model' => $model,
             'department_list' => $department_list,
             'post_list' => $post_list,
