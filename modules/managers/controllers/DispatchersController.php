@@ -2,6 +2,7 @@
 
     namespace app\modules\managers\controllers;
     use Yii;
+    use yii\web\UploadedFile;
     use app\modules\managers\controllers\AppManagersController;
     use app\modules\managers\models\form\EmployerForm;
     use app\models\Departments;
@@ -34,7 +35,9 @@ class DispatchersController extends AppManagersController {
         
         
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            $model->addDispatcher();
+            $file = UploadedFile::getInstance($model, 'photo');
+            $model->photo = $file;
+            $model->addDispatcher($file);
             return $this->redirect('index');
         }
         

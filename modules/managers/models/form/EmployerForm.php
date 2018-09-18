@@ -54,36 +54,40 @@ class EmployerForm extends Model {
                 'message' => 'Поле "{attribute}" может содержать только буквы русского алфавита, и знак "-"',
             ],            
             
+            
             ['username', 'string', 'min' => 3, 'max' => 50],
             
             [['password', 'password_repeat'], 'string', 'min' => 6, 'max' => 12],
             ['password', 'compare', 'message' => 'Указанные пароли не совпадают!'],
+            
             [['username', 'password', 'password_repeat'],
                 'match', 
                 'pattern' => '/^[A-Za-z0-9\_\-]+$/iu', 
                 'message' => 'Поле "{attribute}" может содержать только буквы английского алфавита, цифры, знаки "-", "_"',
             ],            
-            
+            ['username', 'unique', 
+                'targetClass' => User::className(), 
+                'targetAttribute' => 'user_login', 
+                'message' => 'Данное имя пользователя в систмеме уже используется'
+            ],
+
+            ['email', 'email'],
             ['email', 'match',
                 'pattern' => '/^[A-Za-z0-9\_\-\@\.]+$/iu',
                 'message' => 'Поле "{attribute}" может содержать только буквы английского алфавита, цифры, знаки "-", "_"',
             ],
-            
-            [
-                'username', 'unique', 
-                'targetClass' => User::className(), 
-                'targetAttribute' => 'user_login', 
-                'message' => 'Пользователь с введенным лицевым счетом в системе уже зарегистрирован'
-            ],
-            
-            [
-                'email', 'unique',
+            ['email', 'unique',
                 'targetClass' => User::className(),
                 'targetAttribute' => 'user_email',
-                'message' => 'Указанный номер телефона в системе зарегистирован'
+                'message' => 'Указанный электронный адрес в системе уже используется'
             ],
             
             ['mobile', 'match', 'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/i'],
+            ['mobile', 'unique',
+                'targetClass' => User::className(),
+                'targetAttribute' => 'user_mobile',
+                'message' => 'Указанный номер мобильного телефона в системе уже используется'
+            ],
             
             [['photo'], 'file', 'extensions' => 'png, jpg, jpeg'],
             [['photo'], 'image', 'maxWidth' => 510, 'maxHeight' => 510],
@@ -92,8 +96,8 @@ class EmployerForm extends Model {
         ];
     }
     
-    public function addDispatcher() {
-
+    public function addDispatcher($file) {
+        
         $transaction = Yii::$app->db->beginTransaction();
         try {
             if ($this->validate()) {
@@ -102,7 +106,7 @@ class EmployerForm extends Model {
                 $employer = new Employers();
                 $employer->employers_name = $this->name;
                 $employer->employers_surname = $this->surname;
-                $employer->employers_second_name = $this->surname;
+                $employer->employers_second_name = $this->second_name;
                 $employer->employers_department_id = $this->department;
                 $employer->employers_posts_id = $this->post;
                 $employer->employers_birthday = $this->birthday;
@@ -118,7 +122,8 @@ class EmployerForm extends Model {
                 $user->user_email = $this->email;
                 $user->user_mobile = $this->mobile;
                 $user->status = User::STATUS_ENABLED;
-                $user->user_employee_id = $employer->employers_id;
+                $user->uploadPhoto($file);
+                // $user->user_employee_id = $employer->employers_id;
                 $user->link('employer', $employer);
 
                 if(!$user->save(false)) {
