@@ -20,7 +20,8 @@
         "yiisoft/yii2-swiftmailer": "~2.0.0",
         "costa-rico/yii2-images": "dev-master",
         "bower-asset/bootbox": "~4.3.0",
-        "kartik-v/yii2-widget-alert": "*"
+        "kartik-v/yii2-widget-alert": "*",
+        "kartik-v/yii2-widget-datepicker": "@dev"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

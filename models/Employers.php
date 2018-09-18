@@ -3,7 +3,6 @@
     namespace app\models;
     use Yii;
     use yii\db\ActiveRecord;
-    use yii\helpers\ArrayHelper;
     use app\models\User;
     use app\models\Departments;
     use app\models\Posts;
@@ -13,9 +12,6 @@
  */
 class Employers extends ActiveRecord
 {
-    
-    const GENDER_MALE = 0;
-    const GENDER_FEMALE = 1;
     
     /**
      * Таблица из БД
@@ -31,7 +27,7 @@ class Employers extends ActiveRecord
         return [
             
             [[
-                'employers_department_id', 'employers_posts_id', 'employers_gender',
+                'employers_department_id', 'employers_posts_id', 'employers_birthday',
                 'employers_name', 'employers_surname', 'employers_second_name'], 'required'],
             
             [['employers_name', 'employers_surname', 'employers_second_name'], 'filter', 'filter' => 'trim'],
@@ -45,7 +41,9 @@ class Employers extends ActiveRecord
                 'message' => 'Поле "{attribute}" может содержать только буквы русского алфавита, и знак "-"',
             ],
             
-            [['employers_department_id', 'employers_posts_id', 'employers_gender'], 'integer'],
+            [['employers_department_id', 'employers_posts_id'], 'integer'],
+            
+            ['employers_birthday', 'date', 'format' => 'php:Y-m-d'],
         ];
     }
 
@@ -70,41 +68,6 @@ class Employers extends ActiveRecord
         return $this->hasOne(Posts::className(), ['posts_id' => 'employers_posts_id']);
     }    
     
-    /*
-     * Сформировать массив
-     */
-    public static function getGenderArray() {
-        return [
-            ['id' => self::GENDER_MALE, 'name' => 'Мужской'],
-            ['id' => self::GENDER_FEMALE, 'name' => 'Женский'],
-        ];
-    }
-    
-    /*
-     * Выводим текстовое обознаечние пола
-     */
-    public function getGenderName() {
-        return ArrayHelper::getValue(self::getGenderArray(), $this->gender);
-    }
-    
-    /*
-     * После создания нового записи нового сотрудника
-     * 
-     * Создаем для него учетную запись
-     */
-//    public function afterSave($insert, $changedAttributes) {
-//        parent::afterSave($insert, $changedAttributes);
-//        
-//        if ($insert) {
-//            $new_user = new User();
-//            echo '<pre>';
-//            var_dump($insert);
-//            echo '<pre>';
-//            var_dump($changedAttributes);
-//            die();
-//        }
-//    }
-    
     /**
      * Метки для полей
      */
@@ -116,7 +79,7 @@ class Employers extends ActiveRecord
             'employers_second_name' => 'Отчество',
             'employers_department_id' => 'Подразделение',
             'employers_posts_id' => 'Должность',
-            'employers_gender' => 'Пол',
+            'employers_birthday' => 'Дата рождения',
         ];
     }
 }

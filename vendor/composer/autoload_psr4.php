@@ -15,6 +15,7 @@ return array(
     'yii\\' => array($vendorDir . '/yiisoft/yii2'),
     'rico\\yii2images\\' => array($vendorDir . '/costa-rico/yii2-images'),
     'phpDocumentor\\Reflection\\' => array($vendorDir . '/phpdocumentor/reflection-common/src', $vendorDir . '/phpdocumentor/reflection-docblock/src', $vendorDir . '/phpdocumentor/type-resolver/src'),
+    'kartik\\date\\' => array($vendorDir . '/kartik-v/yii2-widget-datepicker/src'),
     'kartik\\base\\' => array($vendorDir . '/kartik-v/yii2-krajee-base/src'),
     'kartik\\alert\\' => array($vendorDir . '/kartik-v/yii2-widget-alert'),
     'cebe\\markdown\\' => array($vendorDir . '/cebe/markdown'),

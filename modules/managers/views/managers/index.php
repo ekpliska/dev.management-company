@@ -4,6 +4,7 @@
     use yii\helpers\Html;
     use yii\helpers\ArrayHelper;
     use yii\widgets\MaskedInput;
+    use kartik\date\DatePicker;
     use app\helpers\FormatHelpers;
     use app\modules\managers\widgets\AlertsShow;
 
@@ -61,8 +62,18 @@ $this->title = "Профиль";
                         'placeHolder' => $employer_info->getAttributeLabel('employers_surname')])
                     ->label() ?>
             
-            <?= $form->field($employer_info, 'employers_gender')
-                    ->radioList(ArrayHelper::map($gender_list, 'id', 'name'))->label(); ?>
+            <?= $form->field($employer_info, 'employers_birthday')
+                    ->widget(DatePicker::className(), [
+                        'language' => 'ru',
+                        'options' => [
+                            'placeholder' => 'Дата рождения',
+                        ],
+                        'type' => DatePicker::TYPE_COMPONENT_APPEND,
+                        'pluginOptions' => [
+                            'autoClose' => true,
+                            'format' => 'yyyy-mm-dd',
+                        ]
+                    ]) ?>
             
             <?= $form->field($employer_info, 'employers_department_id')
                     ->dropDownList($department_list, [

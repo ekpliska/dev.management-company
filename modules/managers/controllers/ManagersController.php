@@ -21,7 +21,6 @@ class ManagersController extends AppManagersController {
      * @param array $user_info Информация о текущем пользователе
      * @param object $user_model Модель профиля пользователя
      * @param array $employer_info Информация о сотруднике
-     * @param array $gender_list Пол /Мужской, женский/
      * @param array $department_list Список подразделений
      * @param array $post_lis Списко должностей
      */
@@ -33,7 +32,6 @@ class ManagersController extends AppManagersController {
         
         $employer_info = Employers::find()->andWhere(['employers_id' => $user_info->employerID])->one();
         
-        $gender_list = Employers::getGenderArray();
         $department_list = Departments::getArrayDepartments();
         $post_list = Posts::getPostList($employer_info->employers_department_id);
         
@@ -57,7 +55,6 @@ class ManagersController extends AppManagersController {
             'user_info' => $user_info,
             'user_model' => $user_model,
             'employer_info' => $employer_info,
-            'gender_list' => $gender_list,
             'department_list' => $department_list,
             'post_list' => $post_list,
         ]);

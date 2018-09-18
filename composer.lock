@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "8975dee2d91dcf4da8cfac829f79dd3d",
+    "content-hash": "ef9210dd7ff3d57a733eb5a54cd49a06",
     "packages": [
         {
             "name": "abeautifulsite/simpleimage",
@@ -445,6 +445,60 @@
                 "yii2"
             ],
             "time": "2017-03-10T17:08:52+00:00"
+        },
+        {
+            "name": "kartik-v/yii2-widget-datepicker",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/yii2-widget-datepicker.git",
+                "reference": "01a5940fb1b70b39b7916a4e68768f8626024ddc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-datepicker/zipball/01a5940fb1b70b39b7916a4e68768f8626024ddc",
+                "reference": "01a5940fb1b70b39b7916a4e68768f8626024ddc",
+                "shasum": ""
+            },
+            "require": {
+                "kartik-v/yii2-krajee-base": "~1.9"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.4.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "kartik\\date\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
+                }
+            ],
+            "description": "Enhanced Yii2 wrapper for the bootstrap datepicker plugin (sub repo split from yii2-widgets).",
+            "homepage": "https://github.com/kartik-v/yii2-widget-datepicker",
+            "keywords": [
+                "date",
+                "extension",
+                "form",
+                "jquery",
+                "picker",
+                "plugin",
+                "select2",
+                "widget",
+                "yii2"
+            ],
+            "time": "2018-08-29T12:10:45+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -3169,7 +3223,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "costa-rico/yii2-images": 20
+        "costa-rico/yii2-images": 20,
+        "kartik-v/yii2-widget-datepicker": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
