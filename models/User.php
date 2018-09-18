@@ -324,11 +324,12 @@ class User extends ActiveRecord implements IdentityInterface
     
     public function afterSave($insert, $changedAttributes) {
         
-        parent::afterSave($insert, $changedAttributes);
-        if ($insert) {
-            $rentRole = Yii::$app->authManager->getRole('clients_rent');
-            Yii::$app->authManager->assign($rentRole, $this->getId());                    
-        }
+//        parent::afterSave($insert, $changedAttributes);
+//        if ($insert) {
+//            $rentRole = Yii::$app->authManager->getRole('clients_rent');
+//            Yii::$app->authManager->assign($rentRole, $this->getId());                    
+//        }
+        
     }
     
     /*

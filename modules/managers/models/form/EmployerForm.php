@@ -92,13 +92,12 @@ class EmployerForm extends Model {
     
     public function addDispatcher() {
         
-        
         $transaction = Yii::$app->db->beginTransaction();
         try {
             if ($this->validate()) {
-
+                
+                // Добавляем нового Сотрудника
                 $employer = new Employers();
-
                 $employer->employers_name = $this->name;
                 $employer->employers_surname = $this->surname;
                 $employer->employers_second_name = $this->surname;
@@ -110,19 +109,32 @@ class EmployerForm extends Model {
                     throw new \yii\db\Exception('Ошибка сохранения арендатора. Ошибка: ' . join(', ', $employer->getFirstErrors()));
                 }
                 
+                // Создаем нового пользователя для сотрудника
                 $user = new User();
                 $user->user_login = $this->username;
                 $user->user_password = Yii::$app->security->generatePasswordHash($this->password);
                 $user->user_email = $this->email;
                 $user->user_mobile = $this->mobile;
                 $user->status = User::STATUS_ENABLED;
+                $user->user_employee_id = $employer->employers_id;
+                $user->link('employer', $employer);
 
                 if(!$user->save(false)) {
                     throw new \yii\db\Exception('Ошибка сохранения арендатора. Ошибка: ' . join(', ', $user->getFirstErrors()));
                 }
                 
+                // Назначаем сотруднику роль
+                $role = Yii::$app->authManager->getRole('dispatcher');
+                Yii::$app->authManager->assign($role, $user->user_id);
+                
+                // Устанавливаем права на добавления новостей
+                if ($this->is_new === 1) {
+                    $permission_news = Yii::$app->authManager->getPermission('AddNews');
+                    Yii::$app->authManager->assign($permission_news, $user->user_id);
+                }
                 
             }
+            
             $transaction->commit();
             
         } catch (Exception $ex) {

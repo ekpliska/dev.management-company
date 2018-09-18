@@ -69,13 +69,18 @@ class RbacController extends Controller {
         $vote->description = 'Участие в голосовании';
         $auth->add($vote);
         
-        /*
-         * Назначаем разрешения добавлять/радактировать информацию об Арендаторе
-         * только для роли Собсвенник
-         */
+        $addNews = $auth->createPermission('AddNews');
+        $addNews->description = 'Добавение новостей';
+        $auth->add($addNews);
+        
+        //Назначаем разрешения добавлять/радактировать информацию об Арендаторе только для роли Собсвенник
         $auth->addChild($clients, $addNewRent);
-        $auth->addChild($clients, $viewInfoRent);
         $auth->addChild($clients, $vote);
+        //$auth->addChild($clients, $viewInfoRent);
+        
+        // Назначаем разрешения добавлять/радактировать новости только для роли Специалист(выборочно)/Администратор
+        $auth->addChild($dispatcher, $addNews);
+        
         
         // Администратор обладает правами всех других пользователей
         /*
