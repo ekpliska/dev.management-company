@@ -8,6 +8,7 @@
     use app\models\Departments;
     use app\modules\managers\models\User;
     use app\modules\managers\models\Dispatchers;
+    use app\modules\managers\models\searchForm\searchEmployer;
 
 /**
  * Диспетчеры
@@ -30,8 +31,11 @@ class DispatchersController extends AppManagersController {
             ]            
         ]);
         
+        $search_model = new searchEmployer();
+        
         return $this->render('index', [
             'dispatchers' => $dispatchers,
+            'search_model' => $search_model,
         ]);
     }
     
