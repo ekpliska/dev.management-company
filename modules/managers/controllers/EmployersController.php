@@ -3,6 +3,7 @@
     namespace app\modules\managers\controllers;
     use Yii;
     use yii\web\UploadedFile;
+    use yii\data\ActiveDataProvider;
     use yii\web\Response;
     use app\modules\managers\controllers\AppManagersController;
     use app\modules\managers\models\form\EmployerForm;
@@ -19,13 +20,11 @@
 class EmployersController extends AppManagersController {
     
     /*
-     * Главная страница
-     * 
-     * Все Лиспетчеры
+     * Все Диспетчеры
      */
     public function actionDispatchers() {
         
-        $dispatchers = new \yii\data\ActiveDataProvider([
+        $dispatchers = new ActiveDataProvider([
             'query' => Dispatchers::getListDispatchers(),
             'pagination' => [
                 'forcePageParam' => false,
@@ -41,6 +40,29 @@ class EmployersController extends AppManagersController {
             'search_model' => $search_model,
         ]);
     }
+
+    /*
+     * Все Специалисты
+     */
+    public function actionSpecialists() {
+        
+//        $dispatchers = new ActiveDataProvider([
+//            'query' => Dispatchers::getListDispatchers(),
+//            'pagination' => [
+//                'forcePageParam' => false,
+//                'pageSizeParam' => false,
+//                'pageSize' => 30,
+//            ]            
+//        ]);
+//        
+//        $search_model = new searchEmployer();
+        
+        return $this->render('specialists' /*, [
+            'dispatchers' => $dispatchers,
+            'search_model' => $search_model,
+        ]*/);
+    }
+    
     
     /*
      * Создать нового диспетчера
@@ -69,12 +91,41 @@ class EmployersController extends AppManagersController {
             }
         }
         
-        return $this->render('add-dispatcher', [
+        return $this->render('add-employer', [
             'model' => $model,
             'department_list' => $department_list,
             'post_list' => $post_list,
             'roles' => $roles,
         ]);
+    }
+    
+    public function actionAddSpecialist() {
+        
+        $this->view->title = 'Специалист (+)';
+        
+        $model = new EmployerForm();
+        
+        $department_list = Departments::getArrayDepartments();
+        $post_list = [];
+        $roles = User::getRole();
+        
+        
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $file = UploadedFile::getInstance($model, 'photo');
+            $model->photo = $file;
+            $employer_id = $model->addDispatcher($file);
+            if ($employer_id) {
+                return $this->redirect(['edit-specialist', 'specialist_id' => $employer_id]);
+            }
+        }
+        
+        return $this->render('add-employer', [
+            'model' => $model,
+            'department_list' => $department_list,
+            'post_list' => $post_list,
+            'roles' => $roles,
+        ]);        
+        
     }
     
     /*
@@ -132,7 +183,7 @@ class EmployersController extends AppManagersController {
             // Загружаем модель поиска
             $model = new searchEmployer();
             $dispatchers = $model->searshDispatcer($value);
-            $data = $this->renderAjax('data/grid', ['dispatchers' => $dispatchers]);
+            $data = $this->renderAjax('data/grid_dispatchers', ['dispatchers' => $dispatchers]);
             return ['status' => true, 'data' => $data];
         }
         return ['status' => false];

@@ -42,6 +42,7 @@ class EmployerForm extends Model {
             [[
                 'username', 'password', 'password_repeat', 'mobile', 'email',
                 'surname', 'name', 'second_name', 'birthday', 'department', 'post',
+                'role',
                 ], 
                 'required'],
             
@@ -163,7 +164,7 @@ class EmployerForm extends Model {
             'mobile' => 'Мобильный телефон',
             'email' => 'Электронный адрес',
             'photo' => 'Фотография',
-            'role' => 'Роль',
+            'role' => 'Роль пользователя',
             'rule' => 'Добавление новостей',
             'surname' => 'Фамилия',
             'name' => 'Имя',

@@ -1,23 +1,22 @@
 <?php
 
-    use yii\helpers\Html;
-    use yii\widgets\ActiveForm;
     use app\modules\managers\widgets\AlertsShow;
+    use yii\helpers\Html;
 
 /* 
- * Диспетчеры
+ * Специалисты
  */
 
-$this->title = 'Диспетчеры';
+$this->title = 'Специалисты';
 ?>
 <div class="dispatchers-default-index">
     <h1><?= $this->title ?></h1>
     
     <?= AlertsShow::widget() ?>
     
-    <?= Html::a('Диспетчер (+)', ['employers/add-dispatcher'], ['class' => 'btn btn-success btn-sm']) ?>
+    <?= Html::a('Специалисты (+)', ['employers/add-specialist'], ['class' => 'btn btn-success btn-sm']) ?>
     
-    <?php
+    <?php /*
         $form = ActiveForm::begin([
             'id' => 'search-form',
         ]);
@@ -29,8 +28,10 @@ $this->title = 'Диспетчеры';
                     'id' => '_search-dispatcher',])
                 ->label() ?>
     
-    <?php ActiveForm::end(); ?>
+    <?php ActiveForm::end(); */ ?>
     
     <hr />
-    <?= $this->render('data/grid_dispatchers', ['dispatchers' => $dispatchers]) ?>
+    <?php //= $this->render('data/grid_dispatchers', ['dispatchers' => $dispatchers]) ?>
+    
+    
 </div>

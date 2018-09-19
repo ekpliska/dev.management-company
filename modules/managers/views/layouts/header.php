@@ -138,7 +138,7 @@
             ['label' => 'Профиль', 'url' => ['managers/index']],
             ['label' => 'Собственники', 'url' => ['clients/index']],
             ['label' => 'Диспетчеры', 'url' => ['employers/dispatchers']],
-            ['label' => 'Специалисты', 'url' => ['']],
+            ['label' => 'Специалисты', 'url' => ['employers/specialists']],
             ['label' => 'Услуги', 'url' => ['']],
             ['label' => 'Заявки', 'url' => ['']],
             ['label' => 'Настройки', 'url' => ['']],

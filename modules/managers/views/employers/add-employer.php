@@ -93,7 +93,7 @@
                     </div>
                     <?= $form->field($model, 'role')
                             ->dropDownList($roles, [
-                                'value' => 'dispatcher',
+                                'prompt' => 'Выберите роль из списка...',
                                 'disabled' => false,])
                             ->label() ?>
                     
