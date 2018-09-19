@@ -1,20 +1,8 @@
 <?php
 
-namespace app\models;
+    namespace app\models;
+    use Yii;
 
-use Yii;
-
-/**
- * This is the model class for table "employers".
- *
- * @property int $employers_id
- * @property string $employers_name
- * @property string $employers_surname
- * @property string $employers_second_name
- * @property int $employers_department_id
- * @property int $employers_posts_id
- * @property string $employers_birthday
- */
 class Employers extends \yii\db\ActiveRecord
 {
     /**
@@ -43,6 +31,10 @@ class Employers extends \yii\db\ActiveRecord
         return self::find()
                 ->andWhere(['employers_id' => $employer_id])
                 ->one();
+    }
+    
+    public function getId() {
+        return $this->employers_id;
     }
     
     /*

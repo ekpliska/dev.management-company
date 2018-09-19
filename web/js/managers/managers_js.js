@@ -24,13 +24,13 @@ $(document).ready(function() {
     $('body').on('click', '.block_user', function(e) {
         e.preventDefault();
         var userId = $(this).data('user');
-        var statusClient = $(this).data('status');        
+        var statusUser = $(this).data('status');        
         $.ajax({
-            url: 'block-client-in-view',
+            url: '/web/managers/app-managers/block-user-in-view',
             method: 'POST',
             data: {
                 userId: userId,
-                statusClient: statusClient,
+                statusUser: statusUser,
             },
             success: function(response) {
                 if (response.status == 2) {

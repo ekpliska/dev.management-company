@@ -49,7 +49,20 @@ $this->title = 'Диспетчер ' . $dispatcher_info->fullName;
                     'disabled' => false,])
                 ->label() ?>
         
-        <?= Html::button('Заблокировать', ['class' => 'btn btn-danger btn-sm']) ?>
+        <?php if ($user_info->status == 1) : ?>
+            <?= Html::button('Заблокировать', [
+                    'class' => 'btn btn-danger btn-sm block_user',
+                    'data-user' => $user_info->user_id,
+                    'data-status' => 2]) 
+            ?>
+        <?php elseif ($user_info->status == 2)  : ?>
+            <?= Html::button('Разблокировать', [
+                    'class' => 'btn btn-success btn-sm block_user',
+                    'data-user' => $user_info->user_id,
+                    'data-status' => 1]) 
+            ?>
+        <?php endif; ?>
+        
         <?= Html::button('Смена пароля', ['class' => 'btn btn-primary btn-sm']) ?>
     </div>
     
@@ -86,6 +99,7 @@ $this->title = 'Диспетчер ' . $dispatcher_info->fullName;
         </div>
         
         <div class="col-md-6">
+            
             <?= $form->field($dispatcher_info, 'employers_department_id')
                     ->dropDownList($department_list, [
                         'class' => 'form-control department_list',
