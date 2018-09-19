@@ -60,27 +60,27 @@ class ManagersController extends AppManagersController {
         ]);
     }
     
-//    public function actionSettingsProfile() {
-//        
-//        $user_info = $this->permisionUser();
-//        $user_model = $user_info->_model;
-//        
-//        // Загружаем модель смены пароля
-//        $model_password = new ChangePasswordForm($user_model);
-//        
-//        if ($model_password->load(Yii::$app->request->post())) {
-//            if ($model_password->changePassword()) {
-//                Yii::$app->session->setFlash('profile-admin');
-//                return $this->refresh();
-//            } else {
-//                Yii::$app->session->setFlash('profile-admin-error');
-//            }
-//        }
-//        
-//        return $this->render('settings-profile', [
-//            'model_password' => $model_password,
-//        ]);
-//        
-//    }
+    public function actionSettingsProfile() {
+        
+        $user_info = $this->permisionUser();
+        $user_model = $user_info->_model;
+        
+        // Загружаем модель смены пароля
+        $model_password = new ChangePasswordForm($user_model);
+        
+        if ($model_password->load(Yii::$app->request->post())) {
+            if ($model_password->changePassword()) {
+                Yii::$app->session->setFlash('profile-admin');
+                return $this->refresh();
+            } else {
+                Yii::$app->session->setFlash('profile-admin-error');
+            }
+        }
+        
+        return $this->render('settings-profile', [
+            'model_password' => $model_password,
+        ]);
+        
+    }
 
 }

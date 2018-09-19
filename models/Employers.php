@@ -54,12 +54,12 @@ class Employers extends \yii\db\ActiveRecord
     {
         return [
             'employers_id' => 'Employers ID',
-            'employers_name' => 'Employers Name',
-            'employers_surname' => 'Employers Surname',
-            'employers_second_name' => 'Employers Second Name',
-            'employers_department_id' => 'Employers Department ID',
-            'employers_posts_id' => 'Employers Posts ID',
-            'employers_birthday' => 'Employers Birthday',
+            'employers_name' => 'Имя',
+            'employers_surname' => 'Фамилия',
+            'employers_second_name' => 'Отчество',
+            'employers_department_id' => 'Подразделение',
+            'employers_posts_id' => 'Должность (Специальность)',
+            'employers_birthday' => 'Дата рождения',
         ];
     }
 }

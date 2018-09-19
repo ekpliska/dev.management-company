@@ -2,6 +2,7 @@
 
     use yii\helpers\Html;
     use yii\widgets\ActiveForm;
+    use app\modules\managers\widgets\AlertsShow;
 
 /* 
  * Диспетчеры
@@ -11,6 +12,8 @@ $this->title = 'Диспетчеры';
 ?>
 <div class="dispatchers-default-index">
     <h1><?= $this->title ?></h1>
+    
+    <?= AlertsShow::widget() ?>
     
     <?= Html::a('Диспетчер (+)', ['employers/add-dispatcher'], ['class' => 'btn btn-success btn-sm']) ?>
     

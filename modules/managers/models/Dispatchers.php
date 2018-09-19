@@ -2,6 +2,9 @@
 
     namespace app\modules\managers\models;
     use app\models\Employers;
+    use app\models\Requests;
+    use app\models\PaidServices;
+    use app\models\StatusRequest;
 
 /**
  * Диспетчеры
@@ -22,6 +25,36 @@ class Dispatchers extends Employers {
                 ->orderBy(['e.employers_surname' => SORT_ASC]);
         
         return $query;
+        
+    }
+    
+    /*
+     * Поиск не закрытых:
+     *      заявок 
+     *      заявок за платные услуги
+     * 
+     * true Имеются не закрытые заявки
+     * false Все заявки закрыты
+     */
+    public static function findRequestsNotClose($dispatcher_id) {
+        
+        $requests = Requests::find()
+                ->andWhere(['requests_dispatcher_id' => $dispatcher_id])
+                ->andWhere(['!=', 'status', StatusRequest::STATUS_CLOSE])
+                ->asArray()
+                ->count();
+        
+        $paid_services = PaidServices::find()
+                ->andWhere(['services_dispatcher_id' => $dispatcher_id])
+                ->andWhere(['!=', 'status', StatusRequest::STATUS_CLOSE])
+                ->asArray()
+                ->count();
+        
+        if ($requests > 0 || $paid_services > 0) {
+            return true;
+        }
+        
+        return false;
         
     }
 

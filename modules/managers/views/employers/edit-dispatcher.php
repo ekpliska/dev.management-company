@@ -4,7 +4,8 @@
     use yii\helpers\Html;
     use app\helpers\FormatHelpers;
     use kartik\date\DatePicker;
-    use app\modules\managers\widgets\AlertsShow;    
+    use app\modules\managers\widgets\AlertsShow;
+    use app\modules\managers\widgets\ModalWindowsManager;
 
 /*
  * Форма
@@ -114,10 +115,43 @@ $this->title = 'Диспетчер ' . $dispatcher_info->fullName;
         </div>
         
         <div class="col-md-12 text-right">
-            <?= Html::button('Удалить', ['class' => 'btn btn-danger']) ?>
+            <?= Html::button('Удалить', [
+                'class' => 'btn btn-danger delete_dispatcher',
+                'data-target' => '#delete_disp_manager',
+                'data-toggle' => 'modal',
+                'data-dispatcher' => $dispatcher_info->id]) ?>
             <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
         </div>
         
     </div>
     <?php ActiveForm::end() ?>
 </div>
+
+<?= ModalWindowsManager::widget(['modal_view' => 'delete_dispatcher']) ?>
+
+<?php
+$this->registerJs("
+    $('.delete_disp__del').on('click', function(){
+        var employerId = $('.delete_dispatcher').data('dispatcher');
+        $.ajax({
+            url: 'query-delete-dispatcher',
+            method: 'POST',
+            dataType: 'json',
+            data: {
+                employerId: employerId,
+            },
+            success: function(response) {
+                if (response.isClose === true) {                
+                    console.log('Имеются не закрытые заявки');
+                    $('#delete_disp_manager_message').modal('show');
+                } else if (response.isClose === false) {
+                    console.log('все заявки закрыты');
+                }
+            },
+            error: function(){
+                console.log('Error #2000');
+            },
+        });
+    });
+")
+?>

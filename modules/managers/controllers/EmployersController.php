@@ -75,6 +75,9 @@ class EmployersController extends AppManagersController {
         ]);
     }
     
+    /*
+     * Редактирование профиля Диспетчера
+     */
     public function actionEditDispatcher($dispatcher_id) {
         
         $dispatcher_info = Employers::findByID($dispatcher_id);
@@ -115,6 +118,9 @@ class EmployersController extends AppManagersController {
         
     }
     
+    /*
+     * Сквозной поиск по таблице Диспетчеры
+     */
     public function actionSearchDispatcher() {
         
         Yii::$app->response->format = Response::FORMAT_JSON;
@@ -126,6 +132,39 @@ class EmployersController extends AppManagersController {
             $dispatchers = $model->searshDispatcer($value);
             $data = $this->renderAjax('data/grid', ['dispatchers' => $dispatchers]);
             return ['status' => true, 'data' => $data];
+        }
+        return ['status' => false];
+        
+    }
+    
+    /*
+     * Запрос за удаление Диспетчера
+     */
+    public function actionQueryDeleteDispatcher() {
+        
+        $emploeyr_id = Yii::$app->request->post('employerId');
+        
+        if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            // Проверяем наличие не закрытых заявко
+            $requests = Dispatchers::findRequestsNotClose($emploeyr_id);
+            // Имеются не закрытые заявки
+            if ($requests) {
+                return ['status' => true, 'isClose' => true];
+            }
+            // Не закрытых заявок нет, сотрудника удаляем
+            $employer = Employers::findOne($emploeyr_id);
+            $user = User::findByEmployerId($emploeyr_id);
+            if (!$employer->delete() && !$user->delete()) {
+                Yii::$app->session->setFlash('delete-employer', [
+                    'success' => false, 
+                    'error' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз']);
+            }
+            Yii::$app->session->setFlash('delete-employer', [
+                'success' => true, 
+                'message' => 'Сотрудник ' . $emploeyr->fullName . ' и его учетная запись были удалены из системы']);
+            
+            return $this->redirect('dispatchers');
         }
         return ['status' => false];
         

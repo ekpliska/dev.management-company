@@ -7,7 +7,6 @@ $(document).ready(function() {
     // ******************************************************** //
     // ************    Start Block of Profile    ************** //
     // ******************************************************** //
-    // /module/controller/action
     /*
      * Формирование зависимых списков выбора Подразделения и Должности Администратора
      */
@@ -157,6 +156,11 @@ $(document).ready(function() {
 
     });
     
+    
+    // ******************************************************** //
+    // ************    Start Block of Employers    ************** //
+    // ******************************************************** //
+    
     /*
      * Поиск по Диспетчерам
      */
@@ -179,7 +183,14 @@ $(document).ready(function() {
         });
     });
 
-    
+    /*
+     * Загрузка данных о Сотруднике модальное окно "Удалить сотрудника"
+     */
+    $('#delete_disp_manager, #delete_disp_manager_message').on('show.bs.modal', function(){
+        $(this).find('#disp-surname').text($('#employers-employers_surname').val());
+        $(this).find('#disp-name').text($('#employers-employers_name').val());
+        $(this).find('#disp-second-name').text($('#employers-employers_second_name').val());
+    });    
 
 });
     
