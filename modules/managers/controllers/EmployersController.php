@@ -145,6 +145,10 @@ class EmployersController extends AppManagersController {
         $post_list = Posts::getPostList($employer_info->employers_department_id);
         $roles = User::getRole();
         
+//        $_role = Yii::$app->authManager->getr($user_info->id);
+//        echo '<pre>';
+//        var_dump($_role); die();
+        
         if ($user_info->load(Yii::$app->request->post()) && $employer_info->load(Yii::$app->request->post())) {
             
             $is_valid = $user_info->validate();
