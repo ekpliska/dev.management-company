@@ -1,10 +1,109 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+    use yii\widgets\ActiveForm;
+    use yii\helpers\Html;
+    use app\helpers\FormatHelpers;
+    use kartik\date\DatePicker;
+    use app\modules\managers\widgets\AlertsShow;    
 
+/*
+ * Форма
+ * 
+ * Редактирование профиля сотрудника
+ */
+$this->title = 'Диспетчер ' . $dispatcher_info->fullName;
 ?>
-edit profile
+<div class="dispatchers-default-index">
+    <h1><?= $this->title ?></h1>
+    
+    <?= AlertsShow::widget() ?>
+    
+    <hr />
+    
+    <?php
+        $form = ActiveForm::begin([
+            'id' => 'edit-dispatcher',
+            'enableClientValidation' => true,
+            'enableAjaxValidation' => false,
+            'validateOnChange' => true,
+            'options' => [
+                'enctype' => 'multipart/form-data',
+            ],            
+        ]);
+    ?>
+    <div class="col-md-4">
+        <div class="text-center">
+            <?= Html::img($user_info->photo, ['id' => 'photoPreview','class' => 'img-circle', 'alt' => $user_info->user_login, 'width' => 150]) ?>
+            <br />
+            <?= $form->field($user_info, 'user_photo')->input('file', ['id' => 'btnLoad'])->label(false) ?>
+        </div>
+        <hr />
+        <p>Логин: <?= $user_info->user_login ?></p>
+        <p>Дата регистрации: <?= FormatHelpers::formatDate($user_info->created_at) ?></p>
+        <p>Дата последнего логина: <?= FormatHelpers::formatDate($user_info->last_login) ?></p>
+        <p>Статус: <?= $user_info->userStatus ?> </p>
+        
+        <?= $form->field($user_info, 'role')
+                ->dropDownList($roles, [
+                    'value' => 'dispatcher',
+                    'disabled' => false,])
+                ->label() ?>
+        
+        <?= Html::button('Заблокировать', ['class' => 'btn btn-danger btn-sm']) ?>
+        <?= Html::button('Смена пароля', ['class' => 'btn btn-primary btn-sm']) ?>
+    </div>
+    
+    <div class="col-md-8">
+        <h3>Профиль</h3>
+        <div class="col-md-6">
+            <?= $form->field($dispatcher_info, 'employers_surname')
+                    ->input('text', [
+                        'placeHolder' => $dispatcher_info->getAttributeLabel('employers_surname')])
+                    ->label() ?>
+
+            <?= $form->field($dispatcher_info, 'employers_name')
+                    ->input('text', [
+                        'placeHolder' => $dispatcher_info->getAttributeLabel('employers_surname')])
+                    ->label() ?>
+
+            <?= $form->field($dispatcher_info, 'employers_second_name')
+                    ->input('text', [
+                        'placeHolder' => $dispatcher_info->getAttributeLabel('employers_surname')])
+                    ->label() ?>
+                    
+            <?= $form->field($dispatcher_info, 'employers_birthday')
+                    ->widget(DatePicker::className(), [
+                        'language' => 'ru',
+                        'options' => [
+                            'placeholder' => 'Дата рождения',
+                        ],
+                        'type' => DatePicker::TYPE_COMPONENT_APPEND,
+                        'pluginOptions' => [
+                            'autoClose' => true,
+                            'format' => 'yyyy-mm-dd',
+                        ]
+                    ]) ?>
+        </div>
+        
+        <div class="col-md-6">
+            <?= $form->field($dispatcher_info, 'employers_department_id')
+                    ->dropDownList($department_list, [
+                        'class' => 'form-control department_list',
+                        'prompt' => 'Выберите подразделение из списка...',])
+                    ->label() ?>
+                    
+            <?= $form->field($dispatcher_info, 'employers_posts_id')
+                    ->dropDownList($post_list, [
+                        'class' => 'form-control posts_list',])
+                    ->label() ?>
+                    
+        </div>
+        
+        <div class="col-md-12 text-right">
+            <?= Html::button('Удалить', ['class' => 'btn btn-danger']) ?>
+            <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
+        </div>
+        
+    </div>
+    <?php ActiveForm::end() ?>
+</div>

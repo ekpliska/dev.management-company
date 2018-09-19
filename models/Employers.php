@@ -37,6 +37,23 @@ class Employers extends \yii\db\ActiveRecord
             [['employers_name', 'employers_surname', 'employers_second_name'], 'string', 'max' => 70],
         ];
     }
+    
+    
+    public static function findByID($employer_id) {
+        return self::find()
+                ->andWhere(['employers_id' => $employer_id])
+                ->one();
+    }
+    
+    /*
+     * Получить полное имя
+     * Фамилия Имя Отчества Сотрудника
+     */
+    public function getFullName() {
+        return $this->employers_surname . ' ' 
+                . $this->employers_name . ' '
+                . $this->employers_second_name;
+    }
 
     /**
      * {@inheritdoc}

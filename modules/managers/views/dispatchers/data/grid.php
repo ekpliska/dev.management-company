@@ -36,7 +36,7 @@
                             Html::a('Просмотр', 
                                     [
                                         'dispatchers/edit-dispatcher',
-                                        'employer_id' => $data['id'],
+                                        'dispatcher_id' => $data['id'],
                                     ], 
                                     [
                                         'data-pjax' => false,

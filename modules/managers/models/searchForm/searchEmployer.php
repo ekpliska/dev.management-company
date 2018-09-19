@@ -10,6 +10,9 @@ class searchEmployer extends Model {
     
     public $_input;
     
+    /*
+     * Правила валидации
+     */
     public function rules() {
         return [
             ['_input', 'string', 'min' => 1, 'max' => '70'],
@@ -22,6 +25,9 @@ class searchEmployer extends Model {
         ];
     }
     
+    /*
+     * Поиск по диспетчерам
+     */
     public function searshDispatcer($value) {
         
         $query = (new \yii\db\Query)

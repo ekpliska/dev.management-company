@@ -2,7 +2,6 @@
     
     use yii\widgets\ActiveForm;
     use yii\helpers\Html;
-    use yii\helpers\ArrayHelper;
     use yii\widgets\MaskedInput;
     use kartik\date\DatePicker;
     use app\helpers\FormatHelpers;

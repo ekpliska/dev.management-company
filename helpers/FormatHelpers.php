@@ -37,6 +37,9 @@ class FormatHelpers {
      * число месяц г. часы:минуты:секунды
      */
     public static function formatDate($date_int) {
+        if (empty($date_int)) {
+            return 'Не установлена';
+        }
         $_date_int = Yii::$app->formatter->asDate($date_int, 'dd.MMMM.yyyy');
         $_time = Yii::$app->formatter->asTime($date_int, 'H:i:s');
         list($day, $month, $year) = explode('.', $_date_int);

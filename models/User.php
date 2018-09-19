@@ -30,7 +30,8 @@ class User extends ActiveRecord implements IdentityInterface
     const SCENARIO_EDIT_CLIENT_PROFILE = 'edit client profile';
     const SCENARIO_ADD_USER = 'add new user';
     
-    public $add_news = false;
+    public $is_new = false;
+    public $role;
 
 
     public function behaviors() {
@@ -104,6 +105,8 @@ class User extends ActiveRecord implements IdentityInterface
             [['user_email'], 'required', 'on' => self::SCENARIO_EDIT_CLIENT_PROFILE],
             
             [['user_check_email'], 'boolean'],
+            
+            [['is_new', 'role'], 'safe'],
             
         ];
     }
@@ -242,6 +245,13 @@ class User extends ActiveRecord implements IdentityInterface
     public static function findByClientId($user_id) {
         return static::findOne(['user_client_id' => $user_id]);
     }
+
+    /*
+     * Поиск ID сотрудника
+     */
+    public static function findByEmployerId($employer_id) {
+        return static::findOne(['user_employee_id' => $employer_id]);
+    }
     
     /*
      * Для связи таблицы пользователь и собственник (поиск по номеру телефона)
@@ -333,6 +343,19 @@ class User extends ActiveRecord implements IdentityInterface
         
     }
     
+    /*
+     * Аватар пользователя
+     */
+    public function getPhoto() {
+        
+        if (empty($this->user_photo)) {
+            return Yii::getAlias('@web') . '/images/no-avatar.jpg';
+        }
+        return Yii::getAlias('@web') . $this->user_photo;
+        
+    }
+
+
     public function afterSave($insert, $changedAttributes) {
         
 //        parent::afterSave($insert, $changedAttributes);
@@ -360,7 +383,8 @@ class User extends ActiveRecord implements IdentityInterface
             'updated_at' => 'Дата редактирования',
             'status' => 'Статус',
             'date_login' => 'Дата последнего входа',
-            'add_news' => 'Добавлять новости',
+            'is_new' => 'Добавлять новости',
+            'role' => 'Роль',
         ];
     }
     

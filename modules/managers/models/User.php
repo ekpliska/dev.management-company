@@ -14,7 +14,7 @@ class User extends BaseUser {
     
     
     /*
-     * Получить списко всех доступнвых ролей
+     * Получить список всех доступнвых ролей
      */
     public static function getRole() {
         
