@@ -20,9 +20,7 @@
                 <div class="modal__text">
                     Вы действительно хотите удалить диспетчера 
                     <br />
-                    <span id="disp-surname"></span>
-                    <span id="disp-name"></span>
-                    <span id="disp-second-name"></span>
+                    <span id="disp-fullname"></span>
                     <br />
                 </div>
             </div>
@@ -45,9 +43,7 @@
             <div class="modal-body">
                 <div class="modal__text">
                     Диспетчер 
-                    <span id="disp-surname"></span>
-                    <span id="disp-name"></span>
-                    <span id="disp-second-name"></span>
+                    <span id="disp-fullname"></span>
                     имеет не закрытые заявки. Удалить диспетчера не возможно!
                 </div>
             </div>

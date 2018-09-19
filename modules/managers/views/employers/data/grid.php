@@ -31,7 +31,7 @@
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{edit-dispatcher} {delete-dispatcher}',
                 'buttons' => [
-                    'edit-dispatcher' => function ($url, $data) {
+                    'edit-dispatcher' => function ($url, $data) {                        
                         return 
                             Html::a('Просмотр', 
                                     [
@@ -45,13 +45,15 @@
                             );
                     },
                     'delete-dispatcher' => function ($url, $data) {
+                        $full_name = $data['surname'] . ' ' . $data['name'] . ' ' . $data['second_name'];
                         return 
                             Html::button('Удалить', [
                                 'data-pjax' => false,
                                 'class' => 'btn btn-danger btn-sm delete_dispatcher',
                                 'data-target' => '#delete_disp_manager',
                                 'data-toggle' => 'modal',
-                                'data-dispatcher' => $data['id']
+                                'data-dispatcher' => $data['id'],
+                                'data-full-name' => $full_name,
                             ]);
                     },
                 ],

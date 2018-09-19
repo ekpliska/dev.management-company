@@ -186,17 +186,21 @@ $(document).ready(function() {
     /*
      * Загрузка данных о Сотруднике модальное окно "Удалить сотрудника"
      */
-    $('#delete_disp_manager, #delete_disp_manager_message').on('show.bs.modal', function(){
-        $(this).find('#disp-surname').text($('#employers-employers_surname').val());
-        $(this).find('#disp-name').text($('#employers-employers_name').val());
-        $(this).find('#disp-second-name').text($('#employers-employers_second_name').val());
+    $('#delete_disp_manager, #delete_disp_manager_message').on('show.bs.modal', function(e) {
+        // Обращаемся к кнопке, которая открыла модальное окно
+        var button = $(e.relatedTarget);
+        // Получаем ее дата атрибут
+        var dataDis = button.data('dispatcher');
+        var dataFullName = button.data('fullName');
+        $('#delete_disp_manager, #delete_disp_manager_message').find('#disp-fullname').text(dataFullName);
+        $(this).find('.delete_disp__del').data('dispatcher', dataDis);
     });    
 
     /*
      * Запрос на удаление профиля сотрудника
      */
     $('.delete_disp__del').on('click', function(){
-        var employerId = $('.delete_dispatcher').data('dispatcher');
+        var employerId = $(this).data('dispatcher');
         $.ajax({
             url: 'query-delete-dispatcher',
             method: 'POST',

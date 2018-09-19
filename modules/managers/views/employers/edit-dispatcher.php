@@ -119,7 +119,8 @@ $this->title = 'Диспетчер ' . $dispatcher_info->fullName;
                 'class' => 'btn btn-danger delete_dispatcher',
                 'data-target' => '#delete_disp_manager',
                 'data-toggle' => 'modal',
-                'data-dispatcher' => $dispatcher_info->id]) ?>
+                'data-dispatcher' => $dispatcher_info->id,
+                'data-full-name' => $dispatcher_info->fullName,]) ?>
             <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
         </div>
         
@@ -128,30 +129,3 @@ $this->title = 'Диспетчер ' . $dispatcher_info->fullName;
 </div>
 
 <?= ModalWindowsManager::widget(['modal_view' => 'delete_dispatcher']) ?>
-
-<?php
-//$this->registerJs("
-//    $('.delete_disp__del').on('click', function(){
-//        var employerId = $('.delete_dispatcher').data('dispatcher');
-//        $.ajax({
-//            url: 'query-delete-dispatcher',
-//            method: 'POST',
-//            dataType: 'json',
-//            data: {
-//                employerId: employerId,
-//            },
-//            success: function(response) {
-//                if (response.isClose === true) {                
-//                    console.log('Имеются не закрытые заявки');
-//                    $('#delete_disp_manager_message').modal('show');
-//                } else if (response.isClose === false) {
-//                    console.log('все заявки закрыты');
-//                }
-//            },
-//            error: function(){
-//                console.log('Error #2000');
-//            },
-//        });
-//    });
-//")
-?>
