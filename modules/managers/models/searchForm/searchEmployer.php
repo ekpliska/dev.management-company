@@ -28,7 +28,7 @@ class searchEmployer extends Model {
     /*
      * Поиск по диспетчерам
      */
-    public function searshDispatcer($value) {
+    public function searshDispatcher($value) {
         
         $query = (new \yii\db\Query)
                 ->select('e.employers_id as id, '
@@ -39,6 +39,36 @@ class searchEmployer extends Model {
                 ->join('LEFT JOIN', 'user as u', 'e.employers_id = u.user_employee_id')                
                 ->join('LEFT JOIN','auth_assignment as au','au.user_id = u.user_id')
                 ->where(['au.item_name' => 'dispatcher'])
+                ->orderBy(['e.employers_surname' => SORT_ASC]);
+        
+        $dataProvider = new \yii\data\ActiveDataProvider([
+            'query' => $query,
+        ]);
+        
+        $this->load($value);
+        $query->andFilterWhere(['like', 'e.employers_surname', $value])
+                ->orFilterWhere(['like', 'e.employers_name', $value])
+                ->orFilterWhere(['like', 'e.employers_second_name', $value])
+                ->orFilterWhere(['like', 'u.user_login', $value]);
+        
+        return $dataProvider;
+        
+    }
+
+    /*
+     * Поиск по диспетчерам
+     */
+    public function searshSpecialist($value) {
+        
+        $query = (new \yii\db\Query)
+                ->select('e.employers_id as id, '
+                        . 'e.employers_surname as surname, e.employers_name as name, e.employers_second_name as second_name,'
+                        . 'u.user_login as login,'
+                        . 'au.item_name as role')
+                ->from('employers as e')
+                ->join('LEFT JOIN', 'user as u', 'e.employers_id = u.user_employee_id')                
+                ->join('LEFT JOIN','auth_assignment as au','au.user_id = u.user_id')
+                ->where(['au.item_name' => 'specialist'])
                 ->orderBy(['e.employers_surname' => SORT_ASC]);
         
         $dataProvider = new \yii\data\ActiveDataProvider([

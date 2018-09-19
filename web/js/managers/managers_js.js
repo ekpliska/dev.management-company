@@ -221,6 +221,31 @@ $(document).ready(function() {
             },
         });
     });
+    
+    /*
+     * Поиск по Специалистам
+     */
+    /*
+     * Поиск по Диспетчерам
+     */
+    $('#_search-specialist').on('input', function() {
+    
+        var searchValue = $(this).val();
+        
+        $.ajax({
+            url: 'search-specialist',
+            method: 'POST',
+            data: {
+                searchValue: searchValue,
+            },
+            success: function(response) {
+                $('.grid-view').html(response.data);
+            },
+            error: function() {
+                console.log('Error #2000-10');
+            }
+        });
+    });    
 
 });
     

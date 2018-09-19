@@ -3,6 +3,7 @@
     use yii\helpers\Html;
     use yii\widgets\ActiveForm;
     use app\modules\managers\widgets\AlertsShow;
+    use app\modules\managers\widgets\ModalWindowsManager;
 
 /* 
  * Диспетчеры
@@ -34,3 +35,5 @@ $this->title = 'Диспетчеры';
     <hr />
     <?= $this->render('data/grid_dispatchers', ['dispatchers' => $dispatchers]) ?>
 </div>
+
+<?= ModalWindowsManager::widget(['modal_view' => 'delete_dispatcher']) ?>

@@ -10,6 +10,7 @@
     use app\models\Departments;
     use app\modules\managers\models\User;
     use app\modules\managers\models\Dispatchers;
+    use app\modules\managers\models\Specialists;
     use app\modules\managers\models\searchForm\searchEmployer;
     use app\models\Employers;
     use app\modules\managers\models\Posts;
@@ -46,21 +47,21 @@ class EmployersController extends AppManagersController {
      */
     public function actionSpecialists() {
         
-//        $dispatchers = new ActiveDataProvider([
-//            'query' => Dispatchers::getListDispatchers(),
-//            'pagination' => [
-//                'forcePageParam' => false,
-//                'pageSizeParam' => false,
-//                'pageSize' => 30,
-//            ]            
-//        ]);
-//        
-//        $search_model = new searchEmployer();
+        $specialists = new ActiveDataProvider([
+            'query' => Specialists::getListSpecialists(),
+            'pagination' => [
+                'forcePageParam' => false,
+                'pageSizeParam' => false,
+                'pageSize' => 30,
+            ]            
+        ]);
         
-        return $this->render('specialists' /*, [
-            'dispatchers' => $dispatchers,
+        $search_model = new searchEmployer();
+        
+        return $this->render('specialists' , [
+            'specialists' => $specialists,
             'search_model' => $search_model,
-        ]*/);
+        ]);
     }
     
     
@@ -182,8 +183,27 @@ class EmployersController extends AppManagersController {
         if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
             // Загружаем модель поиска
             $model = new searchEmployer();
-            $dispatchers = $model->searshDispatcer($value);
+            $dispatchers = $model->searshDispatcher($value);
             $data = $this->renderAjax('data/grid_dispatchers', ['dispatchers' => $dispatchers]);
+            return ['status' => true, 'data' => $data];
+        }
+        return ['status' => false];
+        
+    }
+
+    /*
+     * Сквозной поиск по таблице Специалисты
+     */
+    public function actionSearchSpecialist() {
+        
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $value = Yii::$app->request->post('searchValue');
+        
+        if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
+            // Загружаем модель поиска
+            $model = new searchEmployer();
+            $specialists = $model->searshSpecialist($value);
+            $data = $this->renderAjax('data/grid_specialists', ['specialists' => $specialists]);
             return ['status' => true, 'data' => $data];
         }
         return ['status' => false];
