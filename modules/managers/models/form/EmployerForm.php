@@ -147,6 +147,7 @@ class EmployerForm extends Model {
             }
             
             $transaction->commit();
+            return $employer->id;
             
         } catch (Exception $ex) {
             $transaction->rollBack();

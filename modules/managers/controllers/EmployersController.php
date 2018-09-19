@@ -63,8 +63,10 @@ class EmployersController extends AppManagersController {
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $file = UploadedFile::getInstance($model, 'photo');
             $model->photo = $file;
-            $model->addDispatcher($file);
-            return $this->redirect('index');
+            $employer_id = $model->addDispatcher($file);
+            if ($employer_id) {
+                return $this->redirect(['edit-dispatcher', 'dispatcher_id' => $employer_id]);
+            }
         }
         
         return $this->render('add-dispatcher', [
@@ -154,15 +156,14 @@ class EmployersController extends AppManagersController {
             }
             // Не закрытых заявок нет, сотрудника удаляем
             $employer = Employers::findOne($emploeyr_id);
-            $user = User::findByEmployerId($emploeyr_id);
-            if (!$employer->delete() && !$user->delete()) {
+            if (!$employer->delete()) {
                 Yii::$app->session->setFlash('delete-employer', [
                     'success' => false, 
                     'error' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз']);
             }
             Yii::$app->session->setFlash('delete-employer', [
                 'success' => true, 
-                'message' => 'Сотрудник ' . $emploeyr->fullName . ' и его учетная запись были удалены из системы']);
+                'message' => 'Сотрудник ' . $employer->fullName . ' и его учетная запись были удалены из системы']);
             
             return $this->redirect('dispatchers');
         }

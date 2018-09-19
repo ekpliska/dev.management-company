@@ -130,28 +130,28 @@ $this->title = 'Диспетчер ' . $dispatcher_info->fullName;
 <?= ModalWindowsManager::widget(['modal_view' => 'delete_dispatcher']) ?>
 
 <?php
-$this->registerJs("
-    $('.delete_disp__del').on('click', function(){
-        var employerId = $('.delete_dispatcher').data('dispatcher');
-        $.ajax({
-            url: 'query-delete-dispatcher',
-            method: 'POST',
-            dataType: 'json',
-            data: {
-                employerId: employerId,
-            },
-            success: function(response) {
-                if (response.isClose === true) {                
-                    console.log('Имеются не закрытые заявки');
-                    $('#delete_disp_manager_message').modal('show');
-                } else if (response.isClose === false) {
-                    console.log('все заявки закрыты');
-                }
-            },
-            error: function(){
-                console.log('Error #2000');
-            },
-        });
-    });
-")
+//$this->registerJs("
+//    $('.delete_disp__del').on('click', function(){
+//        var employerId = $('.delete_dispatcher').data('dispatcher');
+//        $.ajax({
+//            url: 'query-delete-dispatcher',
+//            method: 'POST',
+//            dataType: 'json',
+//            data: {
+//                employerId: employerId,
+//            },
+//            success: function(response) {
+//                if (response.isClose === true) {                
+//                    console.log('Имеются не закрытые заявки');
+//                    $('#delete_disp_manager_message').modal('show');
+//                } else if (response.isClose === false) {
+//                    console.log('все заявки закрыты');
+//                }
+//            },
+//            error: function(){
+//                console.log('Error #2000');
+//            },
+//        });
+//    });
+//")
 ?>

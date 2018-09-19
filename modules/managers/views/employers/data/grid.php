@@ -46,9 +46,12 @@
                     },
                     'delete-dispatcher' => function ($url, $data) {
                         return 
-                            Html::a('Удалить', ['delete-dispatchers', 'employer_id' => $data['id']], [
+                            Html::button('Удалить', [
                                 'data-pjax' => false,
-                                'class' => 'btn btn-danger btn-sm',
+                                'class' => 'btn btn-danger btn-sm delete_dispatcher',
+                                'data-target' => '#delete_disp_manager',
+                                'data-toggle' => 'modal',
+                                'data-dispatcher' => $data['id']
                             ]);
                     },
                 ],
@@ -56,3 +59,5 @@
         ],
     ]); ?>
 </div>
+
+<?= \app\modules\managers\widgets\ModalWindowsManager::widget(['modal_view' => 'delete_dispatcher']) ?>
