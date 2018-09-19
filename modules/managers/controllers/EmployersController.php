@@ -16,14 +16,14 @@
 /**
  * Диспетчеры
  */
-class DispatchersController extends AppManagersController {
+class EmployersController extends AppManagersController {
     
     /*
      * Главная страница
      * 
      * Все Лиспетчеры
      */
-    public function actionIndex() {
+    public function actionDispatchers() {
         
         $dispatchers = new \yii\data\ActiveDataProvider([
             'query' => Dispatchers::getListDispatchers(),
@@ -36,7 +36,7 @@ class DispatchersController extends AppManagersController {
         
         $search_model = new searchEmployer();
         
-        return $this->render('index', [
+        return $this->render('dispatchers', [
             'dispatchers' => $dispatchers,
             'search_model' => $search_model,
         ]);

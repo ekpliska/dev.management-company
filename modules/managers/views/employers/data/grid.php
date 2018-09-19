@@ -35,7 +35,7 @@
                         return 
                             Html::a('Просмотр', 
                                     [
-                                        'dispatchers/edit-dispatcher',
+                                        'employers/edit-dispatcher',
                                         'dispatcher_id' => $data['id'],
                                     ], 
                                     [

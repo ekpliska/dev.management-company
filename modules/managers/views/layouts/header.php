@@ -137,7 +137,7 @@
         'items' => [
             ['label' => 'Профиль', 'url' => ['managers/index']],
             ['label' => 'Собственники', 'url' => ['clients/index']],
-            ['label' => 'Диспетчеры', 'url' => ['dispatchers/index']],
+            ['label' => 'Диспетчеры', 'url' => ['employers/dispatchers']],
             ['label' => 'Специалисты', 'url' => ['']],
             ['label' => 'Услуги', 'url' => ['']],
             ['label' => 'Заявки', 'url' => ['']],
