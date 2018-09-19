@@ -88,7 +88,7 @@ class EmployersController extends AppManagersController {
             $model->photo = $file;
             $employer_id = $model->addDispatcher($file);
             if ($employer_id) {
-                return $this->redirect(['edit-dispatcher', 'dispatcher_id' => $employer_id]);
+                return $this->redirect(['edit-employer', 'employer_id' => $employer_id]);
             }
         }
         
@@ -116,7 +116,7 @@ class EmployersController extends AppManagersController {
             $model->photo = $file;
             $employer_id = $model->addDispatcher($file);
             if ($employer_id) {
-                return $this->redirect(['edit-specialist', 'specialist_id' => $employer_id]);
+                return $this->redirect(['edit-employer', 'employer_id' => $employer_id]);
             }
         }
         
@@ -132,28 +132,28 @@ class EmployersController extends AppManagersController {
     /*
      * Редактирование профиля Диспетчера
      */
-    public function actionEditDispatcher($dispatcher_id) {
+    public function actionEditEmployer($employer_id) {
         
-        $dispatcher_info = Employers::findByID($dispatcher_id);
-        $user_info = User::findByEmployerId($dispatcher_id);
+        $employer_info = Employers::findByID($employer_id);
+        $user_info = User::findByEmployerId($employer_id);
         
-        if ($dispatcher_info === null && $user_info === null) {
+        if ($employer_info === null && $user_info === null) {
             throw new \yii\web\NotFoundHttpException('Вы обратились к несуществующей странице');
         }
         
         $department_list = Departments::getArrayDepartments();
-        $post_list = Posts::getPostList($dispatcher_info->employers_department_id);
+        $post_list = Posts::getPostList($employer_info->employers_department_id);
         $roles = User::getRole();
         
-        if ($user_info->load(Yii::$app->request->post()) && $dispatcher_info->load(Yii::$app->request->post())) {
+        if ($user_info->load(Yii::$app->request->post()) && $employer_info->load(Yii::$app->request->post())) {
             
             $is_valid = $user_info->validate();
-            $is_valid = $dispatcher_info->validate() && $is_valid;
+            $is_valid = $employer_info->validate() && $is_valid;
             
             if ($is_valid) {
                 $file = UploadedFile::getInstance($user_info, 'user_photo');
                 $user_info->uploadPhoto($file);
-                $dispatcher_info->save();
+                $employer_info->save();
             } else {
                 Yii::$app->session->setFlash('profile-admin-error');
             }
@@ -162,8 +162,8 @@ class EmployersController extends AppManagersController {
         }
 
         
-        return $this->render('edit-dispatcher', [
-            'dispatcher_info' => $dispatcher_info,
+        return $this->render('edit-employer', [
+            'employer_info' => $employer_info,
             'user_info' => $user_info,
             'department_list' => $department_list,
             'post_list' => $post_list,
