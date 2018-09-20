@@ -69,7 +69,7 @@ class EmployersController extends AppManagersController {
      * Создать нового диспетчера
      * 
      * @param model $model Модель Новый сотрудник
-     * @param array $department_list Списко подраздерений
+     * @param array $department_list Список подраздерений
      * @param array $roles Роли пользователя
      */
     public function actionAddDispatcher() {
@@ -99,7 +99,14 @@ class EmployersController extends AppManagersController {
             'roles' => $roles,
         ]);
     }
-    
+
+    /*
+     * Создать нового Специалиста
+     * 
+     * @param model $model Модель Новый сотрудник
+     * @param array $department_list Список подраздерений
+     * @param array $roles Роли пользователя
+     */    
     public function actionAddSpecialist() {
         
         $this->view->title = 'Специалист (+)';
@@ -108,7 +115,7 @@ class EmployersController extends AppManagersController {
         
         $department_list = Departments::getArrayDepartments();
         $post_list = [];
-        $roles = User::getRole();
+        $roles = User::getRoles();
         
         
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
@@ -116,7 +123,7 @@ class EmployersController extends AppManagersController {
             $model->photo = $file;
             $employer_id = $model->addDispatcher($file);
             if ($employer_id) {
-                return $this->redirect(['edit-employer', 'employer_id' => $employer_id]);
+                return $this->redirect(['edit-specialist', 'specialist_id' => $employer_id]);
             }
         }
         
@@ -130,7 +137,7 @@ class EmployersController extends AppManagersController {
     }
     
     /*
-     * Редактирование профиля Диспетчера
+     * Редактирование профиля Специалиста
      */
     public function actionEditDispatcher($dispatcher_id) {
         
@@ -167,6 +174,54 @@ class EmployersController extends AppManagersController {
         
         return $this->render('edit-dispatcher', [
             'dispatcher_info' => $dispatcher_info,
+            'user_info' => $user_info,
+            'department_list' => $department_list,
+            'post_list' => $post_list,
+            'roles' => $roles,
+            'name_role' => $name_role,
+            'role' => $role,
+        ]);
+        
+    }
+
+    /*
+     * Редактирование профиля Диспетчера
+     */
+    public function actionEditSpecialist($specialist_id) {
+        
+        $specialist_info = Employers::findByID($specialist_id);
+        $user_info = User::findByEmployerId($specialist_id);
+        
+        if ($specialist_info === null && $user_info === null) {
+            throw new \yii\web\NotFoundHttpException('Вы обратились к несуществующей странице');
+        }
+        
+        $department_list = Departments::getArrayDepartments();
+        $post_list = Posts::getPostList($specialist_info->employers_department_id);
+        $roles = User::getRoles();
+        
+        $name_role = array_keys(Yii::$app->authManager->getRolesByUser($user_info->id))[0];
+        $role = User::getRole($name_role);
+        
+        if ($user_info->load(Yii::$app->request->post()) && $specialist_info->load(Yii::$app->request->post())) {
+            
+            $is_valid = $user_info->validate();
+            $is_valid = $specialist_info->validate() && $is_valid;
+            
+            if ($is_valid) {
+                $file = UploadedFile::getInstance($user_info, 'user_photo');
+                $user_info->uploadPhoto($file);
+                $specialist_info->save();
+            } else {
+                Yii::$app->session->setFlash('profile-admin-error');
+            }
+            Yii::$app->session->setFlash('profile-admin');
+            return $this->redirect(Yii::$app->request->referrer);
+        }
+
+        
+        return $this->render('edit-specialist', [
+            'specialist_info' => $specialist_info,
             'user_info' => $user_info,
             'department_list' => $department_list,
             'post_list' => $post_list,

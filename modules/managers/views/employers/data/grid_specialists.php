@@ -29,14 +29,14 @@
             ],
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{edit-employer} {delete-dispatcher}',
+                'template' => '{edit-specialist} {delete-dispatcher}',
                 'buttons' => [
-                    'edit-employer' => function ($url, $data) {                        
+                    'edit-specialist' => function ($url, $data) {                        
                         return 
                             Html::a('Просмотр', 
                                     [
-                                        'employers/edit-employer',
-                                        'employer_id' => $data['id'],
+                                        'employers/edit-specialist',
+                                        'specialist_id' => $data['id'],
                                     ], 
                                     [
                                         'data-pjax' => false,
