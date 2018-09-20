@@ -15,7 +15,7 @@
         <th style="width:20%;">Номер заявки</th>
         <th style="width:30%;">Дата назначения</th>
         <th style="width:10%;">Статус</th>
-        <th style="width:10%;">-</th>
+        <th style="width:10%;"></th>
     </tr>
     <?php foreach ($requests as $request) : ?>
         <tr>

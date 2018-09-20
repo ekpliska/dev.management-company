@@ -139,7 +139,7 @@
             ['label' => 'Собственники', 'url' => ['clients/index']],
             ['label' => 'Диспетчеры', 'url' => ['employers/dispatchers']],
             ['label' => 'Специалисты', 'url' => ['employers/specialists']],
-            ['label' => 'Услуги', 'url' => ['']],
+            ['label' => 'Услуги', 'url' => ['services/index']],
             ['label' => 'Заявки', 'url' => ['']],
             ['label' => 'Настройки', 'url' => ['']],
             ['label' => 'Новости', 'url' => ['']],

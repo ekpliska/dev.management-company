@@ -11,7 +11,7 @@
  * Профиль Администратора
  */    
     
-$this->title = "Профиль";
+$this->title = 'Профиль';
 ?>
 <div class="managers-default-index">
     <h1><?= $this->title ?></h1>

@@ -11,6 +11,10 @@
  */
 class Services extends ActiveRecord
 {
+    
+    const TYPE_SERVICE = 0;
+    const TYPE_PAY = 1;
+    
     /**
      * Таблица из БД
      */
@@ -25,8 +29,15 @@ class Services extends ActiveRecord
     public function rules()
     {
         return [
-            [['services_category_id', 'isPay', 'isServices'], 'integer'],
-            [['services_name', 'services_image'], 'string', 'max' => 255],
+            
+            [[
+                'services_name',
+                'services_category_id', 'isType'], 'required'],
+            
+            [['services_category_id', 'isPay', 'isServices', 'isType'], 'integer'],
+            
+            [['services_name', 'services_image'], 'string', 'min' => '10', 'max' => 255],
+            
             ['services_description', 'string', 'min' => 10, 'max' => 1000],
         ];
     }
@@ -63,7 +74,17 @@ class Services extends ActiveRecord
                 ->all();
         
         return ArrayHelper::map($pay_services, 'services_id', 'services_name');
-    }    
+    }
+    
+    /*
+     * Список типов услуг
+     */
+    public static function getTypeNameArray () {
+        return [
+            self::TYPE_SERVICE => 'Услуга',
+            self::TYPE_PAY => 'Платная услуга',
+        ];
+    }
     
     /**
      * Массив статусов заявок
@@ -72,12 +93,13 @@ class Services extends ActiveRecord
     {
         return [
             'services_id' => 'Services ID',
-            'services_name' => 'Services Name',
-            'services_category_id' => 'Services Category ID',
+            'services_name' => 'Наименование услуги',
+            'services_category_id' => 'Вид услуги',
             'isPay' => 'Is Pay',
             'isServices' => 'Is Services',
-            'services_image' => 'Services Image',
-            'services_description' => 'Services Description',
+            'services_image' => 'Изображение',
+            'services_description' => 'Описание',
+            'isType' => 'Тип услуги',
         ];
     }
 }

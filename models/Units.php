@@ -3,6 +3,7 @@
     namespace app\models;
     use Yii;
     use yii\db\ActiveRecord;
+    use yii\helpers\ArrayHelper;
 
 /**
  * Единицы измерения
@@ -25,6 +26,11 @@ class Units extends ActiveRecord
         return [
             [['units_name'], 'string', 'max' => 10],
         ];
+    }
+    
+    public static function getUnitsArray() {
+        $units = self::find()->asArray()->all();
+        return ArrayHelper::map($units, 'units_id', 'units_name');
     }
 
     /**
