@@ -116,8 +116,8 @@ $this->title = 'Диспетчер ' . $specialist_info->fullName . '<span class
         
         <div class="col-md-12 text-right">
             <?= Html::button('Удалить', [
-                'class' => 'btn btn-danger delete_dispatcher',
-                'data-target' => '#delete_disp_manager',
+                'class' => 'btn btn-danger delete_specialist',
+                'data-target' => '#delete_empl_manager',
                 'data-toggle' => 'modal',
                 'data-dispatcher' => $specialist_info->id,
                 'data-full-name' => $specialist_info->fullName,]) ?>
@@ -128,4 +128,4 @@ $this->title = 'Диспетчер ' . $specialist_info->fullName . '<span class
     <?php ActiveForm::end() ?>
 </div>
 
-<?= ModalWindowsManager::widget(['modal_view' => 'delete_dispatcher']) ?>
+<?= ModalWindowsManager::widget(['modal_view' => 'delete_employer']) ?>

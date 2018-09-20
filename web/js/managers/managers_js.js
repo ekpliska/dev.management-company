@@ -186,13 +186,13 @@ $(document).ready(function() {
     /*
      * Загрузка данных о Сотруднике модальное окно "Удалить сотрудника"
      */
-    $('#delete_disp_manager, #delete_disp_manager_message').on('show.bs.modal', function(e) {
+    $('#delete_empl_manager, #delete_empl_manager_message').on('show.bs.modal', function(e) {
         // Обращаемся к кнопке, которая открыла модальное окно
         var button = $(e.relatedTarget);
         // Получаем ее дата атрибут
         var dataDis = button.data('dispatcher');
         var dataFullName = button.data('fullName');
-        $('#delete_disp_manager, #delete_disp_manager_message').find('#disp-fullname').text(dataFullName);
+        $('#delete_empl_manager, #delete_empl_manager_message').find('#disp-fullname').text(dataFullName);
         $(this).find('.delete_disp__del').data('dispatcher', dataDis);
     });    
 
@@ -211,7 +211,7 @@ $(document).ready(function() {
             success: function(response) {
                 if (response.isClose === true) {                
                     console.log('Имеются не закрытые заявки');
-                    $('#delete_disp_manager_message').modal('show');
+                    $('#delete_empl_manager_message').modal('show');
                 } else if (response.isClose === false) {
                     console.log('все заявки закрыты');
                 }
