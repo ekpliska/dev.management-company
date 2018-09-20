@@ -88,7 +88,7 @@ class EmployersController extends AppManagersController {
             $model->photo = $file;
             $employer_id = $model->addDispatcher($file);
             if ($employer_id) {
-                return $this->redirect(['edit-employer', 'employer_id' => $employer_id]);
+                return $this->redirect(['edit-dispatcher', 'dispatcher_id' => $employer_id]);
             }
         }
         
@@ -132,31 +132,31 @@ class EmployersController extends AppManagersController {
     /*
      * Редактирование профиля Диспетчера
      */
-    public function actionEditEmployer($employer_id) {
+    public function actionEditDispatcher($dispatcher_id) {
         
-        $employer_info = Employers::findByID($employer_id);
-        $user_info = User::findByEmployerId($employer_id);
+        $dispatcher_info = Employers::findByID($dispatcher_id);
+        $user_info = User::findByEmployerId($dispatcher_id);
         
-        if ($employer_info === null && $user_info === null) {
+        if ($dispatcher_info === null && $user_info === null) {
             throw new \yii\web\NotFoundHttpException('Вы обратились к несуществующей странице');
         }
         
         $department_list = Departments::getArrayDepartments();
-        $post_list = Posts::getPostList($employer_info->employers_department_id);
+        $post_list = Posts::getPostList($dispatcher_info->employers_department_id);
         $roles = User::getRoles();
         
         $name_role = array_keys(Yii::$app->authManager->getRolesByUser($user_info->id))[0];
         $role = User::getRole($name_role);
         
-        if ($user_info->load(Yii::$app->request->post()) && $employer_info->load(Yii::$app->request->post())) {
+        if ($user_info->load(Yii::$app->request->post()) && $dispatcher_info->load(Yii::$app->request->post())) {
             
             $is_valid = $user_info->validate();
-            $is_valid = $employer_info->validate() && $is_valid;
+            $is_valid = $dispatcher_info->validate() && $is_valid;
             
             if ($is_valid) {
                 $file = UploadedFile::getInstance($user_info, 'user_photo');
                 $user_info->uploadPhoto($file);
-                $employer_info->save();
+                $dispatcher_info->save();
             } else {
                 Yii::$app->session->setFlash('profile-admin-error');
             }
@@ -165,8 +165,8 @@ class EmployersController extends AppManagersController {
         }
 
         
-        return $this->render('edit-employer', [
-            'employer_info' => $employer_info,
+        return $this->render('edit-dispatcher', [
+            'dispatcher_info' => $dispatcher_info,
             'user_info' => $user_info,
             'department_list' => $department_list,
             'post_list' => $post_list,
@@ -220,18 +220,18 @@ class EmployersController extends AppManagersController {
      */
     public function actionQueryDeleteDispatcher() {
         
-        $emploeyr_id = Yii::$app->request->post('employerId');
+        $employer_id = Yii::$app->request->post('employerId');
         
         if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
             Yii::$app->response->format = Response::FORMAT_JSON;
             // Проверяем наличие не закрытых заявко
-            $requests = Dispatchers::findRequestsNotClose($emploeyr_id);
+            $requests = Dispatchers::findRequestsNotClose($employer_id);
             // Имеются не закрытые заявки
             if ($requests) {
                 return ['status' => true, 'isClose' => true];
             }
             // Не закрытых заявок нет, сотрудника удаляем
-            $employer = Employers::findOne($emploeyr_id);
+            $employer = Employers::findOne($employer_id);
             if (!$employer->delete()) {
                 Yii::$app->session->setFlash('delete-employer', [
                     'success' => false, 

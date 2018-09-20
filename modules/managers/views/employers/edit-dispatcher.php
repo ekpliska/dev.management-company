@@ -12,7 +12,7 @@
  * 
  * Редактирование профиля сотрудника
  */
-$this->title = 'Диспетчер ' . $employer_info->fullName . '<span class="badge">' . $role . '</span>';
+$this->title = 'Диспетчер ' . $dispatcher_info->fullName . '<span class="badge">' . $role . '</span>';
 ?>
 <div class="dispatchers-default-index">
     <h1><?= $this->title ?></h1>
@@ -70,22 +70,22 @@ $this->title = 'Диспетчер ' . $employer_info->fullName . '<span class="
     <div class="col-md-8">
         <h3>Профиль</h3>
         <div class="col-md-6">
-            <?= $form->field($employer_info, 'employers_surname')
+            <?= $form->field($dispatcher_info, 'employers_surname')
                     ->input('text', [
-                        'placeHolder' => $employer_info->getAttributeLabel('employers_surname')])
+                        'placeHolder' => $dispatcher_info->getAttributeLabel('employers_surname')])
                     ->label() ?>
 
-            <?= $form->field($employer_info, 'employers_name')
+            <?= $form->field($dispatcher_info, 'employers_name')
                     ->input('text', [
-                        'placeHolder' => $employer_info->getAttributeLabel('employers_surname')])
+                        'placeHolder' => $dispatcher_info->getAttributeLabel('employers_surname')])
                     ->label() ?>
 
-            <?= $form->field($employer_info, 'employers_second_name')
+            <?= $form->field($dispatcher_info, 'employers_second_name')
                     ->input('text', [
-                        'placeHolder' => $employer_info->getAttributeLabel('employers_surname')])
+                        'placeHolder' => $dispatcher_info->getAttributeLabel('employers_surname')])
                     ->label() ?>
                     
-            <?= $form->field($employer_info, 'employers_birthday')
+            <?= $form->field($dispatcher_info, 'employers_birthday')
                     ->widget(DatePicker::className(), [
                         'language' => 'ru',
                         'options' => [
@@ -101,13 +101,13 @@ $this->title = 'Диспетчер ' . $employer_info->fullName . '<span class="
         
         <div class="col-md-6">
             
-            <?= $form->field($employer_info, 'employers_department_id')
+            <?= $form->field($dispatcher_info, 'employers_department_id')
                     ->dropDownList($department_list, [
                         'class' => 'form-control department_list',
                         'prompt' => 'Выберите подразделение из списка...',])
                     ->label() ?>
                     
-            <?= $form->field($employer_info, 'employers_posts_id')
+            <?= $form->field($dispatcher_info, 'employers_posts_id')
                     ->dropDownList($post_list, [
                         'class' => 'form-control posts_list',])
                     ->label() ?>
@@ -119,8 +119,8 @@ $this->title = 'Диспетчер ' . $employer_info->fullName . '<span class="
                 'class' => 'btn btn-danger delete_dispatcher',
                 'data-target' => '#delete_disp_manager',
                 'data-toggle' => 'modal',
-                'data-dispatcher' => $employer_info->id,
-                'data-full-name' => $employer_info->fullName,]) ?>
+                'data-dispatcher' => $dispatcher_info->id,
+                'data-full-name' => $dispatcher_info->fullName,]) ?>
             <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
         </div>
         
