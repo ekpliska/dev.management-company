@@ -80,7 +80,7 @@ class EmployersController extends AppManagersController {
         
         $department_list = Departments::getArrayDepartments();
         $post_list = [];
-        $roles = User::getRole();
+        $roles = User::getRoles();
         
         
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
@@ -143,11 +143,10 @@ class EmployersController extends AppManagersController {
         
         $department_list = Departments::getArrayDepartments();
         $post_list = Posts::getPostList($employer_info->employers_department_id);
-        $roles = User::getRole();
+        $roles = User::getRoles();
         
-//        $_role = Yii::$app->authManager->getr($user_info->id);
-//        echo '<pre>';
-//        var_dump($_role); die();
+        $name_role = array_keys(Yii::$app->authManager->getRolesByUser($user_info->id))[0];
+        $role = User::getRole($name_role);
         
         if ($user_info->load(Yii::$app->request->post()) && $employer_info->load(Yii::$app->request->post())) {
             
@@ -172,6 +171,8 @@ class EmployersController extends AppManagersController {
             'department_list' => $department_list,
             'post_list' => $post_list,
             'roles' => $roles,
+            'name_role' => $name_role,
+            'role' => $role,
         ]);
         
     }

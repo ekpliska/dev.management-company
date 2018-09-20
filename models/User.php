@@ -30,6 +30,12 @@ class User extends ActiveRecord implements IdentityInterface
     const SCENARIO_EDIT_CLIENT_PROFILE = 'edit client profile';
     const SCENARIO_ADD_USER = 'add new user';
     
+    /*
+     * Дополнительные свойства для модели создания нового пользователя
+     * 
+     * @param integer $is_new Разрешение добавлять новости
+     * @param integer $role Роль пользователя
+     */
     public $is_new = false;
     public $role;
 
@@ -309,6 +315,16 @@ class User extends ActiveRecord implements IdentityInterface
     }
     
     /*
+     * Получить список всех доступнвых ролей
+     */
+    public static function getRoles() {
+        
+        $list = Yii::$app->authManager->getRoles();
+        return ArrayHelper::map($list, 'name', 'description');
+        
+    }    
+    
+    /*
      * Назначение роли пользователю
      * 
      * @param string $role Роль
@@ -317,6 +333,13 @@ class User extends ActiveRecord implements IdentityInterface
     public function setRole($role, $user_id) {
         $_role = Yii::$app->authManager->getRole($role);
         Yii::$app->authManager->assign($_role, $user_id);
+    }
+    
+    /*
+     * Получить имя роли пользователя
+     */
+    public static function getRole($name) {
+        return ArrayHelper::getValue(self::getRoles(), $name);
     }
     
     /*

@@ -12,7 +12,7 @@
  * 
  * Редактирование профиля сотрудника
  */
-$this->title = 'Диспетчер ' . $employer_info->fullName;
+$this->title = 'Диспетчер ' . $employer_info->fullName . '<span class="badge">' . $role . '</span>';
 ?>
 <div class="dispatchers-default-index">
     <h1><?= $this->title ?></h1>
@@ -46,7 +46,7 @@ $this->title = 'Диспетчер ' . $employer_info->fullName;
         
         <?= $form->field($user_info, 'role')
                 ->dropDownList($roles, [
-                    'value' => 'dispatcher',
+                    'value' => $name_role,
                     'disabled' => false,])
                 ->label() ?>
         

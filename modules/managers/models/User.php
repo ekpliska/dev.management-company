@@ -12,17 +12,6 @@
  */
 class User extends BaseUser {
     
-    
-    /*
-     * Получить список всех доступнвых ролей
-     */
-    public static function getRole() {
-        
-        $list = Yii::$app->authManager->getRoles();
-        return ArrayHelper::map($list, 'name', 'description');
-        
-    }    
-    
     public function block($client_id, $status) {
         
         $user_info = self::find()
