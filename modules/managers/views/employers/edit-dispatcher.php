@@ -12,7 +12,7 @@
  * 
  * Редактирование профиля сотрудника
  */
-$this->title = 'Диспетчер ' . $dispatcher_info->fullName . '<span class="badge">' . $role . '</span>';
+$this->title = $dispatcher_info->fullName . '<span class="badge">' . $role . '</span>';
 ?>
 <div class="dispatchers-default-index">
     <h1><?= $this->title ?></h1>
@@ -117,7 +117,7 @@ $this->title = 'Диспетчер ' . $dispatcher_info->fullName . '<span class
         <div class="col-md-12 text-right">
             <?= Html::button('Удалить', [
                 'class' => 'btn btn-danger delete_dispatcher',
-                'data-target' => '#delete_empl_manager',
+                'data-target' => '#delete_disp_manager',
                 'data-toggle' => 'modal',
                 'data-dispatcher' => $dispatcher_info->id,
                 'data-full-name' => $dispatcher_info->fullName,]) ?>
@@ -128,4 +128,4 @@ $this->title = 'Диспетчер ' . $dispatcher_info->fullName . '<span class
     <?php ActiveForm::end() ?>
 </div>
 
-<?= ModalWindowsManager::widget(['modal_view' => 'delete_employer']) ?>
+<?= ModalWindowsManager::widget(['modal_view' => 'delete_dispatcher']) ?>

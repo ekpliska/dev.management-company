@@ -137,7 +137,7 @@ class EmployersController extends AppManagersController {
     }
     
     /*
-     * Редактирование профиля Специалиста
+     * Редактирование профиля Диспетчера
      */
     public function actionEditDispatcher($dispatcher_id) {
         
@@ -185,7 +185,7 @@ class EmployersController extends AppManagersController {
     }
 
     /*
-     * Редактирование профиля Диспетчера
+     * Редактирование профиля Специалиста
      */
     public function actionEditSpecialist($specialist_id) {
         
@@ -301,4 +301,5 @@ class EmployersController extends AppManagersController {
         return ['status' => false];
         
     }
+    
 }

@@ -36,4 +36,4 @@ $this->title = 'Диспетчеры';
     <?= $this->render('data/grid_dispatchers', ['dispatchers' => $dispatchers]) ?>
 </div>
 
-<?= ModalWindowsManager::widget(['modal_view' => 'delete_employer']) ?>
+<?= ModalWindowsManager::widget(['modal_view' => 'delete_dispatcher']) ?>
