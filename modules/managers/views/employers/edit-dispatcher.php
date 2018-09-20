@@ -119,7 +119,7 @@ $this->title = $dispatcher_info->fullName . '<span class="badge">' . $role . '</
                 'class' => 'btn btn-danger delete_dispatcher',
                 'data-target' => '#delete_disp_manager',
                 'data-toggle' => 'modal',
-                'data-dispatcher' => $dispatcher_info->id,
+                'data-employer' => $dispatcher_info->id,
                 'data-full-name' => $dispatcher_info->fullName,]) ?>
             <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
         </div>

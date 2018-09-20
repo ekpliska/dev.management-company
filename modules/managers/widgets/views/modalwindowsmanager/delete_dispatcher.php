@@ -5,7 +5,7 @@
  * Удалить диспетчера
  */ 
 ?>
-<div class="modal fade" id="delete_disp_manager" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
+<div class="modal fade delete_empl" id="delete_disp_manager" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <button class="close delete_disp__close" type="button" data-dismiss="modal" aria-label="Close">
@@ -29,7 +29,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="delete_disp_manager_message" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
+<div class="modal fade delete_empl" id="delete_disp_manager_message" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">

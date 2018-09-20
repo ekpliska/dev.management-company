@@ -50,9 +50,9 @@
                             Html::button('Удалить', [
                                 'data-pjax' => false,
                                 'class' => 'btn btn-danger btn-sm delete_specialist',
-                                'data-target' => '#delete_empl_manager',
+                                'data-target' => '#delete_spec_manager',
                                 'data-toggle' => 'modal',
-                                'data-dispatcher' => $data['id'],
+                                'data-employer' => $data['id'],
                                 'data-full-name' => $full_name,
                             ]);
                     },

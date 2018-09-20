@@ -186,13 +186,13 @@ $(document).ready(function() {
     /*
      * Загрузка данных о Сотруднике модальное окно "Удалить сотрудника"
      */
-    $('#delete_disp_manager, #delete_disp_manager_message').on('show.bs.modal', function(e) {
+    $('.delete_empl').on('show.bs.modal', function(e) {
         // Обращаемся к кнопке, которая открыла модальное окно
         var button = $(e.relatedTarget);
         // Получаем ее дата атрибут
-        var dataDis = button.data('dispatcher');
+        var dataDis = button.data('employer');
         var dataFullName = button.data('fullName');
-        $('#delete_disp_manager, #delete_disp_manager_message').find('#disp-fullname').text(dataFullName);
+        $('.delete_empl').find('#disp-fullname').text(dataFullName);
         $(this).find('.delete_disp__del').data('dispatcher', dataDis);
     });    
 

@@ -52,7 +52,7 @@
                                 'class' => 'btn btn-danger btn-sm delete_dispatcher',
                                 'data-target' => '#delete_disp_manager',
                                 'data-toggle' => 'modal',
-                                'data-dispatcher' => $data['id'],
+                                'data-employer' => $data['id'],
                                 'data-full-name' => $full_name,
                             ]);
                     },
