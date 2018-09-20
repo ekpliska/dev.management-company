@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-danger delete_spec__del" data-dismiss="modal">Удалить</button>
+                <button class="btn btn-danger delete_spec__del" id="confirm_delete-empl" data-dismiss="modal">Удалить</button>
                 <button class="btn btn-primary" data-dismiss="modal">Отмена</button>
             </div>
         </div>

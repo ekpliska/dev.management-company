@@ -301,5 +301,37 @@ class EmployersController extends AppManagersController {
         return ['status' => false];
         
     }
+
+    /*
+     * Запрос за удаление Диспетчера
+     */
+    public function actionQueryDeleteSpecialist() {
+        
+        $employer_id = Yii::$app->request->post('employerId');
+        
+        if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            // Проверяем наличие не закрытых заявко
+            $requests = Specialists::findRequestsNotClose($employer_id);
+            // Имеются не закрытые заявки
+            if ($requests) {
+                return ['status' => true, 'isClose' => true];
+            }
+            // Не закрытых заявок нет, сотрудника удаляем
+            $employer = Employers::findOne($employer_id);
+            if (!$employer->delete()) {
+                Yii::$app->session->setFlash('delete-employer', [
+                    'success' => false, 
+                    'error' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз']);
+            }
+            Yii::$app->session->setFlash('delete-employer', [
+                'success' => true, 
+                'message' => 'Сотрудник ' . $employer->fullName . ' и его учетная запись были удалены из системы']);
+            
+            return $this->redirect('specialists');
+        }
+        return ['status' => false];
+        
+    }
     
 }

@@ -193,14 +193,14 @@ $(document).ready(function() {
         var dataDis = button.data('employer');
         var dataFullName = button.data('fullName');
         $('.delete_empl').find('#disp-fullname').text(dataFullName);
-        $(this).find('.delete_disp__del').data('dispatcher', dataDis);
+        $(this).find('#confirm_delete-empl').data('employer', dataDis);
     });    
 
     /*
      * Запрос на удаление профиля сотрудника (Диспетчер)
      */
     $('.delete_disp__del').on('click', function(){
-        var employerId = $(this).data('dispatcher');
+        var employerId = $(this).data('employer');
         $.ajax({
             url: 'query-delete-dispatcher',
             method: 'POST',
@@ -210,8 +210,32 @@ $(document).ready(function() {
             },
             success: function(response) {
                 if (response.isClose === true) {                
-                    console.log('Имеются не закрытые заявки');
                     $('#delete_disp_manager_message').modal('show');
+                } else if (response.isClose === false) {
+                    console.log('все заявки закрыты');
+                }
+            },
+            error: function(){
+                console.log('Error #2000');
+            },
+        });
+    });
+
+    /*
+     * Запрос на удаление профиля сотрудника (Диспетчер)
+     */
+    $('.delete_spec__del').on('click', function(){
+        var employerId = $(this).data('employer');
+        $.ajax({
+            url: 'query-delete-specialist',
+            method: 'POST',
+            dataType: 'json',
+            data: {
+                employerId: employerId,
+            },
+            success: function(response) {
+                if (response.isClose === true) {                
+                    $('#delete_spec_manager_message').modal('show');
                 } else if (response.isClose === false) {
                     console.log('все заявки закрыты');
                 }

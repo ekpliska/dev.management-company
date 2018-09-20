@@ -12,7 +12,7 @@
  * 
  * Редактирование профиля сотрудника
  */
-$this->title = 'Диспетчер ' . $specialist_info->fullName . '<span class="badge">' . $role . '</span>';
+$this->title = $specialist_info->fullName . '<span class="badge">' . $role . '</span>';
 ?>
 <div class="dispatchers-default-index">
     <h1><?= $this->title ?></h1>
@@ -119,7 +119,7 @@ $this->title = 'Диспетчер ' . $specialist_info->fullName . '<span class
                 'class' => 'btn btn-danger delete_specialist',
                 'data-target' => '#delete_spec_manager',
                 'data-toggle' => 'modal',
-                'data-dispatcher' => $specialist_info->id,
+                'data-employer' => $specialist_info->id,
                 'data-full-name' => $specialist_info->fullName,]) ?>
             <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
         </div>
