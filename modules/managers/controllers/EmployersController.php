@@ -203,6 +203,9 @@ class EmployersController extends AppManagersController {
         $name_role = array_keys(Yii::$app->authManager->getRolesByUser($user_info->id))[0];
         $role = User::getRole($name_role);
         
+        $requests = $specialist_info->requests; 
+        $paid_services = $specialist_info->paidServices;
+        
         if ($user_info->load(Yii::$app->request->post()) && $specialist_info->load(Yii::$app->request->post())) {
             
             $is_valid = $user_info->validate();
@@ -228,6 +231,8 @@ class EmployersController extends AppManagersController {
             'roles' => $roles,
             'name_role' => $name_role,
             'role' => $role,
+            'requests' => $requests,
+            'paid_services' => $paid_services,
         ]);
         
     }

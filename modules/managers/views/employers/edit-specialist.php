@@ -126,6 +126,22 @@ $this->title = $specialist_info->fullName . '<span class="badge">' . $role . '</
         
     </div>
     <?php ActiveForm::end() ?>
+    
+    <div class="clearfix"></div>
+    <div class="col-md-6">
+        <h3>Текущие заявки</h3>
+        <hr />
+        <?= $this->render('requests/grid_requests', ['requests' => $requests]) ?>
+    </div>
+    
+    <div class="col-md-6">
+        <h3>Текущие заявки на платные услуги</h3>
+        <hr />
+        <?= $this->render('requests/grid_paid_requests', ['paid_services' => $paid_services]) ?>
+    </div>
+    
+    
+    
 </div>
 
 <?= ModalWindowsManager::widget(['modal_view' => 'delete_specialist']) ?>

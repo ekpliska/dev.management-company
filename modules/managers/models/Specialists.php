@@ -50,13 +50,12 @@ class Specialists extends Employers {
                 ->asArray()
                 ->count();
         
-        if ($requests > 0 || $paid_services > 0) {
+        if (($requests + $paid_services) > 0) {
             return true;
         }
         
         return false;
         
     }
-
     
 }

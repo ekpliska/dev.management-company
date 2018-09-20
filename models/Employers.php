@@ -2,6 +2,7 @@
 
     namespace app\models;
     use Yii;
+    use app\models\Requests;
 
 class Employers extends \yii\db\ActiveRecord
 {
@@ -46,7 +47,29 @@ class Employers extends \yii\db\ActiveRecord
                 . $this->employers_name . ' '
                 . $this->employers_second_name;
     }
+    
+    /*
+     * Получить все зявки Специалиста
+     */
+    public function getRequests() {
+        return Requests::find()
+                ->andWhere(['requests_specialist_id' => $this->employers_id])
+                ->andWhere(['!=', 'status', StatusRequest::STATUS_CLOSE])
+                ->asArray()
+                ->all();
+    }
 
+    /*
+     * Получить все заявки на платные услуги Специалиста
+     */
+    public function getPaidServices() {
+        return PaidServices::find()
+                ->andWhere(['services_specialist_id' => $this->employers_id])
+                ->andWhere(['!=', 'status', StatusRequest::STATUS_CLOSE])
+                ->asArray()
+                ->all();
+    }
+    
     /**
      * {@inheritdoc}
      */

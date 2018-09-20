@@ -9,6 +9,7 @@
     use app\models\TypeRequests;
     use app\models\CommentsToRequest;
     use app\models\StatusRequest;
+    use app\models\Employers;
 
 /**
  * Заяки
@@ -85,7 +86,7 @@ class Requests extends ActiveRecord
     public function getComment() {
         return $this->hasMany(CommentsToRequest::className(), ['comments_request_id' => 'requests_id']);
     }
-    
+        
     /*
      * Сохранение новой заявки
      * 
