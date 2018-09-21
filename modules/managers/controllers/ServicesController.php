@@ -3,12 +3,14 @@
     namespace app\modules\managers\controllers;
     use Yii;
     use yii\web\UploadedFile;
+    use yii\data\ActiveDataProvider;
     use app\modules\managers\controllers\AppManagersController;
     use app\models\Services;
     use app\models\Rates;
     use app\modules\managers\models\form\ServiceForm;
     use app\models\Units;
     use app\models\CategoryServices;
+    use app\modules\managers\models\ServicesRates;
 
 /**
  * Услуги
@@ -19,7 +21,17 @@ class ServicesController extends AppManagersController {
      * Услуги, главная страница
      */
     public function actionIndex() {
-        return $this->render('index');
+        
+        $services = new ActiveDataProvider([
+            'query' => ServicesRates::getAllServices(),
+            'pagination' => [
+                'forcePageParam' => false,
+                'pageSizeParam' => false,
+                'pageSize' => 15,
+            ],
+        ]);
+        
+        return $this->render('index', ['services' => $services]);
     }
     
     /*
@@ -41,7 +53,7 @@ class ServicesController extends AppManagersController {
                     'success' => true,
                     'message' => 'Новая услуга была успешно добавлена',
                 ]);
-                return $this->redirect(['update-service', 'service_id' => $service_id]);
+                return $this->redirect(['edit-service', 'service_id' => $service_id]);
             } else {
                 Yii::$app->session->setFlash('services-admin', [
                     'success' => false,
@@ -59,7 +71,7 @@ class ServicesController extends AppManagersController {
         ]);
     }
     
-    public function actionUpdateService($service_id) {
+    public function actionEditService($service_id) {
         
         $service = Services::findByID($service_id);
         $rate = Rates::findByServiceID($service_id);
@@ -92,7 +104,7 @@ class ServicesController extends AppManagersController {
             }
         }
         
-        return $this->render('update-service', [
+        return $this->render('edit-service', [
             'service' => $service,
             'rate' => $rate,
             'service_categories' => $service_categories,

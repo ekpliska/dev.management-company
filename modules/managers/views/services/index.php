@@ -12,5 +12,5 @@ $this->title = 'Услуги';
     <h1><?= $this->title ?></h1>
     <hr />
     <?= Html::a('Услуга (+)', ['services/create'], ['class' => 'btn btn-success']) ?>
-    
+    <?= $this->render('data/grid_services', ['services' => $services]) ?>
 </div>
