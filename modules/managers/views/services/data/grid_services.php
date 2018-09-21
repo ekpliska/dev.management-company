@@ -2,6 +2,7 @@
 
     use yii\grid\GridView;
     use yii\helpers\Html;
+    use app\modules\managers\components\PayServiceColumn;
 
 /* 
  * Таблица
@@ -30,6 +31,9 @@
             'attribute' => 'unit',
             'header' => 'Ед. измерения',
             'value' => 'unit',
+        ],
+        [
+            'class' => PayServiceColumn::className(),
         ],
         [
             'class' => 'yii\grid\ActionColumn',

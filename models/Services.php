@@ -94,6 +94,17 @@ class Services extends ActiveRecord
                 ->where(['services_id' => $service_id])
                 ->one();
     }
+    
+    public function checkType($type) {
+        
+        if ($type == self::TYPE_PAY) {
+            $this->isType = self::TYPE_PAY;
+        } elseif ($type == self::TYPE_SERVICE) {
+            $this->isType = self::TYPE_SERVICE;
+        }
+        
+        return $this->save() ? true : false;
+    }
 
     /*
      * Загрузка изображения услуги

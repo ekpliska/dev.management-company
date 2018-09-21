@@ -73,8 +73,7 @@ class BlockClientColumn extends DataColumn {
      * 
      * @param integer $data['status'] == User::STATUS_ENABLED (1) Собственник активен
      * @param integer $data['status'] == User::STATUS_BLOCK (2) Собственник заблокирован
-     */
-    
+     */    
     protected function renderDataCellContent($data) {
         
         if ($data['status'] == User::STATUS_ENABLED) {

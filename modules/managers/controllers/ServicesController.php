@@ -113,4 +113,18 @@ class ServicesController extends AppManagersController {
         
     }
     
+    public function actionCheckTypeService() {
+        
+        $service_id = Yii::$app->request->post('serviceId');
+        $type = Yii::$app->request->post('typeService');
+        
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {            
+            $service = Services::findByID($service_id);
+            $service->checkType($type);
+            return ['status' => true, 'type' => $type];
+        }
+        return ['status' => false];
+    }
+    
 }
