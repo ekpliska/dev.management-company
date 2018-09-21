@@ -3,6 +3,7 @@
     use yii\helpers\Html;
     use yii\widgets\ActiveForm;
     use app\modules\managers\widgets\AlertsShow;
+    use app\modules\managers\widgets\ModalWindowsManager;
 
 /* 
  * Редактирование услуги
@@ -62,8 +63,14 @@ $this->title = $service->services_name;
     </div>
     
     <div class="col-md-7 text-right">
+        <?= Html::button('Удалить', [
+            'class' => 'btn btn-danger delete_service',
+            'data-target' => '#delete_service',
+            'data-toggle' => 'modal',
+            'data-service' => $service->id]) ?>
         <?= Html::submitButton('Добавить', ['class' => 'btn btn-primary']) ?>
     </div>
     
     <?php ActiveForm::end() ?>
 </div>
+<?= ModalWindowsManager::widget(['modal_view' => 'delete_service']) ?>

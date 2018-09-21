@@ -70,7 +70,9 @@ class ServicesController extends AppManagersController {
             'units' => $units,
         ]);
     }
-    
+    /*
+     * Редактирование услуги
+     */
     public function actionEditService($service_id) {
         
         $service = Services::findByID($service_id);
@@ -113,6 +115,10 @@ class ServicesController extends AppManagersController {
         
     }
     
+    /*
+     * Переключение типа услуги Услуга/Платная
+     * для таблица все услуги
+     */
     public function actionCheckTypeService() {
         
         $service_id = Yii::$app->request->post('serviceId');
@@ -127,4 +133,30 @@ class ServicesController extends AppManagersController {
         return ['status' => false];
     }
     
+    /*
+     * Запрос удаление услуги
+     */
+    public function actionConfirmDeleteService() {
+        
+        $service_id = Yii::$app->request->post('serviceId');
+        
+        if (Yii::$app->request->isAjax) {
+            $service = Services::findByID($service_id);
+            if (!$service->delete()) {
+                Yii::$app->session->setFlash('services-admin', [
+                    'success' => false,
+                    'error' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз',
+                ]);
+                return $this->redirect(Yii::$app->request->referrer);
+            }
+            Yii::$app->session->setFlash('services-admin', [
+                    'success' => true,
+                    'message' => 'Услуга ' . $service->services_name . ' была успешно удалена',
+            ]);
+            return $this->redirect(['index']);
+        }
+        
+        return $this->goHome();
+        
+    }
 }

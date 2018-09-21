@@ -76,6 +76,10 @@ class Services extends ActiveRecord
         return ArrayHelper::map($pay_services, 'services_id', 'services_name');
     }
     
+    public function getId() {
+        return $this->services_id;
+    }
+    
     /*
      * Список типов услуг
      */

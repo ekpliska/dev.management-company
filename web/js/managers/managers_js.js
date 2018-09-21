@@ -269,7 +269,46 @@ $(document).ready(function() {
                 console.log('Error #2000-10');
             }
         });
-    });    
+    });
+    
+    // ******************************************************** //
+    // ************    Start Block of Service    ************** //
+    // ******************************************************** //
+    /*
+     * Перед выводом модального окна на подтверждение удаления услуги 
+     * Формируем характеристики удаляемой услуги
+     */
+    $('#delete_service').on('show.bs.modal', function(e){
+        // Обращаемся к кнопке, которая открыла модальное окно
+        var button = $(e.relatedTarget);
+        // Получаем ее дата атрибут
+        var dataSrv = button.data('service');
+        $(this).find('#srv_name').text(dataSrv);
+        $(this).find('#srv_cat').text('text');
+        $(this).find('#srv_rate').text('text');
+        $(this).find('#srv_type').text('text');
+        $('#delete_service').find('.delete_srv__del').data('service', dataSrv);
+    })
+    
+    /*
+     * Запрос на удаление услуги
+     */
+    $('.delete_srv__del').on('click', function() {
+        var serviceId = $(this).data('service');
+        $.ajax({
+            url: 'confirm-delete-service',
+            method: 'POST',
+            data: {
+                serviceId: serviceId,
+            },
+            success: function(response) {
+                // console.log(response.here);
+            },
+            error: function() {
+                console.log('error');
+            }
+        });
+    });
 
 });
     
