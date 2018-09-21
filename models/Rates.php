@@ -26,7 +26,7 @@ class Rates extends ActiveRecord
     {
         return [
             [['rates_service_id', 'rates_unit_id'], 'integer'],
-//            ['rates_cost', 'number'],
+            ['rates_cost', 'number', 'numberPattern' => '/^\d+(.\d{1,2})?$/'],
         ];
     }
     

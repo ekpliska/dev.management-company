@@ -30,7 +30,7 @@ class ServiceForm extends Model {
                 'match', 
                 'pattern' => '/^[А-Яа-яЁё0-9\ \-\(\)]+$/iu'],
             
-            ['service_rate', 'number','numberPattern' => '/^\d+(.\d{1,2})?$/'], 
+            ['service_rate', 'number', 'numberPattern' => '/^\d+(.\d{1,2})?$/'], 
             ['service_rate', 'validateRate'],
             
             [['service_image'], 'file', 'extensions' => 'png, jpg, jpeg'],
