@@ -11,6 +11,7 @@
     use app\models\Units;
     use app\models\CategoryServices;
     use app\modules\managers\models\ServicesRates;
+    use app\modules\managers\models\searchForm\searchService;
 
 /**
  * Услуги
@@ -22,6 +23,8 @@ class ServicesController extends AppManagersController {
      */
     public function actionIndex() {
         
+        $search_model = new searchService();
+        
         $services = new ActiveDataProvider([
             'query' => ServicesRates::getAllServices(),
             'pagination' => [
@@ -31,7 +34,9 @@ class ServicesController extends AppManagersController {
             ],
         ]);
         
-        return $this->render('index', ['services' => $services]);
+        return $this->render('index', [
+            'services' => $services,
+            'search_model' => $search_model]);
     }
     
     /*
@@ -156,7 +161,23 @@ class ServicesController extends AppManagersController {
             return $this->redirect(['index']);
         }
         
-        return $this->goHome();
+        return $this->goHome();        
+    }
+    
+    /*
+     * 
+     */
+    public function actionSearchService() {
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $value = Yii::$app->request->post('searchValue');
         
+        if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
+            // Загружаем модель поиска
+            $model = new searchService();
+            $result = $model->searshService($value);
+            $data = $this->renderAjax('data/grid_services', ['services' => $result]);
+            return ['status' => true, 'data' => $data];
+        }
+        return ['status' => false];        
     }
 }

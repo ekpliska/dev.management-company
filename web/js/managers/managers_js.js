@@ -309,6 +309,26 @@ $(document).ready(function() {
             }
         });
     });
+    
+    /*
+     * 
+     */
+    $('#_search-service').on('input', function() {
+        var searchValue = $(this).val();
+        $.ajax({
+            url: 'search-service',
+            method: 'POST',
+            data: {
+                searchValue: searchValue,
+            },
+            success: function(response) {
+                $('.grid-view').html(response.data);
+            },
+            error: function() {
+                console.log('Error #2000-10');
+            }
+        });
+    });
 
 });
     
