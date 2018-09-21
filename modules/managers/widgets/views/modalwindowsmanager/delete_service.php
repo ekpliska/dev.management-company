@@ -22,9 +22,6 @@
                     <br />
                     Вы собираетесь удалить следующее услугу:
                     <span id="srv_name"></span>
-                    <span id="srv_cat"></span>
-                    <span id="srv_rate"></span>
-                    <span id="srt_type"></span>
                     <br />
                     Продолжить?
                 </div>

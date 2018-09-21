@@ -57,10 +57,11 @@
                         return 
                             Html::button('Удалить', [
                                 'data-pjax' => false,
-                                'class' => 'btn btn-danger btn-sm delete_service',
+                                'class' => 'btn btn-danger btn-sm delete_service__bnt',
                                 'data-target' => '#delete_service',
                                 'data-toggle' => 'modal',
                                 'data-service' => $data['id'],
+                                'data-service-name' => $data['name'],
                             ]);
                         },
                     ],

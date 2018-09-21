@@ -64,10 +64,11 @@ $this->title = $service->services_name;
     
     <div class="col-md-7 text-right">
         <?= Html::button('Удалить', [
-            'class' => 'btn btn-danger delete_service',
+            'class' => 'btn btn-danger delete_service__bnt',
             'data-target' => '#delete_service',
             'data-toggle' => 'modal',
-            'data-service' => $service->id]) ?>
+            'data-service' => $service->id,
+            'data-service-name' => $service->services_name]) ?>
         <?= Html::submitButton('Добавить', ['class' => 'btn btn-primary']) ?>
     </div>
     

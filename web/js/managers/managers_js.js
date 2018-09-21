@@ -283,12 +283,9 @@ $(document).ready(function() {
         var button = $(e.relatedTarget);
         // Получаем ее дата атрибут
         var dataSrv = button.data('service');
-        $(this).find('#srv_name').text(dataSrv);
-        $(this).find('#srv_cat').text('text');
-        $(this).find('#srv_rate').text('text');
-        $(this).find('#srv_type').text('text');
+        $(this).find('#srv_name').text(button.data('serviceName'));
         $('#delete_service').find('.delete_srv__del').data('service', dataSrv);
-    })
+    });
     
     /*
      * Запрос на удаление услуги
@@ -311,7 +308,7 @@ $(document).ready(function() {
     });
     
     /*
-     * 
+     * Сквозной поиск по таблице услуги
      */
     $('#_search-service').on('input', function() {
         var searchValue = $(this).val();

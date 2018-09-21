@@ -165,7 +165,7 @@ class ServicesController extends AppManagersController {
     }
     
     /*
-     * 
+     * Сквозной поиск по таблице услуги
      */
     public function actionSearchService() {
         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
@@ -180,4 +180,5 @@ class ServicesController extends AppManagersController {
         }
         return ['status' => false];        
     }
+    
 }
