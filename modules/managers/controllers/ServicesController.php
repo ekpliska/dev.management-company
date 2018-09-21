@@ -5,6 +5,7 @@
     use yii\web\UploadedFile;
     use app\modules\managers\controllers\AppManagersController;
     use app\models\Services;
+    use app\models\Rates;
     use app\modules\managers\models\form\ServiceForm;
     use app\models\Units;
     use app\models\CategoryServices;
@@ -40,7 +41,7 @@ class ServicesController extends AppManagersController {
                     'success' => true,
                     'message' => 'Новая услуга была успешно добавлена',
                 ]);
-                return $this->redirect(['index', 'service_id' => $service_id]);
+                return $this->redirect(['update-service', 'service_id' => $service_id]);
             } else {
                 Yii::$app->session->setFlash('services-admin', [
                     'success' => false,
@@ -56,6 +57,28 @@ class ServicesController extends AppManagersController {
             'service_types' => $service_types,
             'units' => $units,
         ]);
+    }
+    
+    public function actionUpdateService($service_id) {
+        
+        $service = Services::findByID($service_id);
+        $rate = Rates::findByServiceID($service_id);
+        
+        if ($service === null || $rate === null) {
+            throw new \yii\web\NotFoundHttpException('Вы обратились к несущствующей странице');
+        }
+        
+        $service_categories = CategoryServices::getCategoryNameArray();
+        $service_types = Services::getTypeNameArray();
+        $units = Units::getUnitsArray();        
+        
+        return $this->render('update-service', [
+            'service' => $service,
+            'rate' => $rate,
+            'service_categories' => $service_categories,
+            'service_types' => $service_types,
+            'units' => $units]);
+        
     }
     
 }

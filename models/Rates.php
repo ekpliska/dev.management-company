@@ -26,7 +26,7 @@ class Rates extends ActiveRecord
     {
         return [
             [['rates_service_id', 'rates_unit_id'], 'integer'],
-            ['rates_cost', 'number'],
+//            ['rates_cost', 'number'],
         ];
     }
     
@@ -43,6 +43,16 @@ class Rates extends ActiveRecord
     public function getService() {
         return $this->hasOne(Services::className(), ['services_id' => 'rates_service_id']);
     }
+    
+    /*
+     * Поиск тарифа по ID услуги
+     */
+    public static function findByServiceID($service_id) {
+        return self::find()
+                ->where(['rates_service_id' => $service_id])
+                ->one();
+    }
+    
     
     /**
      * Массив статусов заявок

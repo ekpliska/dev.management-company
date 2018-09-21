@@ -87,8 +87,14 @@ class Services extends ActiveRecord
     }
     
     /*
-     * 
+     * Поиск услуги по ID
      */
+    public static function findByID($service_id) {
+        return self::find()
+                ->where(['services_id' => $service_id])
+                ->one();
+    }
+
     /*
      * Загрузка изображения услуги
      */    
@@ -111,6 +117,17 @@ class Services extends ActiveRecord
         }
         
         return false;
+    }
+    
+    /*
+     * Получить изображение услуги
+     * В случае, если изображени для услуги не было задано - выводится изображение по умолчанию
+     */
+    public function getImage() {
+        if (empty($this->services_image)) {
+            return Yii::getAlias('@web') . '/images/not_found.png';
+        }
+        return Yii::getAlias('@web') . $this->services_image;
     }
 
     
