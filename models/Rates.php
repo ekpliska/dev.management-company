@@ -25,7 +25,8 @@ class Rates extends ActiveRecord
     public function rules()
     {
         return [
-            [['rates_service_id', 'rates_cost', 'rates_unit_id'], 'integer'],
+            [['rates_service_id', 'rates_unit_id'], 'integer'],
+            ['rates_cost', 'number'],
         ];
     }
     
@@ -41,7 +42,7 @@ class Rates extends ActiveRecord
      */
     public function getService() {
         return $this->hasOne(Services::className(), ['services_id' => 'rates_service_id']);
-    }    
+    }
     
     /**
      * Массив статусов заявок

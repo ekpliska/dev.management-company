@@ -2,6 +2,7 @@
 
     use yii\helpers\Html;
     use yii\widgets\ActiveForm;
+    use app\modules\managers\widgets\AlertsShow;
 
 /* 
  * Новая услуга
@@ -11,9 +12,15 @@ $this->title = 'Услуга (+)';
 <div class="managers-default-index">
     <h1><?= $this->title ?></h1>
     <hr />
+    
+    <?= AlertsShow::widget() ?>
+    
     <?php
         $form = ActiveForm::begin([
             'id' => 'create-service',
+            'options' => [
+                'enctype' => 'multipart/form-data',
+            ],
         ]);
     ?>
     
@@ -45,7 +52,7 @@ $this->title = 'Услуга (+)';
         
         <?= $form->field($model, 'service_rate')
                 ->input('text', [
-                    'placeHolder' => $model->getAttributeLabel('service_rate')]) ?>
+                    'placeHolder' => '0.00']) ?>
     </div>
     
     <div class="clearfix"></div>

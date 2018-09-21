@@ -24,30 +24,75 @@ class ServiceForm extends Model {
             [[
                 'service_name', 'service_category', 'service_type',
                 'service_rate', 'service_unit'], 'required'],
-        
+            
             [['service_name', 'service_description'], 'string', 'min' => 3, 'max' => 255],
+            ['service_name', 
+                'match', 
+                'pattern' => '/^[А-Яа-яЁё0-9\ \-\(\)]+$/iu'],
+            
+            ['service_rate', 'number'], 
+            ['service_rate', 'validateRate'],
+            
+            [['service_image'], 'file', 'extensions' => 'png, jpg, jpeg'],
+            [['service_image'], 'image', 'maxWidth' => 510, 'maxHeight' => 510],
             
         ];
     }
     
-    public function save() {
+    /*
+     * Валидация поля Тариф
+     * Тариф не может быть равен нулю и быть отрицательным
+     */
+    public function validateRate() {
+        if ($this->service_rate <= 0) {
+            $this->addError('service_rate', 'Значение тарифа не может быть отрицательным или равным нулю');
+        }
+    }
+    
+    public function save($file) {
+        
         if (!$this->validate()) {
             return false;
         }
         
+        $transaction = Yii::$app->db->beginTransaction();
+        
         try {
             
-        } catch (Exception $ex) {
+            $service = new Services();
+            $service->services_name = $this->service_name;
+            $service->services_category_id = $this->service_category;
+            $service->services_description = $this->service_description;
+            $service->isType = $this->service_type;
+            $service->uploadImage($file);
             
+            if (!$service->save()) {
+                return false;
+            }
+            
+            $rate = new Rates();
+            $rate->rates_unit_id = $this->service_unit;
+            $rate->rates_cost = $this->service_rate;
+            $rate->link('service', $service);
+            
+            if (!$rate->save()) {
+                return false;
+            }
+            
+            $transaction->commit();
+            return $service->services_id;
+            
+        } catch (Exception $ex) {
+            $transaction->rollBack();
         }
         
-        $transaction = Yii::$app->db->beginTransaction();
+        
     }
     
     public function attributeLabels() {
         return [
             'service_name' => 'Наименование услуги',
-            'service_category' => 'Вмд услуги',
+            'service_category' => 'Вид услуги',
             'service_rate' => 'Тариф',
             'service_unit' => 'Единицв измерения',
             'service_type' => 'Тип услуги',

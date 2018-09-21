@@ -86,6 +86,34 @@ class Services extends ActiveRecord
         ];
     }
     
+    /*
+     * 
+     */
+    /*
+     * Загрузка изображения услуги
+     */    
+    public function uploadImage($file) {
+        
+        $current_image = $this->services_image;
+        
+        if ($this->validate()) {
+            if ($file) {
+                $this->services_image = $file;
+                $dir = Yii::getAlias('images/services/');
+                $file_name = 'service_' . time() . '.' . $this->services_image->extension;
+                $this->services_image->saveAs($dir . $file_name);
+                $this->services_image = '/' . $dir . $file_name;
+                @unlink(Yii::getAlias('@webroot' . $current_image));
+            } else {
+                $this->services_image = $current_image;
+            }
+            return $this->save() ? true : false;
+        }
+        
+        return false;
+    }
+
+    
     /**
      * Массив статусов заявок
      */
