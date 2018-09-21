@@ -70,7 +70,27 @@ class ServicesController extends AppManagersController {
         
         $service_categories = CategoryServices::getCategoryNameArray();
         $service_types = Services::getTypeNameArray();
-        $units = Units::getUnitsArray();        
+        $units = Units::getUnitsArray();
+        
+        if ($service->load(Yii::$app->request->post()) && $rate->load(Yii::$app->request->post())) {
+            $is_valid = $service->validate();
+            $is_valid = $rate->validate() && $is_valid;
+            
+            if ($is_valid) {
+                $file = UploadedFile::getInstance($service, 'services_image');
+                $service->uploadImage($file);
+                $rate->save();
+                Yii::$app->session->setFlash('services-admin', [
+                    'success' => true,
+                    'message' => 'Новая услуга была успешно добавлена',
+                ]);
+            } else {
+                Yii::$app->session->setFlash('services-admin', [
+                    'success' => false,
+                    'error' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз',
+                ]);                
+            }
+        }
         
         return $this->render('update-service', [
             'service' => $service,
