@@ -4,12 +4,13 @@
     use app\modules\managers\controllers\AppManagersController;
 
 /**
- * Description of ServicesRatesController
- *
- * @author Ekaterina
+ * Заявки
  */
 class RequestsController extends AppManagersController {
     
+    /*
+     * Заявки, главная страница
+     */
     public function actionIndex() {
         return $this->render('index');
     }

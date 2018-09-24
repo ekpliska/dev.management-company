@@ -56,6 +56,10 @@ class PaidServicesController extends AppClientsController {
         
         // получаем список всех плтаных завок по категориям
         $categorys = CategoryServices::getAllCategory();
+        
+//        echo '<pre>';
+//        var_dump($categorys);
+//        die();
 
         return $this->render('order-services', ['categorys' => $categorys, 'new_order' => $new_order, 'pay_services' => $pay_services]);
         

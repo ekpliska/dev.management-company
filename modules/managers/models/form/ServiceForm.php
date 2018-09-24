@@ -67,6 +67,13 @@ class ServiceForm extends Model {
             $service->uploadImage($file);
             
             if (!$service->save()) {
+                Yii::$app->session->setFlash('services-admin', [
+                    'success' => false,
+                    // 'error' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз',
+                    'error' => $service->getFirstErrors(),
+                ]);
+                /* var_dump(($service->errors));
+                die(); */
                 return false;
             }
             
@@ -76,6 +83,13 @@ class ServiceForm extends Model {
             $rate->link('service', $service);
             
             if (!$rate->save()) {
+                Yii::$app->session->setFlash('services-admin', [
+                    'success' => false,
+                    // 'error' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз',
+                    'error' => $rate->getFirstErrors(),
+                ]);
+                /* var_dump(($rate->errors));
+                die(); */
                 return false;
             }
             
@@ -93,7 +107,7 @@ class ServiceForm extends Model {
         return [
             'service_name' => 'Наименование услуги',
             'service_category' => 'Вид услуги',
-            'service_rate' => 'Тариф',
+            'service_rate' => 'Стоимость',
             'service_unit' => 'Единицв измерения',
             'service_type' => 'Тип услуги',
             'service_description' => 'Описание услуги',

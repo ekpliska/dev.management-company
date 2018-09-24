@@ -5,6 +5,7 @@
     use yii\db\ActiveRecord;
     use app\models\Rates;
     use app\models\CategoryServices;
+    use yii\helpers\ArrayHelper;
 
 /**
  * Услуги
@@ -69,7 +70,7 @@ class Services extends ActiveRecord
      */
     public static function getPayServices() {
         $pay_services = self::find()
-                ->andWhere(['isPay' => '1'])
+                ->andWhere(['isType' => self::TYPE_PAY])
                 ->asArray()
                 ->all();
         

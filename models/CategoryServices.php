@@ -49,7 +49,7 @@ class CategoryServices extends ActiveRecord
     public static function getAllCategory() {
         return self::find()
                 ->joinWith(['service'])
-                ->andWhere(['services.isPay' => 1])
+                ->andWhere(['services.isType' => 1])
                 ->all();
     }    
     

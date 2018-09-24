@@ -22,7 +22,7 @@ $this->title = 'Заказать услугу';
         </div>
         <div>
             <?php foreach ($category['service'] as $value) : ?>
-                <?php if ($value->isPay) : ?>
+                <?php if ($value->isType) : ?>
                     <div class="col-md-2 text-center">
                         <?= Html::img('https://placehold.it/80x80?text=IMAGE', ['class' => 'img-responsive', 'style' => 'width:100%', 'alt' => 'Image']) ?>
                         <?= $value->services_name ?>

@@ -25,7 +25,7 @@
             ],
             [
                 'attribute' => 'rate',
-                'header' => 'Тариф',
+                'header' => 'Стоимость',
                 'value' => 'rate',
             ],
             [
