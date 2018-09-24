@@ -21,6 +21,11 @@ $this->title = 'Заявки';
     
     <hr />
     
+<?php
+echo '<pre>';
+var_dump($model->findClientPhone('+7 (920) 333-77-91'));
+?>
+    
 </div>
 <?= $this->render('form/create', [
         'model' => $model,

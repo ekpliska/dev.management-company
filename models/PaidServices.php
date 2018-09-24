@@ -3,7 +3,6 @@
     namespace app\models;
     use Yii;
     use yii\db\ActiveRecord;
-    use yii\behaviors\TimestampBehavior;
     use yii\helpers\ArrayHelper;
     use yii\helpers\Html;
     use yii\data\ActiveDataProvider;
@@ -16,12 +15,6 @@ class PaidServices extends ActiveRecord
 {
     
     const SCENARIO_ADD_SERVICE = 'add_record';
-    
-    public function behaviors() {
-        return [
-            TimestampBehavior::className(),
-        ];
-    }    
     
     /**
      * Таблица из БД

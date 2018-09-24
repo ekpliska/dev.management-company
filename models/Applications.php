@@ -3,6 +3,8 @@
     namespace app\models;
     use Yii;
     use yii\db\ActiveRecord;
+    use yii\behaviors\TimestampBehavior;
+    use yii\db\Expression;    
     use app\models\StatusRequest;
     use app\models\CategoryServices;
     use app\models\Services;
@@ -20,6 +22,17 @@ class Applications extends ActiveRecord
     {
         return 'applications';
     }
+    
+    public function behaviors() {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at',
+                'value' => new Expression('CURRENT_TIMESTAMP')
+            ]
+        ];
+    }    
 
     /**
      * Правила валидации
@@ -45,6 +58,14 @@ class Applications extends ActiveRecord
      */
     public function getService() {
         return $this->hasOne(Services::className(), ['services_id' => 'services_name_services_id']);
+    }
+    
+    public function getId() {
+        return $this->applications_id;
+    }
+    
+    public function getNumber() {
+        return $this->applications_number;
     }
 
     /**

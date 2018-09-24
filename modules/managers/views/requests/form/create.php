@@ -53,6 +53,7 @@
                     <?= $form->field($model, 'description')->textarea()->label() ?>
 
                     <?= Html::submitButton('Создать', ['class' => 'btn btn-primary']) ?>
+                    <?= Html::button('Отмена', ['class' => 'btn btn-default', 'data-dismiss' => 'modal']) ?>
 
                     <?php ActiveForm::end() ?>
                     

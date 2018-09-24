@@ -24,13 +24,23 @@ class RequestsController extends AppManagersController {
         ]);
     }
     
+    /*
+     * Просмотр и редактирование заявок
+     */
+    public function actionView($request_number) {
+        return $this->render('view');
+    }
+    
+    /*
+     * Метод сохранения созданной заявки
+     */
     public function actionCreateRequest() {
         
         $model = new RequestForm();
         
         if (Yii::$app->request->isPost && $model->load(Yii::$app->request->post())) {
-            $model->save();
-            return $this->redirect(['index']);
+            $number = $model->save();
+            return $this->redirect(['view', 'request_number' => $number]);
         }
     }
     

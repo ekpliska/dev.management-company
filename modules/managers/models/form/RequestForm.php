@@ -2,6 +2,7 @@
 
     namespace app\modules\managers\models\form;
     use Yii;
+    use yii\behaviors\TimestampBehavior;
     use app\models\Applications;
     use app\models\Clients;
     use app\models\Rents;
@@ -19,12 +20,16 @@ class RequestForm extends Model {
     public $fullname;
     public $description;
     
+     /*
+     * Правила валидации
+     */
     public function rules() {
         return [
             [['category_service', 'service_name', 'phone', 'fullname', 'description'], 'required'],
+            
             ['phone', 'existenceClient'],
         ];
-    }
+    }  
     
     /*
      * Проверяет наличие собственника или арендатора по указанному номеру телефона
@@ -52,6 +57,8 @@ class RequestForm extends Model {
         $transaction = Yii::$app->db->beginTransaction();
         try {
             $application = new Applications();
+            $client = $this->findClientPhone($this->phone);
+            
             
             $date = new \DateTime();
             $int = $date->getTimestamp();
@@ -61,14 +68,54 @@ class RequestForm extends Model {
             $application->applications_category_id = $this->category_service;
             $application->applications_service_id = $this->service_name;
             $application->applications_phone = $this->phone;
+            $application->applications_description = $this->description;
             $application->status = StatusRequest::STATUS_NEW;
+            $application->applications_account_id = $client['account_id'];
             
             $application->save();
             
             $transaction->commit();
+            
+            return $application->number;
+            
         } catch (Exception $ex) {
             $transaction->rollBack();
         }
+    }
+    
+    /*
+     * Метод возвращает ID Собственника/Арендатора и его лицевой счет
+     */
+    public function findClientPhone($phone) {
+        
+        $client = (new \yii\db\Query)
+                ->select('c.clients_id as id, p.account_id as account_id')
+                ->from('clients as c')
+                ->join('LEFT JOIN', 'personal_account as p', 'p.personal_clients_id = c.clients_id')
+                ->where(['c.clients_mobile' => $phone])
+                ->orWhere(['c.clients_phone' => $phone])
+                ->one();
+        
+        $rent = (new \yii\db\Query)
+                ->select('r.rents_id as id, p.account_id as account_id')
+                ->from('rents as r')
+                ->join('LEFT JOIN', 'personal_account as p', 'p.personal_rent_id = r.rents_id')                
+                ->where(['r.rents_mobile' => $phone])
+                ->orWhere(['r.rents_mobile_more' => $phone])
+                ->one();
+        
+        if ($client == null && $rent == null) {
+            return false;
+        } elseif ($client != null && $rent == null) {
+            return [
+                'id' => $client['id'], 
+                'account_id' => $client['account_id']];
+        } elseif ($client == null && $rent != null) {
+            return [
+                'id' => $rent['id'], 
+                'account_id' => $rent['account_id']];
+        }
+                
     }
     
     public function attributeLabels() {
