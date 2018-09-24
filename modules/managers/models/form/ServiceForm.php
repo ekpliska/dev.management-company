@@ -43,7 +43,7 @@ class ServiceForm extends Model {
      * Тариф не может быть равен нулю и быть отрицательным
      */
     public function validateCost() {
-        if ($this->service_cost<= 0) {
+        if ($this->service_cost <= 0) {
             $this->addError('service_cost', 'Значение тарифа не может быть отрицательным или равным нулю');
         }
     }

@@ -14,8 +14,14 @@ $this->title = 'Заявки';
     
     <?= AlertsShow::widget() ?>
     
-    <?= Html::a('Заявка (+)', ['requests/create'], ['class' => 'btn btn-success btn-sm']) ?>
+    <?= Html::button('Заявка (+)', [
+        'class' => 'btn btn-success btn-sm',
+        'data-target' => '#create-new-requests',
+        'data-toggle' => 'modal']) ?>
     
     <hr />
     
 </div>
+<?= $this->render('form/create', [
+        'model' => $model,
+        'service_categories' => $service_categories]) ?>
