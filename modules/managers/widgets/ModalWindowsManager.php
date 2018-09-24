@@ -12,7 +12,6 @@ class ModalWindowsManager extends Widget {
     
     // view модального окна
     public $modal_view;
-    
 
     public function init() {
         

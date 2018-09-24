@@ -4,7 +4,7 @@
     use Yii;
     use yii\db\ActiveRecord;
     use app\models\Units;
-    use app\models\Services;
+    use app\models\CategoryServices;
 
 /**
  * Тарифы
@@ -25,8 +25,11 @@ class Rates extends ActiveRecord
     public function rules()
     {
         return [
-            [['rates_service_id', 'rates_unit_id'], 'integer'],
-            ['rates_cost', 'number', 'numberPattern' => '/^\d+(.\d{1,2})?$/'],
+            
+            [['rates_name', 'rates_category_id', 'rates_unit_id', 'rates_cost'], 'required'],
+            [['rates_name'], 'string', 'min' => 3, 'max' => 255],
+//            ['rates_cost', 'number', 'numberPattern' => '/^\d+(.\d{1,2})?$/'],
+            [['rates_category_id', 'rates_unit_id'], 'integer'],
         ];
     }
     
@@ -34,14 +37,14 @@ class Rates extends ActiveRecord
      * Связь с таблицей Единицы измерения
      */
     public function getUnit() {
-        return $this->hasOne(Rates::className(), ['units_id' => 'rates_unit_id']);
+        return $this->hasOne(Units::className(), ['units_id' => 'rates_unit_id']);
     }
 
     /*
-     * Связь с таблицей Услуги
+     * Свзяь с таблицей Категории услуг
      */
-    public function getService() {
-        return $this->hasOne(Services::className(), ['services_id' => 'rates_service_id']);
+    public function getCategory() {
+        return $this->hasOne(CategoryServices::className(), ['category_id' => 'rates_category_id']);
     }
     
     /*
@@ -53,7 +56,6 @@ class Rates extends ActiveRecord
                 ->one();
     }
     
-    
     /**
      * Массив статусов заявок
      */
@@ -61,9 +63,10 @@ class Rates extends ActiveRecord
     {
         return [
             'rates_id' => 'Rates ID',
-            'rates_service_id' => 'Rates Service ID',
-            'rates_unit_id' => 'Rates Units',
-            'rates_cost' => 'Rates Cost',
+            'rates_name' => 'Наименование тарифы',
+            'rates_category_id' => 'Вид услуги',
+            'rates_unit_id' => 'Единица измерения',
+            'rates_cost' => 'Стоимость',
         ];
     }
 }
