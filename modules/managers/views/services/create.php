@@ -50,7 +50,7 @@ $this->title = 'Услуга (+)';
                 ->dropDownList($units, [
                     'prompt' => 'Выбрать из списка...']) ?>
         
-        <?= $form->field($model, 'service_rate')
+        <?= $form->field($model, 'service_cost')
                 ->input('text', [
                     'placeHolder' => '0.00']) ?>
     </div>

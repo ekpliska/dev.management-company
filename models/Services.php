@@ -3,7 +3,7 @@
     namespace app\models;
     use Yii;
     use yii\db\ActiveRecord;
-    use app\models\Rates;
+    use app\models\Units;
     use app\models\CategoryServices;
     use yii\helpers\ArrayHelper;
 
@@ -32,10 +32,15 @@ class Services extends ActiveRecord
         return [
             
             [[
+                'services_category_id',
                 'services_name',
-                'services_category_id', 'isType'], 'required'],
+                'services_unit_id',
+                'services_cost', 
+                'isType'], 'required'],
             
-            [['services_category_id', 'isPay', 'isServices', 'isType'], 'integer'],
+            [['services_category_id', 'isType'], 'integer'],
+            
+            ['services_cost', 'number', 'numberPattern' => '/^\d+(.\d{1,2})?$/'],
             
             [['services_name', 'services_image'], 'string', 'min' => '10', 'max' => 255],
             
@@ -44,17 +49,17 @@ class Services extends ActiveRecord
     }
     
     /*
-     * Связь с таблицей Тарифы
-     */
-    public function getRate() {
-        return $this->hasOne(Rates::className(), ['rates_service_id' => 'services_id']);
-    }        
-
-    /*
-     * Связь с таблицей Категории услуг
+     * Связь с таблицей Категории услуг/Вид услуг
      */
     public function getCategory() {
         return $this->hasOne(CategoryServices::className(), ['category_id' => 'services_category_id']);
+    }
+    
+    /*
+     * Связь с таблицей Единицы измерения
+     */
+    public function getUnit() {
+        return $this->hasOne(Units::className(), ['units_id' => 'services_unit_id']);
     }
     
     /*
@@ -77,6 +82,9 @@ class Services extends ActiveRecord
         return ArrayHelper::map($pay_services, 'services_id', 'services_name');
     }
     
+    /*
+     * Получить ID услуги
+     */
     public function getId() {
         return $this->services_id;
     }
@@ -100,6 +108,10 @@ class Services extends ActiveRecord
                 ->one();
     }
     
+    /*
+     * Метод смены типы усуги
+     * Усулуга/Платная услуга
+     */
     public function checkType($type) {
         
         if ($type == self::TYPE_PAY) {
@@ -156,11 +168,11 @@ class Services extends ActiveRecord
             'services_id' => 'Services ID',
             'services_name' => 'Наименование услуги',
             'services_category_id' => 'Вид услуги',
-            'isPay' => 'Is Pay',
-            'isServices' => 'Is Services',
+            'services_cost' => 'Стоимость',
             'services_image' => 'Изображение',
             'services_description' => 'Описание',
             'isType' => 'Тип услуги',
+            'services_unit_id' => 'Единица измерения',
         ];
     }
 }

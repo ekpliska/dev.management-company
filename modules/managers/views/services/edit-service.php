@@ -47,11 +47,11 @@ $this->title = $service->services_name;
                 ->dropDownList($service_categories, [
                     'prompt' => 'Выберите услугу из списка...',]) ?>
         
-        <?= $form->field($rate, 'rates_unit_id')
+        <?= $form->field($service, 'services_unit_id')
                 ->dropDownList($units, [
                     'prompt' => 'Выбрать из списка...']) ?>
         
-        <?= $form->field($rate, 'rates_cost')
+        <?= $form->field($service, 'services_cost')
                 ->input('text', [
                     'placeHolder' => '0.00']) ?>
     </div>

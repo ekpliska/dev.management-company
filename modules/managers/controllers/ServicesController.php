@@ -6,11 +6,10 @@
     use yii\data\ActiveDataProvider;
     use app\modules\managers\controllers\AppManagersController;
     use app\models\Services;
-    use app\models\Rates;
     use app\modules\managers\models\form\ServiceForm;
     use app\models\Units;
     use app\models\CategoryServices;
-    use app\modules\managers\models\ServicesRates;
+    use app\modules\managers\models\ServicesCost;
     use app\modules\managers\models\searchForm\searchService;
 
 /**
@@ -26,7 +25,7 @@ class ServicesController extends AppManagersController {
         $search_model = new searchService();
         
         $services = new ActiveDataProvider([
-            'query' => ServicesRates::getAllServices(),
+            'query' => ServicesCost::getAllServices(),
             'pagination' => [
                 'forcePageParam' => false,
                 'pageSizeParam' => false,
@@ -81,9 +80,8 @@ class ServicesController extends AppManagersController {
     public function actionEditService($service_id) {
         
         $service = Services::findByID($service_id);
-        $rate = Rates::findByServiceID($service_id);
         
-        if ($service === null || $rate === null) {
+        if ($service === null) {
             throw new \yii\web\NotFoundHttpException('Вы обратились к несущствующей странице');
         }
         
@@ -91,14 +89,12 @@ class ServicesController extends AppManagersController {
         $service_types = Services::getTypeNameArray();
         $units = Units::getUnitsArray();
         
-        if ($service->load(Yii::$app->request->post()) && $rate->load(Yii::$app->request->post())) {
+        if ($service->load(Yii::$app->request->post())) {
             $is_valid = $service->validate();
-            $is_valid = $rate->validate() && $is_valid;
             
             if ($is_valid) {
                 $file = UploadedFile::getInstance($service, 'services_image');
                 $service->uploadImage($file);
-                $rate->save();
                 Yii::$app->session->setFlash('services-admin', [
                     'success' => true,
                     'message' => 'Новая услуга была успешно добавлена',
@@ -113,7 +109,6 @@ class ServicesController extends AppManagersController {
         
         return $this->render('edit-service', [
             'service' => $service,
-            'rate' => $rate,
             'service_categories' => $service_categories,
             'service_types' => $service_types,
             'units' => $units]);
