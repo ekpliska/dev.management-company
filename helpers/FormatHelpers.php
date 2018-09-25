@@ -48,6 +48,28 @@ class FormatHelpers {
     }
     
     /*
+     * Форматирование вывода даты в комментариях на странице заявки
+     * число месяц г. часы:минуты:секунды
+     */
+    public static function formatDateWithMonth($date_int) {
+        
+        if (empty($date_int)) {
+            return 'Не установлена';
+        }
+        
+        $current_year = date('Y');
+        
+        $_date_int = Yii::$app->formatter->asDate($date_int, 'dd.MMMM.yyyy');
+        
+        list($day, $month, $year) = explode('.', $_date_int);
+        $year = $current_year == $year ? '' : $year . ' г.';
+        
+        $date_full = $day . ' ' . $month . ' ' . $year;
+        
+        return $date_full;
+    }
+    
+    /*
      * Форматирование вывода даты
      * Лицевой счет / Приборы учета
      */

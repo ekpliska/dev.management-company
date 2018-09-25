@@ -59,7 +59,14 @@ $this->title = 'Заявка №' . $request['applications_number'];
         </div>        
     </div>
     <div class="col-md-5">
-        comment
+        <div class="panel panel-default">
+            <div class="panel-heading">Комменатрии к заявке</div>
+            <div class="panel-body">
+                <?= $this->render('comments/view', [
+                    'model' => $model_comment,
+                    'comments_find' => $comments_find]) ?>
+            </div>
+        </div>
     </div>
     
     <div class="clearfix"></div>

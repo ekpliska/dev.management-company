@@ -58,6 +58,18 @@ class CommentsToRequest extends ActiveRecord
                 ->all();
     }
     
+    public static function getCommentByRequest($request_id) {
+        
+        $query = (new \yii\db\Query)
+                ->from('comments_to_request')
+//                ->join('', '', '')
+                ->where(['comments_application_id' => $request_id])
+                ->groupBy('created_at')
+                ->all();
+        
+        return $query;
+    }
+    
     /*
      * Сохранение комментария в бд
      */
@@ -72,6 +84,21 @@ class CommentsToRequest extends ActiveRecord
         }
         return false;
     }
+    
+    /*
+     * Сохранение комментария в бд
+     */
+    public function sendComments($request_id) {
+        
+        if ($this->validate()) {
+            
+            $this->comments_application_id = $request_id;
+            $this->comments_user_id = Yii::$app->user->identity->id;
+            return $this->save() ? true : false;
+            
+        }
+        return false;
+    }    
 
     /**
      * Настройка полей для форм

@@ -5,11 +5,8 @@
     use yii\db\ActiveRecord;
     use yii\behaviors\TimestampBehavior;
     use yii\db\Expression;    
-    use app\models\StatusRequest;
-    use app\models\CategoryServices;
     use app\models\Services;
     use app\models\PersonalAccount;
-    use app\models\Employers;
     
 
 class Applications extends ActiveRecord
@@ -72,6 +69,7 @@ class Applications extends ActiveRecord
      * Поиск по номеру заявки
      */
     public static function findByNubmer($number) {
+        
         $query = (new \yii\db\Query)
                 ->from('applications as a')
                 ->join('LEFT JOIN', 'category_services as c', 'c.category_id = a.applications_category_id')
