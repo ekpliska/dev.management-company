@@ -68,6 +68,7 @@ class RequestForm extends Model {
             $application->applications_phone = $this->phone;
             $application->applications_description = $this->description;
             $application->status = StatusRequest::STATUS_NEW;
+            $application->is_accept = 0;
             $application->applications_account_id = $account_id['account_id'];
             
             $application->save();

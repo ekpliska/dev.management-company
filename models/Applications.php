@@ -67,7 +67,23 @@ class Applications extends ActiveRecord
     public function getNumber() {
         return $this->applications_number;
     }
-
+    
+    /*
+     * Поиск по номеру заявки
+     */
+    public static function findByNubmer($number) {
+        $query = (new \yii\db\Query)
+                ->from('applications as a')
+                ->join('LEFT JOIN', 'category_services as c', 'c.category_id = a.applications_category_id')
+                ->join('LEFT JOIN', 'services as s', 's.services_category_id = c.category_id')
+                ->join('LEFT JOIN', 'personal_account as p', 'p.account_id = a.applications_account_id')
+                ->join('LEFT JOIN', 'houses as h', 'h.houses_id = p.personal_house_id')
+                ->where(['applications_number' => $number])
+                ->one();
+        
+        return $query;
+    }
+    
     /**
      * Атрибуты полей
      */

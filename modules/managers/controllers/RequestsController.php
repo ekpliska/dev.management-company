@@ -5,6 +5,7 @@
     use app\modules\managers\controllers\AppManagersController;
     use app\models\CategoryServices;
     use app\modules\managers\models\form\RequestForm;
+    use app\models\Applications;
 
 /**
  * Заявки
@@ -32,7 +33,16 @@ class RequestsController extends AppManagersController {
      * Просмотр и редактирование заявок
      */
     public function actionView($request_number) {
-        return $this->render('view');
+        
+        $request = Applications::findByNubmer($request_number);
+        
+        if (!isset($request) && $request == null) {
+            throw new \yii\web\NotFoundHttpException('Вы обратились к несуществующей странице');
+        }
+        
+        return $this->render('view', [
+            'request' => $request,
+        ]);
     }
     
     /*
