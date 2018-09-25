@@ -89,12 +89,15 @@ class RequestForm extends Model {
     public function findClientPhone($phone) {
         
         $client = (new \yii\db\Query)
-                ->select('c.clients_id as id, p.account_id as account_id')
+                ->select('c.clients_id as id, p.account_id as account_id,'
+                        . 'h.houses_id as house_id')
                 ->from('clients as c')
                 ->join('LEFT JOIN', 'personal_account as p', 'p.personal_clients_id = c.clients_id')
+                ->join('LEFT JOIN', 'houses as h', 'h.houses_client_id = c.clients_id')
                 ->where(['c.clients_mobile' => $phone])
                 ->orWhere(['c.clients_phone' => $phone])
-                ->one();
+                ->groupBy('h.houses_id')
+                ->all();
         
         $rent = (new \yii\db\Query)
                 ->select('r.rents_id as id, p.account_id as account_id')
@@ -107,9 +110,7 @@ class RequestForm extends Model {
         if ($client == null && $rent == null) {
             return false;
         } elseif ($client != null && $rent == null) {
-            return [
-                'id' => $client['id'], 
-                'account_id' => $client['account_id']];
+            return \yii\helpers\ArrayHelper::getColumn($client, 'house_id');
         } elseif ($client == null && $rent != null) {
             return [
                 'id' => $rent['id'], 

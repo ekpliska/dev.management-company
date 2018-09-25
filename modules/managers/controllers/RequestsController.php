@@ -17,10 +17,12 @@ class RequestsController extends AppManagersController {
     public function actionIndex() {
         $model = new RequestForm();
         $service_categories = CategoryServices::getCategoryNameArray();
+        $service_name = [];
         
         return $this->render('index', [
             'model' => $model,
             'service_categories' => $service_categories,
+            'service_name' => $service_name,
         ]);
     }
     

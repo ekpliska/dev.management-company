@@ -4,6 +4,8 @@
     use yii\web\Controller;
     use yii\filters\AccessControl;
     use Yii;
+    use app\models\CategoryServices;
+    use app\models\Services;
     use app\models\Departments;
     use app\modules\managers\models\Posts;
     use app\modules\managers\models\User;
@@ -59,6 +61,33 @@ class AppManagersController extends Controller {
             echo '<option>-</option>';
         }
     }
+    
+    /*
+     * Формирование зависимых списков
+     * Выбор названия услуги зависит от ее категории
+     */
+    public function actionShowNameService($categoryId) {
+        
+        $category_list = CategoryServices::find()
+                ->andWhere(['category_id' => $categoryId])
+                ->asArray()
+                ->count();
+        
+        $service_list = Services::find()
+                ->andWhere(['services_category_id' => $categoryId])
+                ->asArray()
+                ->all();
+        
+        if ($category_list > 0) {
+            foreach ($service_list as $service) {
+                echo '<option value="' . $service['services_id'] . '">' . $service['services_name'] . '</option>';
+            }
+        } else {
+            echo '<option>-</option>';
+        }
+        
+    }
+    
 
     /*
      * Блокировать/Разблокировать Пользователя

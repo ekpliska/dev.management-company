@@ -31,11 +31,14 @@
 
                     <?= $form->field($model, 'category_service')
                             ->dropDownList($service_categories, [
-                                'prompt' => 'Выбрать из списка...'])
+                                'prompt' => 'Выбрать из списка...',
+                                'id' => 'category_service'])
                             ->label() ?>
 
                     <?= $form->field($model, 'service_name')
-                            ->dropDownList($service_categories)
+                            ->dropDownList($service_name, [
+                                'id' => 'service_name',
+                                'prompt' => 'Выбрать из списка...'])
                             ->label() ?>
 
                     <?= $form->field($model, 'phone')

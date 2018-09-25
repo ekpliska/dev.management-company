@@ -327,6 +327,22 @@ $(document).ready(function() {
         });
     });
 
+
+    // ******************************************************** //
+    // ************    Start Block of Requests    ************** //
+    // ******************************************************** //
+    /*
+     * Формирование зависимых списков выбора имени услуги от ее категории
+     */
+    $('#category_service').on('change', function(e) {
+
+        $.post('/web/managers/app-managers/show-name-service?categoryId=' + $(this).val(),
+        function(data) {
+            $('#service_name').html(data);
+        });
+    });
+
+
 });
     
 
