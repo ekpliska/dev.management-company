@@ -90,6 +90,16 @@ class PersonalAccount extends ActiveRecord
                 ->orderBy(['account_id' => SORT_ASC])
                 ->limit(1);
     }
+    
+    /*
+     * Поиск по ID квартиры
+     */
+    public static function findByFlatId($flat_id) {
+        return self::find()
+                ->where(['personal_house_id' => $flat_id])
+                ->asArray()
+                ->one();
+    }
 
     /*
      * Поиск лицевого счета по ID клиента
@@ -239,7 +249,6 @@ class PersonalAccount extends ActiveRecord
             }
         }
     }
-        
     
     /**
      * Метки для полей

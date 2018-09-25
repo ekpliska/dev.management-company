@@ -55,11 +55,6 @@
                                 'prompt' => 'Выбрать из списка...'])
                             ->label() ?>
                     
-                    <?= $form->field($model, 'fullname')
-                            ->input('text', [
-                                'placeHolder' => $model->getAttributeLabel('fullname')])
-                            ->label() ?>
-
                     <?= $form->field($model, 'description')->textarea()->label() ?>
 
                     <?= Html::submitButton('Создать', ['class' => 'btn btn-primary']) ?>

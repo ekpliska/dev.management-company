@@ -17,7 +17,6 @@ class RequestForm extends Model {
     public $service_name;
     public $phone;
     public $flat;
-    public $fullname;
     public $description;
     
      /*
@@ -25,7 +24,7 @@ class RequestForm extends Model {
      */
     public function rules() {
         return [
-            [['category_service', 'service_name', 'phone', 'fullname', 'description', 'flat'], 'required'],
+            [['category_service', 'service_name', 'phone', 'description', 'flat'], 'required'],
             
             ['phone', 'existenceClient'],
         ];
@@ -57,8 +56,7 @@ class RequestForm extends Model {
         $transaction = Yii::$app->db->beginTransaction();
         try {
             $application = new Applications();
-            $client = $this->findAccountClient($this->flat);
-            
+            $account_id = \app\models\PersonalAccount::findByFlatId($this->flat);
             
             $date = new \DateTime();
             $int = $date->getTimestamp();
@@ -70,7 +68,7 @@ class RequestForm extends Model {
             $application->applications_phone = $this->phone;
             $application->applications_description = $this->description;
             $application->status = StatusRequest::STATUS_NEW;
-            $application->applications_account_id = $client['account_id'];
+            $application->applications_account_id = $account_id['account_id'];
             
             $application->save();
             
@@ -81,10 +79,6 @@ class RequestForm extends Model {
         } catch (Exception $ex) {
             $transaction->rollBack();
         }
-    }
-    
-    public function findAccountClient($flat_id) {
-        return '';
     }
     
     /*
