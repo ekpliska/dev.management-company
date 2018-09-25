@@ -4,11 +4,14 @@
     use yii\web\Controller;
     use yii\filters\AccessControl;
     use Yii;
+    use app\helpers\FormatHelpers;
     use app\models\CategoryServices;
     use app\models\Services;
     use app\models\Departments;
     use app\modules\managers\models\Posts;
     use app\modules\managers\models\User;
+    use app\modules\managers\models\form\RequestForm;
+    use app\models\Houses;
 
 /*
  * Общий контроллер модуля Managers
@@ -87,8 +90,34 @@ class AppManagersController extends Controller {
         }
         
     }
-    
 
+
+    public function actionShowHouses($phone) {
+        
+        $model = new RequestForm();
+        $client_id = $model->findClientPhone($phone);
+        
+        $house_list = Houses::find()
+                ->andWhere(['houses_client_id' => $client_id])
+                ->asArray()
+                ->all();
+
+        if (!empty($client_id)) {
+            foreach ($house_list as $house) {
+                $full_adress = FormatHelpers::formatFullAdress(
+                        $house['houses_town'], 
+                        $house['houses_street'], 
+                        $house['houses_number_house'], 
+                        $house['houses_floor'], 
+                        $house['houses_flat']) ;
+                echo '<option value="' . $house['houses_id'] . '">' . $full_adress . '</option>';
+            }
+        } else {
+            echo '<option>Адрес не найден</option>';
+        }        
+        
+    }
+    
     /*
      * Блокировать/Разблокировать Пользователя
      * В профиле пользоваетля

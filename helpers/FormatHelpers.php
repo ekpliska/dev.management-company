@@ -79,16 +79,17 @@ class FormatHelpers {
     
     /*
      * Форматирование полного адреса проживания
-     * г. Город, ул. Улица, д. Номер, кв. Номер
+     * г. Город, ул. Улица, д. Номер, эт. Этаж, кв. Номер
      */
-    public static function formatFullAdress($town, $street, $house, $flat) {
+    public static function formatFullAdress($town, $street, $house, $floor, $flat) {
         
-        $town = 'г. ' . $town;
-        $street = 'ул. '  . $street;
-        $house = 'д. ' . $house;
-        $flat = 'кв. ' . $flat;
+        $town = $town ? 'г. ' . $town : '';
+        $street = $street ? 'ул. '  . $street : '';
+        $house = $house ? 'д. ' . $house : '';
+        $floor = $floor ? 'эт. ' . $floor : '';
+        $flat = $flat ? 'кв. ' . $flat : '';
         
-        return $town .  ', ' . $street . ', ' . $house . ', ' . $flat;
+        return $town .  ', ' . $street . ', ' . $house . ', ' . $floor . ', ' . $flat;
     }
     
     /*

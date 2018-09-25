@@ -2,7 +2,6 @@
 
     namespace app\modules\managers\models\form;
     use Yii;
-    use yii\behaviors\TimestampBehavior;
     use app\models\Applications;
     use app\models\Clients;
     use app\models\Rents;
@@ -17,6 +16,7 @@ class RequestForm extends Model {
     public $category_service;
     public $service_name;
     public $phone;
+    public $flat;
     public $fullname;
     public $description;
     
@@ -25,7 +25,7 @@ class RequestForm extends Model {
      */
     public function rules() {
         return [
-            [['category_service', 'service_name', 'phone', 'fullname', 'description'], 'required'],
+            [['category_service', 'service_name', 'phone', 'fullname', 'description', 'flat'], 'required'],
             
             ['phone', 'existenceClient'],
         ];
@@ -57,7 +57,7 @@ class RequestForm extends Model {
         $transaction = Yii::$app->db->beginTransaction();
         try {
             $application = new Applications();
-            $client = $this->findClientPhone($this->phone);
+            $client = $this->findAccountClient($this->flat);
             
             
             $date = new \DateTime();
@@ -83,38 +83,33 @@ class RequestForm extends Model {
         }
     }
     
+    public function findAccountClient($flat_id) {
+        return '';
+    }
+    
     /*
      * Метод возвращает ID Собственника/Арендатора и его лицевой счет
      */
     public function findClientPhone($phone) {
         
-        $client = (new \yii\db\Query)
-                ->select('c.clients_id as id, p.account_id as account_id,'
-                        . 'h.houses_id as house_id')
-                ->from('clients as c')
-                ->join('LEFT JOIN', 'personal_account as p', 'p.personal_clients_id = c.clients_id')
-                ->join('LEFT JOIN', 'houses as h', 'h.houses_client_id = c.clients_id')
-                ->where(['c.clients_mobile' => $phone])
-                ->orWhere(['c.clients_phone' => $phone])
-                ->groupBy('h.houses_id')
-                ->all();
-        
-        $rent = (new \yii\db\Query)
-                ->select('r.rents_id as id, p.account_id as account_id')
-                ->from('rents as r')
-                ->join('LEFT JOIN', 'personal_account as p', 'p.personal_rent_id = r.rents_id')                
-                ->where(['r.rents_mobile' => $phone])
-                ->orWhere(['r.rents_mobile_more' => $phone])
+        $client = \app\models\Clients::find()
+                ->where(['LIKE', new \yii\db\Expression('REPLACE(clients_mobile, " ", "")'), $phone])
+                ->orWhere(['LIKE', new \yii\db\Expression('REPLACE(clients_phone, " ", "")'), $phone])
+                ->asArray()
+                ->one();
+
+        $rent = \app\models\Rents::find()
+                ->where(['LIKE', new \yii\db\Expression('REPLACE(rents_mobile, " ", "")'), $phone])
+                ->orWhere(['LIKE', new \yii\db\Expression('REPLACE(rents_mobile_more, " ", "")'), $phone])
+                ->asArray()
                 ->one();
         
         if ($client == null && $rent == null) {
             return false;
         } elseif ($client != null && $rent == null) {
-            return \yii\helpers\ArrayHelper::getColumn($client, 'house_id');
+            return ['client_id' => $client['clients_id']];
         } elseif ($client == null && $rent != null) {
-            return [
-                'id' => $rent['id'], 
-                'account_id' => $rent['account_id']];
+            return ['client_id' => $rent['rents_clients_id']];
         }
                 
     }
@@ -124,6 +119,7 @@ class RequestForm extends Model {
             'category_service' => 'Вид услуги',
             'service_name' => 'Название услуги',
             'phone' => 'Мобильный телефон',
+            'flat' => 'Дом',
             'fullname' => 'Фамилия имя отчество',
             'description' => 'Описание',
         ];

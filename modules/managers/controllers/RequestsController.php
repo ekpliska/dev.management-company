@@ -18,11 +18,13 @@ class RequestsController extends AppManagersController {
         $model = new RequestForm();
         $service_categories = CategoryServices::getCategoryNameArray();
         $service_name = [];
+        $flat = [];
         
         return $this->render('index', [
             'model' => $model,
             'service_categories' => $service_categories,
             'service_name' => $service_name,
+            'flat' => $flat,
         ]);
     }
     

@@ -45,9 +45,16 @@
                             ->widget(MaskedInput::className(), [
                                 'mask' => '+7 (999) 999-99-99'])
                             ->input('text', [
-                                'placeHolder' => $model->getAttributeLabel('phone')])
+                                'placeHolder' => $model->getAttributeLabel('phone'),
+                                'class' => 'form-control mobile_phone'])
                             ->label() ?>
-
+                    
+                    <?= $form->field($model, 'flat')
+                            ->dropDownList($flat, [
+                                'class' => 'form-control house',
+                                'prompt' => 'Выбрать из списка...'])
+                            ->label() ?>
+                    
                     <?= $form->field($model, 'fullname')
                             ->input('text', [
                                 'placeHolder' => $model->getAttributeLabel('fullname')])

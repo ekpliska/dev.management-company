@@ -342,6 +342,14 @@ $(document).ready(function() {
         });
     });
 
+    $('body').on('blur', '.mobile_phone', function(e) {
+        var strValue = $(this).val();
+        strValue = strValue.replace(/[^-0-9,(,)]/gim, '');
+        $.post('/web/managers/app-managers/show-houses?phone=' + strValue,
+        function(data) {
+            $('.house').html(data);
+        });
+    });
 
 });
     
