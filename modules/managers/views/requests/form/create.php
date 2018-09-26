@@ -29,16 +29,10 @@
                         ])
                     ?>
 
-                    <?= $form->field($model, 'category_service')
-                            ->dropDownList($service_categories, [
+                    <?= $form->field($model, 'type_request')
+                            ->dropDownList($type_request, [
                                 'prompt' => 'Выбрать из списка...',
                                 'id' => 'category_service'])
-                            ->label() ?>
-
-                    <?= $form->field($model, 'service_name')
-                            ->dropDownList($service_name, [
-                                'id' => 'service_name',
-                                'prompt' => 'Выбрать из списка...'])
                             ->label() ?>
 
                     <?= $form->field($model, 'phone')

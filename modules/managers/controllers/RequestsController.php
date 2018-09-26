@@ -3,7 +3,7 @@
     namespace app\modules\managers\controllers;
     use Yii;
     use app\modules\managers\controllers\AppManagersController;
-    use app\models\CategoryServices;
+    use app\models\TypeRequests;
     use app\modules\managers\models\form\RequestForm;
     use app\models\Applications;
     use app\modules\managers\models\form\CommentForm;
@@ -17,16 +17,14 @@ class RequestsController extends AppManagersController {
     /*
      * Заявки, главная страница
      */
-    public function actionIndex() {
+    public function actionRequests() {
         $model = new RequestForm();
-        $service_categories = CategoryServices::getCategoryNameArray();
-        $service_name = [];
+        $type_request = TypeRequests::getTypeNameArray();
         $flat = [];
         
-        return $this->render('index', [
+        return $this->render('requests', [
             'model' => $model,
-            'service_categories' => $service_categories,
-            'service_name' => $service_name,
+            'type_request' => $type_request,
             'flat' => $flat,
         ]);
     }

@@ -2,7 +2,9 @@
 
     namespace app\modules\managers\models\form;
     use Yii;
-    use app\models\Applications;
+//    use app\models\Applications;
+    use app\models\Requests;
+    use app\models\PersonalAccount;
     use app\models\Clients;
     use app\models\Rents;
     use yii\base\Model;
@@ -13,8 +15,7 @@
  */
 class RequestForm extends Model {
     
-    public $category_service;
-    public $service_name;
+    public $type_request;
     public $phone;
     public $flat;
     public $description;
@@ -24,7 +25,7 @@ class RequestForm extends Model {
      */
     public function rules() {
         return [
-            [['category_service', 'service_name', 'phone', 'description', 'flat'], 'required'],
+            [['type_request', 'phone', 'description', 'flat'], 'required'],
             
             ['phone', 'existenceClient'],
         ];
@@ -53,29 +54,29 @@ class RequestForm extends Model {
     }
     
     public function save() {
+        
         $transaction = Yii::$app->db->beginTransaction();
         try {
-            $application = new Applications();
-            $account_id = \app\models\PersonalAccount::findByFlatId($this->flat);
+            $request = new Requests();
+            $account_id = PersonalAccount::findByFlatId($this->flat);
             
             $date = new \DateTime();
             $int = $date->getTimestamp();
 
-            $numder = substr($int, 5) . '-' . str_pad($this->category_service, 2, 0, STR_PAD_LEFT) . '-' . str_pad($this->service_name, 2, 0, STR_PAD_LEFT);
-            $application->applications_number = $numder;
-            $application->applications_category_id = $this->category_service;
-            $application->applications_service_id = $this->service_name;
-            $application->applications_phone = $this->phone;
-            $application->applications_description = $this->description;
-            $application->status = StatusRequest::STATUS_NEW;
-            $application->is_accept = 0;
-            $application->applications_account_id = $account_id['account_id'];
+            $numder = substr($int, 5) . '-' . str_pad($this->type_request, 2, 0, STR_PAD_LEFT);
+            $request->requests_ident = $numder;
+            $request->requests_type_id = $this->type_request;
+            $request->requests_phone = $this->phone;
+            $request->requests_comment = $this->description;
+            $request->status = StatusRequest::STATUS_NEW;
+            $request->is_accept = 0;
+            $request->requests_account_id = $account_id['account_id'];
             
-            $application->save();
+            $request->save();
             
             $transaction->commit();
             
-            return $application->number;
+            return $numder;
             
         } catch (Exception $ex) {
             $transaction->rollBack();
@@ -111,8 +112,7 @@ class RequestForm extends Model {
     
     public function attributeLabels() {
         return [
-            'category_service' => 'Вид услуги',
-            'service_name' => 'Название услуги',
+            'type_request' => 'Вид заявки',
             'phone' => 'Мобильный телефон',
             'flat' => 'Дом',
             'fullname' => 'Фамилия имя отчество',

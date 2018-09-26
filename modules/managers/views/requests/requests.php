@@ -25,7 +25,5 @@ $this->title = 'Заявки';
 
 <?= $this->render('form/create', [
         'model' => $model,
-        'service_categories' => $service_categories,
-        'service_name' => $service_name,
-        'flat' => $flat,
-    ]) ?>
+        'type_request' => $type_request,
+        'flat' => $flat,]) ?>
