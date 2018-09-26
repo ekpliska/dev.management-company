@@ -37,19 +37,25 @@ class FormatHelpers {
      * число месяц г. часы:минуты:секунды
      */
     public static function formatDate($date_int) {
+        
         if (empty($date_int)) {
             return 'Не установлена';
         }
+        
         $_date_int = Yii::$app->formatter->asDate($date_int, 'dd.MMMM.yyyy');
         $_time = Yii::$app->formatter->asTime($date_int, 'H:i:s');
+        
         list($day, $month, $year) = explode('.', $_date_int);
+        
         $date_full = $day .' '. $month .' '. $year . ' г. ' . $_time;
+        
         return $date_full;
     }
     
     /*
      * Форматирование вывода даты в комментариях на странице заявки
-     * число месяц г. часы:минуты:секунды
+     * @param string $date_full число месяц г. 
+     * $param string $tile часы:минуты:секунды
      */
     public static function formatDateWithMonth($date_int) {
         
@@ -60,13 +66,17 @@ class FormatHelpers {
         $current_year = date('Y');
         
         $_date_int = Yii::$app->formatter->asDate($date_int, 'dd.MMMM.yyyy');
+        $time = Yii::$app->formatter->asTime($date_int, 'H:i:s');
         
         list($day, $month, $year) = explode('.', $_date_int);
         $year = $current_year == $year ? '' : $year . ' г.';
         
         $date_full = $day . ' ' . $month . ' ' . $year;
         
-        return $date_full;
+        return [
+            'date' => $date_full,
+            'time' => $time,
+        ];
     }
     
     /*

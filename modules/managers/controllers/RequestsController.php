@@ -58,6 +58,8 @@ class RequestsController extends AppManagersController {
         }
                 
         $comments_find = CommentsToRequest::getCommentByRequest($request['requests_id']);
+//        echo '<pre>';
+//        var_dump($comments_find); die();
         
         return $this->render('view', [
             'request' => $request,

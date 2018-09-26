@@ -76,7 +76,7 @@ $this->title = 'Заявка №' . $request['requests_ident'];
                     </div>
                     <div class="col-md-4">
                         <br />
-                        <?= Html::button('Отклонить', ['class' => 'btn btn-danger']) ?>
+                        <?= Html::button('Отклонить', ['class' => 'btn btn-danger reject-request']) ?>
                     </div>
                 </div>
                 

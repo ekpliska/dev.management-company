@@ -14,28 +14,28 @@
 
 <?php Pjax::begin(['id' => 'comments']) ?>
 <div class="comments">
-    <h4>Комментарии</h4>
-    <hr />
     <?php if (isset($comments_find)) : ?>
         <?php foreach ($comments_find as $comment) : ?>
-            Дата <?= FormatHelpers::formatDate($comment['created_at']) ?>
+            Дата <?= FormatHelpers::formatDate($comment['date']) ?>
             <br />
 
-<div class="col-8 col-sm-12">
-    <strong>#NAME USER</strong>
-    <?= FormatHelpers::formatDateWithMonth($comment['created_at']) ?>
-</div>
-<div class="col-8 col-sm-2">
-    <?php if ($comment['user']->user_photo) : ?>
-        <?= Html::img($comment['user']->user_photo, ['style' => 'width: 50px;']) ?>
-    <?php else: ?>
-        <?= Html::img('@web/images/no-avatar.jpg', ['style' => 'width: 50px;']) ?>                            
-    <?php endif; ?>
-</div>
+            <div class="col-8 col-sm-12">
+                <strong><?= $comment['user'] ?></strong>
+                <?= FormatHelpers::formatDateWithMonth($comment['date'])['time'] ?>
+            </div>
+            <div class="col-8 col-sm-2">
+                <?php if ($comment['photo']) : ?>
+                    <?= Html::img($comment['photo'], ['style' => 'width: 50px;']) ?>
+                <?php else: ?>
+                    <?= Html::img('@web/images/no-avatar.jpg', ['style' => 'width: 50px;']) ?>                            
+                <?php endif; ?>
+            </div>
 
-<div class="col-8 col-sm-10" style="background: #337ab7; padding: 5px; color: #fff; border-radius: 5px; position: relative; top: 5px;">
-    <?= $comment['comments_text'] ?>
-</div>
+            <div class="col-8 col-sm-10" style="background: #337ab7; padding: 5px; color: #fff; border-radius: 5px; position: relative; top: 5px;">
+                <?= $comment['text'] ?>
+            </div>
+            <div class="clearfix"></div>
+            <hr />
         <?php endforeach; ?>
     <?php endif; ?>
 </div>

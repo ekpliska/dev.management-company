@@ -61,10 +61,11 @@ class CommentsToRequest extends ActiveRecord
     public static function getCommentByRequest($request_id) {
         
         $query = (new \yii\db\Query)
+                ->select('cr.created_at as date, cr.comments_text as text, '
+                        . 'u.user_id as user, u.user_photo as photo')
                 ->from('comments_to_request as cr')
                 ->join('LEFT JOIN', 'user as u', 'u.user_id = cr.comments_user_id')
-                ->where(['cr.comments_application_id' => $request_id])
-                ->groupBy('cr.created_at')
+                ->where(['cr.comments_request_id' => $request_id])
                 ->all();
         
         return $query;
@@ -92,7 +93,7 @@ class CommentsToRequest extends ActiveRecord
         
         if ($this->validate()) {
             
-            $this->comments_application_id = $request_id;
+            $this->comments_request_id = $request_id;
             $this->comments_user_id = Yii::$app->user->identity->id;
             return $this->save() ? true : false;
             

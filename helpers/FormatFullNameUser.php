@@ -8,7 +8,8 @@
     use app\models\Employers;
 
 /**
- * Форматирование вывода полного имени пользователя
+ * Форматирование вывода полного имени пользователя 
+ * Пользователь ищется по номеру телефона
  */
 class FormatFullNameUser {
     
@@ -40,6 +41,12 @@ class FormatFullNameUser {
         
     }
     
+    /*
+     * Формирование ссылки на профиль диспетчера/специалиста
+     * @param integer $employer_id
+     * @param boolean $disp Переключатель формирования ссылки на диспетчера (true),
+     * @param boolean $disp Переключатель формирования ссылки на специалиста (false),
+     */
     public static function fullNameEmployer($employer_id, $disp = true) {
         
         $employer = Employers::find()
