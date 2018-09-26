@@ -23,7 +23,7 @@ $this->title = 'Заявки';
     
 </div>
 
-<?= $this->render('form/create', [
+<?= $this->render('form/create_request', [
         'model' => $model,
         'type_request' => $type_request,
         'flat' => $flat,]) ?>

@@ -47,7 +47,7 @@ class Employers extends ActiveRecord
      * Свзяь с таблицей Пользователи
      */
     public function getUser() {
-        return $this->hasOne(User::className(), ['user_employee_id' => 'employers_id']);
+        return $this->hasOne(User::className(), ['user_employer_id' => 'employers_id']);
     }    
 
     /*

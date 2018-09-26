@@ -58,11 +58,12 @@ class RequestForm extends Model {
      */
     public function save() {
         
+        $account_id = PersonalAccount::findByFlatId($this->flat);
+        
         $transaction = Yii::$app->db->beginTransaction();
+        
         try {
             $request = new Requests();
-            $account_id = PersonalAccount::findByFlatId($this->flat);
-            
 
             /* Формирование идентификатора для заявки:
              *      последние 7 символов лицевого счета - 

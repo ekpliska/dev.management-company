@@ -143,7 +143,7 @@ class User extends ActiveRecord implements IdentityInterface
      * Свзяь с таблицей Сотрудники
      */
     public function getEmployer() {
-        return $this->hasOne(Employers::className(), ['employers_id' => 'user_employee_id']);
+        return $this->hasOne(Employers::className(), ['employers_id' => 'user_employer_id']);
     }
     
     /*
@@ -256,7 +256,7 @@ class User extends ActiveRecord implements IdentityInterface
      * Поиск ID сотрудника
      */
     public static function findByEmployerId($employer_id) {
-        return static::findOne(['user_employee_id' => $employer_id]);
+        return static::findOne(['user_employer_id' => $employer_id]);
     }
     
     /*

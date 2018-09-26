@@ -48,7 +48,7 @@ class UserProfileCompany extends BaseObject {
                         . 'u.created_at as date_created , u.last_login as last_login, '
                         . 'u.status as status')
                     ->from('user as u')
-                    ->join('LEFT JOIN', 'employers as e', 'u.user_employee_id = e.employers_id')
+                    ->join('LEFT JOIN', 'employers as e', 'u.user_employer_id = e.employers_id')
                     ->join('LEFT JOIN', 'departments as d', 'e.employers_department_id = d.departments_id')
                     ->where(['u.user_id' => $this->_user_id])
                     ->one();

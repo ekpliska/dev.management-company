@@ -19,7 +19,7 @@ class Specialists extends Employers {
                         . 'u.user_login as login,'
                         . 'au.item_name as role')
                 ->from('employers as e')
-                ->join('LEFT JOIN', 'user as u', 'e.employers_id = u.user_employee_id')                
+                ->join('LEFT JOIN', 'user as u', 'e.employers_id = u.user_employer_id')                
                 ->join('LEFT JOIN','auth_assignment as au','au.user_id = u.user_id')
                 ->where(['au.item_name' => 'specialist'])
                 ->orderBy(['e.employers_surname' => SORT_ASC]);
