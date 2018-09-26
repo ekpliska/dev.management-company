@@ -3,6 +3,7 @@
     use yii\helpers\Html;
     use app\modules\managers\widgets\AlertsShow;
     use app\helpers\FormatHelpers;
+    use app\helpers\FormatFullNameUser;
 
 /* 
  * Просмотр и редактирование заявки
@@ -56,6 +57,8 @@ $this->title = 'Заявка №' . $request['applications_number'];
                 </div>
                 <div class="col-md-6">
                     <?= $request['requests_phone'] ?>
+                    <br />
+                    <?= FormatFullNameUser::fullNameByPhone($request['requests_phone']) ?>
                 </div>
                 
                 <div class="clearfix"></div>

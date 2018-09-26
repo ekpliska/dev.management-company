@@ -10,6 +10,7 @@
     use app\models\CommentsToRequest;
     use app\models\StatusRequest;
     use app\models\Employers;
+    use app\helpers\FormatHelpers;
 
 /**
  * Заяки
@@ -181,11 +182,12 @@ class Requests extends ActiveRecord
                 ->where(['requests_ident' => $request_numder])
                 ->one();
         
+        
         return $request;
         
     }
-
-    /*
+    
+     /*
      * Поиск заявки по ID лицевого счета
      * @param ActiveQuery
      */

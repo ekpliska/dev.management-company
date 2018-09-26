@@ -9,6 +9,7 @@
     use app\models\Rents;
     use yii\base\Model;
     use app\models\StatusRequest;
+    use app\helpers\FormatHelpers;
 
 /**
  * Новая заявка
@@ -113,9 +114,9 @@ class RequestForm extends Model {
         if ($client == null && $rent == null) {
             return false;
         } elseif ($client != null && $rent == null) {
-            return ['client_id' => $client['clients_id']];
+            return FormatHelpers::formatFullUserName($client['clients_surname'], $client['clients_name'], $client['clients_second_name']);
         } elseif ($client == null && $rent != null) {
-            return ['client_id' => $rent['rents_clients_id']];
+            return FormatHelpers::formatFullUserName($rent['rents_surname'], $rent['rents_name'], $rent['rents_second_name']);
         }
                 
     }
