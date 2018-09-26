@@ -23,23 +23,26 @@ $this->title = 'Заявка №' . $request['applications_number'];
             <div class="panel-body">
                 
                 <div class="col-md-12">
-                    <?= $request['category_name'] ?>
-                    <br />
-                    <?= $request['services_name'] ?>
+                    <?= $request['type_requests_name'] ?>
                     <hr />
                 </div>
                 
                 <div class="col-md-4">
-                    <?= $request['applications_number'] ?>
-                    <hr />                    
+                    <span class="label label-warning">
+                        <?= $request['requests_ident'] ?>
+                    </span>
                 </div>
                 <div class="col-md-8">
-                    <?= FormatHelpers::statusName($request['status']) ?> | <?= FormatHelpers::formatDate($request['created_at']) ?>
+                    <span class="label label-primary">
+                        <?= FormatHelpers::statusName($request['status']) ?> 
+                    </span>
+                    &nbsp;&nbsp;&nbsp;
+                    <?= FormatHelpers::formatDate($request['created_at']) ?>
                     <hr />
                 </div>
                 
                 <div class="col-md-12">
-                    <?= $request['applications_description'] ?>
+                    <?= $request['requests_comment'] ?>
                     <hr />
                 </div>
                 
@@ -52,7 +55,14 @@ $this->title = 'Заявка №' . $request['applications_number'];
                             $request['houses_flat']) ?>
                 </div>
                 <div class="col-md-6">
-                    <?= $request['applications_phone'] ?>
+                    <?= $request['requests_phone'] ?>
+                </div>
+                
+                <div class="clearfix"></div>
+                <hr />
+                <div class="col-md-12 text-center">
+                    <?= Html::button('Назначить исполнителя', ['class' => 'btn btn-primary']) ?>
+                    <?= Html::button('Отклонить', ['class' => 'btn btn-danger']) ?>
                 </div>
                 
             </div>
@@ -70,10 +80,5 @@ $this->title = 'Заявка №' . $request['applications_number'];
     </div>
     
     <div class="clearfix"></div>
-    
-    <div class="col-md-12">
-        <?= Html::button('Назначить исполнителя', ['class' => 'btn btn-primary']) ?>
-        <?= Html::button('Отклонить', ['class' => 'btn btn-danger']) ?>
-    </div>
     
 </div>

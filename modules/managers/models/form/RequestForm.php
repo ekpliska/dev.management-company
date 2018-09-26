@@ -53,6 +53,9 @@ class RequestForm extends Model {
 
     }
     
+    /*
+     * Метод сохранения заявки
+     */
     public function save() {
         
         $transaction = Yii::$app->db->beginTransaction();
@@ -60,10 +63,16 @@ class RequestForm extends Model {
             $request = new Requests();
             $account_id = PersonalAccount::findByFlatId($this->flat);
             
+
+            /* Формирование идентификатора для заявки:
+             *      последние 7 символов лицевого счета - 
+             *      последние 6 символов даты в unix - 
+             *      тип заявки
+             */
             $date = new \DateTime();
             $int = $date->getTimestamp();
 
-            $numder = substr($int, 5) . '-' . str_pad($this->type_request, 2, 0, STR_PAD_LEFT);
+            $numder = substr($account_id['account_number'], 4) . '-' . substr($int, 5) . '-' . str_pad($this->type_request, 2, 0, STR_PAD_LEFT);
             $request->requests_ident = $numder;
             $request->requests_type_id = $this->type_request;
             $request->requests_phone = $this->phone;

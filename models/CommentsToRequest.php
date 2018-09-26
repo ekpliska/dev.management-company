@@ -61,10 +61,10 @@ class CommentsToRequest extends ActiveRecord
     public static function getCommentByRequest($request_id) {
         
         $query = (new \yii\db\Query)
-                ->from('comments_to_request')
-//                ->join('', '', '')
-                ->where(['comments_application_id' => $request_id])
-                ->groupBy('created_at')
+                ->from('comments_to_request as cr')
+                ->join('LEFT JOIN', 'user as u', 'u.user_id = cr.comments_user_id')
+                ->where(['cr.comments_application_id' => $request_id])
+                ->groupBy('cr.created_at')
                 ->all();
         
         return $query;

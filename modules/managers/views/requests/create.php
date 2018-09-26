@@ -41,20 +41,3 @@
 <?= Html::submitButton('Создать', ['class' => 'btn btn-primary']) ?>
 
 <?php ActiveForm::end() ?>
-<?php
-echo '<pre>';
-$client = app\models\Clients::find()
-//                ->where(['like', 'concat("clients_name", "clients_surname")', 'Миллер'])
-        //new \yii\db\Expression("CONCAT(`name`, ' model id: ', `id`)
-                //->select([new yii\db\Expression("CONCAT(clients_name, ' ', clients_surname) as fullName")])
-//                ->where(['=', new yii\db\Expression("CONCAT('clients_name', ' ', 'clients_second_name')"), 'Сергей Леонидович'])
-                ->andWhere(['clients_mobile' => '+7 (920) 333-77-91'])
-                ->orWhere(['clients_phone' => '+7 (111) 111-11-11'])
-//                ->orWhere([
-//                    '' => $this->fullname,
-//                    'clients_phone' => $this->phone])
-                ->asArray()
-                ->all();
-
-var_dump($client);
-?>

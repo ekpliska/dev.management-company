@@ -5,7 +5,7 @@
     use app\modules\managers\controllers\AppManagersController;
     use app\models\TypeRequests;
     use app\modules\managers\models\form\RequestForm;
-    use app\models\Applications;
+    use app\models\Requests;
     use app\modules\managers\models\form\CommentForm;
     use app\models\CommentsToRequest;
 
@@ -34,7 +34,7 @@ class RequestsController extends AppManagersController {
      */
     public function actionView($request_number) {
         
-        $request = Applications::findByNubmer($request_number);
+        $request = Requests::findRequestByIdent($request_number);
         
         if (!isset($request) && $request == null) {
             throw new \yii\web\NotFoundHttpException('Вы обратились к несуществующей странице');
@@ -53,11 +53,11 @@ class RequestsController extends AppManagersController {
                 'scenario' => CommentsToRequest::SCENARIO_ADD_COMMENTS
             ]);        
             if ($model_comment->load(Yii::$app->request->post())) {
-                $model_comment->sendComments($request['applications_id']);
+                $model_comment->sendComments($request['requests_id']);
             }
         }
                 
-        $comments_find = CommentsToRequest::getCommentByRequest($request['applications_id']);
+        $comments_find = CommentsToRequest::getCommentByRequest($request['requests_id']);
         
         return $this->render('view', [
             'request' => $request,
