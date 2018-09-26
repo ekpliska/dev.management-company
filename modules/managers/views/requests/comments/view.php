@@ -4,6 +4,7 @@
     use yii\widgets\Pjax;
     use yii\helpers\Html;
     use app\helpers\FormatHelpers;
+    use app\helpers\FormatFullNameUser;
 
 
 /* 
@@ -16,11 +17,14 @@
 <div class="comments">
     <?php if (isset($comments_find)) : ?>
         <?php foreach ($comments_find as $comment) : ?>
-            Дата <?= FormatHelpers::formatDate($comment['date']) ?>
+    
+            <span class="label label-default">
+                <?= FormatHelpers::formatDateWithMonth($comment['date'])['date'] ?>
+            </span>
             <br />
 
             <div class="col-8 col-sm-12">
-                <strong><?= $comment['user'] ?></strong>
+                <strong> #USER ID <?= $comment['user'] ?></strong>
                 <?= FormatHelpers::formatDateWithMonth($comment['date'])['time'] ?>
             </div>
             <div class="col-8 col-sm-2">

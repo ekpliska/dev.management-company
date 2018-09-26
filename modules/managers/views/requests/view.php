@@ -65,13 +65,16 @@ $this->title = 'Заявка №' . $request['requests_ident'];
                 
                 <div class="clearfix"></div>
                 <hr />
+                
                 <div class="col-md-12 text-center">
                     <div class="col-md-4">
                         <?= FormatFullNameUser::fullNameEmployer($request['requests_dispatcher_id'], true) ?>
+                        <br/>
                         <?= Html::button('Назначить диспетчера', ['class' => 'btn btn-default']) ?>
                     </div>
                     <div class="col-md-4">
                         <?= FormatFullNameUser::fullNameEmployer($request['requests_specialist_id']) ?>
+                        <br/>
                         <?= Html::button('Назначить специалиста', ['class' => 'btn btn-default']) ?>
                     </div>
                     <div class="col-md-4">

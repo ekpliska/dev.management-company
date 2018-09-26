@@ -66,6 +66,7 @@ class CommentsToRequest extends ActiveRecord
                 ->from('comments_to_request as cr')
                 ->join('LEFT JOIN', 'user as u', 'u.user_id = cr.comments_user_id')
                 ->where(['cr.comments_request_id' => $request_id])
+                ->orderBy(['cr.created_at' => SORT_DESC])
                 ->all();
         
         return $query;
