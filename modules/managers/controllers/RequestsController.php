@@ -91,4 +91,19 @@ class RequestsController extends AppManagersController {
             return \yii\widgets\ActiveForm::validate($model);
         }
     }
+    
+    public function actionSwitchStatusRequest() {
+        
+        $status = Yii::$app->request->post('statusId');
+        $request_id = Yii::$app->request->post('requestId');
+        
+        if (Yii::$app->request->isAjax) {
+            $request = Requests::findOne($request_id);
+            $request->switchStatus($status);
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return ['success' => $request, 'status' => $status];
+        }
+        
+        return ['success' => false];
+    }
 }

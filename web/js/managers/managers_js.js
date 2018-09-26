@@ -342,12 +342,53 @@ $(document).ready(function() {
         });
     });
 
+    /*
+     * Поиск собственника по введенному номеру телефона
+     * Поиск срабатывает когда поле ввода теряем фокус
+     */
     $('body').on('blur', '.mobile_phone', function(e) {
+        // Получаем текущее значение
         var strValue = $(this).val();
+        // В полученном значении удаляем все символы кроме цифр, знака -, (, )
         strValue = strValue.replace(/[^-0-9,(,)]/gim, '');
         $.post('/web/managers/app-managers/show-houses?phone=' + strValue,
         function(data) {
             $('.house').html(data);
+        });
+    });
+    
+    /*
+     * Переключение статуса заявки
+     */
+    $('.switch-request').on('click', function(e){
+        e.preventDefault();
+        var linkValue = $(this).text();
+        var statusId = $(this).data('status');
+        var requestId = $(this).data('request');
+        var liChoosing = $('li#status' + statusId);
+        $.ajax({
+            url: 'switch-status-request',
+            method: 'POST',
+            data: {
+                statusId: statusId,
+                requestId: requestId,
+            },
+            success: function(response) {
+                if (response.status) {
+                    console.log(response.status);
+                    $('.dropdown-menu').find('.disabled').removeClass('disabled');
+                    $('#value-btn').text(linkValue);
+                    liChoosing.addClass('disabled');
+                    if (statusId === 4) {
+                        $('.btn:not(.dropdown-toggle)').attr('disabled', true);
+                    } else {
+                        $('.btn:not(.dropdown-toggle)').attr('disabled', false);
+                    }
+                }
+            },
+            error: function() {
+                console.log('error');
+            },
         });
     });
 

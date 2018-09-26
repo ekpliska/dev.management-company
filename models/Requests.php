@@ -216,6 +216,13 @@ class Requests extends ActiveRecord
         }
     }
     
+    public function switchStatus($status) {
+        
+        $this->status = $status;
+        return $this->save() ? true : false;
+        
+    }
+    
     /*
      * @param integer ID заявки
      */

@@ -4,6 +4,7 @@
     use app\modules\managers\widgets\AlertsShow;
     use app\helpers\FormatHelpers;
     use app\helpers\FormatFullNameUser;
+    use app\modules\managers\widgets\SwitchStatusRequest;
 
 /* 
  * Просмотр и редактирование заявки
@@ -34,12 +35,13 @@ $this->title = 'Заявка №' . $request['requests_ident'];
                     </span>
                 </div>
                 <div class="col-md-8">
-                    <span class="label label-primary">
-                        <?= FormatHelpers::statusName($request['status']) ?> 
-                    </span>
-                    &nbsp;&nbsp;&nbsp;
-                    <?= FormatHelpers::formatDate($request['created_at']) ?>
-                    <hr />
+                    
+                    <?= SwitchStatusRequest::widget([
+                            'status' => $request['status'],
+                            'request_id' => $request['requests_id']]) ?>
+                    
+                    <?= FormatHelpers::formatDate($request['created_at']) ?>   
+                    <hr />                 
                 </div>
                 
                 <div class="col-md-12">
