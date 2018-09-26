@@ -114,9 +114,9 @@ class RequestForm extends Model {
         if ($client == null && $rent == null) {
             return false;
         } elseif ($client != null && $rent == null) {
-            return FormatHelpers::formatFullUserName($client['clients_surname'], $client['clients_name'], $client['clients_second_name']);
+            return ['client_id' => $client['clients_id']];
         } elseif ($client == null && $rent != null) {
-            return FormatHelpers::formatFullUserName($rent['rents_surname'], $rent['rents_name'], $rent['rents_second_name']);
+            return ['client_id' => $rent['rents_clients_id']];
         }
                 
     }

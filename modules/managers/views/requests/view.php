@@ -8,7 +8,7 @@
 /* 
  * Просмотр и редактирование заявки
  */
-$this->title = 'Заявка №' . $request['applications_number'];
+$this->title = 'Заявка №' . $request['requests_ident'];
 ?>
 <div class="managers-default-index">
     <h1><?= $this->title ?></h1>
@@ -64,8 +64,18 @@ $this->title = 'Заявка №' . $request['applications_number'];
                 <div class="clearfix"></div>
                 <hr />
                 <div class="col-md-12 text-center">
-                    <?= Html::button('Назначить исполнителя', ['class' => 'btn btn-primary']) ?>
-                    <?= Html::button('Отклонить', ['class' => 'btn btn-danger']) ?>
+                    <div class="col-md-4">
+                        <?= FormatFullNameUser::fullNameEmployer($request['requests_dispatcher_id'], true) ?>
+                        <?= Html::button('Назначить диспетчера', ['class' => 'btn btn-default']) ?>
+                    </div>
+                    <div class="col-md-4">
+                        <?= FormatFullNameUser::fullNameEmployer($request['requests_specialist_id']) ?>
+                        <?= Html::button('Назначить специалиста', ['class' => 'btn btn-default']) ?>
+                    </div>
+                    <div class="col-md-4">
+                        <br />
+                        <?= Html::button('Отклонить', ['class' => 'btn btn-danger']) ?>
+                    </div>
                 </div>
                 
             </div>

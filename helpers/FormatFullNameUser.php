@@ -1,6 +1,7 @@
 <?php
 
     namespace app\helpers;
+    use yii\helpers\Html;
     use app\models\User;
     use app\models\Rents;
     use app\models\Clients;
@@ -37,6 +38,30 @@ class FormatFullNameUser {
         
         return $full_name;
         
+    }
+    
+    public static function fullNameEmployer($employer_id, $disp = true) {
+        
+        $employer = Employers::find()
+                ->where(['employers_id' => $employer_id])
+                ->asArray()
+                ->one();
+        
+        $surname = $employer['employers_surname'];
+        $name = mb_substr($employer['employers_name'], 0, 1, 'UTF-8');
+        $second_name = mb_substr($employer['employers_second_name'], 0, 1, 'UTF-8');
+        
+        $full_name = $surname . ' ' . $name . '. ' . $second_name . '.';
+
+        
+        if ($disp == true) {
+            $link = ['employers/edit-dispatcher', 'dispatcher_id' => $employer['employers_id']];
+        } else {
+            $link = ['employers/edit-specialist', 'specialist_id' => $employer['employers_id']];
+        }
+        
+        return $employer ?
+            Html::a($full_name, $link, ['target' => '_blank']) : 'Не назначен';
     }
     
 }
