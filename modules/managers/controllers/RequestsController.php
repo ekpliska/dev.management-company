@@ -124,14 +124,14 @@ class RequestsController extends AppManagersController {
         $request_id = Yii::$app->request->post('requestId');
         $dispatcher_id = Yii::$app->request->post('dispatcherId');
         
-        if (Yii::$app->request->isAjax) {
+        if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
             $request = Requests::findByID($request_id);
             $request->chooseDispatcher($dispatcher_id);
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-            return ['success' => true, 'data' => $request_id . ' ' . $dispatcher_id];
+            return ['success' => true];
         }
         
-        return ['success' => true];
+        return ['success' => false];
         
     }    
 }

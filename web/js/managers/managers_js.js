@@ -436,10 +436,14 @@ $(document).ready(function() {
                     requestId: requestId,
                 },
                 success: function(response) {
-                    console.log(response.data);
+                    if (response.success === false) {
+                        $('.error-message').text('Ошибка');
+                        return false;
+                    }
+                    $('.btn-dispatcher').data('dispatcher', dispatcherId);
                 },
                 error: function() {
-                    console.log('error');
+                    $('.error-message').text('Ошибка');
                 },
             });
         }
