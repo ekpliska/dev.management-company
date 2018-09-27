@@ -5,11 +5,11 @@
     use yii\helpers\Html;
 
 /* 
- * Модальное окно "Создание заявки"
+ * Модальное окно "Создание заявки на платную услугу"
  */
 
 ?>
-<div class="modal fade" id="create-new-requests" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
+<div class="modal fade" id="create-new-paid-requests" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
@@ -22,17 +22,23 @@
                 <div class="modal__text">
                     <?php
                         $form = ActiveForm::begin([
-                            'id' => 'create-new-request',
-                            'action' => ['create-request'],
+                            'id' => 'create-new-paid-request',
+//                            'action' => ['create-request'],
                             'enableAjaxValidation' => true,
-                            'validationUrl' => ['validation-form', 'form' => 'new-request'],
+                            'validationUrl' => ['validation-form', 'form' => 'paid-request'],
                         ])
                     ?>
 
-                    <?= $form->field($model, 'type_request')
-                            ->dropDownList($type_request, [
+                    <?= $form->field($model, 'servise_category')
+                            ->dropDownList($servise_category, [
                                 'prompt' => 'Выбрать из списка...',
-                                'id' => 'category_service'])
+                                'id' => 'servise_category'])
+                            ->label() ?>
+                    
+                    <?= $form->field($model, 'servise_name')
+                            ->dropDownList($servise_name, [
+                                'prompt' => 'Выбрать из списка...',
+                                'id' => 'servise_name'])
                             ->label() ?>
 
                     <?= $form->field($model, 'phone')

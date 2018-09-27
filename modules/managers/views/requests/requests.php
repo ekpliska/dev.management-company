@@ -15,7 +15,7 @@ $this->title = 'Заявки';
     <?= AlertsShow::widget() ?>
     
     <?= Html::button('Заявка (+)', [
-        'class' => 'btn btn-success btn-sm',
+        'class' => 'btn btn-success btn-sm create-request',
         'data-target' => '#create-new-requests',
         'data-toggle' => 'modal']) ?>
     

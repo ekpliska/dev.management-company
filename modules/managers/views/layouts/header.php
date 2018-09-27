@@ -141,7 +141,7 @@
             ['label' => 'Специалисты +', 'url' => ['employers/specialists']],
             ['label' => 'Услуги +', 'url' => ['services/index']],
             ['label' => 'Заявки', 'url' => ['requests/requests']],
-            ['label' => 'Платные услуги', 'url' => ['requests/requests']],
+            ['label' => 'Платные услуги', 'url' => ['requests/paid-services']],
             ['label' => 'Настройки', 'url' => ['']],
             ['label' => 'Новости', 'url' => ['']],
             ['label' => 'Тарифы (-)', 'url' => ['rates/index']],

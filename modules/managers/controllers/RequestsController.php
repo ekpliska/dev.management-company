@@ -5,7 +5,9 @@
     use yii\data\ActiveDataProvider;
     use app\modules\managers\controllers\AppManagersController;
     use app\models\TypeRequests;
+    use app\models\CategoryServices;
     use app\modules\managers\models\form\RequestForm;
+    use app\modules\managers\models\form\PaidRequestForm;
     use app\modules\managers\models\Requests;
     use app\models\CommentsToRequest;
     use app\models\Image;
@@ -38,6 +40,21 @@ class RequestsController extends AppManagersController {
             'type_request' => $type_request,
             'flat' => $flat,
             'requests' => $requests,
+        ]);
+    }
+    
+    public function actionPaidServices() {
+        
+        $model = new PaidRequestForm();
+        $servise_category = CategoryServices::getCategoryNameArray();
+        $servise_name = [];
+        $flat = [];
+        
+        return $this->render('paid-services', [
+            'model' => $model,
+            'servise_category' => $servise_category,
+            'servise_name' => $servise_name,
+            'flat' => $flat,
         ]);
     }
     
@@ -97,10 +114,15 @@ class RequestsController extends AppManagersController {
     
     /*
      * Валидация формы в модальном окне "Создать заявку"
+     * Валидация формы в модальном окне "Создать заявку на платную услугу"
      */
-    public function actionValidationForm() {
+    public function actionValidationForm($form) {
         
-        $model = new RequestForm();
+        if ($form == 'new-request') {
+            $model = new RequestForm();
+        } elseif ($form == 'paid-request') {
+            $model = new PaidRequestForm();
+        }
         
         if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;

@@ -503,6 +503,10 @@ $(document).ready(function() {
         }
     });
     
+    $('.create-request').on('click', function(){
+        $('#create-new-request')[0].reset();
+    })
+    
 
 });
     
