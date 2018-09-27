@@ -28,7 +28,17 @@ class RequestForm extends Model {
         return [
             [['type_request', 'phone', 'description', 'flat'], 'required'],
             
+            ['description', 'string', 'min' => 10, 'max' => 255],
+            ['description', 'match',
+                'pattern' => '/^[А-Яа-яЁёA-Za-z0-9\_\-\@\.]+$/iu',
+                'message' => 'Поле "{attribute}" может содержать только буквы русского и английского алфавита, цифры, знаки "-", "_"',
+            ],            
+            
             ['phone', 'existenceClient'],
+            ['phone',
+                'match', 
+                'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/i',
+            ],
         ];
     }  
     
@@ -80,7 +90,7 @@ class RequestForm extends Model {
             $request->requests_phone = $this->phone;
             $request->requests_comment = $this->description;
             $request->status = StatusRequest::STATUS_NEW;
-            $request->is_accept = 0;
+            $request->is_accept = 1;
             $request->requests_account_id = $account_id['account_id'];
             
             $request->save();

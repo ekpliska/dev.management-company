@@ -47,7 +47,7 @@ class FormatFullNameUser {
      * @param boolean $disp Переключатель формирования ссылки на диспетчера (true),
      * @param boolean $disp Переключатель формирования ссылки на специалиста (false),
      */
-    public static function fullNameEmployer($employer_id, $disp = true) {
+    public static function fullNameEmployer($employer_id, $disp = false) {
         
         $employer = Employers::find()
                 ->where(['employers_id' => $employer_id])

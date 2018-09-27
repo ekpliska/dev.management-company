@@ -118,7 +118,9 @@ class RequestsController extends AppManagersController {
         return ['success' => false];
     }
     
-    
+    /*
+     * Назначение диспетчера
+     */
     public function actionChooseDispatcher() {
         
         $request_id = Yii::$app->request->post('requestId');
@@ -135,6 +137,9 @@ class RequestsController extends AppManagersController {
         
     }
     
+    /*
+     * Назначение специалиста
+     */
     public function actionChooseSpecialist() {
         
         $request_id = Yii::$app->request->post('requestId');

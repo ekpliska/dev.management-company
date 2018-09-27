@@ -2,6 +2,7 @@
 
     namespace app\modules\managers\models;
     use app\models\Requests as BaseRequests;
+    use app\models\StatusRequest;
 
 /**
  *  Завяки
@@ -50,6 +51,7 @@ class Requests extends BaseRequests {
     public function chooseSpecialist($specialist_id) {
         
         $this->requests_specialist_id = $specialist_id;
+        $this->status = StatusRequest::STATUS_PERFORM;
         return $this->save(false) ? true : false;
     }    
     

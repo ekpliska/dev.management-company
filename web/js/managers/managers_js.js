@@ -394,8 +394,9 @@ $(document).ready(function() {
     
     /*
      * Вызов модального окна "Назначение диспетчера"
+     * Вызов модального окна "Назначение специалиста"
      */
-    $('#add-dispatcher-modal, #add-specialist-modal').on('show.bs.modal', function (e) {
+    $('#add-dispatcher-modal, #add-specialist-modal').on('show.bs.modal', function(e) {
         var requestId = $('.switch-request').data('request');
         var employeeId = $(e.relatedTarget).data('employee');
         $('.error-message').text('');
@@ -403,6 +404,10 @@ $(document).ready(function() {
         $('.add_specialist__btn').data('request', requestId);
         // Если диспетчер уже назначен, то обозначаем его автивным в списке выбора диспетчеров
         $('a[data-employee=' + employeeId + ']').addClass('active');
+    });
+    
+    $('#add-dispatcher-modal, #add-specialist-modal').on('hide.bs.modal', function() {
+        $('#dispatcherList, #specialistList').find('.active').removeClass('active');
     });
 
     /*
@@ -478,7 +483,7 @@ $(document).ready(function() {
                         $('.error-message').text('Ошибка');
                         return false;
                     }
-                    $('.btn-specialist').data('employee', dispatcherId);
+                    $('.btn-specialist').data('employee', specialistId);
                 },
                 error: function() {
                     $('.error-message').text('Ошибка');
