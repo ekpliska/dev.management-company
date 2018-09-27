@@ -21,6 +21,10 @@ $this->title = 'Заявки';
     
     <hr />
     
+    <?= $this->render('data/grid_requests', [
+        'requests' => $requests
+    ]) ?>
+    
 </div>
 
 <?= $this->render('form/create_request', [

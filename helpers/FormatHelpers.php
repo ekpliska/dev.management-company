@@ -34,7 +34,7 @@ class FormatHelpers {
     
     /*
      * Форматирование вывода даты в комментариях на странице заявки
-     * число месяц г. часы:минуты:секунды
+     * число месяц г.
      */
     public static function formatDate($date_int) {
         
@@ -47,7 +47,7 @@ class FormatHelpers {
         
         list($day, $month, $year) = explode('.', $_date_int);
         
-        $date_full = $day .' '. $month .' '. $year . ' г. ' . $_time;
+        $date_full = $day .' '. $month .' '. $year . ' г. ';
         
         return $date_full;
     }
@@ -101,6 +101,10 @@ class FormatHelpers {
      * Фамилия И. О.
      */
     public static function formatFullUserName($surname, $name, $second_name) {
+        
+        if ($surname == null && $name == null && $second_name == null) {
+            return 'Не задан';
+        }
         
         $_name = mb_substr($name, 0, 1, 'UTF-8');
         $_second_name = mb_substr($second_name, 0, 1, 'UTF-8');

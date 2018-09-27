@@ -2,11 +2,11 @@
 
     namespace app\modules\managers\controllers;
     use Yii;
+    use yii\data\ActiveDataProvider;
     use app\modules\managers\controllers\AppManagersController;
     use app\models\TypeRequests;
     use app\modules\managers\models\form\RequestForm;
-    use app\models\Requests;
-    use app\modules\managers\models\form\CommentForm;
+    use app\modules\managers\models\Requests;
     use app\models\CommentsToRequest;
 
 /**
@@ -18,14 +18,24 @@ class RequestsController extends AppManagersController {
      * Заявки, главная страница
      */
     public function actionRequests() {
+        
         $model = new RequestForm();
         $type_request = TypeRequests::getTypeNameArray();
         $flat = [];
+        
+        $requests = new ActiveDataProvider([
+            'query' => Requests::getAllRequests(),
+        ]);
+        
+//        echo '<pre>';
+//        var_dump($requests);
+//        die();
         
         return $this->render('requests', [
             'model' => $model,
             'type_request' => $type_request,
             'flat' => $flat,
+            'requests' => $requests,
         ]);
     }
     

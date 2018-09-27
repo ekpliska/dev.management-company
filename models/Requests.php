@@ -182,7 +182,6 @@ class Requests extends ActiveRecord
                 ->where(['requests_ident' => $request_numder])
                 ->one();
         
-        
         return $request;
         
     }
