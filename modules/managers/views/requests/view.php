@@ -5,7 +5,7 @@
     use app\helpers\FormatHelpers;
     use app\helpers\FormatFullNameUser;
     use app\modules\managers\widgets\SwitchStatusRequest;
-    use app\modules\managers\widgets\AddDispatcher;
+    use app\modules\managers\widgets\AddEmployee;
 
 /* 
  * Просмотр и редактирование заявки
@@ -73,14 +73,18 @@ $this->title = 'Заявка №' . $request['requests_ident'];
                         <br/>
                         <?= Html::button('Назначить диспетчера', [
                             'class' => 'btn btn-default btn-dispatcher',
-                            'data-dispatcher' => $request['requests_dispatcher_id'],
+                            'data-employee' => $request['requests_dispatcher_id'],
                             'data-target' => '#add-dispatcher-modal',
                             'data-toggle' => 'modal']) ?>
                     </div>
                     <div class="col-md-4">
                         <?= FormatFullNameUser::fullNameEmployer($request['requests_specialist_id']) ?>
                         <br/>
-                        <?= Html::button('Назначить специалиста', ['class' => 'btn btn-default']) ?>
+                        <?= Html::button('Назначить специалиста', [
+                            'class' => 'btn btn-default',
+                            'data-employee' => $request['requests_specialist_id'],
+                            'data-target' => '#add-specialist-modal',
+                            'data-toggle' => 'modal']) ?>
                     </div>
                     <div class="col-md-4">
                         <br />
@@ -103,5 +107,5 @@ $this->title = 'Заявка №' . $request['requests_ident'];
     </div>
     
     <div class="clearfix"></div>
-    <?= AddDispatcher::widget() ?>
+    <?= AddEmployee::widget() ?>
 </div>

@@ -34,11 +34,23 @@ class Requests extends BaseRequests {
         return $requests;
     }
     
+    /*
+     * Назначение диспетчера
+     */
     public function chooseDispatcher($dispatcher_id) {
         
         $this->requests_dispatcher_id = $dispatcher_id;
         return $this->save(false) ? true : false;
         
     }
+
+    /*
+     * Назначение специалиста
+     */
+    public function chooseSpecialist($specialist_id) {
+        
+        $this->requests_specialist_id = $specialist_id;
+        return $this->save(false) ? true : false;
+    }    
     
 }

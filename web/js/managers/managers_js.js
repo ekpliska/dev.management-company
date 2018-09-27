@@ -395,23 +395,25 @@ $(document).ready(function() {
     /*
      * Вызов модального окна "Назначение диспетчера"
      */
-    $('#add-dispatcher-modal').on('show.bs.modal', function (e) {
+    $('#add-dispatcher-modal, #add-specialist-modal').on('show.bs.modal', function (e) {
         var requestId = $('.switch-request').data('request');
-        var dispatcherId = $(e.relatedTarget).data('dispatcher');
+        var employeeId = $(e.relatedTarget).data('employee');
         $('.error-message').text('');
         $('.add_dispatcher__btn').data('request', requestId);
+        $('.add_specialist__btn').data('request', requestId);
         // Если диспетчер уже назначен, то обозначаем его автивным в списке выбора диспетчеров
-        $('a[data-dispatcher=' + dispatcherId + ']').addClass('active');
+        $('a[data-employee=' + employeeId + ']').addClass('active');
     });
 
     /*
-     * Выбранных диспетчеров обозначаем активными
+     * В списке сотрудников, выбранных диспетчеров/специалистов обозначаем активными
      */
-    $('#myList a').on('click', function() {
-        var dispatcherId = $(this).data('dispatcher');
-        $('#myList').find('.active').removeClass('active');
+    $('#dispatcherList a, #specialistList a').on('click', function() {
+        var employeeId = $(this).data('employee');
+        $('#dispatcherList, #specialistList').find('.active').removeClass('active');
         $(this).toggleClass('active');
-        $('.add_dispatcher__btn').data('dispatcher', dispatcherId);
+        $('.add_dispatcher__btn').data('dispatcher', employeeId);
+        $('.add_specialist__btn').data('specialist', employeeId);
     });
 
     /*
@@ -440,7 +442,43 @@ $(document).ready(function() {
                         $('.error-message').text('Ошибка');
                         return false;
                     }
-                    $('.btn-dispatcher').data('dispatcher', dispatcherId);
+                    $('.btn-dispatcher').data('employee', dispatcherId);
+                },
+                error: function() {
+                    $('.error-message').text('Ошибка');
+                },
+            });
+        }
+    });
+
+    
+    /*
+     * Отправляем запрос на добавления диспетчера к выбранной заявке
+     */
+    $('.add_specialist__btn').on('click', function(e) {
+        e.preventDefault();
+        
+        var specialistId = $(this).data('specialist');
+        var requestId = $(this).data('request');
+
+        // Проверяем налицие дата параметров
+        if (specialistId === undefined || requestId === undefined) {
+            $('.error-message').text('Прежде чем назначить специалиста, выберите его из списка');
+            return false;
+        } else {
+            $.ajax({
+                url: 'choose-specialist',
+                method: 'POST',
+                data: {
+                    specialistId: specialistId,
+                    requestId: requestId,
+                },
+                success: function(response) {
+                    if (response.success === false) {
+                        $('.error-message').text('Ошибка');
+                        return false;
+                    }
+                    $('.btn-specialist').data('employee', dispatcherId);
                 },
                 error: function() {
                     $('.error-message').text('Ошибка');

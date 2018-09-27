@@ -133,5 +133,22 @@ class RequestsController extends AppManagersController {
         
         return ['success' => false];
         
-    }    
+    }
+    
+    public function actionChooseSpecialist() {
+        
+        $request_id = Yii::$app->request->post('requestId');
+        $specialist_id = Yii::$app->request->post('specialistId');
+        
+        if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
+            $request = Requests::findByID($request_id);
+            $request->chooseSpecialist($specialist_id);
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return ['success' => true];
+        }
+        
+        return ['success' => false];
+        
+    }
+    
 }
