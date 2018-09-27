@@ -426,7 +426,8 @@ $(document).ready(function() {
      */
     $('.add_dispatcher__btn').on('click', function(e) {
         e.preventDefault();
-        
+        // Получаем ФИО выбранного сотрудника
+        var employeeName = $('#dispatcherList').find('.active').text();
         var dispatcherId = $(this).data('dispatcher');
         var requestId = $(this).data('request');
 
@@ -447,7 +448,12 @@ $(document).ready(function() {
                         $('.error-message').text('Ошибка');
                         return false;
                     }
+                    
                     $('.btn-dispatcher').data('employee', dispatcherId);
+                    $('#dispatcher-name').text('');
+                    $('#dispatcher-name').html(
+                            '<a href="/web/managers/employers/edit-dispatcher?dispatcher_id=' + dispatcherId + '">' + 
+                            employeeName + '</a>');
                 },
                 error: function() {
                     $('.error-message').text('Ошибка');
@@ -462,7 +468,8 @@ $(document).ready(function() {
      */
     $('.add_specialist__btn').on('click', function(e) {
         e.preventDefault();
-        
+        // Получаем ФИО выбранного сотрудника
+        var employeeName = $('#specialistList').find('.active').text();
         var specialistId = $(this).data('specialist');
         var requestId = $(this).data('request');
 
@@ -484,6 +491,10 @@ $(document).ready(function() {
                         return false;
                     }
                     $('.btn-specialist').data('employee', specialistId);
+                    $('#specialist-name').text('');
+                    $('#specialist-name').html(
+                            '<a href="/web/managers/employers/edit-specialist?specialist_id=' + specialistId + '">' + 
+                            employeeName + '</a>');
                 },
                 error: function() {
                     $('.error-message').text('Ошибка');

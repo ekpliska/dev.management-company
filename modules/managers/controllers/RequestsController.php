@@ -8,6 +8,7 @@
     use app\modules\managers\models\form\RequestForm;
     use app\modules\managers\models\Requests;
     use app\models\CommentsToRequest;
+    use app\models\Image;
 
 /**
  * Заявки
@@ -70,10 +71,14 @@ class RequestsController extends AppManagersController {
                 
         $comments_find = CommentsToRequest::getCommentByRequest($request['requests_id']);
         
+        // Получаем прикрепленные к заявке файлы
+        $images = Image::find()->andWhere(['itemId' => $request['requests_id']])->all();
+        
         return $this->render('view', [
             'request' => $request,
             'model_comment' => $model_comment,
             'comments_find' => $comments_find,
+            'all_images' => $images,
         ]);
     }
     

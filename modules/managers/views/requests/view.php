@@ -51,6 +51,14 @@ $this->title = 'Заявка №' . $request['requests_ident'];
                 <div class="col-md-12">
                     <?= $request['requests_comment'] ?>
                     <hr />
+                    Прикрепленные файлы: <br />
+                    <?php if (isset($all_images)) : ?>
+                        <?php foreach ($all_images as $image) : ?>
+                            <?= FormatHelpers::formatUrlFileRequest($image->getImagePath($image->filePath)) ?>
+                            <br />
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                    <hr />
                 </div>
                 
                 <div class="col-md-6">
@@ -72,7 +80,9 @@ $this->title = 'Заявка №' . $request['requests_ident'];
                 
                 <div class="col-md-12 text-center">
                     <div class="col-md-4">
-                        <?= FormatFullNameUser::fullNameEmployer($request['requests_dispatcher_id'], true) ?>
+                        <div id="dispatcher-name">
+                            <?= FormatFullNameUser::fullNameEmployer($request['requests_dispatcher_id'], true, true) ?>
+                        </div>
                         <br/>
                         <?= Html::button('Назначить диспетчера', [
                             'class' => 'btn btn-default btn-dispatcher',
@@ -81,7 +91,9 @@ $this->title = 'Заявка №' . $request['requests_ident'];
                             'data-toggle' => 'modal']) ?>
                     </div>
                     <div class="col-md-4">
-                        <?= FormatFullNameUser::fullNameEmployer($request['requests_specialist_id']) ?>
+                        <div id="specialist-name">
+                            <?= FormatFullNameUser::fullNameEmployer($request['requests_specialist_id'], false, true) ?>
+                        </div>
                         <br/>
                         <?= Html::button('Назначить специалиста', [
                             'class' => 'btn btn-default',

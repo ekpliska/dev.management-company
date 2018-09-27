@@ -46,20 +46,22 @@ class FormatFullNameUser {
      * @param integer $employer_id
      * @param boolean $disp Переключатель формирования ссылки на диспетчера (true),
      * @param boolean $disp Переключатель формирования ссылки на специалиста (false),
+     * @param boolean $full Переключатель вывода ФИО сотрудника 
+     *      true - Фамилия Имя Отчество
+     *      false - Фамилия И. О.
      */
-    public static function fullNameEmployer($employer_id, $disp = false) {
+    public static function fullNameEmployer($employer_id, $disp = false, $full = false) {
         
         $employer = Employers::find()
                 ->where(['employers_id' => $employer_id])
                 ->asArray()
                 ->one();
         
-        $surname = $employer['employers_surname'];
-        $name = mb_substr($employer['employers_name'], 0, 1, 'UTF-8');
-        $second_name = mb_substr($employer['employers_second_name'], 0, 1, 'UTF-8');
+        $surname = $full ? $employer['employers_surname'] . ' ' : $employer['employers_surname'] . ' ';
+        $name = $full ? $employer['employers_name'] . ' ' : mb_substr($employer['employers_name'], 0, 1, 'UTF-8') . '. ';
+        $second_name = $full ? $employer['employers_second_name'] . ' ' : mb_substr($employer['employers_second_name'], 0, 1, 'UTF-8') . '.';
         
-        $full_name = $surname . ' ' . $name . '. ' . $second_name . '.';
-
+        $full_name = $surname . $name . $second_name;
         
         if ($disp == true) {
             $link = ['employers/edit-dispatcher', 'dispatcher_id' => $employer['employers_id']];
@@ -70,6 +72,5 @@ class FormatFullNameUser {
         return $employer ?
             Html::a($full_name, $link, ['target' => '_blank']) : 'Не назначен';
     }
-
     
 }

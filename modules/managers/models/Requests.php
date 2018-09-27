@@ -41,6 +41,7 @@ class Requests extends BaseRequests {
     public function chooseDispatcher($dispatcher_id) {
         
         $this->requests_dispatcher_id = $dispatcher_id;
+        $this->status = StatusRequest::STATUS_IN_WORK;
         return $this->save(false) ? true : false;
         
     }

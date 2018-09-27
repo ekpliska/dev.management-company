@@ -37,14 +37,14 @@
                 'attribute' => 'name_d',
                 'header' => 'Диспетчер',
                 'value' => function ($data) {
-                    return FormatHelpers::formatFullUserName($data['surname_d'],$data['name_d'],$data['sname_d']);
+                    return FormatHelpers::formatFullUserName($data['surname_d'], $data['name_d'], $data['sname_d']);
                 },
             ],
             [
                 'attribute' => 'name_s',
                 'header' => 'Специалист',
                 'value' => function ($data) {
-                    return FormatHelpers::formatFullUserName($data['surname_s'],$data['name_s'],$data['sname_s']);
+                    return FormatHelpers::formatFullUserName($data['surname_s'], $data['name_s'], $data['sname_s']);
                 },
             ],
             [
