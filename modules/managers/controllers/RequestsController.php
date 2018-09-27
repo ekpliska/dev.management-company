@@ -113,6 +113,19 @@ class RequestsController extends AppManagersController {
     }
     
     /*
+     * Метод сохранения созданной заявки на платную услугу
+     */
+    public function actionCreatePaidRequest() {
+        
+        $model = new PaidRequestForm();
+        
+        if (Yii::$app->request->isPost && $model->load(Yii::$app->request->post())) {
+            $number = $model->save();
+            return $this->redirect(['view', 'request_number' => $number]);
+        }
+    }    
+    
+    /*
      * Валидация формы в модальном окне "Создать заявку"
      * Валидация формы в модальном окне "Создать заявку на платную услугу"
      */

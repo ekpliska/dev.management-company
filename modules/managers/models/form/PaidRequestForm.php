@@ -62,7 +62,13 @@ class PaidRequestForm extends Model {
 
     }
     
+    public function save() {
+        
+    }
     
+    /*
+     * Атрибуты полей
+     */
     public function attributeLabels() {
         return [
             'servise_category' => 'Вид услуги',

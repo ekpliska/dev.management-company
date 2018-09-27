@@ -23,7 +23,7 @@
                     <?php
                         $form = ActiveForm::begin([
                             'id' => 'create-new-paid-request',
-//                            'action' => ['create-request'],
+                            'action' => ['create-paid-request'],
                             'enableAjaxValidation' => true,
                             'validationUrl' => ['validation-form', 'form' => 'paid-request'],
                         ])
@@ -32,13 +32,13 @@
                     <?= $form->field($model, 'servise_category')
                             ->dropDownList($servise_category, [
                                 'prompt' => 'Выбрать из списка...',
-                                'id' => 'servise_category'])
+                                'id' => 'category_service'])
                             ->label() ?>
                     
                     <?= $form->field($model, 'servise_name')
                             ->dropDownList($servise_name, [
                                 'prompt' => 'Выбрать из списка...',
-                                'id' => 'servise_name'])
+                                'id' => 'service_name'])
                             ->label() ?>
 
                     <?= $form->field($model, 'phone')
