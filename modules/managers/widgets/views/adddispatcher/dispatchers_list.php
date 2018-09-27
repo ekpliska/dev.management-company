@@ -42,8 +42,10 @@ $this->registerJs("
 
     $('#add-dispatcher-modal').on('show.bs.modal', function (e) {
         var requestId = $('.switch-request').data('request');
+        var dispatcherId = $('.btn-dispatcher').data('dispatcher');
         $('.error-message').text('');
         $('.add_dispatcher__btn').data('request', requestId);
+        $('a[data-dispatcher=' + dispatcherId + ']').addClass('active');
     });
 
     $('#myList a').on('click', function() {

@@ -391,6 +391,60 @@ $(document).ready(function() {
             },
         });
     });
+    
+    /*
+     * Вызов модального окна "Назначение диспетчера"
+     */
+    $('#add-dispatcher-modal').on('show.bs.modal', function (e) {
+        var requestId = $('.switch-request').data('request');
+        var dispatcherId = $(e.relatedTarget).data('dispatcher');
+        $('.error-message').text('');
+        $('.add_dispatcher__btn').data('request', requestId);
+        // Если диспетчер уже назначен, то обозначаем его автивным в списке выбора диспетчеров
+        $('a[data-dispatcher=' + dispatcherId + ']').addClass('active');
+    });
+
+    /*
+     * Выбранных диспетчеров обозначаем активными
+     */
+    $('#myList a').on('click', function() {
+        var dispatcherId = $(this).data('dispatcher');
+        $('#myList').find('.active').removeClass('active');
+        $(this).toggleClass('active');
+        $('.add_dispatcher__btn').data('dispatcher', dispatcherId);
+    });
+
+    /*
+     * Отправляем запрос на добавления диспетчера к выбранной заявке
+     */
+    $('.add_dispatcher__btn').on('click', function(e) {
+        e.preventDefault();
+        
+        var dispatcherId = $(this).data('dispatcher');
+        var requestId = $(this).data('request');
+
+        // Проверяем налицие дата параметров
+        if (dispatcherId === undefined || requestId === undefined) {
+            $('.error-message').text('Прежде чем назначить диспетчера, выберите его из списка');
+            return false;
+        } else {
+            $.ajax({
+                url: 'choose-dispatcher',
+                method: 'POST',
+                data: {
+                    dispatcherId: dispatcherId,
+                    requestId: requestId,
+                },
+                success: function(response) {
+                    console.log(response.data);
+                },
+                error: function() {
+                    console.log('error');
+                },
+            });
+        }
+    });
+    
 
 });
     

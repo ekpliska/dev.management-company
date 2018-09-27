@@ -72,7 +72,8 @@ $this->title = 'Заявка №' . $request['requests_ident'];
                         <?= FormatFullNameUser::fullNameEmployer($request['requests_dispatcher_id'], true) ?>
                         <br/>
                         <?= Html::button('Назначить диспетчера', [
-                            'class' => 'btn btn-default',
+                            'class' => 'btn btn-default btn-dispatcher',
+                            'data-dispatcher' => $request['requests_dispatcher_id'],
                             'data-target' => '#add-dispatcher-modal',
                             'data-toggle' => 'modal']) ?>
                     </div>
