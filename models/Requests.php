@@ -20,6 +20,9 @@ class Requests extends ActiveRecord
 
     const SCENARIO_ADD_REQUEST = 'add_record';
     
+    const ACCEPT_YES = 1;
+    const ACCEPT_NO = 0;
+    
     // Для загружаемых файлов
     public $gallery;
 
@@ -218,6 +221,14 @@ class Requests extends ActiveRecord
     public function switchStatus($status) {
         
         $this->status = $status;
+        
+        if ($status == StatusRequest::STATUS_CLOSE) {
+            $this->date_closed = time();
+        } else {
+            $this->date_closed = null;
+            $this->requests_grade = null;
+        }
+        
         return $this->save() ? true : false;
         
     }

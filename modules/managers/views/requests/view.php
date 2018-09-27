@@ -27,6 +27,9 @@ $this->title = 'Заявка №' . $request['requests_ident'];
                 
                 <div class="col-md-12">
                     <?= $request['type_requests_name'] ?>
+                    <br />
+                    <?= FormatHelpers::formatDate($request['created_at']) ?> 
+                    <div id="star" data-request="<?= $request['requests_id'] ?>" data-score-reguest="<?= $request['requests_grade'] ?>"></div>
                     <hr />
                 </div>
                 
@@ -41,7 +44,7 @@ $this->title = 'Заявка №' . $request['requests_ident'];
                             'status' => $request['status'],
                             'request_id' => $request['requests_id']]) ?>
                     
-                    <?= FormatHelpers::formatDate($request['created_at']) ?>   
+                    <?= FormatHelpers::formatDate($request['updated_at']) ?>   
                     <hr />                 
                 </div>
                 
@@ -109,3 +112,14 @@ $this->title = 'Заявка №' . $request['requests_ident'];
     <div class="clearfix"></div>
     <?= AddEmployee::widget() ?>
 </div>
+
+
+<?php
+$grade = $request['requests_grade'] ? $request['requests_grade'] : 0; 
+$this->registerJs("
+$('div#star').raty({
+    score: " . $grade . ",
+    readOnly: true,
+});    
+")
+?> 

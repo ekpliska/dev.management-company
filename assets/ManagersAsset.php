@@ -18,6 +18,7 @@ class ManagersAsset extends AssetBundle {
     
     public $js = [
         'js/managers/managers_js.js',
+        'js/lib-rating-plugin/jquery.raty.js',
     ];
     
     public $depends = [];
