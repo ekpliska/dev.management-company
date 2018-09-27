@@ -34,4 +34,11 @@ class Requests extends BaseRequests {
         return $requests;
     }
     
+    public function chooseDispatcher($dispatcher_id) {
+        
+        $this->requests_dispatcher_id = $dispatcher_id;
+        return $this->save(false) ? true : false;
+        
+    }
+    
 }

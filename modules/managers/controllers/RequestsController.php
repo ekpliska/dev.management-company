@@ -117,4 +117,21 @@ class RequestsController extends AppManagersController {
         
         return ['success' => false];
     }
+    
+    
+    public function actionChooseDispatcher() {
+        
+        $request_id = Yii::$app->request->post('requestId');
+        $dispatcher_id = Yii::$app->request->post('dispatcherId');
+        
+        if (Yii::$app->request->isAjax) {
+            $request = Requests::findByID($request_id);
+            $request->chooseDispatcher($dispatcher_id);
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return ['success' => true, 'data' => $request_id . ' ' . $dispatcher_id];
+        }
+        
+        return ['success' => true];
+        
+    }    
 }

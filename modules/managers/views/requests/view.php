@@ -5,6 +5,7 @@
     use app\helpers\FormatHelpers;
     use app\helpers\FormatFullNameUser;
     use app\modules\managers\widgets\SwitchStatusRequest;
+    use app\modules\managers\widgets\AddDispatcher;
 
 /* 
  * Просмотр и редактирование заявки
@@ -70,7 +71,10 @@ $this->title = 'Заявка №' . $request['requests_ident'];
                     <div class="col-md-4">
                         <?= FormatFullNameUser::fullNameEmployer($request['requests_dispatcher_id'], true) ?>
                         <br/>
-                        <?= Html::button('Назначить диспетчера', ['class' => 'btn btn-default']) ?>
+                        <?= Html::button('Назначить диспетчера', [
+                            'class' => 'btn btn-default',
+                            'data-target' => '#add-dispatcher-modal',
+                            'data-toggle' => 'modal']) ?>
                     </div>
                     <div class="col-md-4">
                         <?= FormatFullNameUser::fullNameEmployer($request['requests_specialist_id']) ?>
@@ -98,5 +102,5 @@ $this->title = 'Заявка №' . $request['requests_ident'];
     </div>
     
     <div class="clearfix"></div>
-    
+    <?= AddDispatcher::widget() ?>
 </div>
