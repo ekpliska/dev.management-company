@@ -119,13 +119,13 @@ class FormatHelpers {
      */
     public static function formatFullAdress($town, $street, $house, $floor, $flat) {
         
-        $town = $town ? 'г. ' . $town : '';
-        $street = $street ? 'ул. '  . $street : '';
-        $house = $house ? 'д. ' . $house : '';
-        $floor = $floor ? 'эт. ' . $floor : '';
+        $town = $town ? 'г. ' . $town . ', ' : '';
+        $street = $street ? 'ул. '  . $street . ', ' : '';
+        $house = $house ? 'д. ' . $house . ', ' : '';
+        $floor = $floor ? 'эт. ' . $floor . ', ' : '';
         $flat = $flat ? 'кв. ' . $flat : '';
         
-        return $town .  ', ' . $street . ', ' . $house . ', ' . $floor . ', ' . $flat;
+        return $town .  $street . $house . $floor . $flat;
     }
     
     /*

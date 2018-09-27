@@ -30,6 +30,7 @@ $this->title = 'Детали заявки';
                         <td><?= FormatHelpers::formatFullAdress(
                                 $request_info['houses_town'], 
                                 $request_info['houses_street'], 
+                                null, 
                                 $request_info['houses_number_house'], 
                                 $request_info['houses_flat']) 
                             ?>

@@ -25,11 +25,12 @@ class RequestsController extends AppManagersController {
         
         $requests = new ActiveDataProvider([
             'query' => Requests::getAllRequests(),
+            'pagination' => [
+                'forcePageParam' => false,
+                'pageSizeParam' => false,
+                'pageSize' => 15,
+            ],
         ]);
-        
-//        echo '<pre>';
-//        var_dump($requests);
-//        die();
         
         return $this->render('requests', [
             'model' => $model,
