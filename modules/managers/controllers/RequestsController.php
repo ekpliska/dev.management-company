@@ -61,7 +61,7 @@ class RequestsController extends AppManagersController {
     /*
      * Просмотр и редактирование заявок
      */
-    public function actionView($request_number) {
+    public function actionViewRequest($request_number) {
         
         $request = Requests::findRequestByIdent($request_number);
         
@@ -91,7 +91,7 @@ class RequestsController extends AppManagersController {
         // Получаем прикрепленные к заявке файлы
         $images = Image::find()->andWhere(['itemId' => $request['requests_id']])->all();
         
-        return $this->render('view', [
+        return $this->render('view-request', [
             'request' => $request,
             'model_comment' => $model_comment,
             'comments_find' => $comments_find,

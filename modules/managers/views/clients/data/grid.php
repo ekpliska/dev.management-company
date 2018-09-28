@@ -30,7 +30,7 @@
                 'attribute' => 'adress',
                 'header' => 'Адрес',
                 'value' => function ($data) {
-                    return FormatHelpers::formatFullAdress($data['town'], $data['street'], $data['house'], $data['flat']);
+                    return FormatHelpers::formatFullAdress($data['town'], $data['street'], false, $data['house'], $data['flat']);
                 },
             ],
             [

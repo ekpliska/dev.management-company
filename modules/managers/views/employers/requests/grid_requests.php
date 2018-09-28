@@ -22,7 +22,7 @@
             <td><?= $request['requests_ident'] ?></td>
             <td><?= FormatHelpers::formatDate($request['updated_at']) ?></td>
             <td><?= FormatHelpers::statusName($request['status']) ?></td>
-            <td><?= Html::a('см.', ['requests/view', 'request_number' => $request['requests_ident']]) ?></td>
+            <td><?= Html::a('см.', ['requests/view-request', 'request_number' => $request['requests_ident']]) ?></td>
         </tr>
     <?php endforeach; ?>
 </table>

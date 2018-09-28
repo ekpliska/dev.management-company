@@ -70,13 +70,13 @@
             ],
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{view} {delete-request}',
+                'template' => '{view-request} {delete-request}',
                 'buttons' => [
-                    'view' => function ($url, $data) {                        
+                    'view-request' => function ($url, $data) {                        
                         return 
                             Html::a('Просмотр', 
                                     [
-                                        'requests/view',
+                                        'requests/view-request',
                                         'request_number' => $data['number'],
                                     ], 
                                     [
