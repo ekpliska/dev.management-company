@@ -303,16 +303,14 @@ class RequestsController extends AppManagersController {
                     return ['success' => true];
                     break;
                 case 'paid-request':
-                    //
+                    $paid_request = PaidServices::findOne($request_id);
+                    $paid_request->chooseSpecialist($specialist_id);
+                    return ['success' => true];
                     break;
                 default:
-                    //
+                    return ['success' => false];                    
                     break;
             }
-//            $request = Requests::findByID($request_id);
-//            $request->chooseSpecialist($specialist_id);
-//            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-//            return ['success' => true];
         }
         
         return ['success' => false];

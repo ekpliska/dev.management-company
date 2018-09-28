@@ -438,7 +438,8 @@ $(document).ready(function() {
         $('.add_dispatcher__btn').data('request', requestId);
         $('.add_dispatcher__btn').data('typeRequest', typeRequest);
         $('.add_specialist__btn').data('request', requestId);
-        // Если диспетчер уже назначен, то обозначаем его автивным в списке выбора диспетчеров
+        $('.add_specialist__btn').data('typeRequest', typeRequest);
+        // Если сотрудник уже назначен, то обозначаем его активным в списке выбора сотрудников
         $('a[data-employee=' + employeeId + ']').addClass('active');
     });
     
@@ -546,9 +547,9 @@ $(document).ready(function() {
         }
     });
     
-    $('.create-request').on('click', function(){
-        $('#create-new-request')[0].reset();
-    })
+    $('.create-request, .create-paid-request').on('click', function(){
+        $('#create-new-request, #create-new-paid-request')[0].reset();
+    });
     
 
 });
