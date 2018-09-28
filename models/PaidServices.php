@@ -2,6 +2,7 @@
 
     namespace app\models;
     use Yii;
+    use yii\behaviors\TimestampBehavior;
     use yii\db\ActiveRecord;
     use yii\helpers\ArrayHelper;
     use yii\helpers\Html;
@@ -23,6 +24,13 @@ class PaidServices extends ActiveRecord
     {
         return 'paid_services';
     }
+    
+    public function behaviors() {
+        return [
+            TimestampBehavior::className(),
+        ];
+    }
+    
 
     /**
      * Правила валидации
@@ -31,7 +39,7 @@ class PaidServices extends ActiveRecord
     {
         return [
             
-            [['services_name_services_id', 'services_phone', 'services_comment'], 'required', 'on' => self::SCENARIO_ADD_SERVICE],
+            [['services_name_services_id', 'services_category_services_id', 'services_phone', 'services_comment'], 'required', 'on' => self::SCENARIO_ADD_SERVICE],
             
             [
                 'services_phone', 
@@ -43,8 +51,8 @@ class PaidServices extends ActiveRecord
             [['services_comment'], 'string', 'on' => self::SCENARIO_ADD_SERVICE],
             [['services_comment'], 'string', 'min' => 10, 'max' => 255, 'on' => self::SCENARIO_ADD_SERVICE],
             
-            [['services_name_services_id', 'created_at', 'updated_at', 'status', 'services_dispatcher_id', 'services_specialist_id', 'services_account_id'], 'integer'],
-            [['services_number'], 'string', 'max' => 16],
+            [['services_name_services_id', 'services_category_services_id', 'created_at', 'updated_at', 'status', 'services_dispatcher_id', 'services_specialist_id', 'services_account_id'], 'integer'],
+            [['services_number'], 'string', 'max' => 50],
             [['services_phone'], 'string', 'max' => 50],
         ];
     }
