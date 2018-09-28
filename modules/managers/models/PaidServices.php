@@ -2,6 +2,7 @@
 
     namespace app\modules\managers\models;
     use app\models\PaidServices as BasePaidServices;
+    use app\models\StatusRequest;
 
 /**
  * Заявки на платные услуги
@@ -36,5 +37,27 @@ class PaidServices extends BasePaidServices {
         
         return $requests;
     }
+    
+    /*
+     * Назначение диспетчера
+     */
+    public function chooseDispatcher($dispatcher_id) {
+        
+        $this->services_dispatcher_id = $dispatcher_id;
+        $this->status = StatusRequest::STATUS_IN_WORK;
+        return $this->save(false) ? true : false;
+        
+    }
+
+    /*
+     * Назначение специалиста
+     */
+    public function chooseSpecialist($specialist_id) {
+        
+        $this->services_specialist_id = $specialist_id;
+        $this->status = StatusRequest::STATUS_PERFORM;
+        return $this->save(false) ? true : false;
+    }    
+    
     
 }

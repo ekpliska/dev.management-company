@@ -399,7 +399,7 @@ $(document).ready(function() {
         e.preventDefault();
         var linkValue = $(this).text();
         var statusId = $(this).data('status');
-        var requestPaidId = $(this).data('paid-request');
+        var requestPaidId = $(this).data('request');
         var liChoosing = $('li#status' + statusId);
         $.ajax({
             url: 'switch-status-paid-request',
@@ -431,10 +431,12 @@ $(document).ready(function() {
      * Вызов модального окна "Назначение специалиста"
      */
     $('#add-dispatcher-modal, #add-specialist-modal').on('show.bs.modal', function(e) {
-        var requestId = $('.switch-request').data('request');
+        var requestId = $('.switch-request-status').data('request');
         var employeeId = $(e.relatedTarget).data('employee');
+        var typeRequest = $(e.relatedTarget).data('typeRequest');
         $('.error-message').text('');
         $('.add_dispatcher__btn').data('request', requestId);
+        $('.add_dispatcher__btn').data('typeRequest', typeRequest);
         $('.add_specialist__btn').data('request', requestId);
         // Если диспетчер уже назначен, то обозначаем его автивным в списке выбора диспетчеров
         $('a[data-employee=' + employeeId + ']').addClass('active');
@@ -464,6 +466,9 @@ $(document).ready(function() {
         var employeeName = $('#dispatcherList').find('.active').text();
         var dispatcherId = $(this).data('dispatcher');
         var requestId = $(this).data('request');
+        var typeRequest = $(this).data('typeRequest');
+        
+        console.log(employeeName + ' ' +dispatcherId + ' ' + requestId + ' ' + typeRequest );
 
         // Проверяем налицие дата параметров
         if (dispatcherId === undefined || requestId === undefined) {
@@ -476,8 +481,10 @@ $(document).ready(function() {
                 data: {
                     dispatcherId: dispatcherId,
                     requestId: requestId,
+                    typeRequest: typeRequest,
                 },
                 success: function(response) {
+                    console.log(response.type_request);
                     if (response.success === false) {
                         $('.error-message').text('Ошибка');
                         return false;
@@ -506,6 +513,7 @@ $(document).ready(function() {
         var employeeName = $('#specialistList').find('.active').text();
         var specialistId = $(this).data('specialist');
         var requestId = $(this).data('request');
+        var typeRequest = $(this).data('typeRequest');
 
         // Проверяем налицие дата параметров
         if (specialistId === undefined || requestId === undefined) {
@@ -518,6 +526,7 @@ $(document).ready(function() {
                 data: {
                     specialistId: specialistId,
                     requestId: requestId,
+                    typeRequest: typeRequest,
                 },
                 success: function(response) {
                     if (response.success === false) {

@@ -87,6 +87,7 @@ $this->title = 'Заявка №' . $request['requests_ident'];
                         <br/>
                         <?= Html::button('Назначить диспетчера', [
                             'class' => 'btn btn-default btn-dispatcher',
+                            'data-type-request' => 'request',
                             'data-employee' => $request['requests_dispatcher_id'],
                             'data-target' => '#add-dispatcher-modal',
                             'data-toggle' => 'modal']) ?>
@@ -98,6 +99,7 @@ $this->title = 'Заявка №' . $request['requests_ident'];
                         <br/>
                         <?= Html::button('Назначить специалиста', [
                             'class' => 'btn btn-default',
+                            'data-type-request' => 'request',
                             'data-employee' => $request['requests_specialist_id'],
                             'data-target' => '#add-specialist-modal',
                             'data-toggle' => 'modal']) ?>

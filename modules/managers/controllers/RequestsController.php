@@ -12,11 +12,17 @@
     use app\modules\managers\models\PaidServices;
     use app\models\CommentsToRequest;
     use app\models\Image;
+    use yii\helpers\ArrayHelper;
 
 /**
  * Заявки
  */
 class RequestsController extends AppManagersController {
+    
+    public $type_request = [
+        'request',
+        'paid-request',
+    ];
     
     /*
      * Заявки, главная страница
@@ -234,17 +240,37 @@ class RequestsController extends AppManagersController {
     }    
     
     /*
-     * Назначение диспетчера
+     * Назначение диспетчера для Заявок и Заявок на платные услуги
      */
     public function actionChooseDispatcher() {
         
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        
         $request_id = Yii::$app->request->post('requestId');
         $dispatcher_id = Yii::$app->request->post('dispatcherId');
+        $type_request = Yii::$app->request->post('typeRequest');
         
-        if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
-            $request = Requests::findByID($request_id);
-            $request->chooseDispatcher($dispatcher_id);
-            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        // Если параметр "тип заявки" пришел не верный отправляем на главную страницу
+        if (ArrayHelper::keyExists($type_request, $this->type_request)) {
+            return $this->goHome();
+        }
+        
+        if (Yii::$app->request->isAjax) {
+            switch ($type_request) {
+                case 'request':
+                    $request = Requests::findByID($request_id);
+                    $request->chooseDispatcher($dispatcher_id);
+                    return ['success' => true];
+                    break;
+                
+                case 'paid-request':
+                    $paid_request = PaidServices::findOne($request_id);
+                    $paid_request->chooseDispatcher($dispatcher_id);
+                    return ['success' => true];
+                    break;
+                default:
+                    return ['success' => false];
+            }
             return ['success' => true];
         }
         
@@ -253,18 +279,40 @@ class RequestsController extends AppManagersController {
     }
     
     /*
-     * Назначение специалиста
+     * Назначение специалиста для Заявок и Заявок на платные услуги
      */
     public function actionChooseSpecialist() {
         
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        
         $request_id = Yii::$app->request->post('requestId');
         $specialist_id = Yii::$app->request->post('specialistId');
+        $type_request = Yii::$app->request->post('typeRequest');
         
-        if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
-            $request = Requests::findByID($request_id);
-            $request->chooseSpecialist($specialist_id);
-            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-            return ['success' => true];
+        // Если параметр "тип заявки" пришел не верный отправляем на главную страницу
+        if (ArrayHelper::keyExists($type_request, $this->type_request)) {
+            return $this->goHome();
+        }        
+        
+        if (Yii::$app->request->isAjax) {
+            
+            switch ($type_request) {
+                case 'request':
+                    $request = Requests::findByID($request_id);
+                    $request->chooseSpecialist($specialist_id);
+                    return ['success' => true];
+                    break;
+                case 'paid-request':
+                    //
+                    break;
+                default:
+                    //
+                    break;
+            }
+//            $request = Requests::findByID($request_id);
+//            $request->chooseSpecialist($specialist_id);
+//            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+//            return ['success' => true];
         }
         
         return ['success' => false];

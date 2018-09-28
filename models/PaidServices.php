@@ -196,7 +196,14 @@ class PaidServices extends ActiveRecord
         
         return $this->save() ? true : false;
         
-    }    
+    }
+    
+    public static function findByID($request_id) {
+        return self::find()
+                ->where(['services_id' => $request_id])
+                ->asArray()
+                ->one();
+    }
     
     
     /**
