@@ -21,9 +21,9 @@ $this->title = 'Платные услуги';
     
     <hr />
     
-    <?php /*= $this->render('data/grid_requests', [
-        'requests' => $requests
-    ]) */ ?>
+    <?= $this->render('data/grid_paid_requests', [
+        'paid_requests' => $paid_requests
+    ]) ?>
     
 </div>
 

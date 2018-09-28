@@ -51,11 +51,21 @@ class RequestsController extends AppManagersController {
         $servise_name = [];
         $flat = [];
         
+        $paid_requests = new ActiveDataProvider([
+            'query' => PaidServices::getAllPaidRequests(),
+            'pagination' => [
+                'forcePageParam' => false,
+                'pageSizeParam' => false,
+                'pageSize' => 15,
+            ],
+        ]);
+        
         return $this->render('paid-services', [
             'model' => $model,
             'servise_category' => $servise_category,
             'servise_name' => $servise_name,
             'flat' => $flat,
+            'paid_requests' => $paid_requests,
         ]);
     }
     
