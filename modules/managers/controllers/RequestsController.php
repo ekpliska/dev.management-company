@@ -9,6 +9,7 @@
     use app\modules\managers\models\form\RequestForm;
     use app\modules\managers\models\form\PaidRequestForm;
     use app\modules\managers\models\Requests;
+    use app\modules\managers\models\PaidServices;
     use app\models\CommentsToRequest;
     use app\models\Image;
 
@@ -99,8 +100,46 @@ class RequestsController extends AppManagersController {
         ]);
     }
     
+    /*
+     * Просомтр и редактирование заявки, на платную услугу
+     */
     public function actionViewPaidRequest($request_number) {
-        return $this->render('view-paid-request');
+        
+        $paid_request = PaidServices::findRequestByIdent($request_number);
+        
+        if (!isset($paid_request) && $paid_request == null) {
+            throw new \yii\web\NotFoundHttpException('Вы обратились к несуществующей странице');
+        }
+        
+//        $model_comment = new CommentsToRequest([
+//            'scenario' => CommentsToRequest::SCENARIO_ADD_COMMENTS
+//        ]);
+
+        /*
+         * Загружаем модель для добавления комментрария к задаче
+         * Pjax
+         */
+//        if (Yii::$app->request->isPjax) {
+//            $model_comment = new CommentsToRequest([
+//                'scenario' => CommentsToRequest::SCENARIO_ADD_COMMENTS
+//            ]);        
+//            if ($model_comment->load(Yii::$app->request->post())) {
+//                $model_comment->sendComments($request['requests_id']);
+//            }
+//        }
+                
+//        $comments_find = CommentsToRequest::getCommentByRequest($request['requests_id']);
+        
+//        return $this->render('view-request', [
+//            'request' => $request,
+//            'model_comment' => $model_comment,
+//            'comments_find' => $comments_find,
+//            'all_images' => $images,
+//        ]);
+        
+        return $this->render('view-paid-request', [
+            'paid_request' => $paid_request,
+        ]);
     }
     
     /*
