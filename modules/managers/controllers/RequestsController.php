@@ -186,6 +186,9 @@ class RequestsController extends AppManagersController {
         }
     }
     
+    /*
+     * Метод переключения статуса для заявки
+     */
     public function actionSwitchStatusRequest() {
         
         $status = Yii::$app->request->post('statusId');
@@ -200,6 +203,25 @@ class RequestsController extends AppManagersController {
         
         return ['success' => false];
     }
+    
+    /*
+     * Метод переключения статуса для заявки на платную услугу
+     */
+    public function actionSwitchStatusPaidRequest() {
+        
+        $status = Yii::$app->request->post('statusId');
+        $request_id = Yii::$app->request->post('requestPaidId');
+        
+        if (Yii::$app->request->isAjax) {
+            $request = PaidServices::findOne($request_id);
+            $request->switchStatus($status);
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return ['success' => $request, 'status' => $status, 'request_id' => $request_id];
+        }
+        
+        return ['success' => false];
+        
+    }    
     
     /*
      * Назначение диспетчера

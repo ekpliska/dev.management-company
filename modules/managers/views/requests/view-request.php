@@ -41,6 +41,7 @@ $this->title = 'Заявка №' . $request['requests_ident'];
                 <div class="col-md-8">
                     
                     <?= SwitchStatusRequest::widget([
+                            'view_name' => 'request',
                             'status' => $request['status'],
                             'request_id' => $request['requests_id']]) ?>
                     

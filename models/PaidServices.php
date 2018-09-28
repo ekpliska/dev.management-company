@@ -156,6 +156,16 @@ class PaidServices extends ActiveRecord
     public static function findRequestByIdent($request_number) {
 
         $request = (new \yii\db\Query)
+                ->select('ps.services_id as id, ps.services_number as number,'
+                        . 'ps.created_at as date_cr, ps.updated_at as date_up, ps.date_closed as date_cl,'
+                        . 'ps.services_phone as phone, ps.services_comment as text, '
+                        . 'ps.status as status, ps.services_comment as text,'
+                        . 'ps.services_grade as grade,'
+                        . 'ps.services_dispatcher_id as dispatcher,'
+                        . 'ps.services_specialist_id as specialist,'
+                        . 'cs.category_name as category, s.services_name as services_name,'
+                        . 'h.houses_town as town, h.houses_street as street, h.houses_number_house as number_house,'
+                        . 'h.houses_floor as floor, h.houses_flat as flat')
                 ->from('paid_services as ps')
                 ->join('LEFT JOIN', 'category_services as cs', 'cs.category_id = ps.services_category_services_id')
                 ->join('LEFT JOIN', 'services as s', 's.services_id = ps.services_name_services_id')
@@ -169,6 +179,24 @@ class PaidServices extends ActiveRecord
         return $request;        
         
     }
+    
+    /*
+     * Переключение статуса для заявки на платную услугу
+     */
+    public function switchStatus($status) {
+        
+        $this->status = $status;
+        
+        if ($status == StatusRequest::STATUS_CLOSE) {
+            $this->date_closed = time();
+        } else {
+            $this->date_closed = null;
+            $this->services_grade = null;
+        }
+        
+        return $this->save() ? true : false;
+        
+    }    
     
     
     /**

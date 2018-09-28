@@ -10,7 +10,7 @@
 /* 
  * Просмотр и редактирование заявки на платную услугу
  */
-$this->title = 'Заявка №' . $paid_request['services_number'];
+$this->title = 'Заявка №' . $paid_request['number'];
 ?>
 <div class="managers-default-index">
     <h1><?= $this->title ?></h1>
@@ -21,50 +21,51 @@ $this->title = 'Заявка №' . $paid_request['services_number'];
     <div class="col-md-7">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <?= $paid_request['category_name'] ?>
+                <?= $paid_request['category'] ?>
             </div>
             <div class="panel-body">
                 
                 <div class="col-md-12">
                     <?= $paid_request['services_name'] ?>
                     <br />
-                    <?= FormatHelpers::formatDate($paid_request['date_create']) ?> 
-                    <div id="star" data-request="<?= $paid_request['services_id'] ?>" data-score-reguest="<?= $paid_request['services_grade'] ?>"></div>
+                    <?= FormatHelpers::formatDate($paid_request['date_cr']) ?> 
+                    <div id="star" data-request="<?= $paid_request['id'] ?>" data-score-reguest="<?= $paid_request['grade'] ?>"></div>
                     <hr />
                 </div>
                 
                 <div class="col-md-4">
                     <span class="label label-warning">
-                        <?= $paid_request['services_number'] ?>
+                        <?= $paid_request['number'] ?>
                     </span>
                 </div>
                 <div class="col-md-8">
                     
                     <?= SwitchStatusRequest::widget([
+                            'view_name' => 'paid_request',
                             'status' => $paid_request['status'],
-                            'request_id' => $paid_request['services_id']]) ?>
+                            'request_id' => $paid_request['id']]) ?>
                     
-                    <?= FormatHelpers::formatDate($paid_request['updated_at']) ?>   
+                    <?= FormatHelpers::formatDate($paid_request['date_up']) ?>   
                     <hr />                 
                 </div>
                 
                 <div class="col-md-12">
-                    <?= $paid_request['services_comment'] ?>
+                    <?= $paid_request['text'] ?>
                     <hr />
                 </div>
                 
                 <div class="col-md-6">
                     <?= FormatHelpers::formatFullAdress(
-                            $paid_request['houses_town'], 
-                            $paid_request['houses_street'], 
-                            $paid_request['houses_number_house'], 
-                            $paid_request['houses_floor'], 
-                            $paid_request['houses_flat']) ?>
+                            $paid_request['town'], 
+                            $paid_request['street'], 
+                            $paid_request['number_house'], 
+                            $paid_request['floor'], 
+                            $paid_request['flat']) ?>
                 </div>
                 <div class="col-md-6">
-                    <?= $paid_request['services_phone'] ?>
+                    <?= $paid_request['phone'] ?>
                     <br />
-                    <?= FormatFullNameUser::fullNameByPhone($paid_request['services_phone']) ?>
+                    <?= FormatFullNameUser::fullNameByPhone($paid_request['phone']) ?>
                 </div>
                 
                 <div class="clearfix"></div>
@@ -73,23 +74,23 @@ $this->title = 'Заявка №' . $paid_request['services_number'];
                 <div class="col-md-12 text-center">
                     <div class="col-md-4">
                         <div id="dispatcher-name">
-                            <?= FormatFullNameUser::fullNameEmployer($paid_request['services_dispatcher_id'], true, true) ?>
+                            <?= FormatFullNameUser::fullNameEmployer($paid_request['dispatcher'], true, true) ?>
                         </div>
                         <br/>
                         <?= Html::button('Назначить диспетчера', [
                             'class' => 'btn btn-default btn-dispatcher',
-                            'data-employee' => $paid_request['services_dispatcher_id'],
+                            'data-employee' => $paid_request['dispatcher'],
                             'data-target' => '#add-dispatcher-modal',
                             'data-toggle' => 'modal']) ?>
                     </div>
                     <div class="col-md-4">
                         <div id="specialist-name">
-                            <?= FormatFullNameUser::fullNameEmployer($paid_request['services_specialist_id'], false, true) ?>
+                            <?= FormatFullNameUser::fullNameEmployer($paid_request['specialist'], false, true) ?>
                         </div>
                         <br/>
                         <?= Html::button('Назначить специалиста', [
                             'class' => 'btn btn-default',
-                            'data-employee' => $paid_request['services_specialist_id'],
+                            'data-employee' => $paid_request['specialist'],
                             'data-target' => '#add-specialist-modal',
                             'data-toggle' => 'modal']) ?>
                     </div>
@@ -119,7 +120,7 @@ $this->title = 'Заявка №' . $paid_request['services_number'];
 
 
 <?php
-$grade = $paid_request['services_grade'] ? $paid_request['services_grade'] : 0; 
+$grade = $paid_request['grade'] ? $paid_request['grade'] : 0; 
 $this->registerJs("
 $('div#star').raty({
     score: " . $grade . ",
