@@ -415,8 +415,10 @@ $(document).ready(function() {
                     liChoosing.addClass('disabled');
                     if (statusId === 4) {
                         $('.btn:not(.dropdown-toggle)').attr('disabled', true);
+                        $('textarea[id="comments-text"]').attr('disabled', true);
                     } else {
                         $('.btn:not(.dropdown-toggle)').attr('disabled', false);
+                        $('textarea[id="comments-text"]').attr('disabled', false);                        
                     }
                 }
             },
@@ -468,8 +470,6 @@ $(document).ready(function() {
         var dispatcherId = $(this).data('dispatcher');
         var requestId = $(this).data('request');
         var typeRequest = $(this).data('typeRequest');
-        
-        console.log(employeeName + ' ' +dispatcherId + ' ' + requestId + ' ' + typeRequest );
 
         // Проверяем налицие дата параметров
         if (dispatcherId === undefined || requestId === undefined) {

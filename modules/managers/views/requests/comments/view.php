@@ -57,6 +57,7 @@
                     
     <?= $form->field($model, 'comments_text')
             ->textarea([
+                'id' => 'comments-text',
                 'placeHolder' => $model->getAttributeLabel('comments_text'), 
                 'rows' => 6])
             ->label(false) ?>

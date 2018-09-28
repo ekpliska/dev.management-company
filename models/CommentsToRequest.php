@@ -78,11 +78,9 @@ class CommentsToRequest extends ActiveRecord
     public function sendComment($request_id) {
         
         if ($this->validate()) {
-            
             $this->comments_request_id = $request_id;
             $this->comments_user_id = Yii::$app->user->identity->id;
             return $this->save() ? true : false;
-            
         }
         return false;
     }

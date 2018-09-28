@@ -127,34 +127,29 @@ class RequestsController extends AppManagersController {
             throw new \yii\web\NotFoundHttpException('Вы обратились к несуществующей странице');
         }
         
-//        $model_comment = new CommentsToRequest([
-//            'scenario' => CommentsToRequest::SCENARIO_ADD_COMMENTS
-//        ]);
+        $model_comment = new CommentsToRequest([
+            'scenario' => CommentsToRequest::SCENARIO_ADD_COMMENTS
+        ]);
 
         /*
          * Загружаем модель для добавления комментрария к задаче
          * Pjax
          */
-//        if (Yii::$app->request->isPjax) {
-//            $model_comment = new CommentsToRequest([
-//                'scenario' => CommentsToRequest::SCENARIO_ADD_COMMENTS
-//            ]);        
-//            if ($model_comment->load(Yii::$app->request->post())) {
-//                $model_comment->sendComments($request['requests_id']);
-//            }
-//        }
+        if (Yii::$app->request->isPjax) {
+            $model_comment = new CommentsToRequest([
+                'scenario' => CommentsToRequest::SCENARIO_ADD_COMMENTS
+            ]);        
+            if ($model_comment->load(Yii::$app->request->post())) {
+                $model_comment->sendComments($paid_request['id']);
+            }
+        }
                 
-//        $comments_find = CommentsToRequest::getCommentByRequest($request['requests_id']);
-        
-//        return $this->render('view-request', [
-//            'request' => $request,
-//            'model_comment' => $model_comment,
-//            'comments_find' => $comments_find,
-//            'all_images' => $images,
-//        ]);
+        $comments_find = CommentsToRequest::getCommentByRequest($paid_request['id']);
         
         return $this->render('view-paid-request', [
             'paid_request' => $paid_request,
+            'model_comment' => $model_comment,
+            'comments_find' => $comments_find,            
         ]);
     }
     

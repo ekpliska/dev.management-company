@@ -109,9 +109,9 @@ $this->title = 'Заявка №' . $paid_request['number'];
         <div class="panel panel-default">
             <div class="panel-heading">Комменатрии к заявке</div>
             <div class="panel-body">
-                <?php /* = $this->render('comments/view', [
+                <?= $this->render('comments/view', [
                     'model' => $model_comment,
-                    'comments_find' => $comments_find]) */ ?>
+                    'comments_find' => $comments_find]) ?>
             </div>
         </div>
     </div>
