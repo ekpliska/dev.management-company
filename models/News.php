@@ -10,9 +10,16 @@ class News extends ActiveRecord
     
     const ONLY_PERSONAL_OFFICE = 0;
     const ONLY_PERSONAL_OFFICE_WITH_NOTICE = 1;
+    
+    const FOR_ALL = 0;
+    const FOR_ALL_HOUSE_AREA = 1;
+    const FOR_CURRENT_HOUSE = 2;
+    
+    const NOTICE_SMS = 0;
+    const NOTICE_EMAIL = 1;
+    const NOTICE_PUSH = 2;
 
-
-    /**
+        /**
      * Таблица из БД
      */
     public static function tableName()
@@ -41,12 +48,38 @@ class News extends ActiveRecord
         return $this->hasOne(Rubrics::className(), ['rubrics_id' => 'news_type_rubric_id']);
     }
     
+    /*
+     * Тип уведомления публикации
+     */
     public static function getArrayStatusNotice() {
         return [
             self::ONLY_PERSONAL_OFFICE => 'Публикация только в личном кабинете',
             self::ONLY_PERSONAL_OFFICE_WITH_NOTICE => 'Публикация в личном кабинете с оповещением',
         ];
     }
+    
+    /*
+     * Статус размещения публикации
+     */
+    public static function getStatusPublish() {
+        return [
+            self::FOR_ALL => 'Для всех жильцов',
+            self::FOR_ALL_HOUSE_AREA => 'Для жилого комплекса',
+            self::FOR_CURRENT_HOUSE => 'Для конкретного дома',
+        ];
+    }
+    
+    /*
+     * Тип оповещения
+     */
+    public static function getNoticeType() {
+        return [
+            self::NOTICE_SMS => 'СМС',
+            self::NOTICE_EMAIL => 'Email',
+            self::NOTICE_PUSH => 'Push',
+        ];
+    }
+    
 
     /**
      * Аттрибуты полей

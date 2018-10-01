@@ -12,7 +12,7 @@ $this->title = 'Новости';
     <h1><?= $this->title ?></h1>
     <hr />
     <?= AlertsShow::widget() ?>
-    <?= Html::button('Новость (+)', [
+    <?= Html::a('Новость (+)', ['news/create'], [
         'class' => 'btn btn-sm btn-success',])
     ?>
     

@@ -1,6 +1,7 @@
 <?php
 
     use yii\db\Migration;
+    use app\models\News;
 
 /**
  * Новости
@@ -26,6 +27,7 @@ class m181001_072514_table_news extends Migration
             'news_preview' => $this->string(255)->notNull(),
             'news_house_id' => $this->integer()->notNull(),
             'news_user_id' => $this->integer()->notNull(),
+            'news_status' => $this->integer()->notNull()->defaultValue(News::FOR_ALL),
             'isPrivateOffice' => $this->integer()->notNull(),
             'isSMS' => $this->integer()->defaultValue(false),
             'isEmail' => $this->integer()->defaultValue(false),
