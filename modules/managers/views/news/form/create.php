@@ -8,7 +8,6 @@
 /* 
  * Создание новой новости
  */
-
 $this->title = 'Новость (+)';
 ?>
 <div class="managers-default-index">

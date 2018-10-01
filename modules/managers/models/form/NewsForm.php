@@ -31,7 +31,7 @@ class NewsForm extends Model {
     public $user;
     // Дата публикации
     public $date_publish;
-
+    
     public function rules() {
         return [
             [[
@@ -86,7 +86,7 @@ class NewsForm extends Model {
             
             $transaction->commit();
             
-//            return $add_news->slug;
+            return $add_news->slug;
             
         } catch (Exception $ex) {
             $transaction->rollBack();

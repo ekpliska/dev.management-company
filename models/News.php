@@ -3,6 +3,7 @@
     namespace app\models;
     use Yii;
     use yii\db\ActiveRecord;
+    use yii\behaviors\SluggableBehavior;
     use app\models\Rubrics;
 
 class News extends ActiveRecord
@@ -19,7 +20,7 @@ class News extends ActiveRecord
     const NOTICE_EMAIL = 1;
     const NOTICE_PUSH = 2;
 
-        /**
+    /**
      * Таблица из БД
      */
     public static function tableName()
@@ -27,6 +28,15 @@ class News extends ActiveRecord
         return 'news';
     }
 
+    public function behaviors () {
+        return [
+            [
+                'class' => SluggableBehavior::className(),
+                'attribute' => 'news_title',
+            ],
+        ];
+    }    
+    
     /**
      * Правила валидации
      */
@@ -38,7 +48,7 @@ class News extends ActiveRecord
                 'news_title', 'news_text', 
 //                'news_preview', 
                 'news_house_id', 
-//                'news_user_id', 
+                'news_user_id', 
                 'isPrivateOffice', 
                 'created_at'], 'required'],
             
@@ -50,6 +60,8 @@ class News extends ActiveRecord
             
             [['news_text'], 'string'],
             [['news_title', 'news_preview', 'slug'], 'string', 'max' => 255],
+            
+            ['slug', 'string'],
             
 //            [['news_type_rubric_id'], 'exist', 'skipOnError' => true, 'targetClass' => Rubrics::className(), 'targetAttribute' => ['news_type_rubric_id' => 'rubrics_id']],
         ];

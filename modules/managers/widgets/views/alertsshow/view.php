@@ -73,12 +73,12 @@
     ?>
 <?php endif; ?>
 
-<?php if (Yii::$app->session->hasFlash('rate-admin')) : ?>
-<?php $flash = Yii::$app->session->getFlash('rate-admin'); ?>
+<?php if (Yii::$app->session->hasFlash('news-admin')) : ?>
+<?php $flash = Yii::$app->session->getFlash('news-admin'); ?>
     <?=
         Alert::widget([
             'type' => $flash['success'] ? Alert::TYPE_INFO : Alert::TYPE_DANGER,
-            'title' => 'Услуги',
+            'title' => 'Новости',
             'icon' => 'glyphicon glyphicon-ok-sign',
             'body' => $flash['success'] ? $flash['message'] : $flash['error'],
             'showSeparator' => true,

@@ -41,8 +41,20 @@ class NewsController extends AppManagersController {
         if (Yii::$app->request->isPost && $model->load(Yii::$app->request->post())) {
             $file = UploadedFile::getInstance($model, 'preview');
             $model->preview = $file;
-            $model->save($file);
-            return 'here';
+            $slug = $model->save($file);
+            if ($slug) {
+                Yii::$app->session->setFlash('news-admin', [
+                    'success' => true,
+                    'message' => 'Новость была успешно добавлена',
+                ]);                
+                return $this->redirect(['view-news', 'slug' => $slug]);
+            } else {
+                Yii::$app->session->setFlash('news-admin', [
+                    'success' => false,
+                    'error' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз',
+                ]);
+                return $this->redirect(Yii::$app->request->referrer);
+            }
         }
         
         return $this->render('form/create', [
@@ -52,6 +64,19 @@ class NewsController extends AppManagersController {
             'type_notice' => $type_notice,
             'rubrics' => $rubrics,
             'houses' => $houses,
+        ]);
+    }
+    
+    public function actionViewNews($slug) {
+        
+        $news = News::findOne(['slug' => $slug]);
+        
+        if ($news == null) {
+            throw new \yii\web\NotFoundHttpException('Вы обратились к несуществующей странице');
+        }
+        
+        return $this->render('view-news', [
+            'news' => $news,
         ]);
     }
     
