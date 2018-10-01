@@ -27,10 +27,20 @@ class NewsForm extends Model {
     public $isPrivateOffice;
     // Тип оповещение (СМСб Email, Push)
     public $isNotice;
-    
+    // Пользователь
+    public $user;
+    // Дата публикации
+    public $date_publish;
+
     public function rules() {
         return [
-            [['rubric', 'title', 'text', 'preview', 'house', 'isPrivateOffice'], 'required'],
+            [[
+                'status',
+                'rubric', 'title', 'text', 'preview', 
+                'house', 
+                'isPrivateOffice', 
+                'date_publish',
+                'user'], 'required'],
             
             ['title', 'string', 'min' => '10', 'max' => '255'],
             
@@ -47,8 +57,10 @@ class NewsForm extends Model {
         ];
     }
     
+
     public function attributeLabels() {
         return [
+            'status' => 'Статус публикации',
             'rubric' => 'Тип публикации',
             'title' => 'Заголовок публикации',
             'text' => 'Текст публикации',
@@ -58,6 +70,8 @@ class NewsForm extends Model {
             'isSMS' => 'СМС',
             'isEmail' => 'Email',
             'isPush' => 'Push',
+            'user' => 'Пользователь',
+            'date_publish' => 'Дата публикации',
         ];
     }
     

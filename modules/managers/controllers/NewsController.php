@@ -6,6 +6,7 @@
     use app\models\News;
     use app\models\Rubrics;
     use app\models\Houses;
+    use app\helpers\FormatHelpers;
 
 /**
  * Новости
@@ -43,5 +44,33 @@ class NewsController extends AppManagersController {
             'houses' => $houses,
         ]);
     }
+    
+    /*
+     * Зависимый переключатель статуса публикации
+     *      Для всех
+     *      Для жилого комплекса
+     *      Для конкретного дома
+     */
+    public function actionForWhomNews($status) {
+        
+        $current_house = Houses::getHousesList();
+        
+        if ($status == 0) {
+            echo '<option value="-1">Для всех</option>';
+        } elseif ($status == 1) {
+            echo '<option value="0">Для жилого комплекса</option>';
+        } elseif ($status == 2) {
+            foreach ($current_house as $house) {
+                $full_adress = \app\helpers\FormatHelpers::formatFullAdress(
+                        $house['houses_town'], 
+                        $house['houses_street'], 
+                        $house['houses_number_house'], 
+                        false, false) ;
+                echo '<option value="' . $house['houses_id'] . '">' . $full_adress . '</option>';
+            }
+        }
+        
+    }
+    
     
 }

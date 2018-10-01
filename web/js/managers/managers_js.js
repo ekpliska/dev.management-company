@@ -546,9 +546,40 @@ $(document).ready(function() {
             });
         }
     });
-    
+
+    /*
+     * Сброс форм 
+     *      Новая завяка
+     *      Новая заявка на платную услугу
+     */
     $('.create-request, .create-paid-request').on('click', function(){
         $('#create-new-request, #create-new-paid-request')[0].reset();
+    });
+    
+    
+    // ******************************************************** //
+    // ************     Start Block of News      ************** //
+    // ******************************************************** //
+    /*
+     * Переключатель, статус публикации новости
+     *      Для всех
+     *      Для жилого комплекса
+     *      Для отдельного дома
+     */
+    $('#for_whom_news').on('change', function(e) {
+        var forWhom = $("#news-form input[type='radio']:checked").val();
+        
+        if (forWhom === '0') {
+            $('#adress_list').prop('disabled', true);
+        } else {
+            $('#adress_list').prop('disabled', false);
+        }
+        
+        $.post('for-whom-news?status=' + forWhom,
+            function(data) {
+                $('#adress_list').html(data);
+            }
+        );
     });
     
 

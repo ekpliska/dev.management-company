@@ -2,6 +2,7 @@
 
     use yii\helpers\Html;
     use yii\widgets\ActiveForm;
+    use kartik\date\DatePicker;
     use app\modules\managers\widgets\AlertsShow;
 
 /* 
@@ -22,12 +23,16 @@ $this->title = 'Новость (+)';
     ?>
     
     <div class="col-md-12">
-        <?= $form->field($model, 'status')->radioList($status_publish)->label(false) ?>        
+        <?= $form->field($model, 'status')
+                ->radioList($status_publish, [
+                    'id' => 'for_whom_news'])
+                ->label(false) ?>
     </div>
     
     <div class="col-md-6">
         <?= $form->field($model, 'house')->dropDownList($houses, [
             'prompt' => 'Выбрать из списка...',
+            'id' => 'adress_list',
         ]) ?>
     </div>
     
@@ -63,9 +68,26 @@ $this->title = 'Новость (+)';
         <?= $form->field($model, 'isNotice')->checkboxList($type_notice)->label(false) ?>
     </div>
     
-    <div class="col-md-12">
-        Дата публикации: 11
-        Автор: 222
+    <div class="clearfix"></div>
+    
+    <div class="col-md-6">
+        
+        <?= $form->field($model, 'date_publish')
+                    ->widget(DatePicker::className(), [
+                        'language' => 'ru',
+                        'options' => [
+                            'value' => date('Y-m-d'),
+                        ],
+                        'type' => DatePicker::TYPE_COMPONENT_APPEND,
+                        'pluginOptions' => [
+                            'autoClose' => true,
+                            'format' => 'yyyy-mm-dd',
+                        ]
+                    ]) ?>
+    </div>
+    
+    <div class="col-md-6">
+        Назначить пользователя (?)
     </div>
     
     <div class="col-md-12 text-right">

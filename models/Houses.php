@@ -68,18 +68,11 @@ class Houses extends ActiveRecord
     /*
      * Полксить список всех домов жилого массива для
      */
-    public static function getHousingArea() {
-        $list = self::find()
-                ->select($columns)
+    public static function getHousesList() {
+        return self::find()
+                ->select(['houses_id', 'houses_town', 'houses_street', 'houses_number_house'])
                 ->asArray()
                 ->all();
-        return ArrayHelper::map($list, 'houses_id', function ($array) {
-            return 
-                $array['houses_name'] . 
-                ', г. ' . $array['houses_town'] .
-                ', ул. ' . $array['houses_street']. 
-                ', д. ' . $array['houses_number_house'];
-        });
     }
     
     public function getAdress() {

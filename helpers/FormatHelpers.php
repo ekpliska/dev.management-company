@@ -117,11 +117,11 @@ class FormatHelpers {
      * Форматирование полного адреса проживания
      * г. Город, ул. Улица, д. Номер, эт. Этаж, кв. Номер
      */
-    public static function formatFullAdress($town, $street, $house, $floor, $flat) {
+    public static function formatFullAdress($town, $street, $house, $floor = false, $flat = false) {
         
         $town = $town ? 'г. ' . $town . ', ' : '';
         $street = $street ? 'ул. '  . $street . ', ' : '';
-        $house = $house ? 'д. ' . $house . ', ' : '';
+        $house = ($house && $flat) ? 'д. ' . $house . ', ' : 'д. ' . $house;
         $floor = $floor ? 'эт. ' . $floor . ', ' : '';
         $flat = $flat ? 'кв. ' . $flat : '';
         
