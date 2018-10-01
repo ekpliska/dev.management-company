@@ -129,6 +129,19 @@ class FormatHelpers {
     }
     
     /*
+     * Форматирование полного адреса жилого комплекса
+     * Наименование комплекса. г. Город
+     */
+    public static function formatEstateAdress($name, $town) {
+        
+        $name = $name ? $name . ', ' : '';
+        $town = $town ? 'г. ' . $town : '';
+        
+        return $name . $town;
+    }
+    
+    
+    /*
      * Форматирование суммы баланса Собственика лицевого счета
      * 
      * 

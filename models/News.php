@@ -33,11 +33,25 @@ class News extends ActiveRecord
     public function rules()
     {
         return [
-            [['news_type_rubric_id', 'news_title', 'news_text', 'news_preview', 'news_house_id', 'news_user_id', 'isPrivateOffice', 'created_at', 'updated_at'], 'required'],
-            [['news_type_rubric_id', 'news_house_id', 'news_user_id', 'isPrivateOffice', 'isSMS', 'isEmail', 'isPush', 'created_at', 'updated_at'], 'integer'],
+            [[
+                'news_type_rubric_id', 
+                'news_title', 'news_text', 
+//                'news_preview', 
+                'news_house_id', 
+//                'news_user_id', 
+                'isPrivateOffice', 
+                'created_at'], 'required'],
+            
+            [[
+                'news_type_rubric_id', 'news_house_id', 
+                'news_user_id', 
+                'isPrivateOffice', 'isSMS', 'isEmail', 'isPush', 
+                'created_at', 'updated_at'], 'integer'],
+            
             [['news_text'], 'string'],
-            [['news_title', 'news_preview'], 'string', 'max' => 255],
-            [['news_type_rubric_id'], 'exist', 'skipOnError' => true, 'targetClass' => Rubrics::className(), 'targetAttribute' => ['news_type_rubric_id' => 'rubrics_id']],
+            [['news_title', 'news_preview', 'slug'], 'string', 'max' => 255],
+            
+//            [['news_type_rubric_id'], 'exist', 'skipOnError' => true, 'targetClass' => Rubrics::className(), 'targetAttribute' => ['news_type_rubric_id' => 'rubrics_id']],
         ];
     }
     
@@ -80,6 +94,29 @@ class News extends ActiveRecord
         ];
     }
     
+    /*
+     * Загрузка изображения услуги
+     */    
+    public function uploadImage($file) {
+        
+        $current_image = $this->news_preview;
+        
+        if ($this->validate()) {
+            if ($file) {
+                $this->news_preview = $file;
+                $dir = Yii::getAlias('images/news/');
+                $file_name = 'news_' . time() . '.' . $this->news_preview->extension;
+                $this->news_preview->saveAs($dir . $file_name);
+                $this->news_preview = '/' . $dir . $file_name;
+                @unlink(Yii::getAlias('@webroot' . $current_image));
+            } else {
+                $this->news_preview = $current_image;
+            }
+            return $this->save() ? true : false;
+        }
+        
+        return false;
+    }
 
     /**
      * Аттрибуты полей

@@ -19,6 +19,9 @@ $this->title = 'Новость (+)';
     <?php
         $form = ActiveForm::begin([
             'id' => 'news-form',
+            'options' => [
+                'enctype' => 'multipart/form-data',
+            ],
         ]);
     ?>
     
@@ -41,7 +44,17 @@ $this->title = 'Новость (+)';
             'prompt' => 'Выбрать из списка',]) ?>
     </div>
     
-    <div class="col-md-12">
+    <div class="col-md-2">
+        <div class="text-center">
+            <?= Html::img($model->preview, ['id' => 'photoPreview', 'class' => 'img-rounded', 'alt' => $model->title, 'width' => 150]) ?>
+        </div>
+        <br />
+        <?= $form->field($model, 'preview')
+                ->input('file', ['id' => 'btnLoad'])
+                ->label(false) ?>
+    </div>    
+    
+    <div class="col-md-10">
         <?= $form->field($model, 'title')
                 ->input('text', [
                     'placeHolder' => $model->getAttributeLabel('title'),])

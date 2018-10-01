@@ -48,15 +48,51 @@ class NewsForm extends Model {
             
             [['title', 'text'], 'filter', 'filter' => 'trim'],
             [['title', 'text'], 'match',
-                'pattern' => '/^[А-Яа-яЁёA-Za-z0-9\_\-\@\.]+$/iu',
-                'message' => 'Поле "{attribute}" может содержать только буквы русского и английского алфавита, цифры, знаки "-", "_"',
+                'pattern' => '/^[А-Яа-яЁёA-Za-z0-9\ \_\-\@\.]+$/iu',
+                'message' => 'Поле "{attribute}" может содержать только буквы русского и английского алфавита, пробел, цифры, знаки "-", "_"',
             ],
             
             [['status', 'house', 'isPrivateOffice', 'isNotice'], 'integer'],
             
+            [['preview'], 'file', 'extensions' => 'png, jpg, jpeg'],
+            [['preview'], 'image', 'maxWidth' => 510, 'maxHeight' => 510],
+            
         ];
     }
     
+    public function save($file) {
+        
+        $transaction = Yii::$app->db->beginTransaction();
+        
+        try {
+            
+            $add_news = new News();
+            $add_news->news_type_rubric_id = $this->rubric;
+            $add_news->news_title = $this->title;
+            $add_news->news_text = $this->text;
+            $add_news->isPrivateOffice = $this->isPrivateOffice;
+            
+            // Если значение дома не задано, то публикацию сохраняем как "для всех"
+            $add_news->news_house_id = $this->house ? $this->house : -1;
+            // Пользователь, создавший публикацию
+            $add_news->news_user_id = Yii::$app->user->identity->id;
+            $add_news->created_at = strtotime($this->date_publish);
+            // Сохраняем превью публикации
+            $add_news->uploadImage($file);
+            
+            if(!$add_news->save()) {
+                throw new \yii\db\Exception('Ошибка добавления новости. Ошибка: ' . join(', ', $add_news->getFirstErrors()));
+            }
+            
+            $transaction->commit();
+            
+//            return $add_news->slug;
+            
+        } catch (Exception $ex) {
+            $transaction->rollBack();
+        }
+        
+    }
 
     public function attributeLabels() {
         return [
