@@ -3,8 +3,9 @@
     namespace app\models;
     use Yii;
     use yii\db\ActiveRecord;
-    use app\models\Clients;
     use yii\helpers\ArrayHelper;
+    use app\models\Clients;
+    use app\models\HousingEstates;
 
 /**
  * Информация о жилых помещениях
@@ -26,7 +27,7 @@ class Houses extends ActiveRecord
     {
         return [
             [['houses_porch', 'houses_floor', 'houses_flat', 'houses_rooms', 'houses_square', 'houses_account_id'], 'integer'],
-            [['houses_name'], 'string', 'max' => 70],
+            [['houses_estate_name_id'], 'integer'],
             [['houses_town'], 'string', 'max' => 50],
             [['houses_street'], 'string', 'max' => 100],
             [['houses_number_house'], 'string', 'max' => 10],
@@ -34,8 +35,12 @@ class Houses extends ActiveRecord
     }
     
     public function getClient() {
-        return $this->hasOne(Clients::className(), ['client_id' => 'houses_account_id']);
-    }      
+        return $this->hasOne(Clients::className(), ['client_id' => 'houses_estate_name_id']);
+    }
+    
+    public function getHousingEstate() {
+        return $this->hasOne(HousingEstates::className(), ['estate_id' => '']);
+    }
         
     
     public static function findByAccountId($account_id) {
@@ -105,7 +110,7 @@ class Houses extends ActiveRecord
     {
         return [
             'houses_id' => 'Houses ID',
-            'houses_name' => 'Houses Name',
+            'houses_estate_name_id' => 'Houses Name',
             'houses_town' => 'Houses Town',
             'houses_street' => 'Houses Street',
             'houses_number_house' => 'Houses Number House',
