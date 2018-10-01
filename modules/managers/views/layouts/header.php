@@ -143,7 +143,7 @@
             ['label' => 'Заявки +', 'url' => ['requests/requests']],
             ['label' => 'Платные услуги +', 'url' => ['requests/paid-services']],
             ['label' => 'Настройки', 'url' => ['']],
-            ['label' => 'Новости', 'url' => ['']],
+            ['label' => 'Новости', 'url' => ['news/index']],
             ['label' => 'Тарифы (-)', 'url' => ['rates/index']],
             ['label' => 'Реклама', 'url' => ['']],
             ['label' => 'Голосование', 'url' => ['']],

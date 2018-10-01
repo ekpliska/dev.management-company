@@ -7,6 +7,11 @@
 
 class News extends ActiveRecord
 {
+    
+    const ONLY_PERSONAL_OFFICE = 0;
+    const ONLY_PERSONAL_OFFICE_WITH_NOTICE = 1;
+
+
     /**
      * Таблица из БД
      */
@@ -34,6 +39,13 @@ class News extends ActiveRecord
      */
     public function getRubric() {
         return $this->hasOne(Rubrics::className(), ['rubrics_id' => 'news_type_rubric_id']);
+    }
+    
+    public static function getArrayStatusNotice() {
+        return [
+            self::ONLY_PERSONAL_OFFICE => 'Публикация только в личном кабинете',
+            self::ONLY_PERSONAL_OFFICE_WITH_NOTICE => 'Публикация в личном кабинете с оповещением',
+        ];
     }
 
     /**
