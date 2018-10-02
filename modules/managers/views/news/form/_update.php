@@ -4,6 +4,7 @@
     use yii\helpers\Url;
     use yii\widgets\ActiveForm;
     use vova07\imperavi\Widget;
+    use app\modules\managers\widgets\ModalWindowsManager;
 
 // Тип публикации, для блокировки чекбоксов смс, емайл, пуш уведомления    
 $status_checkbox = $model->isPrivateOffice ? false : true;
@@ -112,9 +113,18 @@ $status_checkbox = $model->isPrivateOffice ? false : true;
     </div>
     
     <div class="col-md-12 text-right">
+        
+        <?= Html::button('Удалить', [
+            'class' => 'btn btn-danger',
+            'data-target' => '#delete_news_manager',
+            'data-toggle' => 'modal',
+            'data-news' => $model->news_id]) ?>
+        
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary']) ?>
+        
     </div>
      
     
     <?php ActiveForm::end(); ?>
-    
+
+<?= ModalWindowsManager::widget(['modal_view' => 'delete_news']) ?>    

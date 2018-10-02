@@ -1,7 +1,7 @@
 <?php
 
     use yii\helpers\Html;
-    use app\modules\clients\widgets\AlertsShow;
+    use app\modules\managers\widgets\AlertsShow;
     use app\modules\managers\widgets\ModalWindowsManager;
 
 /* 
