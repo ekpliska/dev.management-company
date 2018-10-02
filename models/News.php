@@ -121,8 +121,8 @@ class News extends ActiveRecord
         if ($this->validate()) {
             if ($file) {
                 $this->news_preview = $file;
-                $dir = Yii::getAlias('images/news/');
-                $file_name = 'news_' . time() . '.' . $this->news_preview->extension;
+                $dir = Yii::getAlias('upload/news/previews');
+                $file_name = 'previews_news_' . time() . '.' . $this->news_preview->extension;
                 $this->news_preview->saveAs($dir . $file_name);
                 $this->news_preview = '/' . $dir . $file_name;
                 @unlink(Yii::getAlias('@webroot' . $current_image));
