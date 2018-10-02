@@ -2,6 +2,7 @@
 
     use yii\helpers\Html;
     use app\modules\clients\widgets\AlertsShow;
+    use app\modules\managers\widgets\ModalWindowsManager;
 
 /* 
  * Новости, нлавная страница
@@ -22,3 +23,5 @@ $this->title = 'Новости';
     ?>
     
 </div>
+
+<?= ModalWindowsManager::widget(['modal_view' => 'delete_news']) ?>

@@ -597,6 +597,34 @@ $(document).ready(function() {
         }
     });
     
+    /*
+     * Перед загрузкой модального окна на удаление новости, присваиваем в дата атрибут ID новости
+     */
+    $('#delete_news_manager').on('show.bs.modal', function(e) {
+        var newsId = $(e.relatedTarget).data('news');
+        $('.delete_news__del').data('news', newsId);
+    });
+
+    /*
+     * Запрос на удаление новости
+     */
+    $('.delete_news__del').on('click', function(){
+        var newsId = $(this).data('news');
+        $.ajax({
+            url: 'delete-news',
+            method: 'POST',
+            data: {
+                newsId: newsId,
+            },
+            success: function(responce){
+                console.log(responce.success);
+            },
+            error: function(){
+                console.log('error');
+            },
+        });
+    });
+    
 
 });
     

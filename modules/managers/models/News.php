@@ -23,7 +23,7 @@ class News extends BaseNews {
                 ->join('LEFT JOIN', 'housing_estates as he', 'n.news_house_id = he.estate_id')
                 ->join('LEFT JOIN', 'houses as h_e', 'he.estate_id = h_e.houses_estate_name_id')
                 ->join('LEFT JOIN', 'houses as h', 'n.news_house_id = h.houses_id')
-                ->orderBy(['created_at' => SORT_ASC]);
+                ->orderBy(['created_at' => SORT_DESC]);
         
         return $array;
         

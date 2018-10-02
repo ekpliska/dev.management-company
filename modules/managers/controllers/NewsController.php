@@ -177,5 +177,26 @@ class NewsController extends AppManagersController {
         
     }
     
+    public function actionDeleteNews() {
+        
+        $news_id = Yii::$app->request->post('newsId');
+        
+        if (Yii::$app->request->isAjax) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            $news = News::findOne($news_id);
+            
+            if (!$news->delete()) {
+                Yii::$app->session->setFlash('news-admin', [
+                    'success' => false, 
+                    'error' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз']);
+            }
+            Yii::$app->session->setFlash('news-admin', [
+                'success' => true, 
+                'message' => 'Новость ' . $news->news_title . ' была успешно удалена']);
+            
+            return $this->redirect('index');
+        }
+        
+    }
     
 }
