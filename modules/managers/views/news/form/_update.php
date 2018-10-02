@@ -77,23 +77,29 @@ $status_checkbox = $model->isPrivateOffice ? false : true;
     </div>
     
     <div class="col-md-6">
-        <?= $form->field($model, 'isPrivateOffice')->radioList($notice)->label(false) ?>
+        <?= $form->field($model, 'isPrivateOffice')
+                ->radioList($notice, [
+                    'id' => 'type_notice'])
+                ->label(false) ?>
     </div>
     
     <div class="col-md-6">
         
         <?= $form->field($model, 'isSMS')
                 ->checkbox([
+                    'id' => 'is_notice',
                     'disabled' => $status_checkbox])
                 ->label(false) ?>
         
         <?= $form->field($model, 'isEmail')
                 ->checkbox([
+                    'id' => 'is_notice',
                     'disabled' => $status_checkbox])
                 ->label(false) ?>
         
         <?= $form->field($model, 'isPush')
                 ->checkbox([
+                    'id' => 'is_notice',
                     'disabled' => $status_checkbox])
                 ->label(false) ?>
     </div>

@@ -582,6 +582,21 @@ $(document).ready(function() {
         );
     });
     
+    /*
+     * Блокируем виды оповещений, если выбран пункт "Публикация в личном кабинете"
+     */
+    $('#type_notice').on('change', function (){
+        var valueType = $('input[name*=isPrivateOffice]:checked').val();
+
+        if (valueType === '0') {
+            $('input[id^=is_notice]').prop('disabled', true);
+            $('input[id^=is_notice]').prop('checked', false);
+        } else {
+            $('input[id^=is_notice]').prop('disabled', false);
+            $('input[id^=is_notice]').prop('checked', false);            
+        }
+    });
+    
 
 });
     

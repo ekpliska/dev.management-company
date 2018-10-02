@@ -81,7 +81,10 @@
     </div>
     
     <div class="col-md-6">
-        <?= $form->field($model, 'isPrivateOffice')->radioList($notice)->label(false) ?>
+        <?= $form->field($model, 'isPrivateOffice')
+                ->radioList($notice, [
+                    'id' => 'type_notice'])
+                ->label(false) ?>
     </div>
     
     <div class="col-md-6">
@@ -89,6 +92,7 @@
             'item' => function ($index, $label, $name, $checked, $value) {
                 return Html::checkbox($name, $checked, [
                     'value' => $value,
+                    'id' => 'is_notice_' . $index,
                     'disabled' => 'disabled'
                 ]) . $label;
             }
