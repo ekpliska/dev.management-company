@@ -64,6 +64,9 @@
                     'plugins' => [
                         'fullscreen',
                         'imagemanager',
+                        'fontcolor',
+                        'table',
+                        'fontsize',
                     ],
                 ],
             ]) ?>
@@ -82,7 +85,15 @@
     </div>
     
     <div class="col-md-6">
-        <?= $form->field($model, 'isNotice')->checkboxList($type_notice)->label(false) ?>
+        <?= $form->field($model, 'isNotice')->checkboxList($type_notice, [
+            'item' => function ($index, $label, $name, $checked, $value) {
+                return Html::checkbox($name, $checked, [
+                    'value' => $value,
+                    'disabled' => 'disabled'
+                ]) . $label;
+            }
+        ])->label(false) ?>
+
     </div>
     
     <div class="clearfix"></div>

@@ -105,6 +105,24 @@ class NewsController extends AppManagersController {
         $rubrics = Rubrics::getArrayRubrics();
         $houses = HousesEstates::getHouseOrEstate($news->news_status);
         
+        if ($news->load(Yii::$app->request->post())) {
+            $is_valid = $news->validate();
+            
+            if ($is_valid) {
+                $file = UploadedFile::getInstance($news, 'news_preview');
+                $news->uploadImage($file);
+                Yii::$app->session->setFlash('news-admin', [
+                    'success' => true,
+                    'message' => 'Изменения были успешно сохранены',
+                ]);
+            } else {
+                Yii::$app->session->setFlash('news-admin', [
+                    'success' => false,
+                    'error' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз',
+                ]);                
+            }
+        }
+        
         return $this->render('view-news', [
             'news' => $news,
             'status_publish' => $status_publish,

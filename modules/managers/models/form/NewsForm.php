@@ -86,6 +86,7 @@ class NewsForm extends Model {
             
             if(!$add_news->save()) {
                 throw new \yii\db\Exception('Ошибка добавления новости. Ошибка: ' . join(', ', $add_news->getFirstErrors()));
+//                return ['error' => join(', ', $add_news->getFirstErrors())];
             }
             
             $transaction->commit();

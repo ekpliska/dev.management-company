@@ -3,6 +3,7 @@
     namespace app\models;
     use Yii;
     use yii\db\ActiveRecord;
+    use yii\behaviors\TimestampBehavior;
     use yii\behaviors\SluggableBehavior;
     use app\models\Rubrics;
 
@@ -34,6 +35,12 @@ class News extends ActiveRecord
                 'class' => SluggableBehavior::className(),
                 'attribute' => 'news_title',
             ],
+            [
+                'class' => TimestampBehavior::className(),
+//                'createdAtAttribute' => 'create_time',
+                'updatedAtAttribute' => 'updated_at',
+                'value' => time(),
+            ],
         ];
     }    
     
@@ -47,8 +54,7 @@ class News extends ActiveRecord
                 'news_type_rubric_id', 
                 'news_title', 'news_text', 
                 'news_user_id', 
-                'isPrivateOffice', 
-                'created_at'], 'required'],
+                'isPrivateOffice'], 'required'],
             
             ['news_title', 'unique',
                 'targetClass' => self::className(),
@@ -59,7 +65,8 @@ class News extends ActiveRecord
                 'news_type_rubric_id', 'news_house_id', 
                 'news_user_id', 
                 'isPrivateOffice', 
-                'created_at', 'updated_at'], 'integer'],
+                'news_status', 
+                ], 'integer'],
             
             [['isSMS', 'isEmail', 'isPush'], 'boolean'],
             
@@ -68,7 +75,6 @@ class News extends ActiveRecord
             
             ['slug', 'string'],
             
-//            [['news_type_rubric_id'], 'exist', 'skipOnError' => true, 'targetClass' => Rubrics::className(), 'targetAttribute' => ['news_type_rubric_id' => 'rubrics_id']],
         ];
     }
     
@@ -112,6 +118,16 @@ class News extends ActiveRecord
     }
     
     /*
+     * Получить превью публикации
+     */
+    public function getPreview() {
+        if (empty($this->news_preview)) {
+            return Yii::getAlias('@web') . 'images/news_preview';
+        }
+        return Yii::getAlias('@web') . $this->news_preview;
+    }
+    
+    /*
      * Загрузка изображения услуги
      */    
     public function uploadImage($file) {
@@ -121,7 +137,7 @@ class News extends ActiveRecord
         if ($this->validate()) {
             if ($file) {
                 $this->news_preview = $file;
-                $dir = Yii::getAlias('upload/news/previews');
+                $dir = Yii::getAlias('upload/news/previews/');
                 $file_name = 'previews_news_' . time() . '.' . $this->news_preview->extension;
                 $this->news_preview->saveAs($dir . $file_name);
                 $this->news_preview = '/' . $dir . $file_name;
@@ -133,8 +149,8 @@ class News extends ActiveRecord
         }
         
         return false;
-    }
-
+    }   
+    
     /**
      * Аттрибуты полей
      */

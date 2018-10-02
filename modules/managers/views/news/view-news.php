@@ -1,5 +1,6 @@
 <?php
 
+    use app\helpers\FormatHelpers;
     use app\modules\managers\widgets\AlertsShow;
 
 /* 
@@ -9,6 +10,14 @@ $this->title = 'Новость: ' . $news->news_title;
 ?>
 <div class="managers-default-index">
     <h1><?= $this->title ?></h1>
+    <p class="label label-warning">
+        <?= FormatHelpers::formatDate($news->created_at) ?>
+    </p>
+    <br />
+    Последний раз редактировалось: <p class="label label-success">
+        <?= FormatHelpers::formatDate($news->updated_at) ?>
+    </p>
+    
     <hr />
     <?= AlertsShow::widget() ?>
     

@@ -4,8 +4,9 @@
     use yii\helpers\Url;
     use yii\widgets\ActiveForm;
     use vova07\imperavi\Widget;
-    use kartik\date\DatePicker;
-    
+
+// Тип публикации, для блокировки чекбоксов смс, емайл, пуш уведомления    
+$status_checkbox = $model->isPrivateOffice ? false : true;
 ?>
 
     <?php
@@ -16,7 +17,7 @@
             ],
         ]);
     ?>
-    
+
     <div class="col-md-12">
         <?= $form->field($model, 'news_status')
                 ->radioList($status_publish, [
@@ -36,7 +37,7 @@
     
     <div class="col-md-2">
         <div class="text-center">
-            <?= Html::img($model->news_preview, ['id' => 'photoPreview', 'class' => 'img-rounded', 'alt' => $model->news_title, 'width' => 150]) ?>
+            <?= Html::img($model->preview, ['id' => 'photoPreview', 'class' => 'img-rounded', 'alt' => $model->news_title, 'width' => 150]) ?>
         </div>
         <br />
         <?= $form->field($model, 'news_preview')
@@ -59,6 +60,9 @@
                     'plugins' => [
                         'fullscreen',
                         'imagemanager',
+                        'fontcolor',
+                        'table',
+                        'fontsize',
                     ],
                 ],
             ]) ?>
@@ -77,30 +81,27 @@
     </div>
     
     <div class="col-md-6">
-        <?= $form->field($model, 'isSMS')->checkbox()->label(false) ?>
-        <?= $form->field($model, 'isEmail')->checkbox()->label(false) ?>
-        <?= $form->field($model, 'isPush')->checkbox()->label(false) ?>
+        
+        <?= $form->field($model, 'isSMS')
+                ->checkbox([
+                    'disabled' => $status_checkbox])
+                ->label(false) ?>
+        
+        <?= $form->field($model, 'isEmail')
+                ->checkbox([
+                    'disabled' => $status_checkbox])
+                ->label(false) ?>
+        
+        <?= $form->field($model, 'isPush')
+                ->checkbox([
+                    'disabled' => $status_checkbox])
+                ->label(false) ?>
     </div>
     
     <div class="clearfix"></div>
     
-    <div class="col-md-6">
-        
-        <?= $form->field($model, 'created_at')
-                    ->widget(DatePicker::className(), [
-                        'language' => 'ru',
-                        'options' => [
-                            'value' => date('Y-m-d'),
-                        ],
-                        'type' => DatePicker::TYPE_COMPONENT_APPEND,
-                        'pluginOptions' => [
-                            'autoClose' => true,
-                            'format' => 'yyyy-mm-dd',
-                        ]
-                    ]) ?>
-    </div>
     
-    <div class="col-md-6">
+    <div class="col-md-12">
         Назначить пользователя (?)
     </div>
     
@@ -111,4 +112,3 @@
     
     <?php ActiveForm::end(); ?>
     
-</div>

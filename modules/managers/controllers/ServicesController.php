@@ -97,7 +97,7 @@ class ServicesController extends AppManagersController {
                 $service->uploadImage($file);
                 Yii::$app->session->setFlash('services-admin', [
                     'success' => true,
-                    'message' => 'Новая услуга была успешно добавлена',
+                    'message' => 'Информациа об услуге успешно обновлена',
                 ]);
             } else {
                 Yii::$app->session->setFlash('services-admin', [
