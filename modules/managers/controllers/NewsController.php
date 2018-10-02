@@ -3,9 +3,10 @@
     namespace app\modules\managers\controllers;
     use Yii;
     use yii\web\UploadedFile;
+    use yii\data\ActiveDataProvider;
     use app\modules\managers\controllers\AppManagersController;
     use app\modules\managers\models\form\NewsForm;
-    use app\models\News;
+    use app\modules\managers\models\News;
     use app\models\Rubrics;
     use app\models\Houses;
     use app\models\HousingEstates;
@@ -41,7 +42,19 @@ class NewsController extends AppManagersController {
      * Новости, главная страница
      */
     public function actionIndex() {
-        return $this->render('index');
+        
+        $all_news = new ActiveDataProvider([
+            'query' => News::getAllNews(),
+            'pagination' => [
+                'forcePageParam' => false,
+                'pageSizeParam' => false,
+                'pageSize' => 15,
+            ],
+        ]);
+        
+        return $this->render('index', [
+            'all_news' => $all_news,
+        ]);
     }
     
     /*

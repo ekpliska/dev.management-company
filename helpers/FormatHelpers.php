@@ -157,4 +157,22 @@ class FormatHelpers {
         
     }
     
+    /*
+     * Вывод тизера публикации
+     * 
+     * @param string $text Полный текст новости
+     * @param integer $count_world Количество слов для тизера
+     */
+    public static function shortTextNews($text, $count_world = 40) {
+        
+        if (empty($text)) {
+            return 'Текст публикации отсутствует';
+        }
+        // Удаляем все html теги в тексте публикации
+        $_text = strip_tags($text);
+        return StringHelper::truncateWords($_text , $count_world);
+        
+        
+    }
+    
 }

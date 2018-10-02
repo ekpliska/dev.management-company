@@ -4,7 +4,7 @@
     use yii\helpers\ArrayHelper;
     use app\helpers\FormatHelpers;
     use app\models\Houses;
-    use app\models\News;
+//    use app\models\News;
     use app\models\HousingEstates;
 
 /**

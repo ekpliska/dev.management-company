@@ -16,4 +16,9 @@ $this->title = 'Новости';
         'class' => 'btn btn-sm btn-success',])
     ?>
     
+    <?= $this->render('data/grid_news', [
+        'all_news' => $all_news,
+    ])
+    ?>
+    
 </div>
