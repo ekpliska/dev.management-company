@@ -25,15 +25,16 @@ class m181001_072514_table_news extends Migration
             'news_title' => $this->string(255)->notNull(),
             'news_text' => $this->text(5000)->notNull(),
             'news_preview' => $this->string(255)->notNull(),
-            'news_house_id' => $this->integer()->notNull(),
+            'news_house_id' => $this->integer(),
             'news_user_id' => $this->integer()->notNull(),
             'news_status' => $this->integer()->notNull()->defaultValue(News::FOR_ALL),
             'isPrivateOffice' => $this->integer()->notNull(),
-            'isSMS' => $this->integer()->defaultValue(false),
-            'isEmail' => $this->integer()->defaultValue(false),
-            'isPush' => $this->integer()->defaultValue(false),
+            'isSMS' => $this->tinyInteger(),
+            'isEmail' => $this->tinyInteger(),
+            'isPush' => $this->tinyInteger(),
             'created_at' => $this->integer()->notNull(),
-            'updated_at' => $this->integer()->notNull(),
+            'updated_at' => $this->integer(),
+            'slug' => $this->string(255),
         ]);
         $this->createIndex('idx-news-news_id', '{{%news}}', 'news_id');
         

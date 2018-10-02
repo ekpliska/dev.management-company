@@ -71,7 +71,7 @@ class Houses extends ActiveRecord
     }
     
     /*
-     * Полксить список всех домов жилого массива для
+     * Список всех домов жилого массива
      */
     public static function getHousesList() {
         return self::find()

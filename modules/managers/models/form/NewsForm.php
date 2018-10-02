@@ -46,7 +46,7 @@ class NewsForm extends Model {
             ['text', 'string', 'min' => '10', 'max' => '5000'],
             
             [['title', 'text'], 'filter', 'filter' => 'trim'],
-            [['title', 'text'], 'match',
+            [['title'], 'match',
                 'pattern' => '/^[А-Яа-яЁёA-Za-z0-9\ \_\-\@\.]+$/iu',
                 'message' => 'Поле "{attribute}" может содержать только буквы русского и английского алфавита, пробел, цифры, знаки "-", "_"',
             ],
@@ -80,6 +80,10 @@ class NewsForm extends Model {
             // Сохраняем превью публикации
             $add_news->uploadImage($file);
             
+            $add_news->isSMS = $this->isNotice[0] ? true : false;
+            $add_news->isEmail = $this->isNotice[1] ? true : false;
+            $add_news->isPush = $this->isNotice[2] ? true : false;
+            
             if(!$add_news->save()) {
                 throw new \yii\db\Exception('Ошибка добавления новости. Ошибка: ' . join(', ', $add_news->getFirstErrors()));
             }
@@ -102,7 +106,7 @@ class NewsForm extends Model {
             'text' => 'Текст публикации',
             'preview' => 'Превью',
             'house' => 'Адрес',
-            'isPrivateOffice' => 'Тип публикации',
+            'isPrivateOffice' => 'Уведомления',
             'isSMS' => 'СМС',
             'isEmail' => 'Email',
             'isPush' => 'Push',

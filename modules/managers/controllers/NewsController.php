@@ -107,7 +107,7 @@ class NewsController extends AppManagersController {
         $housing_estates = HousingEstates::getHousingEstateList();
         
         if ($status == 0) {
-            echo '<option value="-1">Для всех</option>';
+            echo '<option>Для всех</option>';
         } elseif ($status == 1) {
             foreach ($housing_estates as $estate) {
                 $name = FormatHelpers::formatEstateAdress($estate['name'], $estate['town']);

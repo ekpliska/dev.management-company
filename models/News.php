@@ -46,17 +46,22 @@ class News extends ActiveRecord
             [[
                 'news_type_rubric_id', 
                 'news_title', 'news_text', 
-//                'news_preview', 
-                'news_house_id', 
                 'news_user_id', 
                 'isPrivateOffice', 
                 'created_at'], 'required'],
             
+            ['news_title', 'unique',
+                'targetClass' => self::className(),
+                'targetAttribute' => 'news_title',
+                'message' => 'Заголовок публикации не явяляется уникальным'],
+            
             [[
                 'news_type_rubric_id', 'news_house_id', 
                 'news_user_id', 
-                'isPrivateOffice', 'isSMS', 'isEmail', 'isPush', 
+                'isPrivateOffice', 
                 'created_at', 'updated_at'], 'integer'],
+            
+            [['isSMS', 'isEmail', 'isPush'], 'boolean'],
             
             [['news_text'], 'string'],
             [['news_title', 'news_preview', 'slug'], 'string', 'max' => 255],
@@ -137,18 +142,18 @@ class News extends ActiveRecord
     {
         return [
             'news_id' => 'News ID',
-            'news_type_rubric_id' => 'News Type Rubric ID',
-            'news_title' => 'News Title',
-            'news_text' => 'News Text',
-            'news_preview' => 'News Preview',
-            'news_house_id' => 'News House ID',
-            'news_user_id' => 'News User ID',
-            'isPrivateOffice' => 'Is Private Office',
-            'isSMS' => 'Is Sms',
-            'isEmail' => 'Is Email',
-            'isPush' => 'Is Push',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'news_type_rubric_id' => 'Тип публикации',
+            'news_title' => 'Заголовок публикации',
+            'news_text' => 'Текс публикации',
+            'news_preview' => 'Превью',
+            'news_house_id' => 'Адрес',
+            'news_user_id' => 'Пользователь',
+            'isPrivateOffice' => 'Уведомления',
+            'isSMS' => 'СМС',
+            'isEmail' => 'Email',
+            'isPush' => 'Push',
+            'created_at' => 'Дата создания',
+            'updated_at' => 'Дата обновления',
         ];
     }
 

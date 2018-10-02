@@ -24,14 +24,12 @@
     
     <div class="col-md-6">
         <?= $form->field($model, 'news_house_id')->dropDownList($houses, [
-            'prompt' => 'Выбрать из списка...',
             'id' => 'adress_list',
         ]) ?>
     </div>
     
     <div class="col-md-6">
-        <?= $form->field($model, 'news_type_rubric_id')->dropDownList($rubrics, [
-            'prompt' => 'Выбрать из списка',]) ?>
+        <?= $form->field($model, 'news_type_rubric_id')->dropDownList($rubrics) ?>
     </div>
     
     <div class="col-md-2">
@@ -68,7 +66,9 @@
     </div>
     
     <div class="col-md-6">
-        <?php // = $form->field($model, 'isNotice')->checkboxList($type_notice)->label(false) ?>
+        <?= $form->field($model, 'isSMS')->checkbox()->label(false) ?>
+        <?= $form->field($model, 'isEmail')->checkbox()->label(false) ?>
+        <?= $form->field($model, 'isPush')->checkbox()->label(false) ?>
     </div>
     
     <div class="clearfix"></div>

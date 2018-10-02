@@ -18,6 +18,8 @@ class HousesEstates extends Houses {
      */
     public static function getHouseOrEstate($status) {
         
+        $null_list = ['0' => 'Для всех'];
+        
         $_house = Houses::find()->asArray()->all();
         $current_house = ArrayHelper::map(
                 $_house, 
@@ -31,11 +33,11 @@ class HousesEstates extends Houses {
         $_estates = HousingEstates::find()->asArray()->all();
         $housing_estates = ArrayHelper::map($_estates, 'estate_id', 'estate_name');
         
-        if ($status == News::FOR_ALL) {
-            return 'here';
-        } elseif ($status == News::FOR_ALL_HOUSE_AREA) {
+        if ($status === News::FOR_ALL) {
+            return $null_list;
+        } elseif ($status === News::FOR_ALL_HOUSE_AREA) {
             return $housing_estates;
-        } elseif ($status == News::FOR_CURRENT_HOUSE) {
+        } elseif ($status === News::FOR_CURRENT_HOUSE) {
             return $current_house;
         }
     }
