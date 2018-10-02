@@ -17,6 +17,26 @@
  */
 class NewsController extends AppManagersController {
     
+    public function actions() {
+        
+        return [
+            
+            'image-upload' => [
+                'class' => 'vova07\imperavi\actions\UploadFileAction',
+                'url' => 'http://dev.management-company/web/upload/news', // Directory URL address, where files are stored.
+                'path' => '@webroot/upload/news', // Or absolute path to directory where files are stored.
+            ],
+            
+            'file-delete' => [
+                'class' => 'vova07\imperavi\actions\DeleteFileAction',
+                'url' => 'http://dev.management-company/web/upload/news', // Directory URL address, where files are stored.
+                'path' => '/var/www/my-site.com/dev.management-company/web/upload/news', // Or absolute path to directory where files are stored.
+            ],            
+         
+       ]; 
+        
+    }    
+    
     /*
      * Новости, главная страница
      */

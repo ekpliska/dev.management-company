@@ -1,7 +1,9 @@
 <?php
 
     use yii\helpers\Html;
+    use yii\helpers\Url;
     use yii\widgets\ActiveForm;
+    use vova07\imperavi\Widget;
     use kartik\date\DatePicker;
     
 ?>
@@ -48,10 +50,19 @@
                     'placeHolder' => $model->getAttributeLabel('news_title'),])
                 ->label() ?>
         
-        <?= $form->field($model, 'news_text')
-                ->input('text', [
-                    'placeHolder' => $model->getAttributeLabel('news_text'),])
-                ->label() ?>
+        <?= $form->field($model, 'news_text')->widget(Widget::className(), [
+                'settings' => [
+                    'lang' => 'ru',
+                    'minHeight' => 200,
+                    'imageUpload' => Url::to(['/managers/news/image-upload']),
+                    'imageDelete' => Url::to(['/managers/news/file-delete']),
+                    'plugins' => [
+                        'fullscreen',
+                        'imagemanager',
+                    ],
+                ],
+            ]) ?>
+        
     </div>
     
     <div class="col-md-12">

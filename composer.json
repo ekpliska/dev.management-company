@@ -21,7 +21,8 @@
         "costa-rico/yii2-images": "dev-master",
         "bower-asset/bootbox": "~4.3.0",
         "kartik-v/yii2-widget-alert": "*",
-        "kartik-v/yii2-widget-datepicker": "@dev"
+        "kartik-v/yii2-widget-datepicker": "@dev",
+        "vova07/yii2-imperavi-widget": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

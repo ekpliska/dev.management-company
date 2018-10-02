@@ -26,6 +26,11 @@ class ComposerStaticInit219e3185cca689ae9d26d6792bd915a0
             'yii\\bootstrap\\' => 14,
             'yii\\' => 4,
         ),
+        'v' => 
+        array (
+            'vova07\\imperavi\\tests\\' => 22,
+            'vova07\\imperavi\\' => 16,
+        ),
         'r' => 
         array (
             'rico\\yii2images\\' => 16,
@@ -115,6 +120,14 @@ class ComposerStaticInit219e3185cca689ae9d26d6792bd915a0
         'yii\\' => 
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2',
+        ),
+        'vova07\\imperavi\\tests\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/vova07/yii2-imperavi-widget/tests',
+        ),
+        'vova07\\imperavi\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/vova07/yii2-imperavi-widget/src',
         ),
         'rico\\yii2images\\' => 
         array (
