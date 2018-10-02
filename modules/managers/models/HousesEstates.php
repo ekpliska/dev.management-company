@@ -1,0 +1,43 @@
+<?php
+
+    namespace app\modules\managers\models;
+    use yii\helpers\ArrayHelper;
+    use app\helpers\FormatHelpers;
+    use app\models\Houses;
+    use app\models\News;
+    use app\models\HousingEstates;
+
+/**
+ * Дома
+ * Жилой комплекс
+ */
+class HousesEstates extends Houses {
+    
+    /*
+     * В зависимости пришедщего статуса публикации формируем список жилых коплексов или домов
+     */
+    public static function getHouseOrEstate($status) {
+        
+        $_house = Houses::find()->asArray()->all();
+        $current_house = ArrayHelper::map(
+                $_house, 
+                'houses_id', 
+                function ($array) {
+                    return FormatHelpers::formatFullAdress($array['houses_town'], $array['houses_street'], $array['houses_number_house'], false, false);
+                }
+        );
+        
+        
+        $_estates = HousingEstates::find()->asArray()->all();
+        $housing_estates = ArrayHelper::map($_estates, 'estate_id', 'estate_name');
+        
+        if ($status == News::FOR_ALL) {
+            return 'here';
+        } elseif ($status == News::FOR_ALL_HOUSE_AREA) {
+            return $housing_estates;
+        } elseif ($status == News::FOR_CURRENT_HOUSE) {
+            return $current_house;
+        }
+    }
+    
+}

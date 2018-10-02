@@ -3,7 +3,6 @@
     namespace app\modules\managers\models\form;
     use Yii;
     use yii\base\Model;
-    use app\models\Rubrics;
     use app\models\News;
 
 /* 
@@ -72,8 +71,9 @@ class NewsForm extends Model {
             $add_news->news_text = $this->text;
             $add_news->isPrivateOffice = $this->isPrivateOffice;
             
-            // Если значение дома не задано, то публикацию сохраняем как "для всех"
-            $add_news->news_house_id = $this->house ? $this->house : -1;
+            // Если значение дома не задано, то публикацию сохраняем как "для всех" (null)
+            $add_news->news_house_id = $this->house ? $this->house : null;
+            $add_news->news_status = $this->status;
             // Пользователь, создавший публикацию
             $add_news->news_user_id = Yii::$app->user->identity->id;
             $add_news->created_at = strtotime($this->date_publish);

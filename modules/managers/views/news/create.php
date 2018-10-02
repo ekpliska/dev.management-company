@@ -3,17 +3,17 @@
     use app\modules\managers\widgets\AlertsShow;
 
 /* 
- * Просмотр/редактирование новости
+ * Создание новой новости
  */
-$this->title = 'Новость: ' . $news->news_title;
+$this->title = 'Новость (+)';
 ?>
 <div class="managers-default-index">
     <h1><?= $this->title ?></h1>
     <hr />
     <?= AlertsShow::widget() ?>
     
-    <?= $this->render('form/_update', [
-        'model' => $news,
+    <?= $this->render('form/_form', [
+        'model' => $model,
         'status_publish' => $status_publish,
         'notice' => $notice,
         'type_notice' => $type_notice,

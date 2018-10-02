@@ -10,6 +10,7 @@
     use app\models\Houses;
     use app\models\HousingEstates;
     use app\helpers\FormatHelpers;
+    use app\modules\managers\models\HousesEstates;
 
 /**
  * Новости
@@ -24,7 +25,7 @@ class NewsController extends AppManagersController {
     }
     
     /*
-     * Создание новости
+     * Создание публикации
      * 
      * $status_publish array Статус размещения публикации
      * $rubrics array Тип публикации
@@ -57,7 +58,7 @@ class NewsController extends AppManagersController {
             }
         }
         
-        return $this->render('form/create', [
+        return $this->render('create', [
             'model' => $model,
             'status_publish' => $status_publish,
             'notice' => $notice,
@@ -67,6 +68,9 @@ class NewsController extends AppManagersController {
         ]);
     }
     
+    /*
+     * Просмотр, редактирование публикации
+     */
     public function actionViewNews($slug) {
         
         $news = News::findOne(['slug' => $slug]);
@@ -75,8 +79,19 @@ class NewsController extends AppManagersController {
             throw new \yii\web\NotFoundHttpException('Вы обратились к несуществующей странице');
         }
         
+        $status_publish = News::getStatusPublish();
+        $notice = News::getArrayStatusNotice();
+        $type_notice = News::getNoticeType();
+        $rubrics = Rubrics::getArrayRubrics();
+        $houses = HousesEstates::getHouseOrEstate($news->news_status);
+        
         return $this->render('view-news', [
             'news' => $news,
+            'status_publish' => $status_publish,
+            'notice' => $notice,
+            'type_notice' => $type_notice,
+            'rubrics' => $rubrics,
+            'houses' => $houses
         ]);
     }
     
@@ -104,7 +119,7 @@ class NewsController extends AppManagersController {
                         $house['houses_town'], 
                         $house['houses_street'], 
                         $house['houses_number_house'], 
-                        false, false) ;
+                        false, false);
                 echo '<option value="' . $house['houses_id'] . '">' . $full_adress . '</option>';
             }
         }

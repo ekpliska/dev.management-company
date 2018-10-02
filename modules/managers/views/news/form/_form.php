@@ -3,17 +3,11 @@
     use yii\helpers\Html;
     use yii\widgets\ActiveForm;
     use kartik\date\DatePicker;
-    use app\modules\managers\widgets\AlertsShow;
 
 /* 
  * Создание новой новости
  */
-$this->title = 'Новость (+)';
 ?>
-<div class="managers-default-index">
-    <h1><?= $this->title ?></h1>
-    <hr />
-    <?= AlertsShow::widget() ?>
     
     <?php
         $form = ActiveForm::begin([
@@ -109,4 +103,3 @@ $this->title = 'Новость (+)';
     
     <?php ActiveForm::end(); ?>
     
-</div>
