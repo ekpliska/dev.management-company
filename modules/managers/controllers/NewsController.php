@@ -200,26 +200,46 @@ class NewsController extends AppManagersController {
         
     }
     
+    /*
+     * Запрос на удаление публикации
+     */
     public function actionDeleteNews() {
         
         $news_id = Yii::$app->request->post('newsId');
         
         if (Yii::$app->request->isAjax) {
-            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+//            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
             $news = News::findOne($news_id);
             
             if (!$news->delete()) {
                 Yii::$app->session->setFlash('news-admin', [
                     'success' => false, 
                     'error' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз']);
+                return $this->redirect(Yii::$app->request->referrer);
             }
             Yii::$app->session->setFlash('news-admin', [
                 'success' => true, 
                 'message' => 'Новость ' . $news->news_title . ' была успешно удалена']);
-            
-            return $this->redirect('index');
         }
+        return $this->redirect('index');        
+    }
+    
+    /*
+     * Запрос на удаление прикрепленного документа
+     */
+    public function actionDeleteFile() {
         
+        $file_id = Yii::$app->request->post('fileId');
+        if (Yii::$app->request->isAjax) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            $file = Image::findOne($file_id);
+            if (!$file->delete()) {
+                Yii::$app->session->setFlash('news-admin', [
+                    'success' => false, 
+                    'error' => 'Извините, при удалении документа произошла ошибка. Попробуйте обновить страницу и повторите действие еще раз']);
+            }
+            return $this->redirect(Yii::$app->request->referrer);
+        }
     }
     
 }

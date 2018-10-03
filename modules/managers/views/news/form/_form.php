@@ -84,6 +84,7 @@
                 ->radioList($notice, [
                     'id' => 'type_notice'])
                 ->label(false) ?>
+
     </div>
     
     <div class="col-md-6">

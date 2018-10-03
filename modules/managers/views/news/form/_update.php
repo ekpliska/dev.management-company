@@ -77,6 +77,9 @@ $status_checkbox = $model->isPrivateOffice ? false : true;
         <?php if (isset($docs) && count($docs) > 0) : ?>
             <?php foreach ($docs as $doc) : ?>
                 <?= FormatHelpers::formatUrlByDoc($doc['name'], $doc['filePath']) ?>
+                <?= Html::button('Удалить', [
+                        'class' => 'btn btn-link btn-sm delete_file',
+                        'data-files' => $doc['id'],]) ?>
             <?php endforeach; ?>
         <?php endif; ?>
         <hr />

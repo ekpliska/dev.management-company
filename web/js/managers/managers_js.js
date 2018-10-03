@@ -617,12 +617,33 @@ $(document).ready(function() {
                 newsId: newsId,
             },
             success: function(responce){
-                console.log(responce.success);
+//                console.log(responce.success);
             },
             error: function(){
                 console.log('error');
             },
         });
+    });
+    
+    /*
+     * Запрос на удаление прикрепленного документа
+     */
+    $('.delete_file').on('click', function(){
+       var fileId = $(this).data('files');
+       alert(fileId);
+       $.ajax({
+           url: 'delete-file',
+           method: 'POST',
+           data: {
+               fileId: fileId,
+           },
+           success: function(response){
+//               console.log(response.status);
+           },
+           error: function(){
+               console.log('error');
+           },
+       });
     });
     
 

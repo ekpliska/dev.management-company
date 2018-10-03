@@ -213,18 +213,53 @@ class News extends ActiveRecord
                 $path = substr($path, 4);
                 @unlink (Yii::getAlias('@webroot') . $path);
             }
+            return true;
         }
+        return false;
+    }
+    
+    /*
+     * Метод удаления директории, содержащей прикрепленные документы к публикации
+     */
+    function removeDirectory($dir_news) {
+        
+        $objs = glob($dir_news . "/*");
+        if ($objs) {
+            foreach($objs as $obj) {
+                is_dir($obj) ? removeDirectory($obj) : @unlink($obj);
+            }
+            rmdir($dir_news);
+            return true;
+        }
+        return false;
     }
     
     /*
      * После запроса на удаление новости, удаляем изображение превью новости,
      * Вызываем метод на удаление всех изображений, используемых в тексте публикации
+     * Вызываем метод на удаление директории с закрепленными за публикацией документами
      */
     public function afterDelete() {
+        
         parent::afterDelete();
-        $this->getPathImageInText($this->news_text);
-        $preview = $this->news_preview;
-        @unlink(Yii::getAlias('@webroot') . $preview);
+        
+        // Формируем имя директории, где хранятся закрепленные за публикацией документы
+        $dir_news = Yii::getAlias('@webroot') . '/upload/store/News/News' . $this->news_id;
+        
+        
+        if ($this->getPathImageInText($this->news_text)) {
+            // Проверяем существование директории
+            if (file_exists($dir_news)) {
+                $this->removeDirectory($dir_news);
+            }
+            $preview = $this->news_preview;
+            @unlink(Yii::getAlias('@webroot') . $preview);
+            
+            return true;
+        }
+        
+        return false;
+        
     }
     
     /**

@@ -50,6 +50,20 @@ class Image extends ActiveRecord
                 ->asArray()
                 ->all();
     }
+    
+    public function afterDelete() {
+        
+        parent::afterDelete();
+        $path = $this->filePath;
+        @unlink(Yii::getAlias('@webroot') . '/upload/store/' . $path);
+    }
+    
+//    public function afterDelete() {
+//        parent::afterDelete();
+//        $this->getPathImageInText($this->news_text);
+//        $preview = $this->news_preview;
+//        @unlink(Yii::getAlias('@webroot') . $preview);
+//    }    
 
     /**
      * Метки для полей
