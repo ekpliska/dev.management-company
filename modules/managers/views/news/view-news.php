@@ -15,7 +15,7 @@ $this->title = 'Новость: ' . $news->news_title;
     </p>
     <br />
     Последний раз редактировалось: <p class="label label-success">
-        <?= FormatHelpers::formatDate($news->updated_at) ?>
+        <?= FormatHelpers::formatDate($news->updated_at, true) ?>
     </p>
     
     <hr />

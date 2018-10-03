@@ -4,6 +4,7 @@
     use Yii;
     use yii\base\Model;
     use app\models\News;
+    use yii\helpers\HtmlPurifier;
 
 /* 
  * Создание новой новости
@@ -46,10 +47,6 @@ class NewsForm extends Model {
             ['text', 'string', 'min' => '10', 'max' => '5000'],
             
             [['title', 'text'], 'filter', 'filter' => 'trim'],
-            [['title'], 'match',
-                'pattern' => '/^[А-Яа-яЁёA-Za-z0-9\ \_\-\@\.]+$/iu',
-                'message' => 'Поле "{attribute}" может содержать только буквы русского и английского алфавита, пробел, цифры, знаки "-", "_"',
-            ],
             
             [['status', 'house', 'isPrivateOffice', 'isNotice'], 'integer'],
             
@@ -67,7 +64,7 @@ class NewsForm extends Model {
             
             $add_news = new News();
             $add_news->news_type_rubric_id = $this->rubric;
-            $add_news->news_title = $this->title;
+            $add_news->news_title = HtmlPurifier::process(strip_tags($this->title));
             $add_news->news_text = $this->text;
             $add_news->isPrivateOffice = $this->isPrivateOffice;
             

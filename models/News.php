@@ -17,9 +17,9 @@ class News extends ActiveRecord
     const FOR_ALL_HOUSE_AREA = 1;
     const FOR_CURRENT_HOUSE = 2;
     
-    const NOTICE_SMS = 0;
-    const NOTICE_EMAIL = 1;
-    const NOTICE_PUSH = 2;
+    const NOTICE_SMS = 1;
+    const NOTICE_EMAIL = 2;
+    const NOTICE_PUSH = 3;
 
     /**
      * Таблица из БД

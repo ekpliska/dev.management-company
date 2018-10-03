@@ -36,18 +36,18 @@ class FormatHelpers {
      * Форматирование вывода даты в комментариях на странице заявки
      * число месяц г.
      */
-    public static function formatDate($date_int) {
+    public static function formatDate($date_int, $time = false) {
         
         if (empty($date_int)) {
             return 'Не установлена';
         }
         
         $_date_int = Yii::$app->formatter->asDate($date_int, 'dd.MMMM.yyyy');
-        $_time = Yii::$app->formatter->asTime($date_int, 'H:i:s');
+        $_time = $time ? Yii::$app->formatter->asTime($date_int) : '';
         
         list($day, $month, $year) = explode('.', $_date_int);
         
-        $date_full = $day .' '. $month .' '. $year . ' г. ';
+        $date_full = $day .' '. $month .' '. $year . ' г. ' . $_time;
         
         return $date_full;
     }
@@ -170,7 +170,7 @@ class FormatHelpers {
         }
         // Удаляем все html теги в тексте публикации
         $_text = strip_tags($text);
-        return StringHelper::truncateWords($_text , $count_world);
+        return StringHelper::truncateWords($_text , $count_world, ' [...]');
         
         
     }

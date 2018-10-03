@@ -17,7 +17,7 @@
                 'attribute' => 'date',
                 'header' => 'Дата публикации',
                 'value' => function ($date){
-                    return FormatHelpers::formatDate($date['date']);
+                    return FormatHelpers::formatDate($date['date'], true);
                 },
             ],
             [
