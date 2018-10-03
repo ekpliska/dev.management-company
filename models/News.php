@@ -246,19 +246,14 @@ class News extends ActiveRecord
         // Формируем имя директории, где хранятся закрепленные за публикацией документы
         $dir_news = Yii::getAlias('@webroot') . '/upload/store/News/News' . $this->news_id;
         
+        $preview = $this->news_preview;
+        @unlink(Yii::getAlias('@webroot') . $preview);
+        $this->getPathImageInText($preview);
         
-        if ($this->getPathImageInText($this->news_text)) {
-            // Проверяем существование директории
-            if (file_exists($dir_news)) {
-                $this->removeDirectory($dir_news);
-            }
-            $preview = $this->news_preview;
-            @unlink(Yii::getAlias('@webroot') . $preview);
-            
-            return true;
+        // Проверяем существование директории
+        if (file_exists($dir_news)) {
+            $this->removeDirectory($dir_news);
         }
-        
-        return false;
         
     }
     
