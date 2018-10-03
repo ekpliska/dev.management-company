@@ -44,9 +44,10 @@ class Image extends ActiveRecord
     /*
      * Получить все документы, закрепленные за публикацией
      */
-    public static function getAllDocByNews($news_id) {
+    public static function getAllDocByNews($news_id, $model_name) {
         return self::find()
                 ->where(['itemId' => $news_id])
+                ->andWhere(['modelName' => $model_name])
                 ->asArray()
                 ->all();
     }

@@ -15,6 +15,7 @@ class News extends BaseNews {
                         . 'rubrics_name as rubric, '
                         . 'news_title as title, news_text as text,'
                         . 'slug as slug, '
+                        . 'isAdvert as advert, '
                         . 'created_at as date, '
                         . 'he.estate_name as estate_name, h_e.houses_town as e_town,'
                         . 'h.houses_town as town, h.houses_street as street, h.houses_number_house as house')

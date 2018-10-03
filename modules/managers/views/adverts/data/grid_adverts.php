@@ -72,6 +72,7 @@
                                 'data-target' => '#delete_news_manager',
                                 'data-toggle' => 'modal',
                                 'data-news' => $data['id'],
+                                'data-is-advert' => $data['advert'],
                             ]);
                     },
                 ],

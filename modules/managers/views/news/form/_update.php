@@ -26,7 +26,7 @@ $status_checkbox = $model->isPrivateOffice ? false : true;
                     'id' => 'for_whom_news'])
                 ->label(false) ?>
         
-        <?= $form->field($model, 'isAdvert')->checkbox()->label(false) ?>
+        <?= $form->field($model, 'isAdvert')->checkbox(['id' => 'isAdvert'])->label(false) ?>
         
     </div>
     
@@ -131,7 +131,8 @@ $status_checkbox = $model->isPrivateOffice ? false : true;
             'class' => 'btn btn-danger',
             'data-target' => '#delete_news_manager',
             'data-toggle' => 'modal',
-            'data-news' => $model->news_id]) ?>
+            'data-news' => $model->news_id,
+            'data-is-advert' => $model->isAdvert]) ?>
         
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary']) ?>
         

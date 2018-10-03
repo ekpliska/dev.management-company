@@ -125,7 +125,7 @@ class NewsController extends AppManagersController {
         $houses = HousesEstates::getHouseOrEstate($news->news_status);
         
         // Получаем прикрепленные к заявке файлы
-        $docs = Image::getAllDocByNews($news->news_id);
+        $docs = Image::getAllDocByNews($news->news_id, $model_name = 'News');
         
         if ($news->load(Yii::$app->request->post())) {
             $is_valid = $news->validate();
@@ -206,6 +206,7 @@ class NewsController extends AppManagersController {
     public function actionDeleteNews() {
         
         $news_id = Yii::$app->request->post('newsId');
+        $_redirect = Yii::$app->request->post('isAdvert') == 1 ? ['adverts/index'] : ['news/index'];
         
         if (Yii::$app->request->isAjax) {
 //            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
@@ -221,7 +222,7 @@ class NewsController extends AppManagersController {
                 'success' => true, 
                 'message' => 'Новость ' . $news->news_title . ' была успешно удалена']);
         }
-        return $this->redirect('index');        
+        return $this->redirect($_redirect);        
     }
     
     /*
