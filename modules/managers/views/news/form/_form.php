@@ -21,10 +21,14 @@
     ?>
     
     <div class="col-md-12">
+        
         <?= $form->field($model, 'status')
                 ->radioList($status_publish, [
                     'id' => 'for_whom_news'])
                 ->label(false) ?>
+        
+        <?= $form->field($model, 'isAdvert')->checkbox()->label(false) ?>
+        
     </div>
     
     <div class="col-md-6">
@@ -74,7 +78,6 @@
     </div>
     
     <div class="col-md-12">
-        Прикрепленные файлы:
         <br />
         <?= $form->field($model, 'files[]')->input('file', ['multiple' => true])->label() ?>
     </div>

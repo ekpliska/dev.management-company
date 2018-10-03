@@ -33,6 +33,8 @@ class NewsForm extends Model {
     public $date_publish;
     // Загружаемые файлы
     public $files;
+    // Переключатель на рекламную публикацию
+    public $isAdvert = false;
 
 
     public function rules() {
@@ -57,6 +59,8 @@ class NewsForm extends Model {
             [['preview'], 'image', 'maxWidth' => 510, 'maxHeight' => 510],
             
             [['files'], 'file', 'extensions' => 'doc, docx, pdf, xls, xlsx, ppt, pptx, txt', 'maxFiles' => 4],
+            
+            ['isAdvert', 'boolean'],
             
         ];
     }
@@ -94,6 +98,8 @@ class NewsForm extends Model {
             $add_news->isEmail = $this->isNotice[1] ? true : false;
             $add_news->isPush = $this->isNotice[2] ? true : false;
             
+            $add_news->isAdvert = $this->isAdvert;
+            
             if(!$add_news->save()) {
                 throw new \yii\db\Exception('Ошибка добавления новости. Ошибка: ' . join(', ', $add_news->getFirstErrors()));
 //                return ['error' => join(', ', $add_news->getFirstErrors())];
@@ -125,6 +131,7 @@ class NewsForm extends Model {
             'user' => 'Пользователь',
             'date_publish' => 'Дата публикации',
             'files' => 'Прикрепленные файлы',
+            'isAdvert' => 'Рекламная публикаця',
         ];
     }
     

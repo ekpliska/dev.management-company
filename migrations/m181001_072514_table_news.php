@@ -35,6 +35,7 @@ class m181001_072514_table_news extends Migration
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer(),
             'slug' => $this->string(255),
+            'isAdvert' => $this->tinyInteger()->defaultValue(0),
         ]);
         $this->createIndex('idx-news-news_id', '{{%news}}', 'news_id');
         

@@ -8,6 +8,11 @@
     use rico\yii2images\behaviors\ImageBehave;
     use app\models\Rubrics;
 
+    
+/*
+ * Новости
+ * Рекламный блок (наличие переключатель isAdvert)
+ */    
 class News extends ActiveRecord
 {
     
@@ -41,7 +46,6 @@ class News extends ActiveRecord
             ],
             
             'image' => [
-//                'class' => 'rico\yii2images\behaviors\ImageBehave',
                 'class' => ImageBehave::className(),
             ],
             
@@ -91,6 +95,7 @@ class News extends ActiveRecord
                 'maxSize' => 256 * 1024,
             ],
             
+            ['isAdvert', 'boolean'],
         ];
     }
     
@@ -277,6 +282,7 @@ class News extends ActiveRecord
             'created_at' => 'Дата создания',
             'updated_at' => 'Дата обновления',
             'files' => 'Прикрепленные документы',
+            'isAdvert' => 'Рекламная публикаця',
         ];
     }
 

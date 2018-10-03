@@ -25,12 +25,17 @@ $status_checkbox = $model->isPrivateOffice ? false : true;
                 ->radioList($status_publish, [
                     'id' => 'for_whom_news'])
                 ->label(false) ?>
+        
+        <?= $form->field($model, 'isAdvert')->checkbox()->label(false) ?>
+        
     </div>
     
     <div class="col-md-6">
+        
         <?= $form->field($model, 'news_house_id')->dropDownList($houses, [
             'id' => 'adress_list',
         ]) ?>
+        
     </div>
     
     <div class="col-md-6">

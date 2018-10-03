@@ -45,7 +45,7 @@ class NewsController extends AppManagersController {
     public function actionIndex() {
         
         $all_news = new ActiveDataProvider([
-            'query' => News::getAllNews(),
+            'query' => News::getAllNews($adver = false),
             'pagination' => [
                 'forcePageParam' => false,
                 'pageSizeParam' => false,
