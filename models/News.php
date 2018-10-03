@@ -20,7 +20,7 @@ class News extends ActiveRecord
     const NOTICE_SMS = 1;
     const NOTICE_EMAIL = 2;
     const NOTICE_PUSH = 3;
-
+    
     /**
      * Таблица из БД
      */
@@ -149,7 +149,36 @@ class News extends ActiveRecord
         }
         
         return false;
-    }   
+    }
+    
+    /*
+     * Парсит текст публикации, находит все используемые ссылки на изображения в тексте
+     * Собирает в массив, и затем удаляет
+     */
+    public function getPathImageInText($text) {
+        
+        $pattern = '/<img(?:\\s[^<>]*?)?\\bsrc\\s*=\\s*(?|"([^"]*)"|\'([^\']*)\'|([^<>\'"\\s]*))[^<>]*>/i';
+        
+        if (preg_match_all($pattern, $text, $matches)) {
+            foreach ($matches[1] as $image) {
+                $path = parse_url($image)['path'];
+                $path = substr($path, 4);
+                @unlink (Yii::getAlias('@webroot') . $path);
+            }
+        }
+        
+    }
+    
+    /*
+     * После запроса на удаление новости, удаляем изображение превью новости,
+     * все изображение, используемые в тексте новости
+     */
+    public function afterDelete() {
+        parent::afterDelete();
+        $this->getPathImageInText($this->news_text);
+        $preview = $this->news_preview;
+        @unlink(Yii::getAlias('@webroot') . $preview);
+    }
     
     /**
      * Аттрибуты полей
