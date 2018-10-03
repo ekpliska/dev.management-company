@@ -4,7 +4,8 @@
     use yii\helpers\Url;
     use yii\widgets\ActiveForm;
     use vova07\imperavi\Widget;
-    use app\modules\managers\widgets\ModalWindowsManager;
+    use app\helpers\FormatHelpers;
+    use app\modules\managers\widgets\ModalWindowsManager;    
 
 // Тип публикации, для блокировки чекбоксов смс, емайл, пуш уведомления    
 $status_checkbox = $model->isPrivateOffice ? false : true;
@@ -71,11 +72,14 @@ $status_checkbox = $model->isPrivateOffice ? false : true;
     </div>
     
     <div class="col-md-12">
-        Прикрепленные файлы:
-        <br />
-        <?php
-            var_dump($docs);
-        ?>
+        <?= $form->field($model, 'files[]')->input('file', ['multiple' => true])->label() ?>
+        <hr />
+        <?php if (isset($docs) && count($docs) > 0) : ?>
+            <?php foreach ($docs as $doc) : ?>
+                <?= FormatHelpers::formatUrlByDoc($doc['name'], $doc['filePath']) ?>
+            <?php endforeach; ?>
+        <?php endif; ?>
+        <hr />
     </div>
     
     <div class="col-md-6">

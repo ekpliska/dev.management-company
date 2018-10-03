@@ -131,19 +131,31 @@ class NewsController extends AppManagersController {
             $is_valid = $news->validate();
             
             if ($is_valid) {
+                // Превью
                 $file = UploadedFile::getInstance($news, 'news_preview');
                 $news->uploadImage($file);
+                
+                // Прикрепленные документы
+                $files = UploadedFile::getInstances($news, 'files');
+                $news->uploadFiles($files);
                 
                 Yii::$app->session->setFlash('news-admin', [
                     'success' => true,
                     'message' => 'Изменения были успешно сохранены',
                 ]);
+                
+                return $this->redirect(Yii::$app->request->referrer);
+                
             } else {
                 Yii::$app->session->setFlash('news-admin', [
                     'success' => false,
                     'error' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз',
-                ]);                
+                ]);
+                
+                return $this->redirect(Yii::$app->request->referrer);
+
             }
+            
         }
         
         return $this->render('view-news', [

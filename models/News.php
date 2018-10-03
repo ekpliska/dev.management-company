@@ -5,6 +5,7 @@
     use yii\db\ActiveRecord;
     use yii\behaviors\TimestampBehavior;
     use yii\behaviors\SluggableBehavior;
+    use rico\yii2images\behaviors\ImageBehave;
     use app\models\Rubrics;
 
 class News extends ActiveRecord
@@ -40,7 +41,8 @@ class News extends ActiveRecord
             ],
             
             'image' => [
-                'class' => 'rico\yii2images\behaviors\ImageBehave',
+//                'class' => 'rico\yii2images\behaviors\ImageBehave',
+                'class' => ImageBehave::className(),
             ],
             
             [
@@ -181,11 +183,13 @@ class News extends ActiveRecord
      */
     public function uploadFiles($files) {
         
-        if ($this->validate()) {
+        if ($this->validate() && $files) {
             foreach ($files as $file) {
-                $path = 'upload/store' . $file->baseName . '.' . $file->extension;
+                $file_name = $file->basename;                
+                $path = 'upload/store' . $file_name . '.' . $file->extension;
+                // Получаем имя файла
                 $file->saveAs($path);
-                $this->attachImage($path);
+                $this->attachImage($path, false, $file_name);
                 @unlink($path);
             }
             return true;
@@ -242,6 +246,7 @@ class News extends ActiveRecord
             'isPush' => 'Push',
             'created_at' => 'Дата создания',
             'updated_at' => 'Дата обновления',
+            'files' => 'Прикрепленные документы',
         ];
     }
 

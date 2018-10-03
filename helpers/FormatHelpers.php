@@ -33,6 +33,22 @@ class FormatHelpers {
     }
     
     /*
+     * Формирование ссылки на прикрепленный документ 
+     */
+    public static function formatUrlByDoc($file_name, $path) {
+        
+        $link = Yii::getAlias('@web' . '/upload/store/') . $path;
+        $options = ['target' => '_blank', 'class' => 'btn btn-info btn-sm'];
+        
+        if (empty($file_name) || empty($path)) {
+            return Html::a('Документ', $link, $options);
+        }
+        
+        return Html::a($file_name, $link, $options);
+        
+    }
+    
+    /*
      * Форматирование вывода даты в комментариях на странице заявки
      * число месяц г.
      */
