@@ -73,8 +73,9 @@ $status_checkbox = $model->isPrivateOffice ? false : true;
     <div class="col-md-12">
         Прикрепленные файлы:
         <br />
-        <br />
-        <br />
+        <?php
+            var_dump($docs);
+        ?>
     </div>
     
     <div class="col-md-6">

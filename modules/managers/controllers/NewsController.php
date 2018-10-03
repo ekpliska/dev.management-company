@@ -12,6 +12,7 @@
     use app\models\HousingEstates;
     use app\helpers\FormatHelpers;
     use app\modules\managers\models\HousesEstates;
+    use app\models\Image;
 
 /**
  * Новости
@@ -111,7 +112,7 @@ class NewsController extends AppManagersController {
      */
     public function actionViewNews($slug) {
         
-        $news = News::findOne(['slug' => $slug]);
+        $news = News::findNewsBySlug($slug);
         
         if ($news == null) {
             throw new \yii\web\NotFoundHttpException('Вы обратились к несуществующей странице');
@@ -122,6 +123,9 @@ class NewsController extends AppManagersController {
         $type_notice = News::getNoticeType();
         $rubrics = Rubrics::getArrayRubrics();
         $houses = HousesEstates::getHouseOrEstate($news->news_status);
+        
+        // Получаем прикрепленные к заявке файлы
+        $docs = Image::getAllDocByNews($news->news_id);
         
         if ($news->load(Yii::$app->request->post())) {
             $is_valid = $news->validate();
@@ -148,7 +152,8 @@ class NewsController extends AppManagersController {
             'notice' => $notice,
             'type_notice' => $type_notice,
             'rubrics' => $rubrics,
-            'houses' => $houses
+            'houses' => $houses,
+            'docs' => $docs,
         ]);
     }
     

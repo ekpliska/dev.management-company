@@ -40,6 +40,16 @@ class Image extends ActiveRecord
     public function getImagePath($image) {
         return '@web/upload/store/' . $image;
     }
+    
+    /*
+     * Получить все документы, закрепленные за публикацией
+     */
+    public static function getAllDocByNews($news_id) {
+        return self::find()
+                ->where(['itemId' => $news_id])
+                ->asArray()
+                ->all();
+    }
 
     /**
      * Метки для полей

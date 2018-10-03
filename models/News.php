@@ -142,6 +142,17 @@ class News extends ActiveRecord
     }
     
     /*
+     * Найти публикацию на slug
+     */
+    public static function findNewsBySlug($slug) {
+        
+        return self::find()
+                ->where(['slug' => $slug])
+                ->one();
+        
+    }
+    
+    /*
      * Загрузка изображения услуги
      */    
     public function uploadImage($file) {
@@ -165,6 +176,9 @@ class News extends ActiveRecord
         return false;
     }
     
+    /*
+     * Загрузка прикрепленные документов
+     */
     public function uploadFiles($files) {
         
         if ($this->validate()) {
