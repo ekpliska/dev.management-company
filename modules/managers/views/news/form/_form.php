@@ -76,8 +76,7 @@
     <div class="col-md-12">
         Прикрепленные файлы:
         <br />
-        <br />
-        <br />
+        <?= $form->field($model, 'files[]')->input('file', ['multiple' => true])->label() ?>
     </div>
     
     <div class="col-md-6">

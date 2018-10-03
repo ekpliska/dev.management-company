@@ -31,7 +31,10 @@ class NewsForm extends Model {
     public $user;
     // Дата публикации
     public $date_publish;
-    
+    // Загружаемые файлы
+    public $files;
+
+
     public function rules() {
         return [
             [[
@@ -53,10 +56,18 @@ class NewsForm extends Model {
             [['preview'], 'file', 'extensions' => 'png, jpg, jpeg'],
             [['preview'], 'image', 'maxWidth' => 510, 'maxHeight' => 510],
             
+            [['files'], 'file', 'extensions' => 'doc, docx, pdf, xls, xlsx, ppt, pptx, txt', 'maxFiles' => 4],
+            
         ];
     }
     
-    public function save($file) {
+    /*
+     * Сохраняем запись публикации
+     * 
+     * @param string $file Превью новости
+     * @param string $files Прикрепленные изображения
+     */
+    public function save($file, $files) {
         
         $transaction = Yii::$app->db->beginTransaction();
         
@@ -76,6 +87,8 @@ class NewsForm extends Model {
             $add_news->created_at = strtotime($this->date_publish);
             // Сохраняем превью публикации
             $add_news->uploadImage($file);
+            // Сохраняем прикрепленные изображения
+            $add_news->uploadFiles($files);
             
             $add_news->isSMS = $this->isNotice[0] ? true : false;
             $add_news->isEmail = $this->isNotice[1] ? true : false;
@@ -85,6 +98,7 @@ class NewsForm extends Model {
                 throw new \yii\db\Exception('Ошибка добавления новости. Ошибка: ' . join(', ', $add_news->getFirstErrors()));
 //                return ['error' => join(', ', $add_news->getFirstErrors())];
             }
+            
             
             $transaction->commit();
             
@@ -110,6 +124,7 @@ class NewsForm extends Model {
             'isPush' => 'Push',
             'user' => 'Пользователь',
             'date_publish' => 'Дата публикации',
+            'files' => 'Прикрепленные файлы',
         ];
     }
     

@@ -21,6 +21,9 @@ class News extends ActiveRecord
     const NOTICE_EMAIL = 2;
     const NOTICE_PUSH = 3;
     
+    public $files;
+
+
     /**
      * Таблица из БД
      */
@@ -35,6 +38,11 @@ class News extends ActiveRecord
                 'class' => SluggableBehavior::className(),
                 'attribute' => 'news_title',
             ],
+            
+            'image' => [
+                'class' => 'rico\yii2images\behaviors\ImageBehave',
+            ],
+            
             [
                 'class' => TimestampBehavior::className(),
 //                'createdAtAttribute' => 'create_time',
@@ -74,6 +82,12 @@ class News extends ActiveRecord
             [['news_title', 'news_preview', 'slug'], 'string', 'max' => 255],
             
             ['slug', 'string'],
+            
+            [['files'], 'file', 
+                'extensions' => 'doc, docx, pdf, xls, xlsx, ppt, pptx, txt', 
+                'maxFiles' => 4, 
+                'maxSize' => 256 * 1024,
+            ],
             
         ];
     }
@@ -151,6 +165,22 @@ class News extends ActiveRecord
         return false;
     }
     
+    public function uploadFiles($files) {
+        
+        if ($this->validate()) {
+            foreach ($files as $file) {
+                $path = 'upload/store' . $file->baseName . '.' . $file->extension;
+                $file->saveAs($path);
+                $this->attachImage($path);
+                @unlink($path);
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    
     /*
      * Парсит текст публикации, находит все используемые ссылки на изображения в тексте
      * Собирает в массив, и затем удаляет
@@ -166,12 +196,11 @@ class News extends ActiveRecord
                 @unlink (Yii::getAlias('@webroot') . $path);
             }
         }
-        
     }
     
     /*
      * После запроса на удаление новости, удаляем изображение превью новости,
-     * все изображение, используемые в тексте новости
+     * Вызываем метод на удаление всех изображений, используемых в тексте публикации
      */
     public function afterDelete() {
         parent::afterDelete();

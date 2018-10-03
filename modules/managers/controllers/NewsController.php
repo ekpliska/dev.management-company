@@ -73,9 +73,14 @@ class NewsController extends AppManagersController {
         $houses = [];
         
         if (Yii::$app->request->isPost && $model->load(Yii::$app->request->post())) {
+            // Превью
             $file = UploadedFile::getInstance($model, 'preview');
             $model->preview = $file;
-            $slug = $model->save($file);
+            // Прикрепленные файлы
+            $files = UploadedFile::getInstances($model, 'files');
+            $model->files = $files;
+            
+            $slug = $model->save($file, $files);            
             if ($slug) {
                 Yii::$app->session->setFlash('news-admin', [
                     'success' => true,
@@ -124,6 +129,7 @@ class NewsController extends AppManagersController {
             if ($is_valid) {
                 $file = UploadedFile::getInstance($news, 'news_preview');
                 $news->uploadImage($file);
+                
                 Yii::$app->session->setFlash('news-admin', [
                     'success' => true,
                     'message' => 'Изменения были успешно сохранены',
