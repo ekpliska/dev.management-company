@@ -46,12 +46,6 @@ class NewsForm extends Model {
                 'isPrivateOffice', 
                 'user'], 'required'],
             
-            // Поле контрагент обязательно для заполнения, если стоит переключатель "рекламная запись"
-            ['partner', 'required', 'when' => function($model) {
-                return $model->isAdvert = true;
-            }],
-            ['partner', 'safe'],
-            
             ['title', 'string', 'min' => '10', 'max' => '255'],
                         
             ['text', 'string', 'min' => '10', 'max' => '5000'],
@@ -65,7 +59,12 @@ class NewsForm extends Model {
             
             [['files'], 'file', 'extensions' => 'doc, docx, pdf, xls, xlsx, ppt, pptx, txt', 'maxFiles' => 4],
             
-            ['isAdvert', 'boolean'],
+            [['partner', 'isAdvert'], 'integer'],
+            
+            // Поле контрагент обязательно для заполнения, если стоит переключатель "рекламная запись"
+            ['partner', 'required', 'when' => function($model) {
+                return $model->isAdvert = true;
+            }],            
             
         ];
     }
@@ -102,11 +101,11 @@ class NewsForm extends Model {
             $add_news->isEmail = $this->isNotice[1] ? true : false;
             $add_news->isPush = $this->isNotice[2] ? true : false;
             
-            if ($this->isAdvert == true) {
-                $add_news->isAdvert = true;
+            if ($this->isAdvert == 1) {
+                $add_news->isAdvert = 1;
                 $add_news->news_partner_id = $this->partner;
             } else {
-                $add_news->isAdvert = false;
+                $add_news->isAdvert = 0;
                 $add_news->news_partner_id = null;
             }
             

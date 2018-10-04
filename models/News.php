@@ -74,15 +74,18 @@ class News extends ActiveRecord
                 'news_type_rubric_id', 'news_house_id', 
                 'news_user_id', 
                 'isPrivateOffice', 
-                'news_status',
-                'news_partner_id'], 'integer'],
+                'news_status',], 'integer'],
             
-//            ['news_partner_id', '']
+//            ['news_partner_id', 'default', 'value' => null],
             
             ['news_partner_id', 'required', 'when' => function($model) {
-                return $model->isAdvert = true;
-            }, /* 'on' => self::SCENARIO_EDIT_NEWS */],
-            
+                if ($model->isAdvert) {
+                    return 'Выберите котрагента';
+                } else {
+                    return $this->news_partner_id = null;
+                }
+            }],
+                    
             [['isSMS', 'isEmail', 'isPush'], 'boolean'],
             
             [['news_text'], 'string'],
@@ -96,7 +99,7 @@ class News extends ActiveRecord
                 'maxSize' => 256 * 1024,
             ],
             
-            ['isAdvert', 'boolean'],
+            [['news_partner_id', 'isAdvert'], 'integer'],
             
             [['created_at', 'updated_at'], 'safe'],
             
@@ -278,14 +281,13 @@ class News extends ActiveRecord
     public function afterSave($insert, $changedAttributes) {
         parent::afterSave($insert, $changedAttributes);
         
-        if (!isset($changedAttributes['news_partner_id']) && !isset($changedAttributes['isAdvert'])) {
+        if (!isset($changedAttributes['isAdvert'])) {
             $this->news_partner_id = null;
             $this->isAdvert = false;
-            $this->save();
-//            die();
+            return $this->save();
         }
     }
-    
+
     /**
      * Аттрибуты полей
      */

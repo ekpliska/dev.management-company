@@ -658,7 +658,7 @@ $(document).ready(function() {
        if ($('#check_advet').is(':checked')) {
            $('#parnters_list').prop('disabled', false);
        } else {
-           $('#parnters_list').val('');
+           $('#parnters_list').val('0');
            $('#parnters_list').prop('disabled', true);
        }
     });
