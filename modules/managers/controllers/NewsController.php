@@ -135,6 +135,7 @@ class NewsController extends AppManagersController {
     public function actionView($slug) {
         
         $news = News::findNewsBySlug($slug);
+//        $news->scenario = News::SCENARIO_EDIT_NEWS;
         
         if ($news == null) {
             throw new \yii\web\NotFoundHttpException('Вы обратились к несуществующей странице');

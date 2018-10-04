@@ -77,9 +77,11 @@ class News extends ActiveRecord
                 'news_status',
                 'news_partner_id'], 'integer'],
             
+//            ['news_partner_id', '']
+            
             ['news_partner_id', 'required', 'when' => function($model) {
                 return $model->isAdvert = true;
-            } /*, 'on' => self::SCENARIO_EDIT_NEWS */],
+            }, /* 'on' => self::SCENARIO_EDIT_NEWS */],
             
             [['isSMS', 'isEmail', 'isPush'], 'boolean'],
             
@@ -276,11 +278,10 @@ class News extends ActiveRecord
     public function afterSave($insert, $changedAttributes) {
         parent::afterSave($insert, $changedAttributes);
         
-        if (!isset($changedAttributes['news_partner_id'])) {
+        if (!isset($changedAttributes['news_partner_id']) && !isset($changedAttributes['isAdvert'])) {
             $this->news_partner_id = null;
             $this->isAdvert = false;
             $this->save();
-//            var_dump($this->errors);
 //            die();
         }
     }
