@@ -29,8 +29,6 @@ class NewsForm extends Model {
     public $isNotice;
     // Пользователь
     public $user;
-    // Дата публикации
-    public $date_publish;
     // Загружаемые файлы
     public $files;
     // Переключатель на рекламную публикацию
@@ -44,7 +42,6 @@ class NewsForm extends Model {
                 'rubric', 'title', 'text', 'preview', 
                 'house', 
                 'isPrivateOffice', 
-                'date_publish',
                 'user'], 'required'],
             
             ['title', 'string', 'min' => '10', 'max' => '255'],
@@ -88,7 +85,6 @@ class NewsForm extends Model {
             $add_news->news_status = $this->status;
             // Пользователь, создавший публикацию
             $add_news->news_user_id = Yii::$app->user->identity->id;
-            $add_news->created_at = strtotime($this->date_publish);
             // Сохраняем превью публикации
             $add_news->uploadImage($file);
             // Сохраняем прикрепленные изображения
@@ -129,7 +125,6 @@ class NewsForm extends Model {
             'isEmail' => 'Email',
             'isPush' => 'Push',
             'user' => 'Пользователь',
-            'date_publish' => 'Дата публикации',
             'files' => 'Прикрепленные файлы',
             'isAdvert' => 'Рекламная публикаця',
         ];

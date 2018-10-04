@@ -105,26 +105,6 @@
     
     <div class="clearfix"></div>
     
-    <div class="col-md-6">
-        
-        <?= $form->field($model, 'date_publish')
-                    ->widget(DatePicker::className(), [
-                        'language' => 'ru',
-                        'options' => [
-                            'value' => date('Y-m-d'),
-                        ],
-                        'type' => DatePicker::TYPE_COMPONENT_APPEND,
-                        'pluginOptions' => [
-                            'autoClose' => true,
-                            'format' => 'yyyy-mm-dd',
-                        ]
-                    ]) ?>
-    </div>
-    
-    <div class="col-md-6">
-        Назначить пользователя (?)
-    </div>
-    
     <div class="col-md-12 text-right">
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary']) ?>
     </div>

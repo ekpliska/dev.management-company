@@ -5,7 +5,7 @@
 /* 
  * Создание новой новости
  */
-$this->title = 'Новость (+)';
+$this->title = 'Публикация (+)';
 ?>
 <div class="managers-default-index">
     <h1><?= $this->title ?></h1>

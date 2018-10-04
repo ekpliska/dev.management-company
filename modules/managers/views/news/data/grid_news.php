@@ -49,13 +49,13 @@
             ],
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{view-news} {delete-news}',
+                'template' => '{view} {delete}',
                 'buttons' => [
-                    'view-news' => function ($url, $data) {                        
+                    'view' => function ($url, $data) {                        
                         return 
                             Html::a('Просмотр', 
                                     [
-                                        'news/view-news',
+                                        'news/view',
                                         'slug' => $data['slug'],
                                     ], 
                                     [
@@ -64,7 +64,7 @@
                                     ]
                             );
                     },
-                    'delete-news' => function ($url, $data) {
+                    'delete' => function ($url, $data) {
                         return 
                             Html::button('Удалить', [
                                 'data-pjax' => false,

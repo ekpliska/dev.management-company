@@ -42,7 +42,7 @@ class NewsController extends AppManagersController {
     /*
      * Новости, главная страница
      */
-    public function actionIndex() {
+    public function actionNews() {
         
         $all_news = new ActiveDataProvider([
             'query' => News::getAllNews($adver = false),
@@ -53,10 +53,29 @@ class NewsController extends AppManagersController {
             ],
         ]);
         
-        return $this->render('index', [
+        return $this->render('news', [
             'all_news' => $all_news,
         ]);
     }
+    
+    /*
+     * Реклама, главная страница
+     */
+    public function actionAdverts() {
+        
+        $all_adverts = new ActiveDataProvider([
+            'query' => News::getAllNews($adver = true),
+            'pagination' => [
+                'forcePageParam' => false,
+                'pageSizeParam' => false,
+                'pageSize' => 15,
+            ],
+        ]);        
+        
+        return $this->render('adverts', [
+            'all_adverts' => $all_adverts,
+        ]);
+    }    
     
     /*
      * Создание публикации
@@ -87,7 +106,7 @@ class NewsController extends AppManagersController {
                     'success' => true,
                     'message' => 'Новость была успешно добавлена',
                 ]);                
-                return $this->redirect(['view-news', 'slug' => $slug]);
+                return $this->redirect(['view', 'slug' => $slug]);
             } else {
                 Yii::$app->session->setFlash('news-admin', [
                     'success' => false,
@@ -110,7 +129,7 @@ class NewsController extends AppManagersController {
     /*
      * Просмотр, редактирование публикации
      */
-    public function actionViewNews($slug) {
+    public function actionView($slug) {
         
         $news = News::findNewsBySlug($slug);
         
@@ -158,7 +177,7 @@ class NewsController extends AppManagersController {
             
         }
         
-        return $this->render('view-news', [
+        return $this->render('view', [
             'news' => $news,
             'status_publish' => $status_publish,
             'notice' => $notice,
@@ -206,10 +225,10 @@ class NewsController extends AppManagersController {
     public function actionDeleteNews() {
         
         $news_id = Yii::$app->request->post('newsId');
-        $_redirect = Yii::$app->request->post('isAdvert') == 1 ? ['adverts/index'] : ['news/index'];
+        $_redirect = Yii::$app->request->post('isAdvert') == 1 ? ['news/adverts'] : ['news/news'];
         
         if (Yii::$app->request->isAjax) {
-//            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
             $news = News::findOne($news_id);
             
             if (!$news->delete()) {

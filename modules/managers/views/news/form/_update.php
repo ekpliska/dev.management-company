@@ -120,11 +120,6 @@ $status_checkbox = $model->isPrivateOffice ? false : true;
     
     <div class="clearfix"></div>
     
-    
-    <div class="col-md-12">
-        Назначить пользователя (?)
-    </div>
-    
     <div class="col-md-12 text-right">
         
         <?= Html::button('Удалить', [
