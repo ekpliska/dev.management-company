@@ -145,6 +145,7 @@ class NewsController extends AppManagersController {
         $type_notice = News::getNoticeType();
         $rubrics = Rubrics::getArrayRubrics();
         $houses = HousesEstates::getHouseOrEstate($news->news_status);
+        $parnters = Partners::getAllParnters();
         
         // Получаем прикрепленные к заявке файлы
         $docs = Image::getAllDocByNews($news->news_id, $model_name = 'News');
@@ -187,6 +188,7 @@ class NewsController extends AppManagersController {
             'type_notice' => $type_notice,
             'rubrics' => $rubrics,
             'houses' => $houses,
+            'parnters' => $parnters,
             'docs' => $docs,
         ]);
     }

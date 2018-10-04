@@ -30,9 +30,10 @@ class News extends ActiveRecord
     const NOTICE_PUSH = 3;
     
     public $files;
+    
+    const SCENARIO_EDIT_NEWS = 'edit news';
 
-
-    /**
+        /**
      * Таблица из БД
      */
     public static function tableName()
@@ -69,17 +70,16 @@ class News extends ActiveRecord
                 'news_user_id', 
                 'isPrivateOffice'], 'required'],
             
-            ['news_title', 'unique',
-                'targetClass' => self::className(),
-                'targetAttribute' => 'news_title',
-                'message' => 'Заголовок публикации не явяляется уникальным'],
-            
             [[
                 'news_type_rubric_id', 'news_house_id', 
                 'news_user_id', 
                 'isPrivateOffice', 
                 'news_status',
                 'news_partner_id'], 'integer'],
+            
+            ['news_partner_id', 'required', 'when' => function($model) {
+                return $model->isAdvert = true;
+            }, 'on' => self::SCENARIO_EDIT_NEWS],
             
             [['isSMS', 'isEmail', 'isPush'], 'boolean'],
             

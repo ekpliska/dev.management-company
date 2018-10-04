@@ -20,13 +20,27 @@ $status_checkbox = $model->isPrivateOffice ? false : true;
         ]);
     ?>
 
-    <div class="col-md-12">
+    <div class="col-md-6">
         <?= $form->field($model, 'news_status')
                 ->radioList($status_publish, [
                     'id' => 'for_whom_news'])
                 ->label(false) ?>
         
-        <?= $form->field($model, 'isAdvert')->checkbox(['id' => 'isAdvert'])->label(false) ?>
+    </div>
+
+    <div class="col-md-6" style="background: #ffcce6; padding: 10px;">
+
+        <?= $form->field($model, 'isAdvert')
+                ->checkbox([
+                    'id' => 'check_advet'])
+                ->label(false) ?>
+        
+        <?= $form->field($model, 'news_partner_id')
+                ->dropDownList($parnters, [
+                    'id' => 'parnters_list',
+                    'prompt' => 'Выбрать из списка...',
+                    'disabled' => $model->isAdvert ? false : true,])
+                ->label() ?>
         
     </div>
     

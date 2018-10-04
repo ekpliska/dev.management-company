@@ -46,8 +46,14 @@ class NewsForm extends Model {
                 'isPrivateOffice', 
                 'user'], 'required'],
             
-            ['title', 'string', 'min' => '10', 'max' => '255'],
+            // Поле контрагент обязательно для заполнения, если стоит переключатель "рекламная запись"
+            ['partner', 'required', 'when' => function($model) {
+                return $model->isAdvert = true;
+            }],
+            ['partner', 'safe'],
             
+            ['title', 'string', 'min' => '10', 'max' => '255'],
+                        
             ['text', 'string', 'min' => '10', 'max' => '5000'],
             
             [['title', 'text'], 'filter', 'filter' => 'trim'],
@@ -96,7 +102,13 @@ class NewsForm extends Model {
             $add_news->isEmail = $this->isNotice[1] ? true : false;
             $add_news->isPush = $this->isNotice[2] ? true : false;
             
-            $add_news->isAdvert = $this->isAdvert;
+            if ($this->isAdvert == true) {
+                $add_news->isAdvert = true;
+                $add_news->news_partner_id = $this->partner;
+            } else {
+                $add_news->isAdvert = false;
+                $add_news->news_partner_id = null;
+            }
             
             if(!$add_news->save()) {
                 throw new \yii\db\Exception('Ошибка добавления новости. Ошибка: ' . join(', ', $add_news->getFirstErrors()));

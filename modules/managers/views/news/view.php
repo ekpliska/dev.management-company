@@ -28,6 +28,7 @@ $this->title = $news->news_title;
         'type_notice' => $type_notice,
         'rubrics' => $rubrics,
         'houses' => $houses,
+        'parnters' => $parnters,
         'docs' => $docs,]) ?>
     
 </div>
