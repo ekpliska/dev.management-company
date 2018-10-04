@@ -33,6 +33,8 @@ class NewsForm extends Model {
     public $files;
     // Переключатель на рекламную публикацию
     public $isAdvert = false;
+    // Контрагент
+    public $partner;
 
 
     public function rules() {
@@ -50,7 +52,7 @@ class NewsForm extends Model {
             
             [['title', 'text'], 'filter', 'filter' => 'trim'],
             
-            [['status', 'house', 'isPrivateOffice', 'isNotice'], 'integer'],
+            [['status', 'house', 'isPrivateOffice', 'isNotice', 'partner'], 'integer'],
             
             [['preview'], 'file', 'extensions' => 'png, jpg, jpeg'],
             [['preview'], 'image', 'maxWidth' => 510, 'maxHeight' => 510],
@@ -127,6 +129,7 @@ class NewsForm extends Model {
             'user' => 'Пользователь',
             'files' => 'Прикрепленные файлы',
             'isAdvert' => 'Рекламная публикаця',
+            'partner' => 'Котрагент',
         ];
     }
     

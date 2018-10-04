@@ -13,6 +13,7 @@
     use app\helpers\FormatHelpers;
     use app\modules\managers\models\HousesEstates;
     use app\models\Image;
+    use app\models\Partners;
 
 /**
  * Новости
@@ -91,6 +92,7 @@ class NewsController extends AppManagersController {
         $type_notice = News::getNoticeType();
         $rubrics = Rubrics::getArrayRubrics();
         $houses = [];
+        $parnters = Partners::getAllParnters();
         
         if (Yii::$app->request->isPost && $model->load(Yii::$app->request->post())) {
             // Превью
@@ -123,6 +125,7 @@ class NewsController extends AppManagersController {
             'type_notice' => $type_notice,
             'rubrics' => $rubrics,
             'houses' => $houses,
+            'parnters' => $parnters,
         ]);
     }
     

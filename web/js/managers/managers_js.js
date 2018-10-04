@@ -651,6 +651,17 @@ $(document).ready(function() {
        });
     });
     
+    /*
+     * Если выбран параметр "Реклама" то список партнеров делаем доступным
+     */
+    $('#check_advet').on('change', function(){
+       if ($('#check_advet').is(':checked')) {
+           $('#parnters_list').prop('disabled', false);
+       } else {
+           $('#parnters_list').val('');
+           $('#parnters_list').prop('disabled', true);
+       }
+    });
 
 });
     

@@ -2,11 +2,13 @@
 
     namespace app\models;
     use Yii;
+    use yii\db\Expression;
     use yii\db\ActiveRecord;
     use yii\behaviors\TimestampBehavior;
     use yii\behaviors\SluggableBehavior;
     use rico\yii2images\behaviors\ImageBehave;
     use app\models\Rubrics;
+    use app\models\Partners;
 
     
 /*
@@ -48,12 +50,9 @@ class News extends ActiveRecord
             'image' => [
                 'class' => ImageBehave::className(),
             ],
-            
             [
                 'class' => TimestampBehavior::className(),
-//                'createdAtAttribute' => 'create_time',
-                'updatedAtAttribute' => 'updated_at',
-                'value' => time(),
+                'value' => new Expression("'" . date('Y-m-d H:i:s') . "'"),
             ],
         ];
     }    
@@ -79,8 +78,8 @@ class News extends ActiveRecord
                 'news_type_rubric_id', 'news_house_id', 
                 'news_user_id', 
                 'isPrivateOffice', 
-                'news_status', 
-                ], 'integer'],
+                'news_status',
+                'news_partner_id'], 'integer'],
             
             [['isSMS', 'isEmail', 'isPush'], 'boolean'],
             
@@ -96,6 +95,9 @@ class News extends ActiveRecord
             ],
             
             ['isAdvert', 'boolean'],
+            
+            [['created_at', 'updated_at'], 'safe'],
+            
         ];
     }
     
@@ -104,6 +106,13 @@ class News extends ActiveRecord
      */
     public function getRubric() {
         return $this->hasOne(Rubrics::className(), ['rubrics_id' => 'news_type_rubric_id']);
+    }
+
+    /**
+     * Связь с таблицей Партнеры (Контрагенты)
+     */
+    public function getParnter() {
+        return $this->hasOne(Partners::className(), ['partners_id' => 'news_partner_id']);
     }
     
     /*

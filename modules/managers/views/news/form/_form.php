@@ -4,7 +4,6 @@
     use yii\helpers\Url;
     use yii\widgets\ActiveForm;
     use vova07\imperavi\Widget;
-    use kartik\date\DatePicker;
 
 /* 
  * Создание новой новости
@@ -20,14 +19,27 @@
         ]);
     ?>
     
-    <div class="col-md-12">
+    <div class="col-md-6">
         
         <?= $form->field($model, 'status')
                 ->radioList($status_publish, [
                     'id' => 'for_whom_news'])
                 ->label(false) ?>
+    </div>
+
+    <div class="col-md-6" style="background: #ffcce6; padding: 10px;">
+
+        <?= $form->field($model, 'isAdvert')
+                ->checkbox([
+                    'id' => 'check_advet'])
+                ->label(false) ?>
         
-        <?= $form->field($model, 'isAdvert')->checkbox()->label(false) ?>
+        <?= $form->field($model, 'partner')
+                ->dropDownList($parnters, [
+                    'id' => 'parnters_list',
+                    'prompt' => 'Выбрать из списка...',
+                    'disabled' => true,])
+                ->label() ?>
         
     </div>
     

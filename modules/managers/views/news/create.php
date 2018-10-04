@@ -18,6 +18,7 @@ $this->title = 'Публикация (+)';
         'notice' => $notice,
         'type_notice' => $type_notice,
         'rubrics' => $rubrics,
-        'houses' => $houses,]) ?>
+        'houses' => $houses,
+        'parnters' => $parnters]) ?>
     
 </div>
