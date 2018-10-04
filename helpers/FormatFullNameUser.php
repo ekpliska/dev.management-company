@@ -42,7 +42,7 @@ class FormatFullNameUser {
     }
     
     /*
-     * Формирование ссылки на профиль диспетчера/специалиста
+     * Формирование ссылки на профиль диспетчера/специалиста по ID сотрудника
      * @param integer $employer_id
      * @param boolean $disp Переключатель формирования ссылки на диспетчера (true),
      * @param boolean $disp Переключатель формирования ссылки на специалиста (false),
@@ -72,5 +72,40 @@ class FormatFullNameUser {
         return $employer ?
             Html::a($full_name, $link, ['target' => '_blank']) : 'Не назначен';
     }
+    
+    /*
+     * Формирование ссылки на профиль сотрудника по ID пользователя
+     * @param integer $user_id
+     * Фамилия И. О.
+     */
+    public static function nameEmployerByUserID($user_id) {
+        
+        $user = (new \yii\db\Query)
+                ->select('au.item_name as role, '
+                        . 'e.employers_id as id, '
+                        . 'e.employers_surname as surname, e.employers_name as name, e.employers_second_name as second_name, ')
+                ->from('user as u')
+                ->join('LEFT JOIN', 'employers as e', 'u.user_employer_id = e.employers_id')
+                ->join('LEFT JOIN', 'auth_assignment as au', 'au.user_id = u.user_id')
+                ->where(['u.user_id' => $user_id])
+                ->one();
+
+        $surname = $user['surname'] . ' ';;
+        $name = mb_substr($user['name'], 0, 1, 'UTF-8') . '. ';
+        $second_name = mb_substr($user['second_name'], 0, 1, 'UTF-8') . '.';
+        $full_name = $surname . $name . $second_name;
+        
+        if ($user['role'] == 'administrator') {
+            $link = ['managers/profile', 'managers' => $user['id']];
+        } elseif ($user['role'] == 'dispatcher') {
+            $link = ['employers/edit-dispatcher', 'dispatcher_id' => $user['id']];
+        } elseif ($user['role'] == 'specialist') {
+            $link = ['employers/edit-specialist', 'specialist_id' => $user['id']];
+        }
+        
+        return $user ?
+            Html::a($full_name, $link, ['target' => '_blank', 'class' => 'btn btn-primary btn-xs']) : 'Не назначен';
+        
+    }    
     
 }

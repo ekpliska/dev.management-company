@@ -1,6 +1,7 @@
 <?php
 
     use app\helpers\FormatHelpers;
+    use app\helpers\FormatFullNameUser;
     use app\modules\managers\widgets\AlertsShow;
 
 /* 
@@ -17,6 +18,8 @@ $this->title = $news->news_title;
     Последний раз редактировалось: <p class="label label-success">
         <?= FormatHelpers::formatDate($news->updated_at, true) ?>
     </p>
+    <br />
+    Автор: <?= FormatFullNameUser::nameEmployerByUserID($news->news_user_id) ?>
     
     <hr />
     <?= AlertsShow::widget() ?>

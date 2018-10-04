@@ -79,7 +79,7 @@ class News extends ActiveRecord
             
             ['news_partner_id', 'required', 'when' => function($model) {
                 return $model->isAdvert = true;
-            }, 'on' => self::SCENARIO_EDIT_NEWS],
+            } /*, 'on' => self::SCENARIO_EDIT_NEWS */],
             
             [['isSMS', 'isEmail', 'isPush'], 'boolean'],
             
@@ -212,7 +212,6 @@ class News extends ActiveRecord
         }
     }
     
-    
     /*
      * Парсит текст публикации, находит все используемые ссылки на изображения в тексте
      * Собирает в массив, и затем удаляет
@@ -271,6 +270,21 @@ class News extends ActiveRecord
         
     }
     
+    /*
+     * После сохранения, проверяем если параметр Контрагент не установлен то поле очищаем, публикацию делаем как Новость
+     */
+    public function afterSave($insert, $changedAttributes) {
+        parent::afterSave($insert, $changedAttributes);
+        
+        if (!isset($changedAttributes['news_partner_id'])) {
+            $this->news_partner_id = null;
+            $this->isAdvert = false;
+            $this->save();
+//            var_dump($this->errors);
+//            die();
+        }
+    }
+    
     /**
      * Аттрибуты полей
      */
@@ -292,6 +306,7 @@ class News extends ActiveRecord
             'updated_at' => 'Дата обновления',
             'files' => 'Прикрепленные документы',
             'isAdvert' => 'Рекламная публикаця',
+            'news_partner_id' => 'Контрагент',
         ];
     }
 
