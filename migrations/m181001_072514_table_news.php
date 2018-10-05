@@ -75,7 +75,7 @@ class m181001_072514_table_news extends Migration
                 'CASCADE'
         );
         
-        $this->addForeignKey(
+        /* $this->addForeignKey(
                 'fk-news-news_house_id', 
                 '{{%news}}', 
                 'news_house_id', 
@@ -83,7 +83,7 @@ class m181001_072514_table_news extends Migration
                 'houses_id', 
                 'SET NULL',
                 'CASCADE'
-        );
+        ); */
         
         $this->addForeignKey(
                 'fk-news-news_user_id', 
