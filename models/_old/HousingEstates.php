@@ -2,8 +2,8 @@
 
     namespace app\models;
     use Yii;
-    use app\models\Houses;
     use yii\db\ActiveRecord;
+    use app\models\Houses;
 
 /**
  * Жилой комплекс
@@ -24,15 +24,13 @@ class HousingEstates extends ActiveRecord
     public function rules()
     {
         return [
-            [['estate_name', 'houses_town'], 'required'],
+            [['estate_name'], 'required'],
             [['estate_name'], 'string', 'max' => 170],
-            [['estat_town'], 'string', 'max' => 70],
-            [['estat_description'], 'string', 'max' => 255],
         ];
     }
-
+    
     /**
-     * Связь с таблицей Дома
+     * Связь с таблицей дома
      */
     public function getHouse()
     {
@@ -49,8 +47,8 @@ class HousingEstates extends ActiveRecord
                 ->all();
         
         return $array;
-    }    
-    
+    }
+
     /**
      * Аттрибуты полей
      */
@@ -59,8 +57,6 @@ class HousingEstates extends ActiveRecord
         return [
             'estate_id' => 'Estate ID',
             'estate_name' => 'Estate Name',
-            'estat_town' => 'Houses Town',
-            'estat_description' => 'Houses Description',
         ];
     }
 

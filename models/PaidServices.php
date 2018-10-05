@@ -164,15 +164,17 @@ class PaidServices extends ActiveRecord
                         . 'ps.services_dispatcher_id as dispatcher,'
                         . 'ps.services_specialist_id as specialist,'
                         . 'cs.category_name as category, s.services_name as services_name,'
-                        . 'h.houses_town as town, h.houses_street as street, h.houses_number_house as number_house,'
-                        . 'h.houses_floor as floor, h.houses_flat as flat')
+                        . 'he.estate_town as town, h.houses_street as street, h.houses_number_house as number_house,'
+                        . 'f.flats_porch as porch, f.flats_floor as floor, f.flats_number as flat')
                 ->from('paid_services as ps')
                 ->join('LEFT JOIN', 'category_services as cs', 'cs.category_id = ps.services_category_services_id')
                 ->join('LEFT JOIN', 'services as s', 's.services_id = ps.services_name_services_id')
                 ->join('LEFT JOIN', 'employers as ed', 'ed.employers_id = ps.services_dispatcher_id')
                 ->join('LEFT JOIN', 'employers as es', 'es.employers_id = ps.services_specialist_id')
                 ->join('LEFT JOIN', 'personal_account as pa', 'pa.account_id = ps.services_account_id')
-                ->join('LEFT JOIN', 'houses as h', 'h.houses_id = pa.personal_house_id')                
+                ->join('LEFT JOIN', 'flats as f', 'f.flats_id = pa.personal_house_id')
+                ->join('LEFT JOIN', 'houses as h', 'h.houses_id = f.flats_house_id')
+                ->join('LEFT JOIN', 'housing_estates as he', 'he.estate_id = h.houses_estate_name_id')          
                 ->where(['services_number' => $request_number])
                 ->one();
         

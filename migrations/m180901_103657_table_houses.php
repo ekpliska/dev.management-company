@@ -3,6 +3,7 @@
     use yii\db\Migration;
 
 /**
+ * Квартиры
  * Дома
  * Жилой комплекс
  */
@@ -19,27 +20,37 @@ class m180901_103657_table_houses extends Migration
             $table_options = 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB';
         }
         
-        $this->createTable('{{%houses}}', [
-            'houses_id' => $this->primaryKey(),
-            'houses_estate_name_id' => $this->integer()->notNull(),
-            'houses_town' => $this->string(70)->notNull(),
-            'houses_street' => $this->string(100)->notNull(),
-            'houses_number_house' => $this->string(10)->notNull(),
-            'houses_porch' => $this->integer()->notNull(),
-            'houses_floor' => $this->integer()->notNull(),
-            'houses_flat' => $this->integer()->notNull(),
-            'houses_rooms' => $this->integer()->notNull(),
-            'houses_square' => $this->integer()->notNull(),
-            'houses_account_id' => $this->integer(),
-            'houses_client_id' => $this->integer(),
-        ], $table_options);
-        $this->createIndex('idx-houses-houses_id', '{{%houses}}', 'houses_id');
-        
+        // Жилой комплекс
         $this->createTable('{{%housing_estates}}', [
             'estate_id' => $this->primaryKey(),
             'estate_name' => $this->string(170)->notNull(),
+            'estate_town' => $this->string(70)->notNull(),
+            'estate_description' => $this->string(255),
         ]);
         $this->createIndex('idx-housing_estates-estate_id', '{{%housing_estates}}', 'estate_id');
+        
+        // Дома
+        $this->createTable('{{%houses}}', [
+            'houses_id' => $this->primaryKey(),
+            'houses_estate_name_id' => $this->integer()->notNull(),
+            'houses_street' => $this->string(100)->notNull(),
+            'houses_number_house' => $this->string(10)->notNull(),
+        ], $table_options);
+        $this->createIndex('idx-houses-houses_id', '{{%houses}}', 'houses_id');
+        
+        // Квартиры
+        $this->createTable('{{%flats}}', [
+            'flats_id' => $this->primaryKey(),
+            'flats_house_id' => $this->integer()->notNull(),
+            'flats_porch' => $this->integer()->notNull(),
+            'flats_floor' => $this->integer()->notNull(),
+            'flats_number' => $this->integer()->notNull(),
+            'flats_rooms' => $this->integer()->notNull(),
+            'flats_square' => $this->integer()->notNull(),
+            'flats_account_id' => $this->integer(),
+            'flats_client_id' => $this->integer(),
+        ], $table_options);
+        $this->createIndex('idx-flats-flats_id', '{{%flats}}', 'flats_id');
         
         $this->addForeignKey(
                 'fk-houses-houses_estate_name_id', 
@@ -51,6 +62,16 @@ class m180901_103657_table_houses extends Migration
                 'CASCADE'
         );
         
+        $this->addForeignKey(
+                'fk-flats-flats_house_id', 
+                '{{%flats}}', 
+                'flats_house_id', 
+                '{{%houses}}', 
+                'houses_id', 
+                'CASCADE',
+                'CASCADE'
+        );
+        
     }
 
     /**
@@ -58,10 +79,17 @@ class m180901_103657_table_houses extends Migration
      */
     public function safeDown()
     {
+        
+        $this->dropIndex('idx-housing_estates-estate_id', '{{%housing_estates}}');
         $this->dropIndex('idx-houses-houses_id', '{{%houses}}');
-        $this->dropForeignKey('fk-houses-houses_account_id', '{{%houses}}');
-        $this->dropForeignKey('fk-houses-houses_estate_name_id', '{{%houses}}');
+        $this->dropIndex('idx-flats-flatsid', '{{%flats}}');
+        
+        $this->addForeignKey('fk-houses-houses_estate_name_id', '{{%houses}}');
+        $this->addForeignKey('fk-flats-flats_house_id', '{{%flats}}');
+                
+        $this->dropTable('{{%flats}}');
         $this->dropTable('{{%houses}}');
+        $this->dropTable('{{%housing_estates}}');
     }
 
 }

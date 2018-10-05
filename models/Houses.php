@@ -1,19 +1,18 @@
 <?php
 
     namespace app\models;
-    use Yii;
     use yii\db\ActiveRecord;
-    use yii\helpers\ArrayHelper;
-    use app\models\Clients;
+    use Yii;
+    use app\models\Flats;
     use app\models\HousingEstates;
 
 /**
- * Информация о жилых помещениях
+ * Дома
  */
 class Houses extends ActiveRecord
 {
     /**
-     * {@inheritdoc}
+     * Таблица в БД
      */
     public static function tableName()
     {
@@ -21,88 +20,34 @@ class Houses extends ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * Правила валидации
      */
     public function rules()
     {
         return [
-            [['houses_porch', 'houses_floor', 'houses_flat', 'houses_rooms', 'houses_square', 'houses_account_id'], 'integer'],
+            [['houses_estate_name_id', 'houses_street', 'houses_number_house'], 'required'],
             [['houses_estate_name_id'], 'integer'],
-            [['houses_town'], 'string', 'max' => 50],
             [['houses_street'], 'string', 'max' => 100],
             [['houses_number_house'], 'string', 'max' => 10],
+            [['houses_estate_name_id'], 'exist', 'skipOnError' => true, 'targetClass' => HousingEstates::className(), 'targetAttribute' => ['houses_estate_name_id' => 'estate_id']],
         ];
     }
-    
-    public function getClient() {
-        return $this->hasOne(Clients::className(), ['client_id' => 'houses_estate_name_id']);
-    }
-    
-    public function getHousingEstate() {
-        return $this->hasOne(HousingEstates::className(), ['estate_id' => '']);
-    }
-        
-    
-    public static function findByAccountId($account_id) {
-        return self::find()
-                ->andWhere(['houses_account_id' => $account_id])
-                ->one();
-    }
-    
-    /*
-     * Получить список квартир закрепленных за собственником
+
+    /**
+     * Связь с таблицей Квартиры
      */
-    public static function findByClientID($client_id) {
-        $_list = self::find()
-                ->andWhere(['houses_client_id' => $client_id])
-                ->andWhere(['isAccount' => false])
-                ->asArray()
-                ->all();
-        
-        return
-            ArrayHelper::map($_list, 'houses_id', function ($array) {
-                return 
-                    'г. ' . $array['houses_town'] . ', ул.' .
-                    $array['houses_street'] . ', д. ' .
-                    $array['houses_number_house'] . ', кв. ' .
-                    $array['houses_flat'];
-            });
-        
-    }
-    
-    /*
-     * Список всех домов жилого массива
-     */
-    public static function getHousesList() {
-        return self::find()
-                ->select(['houses_id', 'houses_town', 'houses_street', 'houses_number_house', 'houses_porch'])
-                ->asArray()
-                ->orderBy(['houses_town' => SORT_ASC, 'houses_street' => SORT_ASC, 'houses_number_house' => SORT_ASC])
-                ->all();
-    }
-    
-    public function getAdress() {
-        return $this->houses_town . ' г., ' .
-                $this->houses_street . ' ул., ' .
-                $this->houses_number_house . ' д., ' .
-                $this->houses_flat . ' кв.';
-    }
-    
-    public function getPorch() {
-        return $this->houses_porch;
+    public function getFlat()
+    {
+        return $this->hasMany(Flats::className(), ['flats_house_id' => 'houses_id']);
     }
 
-    public function getFloor() {
-        return $this->houses_floor;
+    /**
+     * Связь с таблицей Жилой комплекс
+     */
+    public function getEstate()
+    {
+        return $this->hasOne(HousingEstates::className(), ['estate_id' => 'houses_estate_name_id']);
     }    
-    
-    public function getRooms() {
-        return $this->houses_rooms;
-    }     
-    
-    public function getSquare() {
-        return $this->houses_square;
-    }     
     
     /**
      * {@inheritdoc}
@@ -111,16 +56,11 @@ class Houses extends ActiveRecord
     {
         return [
             'houses_id' => 'Houses ID',
-            'houses_estate_name_id' => 'Houses Name',
-            'houses_town' => 'Houses Town',
+            'houses_estate_name_id' => 'Houses Estate Name ID',
             'houses_street' => 'Houses Street',
             'houses_number_house' => 'Houses Number House',
-            'houses_porch' => 'Houses Porch',
-            'houses_floor' => 'Houses Floor',
-            'houses_flat' => 'Houses Flat',
-            'houses_rooms' => 'Houses Rooms',
-            'houses_square' => 'Houses Square',
-            'houses_account_id' => 'Houses Account ID',
         ];
     }
+
+
 }

@@ -131,14 +131,14 @@ class FormatHelpers {
     
     /*
      * Форматирование полного адреса проживания
-     * г. Город, ул. Улица, д. Номер, эт. Этаж, кв. Номер
+     * г. Город, ул. Улица, д. Номер, п. Подъезд, эт. Этаж, кв. Номер
      */
     public static function formatFullAdress($town, $street, $house, $porch = false, $floor = false, $flat = false) {
         
         $town = $town ? 'г. ' . $town . ', ' : '';
         $street = $street ? 'ул. '  . $street . ', ' : '';
-        $house = ($house && $flat) ? 'д. ' . $house . ', ' : 'д. ' . $house;
-        $porch = $porch ? ', подъезд ' . $porch : '';
+        $house = ($house || $porch || $floor || $flat)  ? 'д. ' . $house . ', ' : 'д. ' . $house;
+        $porch = $porch ? 'подъезд ' . $porch . ', ' : '';
         $floor = $floor ? 'эт. ' . $floor . ', ' : '';
         $flat = $flat ? 'кв. ' . $flat : '';
         

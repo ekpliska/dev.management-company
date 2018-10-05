@@ -64,11 +64,12 @@ $this->title = 'Заявка №' . $request['requests_ident'];
                 
                 <div class="col-md-6">
                     <?= FormatHelpers::formatFullAdress(
-                            $request['houses_town'], 
+                            $request['estate_town'], 
                             $request['houses_street'], 
                             $request['houses_number_house'], 
-                            $request['houses_floor'], 
-                            $request['houses_flat']) ?>
+                            $request['flats_porch'], 
+                            $request['flats_floor'], 
+                            $request['flats_number']) ?>
                 </div>
                 <div class="col-md-6">
                     <?= $request['requests_phone'] ?>

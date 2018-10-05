@@ -59,6 +59,7 @@ $this->title = 'Заявка №' . $paid_request['number'];
                             $paid_request['town'], 
                             $paid_request['street'], 
                             $paid_request['number_house'], 
+                            $paid_request['porch'], 
                             $paid_request['floor'], 
                             $paid_request['flat']) ?>
                 </div>
