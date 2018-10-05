@@ -50,7 +50,7 @@ class Voting extends ActiveRecord
             [['voting_type', 'voting_object', 'status', 'voting_user_id'], 'integer'],
             [['voting_text'], 'string'],
             [['voting_date_start', 'voting_date_end', 'created_at', 'updated_at'], 'safe'],
-            [['voting_title'], 'string', 'max' => 255],
+            [['voting_title', 'voting_image'], 'string', 'max' => 255],
         ];
     }
     
@@ -71,6 +71,38 @@ class Voting extends ActiveRecord
             self::TYPE_PORCH => 'Подьезд',
         ];
     }
+    
+    /*
+     * 
+     */
+    public function getId() {
+        return $this->voting_id;
+    }
+    
+    /*
+     * Загрузка обложки голосования
+     */
+    public function uploadImage($file) {
+        
+        $current_image = $this->voting_image;
+        
+        if ($this->validate()) {
+            if ($file) {
+                $this->voting_image = $file;
+                $dir = Yii::getAlias('upload/voting/cover/');
+                $file_name = 'previews_voting_' . time() . '.' . $this->voting_image->extension;
+                $this->voting_image->saveAs($dir . $file_name);
+                $this->voting_image = '/' . $dir . $file_name;
+                @unlink(Yii::getAlias('@webroot' . $current_image));
+            } else {
+                $this->voting_image = $current_image;
+            }
+            return $this->save() ? true : false;
+        }
+        
+        return false;
+    }
+    
     /**
      * Аттрибуты полей
      */
@@ -84,6 +116,7 @@ class Voting extends ActiveRecord
             'voting_date_start' => 'Voiting Date Start',
             'voting_date_end' => 'Voiting Date End',
             'voting_object' => 'Voiting Object',
+            'voting_image' => 'Voting Image',
             'status' => 'Status',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',

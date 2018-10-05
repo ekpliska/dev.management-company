@@ -116,7 +116,7 @@ class News extends ActiveRecord
     /**
      * Связь с таблицей Партнеры (Контрагенты)
      */
-    public function getParnter() {
+    public function getPartner() {
         return $this->hasOne(Partners::className(), ['partners_id' => 'news_partner_id']);
     }
     

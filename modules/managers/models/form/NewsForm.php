@@ -84,7 +84,7 @@ class NewsForm extends Model {
             $add_news = new News();
             $add_news->news_type_rubric_id = $this->rubric;
             $add_news->news_title = HtmlPurifier::process(strip_tags($this->title));
-            $add_news->news_text = $this->text;
+            $add_news->news_text = HtmlPurifier::process(strip_tags($this->text));
             $add_news->isPrivateOffice = $this->isPrivateOffice;
             
             // Если значение дома не задано, то публикацию сохраняем как "для всех" (null)

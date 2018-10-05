@@ -22,6 +22,7 @@
             ],
             [
                 'attribute' => 'house',
+                'header' => 'Адрес',
                 'value' => function ($data) {
                     if ($data['status'] == 0) {
                         return '<span class="label label-default">Для всех</span>';                        

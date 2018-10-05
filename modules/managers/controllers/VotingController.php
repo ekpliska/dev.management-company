@@ -2,6 +2,7 @@
 
     namespace app\modules\managers\controllers;
     use Yii;
+    use yii\web\UploadedFile;
     use app\modules\managers\controllers\AppManagersController;
     use app\models\Voting;
     use app\models\Houses;
@@ -34,6 +35,27 @@ class VotingController extends AppManagersController {
         $type_voting = Voting::getTypeVoting();
         $object_vote = [];
         
+        if (Yii::$app->request->isPost && $model->load(Yii::$app->request->post())) {
+            // Обложка
+            $file = UploadedFile::getInstance($model, 'image');
+            $model->image = $file;
+            
+            $voting_id = $model->save($file);            
+            if ($voting_id) {
+                Yii::$app->session->setFlash('news-admin', [
+                    'success' => true,
+                    'message' => 'Новость была успешно добавлена',
+                ]);                
+                return $this->redirect(['view', 'number' => $voting_id]);
+            } else {
+                Yii::$app->session->setFlash('news-admin', [
+                    'success' => false,
+                    'error' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз',
+                ]);
+                return $this->redirect(Yii::$app->request->referrer);
+            }
+        }
+        
         return $this->render('create', [
             'model' => $model,
             'type_voting' => $type_voting,
@@ -53,12 +75,12 @@ class VotingController extends AppManagersController {
         
         if ($status == 0) {
             foreach ($houses as $house) {
-                $name = FormatHelpers::formatFullAdress($house['houses_town'], $house['houses_street'], $house['houses_number_house']);
+                $name = FormatHelpers::formatFullAdress($house['estate_town'], $house['houses_street'], $house['houses_number_house']);
                 echo '<option value="' . $house['houses_id'] . '">' . $name . '</option>';
             }            
         } elseif ($status == 1) {
             foreach ($houses as $house) {
-                $name = FormatHelpers::formatFullAdress($house['houses_town'], $house['houses_street'], $house['houses_number_house'], $house['houses_porch']);
+                $name = FormatHelpers::formatFullAdress($house['estate_town'], $house['houses_street'], $house['houses_number_house'], $house['flats_porch']);
                 return '<option value="' . $house['houses_id'] . '">' . $name . '</option>';
             }            
         }
