@@ -20,6 +20,11 @@
  */
 class NewsController extends AppManagersController {
     
+    /*
+     * Действия
+     *      image-upload Загрузка изображений используемых в редакторе текста новостей
+     *      file-delete Удаление изображений загруженных через редактор текста новостей
+     */
     public function actions() {
         
         return [
@@ -135,7 +140,6 @@ class NewsController extends AppManagersController {
     public function actionView($slug) {
         
         $news = News::findNewsBySlug($slug);
-//        $news->scenario = News::SCENARIO_EDIT_NEWS;
         
         if ($news == null) {
             throw new \yii\web\NotFoundHttpException('Вы обратились к несуществующей странице');
