@@ -46,9 +46,9 @@ class NewsForm extends Model {
                 'isPrivateOffice', 
                 'user'], 'required'],
             
-            ['title', 'string', 'min' => '10', 'max' => '255'],
+            ['title', 'string', 'min' => '6', 'max' => '255'],
                         
-            ['text', 'string', 'min' => '10', 'max' => '5000'],
+            ['text', 'string', 'min' => '10', 'max' => '10000'],
             
             [['title', 'text'], 'filter', 'filter' => 'trim'],
             

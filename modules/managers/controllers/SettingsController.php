@@ -10,7 +10,7 @@
 /**
  * Тарифы
  */
-class RatesController extends AppManagersController {
+class SettingsController extends AppManagersController {
     
     /*
      * Тарифы, главная страница

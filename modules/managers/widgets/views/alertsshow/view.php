@@ -78,7 +78,7 @@
     <?=
         Alert::widget([
             'type' => $flash['success'] ? Alert::TYPE_INFO : Alert::TYPE_DANGER,
-            'title' => 'Новости',
+            'title' => 'Публикации',
             'icon' => 'glyphicon glyphicon-ok-sign',
             'body' => $flash['success'] ? $flash['message'] : $flash['error'],
             'showSeparator' => true,
