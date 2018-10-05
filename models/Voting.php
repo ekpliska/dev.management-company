@@ -8,7 +8,7 @@
 /**
  * Голосование
  */
-class Voiting extends ActiveRecord
+class Voting extends ActiveRecord
 {
     /**
      * {@inheritdoc}

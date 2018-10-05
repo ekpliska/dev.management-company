@@ -8,7 +8,7 @@
  * Вопросы
  * Ответы
  */
-class m181005_073055_table_voiting extends Migration
+class m181005_073055_table_voting extends Migration
 {
     /**
      * {@inheritdoc}
@@ -21,24 +21,25 @@ class m181005_073055_table_voiting extends Migration
             $table_options = 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB';
         }
         
-        $this->createTable('{{%voiting}}', [
-            'voiting_id' => $this->primaryKey(),
-            'voiting_type' => $this->tinyInteger()->notNull(),
-            'voiting_title' => $this->string(255)->notNull(),
-            'voiting_text' => $this->text(10000)->notNull(),
-            'voiting_date_start' => $this->timestamp()->defaultValue(new Expression("NOW()")),
-            'voiting_date_end' => $this->timestamp()->defaultValue(new Expression("NOW()")),
-            'voiting_object' => $this->integer()->notNull(),
+        $this->createTable('{{%voting}}', [
+            'voting_id' => $this->primaryKey(),
+            'voting_type' => $this->tinyInteger()->notNull(),
+            'voting_title' => $this->string(255)->notNull(),
+            'voting_text' => $this->text(10000)->notNull(),
+            'voting_date_start' => $this->timestamp()->defaultValue(new Expression("NOW()")),
+            'voting_date_end' => $this->timestamp()->defaultValue(new Expression("NOW()")),
+            'voting_object' => $this->integer()->notNull(),
+            'voting_image' => $this->string(255)->notNull(),
             'status' => $this->tinyInteger()->defaultValue(true),
             'created_at' => $this->timestamp()->defaultValue(new Expression("NOW()")),
             'updated_at' => $this->timestamp()->defaultValue(new Expression("NOW()")),
-            'voiting_user_id' => $this->integer()->notNull(),
+            'voting_user_id' => $this->integer()->notNull(),
         ]);
-        $this->createIndex('idx-voiting-voiting_id', '{{%voiting}}', 'voiting_id');
+        $this->createIndex('idx-voting-voting_id', '{{%voting}}', 'voting_id');
         
         $this->createTable('{{%questions}}', [
             'questions_id' => $this->primaryKey(),
-            'questions_voiting_id' => $this->integer()->notNull(),
+            'questions_voting_id' => $this->integer()->notNull(),
             'questions_text' => $this->text(1000)->notNull(),
             'questions_user_id' => $this->integer()->notNull(),
             'created_at' => $this->timestamp()->defaultValue(new Expression("NOW()")),
@@ -56,11 +57,11 @@ class m181005_073055_table_voiting extends Migration
         $this->createIndex('idx-answers-answers_id', '{{%answers}}', 'answers_id');
         
         $this->addForeignKey(
-                'fk-questions-questions_voiting_id', 
+                'fk-questions-questions_voting_id', 
                 '{{%questions}}', 
-                'questions_voiting_id', 
-                '{{%voiting}}', 
-                'voiting_id', 
+                'questions_voting_id', 
+                '{{%voting}}', 
+                'voting_id', 
                 'CASCADE',
                 'CASCADE'
         );
@@ -82,16 +83,16 @@ class m181005_073055_table_voiting extends Migration
      */
     public function safeDown()
     {
-        $this->dropIndex('idx-voiting-voiting_id', '{{%voiting}}');
+        $this->dropIndex('idx-voting-voting_id', '{{%voting}}');
         $this->dropIndex('idx-questions-questions_id', '{{%questions}}');
         $this->dropIndex('idx-answers-answers_id', '{{%answers}}');
         
-        $this->dropForeignKey('fk-questions-questions_voiting_id', '{{%questions}}');
+        $this->dropForeignKey('fk-questions-questions_voting_id', '{{%questions}}');
         $this->dropForeignKey('fk-answers-answers_questions_id', '{{%answers}}');
 
         $this->dropTable('{{%answers}}');
         $this->dropTable('{{%questions}}');
-        $this->dropTable('{{%voiting}}');
+        $this->dropTable('{{%voting}}');
     }
 
  }

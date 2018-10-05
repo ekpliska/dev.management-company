@@ -3,7 +3,7 @@
     namespace app\models;
     use Yii;
     use yii\db\ActiveRecord;
-    use app\models\Voiting;
+    use app\models\Voting;
     use app\models\Answers;
 
 /**
@@ -46,7 +46,7 @@ class Questions extends ActiveRecord
      */
     public function getVoiting()
     {
-        return $this->hasOne(Voiting::className(), ['voiting_id' => 'questions_voiting_id']);
+        return $this->hasOne(Voting::className(), ['voiting_id' => 'questions_voiting_id']);
     }
 
     /**
