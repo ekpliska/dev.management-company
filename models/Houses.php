@@ -49,6 +49,18 @@ class Houses extends ActiveRecord
         return $this->hasOne(HousingEstates::className(), ['estate_id' => 'houses_estate_name_id']);
     }    
     
+    /*
+     * Список всех домов жилого массива
+     */
+    public static function getHousesList() {
+        return self::find()
+                ->joinWith(['estate'])
+                ->select(['houses_id', 'estate_name', 'estate_town', 'houses_street', 'houses_number_house'])
+                ->asArray()
+                ->orderBy(['estate_town' => SORT_ASC, 'houses_street' => SORT_ASC, 'houses_number_house' => SORT_ASC])
+                ->all();
+    }    
+    
     /**
      * {@inheritdoc}
      */

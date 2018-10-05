@@ -23,12 +23,13 @@
             [
                 'attribute' => 'house',
                 'value' => function ($data) {
-                    if (!empty($data['estate_name'])) {
-                        return $data['estate_name'];
-                    } elseif ($data['town']) {
-                        return FormatHelpers::formatFullAdress($data['town'], $data['street'], $data['house']);
+                    if ($data['status'] == 0) {
+                        return '<span class="label label-default">Для всех</span>';                        
+                    } elseif ($data['status'] == 1) {
+                        return $data['estate_name'] . ', г. ' . $data['estate_town'];
+                    } elseif ($data['status'] == 2) {
+                        return FormatHelpers::formatFullAdress($data['estate_town'], $data['street'], $data['house']);
                     }
-                    return '<span class="label label-default">Для всех</span>';
                 },
                 'format' => 'raw',
             ],

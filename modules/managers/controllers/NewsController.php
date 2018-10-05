@@ -206,20 +206,22 @@ class NewsController extends AppManagersController {
      */
     public function actionForWhomNews($status) {
         
+        // Полчаем список всех домов
         $current_house = Houses::getHousesList();
+        // Получаем список всех жилых комплексов
         $housing_estates = HousingEstates::getHousingEstateList();
         
         if ($status == 0) {
             echo '<option>Для всех</option>';
         } elseif ($status == 1) {
             foreach ($housing_estates as $estate) {
-                $name = FormatHelpers::formatEstateAdress($estate['name'], $estate['town']);
+                $name = FormatHelpers::formatEstateAdress($estate['estate_name'], $estate['estate_town']);
                 echo '<option value="' . $estate['estate_id'] . '">' . $name . '</option>';
             }
         } elseif ($status == 2) {
             foreach ($current_house as $house) {
                 $full_adress = FormatHelpers::formatFullAdress(
-                        $house['houses_town'], 
+                        $house['estate_town'], 
                         $house['houses_street'], 
                         $house['houses_number_house'], 
                         false, false);

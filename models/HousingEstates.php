@@ -40,13 +40,11 @@ class HousingEstates extends ActiveRecord
     }
     
     public static function getHousingEstateList() {
-        $array = (new \yii\db\Query)
-                ->select('estate_id as estate_id, estate_name as name, houses_town as town')
-                ->from('housing_estates as he')
-                ->join('LEFT JOIN', 'houses as h', 'h.houses_estate_name_id = he.estate_id')
-                ->orderBy(['name' => SORT_ASC])
-                ->groupBy('name')
-                ->all();
+        
+        $array = self::find()
+                ->asArray()
+                ->orderBy(['estate_name' => SORT_ASC])
+                ->all();        
         
         return $array;
     }    

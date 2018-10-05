@@ -38,7 +38,7 @@ class Houses extends ActiveRecord
         return $this->hasOne(Clients::className(), ['client_id' => 'houses_estate_name_id']);
     }
     
-    public function getHousingEstate() {
+    public function getEstate() {
         return $this->hasOne(HousingEstates::className(), ['estate_id' => '']);
     }
         
@@ -75,9 +75,10 @@ class Houses extends ActiveRecord
      */
     public static function getHousesList() {
         return self::find()
-                ->select(['houses_id', 'houses_town', 'houses_street', 'houses_number_house', 'houses_porch'])
+                ->with(['estate'])
+//                ->select(['houses_id', 'houses_town', 'houses_street', 'houses_number_house', 'houses_porch'])
                 ->asArray()
-                ->orderBy(['houses_town' => SORT_ASC, 'houses_street' => SORT_ASC, 'houses_number_house' => SORT_ASC])
+//                ->orderBy(['houses_town' => SORT_ASC, 'houses_street' => SORT_ASC, 'houses_number_house' => SORT_ASC])
                 ->all();
     }
     
