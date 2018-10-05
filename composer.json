@@ -22,7 +22,8 @@
         "bower-asset/bootbox": "~4.3.0",
         "kartik-v/yii2-widget-alert": "*",
         "kartik-v/yii2-widget-datepicker": "@dev",
-        "vova07/yii2-imperavi-widget": "*"
+        "vova07/yii2-imperavi-widget": "*",
+        "kartik-v/yii2-widget-datetimepicker": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

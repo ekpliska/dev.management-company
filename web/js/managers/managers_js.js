@@ -662,7 +662,29 @@ $(document).ready(function() {
            $('#parnters_list').prop('disabled', true);
        }
     });
-
+    
+    // ******************************************************** //
+    // ************     Start Block of Voting    ************** //
+    // ******************************************************** //
+    /*
+     * Переключатель, тип голосования
+     *      Для дома
+     *      Для подъезда
+     */
+    $('#type_voting').on('change', function(e) {
+        var objectType = $("#create-voting input[type='radio']:checked").val();
+//        if (forWhom === '0') {
+//            $('#adress_list').prop('disabled', true);
+//        } else {
+//            $('#adress_list').prop('disabled', false);
+//        }
+        $.post('for-whom-voting?status=' + objectType,
+            function(data) {
+                $('#object_vote_list').html(data);
+            }
+        );
+    });    
+    
 });
     
 

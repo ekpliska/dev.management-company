@@ -2,6 +2,8 @@
 
     namespace app\models;
     use Yii;
+    use yii\db\Expression;
+    use yii\behaviors\TimestampBehavior;
     use yii\db\ActiveRecord;
     use app\models\Questions;
 
@@ -10,25 +12,45 @@
  */
 class Voting extends ActiveRecord
 {
+    
+    // Активено
+    const STATUS_ACTIVE = 0;
+    // Завершено
+    const STATUS_CLOSED = 1;
+    // Отменено
+    const STATUS_CANCEL = 2;
+
+    const TYPE_ALL_HOUSE = 0;
+    const TYPE_PORCH = 1;
+
     /**
-     * {@inheritdoc}
+     * Таблица БД
      */
     public static function tableName()
     {
-        return 'voiting';
+        return 'voting';
     }
 
+    public function behaviors() {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'value' => new Expression("'" . date('Y-m-d H:i:s') . "'"),
+            ]
+        ];
+    }
+    
     /**
-     * {@inheritdoc}
+     * Правила вадилации
      */
     public function rules()
     {
         return [
-            [['voiting_type', 'voiting_title', 'voiting_text', 'voiting_object', 'voiting_user_id'], 'required'],
-            [['voiting_type', 'voiting_object', 'status', 'voiting_user_id'], 'integer'],
-            [['voiting_text'], 'string'],
-            [['voiting_date_start', 'voiting_date_end', 'created_at', 'updated_at'], 'safe'],
-            [['voiting_title'], 'string', 'max' => 255],
+            [['voting_type', 'voting_title', 'voting_text', 'voting_object', 'voting_user_id'], 'required'],
+            [['voting_type', 'voting_object', 'status', 'voting_user_id'], 'integer'],
+            [['voting_text'], 'string'],
+            [['voting_date_start', 'voting_date_end', 'created_at', 'updated_at'], 'safe'],
+            [['voting_title'], 'string', 'max' => 255],
         ];
     }
     
@@ -37,26 +59,35 @@ class Voting extends ActiveRecord
      */
     public function getQuestion()
     {
-        return $this->hasMany(Questions::className(), ['questions_voiting_id' => 'voiting_id']);
+        return $this->hasMany(Questions::className(), ['questions_voting_id' => 'voting_id']);
     }
-
+    
+    /*
+     * Тип голосования
+     */
+    public static function getTypeVoting() {
+        return [
+            self::TYPE_ALL_HOUSE => 'Для дома',
+            self::TYPE_PORCH => 'Подьезд',
+        ];
+    }
     /**
-     * {@inheritdoc}
+     * Аттрибуты полей
      */
     public function attributeLabels()
     {
         return [
-            'voiting_id' => 'Voiting ID',
-            'voiting_type' => 'Voiting Type',
-            'voiting_title' => 'Voiting Title',
-            'voiting_text' => 'Voiting Text',
-            'voiting_date_start' => 'Voiting Date Start',
-            'voiting_date_end' => 'Voiting Date End',
-            'voiting_object' => 'Voiting Object',
+            'voting_id' => 'Voiting ID',
+            'voting_type' => 'Voiting Type',
+            'voting_title' => 'Voiting Title',
+            'voting_text' => 'Voiting Text',
+            'voting_date_start' => 'Voiting Date Start',
+            'voting_date_end' => 'Voiting Date End',
+            'voting_object' => 'Voiting Object',
             'status' => 'Status',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
-            'voiting_user_id' => 'Voiting User ID',
+            'voting_user_id' => 'Voiting User ID',
         ];
     }
 

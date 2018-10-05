@@ -1,6 +1,7 @@
 <?php
 
     namespace app\modules\managers\models\form;
+    use Yii;
     use yii\base\Model;
 
 /**
@@ -13,7 +14,7 @@ class VotingForm extends Model {
     public $text;
     public $date_start;
     public $date_end;
-    public $adress;
+    public $object_vote;
     public $image;
 
     /*
@@ -28,16 +29,20 @@ class VotingForm extends Model {
                 'adress', 
                 'image'], 'required'],
             
-            [['type', 'adress'], 'integer'],
+            [['type', 'object_vote'], 'integer'],
             
             ['title', 'string', 'min' => 6, 'max' => 255],
             ['text', 'string', 'min' => 6, 'max' => 5000],
             
-            [['date_start', 'date_end'], ''],
+            [['date_start', 'date_end'], 'date', 'format' => 'php:dd.mm.yyyy hh:ii'],
             
             [['image'], 'file', 'extensions' => 'png, jpg, jpeg'],
             [['image'], 'image', 'maxWidth' => 510, 'maxHeight' => 510],
         ];
+    }
+    
+    public function save($file) {
+        //
     }
     
     /*
@@ -50,7 +55,7 @@ class VotingForm extends Model {
             'text' => 'Описание голосования',
             'date_start' => 'Дата начала голосования',
             'date_end' => 'Дата окончания голосования',
-            'adress' => 'Адрес',
+            'object_vote' => 'Для кого голосование',
             'image' => 'Оброжка',
         ];
     }

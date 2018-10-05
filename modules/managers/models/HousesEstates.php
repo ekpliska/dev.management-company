@@ -15,6 +15,7 @@ class HousesEstates extends Houses {
     
     /*
      * В зависимости пришедщего статуса публикации формируем список жилых коплексов или домов
+     * # Новости
      */
     public static function getHouseOrEstate($status) {
         

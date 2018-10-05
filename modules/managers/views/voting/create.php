@@ -1,16 +1,23 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+    use yii\helpers\Html;
+    use app\modules\managers\widgets\AlertsShow;
+
+/* 
+ * Голосование, создание голосования
  */
 
-/**
- * Description of create
- *
- * @author Ekaterina
- */
-class create {
-    //put your code here
-}
+$this->title = 'Голосование (+)';
+?>
+<div class="managers-default-index">
+    <h1><?= $this->title ?></h1>
+    <hr />
+    <?= AlertsShow::widget() ?>
+    
+    <?= $this->render('form/_form', [
+        'model' => $model,
+        'type_voting' => $type_voting,
+        'object_vote' => $object_vote,
+    ]) ?>
+    
+</div>
