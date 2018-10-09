@@ -1,105 +1,148 @@
 <?php
-    
-    use yii\helpers\Html;
+
     use yii\widgets\ActiveForm;
+    use yii\helpers\Html;
     use kartik\datetime\DateTimePicker;
+    use app\models\Questions;
 
-/* 
- * Форма создать голосование
- */
-
+/*
+ * Форма голосования
+ */    
 ?>
-<?php
-    $form = ActiveForm::begin([
-        'id' => 'create-voting',
+
+
+<div class="product-form">
+
+    <?php $form = ActiveForm::begin([
+        'id' => 'form-voting',
+        'enableClientValidation' => false,
         'options' => [
                 'enctype' => 'multipart/form-data',
         ],
-    ]);
-?>
+    ]); ?>
 
-    <div class="col-md-6">
-        
-        <?= $form->field($model, 'type')
-                ->radioList($type_voting, [
-                    'id' => 'type_voting',])
-                ->label(false) ?>
-        
-        <?= $form->field($model, 'object_vote')->dropDownList($object_vote, [
-                'prompt' => 'Выбрать из списка...',
-                'id' => 'object_vote_list',
-        ]) ?>
-        
-    </div>
+    <?= $model->errorSummary($form); ?>
 
-    <div class="col-md-6">
-        
-        <div class="text-center">
-            <?= Html::img($model->image, ['id' => 'photoPreview', 'class' => 'img-rounded', 'alt' => $model->title, 'width' => 150]) ?>
+    <fieldset>
+        <legend>Голосование</legend>
+        <div class="col-md-6">
+            <?= $form->field($model->voting, 'voting_type')->radioList($type_voting)->label(false) ?>
+            <?= $form->field($model->voting, 'voting_title')->textInput() ?>
+            <?= $form->field($model->voting, 'voting_text')->textInput() ?>
+
+
+            <?= $form->field($model->voting, 'voting_date_start')
+                        ->widget(DateTimePicker::className(), [
+                            'id' => 'date_voting_start',
+                            'language' => 'ru',
+                            'options' => [
+                                'placeholder' => $model->voting->getAttributeLabel('voting_date_start'),
+                            ],
+                            'type' => DateTimePicker::TYPE_COMPONENT_APPEND,
+                            'pluginOptions' => [
+                                'autoClose' => true,
+                                'format' => 'dd.mm.yyyy hh:ii',
+                            ]
+                        ]) ?>
+
+                <?= $form->field($model->voting, 'voting_date_end')
+                        ->widget(DateTimePicker::className(), [
+                            'id' => 'date_voting_end',
+                            'language' => 'ru',
+                            'options' => [
+                                'placeholder' => $model->voting->getAttributeLabel('voting_date_start'),
+                            ],
+                            'type' => DateTimePicker::TYPE_COMPONENT_APPEND,
+                            'pluginOptions' => [
+                                'autoClose' => true,
+                                'format' => 'dd.mm.yyyy hh:ii',
+                            ]
+                        ]) ?>   
         </div>
-        <br />
-        <?= $form->field($model, 'image')
-                ->input('file', ['id' => 'btnLoad'])
-                ->label(false) ?>
         
-    </div>
-
-    <div class="col-md-12">
-        <?= $form->field($model, 'title')
-            ->input('text', [
-                'placeHolder' => $model->getAttributeLabel('title')])
-            ->label() ?>
-    </div>
-    
-    <div class="col-md-12">
-        <?= $form->field($model, 'text')
-            ->input('text', [
-                'placeHolder' => $model->getAttributeLabel('text')])
-            ->label() ?>
-    </div>
-
-    <div class="col-md-12">
-        <div class="col-md-4">
-            
-            <?= $form->field($model, 'date_start')
-                    ->widget(DateTimePicker::className(), [
-                        'id' => 'date_voting_start',
-                        'language' => 'ru',
-                        'options' => [
-                            'placeholder' => 'Дата начала голосования',
-                        ],
-                        'type' => DateTimePicker::TYPE_COMPONENT_APPEND,
-                        'pluginOptions' => [
-                            'autoClose' => true,
-                            'format' => 'dd.mm.yyyy hh:ii',
-                        ]
-                    ]) ?>
-            
-            <?= $form->field($model, 'date_end')
-                    ->widget(DateTimePicker::className(), [
-                        'id' => 'date_voting_end',
-                        'language' => 'ru',
-                        'options' => [
-                            'placeholder' => 'Дата завершения голосования',
-                        ],
-                        'type' => DateTimePicker::TYPE_COMPONENT_APPEND,
-                        'pluginOptions' => [
-                            'autoClose' => true,
-                            'format' => 'dd.mm.yyyy hh:ii',
-                        ]
-                    ]) ?>            
-            
+        <div class="col-md-6">
+            <div class="text-center">
+                <?= Html::img('@web/' . $model->voting->voting_image, ['id' => 'photoPreview', 'class' => 'img-rounded', 'alt' => $model->voting->voting_title, 'width' => 150]) ?>
+            </div>
+            <br />
+            <?= $form->field($model, 'imageFile')->input('file', ['id' => 'btnLoad'])->label(false) ?>
         </div>
-        <div class="col-md-8" style="border: 1px solid #b3ecff; padding: 10px;">
-            <h4>Вопросы</h4>
-            <hr />
-            <?= Html::button('Добавить', ['class' => 'btn btn-default']) ?>
-        </div>
-    </div>
+        
+    </fieldset>
 
-    <div class="col-md-12 text-center">
-        <?= Html::submitButton('Опубликовать', ['class' => 'btn btn-primary']) ?>
-    </div>
+    <fieldset>
+        <legend>Вопросы
+            <?php
+            echo Html::a('Добавить вопрос', 'javascript:void(0);', [
+              'id' => 'voting-new-question-button', 
+              'class' => 'pull-right btn btn-default btn-xs'
+            ])
+            ?>
+        </legend>
+        <?php
+        
+        $question = new Questions();
+        echo '<table id="voting-questions" class="table table-condensed table-bordered">';
+        echo '<thead>';
+        echo '<tr>';
+        echo '<th>' . $question->getAttributeLabel('questions_text') . '</th>';
+        echo '<td>&nbsp;</td>';
+        echo '</tr>';
+        echo '</thead>';
+        echo '<tbody>';
+        
+        // Формируем поле для ввода вопроса для текущего голосования
+        
+        foreach ($model->questions as $key => $_question) {
+          echo '<tr>';
+          echo $this->render('new_question', [
+            'key' => $_question->isNewRecord ? (strpos($key, 'new') !== false ? $key : 'new' . $key) : $_question->questions_id,
+            'form' => $form,
+            'question' => $_question,
+          ]);
+          echo '</tr>';
+        }
+        
+        // new parcel fields
+        echo '<tr id="voting-new-question-block" style="display: none;">';
+        echo $this->render('new_question', [
+            'key' => '__id__',
+            'form' => $form,
+            'question' => $question,
+        ]);
+        echo '</tr>';
+        echo '</tbody>';
+        echo '</table>';
+        
+        ?>
 
+        <?php ob_start(); // включаем буферизацию для js ?>
+        <script>
+            
+            // Добавление кнопки нового вопроса
+            var question_k = <?php echo isset($key) ? str_replace('new', '', $key) : 0; ?>;
+            $('#voting-new-question-button').on('click', function () {
+                question_k += 1;
+                $('#voting-questions').find('tbody')
+                  .append('<tr>' + $('#voting-new-question-block').html().replace(/__id__/g, 'new' + question_k) + '</tr>');
+            });
+            
+            // Добавление кнопки удаление вопроса
+            $(document).on('click', '.voting-remove-question-button', function () {
+                $(this).closest('tbody tr').remove();
+            });
+            
+            <?php
+            // OPTIONAL: click add when the form first loads to display the first new row
+            if (!Yii::$app->request->isPost && $model->voting->isNewRecord) 
+              echo "$('#voting-new-question-button').click();";
+            ?>
+        </script>
+        <?php $this->registerJs(str_replace(['<script>', '</script>'], '', ob_get_clean())); ?>
 
-<?php ActiveForm::end() ?>
+    </fieldset>
+
+    <?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary']); ?>
+    <?php ActiveForm::end(); ?>
+
+</div>

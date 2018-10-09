@@ -7,7 +7,7 @@
  * Голосование, создание голосования
  */
 
-$this->title = 'Голосование (+)';
+$this->title = $model->voting->voting_title;
 ?>
 <div class="managers-default-index">
     <h1><?= $this->title ?></h1>

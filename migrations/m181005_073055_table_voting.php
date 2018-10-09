@@ -57,6 +57,17 @@ class m181005_073055_table_voting extends Migration
         ]);
         $this->createIndex('idx-answers-answers_id', '{{%answers}}', 'answers_id');
         
+        /* $this->createTable('{{%voting_to_participant}}', [
+            'id' => $this->primaryKey(),
+            'voting_id' => $this->integer()->notNull(),
+            'estate_id' => $this->integer()->notNull(),
+            'house_id' => $this->integer()->notNull(),
+            'porch' => $this->integer()->notNull(),
+            'flat_id' => $this->integer()->null(),
+        ]);
+        $this->createIndex('idx-voting_to_participant-voting_id', '{{%voting_to_participant}}', 'voting_id');
+         */
+        
         $this->addForeignKey(
                 'fk-questions-questions_voting_id', 
                 '{{%questions}}', 

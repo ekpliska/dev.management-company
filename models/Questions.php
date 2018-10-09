@@ -3,12 +3,9 @@
     namespace app\models;
     use Yii;
     use yii\db\ActiveRecord;
-    use app\models\Voting;
     use app\models\Answers;
+    use app\models\Voting;
 
-/**
- * Вопросы к голосованию
- */
 class Questions extends ActiveRecord
 {
     /**
@@ -25,14 +22,14 @@ class Questions extends ActiveRecord
     public function rules()
     {
         return [
-            [['questions_voiting_id', 'questions_text', 'questions_user_id'], 'required'],
-            [['questions_voiting_id', 'questions_user_id'], 'integer'],
-            [['questions_text'], 'string'],
+            [['questions_text'], 'required'],
+            [['questions_voting_id', 'questions_user_id'], 'integer'],
+            [['questions_text'], 'string', 'min' => '10', 'max' => '255'],
             [['created_at', 'updated_at'], 'safe'],
-//            [['questions_voiting_id'], 'exist', 'skipOnError' => true, 'targetClass' => Voiting::className(), 'targetAttribute' => ['questions_voiting_id' => 'voiting_id']],
+            [['questions_voting_id'], 'exist', 'skipOnError' => true, 'targetClass' => Voting::className(), 'targetAttribute' => ['questions_voting_id' => 'voting_id']],
         ];
     }
-    
+
     /**
      * Связь с таблицей Ответы
      */
@@ -42,12 +39,12 @@ class Questions extends ActiveRecord
     }
 
     /**
-     * Связь с таблицей Голосование
+     * Свзяь с таблицей Голсование
      */
     public function getVoting()
     {
         return $this->hasOne(Voting::className(), ['voting_id' => 'questions_voting_id']);
-    }
+    }    
 
     /**
      * Аттрибуты полей
@@ -56,11 +53,11 @@ class Questions extends ActiveRecord
     {
         return [
             'questions_id' => 'Questions ID',
-            'questions_voiting_id' => 'Questions Voiting ID',
-            'questions_text' => 'Questions Text',
-            'questions_user_id' => 'Questions User ID',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'questions_voting_id' => 'Questions Voting ID',
+            'questions_text' => 'Текст вопроса',
+            'questions_user_id' => 'Пользователь',
+            'created_at' => 'Дата создания вопроса',
+            'updated_at' => 'Дата одновления вопроса',
         ];
     }
 

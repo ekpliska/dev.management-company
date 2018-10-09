@@ -31,37 +31,71 @@ class VotingController extends AppManagersController {
     public function actionCreate() {
         
         $model = new VotingForm();
+        $model->voting = new Voting();
+        $model->setAttributes(Yii::$app->request->post());
         
         $type_voting = Voting::getTypeVoting();
-        $object_vote = [];
         
-        if (Yii::$app->request->isPost && $model->load(Yii::$app->request->post())) {
-            // Обложка
-            $file = UploadedFile::getInstance($model, 'image');
-            $model->image = $file;
-            
-            $voting_id = $model->save($file);            
-            if ($voting_id) {
-                Yii::$app->session->setFlash('news-admin', [
-                    'success' => true,
-                    'message' => 'Новость была успешно добавлена',
-                ]);                
-                return $this->redirect(['view', 'number' => $voting_id]);
-            } else {
-                Yii::$app->session->setFlash('news-admin', [
-                    'success' => false,
-                    'error' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз',
-                ]);
-                return $this->redirect(Yii::$app->request->referrer);
+        if (Yii::$app->request->post() && $model->validate()) {
+            // Приводим дату завершения, дату окончания к формату бд
+            $model->voting->voting_date_start = Yii::$app->formatter->asDatetime($model->voting->voting_date_start, 'php:Y-m-d H:i:s');
+            $model->voting->voting_date_end = Yii::$app->formatter->asDatetime($model->voting->voting_date_end, 'php:Y-m-d H:i:s');
+            // Получаем загружаемую оложку для голосования
+            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+            // Вызываем метод на загрузку обложки, при успехе - получаем полный путь к загруженной обложке
+            $path = $model->upload();
+            if ($model->imageFile && $path) {
+                $model->voting->voting_image = $path;
+            }
+            // Сбрасываем путь загруженного изображения
+            $model->imageFile = null; 
+            // Сохраняем модель
+            if ($model->save()) {
+                Yii::$app->getSession()->setFlash('success', 'Product has been created.');
+                return $this->redirect(['view', 'voting' => $model->voting->voting_id]);
             }
         }
-        
+                
         return $this->render('create', [
             'model' => $model,
-            'type_voting' => $type_voting,
-            'object_vote' => $object_vote,
-        ]);
+            'type_voting' => $type_voting]);
+    }
+    
+    /*
+     * Просмотр страницы голосования
+     */
+    public function actionView($voting) {
         
+        $model = new VotingForm();
+        $model->voting = Voting::findOne($voting);
+        
+        if ($model->voting == null) {
+            throw new \yii\web\NotFoundHttpException('Вы обратились к несуществующей странице');
+        }
+        
+        $model->setAttributes(Yii::$app->request->post());
+        
+        $type_voting = Voting::getTypeVoting();        
+        
+        if (Yii::$app->request->post()) {
+            
+            // Получаем загружаемую оложку для голосования
+            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+            // Вызываем метод на загрузку обложки, при успехе - получаем полный путь к загруженной обложке
+            $path = $model->upload();
+            
+            if ($model->imageFile && $path) {
+                $model->voting->voting_image = $path;
+            }
+            $model->imageFile = null; 
+            $model->save();
+            
+            Yii::$app->getSession()->setFlash('success', 'Product has been updated.');
+            return $this->redirect(['view', 'voting' => $model->voting->voting_id]);
+        }
+        return $this->render('view', [
+            'model' => $model,
+            'type_voting' => $type_voting]);
     }
     
     /*
