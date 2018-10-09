@@ -53,6 +53,9 @@ class Voting extends ActiveRecord
             [['voting_text'], 'string'],
             
             [['voting_date_start', 'voting_date_end', 'created_at', 'updated_at'], 'safe'],
+            
+            ['voting_date_start', 'validateStartDateVote'],
+                    
             [['voting_title', 'voting_image'], 'string', 'max' => 255],
             
             ['voting_user_id', 'default', 'value' => Yii::$app->user->identity->id],
@@ -67,9 +70,18 @@ class Voting extends ActiveRecord
     /**
      * Свзяь с таблицей ВОпросы
      */
-    public function getQuestion()
-    {
+    public function getQuestion() {
         return $this->hasMany(Questions::className(), ['questions_voting_id' => 'voting_id']);
+    }
+    
+    /*
+     * Проверка даты начала и даты завершения голосования
+     */
+    public function validateStartDateVote() {
+        
+        if (strtotime($this->voting_date_start) > strtotime($this->voting_date_end)) {
+            return $this->addError('voting_date_start', 'Дата начала голосования не может быть позже даты завершения голосования');
+        }
     }
 
     /*

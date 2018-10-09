@@ -53,7 +53,7 @@
                             'type' => DateTimePicker::TYPE_COMPONENT_APPEND,
                             'pluginOptions' => [
                                 'autoClose' => true,
-                                'format' => 'yyyy-m-d hh:ii',
+                                'format' => 'yyyy-mm-dd hh:ii',
                             ]
                         ]) ?>
 
@@ -67,7 +67,7 @@
                             'type' => DateTimePicker::TYPE_COMPONENT_APPEND,
                             'pluginOptions' => [
                                 'autoClose' => true,
-                                'format' => 'yyyy-m-d hh:ii',
+                                'format' => 'yyyy-mm-dd hh:ii',
                             ]
                         ]) ?>   
         </div>

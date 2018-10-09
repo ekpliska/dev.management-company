@@ -28,8 +28,8 @@
             </p>
             <p>
                 <span class="label label-success"><?= FormatHelpers::statusNameVoting($voting['status']) ?></span>
-                <b>Дата начала голосования:</b> <?= FormatHelpers::formatDate($voting['voting_date_start'], true) ?>
-                <b>Дата окончания голосования:</b> <?= FormatHelpers::formatDate($voting['voting_date_end'], true) ?>
+                <b>Дата начала голосования:</b> <?= FormatHelpers::formatDate($voting['voting_date_start'], true, 1) ?>
+                <b>Дата окончания голосования:</b> <?= FormatHelpers::formatDate($voting['voting_date_end'], true, 1) ?>
                 <b>Проголосовало:</b> #COUNT
             </p>
             <hr />

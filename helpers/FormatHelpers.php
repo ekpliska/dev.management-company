@@ -52,15 +52,25 @@ class FormatHelpers {
     /*
      * Форматирование вывода даты в комментариях на странице заявки
      * число месяц г. (в ЧЧ:ММ)
+     * @param boolean $time Переключатель отображения времени
+     *      Формат:
+     *          $format = 0 -> ЧЧ:ММ:СС
+     *          $format = 1 -> в ЧЧ:ММ
      */
-    public static function formatDate($date_int, $time = false) {
+    public static function formatDate($date_int, $time = false, $format = 0) {
         
         if (empty($date_int)) {
             return 'Не установлена';
         }
         
         $_date_int = Yii::$app->formatter->asDate($date_int, 'dd.MMMM.yyyy');
-        $_time = $time ? ' в ' . Yii::$app->formatter->asTime($date_int, 'short') : '';
+        if ($time && $format == 0) {
+            $_time = Yii::$app->formatter->asTime($date_int, 'medium');
+        } elseif ($time && $format == 1) {
+            $_time = ' в ' . Yii::$app->formatter->asTime($date_int, 'short');
+        } else {
+            $_time = '';
+        }
         
         list($day, $month, $year) = explode('.', $_date_int);
         
