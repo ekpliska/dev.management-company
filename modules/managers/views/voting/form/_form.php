@@ -53,7 +53,7 @@
                             'type' => DateTimePicker::TYPE_COMPONENT_APPEND,
                             'pluginOptions' => [
                                 'autoClose' => true,
-                                'format' => 'dd.mm.yyyy hh:ii',
+                                'format' => 'yyyy-m-d hh:ii',
                             ]
                         ]) ?>
 
@@ -67,17 +67,17 @@
                             'type' => DateTimePicker::TYPE_COMPONENT_APPEND,
                             'pluginOptions' => [
                                 'autoClose' => true,
-                                'format' => 'dd.mm.yyyy hh:ii',
+                                'format' => 'yyyy-m-d hh:ii',
                             ]
                         ]) ?>   
         </div>
         
         <div class="col-md-6">
             <div class="text-center">
-                <?= Html::img('@web/' . $model->voting->voting_image, ['id' => 'photoPreview', 'class' => 'img-rounded', 'alt' => $model->voting->voting_title, 'width' => 150]) ?>
+                <?= Html::img($model->voting->image, ['id' => 'photoPreview', 'class' => 'img-rounded', 'alt' => $model->voting->voting_title, 'width' => 150]) ?>
             </div>
             <br />
-            <?= $form->field($model, 'imageFile')->input('file', ['id' => 'btnLoad'])->label(false) ?>
+                <?= $form->field($model, 'imageFile')->input('file', ['id' => 'btnLoad'])->label(false) ?>
         </div>
         
     </fieldset>

@@ -55,8 +55,8 @@ class VotingController extends AppManagersController {
         
         if (Yii::$app->request->post() && $model->validate()) {
             // Приводим дату завершения, дату окончания к формату бд
-            $model->voting->voting_date_start = Yii::$app->formatter->asDatetime($model->voting->voting_date_start, 'php:Y-m-d H:i:s');
-            $model->voting->voting_date_end = Yii::$app->formatter->asDatetime($model->voting->voting_date_end, 'php:Y-m-d H:i:s');
+//            $model->voting->voting_date_start = Yii::$app->formatter->asDatetime($model->voting->voting_date_start, 'php:Y-m-d H:i:s');
+//            $model->voting->voting_date_end = Yii::$app->formatter->asDatetime($model->voting->voting_date_end, 'php:Y-m-d H:i:s');
             // Получаем загружаемую оложку для голосования
             $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
             // Вызываем метод на загрузку обложки, при успехе - получаем полный путь к загруженной обложке
@@ -104,6 +104,7 @@ class VotingController extends AppManagersController {
             if ($model->imageFile && $path) {
                 $model->voting->voting_image = $path;
             }
+            $model->imageFile = null;
             $model->save();
             
             Yii::$app->getSession()->setFlash('success', 'Product has been updated.');

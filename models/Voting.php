@@ -108,6 +108,13 @@ class Voting extends ActiveRecord
         return $this->voting_id;
     }
     
+    public function getImage() {
+        if (empty($this->voting_image)) {
+            return Yii::getAlias('@web/' . 'images/not_found.png');
+        }
+        return Yii::getAlias('@web/') . $this->voting_image;
+    }
+    
     /*
      * Поиск записи по ID голосования
      */
@@ -139,7 +146,7 @@ class Voting extends ActiveRecord
         }
         
         return false;
-    }    
+    }
     
     /**
      * Аттрибуты полей
