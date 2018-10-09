@@ -82,16 +82,21 @@ class Voting extends ActiveRecord
         ];
     }
     
+    public function getStatusVoting() {
+        return [
+            self::STATUS_ACTIVE => 'Активно',
+            self::STATUS_CLOSED => 'Закрыто',
+            self::STATUS_CANCEL => 'Отменено',
+        ];
+    }
+    
     /*
      * 
      */
     public static function findAllVoting() {
         
-        $array = self::find()
+        return self::find()
                 ->asArray();
-//                ->all();
-        
-        return $array;
         
     }
     

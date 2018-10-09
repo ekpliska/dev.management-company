@@ -19,7 +19,7 @@
                     'width' => '150', 
                     'height' => '150']) ?>
             
-            <?= Html::button('Удалить', ['class' => 'btn btn-danger btn-sm', 'id' => 'delete_voting__btn']) ?>
+            <?= Html::button('Удалить', ['class' => 'btn btn-danger btn-sm']) ?>
         </div>
         <div class="col-md-10">
             <p>
@@ -27,7 +27,7 @@
                 <span class="label label-primary">ID <?= $voting['voting_id'] ?></span>
             </p>
             <p>
-                <span class="label label-success"><?= $voting['status'] ?></span>
+                <span class="label label-success"><?= FormatHelpers::statusNameVoting($voting['status']) ?></span>
                 <b>Дата начала голосования:</b> <?= FormatHelpers::formatDate($voting['voting_date_start'], true) ?>
                 <b>Дата окончания голосования:</b> <?= FormatHelpers::formatDate($voting['voting_date_end'], true) ?>
                 <b>Проголосовало:</b> #COUNT

@@ -5,6 +5,7 @@
     use yii\helpers\StringHelper;
     use yii\helpers\Html;
     use app\models\StatusRequest;
+    use app\models\Voting;
 
 /*
  * Внутренний хелпер,
@@ -111,6 +112,15 @@ class FormatHelpers {
         return ArrayHelper::getValue(StatusRequest::getStatusNameArray(), $status);
         
     }
+
+    /*
+     * Вывод текстового значения статусов для голосования
+     */
+    public static function statusNameVoting($status) {
+        
+        return ArrayHelper::getValue(Voting::getStatusVoting(), $status);
+        
+    }    
     
     /*
      * Форматирование полного имени пользователя

@@ -20,8 +20,8 @@ class VotingController extends AppManagersController {
      */
     public function actionIndex() {
         
-        // Получаем все доступные голсования
-        $query = Voting::find()->asArray();
+        // Получаем все доступные голосования
+        $query = Voting::findAllVoting();
         $count_voting = clone $query;
         $pages = new Pagination([
             'totalCount' => $count_voting->count(),
