@@ -104,7 +104,7 @@ class FormatFullNameUser {
         }
         
         return $user ?
-            Html::a($full_name, $link, ['target' => '_blank', 'class' => 'btn btn-primary btn-xs']) : 'Не назначен';
+            Html::a($full_name, $link, ['target' => '_blank', 'class' => 'btn btn-link btn-xs']) : 'Не назначен';
         
     }    
     

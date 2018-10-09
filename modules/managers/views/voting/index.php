@@ -20,7 +20,7 @@ $this->title = 'Голосование';
     
     <hr />
     
-    <?php /* = $this->render('data/grid_services', ['services' => $services]) */ ?>
+    <?= $this->render('data/view_all_voting', ['view_all_voting' => $view_all_voting, 'pages' => $pages]) ?>
     
 </div>
 

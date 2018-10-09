@@ -50,7 +50,7 @@ class FormatHelpers {
     
     /*
      * Форматирование вывода даты в комментариях на странице заявки
-     * число месяц г.
+     * число месяц г. (в ЧЧ:ММ)
      */
     public static function formatDate($date_int, $time = false) {
         
@@ -59,7 +59,7 @@ class FormatHelpers {
         }
         
         $_date_int = Yii::$app->formatter->asDate($date_int, 'dd.MMMM.yyyy');
-        $_time = $time ? Yii::$app->formatter->asTime($date_int) : '';
+        $_time = $time ? ' в ' . Yii::$app->formatter->asTime($date_int, 'short') : '';
         
         list($day, $month, $year) = explode('.', $_date_int);
         

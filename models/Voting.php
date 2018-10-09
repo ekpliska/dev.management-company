@@ -83,6 +83,19 @@ class Voting extends ActiveRecord
     }
     
     /*
+     * 
+     */
+    public static function findAllVoting() {
+        
+        $array = self::find()
+                ->asArray();
+//                ->all();
+        
+        return $array;
+        
+    }
+    
+    /*
      * Получить ID голосования
      */
     public function getId() {

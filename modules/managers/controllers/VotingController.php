@@ -3,6 +3,7 @@
     namespace app\modules\managers\controllers;
     use Yii;
     use yii\web\UploadedFile;
+    use yii\data\Pagination;
     use app\modules\managers\controllers\AppManagersController;
     use app\models\Voting;
     use app\models\Houses;
@@ -19,7 +20,23 @@ class VotingController extends AppManagersController {
      */
     public function actionIndex() {
         
-        return $this->render('index');
+        // Получаем все доступные голсования
+        $query = Voting::find()->asArray();
+        $count_voting = clone $query;
+        $pages = new Pagination([
+            'totalCount' => $count_voting->count(),
+            'pageSize' => 15,
+            'defaultPageSize' => 15,
+        ]);
+        
+        $view_all_voting = $query->offset($pages->offset)
+                ->limit($pages->limit)
+                ->all();
+
+        return $this->render('index', [
+            'view_all_voting' => $view_all_voting,
+            'pages' => $pages,
+        ]);
         
     }
     
