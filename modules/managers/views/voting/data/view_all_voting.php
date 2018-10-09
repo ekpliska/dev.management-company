@@ -33,7 +33,7 @@
                 <b>Проголосовало:</b> #COUNT
             </p>
             <hr />
-            <?= HtmlPurifier::process($voting['voting_text']) ?>
+            <?= HtmlPurifier::process(strip_tags($voting['voting_text'])) ?>
         </div>
     </div>
 

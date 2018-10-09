@@ -3,6 +3,7 @@
     use yii\widgets\ActiveForm;
     use yii\helpers\Html;
     use kartik\datetime\DateTimePicker;
+    use vova07\imperavi\Widget;
     use app\models\Questions;
 
 /*
@@ -28,7 +29,18 @@
         <div class="col-md-6">
             <?= $form->field($model->voting, 'voting_type')->radioList($type_voting)->label(false) ?>
             <?= $form->field($model->voting, 'voting_title')->textInput() ?>
-            <?= $form->field($model->voting, 'voting_text')->textInput() ?>
+            <?= $form->field($model->voting, 'voting_text')->widget(Widget::className(), [
+                'settings' => [
+                    'lang' => 'ru',
+                    'minHeight' => 200,
+                    'plugins' => [
+                        'fullscreen',
+                        'fontcolor',
+                        'table',
+                        'fontsize',
+                    ],
+                ],
+            ]) ?>
 
 
             <?= $form->field($model->voting, 'voting_date_start')

@@ -96,6 +96,7 @@ class Voting extends ActiveRecord
     public static function findAllVoting() {
         
         return self::find()
+                ->orderBy(['voting_date_start' => SORT_DESC])
                 ->asArray();
         
     }

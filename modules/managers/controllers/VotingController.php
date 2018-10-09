@@ -104,7 +104,6 @@ class VotingController extends AppManagersController {
             if ($model->imageFile && $path) {
                 $model->voting->voting_image = $path;
             }
-            $model->imageFile = null; 
             $model->save();
             
             Yii::$app->getSession()->setFlash('success', 'Product has been updated.');
