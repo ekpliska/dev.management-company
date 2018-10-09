@@ -24,4 +24,4 @@ $this->title = 'Голосование';
     
 </div>
 
-<?= ModalWindowsManager::widget(['modal_view' => 'delete_service']) ?>
+<?= ModalWindowsManager::widget(['modal_view' => 'delete_voting']) ?>

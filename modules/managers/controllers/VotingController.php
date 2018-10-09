@@ -68,8 +68,17 @@ class VotingController extends AppManagersController {
             $model->imageFile = null; 
             // Сохраняем модель
             if ($model->save()) {
-                Yii::$app->getSession()->setFlash('success', 'Product has been created.');
+                Yii::$app->session->setFlash('voting-admin', [
+                    'success' => true,
+                    'message' => 'Новое голосование было успешно создано',
+                ]);
                 return $this->redirect(['view', 'voting' => $model->voting->voting_id]);
+            } else {
+                Yii::$app->session->setFlash('voting-admin', [
+                    'success' => false,
+                    'error' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз',
+                ]);
+                return $this->redirect(Yii::$app->request->referrer);
             }
         }
                 
@@ -105,9 +114,17 @@ class VotingController extends AppManagersController {
                 $model->voting->voting_image = $path;
             }
             $model->imageFile = null;
-            $model->save();
-            
-            Yii::$app->getSession()->setFlash('success', 'Product has been updated.');
+            if (!$model->save()) {
+                Yii::$app->session->setFlash('voting-admin', [
+                    'success' => false,
+                    'error' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз',
+                ]);
+                return $this->redirect(Yii::$app->request->referrer);
+            }
+            Yii::$app->session->setFlash('voting-admin', [
+                'success' => true,
+                'message' => 'Изменения были успешно сохранены',
+            ]);
             return $this->redirect(['view', 'voting' => $model->voting->voting_id]);
         }
         return $this->render('view', [
@@ -136,6 +153,31 @@ class VotingController extends AppManagersController {
             }            
         }
         
+    }
+    
+    /*
+     * Запрос на удаление голосования
+     */
+    public function actionConfirmDeleteVoting() {
+        
+        $voting_id = Yii::$app->request->post('votingId');
+        
+        if (Yii::$app->request->isAjax) {
+            $voting = Voting::findByID($voting_id);
+            if (!$voting->delete()) {
+                Yii::$app->session->setFlash('voting-admin', [
+                    'success' => false,
+                    'error' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз',
+                ]);
+                return $this->redirect(Yii::$app->request->referrer);
+            }
+            Yii::$app->session->setFlash('voting-admin', [
+                    'success' => true,
+                    'message' => 'Голосование ' . $voting->voting_title . ' было успешно удалено',
+            ]);
+            return $this->redirect(['index']);
+        }
+        return ['success' => false];
     }
     
     

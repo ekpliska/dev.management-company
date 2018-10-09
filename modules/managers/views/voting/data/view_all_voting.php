@@ -19,7 +19,11 @@
                     'width' => '150', 
                     'height' => '150']) ?>
             
-            <?= Html::button('Удалить', ['class' => 'btn btn-danger btn-sm']) ?>
+            <?= Html::button('Удалить', [
+                    'class' => 'btn btn-danger btn-sm',
+                    'data-toggle' => 'modal',
+                    'data-target' => '#delete_voting_manager',
+                    'data-voting' => $voting['voting_id']]) ?>
         </div>
         <div class="col-md-10">
             <p>

@@ -683,7 +683,29 @@ $(document).ready(function() {
                 $('#object_vote_list').html(data);
             }
         );
-    });    
+    });
+
+    $('#delete_voting_manager').on('show.bs.modal', function(e){
+        var votingId = $(e.relatedTarget).data('voting');
+        $('.delete_voting__del').data('voting', votingId);
+    })
+    
+    $('.delete_voting__del').on('click', function(){
+        var votingId = $(this).data('voting');
+        $.ajax({
+            url: 'confirm-delete-voting',
+            method: 'POST',
+            data: {
+                votingId: votingId,
+            },
+            success: function (response){
+                return console.log(response.success);
+            },
+            error: function (){
+                return console.log('error');                
+            },
+        })
+    });
     
 });
     
