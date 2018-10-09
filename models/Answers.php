@@ -6,6 +6,11 @@
 
 class Answers extends ActiveRecord
 {
+    
+    const ANSWER_BEHIND = 1;
+    const ANSWER_AGAINST = 0;
+    const ANSWER_ABSTAIN = 2;
+    
     /**
      * Таблица БД
      */
@@ -30,10 +35,20 @@ class Answers extends ActiveRecord
     /**
      * Связь с таблцией Вопросы
      */
-    public function getQuestion()
-    {
+    public function getQuestion() {
         return $this->hasOne(Questions::className(), ['questions_id' => 'answers_questions_id']);
-    }    
+    }
+    
+    /*
+     * Варианты голосов
+     */
+    public function getAnswersArray() {
+        return [
+            self::ANSWER_BEHIND => 'За',
+            self::ANSWER_AGAINST => 'Против',
+            self::ANSWER_ABSTAIN => 'Воздержаться',
+        ];
+    }
     
     /**
      * Аттрибуты полей

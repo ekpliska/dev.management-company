@@ -36,17 +36,17 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">
-                    Внимание
+                    Удаление вопроса
                 </h4>
             </div>
             <div class="modal-body">
                 <div class="modal__text">
-                    Диспетчер <span id="disp-fullname"></span> имеет не закрытые заявки
+                    Вы действительно хотите удалить вопрос?
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" data-dismiss="modal">Удалить</button>
-                <button class="btn btn-primary" data-dismiss="modal">Закрыть</button>
+                <button class="btn btn-danger delete_question" data-dismiss="modal">Удалить</button>
+                <button class="btn btn-primary" data-dismiss="modal">Отмена</button>
             </div>
         </div>
     </div>

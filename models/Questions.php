@@ -8,6 +8,7 @@
 
 class Questions extends ActiveRecord
 {
+    
     /**
      * Таблица БД
      */
@@ -33,16 +34,14 @@ class Questions extends ActiveRecord
     /**
      * Связь с таблицей Ответы
      */
-    public function getAnswer()
-    {
+    public function getAnswer() {
         return $this->hasMany(Answers::className(), ['answers_questions_id' => 'questions_id']);
     }
 
     /**
      * Свзяь с таблицей Голсование
      */
-    public function getVoting()
-    {
+    public function getVoting() {
         return $this->hasOne(Voting::className(), ['voting_id' => 'questions_voting_id']);
     }
     

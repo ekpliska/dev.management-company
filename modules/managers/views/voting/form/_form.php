@@ -139,7 +139,7 @@
                   .append('<tr>' + $('#voting-new-question-block').html().replace(/__id__/g, 'new' + question_k) + '</tr>');
             });
             
-            // Добавление кнопки удаление вопроса
+            // Событие на удаление вопроса
             $(document).on('click', '.voting-remove-question-button', function () {
                 $(this).closest('tbody tr').remove();
             });
