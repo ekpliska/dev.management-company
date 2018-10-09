@@ -44,8 +44,8 @@ class Questions extends ActiveRecord
     public function getVoting()
     {
         return $this->hasOne(Voting::className(), ['voting_id' => 'questions_voting_id']);
-    }    
-
+    }
+    
     /**
      * Аттрибуты полей
      */

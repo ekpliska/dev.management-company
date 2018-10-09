@@ -122,9 +122,9 @@ class Voting extends ActiveRecord
     
     public function getImage() {
         if (empty($this->voting_image)) {
-            return Yii::getAlias('@web/' . 'images/not_found.png');
+            return Yii::getAlias('@web' . '/images/not_found.png');
         }
-        return Yii::getAlias('@web/') . $this->voting_image;
+        return Yii::getAlias('@web') . $this->voting_image;
     }
     
     /*
@@ -159,6 +159,18 @@ class Voting extends ActiveRecord
         
         return false;
     }
+    
+    /*
+     * После запроса на удаление голосования, удаляем изображение обложку голосования,
+     * удаляем вс вопросы, закрепленные за голосованием
+     */
+    public function afterDelete() {
+        
+        parent::afterDelete();
+        
+        $cover = $this->voting_image;
+        @unlink(Yii::getAlias('@webroot') . $cover);
+    }    
     
     /**
      * Аттрибуты полей

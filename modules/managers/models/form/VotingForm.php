@@ -160,11 +160,11 @@ class VotingForm extends Model
                 $dir = Yii::getAlias('upload/voting/cover/');
                 $file_name = 'previews_voting_' . time() . '.' . $this->imageFile->extension;
                 // Формируем путь нового изображения для хранения в БД
-                $path = $dir . $file_name;
+                $path = '/' . $dir . $file_name;
                 // Сохраняем новое изображаение
                 $this->imageFile->saveAs($dir . $file_name);
                 // Удаляем старое
-                @unlink(Yii::getAlias('@webroot/' . $current_image));
+                @unlink(Yii::getAlias('@webroot' . $current_image));
             } else {
                 // Если не было выбрано новое изображение, то путь к изображению в БД оставляем текущий
                 $path = $current_image;

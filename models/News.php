@@ -266,7 +266,7 @@ class News extends ActiveRecord
         
         $preview = $this->news_preview;
         @unlink(Yii::getAlias('@webroot') . $preview);
-        $this->getPathImageInText($preview);
+        $this->getPathImageInText($this->news_text);
         
         // Проверяем существование директории
         if (file_exists($dir_news)) {
