@@ -50,19 +50,20 @@ class Voting extends ActiveRecord
                 'voting_date_start', 'voting_date_end'], 'required'],
             
             [['voting_type', 'voting_house', 'voting_porch', 'status', 'voting_user_id'], 'integer'],
-            [['voting_text'], 'string'],
+            
+            ['voting_title', 'string', 'min' => 10, 'max' => 255],
+            ['voting_text', 'string', 'min' => 10, 'max' => 1000],
+            
+            [['voting_title', 'voting_text'], 'filter', 'filter' => 'trim'],
             
             [['voting_date_start', 'voting_date_end', 'created_at', 'updated_at'], 'safe'],
             
             ['voting_date_start', 'validateStartDateVote'],
                     
-            [['voting_title', 'voting_image'], 'string', 'max' => 255],
+            ['voting_image', 'string', 'max' => 255],
             
             ['voting_user_id', 'default', 'value' => Yii::$app->user->identity->id],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
-            
-            [['voting_image'], 'file', 'extensions' => 'png, jpg, jpeg'],
-            [['voting_image'], 'image', 'maxWidth' => 510, 'maxHeight' => 510],
             
         ];
     }
@@ -180,7 +181,7 @@ class Voting extends ActiveRecord
         return [
             'voting_id' => 'Voting ID',
             'voting_type' => 'Тип голосования',
-            'voting_title' => 'Заголвок голосования',
+            'voting_title' => 'Заголовок голосования',
             'voting_text' => 'Описание голосования',
             'voting_date_start' => 'Дата начала голосования',
             'voting_date_end' => 'Дата окончания голосования',

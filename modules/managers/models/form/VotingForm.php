@@ -180,10 +180,10 @@ class VotingForm extends Model
      */
     private function getAllModels() {
         $models = [
-            'Voting' => $this->voting,
+            'Голосование' => $this->voting,
         ];
         foreach ($this->questions as $id => $question) {
-            $models['Question.' . $id] = $this->questions[$id];
+            $models['Вопросы, вопрос ' . $id] = $this->questions[$id];
         }
         return $models;
     }

@@ -25,7 +25,7 @@ class m181005_073055_table_voting extends Migration
             'voting_id' => $this->primaryKey(),
             'voting_type' => $this->tinyInteger()->notNull(),
             'voting_title' => $this->string(255)->notNull(),
-            'voting_text' => $this->text(10000)->notNull(),
+            'voting_text' => $this->text(1000)->notNull(),
             'voting_date_start' => $this->timestamp()->defaultValue(new Expression("NOW()")),
             'voting_date_end' => $this->timestamp()->defaultValue(new Expression("NOW()")),
             'voting_house' => $this->integer()->notNull(),

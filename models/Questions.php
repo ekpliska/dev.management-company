@@ -23,9 +23,10 @@ class Questions extends ActiveRecord
     public function rules()
     {
         return [
-            [['questions_text'], 'required'],
+            ['questions_text', 'required'],
+            ['questions_text', 'filter', 'filter' => 'trim'],
             [['questions_voting_id', 'questions_user_id'], 'integer'],
-            [['questions_text'], 'string', 'min' => '10', 'max' => '255'],
+            [['questions_text'], 'string', 'min' => 10, 'max' => 255],
             [['created_at', 'updated_at'], 'safe'],
             [['questions_voting_id'], 'exist', 'skipOnError' => true, 'targetClass' => Voting::className(), 'targetAttribute' => ['questions_voting_id' => 'voting_id']],
         ];
