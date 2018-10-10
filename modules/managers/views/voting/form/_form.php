@@ -18,7 +18,7 @@
         'id' => 'form-voting',
         'enableClientValidation' => false,
         'options' => [
-                'enctype' => 'multipart/form-data',
+            'enctype' => 'multipart/form-data',
         ],
     ]); ?>
 
@@ -84,11 +84,10 @@
 
     <fieldset>
         <legend>Вопросы
-            <?php
-            echo Html::a('Добавить вопрос', 'javascript:void(0);', [
-              'id' => 'voting-new-question-button', 
-              'class' => 'pull-right btn btn-default btn-xs'
-            ])
+            <?= Html::a('Добавить вопрос', 'javascript:void(0);', [
+                    'id' => 'voting-new-question-button', 
+                    'class' => 'pull-right btn btn-default btn-xs'
+                ])
             ?>
         </legend>
         <?php
@@ -115,7 +114,7 @@
           echo '</tr>';
         }
         
-        // new parcel fields
+        // Поля для нового вопроса
         echo '<tr id="voting-new-question-block" style="display: none;">';
         echo $this->render('new_question', [
             'key' => '__id__',
@@ -139,13 +138,19 @@
                   .append('<tr>' + $('#voting-new-question-block').html().replace(/__id__/g, 'new' + question_k) + '</tr>');
             });
             
-            // Событие на удаление вопроса
+            /*
+             * Запрос на удаление вопроса
+             */
+            var elemQiestion;
             $(document).on('click', '.voting-remove-question-button', function () {
-                $(this).closest('tbody tr').remove();
+                elemQiestion = $(this).closest('tbody tr');
             });
-            
+            $('.delete_question').on('click', function(){
+                elemQiestion.remove();
+            });
+
+
             <?php
-            // OPTIONAL: click add when the form first loads to display the first new row
             if (!Yii::$app->request->isPost && $model->voting->isNewRecord) 
               echo "$('#voting-new-question-button').click();";
             ?>
@@ -154,7 +159,7 @@
 
     </fieldset>
 
-    <?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary']); ?>
+    <?= Html::submitButton($model->voting->isNewRecord ? 'Опубликовать' : 'Сохранить', ['class' => 'btn btn-primary']); ?>
     <?php ActiveForm::end(); ?>
 
 </div>

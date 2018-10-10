@@ -29,6 +29,11 @@ $this->title = $model->voting->voting_title;
             'data-toggle' => 'modal',
             'data-target' => '#delete_voting_manager',
             'data-voting' => $model->voting->voting_id]) ?>
+    <?= Html::button('Завершить голосование', [
+            'class' => 'btn btn-success btn-sm',
+            'data-toggle' => 'modal',
+            'data-target' => '#close_voting',
+            'data-voting' => $model->voting->voting_id]) ?>
     <hr />
     
     <?= $this->render('form/_form', [
