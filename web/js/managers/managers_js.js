@@ -758,7 +758,7 @@ $(document).ready(function() {
     
     $('#close_voting_manager').on('show.bs.modal', function(e){
         $(this).find('.modal__text p').html(messageText);
-    });
+    });   
     
 });
     

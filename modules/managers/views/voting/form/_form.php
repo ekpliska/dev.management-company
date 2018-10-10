@@ -93,46 +93,43 @@
                 ?>
             <?php endif; ?>
         </legend>
-        <?php
+        <?php $question = new Questions(); ?>
+        <table id="voting-questions" class="table table-condensed table-bordered">
+            <thead>
+                <tr>
+                    <th><?= $question->getAttributeLabel('questions_text') ?></th>
+                    <td>&nbsp;</td>
+                </tr>
+            </thead>
+            <tbody>
+                <?php // Формируем поле для ввода вопроса для текущего голосования ?>
+                <?php foreach ($model->questions as $key => $_question) : ?>
+                    <tr>
+                    <?= $this->render('new_question', [
+                            'key' => $_question->isNewRecord ? (strpos($key, 'new') !== false ? $key : 'new' . $key) : $_question->questions_id,
+                            'form' => $form,
+                            'question' => $_question,
+                            'status' => $model->voting->status,
+                        ]) 
+                    ?>
+                    </tr>
+                <?php endforeach; ?>
+                <?php // Поля для нового вопроса ?>
+                <tr id="voting-new-question-block" style="display: none;">
+                    <?= $this->render('new_question', [
+                            'key' => '__id__',
+                            'form' => $form,
+                            'question' => $question,
+                            'status' => $model->voting->status,
+                        ])
+                    ?>
+                </tr>
+            </tbody>
+        </table>
         
-        $question = new Questions();
-        echo '<table id="voting-questions" class="table table-condensed table-bordered">';
-        echo '<thead>';
-        echo '<tr>';
-        echo '<th>' . $question->getAttributeLabel('questions_text') . '</th>';
-        echo '<td>&nbsp;</td>';
-        echo '</tr>';
-        echo '</thead>';
-        echo '<tbody>';
-        
-        // Формируем поле для ввода вопроса для текущего голосования
-        
-        foreach ($model->questions as $key => $_question) {
-          echo '<tr>';
-          echo $this->render('new_question', [
-            'key' => $_question->isNewRecord ? (strpos($key, 'new') !== false ? $key : 'new' . $key) : $_question->questions_id,
-            'form' => $form,
-            'question' => $_question,
-            'status' => $model->voting->status,
-          ]);
-          echo '</tr>';
-        }
-        
-        // Поля для нового вопроса
-        echo '<tr id="voting-new-question-block" style="display: none;">';
-        echo $this->render('new_question', [
-            'key' => '__id__',
-            'form' => $form,
-            'question' => $question,
-            'status' => $model->voting->status,
-        ]);
-        echo '</tr>';
-        echo '</tbody>';
-        echo '</table>';
-        
-        ?>
 
         <?php ob_start(); // включаем буферизацию для js ?>
+
         <script>
             
             // Добавление кнопки нового вопроса
