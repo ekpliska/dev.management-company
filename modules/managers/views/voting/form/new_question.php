@@ -1,7 +1,8 @@
 <?php
+
     use app\models\Questions;
     use yii\helpers\Html;
-    
+    use app\modules\managers\widgets\Vote;
     
 ?>
 <td>
@@ -9,8 +10,8 @@
         'id' => "Questions_{$key}_questions_text",
         'name' => "Questions[$key][questions_text]",
     ])->label(false) ?>
-    <br />
-    <?= $key ?>
+    
+    <?= \app\modules\managers\widgets\Vote::widget(['question_id' => $key]) ?>
 </td>
 <td>
     <?php if ($status !== 1) : ?>

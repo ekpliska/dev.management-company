@@ -7,9 +7,9 @@
 class Answers extends ActiveRecord
 {
     
-    const ANSWER_BEHIND = 1;
-    const ANSWER_AGAINST = 0;
-    const ANSWER_ABSTAIN = 2;
+    const ANSWER_BEHIND = 2;
+    const ANSWER_AGAINST = 1;
+    const ANSWER_ABSTAIN = 0;
     
     /**
      * Таблица БД
@@ -42,7 +42,7 @@ class Answers extends ActiveRecord
     /*
      * Варианты голосов
      */
-    public function getAnswersArray() {
+    public static function getAnswersArray() {
         return [
             self::ANSWER_BEHIND => 'За',
             self::ANSWER_AGAINST => 'Против',
