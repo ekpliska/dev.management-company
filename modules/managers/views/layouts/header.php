@@ -145,8 +145,8 @@
             ['label' => 'Настройки', 'url' => ['settings/index']],
             ['label' => 'Новости (+)', 'url' => ['news/news']],
             ['label' => 'Реклама (+)', 'url' => ['news/adverts']],
-            ['label' => 'Голосование', 'url' => ['voting/index']],
-            ['label' => 'Жилищный фонд', 'url' => ['']],
+            ['label' => 'Голосование (? to ЖМ)', 'url' => ['voting/index']],
+            ['label' => 'Жилищный фонд', 'url' => ['estates/index']],
             ['label' => 'Конструктор заявок', 'url' => ['']],
         ],
     ]);

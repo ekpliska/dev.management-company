@@ -157,7 +157,7 @@ class FormatHelpers {
         
         $town = $town ? 'г. ' . $town . ', ' : '';
         $street = $street ? 'ул. '  . $street . ', ' : '';
-        $house = ($house || $porch || $floor || $flat)  ? 'д. ' . $house . ', ' : 'д. ' . $house;
+        $house = ($porch || $floor || $flat)  ? 'д. ' . $house . ', ' : 'д. ' . $house;
         $porch = $porch ? 'подъезд ' . $porch . ', ' : '';
         $floor = $floor ? 'эт. ' . $floor . ', ' : '';
         $flat = $flat ? 'кв. ' . $flat : '';

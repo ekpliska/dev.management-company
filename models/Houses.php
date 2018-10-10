@@ -28,6 +28,7 @@ class Houses extends ActiveRecord
             [['houses_estate_name_id', 'houses_street', 'houses_number_house'], 'required'],
             [['houses_estate_name_id'], 'integer'],
             [['houses_street'], 'string', 'max' => 100],
+            [['houses_description'], 'string', 'max' => 255],
             [['houses_number_house'], 'string', 'max' => 10],
             [['houses_estate_name_id'], 'exist', 'skipOnError' => true, 'targetClass' => HousingEstates::className(), 'targetAttribute' => ['houses_estate_name_id' => 'estate_id']],
         ];
@@ -47,6 +48,22 @@ class Houses extends ActiveRecord
     public function getEstate()
     {
         return $this->hasOne(HousingEstates::className(), ['estate_id' => 'houses_estate_name_id']);
+    }
+    
+    public static function getAllHouses() {
+        
+        return self::find()
+                ->select(['estate_id', 'estate_name', 'estate_town', 'houses_id', 'houses_street', 'houses_number_house', 'houses_description'])
+                ->joinWith(['estate'])
+                ->orderBy([
+                    'estate_name' => SORT_ASC,
+                    'estate_town' => SORT_ASC,
+                    'houses_street' => SORT_ASC,
+                    'houses_number_house' => SORT_ASC])
+                ->asArray()
+                ->all();
+        
+        
     }    
     
     /*

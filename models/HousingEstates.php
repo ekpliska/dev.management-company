@@ -47,7 +47,7 @@ class HousingEstates extends ActiveRecord
                 ->all();        
         
         return $array;
-    }    
+    }
     
     /**
      * Аттрибуты полей

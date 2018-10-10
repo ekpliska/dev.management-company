@@ -25,7 +25,6 @@ class m180901_103657_table_houses extends Migration
             'estate_id' => $this->primaryKey(),
             'estate_name' => $this->string(170)->notNull(),
             'estate_town' => $this->string(70)->notNull(),
-            'estate_description' => $this->string(255),
         ]);
         $this->createIndex('idx-housing_estates-estate_id', '{{%housing_estates}}', 'estate_id');
         
@@ -35,6 +34,7 @@ class m180901_103657_table_houses extends Migration
             'houses_estate_name_id' => $this->integer()->notNull(),
             'houses_street' => $this->string(100)->notNull(),
             'houses_number_house' => $this->string(10)->notNull(),
+            'houses_description' => $this->string(255)->notNull(),
         ], $table_options);
         $this->createIndex('idx-houses-houses_id', '{{%houses}}', 'houses_id');
         
