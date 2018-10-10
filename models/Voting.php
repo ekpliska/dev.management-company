@@ -98,7 +98,7 @@ class Voting extends ActiveRecord
     public function getStatusVoting() {
         return [
             self::STATUS_ACTIVE => 'Активно',
-            self::STATUS_CLOSED => 'Закрыто',
+            self::STATUS_CLOSED => 'Завершено',
             self::STATUS_CANCEL => 'Отменено',
         ];
     }
@@ -171,7 +171,14 @@ class Voting extends ActiveRecord
         
         $cover = $this->voting_image;
         @unlink(Yii::getAlias('@webroot') . $cover);
-    }    
+    }
+    
+    public function closeVoting() {
+        
+        $this->status = self::STATUS_CLOSED;
+        return $this->save(false) ? true : false;
+        
+    }
     
     /**
      * Аттрибуты полей

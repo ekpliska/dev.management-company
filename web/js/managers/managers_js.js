@@ -690,6 +690,9 @@ $(document).ready(function() {
         $('.delete_voting__del').data('voting', votingId);
     })
     
+    /*
+     * Запрос на удаление голосования
+     */
     $('.delete_voting__del').on('click', function(){
         var votingId = $(this).data('voting');
         $.ajax({
@@ -705,6 +708,56 @@ $(document).ready(function() {
                 return console.log('error');                
             },
         })
+    });
+    
+    /*
+     * Запрос на подтверждение закрытия голосования
+     */
+    var messageText;
+    $('.close_voting_btn').on('click', function(e){
+        var votingId = $(this).data('voting');
+        $.ajax({
+            url: 'confirm-close-voting',
+            method: 'POST',
+            data: {
+                votingId: votingId,
+            },
+            success: function(response) {
+                if (response.success === true && response.close === 'ask') {
+                    messageText = response.message + ' <b>' + response.title + '</b>?';
+                } else if (response.success === true && response.close === 'yes') {
+                    messageText = response.message + ' <b>' + response.title + '</b>?';
+                }
+                $('#close_voting_manager .close_voting_yes').data('voting', votingId);
+                $('#close_voting_manager').modal('show');
+            },
+            error: function(){
+                console.log('error');
+            },
+        });
+    });
+    
+    /*
+     * Закрытие голосования
+     */
+    $('.close_voting_yes').on('click', function(e){
+        e.preventDefault();
+        var votingId = $(this).data('voting');
+        $.ajax({
+            url: 'close-voting',
+            method: 'POST',
+            data: {
+                votingId: votingId,
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(textStatus);
+            },
+        });
+        return false;
+    });
+    
+    $('#close_voting_manager').on('show.bs.modal', function(e){
+        $(this).find('.modal__text p').html(messageText);
     });
     
 });

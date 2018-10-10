@@ -5,10 +5,11 @@
     use kartik\datetime\DateTimePicker;
     use vova07\imperavi\Widget;
     use app\models\Questions;
+    use app\models\Voting;
 
 /*
  * Форма голосования
- */    
+ */
 ?>
 
 
@@ -84,11 +85,13 @@
 
     <fieldset>
         <legend>Вопросы
-            <?= Html::a('Добавить вопрос', 'javascript:void(0);', [
-                    'id' => 'voting-new-question-button', 
-                    'class' => 'pull-right btn btn-default btn-xs'
-                ])
-            ?>
+            <?php if ($model->voting->status !== 1) : ?>
+                <?= Html::a('Добавить вопрос', 'javascript:void(0);', [
+                        'id' => 'voting-new-question-button', 
+                        'class' => 'pull-right btn btn-default btn-xs'
+                    ])
+                ?>
+            <?php endif; ?>
         </legend>
         <?php
         
@@ -110,6 +113,7 @@
             'key' => $_question->isNewRecord ? (strpos($key, 'new') !== false ? $key : 'new' . $key) : $_question->questions_id,
             'form' => $form,
             'question' => $_question,
+            'status' => $model->voting->status,
           ]);
           echo '</tr>';
         }
@@ -120,6 +124,7 @@
             'key' => '__id__',
             'form' => $form,
             'question' => $question,
+            'status' => $model->voting->status,
         ]);
         echo '</tr>';
         echo '</tbody>';

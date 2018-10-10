@@ -13,9 +13,11 @@
     <?= $key ?>
 </td>
 <td>
-    <?= Html::button('Удалить вопрос', [
-            'class' => 'voting-remove-question-button btn btn-default btn-xs',
-            'data-toggle' => 'modal',
-            'data-target' => '#delete_question_vote_message',
-    ]) ?>
+    <?php if ($status !== 1) : ?>
+        <?= Html::button('Удалить вопрос', [
+                'class' => 'voting-remove-question-button btn btn-default btn-xs',
+                'data-toggle' => 'modal',
+                'data-target' => '#delete_question_vote_message',
+        ]) ?>
+    <?php endif; ?>
 </td>

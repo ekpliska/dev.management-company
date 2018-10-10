@@ -180,5 +180,54 @@ class VotingController extends AppManagersController {
         return ['success' => false];
     }
     
+    /*
+     * Запрос на завешение голосования
+     */
+    public function actionConfirmCloseVoting() {
+        
+        $voting_id = Yii::$app->request->post('votingId');
+        $current_time = strtotime(date('Y-m-d'));        
+        
+        if (Yii::$app->request->isAjax) {
+            $voting = Voting::findByID($voting_id);
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            if ($current_time < strtotime($voting->voting_date_end)) {
+                return [
+                    'success' => true, 
+                    'close' => 'ask', 
+                    'message' => 'Дата завершения голосования отличается от текущей, все равно завершить голосование',
+                    'title' => $voting->voting_title];
+            } else {
+                return [
+                    'success' => true, 
+                    'close' => 'yes', 
+                    'message' => 'Вы действительно хотите завершить голосование ',
+                    'title' => $voting->voting_title];
+            }
+        }
+        return ['success' => false];
+    }
+    
+    public function actionCloseVoting() {
+        
+        $voting_id = Yii::$app->request->post('votingId');
+        if (Yii::$app->request->isAjax) {
+            $voting = Voting::findByID($voting_id);
+            if (!$voting->closeVoting()){
+                Yii::$app->session->setFlash('voting-admin', [
+                    'success' => false,
+                    'error' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз',
+                ]);
+                return $this->redirect(Yii::$app->request->referrer);
+            } else {
+                Yii::$app->session->setFlash('voting-admin', [
+                    'success' => true,
+                    'message' => 'Статус голосования ' . $voting->voting_title . ' изменился на "Завершено"',
+                ]);
+                return $this->redirect(Yii::$app->request->referrer);
+            }
+        }
+        
+    }
     
 }
