@@ -35,15 +35,13 @@ $this->title = 'Жилищный фонд';
                             <?= FormatHelpers::formatFullAdress($house['estate_town'], $house['houses_street'], $house['houses_number_house']) ?>
                         </p>
                     </div>
-                    <div id="house<?= $house['houses_id'] ?>" class="panel-collapse collapse in">
+                    <div id="house<?= $house['houses_id'] ?>" class="panel-collapse collapse">
                         <div class="panel-body">
                             <?= $house['houses_description'] ? $house['houses_description'] : 'Описание отсутствует' ?>
                             <br />
                             <?= Html::a('Редактировать описание', ['update-description', 'house_id' => $house['houses_id']], [
                                     'class' => 'btn btn-primary btn-sm',
-                                    'data-target' => '#edit-description-house',
-                                    'data-toggle' => 'modal',
-                                    'onclick' => "$('#edit-description-house .modal-dialog .modal-content .modal-body').load($(this).attr('href'))",
+                                    'id' => 'edit-discription-btn',
                             ]) ?>
                         </div>
                     </div>

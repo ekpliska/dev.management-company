@@ -760,6 +760,23 @@ $(document).ready(function() {
         $(this).find('.modal__text p').html(messageText);
     });   
     
+    
+    // ******************************************************** //
+    // ************     Start Block of Estates   ************** //
+    // ******************************************************** //    
+    
+    /*
+     * Метод загрузки модального окна на редактирование описания о доме
+     */
+    $('a#edit-discription-btn').on('click', function(e){
+        var link = $(this).attr('href');
+        $('#edit-description-house').modal('show');
+        $('#edit-description-house .modal-dialog .modal-content .modal-body').load(link);
+        e.preventDefault();
+        return false;        
+    });
+    
+    
 });
     
 
