@@ -4,12 +4,17 @@
     use Yii;
     use yii\db\ActiveRecord;
     use app\models\Houses;
+    use app\models\NotesFlat;
 
 /**
  * Квартиры
  */
 class Flats extends ActiveRecord
 {
+    // Задолженность на квартире
+    const STATUS_DEBTOR_YES = 1;
+    const STATUS_DEBTOR_NO = 0;
+    
     /**
      * Таблица в БД
      */
@@ -25,7 +30,7 @@ class Flats extends ActiveRecord
     {
         return [
             [['flats_house_id', 'flats_porch', 'flats_floor', 'flats_number', 'flats_rooms', 'flats_square'], 'required'],
-            [['flats_house_id', 'flats_porch', 'flats_floor', 'flats_number', 'flats_rooms', 'flats_square', 'flats_account_id', 'flats_client_id'], 'integer'],
+            [['flats_house_id', 'flats_porch', 'flats_floor', 'flats_number', 'flats_rooms', 'flats_square', 'flats_account_id', 'flats_client_id', 'status'], 'integer'],
             [['flats_house_id'], 'exist', 'skipOnError' => true, 'targetClass' => Houses::className(), 'targetAttribute' => ['flats_house_id' => 'houses_id']],
         ];
     }
@@ -33,10 +38,16 @@ class Flats extends ActiveRecord
     /**
      * Связь с таблицей Дома
      */
-    public function getHouse()
-    {
+    public function getHouse() {
         return $this->hasOne(Houses::className(), ['houses_id' => 'flats_house_id']);
     }    
+    
+    /*
+     * Связь с таблицей Примечания к квартире
+     */
+    public function getNote() {
+        return $this->hasMany(NotesFlat::className(), ['notes_flat_id' => 'flats_id']);
+    }
     
     /**
      * {@inheritdoc}

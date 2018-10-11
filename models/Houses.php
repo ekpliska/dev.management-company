@@ -5,6 +5,7 @@
     use Yii;
     use app\models\Flats;
     use app\models\HousingEstates;
+    use app\models\CharacteristicsHouse;
 
 /**
  * Дома
@@ -51,17 +52,22 @@ class Houses extends ActiveRecord
     /**
      * Связь с таблицей Квартиры
      */
-    public function getFlat()
-    {
+    public function getFlat() {
         return $this->hasMany(Flats::className(), ['flats_house_id' => 'houses_id']);
     }
 
     /**
      * Связь с таблицей Жилой комплекс
      */
-    public function getEstate()
-    {
+    public function getEstate() {
         return $this->hasOne(HousingEstates::className(), ['estate_id' => 'houses_estate_name_id']);
+    }
+
+    /**
+     * Связь с таблицей Характеристики дома
+     */
+    public function getCharacteristic() {
+        return $this->hasMany(CharacteristicsHouse::className(), ['characteristics_house_id' => 'houses_id']);
     }
     
     public static function getAllHouses() {

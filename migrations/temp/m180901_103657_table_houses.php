@@ -1,6 +1,7 @@
 <?php
 
     use yii\db\Migration;
+    use app\models\Flats;
 
 /**
  * Квартиры
@@ -49,6 +50,7 @@ class m180901_103657_table_houses extends Migration
             'flats_square' => $this->integer()->notNull(),
             'flats_account_id' => $this->integer(),
             'flats_client_id' => $this->integer(),
+            'status' => $this->tinyInteger()->defaultValue(Flats::STATUS_DEBTOR_NO),
         ], $table_options);
         $this->createIndex('idx-flats-flats_id', '{{%flats}}', 'flats_id');
         

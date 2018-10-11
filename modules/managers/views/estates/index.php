@@ -51,7 +51,8 @@ $this->title = 'Жилищный фонд';
     </div>
     
     <div class="col-md-2">
-        Характеристики дома
+        <?= $this->render('data/characteristics_house')
+        ?>
     </div>
     
     <div class="col-md-4">
