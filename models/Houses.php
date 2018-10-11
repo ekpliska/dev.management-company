@@ -11,6 +11,8 @@
  */
 class Houses extends ActiveRecord
 {
+    const SCENARIO_EDIT_DESCRIPRION = 'edit description house';
+    
     /**
      * Таблица в БД
      */
@@ -25,12 +27,24 @@ class Houses extends ActiveRecord
     public function rules()
     {
         return [
-            [['houses_estate_name_id', 'houses_street', 'houses_number_house'], 'required'],
+            [[
+                'houses_estate_name_id', 
+                'houses_street', 'houses_number_house', 
+                'houses_description'], 'required'],
+            
             [['houses_estate_name_id'], 'integer'],
+            
             [['houses_street'], 'string', 'max' => 100],
+            
             [['houses_description'], 'string', 'max' => 255],
+            
             [['houses_number_house'], 'string', 'max' => 10],
+            
             [['houses_estate_name_id'], 'exist', 'skipOnError' => true, 'targetClass' => HousingEstates::className(), 'targetAttribute' => ['houses_estate_name_id' => 'estate_id']],
+
+            ['houses_description', 'required', 'on' => self::SCENARIO_EDIT_DESCRIPRION],
+            ['houses_description', 'string', 'min' => 10, 'max' => 255, 'on' => self::SCENARIO_EDIT_DESCRIPRION],
+            
         ];
     }
 
@@ -85,9 +99,10 @@ class Houses extends ActiveRecord
     {
         return [
             'houses_id' => 'Houses ID',
-            'houses_estate_name_id' => 'Houses Estate Name ID',
-            'houses_street' => 'Houses Street',
-            'houses_number_house' => 'Houses Number House',
+            'houses_estate_name_id' => 'Жилой комплекс',
+            'houses_street' => 'Улица',
+            'houses_number_house' => 'Номер дома',
+            'houses_description' => 'Описание',
         ];
     }
 
