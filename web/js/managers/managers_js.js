@@ -776,6 +776,29 @@ $(document).ready(function() {
         return false;        
     });
     
+    $(document).on('click', '#house_link', function(){
+        var house = $(this).attr('href');
+        house = house.replace(/[^0-9]/gim, '');
+        
+        $.ajax({
+            url: 'view-characteristic-house',
+            method: 'POST',
+            data: {
+                house: house,
+            },
+            success: function (response) {
+                $('#characteristic_list').html(response.data);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(textStatus);
+            }
+        });
+    });
+    
+    $('#characteristic_list').on('click', '#delete-characteristic__link', function(){
+        var characteristicId = $(this).data('characteristicId');
+        alert(characteristicId);
+    });
     
 });
     

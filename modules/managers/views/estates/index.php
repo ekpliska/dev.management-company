@@ -19,15 +19,24 @@ $this->title = 'Жилищный фонд';
     <?= AlertsShow::widget() ?>
     
     <?= Html::a('Жилищный фонд (+)', ['voting/create'], ['class' => 'btn btn-success btn-sm']) ?>
+    <div class="dropdown">
+        <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown">+
+            <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+                <li><a href="#">Добавить характеристику</a></li>
+                <li><a href="#">Добавить вложение</a></li>
+            </ul>
+    </div>
     <hr />
     
     <div class="col-md-4">
+        <h4>Жилой комплекс</h4>
         <div class="panel-group" id="accordion">
             <?php foreach ($houses_list as $house) : ?>
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#house<?= $house['houses_id'] ?>">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#house<?= $house['houses_id'] ?>" id="house_link">
                                 <?= $house['estate_name'] ?>
                             </a>
                         </h4>
@@ -51,16 +60,20 @@ $this->title = 'Жилищный фонд';
     </div>
     
     <div class="col-md-2">
-        <?= $this->render('data/characteristics_house')
-        ?>
+        <h4>Характеристики</h4>
+        <table>
+            <div id="characteristic_list">
+                <?= $this->render('data/characteristics_house', ['characteristics' => $characteristics], false, true) ?>
+            </div>
+        </table>
     </div>
     
     <div class="col-md-4">
-        Квартиры
+        <h4>Квартиры</h4>
     </div>
     
     <div class="col-md-2">
-        Прикрепленные файлы
+        <h4>Вложения</h4>
     </div>
     
 </div>

@@ -4,6 +4,7 @@
     use Yii;
     use app\modules\managers\controllers\AppManagersController;
     use app\models\Houses;
+    use app\models\CharacteristicsHouse;
 
 /**
  * Жилищный фонд
@@ -51,6 +52,23 @@ class EstatesController extends AppManagersController {
             return \yii\widgets\ActiveForm::validate($model);
         }
         
+    }
+    
+    public function actionViewCharacteristicHouse() {
+        
+        $house_id = Yii::$app->request->post('house');
+        
+        if (Yii::$app->request->isAjax) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            $characteristics = CharacteristicsHouse::find()
+                    ->where(['characteristics_house_id' => $house_id])
+                    ->asArray()
+                    ->all();
+            
+            $data = $this->renderPartial('data/characteristics_house', ['characteristics' => $characteristics], false, true);
+            
+            return ['data' => $data];
+        }
     }
     
 }
