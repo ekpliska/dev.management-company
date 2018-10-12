@@ -71,7 +71,7 @@ class EstatesController extends AppManagersController {
                     ->asArray()
                     ->all();
             $flats = Flats::find()
-                    ->select(['flats_id', 'flats_porch', 'flats_number', 'clients_surname', 'clients_name', 'clients_second_name'])
+                    ->select(['flats_id', 'flats_porch', 'flats_number', 'status', 'clients_surname', 'clients_name', 'clients_second_name'])
                     ->joinWith(['client'])
                     ->where(['flats_house_id' => 1])->asArray()->all();
             

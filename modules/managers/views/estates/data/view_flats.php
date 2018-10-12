@@ -1,5 +1,6 @@
 <?php
 
+    use yii\helpers\Html;
     use app\helpers\FormatHelpers;
 
 /* 
@@ -12,7 +13,11 @@
         <tr>
             <td colspan="2">
                 <?= FormatHelpers::flatAndPorch($flat['flats_number'], $flat['flats_porch']) ?>
-                del
+                <?= Html::button('<span class="glyphicon glyphicon-trash"></span>', [
+                        'id' => 'delete-characteristic__link',
+                    ]) 
+                ?>
+                Должник: <?= Html::checkbox($name, $flat['status']) ?>
             </td>
         </tr>
         <tr>
@@ -25,7 +30,7 @@
                 <?= FormatHelpers::formatFullUserName($flat['clients_surname'], $flat['clients_name'], $flat['clients_second_name'], true) ?>
             </td>
         </tr>
-        <tr>
+        <tr style="border-bottom: 1px #c1c1c1 solid;">
             <td colspan="2">
                 <!--desc-->
             </td>
