@@ -16,8 +16,11 @@ class EstatesController extends AppManagersController {
         
         $houses_list = Houses::getAllHouses();
         
+        $flats = Flats::getFlatsByHouse(1);
+        
         return $this->render('index', [
             'houses_list' => $houses_list,
+            'flats' => $flats,
         ]);
         
     }
@@ -66,14 +69,8 @@ class EstatesController extends AppManagersController {
         
         if (Yii::$app->request->isAjax) {
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-            $characteristics = CharacteristicsHouse::find()
-                    ->where(['characteristics_house_id' => $house_id])
-                    ->asArray()
-                    ->all();
-            $flats = Flats::find()
-                    ->select(['flats_id', 'flats_porch', 'flats_number', 'status', 'clients_surname', 'clients_name', 'clients_second_name'])
-                    ->joinWith(['client'])
-                    ->where(['flats_house_id' => 1])->asArray()->all();
+            $characteristics = CharacteristicsHouse::getCharacteristicsByHouse($house_id);
+            $flats = Flats::getFlatsByHouse($house_id);
             
             $data_characteristics = $this->renderPartial('data/characteristics_house', ['characteristics' => $characteristics]);
             $data_flats = $this->renderPartial('data/view_flats', ['flats' => $flats]);

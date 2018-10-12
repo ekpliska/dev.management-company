@@ -37,7 +37,17 @@ class CharacteristicsHouse extends ActiveRecord
      */
     public function getHouse() {
         return $this->hasOne(Houses::className(), ['houses_id' => 'characteristics_house_id']);
-    }    
+    }
+    
+    /*
+     * Получить все характеристики по заданному дому
+     */
+    public static function getCharacteristicsByHouse($house_id) {
+        return self::find()
+                ->where(['characteristics_house_id' => $house_id])
+                ->asArray()
+                ->all();
+    }
     
     /**
      * Аттрибуты полей

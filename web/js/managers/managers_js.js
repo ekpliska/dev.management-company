@@ -789,7 +789,6 @@ $(document).ready(function() {
             success: function (response) {
                 $('#characteristic_list').html(response.data);
                 $('#flats_list').html(response.flats);
-                console.log(response.flats);
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log(textStatus);
@@ -801,13 +800,13 @@ $(document).ready(function() {
      * Полное удаление или восстановление выбранной характеристики дома
      */
     // Массив будет содержать клонированные участки кода с выбранными для удаления характеристиками
-    var queue = new Array();
+    var chooseArray = new Array();
     $('#characteristic_list').on('click', '#delete-characteristic__link', function(){
         var html = $(this).closest('tr').html();
         var block = $(this).closest('tr');
         var characteristicId = $(this).data('characteristicId');
-        queue.push({'html':html});
-        var num = queue.length;
+        chooseArray.push({'html':html});
+        var num = chooseArray.length;
 
         block.html(
                 "<span class='rest_char' id='rest_" + num + "'>Восстановить</span> | " + 
@@ -817,7 +816,7 @@ $(document).ready(function() {
             var num = $(this).attr('id');
             num = num.replace(/[^0-9]/gim, '') - 1;
             var parent = $(this).parent();
-            parent.html(queue[num]['html']);
+            parent.html(chooseArray[num]['html']);
         });
         /*
          * Удаление характеристики

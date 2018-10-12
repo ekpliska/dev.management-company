@@ -57,6 +57,22 @@ class Flats extends ActiveRecord
         return $this->hasMany(NotesFlat::className(), ['notes_flat_id' => 'flats_id']);
     }
     
+    /*
+     * Получить список всех квартир по заданному дому
+     */
+    public static function getFlatsByHouse($house_id){
+        
+        $list = self::find()
+                ->select(['flats_id', 'flats_porch', 'flats_number', 'status', 'clients_surname', 'clients_name', 'clients_second_name'])
+                ->joinWith(['client'])
+                ->where(['flats_house_id' => $house_id])
+                ->asArray()
+                ->all();
+        
+        return $list;
+        
+    }
+    
     /**
      * {@inheritdoc}
      */

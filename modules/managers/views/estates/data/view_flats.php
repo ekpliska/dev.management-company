@@ -17,7 +17,10 @@
                         'id' => 'delete-characteristic__link',
                     ]) 
                 ?>
-                Должник: <?= Html::checkbox($name, $flat['status']) ?>
+                <?= Html::checkbox($flat_status, $flat['status'], [
+                        'data-flat-status' => $flat['flats_id'],
+                    ]) 
+                ?>
             </td>
         </tr>
         <tr>

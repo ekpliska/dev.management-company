@@ -24,6 +24,7 @@ class AppAsset extends AssetBundle
     ];
     public $js = [
         'js/common.js',
+        'js/cookie/set_cookies.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',
