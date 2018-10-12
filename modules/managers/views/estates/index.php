@@ -63,13 +63,16 @@ $this->title = 'Жилищный фонд';
         <h4>Характеристики</h4>
         <table>
             <div id="characteristic_list">
-                <?= $this->render('data/characteristics_house', ['characteristics' => $characteristics], false, true) ?>
+                <?= $this->render('data/characteristics_house', ['characteristics' => $characteristics]) ?>
             </div>
         </table>
     </div>
     
     <div class="col-md-4">
         <h4>Квартиры</h4>
+        <div id="flats_list">
+            <?= $this->render('data/view_flats', ['flats' => $flats]) ?>
+         </div>
     </div>
     
     <div class="col-md-2">

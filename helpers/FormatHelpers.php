@@ -136,16 +136,16 @@ class FormatHelpers {
      * Форматирование полного имени пользователя
      * Фамилия И. О.
      */
-    public static function formatFullUserName($surname, $name, $second_name) {
+    public static function formatFullUserName($surname, $name, $second_name, $full = false) {
         
         if ($surname == null && $name == null && $second_name == null) {
             return 'Не задан';
         }
         
-        $_name = mb_substr($name, 0, 1, 'UTF-8');
-        $_second_name = mb_substr($second_name, 0, 1, 'UTF-8');
+        $_name = $full ? $name : mb_substr($name, 0, 1, 'UTF-8') . '.';
+        $_second_name = $full ? $second_name : mb_substr($second_name, 0, 1, 'UTF-8') . '.';
         
-        return $surname . ' ' . $_name . '. ' . $_second_name . '.';
+        return $surname . ' ' . $_name . ' ' . $_second_name . ' ';
         
     }
     
@@ -175,6 +175,14 @@ class FormatHelpers {
         $town = $town ? 'г. ' . $town : '';
         
         return $name . $town;
+    }
+    
+    /*
+     * Форматирование адреса Квартиты
+     * Квартира Номер. подъеда Номер
+     */
+    public static function flatAndPorch($number_flat, $porch) {
+        return 'Квартира ' . $number_flat . ', подьезд ' . $porch;
     }
     
     

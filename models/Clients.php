@@ -5,7 +5,7 @@
     use yii\db\ActiveRecord;
     use app\models\Rents;
     use app\models\PersonalAccount;
-    use app\models\Houses;
+    use app\models\Flats;
 
 /**
  * Собственники
@@ -53,8 +53,18 @@ class Clients extends ActiveRecord
         ];
     }
     
+    /*
+     * Связь с таблицей Лицевой счет
+     */
     public function getPersonalAccount() {
-        return $this->hasOne(PersonalAccount::className(), ['personal_clients_id' => 'clients_id']);
+        return $this->hasMany(PersonalAccount::className(), ['personal_clients_id' => 'clients_id']);
+    }
+    
+    /*
+     * Связь с таблицей Квартиры
+     */
+    public function getFlat() {
+        return $this->hasMany(Flats::className(), ['flats_client_id' => 'clients_id']);
     }
     
     /*

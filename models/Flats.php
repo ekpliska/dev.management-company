@@ -5,6 +5,7 @@
     use yii\db\ActiveRecord;
     use app\models\Houses;
     use app\models\NotesFlat;
+    use app\models\Clients;
 
 /**
  * Квартиры
@@ -33,6 +34,13 @@ class Flats extends ActiveRecord
             [['flats_house_id', 'flats_porch', 'flats_floor', 'flats_number', 'flats_rooms', 'flats_square', 'flats_account_id', 'flats_client_id', 'status'], 'integer'],
             [['flats_house_id'], 'exist', 'skipOnError' => true, 'targetClass' => Houses::className(), 'targetAttribute' => ['flats_house_id' => 'houses_id']],
         ];
+    }
+    
+    /*
+     * Связь с таблицей Собственники
+     */
+    public function getClient() {
+        return $this->hasOne(Clients::className(), ['clients_id' => 'flats_client_id']);
     }
 
     /**

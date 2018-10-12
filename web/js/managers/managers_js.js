@@ -788,17 +788,14 @@ $(document).ready(function() {
             },
             success: function (response) {
                 $('#characteristic_list').html(response.data);
+                $('#flats_list').html(response.flats);
+                console.log(response.flats);
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log(textStatus);
             }
         });
     });
-    
-//    $('#characteristic_list').on('click', '#delete-characteristic__link', function(){
-//        var characteristicId = $(this).data('characteristicId');
-//        alert(characteristicId);
-//    });
 
     /*
      * Полное удаление или восстановление выбранной характеристики дома
@@ -822,7 +819,9 @@ $(document).ready(function() {
             var parent = $(this).parent();
             parent.html(queue[num]['html']);
         });
-        
+        /*
+         * Удаление характеристики
+         */
         $("span[id='char_" + characteristicId + "']").on('click', function () {
             var charId = $(this).attr('id');
             charId = charId.replace(/[^0-9]/gim, '');
@@ -840,17 +839,12 @@ $(document).ready(function() {
                 error: function (jqXHR, textStatus, errorThrown) {
                     console.log(textStatus);
                 },
-            })
+            });
             
         });        
         
     });
-    
-//    $('.delete_char').on('click', function (){
-//        alert ($(this).attr(''));
-//    });
-//    
-});
+ });
     
 
 

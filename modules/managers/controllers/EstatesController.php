@@ -5,6 +5,7 @@
     use app\modules\managers\controllers\AppManagersController;
     use app\models\Houses;
     use app\models\CharacteristicsHouse;
+    use app\models\Flats;
 
 /**
  * Жилищный фонд
@@ -54,9 +55,14 @@ class EstatesController extends AppManagersController {
         
     }
     
+    /*
+     * Загрузка характеристики дома
+     * Квартиры
+     */
     public function actionViewCharacteristicHouse() {
         
         $house_id = Yii::$app->request->post('house');
+        
         
         if (Yii::$app->request->isAjax) {
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
@@ -64,10 +70,15 @@ class EstatesController extends AppManagersController {
                     ->where(['characteristics_house_id' => $house_id])
                     ->asArray()
                     ->all();
+            $flats = Flats::find()
+                    ->select(['flats_id', 'flats_porch', 'flats_number', 'clients_surname', 'clients_name', 'clients_second_name'])
+                    ->joinWith(['client'])
+                    ->where(['flats_house_id' => 1])->asArray()->all();
             
-            $data = $this->renderPartial('data/characteristics_house', ['characteristics' => $characteristics], false, true);
+            $data_characteristics = $this->renderPartial('data/characteristics_house', ['characteristics' => $characteristics]);
+            $data_flats = $this->renderPartial('data/view_flats', ['flats' => $flats]);
             
-            return ['data' => $data];
+            return ['data' => $data_characteristics, 'flats' => $data_flats];
         }
     }
     
