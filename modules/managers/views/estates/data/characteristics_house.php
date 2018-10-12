@@ -7,7 +7,6 @@
  */
 ?>
 
-
     <?php if (isset($characteristics) && $characteristics) : ?>
         <?php foreach ($characteristics as $characteristic) : ?>
         <tr>

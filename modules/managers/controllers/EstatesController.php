@@ -71,4 +71,21 @@ class EstatesController extends AppManagersController {
         }
     }
     
+    /*
+     * Удаление выбранной характеристики
+     */
+    public function actionDeleteCharacteristic(){
+        $characteristic_id = Yii::$app->request->post('charId');
+        if (Yii::$app->request->isAjax) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            $characteristic = CharacteristicsHouse::findOne($characteristic_id);
+            if (!$characteristic->delete()) {
+                return ['success' => false];
+            } else {
+                return ['success' => true];
+            }
+        }
+        return ['success' => false];
+    }
+    
 }

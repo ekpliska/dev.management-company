@@ -795,11 +795,61 @@ $(document).ready(function() {
         });
     });
     
+//    $('#characteristic_list').on('click', '#delete-characteristic__link', function(){
+//        var characteristicId = $(this).data('characteristicId');
+//        alert(characteristicId);
+//    });
+
+    /*
+     * Полное удаление или восстановление выбранной характеристики дома
+     */
+    // Массив будет содержать клонированные участки кода с выбранными для удаления характеристиками
+    var queue = new Array();
     $('#characteristic_list').on('click', '#delete-characteristic__link', function(){
+        var html = $(this).closest('tr').html();
+        var block = $(this).closest('tr');
         var characteristicId = $(this).data('characteristicId');
-        alert(characteristicId);
+        queue.push({'html':html});
+        var num = queue.length;
+
+        block.html(
+                "<span class='rest_char' id='rest_" + num + "'>Восстановить</span> | " + 
+                "<span class='delete_char' id='char_" + characteristicId + "'>Удалить</span>")
+        
+        $("span[id='rest_" + num + "']").on('click', function () {
+            var num = $(this).attr('id');
+            num = num.replace(/[^0-9]/gim, '') - 1;
+            var parent = $(this).parent();
+            parent.html(queue[num]['html']);
+        });
+        
+        $("span[id='char_" + characteristicId + "']").on('click', function () {
+            var charId = $(this).attr('id');
+            charId = charId.replace(/[^0-9]/gim, '');
+            $.ajax({
+                url: 'delete-characteristic',
+                method: 'POST',
+                data: {
+                    charId: charId,
+                },
+                success: function (data, textStatus, jqXHR) {
+                    if (data.success === true) {
+                        block.remove();
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus);
+                },
+            })
+            
+        });        
+        
     });
     
+//    $('.delete_char').on('click', function (){
+//        alert ($(this).attr(''));
+//    });
+//    
 });
     
 
