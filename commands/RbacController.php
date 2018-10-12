@@ -92,7 +92,7 @@ class RbacController extends Controller {
         $auth->addChild($administrator, $viewInfoRent);
          */
         
-        $this->stdout('Формирование ролей и разрешений выполнено!', PHP_EOL);
+        $this->stdout('here', PHP_EOL);
         
     }
 }

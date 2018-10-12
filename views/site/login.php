@@ -8,7 +8,6 @@ $this->title = 'Вход';
 ?>
 <div class="site-login">
     <h1>Вход</h1>
-    
         <?php if (Yii::$app->session->hasFlash('registration-done')) : ?>
             <div class="alert alert-info" role="alert">
                 <strong>
