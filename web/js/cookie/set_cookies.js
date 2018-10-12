@@ -47,8 +47,9 @@ $(document).ready(function() {
     $(document).on('click', '#house_link', function(){
         var house = $(this).attr('href');
         house = house.replace(/[^0-9]/gim, '');
-        setCookie('choosingHouse', house);
-        alert(document.cookie);
+//        setCookie('choosingHouse', house);
+//        alert(document.cookie);
+        document.cookie = 'choosingHouse_' + "=" + house;
     });
     
 });

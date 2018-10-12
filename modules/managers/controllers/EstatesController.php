@@ -16,13 +16,28 @@ class EstatesController extends AppManagersController {
         
         $houses_list = Houses::getAllHouses();
         
+//        $cookies = Yii::$app->request->cookies;
+//        $choosing = Yii::$app->request->cookies->get('choosingHouse')->value;
+//
+//        var_dump($choosing); die();
+        
+        $characteristics = CharacteristicsHouse::getCharacteristicsByHouse(1);
         $flats = Flats::getFlatsByHouse(1);
         
         return $this->render('index', [
             'houses_list' => $houses_list,
+            'characteristics' => $characteristics,
             'flats' => $flats,
         ]);
         
+    }
+    
+    public function getCookies() {
+        
+        $cookies = Yii::$app->request->cookies;
+        $t = $cookies->getValue('choosingHouse');
+
+        return $t;
     }
     
     /*
