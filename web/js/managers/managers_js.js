@@ -843,6 +843,19 @@ $(document).ready(function() {
         });        
         
     });
+
+    /*
+     * Загрузка модального окна для доабвления новой характеристики
+     */
+    $('a#add-charact-btn').on('click', function(e){
+        var link = $(this).attr('href');
+        $('#add-characteristic-modal-form').modal('show');
+        $('#add-characteristic-modal-form .modal-dialog .modal-content .modal-body').load(link);
+        e.preventDefault();
+        return false;        
+    });
+    
+    
  });
     
 

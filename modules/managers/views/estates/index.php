@@ -1,6 +1,7 @@
 <?php
 
     use yii\helpers\Html;
+    use yii\helpers\Url;
     use yii\bootstrap\Modal;
     use app\modules\managers\widgets\AlertsShow;
     use app\helpers\FormatHelpers;
@@ -23,7 +24,7 @@ $this->title = 'Жилищный фонд';
         <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown">+
             <span class="caret"></span></button>
             <ul class="dropdown-menu">
-                <li><a href="#">Добавить характеристику</a></li>
+                <li><a href="<?= Url::to(['create-characteristic']) ?>" id="add-charact-btn">Добавить характеристику</a></li>
                 <li><a href="#">Добавить вложение</a></li>
             </ul>
     </div>
@@ -61,11 +62,9 @@ $this->title = 'Жилищный фонд';
     
     <div class="col-md-2">
         <h4>Характеристики</h4>
-        <table>
-            <div id="characteristic_list">
-                <?= $this->render('data/characteristics_house', ['characteristics' => $characteristics]) ?>
-            </div>
-        </table>
+        <div id="characteristic_list">
+            <?= $this->render('data/characteristics_house', ['characteristics' => $characteristics]) ?>
+        </div>
     </div>
     
     <div class="col-md-4">
@@ -87,6 +86,19 @@ $this->title = 'Жилищный фонд';
     Modal::begin([
         'id' => 'edit-description-house',
         'header' => 'Редактирование',
+        'clientOptions' => [
+            'backdrop' => 'static', 
+            'keyboard' => false],
+    ]);
+?>
+<?php Modal::end(); ?>
+
+<?php
+    /* Модальное окно для добавления новой характеристики */
+
+    Modal::begin([
+        'id' => 'add-characteristic-modal-form',
+        'header' => 'Добавить характеристику',
         'clientOptions' => [
             'backdrop' => 'static', 
             'keyboard' => false],

@@ -10,8 +10,10 @@
  */
 class CharacteristicsHouse extends ActiveRecord
 {
+    const SCENARIO_ADD_CHARACTERISTIC = 'add new characteristic';
+    
     /**
-     * {@inheritdoc}
+     * Таблица БД
      */
     public static function tableName()
     {
@@ -26,8 +28,15 @@ class CharacteristicsHouse extends ActiveRecord
         return [
             [['characteristics_house_id', 'characteristics_name', 'characteristics_value'], 'required'],
             [['characteristics_house_id'], 'integer'],
+            
             [['characteristics_name'], 'string', 'max' => 255],
             [['characteristics_value'], 'string', 'max' => 170],
+            
+            [['characteristics_name', 'characteristics_value'], 'required', 'on' => self::SCENARIO_ADD_CHARACTERISTIC],
+            [['characteristics_name', 'characteristics_value'], 'filter', 'filter' => 'trim', 'on' => self::SCENARIO_ADD_CHARACTERISTIC],
+            ['characteristics_name', 'string', 'min' => 10, 'max' => 255, 'on' => self::SCENARIO_ADD_CHARACTERISTIC],
+            ['characteristics_value', 'string', 'min' => 1, 'max' => 170, 'on' => self::SCENARIO_ADD_CHARACTERISTIC],
+            
             [['characteristics_house_id'], 'exist', 'skipOnError' => true, 'targetClass' => Houses::className(), 'targetAttribute' => ['characteristics_house_id' => 'houses_id']],
         ];
     }
@@ -57,8 +66,8 @@ class CharacteristicsHouse extends ActiveRecord
         return [
             'characteristics_id' => 'Characteristics ID',
             'characteristics_house_id' => 'Characteristics House ID',
-            'characteristics_name' => 'Characteristics Name',
-            'characteristics_value' => 'Characteristics Value',
+            'characteristics_name' => 'Наимменование характеристики',
+            'characteristics_value' => 'Значение характеристики',
         ];
     }
 

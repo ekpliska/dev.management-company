@@ -7,7 +7,8 @@
  */
 ?>
 
-    <?php if (isset($characteristics) && $characteristics) : ?>
+<?php if (isset($characteristics) && $characteristics) : ?>
+    <table width="100%" border="0" align="center" cellpadding="10" cellspacing="10">
         <?php foreach ($characteristics as $characteristic) : ?>
         <tr>
             <td><?= $characteristic['characteristics_name'] ?>: <?= $characteristic['characteristics_value'] ?></td>
@@ -20,4 +21,5 @@
             </td>
         </tr>
         <?php endforeach; ?>
-    <?php endif; ?> 
+    </table>        
+<?php endif; ?> 

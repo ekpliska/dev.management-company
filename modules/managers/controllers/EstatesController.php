@@ -14,7 +14,7 @@ class EstatesController extends AppManagersController {
     
     public function actionIndex() {
         
-        // Из куки получаем выбранных дом
+        // Из куки получаем выбранный дом
         $house_cookie = $this->actionReadCookies();
         
         $houses_list = Houses::getAllHouses();
@@ -43,6 +43,33 @@ class EstatesController extends AppManagersController {
         if (Yii::$app->request->isAjax) {
             return $this->renderAjax('_form/edit_description', [
                 'model' => $model]);
+        }
+        
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['index']);
+        }
+        
+    }
+    
+    /*
+     * Загрузка модального окна на добаление характеристики
+     * Сохранение данных
+     */
+    public function actionCreateCharacteristic() {
+        
+        $house_cookie = $this->actionReadCookies();
+        if ($house_cookie === null) {
+            return 'house not choose';
+        }
+        
+        $model = new CharacteristicsHouse();
+        $model->scenario = CharacteristicsHouse::SCENARIO_ADD_CHARACTERISTIC;
+        
+        if (Yii::$app->request->isAjax) {
+            return $this->renderAjax('_form/add_characteristic', [
+                'model' => $model,
+                'house_id' => $house_cookie,
+            ]);
         }
         
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
