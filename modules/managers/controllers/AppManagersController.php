@@ -42,6 +42,24 @@ class AppManagersController extends Controller {
     }
     
     /*
+     * Метод получения cookies
+     */
+    public function actionReadCookies() {
+
+        /*
+         * Проверяем наличие выбранного дома из списка Жилых комплексов
+         * Если кука есть, то получаем из нее значение номера выбранного дома
+         */
+        if (Yii::$app->request->cookies->has('choosingHouse')) {
+            return Yii::$app->request->cookies->get('choosingHouse')->value;
+        } 
+        
+        return false;
+
+        
+    }
+    
+    /*
      * Формирование зависимых списков 
      * Выбор Должности/Специализации зависит от выбора Подразделения
      */

@@ -44,7 +44,7 @@ $this->title = 'Жилищный фонд';
                             <?= FormatHelpers::formatFullAdress($house['estate_town'], $house['houses_street'], $house['houses_number_house']) ?>
                         </p>
                     </div>
-                    <div id="house<?= $house['houses_id'] ?>" class="panel-collapse collapse house_accordion">
+                    <div id="house<?= $house['houses_id'] ?>" class="panel-collapse collapse house_accordion <?= $house_cookie == $house['houses_id'] ? 'in' : '' ?>">
                         <div class="panel-body">
                             <?= $house['houses_description'] ? $house['houses_description'] : 'Описание отсутствует' ?>
                             <br />

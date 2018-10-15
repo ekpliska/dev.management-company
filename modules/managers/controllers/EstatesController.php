@@ -14,30 +14,21 @@ class EstatesController extends AppManagersController {
     
     public function actionIndex() {
         
+        // Из куки получаем выбранных дом
+        $house_cookie = $this->actionReadCookies();
+        
         $houses_list = Houses::getAllHouses();
         
-//        $cookies = Yii::$app->request->cookies;
-//        $choosing = Yii::$app->request->cookies->get('choosingHouse')->value;
-//
-//        var_dump($choosing); die();
-        
-        $characteristics = CharacteristicsHouse::getCharacteristicsByHouse(1);
-        $flats = Flats::getFlatsByHouse(1);
+        $characteristics = $house_cookie ? CharacteristicsHouse::getCharacteristicsByHouse($house_cookie) : null;
+        $flats = $house_cookie ? Flats::getFlatsByHouse($house_cookie) : null;
         
         return $this->render('index', [
             'houses_list' => $houses_list,
             'characteristics' => $characteristics,
             'flats' => $flats,
+            'house_cookie' => $house_cookie,
         ]);
         
-    }
-    
-    public function getCookies() {
-        
-        $cookies = Yii::$app->request->cookies;
-        $t = $cookies->getValue('choosingHouse');
-
-        return $t;
     }
     
     /*
@@ -80,7 +71,7 @@ class EstatesController extends AppManagersController {
     public function actionViewCharacteristicHouse() {
         
         $house_id = Yii::$app->request->post('house');
-        
+        $this->setCookieChooseHouse($house_id);
         
         if (Yii::$app->request->isAjax) {
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
@@ -109,6 +100,20 @@ class EstatesController extends AppManagersController {
             }
         }
         return ['success' => false];
+    }
+    
+    /*
+     * Установка куки выбранного дома
+     */
+    public function setCookieChooseHouse($value) {
+        
+        $cookies = Yii::$app->response->cookies;
+        $cookies->add(new \yii\web\Cookie ([
+            'name' => 'choosingHouse',
+            'value' => $value,
+            'expire' => time() + 60*60*24*7,
+        ]));
+        
     }
     
 }

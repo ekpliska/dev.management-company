@@ -652,6 +652,18 @@ class WebDriverTest extends TestsForBrowsers
         $this->module->seeCookie('PHPSESSID');
     }
 
+    public function testSessionSnapshotsAreDeleted() 
+    {
+        $this->notForPhantomJS();
+        $this->module->amOnPage('/');
+        $this->module->setCookie('PHPSESSID', '123456', ['path' => '/']);
+        $this->module->saveSessionSnapshot('login');
+        $this->webDriver->manage()->deleteAllCookies();
+        $this->module->deleteSessionSnapshot('login');
+        $this->assertFalse($this->module->loadSessionSnapshot('login'));
+        $this->module->dontSeeCookie('PHPSESSID');
+    }
+
     public function testSaveSessionSnapshotsExcludeInvalidCookieDomains()
     {
         $this->notForPhantomJS();
@@ -802,7 +814,7 @@ class WebDriverTest extends TestsForBrowsers
         $this->module->amOnPage('/form/bug2921');
         $this->module->seeInField('foo', 'bar baz');
     }
-    
+
     /**
     * @Issue 4726
     */
@@ -811,8 +823,8 @@ class WebDriverTest extends TestsForBrowsers
         $this->module->amOnPage('/form/textarea');
         $this->module->fillField('#description', 'description');
         $this->module->clearField('#description');
-        $this->module->dontSeeInField('#description', 'description');        
-    } 
+        $this->module->dontSeeInField('#description', 'description');
+    }
 
     public function testClickHashLink()
     {
@@ -842,6 +854,13 @@ class WebDriverTest extends TestsForBrowsers
     {
         $this->module->amOnPage('/form/anchor');
         $this->module->click('Hash Form');
+        $this->module->seeCurrentUrlEquals('/form/anchor#a');
+    }
+
+    public function testSubmitHashFormTitle()
+    {
+        $this->module->amOnPage('/form/anchor');
+        $this->module->click('Hash Form Title');
         $this->module->seeCurrentUrlEquals('/form/anchor#a');
     }
 
@@ -1104,6 +1123,25 @@ HTML
         });
         $this->assertNotTrue($this->module->webDriver->getCapabilities()->getCapability('acceptInsecureCerts'));
         $this->module->_initializeSession();
-        $this->assertTrue(true, $this->module->webDriver->getCapabilities()->getCapability('acceptInsecureCerts'));
+        $this->assertTrue($this->module->webDriver->getCapabilities()->getCapability('acceptInsecureCerts'));
+    }
+
+    /**
+     * @dataProvider strictBug4846Provider
+    **/
+    public function testBug4846($selector)
+    {
+        $this->module->amOnPage('/');
+        $this->module->see('Welcome to test app!', $selector);
+        $this->module->dontSee('You cannot see that', $selector);
+    }
+
+    public function strictBug4846Provider()
+    {
+        return [
+            'by id' => ['h1'],
+            'by css' => [['css' => 'body h1']],
+            'by xpath' => ['//body/h1'],
+        ];
     }
 }
