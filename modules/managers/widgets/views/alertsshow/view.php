@@ -100,3 +100,17 @@
         ]);
     ?>
 <?php endif; ?>
+
+<?php if (Yii::$app->session->hasFlash('estate-admin')) : ?>
+<?php $flash = Yii::$app->session->getFlash('estate-admin'); ?>
+    <?=
+        Alert::widget([
+            'type' => $flash['success'] ? Alert::TYPE_INFO : Alert::TYPE_DANGER,
+            'title' => 'Жилой комплекс',
+            'icon' => 'glyphicon glyphicon-ok-sign',
+            'body' => $flash['success'] ? $flash['message'] : $flash['error'],
+            'showSeparator' => true,
+            'delay' => 0,
+        ]);
+    ?>
+<?php endif; ?>

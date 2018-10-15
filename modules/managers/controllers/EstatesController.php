@@ -63,7 +63,11 @@ class EstatesController extends AppManagersController {
         
         $house_cookie = $this->actionReadCookies();
         if ($house_cookie === null) {
-            return 'house not choose';
+            Yii::$app->session->setFlash('estate-admin', [
+                'success' => false,
+                'error' => 'Для добавления характеристики, пожалуйста, выберите дом из списка "Жилой комплекс" слева',
+            ]);
+            return $this->redirect(['index']);
         }
         
         $model = new CharacteristicsHouse();
@@ -89,6 +93,13 @@ class EstatesController extends AppManagersController {
     public function actionLoadFiles() {
         
         $house_cookie = $this->actionReadCookies();
+        if ($house_cookie === null) {
+            Yii::$app->session->setFlash('estate-admin', [
+                'success' => false,
+                'error' => 'Для загрузки документа, пожалуйста, выберите дом из списка "Жилой комплекс" слева',
+            ]);
+            return $this->redirect(['index']);
+        }
         
         $model = Houses::findOne($house_cookie);
         $model->scenario = Houses::SCENARIO_LOAD_FILE;

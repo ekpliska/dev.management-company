@@ -15,6 +15,7 @@
                 <?= FormatHelpers::flatAndPorch($flat['flats_number'], $flat['flats_porch']) ?>
                 <?= Html::button('<span class="glyphicon glyphicon-trash"></span>', [
                         'id' => 'delete-characteristic__link',
+                        'class' => 'btn btn-link btn-sm',
                     ]) 
                 ?>
                 <?= Html::checkbox($flat_status, $flat['status'], [

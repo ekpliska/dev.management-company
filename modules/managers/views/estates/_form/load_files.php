@@ -7,7 +7,6 @@
  * Форма загрузки документов
  */
 ?>
-<?= $house_cookie ?>
 <?php
     $form = ActiveForm::begin([
         'id' => 'form-load-file',

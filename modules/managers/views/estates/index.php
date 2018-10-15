@@ -118,3 +118,5 @@ $this->title = 'Жилищный фонд';
     ]);
 ?>
 <?php Modal::end(); ?>
+
+<?= ModalWindowsManager::widget(['modal_view' => 'estate_house']) ?>

@@ -779,6 +779,8 @@ $(document).ready(function() {
     $(document).on('click', '#house_link', function(){
         var house = $(this).attr('href');
         house = house.replace(/[^0-9]/gim, '');
+        // Устанавливаем куку, выбранного дома
+        setCookie('_house', house);
         
         $.ajax({
             url: 'view-characteristic-house',
@@ -849,6 +851,16 @@ $(document).ready(function() {
      * Загрузка модального окна для добавления новой характеристики
      */
     $('a#add-charact-btn').on('click', function(e){
+        // Перед загрузкой модального окна, проверяем наличие куки выбранного дома
+        if (!getCookie('_house')) {
+            $('#estate_house_message_manager .modal-title').text(
+                    'Ошибка добавления характеристики');
+            $('#estate_house_message_manager .modal__text').text(
+                    'Для добавления характеристики, пожалуйста, выберите дом из списка "Жилой комплекс" слева');
+            $('#estate_house_message_manager').modal('show');
+            return false;
+        }
+        
         var link = $(this).attr('href');
         $('#add-characteristic-modal-form').modal('show');
         $('#add-characteristic-modal-form .modal-dialog .modal-content .modal-body').load(link);
@@ -860,6 +872,16 @@ $(document).ready(function() {
      * Загрузка модального окна для загружки документов
      */
     $('a#add-files-btn').on('click', function(e){
+        // Перед загрузкой модального окна, проверяем наличие куки выбранного дома
+        if (!getCookie('_house')) {
+            $('#estate_house_message_manager .modal-title').text(
+                    'Ошибка загрузки документа');
+            $('#estate_house_message_manager .modal__text').text(
+                    'Для загрузки документа, пожалуйста, выберите дом из списка "Жилой комплекс" слева');
+            $('#estate_house_message_manager').modal('show');
+            return false;
+        }
+        
         var link = $(this).attr('href');
         $('#add-load-files-modal-form').modal('show');
         $('#add-load-files-modal-form .modal-dialog .modal-content .modal-body').load(link);
@@ -922,6 +944,22 @@ $(document).ready(function() {
         });
         return false;
     });
+
+
+    /*
+     * Установка куки
+     */
+    function setCookie(name, value, expire){
+        var date = new Date(new Date().getTime() + (expire * 1000 * 60 * 60 * 24)).toUTCString();
+        document.cookie = name + '=' + value + '; path=/; expires=' + date;
+    }
+
+    function getCookie(name) {
+      var matches = document.cookie.match(new RegExp(
+        "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+      ));
+      return matches ? decodeURIComponent(matches[1]) : undefined;
+    }    
     
  });
     

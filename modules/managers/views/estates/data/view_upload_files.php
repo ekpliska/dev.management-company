@@ -14,7 +14,7 @@
             <td><?= FormatHelpers::formatUrlByDoc($file['name'], $file['filePath']) ?></td>
             
             <td>
-                <?= Html::a('<span class="glyphicon glyphicon-cloud-download"></span>', ['/'], [
+                <?= Html::button('<span class="glyphicon glyphicon-cloud-download"></span>', [
                         'id' => 'download-file__house',
                         'class' => 'btn btn-link btn-sm',
                         'data-files' => $file['id']]) ?>
