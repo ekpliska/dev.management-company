@@ -789,6 +789,7 @@ $(document).ready(function() {
             success: function (response) {
                 $('#characteristic_list').html(response.data);
                 $('#flats_list').html(response.flats);
+                $('#files_list').html(response.files);
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log(textStatus);

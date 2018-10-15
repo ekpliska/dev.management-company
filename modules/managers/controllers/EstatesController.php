@@ -5,6 +5,7 @@
     use yii\web\UploadedFile;
     use app\modules\managers\controllers\AppManagersController;
     use app\models\Houses;
+    use app\models\Image;
     use app\models\CharacteristicsHouse;
     use app\models\Flats;
 
@@ -22,11 +23,13 @@ class EstatesController extends AppManagersController {
         
         $characteristics = $house_cookie ? CharacteristicsHouse::getCharacteristicsByHouse($house_cookie) : null;
         $flats = $house_cookie ? Flats::getFlatsByHouse($house_cookie) : null;
+        $files = $house_cookie ? Image::getAllFilesByHouse($house_cookie, 'Houses') : null;
         
         return $this->render('index', [
             'houses_list' => $houses_list,
             'characteristics' => $characteristics,
             'flats' => $flats,
+            'files' => $files,
             'house_cookie' => $house_cookie,
         ]);
         
@@ -122,6 +125,7 @@ class EstatesController extends AppManagersController {
     /*
      * Загрузка характеристики дома
      * Квартиры
+     * Прикрепленные документы
      */
     public function actionViewCharacteristicHouse() {
         
@@ -132,11 +136,13 @@ class EstatesController extends AppManagersController {
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
             $characteristics = CharacteristicsHouse::getCharacteristicsByHouse($house_id);
             $flats = Flats::getFlatsByHouse($house_id);
+            $files = Image::getAllFilesByHouse($house_id, 'Houses');
             
             $data_characteristics = $this->renderPartial('data/characteristics_house', ['characteristics' => $characteristics]);
             $data_flats = $this->renderPartial('data/view_flats', ['flats' => $flats]);
+            $data_files = $this->renderPartial('data/view_upload_files', ['files' => $files]);
             
-            return ['data' => $data_characteristics, 'flats' => $data_flats];
+            return ['data' => $data_characteristics, 'flats' => $data_flats, 'files' => $data_files];
         }
     }
     

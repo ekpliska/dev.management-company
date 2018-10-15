@@ -15,6 +15,7 @@
             <td>
                 <?= Html::button('<span class="glyphicon glyphicon-trash"></span>', [
                         'id' => 'delete-characteristic__link',
+                        'class' => 'btn btn-link btn-sm',
                         'data-characteristic-id' => $characteristic['characteristics_id'],
                     ]) 
                 ?>

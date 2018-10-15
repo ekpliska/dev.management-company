@@ -51,6 +51,17 @@ class Image extends ActiveRecord
                 ->asArray()
                 ->all();
     }
+
+    /*
+     * Получить все документы, закрепленные за публикацией
+     */
+    public static function getAllFilesByHouse($house_id, $model_name) {
+        return self::find()
+                ->where(['itemId' => $house_id])
+                ->andWhere(['modelName' => $model_name])
+                ->asArray()
+                ->all();
+    }    
     
     public function afterDelete() {
         
