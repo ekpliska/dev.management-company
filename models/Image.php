@@ -35,6 +35,15 @@ class Image extends ActiveRecord
     }
     
     /*
+     * Найти файл по ID
+     */
+    public static function findById($file_id) {
+        return self::find()
+                ->where(['id' => $file_id])
+                ->one();
+    }
+    
+    /*
      * Получить полный путь к загруженному файлу
      */
     public function getImagePath($image) {
@@ -63,6 +72,9 @@ class Image extends ActiveRecord
                 ->all();
     }    
     
+    /*
+     * После удаления записи из БД, удаляем так же физический файл
+     */
     public function afterDelete() {
         
         parent::afterDelete();
@@ -70,13 +82,6 @@ class Image extends ActiveRecord
         @unlink(Yii::getAlias('@webroot') . '/upload/store/' . $path);
     }
     
-//    public function afterDelete() {
-//        parent::afterDelete();
-//        $this->getPathImageInText($this->news_text);
-//        $preview = $this->news_preview;
-//        @unlink(Yii::getAlias('@webroot') . $preview);
-//    }    
-
     /**
      * Метки для полей
      */

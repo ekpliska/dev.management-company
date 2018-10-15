@@ -13,10 +13,13 @@
         <tr>
             <td><?= FormatHelpers::formatUrlByDoc($file['name'], $file['filePath']) ?></td>
             
-            <td><?= Html::a('upload', ['/'], ['class' => 'btn btn-link btn-sm delete_file']) ?></td>
+            <td><?= Html::a('<span class="glyphicon glyphicon-cloud-download"></span>', ['/'], [
+                    'class' => 'btn btn-link btn-sm']) ?>
+            </td>
             
             <td><?= Html::button('<span class="glyphicon glyphicon-trash"></span>', [
                     'class' => 'btn btn-link btn-sm',
+                    'id' => 'delete_file__house',
                     'data-files' => $file['id'],]) ?>
             </td>
         </tr>

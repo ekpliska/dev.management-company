@@ -164,6 +164,23 @@ class EstatesController extends AppManagersController {
     }
     
     /*
+     * Удаление выбранного документа
+     */
+    public function actionDeleteFilesHouse() {
+        $file_id = Yii::$app->request->post('fileId');
+        if (Yii::$app->request->isAjax) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            $file = Image::findById($file_id);
+            if (!$file->delete()) {
+                return ['success' => false];
+            } else {
+                return ['success' => true];
+            }
+        }
+        return ['success' => false];        
+    }
+    
+    /*
      * Установка куки выбранного дома
      */
     public function setCookieChooseHouse($value) {
@@ -174,7 +191,6 @@ class EstatesController extends AppManagersController {
             'value' => $value,
             'expire' => time() + 60*60*24*7,
         ]));
-        
     }
     
 }

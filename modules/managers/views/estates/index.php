@@ -85,7 +85,6 @@ $this->title = 'Жилищный фонд';
 
 <?php
     /* Модальное окно для редактирования описания дома */
-
     Modal::begin([
         'id' => 'edit-description-house',
         'header' => 'Редактирование',
@@ -98,7 +97,6 @@ $this->title = 'Жилищный фонд';
 
 <?php
     /* Модальное окно для добавления новой характеристики */
-
     Modal::begin([
         'id' => 'add-characteristic-modal-form',
         'header' => 'Добавить характеристику',
@@ -111,7 +109,6 @@ $this->title = 'Жилищный фонд';
 
 <?php
     /* Модальное окно для загрузки нового документа */
-
     Modal::begin([
         'id' => 'add-load-files-modal-form',
         'header' => 'Загрузить вложение',
