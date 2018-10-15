@@ -894,6 +894,35 @@ $(document).ready(function() {
         });
         return false;
     });
+    
+    /*
+     * Запрос на загрузку файла с сервера
+     */
+    $('#files_list').on('click', '#download-file__house', function(e) {
+        var blockHtml = $(this).closest('tr');
+        var fileId = $(this).data('files');
+        e.preventDefault();
+        $.ajax({
+            url: 'download-files-house',
+            method: 'POST',
+            data: {
+                fileId: fileId,
+            },
+            success: function (response) {
+                if (response.success === true){
+                    blockHtml.remove();
+                } else if (response.success === false) {
+                    blockHtml.html('Ошибка удаления документа');
+                }
+
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(textStatus);
+            },
+        });
+        return false;
+    });
+    
  });
     
 

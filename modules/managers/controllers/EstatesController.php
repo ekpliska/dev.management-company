@@ -181,6 +181,23 @@ class EstatesController extends AppManagersController {
     }
     
     /*
+     * Скачивание запрашиваемого файла с сервера
+     */
+    public function actionDownloadFilesHouse() {
+        
+        $file_id = Yii::$app->request->post('fileId');
+        $file = Image::findById($file_id);
+        $path = 'upload/store/' . $file->filePath;
+        
+        if (file_exists($path)) {
+            return Yii::$app->response->sendFile($path);
+        } else {
+            throw new \yii\web\NotFoundHttpException('Такого файла не существует ');
+        }
+        
+    }
+    
+    /*
      * Установка куки выбранного дома
      */
     public function setCookieChooseHouse($value) {
