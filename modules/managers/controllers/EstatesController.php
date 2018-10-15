@@ -2,6 +2,7 @@
 
     namespace app\modules\managers\controllers;
     use Yii;
+    use yii\web\UploadedFile;
     use app\modules\managers\controllers\AppManagersController;
     use app\models\Houses;
     use app\models\CharacteristicsHouse;
@@ -76,6 +77,33 @@ class EstatesController extends AppManagersController {
             return $this->redirect(['index']);
         }
         
+    }
+    
+    /*
+     * Вывод модального окна для загрузки документов
+     * Сохранение данных
+     */
+    public function actionLoadFiles() {
+        
+        $house_cookie = $this->actionReadCookies();
+        
+        $model = Houses::findOne($house_cookie);
+        $model->scenario = Houses::SCENARIO_LOAD_FILE;
+        
+        if (Yii::$app->request->isAjax) {
+            return $this->renderAjax('_form/load_files', [
+                'model' => $model,
+                'house_cookie' => $house_cookie,
+            ]);
+        }
+        
+        if ($model->load(Yii::$app->request->post())) {
+            $file = UploadedFile::getInstance($model, 'upload_file');
+            if ($model->uploadFile($file)) {
+                return $this->redirect(['index']);
+            }
+        }
+        return 'При загрузке фала возникла ошибка';
     }
     
     /*

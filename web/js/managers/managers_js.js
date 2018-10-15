@@ -845,12 +845,23 @@ $(document).ready(function() {
     });
 
     /*
-     * Загрузка модального окна для доабвления новой характеристики
+     * Загрузка модального окна для добавления новой характеристики
      */
     $('a#add-charact-btn').on('click', function(e){
         var link = $(this).attr('href');
         $('#add-characteristic-modal-form').modal('show');
         $('#add-characteristic-modal-form .modal-dialog .modal-content .modal-body').load(link);
+        e.preventDefault();
+        return false;        
+    });
+
+    /*
+     * Загрузка модального окна для загружки документов
+     */
+    $('a#add-files-btn').on('click', function(e){
+        var link = $(this).attr('href');
+        $('#add-load-files-modal-form').modal('show');
+        $('#add-load-files-modal-form .modal-dialog .modal-content .modal-body').load(link);
         e.preventDefault();
         return false;        
     });

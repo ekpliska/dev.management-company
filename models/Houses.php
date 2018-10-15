@@ -13,13 +13,25 @@
 class Houses extends ActiveRecord
 {
     const SCENARIO_EDIT_DESCRIPRION = 'edit description house';
+    const SCENARIO_LOAD_FILE = 'load new file';
     
+    public $upload_file;
+
+
     /**
      * Таблица в БД
      */
     public static function tableName()
     {
         return 'houses';
+    }
+    
+    public function behaviors () {
+        return [
+            'image' => [
+                'class' => \rico\yii2images\behaviors\ImageBehave::className(),
+            ],
+        ];
     }
 
     /**
@@ -45,6 +57,13 @@ class Houses extends ActiveRecord
 
             ['houses_description', 'required', 'on' => self::SCENARIO_EDIT_DESCRIPRION],
             ['houses_description', 'string', 'min' => 10, 'max' => 255, 'on' => self::SCENARIO_EDIT_DESCRIPRION],
+            
+            ['upload_file', 'required', 'on' => self::SCENARIO_LOAD_FILE],
+            [['upload_file'],
+                'file', 
+                'maxSize' => 256 * 1000,
+                'extensions' => 'doc, docx, pdf, xls, xlsx, png, jpg, jpeg',
+                'on' => self::SCENARIO_LOAD_FILE],
             
         ];
     }
@@ -87,6 +106,24 @@ class Houses extends ActiveRecord
     }    
     
     /*
+     * Загрузка прикрепленного документа
+     */
+    public function uploadFile($file) {
+        
+        if ($file) {
+            $file_name = $file->basename;
+            $path = 'upload/store/' . $file_name . '.' . $file->extension;
+            // Получаем имя файла
+            $file->saveAs($path);
+            $this->attachImage($path, false, $file_name);
+            @unlink($path);
+            return true;
+        } else {
+            return false;
+        }
+    }    
+    
+    /*
      * Список всех домов жилого массива
      */
     public static function getHousesList() {
@@ -109,6 +146,7 @@ class Houses extends ActiveRecord
             'houses_street' => 'Улица',
             'houses_number_house' => 'Номер дома',
             'houses_description' => 'Описание',
+            'upload_file' => 'Загружаемый файл',
         ];
     }
 

@@ -25,7 +25,7 @@ $this->title = 'Жилищный фонд';
             <span class="caret"></span></button>
             <ul class="dropdown-menu">
                 <li><a href="<?= Url::to(['create-characteristic']) ?>" id="add-charact-btn">Добавить характеристику</a></li>
-                <li><a href="#">Добавить вложение</a></li>
+                <li><a href="<?= Url::to(['load-files']) ?>" id="add-files-btn">Добавить вложение</a></li>
             </ul>
     </div>
     <hr />
@@ -99,6 +99,19 @@ $this->title = 'Жилищный фонд';
     Modal::begin([
         'id' => 'add-characteristic-modal-form',
         'header' => 'Добавить характеристику',
+        'clientOptions' => [
+            'backdrop' => 'static', 
+            'keyboard' => false],
+    ]);
+?>
+<?php Modal::end(); ?>
+
+<?php
+    /* Модальное окно для загрузки нового документа */
+
+    Modal::begin([
+        'id' => 'add-load-files-modal-form',
+        'header' => 'Загрузить вложение',
         'clientOptions' => [
             'backdrop' => 'static', 
             'keyboard' => false],
