@@ -23,6 +23,9 @@ class EstatesController extends AppManagersController {
         
         $characteristics = $house_cookie ? CharacteristicsHouse::getCharacteristicsByHouse($house_cookie) : null;
         $flats = $house_cookie ? Flats::getFlatsByHouse($house_cookie) : null;
+        
+//        echo '<pre>'; var_dump($flats); die();
+        
         $files = $house_cookie ? Image::getAllFilesByHouse($house_cookie, 'Houses') : null;
         
         return $this->render('index', [

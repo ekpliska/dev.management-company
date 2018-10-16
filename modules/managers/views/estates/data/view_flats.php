@@ -13,7 +13,7 @@
         <tr>
             <td colspan="2">
                 <?= FormatHelpers::flatAndPorch($flat['flats_number'], $flat['flats_porch']) ?>
-                <?= Html::button('<span class="glyphicon glyphicon-trash"></span>', [
+                <?= Html::button('<span class="glyphicon glyphicon-edit"></span>', [
                         'id' => 'delete-characteristic__link',
                         'class' => 'btn btn-link btn-sm',
                     ]) 
@@ -25,8 +25,8 @@
             </td>
         </tr>
         <tr>
-            <td bgcolor="#c1c1c1">
-                #foto
+            <td width="10%">
+                <?= FormatHelpers::formatUserPhoto($flat['user_photo']) ?>
             </td>
             <td>
                 Собственник

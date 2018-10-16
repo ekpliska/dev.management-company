@@ -6,6 +6,7 @@
     use app\models\Rents;
     use app\models\PersonalAccount;
     use app\models\Flats;
+    use app\models\User;
 
 /**
  * Собственники
@@ -68,6 +69,17 @@ class Clients extends ActiveRecord
     }
     
     /*
+     * Связь с таблицей Арендаторы
+     */
+    public function getRent() {
+        return $this->hasOne(Rents::className(), ['rents_clients_id' => 'clients_id']);
+    }
+    
+    public function getUser() {
+        return $this->hasOne(User::className(), ['user_client_id' => 'clients_id']);
+    }        
+    
+    /*
      * Получить информацию о Собственнике
      */
     public static function getInfoByClient($clients_id) {
@@ -86,14 +98,6 @@ class Clients extends ActiveRecord
         return $info;
         
     }
-    
-    public function getRent() {
-        return $this->hasOne(Rents::className(), ['rents_clients_id' => 'clients_id']);
-    }
-    
-    public function getHouse() {
-        return $this->hasOne(Houses::className(), ['houses_client_id' => 'clients_id']);
-    }    
     
     public static function findByUser($account_id) {
         $user = static::findOne(['clients_account_id' => $account_id]);

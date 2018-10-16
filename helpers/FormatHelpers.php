@@ -150,6 +150,21 @@ class FormatHelpers {
     }
     
     /*
+     * Вывод фотографии пользователя
+     */
+    public static function formatUserPhoto($user_photo) {
+        
+        $alias = Yii::getAlias('@web');
+        
+        if (empty($user_photo)) {
+            return Html::img($alias . '/images/no-avatar.jpg', ['alt' => 'no_avatar', 'class' => 'img-circle', 'width' => '50px']);
+        }
+        
+        return Html::img($user_photo, ['alt' => 'user_avatar', 'class' => 'img-circle', 'width' => '50px']);
+        
+    }
+    
+    /*
      * Форматирование полного адреса проживания
      * г. Город, ул. Улица, д. Номер, п. Подъезд, эт. Этаж, кв. Номер
      */

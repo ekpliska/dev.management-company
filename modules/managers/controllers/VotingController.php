@@ -19,7 +19,6 @@ class VotingController extends AppManagersController {
      * Голосование, главная страница
      */
     public function actionIndex() {
-        
         // Получаем все доступные голосования
         $query = Voting::findAllVoting();
         $count_voting = clone $query;

@@ -5,6 +5,7 @@
     use yii\db\ActiveRecord;
     use app\models\Houses;
     use app\models\NotesFlat;
+    use app\models\PersonalAccount;
     use app\models\Clients;
 
 /**
@@ -36,11 +37,15 @@ class Flats extends ActiveRecord
         ];
     }
     
-    /*
-     * Связь с таблицей Собственники
-     */
-    public function getClient() {
-        return $this->hasOne(Clients::className(), ['clients_id' => 'flats_client_id']);
+//    /*
+//     * Связь с таблицей Собственники
+//     */
+//    public function getClient() {
+//        return $this->hasOne(Clients::className(), ['clients_id' => 'flats_client_id']);
+//    }
+    
+    public function getAccount() {
+        return $this->hasOne(PersonalAccount::className(), ['account_id' => 'flats_account_id']);
     }
 
     /**
@@ -63,8 +68,8 @@ class Flats extends ActiveRecord
     public static function getFlatsByHouse($house_id){
         
         $list = self::find()
-                ->select(['flats_id', 'flats_porch', 'flats_number', 'status', 'clients_surname', 'clients_name', 'clients_second_name'])
-                ->joinWith(['client'])
+                ->select(['flats_id', 'flats_porch', 'flats_number', 'flats.status', 'clients_surname', 'clients_name', 'clients_second_name', 'user_photo'])
+                ->joinWith(['account', 'account.client', 'account.client.user'])
                 ->where(['flats_house_id' => $house_id])
                 ->asArray()
                 ->all();
