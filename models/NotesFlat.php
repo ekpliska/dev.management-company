@@ -29,11 +29,12 @@ class NotesFlat extends ActiveRecord
         return [
             [['notes_flat_id', 'notes_name'], 'required'],
             [['notes_flat_id'], 'integer'],
-            [['notes_name'], 'string', 'max' => 255],
+            [['notes_name'], 'string', 'max' => 170],
             [['notes_flat_id'], 'exist', 'skipOnError' => true, 'targetClass' => Flats::className(), 'targetAttribute' => ['notes_flat_id' => 'flats_id']],
             
             [['notes_flat_id', 'notes_name'], 'required', 'on' => self::SCENARIO_ADD_NOTE],
-            ['notes_name', 'string', 'min' => 5, 'max' => 255, 'on' => self::SCENARIO_ADD_NOTE],
+            ['notes_name', 'string', 'min' => 5, 'max' => 170, 'on' => self::SCENARIO_ADD_NOTE],
+            ['notes_name', 'filter', 'filter' => 'trim', 'on' => self::SCENARIO_ADD_NOTE],
             
         ];
     }
@@ -55,6 +56,27 @@ class NotesFlat extends ActiveRecord
             $flat->status = Flats::STATUS_DEBTOR_YES;
             $flat->save(false);
         }
+    }
+    
+    /*
+     * До удаления примечаний
+     * Если количество примечаний меньше или равно 1, то автоматически снимаем статус с квартиры "Должник"
+     */
+    public function beforeDelete() {
+        
+        if (parent::beforeDelete()) {
+            $note_list = NotesFlat::find()
+                    ->where(['notes_flat_id' => $this->notes_flat_id])
+                    ->asArray()
+                    ->count();
+            $flat = Flats::findOne($this->notes_flat_id);
+            if ($note_list <= 1 ) {
+                $flat->status = Flats::STATUS_DEBTOR_NO;
+                $flat->save(false);
+            }
+            return true;
+        }
+        return false;
     }
 
     /**

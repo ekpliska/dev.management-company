@@ -43,19 +43,24 @@
         <?php if (isset($flats[$key]['note']) && $flats[0]['note']) : ?>
         <tr>
             <td colspan="2">
-                <span class="label label-primary">
-                    Примечания <?= Html::button('+', ['class' => 'btn btn-link btn-sm']) ?>
-                </span>
+                <span class="label label-primary">Примечания</span>
+                <?= Html::button('<span class="glyphicon glyphicon-plus-sign"></span>', [
+                        'class' => 'btn btn-link btn-sm',
+                        'id' => 'add-note',
+                        'data-flat' => $flat['flats_id'],
+                    ]) ?>
             </td>
         </tr>
-        <tr>
+        <?php foreach ($flats[$key]['note'] as $note) : ?>
+        <tr id="note_flat__tr">
             <td colspan="2">
-                <?php foreach ($flats[$key]['note'] as $note) : ?>
                     <?= $note['notes_name'] ?>
-                    <?= Html::button('<span class="glyphicon glyphicon-trash"></span>', ['class' => 'btn btn-link btn-sm flat_note__delete']) ?>
-                <?php endforeach; ?>
+                    <?= Html::button('<span class="glyphicon glyphicon-trash"></span>', [
+                            'class' => 'btn btn-link btn-sm flat_note__delete',
+                            'data-note' => $note['notes_id']]) ?>
             </td>
         </tr>
+        <?php endforeach; ?>
         <?php endif; ?>
     <?php endforeach; ?>
 </table>

@@ -71,8 +71,7 @@ class Flats extends ActiveRecord
                 ->select([
                     'flats_id', 'flats_porch', 'flats_number', 'flats.status', 
                     'clients_surname', 'clients_name', 'clients_second_name', 
-                    'user_photo', 
-                    'notes_name'])
+                    'user_photo'])
                 ->joinWith(['account', 'account.client', 'account.client.user', 'note'])
                 ->where(['flats_house_id' => $house_id])
                 ->asArray()

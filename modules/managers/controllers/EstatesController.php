@@ -214,6 +214,23 @@ class EstatesController extends AppManagersController {
     }
     
     /*
+     * Удаление выбранного примечания
+     */
+    public function actionDeleteNoteFlat() {
+        
+        $note_id = Yii::$app->request->post('noteId');
+        if (Yii::$app->request->isAjax) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            $note = NotesFlat::findOne($note_id);
+            if (!$note->delete()) {
+                return 'Ошибка удаления примечания';
+            }
+            return ['success' => true, 'note_id' => $note];
+        }
+        
+    }
+    
+    /*
      * Скачивание запрашиваемого файла с сервера
      */
     public function actionDownloadFilesHouse() {

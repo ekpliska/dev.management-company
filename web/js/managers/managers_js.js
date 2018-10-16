@@ -891,6 +891,7 @@ $(document).ready(function() {
     
     /*
      * Загрузка модального окна для установки статуса "Должник"
+     * по чекбоксу "Должник"
      */
     $('#flats_list').on('change', '#check_status__flat', function(){
         var flatId = $(this).data('flat');
@@ -903,6 +904,47 @@ $(document).ready(function() {
             $('#add-note-modal-form .modal-dialog .modal-content .modal-body').load(link, 'flat_id=' + flatId);
         }
     });
+    /*
+     * Загрузка модального окна для добавление нового примечания
+     * по кнопке "Новое примечание"
+     */
+    $('#flats_list').on('click', '#add-note', function(){
+        var flatId = $(this).data('flat');
+        var link = 'check-status-flat';
+        $('#add-note-modal-form').modal('show');
+        $('#add-note-modal-form .modal-dialog .modal-content .modal-body').load(link, 'flat_id=' + flatId);
+    });
+    
+    /*
+     * Удаление примечания для квартиры
+     */
+    $('#flats_list').on('click', '.flat_note__delete', function(e){
+        var noteId = $(this).data('note');
+        var htmlBlock = $(this).closest('tr');
+        // Количество строк с примечаниями
+        var countTr = $('tr#note_flat__tr').length;
+        
+        $.ajax({
+            url: 'delete-note-flat',
+            method: 'POST',
+            data: {
+                noteId: noteId,
+            },
+            success: function (responce, textStatus, jqXHR) {
+                if (responce.success === true) {
+                    htmlBlock.remove();
+                }
+                // Если количество примечаний <=1, то снимаем статус Должник
+                if (countTr <= 1) {
+                    $('#check_status__flat').attr('checked', false);
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(textStatus);                
+            }
+        });
+        return false;
+    })
     
     /*
      * Удаление прикрепленного документа

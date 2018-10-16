@@ -31,7 +31,7 @@ class m181011_090144_table_characteristics_house_and_notes_flat extends Migratio
         $this->createTable('{{%notes_flat}}', [
             'notes_id' => $this->primaryKey(),
             'notes_flat_id' => $this->integer()->notNull(),
-            'notes_name' => $this->string(255)->notNull(),
+            'notes_name' => $this->string(170)->notNull(),
         ]);
         $this->createIndex('idx-notes_flat-notes_id', '{{%notes_flat}}', 'notes_id');
         
