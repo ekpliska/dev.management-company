@@ -231,6 +231,23 @@ class EstatesController extends AppManagersController {
     }
     
     /*
+     * Снять статус "Должник" с квартиры
+     */
+    public function actionTakeOffStatusDebtor() {
+        
+        $flat_id = Yii::$app->request->post('flatId');
+        if (Yii::$app->request->isAjax) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            $flat = Flats::findById($flat_id);
+            if (!$flat->takeOffStatus()) {
+                return ['success' => false];
+            }
+            return ['success' => true];
+        }
+        
+    }
+    
+    /*
      * Скачивание запрашиваемого файла с сервера
      */
     public function actionDownloadFilesHouse() {

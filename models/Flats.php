@@ -63,6 +63,25 @@ class Flats extends ActiveRecord
     }
     
     /*
+     * Поиск по ID квартиры
+     */
+    public static function findById($flat_id) {
+        return self::find()
+                ->where(['flats_id' => $flat_id])
+                ->one();
+    }
+    
+    /*
+     * 
+     */
+    public function takeOffStatus(){
+        
+        $this->status = self::STATUS_DEBTOR_NO;
+        return $this->save(false) ? true : false;
+        
+    }
+    
+    /*
      * Получить список всех квартир по заданному дому
      */
     public static function getFlatsByHouse($house_id){

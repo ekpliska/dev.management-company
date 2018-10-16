@@ -899,6 +899,7 @@ $(document).ready(function() {
         
         if (!$(this).is(':checked')) {
             $('#estate_note_message_manager').modal('show');
+            $('#estate_note_message_manager .estate_note_message__yes').data('flat', flatId);            
         } else {
             $('#add-note-modal-form').modal('show');
             $('#add-note-modal-form .modal-dialog .modal-content .modal-body').load(link, 'flat_id=' + flatId);
@@ -915,10 +916,32 @@ $(document).ready(function() {
         $('#add-note-modal-form .modal-dialog .modal-content .modal-body').load(link, 'flat_id=' + flatId);
     });
     
+    $('.estate_note_message__yes').on('click', function(){
+        var flatId = $(this).data('flat');
+        $.ajax({
+            url: 'take-off-status-debtor',
+            method: 'POST',
+            data: {
+                flatId: flatId,
+            },
+            success: function (response) {
+                if (response.success) {
+                    $('#check_status__flat').attr('checked', false);
+                    $('#estate_note_message_manager').modal('hide');
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(textStatus);                
+            }
+        });
+        return false;
+    });
+    
     /*
      * Удаление примечания для квартиры
      */
     $('#flats_list').on('click', '.flat_note__delete', function(e){
+        e.preventDefault();
         var noteId = $(this).data('note');
         var htmlBlock = $(this).closest('tr');
         // Количество строк с примечаниями
@@ -934,7 +957,7 @@ $(document).ready(function() {
                 if (responce.success === true) {
                     htmlBlock.remove();
                 }
-                // Если количество примечаний <=1, то снимаем статус Должник
+                // Если количество примечаний <=1, то снимаем с квартиры статус Должник
                 if (countTr <= 1) {
                     $('#check_status__flat').attr('checked', false);
                 }

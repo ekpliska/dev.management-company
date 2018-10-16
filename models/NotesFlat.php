@@ -46,6 +46,26 @@ class NotesFlat extends ActiveRecord
     }
 
     /*
+     * Поиск по ID примечания
+     */
+    public static function findById($note_id) {
+        return self::find()
+                ->where(['notes_id' => $note_id])
+                ->asArray()
+                ->one();
+    }
+    
+    /*
+     * Поиск примечания по ID квартиры
+     */
+    public static function findByFlatId($flat_id) {
+        return self::find()
+                ->where(['notes_flat_id' => $flat_id])
+                ->asArray()
+                ->all();
+    }
+    
+    /*
      * После добавления примечания к квартире,
      * устанавливаем статус Должник для квартиры
      */
