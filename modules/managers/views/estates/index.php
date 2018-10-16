@@ -119,4 +119,16 @@ $this->title = 'Жилищный фонд';
 ?>
 <?php Modal::end(); ?>
 
+<?php
+    /* Модальное окно для загрузки формы установки Статуса "Должник" */
+    Modal::begin([
+        'id' => 'add-note-modal-form',
+        'header' => 'Установка статуса "Должник"',
+        'clientOptions' => [
+            'backdrop' => 'static', 
+            'keyboard' => false],
+    ]);
+?>
+<?php Modal::end(); ?>
+
 <?= ModalWindowsManager::widget(['modal_view' => 'estate_house']) ?>

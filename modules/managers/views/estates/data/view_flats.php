@@ -14,12 +14,13 @@
             <td colspan="2">
                 <?= FormatHelpers::flatAndPorch($flat['flats_number'], $flat['flats_porch']) ?>
                 <?= Html::button('<span class="glyphicon glyphicon-edit"></span>', [
-                        'id' => 'delete-characteristic__link',
+                        'id' => 'edit-flat__link',
                         'class' => 'btn btn-link btn-sm',
                     ]) 
                 ?>
                 <?= Html::checkbox($flat_status, $flat['status'], [
-                        'data-flat-status' => $flat['flats_id'],
+                        'id' => 'check_status__flat',
+                        'data-flat' => $flat['flats_id'],
                     ]) 
                 ?>
             </td>

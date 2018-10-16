@@ -8,6 +8,7 @@
     use app\models\Image;
     use app\models\CharacteristicsHouse;
     use app\models\Flats;
+    use app\models\NotesFlat;
 
 /**
  * Жилищный фонд
@@ -121,6 +122,24 @@ class EstatesController extends AppManagersController {
             }
         }
         return 'При загрузке фала возникла ошибка';
+    }
+    
+    public function actionCheckStatusFlat($flat_id) {
+        
+        $model = new NotesFlat();
+        $model->scenario = NotesFlat::SCENARIO_ADD_NOTE;
+        
+        if (Yii::$app->request->isAjax) {
+            return $this->renderAjax('_form/check_status_flat', [
+                'flat_id' => $flat_id,
+                'model' => $model,
+            ]);
+        }
+        
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['index']);
+        }
+        
     }
     
     /*

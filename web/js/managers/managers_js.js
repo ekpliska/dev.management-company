@@ -890,6 +890,22 @@ $(document).ready(function() {
     });
     
     /*
+     * Загрузка модального окна для установки статуса "Должник"
+     */
+    $('#flats_list').on('change', '#check_status__flat', function(){
+        var flatId = $(this).data('flat');
+        var link = 'check-status-flat';
+        
+        if (!$(this).is(':checked')) {
+            alert('Снимаем статус должник');
+        } else {
+            $('#add-note-modal-form').modal('show');
+            $('#add-note-modal-form .modal-dialog .modal-content .modal-body').load(link, 'flat_id=' + flatId);
+            alert(flatId);
+        }
+    });    
+    
+    /*
      * Удаление прикрепленного документа
      */
     $('#files_list').on('click', '#delete_file__house', function(e) {
@@ -959,7 +975,9 @@ $(document).ready(function() {
         "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
       ));
       return matches ? decodeURIComponent(matches[1]) : undefined;
-    }    
+    } 
+    
+
     
  });
     
