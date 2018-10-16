@@ -40,8 +40,8 @@
                 <?= FormatHelpers::formatFullUserName($flat['clients_surname'], $flat['clients_name'], $flat['clients_second_name'], true) ?>
             </td>
         </tr>
-        <?php if (isset($flats[$key]['note']) && $flats[0]['note']) : ?>
-        <tr>
+        <?php if (isset($flats[$key]['note']) && $flats[$key]['note']) : ?>
+        <tr id="note_flat__tr-<?= $flat['flats_id'] ?>">
             <td colspan="2">
                 <span class="label label-primary">Примечания</span>
                 <?= Html::button('<span class="glyphicon glyphicon-plus-sign"></span>', [
@@ -52,7 +52,7 @@
             </td>
         </tr>
         <?php foreach ($flats[$key]['note'] as $note) : ?>
-        <tr id="note_flat__tr">
+        <tr id="note_flat__tr-<?= $flat['flats_id'] ?>">
             <td colspan="2">
                     <?= $note['notes_name'] ?>
                     <?= Html::button('<span class="glyphicon glyphicon-trash"></span>', [

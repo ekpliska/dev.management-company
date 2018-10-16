@@ -61,7 +61,6 @@ class NotesFlat extends ActiveRecord
     public static function findByFlatId($flat_id) {
         return self::find()
                 ->where(['notes_flat_id' => $flat_id])
-                ->asArray()
                 ->all();
     }
     
