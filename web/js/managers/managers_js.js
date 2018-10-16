@@ -897,13 +897,12 @@ $(document).ready(function() {
         var link = 'check-status-flat';
         
         if (!$(this).is(':checked')) {
-            alert('Снимаем статус должник');
+            $('#estate_note_message_manager').modal('show');
         } else {
             $('#add-note-modal-form').modal('show');
             $('#add-note-modal-form .modal-dialog .modal-content .modal-body').load(link, 'flat_id=' + flatId);
-            alert(flatId);
         }
-    });    
+    });
     
     /*
      * Удаление прикрепленного документа

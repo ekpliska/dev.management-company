@@ -68,10 +68,15 @@ class Flats extends ActiveRecord
     public static function getFlatsByHouse($house_id){
         
         $list = self::find()
-                ->select(['flats_id', 'flats_porch', 'flats_number', 'flats.status', 'clients_surname', 'clients_name', 'clients_second_name', 'user_photo'])
-                ->joinWith(['account', 'account.client', 'account.client.user'])
+                ->select([
+                    'flats_id', 'flats_porch', 'flats_number', 'flats.status', 
+                    'clients_surname', 'clients_name', 'clients_second_name', 
+                    'user_photo', 
+                    'notes_name'])
+                ->joinWith(['account', 'account.client', 'account.client.user', 'note'])
                 ->where(['flats_house_id' => $house_id])
                 ->asArray()
+                ->orderBy(['flats_porch' => SORT_ASC, 'flats_number' => SORT_ASC])
                 ->all();
         
         return $list;
