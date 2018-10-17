@@ -2,6 +2,7 @@
 
     namespace app\modules\managers\models\form;
     use yii\base\Model;
+    use Yii;
     use app\models\HousingEstates;
     use app\models\Houses;
     use app\models\CharacteristicsHouse;
@@ -11,50 +12,106 @@
  */
 class HouseForm extends Model {
 
-    private $_estate;
-    private $_house;
-    private $_characteristics;
+    private $_housingEstates;
+    private $_houses;
+//    private $_characteristics;
     
     public function rules() {
         return [
-            ['HousingEstates', 'safe'],
-            ['Houses', 'required'],
-            ['CharacteristicsHouse', 'safe'],
+            ['HousingEstates', 'required'],
+            ['Houses', 'safe'],
+//            ['CharacteristicsHouse', 'safe'],
         ];
     }
     
-    public function getEstate() {
-        return $this->_estate;
-    }
+//    public function afterValidate() {
+//        if (!Model::loadMultiple($this->getAllModels())) {
+//            $this->addError(null);
+//        }
+//        parent::afterValidate();
+//    }
     
-    public function setEstate($estate) {
-        if ($estate instanceof HousingEstates) {
-            $this->_estate = $estate;
-        } elseif (is_array($estate)) {
-            $this->_estate->setAttributes($estate);
+    public function save() {
+        
+        if (!$this->validate()) {
+            return false;
         }
+        
+        $transaction = Yii::$app->db->beginTransaction();
+        
+        if (!$this->saveEstate()) {
+            $transaction->rollBack();
+            return false;
+        }
+        
+        $this->houses->houses_estate_name_id = $this->housingEstates->estate_id ? $this->housingEstates->estate_id : $this->housingEstates->estate_name_drp;
+        if (!$this->houses->save(false)) {
+            $transaction->rollBack();
+            return false;
+        }
+        
+        $transaction->commit();
+        return true;
+        
     }
     
-    public function getHouse() {
-        if ($this->_house === null) {
-            if ($this->estate->isNewRecord) {
-                $this->_house = new Houses();
-            } else {
-                $this->_house = $this->estate->house;
+    public function saveEstate() {
+        
+        // Если пришел переключатель "Новый ЖК", создаем запись нового ЖК
+        if ($this->housingEstates->is_new == true) {
+            if (!$this->housingEstates->save()) {
+                return false;
             }
         }
-        return $this->_house;
+        return true;
     }
     
-    public function setHouse($house) {
-        if (is_array($house)) {
-            $this->house->setAttributes($house);
-        } elseif ($house instanceof Houses) {
-            $this->_house = $house;
+//        else {
+//            $this->houses->houses_estate_name_id = $this->housingEstates->estate_name_drp;
+//            return $this->houses->save() ? true : false;
+//        }
+    
+    public function getHousingEstates() {
+        return $this->_housingEstates;
+    }
+    
+    public function setHousingEstates($estate) {
+        if ($estate instanceof HousingEstates) {
+            $this->_housingEstates = $estate;
+        } elseif (is_array($estate)) {
+            $this->_housingEstates->setAttributes($estate);
         }
     }
     
+    public function getHouses() {
+        if ($this->_houses === null) {
+            if ($this->housingEstates->isNewRecord) {
+                $this->_houses = new Houses();
+            } else {
+                $this->_houses = $this->housingEstates->house;
+            }
+        }
+        return $this->_houses;
+    }
     
+    public function setHouses($house) {
+        if (is_array($house)) {
+            $this->houses->setAttributes($house);
+        } elseif ($house instanceof Houses) {
+            $this->_houses = $house;
+        }
+    }
+    
+    private function getAllModels() {
+        
+        $models = [
+            'Жилой комплекс' => $this->housingEstates,
+            'Дом' => $this->houses,
+        ];
+        
+        return $models;
+        
+    }
     
     
 }

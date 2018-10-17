@@ -47,8 +47,15 @@ class EstatesController extends AppManagersController {
     public function actionCreateHouse() {
         
         $estates_list = ArrayHelper::map(HousingEstates::getHousingEstateList(), 'estate_id', 'estate_name');
+        
         $model = new HouseForm();
-        $model->estate = new HousingEstates();
+        $model->housingEstates = new HousingEstates();
+        $model->setAttributes(Yii::$app->request->post());        
+        
+        if (Yii::$app->request->post() && $model->validate()) {
+            $model->save();
+            return $this->refresh();
+        }
         
         return $this->render('create-house', [
             'model' => $model,

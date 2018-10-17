@@ -18,7 +18,7 @@
 <div class="col-md-6">
     <h4>Существующий жилой комплекс</h4>
     
-    <?= $form->field($model->estate, 'estate_name_drp')
+    <?= $form->field($model->housingEstates, 'estate_name_drp')
             ->dropDownList($estates_list, [
                 'prompt' => 'Выбрать из списка...',])
             ->label() ?>
@@ -28,10 +28,10 @@
 <div class="col-md-6">
     <h4>Новый жилой комплекс</h4>
 
-    <?= $form->field($model->estate, 'is_new')->checkbox()->label(false) ?>
+    <?= $form->field($model->housingEstates, 'is_new')->checkbox()->label(false) ?>
     
-    <?= $form->field($model->estate, 'estate_name')->input('text')->label() ?>
-    <?= $form->field($model->estate, 'estate_town')->input('text')->label() ?>
+    <?= $form->field($model->housingEstates, 'estate_name')->input('text')->label() ?>
+    <?= $form->field($model->housingEstates, 'estate_town')->input('text')->label() ?>
     
 </div>
 
@@ -39,9 +39,9 @@
     <legend>Дом</legend>
     <div class="col-md-12">
 
-            <?= $form->field($model->house, 'houses_street')->input('text')->label() ?>
-            <?= $form->field($model->house, 'houses_number_house')->input('text')->label() ?>
-            <?= $form->field($model->house, 'houses_description')->textarea()->label() ?>
+            <?= $form->field($model->houses, 'houses_street')->input('text')->label() ?>
+            <?= $form->field($model->houses, 'houses_number_house')->input('text')->label() ?>
+            <?= $form->field($model->houses, 'houses_description')->textarea()->label() ?>
 
     </div>
 </div>

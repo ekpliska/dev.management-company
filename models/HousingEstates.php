@@ -35,6 +35,8 @@ class HousingEstates extends ActiveRecord
             [['is_new', 'estate_name_drp'], 'safe'],
             [['estate_name_drp', 'is_new'], 'integer'],
             
+            ['estate_name_drp', 'default', 'value' => 0],
+            
             // Название ЖК, город - обязательны для заполнения, если установлен переключатель "Новый"
             [['estate_name', 'estate_town'], 
                 'required', 
