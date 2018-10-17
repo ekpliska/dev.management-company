@@ -927,7 +927,7 @@ $(document).ready(function() {
             success: function (response) {
                 if (response.success) {
                     // Удаляем html блок со всеми примечаниями
-                    $('tr[id=note_flat__tr-' + flatId).remove();
+                    $('tr[id=note_flat__tr-' + flatId + ']').remove();
                     $('#check_status__flat').attr('checked', false);
                     $('#estate_note_message_manager').modal('hide');
                 }
@@ -947,7 +947,7 @@ $(document).ready(function() {
         var noteId = $(this).data('note');
         var htmlBlock = $(this).closest('tr');
         // Количество строк с примечаниями
-        var countTr = $('tr#note_flat__tr').length;
+        var countTr = $('tr[id^=note_flat__tr]').length;
         
         $.ajax({
             url: 'delete-note-flat',
