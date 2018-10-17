@@ -83,19 +83,22 @@ class NotesFlat extends ActiveRecord
      */
     public function beforeDelete() {
         
-        if (parent::beforeDelete()) {
-            $note_list = NotesFlat::find()
-                    ->where(['notes_flat_id' => $this->notes_flat_id])
-                    ->asArray()
-                    ->count();
-            $flat = Flats::findOne($this->notes_flat_id);
-            if ($note_list <= 1 ) {
-                $flat->status = Flats::STATUS_DEBTOR_NO;
-                $flat->save(false);
-            }
-            return true;
+        if (!parent::beforeDelete()) {
+            return false;
         }
-        return false;
+        
+        $note_list = NotesFlat::find()
+                ->where(['notes_flat_id' => $this->notes_flat_id])
+                ->asArray()
+                ->count();
+        $flat = Flats::findOne($this->notes_flat_id);
+        if ($note_list <= 1 ) {
+            $flat->status = Flats::STATUS_DEBTOR_NO;
+            $flat->save(false);
+        }
+        
+        return true;
+
     }
 
     /**

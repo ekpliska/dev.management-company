@@ -949,6 +949,9 @@ $(document).ready(function() {
         // Количество строк с примечаниями
         var countTr = $('tr[id^=note_flat__tr]').length;
         
+        console.log('count ' + countTr);
+        htmlBlock.css("background", "red");
+        
         $.ajax({
             url: 'delete-note-flat',
             method: 'POST',
@@ -956,11 +959,13 @@ $(document).ready(function() {
                 noteId: noteId,
             },
             success: function (responce, textStatus, jqXHR) {
+                console.log('responce.success ' + responce.success);
                 if (responce.success === true) {
                     htmlBlock.remove();
                 }
-                // Если количество примечаний <=1, то снимаем с квартиры статус Должник
-                if (countTr <= 1) {
+                // Если количество примечаний <=1 + Строка заголовок с кнопкой "Добавить примечание", то снимаем с квартиры статус Должник
+                if (countTr <= 2) {
+                    $('#add-note').closest('tr').remove();
                     $('#check_status__flat').attr('checked', false);
                 }
             },

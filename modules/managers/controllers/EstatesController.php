@@ -222,9 +222,10 @@ class EstatesController extends AppManagersController {
         if (Yii::$app->request->isAjax) {
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
             $note = NotesFlat::findOne($note_id);
-            if (!$note->delete()) {
-                return 'Ошибка удаления примечания';
-            }
+            $note->delete();
+//            if (!$note->delete()) {
+//                return ['success' => $note->errors];
+//            }
             return ['success' => true, 'note_id' => $note];
         }
         
