@@ -10,6 +10,8 @@
 <?php
     $form = ActiveForm::begin([
         'id' => 'add-characteristic',
+        'enableAjaxValidation' => true,
+        'validationUrl' => ['edit-description-validate', 'form' => 'add-characteristic'],
     ]);
 ?>
 

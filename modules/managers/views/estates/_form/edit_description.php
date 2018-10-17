@@ -14,7 +14,7 @@
     $form = ActiveForm::begin([
         'id' => 'edit-form-description',
         'enableAjaxValidation' => true,
-        'validationUrl' => ['edit-description-validate'],
+        'validationUrl' => ['edit-description-validate', 'form' => 'edit-form-description'],
     ]);
 ?>
     <?= $form->field($model, 'houses_description')->textarea()->label() ?>

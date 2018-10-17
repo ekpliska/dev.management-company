@@ -949,9 +949,6 @@ $(document).ready(function() {
         // Количество строк с примечаниями
         var countTr = $('tr[id^=note_flat__tr]').length;
         
-        console.log('count ' + countTr);
-        htmlBlock.css("background", "red");
-        
         $.ajax({
             url: 'delete-note-flat',
             method: 'POST',

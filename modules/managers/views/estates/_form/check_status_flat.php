@@ -11,6 +11,8 @@
 <?php
     $form = ActiveForm::begin([
         'id' => 'form-add-note',
+        'enableAjaxValidation' => true,
+        'validationUrl' => ['edit-description-validate', 'form' => 'form-add-note'],
     ]);
 ?>
 

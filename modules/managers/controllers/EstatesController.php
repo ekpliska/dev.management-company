@@ -25,8 +25,6 @@ class EstatesController extends AppManagersController {
         $characteristics = $house_cookie ? CharacteristicsHouse::getCharacteristicsByHouse($house_cookie) : null;
         $flats = $house_cookie ? Flats::getFlatsByHouse($house_cookie) : null;
         
-//        echo '<pre>'; var_dump($flats); die();
-        
         $files = $house_cookie ? Image::getAllFilesByHouse($house_cookie, 'Houses') : null;
         
         return $this->render('index', [
@@ -124,6 +122,9 @@ class EstatesController extends AppManagersController {
         return 'При загрузке фала возникла ошибка';
     }
     
+    /*
+     * Загрузка модального окна с формой на добавление примечания к квартире
+     */
     public function actionCheckStatusFlat($flat_id) {
         
         $model = new NotesFlat();
@@ -143,11 +144,28 @@ class EstatesController extends AppManagersController {
     }
     
     /*
-     * Валидация формы редактирование описания дома
+     * Валидация форм
+     *      Редактирование описание дома
+     *      Добавление характеристики
+     *      Добавление примечания
      */
-    public function actionEditDescriptionValidate() {
+    public function actionEditDescriptionValidate($form) {
         
-        $model = new Houses();
+        switch ($form) {
+            
+            case 'edit-form-description':
+                $model = new Houses();
+                break;
+            case 'add-characteristic':
+                $model = new CharacteristicsHouse();
+                break;
+            case 'form-add-note':
+                $model = new NotesFlat();
+                break;
+            default:
+                return $this->goHome();
+                
+        }
         if ($model->load(Yii::$app->request->post())) {
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
             return \yii\widgets\ActiveForm::validate($model);
@@ -223,9 +241,6 @@ class EstatesController extends AppManagersController {
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
             $note = NotesFlat::findOne($note_id);
             $note->delete();
-//            if (!$note->delete()) {
-//                return ['success' => $note->errors];
-//            }
             return ['success' => true, 'note_id' => $note];
         }
         
