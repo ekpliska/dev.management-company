@@ -10,6 +10,10 @@
  */
 class HousingEstates extends ActiveRecord
 {
+    
+    public $is_new = false;
+    public $estate_name_drp;
+
     /**
      * Таблица в БД
      */
@@ -24,10 +28,22 @@ class HousingEstates extends ActiveRecord
     public function rules()
     {
         return [
-            [['estate_name', 'houses_town'], 'required'],
-            [['estate_name'], 'string', 'max' => 170],
-            [['estat_town'], 'string', 'max' => 70],
-            [['estat_description'], 'string', 'max' => 255],
+            
+            [['estate_name'], 'string', 'min' => 5, 'max' => 170],
+            [['estate_town'], 'string', 'min' => 5, 'max' => 70],
+
+            [['is_new', 'estate_name_drp'], 'safe'],
+            [['estate_name_drp', 'is_new'], 'integer'],
+            
+            // Название ЖК, город - обязательны для заполнения, если установлен переключатель "Новый"
+            [['estate_name', 'estate_town'], 
+                'required', 
+                'whenClient' => 'function(attribute, value) { return ($("#housingestates-is_new").is(":checked")) ? true : false; }'],
+            
+            ['estate_name_drp',
+                'required',
+                'whenClient' => 'function(attribute, value) { return ($("#housingestates-is_new").is(":checked")) ? false: true; }'],
+            
         ];
     }
 
@@ -56,9 +72,10 @@ class HousingEstates extends ActiveRecord
     {
         return [
             'estate_id' => 'Estate ID',
-            'estate_name' => 'Estate Name',
-            'estat_town' => 'Houses Town',
-            'estat_description' => 'Houses Description',
+            'estate_name' => 'Нименование жилого комплекса',
+            'estate_town' => 'Город',
+            'estate_name_drp' => 'Жилой комплекс',
+            'is_new' => 'Новый',
         ];
     }
 

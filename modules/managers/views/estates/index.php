@@ -19,7 +19,7 @@ $this->title = 'Жилищный фонд';
     
     <?= AlertsShow::widget() ?>
     
-    <?= Html::a('Жилищный фонд (+)', ['voting/create'], ['class' => 'btn btn-success btn-sm']) ?>
+    <?= Html::a('Жилищный фонд (+)', ['estates/create-house'], ['class' => 'btn btn-success btn-sm']) ?>
     <div class="dropdown">
         <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown">+
             <span class="caret"></span></button>

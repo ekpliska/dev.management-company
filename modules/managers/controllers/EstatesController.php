@@ -3,28 +3,32 @@
     namespace app\modules\managers\controllers;
     use Yii;
     use yii\web\UploadedFile;
+    use yii\helpers\ArrayHelper;
     use app\modules\managers\controllers\AppManagersController;
     use app\models\Houses;
     use app\models\Image;
     use app\models\CharacteristicsHouse;
     use app\models\Flats;
     use app\models\NotesFlat;
+    use app\models\HousingEstates;
+    use app\modules\managers\models\form\HouseForm;
 
 /**
  * Жилищный фонд
  */
 class EstatesController extends AppManagersController {
     
+    /*
+     * Жилищный фонд, главная страница
+     */
     public function actionIndex() {
         
         // Из куки получаем выбранный дом
         $house_cookie = $this->actionReadCookies();
         
         $houses_list = Houses::getAllHouses();
-        
         $characteristics = $house_cookie ? CharacteristicsHouse::getCharacteristicsByHouse($house_cookie) : null;
         $flats = $house_cookie ? Flats::getFlatsByHouse($house_cookie) : null;
-        
         $files = $house_cookie ? Image::getAllFilesByHouse($house_cookie, 'Houses') : null;
         
         return $this->render('index', [
@@ -33,6 +37,22 @@ class EstatesController extends AppManagersController {
             'flats' => $flats,
             'files' => $files,
             'house_cookie' => $house_cookie,
+        ]);
+        
+    }
+    
+    /*
+     * Создание нового жилого объекта ЖК + Дом
+     */
+    public function actionCreateHouse() {
+        
+        $estates_list = ArrayHelper::map(HousingEstates::getHousingEstateList(), 'estate_id', 'estate_name');
+        $model = new HouseForm();
+        $model->estate = new HousingEstates();
+        
+        return $this->render('create-house', [
+            'model' => $model,
+            'estates_list' => $estates_list,
         ]);
         
     }
