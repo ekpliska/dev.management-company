@@ -49,12 +49,13 @@ class EstatesController extends AppManagersController {
         $estates_list = ArrayHelper::map(HousingEstates::getHousingEstateList(), 'estate_id', 'estate_name');
         
         $model = new HouseForm();
-        $model->housingEstates = new HousingEstates();
-        $model->setAttributes(Yii::$app->request->post());        
+        $model->houses = new Houses;
+        $model->houses->loadDefaultValues();
+        $model->setAttributes(Yii::$app->request->post());
         
-        if (Yii::$app->request->post() && $model->validate()) {
-            $model->save();
-            return $this->refresh();
+        if (Yii::$app->request->post() && $model->save()) {
+            Yii::$app->getSession()->setFlash('success', 'Product has been created.');
+            return $this->redirect(['update', 'id' => $model->houses->houses_id]);
         }
         
         return $this->render('create-house', [

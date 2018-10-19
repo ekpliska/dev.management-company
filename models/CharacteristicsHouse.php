@@ -26,7 +26,7 @@ class CharacteristicsHouse extends ActiveRecord
     public function rules()
     {
         return [
-            [['characteristics_house_id', 'characteristics_name', 'characteristics_value'], 'required'],
+            [['characteristics_name', 'characteristics_value'], 'required'],
             [['characteristics_house_id'], 'integer'],
             
             [['characteristics_name'], 'string', 'max' => 255],
@@ -66,7 +66,7 @@ class CharacteristicsHouse extends ActiveRecord
         return [
             'characteristics_id' => 'Characteristics ID',
             'characteristics_house_id' => 'Characteristics House ID',
-            'characteristics_name' => 'Наимменование характеристики',
+            'characteristics_name' => 'Наименование характеристики',
             'characteristics_value' => 'Значение характеристики',
         ];
     }
