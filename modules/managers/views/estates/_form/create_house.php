@@ -1,9 +1,9 @@
 <?php
 
-    use app\models\CharacteristicsHouse;
     use yii\widgets\ActiveForm;
     use yii\helpers\Html;
-    use yii\helpers\Url;
+    use app\models\CharacteristicsHouse;
+    use app\helpers\FormatHelpers;
 
 /* 
  * ФОрма создание нового дома
@@ -112,6 +112,16 @@
         </legend>
         <div id="upload-files" class="collapse">
             <?= $form->field($model->houses, 'upload_files[]')->input('file', ['multiple' => true])->label() ?>
+            <br />
+            <?php if (isset($upload_files) && $upload_files) : ?>
+                <?php foreach ($upload_files as $file) : ?>
+                    <?= FormatHelpers::formatUrlByDoc($file['name'], $file['filePath']) ?>
+                    <?= Html::button('Удалить', [
+                            'class' => 'btn btn-link btn-sm delete_file',
+                            'data-files' => $doc['id'],]) ?>
+                <?php endforeach; ?>               
+            <?php endif; ?>
+            
         </div>
    </fieldset>   
     

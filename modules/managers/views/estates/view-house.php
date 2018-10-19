@@ -17,6 +17,7 @@ $this->title = 'Жилой объект (+)';
     
     <?= $this->render('_form/create_house', [
             'model' => $model,
-            'estates_list' => $estates_list]) ?>
+            'estates_list' => $estates_list,
+            'upload_files' => $upload_files]) ?>
     
 </div>

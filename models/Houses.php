@@ -116,6 +116,12 @@ class Houses extends ActiveRecord
         return $this->hasMany(CharacteristicsHouse::className(), ['characteristics_house_id' => 'houses_id']);
     }
     
+    public static function findHouseById($house_id) {
+        return self::find()
+                ->where(['houses_id' => $house_id])
+                ->one();
+    }
+    
     public static function getAllHouses() {
         
         return self::find()
@@ -128,7 +134,6 @@ class Houses extends ActiveRecord
                     'houses_number_house' => SORT_ASC])
                 ->asArray()
                 ->all();
-        
         
     }    
     
@@ -170,7 +175,6 @@ class Houses extends ActiveRecord
         }
     }
 
-    
     /*
      * Список всех домов жилого массива
      */

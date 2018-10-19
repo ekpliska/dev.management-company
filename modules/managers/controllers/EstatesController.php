@@ -53,12 +53,27 @@ class EstatesController extends AppManagersController {
         $model->houses->loadDefaultValues();
         $model->setAttributes(Yii::$app->request->post());
         
-        if (Yii::$app->request->post() && $model->save()) {
+        if (Yii::$app->request->post() && $model->validate()) {
+            // Получаем загружаемые документа
             $files = UploadedFile::getInstances($model->houses, 'upload_files');
             $model->houses->upload_files = $files;
-            $model->houses->uploadFiles($files);
-            return $this->redirect(['view-house', 'house_id' => $model->houses->houses_id]);
-        } 
+            // Сохраняем
+            if ($model->save()) {
+                // Загружаем прикрепленне файлы
+                $model->houses->uploadFiles($files);
+                Yii::$app->session->setFlash('estate-admin', [
+                    'success' => true,
+                    'message' => 'Запись успешно создана',
+                ]);
+                return $this->redirect(['view-house', 'house_id' => $model->houses->houses_id]);
+            } else {
+                Yii::$app->session->setFlash('estate-admin', [
+                    'success' => false,
+                    'error' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз',
+                ]);
+                return $this->redirect(Yii::$app->request->referrer);                
+            }
+        }
         
         return $this->render('create-house', [
             'model' => $model,
@@ -72,22 +87,42 @@ class EstatesController extends AppManagersController {
      */
     public function actionViewHouse($house_id) {
         
-        $estates_list = ArrayHelper::map(HousingEstates::getHousingEstateList(), 'estate_id', 'estate_name');
-        
         $model = new HouseForm();
-        $model->houses = Houses::findOne($house_id);
-        $model->setAttributes(Yii::$app->request->post());
+        $model->houses = Houses::findHouseById($house_id);
         
-        if (Yii::$app->request->post() && $model->save()) {
+        if ($model->houses === null) {
+            throw new \yii\web\NotFoundHttpException('Вы обратились к несуществующей странице');
+        }
+        
+        $model->setAttributes(Yii::$app->request->post());
+
+        $estates_list = ArrayHelper::map(HousingEstates::getHousingEstateList(), 'estate_id', 'estate_name');
+        // Получаем прикрепленные к заявке файлы
+        $upload_files = Image::getAllDocByNews($model->houses->houses_id, $model_name = 'Houses');
+        
+        if (Yii::$app->request->post()) {
             $files = UploadedFile::getInstances($model->houses, 'upload_files');
             $model->houses->upload_files = $files;
             $model->houses->uploadFiles($files);
-            return $this->redirect(['view-house', 'house_id' => $model->houses->houses_id]);
+            $model->houses->upload_files = null;
+            if (!$model->save()) {
+                Yii::$app->session->setFlash('estate-admin', [
+                    'success' => false,
+                    'error' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз',
+                ]);
+                return $this->redirect(Yii::$app->request->referrer);
+            } else {
+                Yii::$app->session->setFlash('estate-admin', [
+                    'success' => true,
+                    'message' => 'Изменения были успешно обновлены',
+                ]);
+            }
         }
         
         return $this->render('view-house', [
             'model' => $model,
             'estates_list' => $estates_list,
+            'upload_files' => $upload_files,
         ]);        
         
     }

@@ -37,6 +37,7 @@ class HouseForm extends Model
             return false;
         }
         $transaction = Yii::$app->db->beginTransaction();
+        
         if (!$this->houses->save()) {
             $transaction->rollBack();
             return false;
