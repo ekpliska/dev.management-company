@@ -55,7 +55,7 @@ class Houses extends ActiveRecord
             
             [['houses_number_house'], 'string', 'max' => 10],
             
-            [['houses_number_house'], 'validateNumberHouse'],
+//            [['houses_number_house'], 'validateNumberHouse'],
             
             [['houses_estate_name_id'], 'exist', 'skipOnError' => true, 'targetClass' => HousingEstates::className(), 'targetAttribute' => ['houses_estate_name_id' => 'estate_id']],
 
@@ -199,6 +199,7 @@ class Houses extends ActiveRecord
             'houses_number_house' => 'Номер дома',
             'houses_description' => 'Описание',
             'upload_file' => 'Загружаемый файл',
+            'upload_files' => 'Файлы',
         ];
     }
 

@@ -53,6 +53,9 @@ $this->title = 'Жилищный фонд';
                                     'class' => 'btn btn-primary btn-sm',
                                     'id' => 'edit-discription-btn',
                             ]) ?>
+                            <?= Html::a('<span class="glyphicon glyphicon-edit"></span>', ['view-house', 'house_id' => $house['houses_id']], [
+                                    'class' => 'btn btn-link btn-sm',
+                            ]) ?>
                         </div>
                     </div>
                 </div>

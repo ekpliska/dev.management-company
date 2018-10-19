@@ -29,7 +29,7 @@
         
         <?= $form->field($model->houses, 'houses_street')->input('text')->label() ?>
         <?= $form->field($model->houses, 'houses_number_house')->input('text')->label() ?>
-        <?= $form->field($model->houses, 'houses_description')->input('text')->label() ?>
+        <?= $form->field($model->houses, 'houses_description')->textarea()->label() ?>
         
     </fieldset>
 </div>

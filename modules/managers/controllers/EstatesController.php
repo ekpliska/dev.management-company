@@ -111,12 +111,14 @@ class EstatesController extends AppManagersController {
                     'error' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз',
                 ]);
                 return $this->redirect(Yii::$app->request->referrer);
-            } else {
-                Yii::$app->session->setFlash('estate-admin', [
-                    'success' => true,
-                    'message' => 'Изменения были успешно обновлены',
-                ]);
             }
+            
+            Yii::$app->session->setFlash('estate-admin', [
+                'success' => true,
+                'message' => 'Изменения были успешно обновлены',
+            ]);
+            return $this->redirect(['view-house', 'house_id' => $model->houses->houses_id]);
+            
         }
         
         return $this->render('view-house', [
