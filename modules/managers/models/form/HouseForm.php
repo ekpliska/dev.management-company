@@ -121,7 +121,7 @@ class HouseForm extends Model
         $errorLists = [];
         foreach ($this->getAllModels() as $id => $model) {
             $errorList = $form->errorSummary($model, [
-              'header' => '<p>Please fix the following errors for <b>' . $id . '</b></p>',
+              'header' => '<p>Пожалуйста, исправьте ошибки в заполнении формы <b>' . $id . '</b></p>',
             ]);
             $errorList = str_replace('<li></li>', '', $errorList); // remove the empty error
             $errorLists[] = $errorList;

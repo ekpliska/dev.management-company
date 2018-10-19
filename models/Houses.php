@@ -53,6 +53,8 @@ class Houses extends ActiveRecord
             
             [['houses_number_house'], 'string', 'max' => 10],
             
+            [['houses_number_house'], 'validateNumberHouse'],
+            
             [['houses_estate_name_id'], 'exist', 'skipOnError' => true, 'targetClass' => HousingEstates::className(), 'targetAttribute' => ['houses_estate_name_id' => 'estate_id']],
 
             ['houses_description', 'required', 'on' => self::SCENARIO_EDIT_DESCRIPRION],
@@ -66,6 +68,22 @@ class Houses extends ActiveRecord
                 'on' => self::SCENARIO_LOAD_FILE],
             
         ];
+    }
+    
+    public function validateNumberHouse() {
+        
+        $house = Houses::find()
+                ->where(['houses_estate_name_id' => $this->houses_estate_name_id])
+                ->andWhere(['houses_street' => $this->houses_street])
+                ->andWhere(['houses_number_house' => $this->houses_number_house])
+                ->asArray()
+                ->one();
+        
+        if ($house !== null) {
+            $errorMsg = 'Указанный номер дома в выбранном жилом комплексе не является уникальным';
+            $this->addError('houses_number_house', $errorMsg);
+        }
+        
     }
 
     /**
