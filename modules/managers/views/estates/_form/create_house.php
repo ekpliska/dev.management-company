@@ -11,7 +11,11 @@
 ?>
     <?php 
         $form = ActiveForm::begin([
+            'id' => 'create-house',
             'enableClientValidation' => false, 
+            'options' => [
+                'enctype' => 'multipart/form-data',
+            ],
         ]); 
     ?>
 
@@ -107,7 +111,7 @@
             </a> 
         </legend>
         <div id="upload-files" class="collapse">
-            <?= Html::button('Добавить вложение', ['class' => 'btn btn-link']) ?>
+            <?= $form->field($model->houses, 'upload_files[]')->input('file', ['multiple' => true])->label() ?>
         </div>
    </fieldset>   
     

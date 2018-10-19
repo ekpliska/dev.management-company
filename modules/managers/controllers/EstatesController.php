@@ -54,14 +54,41 @@ class EstatesController extends AppManagersController {
         $model->setAttributes(Yii::$app->request->post());
         
         if (Yii::$app->request->post() && $model->save()) {
-            Yii::$app->getSession()->setFlash('success', 'Product has been created.');
-            return $this->redirect(['update', 'id' => $model->houses->houses_id]);
-        }
+            $files = UploadedFile::getInstances($model->houses, 'upload_files');
+            $model->houses->upload_files = $files;
+            $model->houses->uploadFiles($files);
+            return $this->redirect(['view-house', 'house_id' => $model->houses->houses_id]);
+        } 
         
         return $this->render('create-house', [
             'model' => $model,
             'estates_list' => $estates_list,
         ]);
+        
+    }
+    
+    /*
+     * Просмотр и редактирование записи жилой дом
+     */
+    public function actionViewHouse($house_id) {
+        
+        $estates_list = ArrayHelper::map(HousingEstates::getHousingEstateList(), 'estate_id', 'estate_name');
+        
+        $model = new HouseForm();
+        $model->houses = Houses::findOne($house_id);
+        $model->setAttributes(Yii::$app->request->post());
+        
+        if (Yii::$app->request->post() && $model->save()) {
+            $files = UploadedFile::getInstances($model->houses, 'upload_files');
+            $model->houses->upload_files = $files;
+            $model->houses->uploadFiles($files);
+            return $this->redirect(['view-house', 'house_id' => $model->houses->houses_id]);
+        }
+        
+        return $this->render('view-house', [
+            'model' => $model,
+            'estates_list' => $estates_list,
+        ]);        
         
     }
     

@@ -3,6 +3,7 @@
     namespace app\models;
     use yii\db\ActiveRecord;
     use Yii;
+    use rico\yii2images\behaviors\ImageBehave;
     use app\models\Flats;
     use app\models\HousingEstates;
     use app\models\CharacteristicsHouse;
@@ -16,6 +17,7 @@ class Houses extends ActiveRecord
     const SCENARIO_LOAD_FILE = 'load new file';
     
     public $upload_file;
+    public $upload_files;
 
 
     /**
@@ -29,7 +31,7 @@ class Houses extends ActiveRecord
     public function behaviors () {
         return [
             'image' => [
-                'class' => \rico\yii2images\behaviors\ImageBehave::className(),
+                'class' => ImageBehave::className(),
             ],
         ];
     }
@@ -66,6 +68,13 @@ class Houses extends ActiveRecord
                 'maxSize' => 256 * 1000,
                 'extensions' => 'doc, docx, pdf, xls, xlsx, png, jpg, jpeg',
                 'on' => self::SCENARIO_LOAD_FILE],
+            
+            [['upload_files'],
+                'file', 
+                'maxSize' => 256 * 1000,
+                'extensions' => 'doc, docx, pdf, xls, xlsx, png, jpg, jpeg',
+                'maxFiles' => 4,
+            ],            
             
         ];
     }
@@ -139,7 +148,28 @@ class Houses extends ActiveRecord
         } else {
             return false;
         }
-    }    
+    }
+
+    /*
+     * Загрузка прикрепленных документов
+     */
+    public function uploadFiles($files) {
+        
+        if ($files) {
+            foreach ($files as $file) {
+                $file_name = $file->basename;
+                $path = 'upload/store' . $file_name . '.' . $file->extension;
+                // Получаем имя файла
+                $file->saveAs($path);
+                $this->attachImage($path, false, $file_name);                
+                @unlink($path);
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     
     /*
      * Список всех домов жилого массива
