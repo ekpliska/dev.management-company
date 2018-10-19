@@ -45,10 +45,16 @@ class UserProfile extends BaseObject {
                         . 'u.user_email as email, u.user_photo as photo, '
                         . 'u.created_at as date_created , u.last_login as last_login, '
                         . 'u.status as status, '
-                        . 'pa.account_number as account')
+                        . 'pa.account_number as account,'
+                        . 'f.flats_id as flat_id,'
+                        . 'h.houses_id as house_id,'
+                        . 'he.estate_id as estate_id,')
                     ->from('user as u')
                     ->join('LEFT JOIN', 'clients as c', 'u.user_client_id = c.clients_id')
                     ->join('LEFT JOIN', 'personal_account as pa', 'u.user_client_id = pa.personal_clients_id')
+                    ->join('LEFT JOIN', 'flats as f', 'f.flats_id = pa.personal_flat_id')
+                    ->join('LEFT JOIN', 'houses as h', 'h.houses_id = f.flats_house_id')
+                    ->join('LEFT JOIN', 'housing_estates as he', 'he.estate_id = h.houses_estate_name_id')
                     ->where(['u.user_id' => $this->_user_id])
                     ->one();
             
@@ -68,6 +74,9 @@ class UserProfile extends BaseObject {
                     ->from('user as u')
                     ->join('LEFT JOIN', 'rents as r', 'u.user_rent_id = r.rents_id')
                     ->join('LEFT JOIN', 'personal_account as pa', 'u.user_rent_id = pa.personal_rent_id')
+                    ->join('LEFT JOIN', 'flats as f', 'f.flats_id = pa.personal_flat_id')
+                    ->join('LEFT JOIN', 'houses as h', 'h.houses_id = f.flats_house_id')
+                    ->join('LEFT JOIN', 'housing_estates as he', 'he.estate_id = h.houses_estate_name_id')                    
                     ->where(['u.user_id' => $this->_user_id])
                     ->one();
             
@@ -203,10 +212,22 @@ class UserProfile extends BaseObject {
     }
     
     /*
-     * Лицевой счет Собственника/Аренедтора
+     * ID квартиры Собственника/Аренедтора
      */
-    public function getAccount() {
-        return $this->_user['account'];
+    public function getFlatId() {
+        return $this->_user['flat_id'];
+    }
+    /*
+     * ID дома Собственника/Аренедтора
+     */
+    public function getHouseId() {
+        return $this->_user['house_id'];
+    }
+    /*
+     * ID жилого комплекса Собственника/Аренедтора
+     */
+    public function getEstateId() {
+        return $this->_user['estate_id'];
     }
         
 }
