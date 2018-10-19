@@ -129,6 +129,12 @@ class EstatesController extends AppManagersController {
         
     }
     
+    public function actionCreateFlat() {
+        
+        return $this->render('create-flat');
+        
+    }
+    
     /*
      * Загрузка модального окна на редактирование описания дома
      * Сохранение данных

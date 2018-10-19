@@ -19,7 +19,14 @@ $this->title = 'Жилищный фонд';
     
     <?= AlertsShow::widget() ?>
     
-    <?= Html::a('Жилищный фонд (+)', ['estates/create-house'], ['class' => 'btn btn-success btn-sm']) ?>
+    <div class="dropdown">
+        <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown">Жилищный фонд (+)
+            <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+                <li><a href="<?= Url::to(['estates/create-house']) ?>">Добавить дом</a></li>
+                <li><a href="<?= Url::to(['estates/create-flat']) ?>">Добавить квартиру</a></li>
+            </ul>
+    </div>
     <div class="dropdown">
         <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown">+
             <span class="caret"></span></button>

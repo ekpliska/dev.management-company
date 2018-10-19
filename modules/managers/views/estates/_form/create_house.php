@@ -105,7 +105,11 @@
     
    <fieldset>
         <legend>
-            Вложения
+            Вложения 
+            <span class="small">
+            #TODO Доделать удаление файлов, изпользуя метод с главной страниц Жилого массива
+            #TODO Или прикрутить виджет
+            </span>
             <a href="#upload-files" class="btn btn-primary btn-sm pull-right" data-toggle="collapse">
                 <span class="glyphicon glyphicon-menu-down"></span>
             </a> 
@@ -117,11 +121,11 @@
                 <?php foreach ($upload_files as $file) : ?>
                     <?= FormatHelpers::formatUrlByDoc($file['name'], $file['filePath']) ?>
                     <?= Html::button('Удалить', [
-                            'class' => 'btn btn-link btn-sm delete_file',
-                            'data-files' => $doc['id'],]) ?>
+                            'class' => 'btn btn-link btn-sm',
+                            'id' => 'delete_file__house',
+                            'data-files' => $file['id']]) ?>
                 <?php endforeach; ?>               
             <?php endif; ?>
-            
         </div>
    </fieldset>   
     
