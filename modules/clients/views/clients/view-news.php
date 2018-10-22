@@ -16,7 +16,7 @@ $this->title = $news['news_title'];
     <div class="col-md-3">
         <?= Html::img('@web' . $news['news_preview'], ['alt' => $news['news_title'], 'style' => 'width: 100%;']) ?>
         <hr />
-        <?php // = FormatHelpers::formatDate($news['rubrics_name'], false) ?>
+        <?= $news['rubrics_name'] ?>
         <hr />
         <?= FormatHelpers::formatDate($news['created_at'], false) ?>
         <hr />
@@ -25,6 +25,11 @@ $this->title = $news['news_title'];
             <?php foreach ($files as $file) : ?>
                 <?= FormatHelpers::formatUrlByDoc($file['name'], $file['filePath']) ?>
             <?php endforeach; ?>
+        <?php endif; ?>
+        <hr />
+        <?php if ($news['isAdvert']) : ?>
+            <span class="label label-danger">Реклама</span>
+            <?= $news['partners_name'] ?>
         <?php endif; ?>
     </div>
     <div class="col-md-9">

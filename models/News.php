@@ -170,11 +170,14 @@ class News extends ActiveRecord
     public static function findNewsBySlug($slug) {
         
         return self::find()
+                ->select(['news_id', 'news_title', 'news_type_rubric_id', 'news_preview', 'news_text', 'created_at', 'slug', 'rubrics_name', 'isAdvert', 'partners_name'])
+                ->joinWith(['rubric', 'partner'])
                 ->where(['slug' => $slug])
+                ->asArray()
                 ->one();
         
     }
-    
+
     /*
      * Формирование списка новостей для конечного пользователя
      */
