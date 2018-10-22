@@ -1,6 +1,9 @@
 <?php
 
-    use app\modules\clients\widgets\News;
+    use yii\helpers\Html;
+    use yii\helpers\Url;
+    use app\helpers\FormatHelpers;
+    use app\modules\clients\widgets\Rubrics;
 
 $this->title ="Главная страница"
 ?>
@@ -9,11 +12,35 @@ $this->title ="Главная страница"
     
     <h1><?= $this->title ?></h1>
     
-    <?= 
-        News::widget([
-            'estate_id' => Yii::$app->userProfile->_user['estate_id'], 
-            'house_id' => Yii::$app->userProfile->_user['house_id'], 
-            'flat_id' => Yii::$app->userProfile->_user['flat_id']]) 
-    ?>
+    <?= Rubrics::widget() ?>
     
+    <?php /* Рубрики */ ?>    
+    <?php if (isset($news) && count($news) > 0) : ?>
+        <?php foreach ($news as $key => $post) : ?>
+        <?php ++$cell ?>
+            <div class="col-md-4">
+                <a href="<?= Url::to(['clients/view-news', 'slug' => $post['slug']]) ?>">
+                    <?= Html::img('@web' . $post['news_preview'], ['alt' => $post['news_title'], 'style' => 'width:100%']) ?>
+                </a>
+                
+                <h4>
+                    <?= Html::a($post['news_title'], ['clients/view-news', 'slug' => $post['slug']]) ?>
+                    <?= $post['news_type_rubric_id'] ?>
+                    <?php if ($post['isAdvert']) : ?>
+                        <span class="label label-danger">Реклама</span>
+                        <?= $post['partners_name'] ?>
+                    <?php endif; ?>
+                </h4>
+                
+                <?= FormatHelpers::formatDate($post['created_at'], false) ?>
+                <p><?= FormatHelpers::shortTextNews($post['news_text']) ?></p>
+            </div>
+
+            <?php if (($key + 1) % 3 == 0) : ?>
+                <div class="clearfix"></div>
+            <?php endif; ?>    
+
+        <?php endforeach; ?>    
+    <?php endif; ?>    
+        
 </div>
