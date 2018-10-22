@@ -244,13 +244,11 @@ class FormatHelpers {
             return 'Не определено';
         }
         
-        $_start = date_create($date_start);
+        $date_now = date_create(date('Y-m-d H:i:s'));
         $_end = date_create($date_end);
-        $interval = date_diff($_start, $_end);
+        $interval = date_diff($date_now, $_end);
 
-
-
-        if ($interval->d !== 0) {
+        if (strtotime($date_end) > time() && $interval->d !== 0) {
             
             $message = Yii::$app->i18n->messageFormatter->format(
                     'До окончания {n, plural, one{# день} few{# дня} many{# дней} other{# дней}}',

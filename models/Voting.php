@@ -129,6 +129,17 @@ class Voting extends ActiveRecord
         return $votings;
     }
     
+    /*
+     * Найти голосование по ID
+     */
+    public static function findVotingById($voting_id) {
+        
+        return self::find()
+                ->joinWith(['question'])
+                ->where(['voting_id' => $voting_id])
+                ->asArray()
+                ->one();        
+    }
     
     /*
      * Получить ID голосования

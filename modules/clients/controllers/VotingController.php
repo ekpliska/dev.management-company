@@ -27,4 +27,17 @@ class VotingController extends AppClientsController {
         
     }
     
+    /*
+     * Страница конечного голосования
+     */
+    public function actionViewVoting($voting_id) {
+        
+        $voting = Voting::findVotingById($voting_id);
+        
+        return $this->render('view-voting', [
+            'voting' => $voting,
+        ]);
+        
+    }
+    
 }
