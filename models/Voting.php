@@ -95,6 +95,9 @@ class Voting extends ActiveRecord
         ];
     }
     
+    /*
+     * Список статусов голосования
+     */
     public function getStatusVoting() {
         return [
             self::STATUS_ACTIVE => 'Активно',
@@ -104,7 +107,7 @@ class Voting extends ActiveRecord
     }
     
     /*
-     * 
+     * Получить список всех голосований
      */
     public static function findAllVoting() {
         
@@ -113,6 +116,19 @@ class Voting extends ActiveRecord
                 ->asArray();
         
     }
+    
+    /*
+     * Получить список всех голосований для конечного пользователя
+     */
+    public static function findAllVotingForClient($estate_id, $house_id, $flat_id) {
+        
+        $votings = self::find()
+//                ->where(['voting_house' => $house_id])
+                ->asArray()
+                ->all();
+        return $votings;
+    }
+    
     
     /*
      * Получить ID голосования

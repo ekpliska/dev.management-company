@@ -17,7 +17,6 @@ $this->title ="Главная страница"
     <?php /* Рубрики */ ?>    
     <?php if (isset($news) && count($news) > 0) : ?>
         <?php foreach ($news as $key => $post) : ?>
-        <?php ++$cell ?>
             <div class="col-md-4">
                 <a href="<?= Url::to(['clients/view-news', 'slug' => $post['slug']]) ?>">
                     <?= Html::img('@web' . $post['news_preview'], ['alt' => $post['news_title'], 'style' => 'width:100%']) ?>

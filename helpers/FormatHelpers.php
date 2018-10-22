@@ -232,7 +232,50 @@ class FormatHelpers {
         $_text = strip_tags($text);
         return StringHelper::truncateWords($_text , $count_world, ' [...]');
         
+    }
+    
+    
+    /*
+     * Подсчет количества дней до завершения голосования
+     */
+    public static function numberOfDaysToFinishVote($date_start, $date_end) {
         
+        if (empty($date_start) || empty($date_end)) {
+            return 'Не определено';
+        }
+        
+        $_start = date_create($date_start);
+        $_end = date_create($date_end);
+        $interval = date_diff($_start, $_end);
+
+
+
+        if ($interval->d !== 0) {
+            
+            $message = Yii::$app->i18n->messageFormatter->format(
+                    'До окончания {n, plural, one{# день} few{# дня} many{# дней} other{# дней}}',
+                    ['n' => $interval->d],
+                    Yii::$app->language);
+            
+        } elseif ($interval->d == 0 && $interval->h !== 0) {
+            
+            $message = Yii::$app->i18n->messageFormatter->format(
+                    'До окончания {n, plural, one{# час} few{# часа} many{# часов} other{# часов}}',
+                    ['n' => $interval->h],
+                    Yii::$app->language);
+            
+        } elseif ($interval->d == 0 && $interval->h == 0 && $interval->i !== 0) {
+            
+            $message = Yii::$app->i18n->messageFormatter->format(
+                    'До окончания {n, plural, one{# минута} few{# минуты} many{# минут} other{# минут}}',
+                    ['n' => $interval->i],
+                    Yii::$app->language);
+            
+        } else {
+            $message = 'Завершено';
+        }
+        
+        return '<span class="label label-danger">' . $message . '</span>';
     }
     
 }

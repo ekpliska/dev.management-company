@@ -21,7 +21,7 @@
         'items' => [
             ['label' => 'Главная', 'url' => ['clients/index']],
             Yii::$app->user->can('clients') ?
-                (['label' => 'Голосование', 'url' => ['clients/vote']]) : '',
+                (['label' => 'Голосование', 'url' => ['voting/index']]) : '',
             ['label' => 'Профиль', 'url' => ['profile/index']],
             [
                 'label' => 'Лицевой счет',
