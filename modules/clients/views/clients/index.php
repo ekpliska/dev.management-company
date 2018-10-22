@@ -25,7 +25,6 @@ $this->title ="Главная страница"
                 
                 <h4>
                     <?= Html::a($post['news_title'], ['clients/view-news', 'slug' => $post['slug']]) ?>
-                    <?= $post['news_type_rubric_id'] ?>
                     <?php if ($post['isAdvert']) : ?>
                         <span class="label label-danger">Реклама</span>
                         <?= $post['partners_name'] ?>

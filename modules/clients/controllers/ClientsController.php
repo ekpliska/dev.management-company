@@ -24,7 +24,7 @@ class ClientsController extends AppClientsController
         $estate_id = Yii::$app->userProfile->_user['estate_id'];
         $house_id = Yii::$app->userProfile->_user['house_id'];
         $flat_id = Yii::$app->userProfile->_user['flat_id'];
-        $rubruc_id = $rubric ? $rubric : 1;
+        $rubruc_id = $rubric ? $rubric : 'important_information';
         
         $news = News::getNewsByClients($rubruc_id, $estate_id, $house_id, $flat_id);
         $rubrucs = Rubrics::getArrayRubrics();

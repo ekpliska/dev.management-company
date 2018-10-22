@@ -28,9 +28,23 @@ class m181001_072514_table_news extends Migration
         ]);
         $this->createIndex('idx-partners-partners_id', '{{%partners}}', 'partners_id');
 
+        $this->createTable('{{%rubrics}}', [
+            'rubrics_id' => $this->string(70)->notNull(),
+            'rubrics_name' => $this->string(170)->notNull(),
+            'PRIMARY KEY (rubrics_id)',
+        ]);
+        
+        $this->batchInsert('{{%rubrics}}', 
+                ['rubrics_id', 'rubrics_name'], [
+                    ['important_information', 'Важная информация'],
+                    ['special_offers', 'Специальные предложения'],
+                    ['house_news', 'Новости дома']
+                ]
+        );
+        
         $this->createTable('{{%news}}', [
             'news_id' => $this->primaryKey(),
-            'news_type_rubric_id' => $this->integer()->notNull(),
+            'news_type_rubric_id' => $this->string(70)->notNull(),
             'news_title' => $this->string(255)->notNull(),
             'news_text' => $this->text(5000)->notNull(),
             'news_preview' => $this->string(255)->notNull(),
@@ -49,11 +63,6 @@ class m181001_072514_table_news extends Migration
         ]);
         $this->createIndex('idx-news-news_id', '{{%news}}', 'news_id');
         
-        $this->createTable('{{%rubrics}}', [
-            'rubrics_id' => $this->primaryKey(),
-            'rubrics_name' => $this->string(170)->notNull(),
-        ]);
-        $this->createIndex('idx-rubrics-rubrics_id', '{{%rubrics}}', 'rubrics_id');
         
         $this->addForeignKey(
                 'fk-news-news_type_rubric_id', 
@@ -61,7 +70,7 @@ class m181001_072514_table_news extends Migration
                 'news_type_rubric_id', 
                 '{{%rubrics}}', 
                 'rubrics_id', 
-                'RESTRICT',
+                'CASCADE',
                 'CASCADE'
         );
         

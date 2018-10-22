@@ -27,7 +27,7 @@ class m180901_095338_table_personal_account extends Migration
             'account_organization_id' => $this->integer(),
             'personal_clients_id' => $this->integer(),
             'personal_rent_id' => $this->integer(),
-            'personal_flat_id' => $this->integer(),
+            'personal_house_id' => $this->integer(),
             'isActive' => $this->tinyInteger()->defaultValue(PersonalAccount::STATUS_DISABLED),
         ], $table_options);
         
@@ -48,7 +48,7 @@ class m180901_095338_table_personal_account extends Migration
         $this->dropForeignKey('fk-personal_account-personal_clients_id', '{{%personal_account}}');
         $this->dropForeignKey('fk-personal_account-personal_rent_id', '{{%personal_account}}');
         $this->dropForeignKey('fk-personal_account-account_organization_id', '{{%personal_account}}');
-        $this->dropForeignKey('fk-personal_account-personal_flat_id', '{{%personal_account}}');
+        $this->dropForeignKey('fk-personal_account-personal_house_id', '{{%personal_account}}');
         $this->dropForeignKey('fk-personal_account-bind-account_id', '{{%personal_account}}');
         
         $this->dropTable('{{%personal_account}}');

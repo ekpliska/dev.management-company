@@ -43,11 +43,11 @@ class m180901_131672_table_personal_account_fk extends Migration
         );
 
         $this->addForeignKey(
-                'fk-personal_account-personal_flat_id', 
+                'fk-personal_account-personal_house_id', 
                 '{{%personal_account}}', 
-                'personal_flat_id', 
-                '{{%flats}}', 
-                'flats_id', 
+                'personal_house_id', 
+                '{{%houses}}', 
+                'houses_id', 
                 'CASCADE',
                 'CASCADE'
         );      

@@ -70,8 +70,10 @@ class News extends ActiveRecord
                 'news_user_id', 
                 'isPrivateOffice'], 'required'],
             
+            ['news_type_rubric_id', 'string'],
+            
             [[
-                'news_type_rubric_id', 'news_house_id', 
+                'news_house_id', 
                 'news_user_id', 
                 'isPrivateOffice', 
                 'news_status',], 'integer'],
@@ -176,12 +178,12 @@ class News extends ActiveRecord
     /*
      * Формирование списка новостей для конечного пользователя
      */
-    public static function getNewsByClients($rubruc_id, $estate_id, $house_id, $flat_id) {
+    public static function getNewsByClients($rubruc, $estate_id, $house_id, $flat_id) {
         
         $news = self::find()
                 ->select(['news_id', 'news_title', 'news_type_rubric_id', 'news_preview', 'news_text', 'created_at', 'slug', 'rubrics_name', 'isAdvert', 'partners_name'])
                 ->joinWith(['rubric', 'partner'])
-                ->andWhere(['news_type_rubric_id' => $rubruc_id])
+                ->andWhere(['news_type_rubric_id' => $rubruc])
                 ->andWhere(['news_house_id' => $house_id, 'news_house_id' => 0])
                 ->asArray()
                 ->all();
