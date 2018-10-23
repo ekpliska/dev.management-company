@@ -4,6 +4,7 @@
     use Yii;
     use app\modules\clients\controllers\AppClientsController;
     use app\models\Voting;
+    use app\models\RegistrationInVoting;
 
 /**
  * Голосование
@@ -53,7 +54,11 @@ class VotingController extends AppClientsController {
         $voting_id = Yii::$app->request->post('voting');
         if (Yii::$app->request->isAjax) {
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-            return ['success' => true, 'voting_id' => $voting_id];
+            $register = new RegistrationInVoting();
+            if ($register->registerIn($voting_id)) {
+                return ['success' => true, 'voting_id' => $voting_id];
+            }
+            return ['success' => false];
         }
         return ['success' => false];
         

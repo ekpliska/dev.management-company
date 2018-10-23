@@ -18,7 +18,8 @@ class m181023_074847_table_registration_in_voting extends Migration
             'id' => $this->primaryKey(),
             'voting_id' => $this->integer()->notNull(),
             'user_id' => $this->integer()->notNull(),
-            'date_at' => $this->integer()->notNull(),
+            'random_number' => $this->integer(5)->notNull(),
+            'date_registration' => $this->integer()->notNull(),
             'status' => $this->tinyInteger()->defaultValue(false),
         ]);
         

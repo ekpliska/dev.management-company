@@ -93,8 +93,9 @@ $this->registerJs("
             }).done(function(response) {
                 if (response.success === true) {
                     console.log(response.voting_id);
+                    $(this).attr('disabled', true);
                 } else if (response.success === false) {
-                    console.log('ошибка');
+                    console.log(response);
                 }
             });
         }

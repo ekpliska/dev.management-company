@@ -1,0 +1,75 @@
+<?php
+
+    namespace app\models;
+    use Yii;
+    use yii\db\ActiveRecord;
+
+/**
+ * Регистрация в голосованиии
+ */
+class RegistrationInVoting extends ActiveRecord
+{
+    /**
+     * Таблица в бд
+     */
+    public static function tableName() {
+        return 'registration_in_voting';
+    }
+
+    /**
+     * Правила валидации
+     */
+    public function rules() {
+        return [
+            [['voting_id', 'user_id', 'date_registration'], 'required'],
+            [['voting_id', 'user_id', 'random_number', 'date_registration', 'status'], 'integer'],
+            [['voting_id'], 'exist', 'skipOnError' => true, 'targetClass' => Voting::className(), 'targetAttribute' => ['voting_id' => 'voting_id']],
+        ];
+    }
+
+    /**
+     * Связь с таблицей Голосование
+     */
+    public function getVoting() {
+        return $this->hasOne(Voting::className(), ['voting_id' => 'voting_id']);
+    }
+    
+    /*
+     * Создаем запись регистрации участия в голосовании пользователя
+     */
+    public function registerIn($voting_id) {
+        
+        $user_id = Yii::$app->user->identity->id;
+        // Проверяем наличие регистрации у пользователя на текущее голосовнаие
+        $register = RegistrationInVoting::find()
+                ->andWhere(['voting_id' => $voting_id, 'user_id' => $user_id])
+                ->asArray()
+                ->one();
+        
+        if ($register !== null) {
+            return false;
+        }
+        
+        $number = mt_rand(10000, 99999);
+        $this->voting_id = $voting_id;
+        $this->user_id = Yii::$app->user->identity->id;
+        $this->random_number = $number;
+        $this->date_registration = time();
+        return $this->save() ? true : false;
+        
+    }
+    
+    /**
+     * Аттрибуты полей
+     */
+    public function attributeLabels() {
+        return [
+            'id' => 'ID',
+            'voting_id' => 'Voting ID',
+            'user_id' => 'User ID',
+            'date_registration' => 'Date Registration',
+            'status' => 'Status',
+        ];
+    }
+
+}
