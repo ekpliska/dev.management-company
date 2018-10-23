@@ -40,4 +40,23 @@ class VotingController extends AppClientsController {
         
     }
     
+    /*
+     * Регистрация на участие в голосовании
+     * 
+     * При нажатии на кнопку "Принять участние" создаем запись в таблице "Участники"
+     * Генерируем случайное число, которое будем отправлять в СМС пользователлю
+     * Формируем время ожидания ввода сгенерированного числа
+     * Если время истекает, запись из бд о регистрации на участие в голосованиии удаляется
+     */
+    public function actionParticipateInVoting() {
+        
+        $voting_id = Yii::$app->request->post('voting');
+        if (Yii::$app->request->isAjax) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return ['success' => true, 'voting_id' => $voting_id];
+        }
+        return ['success' => false];
+        
+    }
+    
 }
