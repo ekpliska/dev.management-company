@@ -67,6 +67,26 @@ class RegistrationInVoting extends ActiveRecord
         
     }
     
+    /*
+     * Поиск записи о регистрации на голосование
+     * 
+     * @param integer $voting_id ID голосование
+     * @param integer $user_id ID текущего пользователя
+     */
+    public static function deleteRegisterById($voting_id) {
+        
+        $user_id = Yii::$app->user->identity->id;
+        $register = RegistrationInVoting::find()
+                ->andWhere(['voting_id' => $voting_id, 'user_id' => $user_id])
+                ->asArray()
+                ->one();
+        if ($register) {
+            $register->delete();
+        }
+        return true;
+        
+    }
+    
     /**
      * Аттрибуты полей
      */

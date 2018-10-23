@@ -109,14 +109,20 @@ class VotingController extends AppClientsController {
     }
     
     /*
-     * Получение куки
+     * Получение куки 
+     * 
+     * Если заданной куки не существует, удаляем запись регистрации участия в голосовании
      */
     private function getCookieVoting($voting_id) {
         
         $cookies = Yii::$app->request->cookies;
         $name_modal = '_participateInVoting-' . $voting_id;
         
-        return $cookies->has($name_modal) ? true : false;
+        if (!$cookies->has($name_modal)) {
+            $register = RegistrationInVoting::deleteRegisterById($voting_id);
+            return false;
+        } 
+        return true;
     }
     
     
