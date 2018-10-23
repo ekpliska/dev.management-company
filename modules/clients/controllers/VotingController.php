@@ -88,6 +88,24 @@ class VotingController extends AppClientsController {
         return ['success' => false];
         
     }
+        
+    /*
+     * Отказ от участия в голосовании
+     */
+    public function actionRenouncementToParticipate() {
+        
+        $voting_id = Yii::$app->request->post('votingId');
+        
+        if (Yii::$app->request->isAjax) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            if (RegistrationInVoting::deleteRegisterById($voting_id)) {
+                $this->deleteCookieVoting($voting_id);
+            }
+            return ['success' => true];
+        }
+        return ['success' => false];
+        
+    }
     
     /*
      * Метод записи куки
@@ -125,5 +143,15 @@ class VotingController extends AppClientsController {
         return true;
     }
     
+    /*
+     * Удаление куки
+     * В случае отказа от участия в голосовании удаляем куку
+     */
+    private function deleteCookieVoting($voting_id) {
+        $cookies = Yii::$app->response->cookies;
+        $name_modal = '_participateInVoting-' . $voting_id;
+        return $cookies->remove($name_modal) ? true : false;
+        
+    }    
     
 }

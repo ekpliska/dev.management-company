@@ -396,4 +396,24 @@ $(document).ready(function() {
 
     /* End Block of Paid Services */
 
+
+    // ************************************************************ //
+    // ***************   Start Block of Voting    **************** //
+    // *********************************************************** //
+
+    $('#renouncement_participate').on('click', function(){
+        var votingId = $(this).data('voting');
+        $.ajax({
+            type: 'POST',
+            url: 'renouncement-to-participate',
+            data: { votingId: votingId, }
+        }).done(function(response) {
+//            console.log('voting');
+        });
+    });
+    
+    
+    
+    /* End Block of Voting */
+    
 });

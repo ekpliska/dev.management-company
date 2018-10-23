@@ -78,11 +78,12 @@ class RegistrationInVoting extends ActiveRecord
         $user_id = Yii::$app->user->identity->id;
         $register = RegistrationInVoting::find()
                 ->andWhere(['voting_id' => $voting_id, 'user_id' => $user_id])
-                ->asArray()
                 ->one();
-        if ($register) {
+        
+        if ($register !== null) {
             $register->delete();
         }
+        
         return true;
         
     }

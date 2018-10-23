@@ -45,7 +45,9 @@
     <?= Html::button('Отмена', [
             'data-dismiss' => 'modal', 
             'class' => 'btn btn-danger',
-            'id' => 'renouncement_participate']) ?>
+            'id' => 'renouncement_participate',
+            'data-voting' => $voting_id,
+        ]) ?>
 
     <?php ActiveForm::end(); ?>
 
