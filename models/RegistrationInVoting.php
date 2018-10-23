@@ -9,6 +9,14 @@
  */
 class RegistrationInVoting extends ActiveRecord
 {
+    /*
+     * Статус участния в голосования
+     */
+    // Пользователь поставлен на регистрацию, Отправлено СМС
+    const STATUS_DISABLED = 0; 
+    // Пользователь зарегистрирован, СМС получено и введен верный код
+    const STATUS_ENABLED = 1;
+
     /**
      * Таблица в бд
      */
@@ -46,9 +54,9 @@ class RegistrationInVoting extends ActiveRecord
                 ->asArray()
                 ->one();
         
-        if ($register !== null) {
-            return false;
-        }
+//        if ($register !== null) {
+//            return false;
+//        }
         
         $number = mt_rand(10000, 99999);
         $this->voting_id = $voting_id;

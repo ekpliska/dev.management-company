@@ -4,6 +4,7 @@
     use yii\helpers\Url;
     use yii\bootstrap\Modal;
     use app\helpers\FormatHelpers;
+    use app\models\RegistrationInVoting;
     use app\modules\clients\widgets\ModalWindows;
 
 /* 
@@ -54,13 +55,34 @@ $this->title = $voting['voting_title'];
                     <td><?= 'HIT' ?></td>
                 </tr>        
             <?php endforeach; ?>
-        </table>            
+        </table>
+        <?php
+         var_dump($is_register['status']);
+         echo 'HERE ' . ($modal_show);
+         
+        ?>
     </div>
     
 </div>
 
+<?php if ($is_register['status'] == RegistrationInVoting::STATUS_DISABLED) : ?>
+
+    <?= $this->render('modal/participate-in-voting', [
+            'model' => $model,
+            'voting_id' => $voting['voting_id']]) ?>
+
+<?php endif; ?>
+
+<?php 
+    /* Если кука отправки СМС кода существует сразу же загружаем модальное окно на ввод кода */
+    if ($modal_show == true) {
+    $this->registerJs("$('#participate-in-voting-" . $voting['voting_id'] . "').modal('show');");    
+} 
+?>
+
 <?php
 $this->registerJs("
+    
     function checkDate(){
         var dateNow = " . $_now . ";
         var dateStart = " . $_start . ";
@@ -94,6 +116,7 @@ $this->registerJs("
                 if (response.success === true) {
                     console.log(response.voting_id);
                     $(this).attr('disabled', true);
+                    $('#participate-in-voting-" . $voting['voting_id'] . "').modal('show');
                 } else if (response.success === false) {
                     console.log(response);
                 }

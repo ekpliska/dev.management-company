@@ -6,7 +6,11 @@
     use yii\behaviors\TimestampBehavior;
     use yii\db\Expression;
     use app\models\Questions;
+    use app\models\RegistrationInVoting;
 
+/*
+ * Голосование
+ */    
 class Voting extends ActiveRecord
 {
     
