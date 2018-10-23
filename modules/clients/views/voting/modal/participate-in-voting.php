@@ -37,7 +37,19 @@
     <?= $form->field($model, 'number3')->input('text', ['maxlength' => 1, 'size' => 1])->label(false) ?>
     <?= $form->field($model, 'number4')->input('text', ['maxlength' => 1, 'size' => 1])->label(false) ?>
     <?= $form->field($model, 'number5')->input('text', ['maxlength' => 1, 'size' => 1])->label(false) ?>
+
+    <br />
+    <?= Html::button('Отправить код еще раз', [
+            'class' => 'btn btn-default',
+            'id' => 'repeat_sms_code',
+            'data-voting' => $voting_id,
+        ]) ?>
     
+    <br />
+    
+    <span class="repeat_sms_code-message"></span>
+    
+    <br />
     <br />
     
     <?= Html::submitButton('Продолжить', ['class' => 'btn btn-primary']) ?>

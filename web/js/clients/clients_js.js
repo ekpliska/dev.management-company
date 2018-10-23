@@ -401,6 +401,9 @@ $(document).ready(function() {
     // ***************   Start Block of Voting    **************** //
     // *********************************************************** //
 
+    /*
+     * Отмена участия в голосовании
+     */
     $('#renouncement_participate').on('click', function(){
         var votingId = $(this).data('voting');
         $.ajax({
@@ -412,6 +415,24 @@ $(document).ready(function() {
         });
     });
     
+    /*
+     * Повторная отправка СМС кода
+     */
+    $('#repeat_sms_code').on('click', function(){
+        var votingId = $(this).data('voting');
+        $.ajax({
+            type: 'POST',
+            url: 'repeat-sms-code',
+            data: { votingId: votingId, }
+        }).done(function(response) {
+            if (response.success === true) {
+                $('.repeat_sms_code-message').text('Новый код был отправлен');
+            } else if (condition) {
+                $('.repeat_sms_code-message').text('Ошибка отправки СМС сообщения');                
+            }
+        });
+        return false;
+    });
     
     
     /* End Block of Voting */

@@ -108,6 +108,25 @@ class VotingController extends AppClientsController {
     }
     
     /*
+     * Повторная отправка вновь сгенерированного кода
+     */
+    public function actionRepeatSmsCode() {
+        
+        $voting_id = Yii::$app->request->post('votingId');
+        
+        if (Yii::$app->request->isAjax) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            $register = RegistrationInVoting::findById($voting_id);
+            if (!$register->generateNewSMSCode()) {
+                return ['success' => false];
+            }
+            return ['success' => true];
+        }
+        return ['success' => false];
+                
+    }
+    
+    /*
      * Метод записи куки
      */
     public function setCookieVoting($voting_id) {

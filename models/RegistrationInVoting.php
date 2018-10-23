@@ -73,6 +73,21 @@ class RegistrationInVoting extends ActiveRecord
      * @param integer $voting_id ID голосование
      * @param integer $user_id ID текущего пользователя
      */
+    public static function findById($voting_id) {
+        
+        $user_id = Yii::$app->user->identity->id;
+        $register = RegistrationInVoting::find()
+                ->andWhere(['voting_id' => $voting_id, 'user_id' => $user_id])
+                ->one();
+        return $register;
+    }
+    
+    /*
+     * Удаление записи о регистрации на голосование
+     * 
+     * @param integer $voting_id ID голосование
+     * @param integer $user_id ID текущего пользователя
+     */
     public static function deleteRegisterById($voting_id) {
         
         $user_id = Yii::$app->user->identity->id;
@@ -88,6 +103,17 @@ class RegistrationInVoting extends ActiveRecord
         
     }
     
+    /*
+     * Генерауия нового СМС кода
+     */
+    public function generateNewSMSCode() {
+        
+        $new_value = $number = mt_rand(10000, 99999);
+        $this->random_number = $new_value;
+        return $this->save(false);
+        
+    }
+    
     /**
      * Аттрибуты полей
      */
@@ -96,6 +122,7 @@ class RegistrationInVoting extends ActiveRecord
             'id' => 'ID',
             'voting_id' => 'Voting ID',
             'user_id' => 'User ID',
+            'random_number' => 'Random Number',
             'date_registration' => 'Date Registration',
             'status' => 'Status',
         ];
