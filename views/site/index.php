@@ -6,6 +6,26 @@
 
 $this->title = 'Customers | Вход';
 ?>
+
+<div class="col-12 p-0 mx-0 row tst6">
+    <div class="col-6 p-0 my-0 mx-auto">
+        <h3 class="registration-txt-h">Быcтро и удобно</h3>
+        <p class="registration-txt">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>
+    </div>
+    <div class="col-6 my-0">
+        <?= Html::img('images/girl_elsa.png', ['class' => 'registration-picture img-fluid mx-auto']) ?>
+    </div>
+    <div class=" fixed-bottom fixed-bottom-btn-group col-6 ml-auto ">
+        <div class="registration-btn-group mx-auto">
+            <div class="text-center">
+                <?= Html::a('Зарегистрироваться', ['site/registration'], ['class' => 'btn blue-outline-btn']) ?>
+                <?= Html::a('Войти', ['site/login'], ['class' => 'btn blue-btn']) ?>
+            </div>
+        </div> 
+    </div>
+</div>
+
+<?php /*
 <div class="site-index">
 
     <div class="body-content">
@@ -27,3 +47,4 @@ $this->title = 'Customers | Вход';
 
     </div>
 </div>
+*/ ?>

@@ -17,140 +17,119 @@ src: url('../fonts/MPLUS1p-Thin.ttf');
 src: url('../fonts/MPLUS1p-Black.ttf');*/
 
 .slimScrollDiv {
-min-height: 1000px;
+    min-height: 1000px;
 }
 
 .container {
-min-height: 768px;
+    min-height: 768px;
     height: auto;
 }
 /* html {
  overflow-y: hidden; 
 } */
+
 /* верхний заголовок на слайдере регистрации */
 .slider-h {
-font-size: 32px;
-letter-spacing: 1.4px;
-line-height: 47px;
-font-family: "Mplus 1p";
-margin-top: 79px; 
+    font-size: 32px;
+    letter-spacing: 1.4px;
+    line-height: 47px;
+    font-family: "Mplus 1p";
+    margin-top: 79px; 
 /* background-color: green; */	
 }
-.registration-h {
-font-family: "Mplus 1p";
-font-size: 24px;
-letter-spacing: 2.52px;
-line-height: 36px;
-text-align: center;
-font-weight: 900;
-font-style: normal;
-margin-top: 211px;
-margin-bottom: 62px;
-/* background-color: gray; */
-}
-.slider-logo {
-height: 236px;
-width: 176px;
-margin-top: 101px;
 
+.registration-h {
+    font-family: "Mplus 1p";
+    font-size: 24px;
+    letter-spacing: 2.52px;
+    line-height: 36px;
+    text-align: center;
+    font-weight: 900;
+    font-style: normal;
+    margin-top: 211px;
+    margin-bottom: 62px;
+    /*background-color: gray;*/ 
+}
+
+.slider-logo {
+    height: 236px;
+    width: 176px;
+    margin-top: 101px;
 }
 
 .slider-product-icon {
     margin-top: 79px;
-height: 199px;
-width: 198px;    
+    height: 199px;
+    width: 198px;    
 }
 
 .registration-logo {
-margin-top: 86px;	
+    margin-top: 86px;	
 }
 
 .overflow-hide {
     overflow: hidden;	
 }
-/* .error-resolution {
-width: 1000000000vw !important;
-height: 100vh !important;
-background-color: black;
 
-} */
 .hidden {
-display: none !important;    
+    display: none !important;    
 }
 
 .blue-logo {
-height: 46px;
-width: 187px;
-margin-top: 56px;
-margin-bottom: 59px;	
-}
-
-.slider-container {
-/* min-height: 770px;
-min-width: 705px; */
-/* height: 100vh; */	
-}
-
-.form-signin {
-/*  background-color: red; */   
+    height: 46px;
+    width: 187px;
+    margin-top: 56px;
+    margin-bottom: 59px;	
 }
 
 .tst {
- bottom: 70px;   
-}
-
-.registration-picture {
-/* height: 650px;
-width: 499px;   */
+    bottom: 70px;   
 }
 
 .registration-txt {
-height: 356px;
-min-width: 262px;
-color: #2D18B4;
-font-family: "Mplus 1p";
-font-size: 14px;
-letter-spacing: 1.05px;
-line-height: 20px;
-margin-left: 31px;
-}
-.registration-txt-h {
-height: 34px;
-color: #EF693A;
-font-family: "Mplus 1p";
-font-size: 24px;
-letter-spacing: 1.05px;
-line-height: 36px; 
-margin-bottom: 12px;
-margin-left: 31px;
+    height: 356px;
+    min-width: 262px;
+    color: #2D18B4;
+    font-family: "Mplus 1p";
+    font-size: 14px;
+    letter-spacing: 1.05px;
+    line-height: 20px;
+    margin-left: 31px;
 }
 
- /* .carousel-indicators {
-  bottom: 149px;   
-  } */ 
+.registration-txt-h {
+    height: 34px;
+    color: #EF693A;
+    font-family: "Mplus 1p";
+    font-size: 24px;
+    letter-spacing: 1.05px;
+    line-height: 36px; 
+    margin-bottom: 12px;
+    margin-left: 31px;
+}
+
 .tst6 {
     position: absolute;
-top: 115px;   
-margin-left: 38px;
-margin-right: 38px;
-
+    top: 115px;   
+    margin-left: 38px;
+    margin-right: 38px;
 }
 
 .fixed-bottom-btn-group {
-  margin-bottom: 36px;  
+    margin-bottom: 36px;  
 }
 
 .req-fixed-bottom-btn-group {
-width: 1300px;
+    width: 1300px;
 }
+
 .add-req-fixed-btn {
-margin-left: 1202px;
+    margin-left: 1202px;
     cursor: pointer;
-
-
 }
+
 .add-req-fixed-btn:hover {
-filter: brightness(80%);
+    filter: brightness(80%);
 }
 
 .add-req-fixed-btn:active {
@@ -158,15 +137,15 @@ filter: brightness(80%);
 }
 
 .container.table-container {
-margin-bottom: 22px;
-
+    margin-bottom: 22px;
 }
 
 .apple-btn-rounded {
-  margin-right: 16px;  
+    margin-right: 16px;  
 }
+
 .g-btn-rounded {
-  margin-left: 16px;  
+    margin-left: 16px;  
 }
 
 .carousel-indicators li {
@@ -183,47 +162,53 @@ margin-bottom: 22px;
     background-color: white;
     /* box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.5);	 */
 } 
-.carousel-indicators .active{
-height: 14px;
-width: 14px;
+.carousel-indicators .active {
+    height: 14px;
+    width: 14px;
 }
 
 .carousel-caption {
-/* top: 79px; */
-/*left: 169px;*/
-margin: 0 auto;	
+    margin: 0 auto;	
 }
+
 .carousel-inner {
-height: 100vh;	
+    height: 100vh;	
 }
 
 .blue-txt {
-color: #2D18B4;	
+    color: #2D18B4;	
 }
 .gray-txt {
-color: #606060;	
+    color: #606060;	
+}
+
+a.btn.blue-outline-btn,
+a.btn.red-outline-btn,
+a.btn.blue-btn {
+    padding-top: 18px;
 }
 
 .blue-outline-btn {
-height: 56px;
-width: 280px;
-border-radius: 12px;
-border: 1px solid #2D18B4;
-background-color: white;
-/* box-shadow: 2px 3px 5px 2px rgba(55,35,35,0.12); */
-color: #2D18B4;
-font-family: "Mplus 1p Bold";
-font-size: 12px;
-font-weight: bold;
-letter-spacing: 0.9px;
-line-height: 18px;
-text-align: center;
-text-transform: uppercase;
+    height: 56px;
+    width: 280px;
+    border-radius: 12px;
+    border: 1px solid #2D18B4;
+    background-color: white;
+    /* box-shadow: 2px 3px 5px 2px rgba(55,35,35,0.12); */
+    color: #2D18B4;
+    font-family: "Mplus 1p Bold";
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 0.9px;
+    line-height: 18px;
+    text-align: center;
+    text-transform: uppercase;
 }
+
 .blue-outline-btn:hover {
-background-color: #2D18B4;
-box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
-color: #FFFFFF;
+    background-color: #2D18B4;
+    box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
+    color: #FFFFFF;
 }
 
 .blue-outline-btn.req-modal-btn {
@@ -239,57 +224,58 @@ color: #FFFFFF;
 }
 
 .blue-outline-btn:active {
-background-color: #201183;
-box-shadow: 1px 2px 3px 2px rgba(55,35,35,0.17);
-color: #FFFFFF;	
+    background-color: #201183;
+    box-shadow: 1px 2px 3px 2px rgba(55,35,35,0.17);
+    color: #FFFFFF;	
 }
+
 .blue-btn {
-height: 56px;
-width: 280px;
-border-radius: 12px;
-border: 1px solid #2D18B4;
-background-color: #2D18B4;
-/* box-shadow: 0 2px 4px 2px rgba(55,35,35,0.28); */
-color: white;
-font-family: "Mplus 1p Bold";
-font-size: 12px;
-font-weight: bold;
-letter-spacing: 0.9px;
-line-height: 18px;
-text-align: center;
-text-transform: uppercase;
+    height: 56px;
+    width: 280px;
+    border-radius: 12px;
+    border: 1px solid #2D18B4;
+    background-color: #2D18B4;
+    /* box-shadow: 0 2px 4px 2px rgba(55,35,35,0.28); */
+    color: white;
+    font-family: "Mplus 1p Bold";
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 0.9px;
+    line-height: 18px;
+    text-align: center;
+    text-transform: uppercase;
 }
 .blue-btn:hover {
-background-color: #2D18B4;
-box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
-color: #FFFFFF;
+    background-color: #2D18B4;
+    box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
+    color: #FFFFFF;
 }
 .blue-btn:active {
-background-color: #201183;
-box-shadow: 0 2px 3px 0 rgba(55,35,35,0.3);
-color: #FFFFFF;	
+    background-color: #201183;
+    box-shadow: 0 2px 3px 0 rgba(55,35,35,0.3);
+    color: #FFFFFF;	
 }
 
 .red-outline-btn {
-height: 56px;
-width: 280px;
-border: 2px solid #FC3232;
-border-radius: 12px;
-/* box-shadow: 2px 3px 5px 2px rgba(55,35,35,0.12); */
-background-color: white;
-color: #EF693A;
-font-family: "Mplus 1p Bold";
-font-size: 12px;
-font-weight: bold;
-letter-spacing: 0.9px;
-line-height: 18px;
-text-align: center;
-text-transform: uppercase;
+    height: 56px;
+    width: 280px;
+    border: 2px solid #FC3232;
+    border-radius: 12px;
+    /* box-shadow: 2px 3px 5px 2px rgba(55,35,35,0.12); */
+    background-color: white;
+    color: #EF693A;
+    font-family: "Mplus 1p Bold";
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 0.9px;
+    line-height: 18px;
+    text-align: center;
+    text-transform: uppercase;
 }	
 .red-outline-btn:hover {
-background-color: #FC3232;
-box-shadow: 0 8px 16px 2px rgba(55,35,35,0.32);
-color: #FFFFFF;
+    background-color: #FC3232;
+    box-shadow: 0 8px 16px 2px rgba(55,35,35,0.32);
+    color: #FFFFFF;
 }
 .red-outline-btn:active {
 background-color: #b72424;
