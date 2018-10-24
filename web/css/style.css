@@ -11,10 +11,10 @@ font-family: "Mplus 1p Bold";
 src: url('../fonts/MPLUS1p-Bold.ttf');
 }
 
-src: url('../fonts/MPLUS1p-ExtraBold.ttf');
+/*src: url('../fonts/MPLUS1p-ExtraBold.ttf');
 src: url('../fonts/MPLUS1p-Light.ttf');
 src: url('../fonts/MPLUS1p-Thin.ttf');
-src: url('../fonts/MPLUS1p-Black.ttf');
+src: url('../fonts/MPLUS1p-Black.ttf');*/
 
 .slimScrollDiv {
 min-height: 1000px;
@@ -66,7 +66,7 @@ margin-top: 86px;
 }
 
 .overflow-hide {
-    /*overflow: hidden;*/	
+    overflow: hidden;	
 }
 /* .error-resolution {
 width: 1000000000vw !important;
@@ -350,17 +350,17 @@ body {
 
 .no-underline,
 .no-underline:hover,
- .no-underline:active, 
- .no-underline:visited {
-  text-decoration: none;  
+.no-underline:active, 
+.no-underline:visited {
+    text-decoration: none;  
 }
  
-.error {
- color: #EF693A;
-font-family: "Mplus 1p";
-font-size: 12px;
-letter-spacing: 1.26px;
-line-height: 18px;   
+.help-block {
+    color: #EF693A;
+    font-family: "Mplus 1p";
+    font-size: 12px;
+    letter-spacing: 1px;
+    line-height: 18px;   
 }
 
 .registration-btn-group {
@@ -421,26 +421,25 @@ color: #201183;
 
 
 .input-registration {
-height: 51px;
-width: 420px;
-border: none;
-border-bottom: 1px solid #D0D0D0;
+    height: 51px;
+    width: 420px;
+    border: none;
+    border-bottom: 1px solid #D0D0D0;
+    text-align: left;
 }
-.input-registration:hover
-{
-border-bottom: 1px solid #606060;
+.input-registration:hover {
+    border-bottom: 1px solid #606060;
 }
-.input-registration:active
-{
-border-bottom: 1px solid #2D18B4;
+.input-registration:active {
+    border-bottom: 1px solid #2D18B4;
 }
 .label-registration {
-color: #2D18B4;
+    color: #2D18B4;
     font-family: "Mplus 1p";
     font-size: 12px;
     letter-spacing: 1.26px;
     line-height: 18px;
-    text-align: center;
+    /*text-align: center;*/
 }
 .registration-form-group {
  width: 420px; 
@@ -3168,93 +3167,4 @@ color: white;
   position: absolute;
   margin-top:0;
   border:none ;
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
-
-
-   
-
-
-
-	
-	
-
-
-

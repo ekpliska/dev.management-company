@@ -37,7 +37,19 @@ AppAsset::register($this);
 	</div>
     </div>
 </div>
+ 
     
+    
+
+    
+    
+<?php $this->endBody() ?>
+</body>
+</html>
+<?php $this->endPage() ?>
+
+
+   
 <?php /*    
 <div class="wrap">
     <?php
@@ -89,8 +101,3 @@ AppAsset::register($this);
 </footer>
 */?> 
     
-    
-<?php $this->endBody() ?>
-</body>
-</html>
-<?php $this->endPage() ?>
