@@ -1,11 +1,14 @@
 <?php
 
-    use app\widgets\Alert;
     use yii\helpers\Html;
-    use yii\bootstrap\Nav;
-    use yii\bootstrap\NavBar;
-    use yii\widgets\Breadcrumbs;
+    use app\widgets\Slider;
     use app\assets\AppAsset;
+    
+//    use app\widgets\Alert;
+//    use yii\bootstrap\Nav;
+//    use yii\bootstrap\NavBar;
+//    use yii\widgets\Breadcrumbs;
+    
 
 AppAsset::register($this);
 
@@ -21,9 +24,21 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body>
+<body class="overflow-hide">
 <?php $this->beginBody() ?>
 
+<div>
+    <div class="col-12 p-0 mx-0 row registration-container overflow-hide">
+        <div class="col-6 mx-0 slider-container p-0">
+            <?= Slider::widget() ?>
+	</div>
+	<div class="col-6 p-0 m-0">
+            <?= $content ?>
+	</div>
+    </div>
+</div>
+    
+<?php /*    
 <div class="wrap">
     <?php
     NavBar::begin([
@@ -72,7 +87,9 @@ AppAsset::register($this);
         <p class="pull-right"><?= Yii::powered() ?></p>
     </div>
 </footer>
-
+*/?> 
+    
+    
 <?php $this->endBody() ?>
 </body>
 </html>

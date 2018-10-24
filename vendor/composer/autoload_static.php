@@ -4,13 +4,14 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit29f62c371948cab33d5b78488dc03c56
+class ComposerStaticInitcbf9de159d4c8df5330b5b6417e02ee4
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '2cffec82183ee1cea088009cef9a6fc3' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
+        '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         '180092cfc969a12e06f2132a203a3184' => __DIR__ . '/..' . '/codeception/verify/src/Codeception/function.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
@@ -25,6 +26,7 @@ class ComposerStaticInit29f62c371948cab33d5b78488dc03c56
             'yii\\debug\\' => 10,
             'yii\\composer\\' => 13,
             'yii\\bootstrap\\' => 14,
+            'yii\\bootstrap4\\' => 15,
             'yii\\' => 4,
         ),
         'v' => 
@@ -42,6 +44,7 @@ class ComposerStaticInit29f62c371948cab33d5b78488dc03c56
         ),
         'k' => 
         array (
+            'kartik\\growl\\' => 13,
             'kartik\\datetime\\' => 16,
             'kartik\\date\\' => 12,
             'kartik\\base\\' => 12,
@@ -105,7 +108,7 @@ class ComposerStaticInit29f62c371948cab33d5b78488dc03c56
         ),
         'yii\\faker\\' => 
         array (
-            0 => __DIR__ . '/..' . '/yiisoft/yii2-faker',
+            0 => __DIR__ . '/..' . '/yiisoft/yii2-faker/src',
         ),
         'yii\\debug\\' => 
         array (
@@ -117,7 +120,11 @@ class ComposerStaticInit29f62c371948cab33d5b78488dc03c56
         ),
         'yii\\bootstrap\\' => 
         array (
-            0 => __DIR__ . '/..' . '/yiisoft/yii2-bootstrap/src',
+            0 => __DIR__ . '/..' . '/yiisoft/yii2-bootstrap',
+        ),
+        'yii\\bootstrap4\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/yiisoft/yii2-bootstrap4/src',
         ),
         'yii\\' => 
         array (
@@ -141,6 +148,10 @@ class ComposerStaticInit29f62c371948cab33d5b78488dc03c56
             1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
             2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
         ),
+        'kartik\\growl\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-growl/src',
+        ),
         'kartik\\datetime\\' => 
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-datetimepicker/src',
@@ -155,7 +166,7 @@ class ComposerStaticInit29f62c371948cab33d5b78488dc03c56
         ),
         'kartik\\alert\\' => 
         array (
-            0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-alert',
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-alert/src',
         ),
         'cebe\\markdown\\' => 
         array (
@@ -760,10 +771,10 @@ class ComposerStaticInit29f62c371948cab33d5b78488dc03c56
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit29f62c371948cab33d5b78488dc03c56::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit29f62c371948cab33d5b78488dc03c56::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit29f62c371948cab33d5b78488dc03c56::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit29f62c371948cab33d5b78488dc03c56::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitcbf9de159d4c8df5330b5b6417e02ee4::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitcbf9de159d4c8df5330b5b6417e02ee4::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitcbf9de159d4c8df5330b5b6417e02ee4::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitcbf9de159d4c8df5330b5b6417e02ee4::$classMap;
 
         }, null, ClassLoader::class);
     }
