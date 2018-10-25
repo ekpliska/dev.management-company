@@ -341,7 +341,7 @@ $(document).ready(function() {
     /*
      * Всплывающая подсказка для кнопки "Вам доступна система оценки"
      */
-    $('[data-toggle="popover"]').popover();
+//    $('[data-toggle="popover"]').popover();
     
     
     /* End Block of Requests */

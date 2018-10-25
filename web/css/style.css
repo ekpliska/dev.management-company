@@ -1541,7 +1541,7 @@ background-color: #000000 !important;
 } */
 
 .container {
-    padding-top: 800px; 
+    padding-top: 170px; 
     margin-top: 24px; 
     width: 1366px;
     max-width: 1366px;
@@ -3140,4 +3140,8 @@ color: white;
 /* Постраничная навигация новостей, Собственник, главная странциа */
 .pagination-news {
     padding-top: 50px;
+}
+
+.news-list {
+    padding-top: 120px;
 }

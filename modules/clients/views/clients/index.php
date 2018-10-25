@@ -5,10 +5,11 @@
     use yii\widgets\LinkPager;
     use app\helpers\FormatHelpers;    
 
-$this->title ="Главная страница"
-?>
+$this->title ="Главная страница";
 
-<div class="row">
+$this->params['breadcrumbs'][] = 'Новости';
+?>
+<div class="row news-list">
     <?php if (isset($news) && count($news) > 0) : ?>
         <?php foreach ($news as $key => $post) : ?>
 
@@ -18,7 +19,7 @@ $this->title ="Главная страница"
                     'class' => 'card-img-top news-card-img-top-preview']) ?>
 
                 <h5 class="news-card-preview-h">
-                    <?= $post['news_title'] ?>
+                    <?= Html::a($post['news_title'], ['clients/view-news', 'slug' => $post['slug']]) ?>
                 </h5>
 
                 <h5 class="news-card-preview-date">

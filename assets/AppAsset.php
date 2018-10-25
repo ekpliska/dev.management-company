@@ -52,14 +52,14 @@ class AppAsset extends AssetBundle
         'plugins/Smooth-Div-Scroll-master/js/jquery.kinetic.min.js',
         'plugins/Smooth-Div-Scroll-master/js/jquery.smoothdivscroll-1.3-min.js',
 //        'plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.js',
-//        'plugins/autosize-master/autosize.js',
+        'plugins/autosize-master/dist/autosize.js',
         'plugins/slick/slick.js',
         'plugins/starrr-gh-pages/dist/starrr.js',
         
         'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js',
         'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.min.js',
         'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/locale/ru.js',
-        
+        'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js',
 
     ];
     public $depends = [
