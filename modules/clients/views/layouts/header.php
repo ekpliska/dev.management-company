@@ -28,42 +28,32 @@
                         <section class="vertical-center-4 slider">
                             <div style="background-color: silver;">
                                 <span class="item">
-                                    <p style="width:350px; height: 100px;"><a href="#">Новости</a></p>
+                                    <p style="width:350px; height: 100px;"><a href="#">Главная</a></p>
+                                </span>
+                            </div>
+                            <div style="background-color: silver;"> 
+                                <span class="item">
+                                    <p style="width:350px; height: 100px;"><a href="#">Голосование</a></p>
                                 </span>
                             </div>
                             <div style="background-color: silver;">
                                 <span class="item">
-                                    <p style="width:350px; height: 100px;"><a href="#">Новости</a></p>
+                                    <p style="width:350px; height: 100px;"><a href="#">Профиль</a></p>
                                 </span>
                             </div>
                             <div style="background-color: silver;">
                                 <span class="item">
-                                    <p style="width:350px; height: 100px;"><a href="#">Новости</a></p>
+                                    <p style="width:350px; height: 100px;"><a href="#">Лицевой счет</a></p>
                                 </span>
                             </div>
                             <div style="background-color: silver;">
                                 <span class="item">
-                                    <p style="width:350px; height: 100px;"><a href="#">Новости</a></p>
+                                    <p style="width:350px; height: 100px;"><a href="#">Заявки</a></p>
                                 </span>
                             </div>
                             <div style="background-color: silver;">
                                 <span class="item">
-                                    <p style="width:350px; height: 100px;"><a href="#">Новости</a></p>
-                                </span>
-                            </div>
-                            <div style="background-color: silver;">
-                                <span class="item">
-                                    <p style="width:350px; height: 100px;"><a href="#">Новости</a></p>
-                                </span>
-                            </div>
-                            <div style="background-color: silver;">
-                                <span class="item">
-                                    <p style="width:350px; height: 100px;"><a href="#">Новости</a></p>
-                                </span>
-                            </div>
-                            <div style="background-color: silver;">
-                                <span class="item">
-                                    <p style="width:350px; height: 100px;"><a href="#">Новости</a></p>
+                                    <p style="width:350px; height: 100px;"><a href="#">Платные услуги</a></p>
                                 </span>
                             </div>
                         </section>
