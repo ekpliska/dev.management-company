@@ -8,18 +8,23 @@
  * Вывод новостей в личном кабинете собственника
  */
 $rubric_link = Yii::$app->controller->actionParams['rubric'];
-//echo '<pre>';
-//var_dump($rubric_link); die();
 ?>
-
 <?php if (isset($rubrics) && count($rubrics)) : ?>
-<ul class="pager">
-    <?php foreach ($rubrics as $key => $rubric) : ?>
-        <li class="<?= $rubric_link == $key ? 'disabled' : '' ?>">
-            <a href="<?= Url::to(['clients/index', 'rubric' => $key]) ?>">
-                <?= $rubric ?>
-            </a>
-        </li>
-    <?php endforeach; ?>
-</ul>
+<nav class="navbar navbar-dark menu-collapsed-nav justify-content-between navbar-expand-sm p-0 carousel-item d-block">
+    <ul class="nav nav-pills mx-auto text-center justify-content-center">
+        <?php foreach ($rubrics as $key => $rubric) : ?>
+            <li class="nav-item">
+                <a href="<?= Url::to(['clients/index', 'rubric' => $key]) ?>" 
+                   class="
+                        nav-link 
+                        submenu-nav-link 
+                        <?= ($rubric_link == $key) ? 'active' : '' ?> 
+                        <?= ($key === 1) ? 'no-border-right no-border-left' : '' ?>"
+                >
+                    <?= $rubric ?>
+                </a>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+</nav>
 <?php endif; ?>

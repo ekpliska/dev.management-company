@@ -22,24 +22,15 @@ ClientsAsset::register($this);
 </head>
 <body>
 <?php $this->beginBody() ?>
-
-    <div class="wrap">
+    <?php $this->beginContent('@app/modules/clients/views/layouts/header.php') ?>
+    <?php $this->endContent() ?>    
         
-        <?php $this->beginContent('@app/modules/clients/views/layouts/header.php') ?>
-        <?php $this->endContent() ?>    
-        
-        
-        <div class="container">
-            <?= Breadcrumbs::widget([
-                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-            ]) ?>
-            <?= $content ?>
-        </div>
-        
+    <div class="container row mx-auto justify-content-center">
+        <?= $content ?>
     </div>
-
-    <?php $this->beginContent('@app/modules/clients/views/layouts/footer.php') ?>
-    <?php $this->endContent() ?>
+        
+    <?php // $this->beginContent('@app/modules/clients/views/layouts/footer.php') ?>
+    <?php // $this->endContent() ?>
 
 <?php $this->endBody() ?>
 </body>

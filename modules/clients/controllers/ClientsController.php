@@ -3,6 +3,7 @@
     namespace app\modules\clients\controllers;
     use Yii;
     use yii\web\NotFoundHttpException;
+    use yii\data\Pagination;
     use app\modules\clients\controllers\AppClientsController;
     use app\models\News;
     use app\models\Rubrics;
@@ -26,12 +27,27 @@ class ClientsController extends AppClientsController
         $flat_id = Yii::$app->userProfile->_user['flat_id'];
         $rubruc_id = $rubric;
         
-        $news = News::getNewsByClients($rubruc_id, $estate_id, $house_id, $flat_id);
+        
+        $query = News::getNewsByClients($rubruc_id, $estate_id, $house_id, $flat_id);
+        $countQuery = clone $query;
+        $pages = new Pagination([
+            'totalCount' => $countQuery->count(),
+            'pageSize' => 6,
+            'forcePageParam' => false,
+            'pageSizeParam' => false,
+        
+        ]);
+        
+        $news = $query->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();        
+        
         $rubrucs = Rubrics::getArrayRubrics();
         
         return $this->render('index', [
             'news' => $news,
             'rubrucs' => $rubrucs,
+            'pages' => $pages,
         ]);
     }
     

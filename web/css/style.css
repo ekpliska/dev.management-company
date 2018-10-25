@@ -1362,9 +1362,8 @@ width: 730px;
 
 }
 .request-body-chat {
-width: 570px;
+    width: 570px;
     border-left: 1px solid #d4d4d4;
-    m
 }
 .request-chat-icon {
 height: 40px;
@@ -1542,16 +1541,16 @@ background-color: #000000 !important;
 } */
 
 .container {
- /*  padding-top: 530px; */
- margin-top: 24px; 
- width: 1366px;
- max-width: 1366px;
- padding-left: 50px;
- padding-right: 50px;
- height: auto;
- margin-bottom: 112px;
-
+    padding-top: 800px; 
+    margin-top: 24px; 
+    width: 1366px;
+    max-width: 1366px;
+    padding-left: 50px;
+    padding-right: 50px;
+    height: auto;
+    margin-bottom: 112px;
 }
+
 .news-card-img-top-preview {
 border-top-right-radius: 12px;
 border-top-left-radius: 12px;
@@ -1677,7 +1676,7 @@ margin-bottom: 72px;
 .border-container {
 border: 1px solid #D4D4D4;  border-radius: 12px;
   background-color: #FFFFFF;
-  box-shadow: 0 4px 26px 2px rgba(103,40,190,0.08);}  
+  box-shadow: 0 4px 26px 2px rgba(103,40,190,0.08);
 }
 
 .material-select .filled ul .radio {
@@ -1846,8 +1845,8 @@ ________________________________________________________________________________
     margin: 5px 0;
     font-family: "Mplus 1p";
     font-size: 15px;
-    letter-spacing: 1.13px;	l
-ine-height: 22px;
+    letter-spacing: 1.13px;
+    line-height: 22px;
 }
 .book_index-left {
     margin-right: -10%;
@@ -1951,7 +1950,7 @@ table.table-striped td {
 }
 .metering-devices {
 
-    border: 1px solid #D4D4D4;s
+    border: 1px solid #D4D4D4;
    
     height: 96px;
     width: 100%;
@@ -2053,7 +2052,7 @@ table.table-striped td {
 
 
 }
-{box-sizing: border-box;}
+/*{box-sizing: border-box;}*/
 form {
     position: relative;
     width: 100%;
@@ -2103,7 +2102,7 @@ input {
 
 }
 .col-2-metering {
-    background-color: ;
+    /*background-color: ;*/
   }
 
 
@@ -2129,11 +2128,10 @@ input {
 .col-4-metering-org1,
 .col-5-metering-org1,
 .col-6-metering-org1,
-.col-7-metering-org1{
+.col-7-metering-org1 {
   background-color: #f8f8f8;
 }
 
-}
   .img-step td {
     margin-left:8px;
     border: 1px solid black;
@@ -2228,7 +2226,7 @@ input {
   font-family: "Mplus 1p";  
   font-size: 14px;  
   letter-spacing: 1.05px; 
-  line-height: 20px;``
+  line-height: 20px;
   width:100%;
 }
 .batton-save {
@@ -2540,7 +2538,7 @@ outline: none;
 .receipt-paid1 {
   border-bottom:1px solid #FFFFFF;
   border-right:1px solid #D4D4D4;
-  background-color: 
+  /*background-color:*/ 
 }
 .box-recept {
   float: right;
@@ -2671,8 +2669,8 @@ margin-left:330px;
  height: 29px;  
  width: 67px;  
  border-radius: 13px;  
- background-color: #2D18B4 
- color:#FFFFFF;
+ background-color: #2D18B4;
+ color: #FFFFFF;
 
 }
 .photo1 {
@@ -2729,7 +2727,7 @@ margin-left:330px;
 .interest1,
 .interest2,
 .interest3 {
-  width: :762px;
+  width: 762px;
   height: 345px;
   border: 1px solid #D4D4D4;
   border-left: none;
@@ -2832,7 +2830,7 @@ color: white;
 
 }
 .photo-voted-root {
-  position:;
+  /*position:;*/
    margin-top: 70px; 
 
 }
@@ -3137,4 +3135,9 @@ color: white;
   position: absolute;
   margin-top:0;
   border:none ;
+}
+
+/* Постраничная навигация новостей, Собственник, главная странциа */
+.pagination-news {
+    padding-top: 50px;
 }
