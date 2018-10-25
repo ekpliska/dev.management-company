@@ -233,6 +233,24 @@ class FormatHelpers {
         return StringHelper::truncateWords($_text , $count_world, ' [...]');
         
     }
+
+
+    /*
+     * Форматирование заголовка или текста публикации, голосования
+     * в зависимости от указанной длины 
+     * 
+     * @param $count_letter integer Количество выводимых символов
+     */
+    public static function shortTitleOrText($text, $count_letter = 25) {
+        
+        if (empty($text)) {
+            return 'Заголовок/тизер не заданы';
+        }
+        // Удаляем все html теги
+        $_text = strip_tags($text);
+        return StringHelper::truncate($_text , $count_letter, '...');
+        
+    }    
     
     
     /*
@@ -273,7 +291,7 @@ class FormatHelpers {
             $message = 'Завершено';
         }
         
-        return '<span class="label label-danger">' . $message . '</span>';
+        return $message;
     }
     
 }

@@ -1,7 +1,6 @@
 <?php
-    use yii\bootstrap\Nav;
-    use yii\bootstrap\NavBar;
     use yii\helpers\Html;
+    use yii\helpers\Url;
     use app\modules\clients\widgets\UserInfo;
     use app\modules\clients\widgets\Rubrics;
 /*
@@ -28,12 +27,12 @@
                         <section class="vertical-center-4 slider">
                             <div style="background-color: silver;">
                                 <span class="item">
-                                    <p style="width:350px; height: 100px;"><a href="#">Главная</a></p>
+                                    <p style="width:350px; height: 100px;"><a href="<?= Url::to(['clients/index']) ?>">Главная</a></p>
                                 </span>
                             </div>
                             <div style="background-color: silver;"> 
                                 <span class="item">
-                                    <p style="width:350px; height: 100px;"><a href="#">Голосование</a></p>
+                                    <p style="width:350px; height: 100px;"><a href="<?= Url::to(['voting/index']) ?>">Голосование</a></p>
                                 </span>
                             </div>
                             <div style="background-color: silver;">
@@ -99,9 +98,7 @@
         </div>
     </nav>
     
-    <?php if (Yii::$app->controller->action->id == 'index') : ?>
-        <?= Rubrics::widget() ?>
-    <?php endif; ?>
+    <?= Rubrics::widget() ?>
     
 </header>
 

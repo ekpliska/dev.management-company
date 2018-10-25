@@ -733,6 +733,10 @@ margin-left: 12px;
 margin-top: 15px;
 }
 
+.requests-card-preview-container {
+    height: 218px;
+}
+
 .requests-card-preview {
     height: 601px;
     width: 388px;
@@ -749,7 +753,10 @@ margin-top: 15px;
 }
 
 .requests-card-img-top {
-    height: 218px;	width: 388px;	border-radius: 12px 12px 0 0;	background-color: #FF8888;
+    height: 218px;
+    /*width: 388px;*/
+    border-radius: 12px 12px 0 0;
+    background-color: #FF8888;
 }
 
 .requests-icon-container-green {
@@ -1466,7 +1473,7 @@ border: 1px solid #D4D4D4;
     font-family: "Mplus 1p Medium";
     font-size: 12px;
     letter-spacing: 1.25px;
-    line-height: 18px;
+    line-height: 28px;
 }
 
 .services-card-preview-executor {
