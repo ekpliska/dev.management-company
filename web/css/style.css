@@ -245,11 +245,13 @@ a.btn.blue-btn {
     text-align: center;
     text-transform: uppercase;
 }
+
 .blue-btn:hover {
     background-color: #2D18B4;
     box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
     color: #FFFFFF;
 }
+
 .blue-btn:active {
     background-color: #201183;
     box-shadow: 0 2px 3px 0 rgba(55,35,35,0.3);
@@ -278,60 +280,55 @@ a.btn.blue-btn {
     color: #FFFFFF;
 }
 .red-outline-btn:active {
-background-color: #b72424;
-border: 2px solid #b72424;
-box-shadow: 1px 2px 3px 2px rgba(55,35,35,0.17);
-color: #FFFFFF;	
+    background-color: #b72424;
+    border: 2px solid #b72424;
+    box-shadow: 1px 2px 3px 2px rgba(55,35,35,0.17);
+    color: #FFFFFF;	
 }
 
 .black-rounded-btn {
- height: 36px;
-width: 168px;
- /* opacity: 0.64;  */
-border-radius: 18px;
-background-color: rgba(0, 0, 0, 0.64);
- color: #FFFFFF;
-font-family: "Mplus 1p";
-font-size: 16px;
-letter-spacing: 1.2px;
-line-height: 23px;
+    height: 36px;
+    width: 168px;
+    /* opacity: 0.64;  */
+    border-radius: 18px;
+    background-color: rgba(0, 0, 0, 0.64);
+    color: #FFFFFF;
+    font-family: "Mplus 1p";
+    font-size: 16px;
+    letter-spacing: 1.2px;
+    line-height: 23px;
 }
 
+.blue-circle-btn:hover {}
 
-.blue-circle-btn:hover {
- 
-}
 .circle-btn-block {
     width: 60px;
     margin-top: 41px;
-margin-bottom: 41px;
+    margin-bottom: 41px;
 }
 
 .agree-btn-block {
     margin-top: 45px;   
 }
 
-.tst4 {
-   
-}
+.tst4 {}
 
 .services-nav {
-height: 96px;
-  background-color: #2D18B4;
-
+    height: 96px;
+    background-color: #2D18B4;
 }
 
  .p-body {
-
-display: block; 
+    display: block; 
 } 
 
 html, body {
-  height:100%;
+    height:100%;
 }
+
 body {
-  display:flex;
-  align-items:center;
+    display:flex;
+    align-items:center;
 }
 
 .no-underline,
@@ -358,53 +355,41 @@ width: 591px;
 /* background: green; */
 /* height: 56px; */
 } 
-/* .registration-btn-group div:first-child {
-margin-left: 57px;    
-}
-.registration-btn-group div:last-child {
-margin-right: 57px;    
-} */
 
 .app-btn-group {
- width: 401px;
- margin-bottom: 50px;
- /* background-color: gray; */    
+    width: 401px;
+    margin-bottom: 50px;
 }
 
 .registration-btn-group {
- width: 591px;   
+    width: 591px;
 }
 
 .slide-content {
- height: 768px;
- position: absolute;
+    height: 768px;
+    position: absolute;
     top: 0px;
     bottom: 0;
     margin: auto 0;
-       /* background-color: green; */     
 }
 
 .slide-txt-block {
     margin-top: 38px;
     margin-bottom: 52px;
- height: 72px; 
-width: 478px;
- /* background-color: red; */ 
+    height: 72px; 
+    width: 478px;
 }
 
 .forgot-a {
-font-family: "Mplus 1p";
-font-size: 14px;
-letter-spacing: 1.05px;
-line-height: 20px;
-text-align: center;
-
+    font-family: "Mplus 1p";
+    font-size: 14px;
+    letter-spacing: 1.05px;
+    line-height: 20px;
+    text-align: center;
 }
 .forgot-a:hover {
-color: #201183;	
+    color: #201183;	
 }
-
-
 
 .input-registration {
     height: 51px;
@@ -413,9 +398,11 @@ color: #201183;
     border-bottom: 1px solid #D0D0D0;
     text-align: left;
 }
+
 .input-registration:hover {
     border-bottom: 1px solid #606060;
 }
+
 .input-registration:active {
     border-bottom: 1px solid #2D18B4;
 }
@@ -425,224 +412,221 @@ color: #201183;
     font-size: 12px;
     letter-spacing: 1.26px;
     line-height: 18px;
-    /*text-align: center;*/
 }
+
 .registration-form-group {
- width: 420px; 
- margin-bottom: 121px;
-/*  background-color: gray;  */ 
+    width: 420px; 
+    margin-bottom: 121px;
 }
 
 .store-btn-icon {
- height: 18px;  width: 20.46px; /* border-radius: 45.5px 0 0 45.5px; */   
+    height: 18px;  
+    width: 20.46px; 
 }
+
 .registration-btn-group .red-outline-btn {
-/*margin-left: 57px;*/
-  margin-right: 13px;      
+    margin-right: 13px;
 }
+
 .registration-btn-group .blue-btn {
-  margin-left: 13px; 
-/* margin-right: 57px; */    
+    margin-left: 13px; 
 }
 
 .tst2 {
-   
-    /* background-color: red; */
-     right: 6%;
+    right: 6%;
     left: 6%; 
 }
 
 .agree-btn-text {
- height: 18px;
-width: 600px;
-color: #606060;
-font-family: "Mplus 1p"; 
-font-size: 13px;
-letter-spacing: 0.97px;
-line-height: 19px;   
+    height: 18px;
+    width: 600px;
+    color: #606060;
+    font-family: "Mplus 1p"; 
+    font-size: 13px;
+    letter-spacing: 0.97px;
+    line-height: 19px;   
 }
 
 .terms-block {
-height: 16px;
-width: 190px; 
-margin-top: 39px;
-margin-bottom: 45px;      
+    height: 16px;
+    width: 190px; 
+    margin-top: 39px;
+    margin-bottom: 45px;      
 }
 .terms-block a {
-color: #2D18B4; font-family: "Mplus 1p";    font-size: 11px;    letter-spacing: 0.82px; line-height: 17px;
+    color: #2D18B4; 
+    font-family: "Mplus 1p";
+    font-size: 11px;
+    letter-spacing: 0.82px; 
+    line-height: 17px;
 }
+
 .white-horizontal-logo {
-  margin-top: 46px;
-height: 38px;
-width: 152px;  
+    margin-top: 46px;
+    height: 38px;
+    width: 152px;  
 }
 
 .circle-scroll-container {
-margin-top: 57px;  
+    margin-top: 57px;  
 }
 
- .menu-bg {
-  
- background-image: url(Head.png);
- background-size: 100% 100%;
- background-repeat: no-repeat;
- }
+.menu-bg {
+    background-image: url(Head.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
 
- 
+.profile-bg {
+    background-image: url(profile-bg.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    height: 372px;
+    width: 1300px;
+}
 
+.profile-bg .face{
+    border: 4px solid #2D18B4;
+    box-shadow: 0px 0px 0px 50px rgba(45, 24, 180, 0.5);
+}
+.face-container {
+    position: relative;
+    top: 89px;
+    margin-left: 601px;
+    margin-right: 601px; 
+}
+.profile-name {
+     margin-top: 152px; 
+    width: 1300px; 
+}
 
- .profile-bg {
- background-image: url(profile-bg.png);
- background-size: 100% 100%;
- background-repeat: no-repeat;
-  height: 372px;
-  width: 1300px;
+.btn-upload {
+    border: none;
+    background-color: transparent;
+    color: #FFFFFF;
+    font-family: "Mplus 1p Medium";
+    font-size: 12px;
+    letter-spacing: 0.9px;
+    line-height: 18px;
+    font-weight: normal;
+    vertical-align: text-top;
+}
 
- }
- .profile-bg .face{
-border: 4px solid #2D18B4;
-box-shadow: 0px 0px 0px 50px rgba(45, 24, 180, 0.5);
- }
- .face-container {
-  position: relative;
-  top: 89px;
-   margin-left: 601px;
- margin-right: 601px; 
+.upload-icon {
+    margin-right: 12.84px; 
+    vertical-align: text-top;
+}
 
- }
- .profile-name {
-/* position: relative;  */
-  margin-top: 152px; 
- width: 1300px; 
- }
-
- .btn-upload {
-border: none;
-background-color: transparent;
-color: #FFFFFF;
-font-family: "Mplus 1p Medium";
-font-size: 12px;
-letter-spacing: 0.9px;
-line-height: 18px;
-font-weight: normal;
-vertical-align: text-top;
- }
-
- .upload-icon {
- margin-right: 12.84px; 
- vertical-align: text-top;
- }
-
- .profile-name-h {
- color: #FFFFFF;
-   font-family: "Mplus 1p";
-     font-size: 28px;
-       letter-spacing: 1.23px;
-  line-height: 42px;
-  white-space: nowrap;
- }
+.profile-name-h {
+    color: #FFFFFF;
+    font-family: "Mplus 1p";
+    font-size: 28px;
+    letter-spacing: 1.23px;
+    line-height: 42px;
+    white-space: nowrap;
+}
 
 a.close-menu{
-color: #FFFFFF;
-font-family: "Mplus 1p Medium";
-font-size: 11px;
-letter-spacing: 0.48px;
-line-height: 17px;
-text-decoration: none;
+    color: #FFFFFF;
+    font-family: "Mplus 1p Medium";
+    font-size: 11px;
+    letter-spacing: 0.48px;
+    line-height: 17px;
+    text-decoration: none;
 }
+
 .close-menu-fa {
-font-size: 55px !important;
-letter-spacing: 28px;
-line-height: 27px;
-vertical-align: bottom;
+    font-size: 55px !important;
+    letter-spacing: 28px;
+    line-height: 27px;
+    vertical-align: bottom;
 }
-..white-horizontal-logo .container {
-max-width: 100% !important;
-width: 100%;  
+
+.white-horizontal-logo, 
+.container {
+    max-width: 100% !important;
+    width: 100%;  
 }
+
 .navbar-toggler {
- border: none; 
-}
-/* .navbar-toggler-icon {
- background-image:; 
-}
- */
-
- .menu-collapsed-nav {
- height: 139px; 
- }
- .menu-collapsed-container {
-  width: 100%;
-  z-index: 2;
- }
-
- .navbar-toggler {
-  display: inline-block !important;
- }
-
- .menu-collapsed-container.carousel-caption {
-  left: 0%;
-  right: 0%;
- }
-
- .bell-badge {
- border-radius: 50%;
- height: 8px;
- width: 8px; 
- position: absolute;
+    border: none; 
 }
 
+.menu-collapsed-nav {
+    height: 139px; 
+}
+
+.menu-collapsed-container {
+    width: 100%;
+    z-index: 2;
+}
+
+.navbar-toggler {
+    display: inline-block !important;
+}
+
+.menu-collapsed-container.carousel-caption {
+    left: 0%;
+    right: 0%;
+}
+
+.bell-badge {
+    border-radius: 50%;
+    height: 8px;
+    width: 8px; 
+    position: absolute;
+}
+
+/* дабы побороть стили бутстрапа */
 ul > li:nth-child(2) > a.submenu-nav-link{
-  /* дабы побороть стили бутстрапа */
- border-radius: 1px; 
+    border-radius: 1px; 
 }
 
 ul li .submenu-nav-link {
-height: 56px;
-width: 200px;
-border: 1px solid #D4D4D4;
+    height: 56px;
+    width: 200px;
+    border: 1px solid #D4D4D4;
 
-background-color: transparent;
-color: #FFFFFF;
-font-family: "Mplus 1p";
-font-size: 12px;
-letter-spacing: 1.07px;
-line-height: 18px;
-text-align: center;
-text-transform: uppercase;
-padding-top: 21px;
-padding-bottom: 18px;
-/* padding-right: 21.5px;
-padding-left: 20.5px;  */
+    background-color: transparent;
+    color: #FFFFFF;
+    font-family: "Mplus 1p";
+    font-size: 12px;
+    letter-spacing: 1.07px;
+    line-height: 18px;
+    text-align: center;
+    text-transform: uppercase;
+    padding-top: 21px;
+    padding-bottom: 18px;
 }
 
 .submenu-nav-link:hover {
- background-color: rgba(100%, 100%, 100%, 0.2);
- color: white; 
+    background-color: rgba(100%, 100%, 100%, 0.2);
+    color: white; 
 }
 
 ul li:first-of-type .submenu-nav-link {
- border-radius: 12px 0 0 12px; 
+    border-radius: 12px 0 0 12px; 
 }
+
 ul li:last-of-type .submenu-nav-link {
- border-radius: 0 12px 12px 0 ;
+    border-radius: 0 12px 12px 0 ;
 }
 
 .active.submenu-nav-link {
-border: 1px solid #2D18B4;
-background-color: white !important;
-color: #2D18B4 !important;
-font-family: "Mplus 1p";
-font-size: 12px;
-letter-spacing: 1.07px;
-line-height: 18px;
-text-align: center;  
+    border: 1px solid #2D18B4;
+    background-color: white !important;
+    color: #2D18B4 !important;
+    font-family: "Mplus 1p";
+    font-size: 12px;
+    letter-spacing: 1.07px;
+    line-height: 18px;
+    text-align: center;  
 }
+
 .bell-popover,
 iframe{
-top: -10%; 
- overflow-y: auto; 
- 
+    top: -10%; 
+    overflow-y: auto; 
 }
 
 .bell-popover {

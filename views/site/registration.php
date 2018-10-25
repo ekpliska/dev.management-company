@@ -9,59 +9,102 @@
  */
 $this->title = 'Customers | Регистрация';
 ?>
-<div class="site-registration">
-    <h1>Регистрация</h1>
-    <div class="row">
-        <div class="col-md-7">
-            <?php
-                $form = ActiveForm::begin([
-                    'id' => 'registration-form',
-                    'enableClientValidation' => true,
-                    'enableAjaxValidation' => false,
-                    'fieldConfig' => [
-                        'template' => "{label}\n<div class=\"col-sm-7\">{input}</div>\n<div class=\"col-sm-12\">{error}</div>",
-                        'labelOptions' => ['class' => 'col-sm-5 control-label'],
-                    ],
-                    'options' => [
-                        'class' => 'form-horizontal',
-                    ]                    
+
+<h1 class="text-center registration-logo">
+    <?= Html::img('images/main/elsa-logo13@2x.png', ['class' => 'blue-logo']) ?>
+</h1>
+<div class="slide-content tst2">
+    <h2 class="text-center registration-h blue-txt">
+        Регистрация
+    </h2>
+    
+    <?php
+        $form = ActiveForm::begin([
+            'id' => 'login-form',
+            'fieldConfig' => [
+                'template' => "{label}{input}{error}",
+                'labelOptions' => ['class' => 'label-registration hidden'],
+            ],
+            'options' => [
+                'class' => 'form-signin d-block my-auto material',
+            ],
+        ])
+    ?>
+    <div class="mx-auto registration-form-group">
+        <?= $form->field($model, 'username')
+                ->input('text', [
+                    'class' => 'mx-auto py-3 d-block form-control input-registration',
+                    'placeholder' => $model->getAttributeLabel('username')])
+                ->label(true) ?>
+        
+        <?= $form->field($model, 'last_sum')
+                ->input('input', [
+                    'class' => 'mx-auto py-3 d-block form-control input-registration',
+                    'placeholder' => $model->getAttributeLabel('last_sum')])
+                ->label(true) ?>
+        
+        <?= $form->field($model, 'square')
+                ->input('text', [
+                    'class' => 'mx-auto py-3 d-block form-control input-registration',
+                    'placeholder' => $model->getAttributeLabel('square')])
+                ->label(true) ?>
+        
+        <?= $form->field($model, 'mobile_phone')
+                ->widget(MaskedInput::className(), [
+                    'mask' => '+7 (999) 999-99-99',
                 ])
-            ?>
+                ->input('text', [
+                    'placeholder' => $model->getAttributeLabel('mobile_phone'),
+                    'class' => 'mx-auto py-3 d-block form-control input-registration',
+                    ])
+                ->label(true) ?>
+        
+        
+        <?= $form->field($model, 'email')
+                ->input('text', [
+                    'placeholder' => $model->getAttributeLabel('email'),
+                    'class' => 'mx-auto py-3 d-block form-control input-registration',
+                    ])
+                ->label(true) ?>
+        
+        <?= $form->field($model, 'password_repeat')
+                ->input('password', [
+                    'placeholder' => $model->getAttributeLabel('password_repeat'),
+                    'class' => 'mx-auto py-3 d-block form-control input-registration',
+                    ])
+                ->label(true) ?>
 
-                <?= $form->field($model, 'username')->textInput(['placeholder' => $model->getAttributeLabel('username')])->label(true) ?>
+        <?= $form->field($model, 'password')
+                ->input('password', [
+                    'placeholder' => $model->getAttributeLabel('password'),
+                    'class' => 'mx-auto py-3 d-block form-control input-registration',
+                    ])
+                ->label(true) ?> 
+        
+    </div>
+    <div class="registration-btn-group mx-auto">
+        <div class="text-center">
             
-                <?= $form->field($model, 'last_sum')->input('text', ['placeholder' => $model->getAttributeLabel('last_sum')])->label(true) ?>
-
-                <?= $form->field($model, 'square')->input('text', ['placeholder' => $model->getAttributeLabel('square')])->label(true) ?>
+            <?= Html::submitButton('Вход', [
+                'class' => 'btn blue-btn', 
+                'name' => 'login-button']) ?>
+    
+            <?= Html::a('Отмена', ['/'], ['class' => 'btn red-outline-btn']) ?>
             
-                <?= $form->field($model, 'mobile_phone')
-                        ->widget(MaskedInput::className(), [
-                            'mask' => '+7 (999) 999-99-99',
-                        ])
-                        ->input('text', ['placeholder' => $model->getAttributeLabel('mobile_phone')])->label(true) ?>
-
-                <?= $form->field($model, 'email')->input('text', ['placeholder' => $model->getAttributeLabel('email')])->label(true) ?>
-
-                <?= $form->field($model, 'password_repeat')->input('password', ['placeholder' => $model->getAttributeLabel('password_repeat')])->label(true) ?>
-
-                <?= $form->field($model, 'password')->input('password', ['placeholder' => $model->getAttributeLabel('password')])->label(true) ?>                        
-
-                <div class="form-group">
-                    <div class="col-sm-12 text-right">
-                        <?= Html::submitButton('Зарегистрироваться', ['class' => 'btn btn-primary']) ?>
-                    </div>
-                </div>
-            
-                <div class="form-group">
-                    <div class="col-sm-12">
-                        <a href="<?= Url::to(['/']) ?>">Вход</a> | 
-                        <a href="<?= Url::to(['site/request-password-reset']) ?>">Забыли пароль</a>
-                    </div>
-                </div>                            
-            
-            <?php ActiveForm::end() ?>
         </div>
     </div>
+    
+    <?php ActiveForm::end(); ?>
+    
 </div>
-    
-    
+<div class=" fixed-bottom col-6 ml-auto">
+    <p class=" text-muted text-center mb-2">
+        <a href="<?= Url::to(['site/request-password-reset']) ?>" class="forgot-a gray-txt no-underline">Забыли пароль?</a>
+    </p>
+</div>
+
+<?php
+$this->registerJs("
+    $('form.material').materialForm();
+");
+?>
