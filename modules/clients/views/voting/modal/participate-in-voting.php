@@ -40,18 +40,18 @@
                 <?= $form->field($model, 'number4')->input('text', ['class' => 'number-sms', 'maxlength' => 1, 'size' => 1])->label(false) ?>
                 <?= $form->field($model, 'number5')->input('text', ['class' => 'number-sms', 'maxlength' => 1, 'size' => 1])->label(false) ?>
                 
-                </div>
+            </div>
             
-                <div class="to-send">
-                    <?= Html::button('Отправить код еще раз', [
-                            'class' => 'again-bt',
-                            'id' => 'repeat_sms_code',
-                            'data-voting' => $voting_id,
-                        ]) ?>
-                </div>
-                <div class="to-send-message">
-                    <span class="repeat_sms_code-message"></span>
-                </div>
+            <div class="to-send">
+                <?= Html::button('Отправить код еще раз', [
+                        'class' => 'again-bt',
+                        'id' => 'repeat_sms_code',
+                        'data-voting' => $voting_id,
+                    ]) ?>
+            </div>
+            <div class="to-send-message">
+                <span class="repeat_sms_code-message"></span>
+            </div>
                 
             <div class="modal-footer no-border bt-sms">
                 
@@ -65,6 +65,7 @@
                     ]) ?>
                 
             </div>
+            
             <?php ActiveForm::end(); ?>
         </div>
     </div>

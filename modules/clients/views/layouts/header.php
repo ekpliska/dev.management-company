@@ -37,7 +37,7 @@
                             </div>
                             <div style="background-color: silver;">
                                 <span class="item">
-                                    <p style="width:350px; height: 100px;"><a href="#">Профиль</a></p>
+                                    <p style="width:350px; height: 100px;"><a href="<?= Url::to(['profile/index']) ?>">Профиль</a></p>
                                 </span>
                             </div>
                             <div style="background-color: silver;">
