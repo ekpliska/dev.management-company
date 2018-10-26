@@ -93,9 +93,14 @@ $this->title = 'Профиль собственника';
                 
         <div class="col-6 rent-profile-info">
             <h5 class="profile-title">
-                <?= Html::checkbox('is_rent', $is_rent ? 'checked' : '', ['id' => 'is_rent']) ?> Арендатор
-            </h5>
+                <label class="el-switch">
+                    <?= Html::checkbox('is_rent', $is_rent ? 'checked' : '', ['id' => 'is_rent']) ?>
+                    <span class="el-switch-style"></span>
+                    <span class="margin-r">Арендатор</span>
+                </label>
                     
+            </h5>   
+
             <?php if (isset($is_rent) && $is_rent) : ?>
                 <?= $this->render('_form/rent-view', [
                         'form' => $form,
@@ -109,15 +114,22 @@ $this->title = 'Профиль собственника';
     </div>
             
     <div class="col-12 spam-agree-txt">
-                
-        <?php $checkboxTemplate = '<div class="round-checkbox text-center mx-auto">{input}{error}{hint}</div>'; ?>
-            <?= $form->field($user, 'user_check_email')->checkbox(['template' => $checkboxTemplate]); ?>
-                
-            <div class="save-btn-group mx-auto">
-                <div class="text-center">
-                    <?= Html::submitButton('Сохранить изменения', ['class' => 'btn blue-btn']) ?>
-                </div>
+        <div class="el-checkbox">
+            <?= $form->field($user, 'user_check_email')->checkbox()->label(); ?>
+            <label class="el-checkbox-style" for="1_1"></label>
+        </div>
+<!--
+        <div class="el-checkbox">
+            <span class="margin-r">Unchecked</span>
+            <input type="checkbox" name="check" id="1_1">
+            <label class="el-checkbox-style" for="1_1"></label>
+        </div>-->
+        <div class="save-btn-group mx-auto">
+            <div class="text-center">
+                <?= Html::submitButton('Сохранить изменения', ['class' => 'btn blue-btn']) ?>
             </div>
+        </div>
+
     </div>            
 
 <?php ActiveForm::end(); ?>
