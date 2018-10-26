@@ -404,7 +404,7 @@ $(document).ready(function() {
     /*
      * Отмена участия в голосовании
      */
-    $('#renouncement_participate').on('click', function(){
+    $('#renouncement_participate, #renouncement_participate_close').on('click', function(){
         var votingId = $(this).data('voting');
         $.ajax({
             type: 'POST',

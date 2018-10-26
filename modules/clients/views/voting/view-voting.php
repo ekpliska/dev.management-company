@@ -6,6 +6,7 @@
     use app\helpers\FormatHelpers;
     use app\models\RegistrationInVoting;
     use app\modules\clients\widgets\ModalWindows;
+    use app\models\Voting;
 
 /* 
  * Просмотр отдельного голосования
@@ -17,6 +18,62 @@ $btn_disabled = ($_start > time() || $_end < time()) ? true : false;
 
 $this->title = $voting['voting_title'];
 ?>
+
+<div class="container-voting">
+    <div class="preview">
+        <div class="rt-btn">
+            <!--<button class="btn bt-hop" data-toggle="modal" data-target="#frostedBk">ПРИНЯТЬ УЧАСТИЕ</button>-->
+            <?= Html::button('ПРИНЯТЬ УЧАСТИЕ', [
+                    'class' => 'btn bt-hop',
+                    'id' => 'get-voting-in',
+                    'data-voting' => $voting['voting_id'],
+//                    'disabled' => $btn_disabled,
+            ]) ?>            
+        </div>
+        <div class="rectengle-left">
+            <?= Html::img('/images/clients/' . ($voting['status'] == Voting::STATUS_CLOSED ? 'check.svg' : 'flag.svg'), ['class' => 'icons-clock']) ?>
+            <?= FormatHelpers::statusNameVoting($voting['status']) ?>
+        </div>
+        <div class="rectengle-center">
+            <?= FormatHelpers::numberOfDaysToFinishVote($voting['voting_date_start'], $voting['voting_date_end']) ?>
+        </div>
+        <div class="saturday-work">
+            <h2 class="saturday-worky">
+                <?= $voting['voting_title'] ?>
+            </h2>
+            <p class="text-saturday">
+                <?= $voting['voting_text'] ?>
+            </p>
+        </div>
+    </div>
+    
+    <div class="voting-tool">
+        <div class="voted voted-root">
+            <!--<button type="button" class="battom-payment bt-voting1">65</button>-->
+            Проголосовало
+        </div>
+	<div class="photo-voted photo-voted-root">
+            photo list
+<!--            <img class="photo1 voted-img" src="/assets/img/noname.jpg" alt="">
+            <img class="photo1 voted-img" src="/assets/img/noname.jpg" alt="">
+            <img class="photo1 voted-img" src="/assets/img/noname.jpg" alt="">
+            <img class="photo1 voted-img" src="/assets/img/noname.jpg" alt="">
+            <img class="photo1 voted-img" src="/assets/img/noname.jpg" alt="">
+            <img class="photo1 voted-img" src="/assets/img/noname.jpg" alt="">-->
+        </div>
+    </div>
+    
+    <div class="results">
+        <?php foreach ($voting['question'] as $key => $question) : ?>
+            <div class="start start1">
+                <?= $question['questions_text'] ?>
+                <!--<button type="button" class="battom-payment bt-voting1 btr-start1">12</button>Проголосовало-->
+            </div>
+        <?php endforeach; ?>
+    </div>
+</div>
+
+<?php /*
 <div class="clients-default-index">
     
     <h1><?= $this->title ?></h1>
@@ -65,6 +122,7 @@ $this->title = $voting['voting_title'];
     
 </div>
 
+*/ ?>
 <?php if ($is_register['status'] == RegistrationInVoting::STATUS_DISABLED) : ?>
 
     <?= $this->render('modal/participate-in-voting', [
@@ -72,6 +130,7 @@ $this->title = $voting['voting_title'];
             'voting_id' => $voting['voting_id']]) ?>
 
 <?php endif; ?>
+
 
 <?php 
     /* Если кука отправки СМС кода существует сразу же загружаем модальное окно на ввод кода */

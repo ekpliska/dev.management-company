@@ -265,24 +265,26 @@ class FormatHelpers {
         $date_now = date_create(date('Y-m-d H:i:s'));
         $_end = date_create($date_end);
         $interval = date_diff($date_now, $_end);
+        
+        $image_clock = Html::img('/images/clients/clock.svg', ['class' => 'icons-clock']);
 
         if (strtotime($date_end) > time() && $interval->d !== 0) {
             
-            $message = Yii::$app->i18n->messageFormatter->format(
+            $message = $image_clock . Yii::$app->i18n->messageFormatter->format(
                     'До окончания {n, plural, one{# день} few{# дня} many{# дней} other{# дней}}',
                     ['n' => $interval->d],
                     Yii::$app->language);
             
         } elseif ($interval->d == 0 && $interval->h !== 0) {
             
-            $message = Yii::$app->i18n->messageFormatter->format(
+            $message = $image_clock . Yii::$app->i18n->messageFormatter->format(
                     'До окончания {n, plural, one{# час} few{# часа} many{# часов} other{# часов}}',
                     ['n' => $interval->h],
                     Yii::$app->language);
             
         } elseif ($interval->d == 0 && $interval->h == 0 && $interval->i !== 0) {
             
-            $message = Yii::$app->i18n->messageFormatter->format(
+            $message = $image_clock . Yii::$app->i18n->messageFormatter->format(
                     'До окончания {n, plural, one{# минута} few{# минуты} many{# минут} other{# минут}}',
                     ['n' => $interval->i],
                     Yii::$app->language);
@@ -290,7 +292,6 @@ class FormatHelpers {
         } else {
             $message = 'Завершено';
         }
-        
         return $message;
     }
     
