@@ -99,8 +99,9 @@ $this->title = 'Профиль собственника';
                     <span class="margin-r">Арендатор</span>
                 </label>
                     
-            </h5>   
-
+            </h5>
+            
+            <div id="content-replace" class="form-add-rent">`
             <?php if (isset($is_rent) && $is_rent) : ?>
                 <?= $this->render('_form/rent-view', [
                         'form' => $form,
@@ -108,7 +109,7 @@ $this->title = 'Профиль собственника';
             <?php else : ?>
                     <p>Арендатор отсутствует</p>
             <?php endif; ?>
-                    
+            </div>      
         </div>
                 
     </div>
