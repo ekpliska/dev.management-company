@@ -124,16 +124,25 @@ src: url('../fonts/MPLUS1p-Black.ttf');*/
 }
 
 .add-req-fixed-btn {
+    background-image: url(/images/clients/new_record.svg);
+    background-repeat: no-repeat;
+    background-position: 0px 5px;
+    width: 70px;
+    height: 70px;
     margin-left: 1202px;
     cursor: pointer;
+    outline: none;
+    border: none;
 }
 
 .add-req-fixed-btn:hover {
     filter: brightness(80%);
+    outline: none;
 }
 
 .add-req-fixed-btn:active {
     filter: brightness(120%);
+    outline: none;
 }
 
 .container.table-container {
@@ -319,16 +328,16 @@ a.btn.blue-btn {
 }
 
  .p-body {
-    display: block; 
+    display: block;
 } 
 
 html, body {
-    height:100%;
+    /*height:100%;*/
 }
 
 body {
-    display:flex;
-    align-items:center;
+    display: flex;
+    align-items: center;
 }
 
 .no-underline,
