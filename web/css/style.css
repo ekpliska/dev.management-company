@@ -941,9 +941,10 @@ margin-right: 7.5px;
     font-family: "Mplus 1p";
     font-size: 12px;
     letter-spacing: 1.07px;
+    padding-top: 17px;
     line-height: 18px;
     text-align: center;
-    text-transform: uppercase;
+    text-transform: uppercase;    
 }
 .req-btn-all {
     background-color: #4E2AE2;
@@ -1126,8 +1127,15 @@ border-radius: 3px;
 }
 
 .req-table-description {
-max-width: 231px;
+    max-width: 231px;
+    text-align: center;
 }
+
+.req-table-description-request {
+    max-width: 231px;
+    text-align: justify;
+}
+
 .req-table-type {
   /*  по согласованию с Максом*/
     max-width: 165px;

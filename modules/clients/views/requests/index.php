@@ -4,13 +4,95 @@
     use yii\widgets\ActiveForm;
     use yii\widgets\MaskedInput;
     use yii\helpers\Url;
+    use app\modules\clients\widgets\StatusRequest;
     use app\modules\clients\widgets\AlertsShow;
     
 /* 
- * Заявки (Обзая страница)
+ * Заявки (Общая страница)
  */
 $this->title = 'Мои заявки';
 ?>
+
+
+
+<?= StatusRequest::widget() ?>
+
+<div class="table-container">
+    <div class="account-info-table-container req-table-container">
+        
+        <?= $this->render('data/grid', ['all_requests' => $all_requests]); ?>
+        
+<!--    <table class="table req-table  pay-table account-info-table px-0">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Вид заявки</th>
+            <th scope="col">Описание</th>
+            <th scope="col">Исполнитель</th>
+            <th scope="col">Дата создания</th>
+            <th scope="col">Дата закрытия</th>
+            <th scope="col">Статус</th>
+        </tr>
+        </thead>
+        <tbody class="text-center">
+        <tr>
+            <th scope="row">373838</th>
+            <td class="req-table-type">Вопросы прописки, регистрации, выдачи справок и выписок</td>
+            <td class="req-table-description"><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p><span><img src="assets/img/noname.jpg" class="req-table-img"><img src="assets/img/noname.jpg" class="req-table-img"><img src="assets/img/noname.jpg" class="req-table-img"><img src="assets/img/noname.jpg" class="req-table-img"> </span></td>
+            <td>ООО "Уолдер Фрей"</td>
+            <td class="date-req-table">18 июня 2018г.</td>
+            <td class="date-req-table">18 июня 2018г.</td>
+            <td><p><span class="badge badge-pill req-badge req-badge-new">Новая</span></p>
+                <button class="blue-outline-btn req-table-btn">Оценить</button> </td>
+        </tr>
+        <tr>
+            <th scope="row">373838</th>
+            <td class="req-table-type">Вопросы прописки, регистрации, выдачи справок и выписок</td>
+            <td class="req-table-description"><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p><span><img src="assets/img/noname.jpg" class="req-table-img"><img src="assets/img/noname.jpg" class="req-table-img"><img src="assets/img/noname.jpg" class="req-table-img"><img src="assets/img/noname.jpg" class="req-table-img"> </span></td>
+            <td>ООО "Уолдер Фрей"</td>
+            <td class="date-req-table">18 июня 2018г.</td>
+            <td class="date-req-table">18 июня 2018г.</td>
+            <td><p><span class="badge badge-pill req-badge req-badge-work">В работе</span></p>
+                <button class="blue-outline-btn req-table-btn">Оценить</button> </td>
+        </tr>
+        <tr>
+            <th scope="row">373838</th>
+            <td class="req-table-type">Вопросы прописки, регистрации, выдачи справок и выписок</td>
+            <td class="req-table-description"><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p><span><img src="assets/img/noname.jpg" class="req-table-img"><img src="assets/img/noname.jpg" class="req-table-img"><img src="assets/img/noname.jpg" class="req-table-img"><img src="assets/img/noname.jpg" class="req-table-img"> </span></td>
+            <td>ООО "Уолдер Фрей"</td>
+            <td class="date-req-table">18 июня 2018г.</td>
+            <td class="date-req-table">18 июня 2018г.</td>
+            <td><p><span class="badge badge-pill req-badge req-badge-complete">Исполненная</span></p>
+                <button class="blue-outline-btn req-table-btn">Оценить</button> </td>
+        </tr>
+        <tr>
+            <th scope="row">373838</th>
+            <td class="req-table-type">Вопросы прописки, регистрации, выдачи справок и выписок</td>
+            <td class="req-table-description"><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p><span><img src="assets/img/noname.jpg" class="req-table-img"><img src="assets/img/noname.jpg" class="req-table-img"><img src="assets/img/noname.jpg" class="req-table-img"><img src="assets/img/noname.jpg" class="req-table-img"> </span></td>
+            <td>ООО "Уолдер Фрей"</td>
+            <td class="date-req-table">18 июня 2018г.</td>
+            <td class="date-req-table">18 июня 2018г.</td>
+            <td><p><span class="badge badge-pill req-badge req-badge-rectification">На уточнении</span></p>
+                <button class="blue-outline-btn req-table-btn">Оценить</button> </td>
+        </tr>
+        <tr>
+            <th scope="row">373838</th>
+            <td class="req-table-type">Вопросы прописки, регистрации, выдачи справок и выписок</td>
+            <td class="req-table-description"><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p><span><img src="assets/img/noname.jpg" class="req-table-img"><img src="assets/img/noname.jpg" class="req-table-img"><img src="assets/img/noname.jpg" class="req-table-img"><img src="assets/img/noname.jpg" class="req-table-img"> </span></td>
+            <td>ООО "Уолдер Фрей"</td>
+            <td class="date-req-table">18 июня 2018г.</td>
+            <td class="date-req-table">18 июня 2018г.</td>
+            <td><p><span class="badge badge-pill req-badge req-badge-close">Закрытая</span></p>
+                <button class="blue-outline-btn req-table-btn">Оценить</button> </td>
+        </tr>
+        <div class="fixed-bottom req-fixed-bottom-btn-group mx-auto ">
+<img class="add-req-fixed-btn" src="assets/img/Group22Copy.svg" onclick="$('#frostedBk').modal('show');"></button>
+        </tbody>
+    </table>-->
+</div>
+</div>
+
+<?php /*
 <div class="clients-default-index">
     <h1><?= $this->title ?></h1>
     
@@ -79,6 +161,8 @@ $this->title = 'Мои заявки';
         </div>
     </div>
 </div>
+*/ ?>
+
 
 <?php
 /* Фильтр заявок пользователя по 

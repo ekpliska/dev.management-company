@@ -11,6 +11,7 @@
     use app\models\StatusRequest;
     use app\models\Employers;
     use app\helpers\FormatHelpers;
+    use app\models\Image;
 
 /**
  * Заяки
@@ -89,6 +90,13 @@ class Requests extends ActiveRecord
      */
     public function getComment() {
         return $this->hasMany(CommentsToRequest::className(), ['comments_request_id' => 'requests_id']);
+    }
+    
+    /*
+     * Связь с таблицей прикрепленных фотографий
+     */
+    public function getImage() {
+        return $this->hasMany(Image::className(), ['itemId' => 'requests_id'])->andWhere(['modelName' => 'Requests']);
     }
         
     /*
@@ -197,9 +205,17 @@ class Requests extends ActiveRecord
      */
     public static function findByAccountID($account_id) {
         
-        return self::find()
+        $requests = self::find()
+                ->joinWith('image')
                 ->andWhere(['requests_account_id' => $account_id])
-                ->orderBy(['created_at' => SORT_DESC]);
+                ->orderBy(['created_at' => SORT_DESC])
+//                ->all()
+                ;
+        
+//        echo '<pre>';
+//        var_dump($requests['image']);
+//        die();
+        return $requests;
     }
 
     /*

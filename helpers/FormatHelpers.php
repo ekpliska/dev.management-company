@@ -295,4 +295,24 @@ class FormatHelpers {
         return $message;
     }
     
+    /*
+     * Формирование списка изображений прикрепленных к заяке
+     */
+    public static function imageRequestList($image_list) {
+        
+        $lists = '';
+        
+        if ($image_list === null) {
+            return $lists;
+        }
+        
+        $lists;
+        
+        foreach ($image_list as $key => $image) {
+            $list = '<img src="' . 'web/upload/store/' . $image->filePath . '" class="req-table-img">';
+            $lists .= $list;
+        }
+        
+        return $lists;
+    }
 }

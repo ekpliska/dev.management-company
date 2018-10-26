@@ -47,7 +47,7 @@
                             </div>
                             <div style="background-color: silver;">
                                 <span class="item">
-                                    <p style="width:350px; height: 100px;"><a href="#">Заявки</a></p>
+                                    <p style="width:350px; height: 100px;"><a href="<?= Url::to(['requests/index']) ?>">Заявки</a></p>
                                 </span>
                             </div>
                             <div style="background-color: silver;">

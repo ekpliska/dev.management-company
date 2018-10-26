@@ -1,6 +1,7 @@
 <?php
     use yii\grid\GridView;
     use yii\helpers\Url;
+    use yii\helpers\Html;
     use app\helpers\FormatHelpers;
 
 /*
@@ -9,34 +10,58 @@
 ?>
     <?= GridView::widget([
         'dataProvider' => $all_requests,
-        'filterUrl' => Url::to(['requests/index']),
+//        'filterUrl' => Url::to(['requests/index']),
+        'layout' => '{items}{pager}',
+        'tableOptions' => [
+            'class' => 'table req-table  pay-table account-info-table px-0',
+        ],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'requests_ident',
+            [
+                'attribute' => 'requests_ident',
+                'value' => function ($data) {
+                    return Html::a($data->requests_ident, ['requests/view-request', 'request_numder' => $data->requests_ident]);
+                },
+                'contentOptions' =>[
+                    'class' => 'req-table-description',
+                ],
+                'format' => 'raw',
+            ],
             [
                 'attribute' => 'requests_type_id',
                 'value' => function ($data) {
                     return $data->getNameRequest();            
                 },
-            ],
-            'requests_specialist_id',
-            [
-                'attribute' => 'created_at',
-                'format' => ['date', 'php:d.m.Y'],
+                'contentOptions' =>[
+                    'class' => 'req-table-description',
+                ],        
             ],
             [
                 'attribute' => 'requests_comment',
                 'value' => function ($data) {
-                    return
-                        '<div class="cutstring" data-display="none" data-max-length="70">'
-                            . $data->requests_comment
-                        . '</div>';
+                    return $data->requests_comment
+                            . '<br />'
+                            . FormatHelpers::imageRequestList($data['image']);
                 },
+                'contentOptions' =>[
+                    'class' => 'req-table-description-request',
+                ],
                 'format' => 'raw',
+            ],                        
+            'requests_specialist_id',
+            [
+                'attribute' => 'created_at',
+                'format' => ['date', 'php:d.m.Y'],
+                'contentOptions' =>[
+                    'class' => 'date-req-table',
+                ],
             ],
             [
                 'attribute' => 'updated_at',
                 'format' => ['date', 'php:d.m.Y'],
+                'contentOptions' =>[
+                    'class' => 'date-req-table',
+                ],
             ],
             [
                 'attribute' => 'status',
@@ -48,14 +73,13 @@
             ],
             [
                 'class' => 'yii\grid\ActionColumn',
-                'controller' => 'requests/index',
-                'template' => '{view-request}',
-                'buttons' => [
-                    'view-request' => function ($url, $data) {
-                        $url = ['request_numder' => $data->requests_ident];
-                        return '<a href='. Url::to(['requests/view-request', 'request_numder' => $data->requests_ident]) .' data-pjax="0" class="btn btn-info">Подробнее</a>';
-                    },
-                ],
+//                'template' => '{view-request}',
+//                'buttons' => [
+//                    'view-request' => function ($url, $data) {
+//                        $url = ['request_numder' => $data->requests_ident];
+//                        return '<a href='. Url::to(['requests/view-request', 'request_numder' => $data->requests_ident]) .' data-pjax="0" class="btn btn-info">Подробнее</a>';
+//                    },
+//                ],
             ],
         ],
     ]); ?>
