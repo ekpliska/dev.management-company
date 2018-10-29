@@ -18,19 +18,34 @@ class FormatHelpers {
      */
     public static function formatUrlFileRequest($file) {
         
-        $array_exension = [
-            'jpg' => '1',
-            'png' => '2',
-            'jpeg' => '3'
-        ];
+        if ($file == null) {
+            return 'Фотографии, закрепленный за заявкой не найдены';
+        }
         
-        $extension = pathinfo($file, PATHINFO_EXTENSION);
+        // Формируем путь
+        $path = Yii::getAlias('@web') . '/upload/store/' . $file;
         
-        if (ArrayHelper::keyExists($extension, $array_exension)) {
-            return Html::a('Изображение', $file, ['target' => '_blank']);
-        } else {      
-            return Html::a('Файл', $file);
-        }        
+        // Формируем html
+        $html_path = Html::beginTag('a', ['href' => $path])
+                . Html::img($path, ['class' => 'req-body-info-img'])
+                . Html::endTag('a');
+        
+        
+        return $html_path;
+        
+//        $array_exension = [
+//            'jpg' => '1',
+//            'png' => '2',
+//            'jpeg' => '3'
+//        ];
+//        
+//        $extension = pathinfo($file, PATHINFO_EXTENSION);
+//        
+//        if (ArrayHelper::keyExists($extension, $array_exension)) {
+//            return Html::a('Изображение', $file, ['target' => '_blank']);
+//        } else {      
+//            return Html::a('Файл', $file);
+//        }        
     }
     
     /*

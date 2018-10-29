@@ -1025,16 +1025,20 @@ background-color: #2D18B4;
     margin-bottom: 30px;*/
 }
 
-.req-body-check-rounded {
-height: 31px;
-width: 31px;
-background-color: #36EADF;
-/*box-shadow: 0 2px 11px 0 rgba(54,234,223,0.57);*/
-border-radius: 50%;
+.req-body-rounded {
+    height: 31px;
+    width: 31px;
+    border-radius: 50%;
     margin-top:25px;
     margin-left: 34px;
     margin-right: 24.5px;
     /*margin-bottom: 23px;*/
+}
+.check-rounded {
+    background-color: #36eadf;
+}
+.uncheck-rounded {
+    background-color: #c1c1c1;
 }
 
 .req-badge span {
@@ -1048,13 +1052,12 @@ border-right: 1px solid #3f9aec;
 
 }
 .req-body-check {
-margin-top: 11px;
-margin-bottom:10px ;
-margin-left:8px;
-margin-right: 8,45px;
-height: 10px;
-width: 14.55px;
-
+    margin-top: 11px;
+    margin-bottom:10px ;
+    margin-left:8px;
+    margin-right: 8,45px;
+    height: 10px;
+    width: 14.55px;
 }
 
 .account-info-table {

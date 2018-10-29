@@ -47,7 +47,7 @@ class Image extends ActiveRecord
      * Получить полный путь к загруженному файлу
      */
     public function getImagePath($image) {
-        return '@web/upload/store/' . $image;
+        return Yii::getAlias('@web') . '/upload/store/' . $image;
     }
     
     /*

@@ -187,14 +187,17 @@ class Requests extends ActiveRecord
         
         $request = (new \yii\db\Query)
                 ->from('requests as r')
-                ->join('LEFT JOIN', 'personal_account as p', 'p.account_id = r.requests_account_id')
-                ->join('LEFT JOIN', 'type_requests as tr', 'r.requests_type_id = tr.type_requests_id')
-                ->join('LEFT JOIN', 'flats as f', 'f.flats_id = p.personal_house_id')
-                ->join('LEFT JOIN', 'houses as h', 'h.houses_id = f.flats_house_id')
-                ->join('LEFT JOIN', 'housing_estates as he', 'he.estate_id = h.houses_estate_name_id') 
+                ->join('LEFT JOIN', 'type_requests as tr', 'r.requests_type_id = tr.type_requests_id')                
+//                ->join('LEFT JOIN', 'personal_account as p', 'p.account_id = r.requests_account_id')
+//                ->join('LEFT JOIN', 'flats as f', 'f.flats_id = p.personal_house_id')
+//                ->join('LEFT JOIN', 'houses as h', 'h.houses_id = f.flats_house_id')
+//                ->join('LEFT JOIN', 'housing_estates as he', 'he.estate_id = h.houses_estate_name_id') 
                 ->where(['requests_ident' => $request_numder])
                 ->one();
         
+//        echo '<pre>';
+//        var_dump($request);
+//        die();
         return $request;
         
     }
