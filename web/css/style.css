@@ -3099,69 +3099,67 @@ div[id^=participate-in-voting-].enter-sms {
 }
 /* модальное окно сообщения */
 
-  div[id^=participate-in-voting-].messedge-rt {
-  height: 467px;
-  width:385px;
-  position: fixed;
-
+div[id^=participate-in-voting-].messedge-rt {
+    height: 467px;
+    width:385px;
+    position: fixed;
   } 
-  .data-mes  {
-  height: 30px;
-  width:116px;
-  background-color: #2D18B4;
-  color: #FFFFFF;
-  border-radius: 12px;
-  margin-top:37px;
-  margin-left:130px;
-  padding-left: 25px;
-  padding-top:7px;
-  font-family: "Mplus 1p Medium"; 
-  font-size: 12px;  
-  line-height: 18px;
- 
+  
+.data-mes  {
+    height: 30px;
+    width:116px;
+    background-color: #2D18B4;
+    color: #FFFFFF;
+    border-radius: 12px;
+    margin-top:37px;
+    margin-left:130px;
+    padding-left: 25px;
+    padding-top:7px;
+    font-family: "Mplus 1p Medium"; 
+    font-size: 12px;  
+    line-height: 18px;
+}  
 
-
-    }  
-    .cont-mes {
-  height: 80px;
-  width:385px;
-  margin-top:32px; 
-  
-     } 
+.cont-mes {
+    height: 80px;
+    width:385px;
+    margin-top:32px; 
+} 
  
-    .mes {
-  height: 76px;
-  width:291px; 
-  background-color: #FFFFFF;
-  border-radius: 12px;
-  color: black;
-  margin-left:67px;
-  position: absolute;
-  
-  
-    }  
-    .text-mes {
-  height: 38px;
-  width:267px;
-  position: absolute;
-  color: #2D18B4; 
-  font-family: "Mplus 1p Medium"; 
-  font-size: 14px;  
-  line-height: 20px;
-  margin-left: 12px;
-  margin-top: 26px;
-    }   
-.name-time {
-  height: 14px;
-  width:267px;
-  position: absolute;
-  color: black;  
-  font-family: "Mplus 1p Medium"; 
-  font-size: 10px;  
-  line-height: 15px;
-  margin-left:12px;
-  margin-top:8px;
+.mes {
+    height: 76px;
+    width:291px; 
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    color: black;
+    margin-left:67px;
+    position: absolute;
+}  
+
+.text-mes {
+    height: 38px;
+    width:267px;
+    position: absolute;
+    color: #2D18B4; 
+    font-family: "Mplus 1p Medium"; 
+    font-size: 14px;  
+    line-height: 20px;
+    margin-left: 12px;
+    margin-top: 26px;
 }
+
+.name-time {
+    height: 14px;
+    width:267px;
+    position: absolute;
+    color: black;  
+    font-family: "Mplus 1p Medium"; 
+    font-size: 10px;  
+    line-height: 15px;
+    margin-left:12px;
+    margin-top:8px;
+}
+
 .photo-name {
   height: 40px;
   width:40px;
@@ -3170,6 +3168,9 @@ div[id^=participate-in-voting-].enter-sms {
   margin-top:0;
   border:none ;
 }
+
+
+
 
 /* Постраничная навигация новостей, Собственник, главная странциа */
 .pagination-news {
@@ -3208,3 +3209,47 @@ button.again-bt {
 .profile-title {
     padding-bottom: 50px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* МОДАЛЬНЫЕ ОКНА */
+
+/* Переопреденное модальное окно бутстрапа */
+.modal-content {
+    /*height: 340px;*/
+    width: 733px;
+    position: absolute;
+    /*left: 100px;*/
+    top: 100px;
+    background: linear-gradient(180.67deg, #39284E 0%, rgba(10,8,8,0.7) 100%);
+    margin: 0;
+    padding: 0;
+    z-index: 10100;
+    box-sizing: border-box;
+    box-shadow: 0 10px 14px 2px rgba(0,0,0,0.26);
+    border-radius: 3px;
+    transition: background .2s;
+}
+.modal-header {
+    color: #fff;
+    border-bottom: none;
+}
+.modal-header h5 {
+    font-size: 27px;
+}
+
+.modal-header .close {
+    margin: 0 !important;
+}
+/* Добавление новой заявки */

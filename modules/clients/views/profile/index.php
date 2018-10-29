@@ -135,6 +135,8 @@ $this->title = 'Профиль собственника';
 
 <?php ActiveForm::end(); ?>
 </div>
+
+
 <?php
 $this->registerJs("
     $('form.material').materialForm();

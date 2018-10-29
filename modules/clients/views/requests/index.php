@@ -3,6 +3,7 @@
     use yii\helpers\Html;
     use yii\widgets\ActiveForm;
     use yii\widgets\MaskedInput;
+    use yii\bootstrap4\Modal;
     use yii\helpers\Url;
     use app\modules\clients\widgets\StatusRequest;
     use app\modules\clients\widgets\AlertsShow;
@@ -56,6 +57,53 @@ $this->title = 'Мои заявки';
     </div>
 </div>
 */ ?>
+
+
+<?php
+    Modal::begin([
+        'id' => 'add-account-modal',
+        'title' => 'Новая заявка',
+        'closeButton' => [
+            'class' => 'close add-acc-modal-close-btn req',
+        ],
+    ]);
+?>
+    <?php
+        $form = ActiveForm::begin([
+            'id' => 'add-request',
+            'options' => [
+                'enctype' => 'multipart/form-data',
+            ]
+        ]);
+    ?>
+                
+        <?= $form->field($model, 'requests_type_id')
+                ->dropDownList($type_requests, [
+                    'prompt' => 'Выберите вид заявки из списка...'])->label(false) ?>
+
+        <?= $form->field($model, 'requests_phone')
+                ->widget(MaskedInput::className(), [
+                    'mask' => '+7 (999) 999-99-99'])
+                ->input('text', [
+                    'placeHolder' => $model->getAttributeLabel('requests_phone'),])
+                ->label(false) ?>
+
+        <?= $form->field($model, 'requests_comment')->textarea(['rows' => 10])->label(false) ?>
+
+        <?= $form->field($model, 'gallery[]')->input('file', ['multiple' => true])->label(false) ?>
+
+        <div class="modal-footer no-border">
+            <?= Html::submitButton('Отправить', ['class' => 'btn blue-outline-btn white-btn mx-auto']) ?>
+            <?= Html::submitButton('Отмена', ['class' => 'btn red-outline-btn bt-bottom2 request__btn_close', 'data-dismiss' => 'modal']) ?>
+        </div>    
+    
+    <?php ActiveForm::end(); ?>
+
+<?php
+    Modal::end();
+?>
+
+<?php /*
 <div id="add-account-modal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -98,7 +146,7 @@ $this->title = 'Мои заявки';
     </div>
 </div>
 
-
+*/ ?>
 
 <?php
 /* Фильтр заявок пользователя по 

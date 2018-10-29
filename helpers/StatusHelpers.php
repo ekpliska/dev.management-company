@@ -25,7 +25,7 @@ class StatusHelpers {
         ];
     
         
-        if ($status == null) {
+        if (!isset($status)) {
             return 'Не задан';
         }
         
