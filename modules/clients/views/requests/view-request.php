@@ -25,11 +25,17 @@ $this->title = 'Детали заявки';
             <?= $request_info['type_requests_name'] ?>
         </h5>
         <h5 class="req-date">
-            <?= FormatHelpers::formatDate($request_info['created_at'], true, 1) ?>
+            <?= FormatHelpers::formatDate($request_info['created_at'], true, 1, true) ?>
         </h5>
         <div class="req-rate-star">
             <div class="starrr" id="star1">
-                here
+                
+                <?= RatingRequest::widget([
+                    '_status' => $request_info['status'], 
+                    '_request_id' => $request_info['requests_id'],
+                    '_score' => $request_info['requests_grade']]) ?>
+                
+                
             </div>
         </div>
         <span class="badge badge-darkblue req-darkblue-badge">
@@ -40,7 +46,7 @@ $this->title = 'Детали заявки';
                 <?= FormatHelpers::statusName($request_info['status']) ?>
             </span>
             <span>
-                <?= FormatHelpers::formatDate($request_info['updated_at'], true, 1) ?>
+                <?= FormatHelpers::formatDate($request_info['updated_at'], true, 1, true) ?>
             </span>
         </span>
         <p class="req-body-info-txt">
@@ -70,15 +76,13 @@ $this->title = 'Детали заявки';
     </div>
     
     <div class="col-6 request-body-chat">
-        <div class=""><span class="badge badge-darkblue request-chat-badge-date">3 сентября</span></div>
-        <div class="row"><img class="rounded-circle request-chat-icon" src="assets/img/noname.jpg"><div class="chat-txt-block"><p class="chat-name">Арья</p>wdasd dsdas dasdasd dsadasd fsdfsdf fsdfsd fsdfsdf ddddddddddddddddddddddddddddddddddddddddddddd</div><span class="chat-time my-auto">11:05</span> </div>
-        <div class="row"><img class="rounded-circle request-chat-icon" src="assets/img/noname.jpg"><div class="chat-txt-block"><p class="chat-name">Арья</p>wdasd dsdas dasdasd dsadasd fsdfsdf fsdfsd fsdfsdf ddddddddddddddddddddddddddddddddddddddddddddd</div><span class="chat-time my-auto">11:05</span> </div>
-        <div class="row"><img class="rounded-circle request-chat-icon" src="assets/img/noname.jpg"><div class="chat-txt-block"><p class="chat-name">Арья</p>wdasd dsdas dasdasd dsadasd fsdfsdf fsdfsd fsdfsdf ddddddddddddddddddddddddddddddddddddddddddddd</div><span class="chat-time my-auto">11:05</span> </div>
-        <div class="row"><img class="rounded-circle request-chat-icon" src="assets/img/noname.jpg"><div class="chat-txt-block"><p class="chat-name">Арья</p>wdasd dsdas dasdasd dsadasd fsdfsdf fsdfsd fsdfsdf ddddddddddddddddddddddddddddddddddddddddddddd</div><span class="chat-time my-auto">11:05</span> </div>
-        <div class="row"><img class="rounded-circle request-chat-icon" src="assets/img/noname.jpg"><div class="chat-txt-block"><p class="chat-name">Арья</p>wdasd dsdas dasdasd dsadasd fsdfsdf fsdfsd fsdfsdf ddddddddddddddddddddddddddddddddddddddddddddd</div><span class="chat-time my-auto">11:05</span> </div>
-        <div class="row"><img class="rounded-circle request-chat-icon" src="assets/img/noname.jpg"><div class="chat-txt-block"><p class="chat-name">Арья</p>wdasd dsdas dasdasd dsadasd fsdfsdf fsdfsd fsdfsdf ddddddddddddddddddddddddddddddddddddddddddddd</div><span class="chat-time my-auto">11:05</span> </div>
-        <div class="chat-msg"><textarea rows="7"></textarea><a role="button" class="d-block text-right chat-btn ml-auto">Отправить<img class="chat-btn-arrow" src="assets/img/Group 21.svg"></a>
-        </div>
+        
+        <?= $this->render('form/_comment', [
+            'model' => $comments, 
+            'comments_find' => $comments_find, 
+            'request_id' => $request_info['requests_id']
+        ]); ?>
+
     </div>
 </div>
 

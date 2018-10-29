@@ -72,13 +72,14 @@ class FormatHelpers {
      *          $format = 0 -> ЧЧ:ММ:СС
      *          $format = 1 -> в ЧЧ:ММ
      */
-    public static function formatDate($date_int, $time = false, $format = 0) {
+    public static function formatDate($date_int, $time = false, $format = 0, $only_time = false) {
         
         if (empty($date_int)) {
             return 'Не установлена';
         }
         
         $_date_int = Yii::$app->formatter->asDate($date_int, 'dd.MMMM.yyyy');
+        
         if ($time && $format == 0) {
             $_time = Yii::$app->formatter->asTime($date_int, 'medium');
         } elseif ($time && $format == 1) {
@@ -88,8 +89,9 @@ class FormatHelpers {
         }
         
         list($day, $month, $year) = explode('.', $_date_int);
+        $_date = $only_time == true ? $day .' '. $month .' '. $year . ' г. ' : '';
         
-        $date_full = $day .' '. $month .' '. $year . ' г. ' . $_time;
+        $date_full = $_date . $_time;
         
         return $date_full;
     }

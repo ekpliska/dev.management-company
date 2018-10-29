@@ -7,16 +7,6 @@
  */
 ?>
 
-<?php if ($score == 0) : ?>
-    <?= Html::button('Вам доступна система оценки <i class="glyphicon glyphicon-question-sign"></i>', [
-        'class' => 'btn btn-info btn-sm',
-        'title' => 'Система оценки заявки',
-        'data-toggle' => 'popover',
-        'data-trigger' => 'focus',
-        'data-content' => 'Для закрытых заявок доступна система оценки заявки по пятибоальной системе'
-    ]) ?>
-<?php endif; ?>
-
 <div id="star" data-request="<?= $request_id ?>" data-score-reguest="<?= $score ?>"></div>
 
 <div id="score-modal-message" class="modal fade" role="dialog">

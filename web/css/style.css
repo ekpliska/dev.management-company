@@ -1368,19 +1368,21 @@ border-radius: 7px;
 }
 
 .payments-profile-icon {
-margin-right: 18px;
+    margin-right: 18px;
 }
 
 .payment-profile-info >div {
-margin-bottom: 45px
+    margin-bottom: 45px
 }
 
 .recipient-info-block {
-margin-left: 53px;
+    margin-left: 53px;
 }
 
 .requests-icon-container-blue {
-    height: 72px;	width: 66px;	background-color: #2D18B4;
+    height: 72px;
+    width: 66px;
+    background-color: #2D18B4;
 }
 
 .payment-profile {
@@ -1392,13 +1394,13 @@ margin-left: 53px;
 }
 
 .services-card-preview button {
-margin-left: 50px !important;
-margin-right: 58px !important;
-margin-bottom: 35px;  
+    margin-left: 50px !important;
+    margin-right: 58px !important;
+    margin-bottom: 35px;  
 }
 
 .request-body-info {
-width: 730px;
+    width: 730px;
 
 }
 .request-body-chat {
@@ -1406,8 +1408,8 @@ width: 730px;
     border-left: 1px solid #d4d4d4;
 }
 .request-chat-icon {
-height: 40px;
-width: 40px;
+    height: 40px;
+    width: 40px;
 }
 .request-chat-badge-date {
     color: #FFFFFF;
@@ -1418,18 +1420,18 @@ width: 40px;
 }
 
 .req-body-container {
-width: 1302px;
-border: 1px solid #D4D4D4;
-border-bottom-right-radius: 12px;
-border-bottom-left-radius: 12px;
-box-shadow: 0 4px 26px 2px rgba(103,40,190,0.08);
+    width: 1302px;
+    border: 1px solid #D4D4D4;
+    border-bottom-right-radius: 12px;
+    border-bottom-left-radius: 12px;
+    box-shadow: 0 4px 26px 2px rgba(103,40,190,0.08);
 }
 
 .chat-txt-block {
-min-width: 92px;
-max-width: 398px;
-background-image: url("Gradient_BG.png");
-border-radius: 12px;
+    min-width: 92px;
+    max-width: 398px;
+    background-image: url("Gradient_BG.png");
+    border-radius: 12px;
     padding: 15px;
     word-wrap: break-word;
     margin-left: 19px;
@@ -1439,31 +1441,35 @@ border-radius: 12px;
     line-height: 20px;
     box-shadow: 0 10px 14px 2px rgba(0,0,0,0.26);
 }
+
 .request-body-chat .row {
-margin-top: 16px;
-margin-bottom: 16px;
-margin-left: 18px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    margin-left: 18px;
 }
 
 .chat-btn {
-color: #2D18B4 !important;
-font-family: "Mplus 1p Medium";
-font-size: 11px;
-letter-spacing: 0.98px;
-line-height: 17px;
-text-align: center;
-text-transform: uppercase;
-position: relative;
-top: -36px;
-right: 21px;
-cursor: pointer;
+    background: url(/images/clients/send_comment.svg) no-repeat right;
+    color: #2d18b4 !important;
+    font-family: "Mplus 1p Medium";
+    font-size: 11px;
+    letter-spacing: 0.98px;
+    line-height: 17px;
+    padding-right: 22px;
+    text-transform: uppercase;
+    position: relative;
+    top: -50px;
+    right: 21px;
+    border: none;
+    cursor: pointer;
 }
+
 .req-body-h-txt {
-margin-top: 30px;
+    margin-top: 30px;
 }
 
 .chat-btn-arrow {
-margin-left: 10px;
+    margin-left: 10px;
 }
 
 
