@@ -3,6 +3,7 @@
     use yii\helpers\Html;
     use app\helpers\FormatHelpers;    
     use app\modules\clients\widgets\RatingRequest;
+    use app\models\StatusRequest;
 
 /* 
  * Детали заявки
@@ -27,17 +28,19 @@ $this->title = 'Детали заявки';
         <h5 class="req-date">
             <?= FormatHelpers::formatDate($request_info['created_at'], true, 1, true) ?>
         </h5>
-        <div class="req-rate-star">
-            <div class="starrr" id="star1">
-                
-                <?= RatingRequest::widget([
-                    '_status' => $request_info['status'], 
-                    '_request_id' => $request_info['requests_id'],
-                    '_score' => $request_info['requests_grade']]) ?>
-                
-                
+        <?php if ($request_info['status'] == StatusRequest::STATUS_CLOSE) : ?>        
+            <div class="req-rate-star">
+                <div class="starrr" id="star1">
+
+                    <?= RatingRequest::widget([
+                        '_status' => $request_info['status'], 
+                        '_request_id' => $request_info['requests_id'],
+                        '_score' => $request_info['requests_grade']]) ?>
+
+                </div>
             </div>
-        </div>
+        <?php endif; ?>
+        
         <span class="badge badge-darkblue req-darkblue-badge">
             <?= $request_info['requests_ident'] ?>
         </span>
@@ -71,8 +74,11 @@ $this->title = 'Детали заявки';
                 </span>
             </div>
         </div>
-        <div class="request-body-rate"><button class="d-block btn blue-outline-btn mx-auto" onclick="$('#frostedBk').modal('show');">Оценить</button>
-        </div>
+        <?php if ($request_info['status'] == StatusRequest::STATUS_CLOSE) : ?>
+            <div class="request-body-rate">
+                <?= Html::button('Оценить', ['class' => 'd-block btn blue-outline-btn mx-auto']) ?>
+            </div>
+        <?php endif; ?>        
     </div>
     
     <div class="col-6 request-body-chat">

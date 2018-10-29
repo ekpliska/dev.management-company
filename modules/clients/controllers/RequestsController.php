@@ -32,15 +32,6 @@ class RequestsController extends AppClientsController
         
         $accoint_id = $this->_choosing;
         
-//        if (!ArrayHelper::keyExists($accoint_id, $this->_list)) {
-//            echo 'here';
-//        }
-//
-//
-//        echo '<pre>';
-//        var_dump($this->_list); die();
-//        
-        
         $type_requests = TypeRequests::getTypeNameArray();
         $status_requests = StatusRequest::getUserStatusRequests();
        

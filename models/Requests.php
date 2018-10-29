@@ -202,7 +202,7 @@ class Requests extends ActiveRecord
     public static function findByAccountID($account_id) {
         
         $requests = self::find()
-                ->joinWith('image', true, 'INNER JOIN')
+                ->with('image')
                 ->andWhere(['requests_account_id' => $account_id])
                 ->orderBy(['created_at' => SORT_DESC]);
         
