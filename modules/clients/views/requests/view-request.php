@@ -28,7 +28,8 @@ $this->title = 'Детали заявки';
             <?= FormatHelpers::formatDate($request_info['created_at'], true, 1) ?>
         </h5>
         <div class="req-rate-star">
-            <div class='starrr' id='star1'>
+            <div class="starrr" id="star1">
+                here
             </div>
         </div>
         <span class="badge badge-darkblue req-darkblue-badge">
@@ -53,13 +54,15 @@ $this->title = 'Детали заявки';
         <div class="row ml-0">
             <div>
                 <?= Html::img('/images/clients/house_icon.svg', ['class' => 'payments-profile-icon']) ?>
-                <!--<img class="payments-profile-icon" src="assets/img/Group 8.svg">-->
-                <span>Ул. Пушкина, 43, кв, 53</span>
+                <span>
+                    #TODO
+                </span>
             </div>
             <div>
                 <?= Html::img('/images/clients/phone_icon.svg', ['class' => 'payments-profile-icon']) ?>
-                <!--<img class="payments-profile-icon" src="assets/img/Group 2.svg">-->
-                <span>+7 (920) 463-42-23</span>
+                <span>
+                    <?= $request_info['requests_phone'] ?>
+                </span>
             </div>
         </div>
         <div class="request-body-rate"><button class="d-block btn blue-outline-btn mx-auto" onclick="$('#frostedBk').modal('show');">Оценить</button>

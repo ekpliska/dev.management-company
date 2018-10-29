@@ -215,11 +215,8 @@ class FormatHelpers {
         return 'Квартира ' . $number_flat . ', подьезд ' . $porch;
     }
     
-    
     /*
      * Форматирование суммы баланса Собственика лицевого счета
-     * 
-     * 
      * Отрицательный баланс, для наглядности, подсвечиваем другим цветом
      */
     public static function formatBalance($balance) {

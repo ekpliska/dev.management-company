@@ -47,6 +47,7 @@ class UserProfile extends BaseObject {
                         . 'u.status as status, '
                         . 'pa.account_number as account,'
                         . 'f.flats_id as flat_id,'
+                        . 'f.flats_id as flat_id,'
                         . 'h.houses_id as house_id,'
                         . 'he.estate_id as estate_id,')
                     ->from('user as u')
@@ -230,5 +231,6 @@ class UserProfile extends BaseObject {
     public function getEstateId() {
         return $this->_user['estate_id'];
     }
-        
+    
+
 }
