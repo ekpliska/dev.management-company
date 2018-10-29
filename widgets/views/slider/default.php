@@ -17,14 +17,14 @@
             <div class="carousel-caption d-none d-md-block slide-content">
                 <h5 class="slider-h">Добро пожаловать!</h5>
                 <p>
-                    <?= Html::img('images/slider/main_logo.png', ['class' => 'slider-logo', 'alt' => 'Elsa logo']) ?>
+                    <?= Html::img('/images/slider/main_logo.png', ['class' => 'slider-logo', 'alt' => 'Elsa logo']) ?>
                 </p>
             </div>
-            <?= Html::img('images/slider/elsa-ground.png', ['class' => 'd-block w-100', 'alt' => 'First slide']) ?>
+            <?= Html::img('/images/slider/elsa-ground.png', ['class' => 'd-block w-100', 'alt' => 'First slide']) ?>
         </div>
         <div class="carousel-item">
             <div class="carousel-caption d-none d-md-block slide-content">
-                <?= Html::img('images/slider/ELSA_product_icon.png', ['class' => 'slider-product-icon', 'alt' => 'Product icon']) ?>
+                <?= Html::img('/images/slider/ELSA_product_icon.png', ['class' => 'slider-product-icon', 'alt' => 'Product icon']) ?>
                 <div class="">
                     <h5 class="slider-h">ELSA</h5>
                         <p class="slide-txt-block text-center mx-auto">
@@ -35,21 +35,21 @@
                         <div class="app-btn-group mx-auto">
                             <div class="text-center">
                                 <button class="btn black-rounded-btn apple-btn-rounded">
-                                    <?= Html::img('images/slider/apstore_gliph.png', ['class' => 'store-btn-icon', 'alt' => 'Store icon']) ?>
+                                    <?= Html::img('/images/slider/apstore_gliph.png', ['class' => 'store-btn-icon', 'alt' => 'Store icon']) ?>
                                     <span class="tst3"> App Store</span>
                                 </button>
                                 <button class="btn black-rounded-btn g-btn-rounded" type="submit">
-                                    <?= Html::img('images/slider/google_play_gliph.png', ['class' => 'store-btn-icon', 'alt' => 'Store icon']) ?>
+                                    <?= Html::img('/images/slider/google_play_gliph.png', ['class' => 'store-btn-icon', 'alt' => 'Store icon']) ?>
                                     Google Play
                                 </button>
                             </div>
                         </div>
                 </div>
             </div>
-            <?= Html::img('images/slider/elsa-ground.png', ['class' => 'd-block w-100', 'alt' => 'Second slide']) ?>
+            <?= Html::img('/images/slider/elsa-ground.png', ['class' => 'd-block w-100', 'alt' => 'Second slide']) ?>
         </div>
         <div class="carousel-item">
-            <?= Html::img('images/slider/elsa-ground.png', ['class' => 'd-block w-100', 'alt' => 'Third slide']) ?>
+            <?= Html::img('/images/slider/elsa-ground.png', ['class' => 'd-block w-100', 'alt' => 'Third slide']) ?>
         </div>
     </div>
 </div>

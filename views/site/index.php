@@ -13,12 +13,12 @@ $this->title = 'Customers | Вход';
         <p class="registration-txt">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>
     </div>
     <div class="col-6 my-0">
-        <?= Html::img('images/girl_elsa.png', ['class' => 'registration-picture img-fluid mx-auto']) ?>
+        <?= Html::img('/images/girl_elsa.png', ['class' => 'registration-picture img-fluid mx-auto']) ?>
     </div>
     <div class=" fixed-bottom fixed-bottom-btn-group col-6 ml-auto ">
         <div class="registration-btn-group mx-auto">
             <div class="text-center">
-                <?= Html::a('Зарегистрироваться', ['site/registration'], ['class' => 'btn blue-outline-btn']) ?>
+                <?= Html::a('Зарегистрироваться', ['signup/index'], ['class' => 'btn blue-outline-btn']) ?>
                 <?= Html::a('Войти', ['site/login'], ['class' => 'btn blue-btn']) ?>
             </div>
         </div> 

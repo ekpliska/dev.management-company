@@ -44,6 +44,8 @@ class AppAsset extends AssetBundle
     public $js = [
         'js/common.js',
         
+        'js/formToWizard.js',
+        
         'plugins/material-form/js/jquery.material.form.js',
         'plugins/infinite-li-scroll/js/index.js',
         'plugins/iziModal-master/js/iziModal.js',

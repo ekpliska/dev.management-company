@@ -78,6 +78,23 @@ class PersonalAccount extends ActiveRecord
                 ->one();
     }
     
+    /*
+     * проверить сущестование лицевого счета
+     *      по Номеру лицевого счета
+     *      по Последней сумме в квитанции
+     *      по по Прощади жилого повещения
+     */
+    public static function findAccountBeforeRegister($account, $summ, $square) {
+        
+        $is_account = self::find()
+                ->where(['account_number' => $account])
+                ->andWhere(['account_balance' => $summ])
+//                ->andWhere(['' => $square])
+                ->asArray()
+                ->one();
+        
+        return $is_account;
+    }
     
     /*
      * Поиск лицевого счета по ID клиента
