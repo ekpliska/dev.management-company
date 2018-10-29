@@ -19,6 +19,9 @@ $this->title = 'Детали заявки';
         </div>
         <p class="req-body-h-txt">Заявка принята</p>
     </h5>
+    <div class="all-requests_link">
+        <?= Html::a('Мои заявки', ['requests/index']) ?>
+    </div>
 </div>
 <div class="row req-body-container mx-0">
     <div class="col-6 request-body-info">

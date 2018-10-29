@@ -3219,7 +3219,15 @@ button.again-bt {
     padding-bottom: 50px;
 }
 
-
+.all-requests_link {
+    text-align: right;
+    margin-top: -47px;
+    padding-right: 25px;
+}
+.all-requests_link a {
+    color: #fff;
+    text-decoration: none;
+}
 
 
 
