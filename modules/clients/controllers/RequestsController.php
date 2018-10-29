@@ -9,7 +9,7 @@
     use app\modules\clients\controllers\AppClientsController;
     use app\models\Requests;
     use app\models\Houses;
-    use app\modules\clients\models\_searchForm\FilterForm;
+    use app\modules\clients\models\_searchForm\FilterStatusRequest;
     use app\models\CommentsToRequest;
     use app\models\Image;
     use app\models\TypeRequests;
@@ -32,12 +32,18 @@ class RequestsController extends AppClientsController
         
         $accoint_id = $this->_choosing;
         
+//        if (!ArrayHelper::keyExists($accoint_id, $this->_list)) {
+//            echo 'here';
+//        }
+//
+//
+//        echo '<pre>';
+//        var_dump($this->_list); die();
+//        
+        
         $type_requests = TypeRequests::getTypeNameArray();
         $status_requests = StatusRequest::getUserStatusRequests();
        
-        // Модель для фильтра по типу заявок
-        $model_filter = new FilterForm();
-        
         // В датапровайдер собираем все заявки по текущему пользователю
         $all_requests = new ActiveDataProvider([
             'query' => Requests::findByAccountID($accoint_id),
@@ -78,7 +84,7 @@ class RequestsController extends AppClientsController
      * Страница отдельной заявки
      */    
     public function actionViewRequest($request_numder) {
-        
+                
         // Ищем заявку по уникальному номеру
         $request_info = Requests::findRequestByIdent($request_numder);
         
@@ -125,31 +131,21 @@ class RequestsController extends AppClientsController
     
     /*
      * Сортировка заявок по
-     * @param integer $type_id ID тип заявки, 
-     * @param integer $account_id ID лицевого счета, 
-     * @param integer $status ID статус заявки
+     *      @param integer $account_id ID лицевого счета, 
+     *      @param integer $status ID статус заявки
      */
-    public function actionFilterByTypeRequest($type_id, $account_id, $status) {
+    public function actionFilterByTypeRequest($status) {
         
         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        
-        /*
-         * Проверяем на актуальность параметр ID лицевого счета
-         * Если лицевой счет не входит в список лицевых счетов пользователя
-         * Кидаем исключение
-         */
-        if (!ArrayHelper::keyExists($account_id, $this->_list)) {
-            return ['status' => false];            
-        }
-        
-        if (!is_numeric($type_id) && !is_numeric($account_id) && !is_numeric($status)) {
+
+        if (!is_numeric($account_id) && !is_numeric($status)) {
             return ['status' => false];
         }
         
         if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
-            $model_filter = new FilterForm();
-            $all_requests = $model_filter->searchRequest($type_id, $account_id, $status);
-            return $this->renderPartial('data/grid', ['all_requests' => $all_requests]);
+            $model_filter = new FilterStatusRequest();
+            $all_requests = $model_filter->searchRequest($status);
+            return $this->renderPartial('data/grid', ['all_requests' => $all_requests, 'status' => $accoint_id]);
         }
         
         return ['status' => false];

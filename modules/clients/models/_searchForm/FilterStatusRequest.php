@@ -1,36 +1,22 @@
 <?php
-    
+
     namespace app\modules\clients\models\_searchForm;
-    use yii\base\Model;
     use Yii;
     use app\models\Requests;
-    use yii\data\ActiveDataProvider;
 
 /**
- * Форма фильтрации для страницы Лицевой счет / Общая информация
+ * Фильтр заявок по статусу
  */
-class FilterForm extends Model {
+class FilterStatusRequest extends Requests {
     
-    public $_value;
-    
-    public function filerRequest($type_id) {
-        
-        $query = Requests::find()
-                ->andWhere(['requests_type_id' => $type_id])
-                ->all();
-        return $query;
-    }
-    
-    /*
+   /*
      * Фильтр заявок 
-     * @param integer $type_id по лицевому счету
      * @param integer $account_id по типу заявки 
      * @param integer $status по статусу
      */
     public function searchRequest($status) {
         
-        // Получаем из сессии ID текущего личевого счета
-        $account_id = 1;
+        $account_id = Yii::$app->request->cookies->get('_userAccount')->value;
         
         $query = Requests::find()
                 ->andWhere(['requests_account_id' => $account_id])
@@ -41,9 +27,9 @@ class FilterForm extends Model {
             // Статус = Все
             $value_query = $query;
         } elseif ($status !== -1) {
-                // Статус = Выбор
-                $value_query = $query->andWhere(['status' => $status]);
-            }
+            // Статус = Выбор
+            $value_query = $query->andWhere(['status' => $status]);
+        }
             
         $this->load($account_id, $status);
 
@@ -51,7 +37,7 @@ class FilterForm extends Model {
             return $query;
         }
         
-        $dataProvider = new ActiveDataProvider([
+        $dataProvider = new \yii\data\ActiveDataProvider([
             'query' => $value_query,
             'pagination' => [
                 'forcePageParam' => false,
@@ -63,5 +49,6 @@ class FilterForm extends Model {
         return $dataProvider;
         
     }
+    
     
 }

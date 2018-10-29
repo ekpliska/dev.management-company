@@ -11,7 +11,6 @@
 ?>
     <?= GridView::widget([
         'dataProvider' => $all_requests,
-//        'filterUrl' => Url::to(['requests/index']),
         'layout' => '{items}{pager}',
         'tableOptions' => [
             'class' => 'table req-table  pay-table account-info-table px-0',
@@ -76,15 +75,8 @@
                 },
                 'format' => 'raw',
             ],
-            [
-                'class' => 'yii\grid\ActionColumn',
-//                'template' => '{view-request}',
-//                'buttons' => [
-//                    'view-request' => function ($url, $data) {
-//                        $url = ['request_numder' => $data->requests_ident];
-//                        return '<a href='. Url::to(['requests/view-request', 'request_numder' => $data->requests_ident]) .' data-pjax="0" class="btn btn-info">Подробнее</a>';
-//                    },
-//                ],
-            ],
+//            [
+//                'class' => 'yii\grid\ActionColumn',
+//            ],
         ],
     ]); ?>

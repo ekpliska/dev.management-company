@@ -270,29 +270,25 @@ $(document).ready(function() {
     
     /*
      * Сортировка заявок по
-     * ID лицевого счета, типу и статусу заявки
+     * ID лицевого счета и статусу заявки
      */
-    $('.list-group-item').on('click', function(e) {
+    $('.status_request-switch').on('click', function(e) {
         e.preventDefault();
         
         var status = $(this).data('status');
-        var account_id = $('.current__account_list').val();
-        var type_id = $('#account_number').val();
         
-        $('.list-group-item').each(function() {
+        $('.status_request-switch').each(function() {
             $(this).removeClass('active');
         });
         $(this).addClass('active');
         
         $.ajax({
-            url: 'filter-by-type-request?type_id=' + type_id + '&account_id=' + account_id + '&status=' + status,
+            url: 'filter-by-type-request?status=' + status,
             method: 'POST',
             data: {
-                type_id: type_id,
-                account_id: account_id,
                 status: status,
             },
-            success: function(data){
+            success: function(data) {
                 if (data.status === false) {
                     console.log('Error #1000-08');
                 } else {
