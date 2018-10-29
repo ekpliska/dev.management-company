@@ -3,6 +3,7 @@
     use yii\helpers\Url;
     use yii\helpers\Html;
     use app\helpers\FormatHelpers;
+    use app\helpers\StatusHelpers;
 
 /*
  * Вывод таблицы заявок текущего пользователя
@@ -67,7 +68,11 @@
                 'attribute' => 'status',
                 'label' => 'Статус',
                 'value' => function ($data) {
-                    return FormatHelpers::statusName($data['status']);
+                    return 
+                            '<p>'
+                            . StatusHelpers::requestStatus($data['status'])
+                            . '</p>'
+                            . Html::button('Оценить', ['class' => 'blue-outline-btn req-table-btn', 'data-request' => $data->requests_id]);
                 },
                 'format' => 'raw',
             ],
