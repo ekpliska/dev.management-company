@@ -26,7 +26,7 @@ $this->title = 'Профиль собственника';
         'validateOnChange' => true,
         'options' => [
             'enctype' => 'multipart/form-data',
-            'class' => 'border-container d-block  material m-0 p-0 border-container',
+            'class' => 'border-container d-block material m-0 p-0 border-container',
         ],
     ])
 ?>

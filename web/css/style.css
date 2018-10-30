@@ -3240,7 +3240,14 @@ button.again-bt {
     text-decoration: none;
 }
 
+/* Ссылка на Историю всех заявок на платные услуги */
+.history-btn-block a {
+    padding-top: 13px !important;
+}
 
+.paid-service-list {
+    margin-top: 60px;
+}
 
 /* МОДАЛЬНЫЕ ОКНА */
 

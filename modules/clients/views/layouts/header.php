@@ -3,6 +3,7 @@
     use yii\helpers\Url;
     use app\modules\clients\widgets\UserInfo;
     use app\modules\clients\widgets\Rubrics;
+    use app\modules\clients\widgets\SubBarPaidService;
 /*
  * Шапка, меню, хлебные крошки
  */
@@ -99,6 +100,7 @@
     </nav>
     
     <?= Rubrics::widget() ?>
+    <?= SubBarPaidService::widget() ?>
     
 </header>
 

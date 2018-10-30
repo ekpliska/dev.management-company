@@ -27,7 +27,7 @@ $category_id = 0;
     
 <?php endif; ?>
 
-<div class="card services-card-preview box-shadow" data-toggle="modal" data-target=".bd-example-modal-lg">
+<div class="card services-card-preview box-shadow paid-service-list" data-toggle="modal" data-target=".bd-example-modal-lg">
     <div class="services-card-preview-executor-container">
         <h5 class="services-card-preview-executor">
             <?= $service['category']['category_name'] ?>
@@ -53,7 +53,7 @@ $category_id = 0;
 <?php $category_id = $service['category']['category_id'] ?>
 
 <?php endforeach; ?>
-
+    
 <?php
     Modal::begin([
         'id' => 'add-record-modal',
