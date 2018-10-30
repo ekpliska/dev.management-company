@@ -14,9 +14,9 @@ class SubBarPaidService extends Widget {
     
     public function init() {
         
-//        if ($this->getNameSevices() == null) {
-//            throw new UnknownPropertyException('Ошибка передечи параметров для виджета навигационного меню, платные услуги');
-//        }
+        if ($this->getNameSevices() == null) {
+            throw new UnknownPropertyException('Ошибка передечи параметров для виджета навигационного меню, платные услуги');
+        }
         
         parent::init();
     }
