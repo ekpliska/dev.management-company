@@ -74,12 +74,18 @@ class Services extends ActiveRecord
      * Получаем только платные услуги
      */
     public static function getPayServices() {
+        
         $pay_services = self::find()
-                ->andWhere(['isType' => self::TYPE_PAY])
+                ->joinWith('category')
                 ->asArray()
+                ->orderBy(['category_name' => SORT_ASC])
                 ->all();
         
-        return ArrayHelper::map($pay_services, 'services_id', 'services_name');
+        
+//        echo '<pre>';
+//        var_dump($pay_services); die();
+        
+        return $pay_services;
     }
     
     /*

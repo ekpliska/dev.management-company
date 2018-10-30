@@ -23,20 +23,6 @@ class PaidServicesController extends AppClientsController {
      */
     public function actionIndex() {
         
-        $this->permisionUser();
-        $account_id = $this->_choosing;
-        
-        $_search = new searchInPaidServices();
-        
-        $all_orders = PaidServices::getOrderByUder($account_id);
-        
-        return $this->render('index', ['all_orders' => $all_orders, '_search' => $_search]);
-    }
-    
-    /*
-     * Страница "Заказать слугу"
-     */
-    public function actionOrderServices() {
         
         $accoint_id = $this->_choosing;
         
@@ -54,14 +40,27 @@ class PaidServicesController extends AppClientsController {
         // Получаем список все платных заявок
         $pay_services = Services::getPayServices();
         
-        // получаем список всех плтаных завок по категориям
-        $categorys = CategoryServices::getAllCategory();
+//        // получаем список всех плтаных завок по категориям
+//        $categorys = CategoryServices::getAllCategory();
         
-//        echo '<pre>';
-//        var_dump($categorys);
-//        die();
-
-        return $this->render('order-services', ['categorys' => $categorys, 'new_order' => $new_order, 'pay_services' => $pay_services]);
+        return $this->render('index', ['new_order' => $new_order, 'pay_services' => $pay_services]);
+        
+        
+    }
+    
+    /*
+     * Страница "Заказать слугу"
+     */
+    public function actionOrderServices() {
+        
+        $this->permisionUser();
+        $account_id = $this->_choosing;
+        
+        $_search = new searchInPaidServices();
+        
+        $all_orders = PaidServices::getOrderByUder($account_id);
+        
+        return $this->render('order-services', ['all_orders' => $all_orders, '_search' => $_search]);
         
     }
     

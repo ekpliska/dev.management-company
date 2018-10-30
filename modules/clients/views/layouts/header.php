@@ -52,7 +52,7 @@
                             </div>
                             <div style="background-color: silver;">
                                 <span class="item">
-                                    <p style="width:350px; height: 100px;"><a href="#">Платные услуги</a></p>
+                                    <p style="width:350px; height: 100px;"><a href="<?= Url::to(['paid-services/index']) ?>">Платные услуги</a></p>
                                 </span>
                             </div>
                         </section>

@@ -1516,63 +1516,64 @@ border: 1px solid #D4D4D4;
 }
 
 .services-card-preview-executor {
-color: #0D0D0D;
-font-family: "Mplus 1p Medium";
-font-size: 15px;
-letter-spacing: 0.1px;
-line-height: 22px;
+    color: #2d18b6;
+    font-size: 20px;
+    letter-spacing: 0.1px;
+    line-height: 22px;
+    padding: 25px;
 }
 
 .services-card-img-top-preview {
 height: 218.25px;
-width: 388px;
+width: 386px;
 /* opacity: 0.14; */
 background-color: #000000; 
 }
 
 .services-card-preview-executor-container {
- min-height: 70px; 
+    min-height: 70px; 
+    height: 70px;
 }
 
 .request-body-rate {
-margin-top: 58px;
-margin-bottom: 241px;
+    margin-top: 58px;
+    margin-bottom: 241px;
 }
 
 .request-body-info .payments-profile-icon {
-margin-left: 26px;
+    margin-left: 26px;
 }
 
 .request-body-chat .badge-darkblue {
     margin-top: 20px;
     margin-bottom: 24px;
-margin-left: 227px;
-margin-right: 227px;
+    margin-left: 227px;
+    margin-right: 227px;
 }
 
 
 /* ____________________________________________________________________ */
 /* цвет ссылок на странице  главная новости */
 .news-card-preview-a {
-color: #f49572;	
+    color: #f49572;	
 }
 /* отключение границ превью карточки на странице  главная новости */
 .news-card-preview {
-color: #a7a7a7;	
-border-top: none;
-border-left: none;
-border-right: none;
-height: 451px;
-max-height: 451px;
-width: 388px;
-max-width: 388px;
-border-radius: 12px;
-background-color: #FFFFFF;
-
-margin-right: 9px;
-margin-left: 9px;
-margin-top: 24px;
+    color: #a7a7a7;	
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    height: 451px;
+    max-height: 451px;
+    width: 388px;
+    max-width: 388px;
+    border-radius: 12px;
+    background-color: #FFFFFF;
+    margin-right: 9px;
+    margin-left: 9px;
+    margin-top: 24px;
 }
+
 .news-card-preview:hover {
     box-shadow: 0 4px 26px 0 rgba(51, 29, 82, 0.16);
 }
@@ -1603,34 +1604,27 @@ border-top-left-radius: 12px;
 }
 .services-card-preview-h,
 .news-card-preview-h,
-.requests-card-preview-h{
-color: #2D18B4;
-font-family: "Mplus 1p Medium";
-font-size: 20px;
-letter-spacing: 0.14px;
-line-height: 29px; 
-margin-top: 20px;
-margin-left: 24px;
-margin-right: 24px;
-margin-bottom: 0px;
+.requests-card-preview-h {
+    color: #2D18B4;
+    font-size: 18px;
+    margin-left: 24px;
+    margin-right: 24px;
+    margin-bottom: 0px;
 }
 .requests-card-preview-h {
-font-size: 18px;
-}
-.services-card-preview-h {
-margin-top: 17.5px;  
+    font-size: 18px;
 }
 
 .news-card-preview-date {
-color: #000000;
-font-family: "Mplus 1p Medium";
-font-size: 12px;
-letter-spacing: 0.9px;
-line-height: 18px;
-margin-left: 24px;
-margin-right: 24px;
-margin-bottom: 0px;
-margin-top: 50px;
+    color: #000000;
+    font-family: "Mplus 1p Medium";
+    font-size: 12px;
+    letter-spacing: 0.9px;
+    line-height: 18px;
+    margin-left: 24px;
+    margin-right: 24px;
+    margin-bottom: 0px;
+    margin-top: 50px;
 }
 h5.news-card-preview-date {
     margin-top: 0px;
@@ -1639,18 +1633,24 @@ h5.news-card-preview-date {
 
 .news-card-preview-text,
 .services-card-preview-text  {
-color: #0D0D0D;
-font-family: "Mplus 1p";
-font-size: 14px;
-letter-spacing: 0.44px;
- line-height: 20px;
- margin-top: 21px;
-margin-left: 24px;
-margin-right: 24px;
+    color: #0D0D0D;
+    font-family: "Mplus 1p";
+    font-size: 14px;
+    letter-spacing: 0.44px;
+    line-height: 20px;
+    padding-top: 20px;
+    text-align: justify;
+    margin-left: 24px;
+    margin-right: 24px;
 }  
 
 .services-card-preview-text {
   margin-bottom: 31px;
+}
+
+.services-btn-container {
+    position: absolute;
+    bottom: 0px;
 }
 
 /* цвет шапки с меню */
@@ -3228,15 +3228,6 @@ button.again-bt {
     color: #fff;
     text-decoration: none;
 }
-
-
-
-
-
-
-
-
-
 
 
 
