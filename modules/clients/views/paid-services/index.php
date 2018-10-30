@@ -44,7 +44,7 @@ $category_id = 0;
         </p>
         <div class="services-btn-container">
             <span class="cost_service"><?= $service['services_cost'] ?> &#8381;</span>
-            <?= Html::button('Заказать', ['class' => 'btn blue-outline-btn-servic mx-auto new-rec', 'data-record' => 0]) ?>
+            <?= Html::button('Заказать', ['class' => 'btn blue-outline-btn btn-add-servic mx-auto new-rec', 'data-record' => $service['services_id']]) ?>
         </div>
         <div class="d-flex justify-content-around align-items-center">
         </div>
@@ -53,41 +53,6 @@ $category_id = 0;
 <?php $category_id = $service['category']['category_id'] ?>
 
 <?php endforeach; ?>
-
-
-
-<?php /*
-<div class="paid-services-default-index">
-    <h1><?= $this->title ?></h1>
-
-    <?= AlertsShow::widget() ?>         
-    
-    <?php foreach ($categorys as $category) : ?>
-        <div class="col-md-12 text-left" style="margin-bottom: 20px; margin-top: 20px;">
-            <?= Html::img('https://placehold.it/20x20?text=i')?> <?= $category->category_name ?>
-        </div>
-        <div>
-            <?php foreach ($category['service'] as $value) : ?>
-                <?php if ($value->isType) : ?>
-                    <div class="col-md-2 text-center">
-                        <?= Html::img('https://placehold.it/80x80?text=IMAGE', ['class' => 'img-responsive', 'style' => 'width:100%', 'alt' => 'Image']) ?>
-                        <?= $value->services_name ?>
-                        <br />
-                        <?= Html::button('Заказать', [
-                            'class' => 'btn btn-success new-rec',
-                            'data-record' => $value->services_id,
-                            ]);
-                        ?>
-                    </div>
-                <?php endif; ?>
-            <?php endforeach; ?>
-        </div>
-    <?php endforeach; ?>
-    
-</div>
-
-*/?>
-
 
 <?php
     Modal::begin([
@@ -109,7 +74,7 @@ $category_id = 0;
             ->label(false) ?>
                     
     <?= $form->field($new_order, 'services_name_services_id')
-            ->dropDownList($pay_services, [
+            ->dropDownList($name_services_array, [
                 'id' => 'name_services',
                 'class' => 'form-control name_services',
                 'disabled' => true])

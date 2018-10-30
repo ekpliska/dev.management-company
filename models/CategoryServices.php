@@ -39,7 +39,11 @@ class CategoryServices extends ActiveRecord
      * Формирование категорий заявок
      */
     public static function getCategoryNameArray() {
-        $array = static::find()->asArray()->all();
+        
+        $array = static::find()
+                ->asArray()
+                ->all();
+        
         return ArrayHelper::map($array, 'category_id', 'category_name');
     }    
     

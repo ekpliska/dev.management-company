@@ -66,7 +66,11 @@ class Services extends ActiveRecord
      * Формирование массива услуг
      */
     public static function getServicesNameArray() {
-        $array = static::find()->asArray()->all();
+        
+        $array = static::find()
+                ->asArray()
+                ->all();
+        
         return ArrayHelper::map($array, 'services_id', 'services_name');
     }
 
@@ -78,12 +82,8 @@ class Services extends ActiveRecord
         $pay_services = self::find()
                 ->joinWith('category')
                 ->asArray()
-                ->orderBy(['category_name' => SORT_ASC])
+                ->orderBy(['category_name' => SORT_ASC, 'services_name' => SORT_ASC])
                 ->all();
-        
-        
-//        echo '<pre>';
-//        var_dump($pay_services); die();
         
         return $pay_services;
     }

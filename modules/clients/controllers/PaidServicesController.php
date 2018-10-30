@@ -40,10 +40,10 @@ class PaidServicesController extends AppClientsController {
         // Получаем список все платных заявок
         $pay_services = Services::getPayServices();
         
-//        // получаем список всех плтаных завок по категориям
-//        $categorys = CategoryServices::getAllCategory();
+        // получаем список всех платных заявок
+        $name_services_array = ArrayHelper::map($pay_services, 'services_id', 'services_name');
         
-        return $this->render('index', ['new_order' => $new_order, 'pay_services' => $pay_services]);
+        return $this->render('index', ['new_order' => $new_order, 'pay_services' => $pay_services, 'name_services_array' => $name_services_array]);
         
         
     }
