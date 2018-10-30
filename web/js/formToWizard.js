@@ -7,9 +7,11 @@ function validateStepOne(account, summ, square) {
         $('.step-one-message').text('Вы используете некорректные данные');
         return false;
     }
+    var account = account;
     $('.step-one-message').text('');
     $.ajax({
         url: 'validate-step-one',
+        method: 'POST',
         data: {
             account: account,
             summ: summ,
@@ -18,10 +20,10 @@ function validateStepOne(account, summ, square) {
         success: function (response, textStatus, jqXHR) {
             if (response.success === false) {
                 $('.step-one-message').text('Вы используете некорректные данные 1');
-                return false;
             } else if (response.success === true) {
                 $('.step-one-message').text('Все ок');
             }
+            console.log(response.qaz);
         },
     });
     return true;
@@ -33,9 +35,11 @@ $('#step0Next').on('click', function(e){
     var accountNumber = $('.account-number-input').val();
     var lastSum = $('.last-summ-input').val();
     var square = $('.square-input').val();
-
-    if (validateStepOne(accountNumber, lastSum, square)) {
-        alert(accountNumber);
+    alert (parseInt(accountNumber) + ' ' + parseFloat(lastSum) + ' ' + parseFloat(square))
+    
+    if (validateStepOne(parseInt(accountNumber), parseFloat(lastSum), parseFloat(square))) {
+        $('#step0').remove();
+        $('#step1').show()();
     }
 
 });

@@ -93,7 +93,7 @@ class PersonalAccount extends ActiveRecord
                 ->asArray()
                 ->one();
         
-        return $is_account;
+        return $is_account ? true : false;
     }
     
     /*

@@ -33,43 +33,12 @@ $this->title = 'Customers | Регистрация';
             <li id="stepDesc1">Шаг 2<span>Пользовательские данные</span></li>
             <li id="stepDesc2">Шаг 3<span>Завершение регистрации</span></li>
         </ul>
-
-<?php
-        $form = ActiveForm::begin([
-            'id' => 'signup-form',
-            'fieldConfig' => [
-                'template' => "{label}{input}{error}",
-                'labelOptions' => ['class' => 'label-registration hidden'],
-            ],
-            'options' => [
-                'class' => 'form-signin d-block my-auto material',
-            ],
-        ])
-    ?>        
+     
         <div id="step0">
             <fieldset>
                 <legend>Лицевой счет</legend>
                 <p class="help-block step-one-message"></p>
-                <?= $form->field($model, 'username')
-                        ->input('text', [
-                            'class' => 'account-number-input',
-                            'placeholder' => $model->getAttributeLabel('username')])
-                    ->label(true) ?>
-                
-                <?= $form->field($model, 'last_sum')
-                        ->input('input', [
-                            'class' => 'last-summ-input',
-                            'placeholder' => $model->getAttributeLabel('last_sum')])
-                        ->label(true) ?>
-        
-                <?= $form->field($model, 'square')
-                        ->input('text', [
-                            'class' => 'square-input',
-                            'placeholder' => $model->getAttributeLabel('square')])
-                        ->label(true) ?>
-                
-                <?= Html::button('Далее', ['class' => 'btn', 'id' => 'step0Next']) ?>
-                <!--<p id="step0commands"><a href="#" id="step0Next" class="next">Next &gt;</a></p>-->
+                <?= $this->render('form/step_one', ['model_step_one' => $model_step_one]) ?>
                 
             </fieldset>
         </div>
@@ -77,13 +46,9 @@ $this->title = 'Customers | Регистрация';
         <div id="step1" style="display: none;">
             <fieldset>
                 <legend>Пользовательские данные</legend>
-                <label for="CompanyName">Company Name</label>
-                <input id="CompanyName" type="text">
-                <label for="Website">Website</label>
-                <input id="Website" type="text">
-                <label for="CompanyEmail">CompanyEmail</label>
-                <input id="CompanyEmail" type="text">
-                <p id="step1commands"><a href="#" id="step1Prev" class="prev">&lt; Back</a><a href="#" id="step1Next" class="next">Next &gt;</a></p>
+                
+                
+                
             </fieldset>
         </div>
             
@@ -99,10 +64,6 @@ $this->title = 'Customers | Регистрация';
             </fieldset>
         </div>
     
-<?php ActiveForm::end(); ?>
-        <p>
-            <input id="SaveAccount" type="button" value="Submit form" style="display: none;">
-        </p>
 
     
     <?php /*

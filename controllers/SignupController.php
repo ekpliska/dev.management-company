@@ -5,6 +5,7 @@
     use yii\web\Controller;
     use app\models\RegistrationForm;
     use app\models\User;
+    use app\models\signup\SignupStepOne;
 
 /**
  * Регистрация
@@ -14,7 +15,14 @@ class SignupController extends Controller {
     public function actionIndex() {
         
         $model = new RegistrationForm();
-                
+        $model_step_one = new SignupStepOne();
+        
+        if ($model_step_one->load(Yii::$app->request->post()) && $model_step_one->validate()) {
+            return 'here';
+            
+        }
+        
+        
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
                 
@@ -29,23 +37,27 @@ class SignupController extends Controller {
             }
         }
         
-        return $this->render('index', ['model' => $model]);
+        return $this->render('index', [
+            'model' => $model,
+            'model_step_one' => $model_step_one]);
         
     }
     
     
     public function actionValidateStepOne() {
+        
         $account = Yii::$app->request->post('account');
         $summ = Yii::$app->request->post('summ');
         $square = Yii::$app->request->post('square');
         
         if (Yii::$app->request->isAjax) {
-            $account = \app\models\PersonalAccount::findAccountBeforeRegister($account, $summ, $square);
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-//            if (!$account) {
-//                return ['success' => false];
-//            }
-            return ['success' => $account];
+            $is_account = \app\models\PersonalAccount::findAccountBeforeRegister($account, $summ, $square);
+            
+            if (!$is_account) {
+                return ['success' => false];
+            }
+            return ['success' => true];
         }
         return ['success' => false];
     }
