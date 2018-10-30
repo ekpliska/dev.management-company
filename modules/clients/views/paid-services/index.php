@@ -43,7 +43,8 @@ $category_id = 0;
             <?= $service['services_description'] ?>
         </p>
         <div class="services-btn-container">
-            <?= Html::button('Заказать', ['class' => 'btn blue-outline-btn mx-auto new-rec', 'data-record' => 0]) ?>
+            <span class="cost_service"><?= $service['services_cost'] ?> &#8381;</span>
+            <?= Html::button('Заказать', ['class' => 'btn blue-outline-btn-servic mx-auto new-rec', 'data-record' => 0]) ?>
         </div>
         <div class="d-flex justify-content-around align-items-center">
         </div>
@@ -103,8 +104,6 @@ $category_id = 0;
         ]);
     ?>
     
-    <p>Вы находитесь в окне оформления платной услуги, ваша услуга:</p>
-    
     <?= $form->field($new_order, 'services_name_services_id')
             ->hiddenInput(['id' => 'secret', 'value' => 'hidden value'])
             ->label(false) ?>
@@ -119,13 +118,13 @@ $category_id = 0;
     <?= $form->field($new_order, 'services_phone')
             ->widget(MaskedInput::className(), [
                 'mask' => '+7(999) 999-99-99'])
-            ->input('text', ['placeHolder' => $new_order->getAttributeLabel('services_phone'), 'class' => 'form-control phone'])->label() ?>
+            ->input('text', ['placeHolder' => $new_order->getAttributeLabel('services_phone'), 'class' => 'form-control phone'])->label(false) ?>
                 
     <?= $form->field($new_order, 'services_comment')
             ->textarea([
                 'rows' => 10,
                 'placeHolder' => $new_order->getAttributeLabel('services_comment'),
-                'class' => 'form-control comment'])->label() ?>
+                'class' => 'form-control comment'])->label(false) ?>
     
     <div class="modal-footer no-border">
         <?= Html::submitButton('Добавить', ['class' => 'btn blue-outline-btn white-btn mx-auto']) ?>
@@ -136,58 +135,6 @@ $category_id = 0;
     
 <?php Modal::end(); ?>
     
-    <?php /*
-<div id="add-record-modal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close btn__paid_service_close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Создать заявку</h4>
-            </div>
-            <div class="modal-body">
-                <?php
-                    $form = ActiveForm::begin([
-                        'id' => 'add-paid-service',
-                        
-                    ])
-                ?>
-                
-                    <p>Вы находитесь в окне оформления платной услуги, ваша услуга:</p>
-                    
-                    <?= $form->field($new_order, 'services_name_services_id')
-                            ->hiddenInput(['id' => 'secret', 'value' => 'hidden value'])
-                            ->label(false);
-                    ?>
-                    
-                    <?= $form->field($new_order, 'services_name_services_id')
-                            ->dropDownList($pay_services, [
-                                'id' => 'name_services',
-                                'class' => 'form-control name_services',
-                                'disabled' => true])
-                            ->label(false)?>
-
-                    <?= $form->field($new_order, 'services_phone')
-                            ->widget(MaskedInput::className(), [
-                                'mask' => '+7(999) 999-99-99'])
-                            ->input('text', ['placeHolder' => $new_order->getAttributeLabel('services_phone'), 'class' => 'form-control phone'])->label() ?>
-                
-                    <?= $form->field($new_order, 'services_comment')
-                            ->textarea([
-                                'rows' => 10,
-                                'placeHolder' => $new_order->getAttributeLabel('services_comment'),
-                                'class' => 'form-control comment'])->label() ?>
-                
-            </div>
-            <div class="modal-footer">
-                    <?= Html::submitButton('Добавить', ['class' => 'btn btn-danger']) ?>
-                    <?= Html::submitButton('Отмена', ['class' => 'btn btn-default btn__paid_service_close', 'data-dismiss' => 'modal']) ?>
-                <?php ActiveForm::end() ?>
-            </div>
-        </div>
-    </div>
-</div>
-*/ ?>
-
 <?php
 $this->registerJs('
     $(".new-rec").on("click", function(){
