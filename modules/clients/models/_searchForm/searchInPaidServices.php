@@ -1,6 +1,7 @@
 <?php
 
     namespace app\modules\clients\models\_searchForm;
+    use Yii;
     use yii\base\Model;
 
 /*
@@ -31,7 +32,9 @@ class searchInPaidServices extends Model {
     /*
      * Поиск по исполнителю
      */
-    public function search($value, $account) {
+    public function search($value) {
+        
+        $account = Yii::$app->request->cookies->get('_userAccount')->value;
                 
         $query = (new \yii\db\Query())
                 ->select('p.services_number, '
@@ -52,10 +55,6 @@ class searchInPaidServices extends Model {
         ]);
         
         $this->load($value, $account);
-        
-//        if (!$this->validate()) {
-//            return $dataProvider;
-//        }
         
         $query->andFilterWhere(['like', 'p.services_specialist_id', $value]);
         

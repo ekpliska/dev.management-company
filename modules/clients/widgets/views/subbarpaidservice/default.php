@@ -1,6 +1,7 @@
 <?php
 
     use yii\helpers\Html;
+    use yii\widgets\ActiveForm;
 
 /* 
  * Вид дополнительного навигационного меню для страниц 
@@ -35,7 +36,24 @@
 
     <div class="container-fluid block-searsh">
         <div class="field-searsh">
-            <?= Html::input('text', 'services-search-input', null, ['placeHolder' => 'Поиск']) ?>
+            
+<?php
+        $form = ActiveForm::begin([
+            'id' => 'search-form',
+        ]);
+    ?>
+    
+            <?= $form->field($_search, '_input')
+                    ->input('text', [
+                        'placeHolder' => $_search->getAttributeLabel('_input'),
+                        'id' => '_search-input'])
+                    ->label(false) ?>
+        </div>
+    </div>
+    
+    <?php ActiveForm::end(); ?>            
+            
+            <?php // = Html::input('text', 'services-search-input', null, ['placeHolder' => 'Поиск', 'id' => '_search-input']) ?>
         </div>
     </div>
 

@@ -4,6 +4,7 @@
     use yii\base\Widget;
     use yii\base\UnknownPropertyException;
     use app\models\CategoryServices;
+    use app\modules\clients\models\_searchForm\searchInPaidServices;
 
 /**
  * Нввигационное меню на странице "Платные услуги"
@@ -22,8 +23,10 @@ class SubBarPaidService extends Widget {
     }
     
     public function run() {
+        
+        $_search = new searchInPaidServices();
 
-        return $this->render('subbarpaidservice/default', ['category_list' => $this->getNameSevices()]);
+        return $this->render('subbarpaidservice/default', ['category_list' => $this->getNameSevices(), '_search' => $_search]);
     }
     
     /*

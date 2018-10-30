@@ -1091,7 +1091,7 @@ background-color: #f8f8f8;
 }
 
 .account-info-table.pay-table {
-width: 1300px;
+    width: 100%;
     color: #000000;
     font-family: "Mplus 1p";
     font-size: 14px;
@@ -2125,7 +2125,7 @@ form {
     padding-left: 15px;
 }*/
 
-input[name="services-search-input"] {
+input[id="_search-input"] {
     background: url(/images/clients/search.svg) no-repeat center left;
     background-size: 5%;
     padding: 5px 30px;    
@@ -2135,9 +2135,11 @@ input[name="services-search-input"] {
     outline: none;
     color: #c1c1c1c1;
 }
-input[type="text"]:focus {
+input[id="_search-input"]:focus {
     border-bottom: 1px #c1c1c1c1 solid;
     color: #fff;
+    outline: none;
+    background-color: transparent;
 }
 
 .table-metering-devices {
@@ -3015,25 +3017,28 @@ color: white;
 }
 
 .table-applications {
+    margin-top: 70px;
     width: 100%;
-    min-height: 749px;
     border: 1px solid #D4D4D4;
     border-radius: 12px;
 }
 
 .table-cod {
-  width: 100%;
-
+    width: 100%;
 }
-.cod-1,.cod-2,.cod-3,.cod-4,.cod-5,.cod-6,.cod-7,.cod-8 {
-  color: #000000; 
-  font-family: "Mplus 1p";  
-  font-size: 11px;  
-  letter-spacing: 1.15px; 
-  line-height: 17px;
-  text-align: center;
-  height: 100px;
 
+.cod-1,.cod-2,.cod-3,.cod-4,.cod-5,.cod-6,.cod-7,.cod-8 {
+    color: #000000; 
+    font-family: "Mplus 1p";  
+    font-size: 11px;  
+    letter-spacing: 1.15px; 
+    line-height: 17px;
+    text-align: center;
+    height: 100px;
+}
+
+.cod-5 {
+    text-align: justify !important;
 }
 
 .cod-pn {

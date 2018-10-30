@@ -8,6 +8,16 @@
 $this->title = 'История услуг';
 ?>
 
+
+<div class=table-applications>
+    
+    <?= $this->render('data/grid', ['all_orders' => $all_orders]) ?>
+    
+</div>
+
+
+
+<?php /*
 <div class="paid-services-default-index">
     <h1><?= $this->title ?></h1>
     
@@ -38,6 +48,7 @@ $this->title = 'История услуг';
     </div>
     
 </div>
+ */ ?>
 
 <?php
 /* Фильтр заявок пользователя по 

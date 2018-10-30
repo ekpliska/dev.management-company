@@ -372,14 +372,14 @@ $(document).ready(function() {
     $('#_search-input').on('input', function() {
     
         var searchValue = $(this).val();
-        var accountId = $('.current__account_list').val();
+//        var accountId = $('.current__account_list').val();
         
         $.ajax({
             url: 'search-by-specialist',
             method: 'POST',
             data: {
                 searchValue: searchValue,
-                accountId: accountId,
+//                accountId: accountId,
             },
             success: function(response) {
                 $('.grid-view').html(response.data);
