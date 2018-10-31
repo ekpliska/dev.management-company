@@ -39,6 +39,20 @@ $(document).ready(function() {
 });
 
 /*
+ * Работа навигационного меню
+ */
+$('button.navbar-toggler').click(function() {
+    $('body').addClass('modal-open');
+    $('.navbar').addClass('hidden');
+});
+
+$('.close-menu').click(function() {
+    $('body').removeClass('modal-open');
+    $('.navbar').removeClass('hidden');
+});
+
+
+/*
  * Скрыть/показать полный текст комментария к заявке
  */
 (function( $ ) {
