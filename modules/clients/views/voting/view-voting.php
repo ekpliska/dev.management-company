@@ -27,7 +27,7 @@ $this->title = $voting['voting_title'];
                     'class' => 'btn bt-hop',
                     'id' => 'get-voting-in',
                     'data-voting' => $voting['voting_id'],
-//                    'disabled' => $btn_disabled,
+                    'disabled' => $btn_disabled,
             ]) ?>            
         </div>
         <div class="rectengle-left">
@@ -49,7 +49,7 @@ $this->title = $voting['voting_title'];
     
     <div class="voting-tool">
         <div class="voted voted-root">
-            <!--<button type="button" class="battom-payment bt-voting1">65</button>-->
+            <button type="button" class="battom-payment bt-voting1">#TODO</button>
             Проголосовало
         </div>
 	<div class="photo-voted photo-voted-root">

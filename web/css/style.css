@@ -1263,7 +1263,7 @@ color: white;
 }
 
 
-div[id^=participate-in-voting-] .modal-content,
+/*div[id^=participate-in-voting-] .modal-content,
 .material .material-input{
 background-color: inherit;
 }
@@ -1312,7 +1312,7 @@ height: 90vh;
     left: 16.5vw;
     z-index: 1150;
     border-radius: 12px;
-}
+}*/
 .request-body-modal .rate-star-white .starrr a {
 font-size: 24px;
     color: white;
@@ -1321,7 +1321,7 @@ font-size: 24px;
 
 }
 
-div[id^=participate-in-voting-].request-body-modal .modal-dialog {
+/*div[id^=participate-in-voting-].request-body-modal .modal-dialog {
     width: 1300px;
     min-width: 1300px;
     max-width: 1300px;
@@ -1342,7 +1342,7 @@ div[id^=participate-in-voting-].request-body-modal table {
 
 div[id^=participate-in-voting-].request-body-modal tr:nth-child(odd) {
     background-color: rgba(139, 112, 157, 0.1);
-}
+}*/
 
 .request-body-modal textarea {
     width: 1084px;
@@ -1368,12 +1368,12 @@ margin-top: 19px;
 
 }
 
-div[id^=participate-in-voting-].request-body-modal tr,
+/*div[id^=participate-in-voting-].request-body-modal tr,
 div[id^=participate-in-voting-].request-body-modal th,
 div[id^=participate-in-voting-].request-body-modal td{
     border: none;
     height: 72px;
-}
+}*/
 
 
 .req-rate-star {
@@ -3116,7 +3116,7 @@ color: white;
   width: 330px
  }
  
-div[id^=participate-in-voting-].enter-sms {
+/*div[id^=participate-in-voting-].enter-sms {
     height: 445px;  
     width: 733px; 
     border-radius: 12px;  
@@ -3129,7 +3129,7 @@ div[id^=participate-in-voting-].enter-sms {
     margin-left: -100px;
     margin-top: -75px;
     position: fixed;
- }
+ }*/
 
 .modal-sms {
     height: 445px;  
@@ -3141,13 +3141,14 @@ div[id^=participate-in-voting-].enter-sms {
 
 .continuation {
     margin-top: 20px;
+    text-align: center;
 }
 
 .sms-cod {
-    width: 310px;
-    height: 66px;
-    margin-left: 220px;
-    margin-top:71px;
+    position: relative;
+    margin-left: 27%;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 .number-sms {
@@ -3193,11 +3194,9 @@ div[id^=participate-in-voting-].enter-sms {
 }
 /* модальное окно сообщения */
 
-div[id^=participate-in-voting-].messedge-rt {
-    height: 467px;
-    width:385px;
-    position: fixed;
-  } 
+div[id^=participate-in-voting-] .modal-content {
+    width: 670px;
+} 
   
 .data-mes  {
     height: 30px;
@@ -3262,14 +3261,6 @@ div[id^=participate-in-voting-].messedge-rt {
   margin-top:0;
   border:none ;
 }
-
-
-
-
-
-
-
-
 
 
 
