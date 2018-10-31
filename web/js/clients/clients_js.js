@@ -137,6 +137,11 @@ $(document).ready(function() {
         $('#add-rent-modal').find('.help-block').text('');
      });
     
+    $('.rent-info__btn_close').on('click', function () {
+        $('#is_rent').prop('checked', false);
+        $('#create-rent-form')[0].reset();
+    });    
+    
     /* End Block of Profile */
 
 

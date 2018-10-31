@@ -152,6 +152,7 @@ class ClientsRentForm extends Model {
             'rents_mobile' => 'Контактный телефон арендатора',
             'rents_email' => 'Электронная почта',
             'password' => 'Пароль',
+            'password_repeat' => 'Повторите пароль',
         ];
     }
     

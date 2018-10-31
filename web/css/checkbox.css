@@ -4,6 +4,13 @@
     position: relative;
     font-size: 100%;
 }
+.el-checkbox span {
+    color: #fff;
+    font-size: 12px;
+    position: absolute;
+    top: 7%;
+    margin-left: 10px;
+}
 label.el-radio,
 label.el-checkbox {
     display: block;
@@ -28,7 +35,7 @@ label.el-checkbox {
 }
 .el-radio > input[type="radio"] + .el-radio-style:hover:before,
 .el-checkbox > input[type="checkbox"] + .el-checkbox-style:hover:before {
-     border-color: #20a0ff;
+     border-color: #fc3232;
 }
 .el-radio > input[type="radio"] + .el-radio-style:before,
 .el-checkbox > input[type="checkbox"] + .el-checkbox-style:before {
@@ -111,8 +118,8 @@ label.el-checkbox {
     border-bottom: 2px solid #fff;
 }
 .el-checkbox > input[type="checkbox"]:checked + .el-checkbox-style:before {
-    border: #20a0ff;
-    background: #20a0ff;
+    border: #fc3232;
+    background: #fc3232;
 }
 .el-checkbox > input[type="checkbox"]:checked[disabled] + .el-checkbox-style:before {
     border: #b0d7f5;

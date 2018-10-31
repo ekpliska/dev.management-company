@@ -81,13 +81,13 @@ $this->title = 'Профиль собственника';
                         'placeholder' => $user->getAttributeLabel('user_mobile')])
                     ->label(false) ?>
                     
-            <?= $form->field($user, 'user_mobile')
+            <?php /* = $form->field($user, 'user_mobile')
                     ->widget(MaskedInput::className(), [
                         'mask' => '+7 (999) 999-99-99'])
                     ->input('text', [
                         'class' => 'mx-auto py-3 d-block form-control input-registration',
                         'placeholder' => $user->getAttributeLabel('user_mobile')])
-                    ->label(false) ?>
+                    ->label(false) */ ?>
                     
             <?= $form->field($user, 'user_email')
                     ->input('text', [
