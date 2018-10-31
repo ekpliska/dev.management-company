@@ -365,4 +365,35 @@ class ProfileController extends AppClientsController
         return ['status' => false, 'message' => 'Ошибка передачи параметров'];
     }
     
+    
+    /*
+     * Проверка валидации формы добавление нового Арендатора
+     */
+    public function actionValidateRentForm() {
+        
+        $model = new ClientsRentForm();
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return \yii\widgets\ActiveForm::validate($model);
+        }
+    }
+    
+    /*
+     * 
+     */
+    public function actionCreateRentForm($client, $account) {
+        
+        if ($client == null || $account == null) {
+            return 'Ошибка отправки формы';
+        }
+        
+        $model = new ClientsRentForm(['scenario' => ClientsRentForm::SCENARIO_AJAX_VALIDATION]);
+        
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $model->saveRentToUser($client, $account);
+            return $this->redirect(['profile/index']);
+        }
+        
+    }
+    
 }

@@ -21,14 +21,13 @@ class ClientsRentForm extends Model {
     public $rents_mobile;
     public $rents_email;
     public $password;
-    public $account_id;
 
     /*
      * Правила валидации
      */
     public function rules() {
         return [
-            [['account_id', 'rents_surname', 'rents_name', 'rents_second_name', 'rents_mobile', 'rents_email', 'password'], 'required', 'on' => self::SCENARIO_AJAX_VALIDATION],
+            [['rents_surname', 'rents_name', 'rents_second_name', 'rents_mobile', 'rents_email', 'password'], 'required', 'on' => self::SCENARIO_AJAX_VALIDATION],
             [['rents_surname', 'rents_name', 'rents_second_name'], 'filter', 'filter' => 'trim', 'on' => self::SCENARIO_AJAX_VALIDATION],
             [['rents_surname', 'rents_name', 'rents_second_name'], 'string', 'min' => 3, 'max' => 50, 'on' => self::SCENARIO_AJAX_VALIDATION],
             [
@@ -72,8 +71,6 @@ class ClientsRentForm extends Model {
                 'on' => self::SCENARIO_AJAX_VALIDATION,
             ],
             
-            ['account_id', 'safe'],
-            
         ];
     }
     
@@ -82,19 +79,24 @@ class ClientsRentForm extends Model {
      * Для арендатора создаем новую учетную запись
      * Новому арендатору присваиваем статус - Активный
      */
-    public function saveRentToUser() {
+    public function saveRentToUser($client, $account) {
+        
+        if (!$this->validate()) {
+            return false;
+        }
         
         $transaction = Yii::$app->db->beginTransaction();
+        
         try {
             
-            $client = Clients::findOne(['clients_id' => Yii::$app->user->identity->user_client_id]);
+            $account_info = PersonalAccount::findOne(['account_id' => $account]);
+            
             $add_rent = new Rents();
             $add_rent->rents_name = $this->rents_name;
             $add_rent->rents_second_name = $this->rents_second_name;
             $add_rent->rents_surname = $this->rents_surname;
             $add_rent->rents_mobile = $this->rents_mobile;
-            // Записываем связь Арендатора с Собственником
-            $add_rent->link('client', $client);
+            $add_rent->rents_clients_id = $client;
             $add_rent->isActive = Rents::STATUS_ENABLED;
 
             if(!$add_rent->save()) {
@@ -102,23 +104,23 @@ class ClientsRentForm extends Model {
             }
                 
             $add_user = new User();
-            $add_user->user_login = $this->account_id . 'r';
+            $add_user->user_login = $account_info->account_number . 'r';
             $add_user->user_password = Yii::$app->security->generatePasswordHash($this->password);
             $add_user->user_email = $this->rents_email;
             $add_user->user_mobile = $this->rents_mobile;
             $add_user->status = User::STATUS_ENABLED;
+            $add_user->user_rent_id = $add_rent->rents_id;
             // Записываем связь Пользователя с Арендатором
-            $add_user->link('rent', $add_rent);
+//            $add_user->link('rent', $add_rent);
             $add_user->save();
                 
             if (!$add_user->save()) {
                 throw new \yii\db\Exception('Ошибка сохранения пользователя. Ошибка: ' . join(', ', $add_user->getFirstErrors()));
             }
                 
-            $account = PersonalAccount::findOne(['account_number' => $this->account_id]);
-            if ($account) {
-                $account->personal_rent_id = $add_rent->rents_id;
-                $account->save(false);
+            if ($account_info) {
+                $account_info->personal_rent_id = $add_rent->rents_id;
+                $account_info->save(false);
             }
             $transaction->commit();
             

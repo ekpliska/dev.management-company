@@ -39,6 +39,7 @@ $(document).ready(function() {
         } else {
             // Показать форму Добавление нового арендатора
             if ($('#is_rent').is(':checked')) {
+                $('#add-rent-modal').modal('show');
                 $.ajax({
                     url: 'show-form',
                     method: 'POST',
