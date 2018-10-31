@@ -161,33 +161,19 @@ class ProfileController extends AppClientsController
     
 
     /*
-     * Методы:
-     * 
-     *      delete Удалить - арендатора
+     * Удаление учетной записи арендатора с портала
      */
-    public function actionChangeRentProfile($action, $rent, $account = null) {
+    public function actionDeleteRentProfile() {
         
-        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $rent_id = Yii::$app->request->post('rentsId');
         
-        if (Yii::$app->request->isGet) {
-            
-            $_rent = Rents::findOne($rent);
-            
-            switch ($action) {
-                case 'delete':
-                    if ($_rent) {
-                        $_rent->delete();
-                        return $this->redirect(Yii::$app->request->referrer);
-                    } else {
-                        Yii::$app->session->setFlash('profile-error');
-                        return $this->refresh();
-                    }
-                    break;
-                
-                default:
-                    Yii::$app->session->setFlash('profile-error');
-                    return $this->redirect(Yii::$app->request->referrer);
+        if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            $rent = Rents::findOne($rent_id);
+            if (!$rent->delete()) {
+                return $this->goHome();
             }
+            return $this->redirect(Yii::$app->request->referrer);
         }
         
         return ['status' => false];

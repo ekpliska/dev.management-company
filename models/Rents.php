@@ -170,9 +170,11 @@ class Rents extends ActiveRecord
      * Снять связь между удаленным Арендатором и Лицевым счетом
      */
     public function afterDelete() {
+        
         parent::afterDelete();
         $_user = User::findOne(['user_rent_id' => $this->rents_id]);
         $_account = PersonalAccount::findOne(['personal_rent_id' => $this->rents_id]);
+        
         if ($_user) {
             $_user->delete();
             if ($_account) {

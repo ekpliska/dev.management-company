@@ -67,7 +67,7 @@ class RegistrationForm extends Model {
             
             ['username', 'checkPersonalAccount'],
             
-            ['password', 'compare', 'message' => 'Указанные пароли не совпадают!'],            
+            ['password', 'compare', 'message' => 'Указанные пароли не совпадают!'],
             [['password_repeat'], 'string', 'min' => 6, 'max' => 12],
             
             ['email', 'email'],

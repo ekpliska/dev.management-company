@@ -21,15 +21,23 @@ class ClientsRentForm extends Model {
     public $rents_mobile;
     public $rents_email;
     public $password;
+    public $password_repeat;
 
     /*
      * Правила валидации
      */
     public function rules() {
         return [
-            [['rents_surname', 'rents_name', 'rents_second_name', 'rents_mobile', 'rents_email', 'password'], 'required', 'on' => self::SCENARIO_AJAX_VALIDATION],
+            [[
+                'rents_surname', 'rents_name', 'rents_second_name', 
+                'rents_mobile', 
+                'rents_email', 
+                'password', 'password_repeat'], 'required', 'on' => self::SCENARIO_AJAX_VALIDATION],
+            
             [['rents_surname', 'rents_name', 'rents_second_name'], 'filter', 'filter' => 'trim', 'on' => self::SCENARIO_AJAX_VALIDATION],
+            
             [['rents_surname', 'rents_name', 'rents_second_name'], 'string', 'min' => 3, 'max' => 50, 'on' => self::SCENARIO_AJAX_VALIDATION],
+            
             [
                 ['rents_surname', 'rents_name', 'rents_second_name'], 
                 'match', 
@@ -63,13 +71,15 @@ class ClientsRentForm extends Model {
                 'on' => self::SCENARIO_AJAX_VALIDATION,
             ],            
             
-            ['password', 'string', 'min' => 6, 'max' => 12, 'on' => self::SCENARIO_AJAX_VALIDATION],
-            ['password', 
+            [['password', 'password_repeat'], 'string', 'min' => 6, 'max' => 12, 'on' => self::SCENARIO_AJAX_VALIDATION],
+            [['password', 'password_repeat'],
                 'match', 
                 'pattern' => '/^[A-Za-z0-9\_\-]+$/iu', 
                 'message' => 'Поле "{attribute}" может содержать только буквы английского алфавита, цифры, знаки "-", "_"',
                 'on' => self::SCENARIO_AJAX_VALIDATION,
             ],
+            
+            ['password_repeat', 'compare', 'compareAttribute' => 'password', 'message' => 'Указанные пароли не совпадают!', 'on' => self::SCENARIO_AJAX_VALIDATION,],
             
         ];
     }

@@ -98,18 +98,19 @@ $(document).ready(function() {
     
     // Удалить данные арендатора из системы
     $('.changes_rent__del').on('click', function() {
-    
         var rentsId = $('input[id=_rents]').val();
-        var accountId = $('#_list-account :selected').text();
-        $.get({
-            url: 'change-rent-profile?action=delete&rent=' + rentsId + '&account=' + accountId,
-            method: 'GET',
-            success: function(response) {
-                // console.log('Удаление арендатора OK');
+        $.ajax({
+            url: 'delete-rent-profile',
+            method: 'POST',
+            data: {
+                rentsId: rentsId,
             },
-            error: function() {
-                console.log('Error #1000-03');
-            }
+            success: function (response, textStatus, jqXHR) {
+//                console.log(textStatus);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log('Error #1000-03');                
+            },
         });
     });
     

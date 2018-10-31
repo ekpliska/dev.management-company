@@ -46,7 +46,8 @@ Modal::begin([
 
 <?= $form->field($add_rent, 'rents_email')->input('text', ['placeHolder' => $add_rent->getAttributeLabel('rents_email')])->label(false) ?>
 
-<?= $form->field($add_rent, 'password')->input('text', ['placeHolder' => $add_rent->getAttributeLabel('password')])->label(false) ?>
+<?= $form->field($add_rent, 'password')->input('password', ['placeHolder' => $add_rent->getAttributeLabel('password')])->label(false) ?>
+<?= $form->field($add_rent, 'password_repeat')->input('password', ['placeHolder' => $add_rent->getAttributeLabel('password_repeat')])->label(false) ?>
 
 <div class="modal-footer no-border">
     <?= Html::submitButton('Создать', ['class' => 'btn blue-outline-btn white-btn mx-auto']) ?>
