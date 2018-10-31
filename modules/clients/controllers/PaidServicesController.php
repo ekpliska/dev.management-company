@@ -32,9 +32,15 @@ class PaidServicesController extends AppClientsController {
         ]);
         
         if ($new_order->load(Yii::$app->request->post())) {
+
             if ($new_order->addOrder($accoint_id)) {
-                return $this->refresh();
+//                return $this->refresh();
+//                var_dump($new_order->errors);
+//                die();
             }
+//            echo '<pre>';
+//            var_dump($new_order->errors);
+//            die();            
         }
         
         // Получаем список все платных заявок

@@ -754,6 +754,11 @@ border: none !important;
     margin-left: 12px;
     margin-top: 15px;
 }
+.services-lists {
+    position: absolute;
+    top: 30%;
+    left: 5%;
+}
 
 .requests-card-preview-container {
     height: 218px;
@@ -1610,9 +1615,10 @@ background-color: #000000 !important;
 }
 
 .news-card-img-top-preview {
-border-top-right-radius: 12px;
-border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    border-top-left-radius: 12px;
 }
+
 .services-card-preview-h,
 .news-card-preview-h,
 .requests-card-preview-h {
@@ -1622,6 +1628,12 @@ border-top-left-radius: 12px;
     margin-right: 24px;
     margin-bottom: 0px;
 }
+
+.news-card-preview-h,
+.requests-card-preview-h {
+    margin-top: 20px;
+}
+
 .requests-card-preview-h {
     font-size: 18px;
 }
@@ -2776,12 +2788,12 @@ margin-left:330px;
   
 }
 .photo-voted {
-   border: 1px solid #D4D4D4;
-   width: 308px;
-   min-height:1105px;
-   margin-left:27px;
-   border-bottom: none;
-    
+    border: 1px solid #D4D4D4;
+    width: 308px;
+    min-height: 750px;
+    height: auto;
+    margin-left: 27px;
+    border-radius: 0px 0px 12px 12px;
   }
 .voted-img {
   margin: 20px 20px 15px 20px;   
@@ -2983,13 +2995,12 @@ color: white;
  }
  
 .field-searsh {
-    /*width: 388px;*/
     height: 35px;
-    border:none;
+    border: none;
     padding-bottom: 6px;
-    /*margin-left: 489px;*/
-    margin-top: 27px;
-    text-align: center;
+    position: absolute;
+    top: 30%;
+    left: 37%;    
 }
 
 .searsh-tk {
@@ -3039,6 +3050,7 @@ color: white;
 
 .cod-5 {
     text-align: justify !important;
+    width: 25%;
 }
 
 .cod-pn {

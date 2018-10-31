@@ -44,7 +44,10 @@ $category_id = 0;
         </p>
         <div class="services-btn-container">
             <span class="cost_service"><?= $service['services_cost'] ?> &#8381;</span>
-            <?= Html::button('Заказать', ['class' => 'btn blue-outline-btn btn-add-servic mx-auto new-rec', 'data-record' => $service['services_id']]) ?>
+            <?= Html::button('Заказать', [
+                    'class' => 'btn blue-outline-btn btn-add-servic mx-auto new-rec', 
+                    'data-service-cat' => $service['category']['category_id'],
+                    'data-service' => $service['services_id']]) ?>
         </div>
         <div class="d-flex justify-content-around align-items-center">
         </div>
@@ -59,7 +62,7 @@ $category_id = 0;
         'id' => 'add-record-modal',
         'title' => 'Заявка на платную услугу',
         'closeButton' => [
-            'class' => 'close add-acc-modal-close-btn req',
+            'class' => 'close add-acc-modal-close-btn req btn__paid_service_close',
         ],
     ]);
 ?>
@@ -69,8 +72,12 @@ $category_id = 0;
         ]);
     ?>
     
+    <?= $form->field($new_order, 'services_category_services_id')
+            ->hiddenInput(['id' => 'secret-cat', 'value' => 'hidden value'])
+            ->label(false) ?>
+    
     <?= $form->field($new_order, 'services_name_services_id')
-            ->hiddenInput(['id' => 'secret', 'value' => 'hidden value'])
+            ->hiddenInput(['id' => 'secret-name', 'value' => 'hidden value'])
             ->label(false) ?>
                     
     <?= $form->field($new_order, 'services_name_services_id')
@@ -103,10 +110,12 @@ $category_id = 0;
 <?php
 $this->registerJs('
     $(".new-rec").on("click", function(){
-        var idService = $(this).data("record");
+        var idService = $(this).data("service");
+        var idCategory = $(this).data("service-cat");
         $("#add-record-modal").modal("show");
         $("#add-record-modal").find("#name_services").val(idService);
-        $("#secret").val(idService);
+        $("#secret-name").val(idService);
+        $("#secret-cat").val(idCategory);
     });    
 ')
 ?>

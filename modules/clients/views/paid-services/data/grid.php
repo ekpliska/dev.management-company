@@ -57,13 +57,6 @@
                 [
                     'attribute' => 'services_comment',
                     'label' => 'Текст заявки',
-                    'value' => function ($data) {
-                        return 
-                            '<div class="cutstring" data-display="none" data-max-length="70">'
-                                . $data['services_comment']
-                            . '</div>';
-                    },
-                    'format' => 'raw',
                     'contentOptions' =>[
                         'class' => 'cod-5',
                     ],
