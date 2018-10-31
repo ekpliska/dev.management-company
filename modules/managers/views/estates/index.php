@@ -100,7 +100,8 @@ $this->title = 'Жилищный фонд';
         'header' => 'Редактирование',
         'clientOptions' => [
             'backdrop' => 'static', 
-            'keyboard' => false],
+            'keyboard' => false,
+        ],
     ]);
 ?>
 <?php Modal::end(); ?>

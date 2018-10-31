@@ -8,6 +8,8 @@
  */
 
 ?>
+
+<?php /*
     <?= $form->field($add_rent, "account_id", ['options' => ['class' => 'hidden']])
         ->hiddenInput([
             'value' => $account_number,
@@ -53,4 +55,4 @@
             ->label() ?>                                   
 
     <?= Html::checkbox('show_password_ch', false) ?> <span class="show_password__text">Показать пароль</span>
-    
+*/ ?>    

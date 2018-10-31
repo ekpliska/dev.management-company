@@ -334,36 +334,36 @@ class ProfileController extends AppClientsController
     /*
      * Показать/Скрыть форму "Добавить арендатора"
      */
-    public function actionShowForm() {
-               
-        $_show = Yii::$app->request->post('_show');
-        $account_number = Yii::$app->request->post('accountNumber');
-        
-        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        
-        // Проверяем данные пришедшие из пост
-        if (!$_show && !is_numeric($account_number)) {
-            return ['status' => false, 'message' => 'Ошибка передачи параметров'];
-        }
-        
-        // Если был ajax запрос и чекбокс "Арендатор" установлен
-        if (Yii::$app->request->isAjax && $_show) {
-            // Загружаем подель формы на добавление нового арендатора
-            $add_rent = new ClientsRentForm([
-                'scenario' => ClientsRentForm::SCENARIO_AJAX_VALIDATION
-            ]);
-                
-            // Формируем рендер вида формы "Добавить арендатора"
-            $data = $this->renderAjax('_form/rent-add', [
-                'form' => ActiveForm::begin(),
-                'account_number' => $account_number, 
-                'add_rent' => $add_rent]);
-                
-            return ['status' => true, 'show' => true, 'data' => $data];
-        }
-        
-        return ['status' => false, 'message' => 'Ошибка передачи параметров'];
-    }
+//    public function actionShowForm() {
+//               
+//        $_show = Yii::$app->request->post('_show');
+//        $account_number = Yii::$app->request->post('accountNumber');
+//        
+//        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+//        
+//        // Проверяем данные пришедшие из пост
+//        if (!$_show && !is_numeric($account_number)) {
+//            return ['status' => false, 'message' => 'Ошибка передачи параметров'];
+//        }
+//        
+//        // Если был ajax запрос и чекбокс "Арендатор" установлен
+//        if (Yii::$app->request->isAjax && $_show) {
+//            // Загружаем подель формы на добавление нового арендатора
+//            $add_rent = new ClientsRentForm([
+//                'scenario' => ClientsRentForm::SCENARIO_AJAX_VALIDATION
+//            ]);
+//                
+//            // Формируем рендер вида формы "Добавить арендатора"
+//            $data = $this->renderAjax('_form/rent-add', [
+//                'form' => ActiveForm::begin(),
+//                'account_number' => $account_number, 
+//                'add_rent' => $add_rent]);
+//                
+//            return ['status' => true, 'show' => true, 'data' => $data];
+//        }
+//        
+//        return ['status' => false, 'message' => 'Ошибка передачи параметров'];
+//    }
     
     
     /*
@@ -379,7 +379,7 @@ class ProfileController extends AppClientsController
     }
     
     /*
-     * 
+     * Добавление учетной записи Арендатора
      */
     public function actionCreateRentForm($client, $account) {
         

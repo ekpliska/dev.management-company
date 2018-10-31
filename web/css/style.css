@@ -3312,6 +3312,10 @@ button.again-bt {
     padding-bottom: 50px;
 }
 
+.profile-title-rent {
+    padding-bottom: 20px;
+}
+
 .all-requests_link {
     text-align: right;
     margin-top: -47px;
@@ -3360,4 +3364,12 @@ button.again-bt {
 .modal-header .close {
     margin: 0 !important;
 }
+
+.del-ar {
+    color: #fff;
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 40px;
+}
+
 /* Добавление новой заявки */

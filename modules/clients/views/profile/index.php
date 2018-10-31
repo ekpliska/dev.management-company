@@ -100,7 +100,7 @@ $this->title = 'Профиль собственника';
         <!--Арендатор-->
         
         <div class="col-6 rent-profile-info">
-            <h5 class="profile-title">
+            <h5 class="profile-title-rent">
                 <label class="el-switch">
                     <?= Html::checkbox('is_rent', $is_rent ? 'checked' : '', ['id' => 'is_rent']) ?>
                     <span class="el-switch-style"></span>
@@ -156,3 +156,5 @@ $this->registerJs("
 <?php if (!$is_rent) : ?>
     <?= $this->render('_form/create_rent', ['add_rent' => $add_rent]) ?>
 <?php endif; ?>
+
+<?= ModalWindows::widget(['modal_view' => 'changes_rent']) ?>
