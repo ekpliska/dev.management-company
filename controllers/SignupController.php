@@ -6,6 +6,7 @@
     use app\models\RegistrationForm;
     use app\models\User;
     use app\models\signup\SignupStepOne;
+    use app\models\PersonalAccount;
 
 /**
  * Регистрация
@@ -14,28 +15,36 @@ class SignupController extends Controller {
     
     public function actionIndex() {
         
+        $session = Yii::$app->session;
+        
         $model = new RegistrationForm();
         $model_step_one = new SignupStepOne();
+        $model_step_two = new \app\models\signup\SignupStepTwo();
         
         if ($model_step_one->load(Yii::$app->request->post()) && $model_step_one->validate()) {
-            return 'here';
+
+            $data = Yii::$app->request->post()['SignupStepOne'];
+            $this->setSessionStepOne($data);
+            
+            if ($session->get('step_one')) {
+                return $this->renderAjax('form/step_two', ['model_step_two' => $model_step_two]);
+            }
             
         }
         
-        
-        if ($model->load(Yii::$app->request->post())) {
-            if ($model->validate()) {
-                
-                Yii::$app->session->setFlash('registration-done', 'Для подтверждения регистрации пройдите по ссылке, указанной в письме');
-                
-                $data_model = new User();                
-                $data_model = $model->registration();
-                return $this->goHome();
-                
-            } else {
-                Yii::$app->session->setFlash('registration-error', 'При регистрации возникла ошибка');
-            }
-        }
+//        if ($model->load(Yii::$app->request->post())) {
+//            if ($model->validate()) {
+//                
+//                Yii::$app->session->setFlash('registration-done', 'Для подтверждения регистрации пройдите по ссылке, указанной в письме');
+//                
+//                $data_model = new User();                
+//                $data_model = $model->registration();
+//                return $this->goHome();
+//                
+//            } else {
+//                Yii::$app->session->setFlash('registration-error', 'При регистрации возникла ошибка');
+//            }
+//        }
         
         return $this->render('index', [
             'model' => $model,
@@ -52,7 +61,7 @@ class SignupController extends Controller {
         
         if (Yii::$app->request->isAjax) {
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-            $is_account = \app\models\PersonalAccount::findAccountBeforeRegister($account, $summ, $square);
+            $is_account = PersonalAccount::findAccountBeforeRegister($account, $summ, $square);
             
             if (!$is_account) {
                 return ['success' => false];
@@ -60,5 +69,24 @@ class SignupController extends Controller {
             return ['success' => true];
         }
         return ['success' => false];
+    }
+    
+    private function setSessionStepOne($data) {
+
+        if ($data == null) {
+            return false;
+        }
+        
+        $session = Yii::$app->session;
+        if (!$session->isActive) {
+            $session->open();
+        }
+        
+        $session['account'] = $data['account_number'];
+        $session['last_summ'] = $data['last_summ'];
+        $session['square'] = $data['square'];
+        $session['step_one'] = true;
+        
+        return true;
     }
 }

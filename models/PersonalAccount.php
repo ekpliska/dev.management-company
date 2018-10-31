@@ -88,7 +88,7 @@ class PersonalAccount extends ActiveRecord
         
         $is_account = self::find()
                 ->where(['account_number' => $account])
-                ->andWhere(['account_balance' => $summ])
+//                ->andWhere(['account_balance' => $summ])
 //                ->andWhere(['' => $square])
                 ->asArray()
                 ->one();

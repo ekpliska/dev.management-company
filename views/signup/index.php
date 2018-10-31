@@ -10,7 +10,6 @@
 $this->title = 'Customers | Регистрация';
 ?>
     <style type="text/css">
-        fieldset { border:none; width:320px;}
         legend { font-size:18px; margin:0px; padding:10px 0px; color:#b0232a; font-weight:bold;}
         #steps { list-style:none; width:100%; overflow:hidden; margin:0px; padding:0px;}
         #steps li {font-size:24px; float:left; padding:10px; color:#b0b1b3;}
@@ -36,8 +35,7 @@ $this->title = 'Customers | Регистрация';
      
         <div id="step0">
             <fieldset>
-                <legend>Лицевой счет</legend>
-                <p class="help-block step-one-message"></p>
+                <!--<legend>Лицевой счет</legend>-->
                 <?= $this->render('form/step_one', ['model_step_one' => $model_step_one]) ?>
                 
             </fieldset>
@@ -46,7 +44,7 @@ $this->title = 'Customers | Регистрация';
         <div id="step1" style="display: none;">
             <fieldset>
                 <legend>Пользовательские данные</legend>
-                
+                <?= $this->render('form/step_one', ['model_step_one' => $model_step_one]) ?>
                 
                 
             </fieldset>

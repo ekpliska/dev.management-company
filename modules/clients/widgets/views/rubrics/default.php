@@ -18,11 +18,11 @@ $rubric_link = Yii::$app->controller->actionParams['rubric'];
             <?php foreach ($rubrics as $key => $rubric) : ?>
                 <li class="nav-item">
                     <a href="<?= Url::to(['clients/index', 'rubric' => $key]) ?>" 
-                       class="
-                            nav-link 
+                       class="nav-link 
                             submenu-nav-link 
                             <?= ($rubric_link == $key) ? 'active' : '' ?> 
-                            <?= ($key === 1) ? 'no-border-right no-border-left' : '' ?>"
+                            <?= ($key == 'important_information') ? ' no-border-right no-border-left' : '' ?>
+                            <?= ($key == 'special_offers') ? ' right-rubrick' : '123' ?>"
                     >
                         <?= $rubric ?>
                     </a>

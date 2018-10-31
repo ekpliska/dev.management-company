@@ -9,7 +9,7 @@
 ?>
 <?php
     $form = ActiveForm::begin([
-        'id' => 'signup-form-step-one',
+        'id' => 'signup-form-step-two',
         'fieldConfig' => [
             'template' => "{label}{input}",
             'labelOptions' => ['class' => 'label-registration hidden'],
@@ -20,24 +20,19 @@
     ])
 ?>
 
-<?= $form->errorSummary($model_step_one); ?>
-
-<?= $form->field($model_step_one, 'account_number')
+<?= $form->field($model_step_two, 'email')
     ->input('text', [
-        'class' => 'account-number-input',
-        'placeholder' => $model_step_one->getAttributeLabel('account_number')])
+        'placeholder' => $model_step_two->getAttributeLabel('email')])
     ->label(true) ?>
                 
-<?= $form->field($model_step_one, 'last_summ')
+<?= $form->field($model_step_two, 'password')
         ->input('input', [
-            'class' => 'last-summ-input',
-            'placeholder' => $model_step_one->getAttributeLabel('last_summ')])
+            'placeholder' => $model_step_two->getAttributeLabel('password')])
         ->label(true) ?>
         
-<?= $form->field($model_step_one, 'square')
+<?= $form->field($model_step_two, 'password_repeat')
         ->input('text', [
-            'class' => 'square-input',
-            'placeholder' => $model_step_one->getAttributeLabel('square')])
+            'placeholder' => $model_step_two->getAttributeLabel('password_repeat')])
         ->label(true) ?>
                 
 <?= Html::submitButton('Далее') ?>

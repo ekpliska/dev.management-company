@@ -686,7 +686,7 @@ ul li:last-of-type .submenu-nav-link {
 .modal_menu, .item a { 
     color: #969c9e; 
     font-family: "Mplus 1p Medium"; 
-    font-size: 20px;  
+    font-size: 19px;  
     letter-spacing: 0.34px; 
     line-height: 20px;
     text-decoration: none;
@@ -1262,57 +1262,6 @@ display: block;
 color: white;
 }
 
-
-/*div[id^=participate-in-voting-] .modal-content,
-.material .material-input{
-background-color: inherit;
-}
-
-div[id^=participate-in-voting-].add-acc-modal {
-color: white;
-    top: 35% !important;
-    left: 30% !important;
-}
-
-div[id^=participate-in-voting-] .modal-footer  {
-margin-top: 64px;
-}
-
-div[id^=participate-in-voting-].add-acc-modal {
-height: 544px;
-width: 687px;
-border-radius: 12px;
-box-shadow: 0 10px 14px 2px rgba(0,0,0,0.26);
-}
-
-div[id^=participate-in-voting-].add-req-modal {
-    height: 671px;
-    width: 669px;
-    border-radius: 12px;
-    box-shadow: 0 10px 14px 2px rgba(0,0,0,0.26);
-    left: 33%;
-    top: 35%;
-}
-div[id^=participate-in-voting-].add-req-modal .add-acc-modal-close-btn.req {
-margin-top: 19px;
-}
-
-div[id^=participate-in-voting-] .modal-body {
-margin-left: 125px;
-}
-
-div[id^=participate-in-voting-].request-body-modal .modal-body {
-width: 1300px;
-}
-
-div[id^=participate-in-voting-].request-body-modal {
-    width: 1300px;
-height: 90vh;
-    top: 18vh;
-    left: 16.5vw;
-    z-index: 1150;
-    border-radius: 12px;
-}*/
 .request-body-modal .rate-star-white .starrr a {
 font-size: 24px;
     color: white;
@@ -1320,29 +1269,6 @@ font-size: 24px;
     margin-right: 14.89px;
 
 }
-
-/*div[id^=participate-in-voting-].request-body-modal .modal-dialog {
-    width: 1300px;
-    min-width: 1300px;
-    max-width: 1300px;
-}
-
-div[id^=participate-in-voting-].request-body-modal .modal-content {
-    width: 1300px !important;
-    height: 100%;
-}
-
-.modal-dialog.modal-dialog-centered.modal-lg {
-    max-height: 80%;
-}
-
-div[id^=participate-in-voting-].request-body-modal table {
-    color: white;
-}
-
-div[id^=participate-in-voting-].request-body-modal tr:nth-child(odd) {
-    background-color: rgba(139, 112, 157, 0.1);
-}*/
 
 .request-body-modal textarea {
     width: 1084px;
@@ -1367,14 +1293,6 @@ color: #8B709D;
 margin-top: 19px;
 
 }
-
-/*div[id^=participate-in-voting-].request-body-modal tr,
-div[id^=participate-in-voting-].request-body-modal th,
-div[id^=participate-in-voting-].request-body-modal td{
-    border: none;
-    height: 72px;
-}*/
-
 
 .req-rate-star {
     margin-bottom: 23px;
@@ -1635,15 +1553,6 @@ background-color: #000000;
 .news-card-preview:hover {
     box-shadow: 0 4px 26px 0 rgba(51, 29, 82, 0.16);
 }
-/*html {
- overflow: hidden; 
-}*/
-
-/* .slimScrollBar {
- переопределяем стили плагина
-background-color: #000000 !important;
- opacity: 0.3 !important;   
-} */
 
 .container {
     padding-top: 170px; 
@@ -1741,24 +1650,8 @@ border-top: 2px solid #a7a7a7;
 border-bottom: 2px solid #a7a7a7;	
 }
 
-/* цвет ссылки меню */
-.menu-a,
-.menu-a:hover {
-color: white;
-/* background: #442a92;
-border: 1px solid #442a92;
--webkit-border-top-right-radius: 999px;
--webkit-border-bottom-right-radius: 999px;
--moz-border-radius-topright: 999px;
--moz-border-radius-bottomright: 999px;
-border-top-right-radius: 999px;
-border-bottom-right-radius: 999px;
- устаревший эффект ховера */ 
-}
-
 .account-select {
-/* height: 28px; */
-width: 420px;  
+    width: 420px;  
 }
 
 .category-select {
@@ -3116,21 +3009,6 @@ color: white;
   width: 330px
  }
  
-/*div[id^=participate-in-voting-].enter-sms {
-    height: 445px;  
-    width: 733px; 
-    border-radius: 12px;  
-    background: linear-gradient(180.67deg, #39284E 0%, rgba(10,8,8,0.5) 100%); 
-    box-shadow: 0 10px 14px 2px rgba(0,0,0,0.26);
-    padding-right: 1px;
-    margin:0;
-    left: 40%;
-    top: 30%;
-    margin-left: -100px;
-    margin-top: -75px;
-    position: fixed;
- }*/
-
 .modal-sms {
     height: 445px;  
     width: 733px;
@@ -3381,3 +3259,8 @@ button.again-bt {
 }
 
 /* Добавление новой заявки */
+
+
+a.nav-link.submenu-nav-link.right-rubrick {
+    padding: 10px;
+}
