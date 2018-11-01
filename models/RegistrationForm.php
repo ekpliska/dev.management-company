@@ -90,32 +90,36 @@ class RegistrationForm extends Model {
     /*
      * Метод описывает первый шаг рагистрации пользователя
      */
-    public function registration() {
+    public function registration($data) {
         
-        if ($this->validate()) {
-            $model = new User();
-            $model->user_login = $this->username;
-            $model->user_password = Yii::$app->security->generatePasswordHash($this->password);
-            $model->user_email = $this->email;
-            $model->user_mobile = $this->mobile_phone;
-            
-            // Связываем таблицы Пользователь и лицевой счет (основной)
-            // $model->setUserAccountId($this->username);
-            
-            // Связываем таблицы Пользователь и Собственник
-            $model->setClientByPhone($this->username);
-            
-            // Новый пользователь получает статус без доступа в систему
-            $model->status = User::STATUS_DISABLED;
-            // Для нового пользователя генерируем ключ, для отправки на почту (Для подтверждения email)
-            $model->generateEmailConfirmToken();
-            // По умолчанию включаем email оповещение
-            $model->user_check_email = true;
-            
-            if ($model->save()) {
-                $this->sendEmail('EmailConfirm', 'Подтверждение регистрации', ['user' => $model]);
-            }
+        if (count($data) != 6 || $data == null) {
+            return false;
         }
+        
+        $model = new User();
+        $model->user_login = $data['account'];
+        $model->user_password = Yii::$app->security->generatePasswordHash($data['password']);
+        $model->user_email = $data['email'];
+        $model->user_mobile = $data['phone'];
+
+        // Связываем таблицы Пользователь и Собственник
+        $model->setClientByPhone($data['account']);
+            
+        // Новый пользователь получает статус без доступа в систему
+        $model->status = User::STATUS_DISABLED;
+        // Для нового пользователя генерируем ключ, для отправки на почту (Для подтверждения email)
+        $model->generateEmailConfirmToken();
+        // По умолчанию включаем email оповещение
+        $model->user_check_email = true;
+            
+        if ($model->save()) {
+            $this->sendEmail('EmailConfirm', 'Подтверждение регистрации', ['user' => $model]);
+        }
+        
+        // Дропаем сессию в случае успешной регистрации нового пользователя
+        Yii::$app->session->removeAll();
+        
+        return true;
     }
     
     /*

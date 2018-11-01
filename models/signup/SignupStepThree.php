@@ -25,7 +25,7 @@ class SignupStepThree extends Model {
             
             $sms_code = Yii::$app->session->get('sms_code');
 
-            if ($sms_code === $this->sms_code) {
+            if ($sms_code != $this->sms_code) {
                 $this->addError($attribute, 'Вы указали не верный СМС код');
                 return false;
             }

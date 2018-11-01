@@ -24,7 +24,7 @@ $this->title = 'Customers | Регистрация';
 <div class="slide-content tst2">
     <h2 class="text-center registration-h blue-txt">
         Регистрация
-        <?php // print_r($_SESSION) ?>
+        <?php print_r($_SESSION) ?>
     </h2>
 
 
@@ -50,7 +50,7 @@ $this->title = 'Customers | Регистрация';
         </div>
     <?php endif; ?>
     
-    <?php if ($_SESSION['step_one'] == 2) : ?>
+    <?php if ($_SESSION['count_step'] == 2) : ?>
         <div id="step2">
             <fieldset>
                 <?= $this->render('form/step_three', ['model_step_three' => $model_step_three]) ?>
