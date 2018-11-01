@@ -358,12 +358,18 @@ a.btn.blue-btn {
     background-color: #2D18B4;
 }
 
+.nav-padding {
+    width: 99.6%;
+    margin-left:auto;
+    margin-right: auto;
+}
+
  .p-body {
     display: block;
 } 
 
 html, body {
-    /*height:100%;*/
+    height:100%;
 }
 
 body {
@@ -385,16 +391,6 @@ body {
     letter-spacing: 1px;
     line-height: 18px;   
 }
-
-.registration-btn-group {
-   /*  background-color: gold; */
-/* margin-top: 91px; */
-/*margin-right: 57px;
-margin-left: 57px; */
-width: 591px;
-/* background: green; */
-/* height: 56px; */
-} 
 
 .app-btn-group {
     width: 401px;
@@ -446,6 +442,12 @@ width: 591px;
 .input-registration:active {
     border-bottom: 1px solid #2D18B4;
 }
+
+.material .material-input label {
+    color: #D0D0D0;
+    font-size: 16px;
+}
+
 .label-registration {
     color: #2D18B4;
     font-family: "Mplus 1p";

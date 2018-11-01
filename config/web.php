@@ -68,7 +68,7 @@ $config = [
          * Настройка session и cookie
          */
         'session' => [
-            'timeout' => 32400,
+            'timeout' => 1800,
             'class' => 'yii\web\DbSession',
             'sessionTable' => 'user_session',
             /*
