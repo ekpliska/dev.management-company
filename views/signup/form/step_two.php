@@ -36,6 +36,8 @@
             'placeholder' => $model_step_two->getAttributeLabel('password_repeat')])
         ->label(true) ?>
                 
-<?= Html::submitButton('Далее') ?>
+<div class="text-center circle-btn-block mx-auto">
+    <?= Html::submitButton('', ['class' => 'blue-circle-btn']) ?>    
+</div>
 
 <?php ActiveForm::end(); ?>

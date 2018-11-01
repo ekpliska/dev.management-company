@@ -308,12 +308,43 @@ a.btn.blue-btn {
     line-height: 23px;
 }
 
-.blue-circle-btn:hover {}
+.blue-circle-btn:hover {
+    background-image: url(/images/clients/arrow_right_hover.png);
+    outline: none;
+}
+
+.blue-circle-btn:focus {
+    outline: none;
+}
+
+.blue-circle-btn {
+    background-image: url(/images/clients/arrow_right.png);
+    background-repeat: no-repeat;
+    background-position: 0px 0px;    
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.428571429;
+    border-radius: 35px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    outline: none;
+}
 
 .circle-btn-block {
-    width: 60px;
     margin-top: 41px;
     margin-bottom: 41px;
+}
+
+.circle-btn-block p {
+    text-align: justify;
+    font-size: 14px;
+}
+
+.circle-btn-block a:hover {
+    text-decoration: none;
 }
 
 .agree-btn-block {
@@ -3263,4 +3294,30 @@ button.again-bt {
 
 a.nav-link.submenu-nav-link.right-rubrick {
     padding: 10px;
+}
+
+.error-summary {
+    background: white;
+    font-size: 13px;
+    color: #2e19b5;    
+}
+.error-summary p {
+    margin: 0;
+}
+.error-summary li {
+    list-style: none;
+}
+
+button#send-request-to-sms {
+    position: absolute;
+    top: 15px;
+    left: 80%;
+    background: transparent;
+    border: none;
+    padding: 5px;
+    color: #2d18b4;
+    cursor: pointer;
+}
+button#send-request-to-sms:focus{
+    outline: none;
 }

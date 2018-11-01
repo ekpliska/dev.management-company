@@ -35,7 +35,17 @@
         ->input('input', [
             'placeholder' => $model_step_three->getAttributeLabel('sms_code')])
         ->label(true) ?>
-        
-<?= Html::submitButton('Далее') ?>
+
+<!--<div>
+</div>-->
+
+<div class="text-center circle-btn-block mx-auto">
+    <p>Нажимая на кнопку Далее, вы соглашаетесь на обработку 
+    <a href="#" target="_blank">Персональных данных </a>и принимаете условия <a href="#" target="_blank">Пользовательского соглашения.</a>
+    </p>
+    
+    <?= Html::submitButton('', ['class' => 'blue-circle-btn']) ?>    
+</div>
+
 
 <?php ActiveForm::end(); ?>

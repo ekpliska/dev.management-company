@@ -25,22 +25,21 @@
 
 <?= $form->field($model_step_one, 'account_number')
     ->input('text', [
-        'class' => 'account-number-input',
         'placeholder' => $model_step_one->getAttributeLabel('account_number')])
     ->label(true) ?>
                 
 <?= $form->field($model_step_one, 'last_summ')
         ->input('input', [
-            'class' => 'last-summ-input',
             'placeholder' => $model_step_one->getAttributeLabel('last_summ')])
         ->label(true) ?>
         
 <?= $form->field($model_step_one, 'square')
         ->input('text', [
-            'class' => 'square-input',
             'placeholder' => $model_step_one->getAttributeLabel('square')])
         ->label(true) ?>
-                
-<?= Html::submitButton('Далее') ?>
+
+<div class="text-center circle-btn-block mx-auto">
+    <?= Html::submitButton('', ['class' => 'blue-circle-btn']) ?>    
+</div>
 
 <?php ActiveForm::end(); ?>

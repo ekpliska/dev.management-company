@@ -16,8 +16,12 @@ class SignupStepOne extends Model {
     public function rules() {
         return [
             [['account_number', 'last_summ', 'square'], 'required'],
-            [['account_number', 'square'], 'integer'],
-            ['last_summ', 'integer'],
+            
+            ['account_number', 'string', 'min' => 11, 'max' => 11],
+            
+            ['last_summ', 'match', 'pattern'=>'/^[0-9]{1,12}(\.[0-9]{0,4})?+$/iu'],
+            ['square', 'match', 'pattern'=>'/^[0-9]{1,12}(\.[0-9]{0,4})?+$/iu'],
+
         ];
     }
     

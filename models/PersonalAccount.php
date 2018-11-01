@@ -92,7 +92,7 @@ class PersonalAccount extends ActiveRecord
                 ->joinWith('flat')
                 ->where(['account_number' => $account])
                 ->andWhere(['account_balance' => $summ])
-                ->andWhere(['isActive' => true])
+                ->andWhere(['isActive' => false])
                 ->andWhere(['flats_square' => $square])
                 ->asArray()
                 ->one();

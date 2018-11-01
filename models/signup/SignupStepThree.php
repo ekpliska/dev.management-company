@@ -16,6 +16,8 @@ class SignupStepThree extends Model {
     public function rules() {
         return [
             [['phone', 'sms_code'], 'required'],
+            
+            ['sms_code', 'string', 'min' => 5, 'max' => 5]
         ];
     }
     

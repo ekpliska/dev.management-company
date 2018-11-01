@@ -24,14 +24,13 @@ $this->title = 'Customers | Регистрация';
 <div class="slide-content tst2">
     <h2 class="text-center registration-h blue-txt">
         Регистрация
-        <?php print_r($_SESSION) ?>
     </h2>
 
 
     <ul id="steps">
-        <li id="stepDesc0" class="current">Шаг 1<span>Лицевой счет</span></li>
-        <li id="stepDesc1">Шаг 2<span>Пользовательские данные</span></li>
-        <li id="stepDesc2">Шаг 3<span>Завершение регистрации</span></li>
+        <li id="stepDesc0" class="<?= $_SESSION['count_step'] == 0 ? 'current' : ''?>">Шаг 1<span>Лицевой счет</span></li>
+        <li id="stepDesc1" class="<?= $_SESSION['count_step'] == 1 ? 'current' : ''?>">Шаг 2<span>Пользовательские данные</span></li>
+        <li id="stepDesc2" class="<?= $_SESSION['count_step'] == 2 ? 'current' : ''?>">Шаг 3<span>Завершение регистрации</span></li>
     </ul>
     
     <?php if ($_SESSION['count_step'] == 0) : ?>
