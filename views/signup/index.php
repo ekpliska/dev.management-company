@@ -23,7 +23,7 @@ $this->title = 'Customers | Регистрация';
 </h1>
 <div class="slide-content tst2">
     <h2 class="text-center registration-h blue-txt">
-        Регистрация
+        Регистрация <?= 'here ' . $is_step_one . $is_step_two ?>
     </h2>
 
 
@@ -32,23 +32,23 @@ $this->title = 'Customers | Регистрация';
             <li id="stepDesc1">Шаг 2<span>Пользовательские данные</span></li>
             <li id="stepDesc2">Шаг 3<span>Завершение регистрации</span></li>
         </ul>
-     
-        <div id="step0">
-            <fieldset>
-                <!--<legend>Лицевой счет</legend>-->
-                <?= $this->render('form/step_one', ['model_step_one' => $model_step_one]) ?>
-                
-            </fieldset>
-        </div>
-            
-        <div id="step1" style="display: none;">
-            <fieldset>
-                <legend>Пользовательские данные</legend>
-                <?= $this->render('form/step_one', ['model_step_one' => $model_step_one]) ?>
-                
-                
-            </fieldset>
-        </div>
+    
+        <?php if ($is_step_one == false && $is_step_two == false) : ?>
+            <div id="step0">
+                <fieldset>
+                    <?= $this->render('form/step_one', ['model_step_one' => $model_step_one]) ?>
+                </fieldset>
+            </div>
+        <?php endif; ?>
+    
+        <?php if ($is_step_one == true && $is_step_two == false) : ?>
+            <div id="step1">
+                <fieldset>
+                    <legend>Пользовательские данные</legend>
+                        <?= $this->render('form/step_two', ['model_step_two' => $model_step_two]) ?>
+                </fieldset>
+            </div>
+        <?php endif; ?>
             
         <div id="step2" style="display: none;">
             <fieldset>

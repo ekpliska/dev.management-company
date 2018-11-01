@@ -24,13 +24,14 @@ class SignupStepOne extends Model {
     public function afterValidate() {
         
         if (!$this->hasErrors()) {
+            
             $account = $this->account_number;
             $summ = $this->last_summ;
             $square = $this->square;
 
             $is_account = PersonalAccount::findAccountBeforeRegister($account, $summ, $square);
 
-            if (!$is_account) {
+            if ($is_account == null) {
                 $this->addError($attribute, 'Вы используете некорректные данные');
                 return false;
             }

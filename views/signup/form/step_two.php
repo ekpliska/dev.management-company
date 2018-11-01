@@ -1,10 +1,9 @@
 <?php
-    use yii\bootstrap\ActiveForm;
+
+    use yii\widgets\ActiveForm;
     use yii\helpers\Html;
 /* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Регистрация, шаг 2
  */
 ?>
 <?php
@@ -19,6 +18,8 @@
         ],
     ])
 ?>
+
+<?= $form->errorSummary($model_step_two); ?>
 
 <?= $form->field($model_step_two, 'email')
     ->input('text', [

@@ -19,6 +19,24 @@ class SignupStepTwo extends Model {
         ];
     }
     
+    public function afterValidate() {
+        
+        if (!$this->hasErrors()) {
+            
+            $email = $this->email;
+
+            $is_user = \app\models\User::findByEmail($email);
+
+            if ($is_user != null) {
+                $this->addError($attribute, 'Указанный электронный адрес используется в системе');
+                return false;
+            }
+        }
+        
+        parent::afterValidate();
+        
+    }
+    
     public function attributeLabels() {
         return [
             'email' => 'Email',

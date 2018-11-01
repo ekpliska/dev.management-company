@@ -5,7 +5,7 @@
     use yii\db\ActiveRecord;
     use app\models\Clients;
     use app\models\Rents;
-    use app\models\Houses;
+    use app\models\Flats;
     use app\models\Organizations;
     use yii\helpers\ArrayHelper;
     use app\models\AccountToUsers;
@@ -53,8 +53,8 @@ class PersonalAccount extends ActiveRecord
         return $this->hasOne(Rents::className(), ['rents_id' => 'personal_rent_id']);
     }
     
-    public function getHouse() {
-        return $this->hasOne(Houses::className(), ['houses_account_id' => 'account_id']);        
+    public function getFlat() {
+        return $this->hasOne(Flats::className(), ['flats_account_id' => 'account_id']);        
     }
     
     public function getOrganization() {
@@ -82,14 +82,18 @@ class PersonalAccount extends ActiveRecord
      * проверить сущестование лицевого счета
      *      по Номеру лицевого счета
      *      по Последней сумме в квитанции
-     *      по по Прощади жилого повещения
+     *      по Прощади жилого повещения
+     * 
+     * При регистрации нового пользователя, лицевому счету ставится статус Активен
      */
     public static function findAccountBeforeRegister($account, $summ, $square) {
         
         $is_account = self::find()
+                ->joinWith('flat')
                 ->where(['account_number' => $account])
-//                ->andWhere(['account_balance' => $summ])
-//                ->andWhere(['' => $square])
+                ->andWhere(['account_balance' => $summ])
+                ->andWhere(['isActive' => true])
+                ->andWhere(['flats_square' => $square])
                 ->asArray()
                 ->one();
         

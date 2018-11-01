@@ -187,6 +187,14 @@ class User extends ActiveRecord implements IdentityInterface
                     'status' => self::STATUS_ENABLED])
                 ->one();
     }
+    
+    public static function findByEmail($email) {
+        
+        return self::find()
+                ->where(['user_email' => $email])
+                ->asArray()
+                ->one();
+    }
 
     /*
      *  Получить ID пользователя
