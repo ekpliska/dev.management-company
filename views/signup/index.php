@@ -23,44 +23,40 @@ $this->title = 'Customers | Регистрация';
 </h1>
 <div class="slide-content tst2">
     <h2 class="text-center registration-h blue-txt">
-        Регистрация <?= 'here ' . $is_step_one . $is_step_two ?>
+        Регистрация
+        <?php // print_r($_SESSION) ?>
     </h2>
 
 
-        <ul id="steps">
-            <li id="stepDesc0" class="current">Шаг 1<span>Лицевой счет</span></li>
-            <li id="stepDesc1">Шаг 2<span>Пользовательские данные</span></li>
-            <li id="stepDesc2">Шаг 3<span>Завершение регистрации</span></li>
-        </ul>
+    <ul id="steps">
+        <li id="stepDesc0" class="current">Шаг 1<span>Лицевой счет</span></li>
+        <li id="stepDesc1">Шаг 2<span>Пользовательские данные</span></li>
+        <li id="stepDesc2">Шаг 3<span>Завершение регистрации</span></li>
+    </ul>
     
-        <?php if ($is_step_one == false && $is_step_two == false) : ?>
-            <div id="step0">
-                <fieldset>
-                    <?= $this->render('form/step_one', ['model_step_one' => $model_step_one]) ?>
-                </fieldset>
-            </div>
-        <?php endif; ?>
-    
-        <?php if ($is_step_one == true && $is_step_two == false) : ?>
-            <div id="step1">
-                <fieldset>
-                    <legend>Пользовательские данные</legend>
-                        <?= $this->render('form/step_two', ['model_step_two' => $model_step_two]) ?>
-                </fieldset>
-            </div>
-        <?php endif; ?>
-            
-        <div id="step2" style="display: none;">
+    <?php if ($_SESSION['count_step'] == 0) : ?>
+        <div id="step0">
             <fieldset>
-                <legend>Завершение регистрации</legend>
-                <label for="NameOnCard">Name on Card</label>
-                <input id="NameOnCard" type="text">
-                <label for="CardNumber">Card Number</label>
-                <input id="CardNumber" type="text">
-                <label for="CreditcardMonth">Expiration</label>
-                <p id="step2commands"><a href="#" id="step2Prev" class="prev">&lt; Back</a></p>
+                <?= $this->render('form/step_one', ['model_step_one' => $model_step_one]) ?>
             </fieldset>
         </div>
+    <?php endif; ?>
+    
+    <?php if ($_SESSION['count_step'] == 1) : ?>
+        <div id="step1">
+            <fieldset>
+                <?= $this->render('form/step_two', ['model_step_two' => $model_step_two]) ?>
+            </fieldset>
+        </div>
+    <?php endif; ?>
+    
+    <?php if ($_SESSION['step_one'] == 2) : ?>
+        <div id="step2">
+            <fieldset>
+                <?= $this->render('form/step_three', ['model_step_three' => $model_step_three]) ?>
+            </fieldset>
+        </div>
+    <?php endif; ?>
     
 
     

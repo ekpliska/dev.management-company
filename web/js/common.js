@@ -53,6 +53,36 @@ $('.close-menu').click(function() {
 
 
 /*
+ * 
+ * @param {type} $
+ * @returns {undefined}
+ */
+$('#send-request-to-sms').on('click', function() {
+    var phoneNumber = $('input[name*="phone"]').val();
+    var re = /^\+7\ \([\d]{3}\)\ [\d]{3}-[\d]{2}-[\d]{2}$/;
+    var valid = re.test(phoneNumber);
+    if (valid === true && phoneNumber.length == 18) {
+        $.ajax({
+            url: 'signup/send-sms-to-register',
+            method: 'POST',
+            data: {
+                phoneNumber: phoneNumber,
+            },
+            success: function (data, textStatus, jqXHR) {
+                console.log('ok');
+                console.log(data.nubmer);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log('ok');                
+            }
+        });
+        return alert('Отправить смс код');        
+    }
+    return alert('Ошибка заполненич номера телефона');
+    
+});
+
+/*
  * Скрыть/показать полный текст комментария к заявке
  */
 (function( $ ) {
