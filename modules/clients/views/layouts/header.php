@@ -48,7 +48,7 @@
                     <div class="border-menu">      
                         <span class="item"> 
                           <nav class="nav menu-big">
-                          <a class="nav-link nav-bt" href="#">Лицевой счет</a>
+                          <a class="nav-link nav-bt" href="<?= Url::to(['personal-account/index']) ?>">Лицевой счет</a>
                           <a class="nav-link nav-bt nav-podmenu" href="#">Квитанция ЖКУ</a>
                           <a class="nav-link nav-bt nav-podmenu" href="#">Показания приборов учета</a>
                           <a class="nav-link nav-bt nav-podmenu" href="#">Платежи</a>

@@ -6,6 +6,21 @@
  */
 $this->title = 'Общая информация';
 ?>
+
+<div class="account-info-table-container">
+    <?= $this->render('data/list', ['account_info' => $account_info]); ?>
+    <?php if (Yii::$app->user->can('clients')) : ?>
+        <div>
+            <?= Html::button('Добавить лицевой счет', [
+                    'class' => 'blue-btn mx-auto text-center add-acc-btn',
+                    'data-toggle' => 'modal',
+                    'data-target' => '#create-account-modal-form']) ?>
+        </div>
+        <?= $this->render('form/create_account') ?>
+    <?php endif; ?>
+</div>
+
+<?php /*
 <div class="clients-default-index">
     <h1><?= $this->title ?></h1>
 
@@ -56,6 +71,9 @@ $this->title = 'Общая информация';
         </div>
     </div>    
 </div>
+*/
+?>
+
 
 <?php
 /*

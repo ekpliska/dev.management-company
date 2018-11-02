@@ -1007,10 +1007,15 @@ margin-top: 94px;
 .account-info-table-container {
     border: 1px solid #D4D4D4;
     border-radius: 12px;
-    /*box-shadow: 0 4px 26px 2px rgba(103,40,190,0.08);*/
+    min-height: 850px;
+    min-width: 818px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
+
 .account-info-table-container.req-table-container {
-min-width: 1300px;
+    min-width: 1300px;
 }
 
 .req-badge {
@@ -1166,33 +1171,58 @@ border-right: 1px solid #3f9aec;
 }
 
 .account-info-table {
-width: 818px;
+    width: 818px;
 }
 
 .account-info-table td {
-height: 66px;
-vertical-align: middle;
-/*border: none;*/
+    height: 66px;
+    vertical-align: middle;
 }
 .account-info-table td.text-right {
-/*border: none;*/
-vertical-align: middle;
+    vertical-align: middle;
 }
 
 
 .account-info-table th,
 .account-info-table thead th{
-height: 90px;
-vertical-align: middle;
-/*border: none;*/
+    height: 90px;
+    vertical-align: middle;
 }
+
 .account-info-table th {
-height: 66px;
+    height: 66px;
+}
+
+
+.table-account {
+    min-height: 690px;
+    padding-left: 42px;
+}
+
+.text-left-tb, .text-right-tb {
+    color: #000000; 
+    font-family: "Mplus 1p";  
+    font-size: 16px;  
+    letter-spacing: 0.29px; 
+    line-height: 23px;
+}
+.text-right-tb {
+    border:1px solid black;
+    text-align: right;
+    padding-right:42px;
+}
+
+.foot-tb {
+    color: #000000;
+    padding-left:42px;
+    padding-top: 39px;
+    padding-bottom:39px;
+    height: 100px ! important;
+    font-weight:bold;
 }
 
 .table-striped tbody tr:nth-of-type(odd) {
-background-color: #f8f8f8;
-
+    background-color: #f8f8f8;
 }
 
 .account-info-table.pay-table {
