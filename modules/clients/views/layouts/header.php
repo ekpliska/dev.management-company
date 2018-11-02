@@ -45,11 +45,14 @@
                             </p>
                         </span>
                     </div>
-                    <div class="border-menu">
-                        <span class="item">
-                            <p style="width:100%; height: 42.5px;">
-                                <a href="#">Лицевой счет</a>
-                            </p>
+                    <div class="border-menu">      
+                        <span class="item"> 
+                          <nav class="nav menu-big">
+                          <a class="nav-link nav-bt" href="#">Лицевой счет</a>
+                          <a class="nav-link nav-bt nav-podmenu" href="#">Платежи</a>
+                          <a class="nav-link nav-bt nav-podmenu" href="#">Квитанция ЖКУ</a>
+                          <a class="nav-link nav-bt nav-podmenu" href="#">Платежи</a>
+                        </nav>
                         </span>
                     </div>
                     <div class="border-menu">
