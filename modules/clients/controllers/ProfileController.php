@@ -99,27 +99,29 @@ class ProfileController extends AppClientsController
         return $this->redirect(Yii::$app->request->referrer);
     }
     
+    
+    
     /*
      * Фильтр выбора лицевого счета
-     * 
      * dropDownList Лицевой счет
      */
     public function actionCheckAccount() {
+
+        // Из пост запроса получаем ID лицевого счета и собственника
+        $account_id = Yii::$app->request->post('dataAccount');
+        $client_id = Yii::$app->request->post('dataClient');        
         
         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         
         if (Yii::$app->request->isAjax) {
             
-            // Из пост запроса получаем ID лицевого счета и собственника
-            $account_id = Yii::$app->request->post('dataAccount');
-            $client_id = Yii::$app->request->post('dataClient');
+            // Записываем выбранный лицевой счет в куку как текущий
+            $this->setChoosingAccountCookie($account_id);
             
             // Ищем арендатора, закрепленного за указанным лицевым счетом
             $model = PersonalAccount::findByRent($account_id, $client_id);
             
-            /*
-             * Если арендатор существует, генерирурем для него модель
-             */
+            // Если арендатор существует, генерирурем для него модель
             if (!empty($model->personal_rent_id)) {
                 $model_rent = Rents::findOne(['rents_id' => $model->personal_rent_id]);
                 if ($model_rent) {
@@ -180,31 +182,29 @@ class ProfileController extends AppClientsController
         
     }
 
-    /*
-     * Сохранение данных арендатора
-     * 
-     * Форма редактирования данных Арендатора
-     */
-    public function saveRentInfo($data_rent) {
-        
-        if ($data_rent == null) {
-            return Yii::$app->session->setFlash('profile-error');            
-        }
-        
-        $_rent = Rents::find()->andWhere(['rents_id' => $data_rent['rents_id']])->one();
-        
-        if ($_rent->load(Yii::$app->request->post()) && $_rent->validate()) {
-            $_rent->save();
-            
-            return Yii::$app->session->setFlash('profile');
-        }
-        
-        return Yii::$app->session->setFlash('profile-error');
-    }
+//    /*
+//     * Сохранение данных арендатора
+//     * Форма редактирования данных Арендатора
+//     */
+//    public function saveRentInfo($data_rent) {
+//        
+//        if ($data_rent == null) {
+//            return Yii::$app->session->setFlash('profile-error');            
+//        }
+//        
+//        $_rent = Rents::find()->andWhere(['rents_id' => $data_rent['rents_id']])->one();
+//        
+//        if ($_rent->load(Yii::$app->request->post()) && $_rent->validate()) {
+//            $_rent->save();
+//            
+//            return Yii::$app->session->setFlash('profile');
+//        }
+//        
+//        return Yii::$app->session->setFlash('profile-error');
+//    }
     
     /*
      * Раздел - Настройки профиля
-     * 
      * @param array $model_password Модель смены пароля учетной записи
      */
     public function actionSettingsProfile() {
@@ -379,6 +379,20 @@ class ProfileController extends AppClientsController
             $model->saveRentToUser($client, $account);
             return $this->redirect(['profile/index']);
         }
+        
+    } 
+    
+    /*
+     * Перезапись в куку номер текущего лицевого счета
+     */
+    private function setChoosingAccountCookie($account_id) {
+        
+        Yii::$app->session->set('_userAccount', $account_id);
+        Yii::$app->response->cookies->add(new \yii\web\Cookie([
+            'name' => '_userAccount',
+            'value' => $account_id,
+            'expire' => time() + 60*60*24*7,
+        ]));        
         
     }
     

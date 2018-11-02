@@ -59,9 +59,6 @@ $(document).ready(function() {
         
         accountNumber.val($('#_list-account :selected').text());
         
-//        console.log(accountNumber + ' ' + client + ' ' + account);
-//        return false;
-        
         $.ajax({
             url: 'check-account',
             data: {
