@@ -35,7 +35,7 @@ class PersonalAccountController extends AppClientsController {
         
         // Загуржаем модель добавления нового лицевого счета
         $model = new NewAccountForm();
-
+        
         return $this->render('index', [
             'user_info' => $user_info,
             'account_info' => $account_info,
@@ -258,6 +258,29 @@ class PersonalAccountController extends AppClientsController {
             return ['status' => true, 'data' => $data];
         }
         return ['status' => false];
+    }
+    
+    /*
+     * Ajax Вадилация формы в модальном окне "Добавление нового лицевого счета"
+     */
+    public function actionValidateAccountForm() {
+        
+        $model = new NewAccountForm();
+        
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return \yii\widgets\ActiveForm::validate($model);
+        }
+    }
+    
+    public function actionCreateAccount($client_id) {
+        
+        $model = new NewAccountForm();
+        
+        if ($model->load(Yii::$app->request->post() && $model->validate())) {
+            return 'here';
+        }
+        
     }
     
     

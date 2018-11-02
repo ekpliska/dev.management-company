@@ -26,7 +26,7 @@
     $form = ActiveForm::begin([
         'id' => 'create-account-modal-form',
         'action' => ['create-account', 
-            'client' => Yii::$app->userProfile-clientID, 
+            'client_id' => Yii::$app->userProfile-clientID, 
         ],
         'enableAjaxValidation' => true,
         'validationUrl' => ['validate-account-form'],
@@ -36,7 +36,6 @@
 <?= $form->field($model, 'account_number')->input('text', ['placeHolder' => $model->getAttributeLabel('account_number')])->label(false) ?>
 <?= $form->field($model, 'last_sum')->input('text', ['placeHolder' => $model->getAttributeLabel('last_sum')])->label(false) ?>
 <?= $form->field($model, 'square')->input('text', ['placeHolder' => $model->getAttributeLabel('square')])->label(false) ?>
-<?= $form->field($model, 'client_id')->input('text', ['placeHolder' => $model->getAttributeLabel('client_id')])->label(false) ?>
 
 <div class="modal-footer no-border">
     <?= Html::submitButton('Создать', ['class' => 'btn blue-outline-btn white-btn mx-auto']) ?>
