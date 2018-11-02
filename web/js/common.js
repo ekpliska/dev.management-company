@@ -28,10 +28,10 @@ $(document).ready(function() {
     $('input[name=show_password_ch]').on('change', function() {
         var isShow = $(this);
         if (isShow.is(':checked')) {
-            $("#show_password").attr("type", "text");
+            $(".show_password").attr("type", "text");
             $("#show_password__text").text("Скрыть пароль");
         } else {
-            $("#show_password").attr("type", "password");
+            $(".show_password").attr("type", "password");
             $("#show_password__text").text("Показать пароль");
         }
     });

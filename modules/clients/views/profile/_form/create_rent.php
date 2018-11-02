@@ -16,6 +16,10 @@ Modal::begin([
     'closeButton' => [
         'class' => 'close add-acc-modal-close-btn req rent-info__btn_close',
     ],
+    'clientOptions' => [
+        'backdrop' => 'static',
+        'keyboard' => false,
+    ],
 ]);
 ?>
 
@@ -48,13 +52,13 @@ Modal::begin([
 
     <?= $form->field($add_rent, 'password')
             ->input('password', [
-//                'id' => 'show_password', 
+                'class' => 'show_password', 
                 'placeHolder' => $add_rent->getAttributeLabel('password')])
             ->label(false) ?>
 
     <?= $form->field($add_rent, 'password_repeat')
             ->input('password', [
-//                'id' => 'show_password', 
+                'class' => 'show_password', 
                 'placeHolder' => $add_rent->getAttributeLabel('password_repeat')])
             ->label(false) ?>
 

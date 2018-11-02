@@ -58,6 +58,7 @@ $this->title = 'Профиль собственника';
         </div>
         
         <?= Html::dropDownList('_list-account', $this->context->_choosing, $accounts_list, [
+                'placeholder' => '',
                 'id' => '_list-account',
                 'data-client' => $user_info->clientID]) 
         ?>
@@ -123,22 +124,11 @@ $this->title = 'Профиль собственника';
     </div>
             
     <div class="col-12 spam-agree-txt">
-        <div class="el-checkbox">
-            <?= $form->field($user, 'user_check_email')->checkbox()->label(); ?>
-        </div>
-
-<!--<label class="el-checkbox el-checkbox-red">
-    <span class="margin-r">large checkbox</span>
-    <input type="checkbox" name="check" checked="">
-    <span class="el-checkbox-style  pull-right"></span>
-</label>        -->
-        
-<!--        
-        <div class="el-checkbox">
-            <span class="margin-r">Unchecked</span>
-            <input type="checkbox" name="check" id="1_1">
-            <label class="el-checkbox-style" for="1_1"></label>
-        </div>-->
+            <?= $form->field($user, 'user_check_email', [
+                'template' => '{input}{label}'])
+                    ->checkbox([
+    'template' => '{label}{input}{error}'
+])->label(true) ?>
 
         <div class="save-btn-group mx-auto">
             <div class="text-center">
