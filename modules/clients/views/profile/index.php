@@ -62,7 +62,7 @@ $this->title = 'Профиль собственника';
                 'id' => '_list-account',
                 'data-client' => $user_info->clientID]) 
         ?>
-                
+        
     </div>
     
     
@@ -73,7 +73,7 @@ $this->title = 'Профиль собственника';
         
         <div class="col-6 clients-profile-info">
             <h5 class="profile-title">Мои контактные данные</h5>
-                    
+            
             <?= $form->field($user, 'user_mobile')
                     ->widget(MaskedInput::className(), [
                         'mask' => '+7 (999) 999-99-99'])
@@ -81,14 +81,6 @@ $this->title = 'Профиль собственника';
                         'class' => 'mx-auto py-3 d-block form-control input-registration',
                         'placeholder' => $user->getAttributeLabel('user_mobile')])
                     ->label(false) ?>
-                    
-            <?php /* = $form->field($user, 'user_mobile')
-                    ->widget(MaskedInput::className(), [
-                        'mask' => '+7 (999) 999-99-99'])
-                    ->input('text', [
-                        'class' => 'mx-auto py-3 d-block form-control input-registration',
-                        'placeholder' => $user->getAttributeLabel('user_mobile')])
-                    ->label(false) */ ?>
                     
             <?= $form->field($user, 'user_email')
                     ->input('text', [
@@ -110,7 +102,7 @@ $this->title = 'Профиль собственника';
                     
             </h5>
             
-            <div id="content-replace" class="form-add-rent">`
+            <div id="content-replace" class="form-add-rent">
             <?php if (isset($is_rent) && $is_rent) : ?>
                 <?= $this->render('_form/rent-view', [
                         'form' => $form,
@@ -124,11 +116,8 @@ $this->title = 'Профиль собственника';
     </div>
             
     <div class="col-12 spam-agree-txt">
-            <?= $form->field($user, 'user_check_email', [
-                'template' => '{input}{label}'])
-                    ->checkbox([
-    'template' => '{label}{input}{error}'
-])->label(true) ?>
+        
+        <?= $form->field($user, 'user_check_email', ['template' => '{input}{label}'])->checkbox(['template' => '{label}{input}'])->label(true) ?>
 
         <div class="save-btn-group mx-auto">
             <div class="text-center">

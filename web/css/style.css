@@ -520,7 +520,7 @@ body {
 }
 
 .nav-podmenu {
-    font-size: 14px !important;
+    font-size: 12px !important;
     padding-bottom: 6px !important;
 }
 
@@ -532,7 +532,7 @@ body {
 }
 
 .menu-big {
-    padding-left: 45.3%;
+    padding-left: 43.7%;
     margin-top: -8.5px;
 }
 
@@ -736,15 +736,15 @@ ul li:last-of-type .submenu-nav-link {
 
 .modal_menu, .item a:hover {
     color: #FFFFFF;
-    font-size: 24px;
+    font-size: 19px;
     text-decoration: none; 
 }
 
 .modal_menu, .item a { 
-    color: #969c9e; 
-    font-family: "Mplus 1p Medium"; 
-    font-size: 19px;  
-    letter-spacing: 0.34px; 
+    color: #969c9e;
+    font-family: "Mplus 1p Medium";
+    font-size: 17px;
+    letter-spacing: 0.34px;
     line-height: 20px;
     text-decoration: none;
     text-transform: uppercase;    
@@ -1775,14 +1775,8 @@ margin-top: 57px;
 }
 
 .save-btn-group {
- margin-top: 102px;
+ margin-top: 40px;
  margin-bottom: 143px; 
-}
-.save-btn-group button:first-of-type {
- margin-right: 15.5px; 
-}
-.save-btn-group button:last-of-type {
- margin-left: 15.5px; 
 }
 
 .news-h {
@@ -3230,9 +3224,11 @@ button.again-bt {
     border-bottom: none !important;
 }
 
-.clients-profile-info, 
+.clients-profile-info {
+    padding-left: 100px;    
+}
 .rent-profile-info {
-    padding-left: 100px;
+    padding-right: 100px;
 }
 
 .profile-title {
@@ -3382,4 +3378,17 @@ button#send-request-to-sms:focus{
 }
 input[type="radio"], input[type="checkbox"] {
     display: none;
+}
+
+/* Выпадающий список Лицево счет, Профиль */
+#_list-account {
+    margin-top: 20px;
+    padding: 5px;
+    width: 380px;
+    border: 1px solid #2d18b4;
+    outline: none;
+    border-radius: 15px;
+    text-align: center;
+    color: #2d18b4;
+    text-align-last:center;
 }
