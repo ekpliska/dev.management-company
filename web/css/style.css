@@ -3303,15 +3303,21 @@ button.again-bt {
     z-index: 10100;
     box-sizing: border-box;
     box-shadow: 0 10px 14px 2px rgba(0,0,0,0.26);
-    border-radius: 3px;
+    border-radius: 15px;
     transition: background .2s;
 }
 .modal-header {
     color: #fff;
     border-bottom: none;
+    padding-top: 36px;
 }
 .modal-header h5 {
-    font-size: 27px;
+    font-family: "Mplus 1p";
+    font-size: 20px;
+    letter-spacing: 1.5px;
+    line-height: 29px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .modal-header .close {
@@ -3319,7 +3325,9 @@ button.again-bt {
 }
 
 #add-rent-modal input[type="text"],
-#add-rent-modal input[type="password"] {
+#add-rent-modal input[type="password"],
+#create-account-modal-form input[type="text"],
+#create-account-modal-form input[type="password"] {
     display: block;
     width: 100%;
     height: calc(2.25rem + 2px);
@@ -3332,8 +3340,30 @@ button.again-bt {
     border: 1px solid #808080;
     border-radius: 0.25rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    background: transparent;    
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #c1c1c1c1;
 }
+
+#add-rent-modal input[type="text"]:focus,
+#add-rent-modal input[type="password"]:focus,
+#create-account-modal-form input[type="text"]:focus,
+#create-account-modal-form input[type="password"]:focus {
+    outline: none;
+    border-bottom: 1px solid #fff;
+    box-shadow: none;
+}
+
+
+
+/* Переодпределение ширины, высоты модальных окон */
+div[id="create-account-modal"] .modal-content {
+    width: 670px;
+} 
+form[id="create-account-modal-form"] {
+    width: 65%;
+}
+
 
 .del-ar {
     color: #fff;

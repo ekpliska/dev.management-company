@@ -232,7 +232,14 @@ $(document).ready(function() {
         }
     });
     
-
+    /*
+     * Сброс формы в модальном окне на добавление нового личевого счета при закрытии формы "Отмена"/х
+     */
+    $('.account-create__btn_close').on('click', function () {
+        alert('here');
+        $('#create-account-modal-form')[0].reset();
+    }); 
+    
     /*
      * Раздел 'Приборы учета'
      * 
@@ -249,7 +256,7 @@ $(document).ready(function() {
     $('.btn__add_indication').on('click', function() {
         ind.prop('disabled', false);
     });
-
+    
     /* End Block of Personal Account */
 
 

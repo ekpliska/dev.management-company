@@ -14,9 +14,9 @@ $this->title = 'Общая информация';
             <?= Html::button('Добавить лицевой счет', [
                     'class' => 'blue-btn mx-auto text-center add-acc-btn',
                     'data-toggle' => 'modal',
-                    'data-target' => '#create-account-modal-form']) ?>
+                    'data-target' => '#create-account-modal']) ?>
         </div>
-        <?= $this->render('form/create_account') ?>
+        <?= $this->render('form/create_account', ['model' => $model]) ?>
     <?php endif; ?>
 </div>
 

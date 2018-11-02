@@ -12,6 +12,7 @@
     use app\modules\clients\models\ClientsRentForm;
     use app\models\Houses;
     use app\models\Counters;
+    use app\modules\clients\models\form\NewAccountForm;
 
 /**
  * Контроллер по работе с разделом "Лицевой счет"
@@ -29,14 +30,16 @@ class PersonalAccountController extends AppClientsController {
         
         $user_info = $this->permisionUser();
         $accoint_id = $this->_choosing;
-        $account_all = $this->_list;
         
         $account_info = PersonalAccount::getAccountInfo($accoint_id, $user_info->clientID);
+        
+        // Загуржаем модель добавления нового лицевого счета
+        $model = new NewAccountForm();
 
         return $this->render('index', [
             'user_info' => $user_info,
             'account_info' => $account_info,
-            'account_all' => $account_all,
+            'model' => $model,
         ]);
         
     }
