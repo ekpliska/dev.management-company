@@ -142,25 +142,25 @@
 </header>
 
 <?php
-$this->registerJs('
-    $(".current__account_list").on("change", function() {
-        var idAccount = $(this).val();
-        
-        $.ajax({
-            url: "' . yii\helpers\Url::to(['app-clients/current-account']) . '",
-            method: "POST",
-            typeData: "json",
-            data: {
-                idAccount: idAccount,
-            },
-            error: function() {
-                console.log("#1001 - Ошибка Ajax запроса");
-            },
-            success: function(response) {
-                // console.log(response.success);
-            }
-        });
-
-    })
-')
+//$this->registerJs('
+//    $(".current__account_list").on("change", function() {
+//        var idAccount = $(this).val();
+//        
+//        $.ajax({
+//            url: "' . yii\helpers\Url::to(['app-clients/current-account']) . '",
+//            method: "POST",
+//            typeData: "json",
+//            data: {
+//                idAccount: idAccount,
+//            },
+//            error: function() {
+//                console.log("#1001 - Ошибка Ajax запроса");
+//            },
+//            success: function(response) {
+//                // console.log(response.success);
+//            }
+//        });
+//
+//    })
+//')
 ?>
