@@ -13,11 +13,38 @@
 
 $this->title = 'Настройки';
 ?>
+
+
+<div class="col-12 p-0 m-0 text-center profile-settings">
+    <div class="row">
+        <div class="col-3 profile-info">
+            <h5 class="profile-title">Профиль</h5>
+            <?= $this->render('data/profile-info', ['user_info' => $user_info]) ?>
+            
+            #TODO если у текущего пользователя существует 
+            
+        </div>
+        <div class="col-9 profile-form-settings">
+            <h5 class="profile-title-setting">Изменить пароль</h5>
+            <?= $this->render('_form/change-password', ['model_password' => $model_password]) ?>
+            
+            <h5 class="profile-title-setting">Изменить номер мобильного телефона</h5>
+            <?php // = $this->render('_form/change-password', ['model_password' => $model_password]) ?>
+            
+            <h5 class="profile-title-setting">Изменить адрес электронноый почты</h5>
+            <?= $this->render('_form/change-email', ['user' => $user]) ?>
+            
+        </div>
+    </div>
+</div>
+
+
+<?php /*
 <div class="clients-default-index">
     <h1><?= $this->title ?></h1>
     
-    <?= SubMenuProfile::widget() ?>
-    <?= AlertsShow::widget() ?>
+    <?php // = SubMenuProfile::widget() ?>
+    <?php // = AlertsShow::widget() ?>
 
     <div class="col-md-4">
         <div class="panel panel-default">
@@ -135,3 +162,4 @@ $this->title = 'Настройки';
     </div>
 
 </div>
+ * */ ?>

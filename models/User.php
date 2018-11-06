@@ -39,7 +39,6 @@ class User extends ActiveRecord implements IdentityInterface
     public $is_new = false;
     public $role;
 
-
     public function behaviors() {
         return [
             TimestampBehavior::className(),
@@ -351,7 +350,7 @@ class User extends ActiveRecord implements IdentityInterface
     }
     
     /*
-     * Метод сохранения электронной почты/мобильного телефона
+     * Метод сохранения электронной почты
      * 
      * Если пользователь меняет мобильный телефон, то 
      * номер меняется у сущности Пользователь/Собственник/Арендатор
@@ -360,13 +359,13 @@ class User extends ActiveRecord implements IdentityInterface
     public function updateEmailProfile() {
         
         if ($this->validate()) {
-            if (Yii::$app->user->can('AddNewRent')) {
-                $this->client->clients_mobile = $this->user_mobile;
-                $this->client->save();                
-            } else {
-                $this->rent->rents_mobile = $this->user_mobile;
-                $this->rent->save();
-            }
+//            if (Yii::$app->user->can('AddNewRent')) {
+//                $this->client->clients_mobile = $this->user_mobile;
+//                $this->client->save();                
+//            } else {
+//                $this->rent->rents_mobile = $this->user_mobile;
+//                $this->rent->save();
+//            }
             $this->save();
             return true;
         }

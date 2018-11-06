@@ -39,7 +39,6 @@ class ProfileController extends AppClientsController
         
     }
     
-    
     /*
      * Метод обновления профиля пользователя
      */
@@ -95,69 +94,6 @@ class ProfileController extends AppClientsController
         Yii::$app->session->setFlash('profile-error');
         return $this->redirect(Yii::$app->request->referrer);
     }
-    
-    
-//    /*
-//     * Метод обновления профиля пользователя
-//     */
-//    public function actionUpdateProfile($form) {
-//
-//        if (empty($form)) {
-//            throw new NotFoundHttpException('При сохранении профиля возникла ошибка. Повторите действие еще раз');
-//        }
-//        
-//        if (Yii::$app->request->isPost) {
-//            if (isset($_POST['is_rent'])) {
-//                // Загружаем модель пользователя
-//                $user_info = $this->permisionUser()->_model;
-//                // Загружаем модель для Добавления Нового арендатора
-//                $add_rent = new ClientsRentForm(['scenario' => ClientsRentForm::SCENARIO_AJAX_VALIDATION]);
-//                
-//                if ($user_info->load(Yii::$app->request->post())) {
-//                    // Сохраняем профиль пользователя
-//                    $file = UploadedFile::getInstance($user_info, 'user_photo');
-//                    $user_info->uploadPhoto($file);                    
-//                    
-//                    // Проверяем, если пришли данные из формы редактирования данных арендатора
-//                    $data_rent = Yii::$app->request->post('Rents');
-//                    if ($data_rent !== null) {
-//                        // Сохряняем их
-//                        $this->saveRentInfo($data_rent);
-//                    }                    
-//                    
-//                    // Если форма Добавления нового Арендатора загружена
-//                    if ($add_rent->load(Yii::$app->request->post())) {
-//                        // Проверяем на ошибки
-//                        if ($add_rent->hasErrors()) {
-//                            Yii::$app->session->setFlash('profile-error');
-//                            return $this->redirect(Yii::$app->request->referrer);
-//                        }
-//                        // на валидацию
-//                        if ($add_rent->validate()) {
-//                            // сохраняем нового арендатора
-//                            $add_rent->saveRentToUser();
-//                        }
-//                    }
-//                    Yii::$app->session->setFlash('profile');
-//                    return $this->redirect(Yii::$app->request->referrer);
-//                }
-//            } else {
-//                // иначе. сохраняем только профиль пользователя
-//                $user_info = $this->permisionUser()->_model;
-//                if ($user_info->load(Yii::$app->request->post())) {
-//                    $file = UploadedFile::getInstance($user_info, 'user_photo');
-//                    $user_info->uploadPhoto($file);
-//                    Yii::$app->session->setFlash('profile');
-//                    return $this->redirect(Yii::$app->request->referrer);
-//                }
-//            }
-//        }
-//        
-//        Yii::$app->session->setFlash('profile-error');
-//        return $this->redirect(Yii::$app->request->referrer);
-//    }
-    
-    
     
     /*
      * Фильтр выбора лицевого счета
@@ -240,26 +176,26 @@ class ProfileController extends AppClientsController
         
     }
 
-//    /*
-//     * Сохранение данных арендатора
-//     * Форма редактирования данных Арендатора
-//     */
-//    public function saveRentInfo($data_rent) {
-//        
-//        if ($data_rent == null) {
-//            return Yii::$app->session->setFlash('profile-error');            
-//        }
-//        
-//        $_rent = Rents::find()->andWhere(['rents_id' => $data_rent['rents_id']])->one();
-//        
-//        if ($_rent->load(Yii::$app->request->post()) && $_rent->validate()) {
-//            $_rent->save();
-//            
-//            return Yii::$app->session->setFlash('profile');
-//        }
-//        
-//        return Yii::$app->session->setFlash('profile-error');
-//    }
+    /*
+     * Редактирование данных арендатора
+     * Форма редактирования данных Арендатора
+     */
+    public function saveRentInfo($data_rent) {
+        
+        if ($data_rent == null) {
+            return Yii::$app->session->setFlash('profile-error');            
+        }
+        
+        $_rent = Rents::find()->andWhere(['rents_id' => $data_rent['rents_id']])->one();
+        
+        if ($_rent->load(Yii::$app->request->post()) && $_rent->validate()) {
+            $_rent->save();
+            
+            return Yii::$app->session->setFlash('profile');
+        }
+        
+        return Yii::$app->session->setFlash('profile-error');
+    }
     
     /*
      * Раздел - Настройки профиля
@@ -270,7 +206,6 @@ class ProfileController extends AppClientsController
         $user_info = $this->permisionUser();
         
         $user = $user_info->_model;
-        $user->scenario = User::SCENARIO_EDIT_PROFILE;
         
         // Загружаем модель смены пароля
         $model_password = new ChangePasswordForm($user);
@@ -323,9 +258,11 @@ class ProfileController extends AppClientsController
     protected function client($user_info) {
         
         $accoint_id = $this->_choosing;
-        $model = $user_info->_model;
         $accounts_list = $this->_list;
-
+        
+        $model = $user_info->_model;
+        $model->scenario = User::SCENARIO_EDIT_PROFILE;
+        
         // Получить информацию по текущему лицевому счету
         $accounts_info = PersonalAccount::findByAccountID($accoint_id);
         
@@ -374,41 +311,6 @@ class ProfileController extends AppClientsController
         ]);
         
     }
-    
-    /*
-     * Показать/Скрыть форму "Добавить арендатора"
-     */
-//    public function actionShowForm() {
-//               
-//        $_show = Yii::$app->request->post('_show');
-//        $account_number = Yii::$app->request->post('accountNumber');
-//        
-//        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-//        
-//        // Проверяем данные пришедшие из пост
-//        if (!$_show && !is_numeric($account_number)) {
-//            return ['status' => false, 'message' => 'Ошибка передачи параметров'];
-//        }
-//        
-//        // Если был ajax запрос и чекбокс "Арендатор" установлен
-//        if (Yii::$app->request->isAjax && $_show) {
-//            // Загружаем подель формы на добавление нового арендатора
-//            $add_rent = new ClientsRentForm([
-//                'scenario' => ClientsRentForm::SCENARIO_AJAX_VALIDATION
-//            ]);
-//                
-//            // Формируем рендер вида формы "Добавить арендатора"
-//            $data = $this->renderAjax('_form/rent-add', [
-//                'form' => ActiveForm::begin(),
-//                'account_number' => $account_number, 
-//                'add_rent' => $add_rent]);
-//                
-//            return ['status' => true, 'show' => true, 'data' => $data];
-//        }
-//        
-//        return ['status' => false, 'message' => 'Ошибка передачи параметров'];
-//    }
-    
     
     /*
      * Проверка валидации формы добавление нового Арендатора

@@ -32,6 +32,7 @@ Modal::begin([
         ],
         'enableAjaxValidation' => true,
         'validationUrl' => ['validate-rent-form'],
+        'validateOnChange' => true,
     ]);
 ?>
 

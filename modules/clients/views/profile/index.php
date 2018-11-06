@@ -22,8 +22,6 @@ $this->title = 'Профиль собственника';
     $form = ActiveForm::begin([
         'id' => 'profile-form',
         'action' => ['profile/update-profile'],
-        'enableClientValidation' => true,
-        'enableAjaxValidation' => false,
         'validateOnChange' => true,
         'options' => [
             'enctype' => 'multipart/form-data',
@@ -74,19 +72,14 @@ $this->title = 'Профиль собственника';
         <div class="col-6 clients-profile-info">
             <h5 class="profile-title">Мои контактные данные</h5>
             
-            <?= $form->field($user, 'user_mobile')
-                    ->widget(MaskedInput::className(), [
-                        'mask' => '+7 (999) 999-99-99'])
-                    ->input('text', [
-                        'class' => 'mx-auto py-3 d-block form-control input-registration',
-                        'placeholder' => $user->getAttributeLabel('user_mobile')])
-                    ->label(false) ?>
-                    
-            <?= $form->field($user, 'user_email')
-                    ->input('text', [
-                        'class' => 'mx-auto py-3 d-block form-control input-registration',
-                        'placeholder' => $user->getAttributeLabel('user_email')])
-                    ->label(false) ?>
+            <?= Html::input('user_mobile', 'user_mobile', $user->user_mobile) ?>
+            <?= Html::a('Изменить', ['profile/settings-profile'], ['class' => 'btn btn-link']) ?>
+
+            <br />
+            
+            <?= Html::input('user_mobile', 'user_mobile', $user->user_email) ?>
+            <?= Html::a('Изменить', ['profile/settings-profile'], ['class' => 'btn btn-link']) ?>
+
         </div>
                 
 
@@ -107,8 +100,6 @@ $this->title = 'Профиль собственника';
                 <?= $this->render('_form/rent-view', [
                         'form' => $form,
                         'model_rent' => $model_rent]) ?>
-            <?php else : ?>
-                <p>Арендатор отсутствует</p>
             <?php endif; ?>
             </div>      
         </div>
@@ -129,13 +120,6 @@ $this->title = 'Профиль собственника';
 
 <?php ActiveForm::end(); ?>
 </div>
-
-
-<?php
-$this->registerJs("
-    $('form.material').materialForm();
-");
-?>
 
 <?php if (!$is_rent) : ?>
     <?= $this->render('_form/create_rent', ['add_rent' => $add_rent]) ?>
