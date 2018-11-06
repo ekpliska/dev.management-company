@@ -3355,7 +3355,7 @@ form[id="create-account-modal-form"] {
 .del-ar {
     color: #fff;
     text-align: center;
-    font-size: 20px;
+    font-size: 18px;
     margin-bottom: 40px;
 }
 
@@ -3428,14 +3428,66 @@ input[type="radio"], input[type="checkbox"] {
 }
 
 /* Выпадающий список Лицево счет, Профиль */
-#_list-account {
-    margin-top: 20px;
-    padding: 5px;
+.account-dropdown {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 10px;
+}
+
+.account-dropdown select {
     width: 380px;
     border: 1px solid #2d18b4;
-    outline: none;
-    border-radius: 15px;
-    text-align: center;
+    text-align-last: center;
     color: #2d18b4;
-    text-align-last:center;
+    font-size: inherit;
+    padding: .4em;
+    padding-right: 2.5em;
+    margin: 0;
+    outline: none;
+    border-radius: 25px;
+    text-indent: 0.01px;
+    text-overflow: '';
+    -webkit-appearance: button;
+}
+
+.account-dropdown::before,
+.account-dropdown::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+}
+
+.account-dropdown::after {
+    content: "\25BC";
+    height: 1em;
+    font-size: .625em;
+    line-height: 1;
+    right: 1.2em;
+    top: 50%;
+    margin-top: -.5em;
+}
+
+.account-dropdown::before {
+    width: 2em;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: 0 3px 3px 0;
+}
+
+.account-dropdown select[disabled] {
+    color: rgba(0,0,0,.3);
+}
+
+.account-dropdown select[disabled]::after {
+    color: rgba(0,0,0,.1);
+}
+
+.account-dropdown::before {
+    /*background-color: rgba(0,0,0,.15);*/
+}
+
+.account-dropdown::after {
+    color: rgb(45, 24, 180);
 }

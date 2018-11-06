@@ -1,6 +1,6 @@
 <?php
     
-    use yii\bootstrap\ActiveForm;
+    use yii\widgets\ActiveForm;
     use yii\helpers\Html;
     use yii\widgets\MaskedInput;
     use yii\bootstrap4\Modal;
@@ -21,7 +21,7 @@ $this->title = 'Профиль собственника';
 <?php
     $form = ActiveForm::begin([
         'id' => 'profile-form',
-        'action' => ['profile/update-profile', 'form' => 'profile-form'],
+        'action' => ['profile/update-profile'],
         'enableClientValidation' => true,
         'enableAjaxValidation' => false,
         'validateOnChange' => true,
@@ -56,13 +56,13 @@ $this->title = 'Профиль собственника';
         <div class="chip-label">
             <span class="badge badge-darkblue">Лицевой счет</span>
         </div>
-        
-        <?= Html::dropDownList('_list-account', $this->context->_choosing, $accounts_list, [
-                'placeholder' => '',
-                'id' => '_list-account',
-                'data-client' => $user_info->clientID]) 
-        ?>
-        
+        <span class="account-dropdown">
+            <?= Html::dropDownList('_list-account', $this->context->_choosing, $accounts_list, [
+                    'placeholder' => '',
+                    'id' => '_list-account',
+                    'data-client' => $user_info->clientID]) 
+            ?>
+        </span>
     </div>
     
     
@@ -114,10 +114,10 @@ $this->title = 'Профиль собственника';
         </div>
                 
     </div>
-            
+           
     <div class="col-12 spam-agree-txt">
         
-        <?= $form->field($user, 'user_check_email', ['template' => '{input}{label}'])->checkbox(['template' => '{label}{input}'])->label(true) ?>
+        <?= $form->field($user, 'user_check_email', ['template' => '{input}{label}'])->checkbox([], false)->label() ?> 
 
         <div class="save-btn-group mx-auto">
             <div class="text-center">

@@ -39,15 +39,12 @@ class ProfileController extends AppClientsController
         
     }
     
+    
     /*
      * Метод обновления профиля пользователя
      */
-    public function actionUpdateProfile($form) {
+    public function actionUpdateProfile() {
 
-        if (empty($form)) {
-            throw new NotFoundHttpException('При сохранении профиля возникла ошибка. Повторите действие еще раз');
-        }
-        
         if (Yii::$app->request->isPost) {
             if (isset($_POST['is_rent'])) {
                 // Загружаем модель пользователя
@@ -98,6 +95,67 @@ class ProfileController extends AppClientsController
         Yii::$app->session->setFlash('profile-error');
         return $this->redirect(Yii::$app->request->referrer);
     }
+    
+    
+//    /*
+//     * Метод обновления профиля пользователя
+//     */
+//    public function actionUpdateProfile($form) {
+//
+//        if (empty($form)) {
+//            throw new NotFoundHttpException('При сохранении профиля возникла ошибка. Повторите действие еще раз');
+//        }
+//        
+//        if (Yii::$app->request->isPost) {
+//            if (isset($_POST['is_rent'])) {
+//                // Загружаем модель пользователя
+//                $user_info = $this->permisionUser()->_model;
+//                // Загружаем модель для Добавления Нового арендатора
+//                $add_rent = new ClientsRentForm(['scenario' => ClientsRentForm::SCENARIO_AJAX_VALIDATION]);
+//                
+//                if ($user_info->load(Yii::$app->request->post())) {
+//                    // Сохраняем профиль пользователя
+//                    $file = UploadedFile::getInstance($user_info, 'user_photo');
+//                    $user_info->uploadPhoto($file);                    
+//                    
+//                    // Проверяем, если пришли данные из формы редактирования данных арендатора
+//                    $data_rent = Yii::$app->request->post('Rents');
+//                    if ($data_rent !== null) {
+//                        // Сохряняем их
+//                        $this->saveRentInfo($data_rent);
+//                    }                    
+//                    
+//                    // Если форма Добавления нового Арендатора загружена
+//                    if ($add_rent->load(Yii::$app->request->post())) {
+//                        // Проверяем на ошибки
+//                        if ($add_rent->hasErrors()) {
+//                            Yii::$app->session->setFlash('profile-error');
+//                            return $this->redirect(Yii::$app->request->referrer);
+//                        }
+//                        // на валидацию
+//                        if ($add_rent->validate()) {
+//                            // сохраняем нового арендатора
+//                            $add_rent->saveRentToUser();
+//                        }
+//                    }
+//                    Yii::$app->session->setFlash('profile');
+//                    return $this->redirect(Yii::$app->request->referrer);
+//                }
+//            } else {
+//                // иначе. сохраняем только профиль пользователя
+//                $user_info = $this->permisionUser()->_model;
+//                if ($user_info->load(Yii::$app->request->post())) {
+//                    $file = UploadedFile::getInstance($user_info, 'user_photo');
+//                    $user_info->uploadPhoto($file);
+//                    Yii::$app->session->setFlash('profile');
+//                    return $this->redirect(Yii::$app->request->referrer);
+//                }
+//            }
+//        }
+//        
+//        Yii::$app->session->setFlash('profile-error');
+//        return $this->redirect(Yii::$app->request->referrer);
+//    }
     
     
     

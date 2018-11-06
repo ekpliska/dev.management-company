@@ -178,7 +178,7 @@ class User extends ActiveRecord implements IdentityInterface
     
     /*
      * Поиск пользователя по параметрам
-     * @user (ID user) / @username / @account (ID лицевого счета)
+     * @user (ID user)
      */    
     public static function findByUser($user) {
         return static::find()
@@ -383,17 +383,6 @@ class User extends ActiveRecord implements IdentityInterface
             return Yii::getAlias('@web') . '/images/no-avatar.jpg';
         }
         return Yii::getAlias('@web') . $this->user_photo;
-        
-    }
-
-
-    public function afterSave($insert, $changedAttributes) {
-        
-//        parent::afterSave($insert, $changedAttributes);
-//        if ($insert) {
-//            $rentRole = Yii::$app->authManager->getRole('clients_rent');
-//            Yii::$app->authManager->assign($rentRole, $this->getId());                    
-//        }
         
     }
     
