@@ -72,14 +72,17 @@ $this->title = 'Профиль собственника';
         <div class="col-6 clients-profile-info">
             <h5 class="profile-title">Мои контактные данные</h5>
             
-            <?= Html::input('user_mobile', 'user_mobile', $user->user_mobile) ?>
-            <?= Html::a('Изменить', ['profile/settings-profile'], ['class' => 'btn btn-link']) ?>
-
-            <br />
+            <div class="field">
+                <label for="user_mobile" class="field-label">Label text</label>
+                <?= Html::input('text', 'user_mobile', $user->user_mobile, ['class' => 'field-input']) ?>
+                <?php // = Html::a('Изменить', ['profile/settings-profile'], ['class' => 'btn btn-link']) ?>
+            </div>
+            <div class="field">
+                <label for="user_email" class="field-label">Label text</label>
+                <?= Html::input('text', 'user_email', $user->user_email, ['class' => 'field-input']) ?>
+                <?php // = Html::a('Изменить', ['profile/settings-profile'], ['class' => 'btn btn-link']) ?>
+            </div>
             
-            <?= Html::input('user_mobile', 'user_mobile', $user->user_email) ?>
-            <?= Html::a('Изменить', ['profile/settings-profile'], ['class' => 'btn btn-link']) ?>
-
         </div>
                 
 

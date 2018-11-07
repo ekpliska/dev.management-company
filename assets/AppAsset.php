@@ -27,7 +27,7 @@ class AppAsset extends AssetBundle
         'css/radio.css',
         'css/style.css',
         
-        'plugins/material-form/css/jquery.material.form.css',
+//        'plugins/material-form/css/jquery.material.form.css',
         'plugins/infinite-li-scroll/css/style.css',
         'plugins/frosted-glass-effect-master/css/style.css',
         'plugins/iziModal-master/css/iziModal.min.css',
@@ -46,7 +46,7 @@ class AppAsset extends AssetBundle
         
         'js/formToWizard.js',
         
-        'plugins/material-form/js/jquery.material.form.js',
+//        'plugins/material-form/js/jquery.material.form.js',
         'plugins/infinite-li-scroll/js/index.js',
         'plugins/iziModal-master/js/iziModal.js',
         'plugins/Smooth-Div-Scroll-master/js/jquery-ui-1.10.3.custom.min.js',
