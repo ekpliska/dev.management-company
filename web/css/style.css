@@ -636,7 +636,7 @@ body {
 
 .block-of-repeat {
     position: absolute;
-    top: 50%;
+    top: 40%;
 }
 
 #repeat-sms_code {
@@ -652,6 +652,10 @@ body {
 #time-to-send {
     font-size: 14px;
     color: #6c757d;
+}
+
+.profile-form-settings form#sms-form label {
+    font-size: 12px;
 }
 
 #repeat-sms_code:focus {

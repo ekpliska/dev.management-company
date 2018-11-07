@@ -65,7 +65,15 @@ class SmsOperations extends ActiveRecord
                 ->where(['user_id' => $user_id, 'operations_type' => $type_operation])
                 ->one();
         
-    }    
+    }
+    
+    public function generateNewSMSCode() {
+        
+        $new_code = mt_rand(10000, 99999);
+        $this->sms_code = $new_code;
+        return $this->save(false) ? true : false;
+        
+    }
 
     /**
      * Аттрибуты полей

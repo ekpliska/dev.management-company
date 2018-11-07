@@ -432,19 +432,24 @@ $(document).ready(function() {
     /* End Block of Voting */
     
 
+    // ************************************************************ //
+    // ***************     Work with send SMS     **************** //
+    // *********************************************************** //
 
-    var timeMinute = 5;
+    // Количество секунд до следующей отправки
+    var timeMinute = 60*2;
     
+    // Таймер
     function startTimer(duration, display) {
         var timer = duration, minutes, seconds;
         var startTimer = setInterval(function () {
             minutes = parseInt(timer / 60, 10)
             seconds = parseInt(timer % 60, 10);
 
-            minutes = minutes < 10 ? "0" + minutes : minutes;
-            seconds = seconds < 10 ? "0" + seconds : seconds;
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            seconds = seconds < 10 ? '0' + seconds : seconds;
 
-            display.text("Отправить код повторно можно будет " + minutes + ":" + seconds);
+            display.text('Отправить код повторно можно будет ' + minutes + ':' + seconds);
 
             if (--timer < 0) {
                 timer = duration;
@@ -455,6 +460,7 @@ $(document).ready(function() {
         }, 1000);
     }
     
+    // После ввода 5тизначного смс кода формируем кнопку на повторную отправку смс
     $('.input-sms_code').on('input', function(){
         var value = $(this).val();
         if (value.length == 5) {
@@ -463,9 +469,18 @@ $(document).ready(function() {
         }        
     });
 
+    /*
+     * Генерация нового СМС кода
+     */
     $(document).on('click', '#repeat-sms_code', function (){
         display = $('#time-to-send');
         startTimer(timeMinute, display);
+        $.ajax({
+            type: 'POST',
+            url: 'generate-new-sms-code',
+        }).done(function(response) {
+//            console.log(response.status);
+        });
     });
     
 });

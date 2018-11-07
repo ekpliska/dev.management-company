@@ -205,6 +205,10 @@ class ProfileController extends AppClientsController
      */
     public function actionSettingsProfile() {
         
+        // Проверяем время существования куки на оп
+        $this->hasCookieSMS();
+        
+        
         $user_info = $this->permisionUser();
         $user = $user_info->_model;
         
@@ -368,5 +372,40 @@ class ProfileController extends AppClientsController
         ]));        
         
     }
+    
+    /*
+     * Получение куки 
+     * Если заданной куки не существует, удаляем запись на смену пароля
+     */
+    private function hasCookieSMS() {
+        
+        $cookies = Yii::$app->request->cookies;
+        $name = '_time';
+        
+        if (isset($cookies[$name])) {
+            $_record = SmsOperations::findByTypeOperation(SmsOperations::TYPE_CHANGE_PASSWORD);
+            $_record->delete(false);
+        }
+        return true;
+    }    
+    
+    /*
+     * 
+     */
+    public function actionGenerateNewSmsCode() {
+        
+        $record_sms = SmsOperations::findByTypeOperation(SmsOperations::TYPE_CHANGE_PASSWORD);
+        
+        if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            if ($record_sms->generateNewSMSCode()) {
+                return ['success' => true];
+            }
+            return ['success' => false];
+        }
+        return ['success' => false];
+
+    }
+    
     
 }

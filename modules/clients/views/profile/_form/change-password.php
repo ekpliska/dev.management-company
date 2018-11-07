@@ -40,7 +40,7 @@
                     'class' => 'form-control show_password']) 
         ?>
 
-        <?= Html::submitButton('Продолжить', ['class' => 'btn btn-primary']) ?>
+        <?= Html::submitButton('Продолжить', ['class' => 'blue-outline-btn req-table-btn']) ?>
 
     <?php ActiveForm::end(); ?>
 
@@ -59,8 +59,9 @@
             ],
             'fieldConfig' => [
                 'template' => '<div class="form-row">'
-                . '<div class="col-2">{label}{input}{error}</div>'
-                . '<div class="col-10"><div class="block-of-repeat"><span id="time-to-send"></span></div></div>'
+                . '<div class="col-sm-2">{label}{input}{error}</div>'
+                . '<div class="col-sm-8"><div class="block-of-repeat"><span id="time-to-send"></span></div>'
+                . '</div>'
                 . '</div>',
             ],
         ]);

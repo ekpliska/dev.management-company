@@ -26,8 +26,8 @@ class SMSForm extends Model {
      */
     public function rules() {
         return [
-            ['sms_code', 'required'],
-//            ['sms_code', 'checkSMSCode'],
+            ['sms_code', 'required', 'message' => 'Заполните код'],
+            ['sms_code', 'integer', 'min' => 10000, 'max' => 99999 ],
         ];
     }
     
