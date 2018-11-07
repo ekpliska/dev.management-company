@@ -431,4 +431,41 @@ $(document).ready(function() {
     
     /* End Block of Voting */
     
+
+
+    var timeMinute = 5;
+    
+    function startTimer(duration, display) {
+        var timer = duration, minutes, seconds;
+        var startTimer = setInterval(function () {
+            minutes = parseInt(timer / 60, 10)
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            display.text("Отправить код повторно можно будет " + minutes + ":" + seconds);
+
+            if (--timer < 0) {
+                timer = duration;
+                clearInterval(startTimer);
+                $('#time-to-send').html('<button type="button" id="repeat-sms_code">Отправить код повторно</button>');
+            }
+
+        }, 1000);
+    }
+    
+    $('.input-sms_code').on('input', function(){
+        var value = $(this).val();
+        if (value.length == 5) {
+            display = $('#time-to-send');
+            startTimer(timeMinute, display);
+        }        
+    });
+
+    $(document).on('click', '#repeat-sms_code', function (){
+        display = $('#time-to-send');
+        startTimer(timeMinute, display);
+    });
+    
 });

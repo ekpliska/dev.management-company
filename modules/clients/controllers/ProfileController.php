@@ -222,14 +222,13 @@ class ProfileController extends AppClientsController
             // Если данные успешно провалидированы, то устанавливаем куку времени на смену пароля
             if ($model_password->checkPassword()) {
                 $this->setTimeCookies();
-                return $this->redirect(['profile/settings-profile']);
+                return $this->refresh();
             }
         }
         
         if ($sms_model->load(Yii::$app->request->post()) && $sms_model->validate()) {
-            if ($sms_model->changePassword()) {
-                return $this->redirect(['profile/settings-profile']);
-            }
+            $sms_model->changePassword();
+            return $this->refresh();
         }
         
         return $this->render('settings-profile', [

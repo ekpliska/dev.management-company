@@ -3,6 +3,7 @@
     use yii\widgets\ActiveForm;
     use yii\helpers\Html;
     use app\modules\clients\models\form\SMSForm;
+    use yii\widgets\MaskedInput;
 
 /* 
  * Смена пароля учетной записи пользователя
@@ -53,18 +54,27 @@
             'validateOnSubmit' => true,
             'validateOnBlur' => false,
             'validateOnChange' => false,
+            'options' => [
+                'class' => 'form-horizontal',
+            ],
+            'fieldConfig' => [
+                'template' => '<div class="form-row">'
+                . '<div class="col-2">{label}{input}{error}</div>'
+                . '<div class="col-10"><div class="block-of-repeat"><span id="time-to-send"></span></div></div>'
+                . '</div>',
+            ],
         ]);
     ?>
 
         <?= $form_psw->field($sms_model, 'sms_code')
+                ->widget(MaskedInput::className(), [
+                    'mask' => '9{5,5}'])
                 ->input('text', [
-                    'placeHolder' => $sms_model->getAttributeLabel('sms_code'),
-                    'class' => 'form-control show_password'
+                    'class' => 'form-control input-sms_code',
                 ]) 
         ?>
 
-        <?= Html::submitButton('Продолжить', ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Выслать код повторно', ['profile/repeat-send-sms']) ?>
+        <?= Html::submitButton('Продолжить', ['class' => 'blue-outline-btn req-table-btn']) ?>
 
     <?php ActiveForm::end(); ?>
 

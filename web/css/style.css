@@ -627,9 +627,35 @@ body {
 }
 
 .profile-form-settings form {
-    width: 50%;
-    margin: 0;
-    padding: 10px 35px;
+    margin: 10px 25px;
+}
+
+.profile-form-settings form#sms-form input[type="text"] {
+    width: 105px;
+}
+
+.block-of-repeat {
+    position: absolute;
+    top: 50%;
+}
+
+#repeat-sms_code {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    color: #6c757d;
+    text-decoration: underline;
+    outline: none;
+}
+
+#time-to-send {
+    font-size: 14px;
+    color: #6c757d;
+}
+
+#repeat-sms_code:focus {
+    outline: none;    
 }
 
 .upload-icon {

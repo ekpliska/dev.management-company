@@ -27,29 +27,30 @@ class SMSForm extends Model {
     public function rules() {
         return [
             ['sms_code', 'required'],
-            ['sms_code', 'checkSMSCode'],
+//            ['sms_code', 'checkSMSCode'],
         ];
     }
     
     /*
      * Проверка валидации введенного смс кода и существующим в бд
      */
-    public function checkSMSCode() {
+    public function afterValidate() {
         
+        // Существующая запись по введенному смс коду
         $record = SmsOperations::findBySMSCode($this->sms_code);
+        // Поиск запроса на смену пароля по ID текущего пользователя и типу операции
+        $_record = SmsOperations::findByTypeOperation(SmsOperations::TYPE_CHANGE_PASSWORD);
         
-        if ($record == null) {
-            $this->addError('sms_code', 'Введённый код неверен');
-            return true;
-        }
-        
-        // Если время запроса на смену пароля истекло, удаляем куку и запись на смену пароля
         if (Yii::$app->request->cookies->has('_time')) {
-            $record->delete(false);
+            $_record->delete(false);
             $this->addError('sms_code', 'Время действия кода истекло');
             return true;
+        } elseif ($record == null) {
+            $this->addError('sms_code', 'Введённый код неверен');
+            return true;            
         }
         
+        parent::afterValidate();
     }
     
     /*
@@ -74,7 +75,7 @@ class SMSForm extends Model {
     
     public function attributeLabels() {
         return [
-            'sms_code' => 'СМС код'
+            'sms_code' => 'Код из СМС'
         ];
     }
     

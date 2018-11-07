@@ -53,6 +53,19 @@ class SmsOperations extends ActiveRecord
                 ->one();
         
     }
+    
+    /*
+     * Проверка наличия записи по ID пользователя и типу операции
+     */
+    public static function findByTypeOperation($type_operation) {
+        
+        $user_id = Yii::$app->user->identity->id;
+        
+        return $array = self::find()
+                ->where(['user_id' => $user_id, 'operations_type' => $type_operation])
+                ->one();
+        
+    }    
 
     /**
      * Аттрибуты полей
