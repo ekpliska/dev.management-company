@@ -47,7 +47,6 @@
 
 <?php /* Форма ввода СМС кода */ ?>
 <?php if ($is_change_password == true) : ?>
-<?php $smp_model = new SMSForm() ?>
     <?php
         $form_psw = ActiveForm::begin([
             'id' => 'sms-form',
@@ -57,9 +56,9 @@
         ]);
     ?>
 
-        <?= $form_psw->field($smp_model, 'sms_code')
+        <?= $form_psw->field($sms_model, 'sms_code')
                 ->input('text', [
-                    'placeHolder' => $smp_model->getAttributeLabel('sms_code'),
+                    'placeHolder' => $sms_model->getAttributeLabel('sms_code'),
                     'class' => 'form-control show_password'
                 ]) 
         ?>

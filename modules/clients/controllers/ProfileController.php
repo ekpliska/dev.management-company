@@ -211,50 +211,32 @@ class ProfileController extends AppClientsController
         // Загружаем модель смены пароля
         $model_password = new ChangePasswordForm($user);
         
-        // Модаль на ввод СМС кода
-        $sms_model = new SMSForm();
+        // Модель на ввод СМС кода
+        $sms_model = new SMSForm($user);
 
         
         // Получаем статус запроса на смену пароля
         $is_change_password = SmsOperations::findByUserIDAndType($user_info->userID, SmsOperations::TYPE_CHANGE_PASSWORD);
 
         if ($model_password->load(Yii::$app->request->post()) && $model_password->validate()) {
-            if ($model_password->changePassword()) {
-                Yii::$app->session->setFlash('profile', [
-                        'success' => true, 
-                        'message' => 'Пароль от вашей учетной записи успешно изменен'
-                ]);
-                return $this->refresh();
-            } else {
-                Yii::$app->session->setFlash('profile', [
-                        'success' => false, 
-                        'error' => 'При обновлении настроек профиль произошла ошибка. Повторите действие еще раз'
-                ]);
+            // Если данные успешно провалидированы, то устанавливаем куку времени на смену пароля
+            if ($model_password->checkPassword()) {
+                $this->setTimeCookies();
+                return $this->redirect(['profile/settings-profile']);
             }
         }
         
         if ($sms_model->load(Yii::$app->request->post()) && $sms_model->validate()) {
-            
+            if ($sms_model->changePassword()) {
+                return $this->redirect(['profile/settings-profile']);
+            }
         }
-        
-//        if ($user->load(Yii::$app->request->post())) {
-//            if ($user->updateEmailProfile()) {
-//                Yii::$app->session->setFlash('profile', [
-//                        'success' => true, 
-//                        'message' => 'Даные электронной почты и/или мобильный номер телефона успешно изменены'
-//                ]);
-//            } else {
-//                Yii::$app->session->setFlash('profile', [
-//                        'success' => false, 
-//                        'error' => 'При обновлении настроек профиль произошла ошибка. Повторите действие еще раз'
-//                ]);                
-//            }
-//        }
         
         return $this->render('settings-profile', [
             'user_info' => $user_info,
             'user' => $user,
             'model_password' => $model_password,
+            'sms_model' => $sms_model,
             'is_change_password' => $is_change_password,
         ]);
     }
@@ -365,6 +347,25 @@ class ProfileController extends AppClientsController
             'name' => '_userAccount',
             'value' => $account_id,
             'expire' => time() + 60*60*24*7,
+        ]));        
+        
+    }
+
+    /*
+     * Установка времени куки для СМС операций
+     */
+    private function setTimeCookies() {
+        
+        $cookies = Yii::$app->response->cookies;
+        $name_modal = '_time';
+      
+        // Количество минут для хранения куки
+        $minutes_to_add = 10;
+
+        $cookies->add(new \yii\web\Cookie([
+            'name' => $name_modal,
+            'value' => '',
+            'expire' => strtotime("+ {$minutes_to_add} minutes"),
         ]));        
         
     }

@@ -26,6 +26,7 @@ $this->title = 'Настройки';
             <h5 class="profile-title-setting">Изменить пароль</h5>
             <?= $this->render('_form/change-password', [
                     'model_password' => $model_password,
+                    'sms_model' => $sms_model,
                     'is_change_password' => $is_change_password]) ?>
             
             <h5 class="profile-title-setting">Изменить номер мобильного телефона</h5>

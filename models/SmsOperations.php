@@ -6,9 +6,9 @@
 
 class SmsOperations extends ActiveRecord
 {
-    
-    const TYPE_CHANGE_PASSWORD = 1;
 
+    const TYPE_CHANGE_PASSWORD = 1;
+    
     /**
      * Таблица БД
      */
@@ -27,6 +27,9 @@ class SmsOperations extends ActiveRecord
         ];
     }
     
+    /*
+     * Проверка наличия записи на запрос "смена пароля"
+     */
     public static function findByUserIDAndType($user_id, $type_id) {
         
         $array = self::find()
@@ -35,6 +38,19 @@ class SmsOperations extends ActiveRecord
                 ->one();
         
         return $array == null ? false : true; 
+        
+    }
+    
+    /*
+     * Проверка наличия записи по СМС коду
+     */
+    public static function findBySMSCode($sms_code) {
+        
+        $user_id = Yii::$app->user->identity->id;
+        
+        return $array = self::find()
+                ->where(['user_id' => $user_id, 'sms_code' => $sms_code, 'status' => false])
+                ->one();
         
     }
 
