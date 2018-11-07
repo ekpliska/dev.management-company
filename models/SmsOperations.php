@@ -67,14 +67,34 @@ class SmsOperations extends ActiveRecord
         
     }
     
+    /*
+     * Генерация нового СМС кода
+     */
     public function generateNewSMSCode() {
         
         $new_code = mt_rand(10000, 99999);
         $this->sms_code = $new_code;
         return $this->save(false) ? true : false;
+    }
+    
+    /*
+     * Удаление не актуальной записи операции
+     */
+    public static function deleteOperation($type_operation) {
+        
+        $user_id = Yii::$app->user->identity->id;
+        $record = self::find()
+                ->andWhere(['user_id' => $user_id, 'operations_type' => $type_operation])
+                ->one();
+        
+        if ($record !== null) {
+            $record->delete();
+        }
+        
+        return true;        
         
     }
-
+    
     /**
      * Аттрибуты полей
      */

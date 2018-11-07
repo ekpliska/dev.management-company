@@ -379,14 +379,12 @@ class ProfileController extends AppClientsController
      */
     private function hasCookieSMS() {
         
-        $cookies = Yii::$app->request->cookies;
-        $name = '_time';
-        
-        if (isset($cookies[$name])) {
-            $_record = SmsOperations::findByTypeOperation(SmsOperations::TYPE_CHANGE_PASSWORD);
-            $_record->delete(false);
-        }
+        if (!$_COOKIE['_time']) {
+            $_record = SmsOperations::deleteOperation(SmsOperations::TYPE_CHANGE_PASSWORD);
+            return false;
+        } 
         return true;
+        
     }    
     
     /*
