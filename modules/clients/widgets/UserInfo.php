@@ -5,19 +5,16 @@
     use yii\base\Widget;
 
 /**
- * Description of UserInfo
- *
- * @author Ekaterina
+ * Профиль пользователя из навигационного меню
  */
 class UserInfo extends Widget {
     
     public $_user;
     public $_choosing;
-    public $_list;
 
     public function init() {
         
-        if ($this->_choosing == null && $this->_list == null) {
+        if ($this->_choosing == null) {
             throw new InvalidConfigException('Ошибка передачи параметров');
         }
         
@@ -29,8 +26,8 @@ class UserInfo extends Widget {
         
         return $this->render('userinfo/profile', [
             'user_info' => $this->_user, 
-            'choosing' => $this->_choosing, 
-            'list' => $this->_list]);
+            'choosing' => $this->_choosing,
+        ]);
         
     }
     

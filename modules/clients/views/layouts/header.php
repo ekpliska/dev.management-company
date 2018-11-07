@@ -99,10 +99,7 @@
             </a>
             <div class="navbar-collapse collapse dual-nav w-50 order-2">
                 <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item"><a class="nav-link" href="">
-                            <?= Html::img('/images/navbar/user.svg') ?>
-                        </a>
-                    </li>
+                    <?= UserInfo::widget(['_choosing' => '1231']) ?>
                     <li class="nav-item">
                         <a class="nav-link" href="#" data-toggle="popover" data-placement="bottom" data-content="" data-original-title="" title="">
                             <label for="checkbox-tenant" data-toggle="modal" data-target="#exampleModale">
@@ -114,53 +111,11 @@
                     </li>
                 </ul>
             </div>
-<!--            <div class="modal fade" id="#modalkeyk" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            ...
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>-->
         </div>
     </nav>
 
     <?= Rubrics::widget() ?>
     <?= SubBarPaidService::widget() ?>
     
+    
 </header>
-
-<?php
-//$this->registerJs('
-//    $(".current__account_list").on("change", function() {
-//        var idAccount = $(this).val();
-//        
-//        $.ajax({
-//            url: "' . yii\helpers\Url::to(['app-clients/current-account']) . '",
-//            method: "POST",
-//            typeData: "json",
-//            data: {
-//                idAccount: idAccount,
-//            },
-//            error: function() {
-//                console.log("#1001 - Ошибка Ajax запроса");
-//            },
-//            success: function(response) {
-//                // console.log(response.success);
-//            }
-//        });
-//
-//    })
-//')
-?>

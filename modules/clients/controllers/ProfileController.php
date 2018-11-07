@@ -208,7 +208,6 @@ class ProfileController extends AppClientsController
         // Проверяем время существования куки на оп
         $this->hasCookieSMS();
         
-        
         $user_info = $this->permisionUser();
         $user = $user_info->_model;
         
