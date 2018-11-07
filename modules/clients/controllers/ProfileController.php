@@ -11,6 +11,8 @@
     use app\models\Rents;
     use app\models\PersonalAccount;
     use app\modules\clients\models\ChangePasswordForm;
+    use app\models\SmsOperations;
+    use app\modules\clients\models\form\SMSForm;
     
     
 
@@ -204,13 +206,19 @@ class ProfileController extends AppClientsController
     public function actionSettingsProfile() {
         
         $user_info = $this->permisionUser();
-        
         $user = $user_info->_model;
         
         // Загружаем модель смены пароля
         $model_password = new ChangePasswordForm($user);
         
-        if ($model_password->load(Yii::$app->request->post())) {
+        // Модаль на ввод СМС кода
+        $sms_model = new SMSForm();
+
+        
+        // Получаем статус запроса на смену пароля
+        $is_change_password = SmsOperations::findByUserIDAndType($user_info->userID, SmsOperations::TYPE_CHANGE_PASSWORD);
+
+        if ($model_password->load(Yii::$app->request->post()) && $model_password->validate()) {
             if ($model_password->changePassword()) {
                 Yii::$app->session->setFlash('profile', [
                         'success' => true, 
@@ -225,24 +233,29 @@ class ProfileController extends AppClientsController
             }
         }
         
-        if ($user->load(Yii::$app->request->post())) {
-            if ($user->updateEmailProfile()) {
-                Yii::$app->session->setFlash('profile', [
-                        'success' => true, 
-                        'message' => 'Даные электронной почты и/или мобильный номер телефона успешно изменены'
-                ]);
-            } else {
-                Yii::$app->session->setFlash('profile', [
-                        'success' => false, 
-                        'error' => 'При обновлении настроек профиль произошла ошибка. Повторите действие еще раз'
-                ]);                
-            }
+        if ($sms_model->load(Yii::$app->request->post()) && $sms_model->validate()) {
+            
         }
+        
+//        if ($user->load(Yii::$app->request->post())) {
+//            if ($user->updateEmailProfile()) {
+//                Yii::$app->session->setFlash('profile', [
+//                        'success' => true, 
+//                        'message' => 'Даные электронной почты и/или мобильный номер телефона успешно изменены'
+//                ]);
+//            } else {
+//                Yii::$app->session->setFlash('profile', [
+//                        'success' => false, 
+//                        'error' => 'При обновлении настроек профиль произошла ошибка. Повторите действие еще раз'
+//                ]);                
+//            }
+//        }
         
         return $this->render('settings-profile', [
             'user_info' => $user_info,
             'user' => $user,
             'model_password' => $model_password,
+            'is_change_password' => $is_change_password,
         ]);
     }
     

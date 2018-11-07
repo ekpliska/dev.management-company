@@ -20,13 +20,13 @@ $this->title = 'Настройки';
         <div class="col-3 profile-info">
             <h5 class="profile-title">Профиль</h5>
             <?= $this->render('data/profile-info', ['user_info' => $user_info]) ?>
-            
-            #TODO если у текущего пользователя существует 
-            
         </div>
+        
         <div class="col-9 profile-form-settings">
             <h5 class="profile-title-setting">Изменить пароль</h5>
-            <?= $this->render('_form/change-password', ['model_password' => $model_password]) ?>
+            <?= $this->render('_form/change-password', [
+                    'model_password' => $model_password,
+                    'is_change_password' => $is_change_password]) ?>
             
             <h5 class="profile-title-setting">Изменить номер мобильного телефона</h5>
             <?php // = $this->render('_form/change-password', ['model_password' => $model_password]) ?>

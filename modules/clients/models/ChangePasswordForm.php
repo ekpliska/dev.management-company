@@ -1,8 +1,10 @@
 <?php
 
     namespace app\modules\clients\models;
+    use Yii;
     use yii\base\Model;
     use app\models\User;
+    use app\models\SmsOperations;
 
 /**
  * Смена пароля учетной записи
@@ -61,13 +63,22 @@ class ChangePasswordForm extends Model {
     
     /*
      * Метода смены пароля пользователя
+     * После прохождения валидации создаем запись в таблице "СМС операции"
+     * Присваиваем операции статус "Смена пароля"
      */
     public function changePassword() {
         
         if ($this->validate()) {
-            $user = $this->_user;
-            $user->setUserPassword($this->new_password);
-            return $user->save();
+            $sms_model = new SmsOperations();
+            $sms_model->operations_type = SmsOperations::TYPE_CHANGE_PASSWORD;
+            $sms_model->user_id = Yii::$app->user->identity->id;
+            $sms_model->sms_code = mt_rand(10000, 99999);
+            $sms_model->date_registration = time();
+            $sms_model->save(false);
+            return true;
+//            $user = $this->_user;
+//            $user->setUserPassword($this->new_password);
+//            return $user->save();
         } else {
             return false;
         }
