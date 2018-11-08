@@ -39,7 +39,7 @@ class SignupStepThree extends Model {
     
     public function attributeLabels() {
         return [
-            'phone' => 'Номер телефонв',
+            'phone' => 'Номер телефона',
             'sms_code' => 'СМС код',
         ];
     }

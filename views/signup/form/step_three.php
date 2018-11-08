@@ -30,6 +30,7 @@
                     'mask' => '+7 (999) 999-99-99'])
                 ->input('text', ['class' => 'field-input'])
                 ->label($model_step_three->getAttributeLabel('phone'), ['class' => 'field-label']) ?> 
+        <?= Html::button('Получить код', ['id' => 'send-request-to-sms']) ?>
     </div>
 
     <div class="field-sms">
@@ -38,7 +39,7 @@
                 ->input('text', ['class' => 'field-input'])
                 ->label($model_step_three->getAttributeLabel('sms_code'), ['class' => 'field-label']) ?>
         
-        <?= Html::button('Получить код', ['id' => 'send-request-to-sms']) ?>
+        
     </div>
 
     <div class="text-center circle-btn-block mx-auto">

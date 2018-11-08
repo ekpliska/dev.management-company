@@ -68,30 +68,30 @@ class SiteController extends Controller
         return $this->render('index');
     }
     
-    /*
-     * Форма регистрации
-     */
-    public function actionRegistration() {
-        
-        $model = new RegistrationForm();
-                
-        if ($model->load(Yii::$app->request->post())) {
-            if ($model->validate()) {
-                
-                Yii::$app->session->setFlash('registration-done', 'Для подтверждения регистрации пройдите по ссылке, указанной в письме');
-                
-                $data_model = new User();                
-                $data_model = $model->registration();
-                return $this->goHome();
-                
-            } else {
-                Yii::$app->session->setFlash('registration-error', 'При регистрации возникла ошибка');
-            }
-        }
-        
-        return $this->render('registration', ['model' => $model]);
-    }
-
+//    /*
+//     * Форма регистрации
+//     */
+//    public function actionRegistration() {
+//        
+//        $model = new RegistrationForm();
+//                
+//        if ($model->load(Yii::$app->request->post())) {
+//            if ($model->validate()) {
+//                
+//                Yii::$app->session->setFlash('registration-done', 'Для подтверждения регистрации пройдите по ссылке, указанной в письме');
+//                
+//                $data_model = new User();                
+//                $data_model = $model->registration();
+//                return $this->goHome();
+//                
+//            } else {
+//                Yii::$app->session->setFlash('registration-error', 'При регистрации возникла ошибка');
+//            }
+//        }
+//        
+//        return $this->render('registration', ['model' => $model]);
+//    }
+//
     /**
      * Форма входа в систему
      */
@@ -103,7 +103,6 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-//            return $this->goBack();
             return $this->redirect(['clients/clients']);
         }
 
@@ -117,28 +116,29 @@ class SiteController extends Controller
      * Выход из системы
      */
     public function actionLogout() {
+        
         Yii::$app->user->logout();
         return $this->goHome();
     }
 
-    /*
-     * Подтверждение регистрации
-     */
-    public function actionEmailConfirm($token) {
-        try {
-            $model = new EmailConfirmForm($token);
-        } catch (InvalidParamException $e) {
-            throw new BadRequestHttpException($e->getMessage());
-        }
-        
-        if ($model->confirmEmail()) {
-            Yii::$app->getSession()->setFlash('registration-done', 'Ваш Email успешно подтверждён');
-        } else {
-            Yii::$app->getSession()->setFlash('registration-error', 'Ошибка подтверждения Email');
-        }
- 
-        return $this->goHome();
-    }
+//    /*
+//     * Подтверждение регистрации
+//     */
+//    public function actionEmailConfirm($token) {
+//        try {
+//            $model = new EmailConfirmForm($token);
+//        } catch (InvalidParamException $e) {
+//            throw new BadRequestHttpException($e->getMessage());
+//        }
+//        
+//        if ($model->confirmEmail()) {
+//            Yii::$app->getSession()->setFlash('registration-done', 'Ваш Email успешно подтверждён');
+//        } else {
+//            Yii::$app->getSession()->setFlash('registration-error', 'Ошибка подтверждения Email');
+//        }
+// 
+//        return $this->goHome();
+//    }
     
     /*
      * Запрос на восстановление пароля

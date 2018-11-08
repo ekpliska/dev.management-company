@@ -1,5 +1,5 @@
 <?php
-    use yii\bootstrap\ActiveForm;
+    use yii\widgets\ActiveForm;
     use yii\helpers\Html;
     use yii\helpers\Url;
     
@@ -17,12 +17,14 @@ $this->title = "Customers | Восстановаление пароля";
     <?php
         $form = ActiveForm::begin([
             'id' => 'password-reset-form',
+            'validateOnChange' => false,
+            'validateOnBlur' => false,
             'fieldConfig' => [
-                'template' => "{label}{input}{error}",
+                'template' => '<div class="field">{label}{input}</div>',
                 'labelOptions' => ['class' => 'label-registration hidden'],
             ],
             'options' => [
-                'class' => 'form-signin d-block my-auto material',
+                'class' => 'form-signin d-block my-auto',
             ],
         ])
     ?>
@@ -30,10 +32,8 @@ $this->title = "Customers | Восстановаление пароля";
     <div class="mx-auto registration-form-group">
 
         <?= $form->field($model, 'email')
-                ->input('text', [
-                    'class' => 'mx-auto py-3 d-block form-control input-registration', 
-                    'placeholder' => $model->getAttributeLabel('email')])
-                ->label(true) ?>
+                ->input('text', ['class' => 'field-input'])
+                ->label($model->getAttributeLabel('email'), ['class' => 'field-label']) ?>
 
         <small>Для восстановление пароля введите адрес электронной почты, указанный при регистрации</small>
                 
@@ -50,9 +50,3 @@ $this->title = "Customers | Восстановаление пароля";
     <?php ActiveForm::end(); ?>
     
 </div>
-
-<?php
-$this->registerJs("
-    $('form.material').materialForm();
-");
-?>

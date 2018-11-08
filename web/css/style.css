@@ -3533,7 +3533,7 @@ a.nav-link.submenu-nav-link.right-rubrick {
 
 button#send-request-to-sms {
     position: absolute;
-    top: 15px;
+    top: 25px;
     left: 70%;
     background: transparent;
     border: none;
