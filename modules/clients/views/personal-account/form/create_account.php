@@ -28,14 +28,26 @@
         'action' => ['create-account', 
             'client_id' => Yii::$app->userProfile-clientID, 
         ],
+        'validateOnChange' => false,
+        'validateOnBlur' => false,
         'enableAjaxValidation' => true,
         'validationUrl' => ['validate-account-form'],
+        'fieldConfig' => [
+            'template' => '<div class="field-modal">{label}{input}{error}</div>',
+            'labelOptions' => ['class' => 'label-registration hidden'],
+        ],
     ]);
 ?>
 
-<?= $form->field($model, 'account_number')->input('text', ['placeHolder' => $model->getAttributeLabel('account_number')])->label(false) ?>
-<?= $form->field($model, 'last_sum')->input('text', ['placeHolder' => $model->getAttributeLabel('last_sum')])->label(false) ?>
-<?= $form->field($model, 'square')->input('text', ['placeHolder' => $model->getAttributeLabel('square')])->label(false) ?>
+<?= $form->field($model, 'account_number')
+        ->input('text', ['class' => 'field-input-modal'])
+        ->label($model->getAttributeLabel('account_number'), ['class' => 'field-label-modal']) ?>
+<?= $form->field($model, 'last_sum')
+        ->input('text', ['class' => 'field-input-modal'])
+        ->label($model->getAttributeLabel('last_sum'), ['class' => 'field-label-modal']) ?>
+<?= $form->field($model, 'square')
+        ->input('text', ['class' => 'field-input-modal'])
+        ->label($model->getAttributeLabel('square'), ['class' => 'field-label-modal']) ?>
 
 <div class="modal-footer no-border">
     <?= Html::submitButton('Создать', ['class' => 'btn blue-outline-btn white-btn mx-auto']) ?>

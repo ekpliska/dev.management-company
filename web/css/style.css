@@ -554,7 +554,7 @@ body {
     height: 260px;
     width: 479px;
     border-radius: 12px;
-    background: linear-gradient(180.67deg, #39284E 0%, rgba(10,8,8,0.5) 100%);
+    background: linear-gradient(180.67deg, #39284E 0%, rgba(10,8,8,0.7) 100%);
     box-shadow: 0 10px 14px 2px rgba(0,0,0,0.26);  
 }
 
@@ -567,14 +567,41 @@ body {
     border-color: transparent transparent #343A40 transparent;
 }
 
-.dropdown_footer {
-    margin: 40px;
+.dropdown_footer div {
+    padding: 40px 30px 0px 30px;
+    font-family: "Mplus 1p";
+}
+
+.dropdown a#navbarDropdown:hover {
+    background: #928DD2;
+    border-radius: 50px;    
+}
+
+.dropdown_footer a.footer_link {
+    text-transform: uppercase;
+    color: #fff;
+    letter-spacing: 0.12em;
+}
+
+.dropdown_footer a.footer_link:hover {
+    text-decoration: none;
+}
+
+.dropdown_footer a.footer_link-logout {
+    text-transform: uppercase;
+    color: #ff1760;
+    letter-spacing: 0.12em;
+}
+
+.dropdown_footer a.footer_link-logout:hover {
+    text-decoration: none;
 }
 
 .photo-user-dropdown {
     border: 4px solid #2D18B4;
     box-shadow: 0px 0px 0px 20px rgba(45, 24, 180, 0.5);
-    margin: 40px;
+    margin-top: 40px;
+    width: 100px;
 }
 
 .dropdown_user-info {
@@ -591,14 +618,7 @@ body {
     margin-bottom: 0px;    
 }
 
-.mail-border {
-    height: 33px; 
-    width: 300px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid #414141; 
-}
-
-.mail-border a {
+.mail-border p {
     color: #ef693a;
 }
 
@@ -643,8 +663,6 @@ body {
 .face-container {
     position: relative;
     top: 89px;
-    margin-left: 601px;
-    margin-right: 601px; 
 }
 .profile-name {
      margin-top: 152px; 

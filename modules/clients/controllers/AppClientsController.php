@@ -33,6 +33,7 @@ class AppClientsController extends Controller {
                 'class' => checkPersonalAccount::className(),
                 '_list' => '_list',
                 '_choosing' => '_choosing',
+                '_value_choosing' => '_value_choosing',
             ],
         ];
     }

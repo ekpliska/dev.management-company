@@ -99,7 +99,7 @@
             </a>
             <div class="navbar-collapse collapse dual-nav w-50 order-2">
                 <ul class="nav navbar-nav ml-auto">
-                    <?= UserInfo::widget(['_choosing' => '1231']) ?>
+                    <?= UserInfo::widget(['_value_choosing' => $this->context->_value_choosing]) ?>
                     <li class="nav-item">
                         <a class="nav-link" href="#" data-toggle="popover" data-placement="bottom" data-content="" data-original-title="" title="">
                             <label for="checkbox-tenant" data-toggle="modal" data-target="#exampleModale">

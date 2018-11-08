@@ -22,6 +22,8 @@ class checkPersonalAccount extends Behavior {
      * в dropDownList
      */
     public $_choosing;
+    
+    public $_value_choosing;
 
     public function events() {
         return [
@@ -68,7 +70,11 @@ class checkPersonalAccount extends Behavior {
             ]));
         }
         
-        return $this->_choosing = $choosing;
+//        return $this->_choosing = $choosing;
+        return [
+            '_choosing' => $this->_choosing = $choosing,
+            '_value_choosing' => $this->_value_choosing = $array_account[$choosing],
+            ];
         
     }
 }

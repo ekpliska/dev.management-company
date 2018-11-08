@@ -10,11 +10,11 @@
 class UserInfo extends Widget {
     
     public $_user;
-    public $_choosing;
+    public $_value_choosing;
 
     public function init() {
         
-        if ($this->_choosing == null) {
+        if ($this->_value_choosing == null) {
             throw new InvalidConfigException('Ошибка передачи параметров');
         }
         
@@ -26,7 +26,7 @@ class UserInfo extends Widget {
         
         return $this->render('userinfo/profile', [
             'user_info' => $this->_user, 
-            'choosing' => $this->_choosing,
+            'account_number' => $this->_value_choosing,
         ]);
         
     }

@@ -22,6 +22,8 @@ class ClientsController extends AppClientsController
      */
     public function actionIndex($rubric = 'important_information') {
 
+//        var_dump($this->_value_choosing); die();
+        
         $estate_id = Yii::$app->userProfile->_user['estate_id'];
         $house_id = Yii::$app->userProfile->_user['house_id'];
         $flat_id = Yii::$app->userProfile->_user['flat_id'];

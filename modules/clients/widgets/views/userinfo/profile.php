@@ -1,6 +1,7 @@
 <?php
 
     use yii\helpers\Html;
+    use yii\helpers\Url;
     use app\helpers\FormatHelpers;
 
 /* 
@@ -15,28 +16,30 @@
     <ul class="dropdown-menu">
         <li class="user-info-box">
             <div class="row">
-                <div class="col-lg-3 col-sm-3 col-3 text-center">
-                    <?= Html::img(Yii::$app->userProfile->photo, ['class' => 'w-50 rounded-circle photo-user-dropdown']) ?>
+                <div class="col-lg-5 col-sm-5 col-5 text-center">
+                    <a href="<?= Url::to(['profile/index']) ?>">
+                        <?= Html::img(Yii::$app->userProfile->photo, ['class' => 'rounded-circle photo-user-dropdown']) ?>                        
+                    </a>
                 </div>
-                <div class="col-lg-8 col-sm-8 col-8 dropdown_user-info">
-                    <strong class="dropdown_user-name">David John</strong>
+                <div class="col-lg-6 col-sm-6 col-6 dropdown_user-info">
+                    <strong class="dropdown_user-name">
+                        <?= Yii::$app->userProfile->fullNameClient ?>
+                    </strong>
                     <div class="mail-border">
-                        <p><a href="#" class="mail-color">Iam_Mayer@gmail.com</a></p>
+                        <p class="mail-color">Iam_Mayer@gmail.com</p>
                     </div>
                     <p class="dropdown_account-title">Текущий лицевой счет</p>
-                    <p class="dropdown_account-number">#########</p>
-                    <!--<small class="text-warning">27.11.2015, 15:00</small>-->
+                    <p class="dropdown_account-number"><?= $account_number ?></p>
                 </div>
             </div>
         </li>
         <li class="text-light dropdown_footer">
             <div class="col-lg-12 col-sm-12 col-12">
-                <?= Html::a('Изменить пароль', ['profile/settings-profile']) ?>
-                <!--<span>Изменить пароль</span>-->
-                <?= Html::beginForm(['/site/logout'], 'post') ?>
-                    <?= Html::submitButton('Выйти', ['class' => 'float-right text-light'])?>
-                <?= Html::endForm() ?>
-                <!--<a href="" class="float-right text-light">Выйти</a>-->
+                <?= Html::a('<i class="fa fa-lock" aria-hidden="true"></i> Изменить пароль', ['profile/settings-profile'], ['class' => 'footer_link']) ?>
+                <?= Html::a('Выйти <i class="fa fa-sign-out" aria-hidden="true"></i>', ['/site/logout'], [
+                        'data' => [
+                            'method' => 'post'], 
+                        'class' => 'float-right footer_link-logout']) ?>
             </div>
         </li>
     </ul>
