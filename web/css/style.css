@@ -389,7 +389,8 @@ body {
     font-family: "Mplus 1p";
     font-size: 12px;
     letter-spacing: 1px;
-    line-height: 18px;   
+    line-height: 18px;
+    margin-top: 7px;
 }
 
 .app-btn-group {
@@ -427,7 +428,7 @@ body {
     color: #201183;	
 }
 
-.input-registration {
+/*.input-registration {
     height: 51px;
     width: 420px;
     border: none;
@@ -454,7 +455,7 @@ body {
     font-size: 12px;
     letter-spacing: 1.26px;
     line-height: 18px;
-}
+}*/
 
 .registration-form-group {
     width: 420px; 
@@ -3533,7 +3534,7 @@ a.nav-link.submenu-nav-link.right-rubrick {
 button#send-request-to-sms {
     position: absolute;
     top: 15px;
-    left: 80%;
+    left: 70%;
     background: transparent;
     border: none;
     padding: 5px;
@@ -3646,69 +3647,4 @@ input[type="radio"], input[type="checkbox"] {
 
 .change-info {
     
-}
-
-
-
-
-.field{
-   position: relative;
-   height: 72px;
-   padding: 16px 0 8px 0;
-}
-.field-label{
-   position: relative;
-   margin: 0;
-   display: block;
-
-   color:  #bfbfbf;
-   line-height: 16px;
-   font-size: 16px;
-   font-weight: 400;
-
-   transform: translateY(24px);
-   transition: transform 0.3s, color 0.3s;
-   transform-origin: 0 50%;
-}
-.field-input{
-   position: relative;
-   display: block;
-   width: 100%;
-   height: 32px;
-   padding: 8px 0;
-
-   line-height: 16px;
-   font-family: Roboto;
-   font-size: 16px;
-
-   background: transparent;
-   border: none;
-   -webkit-appearance: none;
-   outline: none;
-}
-.field::after, .field::before{
-   content:'';
-   height: 2px;
-   width: 100%;
-   position: absolute;
-   bottom: 6px;
-   left: 0;
-
-   background-color: #e6e6e6;
-}
-
-.field::after{
-   background-color: red;
-   transform: scaleX(0);
-   transition: transform 0.3s;
-}
-.has-label .field-label{
-   transform: translateY(0) scale(0.75);
-}
-
-.is-focused .field-label{
-   color: green;
-}
-.field.is-focused::after{
-   transform: scaleX(1);
 }

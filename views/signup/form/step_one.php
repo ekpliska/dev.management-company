@@ -3,16 +3,16 @@
     use yii\widgets\ActiveForm;
     use yii\helpers\Html;
 /* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Форма регистрации, шаг первый
  */
 ?>
 <?php
     $form = ActiveForm::begin([
         'id' => 'signup-form-step-one',
+        'validateOnChange' => false,
+        'validateOnBlur' => false,
         'fieldConfig' => [
-            'template' => "{label}{input}",
+            'template' => '<div class="field">{label}{input}</div>',
             'labelOptions' => ['class' => 'label-registration hidden'],
         ],
         'options' => [
@@ -24,19 +24,16 @@
 <?= $form->errorSummary($model_step_one); ?>
 
 <?= $form->field($model_step_one, 'account_number')
-    ->input('text', [
-        'placeholder' => $model_step_one->getAttributeLabel('account_number')])
-    ->label(true) ?>
+        ->input('text', ['class' => 'field-input'])
+        ->label($model_step_one->getAttributeLabel('account_number'), ['class' => 'field-label']) ?>
                 
 <?= $form->field($model_step_one, 'last_summ')
-        ->input('input', [
-            'placeholder' => $model_step_one->getAttributeLabel('last_summ')])
-        ->label(true) ?>
+        ->input('input', ['class' => 'field-input'])
+        ->label($model_step_one->getAttributeLabel('last_summ'), ['class' => 'field-label']) ?>
         
 <?= $form->field($model_step_one, 'square')
-        ->input('text', [
-            'placeholder' => $model_step_one->getAttributeLabel('square')])
-        ->label(true) ?>
+        ->input('text', ['class' => 'field-input'])
+        ->label($model_step_one->getAttributeLabel('square'), ['class' => 'field-label']) ?>
 
 <div class="text-center circle-btn-block mx-auto">
     <?= Html::submitButton('', ['class' => 'blue-circle-btn']) ?>    

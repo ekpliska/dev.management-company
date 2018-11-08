@@ -9,14 +9,6 @@
  */
 $this->title = 'Customers | Регистрация';
 ?>
-    <style type="text/css">
-        legend { font-size:18px; margin:0px; padding:10px 0px; color:#b0232a; font-weight:bold;}
-        #steps { list-style:none; width:100%; overflow:hidden; margin:0px; padding:0px;}
-        #steps li {font-size:24px; float:left; padding:10px; color:#b0b1b3;}
-        #steps li span {font-size:11px; display:block;}
-        #steps li.current { color:#000;}
-    </style>
-
 
 <h1 class="text-center registration-logo">
     <?= Html::img('/images/main/elsa-logo13@2x.png', ['class' => 'blue-logo']) ?>
@@ -60,8 +52,3 @@ $this->title = 'Customers | Регистрация';
     </div>
     
 </div>
-<?php
-$this->registerJs("
-    $('form.material').materialForm();
-");
-?>

@@ -2,7 +2,7 @@
 
     use yii\helpers\Html;
     use yii\helpers\Url;
-    use yii\bootstrap\ActiveForm;
+    use yii\widgets\ActiveForm;
 
 $this->title = 'Вход';
 ?>
@@ -19,8 +19,10 @@ $this->title = 'Вход';
     <?php
         $form = ActiveForm::begin([
             'id' => 'login-form',
+            'validateOnChange' => false,
+            'validateOnBlur' => false,
             'fieldConfig' => [
-                'template' => "{label}{input}{error}",
+                'template' => '<div class="field">{label}{input}{error}</div>',
                 'labelOptions' => ['class' => 'label-registration hidden'],
             ],
             'options' => [
@@ -31,19 +33,14 @@ $this->title = 'Вход';
     <div class="mx-auto registration-form-group">
         <?= $form->field($model, 'username')
                 ->input('text', [
-                    'class' => 'mx-auto py-3 d-block form-control input-registration', 
-                    'placeholder' => $model->getAttributeLabel('username')])
-                ->label(true) ?>
+                    'class' => 'mx-auto py-3 d-block input-registration field-input'])
+                ->label($model->getAttributeLabel('username'), ['class' => 'field-label']) ?>
         
         <?= $form->field($model, 'password')
                 ->input('password', [
-                    'class' => 'mx-auto py-3 d-block form-control input-registration',                     
-                    'placeholder' => $model->getAttributeLabel('password')])
-                ->label(true) ?>
+                    'class' => 'mx-auto py-3 d-block input-registration field-input'])
+                ->label($model->getAttributeLabel('password'), ['class' => 'field-label']) ?>
         
-        <?php /*= $form->field($model, 'rememberMe')->checkbox([
-                'template' => "<div class=\"col-sm-12\">{input} {label}</div>\n<div class=\"col-sm-12\">{error}</div>",
-            ]) */ ?>
     </div>
     <div class="registration-btn-group mx-auto">
         <div class="text-center">
@@ -67,7 +64,7 @@ $this->title = 'Вход';
 </div>
 
 <?php
-$this->registerJs("
-    $('form.material').materialForm();
-");
+//$this->registerJs("
+//    $('form.material').materialForm();
+//");
 ?>
