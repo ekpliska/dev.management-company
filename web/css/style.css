@@ -517,7 +517,13 @@ body {
 .menu-bg {
     background-image: url(Head.png);
     background-size: 100% 100%;
-    background-repeat: no-repeat;
+    background-repeat: round;
+    
+/*    background: url(Head.png) round center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;    */
 }
 
 .nav-podmenu {
@@ -1181,13 +1187,14 @@ margin-top: 94px;
 }
 
 .account-info-table-container {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 90px;
     border: 1px solid #D4D4D4;
     border-radius: 12px;
     min-height: 850px;
     min-width: 818px;
     display: block;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .account-info-table-container.req-table-container {
@@ -3689,3 +3696,33 @@ input[type="radio"], input[type="checkbox"] {
 .change-info {
     
 }
+
+/* Дополнительное нафигационное меню для раздела Лицевой счет */
+
+.navbar_personal-account {
+    text-transform: uppercase;
+    background: linear-gradient(190.67deg, #39284E 50%, rgba(132,131,131,0.1) 100%);
+    box-shadow: 0 10px 14px 2px rgba(0,0,0,0.26);
+    z-index: -1;
+    padding: 0;
+    letter-spacing: 0.1em;
+}
+
+.navbar_personal-account li.nav-item {
+    height: 90px;
+    padding-top: 25px;
+    padding-left: 25px;
+    padding-right: 25px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.navbar_personal-account li.nav-item:hover {
+    background: rgba(0, 123, 255, 0.11);
+}
+
+.navbar_personal-account a.nav-link {
+    color: #fff !important;
+}
+
+/* Конец Дополнительное нафигационное меню для раздела Лицевой счет */
