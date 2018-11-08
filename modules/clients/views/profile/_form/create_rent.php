@@ -26,42 +26,58 @@ Modal::begin([
 <?php
     $form = ActiveForm::begin([
         'id' => 'create-rent-form',
+        'validateOnChange' => false,
+        'validateOnBlur' => false,
         'action' => ['create-rent-form', 
             'client' => Yii::$app->userProfile-clientID, 
             'account' => $this->context->_choosing,
         ],
         'enableAjaxValidation' => true,
         'validationUrl' => ['validate-rent-form'],
-        'validateOnChange' => true,
+        'fieldConfig' => [
+            'template' => '<div class="field-modal">{label}{input}{error}</div>',
+            'labelOptions' => ['class' => 'label-registration hidden'],
+        ],        
     ]);
 ?>
 
-    <?= $form->field($add_rent, 'rents_surname')->input('text', ['placeHolder' => $add_rent->getAttributeLabel('rents_surname')])->label(false) ?>
+    <?= $form->field($add_rent, 'rents_surname')
+            ->input('text', [
+                'class' => 'field-input-modal'])
+            ->label($add_rent->getAttributeLabel('rents_surname'), [
+                'class' => 'field-label-modal']) ?>
 
-    <?= $form->field($add_rent, 'rents_name')->input('text', ['placeHolder' => $add_rent->getAttributeLabel('rents_name')])->label(false) ?>
+    <?= $form->field($add_rent, 'rents_name')
+            ->input('text', [
+                'class' => 'field-input-modal'])
+            ->label($add_rent->getAttributeLabel('rents_name'), ['class' => 'field-label-modal']) ?>
 
-    <?= $form->field($add_rent, 'rents_second_name')->input('text', ['placeHolder' => $add_rent->getAttributeLabel('rents_second_name')])->label(false) ?>
+    <?= $form->field($add_rent, 'rents_second_name')
+            ->input('text', [
+                'class' => 'field-input-modal'])
+            ->label($add_rent->getAttributeLabel('rents_second_name'), ['class' => 'field-label-modal']) ?>
 
     <?= $form->field($add_rent, 'rents_mobile')
             ->widget(MaskedInput::className(), [
                 'mask' => '+7 (999) 999-99-99'])
             ->input('text', [
-                'placeHolder' => $add_rent->getAttributeLabel('rents_mobile')])
-            ->label(false) ?>
+                'class' => 'field-input-modal'])
+            ->label($add_rent->getAttributeLabel('rents_mobile'), ['class' => 'field-label-modal']) ?>
 
-    <?= $form->field($add_rent, 'rents_email')->input('text', ['placeHolder' => $add_rent->getAttributeLabel('rents_email')])->label(false) ?>
+    <?= $form->field($add_rent, 'rents_email')
+            ->input('text', [
+                'class' => 'field-input-modal'])
+            ->label($add_rent->getAttributeLabel('rents_email'), ['class' => 'field-label-modal']) ?>
 
     <?= $form->field($add_rent, 'password')
             ->input('password', [
-                'class' => 'show_password', 
-                'placeHolder' => $add_rent->getAttributeLabel('password')])
-            ->label(false) ?>
+                'class' => 'field-input-modal show_password'])
+            ->label($add_rent->getAttributeLabel('password'), ['class' => 'field-label-modal']) ?>
 
     <?= $form->field($add_rent, 'password_repeat')
             ->input('password', [
-                'class' => 'show_password', 
-                'placeHolder' => $add_rent->getAttributeLabel('password_repeat')])
-            ->label(false) ?>
+                'class' => 'field-input-modal show_password'])
+            ->label($add_rent->getAttributeLabel('password_repeat'), ['class' => 'field-label-modal']) ?>
 
     <div class="el-checkbox">
         <?= Html::checkbox('show_password_ch', false, ['id' => '1_1']) ?>

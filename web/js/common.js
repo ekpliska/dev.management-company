@@ -85,11 +85,11 @@ $('#send-request-to-sms').on('click', function() {
 
 /* Форма */
 $(function($) {
-    $('.field-input').focus(function(){
+    $('.field-input, .field-input-modal').focus(function(){
         $(this).parent().addClass('is-focused has-label');
     });
 
-    $('.field-input').blur(function(){
+    $('.field-input, .field-input-modal').blur(function(){
         $parent = $(this).parent();
         if($(this).val() == ''){
             $parent.removeClass('has-label');
@@ -97,7 +97,7 @@ $(function($) {
         $parent.removeClass('is-focused');
     });
 
-    $('.field-input').each(function(){
+    $('.field-input, .field-input-modal').each(function(){
         if($(this).val() !== ''){
             $(this).parent().addClass('has-label');
         }

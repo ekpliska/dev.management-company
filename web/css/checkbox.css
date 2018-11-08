@@ -3,6 +3,7 @@
 .el-checkbox {
     position: relative;
     font-size: 100%;
+    top: 10px;
 }
 .el-checkbox span {
     color: #fff;
@@ -179,14 +180,14 @@ label.el-checkbox {
 .el-switch .el-switch-style:before {
     display: block;
     content: '';
-    height: 1.4em;
+    height: 1.2em;
     position: absolute;
-    width: 1.4em;
+    width: 1.2em;
     background-color: #fff;
     -webkit-border-radius: 50%;
     border-radius: 50%;
-    left: 0.1em;
-    top: 0.1em;
+    left: 0.2em;
+    top: 0.2em;
     -webkit-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
 }

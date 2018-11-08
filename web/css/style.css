@@ -951,13 +951,14 @@ iframe #header {
     display: none;  
 }
 .no-border-left {
-    border-left: none !important;  
+    border-left: none !important; 
 }
 .no-border-right {
     border-right: none !important;  
 }
 .no-border {
     border: none !important;
+    margin: 1rem;    
 }
 
 .blue-outline-btn.white-btn {
@@ -1907,12 +1908,13 @@ height: 28px;	width: 388px;
 }
 
 .badge-darkblue {
-
-border-radius: 13px;
-background-color: #2D18B4;
-padding: 4px 35px;
-color: #FFFFFF; font-family: "Mplus 1p Medium"; font-size: 14px;  letter-spacing: 1.05px; line-height: 20px;
-font-weight: normal;
+    padding-bottom: 30px;
+    color: #2d18b4; 
+    font-size: 20px;  
+    letter-spacing: 1.05px; 
+    line-height: 20px;
+    font-weight: normal;
+    text-transform: uppercase;
 }
 
 .chip-label  {
@@ -3397,11 +3399,13 @@ button.again-bt {
 }
 
 .clients-profile-info {
-    padding-left: 70px;
+    padding-right: 100px;
+    padding-left: 100px;
     text-align: left;
 }
 .rent-profile-info {
-    padding-right: 70px;
+    padding-right: 100px;
+    padding-left: 100px;
     text-align: left;
 }
 
@@ -3474,7 +3478,7 @@ button.again-bt {
     margin: 0 !important;
 }
 
-#add-rent-modal input[type="text"],
+/*#add-rent-modal input[type="text"],
 #add-rent-modal input[type="password"],
 #create-account-modal-form input[type="text"],
 #create-account-modal-form input[type="password"] {
@@ -3503,17 +3507,24 @@ button.again-bt {
     border-bottom: 1px solid #fff;
     box-shadow: none;
 }
-
+*/
 
 
 /* Переодпределение ширины, высоты модальных окон */
+div[id="add-rent-modal"] .modal-content {
+    width: 670px;
+} 
+form[id="create-rent-form"] {
+    width: 65%;
+}
+
 div[id="create-account-modal"] .modal-content {
     width: 670px;
 } 
 form[id="create-account-modal-form"] {
     width: 65%;
 }
-
+/* */
 
 .del-ar {
     color: #fff;
