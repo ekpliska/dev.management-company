@@ -711,15 +711,21 @@ body {
 
 .profile-form-settings form {
     margin: 10px 25px;
+    width: 380px;
 }
 
 .profile-form-settings form#sms-form input[type="text"] {
     width: 105px;
 }
 
+.profile-form-settings button {
+    margin-top: 20px;
+}
+
 .block-of-repeat {
     position: absolute;
-    top: 40%;
+    top: 10%;
+    left: 40%;
 }
 
 #repeat-sms_code {
@@ -3400,13 +3406,17 @@ button.again-bt {
 }
 
 .profile-title {
-    padding-bottom: 50px;
+    padding-bottom: 20px;
     text-align: center;    
 }
 
 .profile-title-rent {
-    padding-bottom: 20px;
+    padding-bottom: 3px;
     text-align: center;    
+}
+
+.profile-title a {
+    color: #2d18b4;
 }
 
 .all-requests_link {

@@ -243,6 +243,20 @@ class ProfileController extends AppClientsController
         ]);
     }
     
+    public function actionValidateSmsForm() {
+        
+        $user_info = $this->permisionUser();
+        $user = $user_info->_model;
+        
+        $sms_model = new SMSForm($user);
+        
+        if (Yii::$app->request->isAjax && $sms_model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return \yii\widgets\ActiveForm::validate($sms_model);
+        }
+        
+    }
+    
     /*
      * Метод формирования вывода Профиля Собственника
      * 

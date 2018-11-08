@@ -114,8 +114,8 @@
         </div>
     </nav>
 
-    <?php // = Rubrics::widget() ?>
-    <?php // = SubBarPaidService::widget() ?>
+    <?= Rubrics::widget() ?>
+    <?= SubBarPaidService::widget() ?>
     
     
 </header>

@@ -32,13 +32,13 @@
     <tr>
         <td>
             <p>Дата регистрации</p>
-            <?= FormatHelpers::formatDate($user_info->dateRegister, true, 1, true) ?>
+            <?= FormatHelpers::formatDate($user_info->dateRegister, true, 0, false) ?>
         </td>
     </tr>
     <tr>
         <td>
             <p>Дата последнего входа</p>
-            <?= FormatHelpers::formatDate($user_info->lastLogin, true, 1, true) ?>
+            <?= FormatHelpers::formatDate($user_info->lastLogin, true, 0, false) ?>
         </td>
     </tr>
     <tr>

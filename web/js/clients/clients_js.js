@@ -449,7 +449,7 @@ $(document).ready(function() {
             minutes = minutes < 10 ? '0' + minutes : minutes;
             seconds = seconds < 10 ? '0' + seconds : seconds;
 
-            display.text('Отправить код повторно можно будет ' + minutes + ':' + seconds);
+            display.text('Отправить код повторно можно будет через ' + minutes + ':' + seconds);
 
             if (--timer < 0) {
                 timer = duration;

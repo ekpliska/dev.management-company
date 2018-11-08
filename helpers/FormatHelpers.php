@@ -89,7 +89,7 @@ class FormatHelpers {
         }
         
         list($day, $month, $year) = explode('.', $_date_int);
-        $_date = $only_time == true ? $day .' '. $month .' '. $year . ' г. ' : '';
+        $_date = $only_time == false ? $day .' '. $month .' '. $year . ' г. ' : '';
         
         $date_full = $_date . $_time;
         

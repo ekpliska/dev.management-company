@@ -23,6 +23,7 @@ class AppAsset extends AssetBundle
         'css/style.css',        
         'css/checkbox.css',
         'css/form-style.css',
+        '//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css',
         
 //        'plugins/material-form/css/jquery.material.form.css',
 //        'plugins/infinite-li-scroll/css/style.css',
@@ -33,8 +34,8 @@ class AppAsset extends AssetBundle
 //        'plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css',
 //        'plugins/starrr-gh-pages/dist/starrr.css',
         
-        'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css',
-        'http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css',
+//        'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css',
+//        'http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css',
         
         
     ];

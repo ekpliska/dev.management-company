@@ -15,32 +15,33 @@
     <?php
         $form_psw = ActiveForm::begin([
             'id' => 'change-password-form',
-            'validateOnSubmit' => true,
             'validateOnBlur' => false,
             'validateOnChange' => false,
+            'fieldConfig' => [
+                'template' => '<div class="field">{label}{input}{error}</div>',
+                'labelOptions' => ['class' => 'label-registration hidden'],
+            ],
         ]);
     ?>
 
         <?= $form_psw->field($model_password, 'current_password')
-                ->input('password', [
-                    'placeHolder' => $model_password->getAttributeLabel('current_password'),
-                    'class' => 'form-control show_password'
-                ]) 
+                ->input('password', ['class' => 'field-input show_password']) 
+                ->label($model_password->getAttributeLabel('current_password'), ['class' => 'field-label'])
         ?>
 
         <?= $form_psw->field($model_password, 'new_password')
-                ->input('password', [
-                    'placeHolder' => $model_password->getAttributeLabel('new_password'),
-                    'class' => 'form-control show_password'])
+                ->input('password', ['class' => 'field-input show_password'])
+                ->label($model_password->getAttributeLabel('new_password'), ['class' => 'field-label'])
         ?>
 
         <?= $form_psw->field($model_password, 'new_password_repeat')
-                ->input('password', [
-                    'placeHolder' => $model_password->getAttributeLabel('new_password_repeat'),
-                    'class' => 'form-control show_password']) 
+                ->input('password', ['class' => 'field-input show_password'])
+                ->label($model_password->getAttributeLabel('new_password_repeat'), ['class' => 'field-label'])
         ?>
-
-        <?= Html::submitButton('Продолжить', ['class' => 'blue-outline-btn req-table-btn']) ?>
+        
+        <div class="text-right">
+                <?= Html::submitButton('Продолжить', ['class' => 'blue-outline-btn req-table-btn']) ?>
+        </div>    
 
     <?php ActiveForm::end(); ?>
 
@@ -51,31 +52,29 @@
     <?php
         $form_psw = ActiveForm::begin([
             'id' => 'sms-form',
-            'validateOnSubmit' => true,
             'validateOnBlur' => false,
             'validateOnChange' => false,
+            'enableAjaxValidation' => true,
+            'validationUrl' => ['validate-sms-form'],
             'options' => [
                 'class' => 'form-horizontal',
-            ],
-            'fieldConfig' => [
-                'template' => '<div class="form-row">'
-                . '<div class="col-sm-2">{label}{input}{error}</div>'
-                . '<div class="col-sm-8"><div class="block-of-repeat"><span id="time-to-send"></span></div>'
-                . '</div>'
-                . '</div>',
             ],
         ]);
     ?>
 
+    <div class="field-sms">
         <?= $form_psw->field($sms_model, 'sms_code')
                 ->widget(MaskedInput::className(), [
                     'mask' => '9{5,5}'])
-                ->input('text', [
-                    'class' => 'form-control input-sms_code',
-                ]) 
+                ->input('text', ['class' => 'field-input input-sms_code'])
+                ->label($sms_model->getAttributeLabel('sms_code'), ['class' => 'field-label'])
         ?>
-
-        <?= Html::submitButton('Продолжить', ['class' => 'blue-outline-btn req-table-btn']) ?>
+    </div>        
+    <div class="block-of-repeat"><span id="time-to-send"></span></div>    
+    
+    <div class="text-left">
+        <?= Html::submitButton('Продолжить', ['class' => 'blue-outline-btn req-table-btn']) ?>        
+    </div>
 
     <?php ActiveForm::end(); ?>
 

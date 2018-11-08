@@ -33,7 +33,7 @@ $this->title = 'Настройки';
             <?php // = $this->render('_form/change-password', ['model_password' => $model_password]) ?>
             
             <h5 class="profile-title-setting">Изменить адрес электронноый почты</h5>
-            <?= $this->render('_form/change-email', ['user' => $user]) ?>
+            <?php // = $this->render('_form/change-email', ['user' => $user]) ?>
             
         </div>
     </div>

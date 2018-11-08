@@ -22,10 +22,11 @@ $this->title = 'Профиль собственника';
     $form = ActiveForm::begin([
         'id' => 'profile-form',
         'action' => ['profile/update-profile'],
-        'validateOnChange' => true,
+        'validateOnChange' => false,
+        'validateOnBlur' => false,
         'options' => [
             'enctype' => 'multipart/form-data',
-            'class' => 'border-container d-block material m-0 p-0 border-container',
+            'class' => 'border-container d-block m-0 p-0 border-container',
         ],
     ])
 ?>
@@ -70,17 +71,18 @@ $this->title = 'Профиль собственника';
         <!--Собственник-->
         
         <div class="col-6 clients-profile-info">
-            <h5 class="profile-title">Мои контактные данные</h5>
+            <h5 class="profile-title">
+                Мои контактные данные&nbsp;
+                <?= Html::a('<i class="fa fa-edit"></i>', ['profile/settings-profile']) ?>
+            </h5>
             
             <div class="field">
-                <label for="user_mobile" class="field-label">Label text</label>
+                <label for="user_mobile" class="field-label">Мобильный телефон</label>
                 <?= Html::input('text', 'user_mobile', $user->user_mobile, ['class' => 'field-input']) ?>
-                <?php // = Html::a('Изменить', ['profile/settings-profile'], ['class' => 'btn btn-link']) ?>
             </div>
             <div class="field">
-                <label for="user_email" class="field-label">Label text</label>
+                <label for="user_email" class="field-label">Электронная почта</label>
                 <?= Html::input('text', 'user_email', $user->user_email, ['class' => 'field-input']) ?>
-                <?php // = Html::a('Изменить', ['profile/settings-profile'], ['class' => 'btn btn-link']) ?>
             </div>
             
         </div>

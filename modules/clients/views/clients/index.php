@@ -5,9 +5,10 @@
     use yii\widgets\LinkPager;
     use app\helpers\FormatHelpers;    
 
+/*
+ * Главная страница личного кабинета Собственника
+ */    
 $this->title ="Главная страница";
-
-$this->params['breadcrumbs'][] = 'Новости';
 ?>
 <div class="row news-list">
     <?php if (isset($news) && count($news) > 0) : ?>
@@ -25,7 +26,6 @@ $this->params['breadcrumbs'][] = 'Новости';
                 <h5 class="news-card-preview-date">
                     <?= FormatHelpers::formatDate($post['created_at'], false) ?>
                 </h5>
-
 
                 <div class="card-body m-0 p-0 news-card-preview-body">
                     <p class="card-text news-card-preview-text ">
