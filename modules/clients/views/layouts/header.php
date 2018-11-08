@@ -2,6 +2,7 @@
     use yii\helpers\Html;
     use yii\helpers\Url;
     use app\modules\clients\widgets\UserInfo;
+    use app\modules\clients\widgets\Notifications;
     use app\modules\clients\widgets\Rubrics;
     use app\modules\clients\widgets\SubBarPaidService;
 /*
@@ -100,15 +101,7 @@
             <div class="navbar-collapse collapse dual-nav w-50 order-2">
                 <ul class="nav navbar-nav ml-auto">
                     <?= UserInfo::widget(['_value_choosing' => $this->context->_value_choosing]) ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" data-toggle="popover" data-placement="bottom" data-content="" data-original-title="" title="">
-                            <label for="checkbox-tenant" data-toggle="modal" data-target="#exampleModale">
-                                <?= Html::img('/images/navbar/bell.svg') ?>
-                                <span class="badge badge-danger bell-badge p-0 hidden">
-                                </span>
-                            </label>
-                        </a>
-                    </li>
+                    <?= Notifications::widget() ?>
                 </ul>
             </div>
         </div>

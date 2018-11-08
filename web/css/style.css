@@ -568,7 +568,7 @@ body {
 }
 
 .dropdown_footer div {
-    padding: 40px 30px 0px 30px;
+    padding: 20px 30px 0px 30px;
     font-family: "Mplus 1p";
 }
 
@@ -614,8 +614,13 @@ body {
     font-size: 18px;
     letter-spacing: 1.23px;
     line-height: 27px;
-    margin-top: 11px;
     margin-bottom: 0px;    
+}
+
+.dropdown_account-block {
+    font-family: "Mplus 1p";
+    border: 1px solid #414141;
+    padding: 10px;
 }
 
 .mail-border p {
@@ -628,17 +633,14 @@ body {
 
 .dropdown_account-title{
     color: #78e4ff;
-    font-family: "Mplus 1p";
     font-size: 12px;
     letter-spacing: 1.26px;
     line-height: 18px;
     margin-bottom: 0;
-    margin-top: 12px;
 }
 
 .dropdown_account-number {
     color: #fff;
-    font-family: "Mplus 1p";
     font-size: 16px;
     letter-spacing: 1.26px;
     line-height: 18px;
