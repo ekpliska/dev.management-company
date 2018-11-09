@@ -277,6 +277,56 @@ legend {
     border: 1px solid #8b709d;
     box-shadow: none;
 }
+
+
+.paid-service-dropdown-arrow {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    width: 100%;
+}
+
+.paid-service-dropdown-arrow::before,
+.paid-service-dropdown-arrow::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+}
+
+.paid-service-dropdown-arrow::after {
+    content: "\25BC";
+    height: 1em;
+    font-size: .625em;
+    line-height: 1;
+    right: 1.2em;
+    top: 50%;
+    margin-top: -.5em;
+}
+
+.paid-service-dropdown-arrow::before {
+    width: 2em;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: 0 3px 3px 0;
+}
+
+.paid-service-dropdown-arrow select[disabled] {
+    color: rgb(247, 247, 247);
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.paid-service-dropdown-arrow select[disabled]::after {
+    color: rgba(0,0,0,.1);
+}
+
+.paid-service-dropdown-arrow::before {
+    background-color: transparent;
+}
+
+.paid-service-dropdown-arrow::after {
+    color: #fff;
+}
 /* End Select in modal window */
 
 /* File input in modal window */
@@ -434,7 +484,8 @@ legend {
 }
 
 .paid-service-dropdown select[disabled] {
-    color: rgba(0,0,0,.3);
+    color: rgb(247, 247, 247);
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
 .paid-service-dropdown select[disabled]::after {

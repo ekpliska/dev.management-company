@@ -17,6 +17,10 @@
         'closeButton' => [
             'class' => 'close add-acc-modal-close-btn req',
         ],
+        'clientOptions' => [
+            'backdrop' => 'static',
+            'keyboard' => false,
+        ],        
     ]);
 ?>
     <?php
@@ -29,9 +33,9 @@
             ]
         ]);
     ?>
-
     
-        <?= $form->field($model, 'requests_type_id', ['template' => '<div class="field-modal-select">{label}{input}{error}</div>'])
+        <?= $form->field($model, 'requests_type_id', [
+                    'template' => '<span class="paid-service-dropdown-arrow"><div class="field-modal-select">{label}{input}{error}</div></span>'])
                 ->dropDownList($type_requests, [
                     'prompt' => 'Выберите вид заявки из списка...'])
                 ->label(false) 

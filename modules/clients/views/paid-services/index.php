@@ -1,10 +1,6 @@
 <?php
     
     use yii\helpers\Html;
-    use yii\bootstrap4\Modal;
-    use yii\helpers\Url;
-    use yii\widgets\ActiveForm;
-    use yii\widgets\MaskedInput;
     use app\modules\clients\widgets\AlertsShow;
     
 /* 
@@ -57,55 +53,9 @@ $category_id = 0;
 
 <?php endforeach; ?>
     
-<?php
-    Modal::begin([
-        'id' => 'add-record-modal',
-        'title' => 'Заявка на платную услугу',
-        'closeButton' => [
-            'class' => 'close add-acc-modal-close-btn req btn__paid_service_close',
-        ],
-    ]);
-?>
-    <?php
-        $form = ActiveForm::begin([
-            'id' => 'add-paid-service',
-        ]);
-    ?>
-    
-    <?= $form->field($new_order, 'services_category_services_id')
-            ->hiddenInput(['id' => 'secret-cat', 'value' => 'hidden value'])
-            ->label(false) ?>
-    
-    <?= $form->field($new_order, 'services_name_services_id')
-            ->hiddenInput(['id' => 'secret-name', 'value' => 'hidden value'])
-            ->label(false) ?>
-                    
-    <?= $form->field($new_order, 'services_name_services_id')
-            ->dropDownList($name_services_array, [
-                'id' => 'name_services',
-                'class' => 'form-control name_services',
-                'disabled' => true])
-            ->label(false) ?>
-
-    <?= $form->field($new_order, 'services_phone')
-            ->widget(MaskedInput::className(), [
-                'mask' => '+7(999) 999-99-99'])
-            ->input('text', ['placeHolder' => $new_order->getAttributeLabel('services_phone'), 'class' => 'form-control phone'])->label(false) ?>
-                
-    <?= $form->field($new_order, 'services_comment')
-            ->textarea([
-                'rows' => 10,
-                'placeHolder' => $new_order->getAttributeLabel('services_comment'),
-                'class' => 'form-control comment'])->label(false) ?>
-    
-    <div class="modal-footer no-border">
-        <?= Html::submitButton('Добавить', ['class' => 'btn blue-outline-btn white-btn mx-auto']) ?>
-        <?= Html::submitButton('Отмена', ['class' => 'btn red-outline-btn bt-bottom2 btn__paid_service_close', 'data-dismiss' => 'modal']) ?>
-    </div>
-    
-    <?php ActiveForm::end() ?>    
-    
-<?php Modal::end(); ?>
+<?= $this->render('form/add-paid-request', [
+        'new_order' => $new_order, 
+        'name_services_array' => $name_services_array]) ?>
     
 <?php
 $this->registerJs('

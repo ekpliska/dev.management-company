@@ -35,28 +35,28 @@
     </nav>
 
 <?php elseif(Yii::$app->controller->id == 'paid-services' && Yii::$app->controller->action->id == 'order-services') : ?>
+    <nav class="navbar services-nav navbar-dark justify-content-between navbar-expand-sm p-0 carousel-item d-block">
+        <div class="container-fluid block-searsh">
+            <div class="field-searsh">
+                <?php
+                    $form = ActiveForm::begin([
+                        'id' => 'search-form',
+                    ]);
+                ?>
 
-    <div class="container-fluid block-searsh">
-        <div class="field-searsh">
-            <?php
-                $form = ActiveForm::begin([
-                    'id' => 'search-form',
-                ]);
-            ?>
-    
-            <?= $form->field($_search, '_input')
-                    ->input('text', [
-                        'placeHolder' => $_search->getAttributeLabel('_input'),
-                        'id' => '_search-input'])
-                    ->label(false) ?>
-            
-            <?php ActiveForm::end(); ?>
-            
+                <?= $form->field($_search, '_input')
+                        ->input('text', [
+                            'placeHolder' => $_search->getAttributeLabel('_input'),
+                            'id' => '_search-input'])
+                        ->label(false) ?>
+
+                <?php ActiveForm::end(); ?>
+
+            </div>
+
+            <div class="services-lists">
+                <?= Html::a('Заказать услугу', ['paid-services/index'], ['class' => '']) ?>
+            </div>
         </div>
-        
-        <div class="services-lists">
-            <?= Html::a('Заказать услугу', ['paid-services/index'], ['class' => '']) ?>
-        </div>
-    </div>
-                
+    </nav>                
 <?php endif; ?>
