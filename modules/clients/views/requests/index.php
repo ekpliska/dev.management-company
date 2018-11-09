@@ -14,10 +14,6 @@
 $this->title = 'Мои заявки';
 ?>
 
-
-
-<?= StatusRequest::widget() ?>
-
 <div class="table-container">
     <div class="account-info-table-container req-table-container">
         

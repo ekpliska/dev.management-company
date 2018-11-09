@@ -1203,7 +1203,6 @@ margin-top: 94px;
     margin-top: 90px;
     border: 1px solid #D4D4D4;
     border-radius: 12px;
-    min-height: 850px;
     min-width: 818px;
     display: block;
 }
@@ -1484,8 +1483,9 @@ background-color: #FCE7DF !important;
 }
 
 .pay-panel {
-height: 145px;
-background-color: white;
+    height: 145px;
+    background-color: white;
+    z-index: -1;
 }
 .pay-outline-btn {
 margin-left: 44px;
@@ -1557,8 +1557,9 @@ width: 1300px;
 }
 
 .pay-panel ul.nav li {
-margin-top: 61px;
+    margin-top: 31px;
     margin-bottom: 55px;
+    margin-left: auto;
 }
 
 input.date-prop {

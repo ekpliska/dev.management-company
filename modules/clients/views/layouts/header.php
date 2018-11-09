@@ -6,6 +6,7 @@
     use app\modules\clients\widgets\Rubrics;
     use app\modules\clients\widgets\SubBarPaidService;
     use app\modules\clients\widgets\SubBarPersonalAccount;
+    use app\modules\clients\widgets\StatusRequest;
 /*
  * Шапка, меню, хлебные крошки
  */
@@ -104,6 +105,6 @@
     <?= Rubrics::widget() ?>
     <?= SubBarPaidService::widget() ?>
     <?= SubBarPersonalAccount::widget() ?>
-    
+    <?= StatusRequest::widget() ?>
     
 </header>
