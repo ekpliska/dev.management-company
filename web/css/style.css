@@ -1217,11 +1217,13 @@ margin-top: 94px;
     border-radius: 13px;
     color: #000;
     font-family: "Mplus 1p";
-    font-size: 12px;
+    font-size: 10px;
     letter-spacing: 0.21px;
     line-height: 18px;
     text-align: center;
     margin-bottom: 10px;
+    padding: 5px 0;
+    text-transform: uppercase;
 }
 .req-badge-new {
     border: 2px solid #598EFF;
@@ -1345,10 +1347,11 @@ color: white;
 }
 
 .req-body-h-container {
-height: 78px;
-width: 1300px;
-border-radius: 12px 12px 0 0;
-background-color: #2D18B4;
+    height: 78px;
+    width: 1300px;
+    border-radius: 12px 12px 0 0;
+    background-color: #2D18B4;
+    position: absolute;
 }
 .req-body-h {
     color: white;
@@ -1698,7 +1701,20 @@ border-radius: 7px;
 .request-body-chat {
     width: 570px;
     border-left: 1px solid #d4d4d4;
+    padding-left: 0;
 }
+.request-body-chat form {
+    width: 95%;
+    margin: 0;
+}
+.request-body-chat form textarea:focus {
+    border: 1px solid #D4D4D4;
+    border-right: none;
+    border-left: none;
+    box-shadow: none;
+    outline: none;
+}
+
 .request-chat-icon {
     height: 40px;
     width: 40px;
@@ -1712,10 +1728,12 @@ border-radius: 7px;
 }
 
 .req-body-container {
-    width: 1302px;
+    position: absolute;
+    top: 28%;
     border: 1px solid #D4D4D4;
     border-bottom-right-radius: 12px;
     border-bottom-left-radius: 12px;
+    margin-bottom: 40px;
     box-shadow: 0 4px 26px 2px rgba(103,40,190,0.08);
 }
 
@@ -1764,10 +1782,6 @@ border-radius: 7px;
     margin-left: 10px;
 }
 
-
-
-
-
 .chat-time {
     color: #7C7C7C;
     font-family: "Mplus 1p Medium";
@@ -1776,19 +1790,16 @@ border-radius: 7px;
     line-height: 18px;
     margin-left: 17px;
 }
-
 .chat-msg {
     margin-top: 116px;
-width: 570px;
+    width: 570px;
 }
 .chat-msg textarea {
-width: 570px;
-border: 1px solid #D4D4D4;
+    border: 1px solid #D4D4D4;
     border-left: none;
-   /* border-bottom: none;*/
-    resize:none;
+    border-right: none;
+    resize: none;
 }
-
 .req-img-badge {
     height: 36px;
     width: 236px;
@@ -1980,11 +1991,10 @@ height: 28px;	width: 388px;
 }
 
 .badge-darkblue {
-    padding-bottom: 30px;
-    color: #2d18b4; 
-    font-size: 20px;  
-    letter-spacing: 1.05px; 
-    line-height: 20px;
+    color: #ffffff;
+    background: #2d18b4;
+    padding: 5px 25px;
+    border-radius: 23px;
     font-weight: normal;
     text-transform: uppercase;
 }
@@ -2132,12 +2142,12 @@ margin-right: 77px;
     margin-bottom: 24px;
 }
 .req-darkblue-badge {
-font-family: "Mplus 1p";
-font-size: 12px;
-letter-spacing: 0.21px;
-line-height: 18px;
-text-align: center;
-margin-right: 14px;
+    font-family: "Mplus 1p";
+    font-size: 12px;
+    letter-spacing: 0.21px;
+    line-height: 18px;
+    text-align: center;
+    margin-right: 14px;
     margin-bottom: 24px;
     margin-left: 24px;
 }

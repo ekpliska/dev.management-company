@@ -81,7 +81,7 @@ class FormatHelpers {
         $_date_int = Yii::$app->formatter->asDate($date_int, 'dd.MMMM.yyyy');
         
         if ($time && $format == 0) {
-            $_time = Yii::$app->formatter->asTime($date_int, 'medium');
+            $_time = Yii::$app->formatter->asTime($date_int, 'short');
         } elseif ($time && $format == 1) {
             $_time = ' в ' . Yii::$app->formatter->asTime($date_int, 'short');
         } else {

@@ -19,17 +19,14 @@ $this->title = 'Детали заявки';
         </div>
         <p class="req-body-h-txt">Заявка принята</p>
     </h5>
-    <div class="all-requests_link">
-        <?= Html::a('Мои заявки', ['requests/index']) ?>
-    </div>
 </div>
 <div class="row req-body-container mx-0">
-    <div class="col-6 request-body-info">
+    <div class="col-7 request-body-info">
         <h5 class="req-h">
             <?= $request_info['type_requests_name'] ?>
         </h5>
         <h5 class="req-date">
-            <?= FormatHelpers::formatDate($request_info['created_at'], true, 1, true) ?>
+            <?= FormatHelpers::formatDate($request_info['created_at'], true, 0, false) ?>
         </h5>
         <?php if ($request_info['status'] == StatusRequest::STATUS_CLOSE) : ?>        
             <div class="req-rate-star">
@@ -52,7 +49,7 @@ $this->title = 'Детали заявки';
                 <?= FormatHelpers::statusName($request_info['status']) ?>
             </span>
             <span>
-                <?= FormatHelpers::formatDate($request_info['updated_at'], true, 1, true) ?>
+                <?= FormatHelpers::formatDate($request_info['updated_at'], true, 0, false) ?>
             </span>
         </span>
         <p class="req-body-info-txt">
@@ -84,7 +81,7 @@ $this->title = 'Детали заявки';
         <?php endif; ?>        
     </div>
     
-    <div class="col-6 request-body-chat">
+    <div class="col-5 request-body-chat">
         
         <?= $this->render('form/_comment', [
             'model' => $comments, 
