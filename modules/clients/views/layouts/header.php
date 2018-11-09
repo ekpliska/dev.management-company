@@ -26,33 +26,12 @@
         <div class=" circle-scroll-container px-0 menu-start" style="text-align: center;">
             <div class="sticky-top col-12">
                 <div class="modal_menu">
-                    <div class="border-menu">
-                        <span class="item">
-                            <p style="width:100%; height: 42.5px;">
-                                <a href="<?= Url::to(['clients/index']) ?>">Главная</a>
-                            </p>
-                        </span>
-                    </div>
-                    <div class="border-menu">
-                        <span class="item">
-                            <p style="width:100%; height: 42.5px;">
-                                <a href="<?= Url::to(['voting/index']) ?>">Голосование</a>
-                            </p>
-                        </span>
-                    </div>
-                    <div class="border-menu">
-                        <span class="item">
-                            <p style="width:100%; height: 42.5px;">
-                                <a href="<?= Url::to(['profile/index']) ?>">Профиль</a>
-                            </p>
-                        </span>
-                    </div>
                     <div class="border-menu">      
                         <span class="item"> 
                           <nav class="nav menu-big">
                           <a class="nav-link nav-bt" href="<?= Url::to(['personal-account/index']) ?>">Лицевой счет</a>
+                          <a class="nav-link nav-bt nav-podmenu" href="#">Платежи</a>                          
                           <a class="nav-link nav-bt nav-podmenu" href="<?= Url::to(['personal-account/receipts-of-hapu']) ?>">Квитанция ЖКУ</a>
-                          <a class="nav-link nav-bt nav-podmenu" href="#">Платежи</a>
                           <a class="nav-link nav-bt nav-podmenu" href="<?= Url::to(['personal-account/counters']) ?>">Показания приборов учета</a>
                         </nav>
                         </span>
@@ -63,14 +42,28 @@
                                 <a href="<?= Url::to(['requests/index']) ?>">Заявки</a>
                             </p>
                         </span>
+                    </div>                    
+                    <div class="border-menu">
+                        <span class="item">
+                            <p style="width:100%; height: 42.5px;">
+                                <a href="<?= Url::to(['clients/index']) ?>">Новости</a>
+                            </p>
+                        </span>
                     </div>
                     <div class="border-menu">
                         <span class="item">
                             <p style="width:100%; height:42.5px;">
-                                <a href="<?= Url::to(['paid-services/index']) ?>">Платные услуги</a>
+                                <a href="<?= Url::to(['paid-services/index']) ?>">Услуги</a>
                             </p>
                         </span>
-                    </div>                    
+                    </div>                                        
+                    <div class="border-menu">
+                        <span class="item">
+                            <p style="width:100%; height: 42.5px;">
+                                <a href="<?= Url::to(['voting/index']) ?>">Опрос</a>
+                            </p>
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>

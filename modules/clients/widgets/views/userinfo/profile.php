@@ -23,8 +23,11 @@
                 </div>
                 <div class="col-lg-6 col-sm-6 col-6 dropdown_user-info">
                     <p class="dropdown_user-name">
-                        <?= Yii::$app->userProfile->fullNameClient ?>
+                        <?= Yii::$app->userProfile->fullNameClient ?>                        
                     </p>
+                    <div class="dropdown-menu_link-profile">
+                        <?= Html::a('Мой профиль', ['profile/index']) ?>
+                    </div>                    
                     <div class="mail-border">
                         <p class="mail-color">Iam_Mayer@gmail.com</p>
                     </div>
