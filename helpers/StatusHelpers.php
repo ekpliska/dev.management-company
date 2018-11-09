@@ -11,9 +11,10 @@
  */
 class StatusHelpers {
     
-    public static function requestStatus($status) {
+    public static function requestStatus($status, $value) {
         
         $btn_css = '';
+        $voting_bnt = '';
         
         // Стили для кнопок статусов
         $css_classes = [
@@ -33,18 +34,22 @@ class StatusHelpers {
         $status_name = ArrayHelper::getValue(StatusRequest::getStatusNameArray(), $status);        
         
         if ($status == StatusRequest::STATUS_NEW) {
-            $btn_css = '<p><span class="' . $css_classes[0] . '">' . $status_name . '</span></p>';
+            $btn_css = '<span class="' . $css_classes[0] . '">' . $status_name . '</span>';
         } elseif ($status == StatusRequest::STATUS_IN_WORK) {
-            $btn_css = '<p><span class="' . $css_classes[1] . '">' . $status_name . '</span></p>';
+            $btn_css = '<span class="' . $css_classes[1] . '">' . $status_name . '</span>';
         } elseif ($status == StatusRequest::STATUS_PERFORM) {
-            $btn_css = '<p><span class="' . $css_classes[2] . '">' . $status_name . '</span></p>';
+            $btn_css = '<span class="' . $css_classes[2] . '">' . $status_name . '</span>';
         } elseif ($status == StatusRequest::STATUS_FEEDBAK) {
-            $btn_css = '<p><span class="' . $css_classes[3] . '">' . $status_name . '</span></p>';
+            $btn_css = '<span class="' . $css_classes[3] . '">' . $status_name . '</span>';
         } elseif ($status == StatusRequest::STATUS_CLOSE) {
-            $btn_css = '<p><span class="' . $css_classes[4] . '">' . $status_name . '</span></p>';
+            $btn_css = '<span class="' . $css_classes[4] . '">' . $status_name . '</span>';
         }
         
-        return $btn_css;
+        if ($status == StatusRequest::STATUS_CLOSE) {
+            $voting_bnt = Html::button('Оценить', ['class' => 'blue-outline-btn req-table-btn', 'data-request' => $value]);
+        }
+        
+        return $btn_css . '<br />' . $voting_bnt;
         
     }
     

@@ -611,6 +611,7 @@ body {
     box-shadow: 0px 0px 0px 20px rgba(45, 24, 180, 0.5);
     margin-top: 40px;
     width: 100px;
+    height: 100px;
 }
 
 .dropdown_user-info {
@@ -1152,8 +1153,9 @@ width: 25px;
 border: 1px solid #D4D4D4;
 }
 .payment-profile-face {
-margin-top: 71px;
-    height: 97px;	width: 97px;
+    margin-top: 71px;
+    height: 97px;	
+    width: 97px;
 }
 
 .payment-profile-name {
@@ -1214,31 +1216,35 @@ margin-top: 94px;
     height: 30px;
     width: 112px;
     border-radius: 13px;
-    color: #FFFFFF;
+    color: #000;
     font-family: "Mplus 1p";
     font-size: 12px;
     letter-spacing: 0.21px;
     line-height: 18px;
     text-align: center;
-    padding-bottom: 5px;
-    padding-top: 5px;
-
+    margin-bottom: 10px;
 }
 .req-badge-new {
-     background-color: #59B0FF;
+    border: 2px solid #598EFF;
+    box-shadow: 0px 1px 4px 6px rgba(0,101,255,0.28)
  }
 .req-badge-work {
-    background-color: #D292FF;
+border: 2px solid #E17DFF;
+    box-shadow: 0px 1px 4px 6px rgba(225,125,255,0.42);
 }
 .req-badge-complete {
-    background-color: #36EADF;
+    border: 2px solid #7C7C7C;
+    box-shadow: 0px 1px 4px 6px rgba(255,125,125,0.26);
 }
 .req-badge-rectification {
-    background-color: #59E1FF;
+    border: 2px solid #1FD68D;
+    box-shadow: 0px 1px 4px 6px rgba(56,231,161,0.54);
 }
 .req-badge-close {
-    background-color: #FB6D5B;
+    border: 2px solid #FF7D7D;
+    box-shadow: 0px 1px 4px 6px rgba(252,193,193,0.83);
 }
+
 nav.req-nav li  {
 margin-left: 7.5px;
 margin-right: 7.5px;
@@ -1247,8 +1253,9 @@ margin-right: 7.5px;
 .req-btn {
     height: 56px;
     width: 180px;
-    border-radius: 12px;
-    color: #FFFFFF;
+    border-radius: 27px;
+    color: #343a40;
+    font-weight: bold;
     font-family: "Mplus 1p";
     font-size: 12px;
     letter-spacing: 1.07px;
@@ -1258,36 +1265,64 @@ margin-right: 7.5px;
     text-transform: uppercase;    
 }
 .req-btn-all {
-    background-color: #4E2AE2;
-    box-shadow: 0 6px 20px 0 rgba(78,42,226,0.36);
+    border: 2px solid #4E2AE2;
+    box-shadow: 0px 1px 4px 6px rgba(51,0,255,0.33);
 }
 .req-btn-new {
-    background-color: #59B0FF;
-    box-shadow: 0 6px 20px 0 rgba(0,168,255,0.43);
+    border: 2px solid #598EFF;
+    background-color: #598EFF;
 }
 .req-btn-work {
-    background-color: #D292FF;
-    box-shadow: 0 6px 20px 0 rgba(198,98,253,0.5);
+    border: 2px solid #E17DFF;
+    border-radius: 26px;
 }
-
-.req-btn-complete{
-background-color: #36EADF;
-box-shadow: 0 6px 20px 0 rgba(54,234,223,0.48);
+.req-btn-complete {
+    border: 2px solid #7C7C7C;    
 }
 .req-btn-rectification {
-    background-color: #59E1FF;
-    box-shadow: 0 6px 20px 0 rgba(89,225,255,0.5);
+    border: 2px solid #1FD68D;
 }
 
 .req-btn-close {
-    background-color: #FB6D5B;
-    box-shadow: 0 6px 20px 0 rgba(251,109,91,0.53);
+    border: 2px solid #FF7D7D;
 }
 .req-btn:hover {
-    filter: brightness(84%);
+    color: #343a40;
+    text-decoration: none;
 }
-.req-notification
-{
+.req-btn-all:hover, 
+.req-btn-all:focus {
+    box-sizing: border-box;
+    border: 3px solid #4E2AE2;
+    box-shadow: 0px 1px 4px 6px rgba(51,0,255,0.33);
+}
+.req-btn-new:hover, 
+.req-btn-new:focus {
+    border: 3px solid #598EFF;
+    box-shadow: 0px 1px 4px 6px rgba(0,101,255,0.28);
+}
+.req-btn-work:hover, 
+.req-btn-work:focus {
+    border: 3px solid #E17DFF;
+    box-shadow: 0px 1px 4px 6px rgba(225,125,255,0.42);
+}
+.req-btn-complete:hover,
+.req-btn-complete:focus {
+    border: 3px solid #7C7C7C;
+    box-shadow: 0px 1px 4px 6px rgba(255,125,125,0.26);
+}
+.req-btn-rectification:hover,
+.req-btn-rectification:focus {
+    border: 3px solid #1FD68D;
+    box-shadow: 0px 1px 4px 6px rgba(56,231,161,0.54);
+}
+.req-btn-close:hover,
+.req-btn-close:focus {
+    border: 3px solid #FF7D7D;
+    box-shadow: 0px 1px 4px 6px rgba(252,193,193,0.83);
+}
+
+.req-notification {
     height: 20px;
     width: 20px;
     background-color: #EF693A;

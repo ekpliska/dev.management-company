@@ -67,11 +67,7 @@
                 'attribute' => 'status',
                 'label' => 'Статус',
                 'value' => function ($data) {
-                    return 
-                            '<p>'
-                            . StatusHelpers::requestStatus($data['status'])
-                            . '</p>'
-                            . Html::button('Оценить', ['class' => 'blue-outline-btn req-table-btn', 'data-request' => $data->requests_id]);
+                    return StatusHelpers::requestStatus($data['status'], $data->requests_id);
                 },
                 'format' => 'raw',
             ],
