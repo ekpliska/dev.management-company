@@ -1986,10 +1986,6 @@ height: 28px;	width: 388px;
 
 }
 
-.category-select-block {
-    margin-left: 77px;
-}
-
 .badge-darkblue {
     color: #ffffff;
     background: #2d18b4;
@@ -2399,14 +2395,15 @@ input[id="_search-input"] {
     padding: 5px 30px;    
     width: 380px;
     border: none;
-    border-bottom: 1px #c1c1c1c1 solid;
+    border-bottom: 1px #8b709d solid;
     outline: none;
-    color: #c1c1c1c1;
+    color: #8b709d;
 }
 input[id="_search-input"]:focus {
-    border-bottom: 1px #c1c1c1c1 solid;
+    border-bottom: 1px #8b709d solid;
     color: #fff;
     outline: none;
+    box-shadow: none;
     background-color: transparent;
 }
 
@@ -3273,6 +3270,7 @@ color: white;
 .table-applications {
     margin-top: 70px;
     width: 100%;
+    height: 100%;
     border: 1px solid #D4D4D4;
     border-radius: 12px;
 }
@@ -3693,74 +3691,6 @@ input[type="radio"], input[type="checkbox"] {
     display: none;
 }
 
-/* Выпадающий список Лицево счет, Профиль */
-.account-dropdown {
-    position: relative;
-    display: inline-block;
-    vertical-align: middle;
-    margin: 10px;
-}
-
-.account-dropdown select {
-    width: 380px;
-    border: 1px solid #2d18b4;
-    text-align-last: center;
-    color: #2d18b4;
-    font-size: inherit;
-    padding: .4em;
-    padding-right: 2.5em;
-    margin: 0;
-    outline: none;
-    border-radius: 25px;
-    text-indent: 0.01px;
-    text-overflow: '';
-    -webkit-appearance: button;
-}
-
-.account-dropdown::before,
-.account-dropdown::after {
-    content: "";
-    position: absolute;
-    pointer-events: none;
-}
-
-.account-dropdown::after {
-    content: "\25BC";
-    height: 1em;
-    font-size: .625em;
-    line-height: 1;
-    right: 1.2em;
-    top: 50%;
-    margin-top: -.5em;
-}
-
-.account-dropdown::before {
-    width: 2em;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    border-radius: 0 3px 3px 0;
-}
-
-.account-dropdown select[disabled] {
-    color: rgba(0,0,0,.3);
-}
-
-.account-dropdown select[disabled]::after {
-    color: rgba(0,0,0,.1);
-}
-
-.account-dropdown::before {
-    /*background-color: rgba(0,0,0,.15);*/
-}
-
-.account-dropdown::after {
-    color: rgb(45, 24, 180);
-}
-
-.change-info {
-    
-}
 
 /* Дополнительное нафигационное меню для раздела Лицевой счет */
 

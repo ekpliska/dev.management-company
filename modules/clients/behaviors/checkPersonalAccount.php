@@ -69,12 +69,11 @@ class checkPersonalAccount extends Behavior {
                 'expire' => time() + 60*60*24*7,
             ]));
         }
-        
-//        return $this->_choosing = $choosing;
+
         return [
             '_choosing' => $this->_choosing = $choosing,
-            '_value_choosing' => $this->_value_choosing = $array_account[$choosing],
-            ];
+            '_value_choosing' => $this->_value_choosing = array_shift($array_account),
+        ];
         
     }
 }

@@ -14,10 +14,12 @@
     <nav class="navbar services-nav navbar-dark justify-content-between navbar-expand-sm p-0 carousel-item d-block">
         <ul class="nav  mx-auto text-center justify-content-center">
             <li class="nav-item">
-                <div class="col-12 text-left material category-select-block">
+                <div class="col-12 text-left">
                     <div class="category-select mx-auto">
-                        <?= Html::dropDownList('category_list', -1, $category_list, [
-                                'prompt' => 'Все категории', 'class' => '']) ?>
+                        <span class="paid-service-dropdown">
+                            <?= Html::dropDownList('category_list', -1, $category_list, [
+                                    'prompt' => 'Все категории']) ?>
+                        </span>
                     </div>
                 </div>
             </li>

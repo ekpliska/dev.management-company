@@ -210,47 +210,6 @@ legend {
     transform: scaleX(1);
 }
 
-
-
-
-/*
-
-
-.text-group textarea {
-    display: block;
-    background: none;
-    padding: 0.125rem 0.125rem 0.0625rem;
-    border-width: 0;
-    border-color: transparent;
-    line-height: 1.9;
-    width: 100%;
-    -webkit-transition: all 0.28s ease;
-    transition: all 0.28s ease;
-    box-shadow: none;
-}
-.text-group textarea:focus ~ .input-label,
-.text-group textarea:valid ~ .input-label,
-.text-group textarea.form-file ~ .input-label,
-.text-group textarea.has-value ~ .input-label {
-    font-size: 14px;
-    ;
-    color: gray;
-    top: -1rem;
-    left: 0;
-}
-.text-group textarea:focus ~ .input-label {
-    color: #96c93d;
-}
-.text-group textarea:focus ~ .bar::before {
-    width: 100%;
-    left: 0;
-}
-.text-group {
-    position: relative;
-    margin-top: 2.25rem;
-    margin-bottom: 4.25rem;
-}*/
-
 /* Textarea in modal windows */
 .field-modal-textarea {
     position: relative;
@@ -357,3 +316,136 @@ legend {
     cursor: pointer;    
 }
 /* End File input in modal window */
+
+/* Выпадающий список Лицевой счет, Профиль */
+.account-dropdown {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 10px;
+}
+
+.account-dropdown select {
+    width: 380px;
+    border: 1px solid #2d18b4;
+    text-align-last: center;
+    color: #2d18b4;
+    font-size: inherit;
+    padding: .4em;
+    padding-right: 2.5em;
+    margin: 0;
+    outline: none;
+    border-radius: 25px;
+    text-indent: 0.01px;
+    text-overflow: '';
+    -webkit-appearance: button;
+}
+
+.account-dropdown::before,
+.account-dropdown::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+}
+
+.account-dropdown::after {
+    content: "\25BC";
+    height: 1em;
+    font-size: .625em;
+    line-height: 1;
+    right: 1.2em;
+    top: 50%;
+    margin-top: -.5em;
+}
+
+.account-dropdown::before {
+    width: 2em;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: 0 3px 3px 0;
+}
+
+.account-dropdown select[disabled] {
+    color: rgba(0,0,0,.3);
+}
+
+.account-dropdown select[disabled]::after {
+    color: rgba(0,0,0,.1);
+}
+
+.account-dropdown::before {
+    /*background-color: rgba(0,0,0,.15);*/
+}
+
+.account-dropdown::after {
+    color: rgb(45, 24, 180);
+}
+/* Конец Выпадающий список Лицевой счет, Профиль */
+
+/* Выпадающий список навигационная панель, Платные услуги */
+.paid-service-dropdown {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 29.4px;
+}
+
+.paid-service-dropdown select {
+    width: 380px;
+    border: 1px solid #fff;
+    text-align-last: center;
+    color: #fff;
+    font-size: inherit;
+    padding: .4em;
+    padding-right: 2.5em;
+    background: transparent;
+    margin: 0;
+    outline: none;
+    border-radius: 25px;
+    text-indent: 0.01px;
+    text-overflow: '';
+    -webkit-appearance: button;
+}
+
+.paid-service-dropdown::before,
+.paid-service-dropdown::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+}
+
+.paid-service-dropdown::after {
+    content: "\25BC";
+    height: 1em;
+    font-size: .625em;
+    line-height: 1;
+    right: 1.2em;
+    top: 50%;
+    margin-top: -.5em;
+}
+
+.paid-service-dropdown::before {
+    width: 2em;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: 0 3px 3px 0;
+}
+
+.paid-service-dropdown select[disabled] {
+    color: rgba(0,0,0,.3);
+}
+
+.paid-service-dropdown select[disabled]::after {
+    color: rgba(0,0,0,.1);
+}
+
+.paid-service-dropdown::before {
+    background-color: transparent;
+}
+
+.paid-service-dropdown::after {
+    color: #fff;
+}
+/* Конец Выпадающий список навигационная панель, Платные услуги */
