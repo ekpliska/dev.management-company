@@ -834,7 +834,6 @@ a.close-menu{
 
 .menu-collapsed-nav {
     height: 139px;
-    /*box-shadow: 0px 5px 7px -1px rgba(0, 0, 0, 0.35);*/
 }
 
 .menu-collapsed-container {
@@ -859,7 +858,7 @@ a.close-menu{
 }
 
 .menu-start{
-    height: 350px;
+    height: 250px;
 }
 /* дабы побороть стили бутстрапа */
 ul > li:nth-child(2) > a.submenu-nav-link{

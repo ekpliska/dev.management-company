@@ -1,9 +1,10 @@
 <?php
 
+    use yii\helpers\Html;
+    use yii\helpers\Url;
+
 /* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Дополнительное навигационное меню в разделе "Лицевой счет"
  */
 ?>
 
@@ -12,26 +13,26 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="<?= Url::to(['personal-account/index']) ?>">
                     Общая информация
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
-                    Квитанция ЖКУ
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="<?= Url::to(['personal-account/payment']) ?>">
                     Платежи
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="<?= Url::to(['personal-account/counters']) ?>">
                     Показания приборов учета
                 </a>
             </li>
-    </ul>
+            <li class="nav-item">
+                <a class="nav-link" href="<?= Url::to(['personal-account/receipts-of-hapu']) ?>">
+                    Квитанция ЖКУ
+                </a>
+            </li>            
+        </ul>
   </div>
 </nav>
 <?php endif; ?>
