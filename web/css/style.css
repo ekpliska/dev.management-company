@@ -984,7 +984,16 @@ iframe #header {
 }
 .no-border {
     border: none !important;
-    margin: 1rem;    
+    margin: 1rem;
+}
+
+.modal-footer-btn {
+    display: inline-flex;
+    margin-left: 7%;
+}
+.modal-footer-btn button {
+    width: 180px;
+    margin: 20px;
 }
 
 .blue-outline-btn.white-btn {
@@ -3554,10 +3563,11 @@ form[id="create-account-modal-form"] {
 
 div[id="add-request-modal"] .modal-content {
     width: 670px;
-    height: 670px;
+    height: 620px;
 } 
 form[id="add-request-modal-form"] {
     width: 65%;
+    margin-top: 40px;
 }
 
 /* Конец Переодпределение ширины, высоты модальных окон */

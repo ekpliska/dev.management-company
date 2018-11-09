@@ -263,7 +263,7 @@ $(document).ready(function() {
      * Очистить форму заполнения заявки, если пользователь нажал в модальном окне 'Отмена'
      */ 
     $('.request__btn_close').on('click', function () {
-        $('#add-request')[0].reset();
+        $('#add-request-modal-form')[0].reset();
     });
     
     /*

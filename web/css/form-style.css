@@ -319,3 +319,41 @@ legend {
     box-shadow: none;
 }
 /* End Select in modal window */
+
+/* File input in modal window */
+#uploadImagesList {
+    list-style: none;
+    padding: 0;
+}
+#uploadImagesList .item {
+    float: left;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+#uploadImagesList .item .img-wrap {
+    width: inherit;
+    display: block;
+    height: 50px;
+}
+#uploadImagesList .item .img-wrap img {
+    width: auto;
+    height: inherit;
+    border: 1px solid #8b709d;
+    border-radius: 5px;    
+}
+#uploadImagesList .item .delete-link {
+    cursor: pointer;
+    display: block;
+    color: #ff1760;
+    position: absolute;
+    margin-top: -61px;
+    margin-left: 43px;    
+}
+.modal_btn-upload {
+    color: #fff;
+    position: absolute;
+    margin-left: 91%;
+    margin-top: -12%;
+    cursor: pointer;    
+}
+/* End File input in modal window */

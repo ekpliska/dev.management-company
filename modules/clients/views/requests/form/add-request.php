@@ -47,12 +47,26 @@
                 ->textarea(['rows' => 10, 'class' => 'field-input-textarea-modal'])
                 ->label($model->getAttributeLabel('requests_comment'), ['class' => 'field-label-modal']) ?>
 
-        <?php // = $form->field($model, 'gallery[]')->input('file', ['multiple' => true])->label(false) ?>
 
-        <?= $form->field($model, 'gallery[]', ['template' => '<label class="text-center btn btn-upload" role="button">{input}{label}{error}</label>'])
-                ->input('file', ['multiple' => true, 'id' => 'btnLoad', 'class' => 'hidden'])->label(false) ?>
+        <?= $form->field($model, 'gallery[]', [
+                'template' => '<label class="modal_btn-upload" role="button"><i class="fa fa-paperclip" aria-hidden="true"></i>{input}{label}{error}</label>'])
+                ->input('file', [
+                    'class' => 'addImages hidden', 
+                    'multiple' => true])
+                ->label(false) ?>
 
-        <div class="modal-footer no-border">
+        <div class="form-group">
+            <ul id="uploadImagesList">
+                <li class="item template">
+                    <span class="img-wrap">
+                        <img src="" alt="">
+                    </span>
+                    <span class="delete-link" title="Удалить"><i class="fa fa-times" aria-hidden="true"></i></span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="modal-footer-btn">
             <?= Html::submitButton('Отправить', ['class' => 'btn blue-outline-btn white-btn mx-auto']) ?>
             <?= Html::submitButton('Отмена', ['class' => 'btn red-outline-btn bt-bottom2 request__btn_close', 'data-dismiss' => 'modal']) ?>
         </div>    
