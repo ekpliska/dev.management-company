@@ -356,6 +356,7 @@ a.btn.blue-btn {
 .services-nav {
     height: 96px;
     background-color: #2D18B4;
+    z-index: -1;
 }
 
 .nav-padding {
@@ -1993,6 +1994,15 @@ height: 28px;	width: 388px;
     border-radius: 23px;
     font-weight: normal;
     text-transform: uppercase;
+}
+
+.badge-darkblue-personal-account {
+    color: #2d18b4;
+    font-size: 16px;
+    font-weight: normal;
+    text-transform: uppercase;
+    font-weight: 400;
+    letter-spacing: 0.1em;
 }
 
 .chip-label  {

@@ -53,7 +53,7 @@ $this->title = 'Профиль собственника';
 <div class="col-12 p-0 m-0 text-center material ">
     <div class="account-select mx-auto">
         <div class="chip-label">
-            <span class="badge badge-darkblue">Лицевой счет</span>
+            <span class="badge badge-darkblue-personal-account">Лицевой счет</span>
         </div>
         <span class="account-dropdown">
             <?= Html::dropDownList('_list-account', $this->context->_choosing, $accounts_list, [
