@@ -105,6 +105,27 @@ $(function($) {
 });
 
 
+$(function($) {
+    $('.field-input-textarea-modal').focus(function(){
+        $(this).parent().addClass('is-focused has-label');
+    });
+
+    $('.field-input-textarea-modal').blur(function(){
+        $parent = $(this).parent();
+        if($(this).val() == ''){
+            $parent.removeClass('has-label');
+        }
+        $parent.removeClass('is-focused');
+    });
+
+    $('.field-input-textarea-modal').each(function(){
+        if($(this).val() !== ''){
+            $(this).parent().addClass('has-label');
+        }
+    });
+});
+
+
 /*
  * Скрыть/показать полный текст комментария к заявке
  */

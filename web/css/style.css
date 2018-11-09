@@ -857,7 +857,7 @@ a.close-menu{
     position: absolute;
 }
 
-.menu-start{
+.menu-start {
     height: 250px;
 }
 /* дабы побороть стили бутстрапа */
@@ -3551,7 +3551,16 @@ div[id="create-account-modal"] .modal-content {
 form[id="create-account-modal-form"] {
     width: 65%;
 }
-/* */
+
+div[id="add-request-modal"] .modal-content {
+    width: 670px;
+    height: 670px;
+} 
+form[id="add-request-modal-form"] {
+    width: 65%;
+}
+
+/* Конец Переодпределение ширины, высоты модальных окон */
 
 .del-ar {
     color: #fff;
