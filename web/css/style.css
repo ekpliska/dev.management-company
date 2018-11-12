@@ -20,10 +20,14 @@ src: url('../fonts/MPLUS1p-Black.ttf');*/
     min-height: 1000px;
 }
 
-.container {
+a:hover {
+    text-decoration: none;
+}
+
+/*.container {
     min-height: 768px;
     height: auto;
-}
+}*/
 /* html {
  overflow-y: hidden; 
 } */
@@ -837,7 +841,7 @@ a.close-menu{
 
 .menu-collapsed-nav {
     height: 139px;
-    box-shadow: 0 5px 5px 1px rgba(0,0,0,0.26);
+    /*box-shadow: 0 5px 5px 1px rgba(0,0,0,0.26);*/
 }
 
 .menu-collapsed-container {
@@ -1868,7 +1872,6 @@ background-color: #000000;
     background-color: #FFFFFF;
     padding: 0 !important;
     margin: 10px 5px;
-    width: 340px;
 }
 
 .news-card-preview:hover {
@@ -1896,7 +1899,7 @@ background-color: #000000;
     font-size: 18px;
     margin-left: 24px;
     margin-right: 24px;
-    margin-bottom: 0px;
+    margin-bottom: 5px;
 }
 
 .news-card-preview-h,
@@ -1906,6 +1909,10 @@ background-color: #000000;
 
 .requests-card-preview-h {
     font-size: 18px;
+}
+
+.news-card-preview-h a {
+    color: #2D18B4;
 }
 
 .news-card-preview-date {
@@ -3445,7 +3452,7 @@ div[id^=participate-in-voting-] .modal-content {
 /* Конец Постраничная навигация новостей, Собственник, главная странциа */
 
 .news-list {
-    padding-top: 70px;
+    padding-top: 90px;
 }
 
 button.again-bt {
@@ -3586,7 +3593,7 @@ form[id="add-paid-service"] {
 /* Добавление новой заявки */
 
 
-a.nav-link.submenu-nav-link.right-rubrick {
+a.nav-link.submenu-nav-link.central-block {
     padding: 10px;
 }
 
@@ -3594,9 +3601,7 @@ a.nav-link.submenu-nav-link.right-rubrick {
     z-index: -1;
     height: 96px;
     width: 100%;
-    background-color: #2D18B4;
-    position: fixed;
-    border-top: none;
+    box-shadow: 3px 0px 1px #88888800, 0px 5px 5px #88888894;
 }
 
 .error-summary {

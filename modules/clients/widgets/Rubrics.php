@@ -9,11 +9,17 @@
  */
 class Rubrics extends Widget {
 
+    public $general_navbar = [
+        'important_information' => 'Важная информация',
+        'special_offers' => 'Специальные предложения',
+        'house_news' => 'Новости дома',
+    ];
+    
     public function run() {
         $rubrics = ModelRubrics::getArrayRubrics();
         
         return $this->render('rubrics/default', [
-            'rubrics' => $rubrics,
+            'general_navbar' => $this->general_navbar,
         ]);
     }
         

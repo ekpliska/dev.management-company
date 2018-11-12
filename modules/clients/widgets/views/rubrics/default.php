@@ -8,24 +8,23 @@
  * Вывод новостей в личном кабинете собственника
  */
 ?>
+<?php if (Yii::$app->controller->id == 'clients' && Yii::$app->controller->action->id == 'index') : ?>
 
-<?php if (Yii::$app->controller->id == 'news' && Yii::$app->controller->action->id == 'index') : ?>
+    <?php $current_block = Yii::$app->controller->actionParams['block']; ?>
 
-    <?php $rubric_link = Yii::$app->controller->actionParams['rubric']; ?>
-
-    <?php if (isset($rubrics) && count($rubrics)) : ?>
+    <?php if (isset($general_navbar)) : ?>
     <nav class="navbar nav-pills mx-auto text-center justify-content-center nav-tref-potty">
         <ul class="nav nav-pills mx-auto text-center justify-content-center">
-            <?php foreach ($rubrics as $key => $rubric) : ?>
+            <?php foreach ($general_navbar as $key => $item) : ?>
                 <li class="nav-item">
-                    <a href="<?= Url::to(['news/index', 'rubric' => $key]) ?>" 
+                    <a href="<?= Url::to(['clients/index', 'block' => $key]) ?>" 
                        class="nav-link 
                             submenu-nav-link 
-                            <?= ($rubric_link == $key) ? 'active' : '' ?> 
-                            <?= ($key == 'important_information') ? ' no-border-right no-border-left' : '' ?>
-                            <?= ($key == 'special_offers') ? ' right-rubrick' : '123' ?>"
+                            <?= ($current_block == $key) ? 'active' : '' ?> 
+                            <?= ($key == 'special_offers') ? ' no-border-right no-border-left' : '' ?>
+                            <?= ($key == 'special_offers') ? 'central-block' : '123' ?>"
                     >
-                        <?= $rubric ?>
+                        <?= $item ?>
                     </a>
                 </li>
             <?php endforeach; ?>

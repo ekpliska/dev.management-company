@@ -20,9 +20,31 @@ class ClientsController extends AppClientsController
      * Главная страница
      * Формирование списка новостей для собственника
      */
-    public function actionIndex($rubric = 'important_information') {
+    public function actionIndex($block = 'important_information') {
+
+        // Получаем ID текущего лицевого счета
+        $accoint_id = $this->_choosing;
         
-        return $this->render('index');
+        $estate_id = Yii::$app->userProfile->_user['estate_id'];
+        $house_id = Yii::$app->userProfile->_user['house_id'];
+        $flat_id = Yii::$app->userProfile->_user['flat_id'];
+        
+        switch ($block) {
+            case 'important_information':
+            case null: {
+                break;
+            }
+            case 'special_offers': {
+                break;
+            }
+            case 'house_news': {
+                $news = News::getNewsByClients($estate_id, $house_id, $flat_id);
+                break;
+            }
+        }
+        return $this->render('index', [
+            'news' => $news,
+        ]);
     }
     
 }
