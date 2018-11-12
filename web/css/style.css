@@ -519,6 +519,7 @@ body {
     background-image: url(Head.png);
     background-size: 100% 100%;
     background-repeat: round;
+    
 }
 
 .nav-podmenu {
@@ -836,6 +837,7 @@ a.close-menu{
 
 .menu-collapsed-nav {
     height: 139px;
+    box-shadow: 0 5px 5px 1px rgba(0,0,0,0.26);
 }
 
 .menu-collapsed-container {
@@ -3632,6 +3634,17 @@ form[id="add-paid-service"] {
 
 a.nav-link.submenu-nav-link.right-rubrick {
     padding: 10px;
+}
+
+.nav-tref-potty {
+    margin-top: 0;
+    z-index: -1;
+    height: 96px;
+    width: 100%;
+    background-color: #2D18B4;
+    position: fixed;
+    padding-top: 20px;
+    border-top: none;
 }
 
 .error-summary {

@@ -29,7 +29,9 @@
                         <?= Html::a('Мой профиль', ['profile/index']) ?>
                     </div>                    
                     <div class="mail-border">
-                        <p class="mail-color">Iam_Mayer@gmail.com</p>
+                        <p class="mail-color">
+                            <?= Yii::$app->userProfile->email ?> 
+                        </p>
                     </div>
                     <div class="dropdown_account-block">
                         <p class="dropdown_account-title">Текущий лицевой счет</p>
