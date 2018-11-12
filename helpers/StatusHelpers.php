@@ -11,7 +11,7 @@
  */
 class StatusHelpers {
     
-    public static function requestStatus($status, $value) {
+    public static function requestStatus($status, $value = null) {
         
         $btn_css = '';
         $voting_bnt = '';
@@ -26,7 +26,7 @@ class StatusHelpers {
         ];
     
         
-        if (!isset($status)) {
+        if ($status == null) {
             return 'Не задан';
         }
         

@@ -73,7 +73,7 @@
                     'attribute' => 'status',
                     'label' => 'Статус',
                     'value' => function ($data) {
-                        return '<p>' . StatusHelpers::requestStatus($data['status']) . '</p>';
+                        return StatusHelpers::requestStatus($data['status']);
                     },
                     'contentOptions' =>[
                         'class' => 'cod-7',
