@@ -188,9 +188,7 @@ class News extends ActiveRecord
                 ->joinWith(['rubric', 'partner'])
                 ->andWhere(['news_type_rubric_id' => $rubruc])
                 ->andWhere(['news_house_id' => $house_id, 'news_house_id' => 0])
-                ->asArray()
-//                ->all()
-                ;
+                ->asArray();
         
         return $news;
     }

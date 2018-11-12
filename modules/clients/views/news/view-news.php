@@ -9,27 +9,30 @@
  */
 $this->title = $news['news_title'];
 ?>
-
-<div class="row">
-    <div class="col-3">
-        <?= Html::img('@web' . $news['news_preview'], ['alt' => $news['news_title'], 'style' => 'width: 100%;']) ?>
-        
-        <?php if (isset($files) && count($files)) : ?>
-            Прикрепленные документы:
-            <?php foreach ($files as $file) : ?>
-                <?= FormatHelpers::formatUrlByDoc($file['name'], $file['filePath']) ?>
-            <?php endforeach; ?>
-        <?php endif; ?>
+<div class="new-conteiner">
+    <div class="preview-news">        
+        <?= Html::img('@web' . $news['news_preview'], ['alt' => $news['news_title'], 'class' => 'news-image']) ?>
+        <div class="news-rubric-block">
+            <span class="rubric-name"><?= $news['rubrics_name'] ?></span>
+            <?php if ($news['isAdvert']) : ?>
+                <span class="partner-name"><?= $news['partners_name'] ?></span>
+            <?php endif; ?>
+        </div>
+        <div class="news-title-block">
+            <h2 class="news-title"><?= $news['news_title'] ?></h2>
+            <p class="news-date"><?= FormatHelpers::formatDate($news['created_at'], false) ?></p>
             
-        <?php if ($news['isAdvert']) : ?>
-            <span class="label label-danger">Реклама</span>
-            <?= $news['partners_name'] ?>
-        <?php endif; ?>
-            
+            <?php if (isset($files) && count($files)) : ?>
+                <?php foreach ($files as $file) : ?>
+                    <p class="load-documents">
+                        <?= FormatHelpers::formatUrlByDoc($file['name'], $file['filePath']) ?>
+                    </p>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </div>
     </div>
-    <div class="col-9">
-        <h4 class="news-h"><?= $news['news_title']; ?></h4>
-        <h5 class="news-date"><?= FormatHelpers::formatDate($news['created_at'], false) ?></h5>
+
+    <div class="news-text">
         <?= $news['news_text'] ?>
     </div>
 </div>

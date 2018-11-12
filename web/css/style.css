@@ -1106,7 +1106,7 @@ background-color:#2D18B4;
 }
 .requests-card-preview-h,
 .news-card-preview-date {
-position: absolute;
+    position: absolute;
 }
 
 .requests-icon-container-green img
@@ -1858,26 +1858,17 @@ background-color: #000000;
 }
 
 
-/* ____________________________________________________________________ */
-/* цвет ссылок на странице  главная новости */
 .news-card-preview-a {
     color: #f49572;	
 }
-/* отключение границ превью карточки на странице  главная новости */
-.news-card-preview {
-    color: #a7a7a7;	
-    border-top: none;
-    border-left: none;
-    border-right: none;
+.news-card-preview {    
+    color: #a7a7a7;
     height: 451px;
-    max-height: 451px;
-    width: 388px;
-    max-width: 388px;
     border-radius: 12px;
     background-color: #FFFFFF;
-    margin-right: 9px;
-    margin-left: 9px;
-    margin-top: 24px;
+    padding: 0 !important;
+    margin: 10px 5px;
+    width: 340px;
 }
 
 .news-card-preview:hover {
@@ -1889,10 +1880,8 @@ background-color: #000000;
     margin-top: 24px; 
     width: 1366px;
     max-width: 1366px;
-    padding-left: 50px;
-    padding-right: 50px;
     height: auto;
-    margin-bottom: 112px;
+    margin-bottom: 40px;
 }
 
 .news-card-img-top-preview {
@@ -2061,11 +2050,6 @@ margin-top: 57px;
     margin-top: 11px;
     margin-left: 98px;
     margin-right: 31px;
-}
-.news-date {
-    margin-left: 98px;
-    margin-bottom: 24px;
-    color: #000000;	font-family: "Mplus 1p Medium";	font-size: 12px;	letter-spacing: 0.9px;	line-height: 18px;
 }
 
 .news-txt {
@@ -3458,8 +3442,10 @@ div[id^=participate-in-voting-] .modal-content {
     padding-top: 50px;
 }
 
+/* Конец Постраничная навигация новостей, Собственник, главная странциа */
+
 .news-list {
-    padding-top: 120px;
+    padding-top: 70px;
 }
 
 button.again-bt {
@@ -3476,11 +3462,11 @@ button.again-bt {
 }
 
 /* Выпадающий список лицевых счетов, переопределение от основного плагина */
-.material .material-select ul li label {
+/*.material .material-select ul li label {
     padding-top: 7px !important;
     height: 30px !important;
     border-bottom: none !important;
-}
+}*/
 
 .clients-profile-info {
     padding-right: 100px;
@@ -3562,38 +3548,6 @@ button.again-bt {
     margin: 0 !important;
 }
 
-/*#add-rent-modal input[type="text"],
-#add-rent-modal input[type="password"],
-#create-account-modal-form input[type="text"],
-#create-account-modal-form input[type="password"] {
-    display: block;
-    width: 100%;
-    height: calc(2.25rem + 2px);
-    padding: 0.375rem 0.75rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    color: #ffffff;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #808080;
-    border-radius: 0.25rem;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    background: transparent;
-    border: none;
-    border-bottom: 1px solid #c1c1c1c1;
-}
-
-#add-rent-modal input[type="text"]:focus,
-#add-rent-modal input[type="password"]:focus,
-#create-account-modal-form input[type="text"]:focus,
-#create-account-modal-form input[type="password"]:focus {
-    outline: none;
-    border-bottom: 1px solid #fff;
-    box-shadow: none;
-}
-*/
-
-
 /* Переодпределение ширины, высоты модальных окон */
 div[id="add-rent-modal"] .modal-content {
     width: 670px;
@@ -3637,13 +3591,11 @@ a.nav-link.submenu-nav-link.right-rubrick {
 }
 
 .nav-tref-potty {
-    margin-top: 0;
     z-index: -1;
     height: 96px;
     width: 100%;
     background-color: #2D18B4;
     position: fixed;
-    padding-top: 20px;
     border-top: none;
 }
 
@@ -3738,3 +3690,86 @@ input[type="radio"], input[type="checkbox"] {
 }
 
 /* Конец Дополнительное нафигационное меню для раздела Лицевой счет */
+
+/* Просмотр отдельной новости */
+.new-conteiner {
+    border: 1px solid #D4D4D4;
+    border-radius: 15px;
+    padding-bottom: 70px;
+}
+.preview-news {
+    position: relative;
+    height: 616px;
+    width: 1200px;
+    overflow: hidden;
+}
+.news-image {
+    width: 100%;
+    height: 100%;
+    border-top-left-radius: 15px;  
+    border-top-right-radius: 15px;  
+}
+.news-rubric-block {
+    position: absolute;
+    height: 40px;
+    width: 100%;
+    color: #000;
+    top: 20px;
+}
+.news-rubric-block span {
+    padding: 5px 20px;
+    background: rgba(0, 0, 0, 0.2);
+    color: #fff;
+    border-radius: 15px;
+    margin-left: 20px;
+    font-size: 12px;
+    font-family: "Mplus 1p Medium";
+}
+.news-title-block {
+    position: absolute;
+    height: 160px;
+    width: 100%;
+    color: #000;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.2);
+}
+.news-title {
+    color: #fff;
+    padding-left: 26px;
+    padding-top: 15px;
+}
+.news-date {
+    padding-left: 26px;
+    color: #fff;
+    font-family: "Mplus 1p Medium";
+    font-size: 12px;
+    letter-spacing: 0.9px;
+    line-height: 18px;
+}
+.load-documents {
+    padding-left: 26px;
+    color: #fff;
+    font-family: "Mplus 1p Medium";
+    font-size: 16px;
+    letter-spacing: 0.9px;
+    line-height: 18px;
+}
+.news-text {
+    padding: 20px;
+    width: 1200px;
+    color: #000;
+    text-align: justify;
+}
+.news-title-block a {
+    background: rgba(0, 123, 255, 0.25);
+    border-radius: 15px;
+    padding: 5px 10px;
+    font-size: 12px;
+    color: #ffffff;
+}
+.news-title-block a:hover {
+    background: rgba(0, 123, 255, 0.5);
+    color: #ffffff;
+    text-decoration: none;
+}
+/* Конец Просмотр отдельной новости */

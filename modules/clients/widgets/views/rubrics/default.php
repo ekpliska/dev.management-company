@@ -14,7 +14,6 @@
     <?php $rubric_link = Yii::$app->controller->actionParams['rubric']; ?>
 
     <?php if (isset($rubrics) && count($rubrics)) : ?>
-    <!--<nav class="navbar navbar-dark menu-collapsed-nav justify-content-between navbar-expand-sm p-0 carousel-item d-block">-->
     <nav class="navbar nav-pills mx-auto text-center justify-content-center nav-tref-potty">
         <ul class="nav nav-pills mx-auto text-center justify-content-center">
             <?php foreach ($rubrics as $key => $rubric) : ?>

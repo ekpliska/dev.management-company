@@ -14,7 +14,7 @@ $this->title ="Главная страница";
     <?php if (isset($news) && count($news) > 0) : ?>
         <?php foreach ($news as $key => $post) : ?>
 
-            <div class="card news-card-preview  box-shadow">
+            <div class="col card news-card-preview box-shadow">
                 <?= Html::img('@web' . $post['news_preview'], [
                     'alt' => $post['news_title'], 
                     'class' => 'card-img-top news-card-img-top-preview']) ?>
@@ -35,12 +35,18 @@ $this->title ="Главная страница";
                     </div>
                 </div>
             </div>
+    
+            <?php if (($key + 1) % 3 == 0) : ?>
+                <div class="w-100"></div>
+            <?php endif; ?>
         <?php endforeach; ?>    
-    <?php endif; ?>   
+    <?php endif; ?> 
 </div>
 
+<?php /*
 <div class="row pagination-news">
     <?= LinkPager::widget([
             'pagination' => $pages]); 
     ?>
 </div>
+ */ ?>
