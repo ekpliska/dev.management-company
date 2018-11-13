@@ -13,6 +13,7 @@ $(document).ready(function() {
      * выводим модальное окно для управления учетной записью арендатора
      */
     $('#is_rent').on('change', function(e) {
+        
         var rentsId = $('input[id=_rents]').val();
         var accountNumber = $('#_list-account :selected').text();
         var checkShow = $(this).val();
@@ -43,6 +44,7 @@ $(document).ready(function() {
             } else {
                 $('.form-add-rent').html('Арендатор отсутствует');
             }
+    
         }
     });    
     

@@ -58,7 +58,8 @@ class Rents extends ActiveRecord
                 'on' => self::SCENARIO_EDIT_VALIDATION,
             ],
             
-            [['rents_mobile', 'rents_mobile_more'], 'match', 'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/i'],
+            ['rents_mobile', 'match', 'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/i'],
+            ['rents_mobile_more', 'match', 'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{4}\)?[\- ]?)?[\d\- ]{7,10}$/i'],
             
             ['isActive', 'boolean'],
         ];

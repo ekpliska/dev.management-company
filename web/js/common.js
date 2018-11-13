@@ -151,25 +151,23 @@ $('#send-request-to-sms').on('click', function() {
 
 
 /* Форма */
-$(function($) {
-    $('.field-input, .field-input-modal').focus(function(){
+    $(document).on('focus', '.field-input, .field-input-modal', function(){
         $(this).parent().addClass('is-focused has-label');
     });
 
-    $('.field-input, .field-input-modal').blur(function(){
+    $(document).on('blur', '.field-input, .field-input-modal', function(){
         $parent = $(this).parent();
-        if($(this).val() == ''){
+        if ($(this).val() == '') {
             $parent.removeClass('has-label');
         }
         $parent.removeClass('is-focused');
     });
 
     $('.field-input, .field-input-modal').each(function(){
-        if($(this).val() !== ''){
+        if ($(this).val() !== '') {
             $(this).parent().addClass('has-label');
         }
     });
-});
 
 
 $(function($) {

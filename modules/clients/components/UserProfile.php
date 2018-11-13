@@ -214,25 +214,25 @@ class UserProfile extends BaseObject {
         return $this->_user['phone'];
     }
     
-    /*
-     * ID квартиры Собственника/Аренедтора
-     */
-    public function getFlatId() {        
-        return $this->_user['flat_id'];
-    }
-    /*
-     * ID дома Собственника/Аренедтора
-     */
-    public function getHouseId() {
-        return $this->_user['house_id'];
-    }
-    /*
-     * ID жилого комплекса Собственника/Аренедтора
-     */
-    public function getEstateId() {
-        return $this->_user['estate_id'];
-    }
-    
+//    /*
+//     * ID квартиры Собственника/Аренедтора
+//     */
+//    public function getFlatId() {        
+//        return $this->_user['flat_id'];
+//    }
+//    /*
+//     * ID дома Собственника/Аренедтора
+//     */
+//    public function getHouseId() {
+//        return $this->_user['house_id'];
+//    }
+//    /*
+//     * ID жилого комплекса Собственника/Аренедтора
+//     */
+//    public function getEstateId() {
+//        return $this->_user['estate_id'];
+//    }
+//    
     /*
      * Получить ID ЖК, ID Дома, ID Квартиры и номер подъезда
      * по текущему лицевому счету

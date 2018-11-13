@@ -82,7 +82,7 @@ class ProfileController extends AppClientsController
                     return $this->redirect(Yii::$app->request->referrer);
                 }
             } else {
-                // иначе. сохраняем только профиль пользователя
+                // иначе сохраняем только профиль пользователя
                 $user_info = $this->permisionUser()->_model;
                 if ($user_info->load(Yii::$app->request->post())) {
                     $file = UploadedFile::getInstance($user_info, 'user_photo');
@@ -401,7 +401,7 @@ class ProfileController extends AppClientsController
     }    
     
     /*
-     * 
+     * Формирование нового смс кода
      */
     public function actionGenerateNewSmsCode() {
         

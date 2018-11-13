@@ -69,7 +69,6 @@ $this->title = 'Профиль собственника';
     <div class="col-12 mx-0 row personal-info">
         
         <!--Собственник-->
-        
         <div class="col-6 clients-profile-info">
             <h5 class="profile-title">
                 Мои контактные данные&nbsp;
@@ -77,12 +76,18 @@ $this->title = 'Профиль собственника';
             </h5>
             
             <div class="field">
-                <label for="user_mobile" class="field-label">Мобильный телефон</label>
-                <?= Html::input('text', 'user_mobile', $user->user_mobile, ['class' => 'field-input']) ?>
+                <label for="user_mobile" class="field-label"><i class="fa fa-mobile"></i> Мобильный телефон</label>
+                <?= Html::input('text', 'user_mobile', $user_info->mobile, ['class' => 'field-input']) ?>
             </div>
+            
             <div class="field">
-                <label for="user_email" class="field-label">Электронная почта</label>
-                <?= Html::input('text', 'user_email', $user->user_email, ['class' => 'field-input']) ?>
+                <label for="user_mobile" class="field-label"><i class="fa fa-phone"></i> Домашний телефон</label>
+                <?= Html::input('text', 'user_mobile', $user_info->otherPhone, ['class' => 'field-input']) ?>
+            </div>
+            
+            <div class="field">
+                <label for="user_email" class="field-label"><i class="fa fa-envelope-o"></i> Электронная почта</label>
+                <?= Html::input('text', 'user_email', $user_info->email, ['class' => 'field-input']) ?>
             </div>
             
         </div>

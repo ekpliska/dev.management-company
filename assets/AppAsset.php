@@ -20,7 +20,7 @@ class AppAsset extends AssetBundle
         'css/style.css',        
         'css/checkbox.css',
         'css/form-style.css',
-        '//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css',
+        '//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css',        
     ];
     public $js = [
         'js/common.js',
