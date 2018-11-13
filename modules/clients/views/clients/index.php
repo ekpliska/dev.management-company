@@ -42,5 +42,9 @@ $this->title ="Главная страница";
                 <div class="w-100"></div>
             <?php endif; ?>
         <?php endforeach; ?>    
+    <?php else : ?>
+         <div class="notice notice-info">
+            <strong>Новости</strong> не найдено.
+        </div>
     <?php endif; ?> 
 </div>

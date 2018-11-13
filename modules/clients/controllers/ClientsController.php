@@ -24,10 +24,8 @@ class ClientsController extends AppClientsController
 
         // Получаем ID текущего лицевого счета
         $accoint_id = $this->_choosing;
-        
-        $estate_id = Yii::$app->userProfile->_user['estate_id'];
-        $house_id = Yii::$app->userProfile->_user['house_id'];
-        $flat_id = Yii::$app->userProfile->_user['flat_id'];
+        // Получаем массив содержащий ID ЖК, ID дома, ID квартиры, номер подъезда
+        $living_space = Yii::$app->userProfile->getLivingSpace($accoint_id);
         
         switch ($block) {
             case 'important_information':
@@ -35,10 +33,12 @@ class ClientsController extends AppClientsController
                 break;
             }
             case 'special_offers': {
+                $news = News::getNewsByClients($living_space, true);
+                break;
                 break;
             }
             case 'house_news': {
-                $news = News::getNewsByClients($estate_id, $house_id, $flat_id);
+                $news = News::getNewsByClients($living_space, false);
                 break;
             }
         }

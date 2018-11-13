@@ -165,7 +165,7 @@ class News extends ActiveRecord
     }
     
     /*
-     * Найти публикацию на slug
+     * Найти публикацию по slug
      */
     public static function findNewsBySlug($slug) {
         
@@ -180,34 +180,34 @@ class News extends ActiveRecord
 
     /*
      * Формирование списка новостей для конечного пользователя
+     * 
+     * @param array $living_space
+     *      $living_space['estate_id'] ID ЖК
+     *      $living_space['houses_id'] ID Дома
+     *      $living_space['flats_id'] ID Квартиры
+     *      $living_space['flats_porch'] Номер подъезда
+     * 
+     * @param boolean $is_advert - Переключатель типа новостей (true - Реклама)
      */
-    public static function getNewsByClients($estate_id, $house_id, $flat_id) {
+    public static function getNewsByClients($living_space, $is_advert = false) {
+        
+        if ($living_space == null) {
+            return $news = [];
+        }
         
         $news = self::find()
                 ->select(['news_id', 'news_title', 'news_type_rubric_id', 'news_preview', 'news_text', 'created_at', 'slug', 'rubrics_name', 'isAdvert', 'partners_name'])
                 ->joinWith(['rubric', 'partner'])
-                ->andWhere(['news_house_id' => $house_id, 'news_house_id' => 0])
+                ->andWhere([
+                    'news_house_id' => $living_space['houses_id'],
+                    'isAdvert' => $is_advert,
+                ])
                 ->asArray()
                 ->all();
         
         return $news;
     }
-    
-    /*
-     * Формирование списка новостей (Рекламы) для конечного пользователя
-     */
-    public static function getNewsByClientsAdverts($estate_id, $house_id, $flat_id) {
         
-        $news = self::find()
-                ->select(['news_id', 'news_title', 'news_type_rubric_id', 'news_preview', 'news_text', 'created_at', 'slug', 'rubrics_name', 'isAdvert', 'partners_name'])
-                ->joinWith(['rubric', 'partner'])
-                ->andWhere(['news_house_id' => $house_id, 'news_house_id' => 0])
-                ->asArray()
-                ->all();
-        
-        return $news;
-    }
-    
     /*
      * Загрузка изображения услуги
      */    

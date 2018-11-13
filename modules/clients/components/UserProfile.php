@@ -6,6 +6,7 @@
     use Yii;
     use yii\helpers\ArrayHelper;
     use app\models\User;
+    use app\models\PersonalAccount;
 
 /* 
  * Профиль пользователя
@@ -216,7 +217,7 @@ class UserProfile extends BaseObject {
     /*
      * ID квартиры Собственника/Аренедтора
      */
-    public function getFlatId() {
+    public function getFlatId() {        
         return $this->_user['flat_id'];
     }
     /*
@@ -230,6 +231,22 @@ class UserProfile extends BaseObject {
      */
     public function getEstateId() {
         return $this->_user['estate_id'];
+    }
+    
+    /*
+     * Получить ID ЖК, ID Дома, ID Квартиры и номер подъезда
+     * по текущему лицевому счету
+     */
+    public function getLivingSpace($account_id) {
+        
+        $info = PersonalAccount::find()
+                ->select(['estate_id', 'houses_id', 'flats_id', 'flats_porch'])
+                ->joinWith(['flat', 'flat.house', 'flat.house.estate'])
+                ->where(['account_id' => $account_id])
+                ->asArray()
+                ->one();
+        
+        return $info;
     }
     
 

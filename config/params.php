@@ -18,5 +18,6 @@ return [
      */
     'count_symbol' => 70,
     
+    // (EL)ectronic (S)mart (A)ssistant 
     
 ];
