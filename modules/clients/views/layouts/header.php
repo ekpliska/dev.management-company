@@ -47,7 +47,7 @@
                     <div class="border-menu">
                         <span class="item">
                             <p style="width:100%; height: 42.5px;">
-                                <a href="<?= Url::to(['news/index']) ?>">Новости</a>
+                                <a href="<?= Url::to(['clients/index']) ?>">Новости</a>
                             </p>
                         </span>
                     </div>

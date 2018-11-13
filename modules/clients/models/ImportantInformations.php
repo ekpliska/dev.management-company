@@ -33,13 +33,12 @@ class ImportantInformations extends Model {
                 ->all();
         
         $lists = array_merge($voling_list, $news_list);
-        usort($lists, 
-                function ($a, $b) {
-                    $date_1 = strtotime($a['created_at']);
-                    $date_2 = strtotime($b['created_at']);
-                    if ($date_1 == $date_2) return 0;
-                    return $date_1 < $date_2 ? 1 : -1;
-                }
+        usort($lists, function ($a, $b) {
+            $date_1 = strtotime($a['created_at']);
+            $date_2 = strtotime($b['created_at']);
+            if ($date_1 == $date_2) return 0;
+                return $date_1 < $date_2 ? 1 : -1;
+            }
         );
         
         return $lists;

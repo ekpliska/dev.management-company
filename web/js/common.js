@@ -55,7 +55,6 @@ $(document).ready(function() {
              preview(files[i]);
          }
  
-         this.value = '';
      });
  
      // Создание превью
