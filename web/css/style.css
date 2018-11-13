@@ -1890,6 +1890,7 @@ background-color: #000000;
 .news-card-img-top-preview {
     border-top-right-radius: 12px;
     border-top-left-radius: 12px;
+    height: 50%;
 }
 
 .services-card-preview-h,

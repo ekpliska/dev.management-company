@@ -16,9 +16,7 @@ $this->title ="Главная страница";
         <?php foreach ($news as $key => $post) : ?>
 
             <div class="col-4"> <div class="card news-card-preview box-shadow">
-                <?= Html::img('@web' . $post['news_preview'], [
-                    'alt' => $post['news_title'], 
-                    'class' => 'card-img-top news-card-img-top-preview']) ?>
+                <?= FormatHelpers::previewNewsOrVote($post['news_preview'], false) ?>
 
                 <h5 class="news-card-preview-h">
                     <?= FormatHelpers::formatUrlNewsOrVote($post['news_title'], $post['slug']) ?>

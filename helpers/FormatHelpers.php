@@ -236,6 +236,25 @@ class FormatHelpers {
     }
     
     /*
+     * Формирование превью новости, голосования
+     * Главная страница личного кабинета собственника
+     * @param boolean $full Превью, (true - для отдельной страницы)
+     */
+    public static function previewNewsOrVote($path, $full = false) {
+        
+        if (empty($path)) {
+            $full_path = Yii::getAlias('@web') . '/images/not_found.png';
+        } else {
+            $full_path = Yii::getAlias('@web') . $path;
+        }
+        
+        $class_css = $full ? 'news-image' : 'card-img-top news-card-img-top-preview';
+        
+        return Html::img($full_path, ['class' => $class_css]);
+        
+    }
+    
+    /*
      * Вывод тизера публикации
      * 
      * @param string $text Полный текст новости

@@ -10,13 +10,13 @@
 $this->title = $news['news_title'];
 ?>
 <div class="new-conteiner">
-    <div class="preview-news">        
-        <?= Html::img('@web' . $news['news_preview'], ['alt' => $news['news_title'], 'class' => 'news-image']) ?>
+    <div class="preview-news">
+        <?= FormatHelpers::previewNewsOrVote($news['news_preview'], true) ?>
         <div class="news-rubric-block">
             <span class="rubric-name"><?= $news['rubrics_name'] ?></span>
-            <?php /* if ($news['isAdvert'] == 1) : ?>
+            <?php if ($news['isAdvert'] == 1) : ?>
                 <span class="partner-name"><?= $news['partners_name'] ?></span>
-            <?php endif; */ ?>
+            <?php endif; ?>
         </div>
         <div class="news-title-block">
             <h2 class="news-title"><?= $news['news_title'] ?></h2>
