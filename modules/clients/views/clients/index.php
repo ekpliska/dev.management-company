@@ -30,7 +30,7 @@ $this->title ="Главная страница";
 
                 <div class="card-body m-0 p-0 news-card-preview-body">
                     <p class="card-text news-card-preview-text ">
-                        <?= FormatHelpers::shortTextNews($post['news_text']) ?>
+                        <?= FormatHelpers::shortTextNews($post['news_text'], 30) ?>
                     </p>
                     <div class=" d-flex justify-content-around align-items-center">
                     </div>

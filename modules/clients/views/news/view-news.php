@@ -14,9 +14,9 @@ $this->title = $news['news_title'];
         <?= Html::img('@web' . $news['news_preview'], ['alt' => $news['news_title'], 'class' => 'news-image']) ?>
         <div class="news-rubric-block">
             <span class="rubric-name"><?= $news['rubrics_name'] ?></span>
-            <?php if ($news['isAdvert']) : ?>
+            <?php /* if ($news['isAdvert'] == 1) : ?>
                 <span class="partner-name"><?= $news['partners_name'] ?></span>
-            <?php endif; ?>
+            <?php endif; */ ?>
         </div>
         <div class="news-title-block">
             <h2 class="news-title"><?= $news['news_title'] ?></h2>

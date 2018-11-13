@@ -374,7 +374,7 @@ a.btn.blue-btn {
 } 
 
 html, body {
-    height:100%;
+    /*height:100%;*/
 }
 
 body {
@@ -3799,3 +3799,17 @@ input[type="radio"], input[type="checkbox"] {
     color: #007bff;
 }
 /* Конец Уведомления на странице */
+
+
+.tableBodyScroll tbody {
+  display: block;
+  max-height: 300px;
+  overflow-y: scroll;
+}
+
+.tableBodyScroll thead,
+tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
