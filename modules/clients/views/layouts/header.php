@@ -3,7 +3,7 @@
     use yii\helpers\Url;
     use app\modules\clients\widgets\UserInfo;
     use app\modules\clients\widgets\Notifications;
-    use app\modules\clients\widgets\Rubrics;
+    use app\modules\clients\widgets\SubBarGeneralPage;
     use app\modules\clients\widgets\SubBarPaidService;
     use app\modules\clients\widgets\SubBarPersonalAccount;
     use app\modules\clients\widgets\StatusRequest;
@@ -102,7 +102,7 @@
         </div>
     </nav>
 
-    <?= Rubrics::widget() ?>
+    <?= SubBarGeneralPage::widget() ?>
     <?= SubBarPaidService::widget() ?>
     <?= SubBarPersonalAccount::widget() ?>
     <?= StatusRequest::widget() ?>

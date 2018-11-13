@@ -69,10 +69,15 @@ class checkPersonalAccount extends Behavior {
                 'expire' => time() + 60*60*24*7,
             ]));
         }
+        
+        // Получаем ID лицевого счета
+        $this->_choosing = $choosing;
+        // Получаем номер лицевого счета
+        $this->_value_choosing = $choosing ? $array_account[$choosing] : $first_account;
 
         return [
-            '_choosing' => $this->_choosing = $choosing,
-            '_value_choosing' => $this->_value_choosing = array_shift($array_account),
+            '_choosing' => $this->_choosing,
+            '_value_choosing' => $this->_value_choosing,
         ];
         
     }

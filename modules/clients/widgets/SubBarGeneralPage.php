@@ -7,7 +7,7 @@
 /**
  * Список рубрик новостной ленты
  */
-class Rubrics extends Widget {
+class SubBarGeneralPage extends Widget {
 
     public $general_navbar = [
         'important_information' => 'Важная информация',
@@ -16,7 +16,6 @@ class Rubrics extends Widget {
     ];
     
     public function run() {
-        $rubrics = ModelRubrics::getArrayRubrics();
         
         return $this->render('rubrics/default', [
             'general_navbar' => $this->general_navbar,
