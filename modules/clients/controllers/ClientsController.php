@@ -2,12 +2,9 @@
 
     namespace app\modules\clients\controllers;
     use Yii;
-    use yii\web\NotFoundHttpException;
-    use yii\data\Pagination;
     use app\modules\clients\controllers\AppClientsController;
     use app\models\News;
-    use app\models\Rubrics;
-    use app\models\Image;
+    use app\modules\clients\models\ImportantInformations;
     
 
 /**
@@ -30,6 +27,8 @@ class ClientsController extends AppClientsController
         switch ($block) {
             case 'important_information':
             case null: {
+                $info = new ImportantInformations();
+                $news = $info->informations($living_space);
                 break;
             }
             case 'special_offers': {
@@ -42,6 +41,7 @@ class ClientsController extends AppClientsController
                 break;
             }
         }
+        
         return $this->render('index', [
             'news' => $news,
         ]);

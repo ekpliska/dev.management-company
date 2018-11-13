@@ -33,19 +33,6 @@ class FormatHelpers {
         
         return $html_path;
         
-//        $array_exension = [
-//            'jpg' => '1',
-//            'png' => '2',
-//            'jpeg' => '3'
-//        ];
-//        
-//        $extension = pathinfo($file, PATHINFO_EXTENSION);
-//        
-//        if (ArrayHelper::keyExists($extension, $array_exension)) {
-//            return Html::a('Изображение', $file, ['target' => '_blank']);
-//        } else {      
-//            return Html::a('Файл', $file);
-//        }        
     }
     
     /*
@@ -62,6 +49,23 @@ class FormatHelpers {
         
         return Html::a($file_name, $link, $options);
         
+    }
+    
+    /*
+     * Формирование ссылки на новость или голосование
+     * Если slug содержит число, то это голосование - иначе новость
+     */
+    public static function formatUrlNewsOrVote($title, $slug) {
+        
+        $path = '';
+        
+        if (is_numeric($slug)) {
+            $path = ['voting/view-voting', 'voting_id' => $slug];
+        } elseif (is_string($slug)) {
+            $path = ['news/view-news', 'slug' => $slug];
+        }
+        
+        return Html::a($title, $path);
     }
     
     /*

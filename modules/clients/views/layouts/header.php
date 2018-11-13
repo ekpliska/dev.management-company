@@ -90,7 +90,7 @@
                     </li>
                 </ul>
             </div>
-            <a href="/" class="navbar-brand mx-auto d-block text-center order-0 order-md-1 w-25">
+            <a href="<?= Url::to(['clients/index']) ?>" class="navbar-brand mx-auto d-block text-center order-0 order-md-1 w-25">
                 <?= Html::img('/images/navbar/group_46.svg') ?>
             </a>
             <div class="navbar-collapse collapse dual-nav w-50 order-2">

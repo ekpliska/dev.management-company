@@ -202,6 +202,7 @@ class News extends ActiveRecord
                     'news_house_id' => $living_space['houses_id'],
                     'isAdvert' => $is_advert,
                 ])
+                ->orderBy(['created_at' => SORT_DESC])
                 ->asArray()
                 ->all();
         

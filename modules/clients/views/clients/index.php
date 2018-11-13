@@ -21,7 +21,7 @@ $this->title ="Главная страница";
                     'class' => 'card-img-top news-card-img-top-preview']) ?>
 
                 <h5 class="news-card-preview-h">
-                    <?= Html::a($post['news_title'], ['news/view-news', 'slug' => $post['slug']]) ?>
+                    <?= FormatHelpers::formatUrlNewsOrVote($post['news_title'], $post['slug']) ?>
                 </h5>
 
                 <h5 class="news-card-preview-date">
@@ -44,7 +44,7 @@ $this->title ="Главная страница";
         <?php endforeach; ?>    
     <?php else : ?>
          <div class="notice notice-info">
-            <strong>Новости</strong> не найдено.
+            <strong>Новости</strong> по текущему разделу новостной информации не найдено.
         </div>
     <?php endif; ?> 
 </div>
