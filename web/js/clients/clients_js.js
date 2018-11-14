@@ -325,11 +325,11 @@ $(document).ready(function() {
      * Загрузка модального окна "Добавить платную услугу"
      * В dropDownList, hiddenInput загружаем ID выбранной услуги
      */
-    $(".new-rec").on("click", function(){
-        var idService = $(this).data("record");
-        $("#add-record-modal").modal("show");
-        $("#add-record-modal").find("#name_services").val(idService);
-        $("#secret").val(idService);
+    $(document).on('click', '.new-rec', function(){
+        var idService = $(this).data('record');
+        $('#add-record-modal').modal('show');
+        $('#add-record-modal').find('#name_services').val(idService);
+        $('#secret').val(idService);
     });    
 
 
@@ -347,14 +347,12 @@ $(document).ready(function() {
     $('#_search-input').on('input', function() {
     
         var searchValue = $(this).val();
-//        var accountId = $('.current__account_list').val();
         
         $.ajax({
             url: 'search-by-specialist',
             method: 'POST',
             data: {
                 searchValue: searchValue,
-//                accountId: accountId,
             },
             success: function(response) {
                 $('.grid-view').html(response.data);
@@ -366,7 +364,7 @@ $(document).ready(function() {
     });
     
     /*
-     * Фильтр заявко по категориям
+     * Фильтр заявок по категориям
      */
     $('#category_list').on('change', function(){
         var categoryId = $(this).val();
