@@ -1208,7 +1208,7 @@ margin-top: 94px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 90px;
-    border: 1px solid #D4D4D4;
+    /*border: 1px solid #D4D4D4;*/
     border-radius: 12px;
     min-width: 818px;
     display: block;
@@ -1401,7 +1401,7 @@ border-right: 1px solid #3f9aec;
     margin-top: 11px;
     margin-bottom:10px ;
     margin-left:8px;
-    margin-right: 8,45px;
+    margin-right: 8.45px;
     height: 10px;
     width: 14.55px;
 }
@@ -1472,17 +1472,19 @@ border-right: 1px solid #3f9aec;
 }
 
 .pay-table span.green-txt {
-    color: #23DD6F;	font-family: "Mplus 1p";	font-size: 14px;	letter-spacing: 1.05px;	line-height: 20px;	text-align: center;
+    color: #23DD6F;
+    font-family: "Mplus 1p";
+    font-size: 14px;
+    letter-spacing: 1.05px;
+    line-height: 20px;
+    text-align: center;
 }
+
 .pay-table thead th {
-    color: #2D18B4;
+    color: #2d18b4;
     font-family: "Mplus 1p";
     font-size: 12px;
-    letter-spacing: 1.07px;
-    line-height: 18px;
-    text-align: center;
     text-transform: uppercase;
-    border-bottom: 1px solid #D4D4D4;
 }
 .pay-table td {
     height: 139px;
@@ -1498,48 +1500,39 @@ background-color: #FCE7DF !important;
     z-index: -1;
 }
 .pay-outline-btn {
-margin-left: 44px;
+    margin-left: 44px;
 }
 
 .req-table-img {
-height: 24px;
-width: 24px;
-border-radius: 3px;
+    height: 24px;
+    width: 24px;
+    border-radius: 3px;
     margin-left: 4px;
     margin-right: 4px;
     margin-top: 5px;
 }
 
-.req-table-description {
-    max-width: 231px;
-    text-align: center;
+.req-table_req-main {
+    width: 10%;
 }
-
+.req-table_req-type {
+    width: 20%;
+}
 .req-table-description-request {
-    max-width: 231px;
+    width: 30%;
     text-align: justify;
 }
 
-.req-table-type {
-  /*  по согласованию с Максом*/
-    max-width: 165px;
-}
 .req-table.pay-table {
-color: #000000;
-font-family: "Mplus 1p";
-font-size: 12px;
-letter-spacing: 0.21px;
-line-height: 18px;
-
+    color: #000000;
+    font-family: "Mplus 1p";
+    font-size: 12px;
+    letter-spacing: 0.21px;
+    line-height: 18px;
 }
-.req-table.pay-table td {
-    /*padding: 0 !important;*/
-}
-
 .date-req-table {
    width:  140px;
 }
-
 
 .req-table-btn {
     height: 36px;
@@ -2229,11 +2222,6 @@ table.table-striped td,
 table.table-striped th {
     border: none;
     vertical-align: center;
-
-
-
-
-
 }
 table.table-striped th {
 
@@ -2245,21 +2233,14 @@ table.table-striped th {
     padding-bottom: 30px;
     padding-left: 30px;
     vertical-align:middle;
-
-
-
 }
 table.table-striped td {
     height: 60px;
     vertical-align:middle;
-     
-
-
 }
 .col-table-right {
     text-align: right;
     padding: 0;
-
 }
 .btn-lg-account {
     height: 56px;
@@ -3802,15 +3783,30 @@ input[type="radio"], input[type="checkbox"] {
 /* Конец Уведомления на странице */
 
 
-.tableBodyScroll tbody {
-  display: block;
-  max-height: 300px;
-  overflow-y: scroll;
+table {
+    background-color: #aaa;
+    position: relative;
+}
+thead {
+    position: fixed;
+    background: #fff;
+    width: 70.25%;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    border: 1px solid #d4d4d4;
+}
+tbody {
+    margin-top: 7.5em;
+    height: 100%;
+    border: 1px solid #d4d4d4;
+}
+td {
+    padding: 3px 10px;
 }
 
-.tableBodyScroll thead,
-tbody tr {
-  display: table;
-  width: 100%;
-  table-layout: fixed;
+thead > tr, tbody{
+    display:block;
+}
+.table thead th {
+    border: none;
 }

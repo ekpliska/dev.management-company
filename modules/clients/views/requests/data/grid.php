@@ -16,60 +16,92 @@
             'class' => 'table req-table  pay-table account-info-table px-0 tableBodyScroll',
         ],
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
             [
-                'attribute' => 'requests_ident',
+                'attribute' => 'ID',
                 'value' => function ($data) {
                     return Html::a($data->requests_ident, ['requests/view-request', 'request_numder' => $data->requests_ident]);
                 },
+                'headerOptions' => [
+                    'style' => 'width: 10%',
+                ],
                 'contentOptions' =>[
-                    'class' => 'req-table-description',
+                    'class' => 'req-table_req-main',
                 ],
                 'format' => 'raw',
             ],
             [
-                'attribute' => 'requests_type_id',
+                'attribute' => 'Вид заявки',
                 'value' => function ($data) {
                     return $data->getNameRequest();            
                 },
+                'headerOptions' => [
+                    'style' => 'width: 20%',
+                ],
                 'contentOptions' =>[
-                    'class' => 'req-table-description',
+                    'class' => 'req-table_req-type',
                 ],        
             ],
             [
-                'attribute' => 'requests_comment',
+                'attribute' => 'Описание',
                 'value' => function ($data) {
                     return $data->requests_comment
                             . '<br />'
                             . FormatHelpers::imageRequestList($data['image']);
                 },
+                'headerOptions' => [
+                    'style' => 'width: 30%',
+                ],                        
                 'contentOptions' =>[
                     'class' => 'req-table-description-request',
                 ],
                 'format' => 'raw',
             ],                        
-            'requests_specialist_id',
             [
-                'attribute' => 'created_at',
-                'format' => ['date', 'php:d.m.Y'],
+                'attribute' => 'Исполнитель',
+                'value' => function ($data) {
+                    return $data->requests_specialist_id;
+                },
+                'headerOptions' => [
+                    'style' => 'width: 10%'
+                ],                                
+            ],
+            [
+                'attribute' => 'Дата создания',
+                'value' => function ($data) {
+                    return FormatHelpers::formatDate($data->created_at, false, 0, false);
+                },
+                'headerOptions' => [
+                    'style' => 'width: 10%'
+                ],                
                 'contentOptions' =>[
-                    'class' => 'date-req-table',
+                    'class' => 'req-table_req-main',
                 ],
             ],
             [
-                'attribute' => 'updated_at',
-                'format' => ['date', 'php:d.m.Y'],
+                'attribute' => 'Дата закрытия',
+                'value' => function ($data) {
+                    return FormatHelpers::formatDate($data->date_closed, false, 0, false);
+                },
+                'headerOptions' => [
+                    'style' => 'width: 10%'
+                ],                
                 'contentOptions' =>[
-                    'class' => 'date-req-table',
+                    'class' => 'req-table_req-main',
                 ],
             ],
             [
-                'attribute' => 'status',
+                'attribute' => 'Статус',
                 'label' => 'Статус',
                 'value' => function ($data) {
                     return StatusHelpers::requestStatus($data['status'], $data->requests_id);
                 },
                 'format' => 'raw',
+                'headerOptions' => [
+                    'style' => 'width: 10%'
+                ],                        
+                'contentOptions' =>[
+                    'class' => 'req-table_req-main',
+                ],                        
             ],
 //            [
 //                'class' => 'yii\grid\ActionColumn',
