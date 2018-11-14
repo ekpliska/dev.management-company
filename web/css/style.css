@@ -1515,6 +1515,12 @@ background-color: #FCE7DF !important;
 .req-table_req-main {
     width: 10%;
 }
+.req-table_req-categ {
+    width: 13%;    
+}
+.req-table_req-categ-name {
+    width: 20%;    
+}
 .req-table_req-type {
     width: 20%;
 }
@@ -3248,50 +3254,9 @@ color: white;
     margin-top: 70px;
     width: 100%;
     height: 100%;
-    border: 1px solid #D4D4D4;
     border-radius: 12px;
 }
 
-.table-cod {
-    width: 100%;
-}
-
-.cod-1,.cod-2,.cod-3,.cod-4,.cod-5,.cod-6,.cod-7,.cod-8 {
-    color: #000000; 
-    font-family: "Mplus 1p";  
-    font-size: 11px;  
-    letter-spacing: 1.15px; 
-    line-height: 17px;
-    text-align: center;
-    height: 100px;
-}
-
-.cod-5 {
-    text-align: justify !important;
-    width: 25%;
-}
-
-.cod-pn {
-  color: #2D18B4; 
-  font-family: "Mplus 1p";  
-  font-size: 11px;  
-  letter-spacing: 0.98px; 
-  line-height: 17px;  
-  text-align: center;
-  text-transform:uppercase;
-  height:75px;
-  border-bottom: 1px solid #D4D4D4;
-;
-}
- .zebra-gray {
-  background-color: #f8f8f8; 
- }
- .left-tk {
-  text-align: left;
-  padding-left:70px;
-  width: 330px
- }
- 
 .modal-sms {
     height: 445px;  
     width: 733px;

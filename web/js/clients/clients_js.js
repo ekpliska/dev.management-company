@@ -17,9 +17,6 @@ $(document).ready(function() {
         
         var currentAccount = $('#_list-account').val();
         accountNumber = parseInt(currentAccount, 10);
-        
-        console.log(accountNumber);
-        
         $.post('check-is-rent?account=' + accountNumber, function(response) {
             if (response.new_rent == true) {
                 $('#add-rent-modal').modal('show');

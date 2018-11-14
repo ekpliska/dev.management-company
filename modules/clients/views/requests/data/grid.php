@@ -13,7 +13,7 @@
         'dataProvider' => $all_requests,
         'layout' => '{items}{pager}',
         'tableOptions' => [
-            'class' => 'table req-table  pay-table account-info-table px-0 tableBodyScroll',
+            'class' => 'table req-table  pay-table account-info-table px-0',
         ],
         'columns' => [
             [
