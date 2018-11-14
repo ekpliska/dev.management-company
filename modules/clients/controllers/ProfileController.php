@@ -136,24 +136,6 @@ class ProfileController extends AppClientsController
         
     }
     
-//    /*
-//     * Получить информацию об арендаторе
-//     * Вывод информации в модальное окно "Дальнейшие действия с учетной записью арендатора
-//     * checkBox "Арендатор"
-//     */
-//    public function actionGetRentInfo($rent) {
-//        
-//        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-//        
-//        if (Yii::$app->request->isAjax) {
-//            $_rent = Rents::findOne($rent);
-//            if ($_rent) {
-//                return ['status' => true, 'rent' => $_rent];                
-//            }
-//        }
-//        return ['status' => false];
-//    }
-    
     /*
      * Проверка наличия арендатора у лицевого счета
      */
@@ -353,7 +335,9 @@ class ProfileController extends AppClientsController
     /*
      * Добавление учетной записи Арендатора
      */
-    public function actionCreateRentForm($client, $account) {
+    public function actionCreateRentForm($client) {
+        
+        $account = $this->_choosing;
         
         if ($client == null || $account == null) {
             return 'Ошибка отправки формы';
