@@ -9,6 +9,7 @@
  * Вывод таблицы заявок текущего пользователя
  */
 ?>
+<?php echo 'hello - 2' ?>
     <?= GridView::widget([
         'dataProvider' => $all_requests,
         'layout' => '{items}{pager}',
