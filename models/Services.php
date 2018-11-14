@@ -75,12 +75,13 @@ class Services extends ActiveRecord
     }
 
     /*
-     * Получаем только платные услуги
+     * Формируем список услуг по заданной категории
      */
-    public static function getPayServices() {
+    public static function getPayServices($category_id) {
         
         $pay_services = self::find()
                 ->joinWith('category')
+                ->andWhere(['services_category_id' => $category_id])
                 ->asArray()
                 ->orderBy(['category_name' => SORT_ASC, 'services_name' => SORT_ASC])
                 ->all();

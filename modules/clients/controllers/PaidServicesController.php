@@ -42,12 +42,11 @@ class PaidServicesController extends AppClientsController {
 //            var_dump($new_order->errors);
 //            die();            
         }
-        
-        // Получаем список все платных заявок
-        $pay_services = Services::getPayServices();
-        
+
         // получаем список всех платных заявок
-        $name_services_array = ArrayHelper::map($pay_services, 'services_id', 'services_name');
+        $name_services_array = CategoryServices::getCategoryNameArray();
+        // Получаем список услуг по первой категории
+        $pay_services = Services::getPayServices(key($name_services_array));
         
         return $this->render('index', ['new_order' => $new_order, 'pay_services' => $pay_services, 'name_services_array' => $name_services_array]);
         
@@ -66,36 +65,6 @@ class PaidServicesController extends AppClientsController {
         
         return $this->render('order-services', ['all_orders' => $all_orders]);
         
-    }
-    
-    /*
-     * Метод переключения текущего лицевого счета
-     * dropDownList в хеддере
-     */
-    public function actionFilterByAccount($account_id) {
-        
-        Yii::$app->response->format = Response::FORMAT_JSON;
-        
-        /*
-         * Проверяем на актуальность параметр ID лицевого счета
-         * Если лицевой счет не входит в список лицевых счетов пользователя
-         * Кидаем исключение
-         */
-        if (!is_numeric($account_id) || !ArrayHelper::keyExists($account_id, $this->_list)) {
-            return ['status' => false];
-        }
-        
-        if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
-            
-            $all_orders = PaidServices::getOrderByUder($account_id);
-            
-            $data = $this->renderAjax('data/grid', ['all_orders' => $all_orders]);
-            
-            return ['status' => true, 'data' => $data];
-            
-        }
-        
-        return ['status' => false];
     }
     
     /*
@@ -123,6 +92,23 @@ class PaidServicesController extends AppClientsController {
         
         return ['status' => false];
         
+    }
+    
+    public function actionFilterCategoryServices($category) {
+        
+        if (Yii::$app->request->isPost) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            $pay_services = Services::getPayServices($category);
+            
+//            if ($pay_services == null) {
+//                return ['success' => true, 'is' => false];
+//            }
+            $data = $this->renderPartial('data/service-lists', [
+                'pay_services' => $pay_services, 
+            ]);            
+            return ['success' => true, 'is' => true, 'data' => $data];
+        }
+        return ['success' => false];
     }
         
 }

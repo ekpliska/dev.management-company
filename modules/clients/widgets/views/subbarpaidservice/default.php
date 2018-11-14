@@ -16,10 +16,15 @@
             <li class="nav-item">
                 <div class="col-12 text-left">
                     <div class="category-select mx-auto">
-                        <span class="paid-service-dropdown">
-                            <?= Html::dropDownList('category_list', -1, $category_list, [
-                                    'prompt' => 'Все категории']) ?>
-                        </span>
+                        <div class="account-block_select">
+                            <div class="select">
+                                <?= Html::dropDownList('category_list', 1, $category_list, [
+                                        'class' => 'select-text',
+                                        'id' => 'category_list']) ?>
+                                <label class="select-label">Выбрать категорию услуги</label>
+                            </div>
+                        </div>
+                        
                     </div>
                 </div>
             </li>

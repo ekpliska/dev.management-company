@@ -364,6 +364,22 @@ $(document).ready(function() {
             }
         });
     });
+    
+    /*
+     * Фильтр заявко по категориям
+     */
+    $('#category_list').on('change', function(){
+        var categoryId = $(this).val();
+        console.log(categoryId);
+        
+        $.post('filter-category-services?category=' + categoryId, function(response) {
+            if (response.is === false) {
+                $('#services-list').html('here');
+            } else if (response.is === true) {
+                $('#services-list').html(response.data);                
+            }
+        }); 
+    });
 
     /* End Block of Paid Services */
 
