@@ -29,7 +29,7 @@ Modal::begin([
         'validateOnChange' => false,
         'validateOnBlur' => false,
         'action' => ['create-rent-form', 
-            'client' => Yii::$app->userProfile-clientID, 
+            'client' => Yii::$app->userProfile->clientID, 
             'account' => $this->context->_choosing,
         ],
         'enableAjaxValidation' => true,

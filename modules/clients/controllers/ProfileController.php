@@ -106,14 +106,11 @@ class ProfileController extends AppClientsController
         // Из пост запроса получаем ID лицевого счета и собственника
         $account_id = Yii::$app->request->post('dataAccount');
         $client_id = Yii::$app->request->post('dataClient');        
-        
         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         
         if (Yii::$app->request->isAjax) {
-            
             // Записываем выбранный лицевой счет в куку как текущий
             $this->setChoosingAccountCookie($account_id);
-            
             // Ищем арендатора, закрепленного за указанным лицевым счетом
             $model = PersonalAccount::findByRent($account_id, $client_id);
             
@@ -139,22 +136,40 @@ class ProfileController extends AppClientsController
         
     }
     
+//    /*
+//     * Получить информацию об арендаторе
+//     * Вывод информации в модальное окно "Дальнейшие действия с учетной записью арендатора
+//     * checkBox "Арендатор"
+//     */
+//    public function actionGetRentInfo($rent) {
+//        
+//        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+//        
+//        if (Yii::$app->request->isAjax) {
+//            $_rent = Rents::findOne($rent);
+//            if ($_rent) {
+//                return ['status' => true, 'rent' => $_rent];                
+//            }
+//        }
+//        return ['status' => false];
+//    }
+    
     /*
-     * Получить информацию об арендаторе
-     * Вывод информации в модальное окно "Дальнейшие действия с учетной записью арендатора
-     * checkBox "Арендатор"
+     * Проверка наличия арендатора у лицевого счета
      */
-    public function actionGetRentInfo($rent) {
+    public function actionCheckIsRent($account) {
         
-        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $client_id = Yii::$app->userProfile->clientID;
         
-        if (Yii::$app->request->isAjax) {
-            $_rent = Rents::findOne($rent);
-            if ($_rent) {
-                return ['status' => true, 'rent' => $_rent];                
+        if (Yii::$app->request->isPost) {
+            $is_rent = PersonalAccount::findByRent($account, $client_id);
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            if (!$is_rent) {
+                return ['success' => true, 'new_rent' => true];
             }
+            return ['success' => true, 'new_rent' => false];
         }
-        return ['status' => false];
+        return ['success' => false];
     }
     
 

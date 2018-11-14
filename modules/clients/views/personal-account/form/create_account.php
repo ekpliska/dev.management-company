@@ -26,7 +26,7 @@
     $form = ActiveForm::begin([
         'id' => 'create-account-modal-form',
         'action' => ['create-account', 
-            'client_id' => Yii::$app->userProfile-clientID, 
+            'client_id' => Yii::$app->userProfile->clientID, 
         ],
         'validateOnChange' => false,
         'validateOnBlur' => false,

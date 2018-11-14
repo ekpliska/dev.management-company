@@ -12,40 +12,56 @@ $(document).ready(function() {
      * Если за лицевым счетом закреплен арендатор, то 
      * выводим модальное окно для управления учетной записью арендатора
      */
-    $('#is_rent').on('change', function(e) {
-        
-        var rentsId = $('input[id=_rents]').val();
-        var accountNumber = $('#_list-account :selected').text();
-        var checkShow = $(this).val();
-        accountNumber = parseInt(accountNumber, 10);
-        if ($('input').is('#_rents')) {
-            $('#changes_rent').modal('show');
-            $.ajax({
-                url: 'get-rent-info?rent=' + rentsId,
-                method: 'POST',
-                dataType: 'json',
-                data: {
-                    rent_id: rentsId,
-                },
-                success: function(response) {
-                    if (response.status) {
-                        $('#changes_rent #rent-surname').text(response.rent.rents_surname);
-                        $('#changes_rent #rent-name').text(response.rent.rents_name);
-                        $('#changes_rent #rent-second-name').text(response.rent.rents_second_name);
-                    } else {
-                        console.log('Error #1000-01');
-                    }
-                }
-            });
-        } else {
-            // Показать форму Добавление нового арендатора
-            if ($('#is_rent').is(':checked')) {
-                $('#add-rent-modal').modal('show');
-            } else {
-                $('.form-add-rent').html('Арендатор отсутствует');
-            }
     
-        }
+    $('#is_rent').on('change', function() {
+        
+        var currentAccount = $('#_list-account').val();
+        accountNumber = parseInt(currentAccount, 10);
+        
+        console.log(accountNumber);
+        
+        $.post('check-is-rent?account=' + accountNumber, function(response) {
+            if (response.new_rent == true) {
+                $('#add-rent-modal').modal('show');
+            } else if (response.new_rent == false) {
+                $('#changes_rent').modal('show');
+            }
+        }); 
+        
+        
+//        console.log(checkIsRent(accountNumber));
+//        var rentsId = $('input[id=_rents]').val();
+//        var accountNumber = $('#_list-account :selected').text();
+//        var checkShow = $(this).val();
+//        accountNumber = parseInt(accountNumber, 10);
+//        if ($('input').is('#_rents')) {
+//            $('#changes_rent').modal('show');
+//            $.ajax({
+//                url: 'get-rent-info?rent=' + rentsId,
+//                method: 'POST',
+//                dataType: 'json',
+//                data: {
+//                    rent_id: rentsId,
+//                },
+//                success: function(response) {
+//                    if (response.status) {
+//                        $('#changes_rent #rent-surname').text(response.rent.rents_surname);
+//                        $('#changes_rent #rent-name').text(response.rent.rents_name);
+//                        $('#changes_rent #rent-second-name').text(response.rent.rents_second_name);
+//                    } else {
+//                        console.log('Error #1000-01');
+//                    }
+//                }
+//            });
+//        } else {
+//            // Показать форму Добавление нового арендатора
+////            if ($('#is_rent').is(':checked')) {
+//                $('#add-rent-modal').modal('show');
+////            } else {
+//                $('.form-add-rent').html('Арендатор отсутствует');
+////            }
+//    
+//        }
     });    
     
     
@@ -57,6 +73,8 @@ $(document).ready(function() {
     $('#_list-account').on('change', function() {
         var client = $(this).data('client');
         var account = $(this).val();
+        
+        console.log(client + ' ' + account);
         
         $.ajax({
             url: 'check-account',
