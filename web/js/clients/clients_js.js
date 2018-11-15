@@ -331,13 +331,14 @@ $(document).ready(function() {
      * В dropDownList, hiddenInput загружаем ID выбранной услуги
      */
     $(document).on('click', '.new-rec', function(){
-        var idService = $('.new-rec').data('record');
-        console.log(idService);
+        var idService = $(this).data('service');
+        var idCategory = $(this).data('service-cat');
         $('#add-record-modal').modal('show');
         $('#add-record-modal').find('#name_services').val(idService);
-        $('#secret').val(idService);
-    });    
-
+        $('#secret-name').val(idService);
+        $('#secret-cat').val(idCategory);
+        $('#name_services').val(idCategory);
+    }); 
 
     /*
      * Сбросить заполненные поля формы в случае, 

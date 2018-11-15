@@ -30,11 +30,11 @@
     ?>
     
     <?= $form->field($new_order, 'services_category_services_id')
-            ->textInput(['id' => 'secret-cat', 'value' => ''])
+            ->hiddenInput(['id' => 'secret-cat', 'value' => ''])
             ->label(false) ?>
     
     <?= $form->field($new_order, 'services_name_services_id')
-            ->textInput(['id' => 'secret-name', 'value' => ''])
+            ->hiddenInput(['id' => 'secret-name', 'value' => ''])
             ->label(false) ?>
                     
     <?= $form->field($new_order, 'services_name_services_id', [

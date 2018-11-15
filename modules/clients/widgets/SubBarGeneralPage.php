@@ -17,7 +17,7 @@ class SubBarGeneralPage extends Widget {
     
     public function run() {
         
-        return $this->render('rubrics/default', [
+        return $this->render('subbargeneralpage/default', [
             'general_navbar' => $this->general_navbar,
         ]);
     }

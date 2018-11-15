@@ -277,8 +277,6 @@ legend {
     border: 1px solid #8b709d;
     box-shadow: none;
 }
-
-
 .paid-service-dropdown-arrow {
     position: relative;
     display: inline-block;
@@ -302,7 +300,6 @@ legend {
     top: 50%;
     margin-top: -.5em;
 }
-
 .paid-service-dropdown-arrow::before {
     width: 2em;
     right: 0;
@@ -316,9 +313,11 @@ select[name="category_list"] option {
 .paid-service-dropdown-arrow::before {
     background-color: transparent;
 }
-
 .paid-service-dropdown-arrow::after {
     color: #fff;
+}
+.field-modal-select select:disabled {
+    background: transparent;
 }
 /* End Select in modal window */
 
