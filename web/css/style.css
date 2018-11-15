@@ -2355,34 +2355,43 @@ table.table-striped td {
     background-color: #2D18B4;
     height: 28px;
     width: 388px;
-
-
 }
-/*{box-sizing: border-box;}*/
+
 form {
     position: relative;
     width: 100%;
     margin: 0 auto;
-   
-
 }
-
 input[id="_search-input"] {
-    background: url(/images/clients/search.svg) no-repeat center left;
+    background: url(/images/clients/search.svg) no-repeat 20px 10px;
+    border: 1px solid #ccc;
+    border-radius: 10em;
+    box-sizing: content-box;
+    transition: all 0.5s ease 0s;
+    width: 55px;
     background-size: 5%;
-    padding: 5px 30px;    
-    width: 380px;
-    border: none;
-    border-bottom: 1px #fff solid;
-    outline: none;
+    padding: 0 54px;
+    width: 250px;
     color: #fffd;
+    font-size: 14px;
 }
 input[id="_search-input"]:focus {
-    border-bottom: 1px #8b709d solid;
-    color: #fff;
-    outline: none;
-    box-shadow: none;
     background-color: transparent;
+    border-color: #8b709d;
+    box-shadow: 0 0 5px #8b709d;
+    color: #fff;
+}
+input[id="_search-input"]::-webkit-input-placeholder { 
+  color: #fff;
+}
+input[id="_search-input"]::-moz-placeholder {
+  color: #fff;
+}
+input[id="_search-input"]:-ms-input-placeholder {
+  color: #fff;
+}
+input[id="_search-input"]:-moz-placeholder {
+  color: #fff;
 }
 
 .table-metering-devices {
@@ -2631,30 +2640,25 @@ background-color:#FFFFFF;
   
 }
 .indication-heat:hover {
-  border: 1.3px solid #2D18B4;
+    border: 1.3px solid #2D18B4;
 }
 .indication-heat:focus {
-  border: 1.3px solid #2D18B4;
-
-
-
+    border: 1.3px solid #2D18B4;
 }
 .indication-heat {
-  font-size: 12px;
-  color: #2D18B4;  
-  letter-spacing: 0.9px;  
-  line-height: 18px;  
-  text-align: center;
-  font-weight:bold;
-  text-transform:uppercase;
+    font-size: 12px;
+    color: #2D18B4;  
+    letter-spacing: 0.9px;  
+    line-height: 18px;  
+    text-align: center;
+    font-weight:bold;
+    text-transform:uppercase;
 }
 .col-0-metering-org tr.color-tig {
-  background-color: #FCE7Df;
+    background-color: #FCE7Df;
 }
 
-
 /*Квитанция*/
-
 .big-conteiner {
     width: 1300px;
     min-height: 800px;
