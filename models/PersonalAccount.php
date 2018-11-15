@@ -214,6 +214,7 @@ class PersonalAccount extends ActiveRecord
 
     /*
      * Поиск Арендатора закрепленного за лицевым счетом
+     * по ID лицевого счета
      */
     public static function findByRent($account_id, $client_id) {
         return self::find()

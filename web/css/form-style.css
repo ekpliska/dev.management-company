@@ -597,6 +597,8 @@ select[name="category_list"] option {
     z-index: 999;
 }
 .custom-select.opened .custom-options {
+    position: relative;
+    top: -4px;
     opacity: 1;
     visibility: visible;
     pointer-events: all;

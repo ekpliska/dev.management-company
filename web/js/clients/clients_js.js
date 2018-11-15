@@ -16,7 +16,7 @@ $(document).ready(function() {
     
     $('#is_rent').on('change', function() {
         
-        var currentAccount = $('#_list-account').val();
+        var currentAccount = $('.custom-options').find('.selection').data('value');
         accountNumber = parseInt(currentAccount, 10);
         $.post('check-is-rent?account=' + accountNumber, function(response) {
             if (response.new_rent == true) {
@@ -30,18 +30,16 @@ $(document).ready(function() {
     
     $('input[name*=account-number]').val($('.current__account_list :selected').text());
     
-    /* Обработка события при клике на dropDownList "Список лицевых счетов собственника"
-     * Профиль, блок "Контактные данные арендатора"
+    /*
+     * Функция смены текущего лицевого счета,
+     * в личном кабинете пользователя
+     * @param {integer} accountValue ID лицевого счета
      */
-    $('#_list-account').on('change', function() {
-        var client = $(this).data('client');
-        var account = $(this).val();
-        
+    function switchAccountNumber(accountValue) {
         $.ajax({
             url: 'check-account',
             data: {
-                dataClient: client,
-                dataAccount: account,
+                dataAccount: accountValue,
             },
             error: function() {
                 console.log('Error #1000-11');
@@ -54,11 +52,10 @@ $(document).ready(function() {
                 } else {
                     $('#is_rent').prop('checked', false);
                 }                
-               $("#content-replace").html(response.data);
+                $("#content-replace").html(response.data);
             }
-        });
-
-    });
+        });        
+    }
     
     /*
      * Спять чекбокс Арендатор, если пользователь закрыл модальное окно "Новый арендатор"
@@ -492,15 +489,24 @@ $(document).ready(function() {
         var template =  '<div class="' + classes + '">';
             template += '<span class="custom-select-trigger">' + $(this).attr("placeholder") + '</span>';
             template += '<div class="custom-options">';
-
+        // Текущий выбранный лицевой счета    
+        var currentValue = $('#sources option:selected').val();
+        
         $(this).find("option").each(function() {
-            template += '<span class="custom-option ' + $(this).attr("class") + '" data-value="' + $(this).attr("value") + '">' + $(this).html() + '</span>';
+            var classSelection = ($(this).attr("value") == currentValue) ? 'selection ' : '';            
+            template += '<span class="custom-option ' + classSelection + $(this).attr("class") + '" data-value="' + $(this).attr("value") + '">' + $(this).html() + '</span>';
+            
+            $(this).val('selection');
+            
         });
         template += '</div></div>';
 
         $(this).wrap('<div class="custom-select-wrapper"></div>');
         $(this).hide();
         $(this).after(template);
+        
+        
+        
     });
 
     $(".custom-option:first-of-type").hover(function() {
@@ -518,40 +524,16 @@ $(document).ready(function() {
     });
 
 
-    /* Смена лицевого счета */
     $(".custom-option").on("click", function() {
-        
         var valueSelect = $(this).data("value");
         var textSelect = $(this).text();
-        
         $(this).parents(".custom-select-wrapper").find("select").val(valueSelect);
         $(this).parents(".custom-options").find(".custom-option").removeClass("selection");
         $(this).addClass("selection");
         $(this).parents(".custom-select").removeClass("opened");
         $(this).parents(".custom-select").find(".custom-select-trigger").text(textSelect);
-        
-        $.ajax({
-            url: 'check-account',
-            data: {
-                dataAccount: valueSelect,
-            },
-            error: function() {
-                console.log('Error #1000-11');
-            },
-            dataType: 'json',
-            type: 'POST',
-            success: function(response) {
-                if (response.is_rent) {
-                    $('#is_rent').prop('checked', true);
-                } else {
-                    $('#is_rent').prop('checked', false);
-                }                
-               $("#content-replace").html(response.data);
-            }
-        });        
-        
+        // Смена текущего лицевого счета, ЛК собственник
+        switchAccountNumber(valueSelect);
     });
-    
-    
     
 });
