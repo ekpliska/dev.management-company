@@ -138,7 +138,7 @@ class Requests extends ActiveRecord
                     . 'Номер вашей заявки №' . $request_numder . '<br />'
                     . 'Ознакомиться с деталями заявки можно пройдя по ' . Html::a('ссылке', ['requests/view-request', 'request_numder' => $request_numder])
             ]);
-            return $this->save() ? true : false;
+            return $this->save() ? $request_numder : false;
         }
         Yii::$app->session->setFlash('request', [
                 'success' => false,

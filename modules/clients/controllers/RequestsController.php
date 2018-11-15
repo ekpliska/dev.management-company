@@ -55,11 +55,12 @@ class RequestsController extends AppClientsController
             ]);
         
         if ($model->load(Yii::$app->request->post())) {
-            if ($model->addRequest($accoint_id)) {
+            $request_number = $model->addRequest($accoint_id);
+            if ($request_number) {
                 $model->gallery = UploadedFile::getInstances($model, 'gallery');
                 $model->uploadGallery();
+                return $this->redirect(['view-request', 'request_numder' => $request_number]);
             }
-            return $this->refresh();
         }
 
         return $this->render('index', [
@@ -67,7 +68,6 @@ class RequestsController extends AppClientsController
             'type_requests' => $type_requests,
             'status_requests' => $status_requests,
             'model' => $model,
-            'model_filter' => $model_filter,
         ]);
     }
     
@@ -113,7 +113,6 @@ class RequestsController extends AppClientsController
         
         return $this->render('view-request', [
             'request_info' => $request_info, 
-            // 'user_house' => $user_house, 
             'all_images' => $images,
             'comments' => $comments,
             'comments_find' => $comments_find,

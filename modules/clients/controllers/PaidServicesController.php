@@ -32,15 +32,9 @@ class PaidServicesController extends AppClientsController {
         ]);
         
         if ($new_order->load(Yii::$app->request->post())) {
-
             if ($new_order->addOrder($accoint_id)) {
-//                return $this->refresh();
-//                var_dump($new_order->errors);
-//                die();
+                return $this->redirect(['paid-services/order-services']);
             }
-//            echo '<pre>';
-//            var_dump($new_order->errors);
-//            die();            
         }
 
         // получаем список всех платных заявок
@@ -48,8 +42,11 @@ class PaidServicesController extends AppClientsController {
         // Получаем список услуг по первой категории
         $pay_services = Services::getPayServices(key($name_services_array));
         
-        return $this->render('index', ['new_order' => $new_order, 'pay_services' => $pay_services, 'name_services_array' => $name_services_array]);
-        
+        return $this->render('index', [
+            'new_order' => $new_order, 
+            'pay_services' => $pay_services, 
+            'name_services_array' => $name_services_array
+        ]);
         
     }
     
