@@ -142,14 +142,11 @@ class ProfileController extends AppClientsController
     public function actionCheckIsRent($account) {
         
         $client_id = Yii::$app->userProfile->clientID;
-        
         if (Yii::$app->request->isPost) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;            
             $is_rent = PersonalAccount::findByRent($account, $client_id);
-            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-            if (!$is_rent) {
-                return ['success' => true, 'new_rent' => true];
-            }
-            return ['success' => true, 'new_rent' => false];
+            $is_rent = $is_rent ? true : false;
+            return ['success' => true, 'is_rent' => $is_rent];
         }
         return ['success' => false];
     }

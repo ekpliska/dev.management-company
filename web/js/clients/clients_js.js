@@ -19,12 +19,13 @@ $(document).ready(function() {
         var currentAccount = $('.custom-options').find('.selection').data('value');
         accountNumber = parseInt(currentAccount, 10);
         $.post('check-is-rent?account=' + accountNumber, function(response) {
-            if (response.new_rent == true) {
+            if (response.is_rent === false) {
                 $('#add-rent-modal').modal('show');
-            } else if (response.new_rent == false) {
+            } else if (response.is_rent === true) {
                 $('#changes_rent').modal('show');
             }
-        }); 
+        });
+        return false;
     });    
     
     
