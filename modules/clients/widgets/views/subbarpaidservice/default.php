@@ -54,10 +54,6 @@
                 <?php ActiveForm::end(); ?>
 
             </div>
-
-            <div class="services-lists">
-                <?= Html::a('Заказать услугу', ['paid-services/index'], ['class' => '']) ?>
-            </div>
         </div>
-    </nav>                
+    </nav>
 <?php endif; ?>

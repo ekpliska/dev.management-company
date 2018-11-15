@@ -373,29 +373,11 @@ $(document).ready(function() {
      * Фильтр заявок по категориям
      */
     function filterServicesCategory(categoryId) {
-//        var currentAccount = $('.custom-options').find('.selection').data('value');
         $.post('filter-category-services?category=' + categoryId, function(response) {
-            if (response.is === false) {
-                $('#services-list').html('here');
-            } else if (response.is === true) {
-                $('#services-list').html(response.data);                
-            }
+            $('#services-list').html(response.data);                
         });         
         
     }
-    
-//    $('#category_list').on('change', function(){
-//        var categoryId = $(this).val();
-//        console.log(categoryId);
-//        
-//        $.post('filter-category-services?category=' + categoryId, function(response) {
-//            if (response.is === false) {
-//                $('#services-list').html('here');
-//            } else if (response.is === true) {
-//                $('#services-list').html(response.data);                
-//            }
-//        }); 
-//    });
 
     /* End Block of Paid Services */
 

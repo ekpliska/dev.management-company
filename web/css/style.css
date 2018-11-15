@@ -126,7 +126,6 @@ a:hover {
 .req-fixed-bottom-btn-group {
     width: 1300px;
 }
-
 .add-req-fixed-btn {
     background-image: url(/images/clients/new_record.svg);
     background-repeat: no-repeat;
@@ -137,6 +136,9 @@ a:hover {
     cursor: pointer;
     outline: none;
     border: none;
+}
+.add-paid-req-btn {
+    display: block;
 }
 
 .add-req-fixed-btn:hover {
@@ -1051,11 +1053,6 @@ iframe #header {
     margin-right: 12px;
     margin-left: 12px;
     margin-top: 15px;
-}
-.services-lists {
-    position: absolute;
-    top: 30%;
-    left: 5%;
 }
 
 .requests-card-preview-container {
@@ -2376,9 +2373,9 @@ input[id="_search-input"] {
     padding: 5px 30px;    
     width: 380px;
     border: none;
-    border-bottom: 1px #8b709d solid;
+    border-bottom: 1px #fff solid;
     outline: none;
-    color: #8b709d;
+    color: #fffd;
 }
 input[id="_search-input"]:focus {
     border-bottom: 1px #8b709d solid;
