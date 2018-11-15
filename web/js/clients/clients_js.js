@@ -13,6 +13,10 @@ $(document).ready(function() {
      * выводим модальное окно для управления учетной записью арендатора
      */
     
+    
+    
+    
+    
     $('#is_rent').on('change', function() {
         
         var currentAccount = $('#_list-account').val();
@@ -104,6 +108,12 @@ $(document).ready(function() {
         $('#_personal-account').val(accountId);
         $('.btn__add_rent', this).data('accountId', accountId);
     });
+    
+    
+    
+    
+    
+    
     
     // Очистить поля ввода, клик по кнопкам 'Отмена', 'x'
     $('#add-rent-modal .add-rent-modal__close').on('click', function() {
@@ -326,7 +336,8 @@ $(document).ready(function() {
      * В dropDownList, hiddenInput загружаем ID выбранной услуги
      */
     $(document).on('click', '.new-rec', function(){
-        var idService = $(this).data('record');
+        var idService = $('.new-rec').data('record');
+        console.log(idService);
         $('#add-record-modal').modal('show');
         $('#add-record-modal').find('#name_services').val(idService);
         $('#secret').val(idService);

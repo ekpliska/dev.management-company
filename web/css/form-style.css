@@ -525,3 +525,114 @@ select[name="category_list"] option {
     color: #fff;
 }
 /* Конец Выпадающий список навигационная панель, Платные услуги */
+
+
+/* Выпадающий список */
+
+.center {
+/*  position: absolute;
+  display: inline-block;
+  top: 50%; left: 50%;*/
+  /*transform: translate(-50%, -50%);*/
+}
+
+/** Custom Select **/
+.custom-select {
+    background: none;
+    border: none; 
+}
+.custom-select-wrapper {
+    position: relative;
+    display: inline-block;
+    user-select: none;
+    font-family: "Mplus 1p";
+}
+  .custom-select-wrapper select {
+    display: none;
+  }
+  .custom-select {
+    position: relative;
+    display: inline-block;
+  }
+.custom-select-trigger {
+    position: relative;
+    display: block;
+    width: 380px;
+    font-size: 14px;
+    font-weight: 300;
+    color: #2d1e81;
+    line-height: 35px;
+    background: #ffffff;
+    border-radius: 25px;
+    cursor: pointer;
+    border: 1px solid #2d1e81;
+}
+.custom-select-trigger:after {
+    position: absolute;
+    display: block;
+    content: '';
+    width: 10px; height: 10px;
+    top: 50%; right: 25px;
+    margin-top: -3px;
+    border-bottom: 1px solid #2e1e86;
+    border-right: 1px solid #2e1e86;
+    transform: rotate(45deg) translateY(-50%);
+    transition: all .4s ease-in-out;
+    transform-origin: 50% 0;
+}
+
+.custom-select.opened .custom-select-trigger:after {
+    margin-top: 3px;
+    transform: rotate(-135deg) translateY(-50%);
+}
+.custom-options {
+    display: block;
+    top: 100%; 
+    left: 0; 
+    right: 0;
+    min-width: 100%;
+    margin: 5px 0;
+    border: 1px solid #604c6e;
+    border-radius: 4px;
+    box-sizing: border-box;
+    box-shadow: 0 2px 1px rgba(0,0,0,.07);
+    background: #fff;
+    transition: all .4s ease-in-out;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-15px);
+    z-index: 999;
+}
+.custom-select.opened .custom-options {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+    transform: translateY(0);
+    background: linear-gradient(180.67deg, #39284E 0%, rgba(10,8,8,0.5) 100%);    
+}
+.option-hover:before {
+    background: #f9f9f9;
+}
+.custom-option {
+    position: relative;
+    display: block;
+    padding: 0 22px;
+    border-bottom: 1px solid #8b709d;
+    font-size: 14px;
+    color: #fff;
+    line-height: 47px;
+    cursor: pointer;
+    transition: all .4s ease-in-out;
+}
+.custom-option:first-of-type {
+    border-radius: 4px 4px 0 0;
+}
+.custom-option:last-of-type {
+    border-bottom: 0;
+    border-radius: 0 0 4px 4px;
+}
+.custom-option:hover,
+.custom-option.selection {
+    background: rgba(0, 123, 255, 0.12);
+}

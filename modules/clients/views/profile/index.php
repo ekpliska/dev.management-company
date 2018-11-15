@@ -55,16 +55,15 @@ $this->title = 'Профиль собственника';
         <div class="chip-label">
             <span class="badge badge-darkblue-personal-account">Лицевой счет</span>
         </div>
-        <span class="account-dropdown">
-            <?= Html::dropDownList('_list-account', $this->context->_choosing, $accounts_list, [
-                    'placeholder' => '',
-                    'id' => '_list-account',
-                    'data-client' => $user_info->clientID]) 
-            ?>
-        </span>
+
+        <?= Html::dropDownList('_list-account', $this->context->_choosing, $accounts_list, [
+                'placeholder' => $this->context->_value_choosing,
+                'id' => 'sources',
+                'class' => 'custom-select sources',
+                'data-client' => $user_info->clientID]) 
+        ?>    
+        
     </div>
-    
-    
     
     <div class="col-12 mx-0 row personal-info">
         
@@ -77,17 +76,17 @@ $this->title = 'Профиль собственника';
             
             <div class="field">
                 <label for="user_mobile" class="field-label"><i class="fa fa-mobile"></i> Мобильный телефон</label>
-                <?= Html::input('text', 'user_mobile', $user_info->mobile, ['class' => 'field-input']) ?>
+                <?= Html::input('text', 'user_mobile', $user_info->mobile, ['class' => 'field-input', 'readonly' => true]) ?>
             </div>
             
             <div class="field">
                 <label for="user_mobile" class="field-label"><i class="fa fa-phone"></i> Домашний телефон</label>
-                <?= Html::input('text', 'user_mobile', $user_info->otherPhone, ['class' => 'field-input']) ?>
+                <?= Html::input('text', 'user_mobile', $user_info->otherPhone, ['class' => 'field-input', 'readonly' => true]) ?>
             </div>
             
             <div class="field">
                 <label for="user_email" class="field-label"><i class="fa fa-envelope-o"></i> Электронная почта</label>
-                <?= Html::input('text', 'user_email', $user_info->email, ['class' => 'field-input']) ?>
+                <?= Html::input('text', 'user_email', $user_info->email, ['class' => 'field-input', 'readonly' => true]) ?>
             </div>
             
         </div>
