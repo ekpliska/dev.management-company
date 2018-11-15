@@ -372,18 +372,30 @@ $(document).ready(function() {
     /*
      * Фильтр заявок по категориям
      */
-    $('#category_list').on('change', function(){
-        var categoryId = $(this).val();
-        console.log(categoryId);
-        
+    function filterServicesCategory(categoryId) {
+//        var currentAccount = $('.custom-options').find('.selection').data('value');
         $.post('filter-category-services?category=' + categoryId, function(response) {
             if (response.is === false) {
                 $('#services-list').html('here');
             } else if (response.is === true) {
                 $('#services-list').html(response.data);                
             }
-        }); 
-    });
+        });         
+        
+    }
+    
+//    $('#category_list').on('change', function(){
+//        var categoryId = $(this).val();
+//        console.log(categoryId);
+//        
+//        $.post('filter-category-services?category=' + categoryId, function(response) {
+//            if (response.is === false) {
+//                $('#services-list').html('here');
+//            } else if (response.is === true) {
+//                $('#services-list').html(response.data);                
+//            }
+//        }); 
+//    });
 
     /* End Block of Paid Services */
 
@@ -481,8 +493,7 @@ $(document).ready(function() {
     });
    
     
-    /* Кастомизация элеметнов управления формой */
-    /* Выпадающий список лицевой счет */    
+    /* Кастомизация элеметнов управления формой, лицевой счет */
     $(".custom-select").each(function() {
         var classes = $(this).attr("class"),
             id = $(this).attr("id"),
@@ -505,9 +516,6 @@ $(document).ready(function() {
         $(this).wrap('<div class="custom-select-wrapper"></div>');
         $(this).hide();
         $(this).after(template);
-        
-        
-        
     });
 
     $(".custom-option:first-of-type").hover(function() {
@@ -535,6 +543,56 @@ $(document).ready(function() {
         $(this).parents(".custom-select").find(".custom-select-trigger").text(textSelect);
         // Смена текущего лицевого счета, ЛК собственник
         switchAccountNumber(valueSelect);
+    });
+    
+    /* Кастомизация элеметнов управления формой, категории услуг */
+    $(".custom-select-services").each(function() {
+        var classes = $(this).attr("class"),
+            id = $(this).attr("id"),
+            name = $(this).attr("name");
+        var template =  '<div class="' + classes + '">';
+            template += '<span class="custom-select-trigger-services">' + $(this).attr("placeholder") + '</span>';
+            template += '<div class="custom-options-services">';
+        // Текущий выбранный лицевой счета    
+        var currentValue = $('#sources-services option:selected').val();
+        
+        $(this).find("option").each(function() {
+            var classSelection = ($(this).attr("value") == currentValue) ? 'selection-services ' : '';            
+            template += '<span class="custom-option-services ' + classSelection + $(this).attr("class") + '" data-value="' + $(this).attr("value") + '">' + $(this).html() + '</span>';
+            
+            $(this).val('selection-services');
+            
+        });
+        template += '</div></div>';
+
+        $(this).wrap('<div class="custom-select-wrapper-services"></div>');
+        $(this).hide();
+        $(this).after(template);
+    });
+
+    $(".custom-option-services:first-of-type").hover(function() {
+        $(this).parents(".custom-options-services").addClass("option-hover-services");
+    }, function() {
+        $(this).parents(".custom-options-services").removeClass("option-hover-services");
+    });
+
+    $(".custom-select-trigger-services").on("click", function() {
+        $('html').one('click',function() {
+            $(".custom-select-services").removeClass("opened");
+        });
+        $(this).parents(".custom-select-services").toggleClass("opened");
+        event.stopPropagation();
+    });
+    
+    $(".custom-option-services").on("click", function() {
+        var valueSelect = $(this).data("value");
+        var textSelect = $(this).text();
+        $(this).parents(".custom-select-wrapper-services").find("select").val(valueSelect);
+        $(this).parents(".custom-options-services").find(".custom-option-services").removeClass("selection-services");
+        $(this).addClass("selection-services");
+        $(this).parents(".custom-select-services").removeClass("opened");
+        $(this).parents(".custom-select-services").find(".custom-select-trigger-services").text(textSelect);
+        filterServicesCategory(valueSelect);
     });
     
 });
