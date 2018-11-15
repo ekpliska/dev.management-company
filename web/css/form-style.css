@@ -528,14 +528,6 @@ select[name="category_list"] option {
 
 
 /* Выпадающий список */
-
-.center {
-/*  position: absolute;
-  display: inline-block;
-  top: 50%; left: 50%;*/
-  /*transform: translate(-50%, -50%);*/
-}
-
 /** Custom Select **/
 .custom-select {
     background: none;

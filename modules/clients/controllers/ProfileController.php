@@ -105,7 +105,7 @@ class ProfileController extends AppClientsController
 
         // Из пост запроса получаем ID лицевого счета и собственника
         $account_id = Yii::$app->request->post('dataAccount');
-        $client_id = Yii::$app->request->post('dataClient');        
+        $client_id = Yii::$app->userProfile->clientID;
         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         
         if (Yii::$app->request->isAjax) {

@@ -14,9 +14,6 @@ $(document).ready(function() {
      */
     
     
-    
-    
-    
     $('#is_rent').on('change', function() {
         
         var currentAccount = $('#_list-account').val();
@@ -484,5 +481,77 @@ $(document).ready(function() {
 //            console.log(response.status);
         });
     });
+   
+    
+    /* Кастомизация элеметнов управления формой */
+    /* Выпадающий список лицевой счет */    
+    $(".custom-select").each(function() {
+        var classes = $(this).attr("class"),
+            id = $(this).attr("id"),
+            name = $(this).attr("name");
+        var template =  '<div class="' + classes + '">';
+            template += '<span class="custom-select-trigger">' + $(this).attr("placeholder") + '</span>';
+            template += '<div class="custom-options">';
+
+        $(this).find("option").each(function() {
+            template += '<span class="custom-option ' + $(this).attr("class") + '" data-value="' + $(this).attr("value") + '">' + $(this).html() + '</span>';
+        });
+        template += '</div></div>';
+
+        $(this).wrap('<div class="custom-select-wrapper"></div>');
+        $(this).hide();
+        $(this).after(template);
+    });
+
+    $(".custom-option:first-of-type").hover(function() {
+        $(this).parents(".custom-options").addClass("option-hover");
+    }, function() {
+        $(this).parents(".custom-options").removeClass("option-hover");
+    });
+
+    $(".custom-select-trigger").on("click", function() {
+        $('html').one('click',function() {
+            $(".custom-select").removeClass("opened");
+        });
+        $(this).parents(".custom-select").toggleClass("opened");
+        event.stopPropagation();
+    });
+
+
+    /* Смена лицевого счета */
+    $(".custom-option").on("click", function() {
+        
+        var valueSelect = $(this).data("value");
+        var textSelect = $(this).text();
+        
+        $(this).parents(".custom-select-wrapper").find("select").val(valueSelect);
+        $(this).parents(".custom-options").find(".custom-option").removeClass("selection");
+        $(this).addClass("selection");
+        $(this).parents(".custom-select").removeClass("opened");
+        $(this).parents(".custom-select").find(".custom-select-trigger").text(textSelect);
+        
+        $.ajax({
+            url: 'check-account',
+            data: {
+                dataAccount: valueSelect,
+            },
+            error: function() {
+                console.log('Error #1000-11');
+            },
+            dataType: 'json',
+            type: 'POST',
+            success: function(response) {
+                if (response.is_rent) {
+                    $('#is_rent').prop('checked', true);
+                } else {
+                    $('#is_rent').prop('checked', false);
+                }                
+               $("#content-replace").html(response.data);
+            }
+        });        
+        
+    });
+    
+    
     
 });
