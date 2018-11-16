@@ -212,8 +212,8 @@ class User extends ActiveRecord implements IdentityInterface
     /*
      *  Проверка ключа для аутентификации на основе cookie
      */
-    public function validateAuthKey($autKey) {
-        return $this->user_authkey === $authKey;
+    public function validateAuthKey($authKey) {
+        return $this->getAuthKey() === $authKey;
     }
 
     /*
