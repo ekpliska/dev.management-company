@@ -26,12 +26,9 @@ ClientsAsset::register($this);
     <?php $this->endContent() ?>    
         
     <div class="container mx-auto row">
-    <!--<div class="container mx-auto row justify-content-center">-->
-        
         <?php /*= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) */ ?>
-        
         <?= $content ?>
     </div>
         
