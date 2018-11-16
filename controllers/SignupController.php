@@ -30,7 +30,6 @@ class SignupController extends Controller {
         $is_step_three = $this->postDataStepThree($model_step_three);
         
         return $this->render('index', [
-            'model' => $model,
             'model_step_one' => $model_step_one,
             'model_step_two' => $model_step_two,
             'model_step_three' => $model_step_three,

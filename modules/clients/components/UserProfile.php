@@ -240,7 +240,7 @@ class UserProfile extends BaseObject {
     public function getLivingSpace($account_id) {
         
         $info = PersonalAccount::find()
-                ->select(['estate_id', 'houses_id', 'flats_id', 'flats_porch'])
+                ->select(['account_id', 'estate_id', 'houses_id', 'flats_id', 'flats_porch'])
                 ->joinWith(['flat', 'flat.house', 'flat.house.estate'])
                 ->where(['account_id' => $account_id])
                 ->asArray()

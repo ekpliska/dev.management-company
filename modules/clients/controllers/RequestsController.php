@@ -128,14 +128,14 @@ class RequestsController extends AppClientsController
         
         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
-        if (!is_numeric($account_id) && !is_numeric($status)) {
+        if (!is_numeric($status)) {
             return ['status' => false];
         }
         
         if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
             $model_filter = new FilterStatusRequest();
             $all_requests = $model_filter->searchRequest($status);
-            return $this->renderPartial('data/grid', ['all_requests' => $all_requests, 'status' => $accoint_id]);
+            return $this->renderPartial('data/grid', ['all_requests' => $all_requests]);
         }
         
         return ['status' => false];
