@@ -162,8 +162,9 @@ class EntityPopulator
                         if (empty($records)) {
                             return null;
                         }
+                        $id = $records[mt_rand(0, count($records) - 1)]['id'];
 
-                        return $records[mt_rand(0, count($records) - 1)]['id'];
+                        return $id;
                     }
 
                     return null;

@@ -24,25 +24,19 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body class="overflow-hide">
+<body>
 <?php $this->beginBody() ?>
 
-<div>
-    <div class="col-12 p-0 mx-0 row registration-container overflow-hide">
-        <div class="col-6 mx-0 slider-container p-0">
-            <?= Slider::widget() ?>
-	</div>
-	<div class="col-6 p-0 m-0">
-            <?= $content ?>
-	</div>
+<main role="main">
+    
+    <div class="col-md-5 general-slider">
+        <?= Slider::widget() ?>
     </div>
-</div>
- 
+    <div class="col-md-7 general-right-block">
+        <?= $content ?>
+    </div>
     
-    
-
-    
-    
+</main>    
 <?php $this->endBody() ?>
 </body>
 </html>

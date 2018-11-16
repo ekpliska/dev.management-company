@@ -20,7 +20,7 @@ class ColorTest extends TestCase
 
     public function testRgbColorAsArray()
     {
-        $this->assertCount(3, Color::rgbColorAsArray());
+        $this->assertEquals(3, count(Color::rgbColorAsArray()));
     }
 
     public function testRgbColor()

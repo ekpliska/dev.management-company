@@ -732,15 +732,15 @@ abstract class Schema extends BaseObject
         $cache = null;
         if ($this->db->enableSchemaCache && !in_array($name, $this->db->schemaCacheExclude, true)) {
             $schemaCache = is_string($this->db->schemaCache) ? Yii::$app->get($this->db->schemaCache, false) : $this->db->schemaCache;
-            if ($schemaCache instanceof CacheInterface) {
+            if ($schemaCache instanceof Cache) {
                 $cache = $schemaCache;
             }
         }
         $rawName = $this->getRawTableName($name);
-        if (!isset($this->_tableMetadata[$rawName])) {
+        if ($refresh || !isset($this->_tableMetadata[$rawName])) {
             $this->loadTableMetadataFromCache($cache, $rawName);
         }
-        if ($refresh || !array_key_exists($type, $this->_tableMetadata[$rawName])) {
+        if (!array_key_exists($type, $this->_tableMetadata[$rawName])) {
             $this->_tableMetadata[$rawName][$type] = $this->{'loadTable' . ucfirst($type)}($rawName);
             $this->saveTableMetadataToCache($cache, $rawName);
         }

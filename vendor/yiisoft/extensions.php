@@ -3,15 +3,6 @@
 $vendorDir = dirname(__DIR__);
 
 return array (
-  'yiisoft/yii2-bootstrap4' => 
-  array (
-    'name' => 'yiisoft/yii2-bootstrap4',
-    'version' => '9999999-dev',
-    'alias' => 
-    array (
-      '@yii/bootstrap4' => $vendorDir . '/yiisoft/yii2-bootstrap4/src',
-    ),
-  ),
   'costa-rico/yii2-images' => 
   array (
     'name' => 'costa-rico/yii2-images',
@@ -24,7 +15,7 @@ return array (
   'kartik-v/yii2-krajee-base' => 
   array (
     'name' => 'kartik-v/yii2-krajee-base',
-    'version' => '9999999-dev',
+    'version' => '2.0.1.0',
     'alias' => 
     array (
       '@kartik/base' => $vendorDir . '/kartik-v/yii2-krajee-base/src',
@@ -48,22 +39,22 @@ return array (
       '@yii/swiftmailer' => $vendorDir . '/yiisoft/yii2-swiftmailer',
     ),
   ),
-  'kartik-v/yii2-widget-growl' => 
+  'yiisoft/yii2-bootstrap' => 
   array (
-    'name' => 'kartik-v/yii2-widget-growl',
-    'version' => '9999999-dev',
+    'name' => 'yiisoft/yii2-bootstrap',
+    'version' => '2.0.8.0',
     'alias' => 
     array (
-      '@kartik/growl' => $vendorDir . '/kartik-v/yii2-widget-growl/src',
+      '@yii/bootstrap' => $vendorDir . '/yiisoft/yii2-bootstrap/src',
     ),
   ),
   'kartik-v/yii2-widget-alert' => 
   array (
     'name' => 'kartik-v/yii2-widget-alert',
-    'version' => '9999999-dev',
+    'version' => '1.1.1.0',
     'alias' => 
     array (
-      '@kartik/alert' => $vendorDir . '/kartik-v/yii2-widget-alert/src',
+      '@kartik/alert' => $vendorDir . '/kartik-v/yii2-widget-alert',
     ),
   ),
   'kartik-v/yii2-widget-datepicker' => 
@@ -78,26 +69,17 @@ return array (
   'vova07/yii2-imperavi-widget' => 
   array (
     'name' => 'vova07/yii2-imperavi-widget',
-    'version' => '9999999-dev',
+    'version' => '2.0.7.0',
     'alias' => 
     array (
       '@vova07/imperavi' => $vendorDir . '/vova07/yii2-imperavi-widget/src',
       '@vova07/imperavi/tests' => $vendorDir . '/vova07/yii2-imperavi-widget/tests',
     ),
   ),
-  'yiisoft/yii2-bootstrap' => 
-  array (
-    'name' => 'yiisoft/yii2-bootstrap',
-    'version' => '2.0.0.0-beta',
-    'alias' => 
-    array (
-      '@yii/bootstrap' => $vendorDir . '/yiisoft/yii2-bootstrap',
-    ),
-  ),
   'yiisoft/yii2-debug' => 
   array (
     'name' => 'yiisoft/yii2-debug',
-    'version' => '9999999-dev',
+    'version' => '2.0.14.0',
     'alias' => 
     array (
       '@yii/debug' => $vendorDir . '/yiisoft/yii2-debug/src',
@@ -106,7 +88,7 @@ return array (
   'yiisoft/yii2-gii' => 
   array (
     'name' => 'yiisoft/yii2-gii',
-    'version' => '9999999-dev',
+    'version' => '2.0.7.0',
     'alias' => 
     array (
       '@yii/gii' => $vendorDir . '/yiisoft/yii2-gii/src',
@@ -115,10 +97,10 @@ return array (
   'yiisoft/yii2-faker' => 
   array (
     'name' => 'yiisoft/yii2-faker',
-    'version' => '9999999-dev',
+    'version' => '2.0.4.0',
     'alias' => 
     array (
-      '@yii/faker' => $vendorDir . '/yiisoft/yii2-faker/src',
+      '@yii/faker' => $vendorDir . '/yiisoft/yii2-faker',
     ),
   ),
 );

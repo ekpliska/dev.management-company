@@ -415,13 +415,9 @@ class BaseFileHelper
             return unlink($path);
         } catch (ErrorException $e) {
             // last resort measure for Windows
-            if (function_exists('exec') && file_exists($path)) {
-                exec('DEL /F/Q ' . escapeshellarg($path));
-
-                return !file_exists($path);
-            }
-
-            return false;
+            $lines = [];
+            exec('DEL /F/Q ' . escapeshellarg($path), $lines, $deleteError);
+            return $deleteError !== 0;
         }
     }
 
@@ -524,7 +520,7 @@ class BaseFileHelper
         return $list;
     }
 
-    /**
+    /*
      * @param string $dir
      */
     private static function setBasePath($dir, $options)
@@ -538,7 +534,7 @@ class BaseFileHelper
         return $options;
     }
 
-    /**
+    /*
      * @param string $dir
      */
     private static function openDir($dir)
@@ -550,7 +546,7 @@ class BaseFileHelper
         return $handle;
     }
 
-    /**
+    /*
      * @param string $dir
      */
     private static function clearDir($dir)

@@ -196,13 +196,4 @@ class ActiveDataProvider extends BaseDataProvider
             }
         }
     }
-    
-    public function __clone() 
-    {
-        if (is_object($this->query)) {
-            $this->query = clone $this->query;
-        }
-        
-        parent::__clone();
-    }
 }

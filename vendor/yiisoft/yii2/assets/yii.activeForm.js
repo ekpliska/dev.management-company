@@ -325,7 +325,7 @@
             // client-side validation
             $.each(data.attributes, function () {
                 this.$form = $form;
-                if (!findInput($form, this).is(":disabled")) {
+                if (!$(this.input).is(":disabled")) {
                     this.cancelled = false;
                     // perform validation only if the form is being submitted or if an attribute is pending validation
                     if (data.submitting || this.status === 2 || this.status === 3) {
@@ -489,6 +489,7 @@
                 updateInput($(this), attribute, msg);
             }
         }
+
     };
 
     var watchAttribute = function ($form, attribute) {
@@ -624,9 +625,8 @@
 
         if (submitting) {
             var errorAttributes = [];
-            var $input = findInput($form, this);
             $.each(data.attributes, function () {
-                if (!$input.is(":disabled") && !this.cancelled && updateInput($form, this, messages)) {
+                if (!$(this.input).is(":disabled") && !this.cancelled && updateInput($form, this, messages)) {
                     errorAttributes.push(this);
                 }
             });

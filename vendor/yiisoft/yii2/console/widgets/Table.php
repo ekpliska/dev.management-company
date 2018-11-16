@@ -174,8 +174,6 @@ class Table extends Widget
     public function run()
     {
         $this->calculateRowsSize();
-        $headerCount = count($this->_headers);
-
         $buffer = $this->renderSeparator(
             $this->_chars[self::CHAR_TOP_LEFT],
             $this->_chars[self::CHAR_TOP_MID],
@@ -183,24 +181,20 @@ class Table extends Widget
             $this->_chars[self::CHAR_TOP_RIGHT]
         );
         // Header
-        if ($headerCount > 0) {
-            $buffer .= $this->renderRow($this->_headers,
-                $this->_chars[self::CHAR_LEFT],
-                $this->_chars[self::CHAR_MIDDLE],
-                $this->_chars[self::CHAR_RIGHT]
-            );
-        }
+        $buffer .= $this->renderRow($this->_headers,
+            $this->_chars[self::CHAR_LEFT],
+            $this->_chars[self::CHAR_MIDDLE],
+            $this->_chars[self::CHAR_RIGHT]
+        );
 
         // Content
-        foreach ($this->_rows as $i => $row) {
-            if ($i > 0 || $headerCount > 0) {
-                $buffer .= $this->renderSeparator(
-                    $this->_chars[self::CHAR_LEFT_MID],
-                    $this->_chars[self::CHAR_MID_MID],
-                    $this->_chars[self::CHAR_MID],
-                    $this->_chars[self::CHAR_RIGHT_MID]
-                );
-            }
+        foreach ($this->_rows as $row) {
+            $buffer .= $this->renderSeparator(
+                $this->_chars[self::CHAR_LEFT_MID],
+                $this->_chars[self::CHAR_MID_MID],
+                $this->_chars[self::CHAR_MID],
+                $this->_chars[self::CHAR_RIGHT_MID]
+            );
             $buffer .= $this->renderRow($row,
                 $this->_chars[self::CHAR_LEFT],
                 $this->_chars[self::CHAR_MIDDLE],
@@ -309,18 +303,9 @@ class Table extends Widget
         $totalWidth = 0;
         $screenWidth = $this->getScreenWidth() - self::CONSOLE_SCROLLBAR_OFFSET;
 
-        $headerCount = count($this->_headers);
-        if (empty($this->_rows)) {
-            $rowColCount = 0;
-        } else {
-            $rowColCount = max(array_map('count', $this->_rows));
-        }
-        $count = max($headerCount, $rowColCount);
-        for ($i = 0; $i < $count; $i++) {
+        for ($i = 0, $count = count($this->_headers); $i < $count; $i++) {
             $columns[] = ArrayHelper::getColumn($this->_rows, $i);
-            if ($i < $headerCount) {
-                $columns[$i][] = $this->_headers[$i];
-            }
+            $columns[$i][] = $this->_headers[$i];
         }
 
         foreach ($columns as $column) {

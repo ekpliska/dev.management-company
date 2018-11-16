@@ -6,7 +6,6 @@
  */
 
     namespace app\assets;
-
     use yii\web\AssetBundle;
 
 /**
@@ -17,7 +16,8 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/style.css',        
+        'css/main.css',        
+//        'css/style.css',        
         'css/checkbox.css',
         'css/form-style.css',
         '//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css',        
@@ -27,6 +27,7 @@ class AppAsset extends AssetBundle
     ];
     public $depends = [
         'yii\web\YiiAsset',
-        'yii\bootstrap4\BootstrapAsset',
+        'yii\bootstrap\BootstrapAsset',
+        'yii\bootstrap\BootstrapPluginAsset',
     ];
 } 

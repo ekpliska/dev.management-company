@@ -221,15 +221,14 @@ class ActiveForm extends Widget
         }
 
         $content = ob_get_clean();
-        $html = Html::beginForm($this->action, $this->method, $this->options);
-        $html .= $content;
+        echo Html::beginForm($this->action, $this->method, $this->options);
+        echo $content;
 
         if ($this->enableClientScript) {
             $this->registerClientScript();
         }
 
-        $html .= Html::endForm();
-        return $html;
+        echo Html::endForm();
     }
 
     /**
