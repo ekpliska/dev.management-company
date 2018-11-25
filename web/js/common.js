@@ -106,17 +106,20 @@ $(document).ready(function() {
 });
 
 /*
- * Работа навигационного меню
+ * Работа навигационного меню, Собственник
  */
-$('button.navbar-toggler').click(function() {
-    $('body').addClass('modal-open');
-    $('.navbar').addClass('hidden');
+$('.menu-btn-sd').on('click', function(e) {
+    e.preventDefault();
+    $(this).toggleClass('menu-btn-sd_active');
+    $('.modal_menu').hide();
+    $('.menu-sd').toggleClass('menu-sd_active');
+    $('.treck-menu').text('Меню');
+});
+$(document).on('click', '.menu-btn-sd_active', function(){
+    $('.modal_menu').show();
+    $('.treck-menu').text('Закрыть');
 });
 
-$('.close-menu').click(function() {
-    $('body').removeClass('modal-open');
-    $('.navbar').removeClass('hidden');
-});
 
 
 /*

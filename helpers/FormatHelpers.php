@@ -248,7 +248,7 @@ class FormatHelpers {
             $full_path = Yii::getAlias('@web') . $path;
         }
         
-        $class_css = $full ? 'news-image' : 'card-img-top news-card-img-top-preview';
+        $class_css = $full ? 'news-image' : 'news-card-img';
         
         return Html::img($full_path, ['class' => $class_css]);
         

@@ -12,6 +12,46 @@
  */
 ?>
 
+
+<div class="nav-menu-sd">
+    <a href="#">
+        <div class="logo-sd">
+            <?= Html::img('/images/navbar/group_46.svg', ['alt' => 'image'])  ?>
+        </div>
+    </a>
+
+    <div class="user-sd">
+        <?= UserInfo::widget(['_value_choosing' => $this->context->_value_choosing]) ?>
+        <?= Notifications::widget() ?>
+<!--        <a href="">
+            <img src="assets/img/User.svg" class="user-bt-sd">
+        </a>
+        <a href="">
+            <img src="assets/img/Bell.svg">
+        </a>-->
+    </div>    
+    <a class="menu-btn-sd" href="#menu">
+        <span></span><p class="treck-menu">Меню</p>
+    </a>
+    <div class="menu-sd">
+        <ul class="menu-lets">
+            <li><a class="menu-chet" href="<?= Url::to(['personal-account/index']) ?>">Лицевой счет</a>
+                <ul class="podmenu-free">
+                    <li><a class="podmenu-voge" href="#">Платежи</a></li>
+                    <li><a class="podmenu-voge" href="#">Показания прибора учета</a></li>
+                    <li><a class="podmenu-voge" href="#">Квитанция ЖКХ</a></li>
+                </ul>
+            </li>
+            <li><a class="menu-chet" href="<?= Url::to(['requests/index']) ?>">Заявки</a></li>
+            <li><a class="menu-chet active" href="<?= Url::to(['clients/index']) ?>">Новости</a></li>
+            <li><a class="menu-chet" href="<?= Url::to(['paid-services/index']) ?>">Услуги</a></li>
+            <li><a class="menu-chet" href="<?= Url::to(['voting/index']) ?>">Опрос</a></li>
+        </ul>
+    </div>
+</div>
+
+
+<?php /*
 <header class="fixed-top m-0 p-0 menu-bg" id="header">
     <div class="collapse" id="navbarHeader" style="">
         <a href="#" class="close-menu float-left ml-5 mt-5" 
@@ -108,3 +148,5 @@
     <?= StatusRequest::widget() ?>
     
 </header>
+ * 
+ */ ?>

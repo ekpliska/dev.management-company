@@ -2,7 +2,6 @@
 
     use yii\helpers\Html;
     use app\assets\AppAsset;
-    use yii\widgets\Breadcrumbs;
     use app\assets\ClientsAsset;
 
 AppAsset::register($this);
@@ -20,15 +19,12 @@ ClientsAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body class="p-body">
+<body>
 <?php $this->beginBody() ?>
     <?php $this->beginContent('@app/modules/clients/views/layouts/header.php') ?>
     <?php $this->endContent() ?>    
         
-    <div class="container mx-auto row">
-        <?php /*= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) */ ?>
+    <div class="container">
         <?= $content ?>
     </div>
         
