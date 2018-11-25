@@ -143,10 +143,11 @@ legend {
 }
 
 #steps li {
-    font-size: 24px; 
+    font-size: 20px; 
     float: left; 
     padding: 10px; 
     color: #b0b1b3;
+    font-family: "Mplus 1p Medium";
 }
 
 #steps li span {

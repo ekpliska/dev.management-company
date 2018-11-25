@@ -10,15 +10,15 @@
 $this->title = 'Customers | Регистрация';
 ?>
 
-<h1 class="text-center registration-logo">
-    <?= Html::img('/images/main/elsa-logo13@2x.png', ['class' => 'blue-logo']) ?>
-</h1>
+<a style="display:block" href="<?= Url::to(['/']) ?>">
+    <div class="registration-logo"></div>
+</a>
 <div class="slide-content tst2">
-    <h2 class="text-center registration-h blue-txt">
+    <h2 class="text-center registration-title">
         Регистрация
     </h2>
 
-    <div class="mx-auto registration-form-group">
+    <div class="registration-form-group">
         <ul id="steps">
             <li id="stepDesc0" class="<?= $_SESSION['count_step'] == 0 ? 'current' : ''?>">Шаг 1<span>Лицевой счет</span></li>
             <li id="stepDesc1" class="<?= $_SESSION['count_step'] == 1 ? 'current' : ''?>">Шаг 2<span>Пользовательские данные</span></li>

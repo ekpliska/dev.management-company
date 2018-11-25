@@ -16,7 +16,7 @@
             'labelOptions' => ['class' => 'label-registration hidden'],
         ],
         'options' => [
-            'class' => 'form-signin d-block my-auto',
+            'class' => 'form-signin',
         ],
     ])
 ?>

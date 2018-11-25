@@ -17,7 +17,7 @@
             'labelOptions' => ['class' => 'label-registration hidden'],
         ],
         'options' => [
-            'class' => 'form-signin d-block my-auto material',
+            'class' => 'form-signin',
         ],
     ])
 ?>
@@ -42,7 +42,7 @@
         
     </div>
 
-    <div class="text-center circle-btn-block mx-auto">
+    <div class="text-center third-step-offer">
         <p>Нажимая на кнопку Далее, вы соглашаетесь на обработку 
         <a href="#" target="_blank">Персональных данных </a>и принимаете условия <a href="#" target="_blank">Пользовательского соглашения.</a>
         </p>

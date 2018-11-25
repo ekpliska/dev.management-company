@@ -29,10 +29,10 @@ AppAsset::register($this);
 
 <main role="main">
     
-    <div class="col-md-5 general-slider">
+    <div class="col-md-6 general-slider">
         <?= Slider::widget() ?>
     </div>
-    <div class="col-md-7 general-right-block">
+    <div class="col-md-6 general-right-block">
         <?= $content ?>
     </div>
     

@@ -20,8 +20,9 @@ and open the template in the editor.
     src: url('../fonts/MPLUS1p-Bold.ttf');
 }
 
-body {
+html, body {
     font-family: "Mplus 1p";
+    height:100%;
 }
 
 a, a:hover {
@@ -107,11 +108,10 @@ a, a:hover {
     background-repeat: no-repeat;
     background-size: 50%;
     background-position: right;
-    height: 900px;
+    height: 100vh;
 }
 .start-page__title {
     color: #ef693a;
-    font-family: "Mplus 1p";
     font-size: 26px;
     letter-spacing: 1.05px;
     line-height: 36px;
@@ -120,7 +120,6 @@ a, a:hover {
 .start-page__welcome-txt {
     width: 300px;
     color: #2D18B4;
-    font-family: "Mplus 1p";
     font-size: 14px;
     letter-spacing: 1.05px;
     line-height: 20px;
@@ -128,7 +127,7 @@ a, a:hover {
 }
 .start-page__btn-block {
     position: absolute;
-    bottom: 0;
+    bottom: 10px;
     left: 20%;
 }
 .login-page__reset-password {
@@ -170,6 +169,37 @@ form#login-form {
     margin: 50px 0 70px 0;
 }
 /* Кoнец Вход */
+
+/* Регистрация */
+.registration-logo {
+    background-image: url(/images/main/elsa-logo13@2x.png);
+    background-repeat: no-repeat;
+    background-size: 27%;
+    background-position: center;
+    display: inline-block;
+    margin: 40px 0px;
+    padding: 0 10px;
+    height: 70px;
+    width: 100%;
+}
+.registration-title {
+    color: #2d18b4;
+    font-size: 24px;
+    letter-spacing: 4px;
+}
+.registration-form-group {
+    padding-left: 17%;
+    padding-right: 17%;
+    padding-top: 5%;    
+}
+.registration-form-group .error-summary {
+    font-size: 12px;
+    color: #EF693A;
+}
+.third-step-offer p {
+    margin: 30px 0;
+}
+/* Конец Регистрация */
 
 /* Кнопки */
 .white-to-bue-btn {
@@ -257,5 +287,43 @@ form#login-form {
     color: #FFFFFF;
 }
 
+/* Кнопка, регистрация переход на следующий шаг */
+.blue-circle-btn {
+    background-image: url(/images/clients/arrow_right.png);
+    background-repeat: no-repeat;
+    background-position: 0px 0px;    
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.428571429;
+    border-radius: 35px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    outline: none;
+}
+.blue-circle-btn:hover {
+    background-image: url(/images/clients/arrow_right_hover.png);
+    outline: none;
+}
+.blue-circle-btn:focus {
+    outline: none;
+}
+/* Кнопка, регистрация переход на следующий шаг */
 
-/* КОнец Кнопки */
+/* Кнопка отправки СМС кода, регистрация */
+button#send-request-to-sms {
+    position: absolute;
+    top: 40px;
+    left: 79%;
+    background: transparent;
+    border: none;
+    padding: 0;
+    color: #2d18b4;
+    cursor: pointer;
+}
+button#send-request-to-sms:focus{
+    outline: none;
+}
+/* */
