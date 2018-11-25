@@ -1,7 +1,5 @@
 <?php
-    use yii\bootstrap\ActiveForm;
-    use yii\helpers\Html;
-    use yii\widgets\MaskedInput;
+
     use yii\helpers\Url;
 
 /* 
@@ -13,7 +11,7 @@ $this->title = 'Customers | Регистрация';
 <a style="display:block" href="<?= Url::to(['/']) ?>">
     <div class="registration-logo"></div>
 </a>
-<div class="slide-content tst2">
+<div class="slide-content">
     <h2 class="text-center registration-title">
         Регистрация
     </h2>

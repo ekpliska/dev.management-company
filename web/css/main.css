@@ -25,7 +25,7 @@ html, body {
     height:100%;
 }
 
-a, a:hover {
+a, a:hover, a:active {
     text-decoration: none;
 }
 
@@ -162,8 +162,12 @@ a, a:hover {
     margin-top: 100px;
     margin-bottom: 62px;    
 }
-form#login-form {
-    padding: 0px 190px;
+login-form-group .help-block {
+    color: #ef693a;
+    font-size: 12px;
+    letter-spacing: 1px;
+    line-height: 18px;
+    margin-top: 3px;
 }
 .login-form__button {
     margin: 50px 0 70px 0;
@@ -187,7 +191,8 @@ form#login-form {
     font-size: 24px;
     letter-spacing: 4px;
 }
-.registration-form-group {
+.registration-form-group, 
+.login-form-group {
     padding-left: 17%;
     padding-right: 17%;
     padding-top: 5%;    
@@ -205,7 +210,7 @@ form#login-form {
 .white-to-bue-btn {
     padding-top: 18px;
     height: 56px;
-    width: 280px;
+    width: 250px;
     border-radius: 12px;
     border: 1px solid #2D18B4;
     background-color: white;
@@ -223,9 +228,8 @@ form#login-form {
     color: #FFFFFF;
 }
 .blue-btn {
-    padding-top: 18px;
     height: 56px;
-    width: 280px;
+    width: 250px;
     border-radius: 12px;
     border: 1px solid #2D18B4;
     background-color: #2D18B4;
@@ -246,7 +250,7 @@ form#login-form {
 .red-btn {
     padding-top: 18px;
     height: 56px;
-    width: 280px;
+    width: 250px;
     border: 2px solid #FC3232;
     border-radius: 12px;
     background-color: white;
@@ -268,8 +272,9 @@ form#login-form {
     color: #FFFFFF;	
 }
 .blue-btn-link {
+    padding-top: 18px;
     height: 56px;
-    width: 280px;
+    width: 250px;
     border-radius: 12px;
     border: 1px solid #2D18B4;
     background-color: #2D18B4;
