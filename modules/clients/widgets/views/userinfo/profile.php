@@ -9,19 +9,20 @@
  */
 
 ?>
-<li class="nav-item dropdown">
+
+<li class="dropdown">
     <a class="nav-link text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <?= Html::img('/images/navbar/user.svg') ?>
     </a>
     <ul class="dropdown-menu">
         <li class="user-info-box">
             <div class="row">
-                <div class="col-lg-5 col-sm-5 col-5 text-center">
+                <div class="col-lg-5 col-sm-5 col-md-5 text-center">
                     <a href="<?= Url::to(['profile/index']) ?>">
                         <?= Html::img(Yii::$app->userProfile->photo, ['class' => 'rounded-circle photo-user-dropdown']) ?>                        
                     </a>
                 </div>
-                <div class="col-lg-6 col-sm-6 col-6 dropdown_user-info">
+                <div class="col-lg-6 col-sm-6 col-md-6 dropdown_user-info">
                     <p class="dropdown_user-name">
                         <?= Yii::$app->userProfile->fullNameClient ?>                        
                     </p>

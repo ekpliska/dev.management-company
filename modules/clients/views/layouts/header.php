@@ -21,8 +21,11 @@
     </a>
 
     <div class="user-sd">
-        <?= UserInfo::widget(['_value_choosing' => $this->context->_value_choosing]) ?>
-        <?= Notifications::widget() ?>
+
+        <ul class="nav navbar-nav navbar-right">
+            <?= UserInfo::widget(['_value_choosing' => $this->context->_value_choosing]) ?>
+            <?= Notifications::widget() ?>
+        </ul>
 <!--        <a href="">
             <img src="assets/img/User.svg" class="user-bt-sd">
         </a>
