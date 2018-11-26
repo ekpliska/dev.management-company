@@ -122,8 +122,8 @@ $this->title = 'Профиль собственника';
 
     </div>
     
+    <?php ActiveForm::end(); ?>  
     
-    <?php ActiveForm::end(); ?>
 </div>
 
 <?php if (!$is_rent) : ?>

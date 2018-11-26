@@ -14,7 +14,7 @@ Modal::begin([
     'id' => 'add-rent-modal',
     'header' => 'Создание учетной записи арендатора',
     'closeButton' => [
-        'class' => 'close add-acc-modal-close-btn req rent-info__btn_close',
+        'class' => 'close modal-close-btn rent-info__btn_close',
     ],
     'clientOptions' => [
         'backdrop' => 'static',
@@ -84,9 +84,9 @@ Modal::begin([
         <span class="margin-l">Показать пароли</span>
     </div>
     
-    <div class="modal-footer no-border">
-        <?= Html::submitButton('Создать', ['class' => 'btn blue-outline-btn white-btn mx-auto']) ?>
-        <?= Html::button('Отмена', ['class' => 'btn red-outline-btn bt-bottom2 rent-info__btn_close', 'data-dismiss' => 'modal']) ?>
+    <div class="modal-footer">
+        <?= Html::submitButton('Создать', ['class' => 'btn blue-outline-btn']) ?>
+        <?= Html::button('Отмена', ['class' => 'btn red-outline-btn rent-info__btn_close', 'data-dismiss' => 'modal']) ?>
     </div>
 
 <?php ActiveForm::end(); ?>
