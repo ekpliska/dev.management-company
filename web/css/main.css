@@ -332,12 +332,13 @@ button#send-request-to-sms:focus{
     outline: none;
 }
 
-/* Собственник, навбар */
+/* Собственник, навигационное меню */
+.navbar {
+    height: 139px;    
+}
 .menu-btn-sd {
     z-index: 50;
     display: block;
-    width: 50px;
-    height: 50px;
     background: transparent;
     position: fixed;
     top: 40px;
@@ -388,6 +389,7 @@ button#send-request-to-sms:focus{
     background-image: url(Head.png);
     background-size: 100% 100%;
     background-repeat: no-repeat;
+    z-index: 1;
 }
 .logo-sd {
     position: fixed;
@@ -422,19 +424,8 @@ button#send-request-to-sms:focus{
 }
 .user-sd {
     position: absolute;
-    right: 0;
+    right: 100px;
     top: 40px;
-/*    width: 200px;
-    height: 50px;
-    background-color:transparent;
-    position: fixed;
-    left: 89.3%;
-    top: 40px;
-    display: block;
-    z-index: 9;  
-    display: block;
-    padding-top:5px;
-    padding-left: 40px; */
  } 
 .user-bt-sd {
     margin-right: 27px;
@@ -452,8 +443,8 @@ button#send-request-to-sms:focus{
     z-index: 1;
 }
 .treck-menu {
-    margin-left: 55px;
-    margin-top: 14px; 
+    margin-left: 100px;
+    margin-top: 11px; 
     color: white;
     text-decoration: none;
 }
@@ -556,11 +547,14 @@ button#send-request-to-sms:focus{
     box-shadow: 0 4px 26px 0 rgba(51, 29, 82, 0.16);
 }
 .news-card-preview-title {
-    color: #2d18b4;
-    font-size: 18px;
     margin-left: 24px;
     margin-right: 24px;
     margin-bottom: 5px;
+}
+.news-card-preview-title a {
+    color: #2d18b4;
+    font-size: 18px;
+    font-weight: bold;    
 }
 .news-card-preview-date {
     color: #000;
@@ -568,20 +562,15 @@ button#send-request-to-sms:focus{
     font-size: 12px;
     letter-spacing: 0.9px;
     line-height: 18px;
-    margin-left: 24px;
-    margin-right: 24px;
-    margin-bottom: 0px;
-    margin-top: 50px;
+    margin: 0 24px;
 }
 .news-card-preview-text {
     color: #0d0d0d;
     font-size: 14px;
     letter-spacing: 0.44px;
     line-height: 20px;
-    padding-top: 20px;
+    padding: 15px 24px;
     text-align: justify;
-    margin-left: 24px;
-    margin-right: 24px;
 }
 .news-card-img {
     border-top-right-radius: 12px;
@@ -589,7 +578,127 @@ button#send-request-to-sms:focus{
     height: 50%;
     width: 100%;
 }
-/* Конец Собственник, главная страница, Новости */
+.nav > li > a:hover, .nav > li > a:focus, 
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+    text-decoration: none;
+    background-color: #9d8fd7;
+    border-radius: 100%;    
+}
+/* Конец Собственник, навигационное меню */
+
+/* Выпадающее меню, профиль пользователя */
+.dropdown-menu{
+/*    right: 0px;
+    left: unset;
+    box-shadow: 0px 5px 7px -1px #c1c1c1;
+    padding-bottom: 0px;
+    padding: 0px;
+    height: 260px;*/
+    width: 479px;
+    /*border-radius: 12px;*/
+    border-top-left-radius: 12px !important;
+    border-top-right-radius: 12px !important;
+    
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    
+    background: linear-gradient(180.67deg, #39284E 100%, rgba(10,8,8,0.7) 100%);
+    box-shadow: 0 10px 14px 2px rgba(0,0,0,0.26);  
+}
+
+.dropdown-menu:before{
+    border: none;
+}
+
+.dropdown-menu_link-profile {
+    font-size: 12px;
+}
+
+.dropdown-menu_link-profile a {
+    color: #bcbcbc;
+}
+
+.dropdown_footer div {
+    padding: 30px 0;
+    font-family: "Mplus 1p";
+    font-size: 14px;
+}
+
+.dropdown a#navbarDropdown:hover {
+    background: #928DD2;
+    border-radius: 50px;    
+}
+
+.dropdown_footer a.footer_link {
+    text-transform: uppercase;
+    color: #fff;
+    letter-spacing: 0.12em;
+}
+
+.dropdown_footer a.footer_link:hover {
+    text-decoration: none;
+}
+
+.dropdown_footer a.footer_link-logout {
+    text-transform: uppercase;
+    color: #ff1760;
+    letter-spacing: 0.12em;
+}
+
+.dropdown_footer a.footer_link-logout:hover {
+    text-decoration: none;
+}
+
+.photo-user-dropdown {
+    border: 4px solid #2D18B4;
+    box-shadow: 0px 0px 0px 20px rgba(45, 24, 180, 0.5);
+    margin-top: 40px;
+    width: 100px;
+    height: 100px;
+}
+
+.dropdown_user-info {
+    margin-top: 20px;
+}
+
+.dropdown_user-name {
+    color: #FFFFFF;
+    font-family: "Mplus 1p";
+    font-size: 18px;
+    letter-spacing: 1.23px;
+    line-height: 27px;
+    margin-bottom: 0px;    
+}
+
+.dropdown_account-block {
+    font-family: "Mplus 1p";
+}
+
+.mail-border p {
+    color: #ef693a;
+}
+
+.mail-border a:hover {
+    text-decoration: none;
+}
+
+.dropdown_account-title{
+    color: #78e4ff;
+    font-size: 12px;
+    letter-spacing: 1.26px;
+    line-height: 18px;
+    margin-bottom: 0;
+}
+.dropdown_account-number {
+    color: #fff;
+    font-size: 16px;
+    letter-spacing: 1.26px;
+    line-height: 18px;
+    margin-bottom: 0;
+}
+
+/* Конец Выпадающее меню, профиль пользователя */
+
 
 /* Уведомления на странице */
 .notice {

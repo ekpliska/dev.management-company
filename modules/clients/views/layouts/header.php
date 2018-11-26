@@ -11,8 +11,7 @@
  * Шапка, меню, хлебные крошки
  */
 ?>
-
-
+<nav class="navbar">
 <div class="nav-menu-sd">
     <a href="#">
         <div class="logo-sd">
@@ -26,12 +25,6 @@
             <?= UserInfo::widget(['_value_choosing' => $this->context->_value_choosing]) ?>
             <?= Notifications::widget() ?>
         </ul>
-<!--        <a href="">
-            <img src="assets/img/User.svg" class="user-bt-sd">
-        </a>
-        <a href="">
-            <img src="assets/img/Bell.svg">
-        </a>-->
     </div>    
     <a class="menu-btn-sd" href="#menu">
         <span></span><p class="treck-menu">Меню</p>
@@ -52,7 +45,7 @@
         </ul>
     </div>
 </div>
-
+</nav>
 
 <?php /*
 <header class="fixed-top m-0 p-0 menu-bg" id="header">

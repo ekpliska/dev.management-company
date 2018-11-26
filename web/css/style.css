@@ -3774,3 +3774,9 @@ thead > tr, tbody{
 .table thead th {
     border: none;
 }
+
+@media screen and (min-width: 1200px) {
+    .white-to-bue-btn {
+        width: 120px;
+    }
+}

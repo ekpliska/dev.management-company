@@ -42,12 +42,14 @@
             </div>
         </li>
         <li class="text-light dropdown_footer">
-            <div class="col-lg-12 col-sm-12 col-12">
+            <div class="col-lg-6 col-sm-6 col-md-6 text-center">
                 <?= Html::a('<i class="fa fa-lock" aria-hidden="true"></i> Изменить пароль', ['profile/settings-profile'], ['class' => 'footer_link']) ?>
+            </div>
+            <div class="col-lg-6 col-sm-6 col-md-6 text-center">
                 <?= Html::a('Выйти <i class="fa fa-sign-out" aria-hidden="true"></i>', ['/site/logout'], [
                         'data' => [
                             'method' => 'post'], 
-                        'class' => 'float-right footer_link-logout']) ?>
+                        'class' => 'float-right footer_link-logout']) ?>                
             </div>
         </li>
     </ul>
