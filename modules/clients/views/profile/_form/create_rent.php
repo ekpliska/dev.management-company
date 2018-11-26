@@ -1,6 +1,6 @@
 <?php
 
-    use yii\bootstrap4\Modal;
+    use yii\bootstrap\Modal;
     use yii\widgets\ActiveForm;
     use yii\helpers\Html;
     use yii\widgets\MaskedInput;
@@ -12,7 +12,7 @@
 <?php
 Modal::begin([
     'id' => 'add-rent-modal',
-    'title' => 'Создание учетной записи арендатора',
+    'header' => 'Создание учетной записи арендатора',
     'closeButton' => [
         'class' => 'close add-acc-modal-close-btn req rent-info__btn_close',
     ],

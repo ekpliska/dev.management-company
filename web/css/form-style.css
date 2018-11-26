@@ -750,3 +750,37 @@ select[name="category_list"] option {
     background: rgba(0, 123, 255, 0.12);
 }
 /* Конец Выпадающий список, лицевой счет */
+
+/* CheckBox, email уведомления */
+.spam-agree-txt label {
+    font-weight: unset;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.spam-agree-txt label:before {
+    position: absolute;
+    display: block;
+    width: 28px;
+    height: 28px;
+    margin-left: -36px;
+    content: '';
+    border: 2px solid #4E33F9;
+    border-radius: 5px;
+    background: #fff;
+    border-radius: 50%;
+}
+
+.spam-agree-txt input[type='checkbox']:checked + label:before {
+    line-height: 1.5;
+    content: '\2713';
+    text-align: center;
+    color: #fff;
+    border: 2px solid #4E33F9;
+    background-color: #2D18B4;
+    border-radius: 50%;
+}
+input[type="radio"], input[type="checkbox"] {
+    display: none;
+}
+/* Конец CheckBox, email уведомления */

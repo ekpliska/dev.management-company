@@ -226,5 +226,6 @@ label.el-checkbox {
 }
 .margin-r {
     position: relative;
-    top: -10px;
+    top: -7px;
+    font-size: 16px;
 }

@@ -1,6 +1,6 @@
 <?php
 
-    use yii\bootstrap4\Modal;
+    use yii\bootstrap\Modal;
     use yii\helpers\Html;
 
 /* 
@@ -12,7 +12,7 @@
 <?php
 Modal::begin([
     'id' => 'changes_rent',
-    'title' => 'Внимание!',
+    'header' => 'Внимание!',
     'closeButton' => [
         'class' => 'close add-acc-modal-close-btn req changes_rent__close',
     ],

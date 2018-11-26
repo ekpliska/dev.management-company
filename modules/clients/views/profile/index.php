@@ -3,7 +3,7 @@
     use yii\widgets\ActiveForm;
     use yii\helpers\Html;
     use yii\widgets\MaskedInput;
-    use yii\bootstrap4\Modal;
+    use yii\bootstrap\Modal;
     use app\modules\clients\widgets\SubMenuProfile;
     use app\modules\clients\widgets\AlertsShow;
     use app\modules\clients\widgets\ModalWindows;
@@ -14,46 +14,42 @@
 $this->title = 'Профиль собственника';
 ?>
 
-<?php //= SubMenuProfile::widget() ?>
-<?php // = AlertsShow::widget() ?>
+<?= AlertsShow::widget() ?>
 
-
-<?php
-    $form = ActiveForm::begin([
-        'id' => 'profile-form',
-        'action' => ['profile/update-profile'],
-        'validateOnChange' => false,
-        'validateOnBlur' => false,
-        'options' => [
-            'enctype' => 'multipart/form-data',
-            'class' => 'border-container d-block m-0 p-0 border-container',
-        ],
-    ])
-?>
-
-<div class="col-12 p-0 m-0 text-center profile-bg">
-    <div class="face-container">
-        <?= Html::img($user_info->photo, [
-                'class' => 'rounded-circle mx-auto face',
-                'id' => 'photoPreview',
-                'alt' => $user_info->username,]
-            ) ?>
-    </div>
-    <div class="profile-name mx-auto">
-        <h5 class="profile-name-h text center ">
-            <?= $user_info->getFullNameClient(true) ?>
-        </h5>
-    </div>
-    <div class="profile-upload">
-        <?= $form->field($user, 'user_photo', ['template' => '<label class="text-center btn btn-upload" role="button">{input}{label}{error}'])
-                ->input('file', ['id' => 'btnLoad', 'class' => 'hidden'])->label('Загрузить фото') ?>
-    </div>   
-</div>
+<div class="profile-page">
+    <?php
+        $form = ActiveForm::begin([
+            'id' => 'profile-form',
+            'action' => ['profile/update-profile'],
+            'validateOnChange' => false,
+            'validateOnBlur' => false,
+            'options' => [
+                'enctype' => 'multipart/form-data',
+            ],
+        ])
+    ?>
     
-<div class="col-12 p-0 m-0 text-center material ">
-    <div class="account-select mx-auto">
-        <div class="chip-label">
-            <span class="badge badge-darkblue-personal-account">Лицевой счет</span>
+    <div class="profile-bg text-center">
+        <div class="face-container">
+            <?= Html::img($user_info->photo, [
+                    'class' => 'img-rounded face',
+                    'id' => 'photoPreview',
+                    'alt' => $user_info->username]) ?>
+        </div>
+        <div class="profile-name">
+            <p class="profile-user-name text-center">
+                <?= $user_info->getFullNameClient(true) ?>
+            </p>
+        </div>
+        <div class="profile-upload">
+            <?= $form->field($user, 'user_photo', ['template' => '<label class="text-center btn btn-upload" role="button">{input}{label}{error}'])
+                    ->input('file', ['id' => 'btnLoad', 'class' => 'hidden'])->label('Загрузить фото') ?>
+        </div>   
+    </div>
+    
+    <div class="account-select text-center">
+        <div class="account-select_title">
+            <span class="badge-personal-account">Лицевой счет</span>
         </div>
 
         <?= Html::dropDownList('_list-account', $this->context->_choosing, $accounts_list, [
@@ -62,17 +58,16 @@ $this->title = 'Профиль собственника';
                 'class' => 'custom-select sources',
                 'data-client' => $user_info->clientID]) 
         ?>    
-        
     </div>
     
-    <div class="col-12 mx-0 row personal-info">
+    <div class="row">
         
         <!--Собственник-->
-        <div class="col-6 clients-profile-info">
-            <h5 class="profile-title">
+        <div class="col-md-6 clients-profile-info">
+            <p class="profile-title">
                 Мои контактные данные&nbsp;
                 <?= Html::a('<i class="fa fa-edit"></i>', ['profile/settings-profile']) ?>
-            </h5>
+            </p>
             
             <div class="field">
                 <label for="user_mobile" class="field-label"><i class="fa fa-mobile"></i> Мобильный телефон</label>
@@ -94,15 +89,15 @@ $this->title = 'Профиль собственника';
 
         <!--Арендатор-->
         
-        <div class="col-6 rent-profile-info">
-            <h5 class="profile-title-rent">
+        <div class="col-md-6 rent-profile-info">
+            <p class="profile-title-rent">
                 <label class="el-switch">
                     <?= Html::checkbox('is_rent', $is_rent ? 'checked' : '', ['id' => 'is_rent']) ?>
                     <span class="el-switch-style"></span>
                     <span class="margin-r">Арендатор</span>
                 </label>
                     
-            </h5>
+            </p>
             
             <div id="content-replace" class="form-add-rent">
             <?php if (isset($is_rent) && $is_rent) : ?>
@@ -114,8 +109,8 @@ $this->title = 'Профиль собственника';
         </div>
                 
     </div>
-           
-    <div class="col-12 spam-agree-txt">
+    
+    <div class="spam-agree-txt text-center">
         
         <?= $form->field($user, 'user_check_email', ['template' => '{input}{label}'])->checkbox([], false)->label() ?> 
 
@@ -125,9 +120,10 @@ $this->title = 'Профиль собственника';
             </div>
         </div>
 
-    </div>            
-
-<?php ActiveForm::end(); ?>
+    </div>
+    
+    
+    <?php ActiveForm::end(); ?>
 </div>
 
 <?php if (!$is_rent) : ?>
