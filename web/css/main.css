@@ -332,10 +332,10 @@ button#send-request-to-sms:focus{
     outline: none;
 }
 
-/* */
+/* Кнопка Применить, модальное окно */
 .blue-outline-btn {
     height: 56px;
-    width: 190px;
+    width: 220px;
     border-radius: 12px;
     border: 1px solid #2D18B4;
     background-color: white;
@@ -369,12 +369,12 @@ button#send-request-to-sms:focus{
     box-shadow: 1px 2px 3px 2px rgba(55,35,35,0.17);
     color: #FFFFFF;	
 }
-/* */
+/* Конец Кнопка Применить, модальное окно */
 
-/* */
+/* Кнопка Отмена, модальное окно */
 .red-outline-btn {
     height: 56px;
-    width: 190px;
+    width: 220px;
     border: 2px solid #fc3232;
     border-radius: 12px;
     background-color: #fff;
@@ -395,7 +395,7 @@ button#send-request-to-sms:focus{
     box-shadow: 1px 2px 3px 2px rgba(55,35,35,0.17);
     color: #FFFFFF;	
 }
-/* */
+/* Конец Кнопка Отмена, модальное окно */
 
 /* Собственник, навигационное меню */
 .navbar {
