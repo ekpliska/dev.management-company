@@ -11,7 +11,7 @@
 $this->title ="Главная страница";
 ?>
 
-<div class="row">
+<div class="row news-lists">
     <?php if (isset($news) && count($news) > 0) : ?>
     <?php foreach ($news as $key => $post) : ?>
         <div class="col-md-4">

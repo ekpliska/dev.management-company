@@ -13,7 +13,7 @@
     <?php $current_block = Yii::$app->controller->actionParams['block']; ?>
 
     <?php if (isset($general_navbar)) : ?>
-    <nav class="navbar nav-pills mx-auto text-center justify-content-center nav-tref-potty">
+    <nav class="navbar navbar-fixed-top navbar__sub-general">
         <ul class="nav nav-pills mx-auto text-center justify-content-center">
             <?php foreach ($general_navbar as $key => $item) : ?>
                 <li class="nav-item">

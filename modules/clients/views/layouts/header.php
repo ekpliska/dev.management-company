@@ -46,7 +46,6 @@
     </div>
 </div>
 </nav>
-
 <?php /*
 <header class="fixed-top m-0 p-0 menu-bg" id="header">
     <div class="collapse" id="navbarHeader" style="">
@@ -138,10 +137,6 @@
         </div>
     </nav>
 
-    <?= SubBarGeneralPage::widget() ?>
-    <?= SubBarPaidService::widget() ?>
-    <?= SubBarPersonalAccount::widget() ?>
-    <?= StatusRequest::widget() ?>
     
 </header>
  * 
