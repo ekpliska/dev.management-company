@@ -1,12 +1,7 @@
 <?php
     
     use yii\helpers\Html;
-    use yii\widgets\ActiveForm;
-    use yii\widgets\MaskedInput;
-    use yii\bootstrap4\Modal;
     use yii\helpers\Url;
-    use app\modules\clients\widgets\StatusRequest;
-    use app\modules\clients\widgets\AlertsShow;
     
 /* 
  * Заявки (Общая страница)
@@ -14,14 +9,11 @@
 $this->title = 'Мои заявки';
 ?>
 
-<div class="table-container">
-    <div class="account-info-table-container req-table-container">
-        
-        <?= $this->render('data/grid', ['all_requests' => $all_requests]); ?>
-        
-        <div class="fixed-bottom req-fixed-bottom-btn-group mx-auto ">
-            <?= Html::button('', ['class' => 'add-req-fixed-btn btn-link', 'data-toggle' => 'modal', 'data-target' => '#add-request-modal']) ?>
-        </div>
+
+<div class="requests-page">
+    <?= $this->render('data/grid', ['all_requests' => $all_requests]); ?>
+    <div class="fixed-bottom">
+        <?= Html::button('', ['class' => 'create-request-btn btn-link', 'data-toggle' => 'modal', 'data-target' => '#add-request-modal']) ?>
     </div>
 </div>
 

@@ -1,6 +1,6 @@
 <?php
 
-    use yii\bootstrap4\Modal;
+    use yii\bootstrap\Modal;
     use yii\bootstrap\ActiveForm;
     use yii\helpers\Html;
     use yii\widgets\MaskedInput;
@@ -13,9 +13,9 @@
 <?php
     Modal::begin([
         'id' => 'add-request-modal',
-        'title' => 'Новая заявка',
+        'header' => 'Новая заявка',
         'closeButton' => [
-            'class' => 'close add-acc-modal-close-btn req',
+            'class' => 'close modal-close-btn req',
         ],
         'clientOptions' => [
             'backdrop' => 'static',
@@ -59,7 +59,7 @@
                     'multiple' => true])
                 ->label(false) ?>
 
-        <div class="form-group">
+        <div class="form__upload-image">
             <ul id="uploadImagesList">
                 <li class="item template">
                     <span class="img-wrap">
@@ -70,7 +70,7 @@
             </ul>
         </div>
 
-        <div class="modal-footer-btn">
+        <div class="modal-footer">
             <?= Html::submitButton('Отправить', ['class' => 'btn blue-outline-btn white-btn mx-auto']) ?>
             <?= Html::submitButton('Отмена', ['class' => 'btn red-outline-btn bt-bottom2 request__btn_close', 'data-dismiss' => 'modal']) ?>
         </div>    

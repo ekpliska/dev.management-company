@@ -354,8 +354,8 @@ select[name="category_list"] option {
 .modal_btn-upload {
     color: #fff;
     position: absolute;
-    margin-left: 91%;
-    margin-top: -12%;
+    margin-left: 64%;
+    margin-top: -45px;
     cursor: pointer;    
 }
 /* End File input in modal window */

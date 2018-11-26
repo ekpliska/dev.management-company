@@ -2,7 +2,6 @@
 
     use yii\helpers\Html;
     use yii\helpers\Url;
-    use app\helpers\FormatHelpers;
 
 /* 
  * Быстрый доступ к профилю пользователя 
@@ -19,7 +18,7 @@
             <div class="row">
                 <div class="col-lg-5 col-sm-5 col-md-5 text-center">
                     <a href="<?= Url::to(['profile/index']) ?>">
-                        <?= Html::img(Yii::$app->userProfile->photo, ['class' => 'rounded-circle photo-user-dropdown']) ?>                        
+                        <?= Html::img(Yii::$app->userProfile->photo, ['class' => 'img-rounded photo-user-dropdown']) ?>                        
                     </a>
                 </div>
                 <div class="col-lg-6 col-sm-6 col-md-6 dropdown_user-info">
