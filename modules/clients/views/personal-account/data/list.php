@@ -9,25 +9,25 @@
 <table class="table table-striped table-account">
     <thead>
         <tr>
-            <td colspan="2" scope="col" class="foot-tb">Общая информация</td>
+            <td colspan="2">Общая информация</td>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td scope="row" class="text-left-tb">Номер лицевого счета</td>
-            <td class="text-right-tb">
+            <td scope="row">Номер лицевого счета</td>
+            <td>
                 <?= HtmlPurifier::process($account_info['account_number']) ?>
             </td>
         </tr>
         <tr>
-            <td scope="row" class="text-left-tb">Организация</td>
-            <td class="text-right-tb">
+            <td>Организация</td>
+            <td>
                 <?= HtmlPurifier::process($account_info['organizations_name']) ?>
             </td>
         </tr>
         <tr>
-            <td scope="row" class="text-left-tb">Собственник</td>
-            <td class="text-right-tb">
+            <td>Собственник</td>
+            <td>
                 <?= HtmlPurifier::process(FormatHelpers::formatFullUserName(
                         $account_info['clients_surname'],
                         $account_info['clients_name'],

@@ -1,6 +1,6 @@
 <?php
 
-    use yii\bootstrap4\Modal;
+    use yii\bootstrap\Modal;
     use yii\widgets\ActiveForm;
     use yii\helpers\Html;
 
@@ -11,9 +11,9 @@
 <?php
     Modal::begin([
         'id' => 'create-account-modal',
-        'title' => 'Добавить лицевой счет',
+        'header' => 'Добавить лицевой счет',
         'closeButton' => [
-            'class' => 'close add-acc-modal-close-btn req account-create__btn_close',
+            'class' => 'close add-acc-modal-close-btn',
         ],
         'clientOptions' => [
             'backdrop' => 'static',

@@ -1,4 +1,5 @@
 <?php
+
     use yii\helpers\Html;
     use yii\helpers\Url;
 /* 
@@ -7,12 +8,12 @@
 $this->title = 'Общая информация';
 ?>
 
-<div class="account-info-table-container">
+<div class="paid-account-page">
     <?= $this->render('data/list', ['account_info' => $account_info]); ?>
     <?php if (Yii::$app->user->can('clients')) : ?>
-        <div>
+        <div class="paid-account-page_btn text-center">
             <?= Html::button('Добавить лицевой счет', [
-                    'class' => 'blue-btn mx-auto text-center add-acc-btn',
+                    'class' => 'blue-btn add-acc-btn',
                     'data-toggle' => 'modal',
                     'data-target' => '#create-account-modal']) ?>
         </div>
