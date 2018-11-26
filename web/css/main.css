@@ -979,6 +979,49 @@ button#send-request-to-sms:focus{
 }
 /* Конец Таблица для заявок */
 
+/* Платные услуги */
+.paid-requests-page {
+    
+}
+.service-card {
+    height: 490px;
+    border-radius: 12px;
+    background-color: #FFFFFF;
+    box-shadow: 0 4px 26px 0 rgba(51,29,82,0.16); 
+    margin-right: 12px;
+    margin-left: 12px;
+    margin-top: 15px;
+}
+.service-card_title {
+    color: #2d18b6;
+    font-size: 18px;
+    letter-spacing: 0.1px;
+    line-height: 22px;
+    padding: 10px;
+    font-weight: bold;
+}
+.service-card_image {}
+.service-card__body {
+    padding: 0px 10px;
+}
+.service-card__btn {
+    position: absolute;
+    bottom: 20px;
+    right: 40px;
+}
+.service-card__btn button {
+}
+.cost_service {
+    padding: 13px 24px;
+    font-size: 20px;
+    color: #c1c1c1;
+}
+/* Конец Платные услуги */
+
+/* Лицевой счет */
+
+/* Конец Лицевой счет */
+
 /* Уведомления на странице */
 .notice {
     padding: 15px;

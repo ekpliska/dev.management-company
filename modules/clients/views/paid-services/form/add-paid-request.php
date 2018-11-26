@@ -1,6 +1,6 @@
 <?php
 
-    use yii\bootstrap4\Modal;
+    use yii\bootstrap\Modal;
     use yii\helpers\Html;
     use yii\widgets\ActiveForm;
     use yii\widgets\MaskedInput;
@@ -11,7 +11,7 @@
 <?php
     Modal::begin([
         'id' => 'add-record-modal',
-        'title' => 'Заявка на платную услугу',
+        'header' => 'Заявка на платную услугу',
         'closeButton' => [
             'class' => 'close add-acc-modal-close-btn req btn__paid_service_close',
         ],
