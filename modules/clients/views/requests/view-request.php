@@ -13,11 +13,12 @@ $this->title = 'Детали заявки';
 ?>
 
 
-<div class="requests-view">
+<div class="requests-view row">
     <div class="col-md-12 requests-view_title">
         <i class="glyphicon glyphicon-ok <?= $request_info['is_accept'] ? 'check' : 'uncheck' ?>"></i>&nbsp;&nbsp;Заявка принята
     </div>
     
+
     <div class="col-md-7 requests-view_body">
         <h4>
             <?= $request_info['type_requests_name'] ?>
@@ -40,6 +41,9 @@ $this->title = 'Детали заявки';
         <span class="badge request-ident">
             <?= $request_info['requests_ident'] ?>            
         </span>
+        <?= StatusHelpers::requestStatusPage($request_info['status'], $request_info['updated_at']) ?>
+        
+        <?php /*
         <span class="req-badge req-badge-new">
             <span class="right-border">
                 <?= FormatHelpers::statusName($request_info['status']) ?>
@@ -48,6 +52,8 @@ $this->title = 'Детали заявки';
                 <?= FormatHelpers::formatDate($request_info['updated_at'], true, 0, false) ?>
             </span>
         </span>
+         */ ?>
+        
         <p class="request_text">
             <?= $request_info['requests_comment'] ?>
         </p>

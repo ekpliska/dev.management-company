@@ -1035,8 +1035,8 @@ button#send-request-to-sms:focus{
 
 /* Просмотр отдельной заявки */
 .requests-view {
-/*    border: 1px solid #ddd;
-    border-radius: 12px;*/
+    border: 1px solid #ddd;
+    border-radius: 12px;
 }
 .requests-view_title {
     height: 78px;
@@ -1057,10 +1057,7 @@ button#send-request-to-sms:focus{
     border-radius: 100%;
 }
 .requests-view_body {
-    height: 100%;
-    border: 1px solid #ddd;
-    border-radius: 0 0 0 12px;
-    min-height: 400px;
+    border-right: 1px solid #ddd;
 }
 .requests-view_body h4 {
     font-family: "Mplus 1p Medium";
@@ -1091,12 +1088,7 @@ button#send-request-to-sms:focus{
     text-align: center;
     margin: 30px;
 }
-.requests-view_chat {
-    height: 100%;
-    border: 1px solid #ddd;
-    border-radius: 0 0 12px 0;
-    min-height: 400px;
-}
+.requests-view_chat {}
 /* Конец Просомтр отдельной заявки */
 
 /* Завяки, чат */
@@ -1205,35 +1197,36 @@ button#send-request-to-sms:focus{
 }
 /* Конец Оценка заявки, звездочки */
 
-/* Статусы заявок */
+/* Статусы заявок, таблица */
 .badge {
     height: 38px;
     width: 120px;
     background: #fff;
     color: #000;
     border-radius: 25px;
-    font-size: 12px;
+    font-size: 10px;
     line-height: 18px;
     padding-top: 8px;
+    text-transform: uppercase;
 }
 .req-badge-new {
-    border: 2px solid #598EFF;
+    border: 2px solid #598eff;
     box-shadow: 0px 1px 4px 6px rgba(0,101,255,0.28);
 }
 .req-badge-work {
-    border: 2px solid #7C7C7C;
+    border: 2px solid #7c7c7c;
     box-shadow: 0px 1px 4px 6px rgba(255,125,125,0.26);
 }
 .req-badge-complete {
-    border: 2px solid #1FD68D;
+    border: 2px solid #1fd68d;
     box-shadow: 0px 1px 4px 6px rgba(56,231,161,0.54);
 }
 .req-badge-rectification {
-    border: 2px solid #E17DFF;
+    border: 2px solid #e17dff;
     box-shadow: 0px 1px 4px 6px rgba(225,125,255,0.42);
 }
 .req-badge-close {
-    border: 2px solid #FF7D7D;
+    border: 2px solid #ff7d7d;
     box-shadow: 0px 1px 4px 6px rgba(252,193,193,0.83);
 }
 .req-table-btn {
@@ -1244,14 +1237,86 @@ button#send-request-to-sms:focus{
 }
 .request-ident {
     background: #2d18b4;
-    padding: 4px;
+    padding: 6px;
+    font-size: 12px;
     width: 170px;
     color: #fff;
-    height: 27px;
+    height: 30px;
     font-weight: unset;
     line-height: 18px;
 }
-/* Конец Статусы заявок */
+/* Конец Статусы заявок, таблица */
+
+/* Статусы заявок, отдельная страница */
+.badge-page {
+    height: 38px;
+    background: #fff;
+    padding: 7px;
+    color: #000;
+    border-radius: 25px;
+    font-size: 10px;
+    line-height: 18px;
+    padding-top: 8px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.req-badge-new-page {
+    border: 2px solid #598eff;
+    box-shadow: 0px 1px 4px 6px rgba(0,101,255,0.28);
+}
+.req-badge-work-page {
+    border: 2px solid #7c7c7c;
+    box-shadow: 0px 1px 4px 6px rgba(255,125,125,0.26);
+}
+.req-badge-complete-page {
+    border: 2px solid #1fd68d;
+    box-shadow: 0px 1px 4px 6px rgba(56,231,161,0.54);
+}
+.req-badge-rectification-page {
+    border: 2px solid #e17dff;
+    box-shadow: 0px 1px 4px 6px rgba(225,125,255,0.42);
+}
+.req-badge-close-page {
+    border: 2px solid #ff7d7d;
+    box-shadow: 0px 1px 4px 6px rgba(252,193,193,0.83);
+}
+
+.req-badge-new-page span:first-child {
+    border-right: 1px solid #598eff;
+    padding: 8px 25px;
+}
+.req-badge-new-page span:last-child {
+    padding: 8px 25px;
+}
+.req-badge-work-page span:first-child {
+    border-right: 1px solid #598eff;
+    padding: 8px 25px;
+}
+.req-badge-work-page span:last-child {
+    padding: 8px 25px;
+}
+.req-badge-complete-page span:first-child {
+    border-right: 1px solid #1fd68d;
+    padding: 8px 25px;
+}
+.req-badge-complete-page span:last-child {
+    padding: 8px 25px;
+}
+.req-badge-rectification-page span:first-child {
+    border-right: 1px solid #e17dff;
+    padding: 8px 25px;
+}
+.req-badge-rectification-page span:last-child {
+    padding: 8px 25px;
+}
+.req-badge-close-page span:first-child {
+    border-right: 1px solid #ff7d7d;
+    padding: 8px 25px;
+}
+.req-badge-close-page span:last-child {
+    padding: 8px 25px;
+}
+/* Конец Статусы заявок, отдельная страница */
 
 /* Платные услуги */
 .service-card {
