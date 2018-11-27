@@ -1,8 +1,6 @@
 <?php
 
-    use yii\helpers\Html;
     use yii\helpers\Url;
-    use app\helpers\FormatHelpers;
 
 /* 
  * Вывод новостей в личном кабинете собственника
@@ -13,17 +11,12 @@
     <?php $current_block = Yii::$app->controller->actionParams['block']; ?>
 
     <?php if (isset($general_navbar)) : ?>
-    <nav class="navbar navbar-fixed-top navbar__sub-general">
-        <ul class="nav nav-pills mx-auto text-center justify-content-center">
+    <nav class="navbar navbar__sub-general">
+        <ul class="nav nav-pills navbar__pills">
             <?php foreach ($general_navbar as $key => $item) : ?>
-                <li class="nav-item">
+                <li class="nav-item <?= ($current_block == $key) ? 'active' : '' ?>">
                     <a href="<?= Url::to(['clients/index', 'block' => $key]) ?>" 
-                       class="nav-link 
-                            submenu-nav-link 
-                            <?= ($current_block == $key) ? 'active' : '' ?> 
-                            <?= ($key == 'special_offers') ? ' no-border-right no-border-left' : '' ?>
-                            <?= ($key == 'special_offers') ? 'central-block' : '123' ?>"
-                    >
+                       class="<?= ($key == 'special_offers') ? 'central-block' : '' ?>">
                         <?= $item ?>
                     </a>
                 </li>

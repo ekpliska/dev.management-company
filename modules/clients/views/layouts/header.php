@@ -11,41 +11,45 @@
  * Шапка, меню, хлебные крошки
  */
 ?>
-<nav class="navbar">
-<div class="nav-menu-sd">
-    <a href="#">
-        <div class="logo-sd">
-            <?= Html::img('/images/navbar/group_46.svg', ['alt' => 'image'])  ?>
-        </div>
-    </a>
+<header id="header">
+    <nav class="navbar">
+        <div class="nav-menu-sd">
+            <a href="#">
+                <div class="logo-sd">
+                    <?= Html::img('/images/navbar/group_46.svg', ['alt' => 'image'])  ?>
+                </div>
+            </a>
 
-    <div class="user-sd">
+            <div class="user-sd">
 
-        <ul class="nav navbar-nav navbar-right">
-            <?= UserInfo::widget(['_value_choosing' => $this->context->_value_choosing]) ?>
-            <?= Notifications::widget() ?>
-        </ul>
-    </div>    
-    <a class="menu-btn-sd" href="#menu">
-        <span></span><p class="treck-menu">Меню</p>
-    </a>
-    <div class="menu-sd">
-        <ul class="menu-lets">
-            <li><a class="menu-chet" href="<?= Url::to(['personal-account/index']) ?>">Лицевой счет</a>
-                <ul class="podmenu-free">
-                    <li><a class="podmenu-voge" href="#">Платежи</a></li>
-                    <li><a class="podmenu-voge" href="#">Показания прибора учета</a></li>
-                    <li><a class="podmenu-voge" href="#">Квитанция ЖКХ</a></li>
+                <ul class="nav navbar-nav navbar-right">
+                    <?= UserInfo::widget(['_value_choosing' => $this->context->_value_choosing]) ?>
+                    <?= Notifications::widget() ?>
                 </ul>
-            </li>
-            <li><a class="menu-chet" href="<?= Url::to(['requests/index']) ?>">Заявки</a></li>
-            <li><a class="menu-chet active" href="<?= Url::to(['clients/index']) ?>">Новости</a></li>
-            <li><a class="menu-chet" href="<?= Url::to(['paid-services/index']) ?>">Услуги</a></li>
-            <li><a class="menu-chet" href="<?= Url::to(['voting/index']) ?>">Опрос</a></li>
-        </ul>
-    </div>
-</div>
-</nav>
+            </div>    
+            <a class="menu-btn-sd" href="#menu">
+                <span></span><p class="treck-menu">Меню</p>
+            </a>
+            <div class="menu-sd">
+                <ul class="menu-lets">
+                    <li><a class="menu-chet" href="<?= Url::to(['personal-account/index']) ?>">Лицевой счет</a>
+                        <ul class="podmenu-free">
+                            <li><a class="podmenu-voge" href="#">Платежи</a></li>
+                            <li><a class="podmenu-voge" href="#">Показания прибора учета</a></li>
+                            <li><a class="podmenu-voge" href="#">Квитанция ЖКХ</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="menu-chet" href="<?= Url::to(['requests/index']) ?>">Заявки</a></li>
+                    <li><a class="menu-chet active" href="<?= Url::to(['clients/index']) ?>">Новости</a></li>
+                    <li><a class="menu-chet" href="<?= Url::to(['paid-services/index']) ?>">Услуги</a></li>
+                    <li><a class="menu-chet" href="<?= Url::to(['voting/index']) ?>">Опрос</a></li>
+                </ul>
+            </div>
+            
+        </div>
+    </nav>
+    <?= SubBarGeneralPage::widget() ?>
+</header>
 <?php /*
 <header class="fixed-top m-0 p-0 menu-bg" id="header">
     <div class="collapse" id="navbarHeader" style="">

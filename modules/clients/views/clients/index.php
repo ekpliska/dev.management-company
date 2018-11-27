@@ -40,6 +40,6 @@ $this->title ="Главная страница";
     <?php else : ?>
          <div class="notice notice-info">
             <strong>Новости</strong> по текущему разделу новостной информации не найдено.
-        </div>        
+        </div>
     <?php endif; ?>
 </div>

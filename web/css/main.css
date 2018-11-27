@@ -398,16 +398,17 @@ button#send-request-to-sms:focus{
 /* Конец Кнопка Отмена, модальное окно */
 
 /* Собственник, навигационное меню */
+#header {
+    background-image: url(Head.png);
+    background-size: 100% 100%;
+    background-repeat: round;
+}
 .navbar {
     height: 139px;    
 }
 .menu-btn-sd {
-    z-index: 50;
-    display: block;
-    background: transparent;
     position: fixed;
     top: 40px;
-    left: 20px;
 }
 .menu-btn-sd span::before,
 .menu-btn-sd span::after {
@@ -451,9 +452,6 @@ button#send-request-to-sms:focus{
     width: 100vw;
     height: 139px;
     position: fixed; 
-    background-image: url(Head.png);
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
     z-index: 1;
 }
 .logo-sd {
@@ -1527,3 +1525,60 @@ button#send-request-to-sms:focus{
     text-align: center;
 }
 /* Конец Переопреденное модальное окно бутстрапа */
+
+/* Дополнительное меню, главна страница */
+.navbar__sub-general {
+    height: 70px;
+}
+.navbar__pills {
+    display: flex;
+    justify-content: center;
+}
+.navbar__pills > li {
+    width: 200px;
+    height: 56px;
+    border: 1px solid #fff;
+    text-align: center;
+}
+.navbar__pills > li > a {
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.7px;
+}
+.navbar__pills > li:hover {
+    background: #fff;
+    border-radius: unset;
+}
+.navbar__pills > li a:hover {
+    background: transparent;
+    color: #2d18b4;
+    border-radius: unset;
+}
+.navbar__pills > li.active {
+    background: #fff;
+    color: #2d18b4;
+}
+.navbar__pills > li.active > a,
+.navbar__pills > li.active > a:hover {
+    background: transparent;
+    color: #2d18b4;
+}
+.navbar__pills > li:first-child {
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+    padding: 7px;
+}
+.navbar__pills > li:last-child {
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    padding: 7px;
+}
+/* Конец Дополнительное меню, главна страница */
+
+/* Дополнительное меню, услуги */
+.services-nav {
+    height: 96px;
+    background-color: #2D18B4;
+}
+/* Конец Дополнительное меню, услуги */
