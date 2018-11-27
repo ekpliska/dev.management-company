@@ -21,11 +21,8 @@
                 'value' => function ($data) {
                     return Html::a($data->requests_ident, ['requests/view-request', 'request_numder' => $data->requests_ident]);
                 },
-                'headerOptions' => [
-                    'style' => 'width: 10%',
-                ],
                 'contentOptions' =>[
-                    'class' => 'req-table_req-main',
+                    'class' => 'requests-table_main',
                 ],
                 'format' => 'raw',
             ],
@@ -34,11 +31,8 @@
                 'value' => function ($data) {
                     return $data->getNameRequest();            
                 },
-                'headerOptions' => [
-                    'style' => 'width: 20%',
-                ],
                 'contentOptions' =>[
-                    'class' => 'req-table_req-type',
+                    'class' => 'requests-table_main',
                 ],        
             ],
             [
@@ -48,11 +42,8 @@
                             . '<br />'
                             . FormatHelpers::imageRequestList($data['image']);
                 },
-                'headerOptions' => [
-                    'style' => 'width: 30%',
-                ],                        
                 'contentOptions' =>[
-                    'class' => 'req-table-description-request',
+                    'class' => 'requests-table_description',
                 ],
                 'format' => 'raw',
             ],                        
@@ -61,20 +52,14 @@
                 'value' => function ($data) {
                     return $data->requests_specialist_id;
                 },
-                'headerOptions' => [
-                    'style' => 'width: 10%'
-                ],                                
             ],
             [
                 'attribute' => 'Дата создания',
                 'value' => function ($data) {
                     return FormatHelpers::formatDate($data->created_at, false, 0, false);
                 },
-                'headerOptions' => [
-                    'style' => 'width: 10%'
-                ],                
                 'contentOptions' =>[
-                    'class' => 'req-table_req-main',
+                    'class' => 'requests-table_main',
                 ],
             ],
             [
@@ -82,11 +67,8 @@
                 'value' => function ($data) {
                     return FormatHelpers::formatDate($data->date_closed, false, 0, false);
                 },
-                'headerOptions' => [
-                    'style' => 'width: 10%'
-                ],                
                 'contentOptions' =>[
-                    'class' => 'req-table_req-main',
+                    'class' => 'requests-table_main',
                 ],
             ],
             [
@@ -96,11 +78,8 @@
                     return StatusHelpers::requestStatus($data['status'], $data->requests_id);
                 },
                 'format' => 'raw',
-                'headerOptions' => [
-                    'style' => 'width: 10%'
-                ],                        
                 'contentOptions' =>[
-                    'class' => 'req-table_req-main',
+                    'class' => 'requests-table_main',
                 ],                        
             ],
 //            [

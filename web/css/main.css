@@ -937,10 +937,6 @@ button#send-request-to-sms:focus{
 /* Кoнец Страница Профиль пользователя */
 
 /* Заявки */
-.requests-page {
-    border: 1px solid #ddd;
-    border-radius: 12px;
-}
 .fixed-bottom {
     position: absolute;
     bottom: 20px;
@@ -951,7 +947,6 @@ button#send-request-to-sms:focus{
     background-position: 0px 5px;
     width: 70px;
     height: 70px;
-    margin-left: 1202px;
     cursor: pointer;
     outline: none;
     border: none;
@@ -971,11 +966,70 @@ button#send-request-to-sms:focus{
 /* Конец Заявки */
 
 /* Таблица для заявок */
+.requests-table {
+    border-collapse: unset;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    font-size: 12px;
+}
 .requests-table thead {
     color: #2d18b4;
     text-transform: uppercase;
     text-align: center;
     vertical-align: top;
+}
+.requests-table > thead > tr > th {
+    font-size: 12px;
+    vertical-align: middle;
+    text-align: center;
+    border: none;
+    padding: 25px 0;
+}
+.requests-table > tbody > tr > td {
+    vertical-align: middle;
+    text-align: center;
+    padding: 25px 0;
+}
+.requests-table_main {
+    width: 12%;
+}
+.requests-table_description {
+    text-align: left !important;
+}
+.req-table-img {
+    height: 24px;
+    width: 24px;
+    border-radius: 3px;
+    margin-left: 4px;
+    margin-right: 4px;
+    margin-top: 5px;
+}
+.pagination {
+    margin: 0;
+    padding-left: 45%;
+}
+.pagination > li > a, .pagination > li > span {
+    border: none;
+    margin: 5px;
+    color: #2d18b4;
+}
+.pagination > .active > a {
+    background-color: #fff;
+    border: 2px solid #2d18b4;
+    color: #2d18b4;
+    border-radius: 25px;
+}
+.pagination > .active > a:hover {
+    background-color: #fff;
+    border: 2px solid #241390;
+    color: #241390;
+    border-radius: 100%;
+}
+.pagination > li > a:hover {
+    border: 2px solid #ddd;
+    border-radius: 100%;
+    background-color: #fff;
+    color: #ddd;
 }
 /* Конец Таблица для заявок */
 

@@ -12,9 +12,7 @@ $this->title = 'Мои заявки';
 
 <div class="requests-page">
     <?= $this->render('data/grid', ['all_requests' => $all_requests]); ?>
-    <div class="fixed-bottom">
-        <?= Html::button('', ['class' => 'create-request-btn btn-link', 'data-toggle' => 'modal', 'data-target' => '#add-request-modal']) ?>
-    </div>
+    <?= Html::button('', ['class' => 'create-request-btn btn-link pull-right', 'data-toggle' => 'modal', 'data-target' => '#add-request-modal']) ?>
 </div>
 
 <?= $this->render('form/add-request', ['model' => $model, 'type_requests' => $type_requests]) ?>

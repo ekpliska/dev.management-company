@@ -41,7 +41,7 @@ class RequestsController extends AppClientsController
             'pagination' => [
                 'forcePageParam' => false,
                 'pageSizeParam' => false,
-                'pageSize' => 15,
+                'pageSize' => 7,
             ]
         ]);
 
