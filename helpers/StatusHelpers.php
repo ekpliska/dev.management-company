@@ -18,17 +18,13 @@ class StatusHelpers {
         
         // Стили для кнопок статусов
         $css_classes = [
-            'badge badge-pill req-badge req-badge-new', 
-            'badge badge-pill req-badge req-badge-work', 
-            'badge badge-pill req-badge req-badge-complete', 
-            'badge badge-pill req-badge req-badge-rectification', 
-            'badge badge-pill req-badge req-badge-close',
+            'badge req-badge-new', 
+            'badge req-badge-work', 
+            'badge req-badge-complete', 
+            'badge req-badge-rectification', 
+            'badge req-badge-close',
         ];
     
-        
-        if ($status == null) {
-            return 'Не задан';
-        }
         
         // Получаем текстовое обозначение статуса
         $status_name = ArrayHelper::getValue(StatusRequest::getStatusNameArray(), $status);        

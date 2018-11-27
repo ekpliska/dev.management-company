@@ -1011,32 +1011,249 @@ button#send-request-to-sms:focus{
 .pagination > li > a, .pagination > li > span {
     border: none;
     margin: 5px;
-    color: #2d18b4;
+    color: #ff8e8e;
 }
 .pagination > .active > a {
     background-color: #fff;
-    border: 2px solid #2d18b4;
-    color: #2d18b4;
+    border: 2px solid #b8d4ff;
+    color: #598eff;
     border-radius: 25px;
 }
 .pagination > .active > a:hover {
     background-color: #fff;
-    border: 2px solid #241390;
-    color: #241390;
+    border: 2px solid #bcd6ff;
+    color: #8cb4ff;
     border-radius: 100%;
 }
 .pagination > li > a:hover {
-    border: 2px solid #ddd;
+    border: 2px solid #fed9d9;
     border-radius: 100%;
     background-color: #fff;
-    color: #ddd;
+    color: #ff7d7d;
 }
 /* Конец Таблица для заявок */
 
-/* Платные услуги */
-.paid-requests-page {
-    
+/* Просмотр отдельной заявки */
+.requests-view {
+/*    border: 1px solid #ddd;
+    border-radius: 12px;*/
 }
+.requests-view_title {
+    height: 78px;
+    font-family: "Mplus 1p Bold";
+    padding: 20px 30px;
+    color: #fff;
+    border-radius: 12px 12px 0 0;
+    background-color: #2D18B4;
+}
+.requests-view_title i.check {
+    background: #36eadf;
+    padding: 10px;
+    border-radius: 100%;
+}
+.requests-view_title i.uncheck {
+    background: #ddd;
+    padding: 10px;
+    border-radius: 100%;
+}
+.requests-view_body {
+    height: 100%;
+    border: 1px solid #ddd;
+    border-radius: 0 0 0 12px;
+    min-height: 400px;
+}
+.requests-view_body h4 {
+    font-family: "Mplus 1p Medium";
+    font-size: 18px;
+    letter-spacing: 0.32px;
+    line-height: 27px;
+}
+.date_requests {
+    color: #2D18B4;
+    font-family: "Mplus 1p Medium";
+    font-size: 12px;
+    letter-spacing: 0.29px;
+}
+.request_text {
+    color: #2d18b4;
+    padding: 20px 0;
+    font-size: 14px;
+    letter-spacing: 0.25px;
+}
+.client_info {
+    margin: 0 -15px;
+    background: #fcfcfc;
+    height: 60px;
+    color: #2d1d88;
+    padding: 20px 15px;
+}
+.request-body-rate {
+    text-align: center;
+    margin: 30px;
+}
+.requests-view_chat {
+    height: 100%;
+    border: 1px solid #ddd;
+    border-radius: 0 0 12px 0;
+    min-height: 400px;
+}
+/* Конец Просомтр отдельной заявки */
+
+/* Завяки, чат */
+.comments .row {
+    margin: 10px 0;
+}
+.request-chat-icon {
+    height: 40px;
+    width: 40px;
+    border-radius: 100%;    
+}
+.chat_photo {
+    padding: 0 10px;
+}
+.chat-name {
+    font-family: "Mplus 1p Bold";
+}
+.chat_time {
+    text-align: center;
+    vertical-align: middle;
+    font-size: 12px;
+}
+.chat-txt-block {
+    min-width: 92px;
+    max-width: 398px;
+    background-image: url("Gradient_BG.png");
+    border-radius: 12px;
+    padding: 15px;
+    word-wrap: break-word;
+    margin-left: 19px;
+    color: #FFFFFF;
+    font-family: "Mplus 1p";
+    font-size: 14px;
+    line-height: 20px;
+    box-shadow: 0 10px 14px 2px rgba(0,0,0,0.26);
+}
+.chat-msg form {
+    margin: 50px -15px 0 -15px;
+}
+.chat-msg textarea {
+    border: 1px solid #d4d4d4;
+    border-left: none;
+    border-right: none;
+    resize: none;
+    box-shadow: none;
+}
+.chat-msg textarea:focus {
+    border-color: #ddd !important;
+    outline: none;
+    box-shadow: none;
+}
+.has-error textarea {
+    border-color: #ff7d7d !important;
+    outline: none;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+.chat-btn {
+    color: #2d18b4;
+    font-family: "Mplus 1p Medium";
+    font-size: 12px;
+    letter-spacing: 0.98px;
+    text-transform: uppercase;
+    background: transparent;
+    border: none;
+    position: absolute;
+    right: 0;
+    bottom: 30px;    
+}
+.chat-btn:focus {
+    outline: none;
+}
+.error-summary {
+    font-size: 12px;
+    color: #ff7d7d;
+}
+.chat-badge-date {
+    margin: 10px 0;
+    text-align: center;
+}
+.chat-badge-date span {
+    background-color: #2d18b4;
+    padding: 4px 35px;
+    color: #fff;
+    font-family: "Mplus 1p Medium";
+    font-size: 12px;
+    letter-spacing: 1.05px;
+    line-height: 20px;
+    border-radius: 12px;
+}
+/* Конец Завяки, чат */
+
+/* Оценка заявки, звездочки */
+.req-rate-star {
+    margin: 15px 0;
+}
+
+.req-rate-star .starrr a {
+    margin-left: 9.75px;
+    margin-right: 9.75px;
+}
+
+.rate-star-white{
+    margin-top: 48px;
+    margin-bottom: 75px;
+}
+/* Конец Оценка заявки, звездочки */
+
+/* Статусы заявок */
+.badge {
+    height: 38px;
+    width: 120px;
+    background: #fff;
+    color: #000;
+    border-radius: 25px;
+    font-size: 12px;
+    line-height: 18px;
+    padding-top: 8px;
+}
+.req-badge-new {
+    border: 2px solid #598EFF;
+    box-shadow: 0px 1px 4px 6px rgba(0,101,255,0.28);
+}
+.req-badge-work {
+    border: 2px solid #7C7C7C;
+    box-shadow: 0px 1px 4px 6px rgba(255,125,125,0.26);
+}
+.req-badge-complete {
+    border: 2px solid #1FD68D;
+    box-shadow: 0px 1px 4px 6px rgba(56,231,161,0.54);
+}
+.req-badge-rectification {
+    border: 2px solid #E17DFF;
+    box-shadow: 0px 1px 4px 6px rgba(225,125,255,0.42);
+}
+.req-badge-close {
+    border: 2px solid #FF7D7D;
+    box-shadow: 0px 1px 4px 6px rgba(252,193,193,0.83);
+}
+.req-table-btn {
+    width: 120px;
+    height: 36px;
+    text-transform: none;
+    margin: 10px 0;
+}
+.request-ident {
+    background: #2d18b4;
+    padding: 4px;
+    width: 170px;
+    color: #fff;
+    height: 27px;
+    font-weight: unset;
+    line-height: 18px;
+}
+/* Конец Статусы заявок */
+
+/* Платные услуги */
 .service-card {
     height: 490px;
     border-radius: 12px;
