@@ -993,6 +993,10 @@ button#send-request-to-sms:focus{
 .requests-table_main {
     width: 12%;
 }
+.requests-table_category {
+    width: 20%;
+    text-align: left !important;
+}
 .requests-table_description {
     text-align: left !important;
 }
@@ -1336,7 +1340,9 @@ button#send-request-to-sms:focus{
     padding: 10px;
     font-weight: bold;
 }
-.service-card_image {}
+.service-card_image {
+    width: 100%;
+}
 .service-card__body {
     padding: 0px 10px;
 }
@@ -1348,8 +1354,8 @@ button#send-request-to-sms:focus{
 .service-card__btn button {
 }
 .cost_service {
-    padding: 13px 24px;
-    font-size: 20px;
+    font-size: 18px;
+    padding-right: 10px;
     color: #c1c1c1;
 }
 /* Конец Платные услуги */

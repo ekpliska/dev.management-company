@@ -19,72 +19,50 @@
             'dataProvider' => $all_orders,
             'layout' => '{items}{pager}',
             'tableOptions' => [
-                'class' => 'table req-table  pay-table account-info-table px-0',
+                'class' => 'table requests-table',
             ],
             'columns' => [
                 [
                     'attribute' => 'services_number',
-                    'label' => 'Номер',
+                    'label' => 'ID',
                     'value' => 'services_number',
-                    'headerOptions' => [
-                        'style' => 'width: 10%',
-                    ],
                     'contentOptions' =>[
-                        'class' => 'req-table_req-main',
+                        'class' => 'requests-table_main',
                     ],
                 ],
                 [
                     'attribute' => 'category_name',
-                    'label' => 'Категория',
+                    'header' => 'Категория, <br /> Наименование услуг',
                     'value' => 'category_name',
-                    'headerOptions' => [
-                        'style' => 'width: 15%',
-                    ],
+                    'value' => function ($data) {
+                        return $data['category_name'] . ', <br />' . $data['services_name'];
+                    },
+                    'format' => 'raw',
                     'contentOptions' =>[
-                        'class' => 'req-table_req-type',
-                    ],
-                ],
-                [
-                    'attribute' => 'services_name',
-                    'label' => 'Наименование услуги',
-                    'value' => 'services_name',
-                    'headerOptions' => [
-                        'style' => 'width: 15%',
-                    ],
-                    'contentOptions' =>[
-                        'class' => 'req-table_req-type',
+                        'class' => 'requests-table_category',
                     ],
                 ],
                 [
                     'attribute' => 'created_at',
                     'label' => 'Дата заявки',
-                    'headerOptions' => [
-                        'style' => 'width: 10%',
-                    ],                    
                     'format' => ['date', 'php:d.m.Y'],
                     'contentOptions' =>[
-                        'class' => 'req-table_req-main',
+                        'class' => 'requests-table_main',
                     ],
                 ],
                 [
                     'attribute' => 'services_comment',
                     'label' => 'Текст заявки',
-                    'headerOptions' => [
-                        'style' => 'width: 20%',
-                    ],                    
                     'contentOptions' =>[
-                        'class' => 'req-table-description-request',
+                        'class' => 'requests-table_description ',
                     ],
                 ],
                 [
                     'attribute' => 'services_specialist_id',
                     'label' => 'Исполнитель',
                     'value' => 'services_specialist_id',
-                    'headerOptions' => [
-                        'style' => 'width: 10%',
-                    ],                    
                     'contentOptions' =>[
-                        'class' => 'req-table_req-main',
+                        'class' => 'requests-table_main',
                     ],
                 ],
                 [
@@ -93,11 +71,8 @@
                     'value' => function ($data) {
                         return StatusHelpers::requestStatus($data['status']);
                     },
-                    'headerOptions' => [
-                        'style' => 'width: 10%',
-                    ],                            
                     'contentOptions' =>[
-                        'class' => 'req-table_req-main',
+                        'class' => 'requests-table_main',
                     ],
                     'format' => 'raw',
                 ],
@@ -105,11 +80,8 @@
                     'attribute' => 'updated_at',
                     'label' => 'Дата закрытия',
                     'format' => ['date', 'php:d.m.Y'],
-                    'headerOptions' => [
-                        'style' => 'width: 10%',
-                    ],                    
                     'contentOptions' =>[
-                        'class' => 'req-table_req-main',
+                        'class' => 'requests-table_main',
                     ],
                 ],
             ],

@@ -41,7 +41,7 @@ class RequestsController extends AppClientsController
             'pagination' => [
                 'forcePageParam' => false,
                 'pageSizeParam' => false,
-                'pageSize' => 7,
+                'pageSize' => (Yii::$app->params['countRec']['client']) ? Yii::$app->params['countRec']['client'] : 15,
             ]
         ]);
 

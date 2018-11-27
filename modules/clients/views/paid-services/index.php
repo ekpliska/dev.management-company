@@ -9,7 +9,7 @@
 $this->title = 'Заказать услугу';
 ?>
 
-<div class="paid-requests-page row">
+<div class="paid-requests-page">
     <?= $this->render('data/service-lists', ['pay_services' => $pay_services]) ?>
 </div>
 

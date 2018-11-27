@@ -122,12 +122,10 @@ class PaidServices extends ActiveRecord
              *      тип платной заявки
              */
 
-            $account = PersonalAccount::findByAccountID($accoint_id);
-
             $date = new \DateTime();
             $int = $date->getTimestamp();
 
-            $order_numder = substr($account->account_number, 4) . '-' . substr($int, 5) . '-' . str_pad($this->services_name_services_id, 2, 0, STR_PAD_LEFT);
+            $order_numder = substr($int, 5) . '-' . str_pad($this->services_name_services_id, 2, 0, STR_PAD_LEFT);
 
             $this->services_number = $order_numder;
             $this->status = StatusRequest::STATUS_NEW;

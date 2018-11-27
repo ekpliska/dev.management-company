@@ -114,8 +114,6 @@ class Requests extends ActiveRecord
             return false;
         }
         
-        $account = PersonalAccount::findByAccountID($accoint_id);
-        
         /* Формирование идентификатора для заявки:
          *      последние 7 символов лицевого счета - 
          *      последние 6 символов даты в unix - 
@@ -125,7 +123,7 @@ class Requests extends ActiveRecord
         $date = new \DateTime();
         $int = $date->getTimestamp();
         
-        $request_numder = substr($account->account_number, 4) . '-' . substr($int, 5) . '-' . str_pad($this->requests_type_id, 2, 0, STR_PAD_LEFT);      
+        $request_numder = substr($int, 5) . '-' . str_pad($this->requests_type_id, 2, 0, STR_PAD_LEFT);      
         
         if ($this->validate()) {
             $this->requests_ident = $request_numder;
