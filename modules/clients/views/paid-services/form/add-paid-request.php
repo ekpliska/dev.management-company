@@ -13,7 +13,7 @@
         'id' => 'add-record-modal',
         'header' => 'Заявка на платную услугу',
         'closeButton' => [
-            'class' => 'close add-acc-modal-close-btn btn__paid_service_close',
+            'class' => 'close modal-close-btn btn__paid_service_close',
         ],
         'clientOptions' => [
             'backdrop' => 'static',

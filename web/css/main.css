@@ -608,6 +608,7 @@ button#send-request-to-sms:focus{
     padding: 0 !important;
     margin: 10px 5px;
 }
+.vote-card-preview:hover,
 .news-card-preview:hover {
     box-shadow: 0 4px 26px 0 rgba(51, 29, 82, 0.16);
 }
@@ -1377,6 +1378,80 @@ button#send-request-to-sms:focus{
     padding: 20px;
 }
 /* Конец Лицевой счет */
+
+/* Опрос */
+.vote-card-preview {
+    color: #a7a7a7;
+    height: 601px;
+    border-radius: 12px;
+    border: 1px solid #eee;
+    padding: 0 !important;
+    margin: 10px 5px;
+}
+.vote-card-img {
+    border-top-right-radius: 12px;
+    border-top-left-radius: 12px;
+    height: 218px;
+    width: 100%;    
+}
+.vote-card_title {
+    padding: 10px;
+    height: 72px;
+    border-bottom: 1px solid #ddd;
+}
+.vote-card_title a {
+    color: #2d18b4;
+    font-size: 18px;
+    font-weight: bold;
+}
+.vote-card_title i {
+    float: right;
+    padding: 23px;
+    background: #23dd6f;
+    margin: -11px -10px -10px 0;
+    font-size: 26px;
+    color: #fff;    
+}
+.vote-card_text {
+    color: #000;
+    padding: 10px;
+    height: 160px;
+    border-bottom: 1px solid #ddd;
+}
+.vote-card_count {
+    border-bottom: 1px solid #ddd;    
+}
+.vote-card_count, .vote-card_participants {
+    color: #000;
+    padding: 20px 10px;
+    height: 80px;
+    display: flex;
+    align-items: center     
+}
+.vote-bange-count {
+    background: #2d18b4;
+    padding: 5px 15px;
+    color: #fff;
+    border-radius: 25px;
+}
+.vote-card_date-end {
+    height: 36px; 
+    width: 236px;
+    opacity: 0.64;
+    border-radius: 18px;
+    background-color: #202020;
+    position: relative;
+    top: -68px;
+    z-index: 1;
+    margin-left: 75px;
+    margin-right: 75px;
+    color: #FFFFFF;
+    font-family: "Mplus 1p Medium";
+    font-size: 12px;
+    letter-spacing: 1.25px;
+    line-height: 28px;    
+}
+/* Конец Опрос */
 
 /* Уведомления на странице */
 .notice {

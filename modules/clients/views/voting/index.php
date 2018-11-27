@@ -8,9 +8,37 @@
 $this->title ="Голосование"
 ?>
 
+<div class="row vote-lists">
 <?php if (isset($voting_list) && count($voting_list) > 0) : ?>
     <?php foreach ($voting_list as $key => $voting) : ?>
 
+    <div class="col-md-4">
+        <div class="vote-card-preview">
+            <?= Html::img('@web' . $voting['voting_image'], ['class' => 'vote-card-img']) ?>
+            <span class="badge vote-card_date-end">
+                <?= FormatHelpers::numberOfDaysToFinishVote($voting['voting_date_start'], $voting['voting_date_end']) ?>
+            </span>
+            <div class="vote-card_title">
+                <a href="<?= Url::to(['voting/view-voting', 'voting_id' => $voting['voting_id']]) ?>">
+                    <?= FormatHelpers::shortTitleOrText($voting['voting_title'], 25) ?>
+                </a>
+                <i class="glyphicon glyphicon-ok"></i>
+                <!--<i class="glyphicon glyphicon-flag"></i>-->
+            </div>
+            <div class="vote-card_text">
+                <?= FormatHelpers::shortTitleOrText($voting['voting_text'], 250) ?>
+            </div>
+            <div class="vote-card_count">
+                <div class="col-md-2">Проголосовало</div>
+                <div class="col-md-10 text-right"><span class="vote-bange-count">#TODO</span></div>
+            </div>
+            <div class="vote-card_participants">
+                <div class="col-md-2">Участвуют</div>
+                <div class="col-md-10 text-right"><span class="vote-bange-count">#TODO</span></div>
+            </div>
+        </div>
+    </div>
+<?php /*    
 <div class="card requests-card-preview  box-shadow" data-toggle="modal" data-target=".bd-example-modal-lg">
     <div class="requests-card-preview-container">
         <?= Html::img('@web' . $voting['voting_image'], ['class' => 'card-img-top requests-card-img-top']) ?>
@@ -46,10 +74,10 @@ $this->title ="Голосование"
         </div>
     </div>
 </div>
-
+*/ ?>
     <?php endforeach; ?>
 <?php endif; ?>
-
+</div>
 <?php /*
 <div class="clients-default-index">
     

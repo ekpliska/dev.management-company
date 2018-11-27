@@ -303,7 +303,7 @@ class FormatHelpers {
         $_end = date_create($date_end);
         $interval = date_diff($date_now, $_end);
         
-        $image_clock = Html::img('/images/clients/clock.svg', ['class' => 'icons-clock']);
+        $image_clock = '<i class="glyphicon glyphicon-time"></i>';
 
         if (strtotime($date_end) > time() && $interval->d !== 0) {
             
