@@ -1434,6 +1434,9 @@ input[id="_search-input"]:-moz-placeholder {
 
 /* Лицевой счет */
 .paid-account-page {
+    margin-top: 200px;
+}
+.paid-account-page {
     border-radius: 12px;
     border: 1px solid #ddd;
 }
@@ -1832,8 +1835,15 @@ input[id="_search-input"]:-moz-placeholder {
     margin-right: 15px;
 }
 /* Конец Дополнительное навигационное меню, платные услуги */
-
-
-
-
-
+/* Дополнительное навигационное меню, лицевой счет */
+.navbar_personal-account {
+    margin: 0;
+    background: linear-gradient(190.67deg, #39284e 50%, rgba(132,131,131,0.1) 100%);
+    box-shadow: 0 2px 5px 2px rgba(0,0,0,0.26);
+}
+.sub-menu_account > li > a {
+    padding: 20px 70px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+/* Конец Дополнительное навигационное меню, лицевой счет */

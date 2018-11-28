@@ -50,6 +50,7 @@
     <?= SubBarGeneralPage::widget() ?>
     <?= StatusRequest::widget() ?>
     <?= SubBarPaidService::widget() ?>
+    <?= SubBarPersonalAccount::widget() ?>
 </nav>
 
 
