@@ -1436,8 +1436,6 @@ input[id="_search-input"]:-moz-placeholder {
 /* Лицевой счет */
 .paid-account-page {
     margin-top: 240px;
-}
-.paid-account-page {
     border-radius: 12px;
     border: 1px solid #ddd;
 }
@@ -1453,6 +1451,26 @@ input[id="_search-input"]:-moz-placeholder {
     padding: 20px;
 }
 /* Конец Лицевой счет */
+
+/* Квитанции */
+.receipts-page {
+    margin-top: 240px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+}
+.period_title {
+    font-size: 12px;
+    color: #2d1d83;
+    padding: 10px; 
+}
+.receipts_period {
+    padding: 0px;
+    border-right: 1px solid #ddd;
+}
+.receipts_body {
+
+}
+/* Конец Квитанции 
 
 /* Опрос */
 .vote-card-preview {

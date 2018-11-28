@@ -1,5 +1,6 @@
 <?php
-
+    
+    use kartik\date\DatePicker;
     use yii\helpers\Html;
     
 /* 
@@ -9,6 +10,19 @@
 $this->title = 'Квитанции ЖКУ'
 ?>
 
+<div class="receipts-page row">
+    <div class="col-md-5 receipts_period">
+        <p class="period_title"><i class="glyphicon glyphicon-calendar"></i> Период</p>
+        <ul class="list-group">
+            <li class="list-group-item">First item</li>
+            <li class="list-group-item">Second item</li>
+            <li class="list-group-item">Third item</li>
+        </ul>
+    </div>
+    <div class="col-md-7 receipts_body">
+        2
+    </div>
+</div>
 <!--<div class="big-conteiner">
     <div class="payment-ter">
         <p class="date-recept"><img src="assets/img/icons8.svg" width="11.8px" height="11.8px"> Период</p>

@@ -42,18 +42,6 @@ $this->title = 'Детали заявки';
             <?= $request_info['requests_ident'] ?>            
         </span>
         <?= StatusHelpers::requestStatusPage($request_info['status'], $request_info['updated_at']) ?>
-        
-        <?php /*
-        <span class="req-badge req-badge-new">
-            <span class="right-border">
-                <?= FormatHelpers::statusName($request_info['status']) ?>
-            </span>
-            <span>
-                <?= FormatHelpers::formatDate($request_info['updated_at'], true, 0, false) ?>
-            </span>
-        </span>
-         */ ?>
-        
         <p class="request_text">
             <?= $request_info['requests_comment'] ?>
         </p>
