@@ -11,11 +11,11 @@ class StatusRequest extends Widget {
     
     public $status_requests = [];
     public $css_classes = [
-        'btn req-btn req-btn-new', 
-        'btn req-btn req-btn-work', 
-        'btn req-btn req-btn-complete', 
-        'btn req-btn req-btn-rectification', 
-        'btn req-btn req-btn-close'
+        'req-bange req-bange-new', 
+        'req-bange req-bange-work', 
+        'req-bange req-bange-complete', 
+        'req-bange req-bange-rectification', 
+        'req-bange req-bange-close'
     ];
     
     public function init() {

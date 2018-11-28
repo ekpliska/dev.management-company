@@ -8,10 +8,10 @@
 
 ?>
 <?php if (Yii::$app->controller->id == 'requests' && Yii::$app->controller->action->id == 'index') : ?>
-    <nav class="navbar navbar-dark justify-content-between navbar-expand-sm p-0 carousel-item d-block pay-panel mx-auto req-nav">
-        <ul class="nav nav-pills mx-auto justify-content-start px-3">
+    <div class="container-fluid navbar_repusets text-center">
+        <ul class="nav nav-pills status-request">
             <li class="nav-item">
-                <?= Html::a('Все Заявки', ['/'], ['class' => 'btn req-btn req-btn-all status_request-switch', 'data-status' => '-1']) ?>
+                <?= Html::a('Все Заявки', ['requests/index'], ['class' => 'req-bange req-bange-default', 'data-status' => '-1']) ?>
             </li>
             <?php foreach ($status_requests as $key => $status) : ?>
                 <li class="nav-item">
@@ -19,5 +19,5 @@
                 </li>
             <?php endforeach; ?>
         </ul>
-    </nav>
+    </div>
 <?php endif; ?>

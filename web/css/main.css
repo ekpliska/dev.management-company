@@ -951,6 +951,9 @@ button#send-request-to-sms:focus{
     background-position: 0px 5px;
     width: 70px;
     height: 70px;
+    position: fixed;
+    right: 2%;
+    bottom: 10%;    
     cursor: pointer;
     outline: none;
     border: none;
@@ -1684,3 +1687,73 @@ button#send-request-to-sms:focus{
     padding: 20px;
 }
 /* Конец Дополнительное навигационное меню, главная страница */
+
+/* Дополнительное навигационное меню, заявки */
+.navbar_repusets {
+    background: #fff;
+    padding: 20px;
+}
+/* Статусы меню, заявки, главная страница */
+.status-request {
+    display: flex;
+    justify-content: center;    
+}
+.status-request > li > a {
+    height: 50px;
+    width: 192px;
+    border-radius: 25px;
+    font-size: 12px;
+    color: #000;
+    padding: 14px 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.status-request > li > a:hover,
+.status-request > li > a:focus {
+    text-decoration: none;
+    background-color: transparent;
+    border-radius: 25px;
+}
+.req-bange-default {
+    border: 2px solid #4e2ae2;
+    box-shadow: 0px 1px 4px 4px rgba(51,0,255,0.33);    
+}
+.req-bange-new {
+    border: 2px solid #598eff;
+    background-color: #598eff;    
+}
+.req-bange-new:hover,
+.req-bange-new:focus {
+    background-color: #598eff !important;    
+    box-shadow: 0px 1px 4px 4px rgba(0,101,255,0.28);
+}
+.req-bange-work {
+    border: 2px solid #7c7c7c;
+}
+.req-bange-work:hover,
+.req-bange-work:focus {
+    box-shadow: 0px 1px 4px 4px rgba(255,125,125,0.26);    
+}
+.req-bange-rectification {
+    border: 2px solid #e17dff;
+}
+.req-bange-rectification:hover,
+.req-bange-rectification:focus {
+    box-shadow: 0px 1px 4px 4px rgba(225,125,255,0.42);
+}
+.req-bange-complete {
+    border: 2px solid #1fd68d;
+}
+.req-bange-complete:hover,
+.req-bange-complete:focus {
+    box-shadow: 0px 1px 4px 4px rgba(56,231,161,0.54);
+}
+.req-bange-close {
+    border: 2px solid #FF7D7D;
+}
+.req-bange-close:hover,
+.req-bange-close:focus {
+    box-shadow: 0px 1px 4px 4px rgba(252,193,193,0.83);    
+}
+/* Конец Дополнительное навигационное меню, заявки */
