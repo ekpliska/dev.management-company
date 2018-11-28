@@ -11,7 +11,7 @@
     <?php $current_block = Yii::$app->controller->actionParams['block']; ?>
 
     <?php if (isset($general_navbar)) : ?>
-    <nav class="navbar navbar__sub-general">
+    <div class="container-fluid navbar-general-page text-center">
         <ul class="nav nav-pills navbar__pills">
             <?php foreach ($general_navbar as $key => $item) : ?>
                 <li class="nav-item <?= ($current_block == $key) ? 'active' : '' ?>">
@@ -22,7 +22,7 @@
                 </li>
             <?php endforeach; ?>
         </ul>
-    </nav>
+    </div>
     <?php endif; ?>
 
 <?php endif; ?>

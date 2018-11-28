@@ -11,7 +11,48 @@
  * Шапка, меню, хлебные крошки
  */
 ?>
-<header id="header">
+
+
+<nav class="navbar navbar-fixed-top navbar-menu">
+    <div class="container-fluid navbar-menu_header">
+        <div class="navbar-header">
+            <a class="menu-toggle" href="#menu">
+                <span></span><p class="menu-toggle_message">Меню</p>
+            </a>        
+        </div>
+        <a href="#" class="brand">
+            <?= Html::img('/images/navbar/group_46.svg', ['alt' => 'image'])  ?>
+        </a>
+        <ul class="nav navbar-nav navbar-right">
+            <?= UserInfo::widget(['_value_choosing' => $this->context->_value_choosing]) ?>
+            <?= Notifications::widget() ?>            
+        </ul>
+    </div>  
+    <div class="container-fluid navbar-menu__items text-center">
+        <ul class="menu-items">
+            <li>
+                <a href="<?= Url::to(['personal-account/index']) ?>">Лицевой счет</a>
+            </li>
+            <li>
+                <a href="<?= Url::to(['requests/index']) ?>">Завяки</a>
+            </li> 
+            <li>
+                <a href="<?= Url::to(['clients/index']) ?>">Новости</a>
+            </li>
+            <li>
+                <a href="<?= Url::to(['paid-services/index']) ?>">Услуги</a>
+            </li>
+            <li>
+                <a href="<?= Url::to(['voting/index']) ?>">Опрос</a>
+            </li>
+        </ul>        
+    </div>
+    <?= SubBarGeneralPage::widget() ?>
+    <?= StatusRequest::widget() ?>
+</nav>
+
+
+<?php /*
     <nav class="navbar">
         <div class="nav-menu-sd">
             <a href="#">
@@ -48,8 +89,8 @@
             
         </div>
     </nav>
-    <?= SubBarGeneralPage::widget() ?>
-</header>
+
+
 <?php /*
 <header class="fixed-top m-0 p-0 menu-bg" id="header">
     <div class="collapse" id="navbarHeader" style="">

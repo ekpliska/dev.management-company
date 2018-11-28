@@ -398,7 +398,7 @@ button#send-request-to-sms:focus{
 /* Конец Кнопка Отмена, модальное окно */
 
 /* Собственник, навигационное меню */
-#header {
+/*#header {
     background-image: url(Head.png);
     background-size: 100% 100%;
     background-repeat: round;
@@ -594,10 +594,13 @@ button#send-request-to-sms:focus{
 .menu-lets ul {
     position: absolute;
     display: inline-block;
-}
+}*/
 /* Конец Собственник, навбар */
 
 /* Собственник, главная страница, Новости */
+.news-lists {
+    margin-top: 200px;
+}
 .news-card-preview {    
     color: #a7a7a7;
     height: 451px;
@@ -650,12 +653,11 @@ button#send-request-to-sms:focus{
 }
 /* Конец Собственник, главная страница, Новости */
 
-/* Собственник, страница отделной новости */
+/* Собственник, страница отдельной новости */
 .new-conteiner {
     border: 1px solid #D4D4D4;
     border-radius: 15px;
-/*    padding: 0px 0 35px;
-    position: relative;*/
+    margin-top: 110px;
 }
 .preview-news {
     position: relative;
@@ -936,6 +938,9 @@ button#send-request-to-sms:focus{
 /* Кoнец Страница Профиль пользователя */
 
 /* Заявки */
+.requests-page {
+    margin-top: 200px;
+}
 .fixed-bottom {
     position: absolute;
     bottom: 20px;
@@ -1582,3 +1587,100 @@ button#send-request-to-sms:focus{
     background-color: #2D18B4;
 }
 /* Конец Дополнительное меню, услуги */
+
+
+/* Навигационное меню */
+.navbar-menu {
+    background-image: url(Head.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;    
+}
+.navbar-menu_header {
+    padding: 20px;
+    height: 120px;
+}
+.brand {
+    position: absolute;
+    left: 50%;
+    margin-left: -80px !important;
+    margin-top: 10px;
+    display: block;
+}
+.navbar-menu__items {
+    margin-top: -350px;
+}
+.menu-show {
+    margin-top: 0;
+}
+/* Открыть. закрыть меню */
+.menu-toggle {
+    position: fixed;
+    top: 30px;
+    margin-left: -50px;
+}
+.menu-toggle span::before,
+.menu-toggle span::after {
+    position: absolute;
+    top: 50%; 
+    margin-top: -1px;
+    left: 50%; 
+    margin-left: -10px;
+    width: 25px;
+    height: 2px;
+    background-color: #e0e0d1;
+    content: '';
+    display: block;
+    transition: 0.2s;
+}
+.menu-toggle span::before {
+    transform: translateY(-5px);
+}
+.menu-toggle span::after {
+    transform: translateY(5px);
+}
+.menu-toggle_active span {
+    background-color: transparent;
+}
+.menu-toggle_active span:before {
+    transform: rotate(-135deg);
+    width: 20px;
+    transform-origin: center;
+}
+.menu-toggle_active span:after {
+    transform: rotate(135deg);
+    width: 20px;
+    transform-origin: center;
+}
+.menu-toggle_message {
+    margin-left: 100px;
+    margin-top: 11px; 
+    color: white;
+    text-decoration: none;
+}
+.menu-toggle_message:hover {
+    text-decoration: none;
+}
+
+/* Выпадающее меню навигации */
+.menu-items {
+    list-style-type: none;
+    color: #fff;
+}
+.menu-items > li {
+    padding: 10px;    
+}
+.menu-items > li a {
+    color: #fff;
+    font-size: 18px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+/* Конец Выпадающее меню навигации */
+/* Конец Навигационное меню */
+
+
+/* Дополнительное навигационное меню, главная страница */
+.navbar-general-page {
+    padding: 20px;
+}
+/* Конец Дополнительное навигационное меню, главная страница */
