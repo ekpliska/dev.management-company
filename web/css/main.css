@@ -1389,6 +1389,49 @@ button#send-request-to-sms:focus{
 }
 /* Конец Платные услуги */
 
+/* История платных услуг */
+.paid-requests-history {
+    margin-top: 200px;
+}
+form#search-form .form-group {
+    margin: 0;
+}
+form#search-form {
+    display: inline-block;    
+}
+input[id="_search-input"] {
+    background: url(/images/clients/search.svg) no-repeat 20px 10px;
+    border: 1px solid #ccc;
+    border-radius: 10em;
+    box-sizing: content-box;
+    transition: all 0.5s ease 0s;
+    width: 55px;
+    background-size: 5%;
+    padding: 0 54px;
+    width: 250px;
+    color: #fffd;
+    font-size: 14px;
+}
+input[id="_search-input"]:focus {
+    background-color: transparent;
+    border-color: #8b709d;
+    box-shadow: 0 0 5px #8b709d;
+    color: #fff;
+}
+input[id="_search-input"]::-webkit-input-placeholder { 
+  color: #fff;
+}
+input[id="_search-input"]::-moz-placeholder {
+  color: #fff;
+}
+input[id="_search-input"]:-ms-input-placeholder {
+  color: #fff;
+}
+input[id="_search-input"]:-moz-placeholder {
+  color: #fff;
+}
+/* Конец История платных услуг */
+
 /* Лицевой счет */
 .paid-account-page {
     border-radius: 12px;
