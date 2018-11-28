@@ -23,7 +23,7 @@
         <a href="#" class="brand">
             <?= Html::img('/images/navbar/group_46.svg', ['alt' => 'image'])  ?>
         </a>
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-right user-notification">
             <?= UserInfo::widget(['_value_choosing' => $this->context->_value_choosing]) ?>
             <?= Notifications::widget() ?>            
         </ul>

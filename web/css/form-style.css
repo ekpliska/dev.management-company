@@ -662,6 +662,7 @@ select[name="category_list"] option {
 .custom-select-services {
     position: absolute;
     display: inline-block;
+    top: -15px;
 }
 .custom-select-trigger-services {
     text-align: left;

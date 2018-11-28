@@ -599,7 +599,7 @@ button#send-request-to-sms:focus{
 
 /* Собственник, главная страница, Новости */
 .news-lists {
-    margin-top: 200px;
+    margin-top: 240px;
 }
 .news-card-preview {    
     color: #a7a7a7;
@@ -845,9 +845,10 @@ button#send-request-to-sms:focus{
 
 /* Страница Профиль пользователя */
 .profile-page {
-    border: 1px solid #eee;
+    border: 1px solid #ddd;
     border-radius: 12px;
     margin-bottom: 30px;
+    margin-top: 140px;
 }
 .profile-bg {
     background-image: url(profile-bg.png);
@@ -939,7 +940,7 @@ button#send-request-to-sms:focus{
 
 /* Заявки */
 .requests-page {
-    margin-top: 200px;
+    margin-top: 230px;
 }
 .fixed-bottom {
     position: absolute;
@@ -1046,7 +1047,7 @@ button#send-request-to-sms:focus{
 
 /* Просмотр отдельной заявки */
 .requests-view {
-    margin-top: 110px;
+    margin-top: 140px;
     border: 1px solid #ddd;
     border-radius: 12px;
 }
@@ -1332,7 +1333,7 @@ button#send-request-to-sms:focus{
 
 /* Платные услуги */
 .paid-requests-page {
-    margin-top: 200px;
+    margin-top: 230px;
 }
 .navbar-nav a.btn-history {
     height: 56px;
@@ -1434,7 +1435,7 @@ input[id="_search-input"]:-moz-placeholder {
 
 /* Лицевой счет */
 .paid-account-page {
-    margin-top: 200px;
+    margin-top: 240px;
 }
 .paid-account-page {
     border-radius: 12px;
@@ -1667,14 +1668,14 @@ input[id="_search-input"]:-moz-placeholder {
     background-repeat: no-repeat;    
 }
 .navbar-menu_header {
-    padding: 20px;
+    padding: 50px;
     height: 120px;
 }
 .brand {
     position: absolute;
     left: 50%;
     margin-left: -80px !important;
-    margin-top: 10px;
+    margin-top: -10px;
     display: block;
 }
 .navbar-menu__items {
@@ -1683,10 +1684,15 @@ input[id="_search-input"]:-moz-placeholder {
 .menu-show {
     margin-top: 0;
 }
-/* Открыть. закрыть меню */
+.user-notification {
+    position: relative;
+    top: -20px;
+}
+
+/* Открыть, закрыть меню */
 .menu-toggle {
     position: fixed;
-    top: 30px;
+    top: 40px;
     margin-left: -50px;
 }
 .menu-toggle span::before,
@@ -1759,7 +1765,7 @@ input[id="_search-input"]:-moz-placeholder {
 /* Дополнительное навигационное меню, заявки */
 .navbar_repusets {
     background: #fff;
-    padding: 20px;
+    padding: 10px;
 }
 /* Статусы меню, заявки, главная страница */
 .status-request {
@@ -1829,7 +1835,7 @@ input[id="_search-input"]:-moz-placeholder {
 /* Дополнительное навигационное меню, платные услуги */
 .navbar_paid-request {
     background: #2d18b4;
-    padding: 20px;    
+    padding: 10px;    
 }
 .navbar_paid-request > ul {
     margin-right: 15px;
@@ -1837,13 +1843,27 @@ input[id="_search-input"]:-moz-placeholder {
 /* Конец Дополнительное навигационное меню, платные услуги */
 /* Дополнительное навигационное меню, лицевой счет */
 .navbar_personal-account {
-    margin: 0;
-    background: linear-gradient(190.67deg, #39284e 50%, rgba(132,131,131,0.1) 100%);
+    background: linear-gradient(190.67deg, rgba(0, 0, 0, .5) 50%, rgba(132, 131, 131, 0.65) 100%);
     box-shadow: 0 2px 5px 2px rgba(0,0,0,0.26);
 }
+.sub-menu_account {
+    margin-left: -15px;
+    margin-right: -15px;
+}
+.sub-menu_account > li + li {
+    margin-left: 0px;
+}
 .sub-menu_account > li > a {
-    padding: 20px 70px;
+    padding: 30px 40px;
+    color: #fff;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+}
+.sub-menu_account > li.active > a,
+.sub-menu_account li > a:hover,
+.sub-menu_account li > a:focus {
+    color: #fff;
+    background-color: rgba(247, 247, 247, 0.22);
+    border-radius: 0px;
 }
 /* Конец Дополнительное навигационное меню, лицевой счет */

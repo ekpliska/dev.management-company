@@ -116,12 +116,14 @@ $('.menu-toggle').on('click', function(e) {
     $('.navbar-general-page').show();
     $('.navbar_repusets').show();
     $('.navbar_paid-request').show();
+    $('.sub-menu_account').show();
 });
 $(document).on('click', '.menu-toggle_active', function(){
     $('.menu-toggle_message').text('Закрыть');
     $('.navbar-general-page').hide();    
     $('.navbar_repusets').hide();    
     $('.navbar_paid-request').hide();    
+    $('.sub-menu_account').hide();    
 });
 
   
