@@ -374,6 +374,7 @@ $(document).ready(function() {
      * Фильтр заявок по категориям
      */
     function filterServicesCategory(categoryId) {
+
         $.post('filter-category-services?category=' + categoryId, function(response) {
             $('#services-list').html(response.data);                
         });         
@@ -570,6 +571,7 @@ $(document).ready(function() {
     $(".custom-option-services").on("click", function() {
         var valueSelect = $(this).data("value");
         var textSelect = $(this).text();
+        alert(valueSelect);
         $(this).parents(".custom-select-wrapper-services").find("select").val(valueSelect);
         $(this).parents(".custom-options-services").find(".custom-option-services").removeClass("selection-services");
         $(this).addClass("selection-services");

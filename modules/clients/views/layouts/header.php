@@ -49,6 +49,7 @@
     </div>
     <?= SubBarGeneralPage::widget() ?>
     <?= StatusRequest::widget() ?>
+    <?= SubBarPaidService::widget() ?>
 </nav>
 
 

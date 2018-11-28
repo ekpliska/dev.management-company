@@ -660,10 +660,11 @@ select[name="category_list"] option {
     display: none;
 }
 .custom-select-services {
-    position: relative;
+    position: absolute;
     display: inline-block;
 }
 .custom-select-trigger-services {
+    text-align: left;
     position: relative;
     display: block;
     width: 380px;
@@ -672,7 +673,6 @@ select[name="category_list"] option {
     color: #ffffff;
     line-height: 35px;
     background: transparent;
-    /* border-radius: 25px; */
     cursor: pointer;
     border-bottom: 1px solid #ffffff;
 }
@@ -715,6 +715,7 @@ select[name="category_list"] option {
     z-index: 999;
 }
 .custom-select-services.opened .custom-options-services {
+    text-align: left;
     position: relative;
     opacity: 1;
     visibility: visible;

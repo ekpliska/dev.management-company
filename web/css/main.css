@@ -1046,6 +1046,7 @@ button#send-request-to-sms:focus{
 
 /* Просмотр отдельной заявки */
 .requests-view {
+    margin-top: 110px;
     border: 1px solid #ddd;
     border-radius: 12px;
 }
@@ -1330,6 +1331,27 @@ button#send-request-to-sms:focus{
 /* Конец Статусы заявок, отдельная страница */
 
 /* Платные услуги */
+.paid-requests-page {
+    margin-top: 200px;
+}
+.navbar-nav a.btn-history {
+    height: 56px;
+    width: 220px;
+    border-radius: 12px;
+    border: 1px solid #fff;
+    background-color: #2d18b4;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 0.9px;
+    text-transform: uppercase;
+}
+.navbar-nav a.btn-history:hover {
+    background: #fff;
+    border: none;
+    color: #2d18b4;
+    border-radius: 12px;
+}
 .service-card {
     height: 490px;
     border-radius: 12px;
@@ -1757,3 +1779,18 @@ button#send-request-to-sms:focus{
     box-shadow: 0px 1px 4px 4px rgba(252,193,193,0.83);    
 }
 /* Конец Дополнительное навигационное меню, заявки */
+
+/* Дополнительное навигационное меню, платные услуги */
+.navbar_paid-request {
+    background: #2d18b4;
+    padding: 20px;    
+}
+.navbar_paid-request > ul {
+    margin-right: 15px;
+}
+/* Конец Дополнительное навигационное меню, платные услуги */
+
+
+
+
+

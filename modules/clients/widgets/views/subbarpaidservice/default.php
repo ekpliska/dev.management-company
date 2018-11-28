@@ -11,8 +11,25 @@
 ?>
 
 <?php if (Yii::$app->controller->id == 'paid-services' && Yii::$app->controller->action->id == 'index') : ?>
-    <nav class="navbar services-nav navbar-dark justify-content-between navbar-expand-sm p-0 carousel-item d-block">
-        <ul class="nav  mx-auto text-center justify-content-center">
+    <div class="container-fluid navbar_paid-request text-center">
+        <ul class="nav navbar-nav navbar-left">
+            <li>
+                <div class="category-select">
+                    <?= Html::dropDownList('category_list', 1, $category_list, [
+                            'placeholder' => reset($category_list),
+                            'id' => 'sources-services',
+                            'class' => 'custom-select-services sources-services']) 
+                    ?>
+                </div>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <?= Html::a('История', ['paid-services/order-services'], ['class' => 'btn-history']) ?>
+            </li>
+        </ul>
+        <?php /*
+        <ul class="nav text-center">
             <li class="nav-item">
                 <div class="col-12 text-left">
                     <div class="category-select mx-auto">
@@ -32,8 +49,8 @@
             <li class="nav-item">
 
             </li>
-        </ul>
-    </nav>
+        </ul> */ ?>
+    </div>
 
 <?php elseif(Yii::$app->controller->id == 'paid-services' && Yii::$app->controller->action->id == 'order-services') : ?>
     <nav class="navbar services-nav navbar-dark justify-content-between navbar-expand-sm p-0 carousel-item d-block">

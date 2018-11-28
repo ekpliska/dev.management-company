@@ -237,6 +237,8 @@ $(function($) {
             }
         })
 };
+
+
 })(jQuery);
 
 $(function() {
