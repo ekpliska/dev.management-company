@@ -1686,6 +1686,15 @@ input[name="date_end-period-pay"]:focus {
 .counters-message p {
     color: #2d18b4;
 }
+.block-edit-reading {
+    background-color: #fce7df; 
+}
+.block-edit-reading span {
+    color: #ef693a;
+    font-weight: bold;
+    font-size: 12px;
+    letter-spacing: 0.23px;
+}
 /* Конец Приборы учета */
 
 /* Опрос */
