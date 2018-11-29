@@ -1571,7 +1571,8 @@ input[name="date_end-period-pay"]:focus {
     outline: 0;
     box-shadow: none;
 }
-.btn-show-payment {
+.btn-show-payment,
+.btn-edit-reading {
     height: 48px;
     width: 220px;
     border-radius: 12px;
@@ -1583,7 +1584,8 @@ input[name="date_end-period-pay"]:focus {
     text-transform: uppercase;
     font-weight: bold;
 }
-.btn-show-payment:hover {
+.btn-show-payment:hover,
+.btn-edit-reading:hover {
     border-radius: 12px;
     border: 1px solid #2d18b4;
     background-color: #2d18b4;
@@ -1614,6 +1616,77 @@ input[name="date_end-period-pay"]:focus {
     letter-spacing: 0.07em;
 }
 /* Кoнец Платежи */
+
+/* Приборы учета */
+.counters-page {
+    margin-top: 240px;
+}
+.btn-save-reading {
+    height: 48px;
+    width: 220px;
+    border-radius: 12px;
+    border: 1px solid #2d18b4;
+    background-color: #2d18b4;
+    color: #fff;
+    font-size: 12px;
+    letter-spacing: 0.9px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.btn-save-reading:hover {
+    border-radius: 12px;
+    border: 1px solid #2d18b4;
+    background-color: #2d18b4;
+    color: #fff;
+    box-shadow: 0 2px 5px 2px rgba(0,0,0,0.26);    
+}
+.counters-page table {
+    margin-top: 100px;
+}
+.counter-name {
+    font-size: 12px;
+}
+.counter-number {
+    font-size: 12px;
+    font-weight: bold;
+}
+.create-send-request {
+    background-color: #fff;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    padding: 10px 25px;
+    text-transform: uppercase;
+    color: #2d18b4;
+    font-size: 12px;
+    font-weight: bold;
+}
+.create-send-request:hover {
+    border: 1px solid #2d18b4;
+    color: #2d18b4;
+}
+.reading-input {
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    padding: 10px 10px;
+    color: #2d18b4;
+    font-size: 12px;
+    font-weight: bold;    
+}
+.reading-input:focus {
+    border: 1px solid #2d18b4;
+    color: #2d18b4;
+    outline: none;    
+}
+.counters-message p.title {
+    padding: 10px 0px;
+    color: #ef693a;
+    font-size: 24px;
+    letter-spacing: 1.05px;
+}
+.counters-message p {
+    color: #2d18b4;
+}
+/* Конец Приборы учета */
 
 /* Опрос */
 .vote-card-preview {
