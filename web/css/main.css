@@ -1344,8 +1344,7 @@ button#send-request-to-sms:focus{
     border: 1px solid #fff;
     background-color: #2d18b4;
     color: #fff;
-    font-size: 12px;
-    font-weight: bold;
+    font-size: 14px;
     letter-spacing: 0.9px;
     text-transform: uppercase;
 }
@@ -1540,6 +1539,81 @@ a.receipte-btn-dowload {
     background-color: rgba(247, 247, 247, 0.22);
 }
 /* Конец Квитанции 
+
+/* Платежи */
+.payment-page {
+    margin-top: 240px;
+}
+.payment-page_period {
+    display: flex;
+}
+.date-block {
+    display: flex;
+    margin: 0px -15px;
+}
+.payment_title {
+    font-size: 12px;
+    color: #2d1d83;
+    padding:  0px 0px 0px 10px;
+}
+.date-block span {
+    padding: 10px;
+}
+input[name="date_start-period-pay"],
+input[name="date_end-period-pay"] {
+    box-shadow: none;
+    border: none;
+    border-bottom: 1px solid #ddd;    
+}
+input[name="date_start-period-pay"]:focus,
+input[name="date_end-period-pay"]:focus {
+    border-color: #8b709d;
+    outline: 0;
+    box-shadow: none;
+}
+.btn-show-payment {
+    height: 48px;
+    width: 220px;
+    border-radius: 12px;
+    border: 1px solid #2d18b4;
+    background-color: #ffffff;
+    color: #3436ae;
+    font-size: 12px;
+    letter-spacing: 0.9px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.btn-show-payment:hover {
+    border-radius: 12px;
+    border: 1px solid #2d18b4;
+    background-color: #2d18b4;
+    color: #fff;
+    box-shadow: 0 2px 5px 2px rgba(0,0,0,0.26);    
+}
+.payment-page table {
+    margin-top: 100px;
+}
+.payment_btn-pay {
+    background: #2d18b4;
+    padding: 15px 45px;
+    border-radius: 12px;
+    font-size: 10px;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 0.07em;
+}
+.payment_btn-pay:hover {
+    background-color: #2D18B4;
+    box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
+    color: #FFFFFF;
+}
+.paument-ok {
+    color: #23dd6f;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+}
+/* Кoнец Платежи */
 
 /* Опрос */
 .vote-card-preview {
