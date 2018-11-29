@@ -13,7 +13,7 @@
     <a class="nav-link text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <?= Html::img('/images/navbar/user.svg') ?>
     </a>
-    <ul class="dropdown-menu">
+    <ul class="dropdown-menu in_navbar">
         <li class="user-info-box">
             <div class="row">
                 <div class="col-lg-5 col-sm-5 col-md-5 text-center">

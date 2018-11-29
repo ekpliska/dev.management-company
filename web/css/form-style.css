@@ -786,3 +786,36 @@ input[type="radio"], input[type="checkbox"] {
     display: none;
 }
 /* Конец CheckBox, email уведомления */
+
+/* Календарь */
+input[name="date_start-period"],
+input[name="date_end-period"] {
+    width: 35%;
+    box-shadow: none;
+    border: none;
+    border-bottom: 1px solid #ddd;    
+}
+input[name="date_start-period"]:focus,
+input[name="date_end-period"]:focus {
+    border-color: #8b709d;
+    outline: 0;
+    box-shadow: none;
+}
+.datepicker-dropdown {
+    color: #fff;
+    font-size: 12px;
+    z-index: 9999 !important;
+}
+.datepicker table tr td.day:hover, .datepicker table tr td.focused {
+    background-color: rgba(255, 255, 255, .15);
+    border-color: rgba(255, 255, 255, .15);        
+}
+.datepicker table tr td.active.active {
+    color: #2e1e82;
+    background-color: #fff;
+    border-color: #fff;    
+}
+.datepicker table tr th {
+    font-weight: 100;
+}
+/* Конец Календарь */

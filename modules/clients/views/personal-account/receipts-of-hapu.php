@@ -13,14 +13,55 @@ $this->title = 'Квитанции ЖКУ'
 <div class="receipts-page row">
     <div class="col-md-5 receipts_period">
         <p class="period_title"><i class="glyphicon glyphicon-calendar"></i> Период</p>
-        <ul class="list-group">
-            <li class="list-group-item">First item</li>
-            <li class="list-group-item">Second item</li>
-            <li class="list-group-item">Third item</li>
+        <div class="receipts_period-calendar">
+            <span>С</span>
+        <?= DatePicker::widget([
+                'name' => 'date_start-period',
+                'type' => DatePicker::TYPE_INPUT,
+                'value' => date('d-M-Y'),
+                'pluginOptions' => [
+                    'autoclose'=>true,
+                    'format' => 'dd-M-yyyy'
+                ]
+            ]);        
+        ?>
+            <span>ПО</span>
+        <?= DatePicker::widget([
+                'name' => 'date_end-period',
+                'type' => DatePicker::TYPE_INPUT,
+                'value' => date('d-M-Y'),
+                'pluginOptions' => [
+                    'autoclose'=>true,
+                    'format' => 'dd-M-yyyy'
+                ]
+            ]);        
+        ?>
+        </div>
+        <ul class="list-group recipte-of-lists">
+            <li class="list-group-item">
+                <p class="recipte-month">Месяц</p>
+                <p class="recipte-number">Квитанция #TODO</p>
+                <?= Html::a('К оплате: #TODO &#8381;', ['/'], ['class' => 'recipte-btn-pay']) ?>
+                <?= Html::a('<i class="glyphicon glyphicon-download-alt"></i>', ['/'], ['class' => 'recipte-btn-dowload']) ?>
+            </li>
+            <li class="list-group-item">
+                <p class="recipte-month">Месяц</p>
+                <p class="recipte-number">Квитанция #TODO</p>
+                <?= Html::a('К оплате: #TODO &#8381;', ['/'], ['class' => 'recipte-btn-pay']) ?>
+                <?= Html::a('<i class="glyphicon glyphicon-download-alt"></i>', ['/'], ['class' => 'recipte-btn-dowload']) ?>
+            </li>
         </ul>
     </div>
     <div class="col-md-7 receipts_body">
-        2
+        #TODO
+    </div>
+    
+    <div class="operations-block">
+        <ul class="nav nav-pills operations-block_items">
+            <li><a href="#" class="left-block"><i class="glyphicon glyphicon-print"></i> Распечатать</a></li>
+            <li><a href="#" class="center-block"><i class="glyphicon glyphicon-ruble"></i> Оплатить</a></li>
+            <li><a href="#" class="right-block"><i class="glyphicon glyphicon-send"></i> Отправить</a></li>
+        </ul>
     </div>
 </div>
 <!--<div class="big-conteiner">

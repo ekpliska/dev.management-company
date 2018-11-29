@@ -11,7 +11,7 @@
     <a class="nav-link text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <?= Html::img('/images/navbar/bell.svg') ?>
     </a>
-    <ul class="dropdown-menu">
+    <ul class="dropdown-menu in_navbar">
         <li class="user-info-box">
             #TODO
         </li>

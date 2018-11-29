@@ -738,8 +738,10 @@ button#send-request-to-sms:focus{
 /* Конец Подменю, главная страница категории новостей */
 
 /* Выпадающее меню, профиль пользователя */
+.in_navbar {
+    width: 479px;    
+}
 .dropdown-menu{
-    width: 479px;
     border-top-left-radius: 12px !important;
     border-top-right-radius: 12px !important;
     border-bottom-left-radius: 12px;
@@ -1392,7 +1394,7 @@ button#send-request-to-sms:focus{
 
 /* История платных услуг */
 .paid-requests-history {
-    margin-top: 200px;
+    margin-top: 240px;
 }
 form#search-form .form-group {
     margin: 0;
@@ -1461,14 +1463,81 @@ input[id="_search-input"]:-moz-placeholder {
 .period_title {
     font-size: 12px;
     color: #2d1d83;
-    padding: 10px; 
+    padding: 20px 20px 0 20px;
 }
 .receipts_period {
     padding: 0px;
     border-right: 1px solid #ddd;
 }
+.receipts_period-calendar {
+    display: flex;
+    padding: 0 10px 10px 10px;
+}
+.receipts_period-calendar span {
+    padding: 10px;
+}
+.recipte-of-lists > li {
+    padding: 20px 20px;
+    border-left: none;
+    border-right: none;
+}
+.recipte-of-lists > li:hover {
+    box-shadow: inset 0 0 1em #d9edf7;
+}
+.recipte-month {
+    font-size: 12px;
+    color: #2d1d83;
+}
+.recipte-number {
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+a.recipte-btn-pay {
+    padding: 5px 20px;
+    background: #2d18b4;
+    color: #fff;
+    border-radius: 25px;
+}
+a.recipte-btn-dowload {
+    color: #ccc;
+    float: right;
+    position: absolute;
+    right: 20px;
+    top: 43%;
+}
 .receipts_body {
-
+    padding: 20px 10px;
+}
+.operations-block {
+    right: 10%;
+    bottom: 10%;
+    background: #2d18b4;
+    position: fixed;
+    border-radius: 12px;
+}
+.operations-block_items {
+    border-radius: 12px;
+}
+.operations-block_items > li > a {
+    padding: 15px 20px;
+    width: 160px;
+    color: #fff;    
+}
+.operations-block_items > li > a > i {
+    padding: 0px 7px;
+}
+.operations-block_items > li > a.left-block:hover {
+    border-radius: 12px 0px 0px 12px;
+    background-color: rgba(247, 247, 247, 0.22);
+}
+.operations-block_items > li > a.center-block:hover {
+    border-radius: 0px;
+    background-color: rgba(247, 247, 247, 0.22);
+}
+.operations-block_items > li > a.right-block:hover {
+    border-radius: 0px 12px 12px 0px;
+    background-color: rgba(247, 247, 247, 0.22);
 }
 /* Конец Квитанции 
 
@@ -1879,7 +1948,8 @@ input[id="_search-input"]:-moz-placeholder {
 }
 .sub-menu_account > li.active > a,
 .sub-menu_account li > a:hover,
-.sub-menu_account li > a:focus {
+.sub-menu_account li > a:focus,
+.sub-menu_account > li.active > a:hover {
     color: #fff;
     background-color: rgba(247, 247, 247, 0.22);
     border-radius: 0px;
