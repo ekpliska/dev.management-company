@@ -1698,9 +1698,12 @@ input[name="date_end-period-pay"]:focus {
 /* Конец Приборы учета */
 
 /* Опрос */
+.vote-lists {
+    margin-top: 140px;
+}
 .vote-card-preview {
     color: #a7a7a7;
-    height: 601px;
+    height: 600px;
     border-radius: 12px;
     border: 1px solid #eee;
     padding: 0 !important;
@@ -1725,10 +1728,15 @@ input[name="date_end-period-pay"]:focus {
 .vote-card_title i {
     float: right;
     padding: 23px;
-    background: #23dd6f;
     margin: -11px -10px -10px 0;
     font-size: 26px;
     color: #fff;    
+}
+.vote-card_title i.glyphicon-ok {
+    background: #23dd6f;    
+}
+.vote-card_title i.glyphicon-flag {
+    background: #2d18b4;
 }
 .vote-card_text {
     color: #000;
@@ -1753,21 +1761,22 @@ input[name="date_end-period-pay"]:focus {
     border-radius: 25px;
 }
 .vote-card_date-end {
-    height: 36px; 
-    width: 236px;
+    width: 210px;
+    padding: 10px 10px;
     opacity: 0.64;
     border-radius: 18px;
     background-color: #202020;
-    position: relative;
-    top: -68px;
-    z-index: 1;
-    margin-left: 75px;
-    margin-right: 75px;
-    color: #FFFFFF;
-    font-family: "Mplus 1p Medium";
+    position: absolute;
+    top: 25%;
+    left: 20%;
+    text-align: center;
+    color: #fff;
     font-size: 12px;
     letter-spacing: 1.25px;
-    line-height: 28px;    
+    text-transform: uppercase;
+}
+.vote-card_date-end i {
+    padding-right: 5px;
 }
 /* Конец Опрос */
 
