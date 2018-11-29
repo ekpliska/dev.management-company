@@ -37,18 +37,18 @@ $this->title = 'Квитанции ЖКУ'
             ]);        
         ?>
         </div>
-        <ul class="list-group recipte-of-lists">
+        <ul class="list-group receipte-of-lists">
             <li class="list-group-item">
-                <p class="recipte-month">Месяц</p>
-                <p class="recipte-number">Квитанция #TODO</p>
-                <?= Html::a('К оплате: #TODO &#8381;', ['/'], ['class' => 'recipte-btn-pay']) ?>
-                <?= Html::a('<i class="glyphicon glyphicon-download-alt"></i>', ['/'], ['class' => 'recipte-btn-dowload']) ?>
+                <p class="receipte-month">Месяц</p>
+                <p class="receipte-number">Квитанция #TODO</p>
+                <?= Html::a('К оплате: #TODO &#8381;', ['/'], ['class' => 'receipte-btn-pay']) ?>
+                <?= Html::a('<i class="glyphicon glyphicon-download-alt"></i>', ['/'], ['class' => 'receipte-btn-dowload']) ?>
             </li>
             <li class="list-group-item">
-                <p class="recipte-month">Месяц</p>
-                <p class="recipte-number">Квитанция #TODO</p>
+                <p class="receipte-month">Месяц</p>
+                <p class="receipte-number">Квитанция #TODO</p>
                 <?= Html::a('К оплате: #TODO &#8381;', ['/'], ['class' => 'recipte-btn-pay']) ?>
-                <?= Html::a('<i class="glyphicon glyphicon-download-alt"></i>', ['/'], ['class' => 'recipte-btn-dowload']) ?>
+                <?= Html::a('<i class="glyphicon glyphicon-download-alt"></i>', ['/'], ['class' => 'receipte-btn-dowload']) ?>
             </li>
         </ul>
     </div>
