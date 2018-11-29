@@ -397,206 +397,6 @@ button#send-request-to-sms:focus{
 }
 /* Конец Кнопка Отмена, модальное окно */
 
-/* Собственник, навигационное меню */
-/*#header {
-    background-image: url(Head.png);
-    background-size: 100% 100%;
-    background-repeat: round;
-}
-.navbar {
-    height: 139px;    
-}
-.menu-btn-sd {
-    position: fixed;
-    top: 40px;
-}
-.menu-btn-sd span::before,
-.menu-btn-sd span::after {
-    position: absolute;
-    top: 50%; 
-    margin-top: -1px;
-    left: 50%; 
-    margin-left: -10px;
-    width: 25px;
-    height: 2px;
-    background-color: #e0e0d1;
-}
-.menu-btn-sd span::before,
-.menu-btn-sd span::after {
-    content: '';
-    display: block;
-    transition: 0.2s;
-}
-.menu-btn-sd span::before {
-    transform: translateY(-5px);
-}
-.menu-btn-sd span::after {
-    transform: translateY(5px);
-}
-.menu-btn-sd_active span {
-    background-color: transparent;
-}
-.menu-btn-sd_active span:before {
-    transform: rotate(-135deg);
-    width: 20px;
-    transform-origin: center;
-}
-.menu-btn-sd_active span:after {
-    transform: rotate(135deg);
-    width: 20px;
-    transform-origin: center;
-}
-.nav-menu-sd {
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 139px;
-    position: fixed; 
-    z-index: 1;
-}
-.logo-sd {
-    position: fixed;
-    width: 170px;
-    height: 50px;
-    background-color: #ffff33;
-    left: 45%;
-    top: 45px;
-    z-index: 20;
-    display: block;
-    background-color:transparent;
-}
-.menu-sd {
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    position: fixed;
-    width: 100vw;
-    min-height: 322px;
-    z-index: 11;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    top: -100vw;
-    transition: all 0.2s;
-}
-.menu-sd_active {
-    top: 0px;
-    background-image: url(Head.png);
-    z-index:10;
-    height: 370px;
-    position: fixed;
-}
-.user-sd {
-    position: absolute;
-    right: 100px;
-    top: 40px;
- } 
-.user-bt-sd {
-    margin-right: 27px;
-    z-index: 11;  
-}
-.podmenu-sd {
-    margin-left: 4px;
-}
-.menu-title-sd {
-    display: inline-block;
-    margin-left:55px;
-    margin-top:17px;
-    color: #FFFFFF;
-    font-size:11px;
-    z-index: 1;
-}
-.treck-menu {
-    margin-left: 100px;
-    margin-top: 11px; 
-    color: white;
-    text-decoration: none;
-}
-.treck-menu:hover {
-  text-decoration: none;
-}
-.nav-trio {
-    position: absolute;
-    width: 800px;
-    background-color: transparent;
-    display: none;
-}
-.menu-lets {
-    width: 100vw;
-    margin-top:119px !important;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    text-align: center;
-}
-.menu-chet  {
-    color: #FFFFFF; 
-    font-family: "Mplus 1p Medium"; 
-    font-size: 16px;  
-    letter-spacing: 0.39px; 
-    line-height: 23px;  
-    text-align: center;
-    margin-bottom: -1px;
-    padding: 8px 14px;
-    text-decoration: none;
-    font-size: 16px;
-    display: block;
-    text-transform: uppercase;
-    opacity: 0.3;
-    transition: 0.2s;
- }
- .menu-chet:hover {
-    font-size: 20px;
-    border-top: 0.2px solid #FFFFFF;
-    border-bottom: 0.2px solid #FFFFFF;
-    color: #FFFFFF;
-    opacity: 0.8;
-    text-decoration: none;
-    transition: all 0.2s;
-}
- .podmenu-voge {
-    color: #FFFFFF; 
-    font-size: 14px;  
-    letter-spacing: 0.34px; 
-    line-height: 20px;
-    padding: 5px 8px;
-    opacity: 0.5;
- }
- .podmenu-voge:hover {
-    text-decoration: none;
-    color: #FFFFFF; 
-    border: 1px solid #FFFFFF;
-    border-radius: 16px; 
-    opacity: 0.9;
-    transition: all 0.2s;
-}
-.main-menu > li {
-    position: relative;
-}
-.menu-lets .podmenu-free {
-    display:none;
-    height: 42.5px;
-    right: 0;
-    top: 155px;
-    margin: 0;
-    padding: 0;
-    margin-right: 16%;
-    list-style: none;
-    background-color: transparent;
-    position: absolute;
-} 
-.menu-lets> li:hover .podmenu-free {
-    display: flex;
-}
-.podmenu-free li {
-    height: 42px; 
-    margin-left: 30px; 
-}
-.menu-lets ul {
-    position: absolute;
-    display: inline-block;
-}*/
-/* Конец Собственник, навбар */
-
 /* Собственник, главная страница, Новости */
 .news-lists {
     margin-top: 240px;
@@ -733,9 +533,6 @@ button#send-request-to-sms:focus{
     text-decoration: none;
 }
 /* Конец Собственник, страница отдельной новости */
-
-/* Подменю, главная страница категории новостей */
-/* Конец Подменю, главная страница категории новостей */
 
 /* Выпадающее меню, профиль пользователя */
 .in_navbar {
@@ -1757,7 +1554,7 @@ input[name="date_end-period-pay"]:focus {
 .vote-bange-count {
     background: #2d18b4;
     padding: 5px 15px;
-    color: #fff;
+    color: #fff;    
     border-radius: 25px;
 }
 .vote-card_date-end {
@@ -1779,6 +1576,146 @@ input[name="date_end-period-pay"]:focus {
     padding-right: 5px;
 }
 /* Конец Опрос */
+
+/* Страница голосования */
+.view-voting {
+    margin-top: 140px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+}
+.preview-voting {
+    position: relative;
+    height: 616px;
+    overflow: hidden;
+}
+.voting-image {
+    width: 100%;
+    height: 100%;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+.voting-info {
+    position: absolute;
+    height: 40px;
+    color: #000;
+    top: 20px;
+    padding: 10px;    
+}
+.voting-info span {
+    padding: 5px 20px;
+    background: rgba(0, 0, 0, 0.2);
+    color: #fff;
+    border-radius: 15px;
+    margin-left: 20px;
+    font-size: 12px;
+}
+.voting-info span > i {
+    padding-right: 5px;
+}
+.voting-title-block {
+    position: absolute;
+    height: 160px;
+    width: 100%;
+    color: #000;
+    bottom: 0;
+    background: rgba(97, 61, 130, 0.81);
+}
+.voting-title-block h2 {
+    color: #fff;
+    font-size: 24px;
+    padding: 0px 30% 0px 20px;
+}
+.voting-title-block p {
+    color: #fff;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    padding: 0px 30% 0px 20px;  
+}
+.register-in-voting {
+    position: absolute;
+    right: 5%;
+    bottom: 20%;
+    padding: 15px 45px;
+    background-color: transparent;
+    border: 1px solid #fff;
+    text-transform: uppercase;
+    color: #fff;
+    border-radius: 12px;
+    outline: none;
+}
+.voting-body {
+    margin: 5px 0px 5px 0px;
+}
+.voting-body_left {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+}
+.voting-body_left p {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 10px;    
+    margin: 5px -15px 5px -15px;
+}
+.span-count {
+    padding: 2px 5px;
+    color: #fff;
+    margin-right: 5px;    
+    border-radius: 25px;
+    background: #2d18b4;
+}
+.questions-text {
+    margin: 0px -15px 10px 5px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 10px 10px;
+    display: flex;
+}
+.questions-text p {
+    padding-right: 10%;
+}
+.questions-text span:first-child {
+    padding-right: 10%;
+}
+.modal-title-vote {
+    color: #fff;
+    font-size: 16px;
+    letter-spacing: 1.5px;
+    text-align: center;
+    padding-bottom: 30px;
+}
+.again-sms-btn {
+    background-image: url(/images/clients/send_again.svg);
+    background-repeat: no-repeat;
+    background-position: 0px 5px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    height: 36px;
+    padding-left: 36px;
+    vertical-align: middle;
+    color: #fff;
+    outline: none;
+}
+.repeat_sms_code-message {
+    font-size: 12px;
+    color: #fc3232;
+}
+.number-sms {
+    height: 64px;
+    width: 42px;
+    border-radius: 12px;
+    background-color: #FFFFFF;
+    margin-left: 13px;
+    padding-right: 8px;
+    font-size: 34px;
+    text-align: center;
+}
+.questions-text-show > h4 > i {
+    color: #23dd6f;
+    border: 1px solid #23dd6f;
+    padding: 10px;
+    border-radius: 100%;
+}
+/* Конец Страница голосования */
 
 /* Уведомления на странице */
 .notice {

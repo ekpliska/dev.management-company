@@ -19,110 +19,70 @@ $btn_disabled = ($_start > time() || $_end < time()) ? true : false;
 $this->title = $voting['voting_title'];
 ?>
 
-<div class="container-voting">
-    <div class="preview">
-        <div class="rt-btn">
-            <!--<button class="btn bt-hop" data-toggle="modal" data-target="#frostedBk">ПРИНЯТЬ УЧАСТИЕ</button>-->
-            <?= Html::button('ПРИНЯТЬ УЧАСТИЕ', [
-                    'class' => 'btn bt-hop',
+<div class="view-voting row">
+    <div class="preview-voting">
+        <?= Html::img('@web' . $voting['voting_image'], ['class' => 'voting-image', 'alt' => 'preview-vote']) ?>
+        <div class="voting-info">
+            <span><?= FormatHelpers::statusVotingInView($voting['status']) ?></span>
+            <span><?= FormatHelpers::numberOfDaysToFinishVote($voting['voting_date_start'], $voting['voting_date_end']) ?></span>
+        </div>
+        <div class="voting-title-block">
+            <h2 class="voting-title"><?= $voting['voting_title'] ?></h2>
+            <p class="voting-description">
+                <?= $voting['voting_text'] ?>
+            </p>
+            <?= Html::button('Принять участие', [
+                    'class' => 'register-in-voting',
                     'id' => 'get-voting-in',
                     'data-voting' => $voting['voting_id'],
                     'disabled' => $btn_disabled,
-            ]) ?>            
-        </div>
-        <div class="rectengle-left">
-            <?= Html::img('/images/clients/' . ($voting['status'] == Voting::STATUS_CLOSED ? 'check.svg' : 'flag.svg'), ['class' => 'icons-clock']) ?>
-            <?= FormatHelpers::statusNameVoting($voting['status']) ?>
-        </div>
-        <div class="rectengle-center">
-            <?= FormatHelpers::numberOfDaysToFinishVote($voting['voting_date_start'], $voting['voting_date_end']) ?>
-        </div>
-        <div class="saturday-work">
-            <h2 class="saturday-worky">
-                <?= $voting['voting_title'] ?>
-            </h2>
-            <p class="text-saturday">
-                <?= $voting['voting_text'] ?>
-            </p>
-        </div>
-    </div>
-    
-    <div class="voting-tool">
-        <div class="voted voted-root">
-            <button type="button" class="battom-payment bt-voting1">#TODO</button>
-            Проголосовало
-        </div>
-	<div class="photo-voted photo-voted-root">
-            photo list
-<!--            <img class="photo1 voted-img" src="/assets/img/noname.jpg" alt="">
-            <img class="photo1 voted-img" src="/assets/img/noname.jpg" alt="">
-            <img class="photo1 voted-img" src="/assets/img/noname.jpg" alt="">
-            <img class="photo1 voted-img" src="/assets/img/noname.jpg" alt="">
-            <img class="photo1 voted-img" src="/assets/img/noname.jpg" alt="">
-            <img class="photo1 voted-img" src="/assets/img/noname.jpg" alt="">-->
-        </div>
-    </div>
-    
-    <div class="results">
-        <?php foreach ($voting['question'] as $key => $question) : ?>
-            <div class="start start1">
-                <?= $question['questions_text'] ?>
-                <!--<button type="button" class="battom-payment bt-voting1 btr-start1">12</button>Проголосовало-->
-            </div>
-        <?php endforeach; ?>
-    </div>
-</div>
-
-<?php /*
-<div class="clients-default-index">
-    
-    <h1><?= $this->title ?></h1>
-    
-    <div class="col-md-3">
-        <?= Html::img('@web' . $voting['voting_image'], ['alt' => $voting['voting_title'], 'style' => 'width: 100%;']) ?>
-        <hr />
-        Дата начала голосования: <?= FormatHelpers::formatDate($voting['voting_date_start'], false) ?>
-        <br />
-        Дата завершения голосования: <?= FormatHelpers::formatDate($voting['voting_date_end'], false) ?>
-        <br />
-        <?= FormatHelpers::numberOfDaysToFinishVote($voting['voting_date_start'], $voting['voting_date_end']) ?>
-        <hr />
-        Статус: <?= FormatHelpers::statusNameVoting($voting['status']) ?>
-        <hr />
-        <?= Html::button('Принять участие', [
-                'class' => 'btn btn-primary',
-                'id' => 'get-voting-in',
-                'data-voting' => $voting['voting_id'],
-//                'disabled' => $btn_disabled,
             ]) ?>
+        </div>
     </div>
-    <div class="col-md-9">
-        <?= $voting['voting_text'] ?>
-        <hr />
-        <table width="100%">
+    
+    <div class="col-md-12 voting-body">
+        <div class=" col-md-3 voting-body_left">
+            <p>
+                <span class="span-count">#TODO</span> Проголосовало
+            </p>
+            #TODO
+            <br />
+            #TODO
+            <br />
+            #TODO
+            <br />
+            #TODO
+            <br />
+        </div>
+        
+        <div class="col-md-9 voting-body_right">
             <?php foreach ($voting['question'] as $key => $question) : ?>
-                <tr>
-                    <td colspan="3">
-                        <?= $question['questions_text'] ?>
-                    </td>
-                </tr>
-                <tr>
-                    <td><?= 'YES' ?></td>
-                    <td><?= 'NO' ?></td>
-                    <td><?= 'HIT' ?></td>
-                </tr>        
+                <div class="questions-text">
+                    <span><?= $question['questions_text'] ?></span>
+                    <span class="span-count">#TODO</span> Проголосовало
+                </div>
             <?php endforeach; ?>
-        </table>
-        <?php
-         var_dump($is_register['status']);
-         echo 'HERE ' . ($modal_show);
-         
-        ?>
+            
+            <div class="questions-text-show">
+                <h4>
+                    <i class="glyphicon glyphicon-ok"></i> #QUESTIONS
+                </h4>
+                <div class="btn-group">
+                    <p>1</p>
+                    <button type="button" class="btn btn-primary">Apple</button>
+                    <p>2</p>
+                    <button type="button" class="btn btn-primary">Samsung</button>
+                    <p>3</p>
+                    <button type="button" class="btn btn-primary">Sony</button>
+                </div>
+            </div>
+            
+        </div>
+        
     </div>
     
 </div>
 
-*/ ?>
 <?php if ($is_register['status'] == RegistrationInVoting::STATUS_DISABLED) : ?>
 
     <?= $this->render('modal/participate-in-voting', [

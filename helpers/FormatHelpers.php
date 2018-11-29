@@ -332,6 +332,21 @@ class FormatHelpers {
         return $message;
     }
     
+    public static function statusVotingInView($status) {
+        
+        $message = '';
+        
+        if ($status == Voting::STATUS_ACTIVE) {
+            $message =  '<i class="glyphicon glyphicon-ok"></i> Идет обсуждение';
+        } 
+        elseif ($status == Voting::STATUS_CLOSED) {
+            $message =  '<i class="glyphicon glyphicon-flag"></i> Завершено';
+        }
+        
+        return $message;
+        
+    }
+    
     /*
      * Формирование списка изображений прикрепленных к заяке
      */

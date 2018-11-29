@@ -1,6 +1,6 @@
 <?php
 
-    use yii\bootstrap4\Modal;
+    use yii\bootstrap\Modal;
     use yii\widgets\ActiveForm;
     use yii\helpers\Html;
     
@@ -14,20 +14,20 @@
 <?php 
 Modal::begin([
     'id' => 'participate-in-voting-' . $voting_id,
-    'title' => '',
+    'header' => '',
     'closeButton' => [
-        'class' => 'close add-acc-modal-close-btn req rent-info__btn_close',
+        'class' => 'close close modal-close-btn',
     ],
 ]);
 ?>
 
-<h4 class="modal-title modal-acc-h mx-auto continuation">
+<h4 class="modal-title-vote">
     Для участия в голосовании введите СМС код, <br />
     который был выслан на ваш номер мобильного телефона
 </h4>
 
 
-<div class="sms-cod">
+<div class="sms-cod text-center">
     <?php 
         $form = ActiveForm::begin([
             'id' => 'fill_sms_to_participate',
@@ -48,18 +48,17 @@ Modal::begin([
                 
 </div>
             
-<div class="to-send">
+<div class="text-center">
     <?= Html::button('Отправить код еще раз', [
-            'class' => 'again-bt',
+            'class' => 'again-sms-btn',
             'id' => 'repeat_sms_code',
             'data-voting' => $voting_id,
         ]) ?>
-</div>
-<div class="to-send-message">
+    <br />
     <span class="repeat_sms_code-message"></span>
 </div>
                 
-<div class="modal-footer no-border bt-sms">
+<div class="modal-footer">
     <?= Html::submitButton('Продолжить', ['class' => 'btn blue-outline-btn white-btn mx-auto bt-bottom']) ?>
     
     <?= Html::button('Отмена', [
