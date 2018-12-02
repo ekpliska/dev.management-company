@@ -1854,7 +1854,8 @@ input[name="date_end-period-pay"]:focus {
 .navbar-menu {
     background-image: url(Head.png);
     background-size: 100% 100%;
-    background-repeat: no-repeat;    
+    background-repeat: no-repeat;
+    box-shadow: 0px 1px 5px 3px #ddd;
 }
 .navbar-menu_header {
     padding: 50px;
@@ -1931,16 +1932,34 @@ input[name="date_end-period-pay"]:focus {
 .menu-items {
     list-style-type: none;
     color: #fff;
+    padding: 0;
 }
 .menu-items > li {
-    padding: 10px;    
+    padding: 10px;
+    cursor: none;
 }
 .menu-items > li a {
-    color: #fff;
-    font-size: 18px;
+    color: rgba(255, 255, 255, 0.44);
     text-decoration: none;
     text-transform: uppercase;
+    cursor: none;
 }
+.menu-items > li.active-item > a {
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+.menu-items > li.active-item {
+    cursor: pointer;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    -moz-border-image: -moz-linear-gradient(to right, rgba(0, 0, 0, 0), rgba(255, 255, 255, 7), rgba(0, 0, 0, 0));  
+    -webkit-border-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(255, 255, 255, 7), rgba(0, 0, 0, 0));
+    border-image-slice: 1; 
+    
+}
+
+
 /* Конец Выпадающее меню навигации */
 /* Конец Навигационное меню */
 
@@ -2057,3 +2076,19 @@ input[name="date_end-period-pay"]:focus {
     border-radius: 0px;
 }
 /* Конец Дополнительное навигационное меню, лицевой счет */
+
+
+.menu-scroll > li {
+    text-transform: uppercase;
+    font-size: 16px;
+    
+}
+/*.menu-scroll > li:hover {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}*/
+/*#item-menu-2 {
+    font-size: 18px;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}*/

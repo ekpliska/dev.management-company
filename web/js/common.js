@@ -126,8 +126,36 @@ $(document).on('click', '.menu-toggle_active', function(){
     $('.sub-menu_account').hide();    
 });
 
-  
-  
+
+$('#menu').on('wheel', function(e){
+    
+    var delta = e.originalEvent.wheelDelta /120;
+    
+    var _0ID = $('li[id=item-menu-0').html();
+    var _1ID = $('li[id=item-menu-1').html();
+    var _2ID = $('li[id=item-menu-2').html();
+    var _3ID = $('li[id=item-menu-3').html();
+    var _4ID = $('li[id=item-menu-4').html();
+    
+    var first = $('ul.menu-scroll').children().first().html();
+    var last = $('ul.menu-scroll').children().last().html();
+    
+    if (delta > 0) {
+        $('li[id=item-menu-4]').html(first);
+        $('li[id=item-menu-3]').html(_4ID);
+        $('li[id=item-menu-2]').html(_3ID);
+        $('li[id=item-menu-1]').html(_2ID);
+        $('li[id=item-menu-0]').html(_1ID);
+    }
+    else {
+        $('li[id=item-menu-0]').html(last);        
+        $('li[id=item-menu-1]').html(_0ID);        
+        $('li[id=item-menu-2]').html(_1ID);        
+        $('li[id=item-menu-3]').html(_2ID);        
+        $('li[id=item-menu-4]').html(_3ID);        
+    }
+});
+
 /*
  * 
  * @param {type} $

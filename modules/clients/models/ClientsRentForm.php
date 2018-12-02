@@ -120,13 +120,14 @@ class ClientsRentForm extends Model {
             $add_user->user_mobile = $this->rents_mobile;
             $add_user->status = User::STATUS_ENABLED;
             $add_user->user_rent_id = $add_rent->rents_id;
-            // Записываем связь Пользователя с Арендатором
-//            $add_user->link('rent', $add_rent);
             $add_user->save();
                 
             if (!$add_user->save()) {
                 throw new \yii\db\Exception('Ошибка сохранения пользователя. Ошибка: ' . join(', ', $add_user->getFirstErrors()));
             }
+            
+            // Назначаем роль созданному арендатору
+            $add_user->setRole('clients_rent', $add_user->id);
                 
             if ($account_info) {
                 $account_info->personal_rent_id = $add_rent->rents_id;
