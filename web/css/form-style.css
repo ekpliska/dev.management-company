@@ -320,6 +320,10 @@ select[name="category_list"] option {
 .field-modal-select select:disabled {
     background: transparent;
 }
+.field-modal-select option {
+    background: #382949;
+    color: #fff;    
+}
 /* End Select in modal window */
 
 /* File input in modal window */

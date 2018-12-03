@@ -13,7 +13,7 @@
         'id' => 'create-account-modal',
         'header' => 'Добавить лицевой счет',
         'closeButton' => [
-            'class' => 'close add-acc-modal-close-btn',
+            'class' => 'close modal-close-btn',
         ],
         'clientOptions' => [
             'backdrop' => 'static',
