@@ -109,6 +109,7 @@ $(document).ready(function() {
  * Работа навигационного меню, Собственник
  */
 $('.menu-toggle').on('click', function(e) {
+    $(document.body).css('overflow', 'auto');
     e.preventDefault();
     $(this).toggleClass('menu-toggle_active');
     $('.navbar-menu__items').toggleClass('menu-show');
@@ -118,7 +119,8 @@ $('.menu-toggle').on('click', function(e) {
     $('.navbar_paid-request').show();
     $('.sub-menu_account').show();
 });
-$(document).on('click', '.menu-toggle_active', function(){
+$(document).on('click', '.menu-toggle_active', function() {
+    $(document.body).css('overflow', 'hidden');    
     $('.menu-toggle_message').text('Закрыть');
     $('.navbar-general-page').hide();    
     $('.navbar_repusets').hide();    

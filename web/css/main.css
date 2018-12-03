@@ -1792,7 +1792,7 @@ input[name="date_end-period-pay"]:focus {
 }
 /* Конец Переопреденное модальное окно бутстрапа */
 
-/* Дополнительное меню, главна страница */
+/* Дополнительное меню, главная страница */
 .navbar__sub-general {
     height: 70px;
 }
@@ -1855,7 +1855,6 @@ input[name="date_end-period-pay"]:focus {
     background-image: url(Head.png);
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    box-shadow: 0px 1px 5px 3px #ddd;
 }
 .navbar-menu_header {
     padding: 50px;
@@ -1932,17 +1931,38 @@ input[name="date_end-period-pay"]:focus {
 .menu-items {
     list-style-type: none;
     color: #fff;
-    padding: 0;
+    padding: 10px 0;
 }
 .menu-items > li {
     padding: 10px;
-    cursor: none;
+    /*cursor: none;*/
+    cursor: url("../images/cursor/scroll.png"), auto;
 }
 .menu-items > li a {
     color: rgba(255, 255, 255, 0.44);
     text-decoration: none;
     text-transform: uppercase;
     cursor: none;
+}
+.menu-items > li:first-child,
+.menu-items > li:last-child {
+    padding: 0;
+}
+    
+.menu-items > li:first-child a,
+.menu-items > li:last-child a {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.24);
+}
+.menu-items > li#item-menu-1,
+.menu-items > li#item-menu-3 {
+    padding: 10px;
+}
+.menu-items > li#item-menu-2 {
+    padding: 10px;
+}
+.menu-items > li#item-menu-2 a {
+    font-size: 18px;
 }
 .menu-items > li.active-item > a {
     color: #fff;
@@ -1958,8 +1978,6 @@ input[name="date_end-period-pay"]:focus {
     border-image-slice: 1; 
     
 }
-
-
 /* Конец Выпадающее меню навигации */
 /* Конец Навигационное меню */
 
@@ -2083,12 +2101,3 @@ input[name="date_end-period-pay"]:focus {
     font-size: 16px;
     
 }
-/*.menu-scroll > li:hover {
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-}*/
-/*#item-menu-2 {
-    font-size: 18px;
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-}*/

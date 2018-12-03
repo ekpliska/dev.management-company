@@ -30,7 +30,7 @@
     <div class="container-fluid navbar-menu__items text-center">
         <ul class="menu-items menu-scroll" id="menu">
             <li id="item-menu-0">
-                <a href="<?= Url::to(['personal-account/index']) ?>" class="first-item">Лицевой счет</a>
+                <a href="<?= Url::to(['personal-account/index']) ?>" disabled>Лицевой счет</a>
             </li>
             <li id="item-menu-1">
                 <a href="<?= Url::to(['requests/index']) ?>" class="menu-1">Заявки</a>
