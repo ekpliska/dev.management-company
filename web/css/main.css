@@ -181,7 +181,7 @@ login-form-group .help-block {
     background-size: 27%;
     background-position: center;
     display: inline-block;
-    margin: 40px 0px;
+    margin: 70px 0px;
     padding: 0 10px;
     height: 70px;
     width: 100%;
@@ -399,7 +399,7 @@ button#send-request-to-sms:focus{
 
 /* Собственник, главная страница, Новости */
 .news-lists {
-    margin-top: 240px;
+    margin-top: 220px;
 }
 .news-card-preview {    
     color: #a7a7a7;
@@ -457,7 +457,7 @@ button#send-request-to-sms:focus{
 .new-conteiner {
     border: 1px solid #D4D4D4;
     border-radius: 15px;
-    margin-top: 110px;
+    margin-top: 140px;
 }
 .preview-news {
     position: relative;
@@ -737,9 +737,97 @@ button#send-request-to-sms:focus{
 }
 /* Кoнец Страница Профиль пользователя */
 
+/* Настройки профиля пользователя */
+.profile-settings {
+    margin-top: 140px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+}
+.profile-settings div {
+    padding: 10px;
+}
+.user-image {
+    height: 290px;
+}
+.user-image img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    width: 200px;  
+}
+.user-full-name {
+    font-size: 22px;
+    font-weight: bold;
+}
+.profile-settings_block {
+    font-size: 10px;
+    margin-top: 15px;
+    text-transform: uppercase;
+    border-bottom: 1px solid #eee;
+}
+.profile-settings_block span {
+    background: #fff;
+    padding: 10px 10px 10px 0px;
+    color: #ccc;    
+}
+.user-login-name {
+    padding: 2px 20px;
+    border-radius: 25px;
+    background: #598eff;
+    color: #ffffff;
+    font-size: 12px;
+}
+.user-role-name {
+    padding: 2px 20px;
+    border-radius: 25px;
+    background: #6d39c3;
+    color: #ffffff;
+    font-size: 12px;
+}
+.user-span-text {
+    font-size: 12px;
+}
+.user-status {
+    border: 1px solid #ddd;
+    padding: 2px 10px;
+    border-radius: 25px;
+    font-size: 12px;
+    color: #777;
+}
+.user-span-text i {
+    color: #fc3232;
+    font-size: 14px;    
+}
+i.status-0 {
+    color: #ddd;
+}
+i.status-1 {
+    color: #1fd68d;
+}
+i.status-2 {
+    color: #fc3232;
+}
+.settings {
+    border-top: 1px solid #ddd;
+}
+.profile-settings_title {
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 10px 10px 10px 0px;
+    color: #2d18b4;
+    text-align: center;
+}
+.profile-settings_title i {
+    color: #f0754a;
+}
+/* Конец Настройки профиля пользователя */
+
 /* Заявки */
 .requests-page {
-    margin-top: 230px;
+    margin-top: 210px;
 }
 .fixed-bottom {
     position: absolute;
@@ -1132,7 +1220,7 @@ button#send-request-to-sms:focus{
 
 /* Платные услуги */
 .paid-requests-page {
-    margin-top: 230px;
+    margin-top: 210px;
 }
 .navbar-nav a.btn-history {
     height: 56px;
@@ -1872,6 +1960,7 @@ input[name="date_end-period-pay"]:focus {
 }
 .menu-show {
     margin-top: 0;
+    box-shadow: 0px 4px 12px -4px #000000;
 }
 .user-notification {
     position: relative;
@@ -1992,11 +2081,12 @@ input[name="date_end-period-pay"]:focus {
 .navbar_repusets {
     background: #fff;
     padding: 10px;
+    box-shadow: 0px -5px 8px -3px rgb(0, 0, 0);
 }
 /* Статусы меню, заявки, главная страница */
 .status-request {
     display: flex;
-    justify-content: center;    
+    justify-content: center;
 }
 .status-request > li > a {
     height: 50px;
@@ -2061,7 +2151,8 @@ input[name="date_end-period-pay"]:focus {
 /* Дополнительное навигационное меню, платные услуги */
 .navbar_paid-request {
     background: #2d18b4;
-    padding: 10px;    
+    padding: 10px;
+    box-shadow: 0 -1px 7px rgb(0, 0, 0);
 }
 .navbar_paid-request > ul {
     margin-right: 15px;

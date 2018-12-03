@@ -66,7 +66,7 @@ $this->title = 'Профиль собственника';
         <div class="col-md-6 clients-profile-info">
             <p class="profile-title">
                 Мои контактные данные&nbsp;
-                <?= Html::a('<i class="fa fa-edit"></i>', ['profile/settings-profile']) ?>
+                <?= Html::a('<i class="glyphicon glyphicon-cog"></i>', ['profile/settings-profile']) ?>
             </p>
             
             <div class="field">

@@ -28,7 +28,7 @@ $this->title ="Главная страница";
 
                 <div class="news-card-preview-body">
                     <p class="card-text news-card-preview-text ">
-                        <?= FormatHelpers::shortTextNews($post['news_text'], 30) ?>
+                        <?= FormatHelpers::shortTextNews($post['news_text'], 20) ?>
                     </p>
                 </div>
             </div>

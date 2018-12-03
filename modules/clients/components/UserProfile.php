@@ -148,7 +148,14 @@ class UserProfile extends BaseObject {
      * Статус учетной записи пользователя
      */
     public function getStatus() {
-        return ArrayHelper::getValue(User::arrayUserStatus(), $this->_user['status']);
+        
+        $status_value = $this->_user['status'];
+        $status_name = ArrayHelper::getValue(User::arrayUserStatus(), $this->_user['status']);
+        
+        return [
+            'value' => $status_value,
+            'name' => $status_name,
+        ];
     }
     
     /*
@@ -228,6 +235,23 @@ class UserProfile extends BaseObject {
                 ->one();
         
         return $info;
+    }
+    
+    /* Получить полный адрес пользователя
+     * по текущему лицевому счету
+     */
+    public function getFullAdress($account_id) {
+        
+        $info = PersonalAccount::find()
+                ->select(['account_id', 'estate_town', 'houses_street', 'houses_number_house', 'flats_number'])
+                ->joinWith(['flat', 'flat.house', 'flat.house.estate'])
+                ->where(['account_id' => $account_id])
+                ->asArray()
+                ->one();
+        
+        $adress_string = 'г. ' . $info['estate_town'] . ', ул. ' . $info['houses_street'] . ', дом. ' . $info['houses_number_house'] . ', кв. ' . $info['flats_number'];
+        
+        return $info ? $adress_string : 'Адрес не определен';
     }
     
 

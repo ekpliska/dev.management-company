@@ -63,6 +63,7 @@ $this->title = $voting['voting_title'];
                 </div>
             <?php endforeach; ?>
             
+            <?php /* Контент для зарегистрировавщихся участников
             <div class="questions-text-show">
                 <h4>
                     <i class="glyphicon glyphicon-ok"></i> #QUESTIONS
@@ -76,6 +77,7 @@ $this->title = $voting['voting_title'];
                     <button type="button" class="btn btn-primary">Sony</button>
                 </div>
             </div>
+            */ ?>
             
         </div>
         
