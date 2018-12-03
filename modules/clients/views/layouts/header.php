@@ -28,50 +28,10 @@
         </ul>
     </div>  
     <div class="container-fluid navbar-menu__items text-center">
-        <ul class="menu-items menu-scroll" id="menu">
-            <li id="item-menu-0">
-                <a href="<?= Url::to(['personal-account/index']) ?>" disabled>Лицевой счет</a>
-            </li>
-            <li id="item-menu-1">
-                <a href="<?= Url::to(['requests/index']) ?>" class="menu-1">Заявки</a>
-            </li> 
-            <li id="item-menu-2" class="active-item">
-                <a href="<?= Url::to(['clients/index']) ?>" class="menu-2">Новости</a>
-            </li>
-            <li id="item-menu-3">
-                <a href="<?= Url::to(['paid-services/index']) ?>" class="menu-3">Усуги</a>
-            </li>
-            <li id="item-menu-4">
-                <a href="<?= Url::to(['voting/index']) ?>" class="last-item">Опрос</a>
-            </li>
-        </ul>        
+        <?= \app\modules\clients\widgets\NavMenu::widget(); ?>   
     </div>
     <?= SubBarGeneralPage::widget() ?>
     <?= StatusRequest::widget() ?>
     <?= SubBarPaidService::widget() ?>
     <?= SubBarPersonalAccount::widget() ?>
 </nav>
-
-<?php
-
-$menuArrya = [
-    '0' => [
-        'Item0' => '#0',
-    ],
-    '1' => [
-        'Item1' => '#1',
-    ],
-    '2' => [
-        'Item2' => '#2',
-    ],
-    '3' => [
-        'Item3' => '#3',
-    ],
-    '4' => [
-        'Item4' => '#4',
-    ],
-];
-
-
-
-?>
