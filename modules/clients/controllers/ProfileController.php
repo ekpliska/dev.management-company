@@ -393,8 +393,20 @@ class ProfileController extends AppClientsController
             return false;
         } 
         return true;
+    }
+    
+    /* Отмена операций 
+     *      смена пароля
+     *      номера мобильного телефона
+     */
+    public function actionCancelSmsCode() {
         
-    }    
+        // Удаляем запись из БД
+        $_record = SmsOperations::deleteOperation(SmsOperations::TYPE_CHANGE_PASSWORD);
+        // Удаляем куку
+        Yii::$app->response->cookies->remove('_time');
+        return $this->redirect(['profile/settings-profile']);
+    }
     
     /*
      * Формирование нового смс кода

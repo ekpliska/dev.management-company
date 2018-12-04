@@ -461,6 +461,16 @@ $(document).ready(function() {
             startTimer(timeMinute, display);
         }        
     });
+    
+    // Отмена операции по смене пароля, номера телефона
+    $('#cancel-sms').on('click', function() {
+        $.ajax({
+            type: 'POST',
+            url: 'cancel-sms-code',
+        }).done(function(response) {
+//            console.log(response.status);
+        });
+    });
 
     /*
      * Генерация нового СМС кода

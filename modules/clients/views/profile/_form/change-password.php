@@ -73,7 +73,7 @@
     
     <div class="block-of-btn text-center">
         <?= Html::submitButton('Продолжить', ['class' => 'blue-outline-btn req-table-btn']) ?>
-        <?= Html::button('Отмена', ['class' => 'btn red-outline-btn req-table-btn']) ?>        
+        <?= Html::button('Отмена', ['id' => 'cancel-sms', 'class' => 'btn red-outline-btn req-table-btn']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
