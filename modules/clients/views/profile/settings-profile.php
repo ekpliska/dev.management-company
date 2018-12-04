@@ -26,18 +26,18 @@ $this->title = 'Настройки';
     </div>
     
     <div class="col-md-4 settings">
-        <p class="profile-settings_title"><i class="glyphicon glyphicon-lock"></i>&nbsp;&nbsp;Изменить пароль учетной записи</p>
+        <p class="profile-settings_title left"><i class="glyphicon glyphicon-lock"></i>&nbsp;&nbsp;Изменить пароль учетной записи</p>
         <?= $this->render('_form/change-password', [
                 'model_password' => $model_password,
                 'sms_model' => $sms_model,
                 'is_change_password' => $is_change_password]) ?>
     </div>
     <div class="col-md-4 settings">
-        <p class="profile-settings_title"><i class="glyphicon glyphicon-phone"></i>&nbsp;&nbsp;Изменить номер мобильного телефона</p>
+        <p class="profile-settings_title center"><i class="glyphicon glyphicon-phone"></i>&nbsp;&nbsp;Изменить номер мобильного телефона</p>
         <?php // = $this->render('_form/change-password', ['model_password' => $model_password]) ?>
     </div>
     <div class="col-md-4 settings">
-        <p class="profile-settings_title"><i class="glyphicon glyphicon-envelope"></i>&nbsp;&nbsp;Изменить электронный адрес</p>
+        <p class="profile-settings_title right"><i class="glyphicon glyphicon-envelope"></i>&nbsp;&nbsp;Изменить электронный адрес</p>
         <?php // = $this->render('_form/change-email', ['user' => $user]) ?>
     </div>
 </div>

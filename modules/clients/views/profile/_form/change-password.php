@@ -19,7 +19,6 @@
             'validateOnChange' => false,
             'fieldConfig' => [
                 'template' => '{label}{input}{error}',
-                'labelOptions' => ['class' => 'label-registration hidden'],
             ],
         ]);
     ?>
@@ -56,6 +55,9 @@
             'validateOnChange' => false,
             'enableAjaxValidation' => true,
             'validationUrl' => ['validate-sms-form'],
+            'fieldConfig' => [
+                'template' => '<div class="input-block">{label}{input}{error}</div><span id="time-to-send"></span>',
+            ],            
             'options' => [
                 'class' => 'form-horizontal',
             ],
@@ -65,14 +67,13 @@
         <?= $form_psw->field($sms_model, 'sms_code')
                 ->widget(MaskedInput::className(), [
                     'mask' => '9{5,5}'])
-                ->input('text', ['class' => 'settings-input sms-code input-sms_code'])
+                ->input('text', ['class' => 'settings-input input-sms_code'])
                 ->label()
         ?>
-    <div class="block-of-repeat"><span id="time-to-send"></span></div>    
     
-    <div class="text-center">
-        <?= Html::submitButton('Продолжить', ['class' => 'blue-outline-btn req-table-btn']) ?>        
-        <?= Html::submitButton('Отмена', ['class' => 'btn red-outline-btn req-table-btn']) ?>        
+    <div class="block-of-btn text-center">
+        <?= Html::submitButton('Продолжить', ['class' => 'blue-outline-btn req-table-btn']) ?>
+        <?= Html::button('Отмена', ['class' => 'btn red-outline-btn req-table-btn']) ?>        
     </div>
 
     <?php ActiveForm::end(); ?>

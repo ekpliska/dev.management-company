@@ -388,7 +388,7 @@ class ProfileController extends AppClientsController
      */
     private function hasCookieSMS() {
         
-        if (!$_COOKIE['_time']) {
+        if (!isset($_COOKIE['_time'])) {
             $_record = SmsOperations::deleteOperation(SmsOperations::TYPE_CHANGE_PASSWORD);
             return false;
         } 

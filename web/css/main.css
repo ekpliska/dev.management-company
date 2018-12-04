@@ -162,7 +162,7 @@ a, a:hover, a:active {
     margin-top: 100px;
     margin-bottom: 62px;    
 }
-login-form-group .help-block {
+.login-form-group .help-block {
     color: #ef693a;
     font-size: 12px;
     letter-spacing: 1px;
@@ -813,18 +813,26 @@ i.status-2 {
     color: #fc3232;
 }
 .settings {
-    border-top: 1px solid #ddd;
+    padding-top: 20px;
 }
 .profile-settings_title {
     font-size: 12px;
     font-weight: bold;
     text-transform: uppercase;
     padding: 10px 10px 10px 0px;
-    color: #2d18b4;
     text-align: center;
 }
-.profile-settings_title i {
+p.left {
+    color: #2d18b4;
+    border-bottom: 3px solid #2d18b4;
+}
+p.center {
     color: #f0754a;
+    border-bottom: 3px solid #f0754a;
+}
+p.right {
+    color: #1fd68d;
+    border-bottom: 3px solid #1fd68d;
 }
 .settings-input {
     padding: 5px 10px;
@@ -833,26 +841,53 @@ i.status-2 {
     width: 100%;
     outline: none;
 }
+.settings-input:hover,
 .settings-input:focus {
-    border: 1px solid #2d18b4;    
+    border: 1px solid #2d18b4;
 }
 .settings-input::placeholder  {
     color: #777;
 }
-.settings form label,
-.settings form .control-label {
+.settings form label {
     font-size: 12px;
     color: #635f5f;
     font-weight: normal;
     padding: 0px 10px;
+}
+#sms-form .has-error .control-label,
+#change-password-form .has-error .control-label {
+    color: #f0754a;
+}
+.profile-settings form .has-error .settings-input {
+    border: 1px solid #f0754a;
 }
 .settings .help-block {
     color: #f0754a;
     font-size: 12px;
     padding: 0px 10px;
 }
-.sms-code {
-    width: 30%;
+.form-horizontal .form-group {
+    margin-right: 0px;
+    margin-left: 0px;
+    display: flex;
+}
+.input-block {
+    position: relative;
+    width: 120px;
+}
+#time-to-send {
+    font-size: 12px;
+    width: 172px;
+    margin-left: 20px;
+    color: rgb(103, 118, 138);
+    margin-top: 20px;
+}
+#repeat-sms_code {
+    margin-top: 9px;
+    border: none;
+    background: transparent;
+    text-decoration: underline;
+    outline: none;
 }
 /* Конец Настройки профиля пользователя */
 
@@ -1165,6 +1200,7 @@ i.status-2 {
     height: 36px;
     text-transform: none;
     margin: 10px 0;
+    outline: none;
 }
 .request-ident {
     background: #2d18b4;
@@ -1173,8 +1209,6 @@ i.status-2 {
     width: 170px;
     color: #fff;
     height: 30px;
-    font-weight: unset;
-    line-height: 18px;
 }
 /* Конец Статусы заявок, таблица */
 

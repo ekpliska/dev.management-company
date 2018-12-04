@@ -44,7 +44,7 @@ class ChangePasswordForm extends Model {
             ],            
             
             [['current_password', 'new_password', 'new_password_repeat'], 'string', 'min' => 6, 'max' => 12],
-            ['new_password', 'compare', 'compareAttribute' => 'new_password_repeat'],
+            ['new_password', 'compare', 'compareAttribute' => 'new_password_repeat', 'message' => 'Указанные новые пароли не совпадают'],
             ['current_password', 'checkCurrentPassword'],
         ];        
     }
