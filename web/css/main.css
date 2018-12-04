@@ -742,12 +742,10 @@ button#send-request-to-sms:focus{
     margin-top: 140px;
     border: 1px solid #ddd;
     border-radius: 12px;
-}
-.profile-settings div {
     padding: 10px;
 }
 .user-image {
-    height: 290px;
+    height: 260px;
 }
 .user-image img {
     position: absolute;
@@ -822,6 +820,34 @@ i.status-2 {
 }
 .profile-settings_title i {
     color: #f0754a;
+}
+.settings-input {
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    width: 100%;
+    outline: none;
+}
+.settings-input:focus {
+    border: 1px solid #2d18b4;    
+}
+.settings-input::placeholder  {
+    color: #777;
+}
+.settings form label,
+.settings form .control-label {
+    font-size: 12px;
+    color: #635f5f;
+    font-weight: normal;
+    padding: 0px 10px;
+}
+.settings .help-block {
+    color: #f0754a;
+    font-size: 12px;
+    padding: 0px 10px;
+}
+.sms-code {
+    width: 30%;
 }
 /* Конец Настройки профиля пользователя */
 
