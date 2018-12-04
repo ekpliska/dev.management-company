@@ -11,6 +11,7 @@
     use app\models\Rents;
     use app\models\PersonalAccount;
     use app\modules\clients\models\ChangePasswordForm;
+    use app\modules\clients\models\ChangeMobilePhone;
     use app\models\SmsOperations;
     use app\modules\clients\models\form\SMSForm;
     
@@ -199,7 +200,7 @@ class ProfileController extends AppClientsController
      */
     public function actionSettingsProfile() {
         
-        // Проверяем время существования куки на оп
+        // Проверяем время существования куки
         $this->hasCookieSMS();
         
         $user_info = $this->permisionUser();
@@ -207,13 +208,16 @@ class ProfileController extends AppClientsController
         
         // Загружаем модель смены пароля
         $model_password = new ChangePasswordForm($user);
+        // Модель на смену номера мобильного телефона
+        $model_phone = new ChangeMobilePhone($user);
+        
         
         // Модель на ввод СМС кода
         $sms_model = new SMSForm($user);
-
         
-        // Получаем статус запроса на смену пароля
+        // Получаем статус СМС запроса
         $is_change_password = SmsOperations::findByUserIDAndType($user_info->userID, SmsOperations::TYPE_CHANGE_PASSWORD);
+        $is_change_phone = SmsOperations::findByUserIDAndType($user_info->userID, SmsOperations::TYPE_CHANGE_PHONE);
 
         if ($model_password->load(Yii::$app->request->post()) && $model_password->validate()) {
             // Если данные успешно провалидированы, то устанавливаем куку времени на смену пароля
@@ -223,17 +227,22 @@ class ProfileController extends AppClientsController
             }
         }
         
-        if ($sms_model->load(Yii::$app->request->post()) && $sms_model->validate()) {
-            $sms_model->changePassword();
-            return $this->refresh();
+        if ($model_phone->load(Yii::$app->request->post()) && $model_phone->validate()) {
+            // Если данные успешно провалидированы, то устанавливаем куку времени на смену пароля
+            if ($model_phone->checkPhone()) {
+                $this->setTimeCookies();
+                return $this->refresh();
+            }
         }
-        
+
         return $this->render('settings-profile', [
             'user_info' => $user_info,
             'user' => $user,
             'model_password' => $model_password,
             'sms_model' => $sms_model,
+            'model_phone' => $model_phone,
             'is_change_password' => $is_change_password,
+            'is_change_phone' => $is_change_phone,
         ]);
     }
     
@@ -247,7 +256,20 @@ class ProfileController extends AppClientsController
         if (Yii::$app->request->isAjax && $sms_model->load(Yii::$app->request->post())) {
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
             return \yii\widgets\ActiveForm::validate($sms_model);
-        }
+        }        
+    }
+    
+    public function actionSendSmsForm($type) {
+        
+        $user_info = $this->permisionUser();
+        $user = $user_info->_model;        
+        
+        $sms_model = new SMSForm($user);
+        
+        if ($sms_model->load(Yii::$app->request->post()) && $sms_model->validate()) {
+            $sms_model->changeUserInfo($type);
+            return $this->redirect(['profile/settings-profile']);
+        }        
         
     }
     
@@ -398,11 +420,14 @@ class ProfileController extends AppClientsController
     /* Отмена операций 
      *      смена пароля
      *      номера мобильного телефона
+     * @param $value integer Тип СМС запроса TYPE_CHANGE_PASSWORD(1), TYPE_CHANGE_PHONE(2), TYPE_CHANGE_EMAIL(3)
      */
     public function actionCancelSmsCode() {
         
+        $value = Yii::$app->request->post('valueData');
+        
         // Удаляем запись из БД
-        $_record = SmsOperations::deleteOperation(SmsOperations::TYPE_CHANGE_PASSWORD);
+        $_record = SmsOperations::deleteOperation($value);
         // Удаляем куку
         Yii::$app->response->cookies->remove('_time');
         return $this->redirect(['profile/settings-profile']);
@@ -413,7 +438,9 @@ class ProfileController extends AppClientsController
      */
     public function actionGenerateNewSmsCode() {
         
-        $record_sms = SmsOperations::findByTypeOperation(SmsOperations::TYPE_CHANGE_PASSWORD);
+        $value = Yii::$app->request->post('valueData');
+        
+        $record_sms = SmsOperations::findByTypeOperation($value);
         
         if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;

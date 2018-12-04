@@ -889,6 +889,23 @@ p.right {
     text-decoration: underline;
     outline: none;
 }
+.settings-input-phone:focus {
+    padding: 5px 10px;    
+    border: 1px solid #f0754a;
+    border-radius: 25px;
+    outline: none;
+}
+.settings-input-phone:read-only {
+    padding: 5px 0px;
+    border: none;
+    border-bottom: 1px dashed #ddd;
+    outline: none;
+    color: #2f3640;
+    cursor: pointer;
+}
+.change-record-btn {
+    visibility: hidden;
+}
 /* Конец Настройки профиля пользователя */
 
 /* Заявки */

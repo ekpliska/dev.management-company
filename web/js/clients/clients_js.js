@@ -103,13 +103,7 @@ $(document).ready(function() {
         $('#_personal-account').val(accountId);
         $('.btn__add_rent', this).data('accountId', accountId);
     });
-    
-    
-    
-    
-    
-    
-    
+        
     // Очистить поля ввода, клик по кнопкам 'Отмена', 'x'
     $('#add-rent-modal .add-rent-modal__close').on('click', function() {
         $('#add-rent input').val('');
@@ -123,7 +117,24 @@ $(document).ready(function() {
     $('.rent-info__btn_close').on('click', function () {
         $('#is_rent').prop('checked', false);
         $('#create-rent-form')[0].reset();
-    });    
+    });
+    
+    /*
+     * Смена номера мобильного телефона,
+     * Снять атрибут, только для чтения
+     * Кастомизация текстового поля
+     */
+    $('.settings-input-phone').on('click', function(){
+        $(this).prop('readOnly', false);
+    });
+
+    $('.settings-input-phone').on('blur', function(){
+        $(this).prop('readOnly', true);
+    });
+    
+    $('.settings-input-phone').on('input', function(){
+        $('#change-phone-form button').removeClass('change-record-btn');
+    });
     
     /* End Block of Profile */
 
@@ -430,7 +441,8 @@ $(document).ready(function() {
     // *********************************************************** //
 
     // Количество секунд до следующей отправки
-    var timeMinute = 60*2;
+//    var timeMinute = 60*2;
+    var timeMinute = 10;
     
     // Таймер
     function startTimer(duration, display) {
@@ -464,11 +476,15 @@ $(document).ready(function() {
     
     // Отмена операции по смене пароля, номера телефона
     $('#cancel-sms').on('click', function() {
+        var valueData = $('#time-to-send').data('value');
         $.ajax({
             type: 'POST',
             url: 'cancel-sms-code',
+            data: {
+                valueData: valueData,
+            },
         }).done(function(response) {
-//            console.log(response.status);
+            console.log(response.status);
         });
     });
 
@@ -477,12 +493,16 @@ $(document).ready(function() {
      */
     $(document).on('click', '#repeat-sms_code', function (){
         display = $('#time-to-send');
+        var valueData = $('#time-to-send').data('value');
         startTimer(timeMinute, display);
         $.ajax({
             type: 'POST',
             url: 'generate-new-sms-code',
+            data: {
+                valueData: valueData
+            },
         }).done(function(response) {
-//            console.log(response.status);
+//            console.log(response.value);
         });
     });
    

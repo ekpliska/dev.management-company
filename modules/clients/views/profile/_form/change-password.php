@@ -56,7 +56,7 @@
             'enableAjaxValidation' => true,
             'validationUrl' => ['validate-sms-form'],
             'fieldConfig' => [
-                'template' => '<div class="input-block">{label}{input}{error}</div><span id="time-to-send"></span>',
+                'template' => '<div class="input-block">{label}{input}{error}</div><span id="time-to-send" data-value="1"></span>',
             ],            
             'options' => [
                 'class' => 'form-horizontal',

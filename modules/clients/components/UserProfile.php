@@ -43,6 +43,7 @@ class UserProfile extends BaseObject {
                     ->select('c.clients_id as client_id, c.clients_name as name, c.clients_second_name as second_name, c.clients_surname as surname, '
                         . 'c.clients_mobile as mobile, c.clients_phone as phone, '
                         . 'u.user_id as user_id, u.user_login as login, '
+                        . 'u.user_mobile as user_mobile, '
                         . 'u.user_email as email, u.user_photo as photo, '
                         . 'u.created_at as date_created , u.last_login as last_login, '
                         . 'u.status as status, '
@@ -211,7 +212,7 @@ class UserProfile extends BaseObject {
      * Мобальный телефон Собственника/Аренедтора
      */
     public function getMobile() {
-        return $this->_user['mobile'];
+        return $this->_user['user_mobile'];
     }
     
     /*

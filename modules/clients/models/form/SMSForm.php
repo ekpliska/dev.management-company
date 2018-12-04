@@ -57,13 +57,21 @@ class SMSForm extends Model {
      * Организация смены пароля пользователя
      * Если валидация введенного смс кода успешна, то куку по смс операции удаляем
      */
-    public function changePassword() {
+    public function changeUserInfo($type) {
         
         $record = SmsOperations::findBySMSCode($this->sms_code);
         
         if ($this->validate()) {
             $user = $this->_user;
-            $user->user_password = $record->value;
+            switch ($type) {
+                case SmsOperations::TYPE_CHANGE_PASSWORD:
+                    $user->user_password = $record->value;
+                    break;
+                case SmsOperations::TYPE_CHANGE_PHONE: 
+                    $user->user_mobile = $record->value;
+                    break;
+            }
+            
             $user->save();
             $record->delete(false);
             Yii::$app->response->cookies->remove('_time');

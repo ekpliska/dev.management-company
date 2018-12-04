@@ -34,7 +34,12 @@ $this->title = 'Настройки';
     </div>
     <div class="col-md-4 settings">
         <p class="profile-settings_title center"><i class="glyphicon glyphicon-phone"></i>&nbsp;&nbsp;Изменить номер мобильного телефона</p>
-        <?php // = $this->render('_form/change-password', ['model_password' => $model_password]) ?>
+        <?= $this->render('_form/change-phone', [
+                'model_phone' => $model_phone, 
+                'sms_model' => $sms_model,
+                'user_info' => $user_info,
+                'is_change_phone' => $is_change_phone,
+            ]) ?>
     </div>
     <div class="col-md-4 settings">
         <p class="profile-settings_title right"><i class="glyphicon glyphicon-envelope"></i>&nbsp;&nbsp;Изменить электронный адрес</p>
