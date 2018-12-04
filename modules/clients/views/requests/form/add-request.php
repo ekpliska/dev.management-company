@@ -42,9 +42,7 @@
             ?>
 
         <?= $form->field($model, 'requests_phone', ['template' => '<div class="field-modal">{label}{input}{error}</div>'])
-                ->widget(MaskedInput::className(), [
-                    'mask' => '+7 (999) 999-99-99'])
-                ->input('text', ['class' => 'field-input-modal'])
+                ->input('text', ['class' => 'field-input-modal cell-phone'])
                 ->label($model->getAttributeLabel('requests_phone'), ['class' => 'field-label-modal']) ?>
 
         <?= $form->field($model, 'requests_comment', ['template' => '<div class="field-modal-textarea">{label}{input}{error}</div>'])

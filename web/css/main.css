@@ -740,6 +740,11 @@ button#send-request-to-sms:focus{
 .spam-agree-txt {
     margin: 30px 0;
 }
+.modal-confirm {
+    text-align: center;
+    color: #fff;
+    font-size: 16px;    
+}
 /* Кoнец Страница Профиль пользователя */
 
 /* Настройки профиля пользователя */

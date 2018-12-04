@@ -14,7 +14,7 @@ Modal::begin([
     'id' => 'changes_rent',
     'header' => 'Внимание!',
     'closeButton' => [
-        'class' => 'close add-acc-modal-close-btn req changes_rent__close',
+        'class' => 'close modal-close-btn changes_rent__close',
     ],
     'clientOptions' => [
         'backdrop' => 'static', 
@@ -23,7 +23,7 @@ Modal::begin([
 ]);
 ?>
 
-    <p class="del-ar">Данные арендатора будут удалены! Продолжить?</p>
+    <p class="modal-confirm">Данные арендатора будут удалены! Продолжить?</p>
 
     <div class="modal-footer no-border">
         <?= Html::button('Удалить', ['class' => 'btn blue-outline-btn white-btn mx-auto changes_rent__del']) ?>

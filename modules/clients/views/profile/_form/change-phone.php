@@ -24,8 +24,8 @@ $this->title = 'Изменение номера мобильного телеф�
     ?>
 
         <?= $form_phone->field($model_phone, 'new_phone')
-            ->widget(MaskedInput::className(), ['mask' => '+7 (999) 999-99-99'])
-                ->input('text', ['class' => 'settings-input-phone cell-phone', 'readOnly' => true, 'value' => $user_info->mobile]) 
+                ->widget(MaskedInput::className(), ['mask' => '+7 (999) 999-99-99'])
+                ->input('text', ['class' => 'settings-input-phone', 'readOnly' => true, 'value' => $user_info->mobile]) 
                 ->label()
         ?>
         
