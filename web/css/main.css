@@ -204,6 +204,11 @@ login-form-group .help-block {
 .third-step-offer p {
     margin: 30px 0;
 }
+#error-message {
+    margin: -10px 0px;
+    font-size: 12px;
+    color: #ef693a;
+}
 /* Конец Регистрация */
 
 /* Кнопки */
@@ -2093,6 +2098,25 @@ input[name="date_end-period-pay"]:focus {
     border-image-slice: 1; 
     
 }
+.menu-items > li#item-menu-2 a {
+    margin: 0 15px;
+}
+.menu-items > li#item-menu-2 a.sub-menu-item {
+    font-size: 12px;
+    font-weight: 100;
+    text-transform: none;
+    box-sizing: border-box;
+    padding: 5px 15px;
+    margin: 0px -5px;
+    display: unset;
+}
+a.sub-menu-item {
+    display: none;
+}
+.menu-items > li#item-menu-2 a.sub-menu-item:hover {
+    border-radius: 12px;
+    border: 1px solid #fff;
+}
 /* Конец Выпадающее меню навигации */
 /* Конец Навигационное меню */
 
@@ -2212,28 +2236,3 @@ input[name="date_end-period-pay"]:focus {
 }
 /* Конец Дополнительное навигационное меню, лицевой счет */
 
-
-/*.menu-scroll > li {
-    text-transform: uppercase;
-    font-size: 16px;    
-}*/
-
-.menu-items > li#item-menu-2 a {
-    margin: 0 15px;
-}
-.menu-items > li#item-menu-2 a.sub-menu-item {
-    font-size: 12px;
-    font-weight: 100;
-    text-transform: none;
-    box-sizing: border-box;
-    padding: 5px 15px;
-    margin: 0px -5px;
-    display: unset;
-}
-a.sub-menu-item {
-    display: none;
-}
-.menu-items > li#item-menu-2 a.sub-menu-item:hover {
-    border-radius: 12px;
-    border: 1px solid #fff;
-}

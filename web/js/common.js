@@ -4,6 +4,8 @@
 
 $(document).ready(function() {
 
+$('.cell-phone').mask('+7 (999) 999-99-99');
+$('.sms-code-input').mask('99999');
 /*
  * Предварительная загрузка превью одной фотографии
  */
@@ -159,11 +161,10 @@ $('#menu').on('wheel', function(e){
 });
 
 /*
- * 
- * @param {type} $
- * @returns {undefined}
+ * Отправка повторного номера телефона
  */
 $('#send-request-to-sms').on('click', function() {
+    var labelError = $('#error-message');
     var phoneNumber = $('input[name*="phone"]').val();
     var re = /^\+7\ \([\d]{3}\)\ [\d]{3}-[\d]{2}-[\d]{2}$/;
     var valid = re.test(phoneNumber);
@@ -182,9 +183,9 @@ $('#send-request-to-sms').on('click', function() {
                 console.log('ok');                
             }
         });
-        return alert('Отправить смс код');        
+        return labelError.text('СМС код был выслан на указанный номер телефона');
     }
-    return alert('Ошибка заполненич номера телефона');
+    return labelError.text('Ошибка заполнения номера мобильного телефона');
     
 });
 

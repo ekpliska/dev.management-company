@@ -17,13 +17,13 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/main.css',        
-//        'css/style.css',        
         'css/checkbox.css',
         'css/form-style.css',
         '//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css',
     ];
     public $js = [
         'js/common.js',
+        'js/jquery.maskedinput.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

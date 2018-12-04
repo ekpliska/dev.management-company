@@ -20,6 +20,7 @@ class SignupController extends Controller {
     public function actionIndex() {
         
         $session = Yii::$app->session;
+        $session['count_step'] = 0;
         
         $model_step_one = new SignupStepOne();
         $model_step_two = new SignupStepTwo();
@@ -73,7 +74,7 @@ class SignupController extends Controller {
                 
                 $model = new RegistrationForm();
                 $model->registration($this->current_array);
-                return $this->goHome();
+                return $this->redirect(['site/login']);
             }
         }
         return false;
@@ -83,6 +84,7 @@ class SignupController extends Controller {
      * Запись в сессию данных первого шага регистрации
      */
     private function setSessionStepOne($data) {
+        
         if ($data == null) {
             return false;
         }

@@ -1,7 +1,6 @@
 <?php
 
     use yii\widgets\ActiveForm;
-    use yii\widgets\MaskedInput;
     use yii\helpers\Html;
 /* 
  * Регистрация, шаг 3
@@ -26,17 +25,15 @@
 
     <div class="field">
         <?= $form->field($model_step_three, 'phone')
-                ->widget(MaskedInput::className(), [
-                    'mask' => '+7 (999) 999-99-99'])
-                ->input('text', ['class' => 'field-input'])
+                ->input('text', ['class' => 'field-input cell-phone'])
                 ->label($model_step_three->getAttributeLabel('phone'), ['class' => 'field-label']) ?> 
         <?= Html::button('Получить код', ['id' => 'send-request-to-sms']) ?>
+        <p id="error-message"></p>
     </div>
 
     <div class="field-sms">
         <?= $form->field($model_step_three, 'sms_code')
-                ->widget(MaskedInput::className(), ['mask' => '9{5,5}'])
-                ->input('text', ['class' => 'field-input'])
+                ->input('text', ['class' => 'field-input sms-code-input'])
                 ->label($model_step_three->getAttributeLabel('sms_code'), ['class' => 'field-label']) ?>
         
         
