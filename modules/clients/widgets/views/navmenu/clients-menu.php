@@ -12,13 +12,18 @@ $controller = Yii::$app->controller->id;
 
 <ul class="menu-items menu-scroll" id="menu">
     
-    <?php foreach ($menu_array as $key => $items) : ?>
-        <?php foreach ($items as $key_item => $item) : ?>
-            <li id="item-menu-<?= $key ?>" class="<?= ($key == 2) ? 'active-item' : '' ?>">
-                <a href="<?= Url::to([$key_item . '/index']) ?>"><?= $item ?></a>
-            </li>
-            <?php $count++ ?>
-        <?php endforeach; ?>
+    <?php foreach ($menu_array as $key => $item) : ?>
+        <li id="item-menu-<?= $count ?>" class="<?= ($count == 2) ? 'active-item' : '' ?>">
+            <a href="<?= Url::to([$item['link']]) ?>">
+                <?= $item['name'] ?>
+            </a>
+            <?php if ($key == 'personal-account') : ?>
+                <?php foreach ($child_array as $key_child => $child_item) : ?>
+                    <a href="<?= Url::to([$child_item['link']]) ?>" class="sub-menu-item"><?= $child_item['name'] ?></a>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </li>
+        <?php $count++ ?>
     <?php endforeach; ?>
         
 </ul>
