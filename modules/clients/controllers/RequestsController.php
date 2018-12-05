@@ -75,9 +75,11 @@ class RequestsController extends AppClientsController
      * Страница отдельной заявки
      */    
     public function actionViewRequest($request_numder) {
-                
+
+        $accoint_id = $this->_choosing;
+        
         // Ищем заявку по уникальному номеру
-        $request_info = Requests::findRequestByIdent($request_numder);
+        $request_info = Requests::findRequestByIdent($request_numder, $accoint_id);
         
         /*
          * Если заявка не найдена или передан номер заявки не принадлежащий пользователю, 

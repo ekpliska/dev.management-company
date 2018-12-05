@@ -181,12 +181,13 @@ class Requests extends ActiveRecord
     /*
      * Поиск заявки по его уникальному номеру
      */
-    public static function findRequestByIdent($request_numder) {
+    public static function findRequestByIdent($request_numder, $account_id) {
         
         $request = (new \yii\db\Query)
                 ->from('requests as r')
                 ->join('LEFT JOIN', 'type_requests as tr', 'r.requests_type_id = tr.type_requests_id')                
                 ->where(['requests_ident' => $request_numder])
+                ->andWhere(['requests_account_id' => $account_id])
                 ->one();
         
         return $request;
