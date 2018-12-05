@@ -9,6 +9,7 @@ class SmsOperations extends ActiveRecord
 
     const TYPE_CHANGE_PASSWORD = 1;
     const TYPE_CHANGE_PHONE = 2;
+    const TYPE_CHANGE_EMAIL = 3;
     
     /**
      * Таблица БД

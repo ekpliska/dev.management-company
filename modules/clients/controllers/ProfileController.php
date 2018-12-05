@@ -12,6 +12,7 @@
     use app\models\PersonalAccount;
     use app\modules\clients\models\ChangePasswordForm;
     use app\modules\clients\models\ChangeMobilePhone;
+    use app\modules\clients\models\ChangeEmail;
     use app\models\SmsOperations;
     use app\modules\clients\models\form\SMSForm;
     
@@ -209,8 +210,7 @@ class ProfileController extends AppClientsController
         // Загружаем модель смены пароля
         $model_password = new ChangePasswordForm($user);
         // Модель на смену номера мобильного телефона
-        $model_phone = new ChangeMobilePhone($user);
-        
+        $model_phone = new ChangeMobilePhone($user);        
         
         // Модель на ввод СМС кода
         $sms_model = new SMSForm($user);
@@ -233,6 +233,11 @@ class ProfileController extends AppClientsController
                 $this->setTimeCookies();
                 return $this->refresh();
             }
+        }
+        
+        if ($user->load(Yii::$app->request->post()) && $user->validate()) {
+            $user->save();
+            return $this->refresh();
         }
 
         return $this->render('settings-profile', [

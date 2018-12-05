@@ -859,7 +859,8 @@ p.right {
     font-weight: normal;
     padding: 0px 10px;
 }
-#sms-form .has-error .control-label,
+#change-phone-form .has-error .control-label,
+#change-email-form .has-error .control-label,
 #change-password-form .has-error .control-label {
     color: #f0754a;
 }
@@ -900,16 +901,40 @@ p.right {
     border-radius: 25px;
     outline: none;
 }
+.settings-input-phone,
 .settings-input-phone:read-only {
     padding: 5px 0px;
     border: none;
-    border-bottom: 1px dashed #ddd;
+    border-bottom: 1px dashed #2f3640;
     outline: none;
     color: #2f3640;
     cursor: pointer;
 }
 .change-record-btn {
     visibility: hidden;
+}
+.settings-message {
+    font-size: 12px;
+    color: rgb(103, 118, 138);
+}
+.email-inp:focus {
+    padding: 5px 10px;    
+    border: 1px solid #1fd68d;
+    border-radius: 25px;
+    outline: none;
+}
+.change-btn-edit {
+    margin: 0px 5px;
+    padding: 5px 8px;
+    border-radius: 25px;
+    background: #fff;
+    border-color: #2d18b4;
+    color: #2d18b4;
+    outline: none;
+}
+.change-btn-edit:hover {
+    background: #2d18b4;
+    color: #fff;
 }
 /* Конец Настройки профиля пользователя */
 

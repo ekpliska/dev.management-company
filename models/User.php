@@ -58,7 +58,7 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            ['user_login', 'required'],
+            [['user_login', 'user_email', 'user_mobile'], 'required'],
             
             [['user_email', 'user_mobile'], 'required', 'on' => self::SCENARIO_EDIT_PROFILE],
             

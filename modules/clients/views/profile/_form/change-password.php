@@ -4,6 +4,7 @@
     use yii\helpers\Html;
     use app\modules\clients\models\form\SMSForm;
     use yii\widgets\MaskedInput;
+    use app\models\SmsOperations;
 
 /* 
  * Смена пароля учетной записи пользователя
@@ -51,6 +52,7 @@
     <?php
         $form_psw = ActiveForm::begin([
             'id' => 'sms-form',
+            'action' => ['send-sms-form', 'type' => SmsOperations::TYPE_CHANGE_PASSWORD],            
             'validateOnBlur' => false,
             'validateOnChange' => false,
             'enableAjaxValidation' => true,

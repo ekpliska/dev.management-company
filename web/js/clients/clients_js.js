@@ -132,9 +132,13 @@ $(document).ready(function() {
         $(this).prop('readOnly', true);
     });
     
-    $('.settings-input-phone').on('input', function(){
+    $('.phone-inp').on('input', function(){
         $('#change-phone-form button').removeClass('change-record-btn');
     });
+
+    $('.email-inp').on('input', function(){
+        $('#change-email-form button').removeClass('change-record-btn');
+    });    
     
     /* End Block of Profile */
 

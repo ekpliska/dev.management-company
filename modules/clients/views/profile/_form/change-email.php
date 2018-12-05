@@ -7,7 +7,7 @@
  * Смена электронного адреса
  */
 ?>
-<p>
+<p class="settings-message">
     Внимание, на указанный адрес электронной почты будут приходить оповещения с портала. 
     Отключить оповещения вы можете на странице вашего профиля <?= Html::a('Профиль', ['profile/index']) ?>.
 </p>
@@ -17,10 +17,15 @@
         'validateOnSubmit' => true,
         'validateOnBlur' => false,
         'validateOnChange' => false,
+        'options' => [
+            'class' => 'form-inline',
+        ],
     ]);
 ?>
+    <?= $form_email->field($user, 'user_email')
+            ->input('text', ['class' => 'settings-input-phone email-inp', 'readOnly' => true])
+            ->label(false) ?>
 
-    <?= $form_email->field($user, 'user_email')->input('text')->label() ?>
-    <?= Html::submitButton('Изменить', ['class' => 'btn btn-primary']) ?>
-                
+    <?= Html::submitButton('<i class="glyphicon glyphicon-pencil"></i>', ['class' => 'change-btn-edit change-record-btn']) ?>
+
 <?php ActiveForm::end() ?>
