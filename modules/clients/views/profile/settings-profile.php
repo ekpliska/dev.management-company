@@ -32,7 +32,9 @@ $this->title = 'Настройки';
         <?= $this->render('_form/change-password', [
                 'model_password' => $model_password,
                 'sms_model' => $sms_model,
-                'is_change_password' => $is_change_password]) ?>
+                'is_change_password' => $is_change_password,
+                'is_change_phone' => $is_change_phone,
+            ]) ?>        
     </div>
     <div class="col-md-4 settings">
         <p class="profile-settings_title center"><i class="glyphicon glyphicon-phone">            
@@ -43,6 +45,7 @@ $this->title = 'Настройки';
                 'sms_model' => $sms_model,
                 'user_info' => $user_info,
                 'is_change_phone' => $is_change_phone,
+                'is_change_password' => $is_change_password,
             ]) ?>
     </div>
     <div class="col-md-4 settings">

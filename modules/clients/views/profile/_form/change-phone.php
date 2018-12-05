@@ -30,7 +30,9 @@ $this->title = 'Изменение номера мобильного телеф�
         ?>
         
         <div class="text-right">
-            <?= Html::submitButton('Продолжить', ['class' => 'blue-outline-btn req-table-btn change-record-btn']) ?>
+            <?php if ($is_change_password == false) : ?>
+                <?= Html::submitButton('Продолжить', ['class' => 'blue-outline-btn req-table-btn change-record-btn']) ?>            
+            <?php endif; ?>            
         </div>    
 
     <?php ActiveForm::end(); ?>

@@ -40,7 +40,9 @@
         ?>
         
         <div class="text-right">
-            <?= Html::submitButton('Продолжить', ['class' => 'blue-outline-btn req-table-btn']) ?>
+            <?php if ($is_change_phone == false) : ?>
+                <?= Html::submitButton('Продолжить', ['class' => 'blue-outline-btn req-table-btn']) ?>
+            <?php endif; ?>
         </div>    
 
     <?php ActiveForm::end(); ?>
