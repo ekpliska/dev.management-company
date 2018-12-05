@@ -3,7 +3,6 @@
     use yii\bootstrap\Modal;
     use yii\bootstrap\ActiveForm;
     use yii\helpers\Html;
-    use yii\widgets\MaskedInput;
 
 /* 
  * Модальное окно добавления новой заявки
@@ -45,10 +44,10 @@
                 ->input('text', ['class' => 'field-input-modal cell-phone'])
                 ->label($model->getAttributeLabel('requests_phone'), ['class' => 'field-label-modal']) ?>
 
-        <?= $form->field($model, 'requests_comment', ['template' => '<div class="field-modal-textarea">{label}{input}{error}</div>'])
-                ->textarea(['rows' => 10, 'class' => 'field-input-textarea-modal'])
+        <?= $form->field($model, 'requests_comment', [
+                'template' => '<div class="field-modal-textarea">{label}<span id="label-count"></span><span id="label-count-left"></span>{input}{error}</div>'])
+                ->textarea(['rows' => 10, 'class' => 'field-input-textarea-modal comment'])
                 ->label($model->getAttributeLabel('requests_comment'), ['class' => 'field-label-modal']) ?>
-
 
         <?= $form->field($model, 'gallery[]', [
                 'template' => '<label class="modal_btn-upload" role="button"><i class="fa fa-paperclip" aria-hidden="true"></i>{input}{label}{error}</label>'])

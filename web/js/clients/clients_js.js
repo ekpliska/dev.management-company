@@ -261,6 +261,9 @@ $(document).ready(function() {
      */ 
     $('.request__btn_close').on('click', function () {
         $('#add-request-modal-form')[0].reset();
+        $('.field-modal-textarea span').each(function(){
+            $(this).text('');
+        });        
     });
     
     /*
@@ -361,6 +364,9 @@ $(document).ready(function() {
      */
     $('.btn__paid_service_close').on('click', function() {
         $('#add-paid-service')[0].reset();
+        $('.field-modal-textarea span').each(function(){
+            $(this).text('');
+        });
     });
 
     /*
@@ -395,6 +401,11 @@ $(document).ready(function() {
         });         
         
     }
+    
+    /*
+     * Счетчик подстчета количества вводимых символов в поле комментарий к заявке
+     */
+    limitLettrs('.comment', 250, '#label-count', '#label-count-left');
 
     /* End Block of Paid Services */
 
@@ -612,5 +623,26 @@ $(document).ready(function() {
         $(this).parents(".custom-select-services").find(".custom-select-trigger-services").text(textSelect);
         filterServicesCategory(valueSelect);
     });
-    
+
+    /*
+     * Счетчик подсчета количества введенных символов в textarea
+     */
+    function limitLettrs(DOMObject, max, labelCount, lostLetter) {
+        $(DOMObject).on('keyup keypress blur change', function(){
+            // Количество введенных символов
+            var count = $(this).val().length;
+            
+            if (count < max) {
+                $(labelCount).text(count);
+                $(lostLetter).text('/' + max);
+            } else if (count >= max) {
+                // Если достигнул лимит введенных символов
+                $(labelCount).text(count);
+                $(lostLetter).text('/' + max);
+                $(this).val($(this).val().substr(0, max));
+                return false;                
+            }
+        });
+    }
+
 });

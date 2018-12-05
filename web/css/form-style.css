@@ -823,3 +823,19 @@ input[name="date_end-period"]:focus {
     font-weight: 100;
 }
 /* Конец Календарь */
+
+/* Textarea */
+textarea {
+    resize: none;
+    overflow: auto;
+}
+#label-count,
+#label-count-left {
+    font-size: 11px;
+    color: #8b709d;
+}
+.modal-content .has-error .help-block {
+    font-size: 12px;
+    color: #f0754a;
+}
+/* Конец Textarea */

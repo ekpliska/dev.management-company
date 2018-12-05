@@ -3,7 +3,6 @@
     use yii\bootstrap\Modal;
     use yii\helpers\Html;
     use yii\widgets\ActiveForm;
-    use yii\widgets\MaskedInput;
 /* 
  * Форма в модальном окне, создание новой заявки на платную услугу
  */
@@ -46,12 +45,11 @@
             ->label(false) ?>
 
     <?= $form->field($new_order, 'services_phone', ['template' => '<div class="field-modal">{label}{input}{error}</div>'])
-            ->widget(MaskedInput::className(), [
-                'mask' => '+7(999) 999-99-99'])
-            ->input('text', ['class' => 'field-input-modal phone'])
+            ->input('text', ['class' => 'field-input-modal phone cell-phone'])
             ->label($new_order->getAttributeLabel('services_phone'), ['class' => 'field-label-modal']) ?>
-                
-    <?= $form->field($new_order, 'services_comment', ['template' => '<div class="field-modal-textarea">{label}{input}{error}</div>'])
+
+    <?= $form->field($new_order, 'services_comment', [
+            'template' => '<div class="field-modal-textarea">{label}<span id="label-count"></span><span id="label-count-left"></span>{input}{error}</div>'])
             ->textarea([
                 'rows' => 10,
                 'class' => 'field-input-textarea-modal comment'])
