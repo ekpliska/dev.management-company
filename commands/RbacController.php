@@ -57,40 +57,115 @@ class RbacController extends Controller {
         /*
          *  Разрешение для Собственников и Арендаторов
          */
-        $addNewRent = $auth->createPermission('AddNewRent');
-        $addNewRent->description = 'Добавить нового аредатора';
-        $auth->add($addNewRent);
-
-//        $viewInfoRent = $auth->createPermission('ViewInfoRent');
-//        $viewInfoRent->description = 'Редактирование информации об Арендаторе (блок Контактные даныые арендатора)';
-//        $auth->add($viewInfoRent);
-
-        $vote = $auth->createPermission('Vote');
-        $vote->description = 'Участие в голосовании';
+        $vote = $auth->createPermission('ParticipantToVote');
+        $vote->description('Участие в голосовании');
         $auth->add($vote);
         
-        $addNews = $auth->createPermission('AddNews');
-        $addNews->description = 'Добавение новостей';
-        $auth->add($addNews);
-        
-        //Назначаем разрешения добавлять/радактировать информацию об Арендаторе только для роли Собсвенник
-        $auth->addChild($clients, $addNewRent);
-        $auth->addChild($clients, $vote);
-        //$auth->addChild($clients, $viewInfoRent);
-        
-        // Назначаем разрешения добавлять/радактировать новости только для роли Специалист(выборочно)/Администратор
-        $auth->addChild($dispatcher, $addNews);
+        $create_account = $auth->createPermission('CreateAccount');
+        $create_account->description('Создание лицевого счета');
+        $auth->add($create_account);
         
         
-        // Администратор обладает правами всех других пользователей
         /*
-        $auth->addChild($administrator, $clients);
-        $auth->addChild($administrator, $clients_rent);
-        $auth->addChild($administrator, $dispatcher);
-        $auth->addChild($administrator, $specialist);
-        $auth->addChild($administrator, $addNewRent);
-        $auth->addChild($administrator, $viewInfoRent);
+         * Разрешения для Диспетчера
          */
+        $create_news_dispatcher = $auth->createPermission('CreateNewsDispatcher');
+        $create_news_dispatcher->description('Добавление новостей');
+        $auth->add($create_news_dispatcher);
+        
+        /*
+         * Разрешения для Администратора
+         */
+        // Собсвенники
+        $clients_view = $auth->createPermission('ClientsView');
+        $clients_view->description('Просмотр раздела Собственники');
+        $auth->add($clients_view);
+        
+        $clients_edit = $auth->createPermission('ClientsEdit');
+        $clients_edit->description('Редактирование учетных записей Собственников');
+        $auth->add($clients_edit);
+        
+        // Сотрудники
+        $employees_view= $auth->createPermission('EmployeesView');
+        $employees_view->description('Просмотр раздела Сотрудники (Диспетчеры, Специалисты)');
+        $auth->add($employees_view);
+        
+        $employees_edit= $auth->createPermission('EmployeesEdit');
+        $employees_edit->description('Редактирование учетных записей Сотрудников (Диспетчеры, Специалисты)');
+        $auth->add($employees_edit);
+        
+        // Услуги
+        $services_view= $auth->createPermission('ServicesView');
+        $services_view->description('Просмотр раздела Услуги');
+        $auth->add($services_view);
+        
+        $services_edit= $auth->createPermission('ServicesEdit');
+        $services_edit->description('Редактирование раздела Услуги');
+        $auth->add($services_edit);
+        
+        // Заявки
+        $requests_view= $auth->createPermission('RequestsView');
+        $requests_view->description('Просмотр раздела Заявки');
+        $auth->add($requests_view);
+        
+        $requests_edit= $auth->createPermission('RequestsEdit');
+        $requests_edit->description('Редактирование раздела Заявки');
+        $auth->add($requests_edit);
+        
+        // Платыне заявки
+        $paid_reques_view= $auth->createPermission('PaidReuestsView');
+        $paid_reques_view->description('Просмотр раздела Заявки на платные услуги');
+        $auth->add($paid_reques_view);
+        
+        $paid_reques_edit= $auth->createPermission('PaidReuestsEdit');
+        $paid_reques_edit->description('Редактирование раздела Заявки на платные услуги');
+        $auth->add($paid_reques_edit);
+        
+        // Новости
+        $news_view= $auth->createPermission('NewsView');
+        $news_view->description('Просмотр раздела Новости');
+        $auth->add($news_view);
+        
+        $news_edit= $auth->createPermission('NewsEdit');
+        $news_edit->description('Редактирование раздела Новости');
+        $auth->add($news_edit);        
+        
+        // Голосование
+        $votings_view= $auth->createPermission('VotingsView');
+        $votings_view->description('Просмотр раздела Голосования');
+        $auth->add($votings_view);
+        
+        $votings_edit= $auth->createPermission('VotingsEdit');
+        $votings_edit->description('Редактирование раздела Голосования');
+        $auth->add($votings_edit);        
+        
+        // Жилищный фонд
+        $estates_view= $auth->createPermission('EstatesView');
+        $estates_view->description('Просмотр раздела Жилищный фонд');
+        $auth->add($estates_view);
+        
+        $estates_edit= $auth->createPermission('EstatesEdit');
+        $estates_edit->description('Редактирование раздела Жилищный фонд');
+        $auth->add($estates_edit);        
+        
+        // Конструктор заявок
+        $designer_view= $auth->createPermission('DesignerView');
+        $designer_view->description('Просмотр раздела Конструктор заявок');
+        $auth->add($designer_view);
+        
+        $designer_edit= $auth->createPermission('DesignerEdit');
+        $designer_edit->description('Редактирование раздела Конструктор заявок');
+        $auth->add($designer_edit);        
+        
+        // Настройки
+        $settings_view= $auth->createPermission('SettingsView');
+        $settings_view->description('Просмотр раздела Настройки');
+        $auth->add($settings_view);
+        
+        $settings_edit= $auth->createPermission('SettingsEdit');
+        $settings_edit->description('Редактирование раздела Настройки');
+        $auth->add($settings_edit);        
+        
         
         $this->stdout('here', PHP_EOL);
         

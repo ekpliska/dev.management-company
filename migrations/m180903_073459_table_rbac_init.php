@@ -82,9 +82,32 @@ class m180903_073459_table_rbac_init extends Migration
                 ['dispatcher', '1', 'Сотрудник (Диспетчер)', NULL, NULL, time(), time()],
                 ['specialist', '1', 'Специалист', NULL, NULL, time(), time()],
                 ['administrator', '1', 'Администратор', NULL, NULL, time(), time()],
-                ['AddNewRent', '2', 'Добавить нового аредатора', NULL, NULL, time(), time()],
-                ['ViewInfoRent', '2', 'Редактирование информации об Арендаторе (блок Контактные даныые арендатора)', NULL, NULL, time(), time()],
-                ['Vote', '2', 'Голосование', NULL, NULL, time(), time()],
+                
+                ['ParticipantToVote', '2', 'Участие в голосовании', NULL, NULL, time(), time()],
+                ['CreateAccount', '2', 'Создание лицевого счета', NULL, NULL, time(), time()],
+                
+                ['CreateNewsDispatcher', '2', 'Добавление новостей', NULL, NULL, time(), time()],
+                
+                ['ClientsView', '2', 'Просмотр раздела Собственники', NULL, NULL, time(), time()],
+                ['ClientsEdit', '2', 'Редактирование учетных записей Собственников', NULL, NULL, time(), time()],
+                ['EmployeesView', '2', 'Просмотр раздела Сотрудники (Диспетчеры, Специалисты)', NULL, NULL, time(), time()],
+                ['EmployeesEdit', '2', 'Редактирование учетных записей Сотрудников (Диспетчеры, Специалисты)', NULL, NULL, time(), time()],
+                ['ServicesView', '2', 'Просмотр раздела Услуги', NULL, NULL, time(), time()],
+                ['ServicesEdit', '2', 'Редактирование раздела Услуги', NULL, NULL, time(), time()],
+                ['RequestsView', '2', 'Просмотр раздела Заявки', NULL, NULL, time(), time()],
+                ['RequestsEdit', '2', 'Редактирование раздела Заявки', NULL, NULL, time(), time()],
+                ['PaidReuestsView', '2', 'Просмотр раздела Заявки на платные услуги', NULL, NULL, time(), time()],
+                ['PaidReuestsEdit', '2', 'Редактирование раздела Заявки на платные услуги', NULL, NULL, time(), time()],
+                ['NewsView', '2', 'Просмотр раздела Новости', NULL, NULL, time(), time()],
+                ['NewsEdit', '2', 'Редактирование раздела Новости', NULL, NULL, time(), time()],
+                ['VotingsView', '2', 'Просмотр раздела Голосования', NULL, NULL, time(), time()],
+                ['VotingsEdit', '2', 'Редактирование раздела Голосования', NULL, NULL, time(), time()],
+                ['EstatesView', '2', 'Просмотр раздела Жилищный фонд', NULL, NULL, time(), time()],
+                ['EstatesEdit', '2', 'Редактирование раздела Жилищный фонд', NULL, NULL, time(), time()],
+                ['DesignerView', '2', 'Просмотр раздела Конструктор заявок', NULL, NULL, time(), time()],
+                ['DesignerEdit', '2', 'Редактирование раздела Конструктор заявок', NULL, NULL, time(), time()],
+                ['SettingsView', '2', 'Просмотр раздела Настройки', NULL, NULL, time(), time()],
+                ['SettingsEdit', '2', 'Редактирование раздела Настройки', NULL, NULL, time(), time()],
             ]
         );
         
@@ -92,9 +115,29 @@ class m180903_073459_table_rbac_init extends Migration
         // Права
         $this->batchInsert($auth_manager->itemChildTable, [
             'parent', 'child'], [
-                ['clients', 'AddNewRent'],
-                ['clients', 'ViewInfoRent'],
-                ['clients', 'Vote'],
+                ['clients', 'ParticipantToVote'],
+                ['clients', 'CreateAccount'],
+                ['dispatcher', 'CreateNewsDispatcher'],
+                ['administrator', 'ClientsView'],
+                ['administrator', 'ClientsEdit'],
+                ['administrator', 'EmployeesView'],
+                ['administrator', 'EmployeesEdit'],
+                ['administrator', 'ServicesView'],
+                ['administrator', 'ServicesEdit'],
+                ['administrator', 'RequestsView'],
+                ['administrator', 'RequestsEdit'],
+                ['administrator', 'PaidReuestsView'],
+                ['administrator', 'PaidReuestsEdit'],
+                ['administrator', 'NewsView'],
+                ['administrator', 'NewsEdit'],
+                ['administrator', 'VotingsView'],
+                ['administrator', 'VotingsEdit'],
+                ['administrator', 'EstatesView'],
+                ['administrator', 'EstatesEdit'],
+                ['administrator', 'DesignerView'],
+                ['administrator', 'DesignerEdit'],
+                ['administrator', 'SettingsView'],
+                ['administrator', 'SettingsEdit'],
             ]
         );
         
