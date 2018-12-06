@@ -5,6 +5,7 @@
 $(document).ready(function() {
 
 $('.cell-phone').mask('+7 (999) 999-99-99');
+$('.house-phone').mask('+7 (9999) 999-99-99');
 $('.sms-code-input').mask('99999');
 /*
  * Предварительная загрузка превью одной фотографии
