@@ -1011,6 +1011,18 @@ p.right {
 .form__upload-image {
     display: table;
 }
+.count-label {
+    position: absolute;
+    top: -7px;
+    right: -4px;
+    background: #EF693A;
+    font-size: 10px;
+    color: #fff;
+    padding: 2px 10px;
+    border-radius: 12px;
+    border: 3px solid #fff;
+    font-family: "Mplus 1p Bold";
+}
 /* Конец Заявки */
 
 /* Таблица для заявок */
@@ -2258,12 +2270,10 @@ a.sub-menu-item {
     justify-content: center;
 }
 .status-request > li > a {
-    height: 50px;
-    width: 192px;
     border-radius: 25px;
     font-size: 12px;
     color: #000;
-    padding: 14px 15px;
+    padding: 14px 50px;
     font-weight: bold;
     text-transform: uppercase;
     cursor: pointer;
@@ -2273,6 +2283,9 @@ a.sub-menu-item {
     text-decoration: none;
     background-color: transparent;
     border-radius: 25px;
+}
+.status-request > li + li {
+    margin-left: 15px;
 }
 .req-bange-default {
     border: 2px solid #4e2ae2;

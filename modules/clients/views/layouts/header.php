@@ -31,7 +31,7 @@
         <?= \app\modules\clients\widgets\NavMenu::widget(); ?>   
     </div>
     <?= SubBarGeneralPage::widget() ?>
-    <?= StatusRequest::widget() ?>
+    <?= StatusRequest::widget(['account_id' => $this->context->_choosing]) ?>
     <?= SubBarPaidService::widget() ?>
     <?= SubBarPersonalAccount::widget() ?>
 </nav>

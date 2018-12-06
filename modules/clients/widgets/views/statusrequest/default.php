@@ -1,6 +1,7 @@
 <?php
 
     use yii\helpers\Html;
+    use app\models\StatusRequest;
 
 /* 
  * Вид статусов заявок
@@ -15,7 +16,8 @@
             </li>
             <?php foreach ($status_requests as $key => $status) : ?>
                 <li class="nav-item">
-                    <?= Html::a($status, ['requests/index'], ['class' => $css_classes[$key] . ' status_request-switch', 'data-status' => $key]) ?>
+                    <?= Html::a($status['name'], ['requests/index'], ['class' => $css_classes[$key] . ' status_request-switch', 'data-status' => $key]) ?>
+                    <?= $key != StatusRequest::STATUS_CLOSE && $status['count'] != 0 ? '<span class="count-label">' . $status['count'] . '</span>' : '' ?>
                 </li>
             <?php endforeach; ?>
         </ul>

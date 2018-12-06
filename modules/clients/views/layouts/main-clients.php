@@ -25,7 +25,6 @@ ClientsAsset::register($this);
     <?php $this->endContent() ?>    
         
     <div class="container">
-        HERE
         <?= $content ?>
     </div>
         
