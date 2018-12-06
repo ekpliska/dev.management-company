@@ -1031,6 +1031,7 @@ p.right {
     border: 1px solid #ddd;
     border-radius: 12px;
     font-size: 12px;
+    margin-bottom: 0px;
 }
 .requests-table thead {
     color: #2d18b4;
@@ -1068,32 +1069,50 @@ p.right {
     margin-right: 4px;
     margin-top: 5px;
 }
+/* Конец Таблица для заявок */
+
+/* Постраничная нафигация, таблица */
 .pagination {
-    margin: 0;
-    padding-left: 45%;
+    margin: 5px 0;
+}
+.pagination > .active > a, 
+.pagination > .active > span, 
+.pagination > .active > a:hover, 
+.pagination > .active > a:focus, 
+.pagination > .active > span:focus {
+    color: #ef693a;
+    border-bottom: 2px solid #ef693a;
+    background-color: #fedede;    
 }
 .pagination > li > a, .pagination > li > span {
+    color: #7c7c7c;
+    background-color: transparent;
+    font-size: 14px;
+    padding: 2px 7px;
     border: none;
-    margin: 5px;
-    color: #ff8e8e;
 }
-.pagination > .active > a {
-    background-color: #fff;
-    color: #c1c1c1;
+.pagination > li > a:hover, 
+.pagination > li > a:focus, 
+.pagination > li > span:focus {
+    color: #7c7c7c;
+    background-color: transparent;
+    border-bottom: 2px solid #ef693a;    
 }
-.pagination > .active > a:hover {
-    background-color: #fff;
-    border: 2px solid #bcd6ff;
-    color: #8cb4ff;
-    border-radius: 100%;
+.pagination > li.prev > a:hover, 
+.pagination > li.next > a:hover, 
+.pagination > .active > span:hover, 
+.pagination > li > span:hover {
+    border: none;
 }
-.pagination > li > a:hover {
-    border: 2px solid #fed9d9;
-    border-radius: 100%;
-    background-color: #fff;
-    color: #ff7d7d;
+.pagination > li.prev > a:hover i, 
+.pagination > li.next > a:hover i {
+    color: #ef693a;
 }
-/* Конец Таблица для заявок */
+.pagination i {
+    font-size: 10px;
+    color: #7c7c7c;
+}
+/* Конец Постраничная нафигация, таблица */
 
 /* Просмотр отдельной заявки */
 .requests-view {
