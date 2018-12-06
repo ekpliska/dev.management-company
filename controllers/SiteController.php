@@ -13,7 +13,6 @@
     use app\models\LoginForm;
     use app\models\User;
     use app\models\EmailConfirmForm;
-    
     use app\models\PasswordResetRequestForm;
 
 class SiteController extends Controller
@@ -79,7 +78,13 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->redirect(['clients/clients']);
+            if (Yii::$app->user->can('clients') || Yii::$app->user->can('clients_rent')) {
+                return $this->redirect(['clients/clients']);
+            } elseif (Yii::$app->user->can('dispatcher')) {
+                return $this->redirect(['dispatchers/dispatchers']);
+            } elseif (Yii::$app->user->can('administrator')) {
+                return $this->redirect(['managers/managers']);
+            }
         }
 
         $model->password = '';
