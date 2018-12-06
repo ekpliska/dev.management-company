@@ -73,8 +73,9 @@ class checkPersonalAccount extends Behavior {
         // Получаем ID лицевого счета
         $this->_choosing = $choosing;
         // Получаем номер лицевого счета
-        $this->_value_choosing = $choosing ? $array_account[$choosing] : $first_account;
-
+        $this->_value_choosing = $choosing ? $array_account[$choosing] : $array_account[$first_account];
+        
+        
         return [
             '_choosing' => $this->_choosing,
             '_value_choosing' => $this->_value_choosing,

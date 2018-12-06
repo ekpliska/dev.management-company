@@ -56,7 +56,7 @@ $this->title = 'Профиль собственника';
                 'placeholder' => $this->context->_value_choosing,
                 'id' => 'sources',
                 'class' => 'custom-select sources',
-                'data-client' => $user_info->clientID]) 
+                'data-client' => Yii::$app->user->can('clients') ? $user_info->clientID : '']) 
         ?>    
     </div>
     
@@ -88,7 +88,7 @@ $this->title = 'Профиль собственника';
                 
 
         <!--Арендатор-->
-        
+        <?php if (Yii::$app->user->can('clients')) : ?>
         <div class="col-md-6 rent-profile-info">
             <p class="profile-title-rent">
                 <label class="el-switch">
@@ -107,7 +107,7 @@ $this->title = 'Профиль собственника';
             <?php endif; ?>
             </div>      
         </div>
-                
+        <?php endif ?>
     </div>
     
     <div class="spam-agree-txt text-center">
@@ -126,8 +126,12 @@ $this->title = 'Профиль собственника';
     
 </div>
 
-<?php if (!$is_rent) : ?>
-    <?= $this->render('_form/create_rent', ['add_rent' => $add_rent]) ?>
-<?php endif; ?>
+<?php if (Yii::$app->user->can('clients')) : ?>
 
-<?= ModalWindows::widget(['modal_view' => 'changes_rent']) ?>
+    <?php if (!$is_rent) : ?>
+        <?= $this->render('_form/create_rent', ['add_rent' => $add_rent]) ?>
+    <?php endif; ?>
+
+    <?= ModalWindows::widget(['modal_view' => 'changes_rent']) ?>
+
+<?php endif; ?>

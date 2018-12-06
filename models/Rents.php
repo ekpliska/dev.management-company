@@ -47,15 +47,20 @@ class Rents extends ActiveRecord
                 ['rents_name', 'rents_second_name', 'rents_surname'], 
                 'match',
                 'pattern' => '/^[А-Яа-я\ \-]+$/iu',
-                'message' => 'Поле "{attribute}" может содержать только буквы русского алфавита, и знак "-"',
+                'message' => 'Поле может содержать только буквы русского алфавита, и знак "-"',
             ],
             
-            [
-                'rents_mobile', 'unique',
-                'targetClass' => self::className(),
-                'targetAttribute' => 'rents_mobile',
+            ['rents_mobile', 'unique',
+                'targetClass' => User::className(),
+                'targetAttribute' => 'user_mobile',
                 'message' => 'Пользователь с введенным номером мобильного телефона в системе уже зарегистрирован',
                 'on' => self::SCENARIO_EDIT_VALIDATION,
+            ],
+            
+            ['rents_mobile', 'unique',
+                'targetClass' => User::className(),
+                'targetAttribute' => 'user_mobile',
+                'message' => 'Пользователь с введенным номером мобильного телефона в системе уже зарегистрирован',
             ],
             
             ['rents_mobile', 'match', 'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/i'],

@@ -31,12 +31,14 @@ $this->title = $voting['voting_title'];
             <p class="voting-description">
                 <?= $voting['voting_text'] ?>
             </p>
-            <?= Html::button('Принять участие', [
-                    'class' => 'register-in-voting',
-                    'id' => 'get-voting-in',
-                    'data-voting' => $voting['voting_id'],
-                    'disabled' => $btn_disabled,
-            ]) ?>
+            <?php if (Yii::$app->user->can('clients')) : ?>
+                <?= Html::button('Принять участие', [
+                        'class' => 'register-in-voting',
+                        'id' => 'get-voting-in',
+                        'data-voting' => $voting['voting_id'],
+                        'disabled' => $btn_disabled,
+                ]) ?>
+            <?php endif; ?>
         </div>
     </div>
     
@@ -85,7 +87,7 @@ $this->title = $voting['voting_title'];
     
 </div>
 
-<?php if ($is_register['status'] == RegistrationInVoting::STATUS_DISABLED) : ?>
+<?php if ($is_register['status'] == RegistrationInVoting::STATUS_DISABLED && Yii::$app->user->can('clients')) : ?>
 
     <?= $this->render('modal/participate-in-voting', [
             'model' => $model,

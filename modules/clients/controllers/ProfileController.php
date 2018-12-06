@@ -336,10 +336,12 @@ class ProfileController extends AppClientsController
     protected function rent($user_info) {
         
         $model = $user_info->_model;
+        $accounts_list = $this->_list;
         
         return $this->render('index', [
             'user' => $model,
             'user_info' => $user_info,
+            'accounts_list' => $accounts_list,
         ]);
         
     }

@@ -382,6 +382,7 @@ button#send-request-to-sms:focus{
     font-weight: bold;
     letter-spacing: 0.9px;
     text-transform: uppercase;
+    outline: none;
 }
 
 .blue-outline-btn:hover {
@@ -407,6 +408,9 @@ button#send-request-to-sms:focus{
     box-shadow: 1px 2px 3px 2px rgba(55,35,35,0.17);
     color: #FFFFFF;	
 }
+.blue-outline-btn:focus {
+    outline: none;
+}
 /* Конец Кнопка Применить, модальное окно */
 
 /* Кнопка Отмена, модальное окно */
@@ -421,6 +425,7 @@ button#send-request-to-sms:focus{
     font-weight: bold;
     letter-spacing: 0.9px;
     text-transform: uppercase;
+    outline: none;
 }	
 .red-outline-btn:hover {
     background-color: #FC3232;
@@ -432,6 +437,9 @@ button#send-request-to-sms:focus{
     border: 2px solid #b72424;
     box-shadow: 1px 2px 3px 2px rgba(55,35,35,0.17);
     color: #FFFFFF;	
+}
+.red-outline-btn:focus {
+    outline: none;
 }
 /* Конец Кнопка Отмена, модальное окно */
 

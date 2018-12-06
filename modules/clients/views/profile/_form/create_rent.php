@@ -3,7 +3,6 @@
     use yii\bootstrap\Modal;
     use yii\widgets\ActiveForm;
     use yii\helpers\Html;
-    use yii\widgets\MaskedInput;
 
 /* 
  * Модальное окно добавление учетной записи арендатора
@@ -57,10 +56,8 @@ Modal::begin([
             ->label($add_rent->getAttributeLabel('rents_second_name'), ['class' => 'field-label-modal']) ?>
 
     <?= $form->field($add_rent, 'rents_mobile')
-            ->widget(MaskedInput::className(), [
-                'mask' => '+7 (999) 999-99-99'])
             ->input('text', [
-                'class' => 'field-input-modal'])
+                'class' => 'field-input-modal cell-phone'])
             ->label($add_rent->getAttributeLabel('rents_mobile'), ['class' => 'field-label-modal']) ?>
 
     <?= $form->field($add_rent, 'rents_email')

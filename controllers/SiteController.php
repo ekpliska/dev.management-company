@@ -139,8 +139,4 @@ class SiteController extends Controller
         
     }
     
-    public function actionBadBrowsers() {
-        return $this->render('bad_browsers');
-    }
-    
 }

@@ -37,8 +37,8 @@ $this->title = 'Настройки';
             ]) ?>        
     </div>
     <div class="col-md-4 settings">
-        <p class="profile-settings_title center"><i class="glyphicon glyphicon-phone">            
-            </i>&nbsp;&nbsp;Изменить номер мобильного телефона
+        <p class="profile-settings_title center">
+            <i class="glyphicon glyphicon-phone"></i>&nbsp;&nbsp;Изменить номер мобильного телефона
         </p>
         <?= $this->render('_form/change-phone', [
                 'model_phone' => $model_phone, 
@@ -50,7 +50,7 @@ $this->title = 'Настройки';
     </div>
     <div class="col-md-4 settings">
         <p class="profile-settings_title right">
-            <i class="glyphicon glyphicon-envelope"></i>&nbsp;&nbsp;Изменитьадрес электронный почты
+            <i class="glyphicon glyphicon-envelope"></i>&nbsp;&nbsp;Изменить адрес электронной почты
         </p>
         <?= $this->render('_form/change-email', [
                 'user' => $user,

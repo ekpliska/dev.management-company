@@ -70,6 +70,7 @@ class UserProfile extends BaseObject {
                     ->select('r.rents_id as client_id, r.rents_name as name, r.rents_second_name as second_name, r.rents_surname as surname, '
                         . 'r.rents_mobile as mobile, r.rents_mobile_more as phone, '
                         . 'u.user_id as user_id, u.user_login as login, '
+                        . 'u.user_mobile as user_mobile, '
                         . 'u.user_email as email, u.user_photo as photo, '
                         . 'u.created_at as date_created , u.last_login as last_login, '
                         . 'u.status as status, '

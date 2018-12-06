@@ -43,7 +43,7 @@ class ClientsRentForm extends Model {
                 'match', 
                 'pattern' => '/^[А-Яа-я\ \-]+$/iu', 
                 'on' => self::SCENARIO_AJAX_VALIDATION,
-                'message' => 'Поле "{attribute}" может содержать только буквы русского алфавита, и знак "-"',
+                'message' => 'Поле может содержать только буквы русского алфавита, и знак "-"',
             ],
             
             [
