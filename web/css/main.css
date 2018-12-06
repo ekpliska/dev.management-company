@@ -2216,7 +2216,8 @@ input[name="date_end-period-pay"]:focus {
 .menu-items > li#item-menu-2 a {
     font-size: 18px;
 }
-.menu-items > li.active-item > a {
+.menu-items > li.active-item a {
+    display: inline-block;    
     color: #fff;
     font-weight: bold;
     cursor: pointer;
@@ -2240,7 +2241,7 @@ input[name="date_end-period-pay"]:focus {
     box-sizing: border-box;
     padding: 5px 15px;
     margin: 0px -5px;
-    display: unset;
+    display: inline-block;
 }
 a.sub-menu-item {
     display: none;

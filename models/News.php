@@ -170,7 +170,7 @@ class News extends ActiveRecord
     public static function findNewsBySlug($slug) {
         
         return self::find()
-                ->select(['news_id', 'news_title', 'news_type_rubric_id', 'news_preview', 'news_text', 'created_at', 'slug', 'rubrics_name', 'isAdvert', 'partners_name'])
+                ->select(['news_id', 'news_title', 'news_type_rubric_id', 'news_partner_id', 'news_preview', 'news_text', 'created_at', 'slug', 'rubrics_name', 'isAdvert', 'partners_name'])
                 ->joinWith(['rubric', 'partner'])
                 ->where(['slug' => $slug])
                 ->asArray()
@@ -196,7 +196,7 @@ class News extends ActiveRecord
         }
         
         $news = self::find()
-                ->select(['news_id', 'news_title', 'news_type_rubric_id', 'news_preview', 'news_text', 'created_at', 'slug', 'rubrics_name', 'isAdvert', 'partners_name'])
+                ->select(['news_id', 'news_title', 'news_type_rubric_id', 'news_partner_id', 'news_preview', 'news_text', 'created_at', 'slug', 'rubrics_name', 'isAdvert', 'partners_name'])
                 ->joinWith(['rubric', 'partner'])
                 ->andWhere([
                     'news_house_id' => $living_space['houses_id'],
