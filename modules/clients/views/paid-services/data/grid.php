@@ -21,6 +21,10 @@
             'tableOptions' => [
                 'class' => 'table requests-table',
             ],
+            'pager' => [
+                'prevPageLabel' => '<i class="glyphicon glyphicon-menu-left"></i>',
+                'nextPageLabel' => '<i class="glyphicon glyphicon-menu-right"></i>',
+            ],            
             'columns' => [
                 [
                     'attribute' => 'services_number',
