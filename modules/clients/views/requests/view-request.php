@@ -26,6 +26,7 @@ $this->title = 'Детали заявки';
                 <p class="date_requests">
                     <?= FormatHelpers::formatDate($request_info['created_at'], true, 0, false) ?>
                 </p>
+                
                 <?php if ($request_info['status'] == StatusRequest::STATUS_CLOSE) : ?>        
                     <div class="req-rate-star">
                         <div class="starrr" id="star1">
@@ -38,13 +39,21 @@ $this->title = 'Детали заявки';
                         </div>
                     </div>
                 <?php endif; ?>
+                
                 <span class="badge request-ident">
-                    <?= $request_info['requests_ident'] ?>            
+                    <?= $request_info['requests_ident'] ?>
                 </span>
+                
                 <?= StatusHelpers::requestStatusPage($request_info['status'], $request_info['updated_at']) ?>
+                
                 <p class="request_text">
                     <?= $request_info['requests_comment'] ?>
                 </p>
+                
+                <?php foreach ($all_images as $image) : ?>
+                    <?= FormatHelpers::formatUrlFileRequest($image['filePath']) ?>
+                <?php endforeach; ?>
+                
                 <div class="client_info">
                     <div class="col-lg- col-sm-6 col-md-6 text-left">
                         <div class="client_info-image">

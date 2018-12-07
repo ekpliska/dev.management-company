@@ -27,7 +27,7 @@ class FormatHelpers {
         
         // Формируем html
         $html_path = Html::beginTag('a', ['href' => $path])
-                . Html::img($path, ['class' => 'req-body-info-img'])
+                . Html::img($path, ['class' => 'info-img'])
                 . Html::endTag('a');
         
         

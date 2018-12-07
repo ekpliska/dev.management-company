@@ -1145,6 +1145,7 @@ p.right {
 }
 .requests-border {
     border-right: 1px solid #ddd;
+    padding: 10px 0px 0px 15px;    
 }
 .requests-view_body h4 {
     font-family: "Mplus 1p Medium";
@@ -1193,7 +1194,11 @@ p.right {
 [class*="col-"] {
   margin-bottom: 0px;
 }
-
+.requests-view_body img {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 30px;
+}
 
 /* Конец Просомтр отдельной заявки */
 
@@ -1311,8 +1316,6 @@ p.right {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
     background-color: #524e53;
 }
-
-
 /* Конец Завяки, чат */
 
 /* Оценка заявки, звездочки */
