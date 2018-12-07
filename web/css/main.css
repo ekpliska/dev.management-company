@@ -1164,7 +1164,17 @@ p.right {
     background: #fcfcfc;
     height: 60px;
     color: #2d1d88;
-    padding: 20px 15px;
+}
+.client_info-image {
+    margin: 18px 10px;
+}
+.client_info-text {
+    padding: 0 35px;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    font-size: 14px;
 }
 .request-body-rate {
     text-align: center;

@@ -47,12 +47,18 @@ $this->title = 'Детали заявки';
         </p>
         
         <div class="client_info">
-            <div class="col-lg-6 col-sm-6 col-md-6 text-left">
-                <i class="glyphicon glyphicon-home"></i> 
-                <?= Yii::$app->userProfile->getFullAdress($this->context->_choosing)?>
+            <div class="col-lg-8 col-sm-8 col-md-8 text-left">
+                <div class="client_info-image">
+                    <span class="glyphicon glyphicon-home"></span>
+                </div>
+                <span class="client_info-text"><?= Yii::$app->userProfile->getFullAdress($this->context->_choosing)?></span>
+                    
             </div>
-            <div class="col-lg-6 col-sm-6 col-md-6 text-left">
-                <i class="glyphicon glyphicon-phone"></i>&nbsp;&nbsp;<?= $request_info['requests_phone'] ?>
+            <div class="col-lg-4 col-sm-4 col-md-4 text-left">
+                <div class="client_info-image">
+                    <i class="glyphicon glyphicon-phone"></i>
+                </div>
+                <span class="client_info-text"><?= $request_info['requests_phone'] ?></span>
             </div>
         </div>
         
