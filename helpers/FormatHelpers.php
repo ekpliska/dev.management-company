@@ -101,6 +101,34 @@ class FormatHelpers {
     }
     
     /*
+     * Формирование даты сообщения в чате заявки
+     */
+    public static function formatDateChat($prev_date, $current_date) {
+        
+        // Текущий год
+        $year_now = date('Y');
+        // Год даты текущего сообщения
+        $year_message = Yii::$app->formatter->asDate($current_date, 'Y');
+        
+        // Дата предыдущего сообщения
+        $prev = Yii::$app->formatter->asDate($prev_date, 'short');
+        // Дата текущего сообщения
+        $current = Yii::$app->formatter->asDate($current_date, 'short');
+
+        // Задаем формат вывод сообщения (выводим год сообщения, если год сообщения не соответствует текущему)
+        $format = $year_now == $year_message ? 'd MMMM' : 'd MMMM Y';
+        $date_print = Yii::$app->formatter->asDate($current_date, $format);
+        
+        if ($prev != $current) {
+            return '<span>' . $date_print . '</span>';
+        } 
+        elseif ($current != $prev) {
+            return false;
+        }
+        
+    }
+    
+    /*
      * Форматирование вывода даты в комментариях на странице заявки
      * @param string $date_full число месяц г. 
      * $param string $tile часы:минуты:секунды

@@ -12,11 +12,9 @@
     <div class="comments">
         <?php if (isset($comments_find)) : ?>
             <?php foreach ($comments_find as $key => $comment) : ?>
-                <div class="chat-badge-date">
-                    <span>
-                        <?= FormatHelpers::formatDate($comment->created_at, false, 1, false) ?>
-                    </span>
-                </div>
+        <div class="chat-badge-date">
+                <?= FormatHelpers::formatDateChat($prev_date, $comment->created_at)  ?>            
+        </div>
                 <div class="row">
                     <div class="col-sm-1 chat_photo">
                         <?= Html::img($comment['user']->photo, ['class' => 'request-chat-icon']) ?>
@@ -24,14 +22,15 @@
                     <div class="col-sm-8 chat-txt-block">
                         <p class="chat-name">
                             <?= $comment['user']['client']->clients_name ? $comment['user']['client']->clients_name : $comment['user']['employer']->employers_name ?>
-                            <?= $current_date ?>
                         </p>
                         <?= $comment->comments_text ?>
                     </div>
                     <div class="col-sm-2 chat_time">
-                        <?= FormatHelpers::formatDate($comment->created_at, true, 0, true) ?>
+                        <?php // = FormatHelpers::formatDate($comment->created_at, true, 0, true) ?>
                     </div>
                 </div>
+        
+                <?php $prev_date = $comment->created_at; ?>
             <?php endforeach; ?>
         <?php endif; ?>
 
