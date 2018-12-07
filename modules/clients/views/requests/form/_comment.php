@@ -39,7 +39,7 @@
 <?php Pjax::end() ?>  
 
 <?php Pjax::begin(['id' => 'new_note']) ?>
-    <div class="chat-msg">
+    <div class="chat-msg text-right">
 
         <?php
             $form = ActiveForm::begin([
@@ -48,15 +48,15 @@
                 'validateOnChange' => false,
                 'validateOnBlur' => false,
                 'fieldConfig' => [
-                    'template' => '{label}{input}',
+                    'template' => '{input}',
                 ],
                 'options' => [
                     'data-pjax' => true,
                 ],
             ]);
         ?>
-        <?= $form->errorSummary($model); ?>
-        <?= $form->field($model, 'comments_text')
+        <?= $form->field($model, 'comments_text', [
+                'template' => '<span id="label-count"></span><span id="label-count-left"></span>{input}'])
                 ->textarea([
                     'placeHolder' => $model->getAttributeLabel('comments_text'), 
                     'rows' => 7])

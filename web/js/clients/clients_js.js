@@ -332,11 +332,6 @@ $(document).ready(function() {
         }
     });    
     
-    /*
-     * Всплывающая подсказка для кнопки "Вам доступна система оценки"
-     */
-//    $('[data-toggle="popover"]').popover();
-    
     
     /* End Block of Requests */
 
@@ -406,6 +401,7 @@ $(document).ready(function() {
      * Счетчик подстчета количества вводимых символов в поле комментарий к заявке
      */
     limitLettrs('.comment', 250, '#label-count', '#label-count-left');
+    limitLettrs('#commentstorequest-comments_text', 250, '#label-count', '#label-count-left');
 
     /* End Block of Paid Services */
 

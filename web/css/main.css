@@ -1119,14 +1119,16 @@ p.right {
     margin-top: 140px;
     border: 1px solid #ddd;
     border-radius: 12px;
+    min-height: 750px;
 }
 .requests-view_title {
-    height: 78px;
     font-family: "Mplus 1p Bold";
     padding: 20px 30px;
     color: #fff;
     border-radius: 12px 12px 0 0;
-    background-color: #2D18B4;
+    background-color: #2d18b4;
+    margin: 0;
+    font-size: 14px;
 }
 .requests-view_title i.check {
     background: #36eadf;
@@ -1139,13 +1141,15 @@ p.right {
     border-radius: 100%;
 }
 .requests-view_body {
+    padding: 0px 15px;
+}
+.requests-border {
     border-right: 1px solid #ddd;
 }
 .requests-view_body h4 {
     font-family: "Mplus 1p Medium";
     font-size: 18px;
     letter-spacing: 0.32px;
-    line-height: 27px;
 }
 .date_requests {
     color: #2D18B4;
@@ -1181,6 +1185,16 @@ p.right {
     margin: 30px;
 }
 .requests-view_chat {}
+
+.row-flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+[class*="col-"] {
+  margin-bottom: 0px;
+}
+
+
 /* Конец Просомтр отдельной заявки */
 
 /* Завяки, чат */
@@ -1206,19 +1220,26 @@ p.right {
 .chat-txt-block {
     min-width: 92px;
     max-width: 398px;
-    background-image: url("Gradient_BG.png");
     border-radius: 12px;
+    background: linear-gradient(180.67deg, #412b5d 32%, rgba(10,8,8,0.7) 96%);
     padding: 15px;
     word-wrap: break-word;
     margin-left: 19px;
-    color: #FFFFFF;
-    font-family: "Mplus 1p";
-    font-size: 14px;
+    color: #fff;
+    font-size: 12px;
     line-height: 20px;
     box-shadow: 0 10px 14px 2px rgba(0,0,0,0.26);
 }
-.chat-msg form {
-    margin: 50px -15px 0 -15px;
+.chat-msg {
+    margin: 0 0 0 -15px;
+    padding: 40px 0px 0px 0px;
+}
+.chat-msg span#label-count,
+.chat-msg span#label-count-left {
+    color: #6b5d4a;
+}
+.chat-msg span#label-count-left {
+    padding-right: 10px;
 }
 .chat-msg textarea {
     border: 1px solid #d4d4d4;
@@ -1247,8 +1268,8 @@ p.right {
     background: transparent;
     border: none;
     position: absolute;
-    right: 0;
-    bottom: 30px;    
+    right: 25px;
+    bottom: 25px;    
 }
 .chat-btn:focus {
     outline: none;
@@ -1263,14 +1284,36 @@ p.right {
 }
 .chat-badge-date span {
     background-color: #2d18b4;
-    padding: 4px 35px;
+    padding: 4px 20px;
     color: #fff;
     font-family: "Mplus 1p Medium";
-    font-size: 12px;
+    font-size: 10px;
     letter-spacing: 1.05px;
-    line-height: 20px;
     border-radius: 12px;
 }
+.comments {
+    height: 460px;
+    overflow: auto;
+    padding-bottom: 30px;
+}
+.comments::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #ddd;
+}
+
+.comments::-webkit-scrollbar {
+    width: 12px;
+    background-color: #ddd;
+}
+
+.comments::-webkit-scrollbar-thumb {
+    border-radius: 12px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #524e53;
+}
+
+
 /* Конец Завяки, чат */
 
 /* Оценка заявки, звездочки */
@@ -1331,6 +1374,7 @@ p.right {
 .request-ident {
     background: #2d18b4;
     padding: 6px;
+    margin-right: 20px;
     font-size: 12px;
     width: 170px;
     color: #fff;
