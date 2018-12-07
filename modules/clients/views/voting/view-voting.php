@@ -36,7 +36,7 @@ $this->title = $voting['voting_title'];
                         'class' => 'register-in-voting',
                         'id' => 'get-voting-in',
                         'data-voting' => $voting['voting_id'],
-                        'disabled' => $btn_disabled,
+//                        'disabled' => $btn_disabled,
                 ]) ?>
             <?php endif; ?>
         </div>
@@ -116,11 +116,11 @@ $this->registerJs("
         modalMessage.find('.modal-title').text(titleModal);
         
         if (dateNow < dateStart) {
-            modalMessage.find('.modal__text').text('Регистрация на голосование начнется ' + _dateStart);
+            modalMessage.find('.vote-message_span').text('Регистрация на голосование начнется ' + _dateStart);
             modalMessage.modal('show');
             return false;
         } else if (dateNow > dateEnd) {
-            modalMessage.find('.modal__text').text('Голосование завершилось');
+            modalMessage.find('.vote-message_span').text('Голосование завершилось');
             modalMessage.modal('show');
             return false;
         }

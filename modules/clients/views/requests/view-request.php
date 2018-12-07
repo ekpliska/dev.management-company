@@ -50,9 +50,11 @@ $this->title = 'Детали заявки';
                     <?= $request_info['requests_comment'] ?>
                 </p>
                 
-                <?php foreach ($all_images as $image) : ?>
-                    <?= FormatHelpers::formatUrlFileRequest($image['filePath']) ?>
-                <?php endforeach; ?>
+                <?php if (isset($all_images) && count($all_images) > 0) : ?>
+                    <?php foreach ($all_images as $image) : ?>
+                        <?= FormatHelpers::formatUrlFileRequest($image['filePath']) ?>
+                    <?php endforeach; ?>
+                <?php endif; ?>
                 
                 <div class="client_info">
                     <div class="col-lg- col-sm-6 col-md-6 text-left">

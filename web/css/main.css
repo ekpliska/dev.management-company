@@ -2006,7 +2006,7 @@ input[name="date_end-period-pay"]:focus {
     font-size: 16px;
     letter-spacing: 1.5px;
     text-align: center;
-    padding-bottom: 30px;
+    padding: 30px;
 }
 .again-sms-btn {
     background-image: url(/images/clients/send_again.svg);
@@ -2040,6 +2040,12 @@ input[name="date_end-period-pay"]:focus {
     border: 1px solid #23dd6f;
     padding: 10px;
     border-radius: 100%;
+}
+.vote-message_span {
+    padding: 7px 20px;
+    border: 1px solid #8b709d;
+    color: #fff;
+    border-radius: 25px;
 }
 /* Конец Страница голосования */
 
