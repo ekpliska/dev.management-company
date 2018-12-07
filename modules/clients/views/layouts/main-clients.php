@@ -24,12 +24,12 @@ ClientsAsset::register($this);
     <?php $this->beginContent('@app/modules/clients/views/layouts/header.php') ?>
     <?php $this->endContent() ?>    
         
-    <div class="container">
+    <div class="container" id="container">
         <?= $content ?>
     </div>
         
-    <?php // $this->beginContent('@app/modules/clients/views/layouts/footer.php') ?>
-    <?php // $this->endContent() ?>
+    <?php $this->beginContent('@app/modules/clients/views/layouts/footer.php') ?>
+    <?php $this->endContent() ?>
 
 <?php $this->endBody() ?>
 
