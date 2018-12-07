@@ -1,86 +1,33 @@
 <?php
 
-    use kartik\date\DatePicker;
     use yii\helpers\Html;
 
 /* 
- * Платеж
+ * Страница "Платеж" (оплата квитанции)
  */
-
 ?>
-<div class="payment-page row">
-    <p class="payment_title"><i class="glyphicon glyphicon-calendar"></i> Период</p>
-    <div class="col-md-3 date-block">
-        <span>С</span>
-        <?= DatePicker::widget([
-                'name' => 'date_start-period-pay',
-                'type' => DatePicker::TYPE_INPUT,
-                'value' => date('d-M-Y'),
-                'layout' => '<span class="input-group-text">Birth Date</span>',
-                'pluginOptions' => [
-                    'autoclose'=>true,
-                    'format' => 'dd-M-yyyy'
-                ]
-            ]);        
-        ?>
-        
-    </div>
-    <div class="col-md-3 date-block">
-        <span>ПО</span>
-        <?= DatePicker::widget([
-                'name' => 'date_end-period-pay',
-                'type' => DatePicker::TYPE_INPUT,
-                'value' => date('d-M-Y'),
-                'pluginOptions' => [
-                    'autoclose'=>true,
-                    'format' => 'dd-M-yyyy'
-                ]
-            ]);        
-        ?>        
-    </div>
-    <div class="col-md-6">
-        <?= Html::button('Показать', ['class' => 'btn-show-payment']) ?>        
-    </div>
-    
 
-<table class="table requests-table payment-table">
-    <thead>
-    <tr>
-        <th>#TODO</th>
-        <th>#TODO</th>
-        <th>#TODO</th>
-        <th>#TODO</th>
-    </tr>
-    </thead>
-    <tr>
-        <td>Sample text</td>
-        <td>Sample text</td>
-        <td>Sample text</td>
-        <td>
-            <?= Html::a('Оплатить', ['/'], ['class' => 'payment_btn-pay']) ?>
-        </td>
-    </tr>
-    <tr>
-        <td>Sample text</td>
-        <td>Sample text</td>
-        <td>Sample text</td>
-        <td>
-            <span class="paument-ok"><i class="glyphicon glyphicon-ok"></i> Оплачено</span>
-        </td>
-    </tr>
-    <tr>
-        <td>Sample text</td>
-        <td>Sample text</td>
-        <td>Sample text</td>
-        <td>Sample text</td>
-    </tr>
-    <tr>
-        <td>Sample text</td>
-        <td>Sample text</td>
-        <td>Sample text</td>
-        <td>Sample text</td>
-    </tr>
-</table>        
-        
-        
+<div class="payment-page row">
+    <div class="col-md-5 col-sm-6 col-xs-12 text-center payment-page_block">
+        <?= Html::img($user_info->photo, ['id' => 'photoPreview', 'class' => 'img-circle', 'alt' => $user_info->username]) ?>
+        <p class="payment_user-fullname">
+            <?= $user_info->fullNameClient ?>
+        </p>
+        <p class="payment_user-info">
+            <i class="glyphicon glyphicon-home"></i>&nbsp;
+            <?= $user_info->getFullAdress($this->context->_choosing) ?>
+        </p>
+        <p class="payment_user-info">
+            <i class="glyphicon glyphicon-phone"></i>&nbsp;
+            <?= $user_info->mobile ?>
+        </p>
+        <p class="payment_user-info">
+            <i class="glyphicon glyphicon-envelope"></i>&nbsp;
+            <?= $user_info->email ?>
+        </p>
+    </div>
+    <div class="col-md-7 col-sm-6 col-xs-12 payment-page_block">
+        <?= Html::button('Оплатить', ['class' => 'blue-btn add-acc-btn']) ?>
+    </div>
 </div>
+

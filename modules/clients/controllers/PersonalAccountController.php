@@ -92,12 +92,23 @@ class PersonalAccountController extends AppClientsController {
     }
     
     /*
-     * Страница "Платеж"
+     * Страница "Платежи"
+     */
+    public function actionPayments() {
+        return $this->render('payments');
+    }
+    
+    /*
+     * Страница "Платеж" (форма оплаты)
      */
     public function actionPayment() {
         
-        return $this->render('payment');
+        $user_info = $this->permisionUser();
         
+        
+        return $this->render('payment', [
+            'user_info' => $user_info,
+        ]);
     }
 
     /*

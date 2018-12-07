@@ -9,7 +9,7 @@
 ?>
 
 <p class="user-full-name">
-    <?=  $user_info->surname . ' '. $user_info->name . ' ' . $user_info->secondName ?>
+    <?= $user_info->fullNameClient ?>
 </p>
 <p class="profile-settings_block"><span>Пользовательские данные</span></p>
     <span class="user-login-name">Логин: <?= $user_info->username ?></span>
