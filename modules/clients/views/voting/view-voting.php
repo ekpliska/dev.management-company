@@ -12,15 +12,14 @@
 /* 
  * Просмотр отдельного голосования
  */
-$_start = strtotime($voting['voting_date_start']);
-$_end = strtotime($voting['voting_date_end']);
-$_now = time();
-$btn_disabled = ($_start > time() || $_end < time()) ? true : false;
-
 $this->title = Yii::$app->params['site-name'] . $voting['voting_title'];
 $this->params['breadcrumbs'][] = ['label' => 'Опрос', 'url' => ['voting/index']];
 $this->params['breadcrumbs'][] = $voting['voting_title'];
 
+
+$_start = strtotime($voting['voting_date_start']);
+$_end = strtotime($voting['voting_date_end']);
+$_now = time();
 ?>
 
 <?= Breadcrumbs::widget([
@@ -45,7 +44,6 @@ $this->params['breadcrumbs'][] = $voting['voting_title'];
                         'class' => 'register-in-voting',
                         'id' => 'get-voting-in',
                         'data-voting' => $voting['voting_id'],
-//                        'disabled' => $btn_disabled,
                 ]) ?>
             <?php endif; ?>
         </div>

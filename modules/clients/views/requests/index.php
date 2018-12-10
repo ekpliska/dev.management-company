@@ -25,34 +25,12 @@ $this->params['breadcrumbs'][] = 'Заявки';
 <?= $this->render('form/add-request', ['model' => $model, 'type_requests' => $type_requests]) ?>
 
 <?php
-/* Фильтр заявок пользователя по 
- * ID лицевого счета, типу и статусу заявки
- */
-$this->registerJs("    
-    $('#account_number, .current__account_list').on('change', function(e) {
-        
-        e.preventDefault();
-        
-        var type_id = $('#account_number').val();
-        var account_id = $('.current__account_list').val();
-        var status = $('.list-group-item.active').data('status');
-
-        $.ajax({
-            url: 'filter-by-type-request?type_id=' + type_id + '&account_id=' + account_id + '&status=' + status,
-            method: 'POST',
-            data: {
-                type_id: type_id,
-                account_id: account_id,
-                status: status,
-            },
-            success: function(data){
-                if (data.status === false) {
-                    console.log('Ошибка при передаче данных');
-                } else {
-                    $('.grid-view').html(data);
-                }
-            }
-        });
-    });
+$this->registerCss("
+        .navbar-menu {
+            box-shadow: none;
+        }
+        .navbar_repusets {
+            box-shadow: inset 0px 2px 2px -1px #555;
+        }
 ");
 ?>
