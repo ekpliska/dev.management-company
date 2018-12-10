@@ -1850,9 +1850,7 @@ input[name="date_end-period-pay"]:focus {
 /* Конец Приборы учета */
 
 /* Опрос */
-.vote-lists {
-    margin-top: 140px;
-}
+.vote-lists {}
 .vote-card-preview {
     color: #a7a7a7;
     height: 600px;
@@ -1934,7 +1932,6 @@ input[name="date_end-period-pay"]:focus {
 
 /* Страница голосования */
 .view-voting {
-    margin-top: 140px;
     border: 1px solid #ddd;
     border-radius: 12px;
 }

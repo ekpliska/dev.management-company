@@ -3,6 +3,7 @@
     use yii\helpers\Html;
     use yii\helpers\Url;
     use yii\bootstrap\Modal;
+    use yii\widgets\Breadcrumbs;
     use app\helpers\FormatHelpers;
     use app\models\RegistrationInVoting;
     use app\modules\clients\widgets\ModalWindows;
@@ -16,8 +17,16 @@ $_end = strtotime($voting['voting_date_end']);
 $_now = time();
 $btn_disabled = ($_start > time() || $_end < time()) ? true : false;
 
-$this->title = $voting['voting_title'];
+$this->title = Yii::$app->params['site-name'] . $voting['voting_title'];
+$this->params['breadcrumbs'][] = ['label' => 'Опрос', 'url' => ['voting/index']];
+$this->params['breadcrumbs'][] = $voting['voting_title'];
+
 ?>
+
+<?= Breadcrumbs::widget([
+        'homeLink' => ['label' => 'ELSA', 'url' => ['clients/index']],
+        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+]) ?>
 
 <div class="view-voting row">
     <div class="preview-voting">

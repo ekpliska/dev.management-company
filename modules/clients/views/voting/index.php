@@ -2,11 +2,18 @@
 
     use yii\helpers\Html;
     use yii\helpers\Url;
+    use yii\widgets\Breadcrumbs;
     use app\models\Voting;
     use app\helpers\FormatHelpers;
 
-$this->title ="Голосование"
+$this->title = Yii::$app->params['site-name'] . 'Опрос';
+$this->params['breadcrumbs'][] = 'Опрос';
 ?>
+
+<?= Breadcrumbs::widget([
+        'homeLink' => ['label' => 'ELSA', 'url' => ['clients/index']],
+        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+]) ?>  
 
 <div class="vote-lists row">
     <?php if (isset($voting_list) && count($voting_list) > 0) : ?>
