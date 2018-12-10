@@ -20,19 +20,19 @@ ClientsAsset::register($this);
     <?php $this->head() ?>
 </head>
 <body>
-<?php $this->beginBody() ?>
-    <?php $this->beginContent('@app/modules/clients/views/layouts/header.php') ?>
-    <?php $this->endContent() ?>    
-        
-    <div class="container" id="container">
-        <?= $content ?>
+    <?php $this->beginBody() ?>
+    <div class="wrap">
+        <?php $this->beginContent('@app/modules/clients/views/layouts/header.php') ?>
+        <?php $this->endContent() ?>    
+
+        <div class="container">
+            <?= $content ?>
+        </div>
     </div>
-        
+
     <?php $this->beginContent('@app/modules/clients/views/layouts/footer.php') ?>
     <?php $this->endContent() ?>
-
-<?php $this->endBody() ?>
-
+    <?php $this->endBody() ?>
 </body>
 </html>
 <?php $this->endPage() ?>

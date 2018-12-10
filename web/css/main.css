@@ -23,26 +23,31 @@ and open the template in the editor.
 html, body {
     font-family: "Mplus 1p";
     height:100%;
-    width: 100%;
-    height: 100%;
-    min-height: 100vh;    
 }
 
 a, a:hover, a:active {
     text-decoration: none;
 }
-#container {
-    height: 100%;
+
+.wrap {
+    min-height: 100%;
+    height: auto;
+    margin: 0 auto -60px;
+    padding: 0 0 60px;
 }
+
+.wrap > .container {
+    padding: 70px 15px 20px;
+}
+
 /* Футер */
+
 .footer {
-    position: relative;
-    margin-top: -150px;
-    height: 150px;
-    clear:both;
-    background: #ddd;
-    padding: 15px 0;
-    box-shadow: 0 -1px 7px rgba(0, 0, 0, 0.3);
+    height: 100px;
+    background-color: #f3f3f3;
+    padding-top: 15px;
+    box-shadow: 0 -1px 7px #ddd;
+    color: rgb(103, 118, 138);
 }
 .company {
     display: inline-flex;    
@@ -52,11 +57,14 @@ a, a:hover, a:active {
 }
 .company_info h3 {
     margin: 0;
-    font-size: 22px;
-    padding: 15px 0 0 10px;
+    font-family: "Mplus 1p Bold";
+    font-size: 18px;
+    padding: 10px 0 0 20px;
 }
 .company_info p {
-    padding: 0 0 0 10px;
+    margin: 0;
+    padding: 0 0 0 20px;
+    font-size: 12px;
 }
 /* Конец Футер */
 
