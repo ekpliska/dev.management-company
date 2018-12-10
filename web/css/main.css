@@ -40,8 +40,14 @@ a, a:hover, a:active {
     padding: 70px 15px 20px;
 }
 
-/* Футер */
 
+.breadcrumb {
+    margin-top: 70px;
+    font-size: 12px;
+    background: transparent;
+}
+
+/* Футер */
 .footer {
     height: 100px;
     background-color: #f3f3f3;
@@ -451,7 +457,7 @@ button#send-request-to-sms:focus{
 
 /* Собственник, главная страница, Новости */
 .news-lists {
-    margin-top: 220px;
+    margin-top: 170px;
 }
 .news-card-preview {    
     color: #a7a7a7;
@@ -509,7 +515,6 @@ button#send-request-to-sms:focus{
 .new-conteiner {
     border: 1px solid #D4D4D4;
     border-radius: 15px;
-    margin-top: 140px;
 }
 .preview-news {
     position: relative;
@@ -986,7 +991,7 @@ p.right {
 
 /* Заявки */
 .requests-page {
-    margin-top: 210px;
+    margin-top: 140px;
 }
 .fixed-bottom {
     position: absolute;
@@ -1086,9 +1091,9 @@ p.right {
 .pagination > .active > a:hover, 
 .pagination > .active > a:focus, 
 .pagination > .active > span:focus {
-    color: #ef693a;
-    border-bottom: 2px solid #ef693a;
-    background-color: #fedede;    
+    color: #67768a;
+    border-bottom: 2px solid #67768a;
+    background-color: #fff;    
 }
 .pagination > li > a, .pagination > li > span {
     color: #7c7c7c;
@@ -1122,7 +1127,6 @@ p.right {
 
 /* Просмотр отдельной заявки */
 .requests-view {
-    margin-top: 140px;
     border: 1px solid #ddd;
     border-radius: 12px;
     min-height: 750px;

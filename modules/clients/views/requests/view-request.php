@@ -1,6 +1,7 @@
 <?php
 
     use yii\helpers\Html;
+    use yii\widgets\Breadcrumbs;
     use app\helpers\FormatHelpers;    
     use app\modules\clients\widgets\RatingRequest;
     use app\helpers\StatusHelpers;
@@ -9,8 +10,15 @@
 /* 
  * Детали заявки
  */
-$this->title = 'Детали заявки';
+$this->title = Yii::$app->params['site-name'] . 'Детали заявки ' . $request_info['requests_ident'];
+$this->params['breadcrumbs'][] = ['label' => 'Заявки', 'url' => ['requests/index']];
+$this->params['breadcrumbs'][] = 'Заявка ID ' . $request_info['requests_ident'];
 ?>
+
+    <?= Breadcrumbs::widget([
+            'homeLink' => ['label' => 'ELSA', 'url' => ['clients/index']],
+            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+    ]) ?> 
 
 <div class="requests-view">
     
@@ -41,7 +49,7 @@ $this->title = 'Детали заявки';
                 <?php endif; ?>
                 
                 <span class="badge request-ident">
-                    <?= $request_info['requests_ident'] ?>
+                    <?= 'ID ' . $request_info['requests_ident'] ?>
                 </span>
                 
                 <?= StatusHelpers::requestStatusPage($request_info['status'], $request_info['updated_at']) ?>

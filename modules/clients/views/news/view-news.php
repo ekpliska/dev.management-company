@@ -3,12 +3,21 @@
     use app\helpers\FormatHelpers;
     use yii\helpers\Html;
     use yii\helpers\Url;
+    use yii\widgets\Breadcrumbs;
 
 /* 
  * Просмотр отдельной новости
  */
-$this->title = $news['news_title'];
+$this->title = Yii::$app->params['site-name'] .  $news['news_title'];
+$this->params['breadcrumbs'][] = ['label' => 'Новости', 'url' => ['clients/index']];
+$this->params['breadcrumbs'][] = $news['news_title'];
 ?>
+
+<?= Breadcrumbs::widget([
+        'homeLink' => ['label' => 'ELSA', 'url' => ['clients/index']],
+        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+]) ?>
+
 <div class="new-conteiner">
     <div class="preview-news">
     <?= FormatHelpers::previewNewsOrVote($news['news_preview'], true) ?>

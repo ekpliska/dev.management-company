@@ -2,6 +2,8 @@
 
 return [
     
+    'site-name' => 'ELSA | ',
+    
     'adminEmail' => 'admin@example.com',
     
     /*

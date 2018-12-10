@@ -3,6 +3,7 @@
     use yii\helpers\Html;
     use app\assets\AppAsset;
     use app\assets\ClientsAsset;
+    use yii\widgets\Breadcrumbs;
 
 AppAsset::register($this);
 ClientsAsset::register($this);
@@ -23,9 +24,8 @@ ClientsAsset::register($this);
     <?php $this->beginBody() ?>
     <div class="wrap">
         <?php $this->beginContent('@app/modules/clients/views/layouts/header.php') ?>
-        <?php $this->endContent() ?>    
-
-        <div class="container">
+        <?php $this->endContent() ?>        
+        <div class="container">            
             <?= $content ?>
         </div>
     </div>

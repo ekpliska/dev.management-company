@@ -2,15 +2,22 @@
     
     use yii\helpers\Html;
     use yii\helpers\Url;
+    use yii\widgets\Breadcrumbs;
     
 /* 
  * Заявки (Общая страница)
  */
-$this->title = 'Мои заявки';
+$this->title = Yii::$app->params['site-name'] . 'Заявки';
+$this->params['breadcrumbs'][] = 'Заявки';
 ?>
 
-
 <div class="requests-page">
+    
+    <?= Breadcrumbs::widget([
+            'homeLink' => ['label' => 'ELSA', 'url' => ['clients/index']],
+            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+    ]) ?>    
+    
     <?= $this->render('data/grid', ['all_requests' => $all_requests]); ?>
     <?= Html::button('', ['class' => 'create-request-btn btn-link pull-right', 'data-toggle' => 'modal', 'data-target' => '#add-request-modal']) ?>
 </div>
