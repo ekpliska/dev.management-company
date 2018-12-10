@@ -21,3 +21,11 @@ $this->params['breadcrumbs'][] = 'История услуг';
     
     <?= $this->render('data/grid', ['all_orders' => $all_orders]) ?>
 </div>
+
+<?php
+$this->registerCss("
+        .navbar-menu {
+            box-shadow: none;
+        }
+");
+?>

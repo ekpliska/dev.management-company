@@ -2213,7 +2213,7 @@ input[name="date_end-period-pay"]:focus {
     background-image: url(Head.png);
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    box-shadow: -1px 4px 7px #c1c1c1;
+    box-shadow: 1px -1px 6px 2px #000;
     border: none;    
 }
 .navbar-menu_header {
@@ -2444,7 +2444,7 @@ a.sub-menu-item {
 .navbar_paid-request {
     background: #2d18b4;
     padding: 15px;
-    box-shadow: 0 -1px 7px rgb(0, 0, 0);
+    box-shadow: 5px -1px 1px 0px rgb(0, 0, 0);
 }
 .navbar_paid-request > ul {
     margin-right: 15px;

@@ -24,3 +24,12 @@ $this->params['breadcrumbs'][] = 'Услуги';
 <?= $this->render('form/add-paid-request', [
         'new_order' => $new_order, 
         'name_services_array' => $name_services_array]) ?>
+
+
+<?php
+$this->registerCss("
+        .navbar-menu {
+            box-shadow: none;
+        }
+");
+?>
