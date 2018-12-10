@@ -1,14 +1,11 @@
 <?php
 
-    use yii\helpers\Html;
-    use yii\helpers\Url;
-    use yii\widgets\LinkPager;
-    use app\helpers\FormatHelpers;    
+    use app\helpers\FormatHelpers;
 
 /*
  * Главная страница личного кабинета Собственника
  */    
-$this->title ="Главная";
+$this->title = Yii::$app->params['site-name'] . "Главная";
 ?>
 
 <div class="row news-lists">

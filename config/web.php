@@ -2,6 +2,7 @@
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
+$sms = require __DIR__ . '/sms.php';
 
 $config = [
     'id' => 'management-company',
@@ -136,6 +137,7 @@ $config = [
                 'request-password-reset' => 'site/request-password-reset',
             ],
         ],
+        'sms' => $sms,
     ],
     'params' => $params,
 ];
