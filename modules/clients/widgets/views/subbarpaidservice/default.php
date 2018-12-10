@@ -31,7 +31,7 @@
      </div>
 
 <?php elseif(Yii::$app->controller->id == 'paid-services' && Yii::$app->controller->action->id == 'order-services') : ?>
-    <div class="container-fluid navbar_paid-request text-center" style="padding: 30px;">
+    <div class="container-fluid navbar_paid-request text-center">
         <?php
             $form = ActiveForm::begin([
                 'id' => 'search-form',

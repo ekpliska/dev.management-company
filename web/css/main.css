@@ -1470,7 +1470,7 @@ p.right {
 
 /* Платные услуги */
 .paid-requests-page {
-    margin-top: 210px;
+    margin-top: 140px;
 }
 .navbar-nav a.btn-history {
     height: 52px;
@@ -1528,13 +1528,14 @@ p.right {
 
 /* История платных услуг */
 .paid-requests-history {
-    margin-top: 240px;
+    margin-top: 140px;
 }
 form#search-form .form-group {
     margin: 0;
 }
 form#search-form {
-    display: inline-block;    
+    display: inline-block;
+    padding: 7px;
 }
 input[id="_search-input"] {
     background: url(/images/clients/search.svg) no-repeat 20px 10px;
@@ -2443,7 +2444,7 @@ a.sub-menu-item {
 /* Дополнительное навигационное меню, платные услуги */
 .navbar_paid-request {
     background: #2d18b4;
-    padding: 10px;
+    padding: 15px;
     box-shadow: 0 -1px 7px rgb(0, 0, 0);
 }
 .navbar_paid-request > ul {

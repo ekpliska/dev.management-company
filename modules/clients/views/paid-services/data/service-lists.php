@@ -14,7 +14,7 @@
                     <div class="service-card_title">
                         <?= $service['category']['category_name'] ?>
                     </div>
-                    <?= Html::img($service['services_image'], ['class' => 'service-card_image', 'alt' => $service['services_name']]) ?>
+                    <?= Html::img($service['services_image'], ['class' => 'service-card_image', 'alt' => 'service-image']) ?>
                     <div class="service-card_title">
                         <?= $service['services_name'] ?>
                     </div>
