@@ -2,13 +2,24 @@
     
     use kartik\date\DatePicker;
     use yii\helpers\Html;
+    use yii\widgets\Breadcrumbs;
     
 /* 
  * Страница "Квитанции ЖКУ"
  */
 
-$this->title = 'Квитанции ЖКУ'
+$this->title = Yii::$app->params['site-name'] . 'Квитанции КЖУ';
+$this->params['breadcrumbs'][] = ['label' => 'Лицевой счет', 'url' => ['personal-account/index']];
+$this->params['breadcrumbs'][] = 'Квитанции КЖУ';
 ?>
+
+<?= Breadcrumbs::widget([
+        'homeLink' => ['label' => 'ELSA', 'url' => ['clients/index']],
+        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+        'options' => [
+            'class' => 'breadcrumb breadcrumb-padding'
+        ],
+]) ?>
 
 <div class="receipts-page row">
     <div class="col-md-5 receipts_period">

@@ -46,7 +46,9 @@ a, a:hover, a:active {
     font-size: 12px;
     background: transparent;
 }
-
+.breadcrumb-padding {
+    margin-top: 140px;
+}
 /* Футер */
 .footer {
     height: 100px;
@@ -1569,7 +1571,6 @@ input[id="_search-input"]:-moz-placeholder {
 
 /* Лицевой счет */
 .paid-account-page {
-    margin-top: 240px;
     border-radius: 12px;
     border: 1px solid #ddd;
 }
@@ -1588,7 +1589,6 @@ input[id="_search-input"]:-moz-placeholder {
 
 /* Квитанции */
 .receipts-page {
-    margin-top: 240px;
     border: 1px solid #ddd;
     border-radius: 12px;
 }
@@ -1674,9 +1674,7 @@ a.receipte-btn-dowload {
 /* Конец Квитанции 
 
 /* Платежи */
-.payments-page {
-    margin-top: 240px;
-}
+.payments-page {}
 .payment-pages_period {
     display: flex;
 }
@@ -1752,7 +1750,6 @@ input[name="date_end-period-pay"]:focus {
 
 /* Оплата */
 .payment-page {
-    margin-top: 240px;
     border: 1px solid #ddd;
     border-radius: 12px;
 }
@@ -1774,9 +1771,7 @@ input[name="date_end-period-pay"]:focus {
 /* Конец Оплата */
 
 /* Приборы учета */
-.counters-page {
-    margin-top: 240px;
-}
+.counters-page {}
 .btn-save-reading {
     height: 48px;
     width: 220px;

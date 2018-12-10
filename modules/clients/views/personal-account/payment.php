@@ -1,11 +1,24 @@
 <?php
 
     use yii\helpers\Html;
+    use yii\widgets\Breadcrumbs;
 
 /* 
  * Страница "Платеж" (оплата квитанции)
  */
+$this->title = Yii::$app->params['site-name'] . 'Оплата';
+$this->params['breadcrumbs'][] = ['label' => 'Лицевой счет', 'url' => ['personal-account/index']];
+$this->params['breadcrumbs'][] = ['label' => 'Платежи', 'url' => ['personal-account/payments']];
+$this->params['breadcrumbs'][] = 'Оплата' . ' #TODO';    
 ?>
+
+<?= Breadcrumbs::widget([
+        'homeLink' => ['label' => 'ELSA', 'url' => ['clients/index']],
+        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+        'options' => [
+            'class' => 'breadcrumb breadcrumb-padding'
+        ],
+]) ?>
 
 <div class="payment-page row">
     <div class="col-md-5 col-sm-6 col-xs-12 text-center payment-page_block">

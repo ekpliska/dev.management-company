@@ -17,7 +17,7 @@
             <li class="<?= $action == 'receipts-of-hapu' ? 'active' : '' ?>">
                 <a href="<?= Url::to(['personal-account/receipts-of-hapu']) ?>"> Квитанция ЖКУ</a>
             </li>            
-            <li class="<?= $action == 'payments' ? 'active' : '' ?>">
+            <li class="<?= $action == 'payments' || 'payment' ? 'active' : '' ?>">
                 <a href="<?= Url::to(['personal-account/payments']) ?>"> Платежи</a>
             </li>
             <li class="<?= $action == 'counters' ? 'active' : '' ?>">

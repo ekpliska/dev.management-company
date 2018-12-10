@@ -15,10 +15,10 @@ $this->params['breadcrumbs'][] = ['label' => 'Заявки', 'url' => ['requests
 $this->params['breadcrumbs'][] = 'Заявка ID ' . $request_info['requests_ident'];
 ?>
 
-    <?= Breadcrumbs::widget([
-            'homeLink' => ['label' => 'ELSA', 'url' => ['clients/index']],
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-    ]) ?> 
+<?= Breadcrumbs::widget([
+        'homeLink' => ['label' => 'ELSA', 'url' => ['clients/index']],
+        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+]) ?> 
 
 <div class="requests-view">
     
