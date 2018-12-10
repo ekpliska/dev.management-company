@@ -1,6 +1,7 @@
 <?php
     use yii\helpers\Html;
     use yii\helpers\Url;
+    use app\modules\clients\widgets\NavMenu;
     use app\modules\clients\widgets\UserInfo;
     use app\modules\clients\widgets\Notifications;
     use app\modules\clients\widgets\SubBarGeneralPage;
@@ -28,7 +29,7 @@
         </ul>
     </div>  
     <div class="container-fluid navbar-menu__items text-center">
-        <?= \app\modules\clients\widgets\NavMenu::widget(); ?>   
+        <?= NavMenu::widget(); ?>   
     </div>
     <?= SubBarGeneralPage::widget() ?>
     <?= StatusRequest::widget(['account_id' => $this->context->_choosing]) ?>

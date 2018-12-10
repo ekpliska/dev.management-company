@@ -705,7 +705,6 @@ button#send-request-to-sms:focus{
     border: 1px solid #ddd;
     border-radius: 12px;
     margin-bottom: 30px;
-    margin-top: 140px;
 }
 .profile-bg {
     background-image: url(profile-bg.png);
@@ -802,7 +801,6 @@ button#send-request-to-sms:focus{
 
 /* Настройки профиля пользователя */
 .profile-settings {
-    margin-top: 140px;
     border: 1px solid #ddd;
     border-radius: 12px;
     padding: 10px;

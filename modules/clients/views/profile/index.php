@@ -2,19 +2,23 @@
     
     use yii\widgets\ActiveForm;
     use yii\helpers\Html;
-    use yii\widgets\MaskedInput;
-    use yii\bootstrap\Modal;
-    use app\modules\clients\widgets\SubMenuProfile;
+    use yii\widgets\Breadcrumbs;
     use app\modules\clients\widgets\AlertsShow;
     use app\modules\clients\widgets\ModalWindows;
     
 /*
  * Профиль пользователя
  */
-$this->title = 'Профиль собственника';
+$this->title = Yii::$app->params['site-name'] . 'Профиль';
+$this->params['breadcrumbs'][] = 'Профиль';
 ?>
 
-<?= AlertsShow::widget() ?>
+<?php // = AlertsShow::widget() ?>
+
+<?= Breadcrumbs::widget([
+        'homeLink' => ['label' => 'ELSA', 'url' => ['clients/index']],
+        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+]) ?>
 
 <div class="profile-page">
     <?php

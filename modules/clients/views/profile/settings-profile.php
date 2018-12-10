@@ -1,19 +1,20 @@
 <?php
     
     use yii\helpers\Html;
-    use yii\widgets\ActiveForm;
-    use yii\widgets\MaskedInput;
-    use app\helpers\FormatHelpers;
-    use app\modules\clients\widgets\SubMenuProfile;
-    use app\modules\clients\widgets\AlertsShow;
+    use yii\widgets\Breadcrumbs;
     
 /* 
  * Настройки профиля
  */
-
-$this->title = 'Настройки';
+$this->title = Yii::$app->params['site-name'] . 'Настройки профиля';
+$this->params['breadcrumbs'][] = ['label' => 'Профиль', 'url' => ['profile/index']];
+$this->params['breadcrumbs'][] = 'Настройки профиля';
 ?>
 
+<?= Breadcrumbs::widget([
+        'homeLink' => ['label' => 'ELSA', 'url' => ['clients/index']],
+        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+]) ?>
 
 <div class="profile-settings row">
     
