@@ -34,14 +34,14 @@ $(document).ready(function() {
             success: function(response) {
                 if (response.status == 2) {
                     $('.block_user').text('Разблокировать');
-                    $('.block_user').removeClass('btn-danger');
-                    $('.block_user').addClass('btn-success');
+                    $('.block_user').removeClass('btn-block-user');
+                    $('.block_user').addClass('btn-unblock-user');
                     $('.block_user').data('status', 1);
                 } else {
                     if (response.status == 1) {
                         $('.block_user').text('Заблокировать');
-                        $('.block_user').addClass('btn-danger');
-                        $('.block_user').removeClass('btn-success');
+                        $('.block_user').addClass('btn-block-user');
+                        $('.block_user').removeClass('btn-unblock-user');
                         $('.block_user').data('status', 2);
                     }
                 }

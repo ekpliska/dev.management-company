@@ -479,6 +479,69 @@ button#send-request-to-sms:focus{
 }
 /* Конец Кнопка Отмена, модальное окно */
 
+/* Кнопка блокировать пользователя */
+.btn-block-user {
+    border: 1px solid #ef693a;
+    border-radius: 12px;
+    background-color: #f0754a;
+    color: #fff;
+    font-size: 10px;
+    letter-spacing: 0.9px;
+    text-transform: uppercase;
+    outline: none;
+}
+.btn-block-user:hover,
+.btn-block-user:focus,
+.btn-block-user:active {
+    color: #fff;
+    background-color: #ef693a;
+    box-shadow: 4px 4px 6px 2px rgba(55,35,35,0.32);
+    outline: none;    
+}
+/* Конец Кнопка блокировать пользователя */
+
+/* Кнопка разблокировать пользователя */
+.btn-unblock-user {
+    border: 1px solid #23dd6f;
+    border-radius: 12px;
+    background-color: #23dd6f;
+    color: #fff;
+    font-size: 10px;
+    letter-spacing: 0.9px;
+    text-transform: uppercase;
+    outline: none;
+}
+.btn-unblock-user:hover,
+.btn-unblock-user:focus,
+.btn-unblock-user:active {
+    color: #fff;
+    background-color: #23dd6f;
+    box-shadow: 4px 4px 6px 2px rgba(55,35,35,0.32);
+    outline: none;
+}
+/* Конец Кнопка разблокировать пользователя */
+
+/* Кнопка удалить пользователя */
+.btn-delete-user {
+    border: 1px solid #cc3340;
+    border-radius: 12px;
+    background-color: #cc3340;
+    color: #fff;
+    font-size: 10px;
+    letter-spacing: 0.9px;
+    text-transform: uppercase;
+    outline: none;
+}
+.btn-delete-user:hover,
+.btn-delete-user:focus,
+.btn-delete-user:active {
+    color: #fff;
+    background-color: #f36;
+    box-shadow: 4px 4px 6px 2px rgba(55,35,35,0.32);
+    outline: none;
+}
+/* Конец Кнопка удалить пользователя */
+
 /* Собственник, главная страница, Новости */
 .news-lists {
     margin-top: 170px;
