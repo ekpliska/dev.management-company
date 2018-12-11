@@ -20,6 +20,14 @@ class SubMenu extends Widget {
     
     public function run() {
         
+        $params = [];
+        
+        switch ($this->view_name) {
+            case 'clients':
+                $params = [];
+                break;
+        }
+        
         return $this->render('submenu/' . $this->view_name);
         
     }

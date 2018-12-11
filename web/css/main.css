@@ -481,6 +481,7 @@ button#send-request-to-sms:focus{
 
 /* Кнопка блокировать пользователя */
 .btn-block-user {
+    padding: 3px 10px;
     border: 1px solid #ef693a;
     border-radius: 12px;
     background-color: #f0754a;
@@ -502,6 +503,7 @@ button#send-request-to-sms:focus{
 
 /* Кнопка разблокировать пользователя */
 .btn-unblock-user {
+    padding: 3px 10px;
     border: 1px solid #23dd6f;
     border-radius: 12px;
     background-color: #23dd6f;
@@ -523,9 +525,10 @@ button#send-request-to-sms:focus{
 
 /* Кнопка удалить пользователя */
 .btn-delete-user {
-    border: 1px solid #cc3340;
+    padding: 3px 10px;
+    border: 1px solid #fc3232;
     border-radius: 12px;
-    background-color: #cc3340;
+    background-color: #fc3232;
     color: #fff;
     font-size: 10px;
     letter-spacing: 0.9px;

@@ -28,19 +28,19 @@
         <div class="control-block">
             <?php if ($user_info->status == 1) : ?>
                 <?= Html::button('Заблокировать', [
-                        'class' => 'btn btn-block-user block_user',
+                        'class' => 'btn-block-user block_user',
                         'data-user' => $user_info->user_id,
                         'data-status' => 2]) 
                 ?>
             <?php elseif ($user_info->status == 2)  : ?>
                 <?= Html::button('Разблокировать', [
-                        'class' => 'btn btn-unblock-user block_user',
+                        'class' => 'btn-unblock-user block_user',
                         'data-user' => $user_info->user_id,
                         'data-status' => 1]) 
                 ?>
             <?php endif; ?>
             <?= Html::button('Удалить', [
-                        'class' => 'btn btn-delete-user',
+                        'class' => 'btn-delete-user',
                         'data-user' => $user_info->user_id]) 
             ?>
             
