@@ -46,7 +46,7 @@ a, a:hover, a:active {
     width: 100%;    
 }
 .wrap > .container-full {
-    padding: 110px 10px 20px 10px;
+    padding: 110px 30px 20px 30px;
 }
 /* Конец 100% ширина */
 
@@ -2642,6 +2642,7 @@ a.sub-menu-item {
 /* Конец Администратор, контент */
 
 /* Администратор, инпуты */
+/* Поиск */
 ._search-input {
     background: url(/images/clients/search.svg) no-repeat 20px 10px;
     border: 1px solid #ccc;
@@ -2663,5 +2664,41 @@ a.sub-menu-item {
 ._search-input:focus {
     border: 1px solid #fff;
 }
-
+/* Конец Поиск */
 /* Конец Администратор, инпуты */
+
+/* Администратор, профиль */
+.face-user {
+    min-height: 370px;
+}
+.face-user img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    border: 4px solid #2d18b4;
+    border-radius: 100%;
+    box-shadow: 0px 0px 0px 50px rgba(45, 24, 180, 0.5);
+}
+.user-info-block {
+    padding: 110px 20px;
+}
+.user-info-block_name {
+    color: #fff;
+    font-size: 24px;
+}
+/* Конец Администратор, профиль */
+/* Подменю, профиль собсвенника */
+.profile-sub_menu {
+    background: linear-gradient(190.67deg, #42314e 50%, rgba(132, 131, 131, 0.65) 100%);
+}
+.clients-profile-info_manager {
+    padding: 30px 150px;
+    text-align: left;
+}
+.rent-profile-info_manager {
+    padding: 30px 150px;
+    text-align: left;
+}
+/* Конец Подменю, профиль собсвенника */
