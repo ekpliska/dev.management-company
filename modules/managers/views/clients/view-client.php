@@ -2,6 +2,7 @@
 
     use yii\widgets\ActiveForm;
     use yii\helpers\Html;
+    use yii\widgets\Breadcrumbs;
     use yii\widgets\MaskedInput;
     use app\modules\managers\widgets\AlertsShow;
     use app\modules\managers\widgets\ModalWindowsManager;
@@ -10,9 +11,18 @@
  * Просмотр инофрмации о Собственнике
  */
 $this->title = 'Собственник ' . $client_info->fullName;
+$this->title = Yii::$app->params['site-name-manager'] .  'Собственники';
+$this->params['breadcrumbs'][] = ['label' => 'Собственники', 'url' => ['clients/index']];
+$this->params['breadcrumbs'][] = $client_info->fullName;
 ?>
+
+<div class="manager-main">
+<?= Breadcrumbs::widget([
+        'homeLink' => ['label' => 'ELSA', 'url' => ['clients/index']],
+        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+]) ?>
+
 <div class="managers-default-index">
-    <h1><?= $this->title ?></h1>
     
     <?= AlertsShow::widget() ?>
     
@@ -157,3 +167,6 @@ $this->title = 'Собственник ' . $client_info->fullName;
 </div>
 
 <?= ModalWindowsManager::widget(['modal_view' => 'delete_rent']) ?>
+
+    
+</div>    

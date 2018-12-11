@@ -2233,7 +2233,8 @@ input[name="date_end-period-pay"]:focus {
     background-image: url(Head.png);
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    box-shadow: 1px -1px 6px 2px #000;
+    /*box-shadow: 1px -1px 6px 2px #000;*/
+    box-shadow: rgba(0, 15, 41, 0.05) 0px 0px 16px 0px;
     border: none;    
 }
 .navbar-menu_header {
@@ -2567,7 +2568,6 @@ a.sub-menu-item {
 /* Конец Администратор, Собственники */
 
 /* Таблица, Администраторы */
-/* Таблица для заявок */
 .managers-table {
     border-collapse: unset;
     border: 1px solid #ddd;
@@ -2616,4 +2616,52 @@ a.sub-menu-item {
 .managers-table > tbody > tr > td > a {
     color: #2d18b4;
 }
-/* Конец Таблица для заявок */
+/* Конец Таблица */
+
+/* Дополнительное навигационное меню Администратор */
+.submenu-manager {
+    background: #2d18b4;
+    padding: 15px;
+    box-shadow: 5px -1px 4px 0px rgb(0, 0, 0);    
+}
+.submenu-manager > ul {
+    padding: 10px 25px;
+}
+/* Конец Дополнительное навигационное меню Администратор */
+
+/* Администратор, контент + доп меню */
+.manager-main-with-sub {
+    margin-top: 110px;
+}
+/* Конец Администратор, контент + доп меню */
+
+/* Администратор, контент */
+.manager-main {
+    margin-top: -40px;
+}
+/* Конец Администратор, контент */
+
+/* Администратор, инпуты */
+._search-input {
+    background: url(/images/clients/search.svg) no-repeat 20px 10px;
+    border: 1px solid #ccc;
+    border-radius: 10em;
+    box-sizing: content-box;
+    transition: all 0.5s ease 0s;
+    width: 55px;
+    background-size: 5%;
+    padding: 7px 54px;
+    width: 250px;
+    color: #fffd;
+    font-size: 14px;
+    outline: none;
+}
+._search-input::placeholder {
+    color: #fff;
+}
+._search-input:hover,
+._search-input:focus {
+    border: 1px solid #fff;
+}
+
+/* Конец Администратор, инпуты */

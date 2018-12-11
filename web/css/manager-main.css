@@ -1,0 +1,172 @@
+/*
+    Администратор
+*/
+/* 
+    Created on : 11.12.2018, 14:28:49
+    Author     : Ekaterina
+*/
+/*
+    Собственники
+*/
+
+@font-face{
+    font-family: "Mplus 1p";
+    src: url('../fonts/MPLUS1p-Regular.ttf');
+}
+@font-face{
+    font-family: "Mplus 1p Medium";
+    src: url('../fonts/MPLUS1p-Medium.ttf');
+}
+@font-face{
+    font-family: "Mplus 1p Bold";
+    src: url('../fonts/MPLUS1p-Bold.ttf');
+}
+
+html, body {
+    font-family: "Mplus 1p";
+    height:100%;
+}
+a, a:hover, a:active {
+    text-decoration: none;
+}
+.wrap {
+    min-height: 100%;
+    height: auto;
+    margin: 0 auto -60px;
+    padding: 0 0 60px;
+}
+.container-full {
+    margin: 0 auto;
+    width: 100%;    
+}
+.wrap > .container-full {
+    padding: 110px 10px 20px 10px;
+}
+/* Хлебные крошки */
+.breadcrumb {
+    margin-top: 70px;
+    font-size: 12px;
+    background: transparent;
+}
+.breadcrumb-padding {
+    margin-top: 140px;
+}
+.breadcrumb > li > a {
+    color: #c1c1c1;
+}
+.breadcrumb > li > a:hover {
+    color: #f0754a;
+    border-bottom: 1px solid #f0754a;
+}
+.breadcrumb > .active {
+    color: #67768a;
+}
+/* Конец Хлебные крошки */
+
+/* Футер */
+.footer {
+    height: 100px;
+    background-color: #f3f3f3;
+    padding-top: 15px;
+    box-shadow: 0 -1px 7px #ddd;
+    color: rgb(103, 118, 138);
+}
+.company {
+    display: inline-flex;    
+}
+.footer-logo {
+    width: 50px;
+}
+.company_info h3 {
+    margin: 0;
+    font-family: "Mplus 1p Bold";
+    font-size: 18px;
+    padding: 10px 0 0 20px;
+}
+.company_info p {
+    margin: 0;
+    padding: 0 0 0 20px;
+    font-size: 12px;
+}
+/* Конец Футер */
+/* Навигационное меню */
+.navbar-menu {
+    background-image: url(Head.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    box-shadow: 1px -1px 6px 2px #000;
+    border: none;    
+}
+.navbar-menu_header {
+    padding: 50px;
+    height: 120px;
+}
+.brand {
+    position: absolute;
+    left: 50%;
+    margin-left: -80px !important;
+    margin-top: -10px;
+    display: block;
+}
+.navbar-menu__items {
+    margin-top: -350px;
+}
+.menu-show {
+    margin-top: 0;
+    box-shadow: -1px 6px 7px #c1c1c1;
+}
+.user-notification {
+    position: relative;
+    top: -20px;
+}
+
+/* Открыть, закрыть меню */
+.menu-toggle {
+    position: fixed;
+    top: 40px;
+    margin-left: -50px;
+    z-index: 11;
+}
+.menu-toggle span::before,
+.menu-toggle span::after {
+    position: absolute;
+    top: 50%; 
+    margin-top: -1px;
+    left: 50%; 
+    margin-left: -10px;
+    width: 25px;
+    height: 2px;
+    background-color: #e0e0d1;
+    content: '';
+    display: block;
+    transition: 0.2s;
+}
+.menu-toggle span::before {
+    transform: translateY(-5px);
+}
+.menu-toggle span::after {
+    transform: translateY(5px);
+}
+.menu-toggle_active span {
+    background-color: transparent;
+}
+.menu-toggle_active span:before {
+    transform: rotate(-135deg);
+    width: 20px;
+    transform-origin: center;
+}
+.menu-toggle_active span:after {
+    transform: rotate(135deg);
+    width: 20px;
+    transform-origin: center;
+}
+.menu-toggle_message {
+    margin-left: 100px;
+    margin-top: 11px; 
+    color: white;
+    text-decoration: none;
+}
+.menu-toggle_message:hover {
+    text-decoration: none;
+}
+

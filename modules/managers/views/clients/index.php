@@ -8,14 +8,14 @@
 
 $this->title = Yii::$app->params['site-name-manager'] .  'Собственники';
 $this->params['breadcrumbs'][] = 'Собственники';
-
 ?>
 
-<?= Breadcrumbs::widget([
-        'homeLink' => ['label' => 'ELSA', 'url' => ['clients/index']],
-        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-]) ?>
+<div class="manager-main-with-sub">
 
-<div class="managers-default-index">
+    <?= Breadcrumbs::widget([
+            'homeLink' => ['label' => 'ELSA', 'url' => ['clients/index']],
+            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+    ]) ?>    
+    
     <?= $this->render('data/grid', ['client_list' => $client_list]) ?>
 </div>

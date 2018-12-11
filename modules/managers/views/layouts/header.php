@@ -4,6 +4,7 @@
     use yii\helpers\Html;
     use app\modules\clients\widgets\Notifications;
     use app\modules\managers\widgets\NavManager;
+    use app\modules\managers\widgets\SubMenu;
 /*
  * Шапка, меню, хлебные крошки
  */
@@ -25,5 +26,6 @@
             <?= Notifications::widget() ?>
         </ul>
     </div>
+    <?= SubMenu::widget(['view_name' => 'clients']) ?>
     <?= NavManager::widget() ?>
 </nav>
