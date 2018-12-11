@@ -2540,3 +2540,80 @@ a.sub-menu-item {
 }
 /* Конец Дополнительное навигационное меню, лицевой счет */
 
+
+
+/* Администратор, Собственники */
+.dropdown-setting {
+    margin: 0px -100px;
+}
+.dropdown-setting > li > a {
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 12px;
+    padding: 10px 10px;
+    cursor: pointer;
+    letter-spacing: 0.07em;
+}
+.dropdown-setting > li > a:hover {
+    background: rgba(247, 247, 247, 0.3);
+    color: #fff;
+}
+.btn-settings {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #2d18b4;
+}
+/* Конец Администратор, Собственники */
+
+/* Таблица, Администраторы */
+/* Таблица для заявок */
+.managers-table {
+    border-collapse: unset;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    font-size: 12px;
+    margin-bottom: 0px;
+}
+.managers-table thead {
+    color: #2d18b4;
+    text-transform: uppercase;
+    text-align: center;
+    vertical-align: top;
+}
+.managers-table > thead > tr > th {
+    font-size: 12px;
+    vertical-align: middle;
+    text-align: center;
+    border: none;
+    padding: 25px 0;
+}
+.managers-table > tbody > tr > td {
+    vertical-align: middle;
+    text-align: center;
+    padding: 25px 0;
+}
+.managers-table > tbody > tr:hover {
+    background: #d1ccef;
+}
+.managers-table_small {
+    width: 5%;
+    text-align: left;
+}
+.managers-table_middle {
+    width: 15%;
+}
+.managers-table_big {
+    width: 25%;
+    text-align: left !important;
+}
+.managers-table_left {
+    text-align: left !important;    
+}
+.managers-table i.glyphicon-map-marker {
+    color: #2d18b4;
+}
+.managers-table > tbody > tr > td > a {
+    color: #2d18b4;
+}
+/* Конец Таблица для заявок */

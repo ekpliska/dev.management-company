@@ -75,28 +75,39 @@ class BlockClientColumn extends DataColumn {
      * @param integer $data['status'] == User::STATUS_BLOCK (2) Собственник заблокирован
      */    
     protected function renderDataCellContent($data) {
+
+        return
+            Html::beginTag('div', ['class' => 'dropdown']) .
+            Html::button('<i class="glyphicon glyphicon-option-horizontal"></i>', ['class' => 'btn-settings dropdown-toggle', 'type' => 'button', 'data-toggle' => 'dropdown']) .
+                Html::beginTag('ul', ['class' => 'dropdown-menu dropdown-setting']) . 
+                    Html::beginTag('li') .
+                        Html::a('<i class="glyphicon glyphicon-ban-circle"></i>&nbsp;&nbsp;Заблокировать', ['/']) .
+                        Html::a('<i class="glyphicon glyphicon-remove"></i>&nbsp;&nbsp;Удалить собсвенника', ['/']) .
+                    Html::endTag('li') .
+                Html::endTag('ul') . 
+            Html::endTag('div');
         
-        if ($data['status'] == User::STATUS_ENABLED) {
-            return 
-                Html::checkbox('', false,
-                        [
-                            'class' => 'form-control status_btn',
-                            'data' => [
-                                'client-id' => $data['client_id'],
-                                'status' => User::STATUS_BLOCK,
-                            ],
-                        ]);
-        } elseif ($data['status'] == User::STATUS_BLOCK) {
-            return 
-                Html::checkbox('', true,
-                        [
-                            'class' => 'form-control status_btn',
-                            'data' => [
-                                'client-id' => $data['client_id'],
-                                'status' => User::STATUS_ENABLED,
-                            ],
-                        ]);          
-        }
+//        if ($data['status'] == User::STATUS_ENABLED) {
+//            return 
+//                Html::checkbox('', false,
+//                        [
+//                            'class' => 'form-control status_btn',
+//                            'data' => [
+//                                'client-id' => $data['client_id'],
+//                                'status' => User::STATUS_BLOCK,
+//                            ],
+//                        ]);
+//        } elseif ($data['status'] == User::STATUS_BLOCK) {
+//            return 
+//                Html::checkbox('', true,
+//                        [
+//                            'class' => 'form-control status_btn',
+//                            'data' => [
+//                                'client-id' => $data['client_id'],
+//                                'status' => User::STATUS_ENABLED,
+//                            ],
+//                        ]);          
+//        }
         
     }
     
