@@ -1,4 +1,8 @@
 <?php
+
+    use yii\helpers\Url;
+    use yii\helpers\Html;
+    use app\modules\clients\widgets\Notifications;
     use yii\bootstrap\Nav;
     use yii\bootstrap\NavBar;
 /*
@@ -7,6 +11,44 @@
     
 ?>
 
+<nav class="navbar navbar-fixed-top navbar-menu">
+    <div class="container-fluid navbar-menu_header">
+        <div class="navbar-header">
+            <a class="menu-toggle" href="#menu">
+                <span></span><p class="menu-toggle_message">Меню</p>
+            </a>        
+        </div>
+        <a href="<?= Url::to(['clients/index']) ?>" class="brand">
+            <?= Html::img('/images/navbar/group_46.svg', ['alt' => 'image'])  ?>
+        </a>
+        <ul class="nav navbar-nav navbar-right user-notification">
+            <?php /*= UserInfo::widget(['_value_choosing' => $this->context->_value_choosing]) */ ?>
+            <?= Notifications::widget() ?>
+        </ul>
+    </div>
+    <div class="menu-wrap-manager">
+        <div class="menu-sidebar-manager">
+            <ul class="menu">
+                <li><a href="<?= Url::to(['clients/index']) ?>">Собственники</a></li>
+                <li><a href="<?= Url::to(['employers/dispatchers']) ?>">Диспетчеры</a></li>
+                <li><a href="<?= Url::to(['employers/specialists']) ?>">Специалисты</a></li>
+                <li><a href="<?= Url::to(['managers/index']) ?>">Администраторы</a></li>
+                <li><a href="<?= Url::to(['services/index']) ?>">Услуги</a></li>
+                <li><a href="<?= Url::to(['requests/requests']) ?>">Заявки</a></li>
+                <li><a href="<?= Url::to(['requests/paid-services']) ?>">Платные услуги</a></li>
+                <li><a href="<?= Url::to(['news/news']) ?>">Новости</a></li>
+                <li><a href="<?= Url::to(['news/adverts']) ?>">Реклама</a></li>
+                <li><a href="<?= Url::to(['voting/index']) ?>">Голосование</a></li>
+                <li><a href="<?= Url::to(['/']) ?>">Конструктор заявок</a></li>
+                <li><a href="<?= Url::to(['estates/index']) ?>">Жилищный фонд</a></li>
+                <li><a href="<?= Url::to(['settings/index']) ?>">Настройки</a></li>
+            </ul>
+        </div>
+    </div>    
+</nav>
+
+
+<?php /*
 <style>
 .navbar-global {
   background-color: #222;
@@ -152,3 +194,6 @@
     ]);
     NavBar::end();
 ?>
+ * 
+ * 
+ */ ?>

@@ -40,7 +40,17 @@ a, a:hover, a:active {
     padding: 70px 15px 20px;
 }
 
+/* 100% ширина */
+.container-full {
+    margin: 0 auto;
+    width: 100%;    
+}
+.wrap > .container-full {
+    padding: 110px 10px 20px 10px;
+}
+/* Конец 100% ширина */
 
+/* Хлебные крошки */
 .breadcrumb {
     margin-top: 70px;
     font-size: 12px;
@@ -49,6 +59,18 @@ a, a:hover, a:active {
 .breadcrumb-padding {
     margin-top: 140px;
 }
+.breadcrumb > li > a {
+    color: #c1c1c1;
+}
+.breadcrumb > li > a:hover {
+    color: #f0754a;
+    border-bottom: 1px solid #f0754a;
+}
+.breadcrumb > .active {
+    color: #67768a;
+}
+/* Конец Хлебные крошки */
+
 /* Футер */
 .footer {
     height: 100px;
@@ -2242,6 +2264,7 @@ input[name="date_end-period-pay"]:focus {
     position: fixed;
     top: 40px;
     margin-left: -50px;
+    z-index: 11;
 }
 .menu-toggle span::before,
 .menu-toggle span::after {
@@ -2358,6 +2381,46 @@ a.sub-menu-item {
     border: 1px solid #fff;
 }
 /* Конец Выпадающее меню навигации */
+
+/* Выпадающее навигационное меню, Администратор */
+.menu-wrap-manager {
+    background-color: #6968AB;
+    position: fixed;
+    top: 0;
+    height: 100%;
+    width: 280px;
+    margin-left: -280px;
+    font-size: 1em;
+    font-weight: 700;
+    overflow: auto;
+    transition: .25s;
+    z-index: 10;
+    background: linear-gradient(180.67deg, #39284E 69%, rgba(10,8,8,0.7) 100%);
+}
+.menu-show-manager {
+    margin-left: 0;
+    box-shadow: 0px 0px 3px 0px #000;
+}
+.menu-sidebar-manager {
+    margin-top: 116px;
+}
+.menu > li:first-child {
+    border-top: 1px solid #604c6e;    
+}
+.menu > li {
+    padding: 20px;
+    border-bottom: 1px solid #604c6e;
+    margin-left: -40px;
+}
+.menu > li > a {
+    color: #fff;
+    font-weight: normal;
+    font-size: 14px;
+}
+.menu > li:hover {
+    background: rgba(247, 247, 247, 0.3);    
+}
+/* Конец Выпадающее навигационное меню, Администратор */
 /* Конец Навигационное меню */
 
 

@@ -116,6 +116,7 @@ $('.menu-toggle').on('click', function(e) {
     e.preventDefault();
     $(this).toggleClass('menu-toggle_active');
     $('.navbar-menu__items').toggleClass('menu-show');
+    $('.menu-wrap-manager').toggleClass('menu-show-manager');
     $('.menu-toggle_message').text('Меню');
     $('.navbar-general-page').show();
     $('.navbar_repusets').show();
@@ -130,7 +131,6 @@ $(document).on('click', '.menu-toggle_active', function() {
     $('.navbar_paid-request').hide();    
     $('.sub-menu_account').hide();    
 });
-
 
 $('#menu').on('wheel', function(e){
     
@@ -160,6 +160,18 @@ $('#menu').on('wheel', function(e){
         $('li[id=item-menu-4]').html(_3ID);        
     }
 });
+
+
+//$('.menu-toggle').on('click', function(e) {
+//    e.preventDefault();
+//    $(this).toggleClass('menu-toggle_active');
+//    $('.menu-wrap-manager').toggleClass('menu-show-manager');
+//    $('.menu-toggle_message').text('Закрыть');
+//});
+//$(document).on('click', '.menu-toggle_active', function() {
+//    $('.menu-toggle_message').text('Меню');
+//});
+
 
 /*
  * Отправка повторного номера телефона

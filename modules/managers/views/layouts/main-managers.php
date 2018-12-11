@@ -20,24 +20,20 @@ ManagersAsset::register($this);
     <?php $this->head() ?>
 </head>
 <body>
-<?php $this->beginBody() ?>
-
-    <div class="wrap">
-        
+    
+    <?php $this->beginBody() ?>
+    <div class="wrap">        
         <?php $this->beginContent('@app/modules/managers/views/layouts/header.php') ?>
-        <?php $this->endContent() ?>    
-        
-        
-        <div class="main-content">
+        <?php $this->endContent() ?>            
+        <div class="container container-full">
             <?= $content ?>
-        </div>
-        
+        </div>        
     </div>
 
     <?php $this->beginContent('@app/modules/managers/views/layouts/footer.php') ?>
     <?php $this->endContent() ?>
-
-<?php $this->endBody() ?>
+    <?php $this->endBody() ?>
+    
 </body>
 </html>
 <?php $this->endPage() ?>
