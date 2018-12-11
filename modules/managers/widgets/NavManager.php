@@ -9,42 +9,65 @@
 class NavManager extends Widget {
     
     public $menu_array = [
+        'clients' => [
+            'name' => 'Собственники',
+            'link' => 'clients/index',
+        ],
+        'dispatchers' => [
+            'name' => 'Диспетчеры',
+            'link' => 'employers/dispatchers',
+        ],
+        'specialists' => [
+            'name' => 'Специалисты',
+            'link' => 'employers/specialists',
+        ],
         'managers' => [
-            'name' => 'Администратор',
+            'name' => 'Администраторы',
             'link' => 'managers/index',
         ],
-        '' => [
-            'name' => '',
-            'link' => '',
+        'services' => [
+            'name' => 'Услуги',
+            'link' => 'services/index',
         ],
-        '' => [
-            'name' => '',
-            'link' => '',
+        'requests' => [
+            'name' => 'Заявки',
+            'link' => 'requests/requests',
         ],
-        '' => [
-            'name' => '',
-            'link' => '',
+        'paid-services' => [
+            'name' => 'Платные заявки',
+            'link' => 'requests/paid-services',
         ],
-        '' => [
-            'name' => '',
-            'link' => '',
+        'news' => [
+            'name' => 'Новости',
+            'link' => 'news/news',
         ],
-        '' => [
-            'name' => '',
-            'link' => '',
+        'news' => [
+            'name' => 'Реклама',
+            'link' => 'news/adverts',
         ],
-        '' => [
-            'name' => '',
-            'link' => '',
+        'voting' => [
+            'name' => 'Голосование',
+            'link' => 'voting/index',
         ],
-        '' => [
-            'name' => '',
-            'link' => '',
+        '#' => [
+            'name' => 'Конструктор заявок',
+            'link' => '#',
         ],
-        '' => [
-            'name' => '',
-            'link' => '',
+        'estates' => [
+            'name' => 'Жилищный фонд',
+            'link' => 'estates/index',
+        ],
+        'settings' => [
+            'name' => 'Настройки',
+            'link' => 'settings/index',
         ],
     ];
+    
+    public function run() {
+        
+        return $this->render('navmanager/default', [
+            'menu' => $this->menu_array,
+        ]);
+    }
     
 }

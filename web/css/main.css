@@ -2417,7 +2417,8 @@ a.sub-menu-item {
     font-weight: normal;
     font-size: 14px;
 }
-.menu > li:hover {
+.menu > li:hover,
+.menu > li.active {
     background: rgba(247, 247, 247, 0.3);    
 }
 /* Конец Выпадающее навигационное меню, Администратор */
