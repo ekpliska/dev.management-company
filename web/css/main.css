@@ -1851,8 +1851,13 @@ input[name="date_end-period-pay"]:focus {
     box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
     color: #FFFFFF;
 }
-.paument-ok {
+.payment-ok {
     color: #23dd6f;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+}
+.payment-debt {
+    color: #f0754a;
     text-transform: uppercase;
     letter-spacing: 0.07em;
 }
@@ -2808,5 +2813,8 @@ a.sub-menu-item {
 .rent-profile-info_manager {
     padding: 30px 150px;
     text-align: left;
+}
+.payments-date-block {
+    padding: 20px 15px 70px;
 }
 /* Конец Подменю, профиль собсвенника */
