@@ -74,6 +74,7 @@ class PersonalAccount extends ActiveRecord
      */
     public static function findByNumber($account_number) {
         return static::find()
+                ->joinWith(['organization', 'client', 'flat', 'flat.house', 'flat.house.estate', 'rent'])
                 ->andWhere(['account_number' => $account_number])
                 ->one();
     }
@@ -122,18 +123,6 @@ class PersonalAccount extends ActiveRecord
                 ->asArray()
                 ->one();
     }
-
-    /*
-     * Поиск лицевого счета по ID клиента
-     * Для контроллера Профиль пользователя
-     */    
-//    public static function findByClientProfile($client_id) {
-//        return static::find()
-//                ->andWhere(['personal_clients_id' => $client_id])
-//                ->orderBy(['account_id' => SORT_ASC])
-//                ->limit(1)
-//                ->one();
-//    }
 
     /*
      * Информация по лицевому счету

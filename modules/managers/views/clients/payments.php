@@ -68,45 +68,45 @@ $this->params['breadcrumbs'][] = $client_info->fullName;
             </div>
 
 
-        <table class="table requests-table payment-table">
-            <thead>
-            <tr>
-                <th>#TODO</th>
-                <th>#TODO</th>
-                <th>#TODO</th>
-                <th>#TODO</th>
-            </tr>
-            </thead>
-            <tr>
-                <td>Sample text</td>
-                <td>Sample text</td>
-                <td>Sample text</td>
-                <td>
-                    <span class="payment-debt">Задолженность</span>
-                </td>
-            </tr>
-            <tr>
-                <td>Sample text</td>
-                <td>Sample text</td>
-                <td>Sample text</td>
-                <td>
-                    <span class="payment-ok"><i class="glyphicon glyphicon-ok"></i> Оплачено</span>
-                </td>
-            </tr>
-            <tr>
-                <td>Sample text</td>
-                <td>Sample text</td>
-                <td>Sample text</td>
-                <td>Sample text</td>
-            </tr>
-            <tr>
-                <td>Sample text</td>
-                <td>Sample text</td>
-                <td>Sample text</td>
-                <td>Sample text</td>
-            </tr>
-        </table>        
-        
-         
+            <table class="table requests-table payment-table">
+                <thead>
+                <tr>
+                    <th>#TODO</th>
+                    <th>#TODO</th>
+                    <th>#TODO</th>
+                    <th>#TODO</th>
+                </tr>
+                </thead>
+                <tr>
+                    <td>Sample text</td>
+                    <td>Sample text</td>
+                    <td>Sample text</td>
+                    <td>
+                        <span class="payment-debt">Задолженность</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Sample text</td>
+                    <td>Sample text</td>
+                    <td>Sample text</td>
+                    <td>
+                        <span class="payment-ok"><i class="glyphicon glyphicon-ok"></i> Оплачено</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Sample text</td>
+                    <td>Sample text</td>
+                    <td>Sample text</td>
+                    <td>Sample text</td>
+                </tr>
+                <tr>
+                    <td>Sample text</td>
+                    <td>Sample text</td>
+                    <td>Sample text</td>
+                    <td>Sample text</td>
+                </tr>
+            </table>
+            
+        </div>
     </div>
 </div>

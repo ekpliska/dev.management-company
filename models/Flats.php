@@ -110,7 +110,17 @@ class Flats extends ActiveRecord
         if ($changedAttributes['status'] == self::STATUS_DEBTOR_YES) {
             NotesFlat::deleteAll(['notes_flat_id' => $this->flats_id]);
         }
+    }
+    
+    /*
+     * Получить полный адрес
+     */
+    public function getFullAdress() {
         
+        $adress = Flats::find()
+                ->joinWith(['house']);
+        
+        return $adress;
     }
     
     /**

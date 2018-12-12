@@ -305,6 +305,40 @@ class ClientsController extends AppManagersController {
         ]);
         
     }
+
+    /*
+     * Собственник, Приборы учета
+     */
+    public function actionCounters($client_id, $account_number) {
+        
+        $client_info = Clients::findById($client_id);
+        $account_info = PersonalAccount::findByNumber($account_number);
+        $user_info = User::findByClientId($client_id);
+        
+        return $this->render('counters', [
+            'client_info' => $client_info,
+            'account_choosing' => $account_info,
+            'user_info' => $user_info,
+        ]);
+        
+    }
+    
+    /*
+     * Собственник, Общая информация по лицевому счету
+     */
+    public function actionAccountInfo($client_id, $account_number) {
+        
+        $client_info = Clients::findById($client_id);
+        $account_info = PersonalAccount::findByNumber($account_number);
+        $user_info = User::findByClientId($client_id);
+        
+        return $this->render('account-info', [
+            'client_info' => $client_info,
+            'account_choosing' => $account_info,
+            'user_info' => $user_info,
+        ]);
+        
+    }
     
     
 }
