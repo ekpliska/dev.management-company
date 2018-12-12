@@ -277,14 +277,12 @@ class ClientsController extends AppManagersController {
      */
     public function actionReceiptsOfHapu($client_id, $account_number) {
         
-        $client_info = Clients::findById($client_id);
-        $account_info = PersonalAccount::findByNumber($account_number);
-        $user_info = User::findByClientId($client_id);
+        $info = $this->getClientsInfo($client_id, $account_number);
         
         return $this->render('receipts-of-hapu', [
-            'client_info' => $client_info,
-            'account_choosing' => $account_info,
-            'user_info' => $user_info,
+            'client_info' => $info['client_info'],
+            'account_choosing' => $info['account_info'],
+            'user_info' => $info['user_info'],
         ]);
         
     }
@@ -294,14 +292,12 @@ class ClientsController extends AppManagersController {
      */
     public function actionPayments($client_id, $account_number) {
         
-        $client_info = Clients::findById($client_id);
-        $account_info = PersonalAccount::findByNumber($account_number);
-        $user_info = User::findByClientId($client_id);
+        $info = $this->getClientsInfo($client_id, $account_number);
         
         return $this->render('payments', [
-            'client_info' => $client_info,
-            'account_choosing' => $account_info,
-            'user_info' => $user_info,
+            'client_info' => $info['client_info'],
+            'account_choosing' => $info['account_info'],
+            'user_info' => $info['user_info'],
         ]);
         
     }
@@ -311,14 +307,12 @@ class ClientsController extends AppManagersController {
      */
     public function actionCounters($client_id, $account_number) {
         
-        $client_info = Clients::findById($client_id);
-        $account_info = PersonalAccount::findByNumber($account_number);
-        $user_info = User::findByClientId($client_id);
+        $info = $this->getClientsInfo($client_id, $account_number);
         
         return $this->render('counters', [
-            'client_info' => $client_info,
-            'account_choosing' => $account_info,
-            'user_info' => $user_info,
+            'client_info' => $info['client_info'],
+            'account_choosing' => $info['account_info'],
+            'user_info' => $info['user_info'],
         ]);
         
     }
@@ -328,15 +322,27 @@ class ClientsController extends AppManagersController {
      */
     public function actionAccountInfo($client_id, $account_number) {
         
+        $info = $this->getClientsInfo($client_id, $account_number);
+        
+        return $this->render('account-info', [
+            'client_info' => $info['client_info'],
+            'account_choosing' => $info['account_info'],
+            'user_info' => $info['user_info'],
+        ]);
+        
+    }
+    
+    protected function getClientsInfo($client_id, $account_number) {
+        
         $client_info = Clients::findById($client_id);
         $account_info = PersonalAccount::findByNumber($account_number);
         $user_info = User::findByClientId($client_id);
-        
-        return $this->render('account-info', [
+
+        return [
             'client_info' => $client_info,
-            'account_choosing' => $account_info,
+            'account_info' => $account_info,
             'user_info' => $user_info,
-        ]);
+        ];
         
     }
     
