@@ -2759,6 +2759,25 @@ a.sub-menu-item {
 .profile-sub_menu {
     background: linear-gradient(190.67deg, #42314e 50%, rgba(132, 131, 131, 0.65) 100%);
 }
+.profile-sub_menг_ul {
+    margin: 0;
+    display: inline-flex;
+    list-style-type: none;
+}
+.profile-sub_menг_ul > li {
+    padding: 30px;
+    margin: 0px 40px 0px -40px;
+}
+.profile-sub_menг_ul > li.active,
+.profile-sub_menг_ul > li:hover {
+    background: rgba(247, 247, 247, 0.16);
+}
+.profile-sub_menг_ul > li > a {
+    color: #fff;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
 .clients-profile-info_manager {
     padding: 30px 150px;
     text-align: left;

@@ -21,7 +21,7 @@
         </p>
             
             <?= $form->field($add_rent, 'account_id')->dropDownList($list_account, [
-                    'value' => $account_choosing,
+                    'value' => $account_choosing->account_id,
                     'id' => '_list-account',
                     'class' => 'form-control',
                     'data-client' => $client_info->clients_id]) ?>
@@ -47,10 +47,10 @@
         </div>
     </div>
 </div>
-    
+
 <div class="profile-menu profile-sub_menu">
-    <ul class="nav nav-pills sub-menu_account">
-        <li><a href="#">Профиль</a></li>
+    <ul class="profile-sub_menг_ul">
+        <li class="active"><a href="<?= Url::to(['clients/view-client', 'client_id' => $client_info->clients_id, 'account_number' => $account_choosing->account_number]) ?>">Профиль</a></li>
         <li><a href="#">Квитанция ЖКУ</a></li>
         <li><a href="#">Платежи</a></li>
         <li><a href="#">Показания приборов учета</a></li>

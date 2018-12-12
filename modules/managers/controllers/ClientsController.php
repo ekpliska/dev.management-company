@@ -85,7 +85,7 @@ class ClientsController extends AppManagersController {
             'is_rent' => $is_rent,
             'client_info' => $client_info,
             'user_info' => $user_info,
-            'account_choosing' => $account_info->account_id,
+            'account_choosing' => $account_info,
             'list_account' => $list_account,
             'rent_info' => $edit_rent,
             'add_rent' => $add_rent,
