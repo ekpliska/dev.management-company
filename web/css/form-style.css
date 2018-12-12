@@ -637,18 +637,7 @@ select[name="category_list"] option {
 }
 /* Конец Выпадающий список, лицевой счет */
 
-
-
-
-
-
-
-
-
-
-
-
-/* Выпадающий список, лицевой счет */
+/* Выпадающий список, виды патных услуг */
 .custom-select {
     background: none;
     border: none; 
@@ -755,7 +744,7 @@ select[name="category_list"] option {
 .custom-option-services.selection-services {
     background: rgba(0, 123, 255, 0.12);
 }
-/* Конец Выпадающий список, лицевой счет */
+/* Конец Выпадающий список, виды платных услуг */
 
 /* CheckBox, email уведомления */
 .spam-agree-txt label {
@@ -839,3 +828,112 @@ textarea {
     color: #f0754a;
 }
 /* Конец Textarea */
+
+
+/* Выпадающий список, select, администратор (темный) */
+.custom-select {
+    background: none;
+    border: none; 
+}
+.custom-select-wrapper-dark {
+    position: relative;
+    display: inline-block;
+    user-select: none;
+    font-family: "Mplus 1p";
+}
+.custom-select-wrapper-dark select {
+    display: none;
+}
+.custom-select-dark {
+    position: absolute;
+    display: inline-block;
+    top: -15px;
+}
+.custom-select-trigger-dark {
+    text-align: left;
+    position: relative;
+    display: block;
+    width: 380px;
+    font-size: 14px;
+    font-weight: 300;
+    color: #ffffff;
+    line-height: 35px;
+    background: transparent;
+    cursor: pointer;
+    border-bottom: 1px solid #ffffff;
+}
+.custom-select-trigger-dark:after {
+    position: absolute;
+    display: block;
+    content: '';
+    width: 10px; 
+    height: 10px;
+    top: 50%; 
+    right: 7px;
+    border-bottom: 1px solid #fff;
+    border-right: 1px solid #fff;
+    transform: rotate(45deg) translateY(-50%);
+    transition: all .4s ease-in-out;
+    transform-origin: 50% 0;
+}
+
+.custom-select-dark.opened .custom-select-trigger-dark:after {
+    margin-top: 3px;
+    transform: rotate(-135deg) translateY(-50%);
+}
+.custom-options-dark {
+    display: block;
+    top: 100%; 
+    left: 0; 
+    right: 0;
+    min-width: 100%;
+    margin: 0;
+    border: 1px solid #604c6e;
+    border-radius: 4px;
+    box-sizing: border-box;
+    box-shadow: 0 2px 1px rgba(0,0,0,.07);
+    background: #fff;
+    transition: all .4s ease-in-out;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-15px);
+    z-index: 999;
+}
+.custom-select-dark.opened .custom-options-dark {
+    text-align: left;
+    position: relative;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+    transform: translateY(0);
+    background: linear-gradient(180.67deg, #39284E 90%, rgba(10,8,8,0.5) 100%);
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+.option-hover-dark:before {
+    background: #f9f9f9;
+}
+.custom-option-dark {
+    position: relative;
+    display: block;
+    padding: 0 22px;
+    border-bottom: 1px solid #8b709d;
+    font-size: 14px;
+    color: #fff;
+    line-height: 47px;
+    cursor: pointer;
+    transition: all .4s ease-in-out;
+}
+.custom-option-dark:first-of-type {
+    border-radius: 4px 4px 0 0;
+}
+.custom-option-dark:last-of-type {
+    border-bottom: 0;
+    border-radius: 0 0 4px 4px;
+}
+.custom-option-dark:hover,
+.custom-option-dark.selection-services {
+    background: rgba(0, 123, 255, 0.12);
+}
+/* Конец Выпадающий список, select, администратор (темный) */

@@ -2787,20 +2787,20 @@ a.sub-menu-item {
 .profile-sub_menu {
     background: linear-gradient(190.67deg, #42314e 50%, rgba(132, 131, 131, 0.65) 100%);
 }
-.profile-sub_menг_ul {
+.profile-sub_menu_ul {
     margin: 0;
     display: inline-flex;
     list-style-type: none;
 }
-.profile-sub_menг_ul > li {
+.profile-sub_menu_ul > li {
     padding: 30px;
     margin: 0px 40px 0px -40px;
 }
-.profile-sub_menг_ul > li.active,
-.profile-sub_menг_ul > li:hover {
+.profile-sub_menu_ul > li.active,
+.profile-sub_menu_ul > li:hover {
     background: rgba(247, 247, 247, 0.16);
 }
-.profile-sub_menг_ul > li > a {
+.profile-sub_menu_ul > li > a {
     color: #fff;
     font-size: 14px;
     text-transform: uppercase;
@@ -2817,4 +2817,8 @@ a.sub-menu-item {
 .payments-date-block {
     padding: 20px 15px 70px;
 }
+.control-block {
+    padding: 20px 0;
+}
+
 /* Конец Подменю, профиль собсвенника */

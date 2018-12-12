@@ -96,20 +96,11 @@ $this->params['breadcrumbs'][] = $client_info->fullName;
                         <?= Html::checkbox('is_rent', $is_rent ? 'checked' : '', ['id' => 'is_rent']) ?>
                     <?php endif; ?>                                        
                 </p>
-                <div id="content-replace" class="form-add-rent">                    
-                    
-                    <?php if (isset($is_rent) && $is_rent) : ?>
-                        <?= $this->render('_form/rent-view', [
-                                'form' => $form,
-                                'rent_info' => $rent_info]) 
-                        ?>
-                        <?php else : ?>
-                            <p>Арендатор отсутствует</p>
-                        <?php /* = $this->render('_form/add-rent', [
-                                'form' => $form, 
-                                'add_rent' => $add_rent, 
-                                'client_id' => $client_info->id]) */ ?>
-                    <?php endif; ?>
+                <div id="content-replace" class="form-add-rent">
+                    <?= $this->render('_form/rent-view', [
+                            'form' => $form,
+                            'rent_info' => $rent_info]) 
+                    ?>
                 </div>
             </div>
         </div>

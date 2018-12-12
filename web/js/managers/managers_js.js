@@ -1045,6 +1045,55 @@ $(document).ready(function() {
       return matches ? decodeURIComponent(matches[1]) : undefined;
     } 
     
+    /* Кастомизация элеметнов управления формой, категории услуг */
+    $(".custom-select-dark").each(function() {
+        var classes = $(this).attr("class"),
+            id = $(this).attr("id"),
+            name = $(this).attr("name");
+        var template =  '<div class="' + classes + '">';
+            template += '<span class="custom-select-trigger-dark">' + $(this).attr("placeholder") + '</span>';
+            template += '<div class="custom-options-dark">';
+        // Текущий выбранный лицевой счет
+        var currentValue = $('#select-dark option:selected').val();
+        console.log(currentValue);
+        
+        $(this).find("option").each(function() {
+            var classSelection = ($(this).attr("value") == currentValue) ? 'selection-dark ' : '';            
+            template += '<span class="custom-option-dark ' + classSelection + $(this).attr("class") + '" data-value="' + $(this).attr("value") + '">' + $(this).html() + '</span>';
+            
+            $(this).val('selection-dark');
+            
+        });
+        template += '</div></div>';
+
+        $(this).wrap('<div class="custom-select-wrapper-dark"></div>');
+        $(this).hide();
+        $(this).after(template);
+    });
+
+    $(".custom-option-dark:first-of-type").hover(function() {
+        $(this).parents(".custom-options-dark").addClass("option-hover-dark");
+    }, function() {
+        $(this).parents(".custom-options-dark").removeClass("option-hover-dark");
+    });
+
+    $(".custom-select-trigger-dark").on("click", function() {
+        $('html').one('click',function() {
+            $(".custom-select-dark").removeClass("opened");
+        });
+        $(this).parents(".custom-select-dark").toggleClass("opened");
+        event.stopPropagation();
+    });
+    
+    $(".custom-option-dark").on("click", function() {
+        var valueSelect = $(this).data("value");
+        var textSelect = $(this).text();
+        $(this).parents(".custom-select-wrapper-dark").find("select").val(valueSelect);
+        $(this).parents(".custom-options-dark").find(".custom-option-services").removeClass("selection-dark");
+        $(this).addClass("selection-dark");
+        $(this).parents(".custom-select-dark").removeClass("opened");
+        $(this).parents(".custom-select-dark").find(".custom-select-trigger-dark").text(textSelect);
+    });
 
     
  });

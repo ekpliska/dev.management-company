@@ -19,7 +19,14 @@
         <p class="user-info-block_name">
             <?= $client_info->fullName ?>
         </p>
-            
+
+  
+
+        <?= Html::dropDownList('clients-account_list', $account_choosing->account_id, $list_account, [
+                'placeHolder' => $account_choosing->account_number,
+                'id' => 'select-dark',
+                'class' => 'custom-select-dark',
+        ]) ?>
             <?php /* = $form->field($add_rent, 'account_id')->dropDownList($list_account, [
                     'value' => $account_choosing->account_id,
                     'id' => '_list-account',
