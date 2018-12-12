@@ -51,7 +51,7 @@ class ClientsController extends AppManagersController {
      */
     public function actionViewClient($client_id, $account_number) {
         
-        $$is_rent = false;
+        $is_rent = false;
         
         $client_info = Clients::findById($client_id);
         $account_info = PersonalAccount::findByNumber($account_number);
@@ -270,6 +270,23 @@ class ClientsController extends AppManagersController {
         }
         
         return ['status' => false, 'message' => 'Ошибка передачи параметров'];
+    }
+    
+    /*
+     * Собственник, Квитанции ЖКУ
+     */
+    public function actionReceiptsOfHapu($client_id, $account_number) {
+        
+        $client_info = Clients::findById($client_id);
+        $account_info = PersonalAccount::findByNumber($account_number);
+        $user_info = User::findByClientId($client_id);
+        
+        return $this->render('receipts-of-hapu', [
+            'client_info' => $client_info,
+            'account_choosing' => $account_info,
+            'user_info' => $user_info,
+        ]);
+        
     }
     
     

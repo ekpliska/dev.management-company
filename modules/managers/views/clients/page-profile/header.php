@@ -20,11 +20,12 @@
             <?= $client_info->fullName ?>
         </p>
             
-            <?= $form->field($add_rent, 'account_id')->dropDownList($list_account, [
+            <?php /* = $form->field($add_rent, 'account_id')->dropDownList($list_account, [
                     'value' => $account_choosing->account_id,
                     'id' => '_list-account',
                     'class' => 'form-control',
-                    'data-client' => $client_info->clients_id]) ?>
+                    'data-client' => $client_info->clients_id]) */ ?>
+        
         <div class="control-block">
             <?php if ($user_info->status == 1) : ?>
                 <?= Html::button('Заблокировать', [
