@@ -29,15 +29,15 @@ class BlockClientColumn extends DataColumn {
     public function init() {
         
         $this->grid->view->registerJs("
-            $('body').on('change', 'input[type=checkbox]', function(e) {
-                e.preventDefault();
+            $('body').on('click', 'ul.dropdown-setting li', function(e) {
+                e.preventDefault();                
                 // Получаем data атрибут ID собственика
                 var clientId = $(this).data('clientId');
                 // Получаем data атрибут статус собственика
                 var statusClient = $(this).data('status');
                 // Собираем все элементы, которые содержат одинаковые data атрибут ID собственика
                 var btnValue = $('[data-client-id=' + clientId + ']');
-                
+
                 $.ajax({
                     url: '" . $this->action . "',
                     type: '" . $this->ajax_method . "',
@@ -47,11 +47,11 @@ class BlockClientColumn extends DataColumn {
                     },
                     success: function(response) {
                         if (response.status == " . User::STATUS_BLOCK . ") {
-                            btnValue.prop('checked', true);
+                            btnValue.html('&Oslash;&nbsp;&nbsp;Разблокировать');
                             btnValue.data('status', 1);
                         } else {
                             if (response.status == " . User::STATUS_ENABLED . ") {
-                                btnValue.prop('checked', false);
+                                btnValue.html('&Oslash;&nbsp;&nbsp;Заблокировать');
                                 btnValue.data('status', 2);
                             }
                         }
@@ -75,40 +75,34 @@ class BlockClientColumn extends DataColumn {
      * @param integer $data['status'] == User::STATUS_BLOCK (2) Собственник заблокирован
      */    
     protected function renderDataCellContent($data) {
-
+        
+        if ($data['status'] == User::STATUS_ENABLED) {
+            $data_array = [
+                'client-id' => $data['client_id'],
+                'status' => USER::STATUS_BLOCK,
+            ];
+            $label = 'Заблокировать';
+        } elseif ($data['status'] == User::STATUS_BLOCK) {
+            $data_array = [
+                'client-id' => $data['client_id'],
+                'status' => User::STATUS_ENABLED,
+            ];            
+            $label = 'Разблокировать';
+        }
+        
         return
             Html::beginTag('div', ['class' => 'dropdown']) .
             Html::button('<i class="glyphicon glyphicon-option-horizontal"></i>', ['class' => 'btn-settings dropdown-toggle', 'type' => 'button', 'data-toggle' => 'dropdown']) .
                 Html::beginTag('ul', ['class' => 'dropdown-menu dropdown-setting']) . 
+                    Html::beginTag('li', ['data' => $data_array]) .
+                        "&Oslash;&nbsp;&nbsp;{$label}" .
+                    Html::endTag('li') .
                     Html::beginTag('li') .
-                        Html::a('<i class="glyphicon glyphicon-ban-circle"></i>&nbsp;&nbsp;Заблокировать', ['/']) .
-                        Html::a('<i class="glyphicon glyphicon-remove"></i>&nbsp;&nbsp;Удалить собсвенника', ['/']) .
+                        '&times;&nbsp;&nbsp;Удалить собсвенника' .
                     Html::endTag('li') .
                 Html::endTag('ul') . 
             Html::endTag('div');
-        
-//        if ($data['status'] == User::STATUS_ENABLED) {
-//            return 
-//                Html::checkbox('', false,
-//                        [
-//                            'class' => 'form-control status_btn',
-//                            'data' => [
-//                                'client-id' => $data['client_id'],
-//                                'status' => User::STATUS_BLOCK,
-//                            ],
-//                        ]);
-//        } elseif ($data['status'] == User::STATUS_BLOCK) {
-//            return 
-//                Html::checkbox('', true,
-//                        [
-//                            'class' => 'form-control status_btn',
-//                            'data' => [
-//                                'client-id' => $data['client_id'],
-//                                'status' => User::STATUS_ENABLED,
-//                            ],
-//                        ]);          
-//        }
-        
+                        
     }
     
     

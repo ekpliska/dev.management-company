@@ -2641,7 +2641,7 @@ a.sub-menu-item {
 .dropdown-setting {
     margin: 0px -100px;
 }
-.dropdown-setting > li > a {
+.dropdown-setting > li {
     color: #fff;
     text-transform: uppercase;
     font-size: 12px;
@@ -2649,7 +2649,7 @@ a.sub-menu-item {
     cursor: pointer;
     letter-spacing: 0.07em;
 }
-.dropdown-setting > li > a:hover {
+.dropdown-setting > li:hover {
     background: rgba(247, 247, 247, 0.3);
     color: #fff;
 }
