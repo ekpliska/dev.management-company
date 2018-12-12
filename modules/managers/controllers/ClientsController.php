@@ -222,57 +222,6 @@ class ClientsController extends AppManagersController {
     }    
     
     /*
-     * Удалить профиль Арендатора
-     */
-    public function actionDeleteRentProfile($rent, $account) {
-        
-        if (Yii::$app->request->isPost) {
-            $_rent = Rents::findOne($rent);
-            $_rent->delete();
-            Yii::$app->session->setFlash('delete-rent', [
-                'success' => true, 
-                'message' => 'Арендатор ' . $_rent->fullName . ' и его учетная запись успешно удалены с портала',]);
-            return $this->redirect(Yii::$app->request->referrer);
-        }
-        Yii::$app->session->setFlash('delete-rent', [
-            'success' => false,
-            'error' => 'Извините, при обработке запроса произошел сбой. Обновите страницу и повторите действие еще раз']);
-        return $this->redirect(Yii::$app->request->referrer);
-    }
-    
-    /*
-     * Показать/Скрыть форму "Добавить арендатора"
-     */
-    public function actionShowForm() {
-               
-        $_show = Yii::$app->request->post('_show');
-        $account_number = Yii::$app->request->post('accountNumber');
-        
-        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        
-        // Проверяем данные пришедшие из пост
-        if (!$_show && !is_numeric($account_number)) {
-            return ['status' => false, 'message' => 'Ошибка передачи параметров'];
-        }
-        
-        // Если был ajax запрос и чекбокс "Арендатор" установлен
-        if (Yii::$app->request->isAjax && $_show) {
-            // Загружаем подель формы на добавление нового арендатора
-            $add_rent = new AddRent();
-                
-            // Формируем рендер вида формы "Добавить арендатора"
-            $data = $this->renderAjax('_form/add-rent', [
-                'form' => \yii\bootstrap\ActiveForm::begin(),
-                'account_number' => $account_number, 
-                'add_rent' => $add_rent]);
-                
-            return ['status' => true, 'show' => true, 'data' => $data];
-        }
-        
-        return ['status' => false, 'message' => 'Ошибка передачи параметров'];
-    }
-    
-    /*
      * Собственник, Квитанции ЖКУ
      */
     public function actionReceiptsOfHapu($client_id, $account_number) {
@@ -336,6 +285,9 @@ class ClientsController extends AppManagersController {
         
     }
     
+    /*
+     * Получение всех данных о собственнике
+     */
     protected function getClientsInfo($client_id, $account_number) {
         
         $client_info = Clients::findById($client_id);
