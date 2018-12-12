@@ -933,7 +933,8 @@ textarea {
     border-radius: 0 0 4px 4px;
 }
 .custom-option-dark:hover,
-.custom-option-dark.selection-services {
+.custom-option-dark.selection-dark {
+    color: #fff;
     background: rgba(0, 123, 255, 0.12);
 }
 /* Конец Выпадающий список, select, администратор (темный) */

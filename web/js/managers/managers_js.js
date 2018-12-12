@@ -1055,11 +1055,14 @@ $(document).ready(function() {
             template += '<div class="custom-options-dark">';
         // Текущий выбранный лицевой счет
         var currentValue = $('#select-dark option:selected').val();
-        console.log(currentValue);
+        // ID Собственника
+        var currentClient = $('#select-dark').data('client');
         
         $(this).find("option").each(function() {
             var classSelection = ($(this).attr("value") == currentValue) ? 'selection-dark ' : '';            
-            template += '<span class="custom-option-dark ' + classSelection + $(this).attr("class") + '" data-value="' + $(this).attr("value") + '">' + $(this).html() + '</span>';
+            template += '<a href="view-client?client_id=' + currentClient + '&account_number=' + $(this).text() + '" class="custom-option-dark ' + classSelection + $(this).attr("class") 
+                        + '" data-value="' + $(this).attr("value") + '">' 
+                        + $(this).html() + '</a>';
             
             $(this).val('selection-dark');
             

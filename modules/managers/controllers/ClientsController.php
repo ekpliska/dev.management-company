@@ -283,6 +283,7 @@ class ClientsController extends AppManagersController {
             'client_info' => $info['client_info'],
             'account_choosing' => $info['account_info'],
             'user_info' => $info['user_info'],
+            'list_account' => $info['list_account'],            
         ]);
         
     }
@@ -298,6 +299,7 @@ class ClientsController extends AppManagersController {
             'client_info' => $info['client_info'],
             'account_choosing' => $info['account_info'],
             'user_info' => $info['user_info'],
+            'list_account' => $info['list_account'],            
         ]);
         
     }
@@ -313,6 +315,7 @@ class ClientsController extends AppManagersController {
             'client_info' => $info['client_info'],
             'account_choosing' => $info['account_info'],
             'user_info' => $info['user_info'],
+            'list_account' => $info['list_account'],
         ]);
         
     }
@@ -328,6 +331,7 @@ class ClientsController extends AppManagersController {
             'client_info' => $info['client_info'],
             'account_choosing' => $info['account_info'],
             'user_info' => $info['user_info'],
+            'list_account' => $info['list_account'],
         ]);
         
     }
@@ -337,11 +341,13 @@ class ClientsController extends AppManagersController {
         $client_info = Clients::findById($client_id);
         $account_info = PersonalAccount::findByNumber($account_number);
         $user_info = User::findByClientId($client_id);
+        $list_account = PersonalAccount::findByClient($client_id, true);
 
         return [
             'client_info' => $client_info,
             'account_info' => $account_info,
             'user_info' => $user_info,
+            'list_account' => $list_account,
         ];
         
     }
