@@ -289,5 +289,22 @@ class ClientsController extends AppManagersController {
         
     }
     
+    /*
+     * Собственник, Платежи
+     */
+    public function actionPayments($client_id, $account_number) {
+        
+        $client_info = Clients::findById($client_id);
+        $account_info = PersonalAccount::findByNumber($account_number);
+        $user_info = User::findByClientId($client_id);
+        
+        return $this->render('payments', [
+            'client_info' => $client_info,
+            'account_choosing' => $account_info,
+            'user_info' => $user_info,
+        ]);
+        
+    }
+    
     
 }
