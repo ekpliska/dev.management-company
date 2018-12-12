@@ -2,16 +2,17 @@
 
     namespace app\models;
     use Yii;
+    use \yii\db\ActiveRecord;
     use app\models\Requests;
 
-class Employers extends \yii\db\ActiveRecord
+class Employees extends ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'employers';
+        return 'employees';
     }
 
     /**
@@ -20,22 +21,22 @@ class Employers extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['employers_name', 'employers_surname', 'employers_second_name', 'employers_department_id', 'employers_posts_id', 'employers_birthday'], 'required'],
-            [['employers_department_id', 'employers_posts_id'], 'integer'],
-            [['employers_birthday'], 'safe'],
-            [['employers_name', 'employers_surname', 'employers_second_name'], 'string', 'max' => 70],
+            [['employees_name', 'employees_surname', 'employees_second_name', 'employees_department_id', 'employees_posts_id', 'employees_birthday'], 'required'],
+            [['employees_department_id', 'employees_posts_id'], 'integer'],
+            [['employees_birthday'], 'safe'],
+            [['employees_name', 'employees_surname', 'employees_second_name'], 'string', 'max' => 70],
         ];
     }
     
     
     public static function findByID($employer_id) {
         return self::find()
-                ->andWhere(['employers_id' => $employer_id])
+                ->andWhere(['employees_id' => $employer_id])
                 ->one();
     }
     
     public function getId() {
-        return $this->employers_id;
+        return $this->employees_id;
     }
     
     /*
@@ -43,9 +44,9 @@ class Employers extends \yii\db\ActiveRecord
      * Фамилия Имя Отчества Сотрудника
      */
     public function getFullName() {
-        return $this->employers_surname . ' ' 
-                . $this->employers_name . ' '
-                . $this->employers_second_name;
+        return $this->employees_surname . ' ' 
+                . $this->employees_name . ' '
+                . $this->employees_second_name;
     }
     
     /*
@@ -53,7 +54,7 @@ class Employers extends \yii\db\ActiveRecord
      */
     public function getRequests() {
         return Requests::find()
-                ->andWhere(['requests_specialist_id' => $this->employers_id])
+                ->andWhere(['requests_specialist_id' => $this->employees_id])
                 ->andWhere(['!=', 'status', StatusRequest::STATUS_CLOSE])
                 ->asArray()
                 ->all();
@@ -64,7 +65,7 @@ class Employers extends \yii\db\ActiveRecord
      */
     public function getPaidServices() {
         return PaidServices::find()
-                ->andWhere(['services_specialist_id' => $this->employers_id])
+                ->andWhere(['services_specialist_id' => $this->employees_id])
                 ->andWhere(['!=', 'status', StatusRequest::STATUS_CLOSE])
                 ->asArray()
                 ->all();
@@ -76,13 +77,13 @@ class Employers extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'employers_id' => 'Employers ID',
-            'employers_name' => 'Имя',
-            'employers_surname' => 'Фамилия',
-            'employers_second_name' => 'Отчество',
-            'employers_department_id' => 'Подразделение',
-            'employers_posts_id' => 'Должность (Специальность)',
-            'employers_birthday' => 'Дата рождения',
+            'employees_id' => 'Employers ID',
+            'employees_name' => 'Имя',
+            'employees_surname' => 'Фамилия',
+            'employees_second_name' => 'Отчество',
+            'employees_department_id' => 'Подразделение',
+            'employees_posts_id' => 'Должность (Специальность)',
+            'employees_birthday' => 'Дата рождения',
         ];
     }
 }

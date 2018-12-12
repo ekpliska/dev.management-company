@@ -15,11 +15,11 @@ class NavManager extends Widget {
         ],
         'dispatchers' => [
             'name' => 'Диспетчеры',
-            'link' => 'employers/dispatchers',
+            'link' => 'employees/dispatchers',
         ],
         'specialists' => [
             'name' => 'Специалисты',
-            'link' => 'employers/specialists',
+            'link' => 'employees/specialists',
         ],
         'managers' => [
             'name' => 'Администраторы',

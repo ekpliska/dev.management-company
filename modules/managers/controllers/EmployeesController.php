@@ -6,7 +6,7 @@
     use yii\data\ActiveDataProvider;
     use yii\web\Response;
     use app\modules\managers\controllers\AppManagersController;
-    use app\modules\managers\models\form\EmployerForm;
+    use app\modules\managers\models\form\EmployeeForm;
     use app\models\Departments;
     use app\modules\managers\models\User;
     use app\modules\managers\models\Dispatchers;
@@ -18,7 +18,7 @@
 /**
  * Диспетчеры
  */
-class EmployersController extends AppManagersController {
+class EmployeesController extends AppManagersController {
     
     /*
      * Все Диспетчеры
@@ -76,7 +76,7 @@ class EmployersController extends AppManagersController {
         
         $this->view->title = 'Диспетчер (+)';
         
-        $model = new EmployerForm();
+        $model = new EmployeeForm();
         
         $department_list = Departments::getArrayDepartments();
         $post_list = [];
@@ -92,7 +92,7 @@ class EmployersController extends AppManagersController {
             }
         }
         
-        return $this->render('add-employer', [
+        return $this->render('add-employee', [
             'model' => $model,
             'department_list' => $department_list,
             'post_list' => $post_list,
@@ -111,7 +111,7 @@ class EmployersController extends AppManagersController {
         
         $this->view->title = 'Специалист (+)';
         
-        $model = new EmployerForm();
+        $model = new EmployeeForm();
         
         $department_list = Departments::getArrayDepartments();
         $post_list = [];

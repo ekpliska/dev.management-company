@@ -16,7 +16,7 @@ $this->title = 'Диспетчеры';
     
     <?= AlertsShow::widget() ?>
     
-    <?= Html::a('Диспетчер (+)', ['employers/add-dispatcher'], ['class' => 'btn btn-success btn-sm']) ?>
+    <?= Html::a('Диспетчер (+)', ['employees/add-dispatcher'], ['class' => 'btn btn-success btn-sm']) ?>
     
     <?php
         $form = ActiveForm::begin([

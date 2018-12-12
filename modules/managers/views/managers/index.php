@@ -16,6 +16,8 @@ $this->title = 'Профиль';
 <div class="managers-default-index">
     <h1><?= $this->title ?></h1>
     
+    <?= Html::a('add', ['employee-form/index', 'new_employee' => 'administrator']) ?>
+    
     <?= AlertsShow::widget() ?>
     
     <?php
