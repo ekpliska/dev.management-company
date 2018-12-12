@@ -2818,6 +2818,14 @@ a.sub-menu-item {
     padding: 20px 15px 70px;
 }
 .control-block {
-    margin: 30px 0px;
+    margin: 10px 0px;
+}
+.debt-client {
+    background: #ef693a;
+    font-family: cursive;
+    padding: 3px 7px;
+    font-size: 22px;
+    border-radius: 50%;
+    box-shadow: 3px 3px 5px -2px #333;
 }
 /* Конец Подменю, профиль собсвенника */
