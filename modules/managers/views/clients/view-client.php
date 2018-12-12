@@ -13,7 +13,7 @@
 $this->title = 'Собственники';
 $this->title = Yii::$app->params['site-name-manager'] .  'Собственники';
 $this->params['breadcrumbs'][] = ['label' => 'Собственники', 'url' => ['clients/index']];
-$this->params['breadcrumbs'][] = $client_info->fullName;
+$this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosing->account_number . ']';
 ?>
 
 <div class="manager-main">
