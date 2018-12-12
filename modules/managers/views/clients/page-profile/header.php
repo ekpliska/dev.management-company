@@ -27,6 +27,7 @@
                 'id' => 'select-dark',
                 'class' => 'custom-select-dark',
                 'data-client' => $client_info->clients_id,
+                'data-url' => Yii::$app->controller->action->id,
         ]) ?>
         
         <div class="control-block">
@@ -47,7 +48,6 @@
                         'class' => 'btn-delete-user',
                         'data-user' => $user_info->user_id]) 
             ?>
-            
         </div>
     </div>
 </div>

@@ -1057,10 +1057,12 @@ $(document).ready(function() {
         var currentValue = $('#select-dark option:selected').val();
         // ID Собственника
         var currentClient = $('#select-dark').data('client');
+        // Текущий экшен
+        var currentAction = $('#select-dark').data('url');
         
         $(this).find("option").each(function() {
             var classSelection = ($(this).attr("value") == currentValue) ? 'selection-dark ' : '';            
-            template += '<a href="view-client?client_id=' + currentClient + '&account_number=' + $(this).text() + '" class="custom-option-dark ' + classSelection + $(this).attr("class") 
+            template += '<a href="' + currentAction + '?client_id=' + currentClient + '&account_number=' + $(this).text() + '" class="custom-option-dark ' + classSelection + $(this).attr("class") 
                         + '" data-value="' + $(this).attr("value") + '">' 
                         + $(this).html() + '</a>';
             
