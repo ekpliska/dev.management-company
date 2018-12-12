@@ -1,7 +1,7 @@
 <?php
 
     use yii\helpers\Html;
-    use yii\helpers\Url;
+    use app\modules\managers\widgets\SubMenu;
 
 /* 
  * Шапка профиля собсвенника
@@ -48,12 +48,4 @@
     </div>
 </div>
 
-<div class="profile-menu profile-sub_menu">
-    <ul class="profile-sub_menг_ul">
-        <li class="active"><a href="<?= Url::to(['clients/view-client', 'client_id' => $client_info->clients_id, 'account_number' => $account_choosing->account_number]) ?>">Профиль</a></li>
-        <li><a href="#">Квитанция ЖКУ</a></li>
-        <li><a href="#">Платежи</a></li>
-        <li><a href="#">Показания приборов учета</a></li>
-        <li><a href="#">Общая информация по лицевому счету</a></li>
-    </ul>
-</div>
+<?= SubMenu::widget(['view_name' => 'profile', 'client_id' => $client_info->clients_id, 'account_number' => $account_choosing->account_number]) ?>
