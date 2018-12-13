@@ -33,8 +33,7 @@ class SignupStepThree extends Model {
             }
         }
         
-        parent::afterValidate();
-        
+        parent::afterValidate();        
     }
     
     public function attributeLabels() {

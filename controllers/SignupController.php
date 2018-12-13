@@ -15,6 +15,7 @@
 class SignupController extends Controller {
     
     public $current_array = [];
+    public $user_info_array = [];
 
 
     public function actionIndex() {
@@ -169,6 +170,9 @@ class SignupController extends Controller {
             'password' => Yii::$app->session->get('password'),
             'phone' => Yii::$app->session->get('phone'),
         ];
-        
+    }
+    
+    private function getUserRegisterInfo($data) {
+        return $this->user_info_array[] = $data;
     }
 }
