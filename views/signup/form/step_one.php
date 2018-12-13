@@ -21,7 +21,7 @@
     ])
 ?>
 
-<?= $form->errorSummary($model_step_one); ?>
+<?= $form->errorSummary($model_step_one, ['header' => '']); ?>
 
 <?= $form->field($model_step_one, 'account_number')
         ->input('text', ['class' => 'field-input'])

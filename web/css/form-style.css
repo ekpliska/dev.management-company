@@ -62,6 +62,9 @@ Form styles
 .field.is-focused::after{
     transform: scaleX(1);
 }
+form .has-error .field::before {
+    background-color: #ef693a;
+}
 /* Конец основной формы */
 
 /* Формы в модальном окне */

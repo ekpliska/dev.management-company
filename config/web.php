@@ -3,6 +3,7 @@
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 $sms = require __DIR__ . '/sms.php';
+$client_api = require __DIR__ . '/client_api.php';
 
 $config = [
     'id' => 'management-company',
@@ -138,6 +139,7 @@ $config = [
             ],
         ],
         'sms' => $sms,
+        'client_api' => $client_api,
     ],
     'params' => $params,
 ];

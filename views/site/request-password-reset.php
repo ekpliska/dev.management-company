@@ -14,6 +14,7 @@ $this->title = "Customers | Восстановаление пароля";
         Восстановление пароля
     </h2>
     <div class="login-form-group">
+        
         <?php
             $form = ActiveForm::begin([
                 'id' => 'password-reset-form',
