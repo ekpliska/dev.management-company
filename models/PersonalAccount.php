@@ -87,14 +87,12 @@ class PersonalAccount extends ActiveRecord
      * 
      * При регистрации нового пользователя, лицевому счету ставится статус Активен
      */
-    public static function findAccountBeforeRegister($account, $summ, $square) {
+    public static function findAccountBeforeRegister($account) {
         
         $is_account = self::find()
                 ->select(['account_number', 'account_balance', 'flats_square'])
                 ->joinWith('flat')
                 ->where(['account_number' => $account])
-                ->andWhere(['account_balance' => $summ])
-                ->andWhere(['flats_square' => $square])
                 ->asArray()
                 ->one();
         return $is_account ? true : false;

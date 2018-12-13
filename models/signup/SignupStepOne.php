@@ -26,40 +26,40 @@ class SignupStepOne extends Model {
         ];
     }
     
-    public function afterValidate() {
-        
-        if (!$this->hasErrors()) {
-            
-            $account = $this->account_number;
-            $summ = $this->last_summ;
-            $square = $this->square;
-            
-            // Формируем JSON запрос на отправку по API
-            $data = "{
-                    'Номер лицевого счета': '{$account}',
-                    'Сумма последней квитанции': '{$summ}',
-                    'Площадь жилого помещения': '{$square}'
-                }";
-            
-            // Отправляем запрос по API        
-            $result_api = Yii::$app->client_api->accountRegister($data);
-            // Проверяем текущую базу на существование лицевого счета
-            $is_account = PersonalAccount::findAccountBeforeRegister($account, $summ, $square);
-            
-            if ($is_account == true) {
-                $this->addError($attribute, 'Указанный лицевой счет зарегистроваван');
-                return false;
-            }
-            
-            if ($is_account == false && ($result["Лицевой счет"]["status"] == false || $result["status"] == false)) {
-                $this->addError($attribute, 'Указанные данные не являются актуальными');
-                return false;
-            }
-        }
-        
-        parent::afterValidate();
-
-    }
+//    public function afterValidate() {
+//        
+//        if (!$this->hasErrors()) {
+//            
+//            $account = $this->account_number;
+//            $summ = $this->last_summ;
+//            $square = $this->square;
+//            
+//            // Формируем JSON запрос на отправку по API
+//            $data = "{
+//                    'Номер лицевого счета': '{$account}',
+//                    'Сумма последней квитанции': '{$summ}',
+//                    'Площадь жилого помещения': '{$square}'
+//                }";
+//            
+//            // Отправляем запрос по API        
+//            $result_api = Yii::$app->client_api->accountRegister($data);
+//            // Проверяем текущую базу на существование лицевого счета
+//            $is_account = PersonalAccount::findAccountBeforeRegister($account);
+//            
+//            if ($is_account == true) {
+//                $this->addError($attribute, 'Указанный номер номер лицевого счета зарегистрирован');
+//                return false;
+//            }
+//            
+//            if ($is_account == false && ($result["Лицевой счет"]["status"] == false || $result["status"] == false)) {
+//                $this->addError($attribute, 'Указанные данные не являются актуальными');
+//                return false;
+//            }
+//        }
+//        
+//        parent::afterValidate();
+//
+//    }
     
     
     public function attributeLabels() {

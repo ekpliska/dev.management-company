@@ -21,7 +21,7 @@
     ])
 ?>
 
-    <?= $form->errorSummary($model_step_three); ?>
+    <?= $form->errorSummary($model_step_three, ['header' => '']); ?>
 
     <div class="field">
         <?= $form->field($model_step_three, 'phone')
@@ -32,11 +32,10 @@
     </div>
 
     <div class="field-sms">
-        <?= $form->field($model_step_three, 'sms_code')
+        <?= $form->field($model_step_three, 'sms_code', [
+                'template' => '{label}{input}<span id="timer-to-send"></span>'])
                 ->input('text', ['class' => 'field-input sms-code-input'])
                 ->label($model_step_three->getAttributeLabel('sms_code'), ['class' => 'field-label']) ?>
-        
-        
     </div>
 
     <div class="text-center third-step-offer">

@@ -452,8 +452,7 @@ $(document).ready(function() {
     // *********************************************************** //
 
     // Количество секунд до следующей отправки
-//    var timeMinute = 60*2;
-    var timeMinute = 10;
+    var timeMinute = 60*2;
     
     // Таймер
     function startTimer(duration, display) {

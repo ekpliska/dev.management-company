@@ -24,9 +24,9 @@ html, body {
     font-family: "Mplus 1p";
     height:100%;
 }
-
 a, a:hover, a:active {
     text-decoration: none;
+    color: #2d18b4;
 }
 
 .wrap {
@@ -273,12 +273,21 @@ a, a:hover, a:active {
     color: #EF693A;
 }
 .third-step-offer p {
-    margin: 30px 0;
+    margin: 50px 0;
+    font-size: 12px;
+    color: rgb(103, 118, 138);
 }
 #error-message {
     margin: -10px 0px;
     font-size: 12px;
     color: #ef693a;
+}
+#timer-to-send {
+    position: absolute;
+    left: 25%;
+    bottom: 25%;
+    font-size: 12px;
+    color: rgb(103, 118, 138);
 }
 /* Конец Регистрация */
 

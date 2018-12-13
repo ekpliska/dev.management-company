@@ -14,7 +14,6 @@ $this->title = 'Customers | Регистрация';
 <div class="slide-content">
     <h2 class="text-center registration-title">
         Регистрация
-        <?php var_dump($_SESSION) ?>
     </h2>
 
     <div class="registration-form-group">

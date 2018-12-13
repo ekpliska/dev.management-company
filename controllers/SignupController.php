@@ -20,7 +20,6 @@ class SignupController extends Controller {
     public function actionIndex() {
         
         $session = Yii::$app->session;
-        $session['count_step'] = 0;
         
         $model_step_one = new SignupStepOne();
         $model_step_two = new SignupStepTwo();

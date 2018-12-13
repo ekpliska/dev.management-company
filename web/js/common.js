@@ -162,15 +162,30 @@ $('#menu').on('wheel', function(e){
 });
 
 
-//$('.menu-toggle').on('click', function(e) {
-//    e.preventDefault();
-//    $(this).toggleClass('menu-toggle_active');
-//    $('.menu-wrap-manager').toggleClass('menu-show-manager');
-//    $('.menu-toggle_message').text('Закрыть');
-//});
-//$(document).on('click', '.menu-toggle_active', function() {
-//    $('.menu-toggle_message').text('Меню');
-//});
+// Количество секунд до следующей отправки
+var timeMinute = 60*2;
+    
+// Таймер
+function startTimer(duration, display) {
+    var timer = duration, minutes, seconds;
+    var startTimer = setInterval(function () {
+        minutes = parseInt(timer / 60, 10)
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+        seconds = seconds < 10 ? '0' + seconds : seconds;
+
+        display.text('Отправить код повторно можно будет через ' + minutes + ':' + seconds);
+
+        if (--timer < 0) {
+            timer = duration;
+            clearInterval(startTimer);
+            $('#send-request-to-sms').show();
+            $('#timer-to-send').html('');
+        }
+
+    }, 1000);
+}
 
 
 /*
@@ -196,9 +211,12 @@ $('#send-request-to-sms').on('click', function() {
                 console.log('ok');                
             }
         });
+        $(this).hide();
+        display = $('#timer-to-send');
+        startTimer(timeMinute, display);
         return labelError.text('СМС код был выслан на указанный номер телефона');
     }
-    return labelError.text('Ошибка заполнения номера мобильного телефона');
+    return labelError.text('Укажите номер мобильного телефона');
     
 });
 

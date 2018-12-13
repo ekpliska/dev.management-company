@@ -21,7 +21,7 @@
     ])
 ?>
 
-<?= $form->errorSummary($model_step_two); ?>
+<?= $form->errorSummary($model_step_two, ['header' => '']); ?>
 
 <?= $form->field($model_step_two, 'email')
         ->input('text', ['class' => 'field-input'])
