@@ -169,6 +169,7 @@ class SignupController extends Controller {
             'email' => Yii::$app->session->get('email'),
             'password' => Yii::$app->session->get('password'),
             'phone' => Yii::$app->session->get('phone'),
+            'user_info' => Yii::$app->session->get('UserInfo'),
         ];
     }
 

@@ -92,7 +92,7 @@ class RegistrationForm extends Model {
      */
     public function registration($data) {
         
-        if (count($data) != 6 || $data == null) {
+        if ($data == null) {
             return false;
         }
         
@@ -101,10 +101,8 @@ class RegistrationForm extends Model {
         $model->user_password = Yii::$app->security->generatePasswordHash($data['password']);
         $model->user_email = $data['email'];
         $model->user_mobile = $data['phone'];
-
         // Связываем таблицы Пользователь и Собственник
         $model->setClientByPhone($data['account']);
-            
         // Новый пользователь получает статус без доступа в систему
         $model->status = User::STATUS_DISABLED;
         // Для нового пользователя генерируем ключ, для отправки на почту (Для подтверждения email)
@@ -113,6 +111,7 @@ class RegistrationForm extends Model {
         $model->user_check_email = true;
             
         if ($model->save()) {
+            $this->setUserData($data);
             $this->sendEmail('EmailConfirm', 'Подтверждение регистрации', ['user' => $model]);
         }
         
@@ -132,6 +131,40 @@ class RegistrationForm extends Model {
                 ->setSubject($subject)
                 ->send();
         return $message;
+    }
+    
+    private function setUserData($data) {
+        
+        $client = new Clients();
+        $client->clients_surname = $data['user_info']['Фамилия'];
+        $client->clients_name = $data['user_info']['Имя'];
+        $client->clients_second_name = $data['user_info']['Отчество'];
+        $client->save(false);
+        
+        $account = new PersonalAccount();
+        $account->account_number = $data['account'];
+        $account->account_organization_id = 1;
+        $account->personal_clients_id = $client->clients_id;
+        $account->save(false);
+        
+        $house = new Houses();
+        $house_id = $house::isExistence(
+                        $data['user_info']['Город'], 
+                        $data['user_info']['Улица'], 
+                        $data['user_info']['Номер дома']);
+        
+        $flat = new Flats();
+        $flat->flats_house_id = $house_id;
+        $flat->flats_porch = $data['user_info']['Номер подъезда'];
+        $flat->flats_floor = $data['user_info']['Номер этажа'];
+        $flat->flats_number = $data['user_info']['Номер квартиры'];
+        $flat->flats_rooms = $data['user_info']['Количество комнат'];
+        $flat->flats_square = $data['square'];
+        $flat->flats_account_id = $account->account_id;
+        $flat->save(false);
+        
+        return true;
+        
     }
     
     

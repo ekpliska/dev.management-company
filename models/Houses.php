@@ -5,7 +5,6 @@
     use Yii;
     use rico\yii2images\behaviors\ImageBehave;
     use app\models\Flats;
-    use app\models\HousingEstates;
     use app\models\CharacteristicsHouse;
 
 /**
@@ -43,13 +42,11 @@ class Houses extends ActiveRecord
     {
         return [
             [[
-                'houses_estate_name_id', 
+                'houses_town', 
                 'houses_street', 'houses_number_house', 
                 'houses_description'], 'required'],
             
-            [['houses_estate_name_id'], 'integer'],
-            
-            [['houses_street'], 'string', 'max' => 100],
+            [['houses_street', 'houses_town'], 'string', 'max' => 100],
             
             [['houses_description'], 'string', 'max' => 255],
             
@@ -100,13 +97,6 @@ class Houses extends ActiveRecord
      */
     public function getFlat() {
         return $this->hasMany(Flats::className(), ['flats_house_id' => 'houses_id']);
-    }
-
-    /**
-     * Связь с таблицей Жилой комплекс
-     */
-    public function getEstate() {
-        return $this->hasOne(HousingEstates::className(), ['estate_id' => 'houses_estate_name_id']);
     }
 
     /**
@@ -185,7 +175,29 @@ class Houses extends ActiveRecord
                 ->asArray()
                 ->orderBy(['estate_town' => SORT_ASC, 'houses_street' => SORT_ASC, 'houses_number_house' => SORT_ASC])
                 ->all();
-    }    
+    }
+    
+    /*
+     * Проверка существования дома
+     */
+    public static function isExistence($town, $street, $house_number) {
+        
+        $house = self::find()
+                ->where(['houses_number_house' => $house_number])
+                ->andWhere(['houses_town' => $town])
+                ->andWhere(['houses_street' => $street])
+                ->asArray()
+                ->count();
+        if ($house == null) {
+            $this->houses_town = $town;
+            $this->houses_street = $street;
+            $this->houses_number_house = $house_number;
+            $this->save();
+            return $this->houses_id;
+        }
+        return $house['id'];
+        
+    }
     
     /**
      * {@inheritdoc}

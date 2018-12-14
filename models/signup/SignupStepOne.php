@@ -46,15 +46,15 @@ class SignupStepOne extends Model {
             // Проверяем текущую базу на существование лицевого счета
             $is_account = PersonalAccount::findAccountBeforeRegister($account);
             
-            if ($is_account == true) {
-                $this->addError($attribute, 'Указанный номер номер лицевого счета зарегистрирован');
-                return false;
-            }
-            
-            if ($is_account == false && ($result_api['success'] == 'error')) {
-                $this->addError($attribute, 'Регистрационные данные лицевого счета введены некорректно');
-                return false;
-            }
+//            if ($is_account == true) {
+//                $this->addError($attribute, 'Указанный номер номер лицевого счета зарегистрирован');
+//                return false;
+//            }
+//            
+//            if ($is_account == false && ($result_api['success'] == 'error')) {
+//                $this->addError($attribute, 'Регистрационные данные лицевого счета введены некорректно');
+//                return false;
+//            }
             
             // Записываем в сессию пришедщие данные по API
             Yii::$app->session['UserInfo'] = Yii::$app->params['User_info'];
