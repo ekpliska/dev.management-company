@@ -92,8 +92,9 @@ class RegistrationForm extends Model {
      */
     public function registration($data) {
         
-        var_dump('HERE reg');
-        die();
+//        echo '<pre>';
+//        var_dump($data['user_info']['Собственник']['Фамилия']);
+//        die();
         
         if ($data == null) {
             return false;
@@ -139,9 +140,9 @@ class RegistrationForm extends Model {
     private function setUserData($data) {
         
         $client = new Clients();
-        $client->clients_surname = $data['user_info']['Фамилия'];
-        $client->clients_name = $data['user_info']['Имя'];
-        $client->clients_second_name = $data['user_info']['Отчество'];
+        $client->clients_surname = $data['user_info']['Собственник']['Фамилия'];
+        $client->clients_name = $data['user_info']['Собственник']['Имя'];
+        $client->clients_second_name = $data['user_info']['Собственник']['Отчество'];
         $client->save(false);
         
         $account = new PersonalAccount();
@@ -152,16 +153,16 @@ class RegistrationForm extends Model {
         
         $house = new Houses();
         $house_id = $house::isExistence(
-                        $data['user_info']['Город'], 
-                        $data['user_info']['Улица'], 
-                        $data['user_info']['Номер дома']);
+                        $data['user_info']['Жилая площадь']['Город'], 
+                        $data['user_info']['Жилая площадь']['Улица'], 
+                        $data['user_info']['Жилая площадь']['Номер дома']);
         
         $flat = new Flats();
         $flat->flats_house_id = $house_id;
-        $flat->flats_porch = $data['user_info']['Номер подъезда'];
-        $flat->flats_floor = $data['user_info']['Номер этажа'];
-        $flat->flats_number = $data['user_info']['Номер квартиры'];
-        $flat->flats_rooms = $data['user_info']['Количество комнат'];
+        $flat->flats_porch = $data['user_info']['Жилая площадь']['Номер подъезда'];
+        $flat->flats_floor = $data['user_info']['Жилая площадь']['Номер этажа'];
+        $flat->flats_number = $data['user_info']['Жилая площадь']['Номер квартиры'];
+        $flat->flats_rooms = $data['user_info']['Жилая площадь']['Количество комнат'];
         $flat->flats_square = $data['square'];
         $flat->flats_account_id = $account->account_id;
         $flat->save(false);

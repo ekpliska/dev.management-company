@@ -20,7 +20,8 @@ class SignupController extends Controller {
 
     public function actionIndex() {
         
-        $session = Yii::$app->session;
+//        $session = Yii::$app->session;
+//        $session->destroy();
         
         $model_step_one = new SignupStepOne();
         $model_step_two = new SignupStepTwo();
@@ -169,6 +170,7 @@ class SignupController extends Controller {
             'email' => Yii::$app->session->get('email'),
             'password' => Yii::$app->session->get('password'),
             'phone' => Yii::$app->session->get('phone'),
+            'user_info' => Yii::$app->session->get('UserInfo'),
         ];
     }
 

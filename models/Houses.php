@@ -187,15 +187,16 @@ class Houses extends ActiveRecord
                 ->andWhere(['houses_town' => $town])
                 ->andWhere(['houses_street' => $street])
                 ->asArray()
-                ->count();
-        if ($house == null) {
-            $this->houses_town = $town;
-            $this->houses_street = $street;
-            $this->houses_number_house = $house_number;
-            $this->save();
-            return $this->houses_id;
-        }
-        return $house['id'];
+                ->one();
+        
+//        if ($house == null) {
+//            $this->houses_town = $town;
+//            $this->houses_street = $street;
+//            $this->houses_number_house = $house_number;
+//            $this->save();
+//            return $this->houses_id;
+//        }
+        return $house['houses_id'] = 1;
         
     }
     
