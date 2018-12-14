@@ -40,7 +40,7 @@ class m180901_105035_table_organizations extends Migration
             'organizations_name_penalty_limit_all' => $this->string(255)->notNull(),
         ], $table_options);
         
-        $this->createIndex('idx-organizations-organizations_id', '{{%organizations_id}}', 'organizations_id');
+        $this->createIndex('idx-organizations-organizations_id', '{{%organizations}}', 'organizations_id');
 
     }
 
