@@ -17,7 +17,10 @@ class ClientAPI extends Object {
     public function accountRegister($data) {
         
         $array = $this->readUrl('account/register', $data);
-        return $array;
+        return [
+            'success' => $array['Лицевой счет']['status'] ? $array['Лицевой счет']['status'] : $array['status'],
+            'user_info' => $array,
+        ];
     }
     
     

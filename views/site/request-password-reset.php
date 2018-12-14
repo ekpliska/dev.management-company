@@ -28,7 +28,7 @@ $this->title = "Customers | Восстановаление пароля";
                     'class' => 'form-signin',
                 ],
             ])
-        ?>
+        ?>   
             <?= $form->field($model, 'email')
                     ->input('text', ['class' => 'field-input'])
                     ->label($model->getAttributeLabel('email'), ['class' => 'field-label']) ?>
