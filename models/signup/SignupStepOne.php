@@ -56,6 +56,9 @@ class SignupStepOne extends Model {
                 return false;
             }
             
+            // Записываем в сессию пришедщие данные по API
+            Yii::$app->session['UserInfo'] = Yii::$app->params['User_info'];
+            
             return true;
 
         }
