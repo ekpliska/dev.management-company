@@ -15,6 +15,11 @@ $this->title = 'Customers | Регистрация';
     <h2 class="text-center registration-title">
         Регистрация
     </h2>
+    <div>
+        <?php
+        var_dump($_SESSION);
+        ?>
+    </div>
 
     <div class="registration-form-group">
         <ul id="steps">

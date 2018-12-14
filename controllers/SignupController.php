@@ -171,8 +171,5 @@ class SignupController extends Controller {
             'phone' => Yii::$app->session->get('phone'),
         ];
     }
-    
-    private function getUserRegisterInfo($data) {
-        return $this->user_info_array[] = $data;
-    }
+
 }

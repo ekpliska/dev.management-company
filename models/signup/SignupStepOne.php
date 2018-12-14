@@ -56,7 +56,7 @@ class SignupStepOne extends Model {
                 return false;
             }
             
-            Yii::$app->session['User_Info'][] = Yii::$app->temp_array;
+            return true;
 
         }
         
