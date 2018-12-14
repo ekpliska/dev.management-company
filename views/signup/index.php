@@ -15,12 +15,17 @@ $this->title = 'Customers | Регистрация';
     <h2 class="text-center registration-title">
         Регистрация
     </h2>
+    <div>
+        <?php
+        var_dump($_SESSION);
+        ?>
+    </div>
 
     <div class="registration-form-group">
         <ul id="steps">
-            <li id="stepDesc0" class="<?= $_SESSION['count_step'] == 0 ? 'current' : ''?>">Шаг 1<span>Лицевой счет</span></li>
-            <li id="stepDesc1" class="<?= $_SESSION['count_step'] == 1 ? 'current' : ''?>">Шаг 2<span>Пользовательские данные</span></li>
-            <li id="stepDesc2" class="<?= $_SESSION['count_step'] == 2 ? 'current' : ''?>">Шаг 3<span>Завершение регистрации</span></li>
+            <li id="stepDesc0" class="<?= $is_step_one == true ? 'current' : ''?>">Шаг 1<span>Лицевой счет</span></li>
+            <li id="stepDesc1" class="<?= $_SESSION['count_step'] == 2 ? 'current' : ''?>">Шаг 2<span>Пользовательские данные</span></li>
+            <li id="stepDesc2" class="<?= $_SESSION['count_step'] == 3 ? 'current' : ''?>">Шаг 3<span>Завершение регистрации</span></li>
         </ul>
 
         <?php if ($_SESSION['count_step'] == 0) : ?>

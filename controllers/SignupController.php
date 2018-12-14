@@ -14,13 +14,16 @@
  */
 class SignupController extends Controller {
     
+    const STEP_ONE = 'one';
+    const STEP_TWO = 'two';
+    const STEP_THREE = 'three';
+
+
     public $current_array = [];
-    public $user_info_array = [];
+    public $user_info_array = [];    
 
 
     public function actionIndex() {
-        
-        $session = Yii::$app->session;
         
         $model_step_one = new SignupStepOne();
         $model_step_two = new SignupStepTwo();
@@ -34,6 +37,9 @@ class SignupController extends Controller {
             'model_step_one' => $model_step_one,
             'model_step_two' => $model_step_two,
             'model_step_three' => $model_step_three,
+            'is_step_one' => $is_step_one,
+            'is_step_two' => $is_step_two,
+            'is_step_three' => $is_step_three,
         ]);
         
     }
@@ -44,7 +50,7 @@ class SignupController extends Controller {
     private function postDataStepOne($data) {
         if ($data->load(Yii::$app->request->post()) && $data->validate()) {
             $post_data = Yii::$app->request->post()['SignupStepOne'];
-            if ($this->setSessionStepOne($post_data)) {
+            if ($this->setSessionSteps(self::STEP_ONE, $post_data)) {
                 return Yii::$app->session->get('count_step');
             }
         }
@@ -57,7 +63,7 @@ class SignupController extends Controller {
     private function postDataStepTwo($data) {
         if ($data->load(Yii::$app->request->post()) && $data->validate()) {
             $post_data = Yii::$app->request->post()['SignupStepTwo'];
-            if ($this->setSessionStepTwo($post_data)) {
+            if ($this->setSessionSteps(self::STEP_TWO, $post_data)) {
                 return Yii::$app->session->get('count_step');
             }
         }
@@ -69,9 +75,10 @@ class SignupController extends Controller {
     private function postDataStepThree($data) {
         if ($data->load(Yii::$app->request->post()) && $data->validate()) {
             $post_data = Yii::$app->request->post()['SignupStepThree'];
-            if ($this->setSessionStepThree($post_data)) {
+            if ($this->setSessionSteps(self::STEP_THREE, $post_data)) {
                 $this->setCurrentRegisterData();
                 
+                var_dump($this->current_array); die();
                 $model = new RegistrationForm();
                 $model->registration($this->current_array);
                 return $this->redirect(['site/login']);
@@ -80,68 +87,92 @@ class SignupController extends Controller {
         return false;
     }    
     
-    /*
-     * Запись в сессию данных первого шага регистрации
-     */
-    private function setSessionStepOne($data) {
+    private function setSessionSteps($step_number, $data) {
         
-        if ($data == null) {
+        if ($step_number == null || $data == null) {
             return false;
         }
+        
         $session = Yii::$app->session;
-        if (!$session->isActive) {
-            $session->open();
+        
+        switch ($step_number) {
+            case self::STEP_ONE:
+                $session['account'] = $data['account_number'];
+                $session['last_summ'] = $data['last_summ'];
+                $session['square'] = $data['square'];
+                $session['count_step'] = 1;
+                $this->setCurrentRegisterData(self::STEP_ONE);
+                break;
+            case self::STEP_TWO:
+                $session['email'] = $data['email'];
+                $session['password'] = $data['password'];
+                $session['count_step'] = 2;
+                $this->setCurrentRegisterData(self::STEP_TWO);
+                break;
+            case self::STEP_THREE:
+                $session['phone'] = $data['phone'];
+                $session['count_step'] = 3;
+                $this->setCurrentRegisterData(self::STEP_THREE);
+                break;
         }
-        $session['account'] = $data['account_number'];
-        $session['last_summ'] = $data['last_summ'];
-        $session['square'] = $data['square'];
-        $session['count_step'] = 1;
         
         return true;
+        
     }
-    
-    
-    /*
-     * Запись в сессию данных первого шага регистрации
-     */
-    private function setSessionStepTwo($data) {
 
-        if ($data == null) {
-            return false;
-        }
-        
-        $session = Yii::$app->session;
-        if (!$session->isActive) {
-            $session->open();
-        }
-        
-        $session['email'] = $data['email'];
-        $session['password'] = $data['password'];
-        $session['count_step'] = 2;
-        
-        return true;
-    }
-    
-    /*
-     * Запись в сессию данных первого шага регистрации
-     */
-    private function setSessionStepThree($data) {
-
-        if ($data == null) {
-            return false;
-        }
-        
-        $session = Yii::$app->session;
-        if (!$session->isActive) {
-            $session->open();
-        }
-        
-        $session['phone'] = $data['phone'];
-        $session['count_step'] = 3;
-        
-        return true;
-    }
-    
+//
+//    /*
+//     * Запись в сессию данных первого шага регистрации
+//     */
+//    private function setSessionStepOne($data) {
+//        
+//        if ($data == null) {
+//            return false;
+//        }
+//        $session = Yii::$app->session;
+//        $session['account'] = $data['account_number'];
+//        $session['last_summ'] = $data['last_summ'];
+//        $session['square'] = $data['square'];
+//        $session['count_step'] = 1;
+//        
+//        return true;
+//    }
+//    
+//    
+//    /*
+//     * Запись в сессию данных первого шага регистрации
+//     */
+//    private function setSessionStepTwo($data) {
+//
+//        if ($data == null) {
+//            return false;
+//        }
+//        
+//        $session = Yii::$app->session;
+//        $session['email'] = $data['email'];
+//        $session['password'] = $data['password'];
+//        $session['count_step'] = 2;
+//        
+//        return true;
+//    }
+//    
+//    /*
+//     * Запись в сессию данных первого шага регистрации
+//     */
+//    private function setSessionStepThree($data) {
+//
+//        if ($data == null) {
+//            return false;
+//        }
+//        
+//        $session = Yii::$app->session;
+//
+//        $session['phone'] = $data['phone'];
+//        $session['count_step'] = 3;
+//        
+//        return true;
+//    }
+//    
     /*
      * Отправка СМС кода на указанный номер телефона
      */
@@ -160,17 +191,29 @@ class SignupController extends Controller {
         }
     }
     
-    private function setCurrentRegisterData() {
+    private function setCurrentRegisterData($step) {
         
-        return $this->current_array = [
-            'account' => Yii::$app->session->get('account'),
-            'last_summ' => Yii::$app->session->get('last_summ'),
-            'square' => Yii::$app->session->get('square'),
-            'email' => Yii::$app->session->get('email'),
-            'password' => Yii::$app->session->get('password'),
-            'phone' => Yii::$app->session->get('phone'),
-            'user_info' => Yii::$app->session->get('UserInfo'),
-        ];
+        switch ($step) {
+            case self::STEP_ONE:
+                $this->current_array = [
+                    'account' => Yii::$app->session->get('account'),
+                    'last_summ' => Yii::$app->session->get('last_summ'),
+                    'square' => Yii::$app->session->get('square'),                    
+                ];
+                break;
+            case self::STEP_TWO:
+                $this->current_array[] = [
+                    'email' => Yii::$app->session->get('email'),
+                    'password' => Yii::$app->session->get('password'),                    
+                ];
+                break;
+            case self::STEP_THREE:
+                $this->current_array[] = [
+                    'phone' => Yii::$app->session->get('phone'),
+                    'user_info' => Yii::$app->session->get('UserInfo'),
+                ];
+        }
+        return true;
     }
 
 }

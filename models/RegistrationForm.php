@@ -92,6 +92,9 @@ class RegistrationForm extends Model {
      */
     public function registration($data) {
         
+        var_dump('HERE reg');
+        die();
+        
         if ($data == null) {
             return false;
         }
