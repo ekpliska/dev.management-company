@@ -36,6 +36,7 @@ class PersonalAccountController extends AppClientsController {
         // Загуржаем модель добавления нового лицевого счета
         $model = new NewAccountForm();
         
+        
         return $this->render('index', [
             'user_info' => $user_info,
             'account_info' => $account_info,
@@ -45,35 +46,26 @@ class PersonalAccountController extends AppClientsController {
     }
     
     /*
-     * Добавление нового лицевого счета
-     * 
-     * @param array $all_organizations Органицация
-     * @param array $all_flat Список жилой прощади, принадлежащей собственнику
-     * 
+     * Общий метод валидации форм раздела Лицевой счет
      */
-    public function actionShowAddForm() {
+    public function actionValidateForm($form) {
         
-        if (!Yii::$app->user->can('clients')) {
-            throw new NotFoundHttpException('Пользователю с учетной записью Арендатор, доступ к данной странице запрещен');
-        }        
+        if ($form == null) {
+            throw new NotFoundHttpException('Ошибка передалчи параметров. Вы обратились к несуществующей странице');
+        }
         
-        $user_info = $this->permisionUser();
-        $all_organizations = Organizations::getOrganizations();
-        $all_flat = Houses::findByClientID($user_info->clientID);
-
-        // Загружаем модель добавления лицевого счета
-        $add_account = new AddPersonalAccount();
-        // Загружаем модель добавления нового Арендатора
-        $add_rent = new ClientsRentForm();
+        switch ($form) {
+            case 'NewAccountForm':
+                $model = new NewAccountForm();
+                break;
+        }
         
-        return $this->render('_form/_add_account', [
-            'user_info' => $user_info,
-            'all_organizations' => $all_organizations,
-            'all_flat' => $all_flat,
-            'add_account' => $add_account,
-            'add_rent' => $add_rent,
-        ]);
-    }    
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return \yii\widgets\ActiveForm::validate($model);
+        }
+        
+    }
     
     /*
      * Страница "Квитанции ЖКУ"
@@ -289,7 +281,7 @@ class PersonalAccountController extends AppClientsController {
         $model = new NewAccountForm();
         
         if ($model->load(Yii::$app->request->post() && $model->validate())) {
-            return 'here';
+            $model->createAccount();
         }
         
     }

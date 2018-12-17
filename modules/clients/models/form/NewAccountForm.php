@@ -15,15 +15,29 @@ class NewAccountForm extends Model {
     public function rules() {
         
         return [
-            [['account_number', 'last_sum', 'square', 'client_id'], 'required'],
+            [['account_number', 'last_sum', 'square'], 'required'],
             
             ['account_number', 'string', 'min' => 11, 'max' => 11],
             
-//            ['last_summ', 'match', 'pattern'=>'/^[0-9]{1,12}(\.[0-9]{0,4})?+$/iu'],
+//            ['last_sum', 
+//                'match', 
+//                'pattern' => '/^[0-9]{1,12}(\.[0-9]{0,4})?+$/iu', 
+//                'message' => 'Сумма последней квитанции указана не верно. Пример: 2578.70'],
 //            
-//            ['square', 'match', 'pattern'=>'/^[0-9]{1,12}(\.[0-9]{0,4})?+$/iu'],
+//            ['square', 'match', 'pattern'=>'/^[0-9]{1,12}(\.[0-9]{0,4})?+$/iu', 'message' => 'Площадь жилого помещения указана не верно. Пример, 80.27'],
+            
             
         ];
+    }
+    
+    public function createAccount() {
+        
+        if (!$this->validate()) {
+            return false;
+        }
+        
+        return true;
+        
     }
     
     public function attributeLabels() {

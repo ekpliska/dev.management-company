@@ -11,8 +11,8 @@
 class ClientAPI extends Object {
     
     /*
-     * Внутренний метод, для регистрации
-     * Вызов запроса и формирование URL
+     * Регистрация нового пользователя
+     * Добавление нового лицевого счета пользователя
      */
     public function accountRegister($data) {
         
@@ -21,7 +21,7 @@ class ClientAPI extends Object {
             'success' => $array['Лицевой счет']['status'] ? $array['Лицевой счет']['status'] : $array['status'],
             'user_info' => $array,
         ];
-    }
+    }    
     
     
     /*

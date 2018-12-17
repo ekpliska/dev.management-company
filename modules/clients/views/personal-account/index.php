@@ -21,7 +21,9 @@ $this->params['breadcrumbs'][] = 'Общая информация';
 ]) ?> 
 
 <div class="paid-account-page">
+    
     <?= $this->render('data/list', ['account_info' => $account_info]); ?>
+    
     <?php if (Yii::$app->user->can('clients')) : ?>
         <div class="paid-account-page_btn text-center">
             <?= Html::button('Добавить лицевой счет', [
@@ -31,4 +33,5 @@ $this->params['breadcrumbs'][] = 'Общая информация';
         </div>
         <?= $this->render('form/create_account', ['model' => $model]) ?>
     <?php endif; ?>
+    
 </div>
