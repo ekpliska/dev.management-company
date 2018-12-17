@@ -18,7 +18,9 @@ $this->params['breadcrumbs'][] = 'Общая информация';
         'options' => [
             'class' => 'breadcrumb breadcrumb-padding'
         ],
-]) ?> 
+]) ?>
+
+<?= app\modules\clients\widgets\AlertsShow::widget(); ?>
 
 <div class="paid-account-page">
     

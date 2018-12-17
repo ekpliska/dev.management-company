@@ -1,6 +1,5 @@
 <?php
     
-    use yii\helpers\Html;
     use yii\widgets\Breadcrumbs;
     use app\modules\clients\widgets\AlertsShow;
     
@@ -16,7 +15,7 @@ $this->params['breadcrumbs'][] = 'Услуги';
     <?= Breadcrumbs::widget([
             'homeLink' => ['label' => 'ELSA', 'url' => ['clients/index']],
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-    ]) ?>     
+    ]) ?>
     
     <?= $this->render('data/service-lists', ['pay_services' => $pay_services]) ?>
 </div>

@@ -264,29 +264,23 @@ class PersonalAccountController extends AppClientsController {
     }
     
     /*
-     * Ajax Вадилация формы в модальном окне "Добавление нового лицевого счета"
+     * Создание лицевого счета собсвенника
      */
-    public function actionValidateAccountForm() {
-        
-        $model = new NewAccountForm();
-        
-        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
-            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-            return \yii\widgets\ActiveForm::validate($model);
-        }
-    }
-    
     public function actionCreateAccount($client_id) {
         
         $model = new NewAccountForm();
         
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            $model->createAccount();
+            if ($model->createAccount()) {
+                Yii::$app->session->setFlash('success', ['message' => 'Лицевой счет был успешно создан']);
+            } else {
+                Yii::$app->session->setFlash('error', ['message' => 'При создании лицевого счета произошла ошибка. Обновите страницу и повторите действие снова']);
+            }
             return $this->redirect('index');
         }
         
-        return var_dump('error');
-        
+        Yii::$app->session->setFlash('error', ['message' => 'При создании лицевого счета произошла ошибка. Обновите страницу и повторите действие снова']);
+        return $this->redirect('index');
     }
     
     
