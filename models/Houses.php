@@ -51,8 +51,6 @@ class Houses extends ActiveRecord
             
             [['houses_number_house'], 'string', 'max' => 10],
             
-//            [['houses_number_house'], 'validateNumberHouse'],
-            
             ['houses_description', 'required', 'on' => self::SCENARIO_EDIT_DESCRIPRION],
             ['houses_description', 'string', 'min' => 10, 'max' => 255, 'on' => self::SCENARIO_EDIT_DESCRIPRION],
             

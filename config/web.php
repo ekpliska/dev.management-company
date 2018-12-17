@@ -69,23 +69,23 @@ $config = [
         /*
          * Настройка session и cookie
          */
-        'session' => [
-            'timeout' => 1800,
-            'class' => 'yii\web\DbSession',
-            'sessionTable' => 'user_session',
-            /*
-             * Настройка параметров cookie
-             */
-            'cookieParams' => [
-                // Если true, cookie будет недоступен через JavaScript
-                'httpOnly' => false,
-                /*
-                 * Путь на сервере, на котором будут доступены cookie
-                 * По умолчанию '/' куки будут доступны для всего домена
-                 */
-                'path' => '/',
-            ],
-        ],
+//        'session' => [
+//            'timeout' => 1800,
+//            'class' => 'yii\web\DbSession',
+//            'sessionTable' => 'user_session',
+//            /*
+//             * Настройка параметров cookie
+//             */
+//            'cookieParams' => [
+//                // Если true, cookie будет недоступен через JavaScript
+//                'httpOnly' => false,
+//                /*
+//                 * Путь на сервере, на котором будут доступены cookie
+//                 * По умолчанию '/' куки будут доступны для всего домена
+//                 */
+//                'path' => '/',
+//            ],
+//        ],
         
         'user' => [
             'class' => 'yii\web\User',

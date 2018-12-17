@@ -33,6 +33,6 @@
     </div>
     <?= SubBarGeneralPage::widget() ?>
     <?= StatusRequest::widget(['account_id' => $this->context->_choosing]) ?>
-    <?= SubBarPaidService::widget() ?>
+    <?php // = SubBarPaidService::widget() ?>
     <?= SubBarPersonalAccount::widget() ?>
 </nav>

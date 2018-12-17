@@ -282,10 +282,10 @@ class PersonalAccountController extends AppClientsController {
         
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $model->createAccount();
-            return $this->redirect(['profile/index']);
+            return var_dump('ok');
         }
         
-        return var_dump('here');
+        return var_dump('error');
         
     }
     

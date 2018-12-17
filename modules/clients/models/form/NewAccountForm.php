@@ -83,26 +83,25 @@ class NewAccountForm extends Model {
             return false;
         }
         
-        $connection = Yii::$app->db;
-        $transaction = $connection->beginTransaction();
-        
         $house_info = $this->client_info;
         if ($this->checkHouse($house_info)) {
             return true;
         }
         
         return false;
-        
     }
     
     /*
      * Проверяем наличие существования дома, квартиры для нового лицевого счета
      * 
-     * Если по переданным параметрам по API не найден дом, то добавляем новый дом и квартиру в БД
-     * Если по переданным параметрам по API не найдена квартира, то добавляем новую квартиру в БД
+     * Проверяем наличие пришедшего из запроса по API дома,
+     *      если дом не найден и квартира на найдена в БД - то, создаем новую записи в БД (дом, кватира, ЛС)
+     * 
+     * Проверяем наличие пришедшего из запроса по API дома,
+     *      если дом найден и квартира на найдена в БД - то, создаем новую записи в БД (кватира, ЛС)
      * 
      */
-    public function checkHouse($house_info) {
+    private function checkHouse($house_info) {
         
         $is_house = Houses::find()
                 ->where(['houses_town' => $house_info['Жилая площадь']['Город']])
@@ -122,22 +121,22 @@ class NewAccountForm extends Model {
         if ($is_house == null && $is_flat == null) {
             $this->createHouseAndFlat($house_info);
         } elseif ($is_house != null && $is_flat == null) {
-            $this->createFlat($house_info);
+            $this->createFlat($is_house->houses_id, $house_info);
         }
         
         return true;
         
     }
     
+    /*
+     * Создание нового Лицевого счета, с закрепленным домом и квартирой
+     */
     private function createHouseAndFlat($data) {
         
-        $connection = Yii::$app->db;
-        $transaction = $connection->beginTransaction();
+        $transaction = Yii::$app->db->beginTransaction();
 
-        $house = new Houses();
-        $flat = new Flats();
-                
-//        try {
+        try {
+            $house = new Houses();
             $house->houses_town = $data['Жилая площадь']['Город'];
             $house->houses_street = $data['Жилая площадь']['Улица'];
             $house->houses_number_house = $data['Жилая площадь']['Номер дома'];
@@ -145,7 +144,8 @@ class NewAccountForm extends Model {
             if (!$house->save()) {
                 throw new \yii\db\Exception('Ошибка создания новой записи' . 'Ошибка: ' . join(', ', $house->getFirstErrors()));
             }
-
+            
+            $flat = new Flats();
             $flat->flats_house_id = $house->houses_id;
             $flat->flats_porch = $data['Жилая площадь']['Номер подъезда'];
             $flat->flats_floor = $data['Жилая площадь']['Номер этажа'];
@@ -161,7 +161,7 @@ class NewAccountForm extends Model {
             $account->account_number = $this->account_number;
             $account->account_organization_id = 1;
             $account->account_balance = 0;
-            $account->personal_clients_id = 1;
+            $account->personal_clients_id = Yii::$app->userProfile->clientID;
             $account->personal_rent_id = null;
             $account->personal_flat_id = $flat->flats_id;
 
@@ -169,24 +169,57 @@ class NewAccountForm extends Model {
                 throw new \yii\db\Exception('Ошибка создания новой записи' . 'Ошибка: ' . join(', ', $account->getFirstErrors()));
             }
             
-//            echo $house->houses_id . ' ' . $flat->flats_id;
-//            die();
+            $transaction->commit();
             
-//            $transaction->commit();
-//            
-//        } catch (Exception $ex) {            
-//            $transaction->rollBack();
-//            var_dump($ex);
-//            die();
-//        }
-        
-        return true;
+        } catch (Exception $ex) {            
+            $transaction->rollBack();
+            var_dump($ex);
+            die();
+        }        
         
     }
 
-    private function createFlat($data) {
-        echo 'new flat';
-        die();        
+    /*
+     * Создание нового Лицевого счета, с закрепленным домом и квартирой
+     */    
+    private function createFlat($houses_id, $data) {
+        
+        $transaction = Yii::$app->db->beginTransaction();
+
+        try {
+            
+            $flat = new Flats();
+            $flat->flats_house_id = $houses_id;
+            $flat->flats_porch = $data['Жилая площадь']['Номер подъезда'];
+            $flat->flats_floor = $data['Жилая площадь']['Номер этажа'];
+            $flat->flats_number = $data['Жилая площадь']['Номер квартиры'];
+            $flat->flats_rooms = $data['Жилая площадь']['Количество комнат'];
+            $flat->flats_square = $this->square;
+
+            if (!$flat->save()) {
+                throw new \yii\db\Exception('Ошибка создания новой записи' . 'Ошибка: ' . join(', ', $flat->getFirstErrors()));
+            }
+            
+            $account = new PersonalAccount();
+            $account->account_number = $this->account_number;
+            $account->account_organization_id = 1;
+            $account->account_balance = 0;
+            $account->personal_clients_id = Yii::$app->userProfile->clientID;
+            $account->personal_rent_id = null;
+            $account->personal_flat_id = $flat->flats_id;
+
+            if (!$account->save()) {
+                throw new \yii\db\Exception('Ошибка создания новой записи' . 'Ошибка: ' . join(', ', $account->getFirstErrors()));
+            }
+            
+            $transaction->commit();
+            
+        } catch (Exception $ex) {            
+            $transaction->rollBack();
+            var_dump($ex);
+            die();
+        }
+        
     }    
     
     public function attributeLabels() {
