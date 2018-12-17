@@ -122,6 +122,8 @@ class NewAccountForm extends Model {
             $this->createHouseAndFlat($house_info);
         } elseif ($is_house != null && $is_flat == null) {
             $this->createFlat($is_house->houses_id, $house_info);
+        } else {
+            return false;
         }
         
         return true;
@@ -171,11 +173,9 @@ class NewAccountForm extends Model {
             
             $transaction->commit();
             
-        } catch (Exception $ex) {            
+        } catch (Exception $ex) {
             $transaction->rollBack();
-            var_dump($ex);
-            die();
-        }        
+        }
         
     }
 
@@ -212,15 +212,29 @@ class NewAccountForm extends Model {
                 throw new \yii\db\Exception('Ошибка создания новой записи' . 'Ошибка: ' . join(', ', $account->getFirstErrors()));
             }
             
+            $this->setCookies($account->account_id);
+            
             $transaction->commit();
             
-        } catch (Exception $ex) {            
+        } catch (Exception $ex) {
             $transaction->rollBack();
-            var_dump($ex);
-            die();
         }
         
-    }    
+    }
+    
+    /*
+     * После создания нового лицевого счета, передаем его в куки как текущий
+     */
+    private function setCookies($account_id) {
+        
+        Yii::$app->response->cookies->add(new \yii\web\Cookie([
+            'name' => '_userAccount',
+            'value' => $account_id,
+            'expire' => time() + 60*60*24*7,
+        ]));
+        
+        return true;
+    }
     
     public function attributeLabels() {
         
