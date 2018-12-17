@@ -53,14 +53,12 @@ class CommentsToRequest extends ActiveRecord
     public static function findCommentsById($request_id) {
         
         $comments = self::find()
-                ->joinWith(['user', 'user.client', 'user.employer'])
+                ->joinWith(['user', 'user.client', 'user.employee'])
                 ->andWhere(['comments_request_id' => $request_id])
                 ->orderBy(['created_at' => SORT_DESC])
                 ->all();
         
         return $comments;
-//        echo '<pre>';
-//        var_dump($t); die();
     }
     
     public static function getCommentByRequest($request_id) {

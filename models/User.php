@@ -6,7 +6,7 @@
     use yii\helpers\ArrayHelper;
     use yii\behaviors\TimestampBehavior;
     use app\models\PersonalAccount;
-    use app\models\Employers;
+    use app\models\Employees;
     
 
 /**
@@ -141,8 +141,8 @@ class User extends ActiveRecord implements IdentityInterface
     /*
      * Свзяь с таблицей Сотрудники
      */
-    public function getEmployer() {
-        return $this->hasOne(Employers::className(), ['employers_id' => 'user_employer_id']);
+    public function getEmployee() {
+        return $this->hasOne(Employees::className(), ['employee_id' => 'user_employee_id']);
     }
     
     /*

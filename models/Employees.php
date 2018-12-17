@@ -2,41 +2,60 @@
 
     namespace app\models;
     use Yii;
-    use \yii\db\ActiveRecord;
-    use app\models\Requests;
+    use yii\db\ActiveRecord;
+    use app\models\Posts;
+    use app\models\Departments;
 
+/**
+ * Сотрудники
+ */
 class Employees extends ActiveRecord
 {
     /**
-     * {@inheritdoc}
+     * Таблица БД
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'employees';
     }
 
     /**
-     * {@inheritdoc}
+     * Правила валидации
      */
     public function rules()
     {
         return [
-            [['employees_name', 'employees_surname', 'employees_second_name', 'employees_department_id', 'employees_posts_id', 'employees_birthday'], 'required'],
-            [['employees_department_id', 'employees_posts_id'], 'integer'],
-            [['employees_birthday'], 'safe'],
-            [['employees_name', 'employees_surname', 'employees_second_name'], 'string', 'max' => 70],
+            [['employee_name', 'employee_surname', 'employee_second_name', 'employee_birthday', 'employee_department_id', 'employee_posts_id'], 'required'],
+            [['employee_department_id', 'employee_posts_id'], 'integer'],
+            [['employee_name', 'employee_surname', 'employee_second_name', 'employee_birthday'], 'string', 'max' => 70],
+            [['employee_department_id'], 'exist', 'skipOnError' => true, 'targetClass' => Departments::className(), 'targetAttribute' => ['employee_department_id' => 'department_id']],
+            [['employee_posts_id'], 'exist', 'skipOnError' => true, 'targetClass' => Posts::className(), 'targetAttribute' => ['employee_posts_id' => 'post_id']],
         ];
     }
     
-    
+    /**
+     * Свзяь с таблице Подразделения
+     */
+    public function getEmployeeDepartment()
+    {
+        return $this->hasOne(Departments::className(), ['department_id' => 'employee_department_id']);
+    }
+
+    /**
+     * Свзяь с таблицей Долдности
+     */
+    public function getEmployeePosts()
+    {
+        return $this->hasOne(Posts::className(), ['post_id' => 'employee_posts_id']);
+    }    
+
     public static function findByID($employer_id) {
         return self::find()
-                ->andWhere(['employees_id' => $employer_id])
+                ->andWhere(['employee_id' => $employer_id])
                 ->one();
     }
     
     public function getId() {
-        return $this->employees_id;
+        return $this->employee_id;
     }
     
     /*
@@ -44,9 +63,9 @@ class Employees extends ActiveRecord
      * Фамилия Имя Отчества Сотрудника
      */
     public function getFullName() {
-        return $this->employees_surname . ' ' 
-                . $this->employees_name . ' '
-                . $this->employees_second_name;
+        return $this->employee_surname . ' ' 
+                . $this->employee_name . ' '
+                . $this->employee_second_name;
     }
     
     /*
@@ -54,7 +73,7 @@ class Employees extends ActiveRecord
      */
     public function getRequests() {
         return Requests::find()
-                ->andWhere(['requests_specialist_id' => $this->employees_id])
+                ->andWhere(['requests_specialist_id' => $this->employee_id])
                 ->andWhere(['!=', 'status', StatusRequest::STATUS_CLOSE])
                 ->asArray()
                 ->all();
@@ -65,25 +84,26 @@ class Employees extends ActiveRecord
      */
     public function getPaidServices() {
         return PaidServices::find()
-                ->andWhere(['services_specialist_id' => $this->employees_id])
+                ->andWhere(['services_specialist_id' => $this->employee_id])
                 ->andWhere(['!=', 'status', StatusRequest::STATUS_CLOSE])
                 ->asArray()
                 ->all();
-    }
+    }    
     
     /**
-     * {@inheritdoc}
+     * Метки полей
      */
     public function attributeLabels()
     {
         return [
-            'employees_id' => 'Employers ID',
-            'employees_name' => 'Имя',
-            'employees_surname' => 'Фамилия',
-            'employees_second_name' => 'Отчество',
-            'employees_department_id' => 'Подразделение',
-            'employees_posts_id' => 'Должность (Специальность)',
-            'employees_birthday' => 'Дата рождения',
+            'employee_id' => 'Employee ID',
+            'employee_name' => 'Employee Name',
+            'employee_surname' => 'Employee Surname',
+            'employee_second_name' => 'Employee Second Name',
+            'employee_birthday' => 'Employee Birthday',
+            'employee_department_id' => 'Employee Department ID',
+            'employee_posts_id' => 'Employee Posts ID',
         ];
     }
+
 }

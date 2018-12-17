@@ -3,19 +3,17 @@
     namespace app\models;
     use Yii;
     use yii\db\ActiveRecord;
-    use yii\helpers\ArrayHelper;
-    use app\models\Departments;
+    use app\models\Employees;
 
 /**
- * Должности/Специализации
+ * Должности сотрудников
  */
 class Posts extends ActiveRecord
 {
     /**
-     * Таблица из БД
+     * Таблица БД
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'posts';
     }
 
@@ -25,32 +23,30 @@ class Posts extends ActiveRecord
     public function rules()
     {
         return [
-            [['posts_department_id'], 'integer'],
-            [['posts_name'], 'string', 'max' => 150],
+            [['post_name'], 'required'],
+            [['post_name'], 'string', 'max' => 100],
+            [['p_description'], 'string', 'max' => 255],
         ];
     }
     
-    /*
-     * Связь с таблицей Подразделения
+    /**
+     * Связь с таблицей сотрудники
      */
-    public function getDepartment() {
-        return $this->hasOne(Departments::className(), ['departments_id' => 'posts_department_id']);
-    }
-    
-    public static function getArrayPosts() {
-        $array = self::find()->asArray()->all();
-        return ArrayHelper::map($array, 'posts_id', 'posts_name');
-    }
+    public function getEmployees()
+    {
+        return $this->hasMany(Employees::className(), ['employee_posts_id' => 'post_id']);
+    }    
 
     /**
-     * Метки для полей
+     * Метки полей
      */
     public function attributeLabels()
     {
         return [
-            'posts_id' => 'Posts ID',
-            'posts_department_id' => 'Posts Department ID',
-            'posts_name' => 'Posts Name',
+            'post_id' => 'Post ID',
+            'post_name' => 'Post Name',
+            'p_description' => 'P Description',
         ];
     }
+
 }
