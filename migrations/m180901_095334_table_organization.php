@@ -5,7 +5,7 @@
 /**
  * Организация
  */
-class m180901_105035_table_organizations extends Migration
+class m180901_095334_table_organization extends Migration
 {
     /**
      * {@inheritdoc}

@@ -43,8 +43,7 @@ class Houses extends ActiveRecord
         return [
             [[
                 'houses_town', 
-                'houses_street', 'houses_number_house', 
-                'houses_description'], 'required'],
+                'houses_street', 'houses_number_house'], 'required'],
             
             [['houses_street', 'houses_town'], 'string', 'max' => 100],
             
@@ -54,8 +53,6 @@ class Houses extends ActiveRecord
             
 //            [['houses_number_house'], 'validateNumberHouse'],
             
-            [['houses_estate_name_id'], 'exist', 'skipOnError' => true, 'targetClass' => HousingEstates::className(), 'targetAttribute' => ['houses_estate_name_id' => 'estate_id']],
-
             ['houses_description', 'required', 'on' => self::SCENARIO_EDIT_DESCRIPRION],
             ['houses_description', 'string', 'min' => 10, 'max' => 255, 'on' => self::SCENARIO_EDIT_DESCRIPRION],
             
@@ -79,8 +76,7 @@ class Houses extends ActiveRecord
     public function validateNumberHouse() {
         
         $house = Houses::find()
-                ->where(['houses_estate_name_id' => $this->houses_estate_name_id])
-                ->andWhere(['houses_street' => $this->houses_street])
+                ->where(['houses_street' => $this->houses_street])
                 ->andWhere(['houses_number_house' => $this->houses_number_house])
                 ->asArray()
                 ->one();
@@ -177,29 +173,6 @@ class Houses extends ActiveRecord
                 ->all();
     }
     
-    /*
-     * Проверка существования дома
-     */
-    public static function isExistence($town, $street, $house_number) {
-        
-        $house = self::find()
-                ->where(['houses_number_house' => $house_number])
-                ->andWhere(['houses_town' => $town])
-                ->andWhere(['houses_street' => $street])
-                ->asArray()
-                ->one();
-        
-//        if ($house == null) {
-//            $this->houses_town = $town;
-//            $this->houses_street = $street;
-//            $this->houses_number_house = $house_number;
-//            $this->save();
-//            return $this->houses_id;
-//        }
-        return $house['houses_id'] = 1;
-        
-    }
-    
     /**
      * {@inheritdoc}
      */
@@ -207,7 +180,6 @@ class Houses extends ActiveRecord
     {
         return [
             'houses_id' => 'Houses ID',
-            'houses_estate_name_id' => 'Жилой комплекс',
             'houses_street' => 'Улица',
             'houses_number_house' => 'Номер дома',
             'houses_description' => 'Описание',

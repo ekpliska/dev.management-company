@@ -280,9 +280,12 @@ class PersonalAccountController extends AppClientsController {
         
         $model = new NewAccountForm();
         
-        if ($model->load(Yii::$app->request->post() && $model->validate())) {
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $model->createAccount();
+            return $this->redirect(['profile/index']);
         }
+        
+        return var_dump('here');
         
     }
     

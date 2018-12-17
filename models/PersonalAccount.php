@@ -36,12 +36,7 @@ class PersonalAccount extends ActiveRecord
     public function rules()
     {
         return [
-            [['account_number'], 'required'],
-            [['account_balance'], 'string'],
-            [['account_number'], 'string', 'min' => 11, 'max' => 11],
-            [['account_organization_id'], 'integer'],
-            [['account_number'], 'unique'],
-            
+            ['account_number', 'required'],            
         ];
     }
     
@@ -54,7 +49,7 @@ class PersonalAccount extends ActiveRecord
     }
     
     public function getFlat() {
-        return $this->hasOne(Flats::className(), ['flats_account_id' => 'account_id']);        
+        return $this->hasOne(Flats::className(), ['flats_id' => 'personal_flat_id']);        
     }
     
     public function getOrganization() {
@@ -74,7 +69,7 @@ class PersonalAccount extends ActiveRecord
      */
     public static function findByNumber($account_number) {
         return static::find()
-                ->joinWith(['organization', 'client', 'flat', 'flat.house', 'flat.house.estate', 'rent'])
+                ->joinWith(['organization', 'client', 'flat', 'flat.house', 'rent'])
                 ->andWhere(['account_number' => $account_number])
                 ->one();
     }
@@ -84,8 +79,6 @@ class PersonalAccount extends ActiveRecord
      *      по Номеру лицевого счета
      *      по Последней сумме в квитанции
      *      по Прощади жилого повещения
-     * 
-     * При регистрации нового пользователя, лицевому счету ставится статус Активен
      */
     public static function findAccountBeforeRegister($account) {
         
@@ -136,7 +129,7 @@ class PersonalAccount extends ActiveRecord
         $info = (new \yii\db\Query)
                 ->from('personal_account')
                 ->join('LEFT JOIN', 'clients', 'personal_clients_id = clients_id')
-                ->join('LEFT JOIN', 'flats', 'account_id = flats_account_id')
+                ->join('LEFT JOIN', 'flats', 'flats_id = personal_flat_id')
                 ->join('LEFT JOIN', 'houses', 'flats_house_id = houses_id')
                 ->join('LEFT JOIN', 'rents', 'personal_rent_id = rents_id')
                 ->join('LEFT JOIN', 'organizations', 'account_organization_id = organizations_id')

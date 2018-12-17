@@ -32,20 +32,13 @@ class Flats extends ActiveRecord
     {
         return [
             [['flats_house_id', 'flats_porch', 'flats_floor', 'flats_number', 'flats_rooms', 'flats_square'], 'required'],
-            [['flats_house_id', 'flats_porch', 'flats_floor', 'flats_number', 'flats_rooms', 'flats_square', 'flats_account_id', 'flats_client_id', 'status'], 'integer'],
+            [['flats_house_id', 'flats_porch', 'flats_floor', 'flats_number', 'flats_rooms', 'flats_square', 'status'], 'integer'],
             [['flats_house_id'], 'exist', 'skipOnError' => true, 'targetClass' => Houses::className(), 'targetAttribute' => ['flats_house_id' => 'houses_id']],
         ];
     }
     
-//    /*
-//     * Связь с таблицей Собственники
-//     */
-//    public function getClient() {
-//        return $this->hasOne(Clients::className(), ['clients_id' => 'flats_client_id']);
-//    }
-    
     public function getAccount() {
-        return $this->hasOne(PersonalAccount::className(), ['account_id' => 'flats_account_id']);
+        return $this->hasOne(PersonalAccount::className(), ['personal_flat_id' => 'flats_id']);
     }
 
     /**
@@ -136,8 +129,6 @@ class Flats extends ActiveRecord
             'flats_number' => 'Flats Number',
             'flats_rooms' => 'Flats Rooms',
             'flats_square' => 'Flats Square',
-            'flats_account_id' => 'Flats Account ID',
-            'flats_client_id' => 'Flats Client ID',
         ];
     }
 

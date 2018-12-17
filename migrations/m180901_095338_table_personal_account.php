@@ -24,10 +24,10 @@ class m180901_095338_table_personal_account extends Migration
             'account_id' => $this->primaryKey(),
             'account_number' => $this->string(70)->unique()->notNull(),
             'account_balance' => $this->decimal(10,2)->notNull(),
-            'account_organization_id' => $this->integer(),
+            'account_organization_id' => $this->integer()->notNull(),
             'personal_clients_id' => $this->integer(),
             'personal_rent_id' => $this->integer(),
-            'personal_house_id' => $this->integer(),
+            'personal_flat_id' => $this->integer(),
             'isActive' => $this->tinyInteger()->defaultValue(PersonalAccount::STATUS_DISABLED),
         ], $table_options);
         
