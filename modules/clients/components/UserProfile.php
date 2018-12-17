@@ -50,14 +50,12 @@ class UserProfile extends BaseObject {
                         . 'pa.account_number as account,'
                         . 'f.flats_id as flat_id,'
                         . 'f.flats_id as flat_id,'
-                        . 'h.houses_id as house_id,'
-                        . 'he.estate_id as estate_id,')
+                        . 'h.houses_id as house_id')
                     ->from('user as u')
                     ->join('LEFT JOIN', 'clients as c', 'u.user_client_id = c.clients_id')
                     ->join('LEFT JOIN', 'personal_account as pa', 'u.user_client_id = pa.personal_clients_id')
                     ->join('LEFT JOIN', 'flats as f', 'f.flats_id = pa.personal_flat_id')
                     ->join('LEFT JOIN', 'houses as h', 'h.houses_id = f.flats_house_id')
-                    ->join('LEFT JOIN', 'housing_estates as he', 'he.estate_id = h.houses_estate_name_id')
                     ->where(['u.user_id' => $this->_user_id])
                     ->one();
             
@@ -80,7 +78,6 @@ class UserProfile extends BaseObject {
                     ->join('LEFT JOIN', 'personal_account as pa', 'u.user_rent_id = pa.personal_rent_id')
                     ->join('LEFT JOIN', 'flats as f', 'f.flats_id = pa.personal_flat_id')
                     ->join('LEFT JOIN', 'houses as h', 'h.houses_id = f.flats_house_id')
-                    ->join('LEFT JOIN', 'housing_estates as he', 'he.estate_id = h.houses_estate_name_id')                    
                     ->where(['u.user_id' => $this->_user_id])
                     ->one();
             
@@ -230,8 +227,8 @@ class UserProfile extends BaseObject {
     public function getLivingSpace($account_id) {
         
         $info = PersonalAccount::find()
-                ->select(['account_id', 'estate_id', 'houses_id', 'flats_id', 'flats_porch'])
-                ->joinWith(['flat', 'flat.house', 'flat.house.estate'])
+                ->select(['account_id', 'houses_id', 'flats_id', 'flats_porch'])
+                ->joinWith(['flat', 'flat.house'])
                 ->where(['account_id' => $account_id])
                 ->asArray()
                 ->one();
@@ -245,13 +242,13 @@ class UserProfile extends BaseObject {
     public function getFullAdress($account_id) {
         
         $info = PersonalAccount::find()
-                ->select(['account_id', 'estate_town', 'houses_street', 'houses_number_house', 'flats_number'])
-                ->joinWith(['flat', 'flat.house', 'flat.house.estate'])
+                ->select(['account_id', 'houses_town', 'houses_street', 'houses_number_house', 'flats_number'])
+                ->joinWith(['flat', 'flat.house'])
                 ->where(['account_id' => $account_id])
                 ->asArray()
                 ->one();
         
-        $adress_string = 'г. ' . $info['estate_town'] . ', ул. ' . $info['houses_street'] . ', дом. ' . $info['houses_number_house'] . ', кв. ' . $info['flats_number'];
+        $adress_string = 'г. ' . $info['houses_town'] . ', ул. ' . $info['houses_street'] . ', дом. ' . $info['houses_number_house'] . ', кв. ' . $info['flats_number'];
         
         return $info ? $adress_string : 'Адрес не определен';
     }

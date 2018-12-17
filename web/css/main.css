@@ -2610,7 +2610,7 @@ a.sub-menu-item {
 .navbar_paid-request {
     background: #2d18b4;
     padding: 15px;
-    box-shadow: 5px -1px 1px 0px rgb(0, 0, 0);
+    box-shadow: 0px 1px 14px -1px rgb(0, 0, 0);
 }
 .navbar_paid-request > ul {
     margin-right: 15px;
