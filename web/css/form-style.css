@@ -368,12 +368,6 @@ select[name="category_list"] option {
 /* End File input in modal window */
 
 /* Выпадающий список Лицевой счет, Профиль */
-
-
-
-
-/* select starting stylings ------------------------------*/
-
 .account-block_select {
     margin-top: 30px;
     margin-left: 77px;

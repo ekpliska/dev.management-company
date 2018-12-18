@@ -2356,7 +2356,7 @@ input[name="date_end-period-pay"]:focus {
 }
 .menu-show {
     margin-top: 0;
-    box-shadow: -1px 6px 7px #c1c1c1;
+    /*box-shadow: -1px 6px 7px #c1c1c1;*/
 }
 .user-notification {
     position: relative;
