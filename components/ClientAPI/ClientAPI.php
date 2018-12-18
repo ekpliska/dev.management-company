@@ -23,6 +23,19 @@ class ClientAPI extends Object {
         ];
     }    
     
+    /*
+     * Получение показаний приборов учета Собственника
+     * за указанный период
+     */
+    public function getPreviousCounters($data) {
+        
+        $indications = $this->readUrl('counters/previous/get', $data);
+        
+        return [
+            'success' => $indications['status'],
+            'indications' => $indications['Приборы учета'],
+        ];
+    }
     
     /*
      * Функция чтения URL

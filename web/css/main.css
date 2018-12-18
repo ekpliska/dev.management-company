@@ -1159,49 +1159,52 @@ p.right {
 }
 /* Конец Заявки */
 
-/* Таблица для заявок */
-.requests-table {
+/* Таблица, раздел Собственники */
+.clients-table {
     border-collapse: unset;
     border: 1px solid #ddd;
     border-radius: 12px;
     font-size: 12px;
     margin-bottom: 0px;
 }
-.requests-table thead {
+.clients-table thead {
     color: #2d18b4;
     text-transform: uppercase;
     text-align: center;
     vertical-align: top;
 }
-.requests-table > thead > tr > th {
+.clients-table > thead > tr > th {
     font-size: 12px;
     vertical-align: middle;
     text-align: center;
     border: none;
     padding: 25px 0;
 }
-.requests-table > tbody > tr > td {
+.clients-table > tbody > tr > td {
     vertical-align: middle;
     text-align: center;
-    padding: 25px 0;
+    padding: 15px 0;
 }
-.requests-table_main {
+.clients-table_main {
     width: 12%;
 }
-.requests-table_category {
+.clients-table_category {
     width: 20%;
     text-align: left !important;
 }
-.requests-table_description {
+.clients-table_description {
     text-align: left !important;
 }
-.req-table-img {
+.clientse-img {
     height: 24px;
     width: 24px;
     border-radius: 3px;
     margin-left: 4px;
     margin-right: 4px;
     margin-top: 5px;
+}
+.image-counters {
+    padding: 0 10px !important;
 }
 /* Конец Таблица для заявок */
 
@@ -1965,7 +1968,7 @@ input[name="date_end-period-pay"]:focus {
     color: #2d18b4;
 }
 .block-edit-reading {
-    background-color: #fce7df; 
+    background-color: #fce7df !important; 
 }
 .block-edit-reading span {
     color: #ef693a;

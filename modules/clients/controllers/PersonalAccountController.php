@@ -105,23 +105,32 @@ class PersonalAccountController extends AppClientsController {
     /*
      * Страница "Показания приборов учета"
      * 
-     * 
+     * При каждом обрашении к странице Показания приборов учета,
+     * происходит отправка запроса по API на получение актуальных показаний
      */
     public function actionCounters() {
 
         $user_info = $this->permisionUser();
         $account_id = $this->_choosing;
+        $account_number = $this->_value_choosing;
         
         // Получаем номер текущего месяца
         $current_month = date('n');
         // Получаем номер текущего года
         $current_year = date('Y');
         
+        // Формируем запрос в формате JSON на отрпавку по API
+        $data = "{
+                'Номер лицевого счета': '{$account_number}',
+                'Номер месяца': '{$current_month}',
+                'Год': '{$current_year}'
+        }";
+                
+//        $indications = Yii::$app->client_api->getPreviousCounters($data);
+        $indications = Yii::$app->params['current_indications'];
         
-
         return $this->render('counters', [
-            'current_date' => $current_date,
-            'counters' => $counters,
+            'indications' => $indications,
         ]);
         
     }
