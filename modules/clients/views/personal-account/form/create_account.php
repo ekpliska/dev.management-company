@@ -40,7 +40,7 @@
 ?>
 
     <?= $form->field($model, 'account_number')
-            ->input('text', ['class' => 'field-input-modal'])
+            ->input('text', ['class' => 'field-input-modal account-number'])
             ->label($model->getAttributeLabel('account_number'), ['class' => 'field-label-modal']) ?>
     <?= $form->field($model, 'last_sum')
             ->input('text', ['class' => 'field-input-modal'])

@@ -32,7 +32,8 @@ class Flats extends ActiveRecord
     {
         return [
             [['flats_house_id', 'flats_porch', 'flats_floor', 'flats_number', 'flats_rooms', 'flats_square'], 'required'],
-            [['flats_house_id', 'flats_porch', 'flats_floor', 'flats_number', 'flats_rooms', 'flats_square', 'status'], 'integer'],
+            [['flats_house_id', 'flats_porch', 'flats_floor', 'flats_number', 'flats_rooms', 'status'], 'integer'],
+            [['flats_square'], 'double', 'min' => 20.00, 'max' => 1000.00],
             [['flats_house_id'], 'exist', 'skipOnError' => true, 'targetClass' => Houses::className(), 'targetAttribute' => ['flats_house_id' => 'houses_id']],
         ];
     }

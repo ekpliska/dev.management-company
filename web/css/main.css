@@ -2664,7 +2664,7 @@ a.sub-menu-item {
      margin: 20px; 
     bottom: 5%;
     right: 0;
-    cursor: auto;
+    cursor: default;
 }
 .alert-message[data-notification-status="success"]:before,
 .alert-message[data-notification-status="error"]:before {
@@ -2675,7 +2675,6 @@ a.sub-menu-item {
     min-width: 30px;
     margin-right: 20px;
     font-size: 24px;
-    cursor: pointer;
 }
 /* Конец Всплывающие уведовления */
 

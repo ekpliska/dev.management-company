@@ -24,17 +24,13 @@ class NewAccountForm extends Model {
         
         return [
             [['account_number', 'last_sum', 'square'], 'required'],
-            ['account_number', 'string', 'min' => 11, 'max' => 11],
+            ['account_number', 'string', 'min' => 12, 'max' => 12],
+            
+            [['square'], 'double', 'min' => 20.00, 'max' => 1000.00, 'message' => 'Площадь жилого помещения указана не верно. Пример, 80.27'],
+            
+            ['last_sum', 'double', 'min' => 00.00, 'max' => 100000.00, 'message' => 'Сумма предыдущей квитанции указана не верно. Пример: 2578.70'],
             
             ['account_number', 'checkPersonalAccount'],
-            
-            ['last_sum', 
-                'match', 
-                'pattern' => '/^[0-9]{1,12}(\.[0-9]{0,4})?+$/iu', 
-                'message' => 'Сумма последней квитанции указана не верно. Пример: 2578.70'],
-            
-//            ['square', 'match', 'pattern'=>'/^[0-9]{1,12}(\.[0-9]{0,4})?+$/iu', 'message' => 'Площадь жилого помещения указана не верно. Пример, 80.27'],
-            
             
         ];
     }
@@ -139,7 +135,11 @@ class NewAccountForm extends Model {
 
         try {
             $house = new Houses();
+            $house->houses_postcode = $data['Жилая площадь']['Индекс'];
+            $house->houses_region = $data['Жилая площадь']['Область'];
+            $house->houses_area = $data['Жилая площадь']['Район'];
             $house->houses_town = $data['Жилая площадь']['Город'];
+            $house->houses_village = $data['Жилая площадь']['Поселок'] ? $data['Жилая площадь']['Поселок'] : null;
             $house->houses_street = $data['Жилая площадь']['Улица'];
             $house->houses_number_house = $data['Жилая площадь']['Номер дома'];
             
@@ -162,7 +162,7 @@ class NewAccountForm extends Model {
             $account = new PersonalAccount();
             $account->account_number = $this->account_number;
             $account->account_organization_id = 1;
-            $account->account_balance = 0;
+            $account->account_balance = $data['Лицевой счет']['Баланс'];
             $account->personal_clients_id = Yii::$app->userProfile->clientID;
             $account->personal_rent_id = null;
             $account->personal_flat_id = $flat->flats_id;
