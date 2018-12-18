@@ -26,6 +26,7 @@ class Counters extends ActiveRecord
      */
     public function rules() {
         return [
+            [['counters_type_id', 'counters_account_id', 'isActive'], 'required'],
             [['counters_type_id', 'counters_account_id', 'isActive'], 'integer'],
             [['counters_description'], 'string', 'max' => 1000],
             [['counters_number'], 'string', 'max' => 70],

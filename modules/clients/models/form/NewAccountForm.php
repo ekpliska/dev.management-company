@@ -203,9 +203,9 @@ class NewAccountForm extends Model {
             }
             
             $account = new PersonalAccount();
-            $account->account_number = $this->account_number;
+            $account->account_number = trim($this->account_number, '№');
             $account->account_organization_id = 1;
-            $account->account_balance = 0;
+            $account->account_balance = $data['Лицевой счет']['Баланс'];
             $account->personal_clients_id = Yii::$app->userProfile->clientID;
             $account->personal_rent_id = null;
             $account->personal_flat_id = $flat->flats_id;
@@ -247,22 +247,23 @@ class NewAccountForm extends Model {
         $counters_info = $data['Приборы учета'];
 
         
-        $counters = new Counters();
         $type_counters = TypeCounters::getTypeCountersLists();
         
         if (is_array($counters_info)) {
-            for ($i = 0; $i <= count($counters_info); $i++) {
-                $counters->counters_type_id = TypeCounters::getTypeID($counters_info[$i]['Тип прибора учета']);
-                $counters->counters_number = $counters_info[$i]['Регистрационный номер прибора учета'];
-                $data = strtotime($counters_info[$i]['Дата следующей поверки']);
-                $counters->date_check = $data;
-                $counters->counters_description = null;
-                $counters->counters_account_id = $account_id;
-                $counters->isActive = Counters::STATUS_ACTIVE;
-                if (!$counters->save()) {
-                    throw new \yii\db\Exception('Ошибка создания новой записи' . 'Ошибка: ' . join(', ', $counters->getFirstErrors()));
+            
+            foreach ($counters_info as $key => $counter) {
+                $counter = new Counters();
+                $counter->counters_type_id = TypeCounters::getTypeID($counters_info[$key]['Тип прибора учета']);
+                $counter->counters_number = $counters_info[$key]['Регистрационный номер прибора учета'];
+                $counter->date_check = strtotime($counters_info[$key]['Дата следующей поверки']);
+                $counter->counters_description = null;
+                $counter->counters_account_id = $account_id;
+                $counter->isActive = Counters::STATUS_ACTIVE;
+                if (!$counter->save()) {
+                    return false;
                 }
             }
+            return true;
         }
 
     }
