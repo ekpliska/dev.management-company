@@ -30,10 +30,23 @@ class ReadingCounters extends ActiveRecord
     }
     
     /*
-     * 
+     * Связь с таблицей приборы учета Собственника
      */
     public function getCounter() {
         return $this->hasOne(Counters::className(), ['counters_id' => 'reading_counter_id']);
+    }
+    
+    public static function getCurrentIndications($month = null, $year = null) {
+        
+        $indications = self::find()
+                ->select(['type_counters_id', 'type_counters_name', 'counters_number', '', '', '', '', ''])
+                ->joinWith(['counter', 'counter.typeCounter'])
+                ->asArray()
+                ->all();
+        
+        echo '<pre>';
+        var_dump($indications); die();
+        
     }
     
     /**

@@ -8,11 +8,10 @@
     use app\modules\clients\controllers\AppClientsController;
     use app\models\PersonalAccount;
     use app\modules\clients\models\AddPersonalAccount;
-    use app\models\Organizations;
     use app\modules\clients\models\ClientsRentForm;
-    use app\models\Houses;
     use app\models\Counters;
     use app\modules\clients\models\form\NewAccountForm;
+    use app\models\ReadingCounters;
 
 /**
  * Контроллер по работе с разделом "Лицевой счет"
@@ -104,25 +103,22 @@ class PersonalAccountController extends AppClientsController {
     }
 
     /*
-     * Страница "Приборы учета"
-     * @param intereg $accoint_id Значение ID лицевого счета из глобального dropDownList (хеддер)
+     * Страница "Показания приборов учета"
+     * 
+     * 
      */
     public function actionCounters() {
 
         $user_info = $this->permisionUser();
         $account_id = $this->_choosing;
         
-        // Получаем текущую дату
-        $current_date = time();        
         // Получаем номер текущего месяца
         $current_month = date('n');
         // Получаем номер текущего года
         $current_year = date('Y');
         
-        $counters = new ActiveDataProvider([
-            'query' => Counters::getReadingCurrent($account_id, $current_month = 9, $current_year),            
-        ]);
         
+
         return $this->render('counters', [
             'current_date' => $current_date,
             'counters' => $counters,

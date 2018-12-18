@@ -29,11 +29,10 @@ $this->params['breadcrumbs'][] = 'Показания приборов учета
         <?= DatePicker::widget([
                 'name' => 'date_start-period-pay',
                 'type' => DatePicker::TYPE_INPUT,
-                'value' => date('d-M-Y'),
-                'layout' => '<span class="input-group-text">Birth Date</span>',
+                'value' => date('M-Y'),
                 'pluginOptions' => [
                     'autoclose'=>true,
-                    'format' => 'dd-M-yyyy'
+                    'format' => 'M-yyyy'
                 ]
             ]);        
         ?>        

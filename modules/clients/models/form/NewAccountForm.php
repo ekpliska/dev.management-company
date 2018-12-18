@@ -260,13 +260,21 @@ class NewAccountForm extends Model {
                 if (!$counter->save()) {
                     return false;
                 }
-                $this->setCounterReadings($counter->counters_id, $counters_info[$key]);
+                /*
+                 *  Получение показаний приборов учета
+                 *  Хранить в нашей БД показания не будем
+                 *  (17-12-2018)
+                 */
+                // $this->setCounterReadings($counter->counters_id, $counters_info[$key]);
                 
             }
             return true;
         }
     }
     
+    /*
+     * Запись показаний приборов учета Собственника
+     */
     private function setCounterReadings($counter_id, $data) {
         
         $previous_reading = new ReadingCounters();

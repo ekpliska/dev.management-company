@@ -800,7 +800,8 @@ input[name="date_end-period"]:focus {
     background-color: rgba(255, 255, 255, .15);
     border-color: rgba(255, 255, 255, .15);        
 }
-.datepicker table tr td.active.active {
+.datepicker table tr td.active.active,
+.datepicker table tr td span.active.active {
     color: #2e1e82;
     background-color: #fff;
     border-color: #fff;    
@@ -808,6 +809,18 @@ input[name="date_end-period"]:focus {
 .datepicker table tr th {
     font-weight: 100;
 }
+.datepicker .datepicker-switch:hover, 
+.datepicker .prev:hover, 
+.datepicker .next:hover, 
+.datepicker tfoot tr th:hover,
+.datepicker table tr td span:hover, 
+.datepicker table tr td span.focused,
+.datepicker table tr td span.active.active:hover, 
+.datepicker table tr td span.active:hover.active:hover {
+    background-color: rgba(255, 255, 255, .15);
+    border-color: rgba(255, 255, 255, .15);    
+}
+
 /* Конец Календарь */
 
 /* Textarea */
