@@ -22,7 +22,9 @@ class ReadingCounters extends ActiveRecord
      */
     public function rules() {
         return [
-            [['reading_counter_id', 'date_reading', 'user_id'], 'integer'],
+            [['reading_counter_id', 'date_reading'], 'required'],
+            [['reading_counter_id', 'user_id'], 'integer'],
+            ['date_reading', 'safe'],
             [['readings_indication'], 'string', 'max' => 50],
         ];
     }

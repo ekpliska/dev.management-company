@@ -3,12 +3,12 @@
     namespace app\modules\clients\models\form;
     use Yii;
     use yii\base\Model;
-    use yii\helpers\ArrayHelper;
     use app\models\PersonalAccount;
     use app\models\Houses;
     use app\models\Flats;
     use app\models\Counters;
     use app\models\TypeCounters;
+    use app\models\ReadingCounters;
 
 /**
  * Создание нового лицевого счета
@@ -245,12 +245,10 @@ class NewAccountForm extends Model {
     private function setCountersInfo($account_id, $data) {
         
         $counters_info = $data['Приборы учета'];
-
         
         $type_counters = TypeCounters::getTypeCountersLists();
         
         if (is_array($counters_info)) {
-            
             foreach ($counters_info as $key => $counter) {
                 $counter = new Counters();
                 $counter->counters_type_id = TypeCounters::getTypeID($counters_info[$key]['Тип прибора учета']);
@@ -262,9 +260,37 @@ class NewAccountForm extends Model {
                 if (!$counter->save()) {
                     return false;
                 }
+                $this->setCounterReadings($counter->counters_id, $counters_info[$key]);
+                
             }
             return true;
         }
+    }
+    
+    private function setCounterReadings($counter_id, $data) {
+        
+        $previous_reading = new ReadingCounters();
+        $previous_reading->reading_counter_id = $counter_id;
+        $previous_reading->readings_indication = $data['Предыдущие показание'];
+        $previous_reading->date_reading = strtotime($data['Дата снятия показания']);
+        $previous_reading->user_id = Yii::$app->user->identity->id;
+        
+        if (!$previous_reading->save()) {
+            return false;
+        }
+        
+        if ($data['Текущее показание'] != null) {
+            $current_reading = new ReadingCounters();
+            $current_reading->reading_counter_id = $counter_id;
+            $current_reading->readings_indication = $data['Текущее показание'];
+            $current_reading->date_reading = time();
+            $current_reading->user_id = Yii::$app->user->identity->id;
+            if (!$current_reading->save()) {
+                return false;
+            }
+        }
+        
+        return true;
 
     }
     

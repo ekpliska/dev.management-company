@@ -20,7 +20,7 @@ class m180901_113250_table_reading_counters extends Migration
         $this->createTable('{{%reading_counters}}', [
             'reading_id' => $this->primaryKey(),
             'reading_counter_id' => $this->integer()->notNull(),
-            'readings_indication' => $this->string(50)->notNull(),
+            'readings_indication' => $this->decimal(10.2)->notNull(),
             'date_reading' => $this->integer()->notNull(),
             'user_id' => $this->integer()->notNull(),
         ], $table_options);
