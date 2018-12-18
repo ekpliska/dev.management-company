@@ -24,7 +24,11 @@ class m180901_095327_table_houses extends Migration
         // Дома
         $this->createTable('{{%houses}}', [
             'houses_id' => $this->primaryKey(),
+            'houses_postcode' => $this->integer()->notNull(),
+            'houses_region' => $this->string(100)->notNull(),
+            'houses_area' => $this->string()->notNull(),
             'houses_town' => $this->string(100)->notNull(),
+            'houses_village' => $this->string(100),
             'houses_street' => $this->string(100)->notNull(),
             'houses_number_house' => $this->string(10)->notNull(),
             'houses_description' => $this->string(255)->notNull(),
@@ -40,7 +44,7 @@ class m180901_095327_table_houses extends Migration
             'flats_floor' => $this->integer()->notNull(),
             'flats_number' => $this->integer()->notNull(),
             'flats_rooms' => $this->integer()->notNull(),
-            'flats_square' => $this->integer()->notNull(),
+            'flats_square' => $this->decimal(10,2)->notNull(),
             'status' => $this->tinyInteger()->defaultValue(Flats::STATUS_DEBTOR_NO),
         ], $table_options);
         $this->createIndex('idx-flats-flats_id', '{{%flats}}', 'flats_id');

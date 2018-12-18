@@ -1,8 +1,8 @@
 <?php
 
     use yii\helpers\Html;
-    use yii\helpers\Url;
     use yii\widgets\Breadcrumbs;
+    use app\modules\clients\widgets\AlertsShow;
     
 /* 
  * Лицевой счет / Общая информация
@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = 'Общая информация';
         ],
 ]) ?>
 
-<?= app\modules\clients\widgets\AlertsShow::widget(); ?>
+<?= AlertsShow::widget(); ?>
 
 <div class="paid-account-page">
     
