@@ -236,6 +236,13 @@ class NewAccountForm extends Model {
         return true;
     }
     
+    /*
+     * Добавление приборов учета в БД
+     */
+    private function setCountersInfo($account_id, $data) {
+        
+    }
+    
     public function attributeLabels() {
         
         return [

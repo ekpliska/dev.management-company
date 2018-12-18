@@ -531,7 +531,7 @@ select[name="category_list"] option {
 /* Выпадающий список, лицевой счет */
 .custom-select {
     background: none;
-    border: none; 
+    border: none;
 }
 .custom-select-wrapper {
     position: relative;

@@ -872,6 +872,9 @@ button#send-request-to-sms:focus{
     font-size: 12px;
     letter-spacing: 0.9px;
 }
+.account-select {
+    
+}
 .account-select_title {
     padding: 20px;
 }
