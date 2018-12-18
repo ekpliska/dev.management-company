@@ -3,10 +3,12 @@
     namespace app\modules\clients\models\form;
     use Yii;
     use yii\base\Model;
+    use yii\helpers\ArrayHelper;
     use app\models\PersonalAccount;
     use app\models\Houses;
     use app\models\Flats;
     use app\models\Counters;
+    use app\models\TypeCounters;
 
 /**
  * Создание нового лицевого счета
@@ -213,6 +215,7 @@ class NewAccountForm extends Model {
             }
             
             $this->setCookies($account->account_id);
+            $this->setCountersInfo($account->account_id, $data);
             
             $transaction->commit();
             
@@ -241,6 +244,27 @@ class NewAccountForm extends Model {
      */
     private function setCountersInfo($account_id, $data) {
         
+        $counters_info = $data['Приборы учета'];
+
+        
+        $counters = new Counters();
+        $type_counters = TypeCounters::getTypeCountersLists();
+        
+        if (is_array($counters_info)) {
+            for ($i = 0; $i <= count($counters_info); $i++) {
+                $counters->counters_type_id = TypeCounters::getTypeID($counters_info[$i]['Тип прибора учета']);
+                $counters->counters_number = $counters_info[$i]['Регистрационный номер прибора учета'];
+                $data = strtotime($counters_info[$i]['Дата следующей поверки']);
+                $counters->date_check = $data;
+                $counters->counters_description = null;
+                $counters->counters_account_id = $account_id;
+                $counters->isActive = Counters::STATUS_ACTIVE;
+                if (!$counters->save()) {
+                    throw new \yii\db\Exception('Ошибка создания новой записи' . 'Ошибка: ' . join(', ', $counters->getFirstErrors()));
+                }
+            }
+        }
+
     }
     
     public function attributeLabels() {

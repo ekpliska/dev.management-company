@@ -26,9 +26,10 @@ class Counters extends ActiveRecord
      */
     public function rules() {
         return [
-            [['counters_type_id', 'counters_account_id', 'counters_house_id', 'date_check', 'isActive'], 'integer'],
+            [['counters_type_id', 'counters_account_id', 'isActive'], 'integer'],
             [['counters_description'], 'string', 'max' => 1000],
             [['counters_number'], 'string', 'max' => 70],
+            ['date_check', 'safe'],
         ];
     }
     
@@ -162,7 +163,6 @@ class Counters extends ActiveRecord
             'counters_number' => 'Counters Number',
             'counters_description' => 'Counters Description',
             'counters_account_id' => 'Counters Account ID',
-            'counters_house_id' => 'Counters House ID',
             'date_check' => 'Date Check',
             'isActive' => 'Is Active',
         ];

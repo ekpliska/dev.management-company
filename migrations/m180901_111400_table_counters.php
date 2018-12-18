@@ -29,17 +29,17 @@ class m180901_111400_table_counters extends Migration
         $this->batchInsert('{{%type_counters}}', 
                 ['type_counters_id', 'type_counters_name'], 
                 [
-                    ['1', 'Счетчик ХВС'],
-                    ['2', 'Счетчик ГВС'],
-                    ['3', 'Электросчетчик'],
-                    ['4', 'Счетчик отопления'],
+                    ['1', 'Счётчик ХВС'],
+                    ['2', 'Счётчик ГВС'],
+                    ['3', 'Электросчётчик'],
+                    ['4', 'Счётчик отопления'],
                     ['5', 'Распределитель тепла'],
                 ]
             );
         
         // Приборы учета собственника
         $this->createTable('{{%counters}}', [
-            'counters_id' => $this->integer()->notNull(),
+            'counters_id' => $this->primaryKey(),
             'counters_type_id' => $this->integer()->notNull(),
             'counters_number' => $this->integer()->notNull(),
             'counters_description' => $this->string(255),
