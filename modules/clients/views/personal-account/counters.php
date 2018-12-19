@@ -104,9 +104,15 @@ $this->params['breadcrumbs'][] = 'Показания приборов учета
         </table>
     <?php endif; ?>
     
+    <?php if (isset($comments_to_counters)) : ?>
     <div class="col-md-12 counters-message">
-        <p class="title">Обратите внимание</p>
-        <p>#TODO</p>
+        <p class="title">
+            <?= $comments_to_counters['comments_title'] ?>
+        </p>
+        <p class="text">
+            <?= $comments_to_counters['comments_text'] ?>
+        </p>
     </div>
+    <?php endif; ?>
     
 </div>

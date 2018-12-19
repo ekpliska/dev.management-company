@@ -11,7 +11,7 @@
     use app\modules\clients\models\ClientsRentForm;
     use app\models\Counters;
     use app\modules\clients\models\form\NewAccountForm;
-    use app\models\ReadingCounters;
+    use app\models\CommentsToCounters;
 
 /**
  * Контроллер по работе с разделом "Лицевой счет"
@@ -114,6 +114,8 @@ class PersonalAccountController extends AppClientsController {
         $account_id = $this->_choosing;
         $account_number = $this->_value_choosing;
         
+        $comments_to_counters = CommentsToCounters::getComments($account_id);
+        
         // Получаем номер текущего месяца
         $current_month = date('n');
         // Получаем номер текущего года
@@ -131,6 +133,7 @@ class PersonalAccountController extends AppClientsController {
         
         return $this->render('counters', [
             'indications' => $indications,
+            'comments_to_counters' => $comments_to_counters,
         ]);
         
     }

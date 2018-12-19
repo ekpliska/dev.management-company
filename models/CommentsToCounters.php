@@ -36,7 +36,19 @@ class CommentsToCounters extends ActiveRecord
      */
     public function getAccount() {
         return $this->hasOne(PersonalAccount::className(), ['account_id' => 'account_id']);
-    }    
+    }
+    
+    /*
+     * Получить комментарий к приборам учета, по заданному лицевому счету
+     */
+    public static function getComments($account_id) {
+        
+        return self::find()
+                ->where(['account_id' => $account_id])
+                ->asArray()
+                ->one();
+        
+    }
 
     /**
      * Метки полей
@@ -44,12 +56,12 @@ class CommentsToCounters extends ActiveRecord
     public function attributeLabels() {
         return [
             'id' => 'ID',
-            'comments_title' => 'Comments Title',
-            'comments_text' => 'Comments Text',
-            'account_id' => 'Account ID',
-            'user_id' => 'User ID',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'comments_title' => 'Заголовок',
+            'comments_text' => 'Комментарий',
+            'account_id' => 'Лицевой счет',
+            'user_id' => 'Пользоваель',
+            'created_at' => 'Дата создания',
+            'updated_at' => 'Дата обновления',
         ];
     }
 

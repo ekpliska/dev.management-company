@@ -1958,14 +1958,20 @@ input[name="date_end-period-pay"]:focus {
     color: #2d18b4;
     outline: none;    
 }
+.counters-message {
+    margin: 0;
+    padding: 0;
+}
 .counters-message p.title {
-    padding: 10px 0px;
+    padding: 40px 0 0 0;
     color: #ef693a;
     font-size: 24px;
     letter-spacing: 1.05px;
 }
-.counters-message p {
+.counters-message p.text {
     color: #2d18b4;
+    margin-bottom: 40px;
+    text-align: justify;
 }
 .block-edit-reading {
     background-color: #fce7df !important; 
