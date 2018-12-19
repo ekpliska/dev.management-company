@@ -39,6 +39,7 @@ $this->params['breadcrumbs'][] = 'Показания приборов учета
                 'name' => 'date_start-period-pay',
                 'type' => DatePicker::TYPE_INPUT,
                 'value' => date('M-Y'),
+                'language' => 'ru',
                 'pluginOptions' => [
                     'autoclose'=>true,
                     'format' => 'M-yyyy'
