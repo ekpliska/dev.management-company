@@ -1930,6 +1930,7 @@ input[name="date_end-period-pay"]:focus {
 .counter-number {
     font-size: 12px;
     font-weight: bold;
+    color: #2d18b4;    
 }
 .create-send-request {
     background-color: #fff;

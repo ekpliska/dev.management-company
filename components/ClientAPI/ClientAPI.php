@@ -38,6 +38,20 @@ class ClientAPI extends Object {
     }
     
     /*
+     * Отправка текущих показаний приборов учета из личного кабинета Собственника
+     */
+    public function setCirrentCounters($data) {
+        
+        $new_indications = $this->readUrl('counters/current/set', $data);
+        
+        return [
+            'status' => $new_indications['status'],
+            'success' => $new_indications['accepted'],
+        ];
+        
+    }
+    
+    /*
      * Функция чтения URL
      */
     private function readUrl($path, $data) {

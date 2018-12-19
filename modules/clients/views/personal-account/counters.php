@@ -2,6 +2,7 @@
 
     use kartik\date\DatePicker;
     use yii\helpers\Html;
+    use yii\widgets\ActiveForm;
     use yii\widgets\Breadcrumbs;
     use app\models\TypeCounters;
 
@@ -47,9 +48,19 @@ $this->params['breadcrumbs'][] = 'Показания приборов учета
             ]);        
         ?>        
     </div>
+    
+    <?php
+        $form = ActiveForm::begin([
+            'id' => 'send-indications-form',
+            'action' => ['send-indications'],
+            'validateOnChange' => false,
+            'validateOnBlur' => false,
+        ]);
+    ?>
+    
     <div class="col-md-9 text-right">
-        <?= Html::button('Внести измнения', ['class' => 'btn-edit-reading']) ?>
-        <?= Html::button('Сохранить', ['class' => 'btn-save-reading']) ?>
+        <?= Html::button('Внести изменения', ['class' => 'btn-edit-reading']) ?>
+        <?= Html::submitButton('Сохранить', ['class' => 'btn-save-reading']) ?>
     </div>
     
     <?php if (isset($indications) && is_array($indications)) : ?>
@@ -91,7 +102,15 @@ $this->params['breadcrumbs'][] = 'Показания приборов учета
                             <?php if ($indication['Текущее показание'] != null) : ?>
                                 <?= $indication['Текущее показание'] ?>
                             <?php else: ?>
-                                <?= Html::input('text', 'reading-input', '', ['class' => 'reading-input']) ?>
+                                <?= $form->field($model_indication, "[{$indication['Регистрационный номер прибора учета']}]current_indication_repeat")
+                                        ->input('text', ['class' => 'reading-input', 'value' => $indication['Предыдущие показание']])
+                                        ->label(false) ?>
+                                <?= $form->field($model_indication, "[{$indication['Регистрационный номер прибора учета']}]counter_number")
+                                        ->input('text', ['class' => 'reading-input', 'value' => $indication['Регистрационный номер прибора учета']])
+                                        ->label(false) ?>
+                                <?= $form->field($model_indication, "[{$indication['Регистрационный номер прибора учета']}]current_indication")
+                                        ->input('text', ['class' => 'reading-input'])
+                                        ->label(false) ?>
                             <?php endif; ?>
                         </td>
                         <td>
@@ -103,6 +122,9 @@ $this->params['breadcrumbs'][] = 'Показания приборов учета
             </tbody>
         </table>
     <?php endif; ?>
+    
+    <?php ActiveForm::end(); ?>
+    
     
     <?php if (isset($comments_to_counters)) : ?>
     <div class="col-md-12 counters-message">

@@ -5,6 +5,7 @@
     use yii\web\NotFoundHttpException;
     use yii\web\Response;
     use yii\data\ActiveDataProvider;
+    use yii\base\Model;
     use app\modules\clients\controllers\AppClientsController;
     use app\models\PersonalAccount;
     use app\modules\clients\models\AddPersonalAccount;
@@ -12,6 +13,7 @@
     use app\models\Counters;
     use app\modules\clients\models\form\NewAccountForm;
     use app\models\CommentsToCounters;
+    use app\modules\clients\models\form\SendIndicationForm;
 
 /**
  * Контроллер по работе с разделом "Лицевой счет"
@@ -130,11 +132,59 @@ class PersonalAccountController extends AppClientsController {
                 
 //        $indications = Yii::$app->client_api->getPreviousCounters($data);
         $indications = Yii::$app->params['current_indications'];
-        
+
+        $model_indication = new SendIndicationForm();
+                
         return $this->render('counters', [
             'indications' => $indications,
             'comments_to_counters' => $comments_to_counters,
+            'model_indication' => $model_indication,
         ]);
+        
+    }
+    
+    public function actionSendIndications() {
+        
+        $model_indication = [new SendIndicationForm()];
+        
+        if (Yii::$app->request->isPost) {
+            $models = [];
+            $data = [];
+            $t = Yii::$app->request->post($model_indication[0]->formName());
+            
+            foreach ($t as $counter_num => $post_data) {
+                $newModel = new SendIndicationForm();
+                $newModel->load($post_data);
+                $models[$counter_num] = $newModel;
+                $data[$counter_num] = $post_data;
+            }
+            
+            if (Model::loadMultiple($models, Yii::$app->request->post()) && Model::validateMultiple($models)) {
+                $result = $this->sendIndicationAPI($data);
+            } else {
+                return $this->redirect(['counters']);
+            }
+        }
+        
+        return $this->redirect(Yii::$app->request->referrer);
+        
+    }
+    
+    
+    private function sendIndicationAPI($data) {
+        
+        if (!is_array($data)) {
+            return false;
+        }
+        
+        echo '<pre>';
+        var_dump($data); 
+//        foreach ($data as $key => $data) {
+//            echo $key;
+//        }
+        die();
+        
+        $data_request['Приборы учета'] = [];
         
     }
     
