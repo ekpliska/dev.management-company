@@ -117,7 +117,7 @@ $this->params['breadcrumbs'][] = 'Показания приборов учета
                                         ->input('text', ['class' => 'reading-input indication_val', 'disabled' => true])
                                         ->label(false) ?>
                             <?php endif; ?>
-                        </td>
+                        </td>                
                         <td>
                             <?= $indication['Текущее показание'] ? $indication['Текущее показание'] - $indication['Предыдущие показание'] : '' ?>
                         </td>

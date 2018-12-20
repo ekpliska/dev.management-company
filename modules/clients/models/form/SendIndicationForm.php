@@ -18,7 +18,7 @@ class SendIndicationForm extends Model {
         return [
             ['current_indication', 'required', 'message' => 'Укажите показания'],
             ['counter_number', 'integer'],
-            [['current_indication', 'previous_indication'], 'double'],
+            [['current_indication', 'previous_indication'], 'double', 'message' => 'Показания некорректны'],
             
             ['current_indication', 'compare', 'compareValue' => 0, 'operator' => '>', 'type' => 'number', 'message' => 'Показания некорректны'],
             

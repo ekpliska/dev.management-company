@@ -246,7 +246,9 @@ $(document).ready(function() {
      * текстовые поля для ввода показаний делаем доступными
      */
     $('.btn-edit-reading').on('click', function() {
+        $(this).prop('disabled', true);
         ind.prop('disabled', false);
+        ind.first().focus();
         $('.btn-save-reading').prop('disabled', false);
     });
     
