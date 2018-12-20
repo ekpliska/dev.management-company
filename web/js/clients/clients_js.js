@@ -270,14 +270,45 @@ $(document).ready(function() {
                 typeCounter: typeCounter,
                 numCounter: numCounter,
             },
-            success: function (data, textStatus, jqXHR) {
+            success: function (data) {
                 if (data.success == true) {
                     $('.create-send-request').replaceWith('<span class="message-request">Сформирована заявка ID' + data.request_number + '</span>');
                 }
             },
-            error: function (jqXHR, textStatus, errorThrown) {
+            error: function (textStatus) {
                 console.log(textStatus);                
             }
+        });
+    });
+    
+    var month = [
+        'январь',
+        'февраль',
+        'март',
+        'апрель',
+        'май',
+        'июнь',
+        'июль',
+        'август',
+        'сентябрь',
+        'октябрь',
+        'ноябрь',
+        'декабрь',
+    ];
+    
+    /*
+     * Запрос на формирование предыдущих показаний приборов учета
+     */
+    $('#date_start-period-counter').on('change', function() {
+        var dateValue = $(this).val();
+        var numMonth = dateValue.split('-')[0];
+        var year = dateValue.split('-')[1];
+        var monthNumber = month.indexOf(numMonth.toLowerCase()) + 1;
+        console.log(monthNumber + ' ' + year);
+        
+        $.post('find-indications?month=' + monthNumber + '&year=' + year, function(response) {
+            $('#indication-table').html(response.result);
+            console.log(response.result);
         });
     });
     

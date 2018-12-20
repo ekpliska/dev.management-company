@@ -107,19 +107,15 @@ class PersonalAccountController extends AppClientsController {
      * При каждом обрашении к странице Показания приборов учета,
      * происходит отправка запроса по API на получение актуальных показаний
      */
-    public function actionCounters($month = null, $year = null) {
+    public function actionCounters() {
         
         // Статус кнопок управления "Ввод показаний", "Сохранить"
-        $is_btn = false;
+        $is_btn = true;
+        // Получаем номер текущего месяца
+        $current_month = date('n');
+        // Получаем номер текущего года
+        $current_year = date('Y');
         
-        if ($month == null && $year == null) {
-            // Получаем номер текущего месяца
-            $current_month = date('n');
-            // Получаем номер текущего года
-            $current_year = date('Y');
-            $is_btn = true;
-        }
-
         $user_info = $this->permisionUser();
         $account_id = $this->_choosing;
         $account_number = $this->_value_choosing;
@@ -132,7 +128,7 @@ class PersonalAccountController extends AppClientsController {
         
         // Формируем запрос в формате JSON на отрпавку по API
         $data = "{
-                'Номер лицевого счета': '{$account_number}',
+                'Номер лицевого счета': '{$account_id}',
                 'Номер месяца': '{$current_month}',
                 'Год': '{$current_year}'
         }";
@@ -247,6 +243,33 @@ class PersonalAccountController extends AppClientsController {
             return ['success' => true, 'request_number' => $result];
         }
         return ['success' => false];
+    }
+    
+    public function actionFindIndications($month, $year) {
+        
+        $account_id = $this->_choosing;
+        
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        
+        if (!is_numeric($month) || !is_numeric($year) || !isset($month, $year)) {
+            return ['success' => false];
+        }
+        
+        if (Yii::$app->request->isPost) {
+            
+            // Формируем запрос в формате JSON на отрпавку по API
+            $data = "{
+                    'Номер лицевого счета': '{$account_id}',
+                    'Номер месяца': '{$month}',
+                    'Год': '{$year}'
+            }";
+            $indications = Yii::$app->client_api->getPreviousCounters($data);
+            
+            $data = $this->renderPartial('data/grid-counters', ['indications' => $indications['indications']]);
+            return ['success' => true, 'result' => $indications['indications']];
+        }
+        return ['success' => false];
+        
     }
     
     /*
