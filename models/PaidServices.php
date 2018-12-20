@@ -39,7 +39,7 @@ class PaidServices extends ActiveRecord
     {
         return [
             
-            [['services_name_services_id', 'services_category_services_id', 'services_phone', 'services_comment'], 'required', 'on' => self::SCENARIO_ADD_SERVICE],
+            [['services_name_services_id', 'services_phone', 'services_comment'], 'required', 'on' => self::SCENARIO_ADD_SERVICE],
             
             [
                 'services_phone', 
@@ -51,7 +51,7 @@ class PaidServices extends ActiveRecord
             [['services_comment'], 'string', 'on' => self::SCENARIO_ADD_SERVICE],
             [['services_comment'], 'string', 'min' => 10, 'max' => 255, 'on' => self::SCENARIO_ADD_SERVICE],
             
-            [['services_name_services_id', 'services_category_services_id', 'created_at', 'updated_at', 'status', 'services_dispatcher_id', 'services_specialist_id', 'services_account_id'], 'integer'],
+            [['services_name_services_id', 'created_at', 'updated_at', 'status', 'services_dispatcher_id', 'services_specialist_id', 'services_account_id'], 'integer'],
             [['services_number'], 'string', 'max' => 50],
             [['services_phone'], 'string', 'max' => 50],
         ];
@@ -109,6 +109,20 @@ class PaidServices extends ActiveRecord
         
     }
     
+    /* Формирование идентификатора для заявки:
+     *      последние 6 символов даты в unix - 
+     *      ID платной заявки
+     */
+    private static function createNumberRequest($service_id) {
+        
+        $date = new \DateTime();
+        $int = $date->getTimestamp();
+        $order_numder = substr($int, 5) . '-' . str_pad($service_id, 2, 0, STR_PAD_LEFT);
+        
+        return $order_numder;
+        
+    }
+    
     /*
      * Сохранение новой платной заявки
      */
@@ -116,16 +130,7 @@ class PaidServices extends ActiveRecord
         
         if ($this->validate()) {
         
-            /* Формирование идентификатора для заявки:
-             *      последние 7 символов лицевого счета - 
-             *      последние 6 символов даты в unix - 
-             *      тип платной заявки
-             */
-
-            $date = new \DateTime();
-            $int = $date->getTimestamp();
-
-            $order_numder = substr($int, 5) . '-' . str_pad($this->services_name_services_id, 2, 0, STR_PAD_LEFT);
+            $order_numder = $this->createNumberRequest($this->services_name_services_id);
 
             $this->services_number = $order_numder;
             $this->status = StatusRequest::STATUS_NEW;
@@ -205,6 +210,41 @@ class PaidServices extends ActiveRecord
                 ->one();
     }
     
+    /*
+     * Формирование автоматичекой заявки на платную услугу
+     * 
+     * Усоуга - Поверка прибров учета
+     */
+    public static function automaticRequest($account_id, $options = []) {
+        
+        if ($options['type'] == null) {
+            return false;
+        }
+        
+        $service_id = Services::find()
+                ->where(['like', 'services_name', $options['type']])
+                ->asArray()
+                ->one();
+        
+        if ($service_id['services_id'] == null) {
+            return false;
+        }
+        
+        $new = new PaidServices();
+        
+        $order_numder = static::createNumberRequest($service_id['services_id']);
+        
+        $new->services_number = $order_numder;
+        $new->services_name_services_id = $service_id['services_id'];
+        $new->services_comment = 'Заявка, наименование услуги: ' . $service_id['services_name'] . '. ' .
+                'Дополнительные сведения - ' . $options['value'] .
+                '[Заявка сформирована автоматически]';
+        $new->services_phone = Yii::$app->userProfile->mobile;
+        $new->services_account_id = $account_id;
+        
+       return $new->save() ? $new->services_number : false;
+       
+    }
     
     /**
      * Настройка полей для форм

@@ -1992,6 +1992,11 @@ input[name="date_end-period-pay"]:focus {
     font-size: 12px;
     letter-spacing: 0.23px;
 }
+.block-edit-reading span.message-request {
+    font-size: 12px;
+    font-weight: normal;
+    color: #000;
+}
 /* Конец Приборы учета */
 
 /* Опрос */

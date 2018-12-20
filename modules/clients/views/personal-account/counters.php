@@ -100,7 +100,12 @@ $this->params['breadcrumbs'][] = 'Показания приборов учета
                             <span>Ввод показаний заблокирован</span>
                         </td>
                         <td>
-                            <?= Html::a('Заказать поверку', ['/'], ['class' => 'create-send-request']) ?>
+                            <?= Html::button('Заказать поверку', [
+                                    'class' => 'create-send-request', 
+                                    'data-account' => $this->context->_choosing,
+                                    'data-counter-type' => $indication['Тип прибора учета'],
+                                    'data-counter-num' => $indication['Регистрационный номер прибора учета'],
+                            ]) ?>
                         </td>
                     <?php else: ?>
                         <td>

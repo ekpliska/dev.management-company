@@ -14,6 +14,7 @@
     use app\modules\clients\models\form\NewAccountForm;
     use app\models\CommentsToCounters;
     use app\modules\clients\models\form\SendIndicationForm;
+    use app\models\PaidServices;
 
 /**
  * Контроллер по работе с разделом "Лицевой счет"
@@ -210,6 +211,38 @@ class PersonalAccountController extends AppClientsController {
         
         return true;
         
+    }
+    
+    /*
+     * Формирование заявки на пралтую услугу
+     * Наименование услуги: Поверка приборов учета
+     */
+    public function actionCreatePaidRequest() {
+        
+        $account_id = Yii::$app->request->post('accountID');
+        $counter_type = Yii::$app->request->post('typeCounter');
+        $counter_num = Yii::$app->request->post('numCounter');
+        
+        Yii::$app->response->format = Response::FORMAT_JSON;        
+        
+        if (!is_numeric($account_id) && !is_string($counter_type || !is_numeric($counter_num))) {
+            return ['success' => false];
+        }
+        
+        if (Yii::$app->request->isAjax) {
+            
+            $result = $new_request = PaidServices::automaticRequest($account_id, [
+                'type' => 'Поверка',
+                'value' => 'Тип прибора учета: ' . $counter_type . 'Регистрационный номер прибора учета' . $counter_num,
+            ]);
+            
+            if (!$result) {
+                return ['success' => false];
+            }
+            
+            return ['success' => true, 'request_number' => $result];
+        }
+        return ['success' => false];
     }
     
     /*

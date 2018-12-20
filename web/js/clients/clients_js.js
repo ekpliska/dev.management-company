@@ -252,6 +252,35 @@ $(document).ready(function() {
         $('.btn-save-reading').prop('disabled', false);
     });
     
+    /*
+     * Формирование автоматической заявки на платную услугу
+     * "Поверка приборов учета"
+     */
+    $('.create-send-request').on('click', function() {
+        var accountID = $(this).data('account');
+        var typeCounter = $(this).data('counterType');
+        var numCounter = $(this).data('counterNum');
+        
+        console.log(accountID + ' ' + typeCounter + ' ' + numCounter);
+        $.ajax({
+            url: 'create-paid-request',
+            method: 'POST',
+            data: {
+                accountID: accountID,
+                typeCounter: typeCounter,
+                numCounter: numCounter,
+            },
+            success: function (data, textStatus, jqXHR) {
+                if (data.success == true) {
+                    $('.create-send-request').replaceWith('<span class="message-request">Сформирована заявка ID' + data.request_number + '</span>');
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(textStatus);                
+            }
+        });
+    });
+    
     /* End Block of Personal Account */
 
 
