@@ -5,6 +5,7 @@
     use yii\widgets\ActiveForm;
     use yii\widgets\Breadcrumbs;
     use app\models\TypeCounters;
+    use app\modules\clients\widgets\AlertsShow;
 
 /* 
  * Приборы учета
@@ -32,9 +33,11 @@ $this->params['breadcrumbs'][] = 'Показания приборов учета
         ],
 ]) ?>
 
+<?= AlertsShow::widget() ?>
+
 <div class="counters-page row">
 
-    <div class="col-md-3">
+    <div class="col-md-3 options-panel">
         <p class="payment_title"><i class="glyphicon glyphicon-calendar"></i> Период</p>
         <?= DatePicker::widget([
                 'name' => 'date_start-period-pay',
@@ -58,9 +61,11 @@ $this->params['breadcrumbs'][] = 'Показания приборов учета
         ]);
     ?>
     
-    <div class="col-md-9 text-right">
-        <?= Html::button('Внести изменения', ['class' => 'btn-edit-reading']) ?>
-        <?= Html::submitButton('Сохранить', ['class' => 'btn-save-reading']) ?>
+    <div class="col-md-9 text-right options-panel">
+        <?php if ($is_btn) : ?>
+            <?= Html::button('Внести показания', ['class' => 'btn-edit-reading']) ?>
+            <?= Html::submitButton('Сохранить', ['class' => 'btn-save-reading', 'disabled' => true]) ?>
+        <?php endif; ?>
     </div>
     
     <?php if (isset($indications) && is_array($indications)) : ?>
@@ -101,15 +106,15 @@ $this->params['breadcrumbs'][] = 'Показания приборов учета
                         <td>
                             <?php if ($indication['Текущее показание'] != null) : ?>
                                 <?= $indication['Текущее показание'] ?>
-                            <?php else: ?>
+                            <?php elseif ($is_btn) : ?>
                                 <?= $form->field($model_indication, "[{$indication['Регистрационный номер прибора учета']}]current_indication_repeat")
-                                        ->input('text', ['class' => 'reading-input', 'value' => $indication['Предыдущие показание']])
+                                        ->hiddenInput(['class' => 'reading-input', 'value' => $indication['Предыдущие показание'], 'disabled' => true])
                                         ->label(false) ?>
                                 <?= $form->field($model_indication, "[{$indication['Регистрационный номер прибора учета']}]counter_number")
-                                        ->input('text', ['class' => 'reading-input', 'value' => $indication['Регистрационный номер прибора учета']])
+                                        ->hiddenInput(['class' => 'reading-input', 'value' => $indication['Регистрационный номер прибора учета'], 'disabled' => true])
                                         ->label(false) ?>
                                 <?= $form->field($model_indication, "[{$indication['Регистрационный номер прибора учета']}]current_indication")
-                                        ->input('text', ['class' => 'reading-input'])
+                                        ->input('text', ['class' => 'reading-input indication_val', 'disabled' => true])
                                         ->label(false) ?>
                             <?php endif; ?>
                         </td>

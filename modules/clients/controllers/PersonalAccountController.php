@@ -110,19 +110,25 @@ class PersonalAccountController extends AppClientsController {
      * При каждом обрашении к странице Показания приборов учета,
      * происходит отправка запроса по API на получение актуальных показаний
      */
-    public function actionCounters() {
+    public function actionCounters($month = null, $year = null) {
+        
+        // Статус кнопок управления "Ввод показаний", "Сохранить"
+        $is_btn = false;
+        
+        if ($month == null && $year == null) {
+            // Получаем номер текущего месяца
+            $current_month = date('n');
+            // Получаем номер текущего года
+            $current_year = date('Y');
+            $is_btn = true;
+        }
 
         $user_info = $this->permisionUser();
         $account_id = $this->_choosing;
         $account_number = $this->_value_choosing;
         
         $comments_to_counters = CommentsToCounters::getComments($account_id);
-        
-        // Получаем номер текущего месяца
-        $current_month = date('n');
-        // Получаем номер текущего года
-        $current_year = date('Y');
-        
+                
         // Формируем запрос в формате JSON на отрпавку по API
         $data = "{
                 'Номер лицевого счета': '{$account_number}',
@@ -139,10 +145,14 @@ class PersonalAccountController extends AppClientsController {
             'indications' => $indications,
             'comments_to_counters' => $comments_to_counters,
             'model_indication' => $model_indication,
+            'is_btn' => $is_btn,
         ]);
         
     }
     
+    /*
+     * Отправка показаний, валидация формы
+     */
     public function actionSendIndications() {
         
         $model_indication = [new SendIndicationForm()];
@@ -160,31 +170,45 @@ class PersonalAccountController extends AppClientsController {
             }
             
             if (Model::loadMultiple($models, Yii::$app->request->post()) && Model::validateMultiple($models)) {
-                $result = $this->sendIndicationAPI($data);
-            } else {
+                if ($this->sendIndicationAPI($data)) {
+                    Yii::$app->session->setFlash('success', ['message' => 'Показания приборов были переданы успешно']);
+                } else {
+                    Yii::$app->session->setFlash('error', ['message' => 'При передаче показаний возникла ошибка. Обновите страницу и повторите действие снова']);
+                }
                 return $this->redirect(['counters']);
             }
         }
         
-        return $this->redirect(Yii::$app->request->referrer);
+        return $this->goHome();
         
     }
     
-    
+    /*
+     * Отправка показаний приборов учета по API
+     */
     private function sendIndicationAPI($data) {
         
         if (!is_array($data)) {
             return false;
         }
         
-        echo '<pre>';
-        var_dump($data); 
-//        foreach ($data as $key => $data) {
-//            echo $key;
-//        }
-        die();
+        $array_request['Приборы учета'] = [];
         
-        $data_request['Приборы учета'] = [];
+        foreach ($data as $key => $data) {
+            $array['Регистрационный номер прибора учета'] = $key;
+            $array['Дата снятия показания'] = date('Y-m-d');
+            $array['Текущее показание'] = $data['current_indication'];
+            $array_request['Приборы учета'][] = $array;
+        }
+        
+        $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
+        $result = Yii::$app->client_api->setCurrentIndications($data);
+        
+        if ($result['status'] == 'error' || $result['success'] == false ) {
+            return false;
+        }
+        
+        return true;
         
     }
     

@@ -227,7 +227,7 @@ $(document).ready(function() {
     });
     
     /*
-     * Сброс формы в модальном окне на добавление нового личевого счета при закрытии формы "Отмена"/х
+     * Сброс формы в модальном окне на добавление нового лицевого счета при закрытии формы "Отмена"/х
      */
     $('.account-create__btn_close').on('click', function () {
         $('#create-account-modal-form')[0].reset();
@@ -241,13 +241,13 @@ $(document).ready(function() {
      */ 
     var ind = $('.indication_val');
     ind.prop('disabled', true);
-
     /*
      * Если нажата кнопка 'Ввести показания'
      * текстовые поля для ввода показаний делаем доступными
      */
-    $('.btn__add_indication').on('click', function() {
+    $('.btn-edit-reading').on('click', function() {
         ind.prop('disabled', false);
+        $('.btn-save-reading').prop('disabled', false);
     });
     
     /* End Block of Personal Account */

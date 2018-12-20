@@ -16,7 +16,7 @@ class SendIndicationForm extends Model {
     public function rules() {
         
         return [
-            ['current_indication', 'required'],
+            ['current_indication', 'required', 'message' => 'Укажите показания'],
             ['counter_number', 'integer'],
             [['current_indication', 'previous_indication'], 'double'],
             
