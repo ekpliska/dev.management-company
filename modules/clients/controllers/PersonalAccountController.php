@@ -4,17 +4,14 @@
     use Yii;
     use yii\web\NotFoundHttpException;
     use yii\web\Response;
-    use yii\data\ActiveDataProvider;
     use yii\base\Model;
     use app\modules\clients\controllers\AppClientsController;
     use app\models\PersonalAccount;
-    use app\modules\clients\models\AddPersonalAccount;
-    use app\modules\clients\models\ClientsRentForm;
-    use app\models\Counters;
     use app\modules\clients\models\form\NewAccountForm;
     use app\models\CommentsToCounters;
     use app\modules\clients\models\form\SendIndicationForm;
     use app\models\PaidServices;
+    use app\models\Counters;
 
 /**
  * Контроллер по работе с разделом "Лицевой счет"
@@ -37,7 +34,6 @@ class PersonalAccountController extends AppClientsController {
         
         // Загуржаем модель добавления нового лицевого счета
         $model = new NewAccountForm();
-        
         
         return $this->render('index', [
             'user_info' => $user_info,
@@ -128,8 +124,12 @@ class PersonalAccountController extends AppClientsController {
         $account_id = $this->_choosing;
         $account_number = $this->_value_choosing;
         
+        // Получаем список приборов учета с формированной заявкой на поверку счетчиков
+        $counter_request = Counters::notVerified($account_id);
+        
+        // Получаем комментарии по приборам учета Собсвенника. Комментарий формирует Администратор системы
         $comments_to_counters = CommentsToCounters::getComments($account_id);
-                
+        
         // Формируем запрос в формате JSON на отрпавку по API
         $data = "{
                 'Номер лицевого счета': '{$account_number}',
@@ -147,6 +147,7 @@ class PersonalAccountController extends AppClientsController {
             'comments_to_counters' => $comments_to_counters,
             'model_indication' => $model_indication,
             'is_btn' => $is_btn,
+            'counter_request' => $counter_request,
         ]);
         
     }
@@ -172,7 +173,7 @@ class PersonalAccountController extends AppClientsController {
             
             if (Model::loadMultiple($models, Yii::$app->request->post()) && Model::validateMultiple($models)) {
                 if ($this->sendIndicationAPI($data)) {
-                    Yii::$app->session->setFlash('success', ['message' => 'Показания приборов были переданы успешно']);
+                    Yii::$app->session->setFlash('success', ['message' => 'Показания приборов учета были переданы успешно']);
                 } else {
                     Yii::$app->session->setFlash('error', ['message' => 'При передаче показаний возникла ошибка. Обновите страницу и повторите действие снова']);
                 }
@@ -204,6 +205,7 @@ class PersonalAccountController extends AppClientsController {
         
         $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
         $result = Yii::$app->client_api->setCurrentIndications($data);
+//        var_dump($result); die();
         
         if ($result['status'] == 'error' || $result['success'] == false ) {
             return false;
@@ -214,7 +216,7 @@ class PersonalAccountController extends AppClientsController {
     }
     
     /*
-     * Формирование заявки на пралтую услугу
+     * Формирование заявки на платную услугу
      * Наименование услуги: Поверка приборов учета
      */
     public function actionCreatePaidRequest() {
@@ -240,142 +242,11 @@ class PersonalAccountController extends AppClientsController {
                 return ['success' => false];
             }
             
+            $counter = Counters::setRequestStatus($counter_num);
+            
             return ['success' => true, 'request_number' => $result];
         }
         return ['success' => false];
-    }
-    
-    /*
-     * Метод фильтра лицевых счетов
-     * dropDownList
-     */
-    public function actionList() {
-        
-        Yii::$app->response->format = Response::FORMAT_JSON;
-        
-        $account_id = Yii::$app->request->post('accountId');
-        $client_id = Yii::$app->request->post('clientId');
-        
-        if (Yii::$app->request->isAjax) {
-            $account_info = PersonalAccount::getAccountInfo($account_id, $client_id);
-            $data = $this->renderPartial('_data-filter/list', ['account_info' => $account_info]);
-            return ['success' => true, 'data' => $data];
-        }
-        return ['success' => false];
-
-    }
-    
-    /*
-     * Валидация формы "Добавление нового арендатора"
-     */
-    public function actionValidateAddRentForm() {
-        
-        Yii::$app->response->format = Response::FORMAT_JSON;
-        
-        // Если данные пришли через пост и аякс
-        if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
-            // Объявляем модель арендатор, задаем сценарий валидации для формы
-            $model = new ClientsRentForm([
-                'scenario' => ClientsRentForm::SCENARIO_AJAX_VALIDATION,
-            ]);
-            // Если модель загружена
-            if ($model->load(Yii::$app->request->post())) {
-                // и прошла валидацию
-                if ($model->validate()) {
-                    // Для Ajax запроса возвращаем стутас, ок
-                    return ['status' => true];
-                }
-            }
-            // Инваче, запросу отдаем ответ о проваленной валидации и ошибки
-            return [
-                'status' => false,
-                'errors' => $model->errors,
-            ];
-        }
-        return ['status' => false];
-    }
-    
-    /*
-     * Добавление нового лицевого счета
-     */
-    public function actionAddRecordAccount($form) {
-        
-        $user_info = $this->permisionUser();
-
-        if (Yii::$app->request->isPost && $user_info->_user['client_id']) {
-            
-            $account_form = new AddPersonalAccount();
-            $account_form->load(Yii::$app->request->post());
-            $account_form->validate();
-            
-            $new_account = $account_form->account_number;
-            
-            if ($account_form->hasErrors()) {
-                
-                Yii::$app->session->setFlash('form', ['success' => false, 'error' => 'При отправке формы возникла ошибка, попробуйте заполнить форму заново (*) ']);
-                if (Yii::$app->request->referrer) {
-                    Yii::$app->response->setStatusCode(400);
-                    return Yii::$app->request->isAjax ? \yii\helpers\Json::encode(['success' => false]) : $this->redirect(Yii::$app->request->referrer);
-                }
-                return Yii::$app->request->isAjax ? \yii\helpers\Json::encode(['success' => false, 'error' => 'Ошибка формы 1']) : $this->goHome();
-            }
-            
-            // Заполняем массив данными о новом аренадтор
-            $data_rent = Yii::$app->request->post('ClientsRentForm');
-            // Проверям массив на пустоту
-            if (array_filter($data_rent)) {
-                // Если массив не пустой, передаем в модель Арендатор данные
-                $rent_form = new ClientsRentForm($data_rent);
-                
-                // Выводим ошибки в случае неудачной валидации
-                if (!$rent_form->validate()) {
-                    Yii::$app->session->setFlash('form', ['success' => false, 'error' => 'При отправке формы возникла ошибка, попробуйте заполнить форму заново (**) ']);
-                    if (Yii::$app->request->referrer) {
-                        Yii::$app->response->setStatusCode(400);
-                        return Yii::$app->request->isAjax ? \yii\helpers\Json::encode(['success' => false]) : $this->redirect(Yii::$app->request->referrer);                        
-                    }
-                    return Yii::$app->request->isAjax ? \yii\helpers\Json::encode(['success' => false]) : $this->goHome();
-                    // return $rent_form->errors;
-                }
-                
-                // Если данные прошли валидацию и успешно сохранены
-                $_rent = $rent_form->saveRentToUser($data_rent, $new_account);
-                if ($_rent) {
-                    // Сохраняем новый лицевой счет
-                    $account_form->saveAccountChekRent($_rent);
-                    Yii::$app->session->setFlash('form', ['success' => true, 'message' => 'Лицевой счет создан. Созданный лицевой счет связан с новым арендатором']);
-                }
-                
-            } else {
-                $account_form->saveAccountChekRent($_rent = null);
-                Yii::$app->session->setFlash('form', ['success' => true, 'message' => 'Лицевой счет создан']);
-            }
-            
-            return $this->redirect(Yii::$app->request->referrer);            
-        }
-        return $this->goHome();
-        
-    }
-
-    
-    /*
-     * Метод переключения текущего лицевого счета для страницы "Показания приборов"
-     * dropDownList в хеддере
-     */
-    public function actionFilterByAccount($account_id) {
-        
-        Yii::$app->response->format = Response::FORMAT_JSON;
-        if (!is_numeric($account_id)) {
-            return ['status' => false];
-        }
-        if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
-            $counters = new ActiveDataProvider([
-                'query' => Counters::getReadingCurrent($account_id, $current_month = 9, $current_year = 2018),            
-            ]);
-            $data = $this->renderAjax('data/grid', ['counters' => $counters]);
-            return ['status' => true, 'data' => $data];
-        }
-        return ['status' => false];
     }
     
     /*

@@ -3,6 +3,7 @@
     namespace app\models;
     use Yii;
     use yii\db\ActiveRecord;
+    use yii\helpers\ArrayHelper;
     use app\models\TypeCounters;
     use app\models\ReadingCounters;
 
@@ -13,6 +14,12 @@ class Counters extends ActiveRecord
 {
     const STATUS_ACTIVE = 1;
     const STATUS_NOT_ACTIVE = 0;
+    
+    /*
+     * Статусы сформированных заявок если, истекла дата поверки
+     */
+    const REQUEST_YES = 'CREATE';   // Заявка создана
+    const REQUEST_NO = 'NOT REQUIRED';    // Не требуется
 
     /**
      * Таблица из БД
@@ -54,6 +61,30 @@ class Counters extends ActiveRecord
                 ->andWhere(['counters_account_id' => $account_id])
                 ->with(['typeCounter', 'readingCounter']);
         
+    }
+    
+    /*
+     * Установка статус для сформированной заявки на проверку приборов учета
+     */
+    public static function setRequestStatus($counter_num) {
+        
+        $counter = self::find()
+                ->where(['counters_number' => $counter_num])
+                ->one();
+        
+        $counter->isRequest = self::REQUEST_YES;
+        return $counter->save(false);
+    }
+    
+    public static function notVerified($account_id) {
+        
+        $array = self::find()
+                ->where(['counters_account_id' => $account_id])
+                ->andWhere(['isRequest' => self::REQUEST_YES])
+                ->asArray()
+                ->all();
+        
+        return ArrayHelper::map($array, 'counters_number', 'counters_id');
     }
     
     /*

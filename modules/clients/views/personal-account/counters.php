@@ -2,6 +2,7 @@
 
     use kartik\date\DatePicker;
     use yii\helpers\Html;
+    use yii\helpers\ArrayHelper;
     use yii\widgets\ActiveForm;
     use yii\widgets\Breadcrumbs;
     use app\models\TypeCounters;
@@ -100,12 +101,20 @@ $this->params['breadcrumbs'][] = 'Показания приборов учета
                             <span>Ввод показаний заблокирован</span>
                         </td>
                         <td>
+                            <?php if (!ArrayHelper::keyExists($indication['Регистрационный номер прибора учета'], $counter_request)) : ?>
                             <?= Html::button('Заказать поверку', [
                                     'class' => 'create-send-request', 
                                     'data-account' => $this->context->_choosing,
                                     'data-counter-type' => $indication['Тип прибора учета'],
                                     'data-counter-num' => $indication['Регистрационный номер прибора учета'],
                             ]) ?>
+                            <?php else: ?>
+                                <span class="message-request">
+                                    Заявка на поверку cформирована
+                                </span>
+                                <br />
+                                <?= Html::a('Мои платные услуги', ['paid-services/order-services']) ?>
+                            <?php endif; ?>
                         </td>
                     <?php else: ?>
                         <td>

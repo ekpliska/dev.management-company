@@ -46,6 +46,7 @@ class m180901_111400_table_counters extends Migration
             'counters_account_id' => $this->integer()->notNull(),
             'date_check' => $this->integer()->notNull(),
             'isActive' => $this->tinyInteger()->notNull()->defaultValue(Counters::STATUS_ACTIVE),
+            'isRequest' => $this->string(15)->defaultValue(Counters::REQUEST_NO),
         ], $table_options);
         $this->createIndex('idx-counters-counters_id', '{{%counters}}', 'counters_id');
         $this->createIndex('idx-counters-counters_number', '{{%counters}}', 'counters_number');

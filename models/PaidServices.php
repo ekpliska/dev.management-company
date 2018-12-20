@@ -213,7 +213,7 @@ class PaidServices extends ActiveRecord
     /*
      * Формирование автоматичекой заявки на платную услугу
      * 
-     * Усоуга - Поверка прибров учета
+     * Услуга - Поверка прибров учета
      */
     public static function automaticRequest($account_id, $options = []) {
         
