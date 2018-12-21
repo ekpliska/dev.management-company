@@ -72,7 +72,7 @@ class ProfileController extends AppClientsController
                         return $this->redirect(Yii::$app->request->referrer);
                         
                     }
-                    Yii::$app->session->setFlash('success', ['error' => 'При обновлении профиль произошла ошибка. Обновите страницу и повторите действие заново']);
+                    Yii::$app->session->setFlash('error', ['message' => 'При обновлении профиль произошла ошибка. Обновите страницу и повторите действие заново']);
                     return $this->redirect(Yii::$app->request->referrer);                    
                 }
             } else {
@@ -87,7 +87,7 @@ class ProfileController extends AppClientsController
             }
         }
         
-        Yii::$app->session->setFlash('success', ['error' => 'При обновлении профиль произошла ошибка. Обновите страницу и повторите действие заново']);
+        Yii::$app->session->setFlash('error', ['message' => 'При обновлении профиль произошла ошибка. Обновите страницу и повторите действие заново']);
         return $this->redirect(Yii::$app->request->referrer);
     }
     

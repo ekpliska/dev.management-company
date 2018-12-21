@@ -36,6 +36,7 @@ class m180831_193134_table_users extends Migration
             'last_login' => $this->integer(),
             'user_client_id' => $this->integer(),
             'user_rent_id' => $this->integer(),
+            'user_employee_id' => $this->integer(),
         ], $table_options);
         $this->createIndex('idx-user-user_id', '{{%user}}', 'user_id');
         

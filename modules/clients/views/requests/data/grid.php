@@ -13,7 +13,7 @@
         'dataProvider' => $all_requests,
         'layout' => '{items}{pager}',
         'tableOptions' => [
-            'class' => 'table requests-table',
+            'class' => 'table clients-table',
         ],
         'pager' => [
             'prevPageLabel' => '<i class="glyphicon glyphicon-menu-left"></i>',
@@ -26,7 +26,7 @@
                     return Html::a($data->requests_ident, ['requests/view-request', 'request_numder' => $data->requests_ident]);
                 },
                 'contentOptions' =>[
-                    'class' => 'requests-table_main',
+                    'class' => 'clients-table_main',
                 ],
                 'format' => 'raw',
             ],
@@ -36,7 +36,7 @@
                     return $data->getNameRequest();            
                 },
                 'contentOptions' =>[
-                    'class' => 'requests-table_main',
+                    'class' => 'clients-table_main',
                 ],        
             ],
             [
@@ -47,7 +47,7 @@
                             . FormatHelpers::imageRequestList($data['image']);
                 },
                 'contentOptions' =>[
-                    'class' => 'requests-table_description',
+                    'class' => 'clients-table_description',
                 ],
                 'format' => 'raw',
             ],                        
@@ -63,7 +63,7 @@
                     return FormatHelpers::formatDate($data->created_at, false, 0, false);
                 },
                 'contentOptions' =>[
-                    'class' => 'requests-table_main',
+                    'class' => 'clients-table_main',
                 ],
             ],
             [
@@ -72,7 +72,7 @@
                     return FormatHelpers::formatDate($data->date_closed, false, 0, false);
                 },
                 'contentOptions' =>[
-                    'class' => 'requests-table_main',
+                    'class' => 'clients-table_main',
                 ],
             ],
             [
@@ -83,7 +83,7 @@
                 },
                 'format' => 'raw',
                 'contentOptions' =>[
-                    'class' => 'requests-table_main',
+                    'class' => 'clients-table_main',
                 ],                        
             ],
 //            [

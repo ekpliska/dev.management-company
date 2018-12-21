@@ -1206,6 +1206,12 @@ p.right {
 .image-counters {
     padding: 0 10px !important;
 }
+.clients-table img.request {
+    height: 24px;
+    width: 24px;
+    border-radius: 3px;
+    margin: 5px 4px;
+}
 /* Конец Таблица для заявок */
 
 /* Постраничная нафигация, таблица */

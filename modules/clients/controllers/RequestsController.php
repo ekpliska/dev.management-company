@@ -61,6 +61,8 @@ class RequestsController extends AppClientsController
                 $model->uploadGallery();
                 return $this->redirect(['view-request', 'request_numder' => $request_number]);
             }
+            Yii::$app->session->setFlash('error', ['message' => 'При создании заявки произошла ошибка. Обновите страницу и повторите действие заново']);
+            return $this->redirect(['index']);
         }
 
         return $this->render('index', [
