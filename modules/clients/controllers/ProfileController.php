@@ -132,6 +132,7 @@ class ProfileController extends AppClientsController
     
     /*
      * Проверка наличия арендатора у лицевого счета
+     * AJAX запрос при клике на переключатель Арендатор
      */
     public function actionCheckIsRent($account) {
         
@@ -164,27 +165,6 @@ class ProfileController extends AppClientsController
         
         return ['status' => false];
         
-    }
-
-    /*
-     * Редактирование данных арендатора
-     * Форма редактирования данных Арендатора
-     */
-    public function saveRentInfo($data_rent) {
-        
-        if ($data_rent == null) {
-            return Yii::$app->session->setFlash('profile-error');            
-        }
-        
-        $_rent = Rents::find()->andWhere(['rents_id' => $data_rent['rents_id']])->one();
-        
-        if ($_rent->load(Yii::$app->request->post()) && $_rent->validate()) {
-            $_rent->save();
-            
-            return Yii::$app->session->setFlash('profile');
-        }
-        
-        return Yii::$app->session->setFlash('profile-error');
     }
     
     /*
@@ -243,6 +223,9 @@ class ProfileController extends AppClientsController
         ]);
     }
     
+    /*
+     * AJAX валидация формы отправки подтверждения СМС кода
+     */
     public function actionValidateSmsForm() {
         
         $user_info = $this->permisionUser();
@@ -256,6 +239,9 @@ class ProfileController extends AppClientsController
         }        
     }
     
+    /*
+     * Отправка СМС кода
+     */
     public function actionSendSmsForm($type) {
         
         $user_info = $this->permisionUser();
