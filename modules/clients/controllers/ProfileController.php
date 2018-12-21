@@ -3,7 +3,6 @@
     namespace app\modules\clients\controllers;
     use Yii;
     use yii\web\UploadedFile;
-    use yii\web\NotFoundHttpException;
     use yii\widgets\ActiveForm;
     use app\modules\clients\controllers\AppClientsController;
     use app\models\User;
@@ -12,7 +11,6 @@
     use app\models\PersonalAccount;
     use app\modules\clients\models\ChangePasswordForm;
     use app\modules\clients\models\ChangeMobilePhone;
-    use app\modules\clients\models\ChangeEmail;
     use app\models\SmsOperations;
     use app\modules\clients\models\form\SMSForm;
     
@@ -49,53 +47,47 @@ class ProfileController extends AppClientsController
     public function actionUpdateProfile() {
 
         if (Yii::$app->request->isPost) {
+            // Если пришел из пост статуса о существующем Арендаторе
             if (isset($_POST['is_rent'])) {
                 // Загружаем модель пользователя
                 $user_info = $this->permisionUser()->_model;
-                // Загружаем модель для Добавления Нового арендатора
-                $add_rent = new ClientsRentForm(['scenario' => ClientsRentForm::SCENARIO_AJAX_VALIDATION]);
+                $data_rent = Yii::$app->request->post('Rents');
+                $rent_info = Rents::find()->where(['rents_id' => $data_rent['rents_id']])->one();
                 
-                if ($user_info->load(Yii::$app->request->post())) {
-                    // Сохраняем профиль пользователя
-                    $file = UploadedFile::getInstance($user_info, 'user_photo');
-                    $user_info->uploadPhoto($file);                    
+                if ($user_info->load(Yii::$app->request->post()) && $rent_info->load(Yii::$app->request->post())) {
                     
-                    // Проверяем, если пришли данные из формы редактирования данных арендатора
-                    $data_rent = Yii::$app->request->post('Rents');
-                    if ($data_rent !== null) {
-                        // Сохряняем их
-                        $this->saveRentInfo($data_rent);
-                    }                    
+                    $is_valid = $user_info->validate();
+                    $is_valid = $rent_info->validate() && $is_valid;
+
                     
-                    // Если форма Добавления нового Арендатора загружена
-                    if ($add_rent->load(Yii::$app->request->post())) {
-                        // Проверяем на ошибки
-                        if ($add_rent->hasErrors()) {
-                            Yii::$app->session->setFlash('profile-error');
-                            return $this->redirect(Yii::$app->request->referrer);
-                        }
-                        // на валидацию
-                        if ($add_rent->validate()) {
-                            // сохраняем нового арендатора
-                            $add_rent->saveRentToUser();
-                        }
+                    if ($is_valid) {
+                        // Сохраняем профиль Собственника
+                        $file = UploadedFile::getInstance($user_info, 'user_photo');
+                        $user_info->uploadPhoto($file);
+                        
+                        // Сохраняем профиль Арендатора
+                        $rent_info->save();
+
+                        Yii::$app->session->setFlash('success', ['message' => 'Профиль успешно обновлем']);
+                        return $this->redirect(Yii::$app->request->referrer);
+                        
                     }
-                    Yii::$app->session->setFlash('profile');
-                    return $this->redirect(Yii::$app->request->referrer);
+                    Yii::$app->session->setFlash('success', ['error' => 'При обновлении профиль произошла ошибка. Обновите страницу и повторите действие заново']);
+                    return $this->redirect(Yii::$app->request->referrer);                    
                 }
             } else {
                 // иначе сохраняем только профиль пользователя
                 $user_info = $this->permisionUser()->_model;
-                if ($user_info->load(Yii::$app->request->post())) {
+                if ($user_info->load(Yii::$app->request->post()) && $user_info->validate()) {
                     $file = UploadedFile::getInstance($user_info, 'user_photo');
                     $user_info->uploadPhoto($file);
-                    Yii::$app->session->setFlash('profile');
+                    Yii::$app->session->setFlash('success', ['message' => 'Профиль успешно обновлем']);
                     return $this->redirect(Yii::$app->request->referrer);
                 }
             }
         }
         
-        Yii::$app->session->setFlash('profile-error');
+        Yii::$app->session->setFlash('success', ['error' => 'При обновлении профиль произошла ошибка. Обновите страницу и повторите действие заново']);
         return $this->redirect(Yii::$app->request->referrer);
     }
     

@@ -13,12 +13,12 @@ $this->title = Yii::$app->params['site-name'] . 'Профиль';
 $this->params['breadcrumbs'][] = 'Профиль';
 ?>
 
-<?php // = AlertsShow::widget() ?>
-
 <?= Breadcrumbs::widget([
         'homeLink' => ['label' => 'ELSA', 'url' => ['clients/index']],
         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
 ]) ?>
+
+<?= AlertsShow::widget() ?>
 
 <div class="profile-page">
     <?php

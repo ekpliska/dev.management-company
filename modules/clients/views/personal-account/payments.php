@@ -55,7 +55,7 @@ $this->params['breadcrumbs'][] = 'Платежи';
     </div>
     
 
-<table class="table requests-table payment-table">
+<table class="table clients-table">
     <thead>
     <tr>
         <th>#TODO</th>

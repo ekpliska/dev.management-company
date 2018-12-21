@@ -171,7 +171,7 @@ class PersonalAccountController extends AppClientsController {
                 if ($this->sendIndicationAPI($data)) {
                     Yii::$app->session->setFlash('success', ['message' => 'Показания приборов учета были переданы успешно']);
                 } else {
-                    Yii::$app->session->setFlash('error', ['message' => 'При передаче показаний возникла ошибка. Обновите страницу и повторите действие снова']);
+                    Yii::$app->session->setFlash('error', ['message' => 'При передаче показаний возникла ошибка. Обновите страницу и повторите действие заново']);
                 }
                 return $this->redirect(['counters']);
             }
@@ -283,12 +283,12 @@ class PersonalAccountController extends AppClientsController {
             if ($model->createAccount()) {
                 Yii::$app->session->setFlash('success', ['message' => 'Лицевой счет был успешно создан']);
             } else {
-                Yii::$app->session->setFlash('error', ['message' => 'При создании лицевого счета произошла ошибка. Обновите страницу и повторите действие снова']);
+                Yii::$app->session->setFlash('error', ['message' => 'При создании лицевого счета произошла ошибка. Обновите страницу и повторите действие заново']);
             }
             return $this->redirect('index');
         }
         
-        Yii::$app->session->setFlash('error', ['message' => 'При создании лицевого счета произошла ошибка. Обновите страницу и повторите действие снова']);
+        Yii::$app->session->setFlash('error', ['message' => 'При создании лицевого счета произошла ошибка. Обновите страницу и повторите действие заново']);
         return $this->redirect('index');
     }
     
