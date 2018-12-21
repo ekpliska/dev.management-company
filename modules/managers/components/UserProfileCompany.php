@@ -39,17 +39,17 @@ class UserProfileCompany extends BaseObject {
         
         if (Yii::$app->user->can('administrator')) {
             $info = (new \yii\db\Query)
-                    ->select('e.employers_id as employer_id, '
-                        . 'e.employers_name as name, e.employers_second_name as second_name, e.employers_surname as surname, '
-                        . 'd.departments_name as departments_name, '
+                    ->select('e.employee_id as employee_id, '
+                        . 'e.employee_name as name, e.employee_second_name as second_name, e.employee_surname as surname, '
+                        . 'd.department_name as department_name, '
                         . 'u.user_id as user_id, u.user_login as login, '
                         . 'u.user_email as email, u.user_photo as photo, '
                         . 'u.user_mobile as mobile, '
                         . 'u.created_at as date_created , u.last_login as last_login, '
                         . 'u.status as status')
                     ->from('user as u')
-                    ->join('LEFT JOIN', 'employers as e', 'u.user_employer_id = e.employers_id')
-                    ->join('LEFT JOIN', 'departments as d', 'e.employers_department_id = d.departments_id')
+                    ->join('LEFT JOIN', 'employees as e', 'u.user_employee_id = e.employee_id')
+                    ->join('LEFT JOIN', 'departments as d', 'e.employee_department_id = d.department_id')
                     ->where(['u.user_id' => $this->_user_id])
                     ->one();
             
@@ -139,8 +139,8 @@ class UserProfileCompany extends BaseObject {
     /*
      * ID Собственника/Арендатора
      */
-    public function getEmployerID() {
-        return $this->_user['employer_id'];
+    public function getEmployeeID() {
+        return $this->_user['employee_id'];
     }
     
     /*
@@ -168,7 +168,7 @@ class UserProfileCompany extends BaseObject {
      * Фамилия имя отчество Сотрудника
      * Формат: Фамилия И.О.
      */
-    public function getFullNameEmployer() {
+    public function getFullNameEmployee() {
         $_name = mb_substr($this->_user['name'], 0, 1, 'UTF-8');
         $_second_name = mb_substr($this->_user['second_name'], 0, 1, 'UTF-8');
         return $this->_user['surname'] . ' ' . $_name . '. ' . $_second_name . '.';
@@ -182,7 +182,7 @@ class UserProfileCompany extends BaseObject {
     }
 
     public function getDepartment() {
-        return $this->_user['departments_name'];
+        return $this->_user['department_name'];
     }
         
 }

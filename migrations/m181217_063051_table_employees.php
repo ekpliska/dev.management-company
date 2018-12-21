@@ -29,7 +29,8 @@ class m181217_063051_table_employees extends Migration
         $this->createTable('{{%posts}}', [
             'post_id' => $this->primaryKey(),
             'post_name' => $this->string(100)->notNull(),
-            'p_description' => $this->string(255),
+            'posts_department_id' => $this->integer()->notNull(),
+            'p_description' => $this->string(255),            
         ]);
         $this->createIndex('idx-posts-post_id', '{{%posts}}', 'post_id');
         
@@ -44,6 +45,16 @@ class m181217_063051_table_employees extends Migration
         ]);
         
         $this->createIndex('ind-employees-employee_id', '{{%employees}}', 'employee_id');
+
+        $this->addForeignKey(
+                'fk-posts-posts_department_id', 
+                '{{%posts}}', 
+                'posts_department_id', 
+                '{{%departments}}', 
+                'department_id', 
+                'RESTRICT',
+                'CASCADE'
+        );
         
         $this->addForeignKey(
                 'fk-employees-employee_department_id', 
@@ -77,6 +88,7 @@ class m181217_063051_table_employees extends Migration
         $this->dropIndex('idx-posts-post_id', '{{%posts}}');
         $this->dropIndex('ind-employees-employee_id', '{{%employees}}');
         
+        $this->addForeignKey('fk-posts-posts_department_id', '{{%posts}}');
         $this->dropForeignKey('fk-employees-employee_department_id', '{{%employees}}');
         $this->dropForeignKey('fk-employees-employee_posts_id', '{{%employees}}');
         

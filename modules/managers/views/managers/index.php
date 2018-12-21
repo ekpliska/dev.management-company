@@ -47,23 +47,24 @@ $this->title = 'Профиль';
                 <?= Html::a('Сменить пароль', ['managers/settings-profile'], ['class' => 'btn btn-danger']) ?>
             </div>
         </div>
+<?php /*        
         <div class="col-md-6">
-            <?= $form->field($employer_info, 'employers_surname')
+            <?= $form->field($employee_info, 'employee_surname')
                     ->input('text', [
-                        'placeHolder' => $employer_info->getAttributeLabel('employers_surname')])
+                        'placeHolder' => $employee_info->getAttributeLabel('employee_surname')])
                     ->label() ?>
             
-            <?= $form->field($employer_info, 'employers_name')
+            <?= $form->field($employee_info, 'employee_name')
                     ->input('text', [
-                        'placeHolder' => $employer_info->getAttributeLabel('employers_surname')])
+                        'placeHolder' => $employee_info->getAttributeLabel('employee_name')])
                     ->label() ?>
             
-            <?= $form->field($employer_info, 'employers_second_name')
+            <?= $form->field($employee_info, 'employee_second_name')
                     ->input('text', [
-                        'placeHolder' => $employer_info->getAttributeLabel('employers_surname')])
+                        'placeHolder' => $employee_info->getAttributeLabel('employee_second_name')])
                     ->label() ?>
             
-            <?= $form->field($employer_info, 'employers_birthday')
+            <?= $form->field($employee_info, 'employee_birthday')
                     ->widget(DatePicker::className(), [
                         'language' => 'ru',
                         'options' => [
@@ -76,17 +77,17 @@ $this->title = 'Профиль';
                         ]
                     ]) ?>
             
-            <?= $form->field($employer_info, 'employers_department_id')
+            <?= $form->field($employee_info, 'employee_department_id')
                     ->dropDownList($department_list, [
                         'class' => 'form-control department_list',
                         'prompt' => 'Выберите подразделение из списка...',])
                     ->label() ?>
             
-            <?= $form->field($employer_info, 'employers_posts_id')
+            <?= $form->field($employee_info, 'employee_posts_id')
                     ->dropDownList($post_list, [
                         'class' => 'form-control posts_list',])
                     ->label() ?>
-            
+*/ ?>            
             <?= $form->field($user_model, 'user_mobile')
                     ->widget(MaskedInput::className(), [
                         'mask' => '+7(999) 999-99-99'])

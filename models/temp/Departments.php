@@ -25,7 +25,7 @@ class Departments extends ActiveRecord
     public function rules()
     {
         return [
-            [['departments_name'], 'string', 'max' => 150],
+            [['department_name'], 'string', 'max' => 150],
         ];
     }
 
@@ -33,12 +33,12 @@ class Departments extends ActiveRecord
      * Связь с таблицей Должности
      */
     public function getPost() {
-        return $this->hasMany(Posts::className(), ['posts_department_id' => 'departments_id']);
+        return $this->hasMany(Posts::className(), ['posts_department_id' => 'department_id']);
     }    
     
     public static function getArrayDepartments() {
         $array = self::find()->asArray()->all();
-        return ArrayHelper::map($array, 'departments_id', 'departments_name');
+        return ArrayHelper::map($array, 'department_id', 'department_name');
     }
     
     /**
@@ -47,8 +47,8 @@ class Departments extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'departments_id' => 'Departments ID',
-            'departments_name' => 'Departments Name',
+            'department_id' => 'Departments ID',
+            'department_name' => 'Departments Name',
         ];
     }
 }

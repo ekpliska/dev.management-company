@@ -2,6 +2,7 @@
 
     namespace app\models;
     use Yii;
+    use yii\helpers\ArrayHelper;
     use yii\db\ActiveRecord;
     use app\models\Employees;
 
@@ -34,6 +35,11 @@ class Departments extends ActiveRecord
     public function getEmployees()
     {
         return $this->hasMany(Employees::className(), ['employee_department_id' => 'department_id']);
+    }
+    
+    public static function getArrayDepartments() {
+        $array = self::find()->asArray()->all();
+        return ArrayHelper::map($array, 'department_id', 'department_name');
     }    
     
     /**
