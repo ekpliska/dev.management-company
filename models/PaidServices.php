@@ -136,22 +136,8 @@ class PaidServices extends ActiveRecord
             $this->status = StatusRequest::STATUS_NEW;
             $this->services_account_id = $accoint_id;
             $this->save();
-            
-            Yii::$app->session->setFlash('paid-services', [
-                'success' => true,
-                'message' => 'Ваша заявка на платную услугу была успешно сформирована на лицевой счет №' . $account->account_number . '<br />' .
-                    'Номер вашей заявки №' . $order_numder . '<br />' .
-                    'Ознакомиться со списков ваших платных заявок можно пройдя по ' . Html::a('ссылке', ['paid-services/index'])
-            ]);
-            
             return true;
-            
         }
-
-        Yii::$app->session->setFlash('paid-services', [
-                'success' => false,
-                'error' => 'При формировании заявки на платную услугу возникла ошибка. Обновите страницу и повторите действия еще раз',
-        ]);
         return false;
         
     }
@@ -237,7 +223,7 @@ class PaidServices extends ActiveRecord
         $new->services_number = $order_numder;
         $new->services_name_services_id = $service_id['services_id'];
         $new->services_comment = 'Заявка, наименование услуги: ' . $service_id['services_name'] . '. ' .
-                'Дополнительные сведения - ' . $options['value'] .
+                '. Дополнительные сведения - ' . $options['value'] .
                 '[Заявка сформирована автоматически]';
         $new->services_phone = Yii::$app->userProfile->mobile;
         $new->services_account_id = $account_id;

@@ -34,6 +34,9 @@ class PaidServicesController extends AppClientsController {
         if ($new_order->load(Yii::$app->request->post())) {
             if ($new_order->addOrder($accoint_id)) {
                 return $this->redirect(['paid-services/order-services']);
+            } else {
+                Yii::$app->session->setFlash('error', ['message' => 'При создании заявки произошла ошибка. Обновите страницу и повторите действие заново']);
+                return $this->redirect(['index']);                
             }
         }
 

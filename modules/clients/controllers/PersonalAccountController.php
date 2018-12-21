@@ -231,7 +231,7 @@ class PersonalAccountController extends AppClientsController {
             
             $result = $new_request = PaidServices::automaticRequest($account_id, [
                 'type' => 'Поверка',
-                'value' => 'Тип прибора учета: ' . $counter_type . 'Регистрационный номер прибора учета' . $counter_num,
+                'value' => 'тип прибора учета: ' . $counter_type . ', регистрационный номер прибора учета: ' . $counter_num,
             ]);
             
             if (!$result) {

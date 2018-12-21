@@ -17,6 +17,8 @@ $this->params['breadcrumbs'][] = 'Услуги';
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]) ?>
     
+    <?= AlertsShow::widget() ?>
+    
     <?= $this->render('data/service-lists', ['pay_services' => $pay_services]) ?>
 </div>
 

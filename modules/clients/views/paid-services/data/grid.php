@@ -19,7 +19,7 @@
             'dataProvider' => $all_orders,
             'layout' => '{items}{pager}',
             'tableOptions' => [
-                'class' => 'table requests-table',
+                'class' => 'table clients-table',
             ],
             'pager' => [
                 'prevPageLabel' => '<i class="glyphicon glyphicon-menu-left"></i>',
@@ -31,7 +31,7 @@
                     'label' => 'ID',
                     'value' => 'services_number',
                     'contentOptions' =>[
-                        'class' => 'requests-table_main',
+                        'class' => 'clients-table_main',
                     ],
                 ],
                 [
@@ -51,14 +51,14 @@
                     'label' => 'Дата заявки',
                     'format' => ['date', 'php:d.m.Y'],
                     'contentOptions' =>[
-                        'class' => 'requests-table_main',
+                        'class' => 'clients-table_main',
                     ],
                 ],
                 [
                     'attribute' => 'services_comment',
                     'label' => 'Текст заявки',
                     'contentOptions' =>[
-                        'class' => 'requests-table_description ',
+                        'class' => 'clients-table_description',
                     ],
                 ],
                 [
@@ -66,7 +66,7 @@
                     'label' => 'Исполнитель',
                     'value' => 'services_specialist_id',
                     'contentOptions' =>[
-                        'class' => 'requests-table_main',
+                        'class' => 'clients-table_main',
                     ],
                 ],
                 [
@@ -76,7 +76,7 @@
                         return StatusHelpers::requestStatus($data['status']);
                     },
                     'contentOptions' =>[
-                        'class' => 'requests-table_main',
+                        'class' => 'clients-table_main',
                     ],
                     'format' => 'raw',
                 ],
@@ -85,7 +85,7 @@
                     'label' => 'Дата закрытия',
                     'format' => ['date', 'php:d.m.Y'],
                     'contentOptions' =>[
-                        'class' => 'requests-table_main',
+                        'class' => 'clients-table_main',
                     ],
                 ],
             ],
