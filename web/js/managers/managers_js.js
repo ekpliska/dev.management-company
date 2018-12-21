@@ -74,6 +74,15 @@ $(document).ready(function() {
                 });
     });
     
+    /*
+     * Запрос на получение списка квитанций в заданный даипазон
+     */
+    $('#get-receipts').on('click', function(){
+        var startData = new Date($('input[name="date_start-period"]').val());
+        var endData = new Date($('input[name="date_end-period"]').val());
+        console.log(endData + ' ' + startData);
+    });
+    
     // ******************************************************** //
     // ************    Start Block of Employers    ************** //
     // ******************************************************** //

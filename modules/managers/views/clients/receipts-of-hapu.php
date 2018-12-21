@@ -39,10 +39,10 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
                     <?= DatePicker::widget([
                             'name' => 'date_start-period',
                             'type' => DatePicker::TYPE_INPUT,
-                            'value' => date('d-M-Y'),
+                            'value' => date('d-F-Y'),
                             'pluginOptions' => [
                                 'autoclose'=>true,
-                                'format' => 'dd-M-yyyy'
+                                'format' => 'dd-MM-yyyy'
                             ]
                         ]);        
                     ?>
@@ -50,14 +50,14 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
                     <?= DatePicker::widget([
                             'name' => 'date_end-period',
                             'type' => DatePicker::TYPE_INPUT,
-                            'value' => date('d-M-Y'),
+                            'value' => date('d-F-Y'),
                             'pluginOptions' => [
                                 'autoclose'=>true,
-                                'format' => 'dd-M-yyyy'
+                                'format' => 'dd-MM-yyyy'
                             ]
                         ]);        
                     ?>
-                    <?= Html::button('<i class="glyphicon glyphicon-search"></i>', ['class' => 'btn-send-request']) ?>
+                    <?= Html::button('<i class="glyphicon glyphicon-search"></i>', ['id' => 'get-receipts', 'class' => 'btn-send-request']) ?>
                 </div>
                 <?php if (isset($receipts_lists)) : ?>
                     <ul class="list-group receipte-of-lists">
