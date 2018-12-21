@@ -1752,12 +1752,20 @@ input[id="_search-input"]:-moz-placeholder {
     color: #2d1d83;
 }
 .receipte-number {
-    font-size: 12px;
-    text-transform: uppercase;
+    font-size: 14px;
     font-weight: bold;
 }
-a.receipte-btn-pay {
-    padding: 5px 20px;
+span.receipte-btn-pay-ok {
+    padding: 5px 10px;
+    background: #23dd6f;
+    color: #fff;
+    border-radius: 25px;
+}
+span.receipte-btn-pay-ok::before {
+    content: '\2713';
+}
+span.receipte-btn-pay {
+    padding: 5px 10px;
     background: #2d18b4;
     color: #fff;
     border-radius: 25px;
@@ -2743,6 +2751,15 @@ a.sub-menu-item {
     font-size: 12px;
     margin-bottom: 0px;
 }
+.managers-table-in {
+    border-collapse: unset;
+    border-top: 1px solid #ddd;
+    border-left: none;
+    border-right: none;
+    font-size: 12px;
+    border-radius: 0;
+    margin-bottom: 30px;
+}
 .managers-table thead {
     color: #2d18b4;
     text-transform: uppercase;
@@ -2784,7 +2801,9 @@ a.sub-menu-item {
 .managers-table > tbody > tr > td > a {
     color: #2d18b4;
 }
-/* Конец Таблица */
+/* Таблица, Администраторы */
+
+
 
 /* Дополнительное навигационное меню Администратор */
 .submenu-manager {

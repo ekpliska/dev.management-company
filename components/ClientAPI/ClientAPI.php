@@ -52,6 +52,20 @@ class ClientAPI extends Object {
     }
     
     /*
+     * Получение всех квитанций ЖКУ Собственника по лицевому счету
+     */
+    public function getReceipts($data) {
+        
+        $receipts = $this->readUrl('', $data);
+        
+        return [
+            'success' => $receipts['status'],
+            'receipts' => $receipts['Квитанции ЖКУ']
+        ];
+        
+    }
+    
+    /*
      * Функция чтения URL
      */
     private function readUrl($path, $data) {

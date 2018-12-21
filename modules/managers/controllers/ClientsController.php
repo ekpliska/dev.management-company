@@ -228,11 +228,25 @@ class ClientsController extends AppManagersController {
         
         $info = $this->getClientsInfo($client_id, $account_number);
         
+        $array_request = [
+            'Номер лицевого счета' => $account_number,
+            'Период начало' => '',
+            'Период конец' => '',
+        ];
+        
+        $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
+        
+//        $receipts_lists = Yii::$app->client_api->getReceipts($data_json);
+        $receipts_lists = Yii::$app->params['Квитанции ЖКУ'];
+        
         return $this->render('receipts-of-hapu', [
             'client_info' => $info['client_info'],
             'account_choosing' => $info['account_info'],
             'user_info' => $info['user_info'],
-            'list_account' => $info['list_account'],            
+            'list_account' => $info['list_account'],
+            'account_number' => $account_number,
+//            'receipts_lists' => $receipts_lists['receipts'],
+            'receipts_lists' => $receipts_lists,
         ]);
         
     }

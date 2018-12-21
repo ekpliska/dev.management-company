@@ -67,18 +67,15 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
             
             </div>
 
-
-            <table class="table requests-table payment-table">
+            <table class="table managers-table managers-table-in">
                 <thead>
                 <tr>
-                    <th>#TODO</th>
-                    <th>#TODO</th>
-                    <th>#TODO</th>
-                    <th>#TODO</th>
+                    <th>Дата платежа</th>
+                    <th>Сумма платежа</th>
+                    <th>Статус</th>
                 </tr>
                 </thead>
                 <tr>
-                    <td>Sample text</td>
                     <td>Sample text</td>
                     <td>Sample text</td>
                     <td>
@@ -88,19 +85,11 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
                 <tr>
                     <td>Sample text</td>
                     <td>Sample text</td>
-                    <td>Sample text</td>
                     <td>
                         <span class="payment-ok"><i class="glyphicon glyphicon-ok"></i> Оплачено</span>
                     </td>
                 </tr>
                 <tr>
-                    <td>Sample text</td>
-                    <td>Sample text</td>
-                    <td>Sample text</td>
-                    <td>Sample text</td>
-                </tr>
-                <tr>
-                    <td>Sample text</td>
                     <td>Sample text</td>
                     <td>Sample text</td>
                     <td>Sample text</td>
