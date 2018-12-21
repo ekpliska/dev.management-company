@@ -577,6 +577,17 @@ button#send-request-to-sms:focus{
 }
 /* Конец Кнопка, отправить квитанцию, администратор */
 
+/* Кнопка поиска по запросу, администратора */
+.btn-send-request {
+    margin: 0 10px;
+    background: #fff;
+    border: 1px solid #2d18b4;
+    padding: 0 15px;
+    color: #2d18b4;
+    border-radius: 12px;
+}
+/* Конец Кнопка поиска по запросу */
+
 /* Собственник, главная страница, Новости */
 .news-lists {
     margin-top: 170px;
@@ -1862,7 +1873,8 @@ input[name="date_end-period-pay"]:focus {
     outline: none;
 }
 .btn-show-payment:hover,
-.btn-edit-reading:hover {
+.btn-edit-reading:hover,
+.btn-send-request:hover {
     border-radius: 12px;
     border: 1px solid #2d18b4;
     background-color: #2d18b4;

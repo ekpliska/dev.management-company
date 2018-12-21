@@ -34,29 +34,30 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
         <div class="row">
             <div class="col-md-5 receipts_period">
                 <p class="period_title"><i class="glyphicon glyphicon-calendar"></i> Период</p>
-                <div class="receipts_period-calendar">
+                <div class="receipts_period-calendar">                    
                     <span>С</span>
-                <?= DatePicker::widget([
-                        'name' => 'date_start-period',
-                        'type' => DatePicker::TYPE_INPUT,
-                        'value' => date('d-M-Y'),
-                        'pluginOptions' => [
-                            'autoclose'=>true,
-                            'format' => 'dd-M-yyyy'
-                        ]
-                    ]);        
-                ?>
-                    <span>ПО</span>
-                <?= DatePicker::widget([
-                        'name' => 'date_end-period',
-                        'type' => DatePicker::TYPE_INPUT,
-                        'value' => date('d-M-Y'),
-                        'pluginOptions' => [
-                            'autoclose'=>true,
-                            'format' => 'dd-M-yyyy'
-                        ]
-                    ]);        
-                ?>
+                    <?= DatePicker::widget([
+                            'name' => 'date_start-period',
+                            'type' => DatePicker::TYPE_INPUT,
+                            'value' => date('d-M-Y'),
+                            'pluginOptions' => [
+                                'autoclose'=>true,
+                                'format' => 'dd-M-yyyy'
+                            ]
+                        ]);        
+                    ?>
+                        <span>ПО</span>
+                    <?= DatePicker::widget([
+                            'name' => 'date_end-period',
+                            'type' => DatePicker::TYPE_INPUT,
+                            'value' => date('d-M-Y'),
+                            'pluginOptions' => [
+                                'autoclose'=>true,
+                                'format' => 'dd-M-yyyy'
+                            ]
+                        ]);        
+                    ?>
+                    <?= Html::button('<i class="glyphicon glyphicon-search"></i>', ['class' => 'btn-send-request']) ?>
                 </div>
                 <?php if (isset($receipts_lists)) : ?>
                     <ul class="list-group receipte-of-lists">
@@ -90,14 +91,3 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
     </div>    
     
 </div>
-
-<?php
-//$this->registerJS("
-//    $('.list-group-item').on('click', function(){
-//        var liItem = $(this).data('receipt');
-//        alert(location.origin);
-//        $('#frame-receipt').attr('src', '" . Url::to('@web/receipts/' . $account_number . '/' . $account_number . "-' + liItem + '.pdf' +'" , true) . "');
-//    });
-//    
-//");
-?>

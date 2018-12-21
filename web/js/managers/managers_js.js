@@ -70,7 +70,7 @@ $(document).ready(function() {
                 .done(function (){
                     conteiner.html('<iframe src="' + url + '" style="width: 100%; height: 600px;" frameborder="0">Ваш браузер не поддерживает фреймы</iframe>');
                 }).fail(function(){
-                    conteiner.html('');
+                    conteiner.html('<p>Квитанция на сервере не найдена.</p>');
                 });
     });
     
