@@ -367,382 +367,6 @@ select[name="category_list"] option {
 }
 /* End File input in modal window */
 
-/* Выпадающий список Лицевой счет, Профиль */
-.account-block_select {
-    margin-top: 30px;
-    margin-left: 77px;
-}
-.select {
-    position: relative;
-    width: 350px;
-}
-.select-text {
-    color: #fff;
-    position: relative;
-    font-family: inherit;
-    background-color: transparent;
-    width: 350px;
-    padding: 10px 10px 10px 0;
-    font-size: 14px;
-    border-radius: 0;
-    border: none;
-    border-bottom: 1px solid #ced4da;
-}
-.select-text:focus {
-    outline: none;
-    border-bottom: 1px solid #fff;
-}
-.select .select-text {
-    appearance: none;
-    -webkit-appearance:none;
-}
-.select:after {
-    position: absolute;
-    top: 24px;
-    right: 10px;
-    width: 0;
-    height: 0;
-    padding: 0;
-    content: '';
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 6px solid #dee2e6;
-    pointer-events: none;
-}
-.select-label {
-    color: #77dffa;
-    font-size: 18px;
-    font-weight: normal;
-    position: absolute;
-    pointer-events: none;
-    left: 0;
-    top: 10px;
-    transition: 0.2s ease all;
-}
-.select-text:focus ~ .select-label, .select-text:valid ~ .select-label {
-    color: #77dffa;
-    top: -20px;
-    transition: 0.2s ease all;
-    font-size: 12px;
-}
-.select-bar {
-    position: relative;
-    display: block;
-    width: 350px;
-}
-.select-bar:before, .select-bar:after {
-    content: '';
-    height: 2px;
-    width: 0;
-    bottom: 1px;
-    position: absolute;
-    background: #2F80ED;
-    transition: 0.8s ease all;
-}
-.select-bar:before {
-    left: 50%;
-}
-.select-bar:after {
-    right: 50%;
-}
-.select-text:focus ~ .select-bar:before, .select-text:focus ~ .select-bar:after {
-    width: 50%;
-}
-.select-highlight {
-    position: absolute;
-    height: 60%;
-    width: 100px;
-    top: 25%;
-    left: 0;
-    pointer-events: none;
-    opacity: 0.5;
-}
-/* Конец Выпадающий список Лицевой счет, Профиль */
-
-/* Выпадающий список навигационная панель, Платные услуги */
-.paid-service-dropdown {
-    position: relative;
-    display: inline-block;
-    vertical-align: middle;
-    margin: 29.4px;
-}
-
-.paid-service-dropdown select {
-    width: 380px;
-    border: 1px solid #fff;
-    text-align-last: center;
-    color: #fff;
-    font-size: inherit;
-    padding: .4em;
-    padding-right: 2.5em;
-    background: transparent;
-    margin: 0;
-    outline: none;
-    border-radius: 25px;
-    text-indent: 0.01px;
-    text-overflow: '';
-    -webkit-appearance: button;
-}
-
-.paid-service-dropdown::before,
-.paid-service-dropdown::after {
-    content: "";
-    position: absolute;
-    pointer-events: none;
-}
-
-.paid-service-dropdown::after {
-    content: "\25BC";
-    height: 1em;
-    font-size: .625em;
-    line-height: 1;
-    right: 1.2em;
-    top: 50%;
-    margin-top: -.5em;
-}
-
-.paid-service-dropdown::before {
-    width: 2em;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    border-radius: 0 3px 3px 0;
-}
-
-.paid-service-dropdown select[disabled] {
-    color: rgb(247, 247, 247);
-    background-color: rgba(255, 255, 255, 0.5);
-}
-
-.paid-service-dropdown select[disabled]::after {
-    color: rgba(0,0,0,.1);
-}
-
-.paid-service-dropdown::before {
-    background-color: transparent;
-}
-
-.paid-service-dropdown::after {
-    color: #fff;
-}
-/* Конец Выпадающий список навигационная панель, Платные услуги */
-
-
-/* Выпадающий список, лицевой счет */
-.custom-select {
-    background: none;
-    border: none;
-}
-.custom-select-wrapper {
-    position: relative;
-    display: inline-block;
-    user-select: none;
-    font-family: "Mplus 1p";
-}
-.custom-select-wrapper select {
-    display: none;
-}
-.custom-select {
-    position: relative;
-    display: inline-block;
-}
-.custom-select-trigger {
-    position: relative;
-    display: block;
-    width: 380px;
-    font-size: 14px;
-    font-weight: 300;
-    color: #2d1e81;
-    line-height: 35px;
-    background: #ffffff;
-    border-radius: 25px;
-    cursor: pointer;
-    border: 1px solid #2d1e81;
-}
-.custom-select-trigger:after {
-    position: absolute;
-    display: block;
-    content: '';
-    width: 10px; height: 10px;
-    top: 50%; right: 25px;
-    margin-top: -3px;
-    border-bottom: 1px solid #2e1e86;
-    border-right: 1px solid #2e1e86;
-    transform: rotate(45deg) translateY(-50%);
-    transition: all .4s ease-in-out;
-    transform-origin: 50% 0;
-}
-
-.custom-select.opened .custom-select-trigger:after {
-    margin-top: 3px;
-    transform: rotate(-135deg) translateY(-50%);
-}
-.custom-options {
-    display: block;
-    top: 100%; 
-    left: 0; 
-    right: 0;
-    min-width: 100%;
-    margin: 5px 0;
-    border: 1px solid #604c6e;
-    border-radius: 4px;
-    box-sizing: border-box;
-    box-shadow: 0 2px 1px rgba(0,0,0,.07);
-    background: #fff;
-    transition: all .4s ease-in-out;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transform: translateY(-15px);
-    z-index: 999;
-}
-.custom-select.opened .custom-options {
-    position: relative;
-    top: -4px;
-    opacity: 1;
-    visibility: visible;
-    pointer-events: all;
-    transform: translateY(0);
-    background: linear-gradient(180.67deg, #39284E 0%, rgba(10,8,8,0.5) 100%);
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
-}
-.option-hover:before {
-    background: #f9f9f9;
-}
-.custom-option {
-    position: relative;
-    display: block;
-    padding: 0 22px;
-    border-bottom: 1px solid #8b709d;
-    font-size: 14px;
-    color: #fff;
-    line-height: 47px;
-    cursor: pointer;
-    transition: all .4s ease-in-out;
-}
-.custom-option:first-of-type {
-    border-radius: 4px 4px 0 0;
-}
-.custom-option:last-of-type {
-    border-bottom: 0;
-    border-radius: 0 0 4px 4px;
-}
-.custom-option:hover,
-.custom-option.selection {
-    background: rgba(0, 123, 255, 0.12);
-}
-/* Конец Выпадающий список, лицевой счет */
-
-/* Выпадающий список, виды патных услуг */
-.custom-select {
-    background: none;
-    border: none; 
-}
-.custom-select-wrapper-services {
-    position: relative;
-    display: inline-block;
-    user-select: none;
-    margin-left: 77px;
-    font-family: "Mplus 1p";
-}
-.custom-select-wrapper-services select {
-    display: none;
-}
-.custom-select-services {
-    position: absolute;
-    display: inline-block;
-    top: -15px;
-}
-.custom-select-trigger-services {
-    text-align: left;
-    position: relative;
-    display: block;
-    width: 380px;
-    font-size: 14px;
-    font-weight: 300;
-    color: #ffffff;
-    line-height: 35px;
-    background: transparent;
-    cursor: pointer;
-    border-bottom: 1px solid #ffffff;
-}
-.custom-select-trigger-services:after {
-    position: absolute;
-    display: block;
-    content: '';
-    width: 10px; 
-    height: 10px;
-    top: 50%; 
-    right: 7px;
-    border-bottom: 1px solid #fff;
-    border-right: 1px solid #fff;
-    transform: rotate(45deg) translateY(-50%);
-    transition: all .4s ease-in-out;
-    transform-origin: 50% 0;
-}
-
-.custom-select-services.opened .custom-select-trigger-services:after {
-    margin-top: 3px;
-    transform: rotate(-135deg) translateY(-50%);
-}
-.custom-options-services {
-    display: block;
-    top: 100%; 
-    left: 0; 
-    right: 0;
-    min-width: 100%;
-    margin: 5px 0;
-    border: 1px solid #604c6e;
-    border-radius: 4px;
-    box-sizing: border-box;
-    box-shadow: 0 2px 1px rgba(0,0,0,.07);
-    background: #fff;
-    transition: all .4s ease-in-out;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transform: translateY(-15px);
-    z-index: 999;
-}
-.custom-select-services.opened .custom-options-services {
-    text-align: left;
-    position: relative;
-    opacity: 1;
-    visibility: visible;
-    pointer-events: all;
-    transform: translateY(0);
-    background: linear-gradient(180.67deg, #39284E 90%, rgba(10,8,8,0.5) 100%);
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
-}
-.option-hover-services:before {
-    background: #f9f9f9;
-}
-.custom-option-services {
-    position: relative;
-    display: block;
-    padding: 0 22px;
-    border-bottom: 1px solid #8b709d;
-    font-size: 14px;
-    color: #fff;
-    line-height: 47px;
-    cursor: pointer;
-    transition: all .4s ease-in-out;
-}
-.custom-option-services:first-of-type {
-    border-radius: 4px 4px 0 0;
-}
-.custom-option-services:last-of-type {
-    border-bottom: 0;
-    border-radius: 0 0 4px 4px;
-}
-.custom-option-services:hover,
-.custom-option-services.selection-services {
-    background: rgba(0, 123, 255, 0.12);
-}
-/* Конец Выпадающий список, виды платных услуг */
-
 /* CheckBox, email уведомления */
 .spam-agree-txt label {
     font-weight: unset;
@@ -838,3 +462,113 @@ textarea {
     color: #f0754a;
 }
 /* Конец Textarea */
+
+
+/* Выпадающий список, select, администратор (темный) */
+.custom-select {
+    background: none;
+    border: none; 
+}
+.custom-select-wrapper-dark {
+    position: relative;
+    display: inline-block;
+    user-select: none;
+    font-family: "Mplus 1p";
+}
+.custom-select-wrapper-dark select {
+    display: none;
+}
+.custom-select-dark {
+    position: absolute;
+    display: inline-block;
+    top: -15px;
+}
+.custom-select-trigger-dark {
+    text-align: left;
+    position: relative;
+    display: block;
+    width: 380px;
+    font-size: 14px;
+    font-weight: 300;
+    color: #ffffff;
+    line-height: 35px;
+    background: transparent;
+    cursor: pointer;
+    border-bottom: 1px solid #ffffff;
+}
+.custom-select-trigger-dark:after {
+    position: absolute;
+    display: block;
+    content: '';
+    width: 10px; 
+    height: 10px;
+    top: 50%; 
+    right: 7px;
+    border-bottom: 1px solid #fff;
+    border-right: 1px solid #fff;
+    transform: rotate(45deg) translateY(-50%);
+    transition: all .4s ease-in-out;
+    transform-origin: 50% 0;
+}
+
+.custom-select-dark.opened .custom-select-trigger-dark:after {
+    margin-top: 3px;
+    transform: rotate(-135deg) translateY(-50%);
+}
+.custom-options-dark {
+    display: block;
+    top: 100%; 
+    left: 0; 
+    right: 0;
+    min-width: 100%;
+    margin: 0;
+    border: 1px solid #604c6e;
+    border-radius: 4px;
+    box-sizing: border-box;
+    box-shadow: 0 2px 1px rgba(0,0,0,.07);
+    background: #fff;
+    transition: all .4s ease-in-out;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-15px);
+    z-index: 999;
+}
+.custom-select-dark.opened .custom-options-dark {
+    text-align: left;
+    position: relative;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+    transform: translateY(0);
+    background: linear-gradient(180.67deg, #39284E 90%, rgba(10,8,8,0.5) 100%);
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+.option-hover-dark:before {
+    background: #f9f9f9;
+}
+.custom-option-dark {
+    position: relative;
+    display: block;
+    padding: 0 22px;
+    border-bottom: 1px solid #8b709d;
+    font-size: 14px;
+    color: #fff;
+    line-height: 47px;
+    cursor: pointer;
+    transition: all .4s ease-in-out;
+}
+.custom-option-dark:first-of-type {
+    border-radius: 4px 4px 0 0;
+}
+.custom-option-dark:last-of-type {
+    border-bottom: 0;
+    border-radius: 0 0 4px 4px;
+}
+.custom-option-dark:hover,
+.custom-option-dark.selection-dark {
+    color: #fff;
+    background: rgba(0, 123, 255, 0.12);
+}
+/* Конец Выпадающий список, select, администратор (темный) */

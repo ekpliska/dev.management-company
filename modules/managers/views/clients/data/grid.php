@@ -31,7 +31,7 @@
                     $url = ['clients/view-client', 'client_id' => $data['client_id'], 'account_number' => $data['number']];
                     return $data['surname'] . ' ' .
                             $data['name'] .  ' ' .
-                            $data['second_name'] . "\n" . 
+                            $data['second_name'] . '<br />' . 
                             Html::a('Профиль', $url);
                 },
                 'contentOptions' => [

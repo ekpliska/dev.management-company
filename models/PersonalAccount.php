@@ -164,13 +164,11 @@ class PersonalAccount extends ActiveRecord
         if ($all) {
             $account_find = static::find()
                     ->andWhere(['personal_clients_id' => $client_id])
-                    ->andWhere(['isActive' => self::STATUS_ENABLED])
                     ->orderBy(['account_id' => SORT_ASC])
                     ->all();
         } else {
             $account_find = static::find()
                 ->andWhere(['personal_clients_id' => $client_id])
-                ->andWhere(['isActive' => self::STATUS_ENABLED])
                 ->andwhere(['IS', 'personal_rent_id', (new Expression('Null'))])
                 ->orderBy(['account_id' => SORT_ASC])
                 ->all();

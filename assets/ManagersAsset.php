@@ -13,7 +13,7 @@ class ManagersAsset extends AssetBundle {
     public $baseUrl = '@web';
     
     public $css = [
-        
+        'css/form-style_manager.css',
     ];
     
     public $js = [
