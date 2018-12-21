@@ -1744,8 +1744,14 @@ input[id="_search-input"]:-moz-placeholder {
     border-left: none;
     border-right: none;
 }
+.receipte-of-lists > li.active,
+.receipte-of-lists > li.active:hover,
 .receipte-of-lists > li:hover {
     box-shadow: 0px 0px 3em -8px #7139c5;
+    z-index: 2;
+    background: transparent;
+    border: none;
+    color: #000;
 }
 .receipte-month {
     font-size: 12px;

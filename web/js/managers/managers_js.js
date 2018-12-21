@@ -51,7 +51,28 @@ $(document).ready(function() {
             },
         });
         return false;
-    });        
+    });
+    
+    
+    /*
+     * Список квитанцию, Профиль Собственника
+     */
+    $('.list-group-item').on('click', function() {
+        var liItem = $(this).data('receipt');
+        var accountNumber = $(this).data('account');
+        var url = location.origin + '/web/receipts/' + accountNumber + '/' + accountNumber + '-' + liItem + '.pdf';
+        var conteiner = $('.receipts_body');
+        $('ul.receipte-of-lists li').removeClass('active');
+        $(this).addClass('active');
+        
+        // Проверяем сущестование pdf, если существует - загружаем фрейм
+        $.get(url)
+                .done(function (){
+                    conteiner.html('<iframe src="' + url + '" style="width: 100%; height: 600px;" frameborder="0">Ваш браузер не поддерживает фреймы</iframe>');
+                }).fail(function(){
+                    conteiner.html('');
+                });
+    });
     
     // ******************************************************** //
     // ************    Start Block of Employers    ************** //
