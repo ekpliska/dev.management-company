@@ -1773,7 +1773,8 @@ input[id="_search-input"]:-moz-placeholder {
 }
 .receipte-month {
     font-size: 12px;
-    color: #2d1d83;
+    color: #2d18b4;
+    font-weight: bold;
 }
 .receipte-number {
     font-size: 14px;
@@ -1840,8 +1841,7 @@ a.receipte-btn-dowload {
     margin: 10px;
     font-size: 12px;
     line-height: 1.5;
-    color: #fff;
-    background-color: rgba(220,53,69,.9);
+    color: #ef693a;
     border-radius: 10px;    
 }
 /* Конец Квитанции 

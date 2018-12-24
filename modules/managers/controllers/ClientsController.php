@@ -318,5 +318,31 @@ class ClientsController extends AppManagersController {
         
     }
     
+    /*
+     * Запрос на получение квитанций по заданному лицевому счету и диапазону
+     */
+    public function actionSearchReceiptsOnPeriod($account_number, $date_start, $date_end) {
+        
+        $date_start = Yii::$app->formatter->asDate($date_start, 'Y-M-d');
+        $date_end = Yii::$app->formatter->asDate($date_end, 'Y-M-d');
+                
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        
+        if (!is_numeric($account_number)) {
+            return ['success' => false];
+        }
+        
+        if (Yii::$app->request->isPost) {
+            
+            return [
+                'success' => true,
+                'account_number' => $account_number,
+                'date_start' => $date_start,
+                'date_end' => $date_end,
+            ];
+        }
+        
+    }
+    
     
 }

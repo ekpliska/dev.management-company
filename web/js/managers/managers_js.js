@@ -85,6 +85,7 @@ $(document).ready(function() {
      * Запрос на получение списка квитанций в заданный даипазон
      */
     $('#get-receipts').on('click', function(){
+        var accountNumber = +$('#select-dark :selected').text();
         var startDate = $('input[name="date_start-period"]').val();
         var endDate = $('input[name="date_end-period"]').val();
         
@@ -95,11 +96,15 @@ $(document).ready(function() {
             $('.message-block').addClass('invalid-message-show').html('Вы указали некорректный диапазон');
         } else if (parseStartDate - parseEndDate <= 0) {
             $('.message-block').removeClass('invalid-message-show').html('');
-//            $.post('find-receipts-on-period?date_start=' + startDate + '?date_end=' + endDate,
-//                function(data) {
-//                    $('#TODO').html(data);
-//                }
-//            );
+            $.post('search-receipts-on-period?account_number=' + accountNumber + '&date_start=' + startDate + '&date_end=' + endDate,
+                function(data) {
+                    if (data.success === false) {
+                        $('.message-block').addClass('invalid-message-show').html('Ошибка передачи параметров');
+                    } else if (data.success === true) {
+                        $('.message-block').removeClass('invalid-message-show').html('');
+                    }
+                }
+            );
         }
  
     });
