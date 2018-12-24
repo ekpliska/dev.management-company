@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
                             'value' => date('d-m-Y'),
                             'pluginOptions' => [
                                 'autoclose'=>true,
-                                'format' => 'dd-m-yyyy'
+                                'format' => 'dd-mm-yyyy'
                             ],
                         ]);        
                     ?>
@@ -54,7 +54,7 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
                             'value' => date('d-m-Y'),
                             'pluginOptions' => [
                                 'autoclose'=>true,
-                                'format' => 'dd-m-yyyy'
+                                'format' => 'dd-mm-yyyy'
                             ]
                         ]);        
                     ?>

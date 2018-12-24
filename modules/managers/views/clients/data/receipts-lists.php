@@ -24,7 +24,7 @@
     <?php endforeach; ?>
 </ul>
 <?php else: ?>
-<div class="notice warning">
+<div class="notice info">
     <p>За указанный период квитанции не найдены.</p>
 </div>
 <?php endif; ?>

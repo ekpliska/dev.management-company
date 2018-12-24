@@ -2278,7 +2278,7 @@ input[name="date_end-period-pay"]:focus {
 /* Уведомления на странице */
 .notice {
     position: relative;
-    margin: 1em;
+    margin: 2em;
     background: #F9F9F9;
     padding: 1em 1em 1em 2em;
     border-left: 4px solid #DDD;
@@ -2286,6 +2286,8 @@ input[name="date_end-period-pay"]:focus {
 }
 .notice p {
     margin: 0;
+    font-size: 13px;
+    color: #67768a;
 }
 .notice:before {
     position: absolute;
@@ -2304,32 +2306,36 @@ input[name="date_end-period-pay"]:focus {
     text-shadow: 1px 1px rgba(0, 0, 0, 0.5);
 }
 .info {
-    border-color: #0074D9;
+    border-color: #4d55d1;
 }
 .info:before {
-    content: "i";
-    background-color: #0074D9;
+    content: "\02148";
+    margin-top: -15px;
+    background-color: #4d55d1;
 }
 .warning {
     border-color: #FFDC00;
 }
 .warning:before {
-    content: "!";
+    margin-top: -15px;
+    content: "\02604";
     background-color: #FFDC00;
 }
 .success {
     border-color: #2ECC40;
 }
 .success:before {
-    content: "√";
+    margin-top: -15px;
+    content: "\02713";
     background-color: #2ECC40;
 }
 .error {
-    border-color: #FF4136;
+    border-color: #ef693a;
 }
 .error:before {
-    content: "X";
-    background-color: #FF4136;
+    margin-top: -15px;    
+    content: "\02613";
+    background-color: #ef693a;
 }
 /* Конец Уведомления на странице */
 
