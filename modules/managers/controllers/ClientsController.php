@@ -12,7 +12,8 @@
     use app\modules\managers\models\User;
     use app\models\PersonalAccount;
     use app\models\Rents;
-    use app\modules\managers\models\AddRent;    
+    use app\modules\managers\models\AddRent;
+    use app\models\Counters;
 
 /**
  * Клиенты
@@ -307,11 +308,32 @@ class ClientsController extends AppManagersController {
         
         $info = $this->getClientsInfo($client_id, $account_number);
         
+        // Получаем номер текущего месяца
+        $current_month = date('n');
+        // Получаем номер текущего года
+        $current_year = date('Y');
+        
+        // Получаем все приборы учета по лицевому счету, которые имею сформированную заявку на поверку
+        $not_verified = Counters::notVerified($info['account_info']->account_id);
+        
+        $array_request = [
+            'Номер лицевого счета' => $account_number,
+            'Номер месяца' => $current_month,
+            'Год' => $current_year,
+        ];
+        
+        $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
+//        $counters_lists_api = Yii::$app->client_api->getPreviousCounters($data_json);
+        $counters_lists = Yii::$app->params['Приборы учета'];
+        
         return $this->render('counters', [
             'client_info' => $info['client_info'],
             'account_choosing' => $info['account_info'],
             'user_info' => $info['user_info'],
             'list_account' => $info['list_account'],
+//            'counters_lists' => $counters_lists['Приборы учета'],
+            'counters_lists' => $counters_lists,
+            'not_verified' => $not_verified,
         ]);
         
     }
@@ -387,7 +409,7 @@ class ClientsController extends AppManagersController {
 //                    $results = Yii::$app->client_api->getReceipts($data_json);
                     $results = Yii::$app->params['Квитанции ЖКУ_4'];
                     break;
-                case 'paymants':
+                case 'payments':
 //                    $results = Yii::$app->client_api->getReceipts($data_json);
                     $results = Yii::$app->params['Платежи'];
                     break;

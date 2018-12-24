@@ -93,6 +93,7 @@ $(document).ready(function() {
      * @param {type} endDate Дата конца диапазона
      * @param {type} idError ID блока, в котором будет выведены ошибки запроса
      * @param {type} idContent ID блока, в котором будет выведен результат запроса
+     * @param {type} type Тип запроса (Квитанции, Платежи, Приборы учета)
      * @returns {undefined}
      */
     function getDataClients (accountNumber, startDate, endDate, idContent, type) {
@@ -111,11 +112,11 @@ $(document).ready(function() {
                         $('.message-block').removeClass('invalid-message-show').html('');
                         $(idContent).html(data.data_render);
                     }
-                        console.log(data.data_render);
                 }
             );
         }
         
+        return;
         
     }
     
@@ -142,6 +143,10 @@ $(document).ready(function() {
         getDataClients(accountNumber, startDate, endDate, '#payments-lists', 'payments');
         
     });
+    
+    /*
+     * Приборы учета, профиль Собственника
+     */
     
     // ******************************************************** //
     // ************    Start Block of Employers    ************** //

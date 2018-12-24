@@ -2859,18 +2859,18 @@ a.sub-menu-item {
 .managers-table > tbody > tr > td {
     vertical-align: middle;
     text-align: center;
-    padding: 25px 0;
+    padding: 15px 0;
 }
 .managers-table > tbody > tr > td.status-not-found {
     vertical-align: middle;
     text-align: left;
-    padding: 25px;
+    padding: 15px;
 }
 .managers-table > tbody > tr > td.status-not-found::before {
     color: #2d18b4;
     content: '\02139';
-    padding: 0 20px;
-    font-size: 24px;
+    padding: 7px 10px;
+    font-size: 20px;
     font-weight: bold;
 }
 .managers-table > tbody > tr:hover {

@@ -45,8 +45,8 @@ class m180901_111400_table_counters extends Migration
             'counters_description' => $this->string(255),
             'counters_account_id' => $this->integer()->notNull(),
             'date_check' => $this->integer()->notNull(),
-            'isActive' => $this->tinyInteger()->notNull()->defaultValue(Counters::STATUS_ACTIVE),
             'isRequest' => $this->string(15)->defaultValue(Counters::REQUEST_NO),
+            'ID_counter_clients' => $this->integer()->notNull(),
         ], $table_options);
         $this->createIndex('idx-counters-counters_id', '{{%counters}}', 'counters_id');
         $this->createIndex('idx-counters-counters_number', '{{%counters}}', 'counters_number');
@@ -76,8 +76,7 @@ class m180901_111400_table_counters extends Migration
     /**
      * {@inheritdoc}
      */
-    public function safeDown()
-    {
+    public function safeDown() {
         $this->dropIndex('idx-counters-counters_id', '{{%counters}}');
         $this->dropIndex('idx-counters-counters_number', '{{%counters}}');
         $this->dropForeignKey('fk-counters-counters_type_id', '{{%counters}}');
