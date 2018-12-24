@@ -2,6 +2,9 @@
 
     use yii\helpers\Url;
 
+/*
+ * Рендер вида Квитанции ЖКУ
+ */
 ?>
 <?php if (isset($receipts_lists)) : ?>
 <ul class="list-group receipte-of-lists">

@@ -2858,6 +2858,18 @@ a.sub-menu-item {
     text-align: center;
     padding: 25px 0;
 }
+.managers-table > tbody > tr > td.status-not-found {
+    vertical-align: middle;
+    text-align: left;
+    padding: 25px;
+}
+.managers-table > tbody > tr > td.status-not-found::before {
+    color: #2d18b4;
+    content: '\02139';
+    padding: 0 20px;
+    font-size: 24px;
+    font-weight: bold;
+}
 .managers-table > tbody > tr:hover {
     background: #d1ccef;
 }
@@ -2956,6 +2968,7 @@ a.sub-menu-item {
     font-size: 24px;
 }
 /* Конец Администратор, профиль */
+
 /* Подменю, профиль собсвенника */
 .profile-sub_menu {
     background: linear-gradient(190.67deg, #42314e 50%, rgba(132, 131, 131, 0.65) 100%);
@@ -3002,3 +3015,9 @@ a.sub-menu-item {
     box-shadow: 3px 3px 5px -2px #333;
 }
 /* Конец Подменю, профиль собсвенника */
+
+/* Платежи, Профиль Собственника, Администратор */
+.payments-profile {
+    min-height: 600px;
+}
+/* Конец Платежи, Профиль Собственника, Администратор */

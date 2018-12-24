@@ -70,30 +70,17 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
             <table class="table managers-table managers-table-in">
                 <thead>
                 <tr>
+                    <th>Расчетный месяц</th>
                     <th>Дата платежа</th>
+                    <th>Тип оплаты</th>
                     <th>Сумма платежа</th>
-                    <th>Статус</th>
                 </tr>
                 </thead>
-                <tr>
-                    <td>Sample text</td>
-                    <td>Sample text</td>
-                    <td>
-                        <span class="payment-debt">Задолженность</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Sample text</td>
-                    <td>Sample text</td>
-                    <td>
-                        <span class="payment-ok"><i class="glyphicon glyphicon-ok"></i> Оплачено</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Sample text</td>
-                    <td>Sample text</td>
-                    <td>Sample text</td>
-                </tr>
+                <tbody>
+                    <?= $this->render('data/payments-lists', [
+                            'payments_lists' => $payments_lists,
+                    ]) ?>
+                </tbody>
             </table>
             
         </div>
