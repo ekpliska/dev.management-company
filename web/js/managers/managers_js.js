@@ -57,7 +57,7 @@ $(document).ready(function() {
     /*
      * Список квитанцию, Профиль Собственника
      */
-    $('.list-group-item').on('click', function() {
+    $(document).on('click', '.list-group-item', function() {
         var liItem = $(this).data('receipt');
         var accountNumber = $(this).data('account');
         var url = location.origin + '/web/receipts/' + accountNumber + '/' + accountNumber + '-' + liItem + '.pdf';
@@ -74,11 +74,49 @@ $(document).ready(function() {
                 });
     });
 
+    /*
+     * Функция парсинга даты
+     * Смена номер месяца и дня местами
+     */
     function dateParse(date) {
         var dateArray = date.split('-');
         var dateString = dateArray[1] + '-' + dateArray[0] + '-' + dateArray[2];
         var newDate = new Date(dateString);
         return newDate;
+    }
+    
+    /*
+     * 
+     * Общий метод формирования AJAX запросов для профиль Собственника, ЛК Администратор
+     * @param {type} accountNumber Лицевой счет
+     * @param {type} startDate Дата начала даипазона
+     * @param {type} endDate Дата конца диапазона
+     * @param {type} idError ID блока, в котором будет выведены ошибки запроса
+     * @param {type} idContent ID блока, в котором будет выведен результат запроса
+     * @returns {undefined}
+     */
+    function getDataClients (accountNumber, startDate, endDate, idContent, type) {
+        var parseStartDate = dateParse(startDate);
+        var parseEndDate = dateParse(endDate);
+        
+        if (parseStartDate - parseEndDate > 0) {
+            $('.message-block').addClass('invalid-message-show').html('Вы указали некорректный диапазон');
+        } else if (parseStartDate - parseEndDate <= 0) {
+            $('.message-block').removeClass('invalid-message-show').html('');
+            $.post('search-data-on-period?account_number=' + accountNumber + '&date_start=' + startDate + '&date_end=' + endDate + '&type=' + type,
+                function(data) {
+                    if (data.success === false) {
+                        $('.message-block').addClass('invalid-message-show').html('Ошибка запроса');
+                    } else if (data.success === true) {
+                        $('.message-block').removeClass('invalid-message-show').html('');
+                        $(idContent).html(data.data_render);
+                    }
+                        console.log(data.data_render);
+                }
+            );
+        }
+        
+        
     }
     
     /*
@@ -89,25 +127,20 @@ $(document).ready(function() {
         var startDate = $('input[name="date_start-period"]').val();
         var endDate = $('input[name="date_end-period"]').val();
         
-        var parseStartDate = dateParse(startDate);
-        var parseEndDate = dateParse(endDate);
+        getDataClients(accountNumber, startDate, endDate, '#receipts-lists', 'receipts');
         
-        if (parseStartDate - parseEndDate > 0) {
-            $('.message-block').addClass('invalid-message-show').html('Вы указали некорректный диапазон');
-        } else if (parseStartDate - parseEndDate <= 0) {
-            $('.message-block').removeClass('invalid-message-show').html('');
-            $.post('search-receipts-on-period?account_number=' + accountNumber + '&date_start=' + startDate + '&date_end=' + endDate,
-                function(data) {
-                    if (data.success === false) {
-                        $('.message-block').addClass('invalid-message-show').html('Ошибка запроса');
-                    } else if (data.success === true) {
-                        $('.message-block').removeClass('invalid-message-show').html('');
-                        $('#receipts-lists').html(data.data_render);
-                    }
-                }
-            );
-        }
- 
+    });
+    
+    /*
+     * Список платежей, профиль Собственника
+     */
+    $('.btn-show-payment').on('click', function(){
+        var accountNumber = +$('#select-dark :selected').text();
+        var startDate = $('input[name="date_start-period-pay"]').val();
+        var endDate = $('input[name="date_end-period-pay"]').val();
+
+        getDataClients(accountNumber, startDate, endDate, '#payments-lists', 'payments');
+        
     });
     
     // ******************************************************** //

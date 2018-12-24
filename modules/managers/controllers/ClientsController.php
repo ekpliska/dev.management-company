@@ -362,7 +362,7 @@ class ClientsController extends AppManagersController {
      * ]
      * 
      */
-    public function actionSearchReceiptsOnPeriod($account_number, $date_start, $date_end) {
+    public function actionSearchDataOnPeriod($account_number, $date_start, $date_end, $type) {
         
         $date_start = Yii::$app->formatter->asDate($date_start, 'Y-M-d');
         $date_end = Yii::$app->formatter->asDate($date_end, 'Y-M-d');
@@ -382,14 +382,27 @@ class ClientsController extends AppManagersController {
         
         if (Yii::$app->request->isPost) {
             
-//            $results = Yii::$app->client_api->getReceipts($data_json);
-            $results = Yii::$app->params['Квитанции ЖКУ_4'];
+            switch ($type) {
+                case 'receipts':
+//                    $results = Yii::$app->client_api->getReceipts($data_json);
+                    $results = Yii::$app->params['Квитанции ЖКУ_4'];
+                    break;
+                case 'paymants':
+//                    $results = Yii::$app->client_api->getReceipts($data_json);
+                    $results = Yii::$app->params['Платежи'];
+                    break;
+                default:
+                    $results['status'] == 'error';
+                    break;
+            }
             
             if ($results['status'] == 'error') {
                 return ['success' => false];
             }
             
-            $data_render = $this->renderPartial('data/receipts-lists', ['receipts_lists' => $results]);
+            $data_render = $this->renderPartial('data/' . $type . '-lists', [
+                $type . '_lists' => $results,
+                'account_number' => $account_number]);
             
             return [
                 'success' => true,

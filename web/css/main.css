@@ -1838,7 +1838,7 @@ a.receipte-btn-dowload {
 }
 .invalid-message-show {
     max-width: 100%;
-    margin: 10px;
+    /*margin: 10px;*/
     font-size: 12px;
     color: #ef693a;
 }
@@ -1864,6 +1864,8 @@ a.receipte-btn-dowload {
 }
 .date-block span {
     padding: 10px;
+    font-size: 12px;
+    text-transform: uppercase;
 }
 input[name="date_start-period-pay"],
 input[name="date_end-period-pay"] {

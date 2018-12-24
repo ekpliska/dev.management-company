@@ -34,28 +34,28 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
             <div class="payments-date-block">
                 <p class="payment_title"><i class="glyphicon glyphicon-calendar"></i> Период</p>
                 <div class="col-md-3 date-block">
-                    <span>С</span>
+                    <span>с</span>
                     <?= DatePicker::widget([
                             'name' => 'date_start-period-pay',
                             'type' => DatePicker::TYPE_INPUT,
-                            'value' => date('d-M-Y'),
+                            'value' => date('d-m-Y'),
                             'layout' => '<span class="input-group-text">Birth Date</span>',
                             'pluginOptions' => [
                                 'autoclose'=>true,
-                                'format' => 'dd-M-yyyy'
+                                'format' => 'dd-mm-yyyy'
                             ]
                         ]);        
                     ?>
                 </div>
                 <div class="col-md-3 date-block">
-                    <span>ПО</span>
+                    <span>по</span>
                     <?= DatePicker::widget([
                             'name' => 'date_end-period-pay',
                             'type' => DatePicker::TYPE_INPUT,
-                            'value' => date('d-M-Y'),
+                            'value' => date('d-m-Y'),
                             'pluginOptions' => [
                                 'autoclose'=>true,
-                                'format' => 'dd-M-yyyy'
+                                'format' => 'dd-mm-yyyy'
                             ]
                         ]);        
                     ?>        
@@ -75,9 +75,10 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
                     <th>Сумма платежа</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id="payments-lists">
                     <?= $this->render('data/payments-lists', [
                             'payments_lists' => $payments_lists,
+                            'account_number' => $account_number,
                     ]) ?>
                 </tbody>
             </table>
