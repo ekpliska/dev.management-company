@@ -320,6 +320,14 @@ class ClientsController extends AppManagersController {
     
     /*
      * Запрос на получение квитанций по заданному лицевому счету и диапазону
+     * 
+     * Формируем запрос, преобразуем в JSON, отправляем по API:
+     * $data_array = [
+     *      "Номер лицевого счета" => $account_number,
+     *      "Период начало" => $date_start,
+     *      "Период конец" => $date_end
+     * ]
+     * 
      */
     public function actionSearchReceiptsOnPeriod($account_number, $date_start, $date_end) {
         
@@ -332,15 +340,33 @@ class ClientsController extends AppManagersController {
             return ['success' => false];
         }
         
+        $data_array = [
+            'Номер лицевого счета' => $account_number,
+            'Период начало' => $date_start,
+            'Период конец' => $date_end
+        ];        
+        $data_json = json_encode($data_array, JSON_UNESCAPED_UNICODE);
+        
         if (Yii::$app->request->isPost) {
+            
+//            $results = Yii::$app->client_api->getPreviousCounters($data_json);
+            $results = Yii::$app->params['Квитанции ЖКУ_4'];
+            
+            if ($results['status'] == 'error') {
+                return ['success' => false];
+            }
+            
+            $data_render = $this->renderPartial('data/receipts-lists', ['receipts_lists' => $results]);
             
             return [
                 'success' => true,
-                'account_number' => $account_number,
+                'data_render' => $data_render,
                 'date_start' => $date_start,
                 'date_end' => $date_end,
             ];
         }
+        
+        return ['success' => false];
         
     }
     

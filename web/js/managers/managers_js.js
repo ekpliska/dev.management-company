@@ -102,6 +102,7 @@ $(document).ready(function() {
                         $('.message-block').addClass('invalid-message-show').html('Ошибка передачи параметров');
                     } else if (data.success === true) {
                         $('.message-block').removeClass('invalid-message-show').html('');
+                        $('#receipts-lists').html(data.data_render);
                     }
                 }
             );
