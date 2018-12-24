@@ -37,9 +37,14 @@ class Clients extends ActiveRecord
             
             [['clients_name', 'clients_second_name', 'clients_surname'], 'string', 'min' => 3, 'max' => 70],
             
-            [['clients_mobile', 'clients_phone'],
+            ['clients_mobile',
                 'match', 
                 'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/i', 
+            ],
+
+            ['clients_phone',
+                'match', 
+                'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{4}\)?[\- ]?)?[\d\- ]{7,10}$/i', 
             ],
             
             [[

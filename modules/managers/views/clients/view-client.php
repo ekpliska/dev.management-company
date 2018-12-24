@@ -3,7 +3,6 @@
     use yii\widgets\ActiveForm;
     use yii\helpers\Html;
     use yii\widgets\Breadcrumbs;
-    use yii\widgets\MaskedInput;
     use app\modules\managers\widgets\AlertsShow;
     use app\modules\managers\widgets\ModalWindowsManager;
 
@@ -71,15 +70,11 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
                         ->label($client_info->getAttributeLabel('clients_second_name'), ['class' => 'field-label']) ?>
 
                 <?= $form->field($client_info, 'clients_mobile')
-                        ->widget(MaskedInput::className(), [
-                            'mask' => '+7 (999) 999-99-99'])
-                        ->input('text', ['class' => 'field-input'])
+                        ->input('text', ['class' => 'field-input cell-phone'])
                         ->label($client_info->getAttributeLabel('clients_mobile'), ['class' => 'field-label']) ?>
 
                 <?= $form->field($client_info, 'clients_phone')
-                        ->widget(MaskedInput::className(), [
-                            'mask' => '+7 (999) 999-99-99'])
-                        ->input('text', ['class' => 'field-input'])
+                        ->input('text', ['class' => 'field-input house-phone'])
                         ->label($client_info->getAttributeLabel('clients_phone'), ['class' => 'field-label']) ?>
 
                 <?= $form->field($user_info, 'user_email')
