@@ -4,6 +4,7 @@
     use yii\widgets\Breadcrumbs;
     use kartik\date\DatePicker;
     use yii\helpers\Url;
+    use app\modules\managers\widgets\ModalWindowsManager;
 
 /* 
  * Профиль собсвенника, раздел Квитанции ЖКУ
@@ -39,26 +40,27 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
                     <?= DatePicker::widget([
                             'name' => 'date_start-period',
                             'type' => DatePicker::TYPE_INPUT,
-                            'value' => date('d-F-Y'),
+                            'value' => date('d-m-Y'),
                             'pluginOptions' => [
                                 'autoclose'=>true,
-                                'format' => 'dd-MM-yyyy'
-                            ]
+                                'format' => 'dd-m-yyyy'
+                            ],
                         ]);        
                     ?>
                         <span>ПО</span>
                     <?= DatePicker::widget([
                             'name' => 'date_end-period',
                             'type' => DatePicker::TYPE_INPUT,
-                            'value' => date('d-F-Y'),
+                            'value' => date('d-m-Y'),
                             'pluginOptions' => [
                                 'autoclose'=>true,
-                                'format' => 'dd-MM-yyyy'
+                                'format' => 'dd-m-yyyy'
                             ]
                         ]);        
                     ?>
                     <?= Html::button('<i class="glyphicon glyphicon-search"></i>', ['id' => 'get-receipts', 'class' => 'btn-send-request']) ?>
                 </div>
+                <div class="message-block"></div>
                 <?php if (isset($receipts_lists)) : ?>
                     <ul class="list-group receipte-of-lists">
                         <?php foreach ($receipts_lists as $key => $receipt) : ?>

@@ -73,14 +73,35 @@ $(document).ready(function() {
                     conteiner.html('<p>Квитанция на сервере не найдена.</p>');
                 });
     });
+
+    function dateParse(date) {
+        var dateArray = date.split('-');
+        var dateString = dateArray[1] + '-' + dateArray[0] + '-' + dateArray[2];
+        var newDate = new Date(dateString);
+        return newDate;
+    }
     
     /*
      * Запрос на получение списка квитанций в заданный даипазон
      */
     $('#get-receipts').on('click', function(){
-        var startData = new Date($('input[name="date_start-period"]').val());
-        var endData = new Date($('input[name="date_end-period"]').val());
-        console.log(endData + ' ' + startData);
+        var startDate = $('input[name="date_start-period"]').val();
+        var endDate = $('input[name="date_end-period"]').val();
+        
+        var parseStartDate = dateParse(startDate);
+        var parseEndDate = dateParse(endDate);
+        
+        if (parseStartDate - parseEndDate > 0) {
+            $('.message-block').addClass('invalid-message-show').html('Вы указали некорректный диапазон');
+        } else if (parseStartDate - parseEndDate <= 0) {
+            $('.message-block').removeClass('invalid-message-show').html('');
+//            $.post('find-receipts-on-period?date_start=' + startDate + '?date_end=' + endDate,
+//                function(data) {
+//                    $('#TODO').html(data);
+//                }
+//            );
+        }
+ 
     });
     
     // ******************************************************** //

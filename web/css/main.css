@@ -585,6 +585,10 @@ button#send-request-to-sms:focus{
     padding: 0 15px;
     color: #2d18b4;
     border-radius: 12px;
+    outline: none;
+}
+.btn-send-request:focus {
+    outline: none;
 }
 /* Конец Кнопка поиска по запросу */
 
@@ -1745,10 +1749,13 @@ input[id="_search-input"]:-moz-placeholder {
 }
 .receipts_period-calendar {
     display: flex;
-    padding: 0 10px 10px 10px;
+    padding: 0 10px 0px 10px;
 }
 .receipts_period-calendar span {
     padding: 10px;
+}
+.receipte-of-lists {
+    margin: 40px 0 20px 0;    
 }
 .receipte-of-lists > li {
     padding: 20px 20px;
@@ -1826,6 +1833,16 @@ a.receipte-btn-dowload {
 .operations-block_items > li > a.right-block:hover {
     border-radius: 0px 12px 12px 0px;
     background-color: rgba(247, 247, 247, 0.22);
+}
+.invalid-message-show {
+    max-width: 100%;
+    padding: 3px 5px;
+    margin: 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    color: #fff;
+    background-color: rgba(220,53,69,.9);
+    border-radius: 10px;    
 }
 /* Конец Квитанции 
 

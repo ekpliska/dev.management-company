@@ -24,7 +24,7 @@ class m180901_090529_table_rents extends Migration
             'rents_name' => $this->string(70)->notNull(),
             'rents_second_name' => $this->string(70)->notNull(),
             'rents_surname' => $this->string(70)->notNull(),
-            'rents_mobile' => $this->string(70)->unique()->notNull(),
+            'rents_mobile' => $this->string(70),
             'rents_mobile_more' => $this->string(70)->unique(),
             'rents_clients_id' => $this->integer()->notNull(),
             'isActive' => $this->tinyInteger()->defaultValue(Rents::STATUS_ENABLED),
