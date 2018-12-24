@@ -223,6 +223,16 @@ class ClientsController extends AppManagersController {
     
     /*
      * Собственник, Квитанции ЖКУ
+     * 
+     * Формируем запрос, преобразуем в JSON, отправляем по API:
+     * $data_array = [
+     *      "Номер лицевого счета" => $account_number,
+     *      "Период начало" => null,
+     *      "Период конец" => null
+     * ]
+     * 
+     * Если период начала и период конца null, то возвращает список всех квитанций
+     * 
      */
     public function actionReceiptsOfHapu($client_id, $account_number) {
         
@@ -253,16 +263,39 @@ class ClientsController extends AppManagersController {
     
     /*
      * Собственник, Платежи
+     * 
+     * Формируем запрос, преобразуем в JSON, отправляем по API:
+     * $data_array = [
+     *      "Номер лицевого счета" => $account_number,
+     *      "Период начало" => null,
+     *      "Период конец" => null
+     * ]
+     * 
+     * Если период начала и период конца null, то возвращает список всех квитанций
+     * 
      */
     public function actionPayments($client_id, $account_number) {
         
         $info = $this->getClientsInfo($client_id, $account_number);
         
+        $array_request = [
+            'Номер лицевого счета' => $account_number,
+            'Период начало' => '',
+            'Период конец' => '',
+        ];
+        
+        $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
+        
+//        $payments_lists = Yii::$app->client_api->getPayments($data_json);
+        $payments_lists = Yii::$app->params['Платежи'];        
+        
         return $this->render('payments', [
             'client_info' => $info['client_info'],
             'account_choosing' => $info['account_info'],
             'user_info' => $info['user_info'],
-            'list_account' => $info['list_account'],            
+            'list_account' => $info['list_account'],
+//            'payments_lists' => $receipts_lists['receipts'],
+            'payments_lists' => $payments_lists,            
         ]);
         
     }
@@ -349,7 +382,7 @@ class ClientsController extends AppManagersController {
         
         if (Yii::$app->request->isPost) {
             
-//            $results = Yii::$app->client_api->getPreviousCounters($data_json);
+//            $results = Yii::$app->client_api->getReceipts($data_json);
             $results = Yii::$app->params['Квитанции ЖКУ_4'];
             
             if ($results['status'] == 'error') {

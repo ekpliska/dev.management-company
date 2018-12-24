@@ -55,20 +55,6 @@ class ClientAPI extends Object {
      * Получение всех квитанций Собстевнника по лицевому счету,
      * Получение всех квитанций Собстевнника по лицевому счету за указанный период
      */
-    public function getReceipt($data) {
-        
-        $receipts = $this->readUrl('', $data);
-        
-        return [
-            'status' => $receipts['status'],
-            'success' => $receipts['Квитанции ЖКУ'],
-        ];
-        
-    }
-    
-    /*
-     * Получение всех квитанций ЖКУ Собственника по лицевому счету
-     */
     public function getReceipts($data) {
         
         $receipts = $this->readUrl('', $data);
@@ -76,6 +62,21 @@ class ClientAPI extends Object {
         return [
             'success' => $receipts['status'],
             'receipts' => $receipts['Квитанции ЖКУ']
+        ];
+        
+    }
+    
+    /*
+     * Получение всех платежей Собстевнника по лицевому счету,
+     * Получение всех платежей Собстевнника по лицевому счету за указанный период
+     */
+    public function getPayments($data) {
+        
+        $receipts = $this->readUrl('', $data);
+        
+        return [
+            'success' => $receipts['status'],
+            'receipts' => $receipts['Платежи']
         ];
         
     }

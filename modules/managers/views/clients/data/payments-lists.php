@@ -7,12 +7,22 @@
 
 
 <?php if (isset($payments_lists)) : ?>
+<?php foreach ($payments_lists as $key => $payment) : ?>
 <tr>
-    <td>Sample text</td>
-    <td>Sample text</td>
-    <td>Sample text</td>
-    <td>Sample text</td>
+    <td>
+        <?= $payment['Расчетный месяц'] ?>
+    </td>
+    <td>
+        <?= Yii::$app->formatter->asDate($payment['Дата платежа'], 'long') ?>
+    </td>
+    <td>
+        <?= $payment['Тип оплаты'] ?>
+    </td>
+    <td>
+        <?= $payment['Сумма платежа'] ?>
+    </td>
 </tr>
+<?php endforeach; ?>
 <?php else : ?>
 <tr>
     <td colspan="4" class="status-not-found">

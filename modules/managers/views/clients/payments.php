@@ -46,7 +46,6 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
                             ]
                         ]);        
                     ?>
-
                 </div>
                 <div class="col-md-3 date-block">
                     <span>ПО</span>
@@ -64,7 +63,7 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
                 <div class="col-md-6">
                     <?= Html::button('Показать', ['class' => 'btn-show-payment']) ?>        
                 </div>
-            
+                <div class="col-md-12 message-block"></div>
             </div>
 
             <table class="table managers-table managers-table-in">

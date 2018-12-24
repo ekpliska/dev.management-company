@@ -1838,12 +1838,13 @@ a.receipte-btn-dowload {
 }
 .invalid-message-show {
     max-width: 100%;
-    padding: 3px 5px;
     margin: 10px;
     font-size: 12px;
-    line-height: 1.5;
     color: #ef693a;
-    border-radius: 10px;    
+}
+.invalid-message-show::before {
+    content: "\02716";
+    padding: 0 10px;    
 }
 /* Конец Квитанции 
 
@@ -2334,7 +2335,7 @@ input[name="date_end-period-pay"]:focus {
 }
 .error:before {
     margin-top: -15px;    
-    content: "\02613";
+    content: "\02715";
     background-color: #ef693a;
 }
 /* Конец Уведомления на странице */
@@ -3001,7 +3002,7 @@ a.sub-menu-item {
     text-align: left;
 }
 .payments-date-block {
-    padding: 20px 15px 70px;
+    padding: 20px 15px 80px;
 }
 .control-block {
     margin: 10px 0px;

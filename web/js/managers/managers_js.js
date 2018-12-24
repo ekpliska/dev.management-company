@@ -70,7 +70,7 @@ $(document).ready(function() {
                 .done(function (){
                     conteiner.html('<iframe src="' + url + '" style="width: 100%; height: 600px;" frameborder="0">Ваш браузер не поддерживает фреймы</iframe>');
                 }).fail(function(){
-                    conteiner.html('<p>Квитанция на сервере не найдена.</p>');
+                    conteiner.html('<div class="notice error"><p>Квитанция на сервере не найдена.</p></div>');
                 });
     });
 
@@ -99,7 +99,7 @@ $(document).ready(function() {
             $.post('search-receipts-on-period?account_number=' + accountNumber + '&date_start=' + startDate + '&date_end=' + endDate,
                 function(data) {
                     if (data.success === false) {
-                        $('.message-block').addClass('invalid-message-show').html('Ошибка передачи параметров');
+                        $('.message-block').addClass('invalid-message-show').html('Ошибка запроса');
                     } else if (data.success === true) {
                         $('.message-block').removeClass('invalid-message-show').html('');
                         $('#receipts-lists').html(data.data_render);

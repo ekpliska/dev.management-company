@@ -62,7 +62,10 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
                 </div>
                 <div class="message-block"></div>
                 <div id="receipts-lists">
-                    <?= $this->render('data/receipts-lists', ['receipts_lists' => $receipts_lists]) ?>
+                    <?= $this->render('data/receipts-lists', [
+                            'receipts_lists' => $receipts_lists,
+                            'account_number' => $account_number
+                    ]) ?>
                 </div>
             </div>
             <div class="col-md-7 receipts_body">
