@@ -2873,6 +2873,23 @@ a.sub-menu-item {
     font-size: 20px;
     font-weight: bold;
 }
+.managers-table > tbody > tr.form-notice-in-table > td {
+    vertical-align: middle;
+    text-align: left;
+    padding: 30px 15px;
+    border: none;
+    border-top: 1px solid #ddd;
+}
+.managers-table > tbody > tr.btn-block-in-table > td {
+    vertical-align: middle;
+    text-align: center;
+    padding: 30px;
+    border: none;
+}
+.managers-table > tbody > tr.form-notice-in-table:hover, 
+.managers-table > tbody > tr.btn-block-in-table:hover {
+    background: #fff !important;
+}
 .managers-table > tbody > tr:hover {
     background: #d1ccef;
 }
@@ -2895,6 +2912,9 @@ a.sub-menu-item {
 }
 .managers-table > tbody > tr > td > a {
     color: #2d18b4;
+}
+.no-border-bottom {
+    border-bottom: none;
 }
 /* Таблица, Администраторы */
 

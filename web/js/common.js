@@ -244,11 +244,11 @@ $('#send-request-to-sms').on('click', function() {
 
 
 $(function($) {
-    $('.field-input-textarea-modal').focus(function(){
+    $('.field-input-textarea-modal, .field-input-textarea-page').focus(function(){
         $(this).parent().addClass('is-focused has-label');
     });
 
-    $('.field-input-textarea-modal').blur(function(){
+    $('.field-input-textarea-modal, .field-input-textarea-page').blur(function(){
         $parent = $(this).parent();
         if($(this).val() == ''){
             $parent.removeClass('has-label');
@@ -256,7 +256,7 @@ $(function($) {
         $parent.removeClass('is-focused');
     });
 
-    $('.field-input-textarea-modal').each(function(){
+    $('.field-input-textarea-modal, .field-input-textarea-page').each(function(){
         if($(this).val() !== ''){
             $(this).parent().addClass('has-label');
         }

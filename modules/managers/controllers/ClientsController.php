@@ -14,6 +14,8 @@
     use app\models\Rents;
     use app\modules\managers\models\AddRent;
     use app\models\Counters;
+    use app\modules\managers\models\form\CounterIndicationsForm;
+    use app\models\CommentsToCounters;
 
 /**
  * Клиенты
@@ -325,6 +327,22 @@ class ClientsController extends AppManagersController {
         $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
 //        $counters_lists_api = Yii::$app->client_api->getPreviousCounters($data_json);
         $counters_lists = Yii::$app->params['Приборы учета'];
+
+        // Переключатель наличия проблемного счетчика
+        $can_set_indication = false;
+        foreach ($counters_lists as $key => $counter) {
+            $temp_date = Yii::$app->formatter->asDate($counter['Дата снятия показания'], 'M');
+            if (++$temp_date == $current_month) 
+                $can_set_indication = true;
+            break;
+        }
+        
+//        if ($need_verification == true) {
+//            // Загружаем модель для указания текущих показаний приборов учета
+//            $model_indication = new CounterIndicationsForm();
+//            $model_notice = new CommentsToCounters();            
+//        }
+        
         
         return $this->render('counters', [
             'client_info' => $info['client_info'],
@@ -334,6 +352,7 @@ class ClientsController extends AppManagersController {
 //            'counters_lists' => $counters_lists['Приборы учета'],
             'counters_lists' => $counters_lists,
             'not_verified' => $not_verified,
+            'can_set_indication' => $can_set_indication,
         ]);
         
     }

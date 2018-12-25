@@ -22,7 +22,7 @@ class CommentsToCounters extends ActiveRecord
      */
     public function rules() {
         return [
-            [['comments_title', 'comments_text', 'account_id', 'user_id'], 'required'],
+            [['comments_title', 'comments_text'], 'required'],
             [['comments_text'], 'string'],
             [['account_id', 'user_id'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],

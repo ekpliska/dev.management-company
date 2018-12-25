@@ -84,7 +84,7 @@ class Counters extends ActiveRecord
                 ->asArray()
                 ->all();
         
-        return ArrayHelper::map($array, 'counters_number', 'counters_id');
+        return ArrayHelper::map($array, 'ID_counter_clients', 'isRequest');
     }
     
     /*

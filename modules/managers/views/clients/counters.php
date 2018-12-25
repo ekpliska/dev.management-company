@@ -49,7 +49,7 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
                 </div>
             </div>    
 
-            <table class="table managers-table managers-table-in">
+            <table class="table managers-table managers-table-in no-border-bottom">
                 <thead>
                 <tr>
                     <th></th>
@@ -65,15 +65,12 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
                     <?= $this->render('data/counters-lists', [
                             'counters_lists' => $counters_lists,
                             'not_verified' => $not_verified,
+                            'can_set_indication' => $can_set_indication,
                     ]) ?>
                 </tbody>
-            </table>        
+            </table>
 
-            <div class="col-md-12 counters-message">
-                <p>#FORMS</p>
-            </div>
-
-        </div>        
+        </div>
         
         
         
