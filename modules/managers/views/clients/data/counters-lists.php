@@ -31,6 +31,9 @@ $array_image = [
         $model_notice = new app\models\CommentsToCounters();
         $form = ActiveForm::begin([
             'id' => 'send-counters-form',
+            'action' => ['send-indication-form'],
+            'enableAjaxValidation' => true,
+            'validationUrl' => ['test-form'],
         ]);        
     endif;
 ?>
@@ -58,7 +61,7 @@ $array_image = [
                         'data-counter-type' => $indication['Тип прибора учета'],
                         'data-counter-num' => $indication['Регистрационный номер прибора учета'],
                 ]) ?>
-            <?php else: ?>
+            <?php elseif ($can_set_indication == true) : ?>
                 <?= $form->field($model_indication, "[{$indication['ID']}]counter_id_client")
                         ->hiddenInput(['class' => 'reading-input', 'value' => $indication['ID']])
                         ->label(false) ?>
@@ -99,8 +102,6 @@ $array_image = [
     ActiveForm::end();
     endif; 
 ?>
-    
-
 <?php endif; ?>
 
 <?php /*

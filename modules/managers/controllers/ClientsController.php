@@ -337,13 +337,6 @@ class ClientsController extends AppManagersController {
             break;
         }
         
-//        if ($need_verification == true) {
-//            // Загружаем модель для указания текущих показаний приборов учета
-//            $model_indication = new CounterIndicationsForm();
-//            $model_notice = new CommentsToCounters();            
-//        }
-        
-        
         return $this->render('counters', [
             'client_info' => $info['client_info'],
             'account_choosing' => $info['account_info'],
@@ -457,5 +450,32 @@ class ClientsController extends AppManagersController {
         
     }
     
-    
+    /*
+     * Валидация и отправка формы "Текущие показания приборов учета"
+     */
+    public function actionSendIndicationForm() {
+        
+        $model_indication = [new CounterIndicationsForm()];
+        $model_notice = new CommentsToCounters();
+        
+        
+        if (Yii::$app->request->isPost) {
+        
+            $post_data = Yii::$app->request->post($model_indication[0]->formName());
+            $models = [];
+
+            foreach ($post_data as $key => $data) {
+                $model = new CounterIndicationsForm();
+                $model->load($data);
+                $models[$key] = $model;
+            }
+
+            if (\yii\base\Model::loadMultiple($models, Yii::$app->request->post()) && \yii\base\Model::validateMultiple($models)) {
+                echo 'ok'; die();
+            }
+
+                echo 'error'; die();
+        }
+    }
+        
 }

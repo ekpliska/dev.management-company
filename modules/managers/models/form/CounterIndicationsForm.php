@@ -9,13 +9,12 @@
 class CounterIndicationsForm extends Model {
     
     public $counter_id_client;
-    public $previous_indication;
     public $current_indication;
 
     public function rules() {
         
         return [
-            [['counter_id_client', 'current_indication'], 'required'],
+            [['counter_id_client', 'current_indication'], 'required', 'message' => 'Укажите показания'],
         ];
         
     }
