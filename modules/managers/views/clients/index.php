@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = 'Собственники';
 <div class="manager-main-with-sub">
 
     <?= Breadcrumbs::widget([
-            'homeLink' => ['label' => 'ELSA | Администратор', 'url' => ['clients/index']],
+            'homeLink' => ['label' => 'ELSA | Администратор', 'url' => ['managers/index']],
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]) ?>    
     

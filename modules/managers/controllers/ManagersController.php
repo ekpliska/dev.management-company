@@ -3,8 +3,10 @@
     namespace app\modules\managers\controllers;
     use Yii;
     use yii\web\UploadedFile;
+    use yii\data\ActiveDataProvider;
     use app\modules\managers\controllers\AppManagersController;
     use app\models\Employees;
+    use app\modules\managers\models\Managers;
     use app\models\Departments;
     use app\modules\managers\models\Posts;
     use app\models\ChangePasswordForm;
@@ -15,8 +17,29 @@
  */
 class ManagersController extends AppManagersController {
     
+    
     /*
-     * Главная страница - Профиль Администратора
+     * Главная страница - Администраторы
+     */
+    public function actionIndex() {
+        
+        $manager_list = new ActiveDataProvider([
+            'query' => Managers::getListManagers(),
+            'pagination' => [
+                'forcePageParam' => false,
+                'pageSizeParam' => false,
+                'pageSize' => 30,
+            ]
+        ]);
+        
+        return $this->render('index', [
+            'manager_list' => $manager_list,
+        ]);
+        
+    }
+    
+    /*
+     * Страница Профиль Администратора
      * 
      * @param array $user_info Информация о текущем пользователе
      * @param object $user_model Модель профиля пользователя
@@ -24,7 +47,7 @@ class ManagersController extends AppManagersController {
      * @param array $department_list Список подразделений
      * @param array $post_lis Списко должностей
      */
-    public function actionIndex() {
+    public function actionViewProfile() {
         
         $user_info = $this->permisionUser();
         $user_model = $user_info->_model;
@@ -51,7 +74,7 @@ class ManagersController extends AppManagersController {
             return $this->redirect(Yii::$app->request->referrer);
         }
         
-        return $this->render('index', [
+        return $this->render('view-profile', [
             'user_info' => $user_info,
             'user_model' => $user_model,
             'employee_info' => $employee_info,

@@ -1,6 +1,5 @@
 <?php
     
-    use yii\widgets\Breadcrumbs;
     use yii\widgets\ActiveForm;
     use yii\helpers\Html;
     use yii\widgets\MaskedInput;
@@ -9,28 +8,11 @@
     use app\modules\managers\widgets\AlertsShow;
 
 /*
- * Администраторы
+ * Профиль Администратора
  */    
     
-$this->title = Yii::$app->params['site-name-manager'] .  'Администраторы';
-$this->params['breadcrumbs'][] = 'Администраторы';
+$this->title = 'Профиль';
 ?>
-
-<div class="manager-main-with-sub">
-
-    <?= Breadcrumbs::widget([
-            'homeLink' => ['label' => 'ELSA | Администратор', 'url' => ['managers/index']],
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-    ]) ?>    
-    
-    <?= $this->render('data/grid', ['manager_list' => $manager_list]) ?>
-    
-    <?= Html::a('', ['/'], ['class' => 'create-request-btn']) ?>
-    
-</div>
-
-
-<?php /*
 <div class="managers-default-index">
     <h1><?= $this->title ?></h1>
     
@@ -105,7 +87,7 @@ $this->params['breadcrumbs'][] = 'Администраторы';
                     ->dropDownList($post_list, [
                         'class' => 'form-control posts_list',])
                     ->label() ?>
-          
+*/ ?>            
             <?= $form->field($user_model, 'user_mobile')
                     ->widget(MaskedInput::className(), [
                         'mask' => '+7(999) 999-99-99'])
@@ -119,4 +101,4 @@ $this->params['breadcrumbs'][] = 'Администраторы';
                 'class' => 'btn btn-primary']) ?>
         </div>
     <?php ActiveForm::end() ?>
-</div>*/ ?>  
+</div>
