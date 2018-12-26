@@ -18,7 +18,7 @@ class Posts extends BasePost {
                 ->asArray()
                 ->all();
         
-        return ArrayHelper::map($list, 'posts_id', 'posts_name');
+        return ArrayHelper::map($list, 'post_id', 'post_name');
         
     }
     

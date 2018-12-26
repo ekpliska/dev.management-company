@@ -7,6 +7,8 @@
     use app\modules\managers\models\form\EmployeeForm;
     use app\models\Departments;
     use app\modules\managers\models\User;
+    use app\models\Employees;
+    use app\modules\managers\models\Posts;
 
 /**
  * Единый контролер для обработки формы добавления нового сотрудника (пользователя) в систему
@@ -15,6 +17,8 @@ class EmployeeFormController extends AppManagersController {
     
     /*
      * Главная, форма добавления нового сотрудника
+     * 
+     * @param $new_employee string Роль пользователя (Администратора, Диспетчер, Специалист)
      */
     public function actionIndex($new_employee) {
         
@@ -24,16 +28,14 @@ class EmployeeFormController extends AppManagersController {
         $post_list = [];
         $roles = User::getRoles();
         
-//        switch ($new_employee) {
-//            case '':
-//        }
-        
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $file = UploadedFile::getInstance($model, 'photo');
             $model->photo = $file;
-            $employer_id = $model->addDispatcher($file, $new_employee);
-            if ($employer_id) {
-                return $this->redirect(['edit-specialist', 'specialist_id' => $employer_id]);
+            $employee_id = $model->addDispatcher($file, $new_employee);
+            if ($employee_id) {
+                return $this->redirect(['employee-profile', 
+                    'type' => $new_employee,
+                    'employee_id' => $employee_id]);
             }
         }
         
@@ -45,6 +47,38 @@ class EmployeeFormController extends AppManagersController {
             'post_list' => $post_list,
             'roles' => $roles,
         ]);
+    }
+    
+    /*
+     * Редактирование профиля сотрудника
+     */
+    public function actionEmployeeProfile($type, $employee_id) {
+        
+        if ($type == null || $employee_id == null) {
+            throw new \yii\web\NotFoundHttpException('Вы обратились к несуществующей странице');
+        }
+
+        $employee_info = Employees::findByID($employee_id);
+        $user_info = User::findByEmployeeId($employee_id);
+        
+        if ($employee_info === null && $user_info === null) {
+            throw new \yii\web\NotFoundHttpException('Вы обратились к несуществующей странице');
+        }
+        
+        $department_list = Departments::getArrayDepartments();
+        $post_list = Posts::getPostList($employee_info->employee_department_id);
+        
+        $role = User::getRole($type);
+        
+        return $this->render('employee-profile', [
+            'type' => $type,
+            'employee_info' => $employee_info,
+            'user_info' => $user_info,
+            'department_list' => $department_list,
+            'post_list' => $post_list,
+            'role' => $role,
+        ]);
+        
     }
     
 }

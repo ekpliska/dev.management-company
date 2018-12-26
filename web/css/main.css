@@ -2976,6 +2976,8 @@ a.sub-menu-item {
     min-height: 370px;
 }
 .face-user img {
+    width: 150px;
+    height: 150px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -3028,8 +3030,21 @@ a.sub-menu-item {
 .payments-date-block {
     padding: 20px 15px 80px;
 }
-.control-block {
+.control-block, 
+.status-block {
     margin: 10px 0px;
+}
+.status-block .title {
+    display: inline-block;
+    padding-right: 50px;
+    color: #fff;
+    font-size: 12px;
+    text-align: right;
+}
+.status-block span.role-administrator {
+    padding: 2px 0px;
+    color: #fff;
+    font-size: 12px;
 }
 .debt-client {
     background: #ef693a;
@@ -3050,6 +3065,11 @@ a.sub-menu-item {
 /* Создание нового сотрудника */
 .profile-upload-btn {
     margin-top: 170px;
+}
+.profile-upload-btn-employee {
+    position: absolute;
+    bottom: -1%;
+    left: 30%;
 }
 .field-btnLoad > label > label.control-label {
     font-weight: normal;

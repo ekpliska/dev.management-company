@@ -31,7 +31,7 @@ class Employees extends ActiveRecord
     
     public static function findByID($employer_id) {
         return self::find()
-                ->andWhere(['employees_id' => $employer_id])
+                ->andWhere(['employee_id' => $employer_id])
                 ->one();
     }
     

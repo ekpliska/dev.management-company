@@ -621,14 +621,14 @@ textarea {
     font-weight: normal;
     font-size: 12px;
 }
-.field input[id="employeeform-birthday"] {
+.field input.krajee-datepicker {
     outline: none;
     box-shadow: none;
     border: none;
     border-radius: unset;
     border-bottom: 1px solid #e6e6e6;
 }
-.field input[id="employeeform-birthday"]:focus {
+.field input.krajee-datepicker:focus {
     outline: none;
     box-shadow: none;
     border: none;

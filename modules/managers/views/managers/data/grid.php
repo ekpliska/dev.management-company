@@ -41,8 +41,9 @@
                         return 
                             Html::a('Просмотр', 
                                     [
-                                        'employers/edit-dispatcher',
-                                        'dispatcher_id' => $data['id'],
+                                        'employee-form/employee-profile',
+                                        'type' => 'administrator',
+                                        'employee_id' => $data['id'],
                                     ], 
                                     [
                                         'data-pjax' => false,

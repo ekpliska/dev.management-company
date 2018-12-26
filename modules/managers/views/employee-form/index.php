@@ -57,7 +57,7 @@ $this->params['breadcrumbs'][] = 'Новая запись [Сотрудник]';
             <!--Пользователь-->
             <div class="col-md-6 clients-profile-info_manager">
                 <p class="profile-title">
-                    Данные пользоателя
+                    Данные пользователя
                 </p>
                 <?= $form->field($model, 'username')
                         ->input('text', ['class' => 'field-input'])
@@ -133,7 +133,7 @@ $this->params['breadcrumbs'][] = 'Новая запись [Сотрудник]';
         <div class="spam-agree-txt text-center">
             <div class="save-btn-group mx-auto">
                 <div class="text-center">
-                    <?= Html::submitButton('Сохранить изменения', ['class' => 'btn blue-btn']) ?>
+                    <?= Html::submitButton('Добавить', ['class' => 'btn blue-btn']) ?>
                 </div>
             </div>
 

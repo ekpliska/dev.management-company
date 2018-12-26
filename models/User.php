@@ -262,8 +262,8 @@ class User extends ActiveRecord implements IdentityInterface
     /*
      * Поиск ID сотрудника
      */
-    public static function findByEmployerId($employer_id) {
-        return static::findOne(['user_employer_id' => $employer_id]);
+    public static function findByEmployeeId($employee_id) {
+        return static::findOne(['user_employee_id' => $employee_id]);
     }
     
     /*
