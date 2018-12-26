@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = 'Администраторы';
     
     <?= $this->render('data/grid', ['manager_list' => $manager_list]) ?>
     
-    <?= Html::a('', ['/'], ['class' => 'create-request-btn']) ?>
+    <?= Html::a('', ['employee-form/index', 'new_employee' => 'administrator'], ['class' => 'create-request-btn']) ?>
     
 </div>
 

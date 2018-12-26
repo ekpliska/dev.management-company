@@ -10,7 +10,7 @@
  * Новый Диспетчер
  */
 
-class EmployerForm extends Model {
+class EmployeeForm extends Model {
     
     // Данные пользователя
     public $username;
@@ -42,9 +42,8 @@ class EmployerForm extends Model {
             [[
                 'username', 'password', 'password_repeat', 'mobile', 'email',
                 'surname', 'name', 'second_name', 'birthday', 'department', 'post',
-                'role',
                 ], 
-                'required'],
+                'required', 'message' => 'Поле "{attribute}" обязательно для заполнения'],
             
             ['role', 'string'],
             
@@ -61,7 +60,7 @@ class EmployerForm extends Model {
             ['username', 'string', 'min' => 3, 'max' => 50],
             
             [['password', 'password_repeat'], 'string', 'min' => 6, 'max' => 12],
-            ['password', 'compare', 'message' => 'Указанные пароли не совпадают!'],
+            ['password_repeat', 'compare', 'compareAttribute' => 'password', 'message' => 'Указанные пароли не совпадают'],
             
             [['username', 'password', 'password_repeat'],
                 'match', 
@@ -169,7 +168,7 @@ class EmployerForm extends Model {
             'surname' => 'Фамилия',
             'name' => 'Имя',
             'second_name' => 'Отчество',
-            'gender' => 'Пол',
+            'birthday' => 'Дата рождения',
             'department' => 'Подразделение',
             'post' => 'Должность',
             'is_new' => 'Добавлять новости',

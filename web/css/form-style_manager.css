@@ -613,3 +613,39 @@ textarea {
     background: rgba(0, 123, 255, 0.12);
 }
 /* Конец Выпадающий список, select, администратор (темный) */
+
+/* Выпадающий список, Выбор даты */
+.field > label.date-label,
+.field > label.field-input-select_label {
+    color: #bfbfbf;
+    font-weight: normal;
+    font-size: 12px;
+}
+.field input[id="employeeform-birthday"] {
+    outline: none;
+    box-shadow: none;
+    border: none;
+    border-radius: unset;
+    border-bottom: 1px solid #e6e6e6;
+}
+.field input[id="employeeform-birthday"]:focus {
+    outline: none;
+    box-shadow: none;
+    border: none;
+    border-radius: unset;
+    border-bottom: 1px solid #2d18b4;    
+}
+.field span.input-group-addon {
+    background-color: #2d18b4;
+    border: 1px solid #fff;
+    color: #fff;
+}
+/* Конец Выпадающий список, Выбор даты */
+
+/* Выпадающий список (светлый), без js */
+.field-input-select {
+    border: none;
+    width: 100%;
+    outline: none;
+}
+/* Конец Выпадающий список (светлый), без js */

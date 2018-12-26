@@ -34,7 +34,7 @@ $this->title = $dispatcher_info->fullName . '<span class="badge">' . $role . '</
     ?>
     <div class="col-md-4">
         <div class="text-center">
-            <?= Html::img($user_info->photo, ['id' => 'photoPreview','class' => 'img-circle', 'alt' => $user_info->user_login, 'width' => 150]) ?>
+            <?= Html::img($user_info->photo, ['id' => 'photoPreview', 'class' => 'img-circle', 'alt' => $user_info->user_login, 'width' => 150]) ?>
             <br />
             <?= $form->field($user_info, 'user_photo')->input('file', ['id' => 'btnLoad'])->label(false) ?>
         </div>

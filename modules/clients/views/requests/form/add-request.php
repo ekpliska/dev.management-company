@@ -38,7 +38,7 @@
                 ->dropDownList($type_requests, [
                     'prompt' => 'Выберите вид заявки из списка...'])
                 ->label(false) 
-            ?>
+        ?>
 
         <?= $form->field($model, 'requests_phone', ['template' => '<div class="field-modal">{label}{input}{error}</div>'])
                 ->input('text', ['class' => 'field-input-modal cell-phone'])
