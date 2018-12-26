@@ -97,12 +97,12 @@ class Employees extends ActiveRecord
     {
         return [
             'employee_id' => 'Employee ID',
-            'employee_name' => 'Employee Name',
-            'employee_surname' => 'Employee Surname',
-            'employee_second_name' => 'Employee Second Name',
-            'employee_birthday' => 'Employee Birthday',
-            'employee_department_id' => 'Employee Department ID',
-            'employee_posts_id' => 'Employee Posts ID',
+            'employee_name' => 'Имя',
+            'employee_surname' => 'Фамилия',
+            'employee_second_name' => 'Отчество',
+            'employee_birthday' => 'Дата рождения',
+            'employee_department_id' => 'Подразделение',
+            'employee_posts_id' => 'Должность',
         ];
     }
 

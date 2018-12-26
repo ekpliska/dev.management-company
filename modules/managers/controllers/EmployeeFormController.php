@@ -37,6 +37,7 @@ class EmployeeFormController extends AppManagersController {
                     'type' => $new_employee,
                     'employee_id' => $employee_id]);
             }
+            Yii::$app->session->setFlash('error', ['message' => 'Во время создания профиля сотрудника произошла ошибка. Обновите страницу и повторите действие заново']);
         }
         
         
@@ -69,6 +70,25 @@ class EmployeeFormController extends AppManagersController {
         $post_list = Posts::getPostList($employee_info->employee_department_id);
         
         $role = User::getRole($type);
+        
+        
+        if ($user_info->load(Yii::$app->request->post()) && $employee_info->load(Yii::$app->request->post())) {
+            
+            $is_valid = $user_info->validate();
+            $is_valid = $employee_info->validate() && $is_valid;
+            
+            if ($is_valid) {
+                $file = UploadedFile::getInstance($user_info, 'user_photo');
+                $user_info->uploadPhoto($file);
+                $employee_info->save();
+            } else {
+                Yii::$app->session->setFlash('error', ['message' => 'Во время обновления профиля произошла ошибка. Обновите страницу и повторите действие заново']);
+                return $this->redirect(Yii::$app->request->referrer);
+            }
+            Yii::$app->session->setFlash('success', ['message' => 'Профиль сотрудника успешно обновлем']);
+            return $this->redirect(Yii::$app->request->referrer);
+        }        
+        
         
         return $this->render('employee-profile', [
             'type' => $type,

@@ -13,7 +13,7 @@
 $this->title = 'Администраторы';
 $this->title = Yii::$app->params['site-name-manager'] .  'Администраторы';
 $this->params['breadcrumbs'][] = ['label' => 'Администраторы', 'url' => ['managers/index']];
-$this->params['breadcrumbs'][] = 'Новая запись [Сотрудник]';
+$this->params['breadcrumbs'][] = $employee_info->fullName;
 ?>
 <div class="manager-main">
     <?= Breadcrumbs::widget([
@@ -50,7 +50,7 @@ $this->params['breadcrumbs'][] = 'Новая запись [Сотрудник]';
                 ]) ?>
                 
                 <div class="profile-upload-btn profile-upload-btn-employee">
-                <?= $form->field($user_info, 'photo', ['template' => '<label class="text-center btn btn-upload" role="button">{input}{label}{error}'])
+                <?= $form->field($user_info, 'user_photo', ['template' => '<label class="text-center btn btn-upload" role="button">{input}{label}{error}'])
                         ->input('file', ['id' => 'btnLoad', 'class' => 'hidden'])->label('Загрузить фото') ?>
             </div>
                 
