@@ -3046,3 +3046,16 @@ a.sub-menu-item {
     min-height: 600px;
 }
 /* Конец Платежи, Профиль Собственника, Администратор */
+
+/* Создание нового сотрудника */
+.profile-upload-btn {
+    margin-top: 170px;
+}
+.field-btnLoad > label > label.control-label {
+    font-weight: normal;
+    cursor: pointer;
+}
+.btn-upload label {
+    color: #fff;
+}
+/* Конец Создание нового сотрудника */

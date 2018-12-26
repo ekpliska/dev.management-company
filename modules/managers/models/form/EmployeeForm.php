@@ -4,7 +4,7 @@
     use Yii;
     use yii\base\Model;
     use app\models\User;
-    use app\models\Employers;
+    use app\models\Employees;
 
 /**
  * Новый Диспетчер
@@ -101,22 +101,22 @@ class EmployeeForm extends Model {
     /*
      * Метод отвечает за добавление сведений о новом сотруднике и создание учетной записи для него
      */
-    public function addDispatcher($file) {
+    public function addDispatcher($file, $role) {
         
         $transaction = Yii::$app->db->beginTransaction();
         try {
             if ($this->validate()) {
                 
                 // Добавляем нового Сотрудника
-                $employer = new Employers();
-                $employer->employers_name = $this->name;
-                $employer->employers_surname = $this->surname;
-                $employer->employers_second_name = $this->second_name;
-                $employer->employers_department_id = $this->department;
-                $employer->employers_posts_id = $this->post;
-                $employer->employers_birthday = $this->birthday;
+                $employee = new Employees();
+                $employee->employee_name = $this->name;
+                $employee->employee_surname = $this->surname;
+                $employee->employee_second_name = $this->second_name;
+                $employee->employee_department_id = $this->department;
+                $employee->employee_posts_id = $this->post;
+                $employee->employee_birthday = $this->birthday;
                 
-                if(!$employer->save()) {
+                if(!$employee->save()) {
                     throw new \yii\db\Exception('Ошибка сохранения арендатора. Ошибка: ' . join(', ', $employer->getFirstErrors()));
                 }
                 
@@ -129,14 +129,14 @@ class EmployeeForm extends Model {
                 $user->status = User::STATUS_ENABLED;
                 // Загрузка фотографии
                 $user->uploadPhoto($file);
-                $user->link('employer', $employer);
+                $user->link('employee', $employee);
 
                 if(!$user->save(false)) {
                     throw new \yii\db\Exception('Ошибка сохранения арендатора. Ошибка: ' . join(', ', $user->getFirstErrors()));
                 }
                 
                 // Назначение роли пользователю
-                $user->setRole($this->role, $user->user_id);
+                $user->setRole($role, $user->user_id);
                 
                 // Устанавливаем права на добавление новостей
                 if ($this->is_new === 1) {

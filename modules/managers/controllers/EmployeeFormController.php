@@ -1,6 +1,8 @@
 <?php
 
     namespace app\modules\managers\controllers;
+    use Yii;
+    use yii\web\UploadedFile;
     use app\modules\managers\controllers\AppManagersController;
     use app\modules\managers\models\form\EmployeeForm;
     use app\models\Departments;
@@ -25,6 +27,16 @@ class EmployeeFormController extends AppManagersController {
 //        switch ($new_employee) {
 //            case '':
 //        }
+        
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $file = UploadedFile::getInstance($model, 'photo');
+            $model->photo = $file;
+            $employer_id = $model->addDispatcher($file, $new_employee);
+            if ($employer_id) {
+                return $this->redirect(['edit-specialist', 'specialist_id' => $employer_id]);
+            }
+        }
+        
         
         return $this->render('index', [
             'role' => $new_employee,

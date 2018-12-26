@@ -38,6 +38,20 @@ $this->params['breadcrumbs'][] = 'Новая запись [Сотрудник]';
             ]);
         ?>
 
+        <div class="profile-bg text-center">
+            <div class="face-container">
+                <?= Html::img('@web/images/new-user.png', [
+                        'class' => 'img-rounded face',
+                        'id' => 'photoPreview',
+                        'alt' => 'user-photo']) ?>
+            </div>
+            <div class="profile-upload-btn">
+                <?= $form->field($model, 'photo', ['template' => '<label class="text-center btn btn-upload" role="button">{input}{label}{error}'])
+                        ->input('file', ['id' => 'btnLoad', 'class' => 'hidden'])->label('Загрузить фото') ?>
+            </div>   
+        </div>
+    
+        
         <div class="row">
 
             <!--Пользователь-->

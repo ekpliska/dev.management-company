@@ -66,7 +66,7 @@ class AppManagersController extends Controller {
     public function actionShowPost($departmentId) {
         
         $department_list = Departments::find()
-                ->andWhere(['departments_id' => $departmentId])
+                ->andWhere(['department_id' => $departmentId])
                 ->asArray()
                 ->count();
         $post_list = Posts::find()
@@ -76,7 +76,7 @@ class AppManagersController extends Controller {
         
         if ($department_list > 0) {
             foreach ($post_list as $post) {
-                echo '<option value="' . $post['posts_id'] . '">' . $post['posts_name'] . '</option>';
+                echo '<option value="' . $post['post_id'] . '">' . $post['post_name'] . '</option>';
             }
         } else {
             echo '<option>-</option>';
