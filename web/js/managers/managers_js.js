@@ -177,15 +177,45 @@ $(document).ready(function() {
     /*
      * Загрузка данных о Сотруднике модальное окно "Удалить сотрудника"
      */
-    $('.delete_empl').on('show.bs.modal', function(e) {
+    $('#delete_employee_manager').on('show.bs.modal', function(e) {
         // Обращаемся к кнопке, которая открыла модальное окно
         var button = $(e.relatedTarget);
         // Получаем ее дата атрибут
-        var dataDis = button.data('employer');
+        var dataDis = button.data('employee');
         var dataFullName = button.data('fullName');
-        $('.delete_empl').find('#disp-fullname').text(dataFullName);
+        var roleUser = button.data('role');
+        $('#delete_employee_manager').find('#disp-fullname').text(dataFullName);
         $(this).find('#confirm_delete-empl').data('employer', dataDis);
+        $(this).find('#confirm_delete-empl').data('role', roleUser);
     });    
+
+    /*
+     * Запрос на удаление профиля сотрудника
+     */
+    $('.delete_empl__del').on('click', function(){
+        var employerId = $(this).data('employer');
+        var role = $(this).data('role');
+        $.ajax({
+            url: 'query-delete-employee',
+            method: 'POST',
+            dataType: 'json',
+            data: {
+                employerId: employerId,
+                role: role,
+            },
+            success: function(response) {
+                if (response.isClose === true) {                
+                    $('#delete_disp_manager_message').modal('show');
+                } else if (response.isClose === false) {
+                    console.log('все заявки закрыты');
+                }
+            },
+            error: function(){
+                console.log('Error #2000');
+            },
+        });
+    });
+
 
     /*
      * Запрос на удаление профиля сотрудника (Диспетчер)

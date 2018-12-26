@@ -6,6 +6,7 @@
     use kartik\date\DatePicker;
     use app\helpers\FormatHelpers;
     use app\modules\managers\widgets\AlertsShow;
+    use app\modules\managers\widgets\ModalWindowsManager;
 
 /* 
  * Рендер вида, профиль сотрудника
@@ -83,9 +84,13 @@ $this->params['breadcrumbs'][] = $employee_info->fullName;
                     <?php endif; ?>                    
                     
                     <?= Html::button('Удалить', [
-                                'class' => 'btn-delete-user',
-                                'data-user' => $user_info->user_id]) 
-                    ?>
+                            'class' => 'btn-delete-user',
+                            'data-target' => '#delete_employee_manager',
+                            'data-toggle' => 'modal',
+                            'data-role' => $type,
+                            'data-employee' => $employee_info->id,
+                            'data-full-name' => $employee_info->fullName,]) ?>
+                    
                 </div>
                 
                 <div class="status-block">
@@ -183,7 +188,7 @@ $this->params['breadcrumbs'][] = $employee_info->fullName;
         
     </div>            
 </div>
-
+<?= ModalWindowsManager::widget(['modal_view' => 'delete_employee']) ?>
 <?php /*        
     <div class="col-md-4">
         <div class="text-center">

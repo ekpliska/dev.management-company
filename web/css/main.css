@@ -592,6 +592,52 @@ button#send-request-to-sms:focus{
 }
 /* Конец Кнопка поиска по запросу */
 
+/* Кнопка, Просмтр, таблица */
+.btn-edit-in-table {
+    padding: 10px 30px;
+    border: 2px solid #2d18b4;
+    color: #fc3838;
+    border-radius: 12px;
+    text-transform: uppercase;
+    font-size: 12px;
+    background: #fff;
+    font-weight: 900;
+    outline: none;
+}
+.btn-edit-in-table::before {
+    content: '\0270E';
+    padding: 0 5px 0 0;
+}
+.btn-edit-in-table:hover {
+    background-color: #2d18b4;
+    box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
+    color: #fff;
+}
+/* Конец Кнопка, Просмтр, таблица */
+
+/* Кнопка, Удалить, таблица */
+.btn-delete-in-table {
+    padding: 10px 30px;
+    border: 2px solid #ef693a;
+    color: #fc3838;
+    border-radius: 12px;
+    text-transform: uppercase;
+    font-size: 12px;
+    background: #fff;
+    font-weight: 900;
+    outline: none;
+}
+.btn-delete-in-table::before {
+    content: '\02715';
+    padding: 0 5px 0 0;
+}
+.btn-delete-in-table:hover {
+    background-color: #ef693a;
+    box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
+    color: #fff;
+}
+/* Конец Кнопка, Удалить, таблица */
+
 /* Собственник, главная страница, Новости */
 .news-lists {
     margin-top: 170px;
@@ -2371,7 +2417,8 @@ input[name="date_end-period-pay"]:focus {
     font-size: 18px;
 }
 .modal-header .close {
-    margin: 0 !important;
+    /*margin: 0 !important;*/
+    margin: -10px !important;
 }
 .modal-close-btn {
     box-sizing: border-box;
@@ -2394,6 +2441,13 @@ input[name="date_end-period-pay"]:focus {
     border: none;
     padding: 20px 0;
     text-align: center;
+}
+.modal-body {
+    color: #fff;
+    text-align: left;
+}
+.modal-body span#disp-fullname {
+    font-family: "Mplus 1p Bold";
 }
 /* Конец Переопреденное модальное окно бутстрапа */
 
