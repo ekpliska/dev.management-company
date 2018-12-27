@@ -13,6 +13,8 @@
     use app\modules\managers\models\form\RequestForm;
     use app\models\Houses;
     use app\models\Employees;
+    use app\modules\managers\models\Dispatchers;
+    use app\modules\managers\models\Specialists;
 
 /*
  * Общий контроллер модуля Managers
@@ -165,20 +167,21 @@ class AppManagersController extends Controller {
         $employee_id = Yii::$app->request->post('employerId');
         $role = Yii::$app->request->post('role');
 
-        $url = $role == 'administrator' ? 'managers' : $role;        
-        
         if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
             
-            switch ($type) {
+            switch ($role) {
                 case 'dispatcher':
                     $requests = Dispatchers::findRequestsNotClose($employee_id);
+                    $url = 'employees/dispatchers';
                     break;
                 case 'specialist':
                     $requests = Specialists::findRequestsNotClose($employee_id);
+                    $url = 'employees/specialists';
                     break;
                 case 'administrator':
                     $requests = false;
+                    $url = 'managers/index';
                     break;
                 default:
                     $requests = false;
@@ -196,7 +199,7 @@ class AppManagersController extends Controller {
                 return $this->redirect(Yii::$app->request->referrer);
             }
             Yii::$app->session->setFlash('success', ['message' => "Профиль сотрудника {$employee->fullName} успешно удален из системы"]);
-            return $this->redirect(["{$url}/index"]);
+            return $this->redirect(["{$url}"]);
         }
         return ['status' => false];
         
