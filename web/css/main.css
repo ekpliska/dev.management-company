@@ -556,6 +556,29 @@ button#send-request-to-sms:focus{
 }
 /* Конец Кнопка удалить пользователя */
 
+/* Кнопка сменить пароль пользователя */
+.btn-change-password {
+    padding: 3px 10px;
+    border: 1px solid #1fd68d;
+    border-radius: 12px;
+    background-color: #1fd68d;
+    color: #fff;
+    font-size: 10px;
+    letter-spacing: 0.9px;
+    text-transform: uppercase;
+    outline: none;
+}
+.btn-change-password:hover,
+.btn-change-password:focus,
+.btn-change-password:active {
+    color: #fff;
+    background-color: #39c13b;
+    border-color: #39c13b;
+    box-shadow: 4px 4px 6px 2px rgba(55,35,35,0.32);
+    outline: none;
+}
+/* Конец Кнопка удалить пользователя */
+
 /* Кнопка, отправить квитанцию, администратор */
 .send-receipts {
     width: 55px;

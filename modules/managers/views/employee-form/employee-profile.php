@@ -7,6 +7,7 @@
     use app\helpers\FormatHelpers;
     use app\modules\managers\widgets\AlertsShow;
     use app\modules\managers\widgets\ModalWindowsManager;
+    use app\modules\managers\widgets\ConfirmChangePassword;
 
 /* 
  * Рендер вида, профиль сотрудника
@@ -68,6 +69,12 @@ $this->params['breadcrumbs'][] = $employee_info->fullName;
                 </div>
                 
                 <div class="control-block">
+                    
+                    <?= Html::button('Сменить пароль', [
+                            'class' => 'btn-change-password',
+                            'data-target' => '#change_employee_password',
+                            'data-toggle' => 'modal']) 
+                    ?>
                     
                     <?php if ($user_info->status == 1) : ?>
                         <?= Html::button('Заблокировать', [
@@ -189,3 +196,4 @@ $this->params['breadcrumbs'][] = $employee_info->fullName;
     </div>            
 </div>
 <?= ModalWindowsManager::widget(['modal_view' => 'delete_employee']) ?>
+<?= ConfirmChangePassword::widget(['user_id' => $user_info->user_id]) ?>

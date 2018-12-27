@@ -9,8 +9,7 @@
     use app\modules\managers\models\User;
     use app\models\Employees;
     use app\modules\managers\models\Posts;
-    use app\modules\managers\models\Dispatchers;
-    use app\modules\managers\models\Specialists;
+    use app\modules\managers\models\form\ChangePasswordAdministrator;
 
 /**
  * Единый контролер для обработки формы добавления нового сотрудника (пользователя) в систему
@@ -102,6 +101,23 @@ class EmployeeFormController extends AppManagersController {
         ]);
         
     }
+    
+    /*
+     * Смена пароля пользователя администратором
+     */
+    public function actionChangePassword($user_id) {
         
+        $user = User::findByID($user_id);
+        $model = new ChangePasswordAdministrator($user);
+        
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            if ($model->changePassword()) {
+                Yii::$app->session->setFlash('success', ['message' => "Пароль пользователя {$user->user_login} был успешно изменен"]);
+                return $this->redirect(Yii::$app->request->referrer);
+            }
+            Yii::$app->session->setFlash('error', ['message' => 'Во время смены пароля произошла ошибка. Обновите страницу и повторите действие заново']);
+            return $this->redirect(Yii::$app->request->referrer);
+        }
+    }
     
 }

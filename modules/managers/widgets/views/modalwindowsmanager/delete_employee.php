@@ -14,7 +14,7 @@ Modal::begin([
     'id' => 'delete_employee_manager',
     'header' => 'Внимание!',
     'closeButton' => [
-        'class' => 'close modal-close-btn changes_rent__close',
+        'class' => 'close modal-close-btn',
     ],
     'clientOptions' => [
         'backdrop' => 'static', 
