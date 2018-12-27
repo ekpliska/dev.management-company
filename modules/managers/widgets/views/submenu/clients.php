@@ -9,8 +9,13 @@
  */    
 ?>
 <?php if (
-        (Yii::$app->controller->id == 'clients' || Yii::$app->controller->id == 'managers' || Yii::$app->controller->id == 'employees') 
-        && (Yii::$app->controller->action->id == 'index' || Yii::$app->controller->action->id == 'dispatchers')) : ?>
+        (Yii::$app->controller->id == 'clients' 
+            || Yii::$app->controller->id == 'managers' 
+            || Yii::$app->controller->id == 'employees') 
+        && (Yii::$app->controller->action->id == 'index' 
+                || Yii::$app->controller->action->id == 'dispatchers'
+                || Yii::$app->controller->action->id == 'specialists')
+        ) : ?>
     <div class="container-fluid submenu-manager text-center">
         <ul class="nav navbar-nav navbar-left">
             <li>

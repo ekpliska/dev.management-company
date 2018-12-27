@@ -1,7 +1,6 @@
 <?php
 
     use yii\helpers\Html;
-    use yii\widgets\ActiveForm;
     use yii\widgets\Breadcrumbs;
     use app\modules\managers\widgets\AlertsShow;
     use app\modules\managers\widgets\ModalWindowsManager;
@@ -28,6 +27,8 @@ $this->params['breadcrumbs'][] = 'Диспетчеры';
     <?= Html::a('', ['employee-form/index', 'new_employee' => 'dispatcher'], ['class' => 'create-request-btn']) ?>
     
 </div>
+
+<?= ModalWindowsManager::widget(['modal_view' => 'delete_employee']) ?>
 
 <?php /*
 <div class="dispatchers-default-index">
