@@ -621,7 +621,9 @@ textarea {
     font-weight: normal;
     font-size: 12px;
 }
-.field input.krajee-datepicker {
+.field input.krajee-datepicker,
+.field input[id="voting-voting_date_start"],
+.field input[id="voting-voting_date_end"] {
     outline: none;
     box-shadow: none;
     border: none;

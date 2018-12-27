@@ -3161,3 +3161,67 @@ a.sub-menu-item {
     padding: 30px;
 }
 /* Конец Создание нового сотрудника */
+
+/* Голосование, главная страница */
+/* Конец Голосование, главная страница */
+
+/* Голосование, форма создания/редактирования голосования */
+.create-vote-profile {}
+.cover-vote {
+    border: 1px solid #ddd;
+    min-height: 700px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    display: block;
+    position: relative;
+    overflow: hidden;
+}
+.cover-vote img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+.form-vote {
+    border: 1px solid #ddd;
+    border-top: none;
+}
+.form-vote-questions {
+    border: 1px solid #ddd;
+    border-top: none;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.upload-btn-wrapper {
+/*    position: relative;
+    overflow: hidden;
+    display: inline-block;*/
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+
+.btn-upload-cover {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.32);
+    padding: 10px 70px 0 70px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: bold;
+}
+.btn-upload-cover:hover {
+    box-shadow: 0px 1px 6px 1px rgba(55,35,35,0.32);
+}
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+/* Конец Голосование, форма создания/редактирования голосования */

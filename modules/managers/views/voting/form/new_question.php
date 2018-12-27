@@ -11,7 +11,7 @@
         'name' => "Questions[$key][questions_text]",
     ])->label(false) ?>
     
-    <?= \app\modules\managers\widgets\Vote::widget(['question_id' => $key]) ?>
+    <?php // = \app\modules\managers\widgets\Vote::widget(['question_id' => $key]) ?>
 </td>
 <td>
     <?php if ($status !== 1) : ?>
