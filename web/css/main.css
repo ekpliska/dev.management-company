@@ -559,9 +559,9 @@ button#send-request-to-sms:focus{
 /* Кнопка сменить пароль пользователя */
 .btn-change-password {
     padding: 3px 10px;
-    border: 1px solid #1fd68d;
+    border: 1px solid #8f55e9;
     border-radius: 12px;
-    background-color: #1fd68d;
+    background-color: #8f55e9;
     color: #fff;
     font-size: 10px;
     letter-spacing: 0.9px;
@@ -572,8 +572,8 @@ button#send-request-to-sms:focus{
 .btn-change-password:focus,
 .btn-change-password:active {
     color: #fff;
-    background-color: #39c13b;
-    border-color: #39c13b;
+    background-color: #6e39c4;
+    border-color: #6e39c4;
     box-shadow: 4px 4px 6px 2px rgba(55,35,35,0.32);
     outline: none;
 }
