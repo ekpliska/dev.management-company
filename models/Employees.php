@@ -88,7 +88,19 @@ class Employees extends ActiveRecord
                 ->andWhere(['!=', 'status', StatusRequest::STATUS_CLOSE])
                 ->asArray()
                 ->all();
-    }    
+    }
+    
+    /*
+     * После удаления сотрудника, удаляем также профиль пользователя
+     */
+    public function afterDelete() {
+        
+        $user = User::findByEmployeeId($this->employee_id);
+        $user->delete(false);
+        
+        parent::afterDelete();
+        
+    }
     
     /**
      * Метки полей

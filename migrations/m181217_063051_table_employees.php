@@ -34,6 +34,7 @@ class m181217_063051_table_employees extends Migration
         ]);
         $this->createIndex('idx-posts-post_id', '{{%posts}}', 'post_id');
         
+        // Сотрудники
         $this->createTable('{{%employees}}', [
             'employee_id' => $this->primaryKey(),
             'employee_name' => $this->string(70)->notNull(),
@@ -75,7 +76,16 @@ class m181217_063051_table_employees extends Migration
                 'RESTRICT',
                 'CASCADE'
         );
-        
+
+        $this->addForeignKey(
+                'fk-user-user_employee_id', 
+                '{{%user}}', 
+                'user_employee_id', 
+                '{{%employees}}', 
+                'employee_id', 
+                'CASCADE',
+                'CASCADE'
+        );        
 
     }
 
@@ -91,6 +101,8 @@ class m181217_063051_table_employees extends Migration
         $this->addForeignKey('fk-posts-posts_department_id', '{{%posts}}');
         $this->dropForeignKey('fk-employees-employee_department_id', '{{%employees}}');
         $this->dropForeignKey('fk-employees-employee_posts_id', '{{%employees}}');
+        
+        $this->addForeignKey('fk-user-user_employee_id', '{{%user}}');
         
         $this->dropTable('{{%departments}}');
         $this->dropTable('{{%posts}}');

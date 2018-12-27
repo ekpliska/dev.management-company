@@ -139,7 +139,7 @@ class User extends ActiveRecord implements IdentityInterface
     }
     
     /*
-     * Свзяь с таблицей Сотрудники
+     * Связь с таблицей Сотрудники
      */
     public function getEmployee() {
         return $this->hasOne(Employees::className(), ['employee_id' => 'user_employee_id']);

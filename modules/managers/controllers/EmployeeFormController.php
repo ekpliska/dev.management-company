@@ -111,6 +111,8 @@ class EmployeeFormController extends AppManagersController {
         
         $employee_id = Yii::$app->request->post('employerId');
         $role = Yii::$app->request->post('role');
+
+        $url = $role == 'administrator' ? 'managers' : $role;        
         
         if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
@@ -137,15 +139,11 @@ class EmployeeFormController extends AppManagersController {
             // Не закрытых заявок нет, сотрудника удаляем
             $employee = Employees::findOne($employee_id);
             if (!$employee->delete()) {
-                Yii::$app->session->setFlash('delete-employer', [
-                    'success' => false, 
-                    'error' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз']);
+                Yii::$app->session->setFlash('error', ['message' => "При удалении профиля пользователя {$employee->fullName} произошла ошибка. Обновите страницу и повторите действие заново"]);
             }
-            Yii::$app->session->setFlash('delete-employer', [
-                'success' => true, 
-                'message' => 'Сотрудник ' . $employee->fullName . ' и его учетная запись были удалены из системы']);
+            Yii::$app->session->setFlash('success', ['message' => "Профиль сотрудника {$employee->fullName} успешно удален из системы"]);
             
-            return $this->redirect('dispatchers');
+            return $this->redirect(["{$url}/index"]);
         }
         return ['status' => false];
         
