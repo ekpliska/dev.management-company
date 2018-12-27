@@ -9,6 +9,9 @@
 <div class="grid-view">
     <?= GridView::widget([
         'dataProvider' => $dispatchers,
+        'tableOptions' => [
+            'class' => 'table managers-table',
+        ],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             [

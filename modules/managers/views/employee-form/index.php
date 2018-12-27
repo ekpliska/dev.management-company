@@ -9,9 +9,25 @@
 /* 
  * Форма добавления нового сотрудника
  */
-$this->title = 'Администраторы';
-$this->title = Yii::$app->params['site-name-manager'] .  'Администраторы';
-$this->params['breadcrumbs'][] = ['label' => 'Администраторы', 'url' => ['managers/index']];
+    
+$array_url = [
+    'administrator' => [
+        'label' => 'Администраторы',
+        'url' => 'managers/index',
+    ],
+    'dispatcher' => [
+        'label' => 'Диспетчеры',
+        'url' => 'employees/dispatchers',
+    ],
+    'specialist' => [
+        'label' => 'Специалисты',
+        'url' => 'employees/specialists',
+    ],
+];
+
+$this->title = $array_url[$role]['label'];
+$this->title = Yii::$app->params['site-name-manager'] . $array_url[$role]['label'];
+$this->params['breadcrumbs'][] = ['label' => $array_url[$role]['label'], 'url' => [$array_url[$role]['url']]];
 $this->params['breadcrumbs'][] = 'Новая запись [Сотрудник]';
 ?>
 <div class="manager-main">

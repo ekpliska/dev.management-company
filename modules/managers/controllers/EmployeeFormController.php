@@ -27,7 +27,6 @@ class EmployeeFormController extends AppManagersController {
         
         $department_list = Departments::getArrayDepartments();
         $post_list = [];
-        $roles = User::getRoles();
         
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $file = UploadedFile::getInstance($model, 'photo');
@@ -47,7 +46,6 @@ class EmployeeFormController extends AppManagersController {
             'model' => $model,
             'department_list' => $department_list,
             'post_list' => $post_list,
-            'roles' => $roles,
         ]);
     }
     
