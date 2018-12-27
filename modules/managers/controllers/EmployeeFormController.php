@@ -34,7 +34,7 @@ class EmployeeFormController extends AppManagersController {
             $file = UploadedFile::getInstance($model, 'photo');
             $model->photo = $file;
             $employee_id = $model->addDispatcher($file, $new_employee);
-            if ($employee_id) {
+            if ($employee_id != null) {
                 return $this->redirect(['employee-profile', 
                     'type' => $new_employee,
                     'employee_id' => $employee_id]);
