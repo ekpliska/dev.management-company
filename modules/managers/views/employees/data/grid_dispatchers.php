@@ -51,6 +51,9 @@
             ],
             [
                 'class' => 'yii\grid\ActionColumn',
+                'contentOptions' =>[
+                    'class' => 'managers-table_big',
+                ],
                 'template' => '{edit-dispatcher} {delete-dispatcher}',
                 'buttons' => [
                     'edit-dispatcher' => function ($url, $data) {                        

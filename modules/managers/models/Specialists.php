@@ -1,27 +1,29 @@
 <?php
 
     namespace app\modules\managers\models;
-    use app\models\Employers;
-//    use app\models\PaidServices;
+    use app\models\Employees;
     use app\models\StatusRequest;
 
 /**
  * Специалисты
  */
-class Specialists extends Employers {
+class Specialists extends Employees {
     
     public static function getListSpecialists() {
         
         $query = (new \yii\db\Query)
-                ->select('e.employers_id as id, '
-                        . 'e.employers_surname as surname, e.employers_name as name, e.employers_second_name as second_name,'
-                        . 'u.user_login as login,'
+                ->select('e.employee_id as id, '
+                        . 'e.employee_surname as surname, e.employee_name as name, e.employee_second_name as second_name,'
+                        . 'd.department_name as department_name, p.post_name as post_name,'
+                        . 'u.user_login as login, u.last_login as last_login,'
                         . 'au.item_name as role')
-                ->from('employers as e')
-                ->join('LEFT JOIN', 'user as u', 'e.employers_id = u.user_employer_id')                
+                ->from('employees as e')
+                ->join('LEFT JOIN', 'user as u', 'e.employee_id = u.user_employee_id')
+                ->join('LEFT JOIN', 'departments as d', 'e.employee_department_id = d.department_id')
+                ->join('LEFT JOIN', 'posts as p', 'e.employee_posts_id = p.post_id')
                 ->join('LEFT JOIN','auth_assignment as au','au.user_id = u.user_id')
                 ->where(['au.item_name' => 'specialist'])
-                ->orderBy(['e.employers_surname' => SORT_ASC]);
+                ->orderBy(['e.employee_surname' => SORT_ASC]);
         
         return $query;
         

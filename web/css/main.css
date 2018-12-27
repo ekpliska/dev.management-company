@@ -3119,6 +3119,7 @@ a.sub-menu-item {
     text-align: right;
 }
 .status-block span.role-administrator,
+.status-block span.role-specialist,
 .status-block span.role-dispatcher {
     padding: 2px 0px;
     color: #fff;

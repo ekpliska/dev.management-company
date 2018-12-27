@@ -15,7 +15,7 @@ class Dispatchers extends Employees {
                 ->select('e.employee_id as id, '
                         . 'e.employee_surname as surname, e.employee_name as name, e.employee_second_name as second_name,'
                         . 'd.department_name as department_name, p.post_name as post_name,'
-                        . 'u.user_login as login,'
+                        . 'u.user_login as login, u.last_login as last_login,'
                         . 'au.item_name as role')
                 ->from('employees as e')
                 ->join('LEFT JOIN', 'user as u', 'e.employee_id = u.user_employee_id')
