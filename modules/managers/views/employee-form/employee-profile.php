@@ -196,12 +196,17 @@ $this->params['breadcrumbs'][] = $employee_info->fullName;
                     
                 </div>
             </div>
-        
-            <?php if ($type == 'dispatcher') : ?>
-            <?php endif; ?>
 
             <div class="spam-agree-txt text-center">
-                <div class="save-btn-group mx-auto">
+                
+                <?php if ($type == 'dispatcher') : ?>
+                    <div class="dispatch-privileges-block">
+                        <?= Html::checkbox('can-add-news', false, ['id' => 'can-add-news']) ?>
+                        <label for="can-add-news">Возможность добавлять новости</label>
+                    </div>
+                <?php endif; ?>
+                
+                <div class="save-btn-group">
                     <div class="text-center">
                         <?= Html::submitButton('Сохранить изменения', ['class' => 'btn blue-btn']) ?>
                     </div>

@@ -3156,4 +3156,7 @@ a.sub-menu-item {
 .btn-upload label {
     color: #fff;
 }
+.dispatch-privileges-block {
+    padding: 30px;
+}
 /* Конец Создание нового сотрудника */

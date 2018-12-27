@@ -30,9 +30,12 @@ class EmployeeFormController extends AppManagersController {
         $post_list = [];
         
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            
             $file = UploadedFile::getInstance($model, 'photo');
             $model->photo = $file;
-            $employee_id = $model->addDispatcher($file, $new_employee);
+            
+            $employee_id = $model->addEmployer($file, $new_employee);
+            
             if ($employee_id != null) {
                 return $this->redirect(['employee-profile', 
                     'type' => $new_employee,

@@ -101,7 +101,7 @@ class EmployeeForm extends Model {
     /*
      * Метод отвечает за добавление сведений о новом сотруднике и создание учетной записи для него
      */
-    public function addDispatcher($file, $role) {
+    public function addEmployer($file, $role) {
         
         $transaction = Yii::$app->db->beginTransaction();
         try {
