@@ -9,26 +9,45 @@
 <div class="grid-view">
     <?= GridView::widget([
         'dataProvider' => $dispatchers,
+        'layout' => '{items}{pager}',
         'tableOptions' => [
             'class' => 'table managers-table',
         ],
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+//            ['class' => 'yii\grid\SerialColumn'],
             [
-                'attribute' => 'surname',
-                'header' => 'Фамилия',
+                'attribute' => 'id',
+                'header' => 'ID',
+                'contentOptions' =>[
+                    'class' => 'managers-table_small',
+                ],
             ],
             [
-                'attribute' => 'name',
-                'header' => 'Имя',
-            ],
+                'header' => 'Фамилия <br /> имя отчество',
+                'value' => function ($data) {
+                    return $data['surname'] . ' ' .
+                            $data['name'] . ' ' .
+                            $data['second_name'];
+                },
+                'contentOptions' => [
+                    'class' => 'managers-managers-table_big managers-table_left',
+                ],
+            ],            
             [
-                'attribute' => 'second_name',
-                'header' => 'Отчество',
+                'attribute' => 'department_name',
+                'header' => 'Подразделение',
+            ],                        
+            [
+                'attribute' => 'post_name',
+                'header' => 'Должность',
             ],
             [
                 'attribute' => 'login',
                 'header' => 'Логин',
+            ],
+            [
+                'attribute' => 'last_login',
+                'header' => 'Последний раз был',
             ],
             [
                 'class' => 'yii\grid\ActionColumn',
@@ -38,12 +57,13 @@
                         return 
                             Html::a('Просмотр', 
                                     [
-                                        'employers/edit-dispatcher',
-                                        'dispatcher_id' => $data['id'],
+                                        'employee-form/employee-profile',
+                                        'type' => 'dispatcher',
+                                        'employee_id' => $data['id'],
                                     ], 
                                     [
                                         'data-pjax' => false,
-                                        'class' => 'btn btn-info btn-sm',
+                                        'class' => 'btn btn-sm btn-edit-in-table',
                                     ]
                             );
                     },
@@ -52,10 +72,11 @@
                         return 
                             Html::button('Удалить', [
                                 'data-pjax' => false,
-                                'class' => 'btn btn-danger btn-sm delete_dispatcher',
-                                'data-target' => '#delete_disp_manager',
+                                'class' => 'btn btn-sm btn-delete-in-table',
+                                'data-target' => '#delete_employee_manager',
                                 'data-toggle' => 'modal',
-                                'data-employer' => $data['id'],
+                                'data-role' => 'dispatcher',
+                                'data-employee' => $data['id'],
                                 'data-full-name' => $full_name,
                             ]);
                     },

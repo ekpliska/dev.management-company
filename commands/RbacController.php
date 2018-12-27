@@ -43,7 +43,7 @@ class RbacController extends Controller {
         $auth->add($clients_rent);        
         
         $dispatcher = $auth->createRole('dispatcher');
-        $dispatcher->description = 'Сотрудник (Диспетчер)';
+        $dispatcher->description = 'Диспетчер';
         $auth->add($dispatcher);        
         
         $specialist = $auth->createRole('specialist');

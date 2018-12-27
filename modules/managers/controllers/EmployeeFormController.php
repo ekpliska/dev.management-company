@@ -10,6 +10,7 @@
     use app\models\Employees;
     use app\modules\managers\models\Posts;
     use app\modules\managers\models\form\ChangePasswordAdministrator;
+    use yii\web\NotFoundHttpException;
 
 /**
  * Единый контролер для обработки формы добавления нового сотрудника (пользователя) в систему
@@ -55,14 +56,14 @@ class EmployeeFormController extends AppManagersController {
     public function actionEmployeeProfile($type, $employee_id) {
         
         if ($type == null || $employee_id == null) {
-            throw new \yii\web\NotFoundHttpException('Вы обратились к несуществующей странице');
+            throw new NotFoundHttpException('Вы обратились к несуществующей странице');
         }
 
         $employee_info = Employees::findByID($employee_id);
         $user_info = User::findByEmployeeId($employee_id);
         
         if ($employee_info === null && $user_info === null) {
-            throw new \yii\web\NotFoundHttpException('Вы обратились к несуществующей странице');
+            throw new NotFoundHttpException('Вы обратились к несуществующей странице');
         }
         
         $department_list = Departments::getArrayDepartments();

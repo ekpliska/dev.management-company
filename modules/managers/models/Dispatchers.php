@@ -12,12 +12,15 @@ class Dispatchers extends Employees {
     public static function getListDispatchers() {
         
         $query = (new \yii\db\Query)
-                ->select('e.employees_id as id, '
+                ->select('e.employee_id as id, '
                         . 'e.employee_surname as surname, e.employee_name as name, e.employee_second_name as second_name,'
+                        . 'd.department_name as department_name, p.post_name as post_name,'
                         . 'u.user_login as login,'
                         . 'au.item_name as role')
                 ->from('employees as e')
-                ->join('LEFT JOIN', 'user as u', 'e.employee_id = u.user_employee_id')                
+                ->join('LEFT JOIN', 'user as u', 'e.employee_id = u.user_employee_id')
+                ->join('LEFT JOIN', 'departments as d', 'e.employee_department_id = d.department_id')
+                ->join('LEFT JOIN', 'posts as p', 'e.employee_posts_id = p.post_id')
                 ->join('LEFT JOIN','auth_assignment as au','au.user_id = u.user_id')
                 ->where(['au.item_name' => 'dispatcher'])
                 ->orderBy(['e.employee_surname' => SORT_ASC]);
