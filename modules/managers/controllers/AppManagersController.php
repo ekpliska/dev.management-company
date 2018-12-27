@@ -12,6 +12,7 @@
     use app\modules\managers\models\User;
     use app\modules\managers\models\form\RequestForm;
     use app\models\Houses;
+    use app\models\Employees;
 
 /*
  * Общий контроллер модуля Managers
@@ -154,5 +155,51 @@ class AppManagersController extends Controller {
         
         return ['status' => false];
     }
+    
+    /*
+     * Запрос за удаление Сотрудника,
+     * Удаление со страницы Пользователя
+     */
+    public function actionQueryDeleteEmployee() {
+        
+        $employee_id = Yii::$app->request->post('employerId');
+        $role = Yii::$app->request->post('role');
+
+        $url = $role == 'administrator' ? 'managers' : $role;        
+        
+        if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            
+            switch ($type) {
+                case 'dispatcher':
+                    $requests = Dispatchers::findRequestsNotClose($employee_id);
+                    break;
+                case 'specialist':
+                    $requests = Specialists::findRequestsNotClose($employee_id);
+                    break;
+                case 'administrator':
+                    $requests = false;
+                    break;
+                default:
+                    $requests = false;
+                    break;
+            }
+            
+            // Имеются не закрытые заявки
+            if ($requests) {
+                return ['status' => true, 'isClose' => true];
+            }
+            // Не закрытых заявок нет, сотрудника удаляем
+            $employee = Employees::findOne($employee_id);
+            if (!$employee->delete()) {
+                Yii::$app->session->setFlash('error', ['message' => "При удалении профиля пользователя {$employee->fullName} произошла ошибка. Обновите страницу и повторите действие заново"]);
+                return $this->redirect(Yii::$app->request->referrer);
+            }
+            Yii::$app->session->setFlash('success', ['message' => "Профиль сотрудника {$employee->fullName} успешно удален из системы"]);
+            return $this->redirect(["{$url}/index"]);
+        }
+        return ['status' => false];
+        
+    }    
     
 }

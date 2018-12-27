@@ -77,10 +77,11 @@
                         return 
                             Html::button('Удалить', [
                                 'data-pjax' => false,
-                                'class' => 'btn btn-sm btn-delete-in-table delete_dispatcher',
-                                'data-target' => '#delete_disp_manager',
+                                'class' => 'btn btn-sm btn-delete-in-table',
+                                'data-target' => '#delete_employee_manager',
                                 'data-toggle' => 'modal',
-                                'data-employer' => $data['id'],
+                                'data-role' => 'administrator',
+                                'data-employee' => $data['id'],
                                 'data-full-name' => $full_name,
                             ]);
                     },

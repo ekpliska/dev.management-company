@@ -3,6 +3,7 @@
     use yii\widgets\Breadcrumbs;
     use yii\helpers\Html;
     use app\modules\managers\widgets\AlertsShow;
+    use app\modules\managers\widgets\ModalWindowsManager;
 
 /*
  * Администраторы
@@ -26,3 +27,5 @@ $this->params['breadcrumbs'][] = 'Администраторы';
     <?= Html::a('', ['employee-form/index', 'new_employee' => 'administrator'], ['class' => 'create-request-btn']) ?>
     
 </div>
+
+<?= ModalWindowsManager::widget(['modal_view' => 'delete_employee']) ?>

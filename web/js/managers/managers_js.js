@@ -196,7 +196,7 @@ $(document).ready(function() {
         var employerId = $(this).data('employer');
         var role = $(this).data('role');
         $.ajax({
-            url: 'query-delete-employee',
+            url: '/web/managers/app-managers/query-delete-employee',
             method: 'POST',
             dataType: 'json',
             data: {
@@ -204,6 +204,7 @@ $(document).ready(function() {
                 role: role,
             },
             success: function(response) {
+                console.log(response.employee);
                 if (response.isClose === true) {                
                     $('#delete_disp_manager_message').modal('show');
                 } else if (response.isClose === false) {
