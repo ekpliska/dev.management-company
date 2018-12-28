@@ -3190,6 +3190,43 @@ a.sub-menu-item {
 /* Конец Создание нового сотрудника */
 
 /* Голосование, главная страница */
+.vote-card {
+    display: flex;
+    width: 100%;
+    margin: 0 0 20px;
+}
+.vote-card__image {
+    width: 350px;
+    height: 200px;
+}
+.vote-card__image img {
+    height: 100%;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;    
+}
+.vote-card__content {
+    width: 100%;
+    padding: 0 20px;
+    border: 1px solid #ddd;
+    border-left: none;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;    
+}
+.vote-card__content h1 > span {
+    background: #2d18b4;
+    color: #fff;
+    padding: 5px 30px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: normal;
+}
+.vote-card__content_title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #2d18b4;
+}
 /* Конец Голосование, главная страница */
 
 /* Голосование, форма создания/редактирования голосования */

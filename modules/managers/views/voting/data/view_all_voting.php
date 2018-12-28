@@ -11,6 +11,31 @@
  */
 ?>
 <?php foreach ($view_all_voting as $voting) : ?>
+<div class="vote-card">
+    <div class="vote-card__image">
+        <?= Html::img('@web/' . $voting['voting_image'], [
+                'alt' => $voting['voting_title']]) ?>        
+    </div>
+    <div class="vote-card__content">
+        <h1 class="vote-card__content_title">
+            <?= Html::a($voting['voting_title'], ['voting/view', 'voting' => $voting['voting_id']]) ?>
+            <span>ID <?= $voting['voting_id'] ?></span>
+        </h1>
+        <div class="vote-card__content_info">
+            <div class="col-md-2">1</div>
+            <div class="col-md-4">1</div>
+            <div class="col-md-4">1</div>
+            <div class="col-md-2">1</div>
+            <span class="label label-success"><?= FormatHelpers::statusNameVoting($voting['status']) ?></span>
+            <span class="vote_status">1</span>
+            <span class="vote_status">1</span>
+            <span class="vote_status">1</span>
+        </div>
+    </div>
+</div>
+<?php endforeach; ?>
+<?php /*
+<?php foreach ($view_all_voting as $voting) : ?>
     <div class="col-md-12">
         <div class="col-md-2">
             <?= Html::img('@web/' . $voting['voting_image'], [
@@ -58,3 +83,5 @@
         'pagination' => $pages
     ]);
 ?>
+ * 
+ */ ?>

@@ -30,45 +30,45 @@ $action = Yii::$app->controller->action->id;
             
             <div class="upload-btn-wrapper">
             <?= $form->field($model, 'imageFile', ['template' => '<label class="text-center btn-upload-cover" role="button">{input}{label}{error}</label>'])
-                        ->input('file', ['id' => 'btnLoad', 'class' => 'hidden'])->label('<i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;Загрузить фото') ?>
+                    ->input('file', ['id' => 'btnLoad', 'class' => 'hidden'])->label('<i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;Загрузить фото') ?>
             </div>
             
             <div class="cover-block-title">
-<div class="col-md-6">
-                <?= $form->field($model->voting, 'voting_date_start', ['template' => '<div class="field"></i>{label}{input}{error}</div>'])
-                        ->widget(DateTimePicker::className(), [
-                            'id' => 'date_voting_start',
-                            'language' => 'ru',
-                            'options' => [
-                                'placeholder' => 'ГГГГ-ММ-ДД ЧЧ:ММ',
-                            ],
-                            'type' => DateTimePicker::TYPE_COMPONENT_APPEND,
-                            'pluginOptions' => [
-                                'autoClose' => true,
-                                'format' => 'yyyy-mm-dd hh:ii',
-                            ]])
-                    ->label($model->voting->getAttributeLabel('voting_date_start'), ['class' => 'date-label']) ?>
-            </div>
-            <div class="col-md-6">
-                <?= $form->field($model->voting, 'voting_date_end', ['template' => '<div class="field"></i>{label}{input}{error}</div>'])
-                        ->widget(DateTimePicker::className(), [
-                            'id' => 'date_voting_end',
-                            'language' => 'ru',
-                            'options' => [
-                                'placeholder' => 'ГГГГ-ММ-ДД ЧЧ:ММ',
-                            ],
-                            'type' => DateTimePicker::TYPE_COMPONENT_APPEND,
-                            'pluginOptions' => [
-                                'autoClose' => true,
-                                'format' => 'yyyy-mm-dd hh:ii',
-                            ]])
-                        ->label($model->voting->getAttributeLabel('voting_date_end'), ['class' => 'date-label']) ?> 
-            </div>
-            <div class="col-md-12">
-                <?= $form->field($model->voting, 'voting_title', ['template' => '<div class="field"></i>{label}{input}{error}</div>'])
-                        ->textInput(['class' => 'field-input'])
-                        ->label($model->voting->getAttributeLabel('voting_title'), ['class' => 'field-label'])?>
-            </div>                
+                <div class="col-md-6">
+                    <?= $form->field($model->voting, 'voting_date_start', ['template' => '<div class="field"></i>{label}{input}{error}</div>'])
+                            ->widget(DateTimePicker::className(), [
+                                'id' => 'date_voting_start',
+                                'language' => 'ru',
+                                'options' => [
+                                    'placeholder' => 'ГГГГ-ММ-ДД ЧЧ:ММ',
+                                ],
+                                'type' => DateTimePicker::TYPE_COMPONENT_APPEND,
+                                'pluginOptions' => [
+                                    'autoClose' => true,
+                                    'format' => 'yyyy-mm-dd hh:ii',
+                                ]])
+                            ->label($model->voting->getAttributeLabel('voting_date_start'), ['class' => 'date-label']) ?>
+                </div>
+                <div class="col-md-6">
+                    <?= $form->field($model->voting, 'voting_date_end', ['template' => '<div class="field"></i>{label}{input}{error}</div>'])
+                            ->widget(DateTimePicker::className(), [
+                                'id' => 'date_voting_end',
+                                'language' => 'ru',
+                                'options' => [
+                                    'placeholder' => 'ГГГГ-ММ-ДД ЧЧ:ММ',
+                                ],
+                                'type' => DateTimePicker::TYPE_COMPONENT_APPEND,
+                                'pluginOptions' => [
+                                    'autoClose' => true,
+                                    'format' => 'yyyy-mm-dd hh:ii',
+                                ]])
+                            ->label($model->voting->getAttributeLabel('voting_date_end'), ['class' => 'date-label']) ?> 
+                </div>
+                <div class="col-md-12">
+                    <?= $form->field($model->voting, 'voting_title', ['template' => '<div class="field"></i>{label}{input}{error}</div>'])
+                            ->textInput(['class' => 'field-input'])
+                            ->label($model->voting->getAttributeLabel('voting_title'), ['class' => 'field-label'])?>
+                </div>                
             </div>
             
         </div>

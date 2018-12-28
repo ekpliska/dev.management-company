@@ -22,7 +22,7 @@ class Voting extends ActiveRecord
     const STATUS_CANCEL = 2;
 
     const TYPE_FOR_ALL = 'all';
-    const TYPE_FOR_HOUSE = 'house';    
+    const TYPE_FOR_HOUSE = 'house';
     
     /**
      * Таблица БД
