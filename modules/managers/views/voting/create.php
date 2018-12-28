@@ -98,9 +98,45 @@ $this->params['breadcrumbs'][] = 'Новая запись [Голосовани�
             </div>            
         </div>
         <div class="row form-vote-questions">
+
+
+<style>
+
+</style>
+
+            
+<!--<label class="input-radio">One
+  <input type="radio" checked="checked" name="radio">
+  <span class="checkmark"></span>
+</label>            
+<label class="input-radio">One
+  <input type="radio" checked="checked" name="radio">
+  <span class="checkmark"></span>
+</label>            -->
+            
             <div class="col-md-4 housing-lists">
-                <?= $form->field($model->voting, 'voting_type')->radioList($type_voting)->label(false) ?>
+
+                
+                <?=
+                    $form->field($model->voting, 'voting_type')
+                        ->radioList($type_voting,
+                            [
+                                'item' => function($index, $label, $name, $checked, $value) {
+
+                                    $return = '<label class="input-radio">' . ucwords($label);
+                                    $return .= '<input type="radio" name="' . $name . '" value="' . $value . '">';
+                                    $return .= '<span class="checkmark"></span>';
+                                    $return .= '</label>';
+
+                                    return $return;
+                                }
+                            ]
+                        )
+                    ->label(false);
+                    ?>                
+                
             </div>
+            
             <div class="col-md-8 questions-list">
                 <fieldset>
         <legend>Вопросы

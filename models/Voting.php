@@ -21,8 +21,8 @@ class Voting extends ActiveRecord
     // Отменено
     const STATUS_CANCEL = 2;
 
-    const TYPE_ALL_HOUSE = 0;
-    const TYPE_PORCH = 1;    
+    const TYPE_FOR_ALL = 'all';
+    const TYPE_FOR_HOUSE = 'house';    
     
     /**
      * Таблица БД
@@ -94,8 +94,8 @@ class Voting extends ActiveRecord
      */
     public static function getTypeVoting() {
         return [
-            self::TYPE_ALL_HOUSE => 'Для дома',
-            self::TYPE_PORCH => 'Подьезд',
+            self::TYPE_FOR_ALL => 'Для всех',
+            self::TYPE_FOR_HOUSE =>'Для конкретного дома',
         ];
     }
     
