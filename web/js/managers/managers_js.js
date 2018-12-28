@@ -710,6 +710,13 @@ $(document).ready(function() {
             $('#house-lists').prop('disabled', false);
         }
     });
+    
+    /*
+     * При выборе Адреса на форме голосование, автоматически устанавливаем переключатель "Для конкретного дома"
+     */
+    $('#house-lists').on('change', function() {
+        $('#type-vote_1').prop('checked', true);
+    });
 
     $('#delete_voting_manager').on('show.bs.modal', function(e){
         var votingId = $(e.relatedTarget).data('voting');

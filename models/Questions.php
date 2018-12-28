@@ -54,7 +54,7 @@ class Questions extends ActiveRecord
         return [
             'questions_id' => 'Questions ID',
             'questions_voting_id' => 'Questions Voting ID',
-            'questions_text' => 'Текст вопроса',
+            'questions_text' => 'Вопрос',
             'questions_user_id' => 'Пользователь',
             'created_at' => 'Дата создания вопроса',
             'updated_at' => 'Дата одновления вопроса',

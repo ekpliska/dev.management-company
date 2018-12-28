@@ -1002,7 +1002,8 @@ button#send-request-to-sms:focus{
 .modal-confirm {
     text-align: center;
     color: #fff;
-    font-size: 16px;    
+    font-size: 16px;
+    padding: 20px;
 }
 /* Кoнец Страница Профиль пользователя */
 
@@ -2462,7 +2463,7 @@ input[name="date_end-period-pay"]:focus {
 }
 .modal-footer {
     border: none;
-    padding: 20px 0;
+    padding: 20px 10px;
     text-align: center;
 }
 .modal-body {
@@ -3220,9 +3221,9 @@ a.sub-menu-item {
   top: 0;
   opacity: 0;
 }
-.housing-lists {
+.questions-list {
     min-height: 700px;
-    border-right: 1px solid #ddd;
+    border-left: 1px solid #ddd;
 }
 #title-block-of-questions {
     text-align: center;
@@ -3248,6 +3249,9 @@ a.sub-menu-item {
     font-size: 17px;
     padding: 0 5px;
 }
+.vote-btn-block {
+    margin: 50px 0;
+}
 /* Конец Голосование, форма создания/редактирования голосования */
 
 /* Таблица на форме создания голосования */
@@ -3266,7 +3270,8 @@ a.sub-menu-item {
 .btn-delete-question,
 .btn-delete-question:hover,
 .btn-delete-question:focus {
-    color: red;
+    color: #fb6d5b;
     background: transparent;
+    outline: none;
 }
 /* Конец Таблица на форме создания голосования */

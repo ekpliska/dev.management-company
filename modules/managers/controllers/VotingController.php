@@ -103,7 +103,9 @@ class VotingController extends AppManagersController {
         
         $model->setAttributes(Yii::$app->request->post());
         
-        $type_voting = Voting::getTypeVoting();        
+        $type_voting = Voting::getTypeVoting();
+        
+        $houses_array = Houses::getAdressHousesList();
         
         if (Yii::$app->request->post()) {
             
@@ -131,7 +133,8 @@ class VotingController extends AppManagersController {
         }
         return $this->render('view', [
             'model' => $model,
-            'type_voting' => $type_voting]);
+            'type_voting' => $type_voting,
+            'houses_array' => $houses_array]);
     }
     
     /*

@@ -45,6 +45,7 @@ $this->title = $model->voting->voting_title;
     <?= $this->render('form/_form', [
             'model' => $model,
             'type_voting' => $type_voting,
+            'houses_array' => $houses_array,
     ]) ?>
     
 </div>

@@ -225,7 +225,7 @@ class Voting extends ActiveRecord
             'voting_text' => 'Описание голосования',
             'voting_date_start' => 'Дата начала голосования',
             'voting_date_end' => 'Дата окончания голосования',
-            'voting_house_id' => 'Voting House',
+            'voting_house_id' => 'Адресс',
             'voting_image' => 'Обложка',
             'status' => 'Статус',
             'created_at' => 'Дата создания голосования',

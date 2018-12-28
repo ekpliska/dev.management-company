@@ -1,5 +1,8 @@
 <?php
 
+    use yii\bootstrap\Modal;
+    use yii\helpers\Html;
+
 /* 
  * Модальное окно
  * Удалить голосование
@@ -56,7 +59,36 @@
 </div>
 
 <?php /* Удаление вопроса */ ?>
-<div class="modal fade delete_question_vote" id="delete_question_vote_message" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
+
+<?php /* Удаление вопроса */ ?>
+<?php
+Modal::begin([
+    'id' => 'delete_question_vote_message',
+    'header' => 'Внимание!',
+    'closeButton' => [
+        'class' => 'close modal-close-btn',
+    ],
+    'clientOptions' => [
+        'backdrop' => 'static', 
+        'keyboard' => false,
+    ],
+    'bodyOptions' => [
+        'class' => 'delete_question_vote',
+    ],
+]);
+?>
+
+    <p class="modal-confirm">Вы действительно хотите удалить вопрос?</p>
+    <div class="modal-footer">
+        <?= Html::button('Удалить', ['class' => 'btn btn red-outline-btn bt-bottom2 delete_question', 'data-dismiss' => 'modal']) ?>
+        <?= Html::button('Отмена', ['class' => 'btn btn blue-outline-btn white-btn', 'data-dismiss' => 'modal']) ?>
+    </div>
+    
+<?php
+Modal::end(); 
+?>
+
+<!--<div class="modal fade delete_question_vote" id="delete_question_vote_message" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -75,4 +107,4 @@
             </div>
         </div>
     </div>
-</div>
+</div>-->
