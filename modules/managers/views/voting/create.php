@@ -98,25 +98,7 @@ $this->params['breadcrumbs'][] = 'Новая запись [Голосовани�
             </div>            
         </div>
         <div class="row form-vote-questions">
-
-
-<style>
-
-</style>
-
-            
-<!--<label class="input-radio">One
-  <input type="radio" checked="checked" name="radio">
-  <span class="checkmark"></span>
-</label>            
-<label class="input-radio">One
-  <input type="radio" checked="checked" name="radio">
-  <span class="checkmark"></span>
-</label>            -->
-            
             <div class="col-md-4 housing-lists">
-
-                
                 <?=
                     $form->field($model->voting, 'voting_type')
                         ->radioList($type_voting,
@@ -133,8 +115,7 @@ $this->params['breadcrumbs'][] = 'Новая запись [Голосовани�
                             ]
                         )
                     ->label(false);
-                    ?>                
-                
+                    ?>
             </div>
             
             <div class="col-md-8 questions-list">
@@ -160,7 +141,7 @@ $this->params['breadcrumbs'][] = 'Новая запись [Голосовани�
                 <?php // Формируем поле для ввода вопроса для текущего голосования ?>
                 <?php foreach ($model->questions as $key => $_question) : ?>
                     <tr>
-                    <?= $this->render('new_question', [
+                    <?= $this->render('form/new_question', [
                             'key' => $_question->isNewRecord ? (strpos($key, 'new') !== false ? $key : 'new' . $key) : $_question->questions_id,
                             'form' => $form,
                             'question' => $_question,
@@ -218,6 +199,9 @@ $this->params['breadcrumbs'][] = 'Новая запись [Голосовани�
             </div>
         </div>
     </div>
+    
+    
+    <?= Html::submitButton($model->voting->isNewRecord ? 'Опубликовать' : 'Сохранить', ['class' => 'btn btn-primary']); ?>
     
     <?php ActiveForm::end(); ?>
     

@@ -5,7 +5,7 @@
     use app\models\User;
     use app\models\Rents;
     use app\models\Clients;
-    use app\models\Employers;
+    use app\models\Employees;
 
 /**
  * Форматирование вывода полного имени пользователя 
@@ -53,20 +53,20 @@ class FormatFullNameUser {
     public static function fullNameEmployer($employer_id, $disp = false, $full = false) {
         
         $employer = Employers::find()
-                ->where(['employers_id' => $employer_id])
+                ->where(['employee_id' => $employer_id])
                 ->asArray()
                 ->one();
         
-        $surname = $full ? $employer['employers_surname'] . ' ' : $employer['employers_surname'] . ' ';
-        $name = $full ? $employer['employers_name'] . ' ' : mb_substr($employer['employers_name'], 0, 1, 'UTF-8') . '. ';
-        $second_name = $full ? $employer['employers_second_name'] . ' ' : mb_substr($employer['employers_second_name'], 0, 1, 'UTF-8') . '.';
+        $surname = $full ? $employer['employee_surname'] . ' ' : $employer['employee_surname'] . ' ';
+        $name = $full ? $employer['employee_name'] . ' ' : mb_substr($employer['employee_name'], 0, 1, 'UTF-8') . '. ';
+        $second_name = $full ? $employer['employee_second_name'] . ' ' : mb_substr($employer['employee_second_name'], 0, 1, 'UTF-8') . '.';
         
         $full_name = $surname . $name . $second_name;
         
         if ($disp == true) {
-            $link = ['employers/edit-dispatcher', 'dispatcher_id' => $employer['employers_id']];
+            $link = ['employers/edit-dispatcher', 'dispatcher_id' => $employer['employee_id']];
         } else {
-            $link = ['employers/edit-specialist', 'specialist_id' => $employer['employers_id']];
+            $link = ['employers/edit-specialist', 'specialist_id' => $employer['employee_id']];
         }
         
         return $employer ?
@@ -82,10 +82,10 @@ class FormatFullNameUser {
         
         $user = (new \yii\db\Query)
                 ->select('au.item_name as role, '
-                        . 'e.employers_id as id, '
-                        . 'e.employers_surname as surname, e.employers_name as name, e.employers_second_name as second_name, ')
+                        . 'e.employee_id as id, '
+                        . 'e.employee_surname as surname, e.employee_name as name, e.employee_second_name as second_name, ')
                 ->from('user as u')
-                ->join('LEFT JOIN', 'employers as e', 'u.user_employer_id = e.employers_id')
+                ->join('LEFT JOIN', 'employees as e', 'u.user_employee_id = e.employee_id')
                 ->join('LEFT JOIN', 'auth_assignment as au', 'au.user_id = u.user_id')
                 ->where(['u.user_id' => $user_id])
                 ->one();

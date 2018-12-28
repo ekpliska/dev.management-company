@@ -53,7 +53,9 @@ class Voting extends ActiveRecord
 //                'voting_image', 
                 'voting_date_start', 'voting_date_end'], 'required'],
             
-            [['voting_type', 'voting_house', 'voting_porch', 'status', 'voting_user_id'], 'integer'],
+            [['voting_house', 'voting_porch', 'status', 'voting_user_id'], 'integer'],
+            
+            ['voting_type', 'string'],
             
             ['voting_title', 'string', 'min' => 10, 'max' => 255],
             ['voting_text', 'string', 'min' => 10, 'max' => 1000],
