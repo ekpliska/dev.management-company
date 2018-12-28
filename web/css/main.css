@@ -3228,13 +3228,20 @@ a.sub-menu-item {
     text-align: center;
     border: 1px solid #2d18b4;
     border-radius: 12px;
-    margin: 20px 0;    
+    margin: 20px 0;
+    padding: 10px 0;
 }
 .add-question-btn {
     color: #2d18b4;
     font-size: 12px;
+    font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 0.04em;
+}
+.add-question-btn:focus {
+    color: #2d18b4;
+    outline: none;
+    text-decoration: none;
 }
 .add-question-btn::before {
     content: '\002b';
@@ -3242,3 +3249,24 @@ a.sub-menu-item {
     padding: 0 5px;
 }
 /* Конец Голосование, форма создания/редактирования голосования */
+
+/* Таблица на форме создания голосования */
+#voting-questions {
+    margin: 10px 0;
+}
+#voting-questions > tbody > tr {
+    border: 1px solid #ddd;
+}
+#voting-questions > tbody > tr > td.text-question {
+    padding: 0 20px;
+}
+#voting-questions > tbody > tr > td.delete-question {
+    width: 5%;
+}
+.btn-delete-question,
+.btn-delete-question:hover,
+.btn-delete-question:focus {
+    color: red;
+    background: transparent;
+}
+/* Конец Таблица на форме создания голосования */

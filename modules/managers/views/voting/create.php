@@ -125,23 +125,8 @@ $this->params['breadcrumbs'][] = 'Новая запись [Голосовани�
             
             <div class="col-md-8 questions-list">
                 <fieldset>
-                    <legend id="title-block-of-questions">
-                        <?php if ($model->voting->status !== 1) : ?>
-                            <?= Html::a('Добавить вопрос', 'javascript:void(0);', [
-                                    'id' => 'voting-new-question-button', 
-                                    'class' => 'add-question-btn'
-                                ])
-                            ?>
-                        <?php endif; ?>
-                    </legend>
                     <?php $question = new Questions(); ?>
-                    <table id="voting-questions" class="table table-condensed table-bordered">
-                        <thead>
-                            <tr>
-                                <th><?= $question->getAttributeLabel('questions_text') ?></th>
-                                <td>&nbsp;</td>
-                            </tr>
-                        </thead>
+                    <table id="voting-questions" class="table">
                         <tbody>
                             <?php // Формируем поле для ввода вопроса для текущего голосования ?>
                             <?php foreach ($model->questions as $key => $_question) : ?>
@@ -167,6 +152,18 @@ $this->params['breadcrumbs'][] = 'Новая запись [Голосовани�
                             </tr>
                         </tbody>
                     </table>
+                    
+                    <div id="title-block-of-questions">
+                        <?php if ($model->voting->status !== 1) : ?>
+                            <?= Html::a('Добавить вопрос', 'javascript:void(0);', [
+                                    'id' => 'voting-new-question-button', 
+                                    'class' => 'add-question-btn'
+                                ])
+                            ?>
+                        <?php endif; ?>
+                    </div>
+                    
+                    
                     <?php ob_start(); // включаем буферизацию для js ?>
 
 <script>
