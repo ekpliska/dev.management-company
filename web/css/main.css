@@ -3194,9 +3194,6 @@ a.sub-menu-item {
 }
 
 .upload-btn-wrapper {
-/*    position: relative;
-    overflow: hidden;
-    display: inline-block;*/
     margin: 0;
     position: absolute;
     top: 50%;
@@ -3223,5 +3220,25 @@ a.sub-menu-item {
   top: 0;
   opacity: 0;
 }
-
+.housing-lists {
+    min-height: 700px;
+    border-right: 1px solid #ddd;
+}
+#title-block-of-questions {
+    text-align: center;
+    border: 1px solid #2d18b4;
+    border-radius: 12px;
+    margin: 20px 0;    
+}
+.add-question-btn {
+    color: #2d18b4;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+.add-question-btn::before {
+    content: '\002b';
+    font-size: 17px;
+    padding: 0 5px;
+}
 /* Конец Голосование, форма создания/редактирования голосования */

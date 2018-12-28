@@ -101,7 +101,7 @@ $this->params['breadcrumbs'][] = 'Новая запись [Голосовани�
             <div class="col-md-4 housing-lists">
                 <?=
                     $form->field($model->voting, 'voting_type')
-                        ->radioList($type_voting,
+                        ->radioList($type_voting, 
                             [
                                 'item' => function($index, $label, $name, $checked, $value) {
                                     $return = '<label class="input-radio">' . ucwords($label);
@@ -115,90 +115,90 @@ $this->params['breadcrumbs'][] = 'Новая запись [Голосовани�
                         )
                     ->label(false);
                     ?>
-                <?= $form->field($model->voting, 'voting_house_id')
+                <?= $form->field($model->voting, 'voting_house_id', ['template' => '<div class="field"></i>{label}{input}{error}</div>',])
                         ->dropDownList($houses_array, [
-                            'prompt' => 'Выбрать дом из списка...',
-                        ]) ?>
+                            'id' => 'house-lists',
+                            'class' => 'field-input-select',
+                            'prompt' => 'Выбрать дом из списка...'])
+                        ->label($model->voting->getAttributeLabel('voting_house_id'), ['class' => 'field-input-select_label']) ?>
             </div>
             
             <div class="col-md-8 questions-list">
                 <fieldset>
-        <legend>Вопросы
-            <?php if ($model->voting->status !== 1) : ?>
-                <?= Html::a('Добавить вопрос', 'javascript:void(0);', [
-                        'id' => 'voting-new-question-button', 
-                        'class' => 'pull-right btn btn-default btn-xs'
-                    ])
-                ?>
-            <?php endif; ?>
-        </legend>
-        <?php $question = new Questions(); ?>
-        <table id="voting-questions" class="table table-condensed table-bordered">
-            <thead>
-                <tr>
-                    <th><?= $question->getAttributeLabel('questions_text') ?></th>
-                    <td>&nbsp;</td>
-                </tr>
-            </thead>
-            <tbody>
-                <?php // Формируем поле для ввода вопроса для текущего голосования ?>
-                <?php foreach ($model->questions as $key => $_question) : ?>
-                    <tr>
-                    <?= $this->render('form/new_question', [
-                            'key' => $_question->isNewRecord ? (strpos($key, 'new') !== false ? $key : 'new' . $key) : $_question->questions_id,
-                            'form' => $form,
-                            'question' => $_question,
-                            'status' => $model->voting->status,
-                        ]) 
-                    ?>
-                    </tr>
-                <?php endforeach; ?>
-                <?php // Поля для нового вопроса ?>
-                <tr id="voting-new-question-block" style="display: none;">
-                    <?= $this->render('form/new_question', [
-                            'key' => '__id__',
-                            'form' => $form,
-                            'question' => $question,
-                            'status' => $model->voting->status,
-                        ])
-                    ?>
-                </tr>
-            </tbody>
-        </table>
-        
+                    <legend id="title-block-of-questions">
+                        <?php if ($model->voting->status !== 1) : ?>
+                            <?= Html::a('Добавить вопрос', 'javascript:void(0);', [
+                                    'id' => 'voting-new-question-button', 
+                                    'class' => 'add-question-btn'
+                                ])
+                            ?>
+                        <?php endif; ?>
+                    </legend>
+                    <?php $question = new Questions(); ?>
+                    <table id="voting-questions" class="table table-condensed table-bordered">
+                        <thead>
+                            <tr>
+                                <th><?= $question->getAttributeLabel('questions_text') ?></th>
+                                <td>&nbsp;</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php // Формируем поле для ввода вопроса для текущего голосования ?>
+                            <?php foreach ($model->questions as $key => $_question) : ?>
+                                <tr>
+                                <?= $this->render('form/new_question', [
+                                        'key' => $_question->isNewRecord ? (strpos($key, 'new') !== false ? $key : 'new' . $key) : $_question->questions_id,
+                                        'form' => $form,
+                                        'question' => $_question,
+                                        'status' => $model->voting->status,
+                                    ]) 
+                                ?>
+                                </tr>
+                            <?php endforeach; ?>
+                            <?php // Поля для нового вопроса ?>
+                            <tr id="voting-new-question-block" style="display: none;">
+                                <?= $this->render('form/new_question', [
+                                        'key' => '__id__',
+                                        'form' => $form,
+                                        'question' => $question,
+                                        'status' => $model->voting->status,
+                                    ])
+                                ?>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <?php ob_start(); // включаем буферизацию для js ?>
 
-        <?php ob_start(); // включаем буферизацию для js ?>
-
-        <script>
+<script>
+    // Добавление кнопки нового вопроса
+    var question_k = <?php echo isset($key) ? str_replace('new', '', $key) : 0; ?>;
+    $('#voting-new-question-button').on('click', function () {
+        question_k += 1;
+        $('#voting-questions').find('tbody')
+            .append('<tr>' + $('#voting-new-question-block').html().replace(/__id__/g, 'new' + question_k) + '</tr>');
+        });
             
-            // Добавление кнопки нового вопроса
-            var question_k = <?php echo isset($key) ? str_replace('new', '', $key) : 0; ?>;
-            $('#voting-new-question-button').on('click', function () {
-                question_k += 1;
-                $('#voting-questions').find('tbody')
-                  .append('<tr>' + $('#voting-new-question-block').html().replace(/__id__/g, 'new' + question_k) + '</tr>');
-            });
-            
-            /*
-             * Запрос на удаление вопроса
-             */
-            var elemQiestion;
-            $(document).on('click', '.voting-remove-question-button', function () {
-                elemQiestion = $(this).closest('tbody tr');
-            });
-            $('.delete_question').on('click', function(){
-                elemQiestion.remove();
-            });
+    /*
+     * Запрос на удаление вопроса
+     */
+    var elemQiestion;
+    $(document).on('click', '.voting-remove-question-button', function () {
+        elemQiestion = $(this).closest('tbody tr');
+    });
+    $('.delete_question').on('click', function(){
+        elemQiestion.remove();
+    });
 
 
-            <?php
-            if (!Yii::$app->request->isPost && $model->voting->isNewRecord) 
-              echo "$('#voting-new-question-button').click();";
-            ?>
-        </script>
-        <?php $this->registerJs(str_replace(['<script>', '</script>'], '', ob_get_clean())); ?>
+    <?php
+        if (!Yii::$app->request->isPost && $model->voting->isNewRecord) 
+            echo "$('#voting-new-question-button').click();";
+    ?>
+</script>
 
-    </fieldset>
+<?php $this->registerJs(str_replace(['<script>', '</script>'], '', ob_get_clean())); ?>
+
+                </fieldset>
             </div>
         </div>
     </div>

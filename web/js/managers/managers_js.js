@@ -698,21 +698,17 @@ $(document).ready(function() {
     // ******************************************************** //
     /*
      * Переключатель, тип голосования
-     *      Для дома
-     *      Для подъезда
+     *      Для всех
+     *      Для конкретного дома
      */
-    $('#type_voting').on('change', function(e) {
-        var objectType = $("#create-voting input[type='radio']:checked").val();
-//        if (forWhom === '0') {
-//            $('#adress_list').prop('disabled', true);
-//        } else {
-//            $('#adress_list').prop('disabled', false);
-//        }
-        $.post('for-whom-voting?status=' + objectType,
-            function(data) {
-                $('#object_vote_list').html(data);
-            }
-        );
+    $('.input-radio').on('change', function(e) {
+        var forWhom = $("#form-voting input[type='radio']:checked").val();
+        if (forWhom === 'all') {
+            $('#house-lists').prop('disabled', true);
+            $('#house-lists').val(0);
+        } else if (forWhom === 'house') {
+            $('#house-lists').prop('disabled', false);
+        }
     });
 
     $('#delete_voting_manager').on('show.bs.modal', function(e){
