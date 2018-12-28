@@ -293,7 +293,7 @@ a, a:hover, a:active {
 
 /* Кнопки */
 .white-to-bue-btn {
-    padding-top: 18px;
+    /*padding-top: 18px;*/
     height: 56px;
     width: 250px;
     border-radius: 12px;
@@ -306,6 +306,9 @@ a, a:hover, a:active {
     line-height: 18px;
     text-align: center;
     text-transform: uppercase;
+}
+.white-to-bue-a {
+    padding-top: 18px;
 }
 .white-to-bue-btn:hover {
     background-color: #2D18B4;
@@ -374,8 +377,31 @@ a, a:hover, a:active {
 .blue-btn-link:hover {
     background-color: #2D18B4;
     box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
-    color: #FFFFFF;
+    color: #fff;
 }
+/* Конец Кнопки */
+
+/* Кпока удаление записи на странице */
+.delete-record-btn {
+    height: 56px;
+    width: 250px;
+    border-radius: 12px;
+    border: 1px solid #fb6d5b;
+    background-color: #fb6d5b;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 0.9px;
+    line-height: 18px;
+    text-align: center;
+    text-transform: uppercase;
+}
+.delete-record-btn:hover {
+    background-color: #fb6d5b;
+    box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
+    color: #fff;
+}
+/* Конец Кпока удаление записи на странице */
 
 /* Кнопка, регистрация переход на следующий шаг */
 .blue-circle-btn {
@@ -3276,8 +3302,8 @@ a.sub-menu-item {
     font-size: 17px;
     padding: 0 5px;
 }
-.vote-btn-block {
-    margin: 50px 0;
+.vote-btn-block button {
+    margin: 50px 10px;
 }
 /* Конец Голосование, форма создания/редактирования голосования */
 

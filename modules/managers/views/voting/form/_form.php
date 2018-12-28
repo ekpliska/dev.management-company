@@ -10,6 +10,8 @@
 /*
  * Форма голосования
  */
+$controller = Yii::$app->controller->id;
+$action = Yii::$app->controller->action->id;
 ?>
 
 
@@ -145,16 +147,16 @@
                         </tbody>
                     </table>
                     
-                    <div id="title-block-of-questions">
-                        <?php if ($model->voting->status !== 1) : ?>
+                    
+                    <?php if ($model->voting->status !== 1) : ?>
+                        <div id="title-block-of-questions">
                             <?= Html::a('Добавить вопрос', 'javascript:void(0);', [
                                     'id' => 'voting-new-question-button', 
                                     'class' => 'add-question-btn'
                                 ])
                             ?>
-                        <?php endif; ?>
-                    </div>
-                    
+                        </div>
+                    <?php endif; ?>                    
                     
                     <?php ob_start(); // включаем буферизацию для js ?>
 
@@ -190,6 +192,25 @@
                 </fieldset>
                 
                 <div class="vote-btn-block text-center">
+                    
+                    <?php if ($controller == 'voting' && $action == 'view') : ?>
+                    
+                        <?= Html::button('Удалить', [
+                                'class' => 'btn delete-record-btn',
+                                'data-toggle' => 'modal',
+                                'data-target' => '#delete_voting_manager',
+                                'data-voting' => $model->voting->voting_id]) ?>
+
+                        <?php if ($model->voting->status !== 1) : ?>
+                            <?= Html::button('Завершить голосование', [
+                                    'class' => 'btn white-to-bue-btn close_voting_btn',
+                                    'data-toggle' => 'modal',
+                                    'data-target' => '#close_voting',
+                                    'data-voting' => $model->voting->voting_id]) ?>
+                        <?php endif; ?>                    
+
+                    <?php endif; ?>
+                    
                     <?= Html::submitButton($model->voting->isNewRecord ? 'Опубликовать' : 'Сохранить', ['class' => 'btn blue-btn']); ?>
                 </div>
             </div>
