@@ -53,7 +53,7 @@ class Voting extends ActiveRecord
 //                'voting_image', 
                 'voting_date_start', 'voting_date_end'], 'required'],
             
-            [['voting_house', 'voting_porch', 'status', 'voting_user_id'], 'integer'],
+            [['voting_house_id', 'voting_porch', 'status', 'voting_user_id'], 'integer'],
             
             ['voting_type', 'string'],
             
@@ -225,8 +225,7 @@ class Voting extends ActiveRecord
             'voting_text' => 'Описание голосования',
             'voting_date_start' => 'Дата начала голосования',
             'voting_date_end' => 'Дата окончания голосования',
-            'voting_house' => 'Voting House',
-            'voting_porch' => 'Voting Porch',
+            'voting_house_id' => 'Voting House',
             'voting_image' => 'Обложка',
             'status' => 'Статус',
             'created_at' => 'Дата создания голосования',

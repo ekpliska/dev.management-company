@@ -104,9 +104,8 @@ $this->params['breadcrumbs'][] = 'Новая запись [Голосовани�
                         ->radioList($type_voting,
                             [
                                 'item' => function($index, $label, $name, $checked, $value) {
-
                                     $return = '<label class="input-radio">' . ucwords($label);
-                                    $return .= '<input type="radio" name="' . $name . '" value="' . $value . '">';
+                                    $return .= '<input type="radio" name="' . $name . '" value="' . $value . '" id="type-vote_' . $index . '">';
                                     $return .= '<span class="checkmark"></span>';
                                     $return .= '</label>';
 
@@ -116,6 +115,10 @@ $this->params['breadcrumbs'][] = 'Новая запись [Голосовани�
                         )
                     ->label(false);
                     ?>
+                <?= $form->field($model->voting, 'voting_house_id')
+                        ->dropDownList($houses_array, [
+                            'prompt' => 'Выбрать дом из списка...',
+                        ]) ?>
             </div>
             
             <div class="col-md-8 questions-list">

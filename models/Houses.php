@@ -3,6 +3,7 @@
     namespace app\models;
     use yii\db\ActiveRecord;
     use Yii;
+    use yii\helpers\ArrayHelper;
     use rico\yii2images\behaviors\ImageBehave;
     use app\models\Flats;
     use app\models\CharacteristicsHouse;
@@ -41,15 +42,13 @@ class Houses extends ActiveRecord
     public function rules()
     {
         return [
-            [[
-                'houses_town', 
-                'houses_street', 'houses_number_house'], 'required'],
+            ['houses_gis_adress', 'required'],
             
-            [['houses_street', 'houses_town'], 'string', 'max' => 100],
+            ['houses_gis_adress', 'string', 'max' => 255],
             
             [['houses_description'], 'string', 'max' => 255],
             
-            [['houses_number_house'], 'string', 'max' => 10],
+            [['houses_name'], 'string', 'max' => 100],
             
             ['houses_description', 'required', 'on' => self::SCENARIO_EDIT_DESCRIPRION],
             ['houses_description', 'string', 'min' => 10, 'max' => 255, 'on' => self::SCENARIO_EDIT_DESCRIPRION],
@@ -71,20 +70,20 @@ class Houses extends ActiveRecord
         ];
     }
     
-    public function validateNumberHouse() {
-        
-        $house = Houses::find()
-                ->where(['houses_street' => $this->houses_street])
-                ->andWhere(['houses_number_house' => $this->houses_number_house])
-                ->asArray()
-                ->one();
-        
-        if ($house !== null) {
-            $errorMsg = 'Указанный номер дома в выбранном жилом комплексе не является уникальным';
-            $this->addError('houses_number_house', $errorMsg);
-        }
-        
-    }
+//    public function validateNumberHouse() {
+//        
+//        $house = Houses::find()
+//                ->where(['houses_street' => $this->houses_street])
+//                ->andWhere(['houses_number_house' => $this->houses_number_house])
+//                ->asArray()
+//                ->one();
+//        
+//        if ($house !== null) {
+//            $errorMsg = 'Указанный номер дома в выбранном жилом комплексе не является уникальным';
+//            $this->addError('houses_number_house', $errorMsg);
+//        }
+//        
+//    }
 
     /**
      * Связь с таблицей Квартиры
@@ -106,20 +105,20 @@ class Houses extends ActiveRecord
                 ->one();
     }
     
-    public static function getAllHouses() {
-        
-        return self::find()
-                ->select(['estate_id', 'estate_name', 'estate_town', 'houses_id', 'houses_street', 'houses_number_house', 'houses_description'])
-                ->joinWith(['estate'])
-                ->orderBy([
-                    'estate_name' => SORT_ASC,
-                    'estate_town' => SORT_ASC,
-                    'houses_street' => SORT_ASC,
-                    'houses_number_house' => SORT_ASC])
-                ->asArray()
-                ->all();
-        
-    }    
+//    public static function getAllHouses() {
+//        
+//        return self::find()
+//                ->select(['estate_id', 'estate_name', 'estate_town', 'houses_id', 'houses_street', 'houses_number_house', 'houses_description'])
+//                ->joinWith(['estate'])
+//                ->orderBy([
+//                    'estate_name' => SORT_ASC,
+//                    'estate_town' => SORT_ASC,
+//                    'houses_street' => SORT_ASC,
+//                    'houses_number_house' => SORT_ASC])
+//                ->asArray()
+//                ->all();
+//        
+//    }    
     
     /*
      * Загрузка прикрепленного документа
@@ -161,14 +160,27 @@ class Houses extends ActiveRecord
 
     /*
      * Список всех домов жилого массива
+     * Т.к. поле в БД houses_gis_adress - содержит полную строку адреса, 
+     * то из этой строки исключаем Индекс, Область, Район
      */
-    public static function getHousesList() {
-        return self::find()
-                ->joinWith(['estate'])
-                ->select(['houses_id', 'estate_name', 'estate_town', 'houses_street', 'houses_number_house'])
+    public static function getAdressHousesList() {
+        
+        $array = self::find()
                 ->asArray()
-                ->orderBy(['estate_town' => SORT_ASC, 'houses_street' => SORT_ASC, 'houses_number_house' => SORT_ASC])
+                ->orderBy(['houses_gis_adress' => SORT_ASC])
                 ->all();
+        
+        $houses_lists = ArrayHelper::map($array, 'houses_id', function ($array) {
+            $str_array = explode(', ', $array['houses_gis_adress']);
+            // В цикле, начиная с 3 позиции получаем, город/поселок, улицу/площадь.. и т.д, заканчивая номером дома/корпус
+            for ($i = 3; $i < count($str_array); $i++) {
+                $str_adress .= $str_array[$i] . ', ';
+            }
+            return substr($str_adress, 0, -2);
+        });
+        
+        return $houses_lists;
+
     }
     
     /**
@@ -178,8 +190,7 @@ class Houses extends ActiveRecord
     {
         return [
             'houses_id' => 'Houses ID',
-            'houses_street' => 'Улица',
-            'houses_number_house' => 'Номер дома',
+            'houses_gis_adress' => 'Адресс',
             'houses_description' => 'Описание',
             'upload_file' => 'Загружаемый файл',
             'upload_files' => 'Файлы',

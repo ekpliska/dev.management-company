@@ -52,6 +52,8 @@ class VotingController extends AppManagersController {
         
         $type_voting = Voting::getTypeVoting();
         
+        $houses_array = Houses::getAdressHousesList();
+        
         if (Yii::$app->request->post() && $model->validate()) {
             // Приводим дату завершения, дату окончания к формату бд
 //            $model->voting->voting_date_start = Yii::$app->formatter->asDatetime($model->voting->voting_date_start, 'php:Y-m-d H:i:s');
@@ -83,7 +85,8 @@ class VotingController extends AppManagersController {
                 
         return $this->render('create', [
             'model' => $model,
-            'type_voting' => $type_voting]);
+            'type_voting' => $type_voting,
+            'houses_array' => $houses_array]);
     }
     
     /*
