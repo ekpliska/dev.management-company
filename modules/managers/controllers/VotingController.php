@@ -69,16 +69,10 @@ class VotingController extends AppManagersController {
             $model->imageFile = null; 
             // Сохраняем модель
             if ($model->save()) {
-                Yii::$app->session->setFlash('voting-admin', [
-                    'success' => true,
-                    'message' => 'Новое голосование было успешно создано',
-                ]);
+                Yii::$app->session->setFlash('success', ['message' => 'Новое голосование было успешно создано']);
                 return $this->redirect(['view', 'voting' => $model->voting->voting_id]);
             } else {
-                Yii::$app->session->setFlash('voting-admin', [
-                    'success' => false,
-                    'error' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз',
-                ]);
+                Yii::$app->session->setFlash('error', ['message' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз']);
                 return $this->redirect(Yii::$app->request->referrer);
             }
         }
@@ -119,16 +113,10 @@ class VotingController extends AppManagersController {
             }
             $model->imageFile = null;
             if (!$model->save()) {
-                Yii::$app->session->setFlash('voting-admin', [
-                    'success' => false,
-                    'error' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз',
-                ]);
+                Yii::$app->session->setFlash('error', ['message' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз']);
                 return $this->redirect(Yii::$app->request->referrer);
             }
-            Yii::$app->session->setFlash('voting-admin', [
-                'success' => true,
-                'message' => 'Изменения были успешно сохранены',
-            ]);
+            Yii::$app->session->setFlash('success', ['message' => 'Изменения были успешно сохранены']);
             return $this->redirect(['view', 'voting' => $model->voting->voting_id]);
         }
         return $this->render('view', [
@@ -170,16 +158,11 @@ class VotingController extends AppManagersController {
         if (Yii::$app->request->isAjax) {
             $voting = Voting::findByID($voting_id);
             if (!$voting->delete()) {
-                Yii::$app->session->setFlash('voting-admin', [
-                    'success' => false,
-                    'error' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз',
+                Yii::$app->session->setFlash('error', ['message' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз',
                 ]);
                 return $this->redirect(Yii::$app->request->referrer);
             }
-            Yii::$app->session->setFlash('voting-admin', [
-                    'success' => true,
-                    'message' => 'Голосование ' . $voting->voting_title . ' было успешно удалено',
-            ]);
+            Yii::$app->session->setFlash('success', ['message' => 'Голосование ' . $voting->voting_title . ' было успешно удалено']);
             return $this->redirect(['index']);
         }
         return ['success' => false];
@@ -219,16 +202,10 @@ class VotingController extends AppManagersController {
         if (Yii::$app->request->isAjax) {
             $voting = Voting::findByID($voting_id);
             if (!$voting->closeVoting()){
-                Yii::$app->session->setFlash('voting-admin', [
-                    'success' => false,
-                    'error' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз',
-                ]);
+                Yii::$app->session->setFlash('error', ['message' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз']);
                 return $this->redirect(Yii::$app->request->referrer);
             } else {
-                Yii::$app->session->setFlash('voting-admin', [
-                    'success' => true,
-                    'message' => 'Статус голосования ' . $voting->voting_title . ' изменился на "Завершено"',
-                ]);
+                Yii::$app->session->setFlash('success', ['message' => 'Статус голосования ' . $voting->voting_title . ' изменился на "Завершено"']);
                 return $this->redirect(Yii::$app->request->referrer);
             }
         }

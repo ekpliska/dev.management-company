@@ -28,7 +28,6 @@ $array_url = [
     ],
 ];
 
-$this->title = $array_url[$role]['label'];
 $this->title = Yii::$app->params['site-name-manager'] . $array_url[$type]['label'];
 $this->params['breadcrumbs'][] = ['label' => $array_url[$type]['label'], 'url' => [$array_url[$type]['url']]];
 $this->params['breadcrumbs'][] = $employee_info->fullName;

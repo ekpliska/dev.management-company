@@ -3167,10 +3167,36 @@ a.sub-menu-item {
 /* Конец Голосование, главная страница */
 
 /* Голосование, форма создания/редактирования голосования */
+.cover-block-title {
+    position: absolute;
+    bottom: 0;
+    background: #6f4c8f;
+    opacity: 0.9;    
+}
+.cover-block-title .field span.input-group-addon {
+    background-color: #3c2676;
+    border: 1px solid #8b709d;
+    color: #fff;
+}
+.cover-block-title .field > label.date-label, .field > label.field-input-select_label {
+    color: #fff;
+}
+.cover-block-title .field-label {
+    color: #fff;
+}
+.cover-block-title .field-input {
+    color: #ddd;
+}
+.cover-block-title .is-focused .field-label{
+    color: #fff;
+}
+.cover-block-title .field::after, .field::before {
+    background-color: #fff;
+}
 .create-vote-profile {}
 .cover-vote {
     border: 1px solid #ddd;
-    min-height: 700px;
+    min-height: 650px;
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
     display: block;
@@ -3186,6 +3212,7 @@ a.sub-menu-item {
 .form-vote {
     border: 1px solid #ddd;
     border-top: none;
+    padding: 20px 0;
 }
 .form-vote-questions {
     border: 1px solid #ddd;
