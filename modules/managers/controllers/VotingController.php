@@ -126,29 +126,6 @@ class VotingController extends AppManagersController {
     }
     
     /*
-     * Зависимый переключатель типа голосования
-     *      Для конкретного дома
-     *      Для конкретного подъезда
-     */
-    public function actionForWhomVoting($status) {
-        
-        $houses = Houses::getHousesList();
-        
-        if ($status == 0) {
-            foreach ($houses as $house) {
-                $name = FormatHelpers::formatFullAdress($house['estate_town'], $house['houses_street'], $house['houses_number_house']);
-                echo '<option value="' . $house['houses_id'] . '">' . $name . '</option>';
-            }            
-        } elseif ($status == 1) {
-            foreach ($houses as $house) {
-                $name = FormatHelpers::formatFullAdress($house['estate_town'], $house['houses_street'], $house['houses_number_house'], $house['flats_porch']);
-                return '<option value="' . $house['houses_id'] . '">' . $name . '</option>';
-            }            
-        }
-        
-    }
-    
-    /*
      * Запрос на удаление голосования
      */
     public function actionConfirmDeleteVoting() {

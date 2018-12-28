@@ -98,8 +98,9 @@ $action = Yii::$app->controller->action->id;
                         ->radioList($type_voting, 
                             [
                                 'item' => function($index, $label, $name, $checked, $value) {
+                                    $_checked = $checked == 1 ? 'checked' : '';
                                     $return = '<label class="input-radio">' . ucwords($label);
-                                    $return .= '<input type="radio" name="' . $name . '" value="' . $value . '" id="type-vote_' . $index . '">';
+                                    $return .= '<input type="radio" name="' . $name . '" value="' . $value . '" id="type-vote_' . $index . '"' . $_checked . '>';
                                     $return .= '<span class="checkmark"></span>';
                                     $return .= '</label>';
 
