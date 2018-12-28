@@ -24,17 +24,12 @@ class m180901_095327_table_houses extends Migration
         // Дома
         $this->createTable('{{%houses}}', [
             'houses_id' => $this->primaryKey(),
-            'houses_postcode' => $this->integer()->notNull(),
-            'houses_region' => $this->string(100)->notNull(),
-            'houses_area' => $this->string()->notNull(),
-            'houses_town' => $this->string(100)->notNull(),
-            'houses_village' => $this->string(100),
-            'houses_street' => $this->string(100)->notNull(),
-            'houses_number_house' => $this->string(10)->notNull(),
-            'houses_description' => $this->string(255)->notNull(),
+            'houses_gis_adress' => $this->string(250)->notNull(),
+            'houses_description' => $this->string(255),
             'houses_name' => $this->string(100),
         ], $table_options);
         $this->createIndex('idx-houses-houses_id', '{{%houses}}', 'houses_id');
+        $this->createIndex('idx-houses-houses_gis_adress', '{{%houses}}', 'houses_gis_adress');
         
         // Квартиры
         $this->createTable('{{%flats}}', [
@@ -68,9 +63,11 @@ class m180901_095327_table_houses extends Migration
     {
         
         $this->dropIndex('idx-houses-houses_id', '{{%houses}}');
+        $this->createIndex('idx-houses-houses_gis_adress', '{{%houses}}');
+        
         $this->dropIndex('idx-flats-flatsid', '{{%flats}}');
         
-        $this->addForeignKey('fk-flats-flats_house_id', '{{%flats}}');
+        $this->addForeignKey('fk-flats-flats_house_id', '{{%flats}}');        
                 
         $this->dropTable('{{%flats}}');
         $this->dropTable('{{%houses}}');

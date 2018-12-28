@@ -99,7 +99,7 @@ $this->params['breadcrumbs'][] = 'Новая запись [Голосовани�
         </div>
         <div class="row form-vote-questions">
             <div class="col-md-4 housing-lists">
-                #TODO
+                <?= $form->field($model->voting, 'voting_type')->radioList($type_voting)->label(false) ?>
             </div>
             <div class="col-md-8 questions-list">
                 <fieldset>
