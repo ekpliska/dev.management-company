@@ -3226,6 +3226,7 @@ a.sub-menu-item {
 }
 .vote-card__content_author span > a:hover {
     text-decoration: none;
+    color: #000;
 }
 .vote-card__content {
     width: 100%;

@@ -78,7 +78,7 @@ class FormatFullNameUser {
      * @param integer $user_id
      * Фамилия И. О.
      */
-    public static function nameEmployerByUserID($user_id) {
+    public static function nameEmployeeByUserID($user_id) {
         
         $user = (new \yii\db\Query)
                 ->select('au.item_name as role, '
@@ -90,18 +90,12 @@ class FormatFullNameUser {
                 ->where(['u.user_id' => $user_id])
                 ->one();
 
-        $surname = $user['surname'] . ' ';;
+        $surname = $user['surname'] . ' ';
         $name = mb_substr($user['name'], 0, 1, 'UTF-8') . '. ';
         $second_name = mb_substr($user['second_name'], 0, 1, 'UTF-8') . '.';
         $full_name = $surname . $name . $second_name;
         
-        if ($user['role'] == 'administrator') {
-            $link = ['managers/profile', 'managers' => $user['id']];
-        } elseif ($user['role'] == 'dispatcher') {
-            $link = ['employers/edit-dispatcher', 'dispatcher_id' => $user['id']];
-        } elseif ($user['role'] == 'specialist') {
-            $link = ['employers/edit-specialist', 'specialist_id' => $user['id']];
-        }
+        $link = ['employee-form/employee-profile', 'type' => $user['role'], 'employee_id' => $user['id']];
         
         return $user ?
             Html::a($full_name, $link, ['target' => '_blank', 'class' => 'btn btn-link btn-xs']) : 'Не назначен';
