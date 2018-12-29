@@ -43,14 +43,7 @@
                 'attribute' => 'adress',
                 'header' => 'Адрес',
                 'value' => function ($data) {
-                    return '<i class="glyphicon glyphicon-map-marker"></i> ' .
-                        FormatHelpers::formatFullAdress(
-                            $data['town'], 
-                            $data['street'], 
-                            $data['house'], 
-                            false, 
-                            false, 
-                            $data['flat']);
+                    return ($data['full_adress'] && $data['flat']) ? "{$data['full_adress']} , кв. {$data['flat']}" : "Не указан";
                 },
                 'format' => 'raw',
                 'contentOptions' => [

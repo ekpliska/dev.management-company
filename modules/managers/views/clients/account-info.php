@@ -57,12 +57,7 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
                     <tr>
                         <td scope="row" class="text-left-tb">Адрес</td>
                         <td>
-                            <?= 
-                                'г. ' . $account_choosing['flat']['house']['houses_town'] .
-                                ' , ул. ' . $account_choosing['flat']['house']['houses_street'] .
-                                ' , д. ' . $account_choosing['flat']['house']['houses_number_house'] .
-                                ' , кв. ' . $account_choosing['flat']['flats_number']
-                            ?>
+                            <?= "{$account_choosing['flat']['house']['houses_gis_adress']}, кв. {$account_choosing['flat']['flats_number']}" ?>
                         </td>
                     </tr>
                     <tr>
