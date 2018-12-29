@@ -18,7 +18,7 @@ class SignupStepOne extends Model {
         return [
             [['account_number', 'last_summ', 'square'], 'required'],
             
-            ['account_number', 'string', 'min' => 11, 'max' => 11],
+//            ['account_number', 'string', 'min' => 11, 'max' => 11],
             
             ['last_summ', 'match', 'pattern'=>'/^[0-9]{1,12}(\.[0-9]{0,4})?+$/iu', 'message' => 'Сумма последней квитанции указана не верно. Пример: 2578.70'],
             ['square', 'match', 'pattern'=>'/^[0-9]{1,12}(\.[0-9]{0,4})?+$/iu', 'message' => 'Площадь жилого помещения указана не верно. Пример, 80.27'],
@@ -34,30 +34,34 @@ class SignupStepOne extends Model {
             $summ = $this->last_summ;
             $square = $this->square;
             
-            // Формируем JSON запрос на отправку по API
-            $data = "{
-                    'Номер лицевого счета': '{$account}',
-                    'Сумма последней квитанции': '{$summ}',
-                    'Площадь жилого помещения': '{$square}'
-                }";
+            // Формируем регистрационные данные на отправку по API
+            $data_array = [
+                "Номер лицевого счета" => "{$account}",
+                "Сумма последней квитанции" => "{$summ}",
+                "Площадь жилого помещения" => "{$square}",
+            ];
+            
+            // Преобразуем массив в json
+            $data_json = json_encode($data_array, JSON_UNESCAPED_UNICODE);
             
             // Отправляем запрос по API        
-            $result_api = Yii::$app->client_api->accountRegister($data);
+            $result_api = Yii::$app->client_api->accountRegister($data_json);
+            
             // Проверяем текущую базу на существование лицевого счета
             $is_account = PersonalAccount::findAccountBeforeRegister($account);
             
-//            if ($is_account == true) {
-//                $this->addError($attribute, 'Указанный номер номер лицевого счета зарегистрирован');
-//                return false;
-//            }
-//            
-//            if ($is_account == false && ($result_api['success'] == 'error')) {
-//                $this->addError($attribute, 'Регистрационные данные лицевого счета введены некорректно');
-//                return false;
-//            }
+            if ($is_account == true) {
+                $this->addError($attribute, 'Указанный номер номер лицевого счета зарегистрирован');
+                return false;
+            }
+            
+            if ($is_account == false && $result_api['success'] == false) {
+                $this->addError($attribute, 'Регистрационные данные лицевого счета введены некорректно');
+                return false;
+            }
             
             // Записываем в сессию пришедщие данные по API
-            Yii::$app->session['UserInfo'] = Yii::$app->params['User_info'];
+            Yii::$app->session['UserInfo'] = $result_api;
             
             return true;
 

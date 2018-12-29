@@ -183,6 +183,29 @@ class Houses extends ActiveRecord
 
     }
     
+    /*
+     * Проверка существования Дома при регистрации и создании лицевого счета
+     */
+    public static function isExistence($house_adress, $full_adress) {
+        
+        // Обрезаем строку полного адреса содственника до квартиры
+        $_adress = stristr($full_adress, 'кв.', true);
+        
+        $_house = self::find()
+                ->where(['houses_name' => $house_adress, 'houses_gis_adress' => $_adress])
+                ->asArray()
+                ->one();
+        
+        if ($_house == null) {
+            $house = new Houses();
+            $house->houses_gis_adress = $_adress;
+            $house->save(false);
+            return $house->houses_id;
+        }
+        
+        return $_find['houses_id'];
+    }
+    
     /**
      * {@inheritdoc}
      */
