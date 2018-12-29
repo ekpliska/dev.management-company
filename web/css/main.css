@@ -3194,6 +3194,10 @@ a.sub-menu-item {
     display: flex;
     width: 100%;
     margin: 0 0 20px;
+    border-radius: 12px;
+}
+.vote-card:hover {
+    box-shadow: 0 4px 26px 0 rgba(51, 29, 82, 0.16);
 }
 .vote-card__image {
     width: 350px;
@@ -3206,6 +3210,23 @@ a.sub-menu-item {
     border-top-left-radius: 12px;
     border-bottom-left-radius: 12px;    
 }
+.vote-card__content_author {
+    padding: 0 0 10px 0;
+    font-size: 12px;
+}
+.vote-card__content_author span {
+    background: #ffffff;
+    border-radius: 12px;
+    color: #1fd68d;
+    padding: 3px 15px;
+    border: 1px solid #1fd68d;
+}
+.vote-card__content_author span > a {
+    color: #000;
+}
+.vote-card__content_author span > a:hover {
+    text-decoration: none;
+}
 .vote-card__content {
     width: 100%;
     padding: 0 20px;
@@ -3214,10 +3235,10 @@ a.sub-menu-item {
     border-top-right-radius: 12px;
     border-bottom-right-radius: 12px;    
 }
-.vote-card__content h1 > span {
+.vote-card__content h1 > a > span {
     background: #2d18b4;
     color: #fff;
-    padding: 5px 30px;
+    padding: 2px 15px;
     border-radius: 25px;
     font-size: 14px;
     font-weight: normal;
@@ -3226,6 +3247,41 @@ a.sub-menu-item {
     font-size: 18px;
     font-weight: bold;
     color: #2d18b4;
+}
+.vote-card__content_info div[class*="col-"] {
+    text-align: center;
+    font-size: 12px;
+    border-right: 1px solid #ddd;
+}
+.vote-card__content_info div[class*="col-"]:first-child {
+    text-align: left;
+    font-size: 10px;
+}
+.vote-card__content_info div[class*="col-"]:last-child {
+    border-right: none;
+}
+span.status-vote-0::before {
+    content: '\02691';
+    padding: 0 5px;
+    background: #2d18b4;
+    margin: 0 5px;
+    color: #fff;
+}
+span.status-vote-1::before {
+    content: '\02713';
+    padding: 0 3px;
+    background: #1fd68d;
+    margin: 0 5px;
+    color: #fff;
+}
+.vote-card__content_info span.title {
+    color: #2d18b4;
+    font-weight: bold;
+}
+.vote-card__content_text {
+    padding: 10px 0;
+    text-align: justify;
+    font-size: 14px;
 }
 /* Конец Голосование, главная страница */
 
