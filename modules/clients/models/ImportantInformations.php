@@ -17,7 +17,7 @@ class ImportantInformations extends Model {
         
         $voling_list = Voting::find()
                 ->select(['voting_id as slug', 'voting_image as news_preview', 'voting_title as news_title', 'voting_text as news_text', 'created_at'])
-                ->andWhere(['voting_house' => $living_space['houses_id']])
+                ->andWhere(['voting_house_id' => $living_space['houses_id']])
                 ->andWhere(['status' => false])
                 ->orderBy(['created_at' => SORT_DESC])
                 ->asArray()

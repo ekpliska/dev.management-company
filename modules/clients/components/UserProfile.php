@@ -221,13 +221,12 @@ class UserProfile extends BaseObject {
     }
     
     /*
-     * Получить ID ЖК, ID Дома, ID Квартиры и номер подъезда
-     * по текущему лицевому счету
+     * Получить ID Дома по текущему лицевому счету
      */
     public function getLivingSpace($account_id) {
         
         $info = PersonalAccount::find()
-                ->select(['account_id', 'houses_id', 'flats_id', 'flats_porch'])
+                ->select(['account_id', 'houses_id'])
                 ->joinWith(['flat', 'flat.house'])
                 ->where(['account_id' => $account_id])
                 ->asArray()

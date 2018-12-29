@@ -35,7 +35,7 @@ $this->title = Yii::$app->params['site-name'] . "Главная";
         </div>
     <?php endforeach; ?>
     <?php else : ?>
-         <div class="notice notice-info">
+         <div class="notice info">
             <strong>Новости</strong> по текущему разделу новостной информации не найдено.
         </div>
     <?php endif; ?>

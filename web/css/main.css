@@ -707,6 +707,7 @@ button#send-request-to-sms:focus{
     margin-left: 24px;
     margin-right: 24px;
     margin-bottom: 5px;
+    text-align: justify;
 }
 .news-card-preview-title a {
     color: #2d18b4;
