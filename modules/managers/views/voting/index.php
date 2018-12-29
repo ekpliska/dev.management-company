@@ -21,7 +21,9 @@ $this->params['breadcrumbs'][] = 'Голосование';
     
     <?= AlertsShow::widget() ?>
     
-    <?= $this->render('data/view_all_voting', ['view_all_voting' => $view_all_voting, 'pages' => $pages]) ?>
+    <div id="_list-res">
+        <?= $this->render('data/view_all_voting', ['view_all_voting' => $view_all_voting, 'pages' => $pages]) ?>
+    </div>
     
     <?= Html::a('', ['voting/create'], ['class' => 'create-request-btn']) ?>
     

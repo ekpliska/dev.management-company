@@ -26,6 +26,7 @@
             <?= Notifications::widget() ?>
         </ul>
     </div>
-    <?= SubMenu::widget(['view_name' => 'clients']) ?>
+    <?= SubMenu::widget(['view_name' => 'users']) ?>
+    <?= SubMenu::widget(['view_name' => 'voting']) ?>
     <?= NavManager::widget() ?>
 </nav>

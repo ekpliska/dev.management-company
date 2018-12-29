@@ -1133,6 +1133,66 @@ $(document).ready(function() {
         $(this).parents(".custom-select-dark").find(".custom-select-trigger-dark").text(textSelect);
     });
 
+    /*
+     * Фильтр контента по адресу дома, для навигационной панели
+     */
+    function filterByHouseAdress(house_id, typePage) {
+        $.post('/web/managers/app-managers/filter-by-house-adress?house_id=' + house_id + '&type=' + typePage, function(response) {
+            $('#_list-res').html(response.success);
+        }); 
+    }
+
+    /* Кастомизация элеметнов управления формой, список адресов в навигационном меню */
+    $(".custom-select-services").each(function() {
+        var classes = $(this).attr("class"),
+            id = $(this).attr("id"),
+            name = $(this).attr("name");
+        var template =  '<div class="' + classes + '">';
+            template += '<span class="custom-select-trigger-services">' + $(this).attr("placeholder") + '</span>';
+            template += '<div class="custom-options-services">';
+        // Текущий выбранный лицевой счета    
+        var currentValue = $('#sources-services option:selected').val();
+        
+        $(this).find("option").each(function() {
+            var classSelection = ($(this).attr("value") == currentValue) ? 'selection-services ' : '';            
+            template += '<span class="custom-option-services ' + classSelection + $(this).attr("class") + '" data-value="' + $(this).attr("value") + '">' + $(this).html() + '</span>';
+            
+            $(this).val('selection-services');
+            
+        });
+        template += '</div></div>';
+
+        $(this).wrap('<div class="custom-select-wrapper-services"></div>');
+        $(this).hide();
+        $(this).after(template);
+    });
+
+    $(".custom-option-services:first-of-type").hover(function() {
+        $(this).parents(".custom-options-services").addClass("option-hover-services");
+    }, function() {
+        $(this).parents(".custom-options-services").removeClass("option-hover-services");
+    });
+
+    $(".custom-select-trigger-services").on("click", function() {
+        $('html').one('click',function() {
+            $(".custom-select-services").removeClass("opened");
+        });
+        $(this).parents(".custom-select-services").toggleClass("opened");
+        event.stopPropagation();
+    });
+    
+    $(".custom-option-services").on("click", function() {
+        var valueSelect = $(this).data("value");
+        var textSelect = $(this).text();
+        var typePage = $('#sources-adress').data('typePage');
+        $(this).parents(".custom-select-wrapper-services").find("select").val(valueSelect);
+        $(this).parents(".custom-options-services").find(".custom-option-services").removeClass("selection-services");
+        $(this).addClass("selection-services");
+        $(this).parents(".custom-select-services").removeClass("opened");
+        $(this).parents(".custom-select-services").find(".custom-select-trigger-services").text(textSelect);
+        filterByHouseAdress(valueSelect, typePage);
+    });
+
     
  });
     

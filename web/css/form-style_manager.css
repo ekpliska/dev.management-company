@@ -705,3 +705,113 @@ textarea {
     background: white;
 }
 /* End Style for RadioButton */
+
+
+/* Выпадающий список навигационная панель, Выбор адреса */
+.custom-select {
+    background: none;
+    border: none; 
+}
+.custom-select-wrapper-services {
+    position: relative;
+    display: inline-block;
+    user-select: none;
+    margin-left: 77px;
+    font-family: "Mplus 1p";
+}
+.custom-select-wrapper-services select {
+    display: none;
+}
+.custom-select-services {
+    position: absolute;
+    display: inline-block;
+    top: -15px;
+}
+.custom-select-trigger-services {
+    text-align: center;
+    position: relative;
+    display: block;
+    width: 380px;
+    font-size: 14px;
+    font-weight: 300;
+    color: #ffffff;
+    line-height: 35px;
+    background: transparent;
+    border: 1px solid #fff;
+    border-radius: 25px;
+}
+.custom-select-trigger-services:after {
+    position: absolute;
+    display: block;
+    content: '';
+    width: 10px; 
+    height: 10px;
+    top: 45%; 
+    right: 20px;
+    border-bottom: 1px solid #fff;
+    border-right: 1px solid #fff;
+    transform: rotate(45deg) translateY(-50%);
+    transition: all .4s ease-in-out;
+    transform-origin: 50% 0;
+}
+
+.custom-select-services.opened .custom-select-trigger-services:after {
+    margin-top: 3px;
+    transform: rotate(-135deg) translateY(-50%);
+}
+.custom-options-services {
+    display: block;
+    top: 100%; 
+    left: 0; 
+    right: 0;
+    min-width: 100%;
+    margin: 5px 0;
+    border: 1px solid #604c6e;
+    border-radius: 4px;
+    box-sizing: border-box;
+    box-shadow: 0 2px 1px rgba(0,0,0,.07);
+    background: #fff;
+    transition: all .4s ease-in-out;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-15px);
+    z-index: 999;
+}
+.custom-select-services.opened .custom-options-services {
+    text-align: left;
+    position: relative;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+    transform: translateY(0);
+    background: linear-gradient(180.67deg, #39284E 90%, rgba(10,8,8,0.5) 100%);
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+.option-hover-services:before {
+    background: #f9f9f9;
+}
+.custom-option-services {
+    position: relative;
+    display: block;
+    padding: 0 22px;
+    border-bottom: 1px solid #8b709d;
+    font-size: 14px;
+    color: #fff;
+    line-height: 47px;
+    cursor: pointer;
+    transition: all .4s ease-in-out;
+}
+.custom-option-services:first-of-type {
+    border-radius: 4px 4px 0 0;
+}
+.custom-option-services:last-of-type {
+    border-bottom: 0;
+    border-radius: 0 0 4px 4px;
+}
+.custom-option-services:hover,
+.custom-option-services.selection-services {
+    background: rgba(0, 123, 255, 0.12);
+}
+/* Конец Выпадающий список навигационная панель, Платные услуги */

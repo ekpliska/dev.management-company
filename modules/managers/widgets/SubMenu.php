@@ -2,6 +2,7 @@
 
     namespace app\modules\managers\widgets;
     use yii\base\Widget;
+    use app\models\Houses;
 
 /**
  * Дополнительное под меню
@@ -33,28 +34,10 @@ class SubMenu extends Widget {
         switch ($this->view_name) {
             case 'profile':
                 // Меню профиля Собственника
-                $params = [
-                    'view-client' => [
-                        'label' => 'Профиль',
-                        'link' => 'clients/view-client',
-                    ],
-                    'receipts-of-hapu' => [
-                        'label' => 'Квитанция ЖКУ',
-                        'link' => 'clients/receipts-of-hapu',
-                    ],
-                    'payments' => [
-                        'label' => 'Платежи',
-                        'link' => 'clients/payments',
-                    ],
-                    'counters' => [
-                        'label' => 'Показания приборов учета',
-                        'link' => 'clients/counters',
-                    ],
-                    'account-info' => [
-                        'label' => 'Общая информация по лицевому счету',
-                        'link' => 'clients/account-info',
-                    ],
-                ];
+                $params = $this->subMenuProfile();
+                break;
+            case 'voting':
+                $params = $this->adressLists();
                 break;
         }
         
@@ -63,6 +46,44 @@ class SubMenu extends Widget {
             'client_id' => $this->client_id,
             'account_number' => $this->account_number,
         ]);
+        
+    }
+    
+    /*
+     * Подменю для профиля Собственника
+     */
+    private function subMenuProfile() {
+        
+        return $params = [
+            'view-client' => [
+                'label' => 'Профиль',
+                'link' => 'clients/view-client',
+            ],
+            'receipts-of-hapu' => [
+                'label' => 'Квитанция ЖКУ',
+                'link' => 'clients/receipts-of-hapu',
+            ],
+            'payments' => [
+                'label' => 'Платежи',
+                'link' => 'clients/payments',
+            ],
+            'counters' => [
+                'label' => 'Показания приборов учета',
+                'link' => 'clients/counters',
+            ],
+            'account-info' => [
+                'label' => 'Общая информация по лицевому счету',
+                'link' => 'clients/account-info',
+            ],
+        ];
+    }
+    
+    /*
+     * Адреса жилого массива
+     */
+    private function adressLists() {
+        
+        return $params = Houses::getAdressHousesList();
         
     }
     

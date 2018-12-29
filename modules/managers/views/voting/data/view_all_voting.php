@@ -13,7 +13,7 @@
 <?php foreach ($view_all_voting as $voting) : ?>
 <div class="vote-card">
     <div class="vote-card__image">
-        <?= Html::img('@web/' . $voting['voting_image'], [
+        <?= Html::img('@web' . $voting['voting_image'], [
                 'alt' => $voting['voting_title']]) ?>        
     </div>
     <div class="vote-card__content">
