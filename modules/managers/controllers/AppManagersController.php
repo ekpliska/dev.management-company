@@ -205,22 +205,4 @@ class AppManagersController extends Controller {
         
     }    
     
-    /*
-     * Фильтр данных по ID дома
-     * 
-     * @param $type string:
-     *      Голосование
-     *      Новости
-     *      Жилищный фонд
-     */
-    public function actionFilterByHouseAdress($house_id, $type) {
-
-        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        
-        if (Yii::$app->request->isPost) {
-            return ['success' => true];
-        }
-        return ['success' => false];
-        
-    }
 }

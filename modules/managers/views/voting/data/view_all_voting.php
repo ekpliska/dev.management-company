@@ -10,11 +10,12 @@
  * Вид отрисовки списка всех созданных голосований
  */
 ?>
+<?php if (isset($view_all_voting) && (count($view_all_voting) > 0)) : ?>
 <?php foreach ($view_all_voting as $voting) : ?>
 <div class="vote-card">
     <div class="vote-card__image">
         <?= Html::img('@web' . $voting['voting_image'], [
-                'alt' => $voting['voting_title']]) ?>        
+                'alt' => $voting['voting_title']]) ?>
     </div>
     <div class="vote-card__content">
         <h1 class="vote-card__content_title">
@@ -51,8 +52,12 @@
     </div>
 </div>
 <?php endforeach; ?>
-
 <?= LinkPager::widget([
         'pagination' => $pages
     ]);
 ?>
+<?php else: ?>
+<div class="notice info">
+    <p>По указанному адресу функция голосования не создавалась.</p>
+</div>
+<?php endif; ?>

@@ -1136,9 +1136,14 @@ $(document).ready(function() {
     /*
      * Фильтр контента по адресу дома, для навигационной панели
      */
-    function filterByHouseAdress(house_id, typePage) {
-        $.post('/web/managers/app-managers/filter-by-house-adress?house_id=' + house_id + '&type=' + typePage, function(response) {
-            $('#_list-res').html(response.success);
+    function filterByHouseAdress(house_id) {
+        $.post('filter-by-house-adress?house_id=' + house_id, function(response) {
+            if (response.success == true) {
+                $('#_list-res').html(response.data);
+            } else if (response.success == false) {
+                
+            }
+
         }); 
     }
 
@@ -1190,7 +1195,7 @@ $(document).ready(function() {
         $(this).addClass("selection-services");
         $(this).parents(".custom-select-services").removeClass("opened");
         $(this).parents(".custom-select-services").find(".custom-select-trigger-services").text(textSelect);
-        filterByHouseAdress(valueSelect, typePage);
+        filterByHouseAdress(valueSelect);
     });
 
     
