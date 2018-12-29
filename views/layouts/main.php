@@ -3,14 +3,10 @@
     use yii\helpers\Html;
     use app\widgets\Slider;
     use app\assets\AppAsset;
-    
-//    use app\widgets\Alert;
-//    use yii\bootstrap\Nav;
-//    use yii\bootstrap\NavBar;
-//    use yii\widgets\Breadcrumbs;
-    
+    use app\assets\CssLoginForm;
 
 AppAsset::register($this);
+CssLoginForm::register($this);
 
 ?>
 <?php $this->beginPage() ?>

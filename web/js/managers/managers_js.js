@@ -1141,9 +1141,8 @@ $(document).ready(function() {
             if (response.success == true) {
                 $('#_list-res').html(response.data);
             } else if (response.success == false) {
-                
+                $('#_list-res').html('');
             }
-
         }); 
     }
 
