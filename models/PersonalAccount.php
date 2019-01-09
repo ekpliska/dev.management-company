@@ -15,11 +15,12 @@
  */
 class PersonalAccount extends ActiveRecord
 {
-    /* Статус лицевого счета
+    /* Статус текущего лицевого счета 
      * устанавливается, когда пользователь создает новый лицевой счет
+     * или переключает текущий лицевой счет в Профиле пользователя
      */
-    const STATUS_DISABLED = 0;
-    const STATUS_ENABLED = 1;
+    const STATUS_CURRENT = 1;
+    const STATUS_NOT_CURRENT = 0;
     
     public $_list_user = [];
     /**
@@ -178,15 +179,33 @@ class PersonalAccount extends ActiveRecord
     
     /*
      * Получить список лицевых счетов по ID пользователя
+     * 
+     * joinWith('user') Связь через промежуточную таблицу Лицевой счет - Пользователь 
      */
     public static function getListAccountByUserID($user_id) {
         
-        $_list = self::find()
+        $result = self::find()
                 ->joinWith('user', false)
                 ->where(['user.user_id' => $user_id])
+                ->asArray()
+                ->orderBy(['isActive' => SORT_DESC])
                 ->all();
         
-        return ArrayHelper::map($_list, 'account_id', 'account_number');
+        $lists = [];
+        
+        foreach ($result as $key => $account) {
+            $list = [
+                'id' => $account['account_id'],
+                'number' => $account['account_number'],
+            ];
+            $lists[] = $list;
+        }
+        
+        return [
+            'lists' => $lists,
+            'current_account' => $lists[0],
+        ];
+        
     }
 
     /*

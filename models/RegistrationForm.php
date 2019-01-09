@@ -93,10 +93,6 @@ class RegistrationForm extends Model {
      */
     public function registration($data) {
         
-//        echo '<pre>';
-//        var_dump($data);
-//        die();
-        
         if ($data == null) {
             return false;
         }
@@ -167,6 +163,8 @@ class RegistrationForm extends Model {
             $account->personal_clients_id = $client->clients_id;
             $account->account_balance = $data['user_info']['user_info']['Лицевой счет']['Баланс'];
             $account->personal_flat_id = $flat->flats_id;
+            // Устанавливаем зарегистрированных лицевой счет как текущий
+            $account->isActive = PersonalAccount::STATUS_CURRENT;
             if (!$account->save()) {
                 throw new \yii\db\Exception('Ошибка создания новой записи' . 'Ошибка: ' . join(', ', $account->getFirstErrors()));
             }

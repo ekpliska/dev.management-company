@@ -31,9 +31,9 @@ class AppClientsController extends Controller {
             ],
             'accountList' => [
                 'class' => checkPersonalAccount::className(),
-                '_list' => '_list',
-                '_choosing' => '_choosing',
-                '_value_choosing' => '_value_choosing',
+                '_lists' => '_lists',
+                '_current_account_id' => '_current_account_id',
+                '_current_account_number' => '_current_account_number',
             ],
         ];
     }

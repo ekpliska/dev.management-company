@@ -28,7 +28,7 @@ class m180901_095338_table_personal_account extends Migration
             'personal_clients_id' => $this->integer(),
             'personal_rent_id' => $this->integer(),
             'personal_flat_id' => $this->integer(),
-            'isActive' => $this->tinyInteger()->defaultValue(PersonalAccount::STATUS_DISABLED),
+            'isActive' => $this->integer(),
         ], $table_options);
         
         $this->createIndex('idx-personal_account-account_id', '{{%personal_account}}', 'account_id');

@@ -24,7 +24,7 @@
             <?= Html::img('/images/navbar/group_46.svg', ['alt' => 'image'])  ?>
         </a>
         <ul class="nav navbar-nav navbar-right user-notification">
-            <?= UserInfo::widget(['_value_choosing' => $this->context->_value_choosing]) ?>
+            <?= UserInfo::widget(['_value_choosing' => $this->context->_current_account_number]) ?>
             <?= Notifications::widget() ?>            
         </ul>
     </div>  
@@ -32,7 +32,7 @@
         <?= NavMenu::widget(); ?>   
     </div>
     <?= SubBarGeneralPage::widget() ?>
-    <?= StatusRequest::widget(['account_id' => $this->context->_choosing]) ?>
+    <?= StatusRequest::widget(['account_id' => $this->context->_current_account_id]) ?>
     <?= SubBarPaidService::widget() ?>
     <?= SubBarPersonalAccount::widget() ?>
 </nav>

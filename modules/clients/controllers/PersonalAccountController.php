@@ -28,7 +28,7 @@ class PersonalAccountController extends AppClientsController {
     public function actionIndex() {
         
         $user_info = $this->permisionUser();
-        $accoint_id = $this->_choosing;
+        $accoint_id = $this->_current_account_id;
         
         $account_info = PersonalAccount::getAccountInfo($accoint_id, $user_info->clientID);
         
