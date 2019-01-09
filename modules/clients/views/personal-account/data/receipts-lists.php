@@ -9,7 +9,7 @@
 // Текущая дата (Год и номер месяца)
 $current_date = date('Y-m');
 ?>
-<?php if (isset($receipts_lists)) : ?>
+<?php if ($receipts_lists != null || count($receipts_lists) > 0) : ?>
 <ul class="list-group receipte-of-lists">
     <?php foreach ($receipts_lists as $key => $receipt) : ?>
         <?php
@@ -18,16 +18,14 @@ $current_date = date('Y-m');
             $_date = ($current_date == $date->format('Y-m')) ? true : false;
             // Статус квитанции
             $status = $receipt['Статус квитанции'] == 'Не оплачено' ? false : true;
-            
-            $str = ($_date == true && $status == false) ? $receipt['Сумма к оплате'].'&#8381"' : "Оплачено {$receipt['Сумма к оплате']}&#8381";
-            
+            // Формируем ссылку на PDF квитанцию
             $url_pdf = '@web/receipts/' . $account_number . '/' . $account_number . '-' . $receipt['Номер квитанции'] . '.pdf';
         ?>
         <li class="list-group-item" data-receipt="<?= $receipt['Номер квитанции'] ?>" data-account="<?= $account_number ?>">
             <p class="receipte-month"><?= $date->format('F Y') ?></p>
             <p class="receipte-number">Квитанция <?= $receipt['Номер квитанции'] ?></p>
             <?php if ($_date == true && $status == false) : // Если оплата за текущий расчетный период ?>
-                <?= Html::a("К оплате: {$receipt['Сумма к оплате']} &#8381", ['#'], [
+                <?= Html::a("К оплате: {$receipt['Сумма к оплате']} &#8381", ['personal-account/payment'], [
                         'class' => 'receipte-btn-pay',
                     ]) 
                 ?>

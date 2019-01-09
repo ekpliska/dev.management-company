@@ -55,7 +55,7 @@ $(document).ready(function() {
     
     
     /*
-     * Список квитанцию, Профиль Собственника
+     * Список квитанций, Профиль Собственника
      */
     $(document).on('click', '.list-group-item', function() {
         var liItem = $(this).data('receipt');
