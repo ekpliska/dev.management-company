@@ -74,7 +74,7 @@ class PersonalAccountController extends AppClientsController {
         $user_info = $this->permisionUser();
         
         // Получить номер текущего лицевого счета
-        $accoint_number = $this->_current_account_number;
+        $account_number = $this->_current_account_number;
         
         $array_request = [
             'Номер лицевого счета' => $accoint_number,
@@ -87,7 +87,7 @@ class PersonalAccountController extends AppClientsController {
         $receipts_lists = Yii::$app->client_api->getReceipts($data_json);
         
         return $this->render('receipts-of-hapu', [
-            'accoint_number' => $accoint_number,
+            'account_number' => $account_number,
             'receipts_lists' => $receipts_lists['receipts'],
         ]);
     }
@@ -100,10 +100,10 @@ class PersonalAccountController extends AppClientsController {
         $user_info = $this->permisionUser();
         
         // Получить номер текущего лицевого счета
-        $accoint_number = $this->_current_account_number;
+        $account_number = $this->_current_account_number;
         
         $array_request = [
-            'Номер лицевого счета' => $accoint_number,
+            'Номер лицевого счета' => $account_number,
             'Период начало' => null,
             'Период конец' => null,
         ];
@@ -113,7 +113,8 @@ class PersonalAccountController extends AppClientsController {
         $payments_lists = Yii::$app->client_api->getPayments($data_json);
         
         return $this->render('payments', [
-            'payments_lists' => $payments_lists['receipts'],
+            'account_number' => $account_number,
+            'payments_lists' => $payments_lists['payments'],
         ]);
     }
     
@@ -358,8 +359,7 @@ class PersonalAccountController extends AppClientsController {
                     $results = Yii::$app->client_api->getReceipts($data_json)['receipts'];
                     break;
                 case 'payments':
-//                    $results = Yii::$app->client_api->getReceipts($data_json);
-                    $results = Yii::$app->params['Платежи'];
+                    $results = Yii::$app->client_api->getPayments($data_json)['payments'];
                     break;
                 default:
                     $results['status'] == 'error';
@@ -377,8 +377,6 @@ class PersonalAccountController extends AppClientsController {
             return [
                 'success' => true,
                 'data_render' => $data_render,
-                'date_start' => $date_start,
-                'date_end' => $date_end,
             ];
         }
         

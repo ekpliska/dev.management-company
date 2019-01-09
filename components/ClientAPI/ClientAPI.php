@@ -77,7 +77,7 @@ class ClientAPI extends Object {
         
         return [
             'success' => $receipts['status'],
-            'receipts' => $receipts['Платежи']
+            'payments' => $receipts['Платежи']
         ];
         
     }

@@ -1,14 +1,8 @@
 <?php
 
 /* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Рендер вида Платежи
  */
-?>
-<?php 
-//echo '<pre>';
-//var_dump($payments_lists); 
 ?>
 <?php if (empty($payments_lists) || count($payments_lists) > 0) : ?>
 <?php foreach ($payments_lists as $key => $payment) : ?>

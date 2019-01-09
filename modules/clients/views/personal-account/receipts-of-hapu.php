@@ -49,7 +49,7 @@ $this->params['breadcrumbs'][] = 'Квитанции КЖУ';
             <?= Html::button('<i class="glyphicon glyphicon-search"></i>', [
                     'id' => 'get-receipts', 
                     'class' => 'btn-send-request',
-                    'data-account-number' => $accoint_number,
+                    'data-account-number' => $account_number,
                 ]) ?>
         </div>
         <div class="message-block"></div>

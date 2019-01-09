@@ -50,7 +50,12 @@ $this->params['breadcrumbs'][] = 'Платежи';
         ?>        
     </div>
     <div class="col-md-6">
-        <?= Html::button('Показать', ['class' => 'btn-show-payment']) ?>        
+        <?= Html::button('Показать', [
+                'id' => 'btn-show-payment',
+                'class' => 'btn-show-payment',
+                'data-account-number' => $account_number,
+            ]) 
+        ?>
     </div>
     <div class="col-md-12 message-block"></div>
     
