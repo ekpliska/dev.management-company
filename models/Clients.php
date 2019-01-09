@@ -31,21 +31,16 @@ class Clients extends ActiveRecord
             
             [[
                 'clients_name', 'clients_second_name', 'clients_surname', 
-                'clients_mobile', 'clients_phone'], 'required'],
+                'clients_phone'], 'required'],
             
             [['clients_name', 'clients_second_name', 'clients_surname'], 'filter', 'filter' => 'trim'],
             
             [['clients_name', 'clients_second_name', 'clients_surname'], 'string', 'min' => 3, 'max' => 70],
             
-            ['clients_mobile',
-                'match', 
-                'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/i', 
-            ],
-
-            ['clients_phone',
-                'match', 
-                'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{4}\)?[\- ]?)?[\d\- ]{7,10}$/i', 
-            ],
+//            ['clients_phone',
+//                'match', 
+//                'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{4}\)?[\- ]?)?[\d\- ]{7,10}$/i', 
+//            ],
             
             [[
                 'clients_name', 'clients_second_name', 'clients_surname'], 
@@ -54,7 +49,7 @@ class Clients extends ActiveRecord
                 'message' => 'Поле "{attribute}" может содержать только буквы русского алфавита, и знак "-"',
             ],
             
-            [['clients_mobile', 'clients_phone'], 'string', 'max' => 50],
+            ['clients_phone', 'string', 'max' => 50],
             
         ];
     }
@@ -91,7 +86,7 @@ class Clients extends ActiveRecord
         
         $info = (new \yii\db\Query)
                 ->select('t1.clients_id as id, t1.clients_name as name, t1.clients_second_name as second_name, t1.clients_surname as surname, '
-                        . 't1.clients_mobile as mobile, t1.clients_phone as phone, '
+                        . 't1.clients_phone as phone, '
                         . 't2.account_number as account, '
                         . 't3.user_email as email')
                 ->from('clients as t1')
@@ -128,10 +123,6 @@ class Clients extends ActiveRecord
                 $this->clients_second_name;
     }
     
-    public function getPhone() {
-        return $this->clients_mobile;
-    }
-    
     /**
      * Настройка полей для форм
      */
@@ -142,7 +133,6 @@ class Clients extends ActiveRecord
             'clients_name' => 'Имя',
             'clients_second_name' => 'Отчество',
             'clients_surname' => 'Фамилия',
-            'clients_mobile' => 'Мобильный телефон',
             'clients_phone' => 'Дополнительный номер телефона',
         ];
     }

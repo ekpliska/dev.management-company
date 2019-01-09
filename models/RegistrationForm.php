@@ -4,7 +4,8 @@
     use yii\base\Model;
     use Yii;
     use app\models\PersonalAccount;
-    use app\models\Clients;    
+    use app\models\Clients;
+    use app\models\Counters;
     
 
 /**
@@ -92,33 +93,97 @@ class RegistrationForm extends Model {
      */
     public function registration($data) {
         
+//        echo '<pre>';
+//        var_dump($data);
+//        die();
+        
         if ($data == null) {
             return false;
         }
         
-        $model = new User();
-        $model->user_login = $data['account'];
-        $model->user_password = Yii::$app->security->generatePasswordHash($data['password']);
-        $model->user_email = $data['email'];
-        $model->user_mobile = $data['phone'];
-        // Связываем таблицы Пользователь и Собственник
-        $model->setClientByPhone($data['account']);
-        // Новый пользователь получает статус без доступа в систему
-        $model->status = User::STATUS_DISABLED;
-        // Для нового пользователя генерируем ключ, для отправки на почту (Для подтверждения email)
-        $model->generateEmailConfirmToken();
-        // По умолчанию включаем email оповещение
-        $model->user_check_email = true;
+        $transaction = Yii::$app->db->beginTransaction();
+        
+        try {
             
-        if ($model->save()) {
-            $this->setUserData($data);
-            $this->sendEmail('EmailConfirm', 'Подтверждение регистрации', ['user' => $model]);
+            // Сохраняем данные Собственника
+            $client = new Clients();
+            // Данные Собственника, пришедщие по API
+            $client_data_api = $data['user_info']['user_info']['Собственник'];
+            $client->clients_surname = $client_data_api['Фамилия'] ? $client_data_api['Фамилия'] : 'Не задано';
+            $client->clients_name = $client_data_api['Имя'] ? $client_data_api['Имя'] : 'Не задано';
+            $client->clients_second_name = $client_data_api['Отчество'] ? $client_data_api['Отчество'] : 'Не задано';
+            $client->clients_phone = $client_data_api['Домашний телефон'] ? $client_data_api['Домашний телефон'] : 'Не задано';
+            
+            if (!$client->save()) {
+                throw new \yii\db\Exception('Ошибка создания новой записи' . 'Ошибка: ' . join(', ', $client->getFirstErrors()));
+            }
+            
+            // Создаем нового пользователя
+            $user = new User();
+            $user->user_login = $data['account'];
+            $user->user_password = Yii::$app->security->generatePasswordHash($data['password']);
+            $user->user_email = $data['email'];
+            $user->user_mobile = $data['phone'];
+            $user->user_client_id = $client->clients_id;
+            // Новый пользователь получает статус доступа в систему
+            $user->status = User::STATUS_ENABLED;
+            // Для нового пользователя генерируем ключ, для отправки на почту (Для подтверждения email)
+            // $user->generateEmailConfirmToken();
+            // По умолчанию включаем email оповещение
+            $user->user_check_email = true;
+            
+            if (!$user->save()) {
+                throw new \yii\db\Exception('Ошибка создания новой записи' . 'Ошибка: ' . join(', ', $user->getFirstErrors()));
+            }
+            
+            // Назначение роли пользователю
+            $user_role = Yii::$app->authManager->getRole('clients');
+            Yii::$app->authManager->assign($user_role, $user->user_id);
+            
+            // Дом
+            $house = new Houses();
+            $house_data_api = $data['user_info']['user_info']['Жилая площадь'];
+            $house_id = $house::isExistence(
+                            $house_data_api['House adress'], 
+                            $house_data_api['Полный адрес Собственника'],
+                            $house_data_api['Номер дома']);
+        
+            // Квартира
+            $flat = new Flats();
+            $flat->flats_house_id = $house_id;
+            $flat->flats_porch = $house_data_api['Номер подъезда'];
+            $flat->flats_floor = $house_data_api['Номер этажа'];
+            $flat->flats_number = $house_data_api['Номер квартиры'];
+            $flat->flats_rooms = $house_data_api['Количество комнат'];
+            $flat->flats_square = $data['square'];
+            if (!$flat->save()) {
+                throw new \yii\db\Exception('Ошибка создания новой записи' . 'Ошибка: ' . join(', ', $flat->getFirstErrors()));
+            }
+        
+            // Лицевой счет
+            $account = new PersonalAccount();
+            $account->account_number = $data['account'];
+            $account->account_organization_id = 1;
+            $account->personal_clients_id = $client->clients_id;
+            $account->account_balance = $data['user_info']['user_info']['Лицевой счет']['Баланс'];
+            $account->personal_flat_id = $flat->flats_id;
+            if (!$account->save()) {
+                throw new \yii\db\Exception('Ошибка создания новой записи' . 'Ошибка: ' . join(', ', $account->getFirstErrors()));
+            }
+            
+            // Отправляем регистрационные данные на электронную почту пользователя
+            // $this->sendEmail('EmailConfirm', 'Подтверждение регистрации', ['user' => $model]);
+            
+            $transaction->commit();
+            // Дропаем сессию в случае успешной регистрации нового пользователя
+            Yii::$app->session->removeAll();
+            
+            
+        } catch (Exception $e) {
+            $transaction->rollBack();
+//            echo $e->getTraceAsString();
         }
         
-        // Дропаем сессию в случае успешной регистрации нового пользователя
-        Yii::$app->session->removeAll();
-        
-        return true;
     }
     
     /*
@@ -131,41 +196,6 @@ class RegistrationForm extends Model {
                 ->setSubject($subject)
                 ->send();
         return $message;
-    }
-    
-    private function setUserData($data) {
-        
-        $client = new Clients();
-        $client->clients_surname = $data['user_info']['user_info']['Собственник']['Фамилия'];
-        $client->clients_name = $data['user_info']['user_info']['Собственник']['Имя'];
-        $client->clients_second_name = $data['user_info']['user_info']['Собственник']['Отчество'];
-        $client->clients_phone = $data['user_info']['user_info']['Собственник']['Домашний телефон'];
-        $client->save(false);
-        
-        $house = new Houses();
-        $house_id = $house::isExistence(
-                        $data['user_info']['user_info']['Жилая площадь']['House adress'], 
-                        $data['user_info']['user_info']['Жилая площадь']['Полный адрес Собственника']);
-        
-        $flat = new Flats();
-        $flat->flats_house_id = $house_id;
-        $flat->flats_porch = $data['user_info']['user_info']['Жилая площадь']['Номер подъезда'];
-        $flat->flats_floor = $data['user_info']['user_info']['Жилая площадь']['Номер этажа'];
-        $flat->flats_number = $data['user_info']['user_info']['Жилая площадь']['Номер квартиры'];
-        $flat->flats_rooms = $data['user_info']['user_info']['Жилая площадь']['Количество комнат'];
-        $flat->flats_square = $data['square'];
-        $flat->save(false);        
-        
-        $account = new PersonalAccount();
-        $account->account_number = $data['account'];
-        $account->account_organization_id = 1;
-        $account->personal_clients_id = $client->clients_id;
-        $account->account_balance = $data['user_info']['user_info']['Лицевой счет']['Баланс'];
-        $account->personal_flat_id = $flat->flats_id;
-        $account->save(false);        
-        
-        return true;
-        
     }
     
     
