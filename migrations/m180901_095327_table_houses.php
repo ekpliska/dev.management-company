@@ -25,6 +25,7 @@ class m180901_095327_table_houses extends Migration
         $this->createTable('{{%houses}}', [
             'houses_id' => $this->primaryKey(),
             'houses_gis_adress' => $this->string(250)->notNull(),
+            'houses_number' => $this->integer()->notNull(),
             'houses_description' => $this->string(255),
             'houses_name' => $this->string(100),
         ], $table_options);
