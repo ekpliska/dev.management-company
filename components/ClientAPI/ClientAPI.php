@@ -31,6 +31,7 @@ class ClientAPI extends Object {
     public function getPreviousCounters($data) {
         
         $indications = $this->readUrl('counters/previous/get', $data);
+        var_dump($indications); die();
         
         return [
             'success' => $indications['status'],

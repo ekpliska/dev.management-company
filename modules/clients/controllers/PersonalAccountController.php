@@ -147,8 +147,9 @@ class PersonalAccountController extends AppClientsController {
         $current_year = date('Y');
         
         $user_info = $this->permisionUser();
-        $account_id = $this->_choosing;
-        $account_number = $this->_value_choosing;
+        
+        $account_id = $this->_current_account_id;
+        $account_number = $this->_current_account_number;
         
         // Получаем список приборов учета с формированной заявкой на поверку счетчиков
         $counter_request = Counters::notVerified($account_id);
@@ -156,15 +157,18 @@ class PersonalAccountController extends AppClientsController {
         // Получаем комментарии по приборам учета Собсвенника. Комментарий формирует Администратор системы
         $comments_to_counters = CommentsToCounters::getComments($account_id);
         
-        // Формируем запрос в формате JSON на отрпавку по API
-        $data = "{
-                'Номер лицевого счета': '{$account_id}',
-                'Номер месяца': '{$current_month}',
-                'Год': '{$current_year}'
-        }";
-                
-//        $indications = Yii::$app->client_api->getPreviousCounters($data);
-        $indications = Yii::$app->params['current_indications'];
+        
+        $array_request = [
+            'Номер лицевого счета' => $account_number,
+            'Номер месяца' => $current_month,
+            'Год' => $current_year,
+        ];
+        
+        $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
+        
+        $indications = Yii::$app->client_api->getPreviousCounters($data);
+        
+        var_dump($indications); die();
 
         $model_indication = new SendIndicationForm();
                 
