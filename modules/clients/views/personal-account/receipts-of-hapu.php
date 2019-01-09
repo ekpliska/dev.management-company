@@ -25,43 +25,36 @@ $this->params['breadcrumbs'][] = 'Квитанции КЖУ';
     <div class="col-md-5 receipts_period">
         <p class="period_title"><i class="glyphicon glyphicon-calendar"></i> Период</p>
         <div class="receipts_period-calendar">
-            <span>С</span>
-        <?= DatePicker::widget([
-                'name' => 'date_start-period',
-                'type' => DatePicker::TYPE_INPUT,
-                'value' => date('d-M-Y'),
-                'pluginOptions' => [
-                    'autoclose'=>true,
-                    'format' => 'dd-M-yyyy'
-                ]
-            ]);        
-        ?>
-            <span>ПО</span>
-        <?= DatePicker::widget([
-                'name' => 'date_end-period',
-                'type' => DatePicker::TYPE_INPUT,
-                'value' => date('d-M-Y'),
-                'pluginOptions' => [
-                    'autoclose'=>true,
-                    'format' => 'dd-M-yyyy'
-                ]
-            ]);        
-        ?>
+            <?= DatePicker::widget([
+                    'name' => 'date_start-period',
+                    'type' => DatePicker::TYPE_INPUT,
+                    'value' => 'С',
+                    'pluginOptions' => [
+                        'autoclose'=>true,
+                        'format' => 'dd-M-yyyy'
+                    ]
+                ]);        
+            ?>
+            <span>-</span>
+            <?= DatePicker::widget([
+                    'name' => 'date_end-period',
+                    'type' => DatePicker::TYPE_INPUT,
+                    'value' => 'По',
+                    'pluginOptions' => [
+                        'autoclose'=>true,
+                        'format' => 'dd-M-yyyy'
+                    ]
+                ]);        
+            ?>
+            <?= Html::button('<i class="glyphicon glyphicon-search"></i>', ['id' => 'get-receipts', 'class' => 'btn-send-request']) ?>
         </div>
-        <ul class="list-group receipte-of-lists">
-            <li class="list-group-item">
-                <p class="receipte-month">Месяц</p>
-                <p class="receipte-number">Квитанция #TODO</p>
-                <?= Html::a('К оплате: #TODO &#8381;', ['/'], ['class' => 'receipte-btn-pay']) ?>
-                <?= Html::a('<i class="glyphicon glyphicon-download-alt"></i>', ['/'], ['class' => 'receipte-btn-dowload']) ?>
-            </li>
-            <li class="list-group-item">
-                <p class="receipte-month">Месяц</p>
-                <p class="receipte-number">Квитанция #TODO</p>
-                <?= Html::a('К оплате: #TODO &#8381;', ['/'], ['class' => 'receipte-btn-pay']) ?>
-                <?= Html::a('<i class="glyphicon glyphicon-download-alt"></i>', ['/'], ['class' => 'receipte-btn-dowload']) ?>
-            </li>
-        </ul>
+        <div id="receipts-lists">
+            <?= $this->render('data/receipts-lists', [
+                    'receipts_lists' => $receipts_lists,
+                    'account_number' => 1,
+                ]) ?>
+        </div>
+        
     </div>
     <div class="col-md-7 receipts_body">
         #TODO

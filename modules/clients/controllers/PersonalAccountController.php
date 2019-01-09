@@ -76,8 +76,19 @@ class PersonalAccountController extends AppClientsController {
         // Получить список всех лицевых счетов пользователя        
         $account_all = $this->_list;
         
+        $array_request = [
+            'Номер лицевого счета' => 1,
+            'Период начало' => '2018-11-10',
+            'Период конец' => '2018-11-10',
+        ];
+        
+        $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
+        
+        $receipts_lists = Yii::$app->client_api->getReceipts($data_json);
+        
         return $this->render('receipts-of-hapu', [
             'account_all' => $account_all,
+            'receipts' => $receipts_lists['receipts'],
         ]);
     }
     

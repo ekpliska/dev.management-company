@@ -121,7 +121,7 @@ $(document).ready(function() {
     }
     
     /*
-     * Запрос на получение списка квитанций в заданный даипазон
+     * Запрос на получение списка квитанций в заданный диапазон
      */
     $('#get-receipts').on('click', function(){
         var accountNumber = +$('#select-dark :selected').text();
