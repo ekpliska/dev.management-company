@@ -51,15 +51,14 @@ $this->params['breadcrumbs'][] = 'Квитанции КЖУ';
         <div id="receipts-lists">
             <?= $this->render('data/receipts-lists', [
                     'receipts_lists' => $receipts_lists,
-                    'account_number' => 1,
+                    'account_number' => $accoint_number,
                 ]) ?>
         </div>
         
     </div>
     <div class="col-md-7 receipts_body">
         #TODO
-    </div>
-    
+        
     <div class="operations-block">
         <ul class="nav nav-pills operations-block_items">
             <li><a href="#" class="left-block"><i class="glyphicon glyphicon-print"></i> Распечатать</a></li>
@@ -67,4 +66,7 @@ $this->params['breadcrumbs'][] = 'Квитанции КЖУ';
             <li><a href="#" class="right-block"><i class="glyphicon glyphicon-send"></i> Отправить</a></li>
         </ul>
     </div>
+        
+    </div>
+        
 </div>

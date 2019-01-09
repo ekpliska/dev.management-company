@@ -1904,7 +1904,8 @@ a.receipte-btn-dowload {
     padding: 20px 10px;
 }
 .operations-block {
-    right: 10%;
+    margin-left: 5%;
+    /*right: 10%;*/
     bottom: 10%;
     background: #2d18b4;
     position: fixed;
