@@ -267,8 +267,8 @@ class ProfileController extends AppClientsController
      */
     protected function client($user_info) {
         
-        $accoint_id = $this->_choosing;
-        $accounts_list = $this->_list;
+        $accoint_id = $this->_current_account_id;
+        $accounts_list = $this->_lists;
         
         $model = $user_info->_model;
         $model->scenario = User::SCENARIO_EDIT_PROFILE;
@@ -314,7 +314,7 @@ class ProfileController extends AppClientsController
     protected function rent($user_info) {
         
         $model = $user_info->_model;
-        $accounts_list = $this->_list;
+        $accounts_list = $this->_lists;
         
         return $this->render('index', [
             'user' => $model,
@@ -341,7 +341,7 @@ class ProfileController extends AppClientsController
      */
     public function actionCreateRentForm($client) {
         
-        $account = $this->_choosing;
+        $account = $this->_current_account_id;
         
         if ($client == null || $account == null) {
             return 'Ошибка отправки формы';

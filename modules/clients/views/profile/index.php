@@ -56,8 +56,8 @@ $this->params['breadcrumbs'][] = 'Профиль';
             <span class="badge-personal-account">Лицевой счет</span>
         </div>
 
-        <?= Html::dropDownList('_list-account', $this->context->_choosing, $accounts_list, [
-                'placeholder' => $this->context->_value_choosing,
+        <?= Html::dropDownList('_list-account', $this->context->_current_account_id, $accounts_list, [
+                'placeholder' => $this->context->_current_account_number,
                 'id' => 'sources',
                 'class' => 'custom-select sources',
                 'data-client' => Yii::$app->user->can('clients') ? $user_info->clientID : '']) 
