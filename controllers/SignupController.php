@@ -4,7 +4,6 @@
     use Yii;
     use yii\web\Controller;
     use app\models\RegistrationForm;
-    use app\models\User;
     use app\models\signup\SignupStepOne;
     use app\models\signup\SignupStepTwo;
     use app\models\signup\SignupStepThree;
