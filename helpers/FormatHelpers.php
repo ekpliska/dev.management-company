@@ -215,18 +215,18 @@ class FormatHelpers {
     
     /*
      * Форматирование полного адреса проживания
-     * г. Город, ул. Улица, д. Номер, п. Подъезд, эт. Этаж, кв. Номер
+     * Полный адрес ГИС, д. Номер, п. Подъезд, эт. Этаж, кв. Номер
      */
-    public static function formatFullAdress($town, $street, $house, $porch = false, $floor = false, $flat = false) {
+    public static function formatFullAdress($gis_adress, $house, $porch = false, $floor = false, $flat = false) {
         
-        $town = $town ? 'г. ' . $town . ', ' : '';
-        $street = $street ? 'ул. '  . $street . ', ' : '';
+        $gis_adress = $gis_adress ? $gis_adress . ', ' : '';
+        
         $house = ($porch || $floor || $flat)  ? 'д. ' . $house . ', ' : 'д. ' . $house;
         $porch = $porch ? 'подъезд ' . $porch . ', ' : '';
         $floor = $floor ? 'эт. ' . $floor . ', ' : '';
         $flat = $flat ? 'кв. ' . $flat : '';
         
-        return $town .  $street . $house . $porch . $floor . $flat;
+        return $gis_adress .  $house . $porch . $floor . $flat;
     }
     
     /*

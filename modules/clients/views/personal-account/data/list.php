@@ -48,16 +48,15 @@
         <tr>
             <td scope="row" class="text-left-tb">Контактный телефон</td>
             <td class="text-right-tb">
-                <?= $account_info['clients_mobile'] ?>
+                <?= Yii::$app->userProfile->mobile ?>
             </td>
         </tr>
         <tr>
             <td scope="row" class="text-left-tb">Адрес</td>
             <td class="text-right-tb">
                 <?= HtmlPurifier::process(FormatHelpers::formatFullAdress(
-                        false,
-                        $account_info['houses_street'],
-                        $account_info['houses_number_house'],
+                        $account_info['houses_gis_adress'],
+                        $account_info['houses_number'],
                         false,
                         false,
                         $account_info['flats_number'])) ?>
