@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = 'Квитанции КЖУ';
                     'value' => 'С',
                     'pluginOptions' => [
                         'autoclose'=>true,
-                        'format' => 'dd-M-yyyy'
+                        'format' => 'dd-mm-yyyy'
                     ]
                 ]);        
             ?>
@@ -42,12 +42,17 @@ $this->params['breadcrumbs'][] = 'Квитанции КЖУ';
                     'value' => 'По',
                     'pluginOptions' => [
                         'autoclose'=>true,
-                        'format' => 'dd-M-yyyy'
+                        'format' => 'dd-mm-yyyy'
                     ]
                 ]);        
             ?>
-            <?= Html::button('<i class="glyphicon glyphicon-search"></i>', ['id' => 'get-receipts', 'class' => 'btn-send-request']) ?>
+            <?= Html::button('<i class="glyphicon glyphicon-search"></i>', [
+                    'id' => 'get-receipts', 
+                    'class' => 'btn-send-request',
+                    'data-account-number' => $accoint_number,
+                ]) ?>
         </div>
+        <div class="message-block"></div>
         <div id="receipts-lists">
             <?= $this->render('data/receipts-lists', [
                     'receipts_lists' => $receipts_lists,

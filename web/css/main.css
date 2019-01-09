@@ -1887,7 +1887,16 @@ span.receipte-btn-pay-ok {
 span.receipte-btn-pay-ok::before {
     content: '\2713';
 }
-span.receipte-btn-pay {
+span.receipte-btn-pay-debt {
+    padding: 5px 10px;
+    background: #f0754a;
+    color: #fff;
+    border-radius: 25px;
+}
+span.receipte-btn-pay-debt::before {
+    content: '\2715';
+}
+a.receipte-btn-pay {
     padding: 5px 10px;
     background: #2d18b4;
     color: #fff;

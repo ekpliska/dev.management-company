@@ -306,4 +306,69 @@ class PersonalAccountController extends AppClientsController {
     }
     
     
+    /*
+     * Запрос на получение квитанций по заданному лицевому счету и диапазону
+     * 
+     * Формируем запрос, преобразуем в JSON, отправляем по API:
+     * $data_array = [
+     *      "Номер лицевого счета" => $account_number,
+     *      "Период начало" => $date_start,
+     *      "Период конец" => $date_end
+     * ]
+     * 
+     */
+    public function actionSearchDataOnPeriod($account_number, $date_start, $date_end, $type) {
+        
+        $date_start = Yii::$app->formatter->asDate($date_start, 'Y-M-d');
+        $date_end = Yii::$app->formatter->asDate($date_end, 'Y-M-d');
+                
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        
+        if (!is_numeric($account_number)) {
+            return ['success' => false];
+        }
+        
+        $data_array = [
+            'Номер лицевого счета' => $account_number,
+            'Период начало' => $date_start,
+            'Период конец' => $date_end
+        ];        
+        $data_json = json_encode($data_array, JSON_UNESCAPED_UNICODE);
+        
+        if (Yii::$app->request->isPost) {
+            
+            switch ($type) {
+                case 'receipts':
+                    $results = Yii::$app->client_api->getReceipts($data_json)['receipts'];
+                    break;
+                case 'payments':
+//                    $results = Yii::$app->client_api->getReceipts($data_json);
+                    $results = Yii::$app->params['Платежи'];
+                    break;
+                default:
+                    $results['status'] == 'error';
+                    break;
+            }
+            
+            if ($results['status'] == 'error') {
+                return ['success' => false];
+            }
+            
+            $data_render = $this->renderPartial('data/' . $type . '-lists', [
+                $type . '_lists' => $results,
+                'account_number' => $account_number]);
+            
+            return [
+                'success' => true,
+                'data_render' => $data_render,
+                'date_start' => $date_start,
+                'date_end' => $date_end,
+            ];
+        }
+        
+        return ['success' => false];
+        
+    }
+    
+    
 }

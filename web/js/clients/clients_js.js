@@ -163,68 +163,68 @@ $(document).ready(function() {
         }
     });
     
-    /*
-     * Если в модальном окне "Новый арендатор" нажата нопка Отмена/х
-     * Сбрасываем заполненный поля
-     * Снимаем чекбокс Арендатор
-     * Блокирем кнопку "Добавить арендатора"
-     * 
-     */
-    $("#add-rent-modal .btn__modal_rent_close, .btn__modal_close").on("click", function() {
-        $("#add-rent-modal input").val("");
-        $("#add-rent-modal .modal-body").removeClass("has-error");
-        $("#add-rent-modal .modal-body").removeClass("has-success");
-        $("#add-rent-modal .form-group").removeClass("has-success"); 
-        $("#add-rent-modal .form-group").removeClass("has-error");
-        $("#add-rent-modal").find(".help-block").text("");
-        $("#isRent").prop("checked", false);
-        $(".btn__add-rent").prop("disabled", true);
-    });
-    
-    /*
-     * Метод контрольной проверки заполнения формы "Новый лицевой счет"
-     * до того, как была нажала кнопка "Добавить лицевой счет"
-     */
-    $("#add-account").on("beforeSubmit.yii", function (e) {
-
-        // Форма "Новый арендатор" по умолчанию считается не заполненной
-        var isCheck = false;
-        // Поиск в модальном окне создания арендатора поля для заполнения
-        var form = $("#add-rent-modal").find("input[id*=clientsrentform]");
-        // Количество полей на форме "Новый арендатор"
-        var field = [];
-
-        // Проверяем каждое поле на форме "Новый арендатор" на заполнение
-        form.each(function() {
-            field.push("input[id*=clientsrentform]");
-            var value = $(this).val();
-            // console.log(value);
-            for (var i = 1; i < field.length; i++) {
-                // Если втречается заполненное поле, то статус заполнения формы меням на положительный
-                if (value) {
-                    isCheck = true;
-                }
-            }
-            // console.log(field.length);
-        });
-    
-        /*
-        *   Перед отправкой формы, проверяем чекбокс "Арендатор"
-        *   Если переключатель установлен, то проверяем наличие выбранного арендатора из списка
-        *   или наличее добавленного арендатора
-        */
-        if (!$("#isRent").is(":checked")) {
-            $("#add-rent-modal input").val("");
-            $("#add-rent-modal .modal-body").removeClass("has-error");
-            $("#add-rent-modal .modal-body").removeClass("has-success");
-            $("#add-rent-modal .form-group").removeClass("has-success"); 
-            $("#add-rent-modal .form-group").removeClass("has-error");
-            $("#add-rent-modal").find(".help-block").text("");
-            $("#isRent").prop("checked", false);
-            $(".btn__add-rent").prop("disabled", true);
-            e.preventDefault();    
-        }
-    });
+//    /*
+//     * Если в модальном окне "Новый арендатор" нажата нопка Отмена/х
+//     * Сбрасываем заполненный поля
+//     * Снимаем чекбокс Арендатор
+//     * Блокирем кнопку "Добавить арендатора"
+//     * 
+//     */
+//    $("#add-rent-modal .btn__modal_rent_close, .btn__modal_close").on("click", function() {
+//        $("#add-rent-modal input").val("");
+//        $("#add-rent-modal .modal-body").removeClass("has-error");
+//        $("#add-rent-modal .modal-body").removeClass("has-success");
+//        $("#add-rent-modal .form-group").removeClass("has-success"); 
+//        $("#add-rent-modal .form-group").removeClass("has-error");
+//        $("#add-rent-modal").find(".help-block").text("");
+//        $("#isRent").prop("checked", false);
+//        $(".btn__add-rent").prop("disabled", true);
+//    });
+//    
+//    /*
+//     * Метод контрольной проверки заполнения формы "Новый лицевой счет"
+//     * до того, как была нажала кнопка "Добавить лицевой счет"
+//     */
+//    $("#add-account").on("beforeSubmit.yii", function (e) {
+//
+//        // Форма "Новый арендатор" по умолчанию считается не заполненной
+//        var isCheck = false;
+//        // Поиск в модальном окне создания арендатора поля для заполнения
+//        var form = $("#add-rent-modal").find("input[id*=clientsrentform]");
+//        // Количество полей на форме "Новый арендатор"
+//        var field = [];
+//
+//        // Проверяем каждое поле на форме "Новый арендатор" на заполнение
+//        form.each(function() {
+//            field.push("input[id*=clientsrentform]");
+//            var value = $(this).val();
+//            // console.log(value);
+//            for (var i = 1; i < field.length; i++) {
+//                // Если втречается заполненное поле, то статус заполнения формы меням на положительный
+//                if (value) {
+//                    isCheck = true;
+//                }
+//            }
+//            // console.log(field.length);
+//        });
+//    
+//        /*
+//        *   Перед отправкой формы, проверяем чекбокс "Арендатор"
+//        *   Если переключатель установлен, то проверяем наличие выбранного арендатора из списка
+//        *   или наличее добавленного арендатора
+//        */
+//        if (!$("#isRent").is(":checked")) {
+//            $("#add-rent-modal input").val("");
+//            $("#add-rent-modal .modal-body").removeClass("has-error");
+//            $("#add-rent-modal .modal-body").removeClass("has-success");
+//            $("#add-rent-modal .form-group").removeClass("has-success"); 
+//            $("#add-rent-modal .form-group").removeClass("has-error");
+//            $("#add-rent-modal").find(".help-block").text("");
+//            $("#isRent").prop("checked", false);
+//            $(".btn__add-rent").prop("disabled", true);
+//            e.preventDefault();    
+//        }
+//    });
     
     /*
      * Сброс формы в модальном окне на добавление нового лицевого счета при закрытии формы "Отмена"/х
@@ -234,9 +234,63 @@ $(document).ready(function() {
     }); 
     
     /*
+     * Функция парсинга даты
+     * Смена номер месяца и дня местами
+     */
+    function dateParse(date) {
+        var dateArray = date.split('-');
+        var dateString = dateArray[1] + '-' + dateArray[0] + '-' + dateArray[2];
+        var newDate = new Date(dateString);
+        return newDate;
+    }
+    
+    /*
+     * 
+     * Общий метод формирования AJAX запросов для раздела Лицевой счет
+     * @param {type} accountNumber Лицевой счет
+     * @param {type} startDate Дата начала даипазона
+     * @param {type} endDate Дата конца диапазона
+     * @param {type} idContent ID блока, в котором будет выведен результат запроса
+     * @param {type} type Тип запроса (Квитанции, Платежи, Приборы учета)
+     */
+    function getDataClients (accountNumber, startDate, endDate, idContent, type) {
+        var parseStartDate = dateParse(startDate);
+        var parseEndDate = dateParse(endDate);
+        
+        if (parseStartDate - parseEndDate > 0) {
+            $('.message-block').addClass('invalid-message-show').html('Вы указали некорректный диапазон');
+        } else if (parseStartDate - parseEndDate <= 0) {
+            $('.message-block').removeClass('invalid-message-show').html('');
+            $.post('search-data-on-period?account_number=' + accountNumber + '&date_start=' + startDate + '&date_end=' + endDate + '&type=' + type,
+                function(data) {
+                    if (data.success === false) {
+                        $('.message-block').addClass('invalid-message-show').html('Ошибка запроса');
+                    } else if (data.success === true) {
+                        $('.message-block').removeClass('invalid-message-show').html('');
+                        $(idContent).html(data.data_render);
+                    }
+                }
+            );
+        }
+        
+        return;
+        
+    }
+    
+    /*
+     * Запрос на получение списка квитанций в заданный диапазон
+     */
+    $('#get-receipts').on('click', function(){
+        var accountNumber = $(this).data('accountNumber');
+        var startDate = $('input[name="date_start-period"]').val();
+        var endDate = $('input[name="date_end-period"]').val();
+        
+        getDataClients(accountNumber, startDate, endDate, '#receipts-lists', 'receipts');
+        
+    });
+    
+    /*
      * Раздел 'Приборы учета'
-     * 
-     * 
      * Поля ввода для показания приборов учета блокируем
      */ 
     var ind = $('.indication_val');
