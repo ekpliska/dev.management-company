@@ -34,16 +34,15 @@ $(document).ready(function() {
     /*
      * Функция смены текущего лицевого счета,
      * в личном кабинете пользователя
-     * @param {integer} accountValue ID лицевого счета
+     * @param {integer} currentValue ID текущего лицевого счета
+     * @param {integer} valueSelect ID выбранного лицевого счета
      */
-    function switchAccountNumber(accountValue) {
+    function switchAccountNumber(currentValue, valueSelect) {
         $.ajax({
             url: 'check-account',
             data: {
-                dataAccount: accountValue,
-            },
-            error: function() {
-                console.log('Error #1000-11');
+                currentAccount: currentValue,
+                newCurrentAccount: valueSelect,
             },
             dataType: 'json',
             type: 'POST',
@@ -54,6 +53,9 @@ $(document).ready(function() {
                     $('#is_rent').prop('checked', false);
                 }                
                 $("#content-replace").html(response.data);
+            },
+            error: function() {
+                console.log('Error #1000-11');
             }
         });        
     }
@@ -680,8 +682,7 @@ $(document).ready(function() {
         $(this).find("option").each(function() {
             var classSelection = ($(this).attr("value") == currentValue) ? 'selection ' : '';            
             template += '<span class="custom-option ' + classSelection + $(this).attr("class") + '" data-value="' + $(this).attr("value") + '">' + $(this).html() + '</span>';
-            
-            $(this).val('selection');
+//            $(this).val('selection');
             
         });
         template += '</div></div>';
@@ -707,15 +708,20 @@ $(document).ready(function() {
 
 
     $(".custom-option").on("click", function() {
+        // ID выбранного лицевого счета
         var valueSelect = $(this).data("value");
+        // Номер выбранного лицевого счета
         var textSelect = $(this).text();
+        // ID текущего лицевого счета
+        var currentValue = $('#sources option:selected').val();
+        console.log(valueSelect + ' ' + textSelect + ' ' + currentValue);
         $(this).parents(".custom-select-wrapper").find("select").val(valueSelect);
         $(this).parents(".custom-options").find(".custom-option").removeClass("selection");
         $(this).addClass("selection");
         $(this).parents(".custom-select").removeClass("opened");
         $(this).parents(".custom-select").find(".custom-select-trigger").text(textSelect);
         // Смена текущего лицевого счета, ЛК собственник
-        switchAccountNumber(valueSelect);
+        switchAccountNumber(currentValue, valueSelect);
     });
     
     /* Кастомизация элеметнов управления формой, категории услуг */

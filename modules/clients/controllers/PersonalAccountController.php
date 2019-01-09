@@ -77,7 +77,7 @@ class PersonalAccountController extends AppClientsController {
         $account_number = $this->_current_account_number;
         
         $array_request = [
-            'Номер лицевого счета' => $accoint_number,
+            'Номер лицевого счета' => $account_number,
             'Период начало' => null,
             'Период конец' => null,
         ];
@@ -146,8 +146,6 @@ class PersonalAccountController extends AppClientsController {
         // Получаем номер текущего года
         $current_year = date('Y');
         
-        $user_info = $this->permisionUser();
-        
         $account_id = $this->_current_account_id;
         $account_number = $this->_current_account_number;
         
@@ -165,8 +163,8 @@ class PersonalAccountController extends AppClientsController {
         ];
         
         $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
-        
-        $indications = Yii::$app->client_api->getPreviousCounters($data);
+
+        $indications = Yii::$app->client_api->getPreviousCounters($data_json);
         
         var_dump($indications); die();
 

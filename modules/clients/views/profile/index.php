@@ -60,7 +60,8 @@ $this->params['breadcrumbs'][] = 'Профиль';
                 'placeholder' => $this->context->_current_account_number,
                 'id' => 'sources',
                 'class' => 'custom-select sources',
-                'data-client' => Yii::$app->user->can('clients') ? $user_info->clientID : '']) 
+                'data-client' => Yii::$app->user->can('clients') ? $user_info->clientID : '',
+            ]) 
         ?>    
     </div>
     

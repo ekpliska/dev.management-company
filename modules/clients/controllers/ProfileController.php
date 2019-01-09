@@ -92,21 +92,24 @@ class ProfileController extends AppClientsController
     }
     
     /*
-     * Фильтр выбора лицевого счета
+     * Смена выбора текущего лицевого счета
+     * Текущий лицевой счет устанавливается в БД, как статус STATUS_CURRENT
      * dropDownList Лицевой счет
      */
     public function actionCheckAccount() {
 
         // Из пост запроса получаем ID лицевого счета и собственника
-        $account_id = Yii::$app->request->post('dataAccount');
+        $current_account_id = Yii::$app->request->post('currentAccount');
+        $new_current_account_id = Yii::$app->request->post('newCurrentAccount');
         $client_id = Yii::$app->userProfile->clientID;
         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         
         if (Yii::$app->request->isAjax) {
+            $change_account = PersonalAccount::changeCurrentAccount($current_account_id, $new_current_account_id);
             // Записываем выбранный лицевой счет в куку как текущий
-            $this->setChoosingAccountCookie($account_id);
+//            $this->setChoosingAccountCookie($account_id);
             // Ищем арендатора, закрепленного за указанным лицевым счетом
-            $model = PersonalAccount::findByRent($account_id, $client_id);
+            $model = PersonalAccount::findByRent($new_current_account_id, $client_id);
             
             // Если арендатор существует, генерирурем для него модель
             if (!empty($model->personal_rent_id)) {

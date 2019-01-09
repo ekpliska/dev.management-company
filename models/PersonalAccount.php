@@ -202,7 +202,7 @@ class PersonalAccount extends ActiveRecord
         }
         
         return [
-            'lists' => $lists,
+            'lists' => ArrayHelper::map($result, 'account_id', 'account_number'),
             'current_account' => $lists[0],
         ];
         
@@ -267,6 +267,22 @@ class PersonalAccount extends ActiveRecord
                 $bind_date->save();
             }
         }
+    }
+    
+    /*
+     * Смена текущего лицевого счета
+     */
+    public static function changeCurrentAccount($current_account_id, $new_current_account_id) {
+        
+        $old_choosing = PersonalAccount::findByAccountID($current_account_id);
+        $old_choosing->isActive = self::STATUS_NOT_CURRENT;
+        $old_choosing->save(false);
+        
+        $new_choosing = PersonalAccount::findByAccountID($new_current_account_id);
+        $new_choosing->isActive = self::STATUS_CURRENT;
+        $new_choosing->save(false);
+        
+        return true;
     }
     
     /**
