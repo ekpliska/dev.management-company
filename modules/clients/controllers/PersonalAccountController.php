@@ -78,19 +78,17 @@ class PersonalAccountController extends AppClientsController {
         
         $array_request = [
             'Номер лицевого счета' => $accoint_number,
-            'Период начало' => '',
-            'Период конец' => '',
+            'Период начало' => null,
+            'Период конец' => null,
         ];
         
         $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
         
-//        $receipts_lists = Yii::$app->client_api->getReceipts($data_json);
-        $receipts_lists = Yii::$app->params['Квитанции ЖКУ_4'];
+        $receipts_lists = Yii::$app->client_api->getReceipts($data_json);
         
         return $this->render('receipts-of-hapu', [
             'accoint_number' => $accoint_number,
-//            'receipts_lists' => $receipts_lists['receipts'],
-            'receipts_lists' => $receipts_lists,
+            'receipts_lists' => $receipts_lists['receipts'],
         ]);
     }
     
@@ -98,7 +96,25 @@ class PersonalAccountController extends AppClientsController {
      * Страница "Платежи"
      */
     public function actionPayments() {
-        return $this->render('payments');
+        
+        $user_info = $this->permisionUser();
+        
+        // Получить номер текущего лицевого счета
+        $accoint_number = $this->_current_account_number;
+        
+        $array_request = [
+            'Номер лицевого счета' => $accoint_number,
+            'Период начало' => null,
+            'Период конец' => null,
+        ];
+        
+        $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
+        
+        $payments_lists = Yii::$app->client_api->getPayments($data_json);
+        
+        return $this->render('payments', [
+            'payments_lists' => $payments_lists['receipts'],
+        ]);
     }
     
     /*

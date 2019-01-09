@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = 'Квитанции КЖУ';
                     ]
                 ]);        
             ?>
-            <span>-</span>
+            <span>&#45;</span>
             <?= DatePicker::widget([
                     'name' => 'date_end-period',
                     'type' => DatePicker::TYPE_INPUT,

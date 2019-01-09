@@ -233,6 +233,9 @@ $(document).ready(function() {
         $('#create-account-modal-form')[0].reset();
     }); 
     
+    /*
+     * Список квитанций, переключение по квитанции для загрузки PDF
+     */
     $(document).on('click', '.list-group-item', function() {
         var liItem = $(this).data('receipt');
         var accountNumber = $(this).data('account');

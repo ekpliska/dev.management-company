@@ -73,7 +73,7 @@ class ClientAPI extends Object {
      */
     public function getPayments($data) {
         
-        $receipts = $this->readUrl('', $data);
+        $receipts = $this->readUrl('payments/get', $data);
         
         return [
             'success' => $receipts['status'],
