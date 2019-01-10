@@ -54,7 +54,7 @@ $array_image = [
                                 <?php if (!ArrayHelper::keyExists($indication['Регистрационный номер прибора учета'], $counter_request)) : ?>
                                 <?= Html::button('Заказать поверку', [
                                         'class' => 'create-send-request', 
-                                        'data-account' => $this->context->_choosing,
+                                        'data-account' => $this->context->_current_account_id,
                                         'data-counter-type' => $indication['Тип прибора учета'],
                                         'data-counter-num' => $indication['Регистрационный номер прибора учета'],
                                 ]) ?>

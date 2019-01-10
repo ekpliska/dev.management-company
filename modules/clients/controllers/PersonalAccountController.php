@@ -32,7 +32,7 @@ class PersonalAccountController extends AppClientsController {
         
         $account_info = PersonalAccount::getAccountInfo($accoint_id, $user_info->clientID);
         
-        // Загуржаем модель добавления нового лицевого счета
+        // Загружаем модель добавления нового лицевого счета
         $model = new NewAccountForm();
         
         return $this->render('index', [
@@ -40,28 +40,6 @@ class PersonalAccountController extends AppClientsController {
             'account_info' => $account_info,
             'model' => $model,
         ]);
-        
-    }
-    
-    /*
-     * Общий метод валидации форм раздела Лицевой счет
-     */
-    public function actionValidateForm($form) {
-        
-        if ($form == null) {
-            throw new NotFoundHttpException('Ошибка передалчи параметров. Вы обратились к несуществующей странице');
-        }
-        
-        switch ($form) {
-            case 'NewAccountForm':
-                $model = new NewAccountForm();
-                break;
-        }
-        
-        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
-            Yii::$app->response->format = Response::FORMAT_JSON;
-            return \yii\widgets\ActiveForm::validate($model);
-        }
         
     }
     
@@ -130,7 +108,7 @@ class PersonalAccountController extends AppClientsController {
             'user_info' => $user_info,
         ]);
     }
-
+    
     /*
      * Страница "Показания приборов учета"
      * 
@@ -155,7 +133,6 @@ class PersonalAccountController extends AppClientsController {
         // Получаем комментарии по приборам учета Собсвенника. Комментарий формирует Администратор системы
         $comments_to_counters = CommentsToCounters::getComments($account_id);
         
-        
         $array_request = [
             'Номер лицевого счета' => $account_number,
             'Номер месяца' => $current_month,
@@ -166,19 +143,17 @@ class PersonalAccountController extends AppClientsController {
 
         $indications = Yii::$app->client_api->getPreviousCounters($data_json);
         
-        var_dump($indications); die();
-
         $model_indication = new SendIndicationForm();
                 
         return $this->render('counters', [
-            'indications' => $indications,
+            'indications' => $indications['indications'],
             'comments_to_counters' => $comments_to_counters,
             'model_indication' => $model_indication,
             'is_btn' => $is_btn,
             'counter_request' => $counter_request,
         ]);
         
-    }
+    }    
     
     /*
      * Отправка показаний, валидация формы
@@ -225,15 +200,15 @@ class PersonalAccountController extends AppClientsController {
         $array_request['Приборы учета'] = [];
         
         foreach ($data as $key => $data) {
-            $array['Регистрационный номер прибора учета'] = $key;
+            $array['ID'] = $key;
             $array['Дата снятия показания'] = date('Y-m-d');
             $array['Текущее показание'] = $data['current_indication'];
             $array_request['Приборы учета'][] = $array;
         }
         
         $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
-        $result = Yii::$app->client_api->setCurrentIndications($data);
-//        var_dump($result); die();
+        
+        $result = Yii::$app->client_api->setCurrentIndications($data_json);
         
         if ($result['status'] == 'error' || $result['success'] == false ) {
             return false;
@@ -304,8 +279,31 @@ class PersonalAccountController extends AppClientsController {
         
     }
     
+    
     /*
-     * Создание лицевого счета собсвенника
+     * Общий метод валидации форм раздела Лицевой счет
+     */
+    public function actionValidateForm($form) {
+        
+        if ($form == null) {
+            throw new NotFoundHttpException('Ошибка передалчи параметров. Вы обратились к несуществующей странице');
+        }
+        
+        switch ($form) {
+            case 'NewAccountForm':
+                $model = new NewAccountForm();
+                break;
+        }
+        
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return \yii\widgets\ActiveForm::validate($model);
+        }
+        
+    }    
+    
+    /*
+     * Создание лицевого счета Собсвенника
      */
     public function actionCreateAccount() {
         

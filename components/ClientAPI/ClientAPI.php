@@ -30,8 +30,7 @@ class ClientAPI extends Object {
      */
     public function getPreviousCounters($data) {
         
-        $indications = $this->readUrl('counters/previous/get', $data);
-        var_dump($indications); die();
+        $indications = $this->readUrl('counters/get', $data);
         
         return [
             'success' => $indications['status'],
@@ -44,7 +43,7 @@ class ClientAPI extends Object {
      */
     public function setCurrentIndications($data) {
         
-        $new_indications = $this->readUrl('counters/current/set', $data);
+        $new_indications = $this->readUrl('counters/set', $data);
         
         return [
             'status' => $new_indications['status'],
