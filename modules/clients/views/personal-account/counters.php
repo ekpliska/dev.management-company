@@ -62,7 +62,7 @@ $this->params['breadcrumbs'][] = 'Показания приборов учета
         <?= $this->render('data/grid-counters', [
                 'indications' => $indications,
                 'form' => $form,
-                'counter_request' => $counter_request,
+                'auto_request' => $auto_request,
                 'is_btn' => $is_btn,
                 'model_indication' => $model_indication,
         ]) ?>

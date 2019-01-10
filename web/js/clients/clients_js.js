@@ -367,23 +367,24 @@ $(document).ready(function() {
      * Формирование автоматической заявки на платную услугу
      * "Поверка приборов учета"
      */
-    $('.create-send-request').on('click', function() {
+    $('button[id*="create-request-"').on('click', function() {
+        var button = $(this).attr('id');
         var accountID = $(this).data('account');
         var typeCounter = $(this).data('counterType');
-        var numCounter = $(this).data('counterNum');
+        var idCounter = $(this).data('counterId');
         
-        console.log(accountID + ' ' + typeCounter + ' ' + numCounter);
+        console.log(button + ' ' + accountID + ' ' + typeCounter + ' ' + idCounter);
         $.ajax({
             url: 'create-paid-request',
             method: 'POST',
             data: {
                 accountID: accountID,
                 typeCounter: typeCounter,
-                numCounter: numCounter,
+                idCounter: idCounter,
             },
             success: function (data) {
                 if (data.success == true) {
-                    $('.create-send-request').replaceWith('<span class="message-request">Сформирована заявка ID' + data.request_number + '</span>');
+                    $('#' + button).replaceWith('<span class="message-request">Сформирована заявка ID' + data.request_number + '</span>');
                 }
             },
             error: function (textStatus) {

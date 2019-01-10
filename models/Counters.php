@@ -75,18 +75,7 @@ class Counters extends ActiveRecord
         $counter->isRequest = self::REQUEST_YES;
         return $counter->save(false);
     }
-    
-    public static function notVerified($account_id) {
         
-        $array = self::find()
-                ->where(['counters_account_id' => $account_id])
-                ->andWhere(['isRequest' => self::REQUEST_YES])
-                ->asArray()
-                ->all();
-        
-        return ArrayHelper::map($array, 'ID_counter_clients', 'isRequest');
-    }
-    
     /*
      * Получить показания приборов учета по номеру текущего месяца
      * @param $last_indication Показания предыдущего месяца от текущего

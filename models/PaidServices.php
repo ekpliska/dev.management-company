@@ -201,14 +201,14 @@ class PaidServices extends ActiveRecord
      * 
      * Услуга - Поверка прибров учета
      */
-    public static function automaticRequest($account_id, $options = []) {
+    public static function automaticRequest($account_id, $type_request, $counter_type, $counter_id) {
         
-        if ($options['type'] == null) {
+        if ($type_request == null) {
             return false;
         }
         
         $service_id = Services::find()
-                ->where(['like', 'services_name', $options['type']])
+                ->where(['like', 'services_name', $type_request])
                 ->asArray()
                 ->one();
         
@@ -220,17 +220,34 @@ class PaidServices extends ActiveRecord
         
         $order_numder = static::createNumberRequest($service_id['services_id']);
         
+        $request_body = "Заявка, наименование услуги: {$service_id['services_name']}. Тип прибора учета: {$counter_type}. Уникальный инедтификатор прибора учета: {$counter_id}. [Заявка сформирована автоматически]";
+        
         $new->services_number = $order_numder;
         $new->services_name_services_id = $service_id['services_id'];
-        $new->services_comment = 'Заявка, наименование услуги: ' . $service_id['services_name'] . '. ' .
-                '. Дополнительные сведения - ' . $options['value'] .
-                '[Заявка сформирована автоматически]';
+        $new->services_comment = $request_body;
         $new->services_phone = Yii::$app->userProfile->mobile;
         $new->services_account_id = $account_id;
+        $new->value = $counter_id;
         
        return $new->save() ? $new->services_number : false;
        
     }
+    
+    /*
+     * Получаем список автоматически сформированных заявок на поверку приборов учета
+     * по лицевому счету
+     */
+    public static function notVerified($account_id) {
+        
+        $array = self::find()
+                ->where(['services_account_id' => $account_id])
+                ->andWhere(['!=', 'value', 'not null'])
+                ->asArray()
+                ->all();
+        
+        return ArrayHelper::map($array, 'value', 'services_number');
+    }
+    
     
     /**
      * Настройка полей для форм

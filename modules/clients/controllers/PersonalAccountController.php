@@ -127,8 +127,8 @@ class PersonalAccountController extends AppClientsController {
         $account_id = $this->_current_account_id;
         $account_number = $this->_current_account_number;
         
-        // Получаем список приборов учета с формированной заявкой на поверку счетчиков
-        $counter_request = Counters::notVerified($account_id);
+        // Получаем список зявок сформированных автоматически на поверу приборов учета
+        $auto_request = PaidServices::notVerified($account_id);
         
         // Получаем комментарии по приборам учета Собсвенника. Комментарий формирует Администратор системы
         $comments_to_counters = CommentsToCounters::getComments($account_id);
@@ -150,7 +150,7 @@ class PersonalAccountController extends AppClientsController {
             'comments_to_counters' => $comments_to_counters,
             'model_indication' => $model_indication,
             'is_btn' => $is_btn,
-            'counter_request' => $counter_request,
+            'auto_request' => $auto_request,
         ]);
         
     }    
@@ -226,26 +226,21 @@ class PersonalAccountController extends AppClientsController {
         
         $account_id = Yii::$app->request->post('accountID');
         $counter_type = Yii::$app->request->post('typeCounter');
-        $counter_num = Yii::$app->request->post('numCounter');
+        $counter_id = Yii::$app->request->post('idCounter');
         
         Yii::$app->response->format = Response::FORMAT_JSON;        
         
-        if (!is_numeric($account_id) && !is_string($counter_type || !is_numeric($counter_num))) {
+        if (!is_numeric($account_id) && !is_string($counter_type || !is_numeric($counter_id))) {
             return ['success' => false];
         }
         
         if (Yii::$app->request->isAjax) {
             
-            $result = $new_request = PaidServices::automaticRequest($account_id, [
-                'type' => 'Поверка',
-                'value' => 'тип прибора учета: ' . $counter_type . ', регистрационный номер прибора учета: ' . $counter_num,
-            ]);
+            $result = $new_request = PaidServices::automaticRequest($account_id, 'Поверка', $counter_type, $counter_id);
             
             if (!$result) {
                 return ['success' => false];
             }
-            
-            $counter = Counters::setRequestStatus($counter_num);
             
             return ['success' => true, 'request_number' => $result];
         }

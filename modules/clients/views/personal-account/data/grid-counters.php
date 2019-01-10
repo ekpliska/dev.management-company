@@ -51,12 +51,13 @@ $array_image = [
                                 <span>Ввод показаний заблокирован</span>
                             </td>
                             <td>
-                                <?php if (!ArrayHelper::keyExists($indication['ID'], $counter_request)) : ?>
+                                <?php if (!ArrayHelper::keyExists($indication['ID'], $auto_request)) : ?>
                                 <?= Html::button('Заказать поверку', [
+                                        'id' => "create-request-{$key}",
                                         'class' => 'create-send-request', 
                                         'data-account' => $this->context->_current_account_id,
                                         'data-counter-type' => $indication['Тип прибора учета'],
-                                        'data-counter-num' => $indication['ID'],
+                                        'data-counter-id' => $indication['ID'],
                                 ]) ?>
                                 <?php else: ?>
                                     <span class="message-request">
