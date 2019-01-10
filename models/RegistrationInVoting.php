@@ -42,6 +42,8 @@ class RegistrationInVoting extends ActiveRecord
         return $this->hasOne(Voting::className(), ['voting_id' => 'voting_id']);
     }
     
+    
+    
     /*
      * Создаем запись регистрации участия в голосовании пользователя
      */
@@ -111,6 +113,19 @@ class RegistrationInVoting extends ActiveRecord
         $new_value = $number = mt_rand(10000, 99999);
         $this->random_number = $new_value;
         return $this->save(false);
+        
+    }
+    
+    /*
+     * Получить список всех участников
+     */
+    public static function getParticipants($voting_id) {
+        
+        return self::find()
+                ->where(['voting_id' => $voting_id])
+                ->andWhere(['status' => self::STATUS_ENABLED])
+                ->asArray()
+                ->all();
         
     }
     

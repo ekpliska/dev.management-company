@@ -42,8 +42,9 @@ class VotingController extends AppClientsController {
         
         $voting = Voting::findVotingById($voting_id);
         
-        echo '<pre>';
-        var_dump($voting); die();
+        $participants = RegistrationInVoting::getParticipants($voting_id);
+//        echo '<pre>';
+//        var_dump($participants); die();
         
         
         if ($voting === null) {

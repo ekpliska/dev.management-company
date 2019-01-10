@@ -94,13 +94,13 @@ $_now = time();
     
 </div>
 
-<?php if ($is_register['status'] == RegistrationInVoting::STATUS_DISABLED && Yii::$app->user->can('clients')) : ?>
+<?php // if ($is_register['status'] == RegistrationInVoting::STATUS_DISABLED && Yii::$app->user->can('clients')) : ?>
 
     <?= $this->render('modal/participate-in-voting', [
             'model' => $model,
             'voting_id' => $voting['voting_id']]) ?>
 
-<?php endif; ?>
+<?php // endif; ?>
 
 
 <?php 
@@ -155,3 +155,4 @@ $this->registerJs("
     });
 ");
 ?>
+<?= ModalWindows::widget(['modal_view' => 'participate_modal']) ?> 

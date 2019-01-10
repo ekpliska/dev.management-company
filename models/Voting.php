@@ -148,7 +148,7 @@ class Voting extends ActiveRecord
     public static function findVotingById($voting_id) {
         
         return self::find()
-                ->joinWith(['registration', 'question', 'question.answer'])
+                ->joinWith(['question', 'question.answer'])
                 ->where(['voting_id' => $voting_id])
                 ->asArray()
                 ->one();        
