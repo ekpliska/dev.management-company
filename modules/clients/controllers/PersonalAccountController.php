@@ -142,7 +142,7 @@ class PersonalAccountController extends AppClientsController {
         $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
 
         $indications = Yii::$app->client_api->getPreviousCounters($data_json);
-        
+            
         $model_indication = new SendIndicationForm();
                 
         return $this->render('counters', [
@@ -165,15 +165,15 @@ class PersonalAccountController extends AppClientsController {
         if (Yii::$app->request->isPost) {
             $models = [];
             $data = [];
-            $t = Yii::$app->request->post($model_indication[0]->formName());
-            
-            foreach ($t as $counter_num => $post_data) {
+            $temp_data = Yii::$app->request->post($model_indication[0]->formName());
+
+            foreach ($temp_data as $counter_num => $post_data) {
                 $newModel = new SendIndicationForm();
                 $newModel->load($post_data);
                 $models[$counter_num] = $newModel;
                 $data[$counter_num] = $post_data;
             }
-            
+
             if (Model::loadMultiple($models, Yii::$app->request->post()) && Model::validateMultiple($models)) {
                 if ($this->sendIndicationAPI($data)) {
                     Yii::$app->session->setFlash('success', ['message' => 'Показания приборов учета были переданы успешно']);

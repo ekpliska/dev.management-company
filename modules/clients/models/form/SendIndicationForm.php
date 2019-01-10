@@ -8,7 +8,7 @@
  */
 class SendIndicationForm extends Model {
     
-    public $counter_number;
+    public $ID;
     public $current_indication;
     public $previous_indication;
     
@@ -16,7 +16,7 @@ class SendIndicationForm extends Model {
         
         return [
             ['current_indication', 'required', 'message' => 'Укажите показания'],
-            ['counter_number', 'integer'],
+            ['ID', 'integer'],
             [['current_indication', 'previous_indication'], 'double', 'message' => 'Некорректные показания'],
             
             ['current_indication', 'compare', 'compareValue' => 0, 'operator' => '>', 'type' => 'number', 'message' => 'Некорректные показания'],
