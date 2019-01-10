@@ -133,10 +133,10 @@ class Voting extends ActiveRecord
     /*
      * Получить список всех голосований для конечного пользователя
      */
-    public static function findAllVotingForClient($estate_id, $house_id, $flat_id) {
+    public static function findAllVotingForClient($house_id) {
         
         $votings = self::find()
-//                ->where(['voting_house' => $house_id])
+                ->where(['voting_house_id' => $house_id])
                 ->asArray()
                 ->all();
         return $votings;

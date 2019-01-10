@@ -43,12 +43,39 @@ Modal::begin([
             ]
         ]); 
     ?>
-                
-    <?= $form->field($model, 'number1')->input('text', ['class' => 'number-sms', 'maxlength' => 1, 'size' => 1])->label(false) ?>
-    <?= $form->field($model, 'number2')->input('text', ['class' => 'number-sms', 'maxlength' => 1, 'size' => 1])->label(false) ?>
-    <?= $form->field($model, 'number3')->input('text', ['class' => 'number-sms', 'maxlength' => 1, 'size' => 1])->label(false) ?>
-    <?= $form->field($model, 'number4')->input('text', ['class' => 'number-sms', 'maxlength' => 1, 'size' => 1])->label(false) ?>
-    <?= $form->field($model, 'number5')->input('text', ['class' => 'number-sms', 'maxlength' => 1, 'size' => 1])->label(false) ?>
+    
+    <?php //= $model->errorSummary($form); ?>
+    
+    <?= $form->field($model, 'number1')
+            ->input('text', [
+                'class' => 'number-sms', 
+                'maxlength' => 1, 
+                'size' => 1])
+            ->label(false) ?>
+    <?= $form->field($model, 'number2')
+            ->input('text', [
+                'class' => 'number-sms', 
+                'maxlength' => 1, 
+                'size' => 1])
+            ->label(false) ?>
+    <?= $form->field($model, 'number3')
+            ->input('text', [
+                'class' => 'number-sms', 
+                'maxlength' => 1, 
+                'size' => 1])
+            ->label(false) ?>
+    <?= $form->field($model, 'number4')
+            ->input('text', [
+                'class' => 'number-sms', 
+                'maxlength' => 1, 
+                'size' => 1])
+            ->label(false) ?>
+    <?= $form->field($model, 'number5')
+            ->input('text', [
+                'class' => 'number-sms', 
+                'maxlength' => 1, 
+                'size' => 1])
+            ->label(false) ?>
                 
 </div>
             
@@ -63,7 +90,11 @@ Modal::begin([
 </div>
                 
 <div class="modal-footer">
-    <?= Html::submitButton('Продолжить', ['id' => 'participate_in', 'class' => 'btn blue-outline-btn']) ?>
+    <?= Html::submitButton('Продолжить', [
+            'id' => 'participate_in', 
+            'class' => 'btn blue-outline-btn',
+            'data-voting-id' => $voting_id,
+        ]) ?>
     
     <?= Html::button('Отмена', [
             'data-dismiss' => 'modal', 

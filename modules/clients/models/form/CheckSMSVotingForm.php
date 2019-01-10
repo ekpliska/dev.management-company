@@ -18,4 +18,9 @@ class CheckSMSVotingForm extends Model {
         ];
     }
     
+    
+    
+    public function checkSmsCode($sms_code) {
+        return true;
+    }
 }

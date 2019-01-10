@@ -17,11 +17,9 @@ class VotingController extends AppClientsController {
      */
     public function actionIndex() {
         
-        $estate_id = Yii::$app->userProfile->_user['estate_id'];
         $house_id = Yii::$app->userProfile->_user['house_id'];
-        $flat_id = Yii::$app->userProfile->_user['flat_id'];        
         
-        $voting_list = Voting::findAllVotingForClient($estate_id, $house_id, $flat_id);
+        $voting_list = Voting::findAllVotingForClient($house_id);
         
         return $this->render('index', [
             'voting_list' => $voting_list,
@@ -40,12 +38,11 @@ class VotingController extends AppClientsController {
          */
         $modal_show = $this->getCookieVoting($voting_id) ? true : false;
         
+        // Получаем информацию по текущему голосованию
         $voting = Voting::findVotingById($voting_id);
         
+        // Получаем информаию о участниках голосования
         $participants = RegistrationInVoting::getParticipants($voting_id);
-//        echo '<pre>';
-//        var_dump($participants); die();
-        
         
         if ($voting === null) {
             throw new \yii\web\NotFoundHttpException('Вы обратились к несуществующей странице');
@@ -57,6 +54,13 @@ class VotingController extends AppClientsController {
                 ->andWhere(['voting_id' => $voting_id, 'user_id' => Yii::$app->user->identity->id])
                 ->asArray()
                 ->one();
+        
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->checkSmsCode($is_register['random_number'])) {
+                return 'sms ok';
+            }
+            return 'sms bad';
+        }
         
         return $this->render('view-voting', [
             'voting' => $voting,
@@ -176,6 +180,6 @@ class VotingController extends AppClientsController {
         $name_modal = '_participateInVoting-' . $voting_id;
         return $cookies->remove($name_modal) ? true : false;
         
-    }    
+    }
     
 }

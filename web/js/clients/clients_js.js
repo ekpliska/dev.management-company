@@ -615,6 +615,15 @@ $(document).ready(function() {
         return false;
     });
     
+    /*
+     * Подтверждение согласия участия в голосовании
+     * @type Number
+     */
+//    $('#participate_in').on('click', function(){
+//        var votingId = $(this).data('votingId');
+//        alert(votingId);
+//    });
+    
     
     /* End Block of Voting */
     

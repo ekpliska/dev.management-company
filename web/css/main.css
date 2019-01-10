@@ -2371,9 +2371,10 @@ input[name="date_end-period-pay"]:focus {
     height: 64px;
     width: 42px;
     border-radius: 12px;
-    background-color: #FFFFFF;
+    background-color: #fff;
+    color: #000;
     margin-left: 13px;
-    padding-right: 8px;
+    /*padding-right: 8px;*/
     font-size: 34px;
     text-align: center;
 }
