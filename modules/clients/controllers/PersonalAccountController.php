@@ -307,17 +307,18 @@ class PersonalAccountController extends AppClientsController {
     /*
      * Создание лицевого счета собсвенника
      */
-    public function actionCreateAccount($client_id) {
+    public function actionCreateAccount() {
         
         $model = new NewAccountForm();
         
+        // Получаем текущий лицевой счет
+        $old_account_id = $this->_current_account_id;
+        
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->createAccount()) {
+            if ($model->createAccount($old_account_id)) {
                 Yii::$app->session->setFlash('success', ['message' => 'Лицевой счет был успешно создан']);
-            } else {
-                Yii::$app->session->setFlash('error', ['message' => 'При создании лицевого счета произошла ошибка. Обновите страницу и повторите действие заново']);
+                return $this->redirect('index');
             }
-            return $this->redirect('index');
         }
         
         Yii::$app->session->setFlash('error', ['message' => 'При создании лицевого счета произошла ошибка. Обновите страницу и повторите действие заново']);

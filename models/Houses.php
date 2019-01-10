@@ -191,7 +191,7 @@ class Houses extends ActiveRecord
         // Обрезаем строку полного адреса содственника до номера дома
         $_adress = stristr($full_adress, 'д.', true);
         // Обрезаем последний символ в строке (,)
-        $_adress = substr($_adress, 0, -1);
+        $_adress = substr($_adress, 0, -2);
         
         $_house = self::find()
                 ->where([
@@ -210,7 +210,7 @@ class Houses extends ActiveRecord
             return $house->houses_id;
         }
         
-        return $_find['houses_id'];
+        return $_house['houses_id'];
     }
     
     /**

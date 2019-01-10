@@ -16,11 +16,11 @@ class ClientAPI extends Object {
      */
     public function accountRegister($data) {
         
-        $array = $this->readUrl('account/register', $data);
+        $account_info = $this->readUrl('account/register', $data);
         
         return [
-            'success' => $array['Лицевой счет']['success'],
-            'user_info' => $array,
+            'success' => $account_info['Лицевой счет']['success'],
+            'account_info' => $account_info,
         ];
     }    
     

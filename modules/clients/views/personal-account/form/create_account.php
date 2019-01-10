@@ -25,9 +25,7 @@
 <?php
     $form = ActiveForm::begin([
         'id' => 'create-account-modal-form',
-        'action' => ['create-account', 
-            'client_id' => Yii::$app->userProfile->clientID, 
-        ],
+        'action' => ['create-account'],
         'validateOnChange' => false,
         'validateOnBlur' => false,
         'enableAjaxValidation' => true,
@@ -40,7 +38,8 @@
 ?>
 
     <?= $form->field($model, 'account_number')
-            ->input('text', ['class' => 'field-input-modal account-number'])
+//            ->input('text', ['class' => 'field-input-modal account-number'])
+            ->input('text', ['class' => 'field-input-modal'])
             ->label($model->getAttributeLabel('account_number'), ['class' => 'field-label-modal']) ?>
     <?= $form->field($model, 'last_sum')
             ->input('text', ['class' => 'field-input-modal'])
