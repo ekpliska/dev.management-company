@@ -155,5 +155,3 @@ $this->registerJs("
     });
 ");
 ?>
-
-<?= ModalWindows::widget(['modal_view' => 'participate_modal']) ?>

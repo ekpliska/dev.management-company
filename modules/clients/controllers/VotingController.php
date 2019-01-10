@@ -5,6 +5,7 @@
     use app\modules\clients\controllers\AppClientsController;
     use app\models\Voting;
     use app\models\RegistrationInVoting;
+    use app\modules\clients\models\form\CheckSMSVotingForm;
 
 /**
  * Голосование
@@ -46,7 +47,7 @@ class VotingController extends AppClientsController {
             throw new \yii\web\NotFoundHttpException('Вы обратились к несуществующей странице');
         }
         
-        $model = new \app\modules\clients\models\form\CheckSMSVotingForm();
+        $model = new CheckSMSVotingForm();
         
         $is_register = RegistrationInVoting::find()
                 ->andWhere(['voting_id' => $voting_id, 'user_id' => Yii::$app->user->identity->id])
@@ -66,8 +67,8 @@ class VotingController extends AppClientsController {
      * Регистрация на участие в голосовании
      * 
      * При нажатии на кнопку "Принять участние" создаем запись в таблице "Участники"
-     * Генерируем случайное число, которое будем отправлять в СМС пользователлю
-     * Формируем время ожидания ввода сгенерированного числа
+     * Геристрируем случайное число, которое будем отправлять в СМС пользователлю
+     * Формируем время ожидания ввода сгенерированного кода
      * Если время истекает, запись из бд о регистрации на участие в голосованиии удаляется
      * 
      * Если регистрация на участие прошла успешно, записываем куку модального окна ввода СМС кода

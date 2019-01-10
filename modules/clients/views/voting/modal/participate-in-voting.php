@@ -18,6 +18,10 @@ Modal::begin([
     'closeButton' => [
         'class' => 'close close modal-close-btn',
     ],
+    'clientOptions' => [
+        'backdrop' => 'static', 
+        'keyboard' => false,
+    ],
 ]);
 ?>
 

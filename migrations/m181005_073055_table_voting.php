@@ -21,6 +21,7 @@ class m181005_073055_table_voting extends Migration
             $table_options = 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB';
         }
         
+        // Голосование
         $this->createTable('{{%voting}}', [
             'voting_id' => $this->primaryKey(),
             'voting_type' => $this->tinyInteger()->notNull(),
@@ -37,6 +38,7 @@ class m181005_073055_table_voting extends Migration
         ]);
         $this->createIndex('idx-voting-voting_id', '{{%voting}}', 'voting_id');
         
+        // Вопросы к голосованию
         $this->createTable('{{%questions}}', [
             'questions_id' => $this->primaryKey(),
             'questions_voting_id' => $this->integer()->notNull(),
@@ -47,6 +49,7 @@ class m181005_073055_table_voting extends Migration
         ]);
         $this->createIndex('idx-questions-questions_id', '{{%questions}}', 'questions_id');
         
+        // Результаты голосования
         $this->createTable('{{%answers}}', [
             'answers_id' => $this->primaryKey(),
             'answers_questions_id' => $this->integer()->notNull(),

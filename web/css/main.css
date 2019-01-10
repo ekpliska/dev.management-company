@@ -2276,6 +2276,9 @@ input[name="date_end-period-pay"]:focus {
 .voting-info span > i {
     padding-right: 5px;
 }
+.voting-body_left {
+    min-height: 700px;
+}
 .voting-title-block {
     position: absolute;
     height: 160px;
@@ -2308,7 +2311,7 @@ input[name="date_end-period-pay"]:focus {
     outline: none;
 }
 .voting-body {
-    margin: 5px 0px 5px 0px;
+    margin: 15px 0;
 }
 .voting-body_left {
     border: 1px solid #ddd;
@@ -2338,6 +2341,7 @@ input[name="date_end-period-pay"]:focus {
 }
 .questions-text span:first-child {
     padding-right: 10%;
+    width: 70%;
 }
 .modal-title-vote {
     color: #fff;
