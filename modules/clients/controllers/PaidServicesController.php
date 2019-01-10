@@ -24,7 +24,7 @@ class PaidServicesController extends AppClientsController {
     public function actionIndex() {
         
         
-        $accoint_id = $this->_choosing;
+        $accoint_id = $this->_current_account_id;
         
         // Загружаем модель добавления новой заявки
         $new_order = new PaidServices([
@@ -59,7 +59,7 @@ class PaidServicesController extends AppClientsController {
     public function actionOrderServices() {
         
         $this->permisionUser();
-        $account_id = $this->_choosing;
+        $account_id = $this->_current_account_id;
         
         $all_orders = PaidServices::getOrderByUder($account_id);
         

@@ -61,7 +61,7 @@ $array_image = [
                                 ]) ?>
                                 <?php else: ?>
                                     <span class="message-request">
-                                        Заявка на поверку cформирована
+                                        ID заявки <?= ArrayHelper::getValue($auto_request, $indication['ID']) ?>
                                     </span>
                                     <br />
                                     <?= Html::a('Мои платные услуги', ['paid-services/order-services']) ?>
