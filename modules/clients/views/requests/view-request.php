@@ -69,7 +69,7 @@ $this->params['breadcrumbs'][] = 'Заявка ID ' . $request_info['requests_id
                         <div class="client_info-image">
                             <span class="glyphicon glyphicon-home"></span>
                         </div>
-                        <span class="client_info-text"><?= Yii::$app->userProfile->getFullAdress($this->context->_choosing)?></span>
+                        <span class="client_info-text"><?= Yii::$app->userProfile->getFullAdress($this->context->_current_account_id)?></span>
 
                     </div>
                     <div class="col-lg-6 col-sm-6 col-md-6 text-left">

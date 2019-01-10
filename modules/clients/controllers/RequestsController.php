@@ -30,7 +30,7 @@ class RequestsController extends AppClientsController
      */
     public function actionIndex() {
         
-        $accoint_id = $this->_choosing;
+        $accoint_id = $this->_current_account_id;
         
         $type_requests = TypeRequests::getTypeNameArray();
         $status_requests = StatusRequest::getUserStatusRequests();
@@ -78,7 +78,7 @@ class RequestsController extends AppClientsController
      */    
     public function actionViewRequest($request_numder) {
 
-        $accoint_id = $this->_choosing;
+        $accoint_id = $this->_current_account_id;
         
         // Ищем заявку по уникальному номеру
         $request_info = Requests::findRequestByIdent($request_numder, $accoint_id);
@@ -87,7 +87,7 @@ class RequestsController extends AppClientsController
          * Если заявка не найдена или передан номер заявки не принадлежащий пользователю, 
          * кидаем исключение
          */
-        if ($request_info === null || !ArrayHelper::keyExists($request_info['requests_account_id'], $this->_list)) {
+        if ($request_info === null || !ArrayHelper::keyExists($request_info['requests_account_id'], $this->_lists)) {
             throw new NotFoundHttpException('Вы обратились к несуществующей странице');
         }
         

@@ -285,7 +285,6 @@ $(document).ready(function() {
             $('.message-block').removeClass('invalid-message-show').html('');
             $.post('search-data-on-period?account_number=' + accountNumber + '&date_start=' + startDate + '&date_end=' + endDate + '&type=' + type,
                 function(data) {
-                        console.log(data.data_render);
                     if (data.success === false) {
                         $('.message-block').addClass('invalid-message-show').html('Ошибка запроса');
                     } else if (data.success === true) {
@@ -319,7 +318,6 @@ $(document).ready(function() {
         var accountNumber = $(this).data('accountNumber');
         var startDate = $('input[name="date_start-period-pay"]').val();
         var endDate = $('input[name="date_end-period-pay"]').val();
-        console.log(accountNumber);
         getDataClients(accountNumber, startDate, endDate, '#payments-lists', 'payments');
         
     });
