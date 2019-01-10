@@ -1,9 +1,10 @@
 <?php
 
     use yii\db\Migration;
+    use app\models\RegistrationInVoting;
 
 /**
- * Регистрация участния в голосовании
+ * Регистрация участия в голосовании
  */
 class m181023_074847_table_registration_in_voting extends Migration
 {
@@ -20,7 +21,7 @@ class m181023_074847_table_registration_in_voting extends Migration
             'user_id' => $this->integer()->notNull(),
             'random_number' => $this->integer(5)->notNull(),
             'date_registration' => $this->integer()->notNull(),
-            'status' => $this->tinyInteger()->defaultValue(false),
+            'status' => $this->string(20)->defaultValue(RegistrationInVoting::STATUS_DISABLED),
         ]);
         
         $this->createIndex('idx-registration_in_voting-id', '{{%registration_in_voting}}', 'id');

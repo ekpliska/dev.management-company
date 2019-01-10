@@ -75,10 +75,17 @@ class Voting extends ActiveRecord
     }
     
     /**
-     * Свзяь с таблицей ВОпросы
+     * Свзяь с таблицей Вопросы
      */
     public function getQuestion() {
         return $this->hasMany(Questions::className(), ['questions_voting_id' => 'voting_id']);
+    }
+    
+    /**
+     * Свзяь с таблицей Регистрация в голосовании
+     */
+    public function getRegistration() {
+        return $this->hasMany(RegistrationInVoting::className(), ['voting_id' => 'voting_id']);
     }
     
     /*
@@ -141,7 +148,7 @@ class Voting extends ActiveRecord
     public static function findVotingById($voting_id) {
         
         return self::find()
-                ->joinWith(['question'])
+                ->joinWith(['registration', 'question', 'question.answer'])
                 ->where(['voting_id' => $voting_id])
                 ->asArray()
                 ->one();        

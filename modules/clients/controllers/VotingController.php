@@ -39,10 +39,13 @@ class VotingController extends AppClientsController {
          *  если кука существует, то загружаем модальное окно сразу при загрузке страницы с голосованием
          */
         $modal_show = $this->getCookieVoting($voting_id) ? true : false;
-//        var_dump($modal_show);
-//        die();
         
         $voting = Voting::findVotingById($voting_id);
+        
+        echo '<pre>';
+        var_dump($voting); die();
+        
+        
         if ($voting === null) {
             throw new \yii\web\NotFoundHttpException('Вы обратились к несуществующей странице');
         }

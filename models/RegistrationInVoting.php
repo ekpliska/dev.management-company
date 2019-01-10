@@ -13,9 +13,9 @@ class RegistrationInVoting extends ActiveRecord
      * Статус участния в голосования
      */
     // Пользователь поставлен на регистрацию, Отправлено СМС
-    const STATUS_DISABLED = 0; 
-    // Пользователь зарегистрирован, СМС получено и введен верный код
-    const STATUS_ENABLED = 1;
+    const STATUS_DISABLED = 'in register'; 
+    // Пользователь зарегистрирован, как участник
+    const STATUS_ENABLED = 'participant';
 
     /**
      * Таблица в бд
