@@ -71,14 +71,14 @@ $array_image = [
                                 <?php if ($indication['Текущее показание'] != null) : ?>
                                     <?= $indication['Текущее показание'] ?>
                                 <?php elseif ($is_btn) : ?>
-                                    <?= $form->field($model_indication, "[{$indication['Регистрационный номер прибора учета']}]current_indication_repeat")
+                                    <?= $form->field($model_indication, "[{$indication['Регистрационный номер прибора учета']}]previous_indication")
                                             ->hiddenInput(['class' => 'reading-input', 'value' => $indication['Предыдущие показание'], 'disabled' => true])
                                             ->label(false) ?>
                                     <?= $form->field($model_indication, "[{$indication['Регистрационный номер прибора учета']}]counter_number")
                                             ->hiddenInput(['class' => 'reading-input', 'value' => $indication['Регистрационный номер прибора учета'], 'disabled' => true])
                                             ->label(false) ?>
                                     <?= $form->field($model_indication, "[{$indication['Регистрационный номер прибора учета']}]current_indication")
-                                            ->input('text', ['class' => 'reading-input indication_val', 'disabled' => true])
+                                            ->input('text', ['class' => "reading-input indication_val val_cr_{$key}", 'disabled' => true])
                                             ->label(false) ?>
                                 <?php endif; ?>
                             </td>                

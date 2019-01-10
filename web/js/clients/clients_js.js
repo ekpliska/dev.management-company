@@ -322,7 +322,28 @@ $(document).ready(function() {
         console.log(accountNumber);
         getDataClients(accountNumber, startDate, endDate, '#payments-lists', 'payments');
         
-    });    
+    });
+    
+    /*
+     * Валидация ввода показаний приборов учета
+     * @type $|_$
+     */
+    $('input[class*="val_cr_"]').on('input', function () {
+        var currentIndicaton = +$(this).val();
+        var parentContainer = $(this).parent();
+        var tdBlock = $(this).closest('td');
+        var previousIndication = +tdBlock.find('input:first').val();
+        if (currentIndicaton < previousIndication || currentIndicaton == 0 || !$.isNumeric(currentIndicaton)) {
+            $(parentContainer).removeClass('has-success').addClass('has-error');
+            $(parentContainer).find('.help-block').text('Некорректные показания');
+            tdBlock.css('border', '1px solid #f28a71');
+        } else {
+            $(parentContainer).removeClass('has-error').addClass('has-success');
+            $(parentContainer).find('.help-block').text('');
+            tdBlock.css('border', 'none');
+        }
+        console.log(currentIndicaton);
+    });
     
     /*
      * Раздел 'Приборы учета'
@@ -330,6 +351,7 @@ $(document).ready(function() {
      */ 
     var ind = $('.indication_val');
     ind.prop('disabled', true);
+    
     /*
      * Если нажата кнопка 'Ввести показания'
      * текстовые поля для ввода показаний делаем доступными
