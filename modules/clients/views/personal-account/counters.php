@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = 'Показания приборов учета
                 'id' => 'date_start-period-counter',
                 'name' => 'date_start-period-pay',
                 'type' => DatePicker::TYPE_INPUT,
-                'value' => date('F-Y'),
+                'value' => '',
                 'language' => 'ru',
                 'pluginOptions' => [
                     'autoclose'=>true,
@@ -53,7 +53,7 @@ $this->params['breadcrumbs'][] = 'Показания приборов учета
     ?>
     
     <div class="col-md-9 text-right options-panel">
-        <?php if ($is_btn) : ?>
+        <?php if ($is_current) : ?>
             <?= Html::button('Внести показания', ['class' => 'btn-edit-reading']) ?>
             <?= Html::submitButton('Сохранить', ['class' => 'btn-save-reading', 'disabled' => true]) ?>
         <?php endif; ?>
@@ -63,7 +63,7 @@ $this->params['breadcrumbs'][] = 'Показания приборов учета
                 'indications' => $indications,
                 'form' => $form,
                 'auto_request' => $auto_request,
-                'is_btn' => $is_btn,
+                'is_current' => $is_current,
                 'model_indication' => $model_indication,
         ]) ?>
 

@@ -62,15 +62,14 @@ $this->params['breadcrumbs'][] = 'Квитанции КЖУ';
         
     </div>
     <div class="col-md-7 receipts_body">
-        #TODO
         
-    <div class="operations-block">
+<!--    <div class="operations-block">
         <ul class="nav nav-pills operations-block_items">
             <li><a href="#" class="left-block"><i class="glyphicon glyphicon-print"></i> Распечатать</a></li>
             <li><a href="#" class="center-block"><i class="glyphicon glyphicon-ruble"></i> Оплатить</a></li>
             <li><a href="#" class="right-block"><i class="glyphicon glyphicon-send"></i> Отправить</a></li>
         </ul>
-    </div>
+    </div>-->
         
     </div>
         

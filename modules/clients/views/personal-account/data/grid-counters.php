@@ -13,6 +13,7 @@ $array_image = [
     '1' => 'hold-water',
     '2' => 'hot-water',
     '3' => 'electric-meter',
+    '6' => 'electric-meter',
     '4' => 'heating-meter',
     '5' => 'heat-distributor',
 ];
@@ -51,7 +52,7 @@ $array_image = [
                                 <span>Ввод показаний заблокирован</span>
                             </td>
                             <td>
-                                <?php if (!ArrayHelper::keyExists($indication['ID'], $auto_request)) : ?>
+                                <?php if ($is_current && !ArrayHelper::keyExists($indication['ID'], $auto_request)) : ?>
                                 <?= Html::button('Заказать поверку', [
                                         'id' => "create-request-{$key}",
                                         'class' => 'create-send-request', 
@@ -59,6 +60,8 @@ $array_image = [
                                         'data-counter-type' => $indication['Тип прибора учета'],
                                         'data-counter-id' => $indication['ID'],
                                 ]) ?>
+                                <?php elseif ($is_current == false) : ?>
+                                    <?= Html::a('Мои платные услуги', ['paid-services/order-services']) ?>
                                 <?php else: ?>
                                     <span class="message-request">
                                         ID заявки <?= ArrayHelper::getValue($auto_request, $indication['ID']) ?>
@@ -71,7 +74,7 @@ $array_image = [
                             <td>
                                 <?php if ($indication['Текущее показание'] != null) : ?>
                                     <?= $indication['Текущее показание'] ?>
-                                <?php elseif ($is_btn) : ?>
+                                <?php elseif ($is_current) : ?>
                                     <?= $form->field($model_indication, "[{$indication['ID']}]previous_indication")
                                             ->hiddenInput(['class' => 'reading-input', 'value' => $indication['Предыдущие показание'], 'disabled' => true])
                                             ->label(false) ?>

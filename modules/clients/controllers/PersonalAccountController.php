@@ -117,8 +117,8 @@ class PersonalAccountController extends AppClientsController {
      */
     public function actionCounters() {
         
-        // Статус кнопок управления "Ввод показаний", "Сохранить"
-        $is_btn = true;
+        // Статус текущих показаний
+        $is_current = true;
         // Получаем номер текущего месяца
         $current_month = date('n');
         // Получаем номер текущего года
@@ -142,6 +142,7 @@ class PersonalAccountController extends AppClientsController {
         $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
 
         $indications = Yii::$app->client_api->getPreviousCounters($data_json);
+//        echo '<pre>'; var_dump($indications); die();
         
         $model_indication = new SendIndicationForm();
                 
@@ -149,7 +150,7 @@ class PersonalAccountController extends AppClientsController {
             'indications' => $indications['indications'],
             'comments_to_counters' => $comments_to_counters,
             'model_indication' => $model_indication,
-            'is_btn' => $is_btn,
+            'is_current' => $is_current,
             'auto_request' => $auto_request,
         ]);
         
@@ -249,7 +250,7 @@ class PersonalAccountController extends AppClientsController {
     
     public function actionFindIndications($month, $year) {
         
-        $account_id = $this->_choosing;
+        $account_number = $this->_current_account_number;
         
         Yii::$app->response->format = Response::FORMAT_JSON;
         
@@ -259,21 +260,30 @@ class PersonalAccountController extends AppClientsController {
         
         if (Yii::$app->request->isPost) {
             
-            // Формируем запрос в формате JSON на отрпавку по API
-            $data = "{
-                    'Номер лицевого счета': '{$account_id}',
-                    'Номер месяца': '{$month}',
-                    'Год': '{$year}'
-            }";
-            $indications = Yii::$app->client_api->getPreviousCounters($data);
+            // Формируем запрос в массиве
+            $array_request = [
+                'Номер лицевого счета' => $account_number,
+                'Номер месяца' => $month,
+                'Год' => $year,
+            ];
+        
+            // Преобразуем массив в формат JSON
+            $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
             
-            $data = $this->renderPartial('data/grid-counters', ['indications' => $indications['indications']]);
-            return ['success' => true, 'result' => $indications['indications']];
+            $indications = Yii::$app->client_api->getPreviousCounters($data_json);
+            
+            $data = $this->renderPartial('data/grid-counters', [
+                'indications' => $indications['indications'],
+                'form' => null,
+                'auto_request' => null,
+                'is_current' => false,
+                'model_indication' => null,
+            ]);
+            return ['success' => true, 'result' => $data];
         }
         return ['success' => false];
         
     }
-    
     
     /*
      * Общий метод валидации форм раздела Лицевой счет
