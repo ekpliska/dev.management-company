@@ -142,7 +142,7 @@ class PersonalAccountController extends AppClientsController {
         $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
 
         $indications = Yii::$app->client_api->getPreviousCounters($data_json);
-            
+        
         $model_indication = new SendIndicationForm();
                 
         return $this->render('counters', [

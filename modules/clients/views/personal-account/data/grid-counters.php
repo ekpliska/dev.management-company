@@ -44,14 +44,14 @@ $array_image = [
                             <p class="counter-number"><?= $indication['Регистрационный номер прибора учета'] ?></p>
                         </td>
                         <td><?= Yii::$app->formatter->asDate($indication['Дата следующей поверки'], 'long') ?></td>
-                        <td><?= Yii::$app->formatter->asDate($indication['Дата снятия показания'], 'long') ?></td>
+                        <td><?= Yii::$app->formatter->asDate($indication['Дата снятия предыдущего показания'], 'long') ?></td>
                         <td><?= $indication['Предыдущие показание'] ?></td>
                         <?php if ($data_check == true) : ?>
                             <td>
                                 <span>Ввод показаний заблокирован</span>
                             </td>
                             <td>
-                                <?php if (!ArrayHelper::keyExists($indication['Регистрационный номер прибора учета'], $counter_request)) : ?>
+                                <?php if (!ArrayHelper::keyExists($indication['ID'], $counter_request)) : ?>
                                 <?= Html::button('Заказать поверку', [
                                         'class' => 'create-send-request', 
                                         'data-account' => $this->context->_current_account_id,
