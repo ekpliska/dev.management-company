@@ -135,33 +135,37 @@ class Voting extends ActiveRecord
      */
     public static function findAllVotingForClient($house_id) {
         
-        $query = (new \yii\db\Query)
-//                ->select(['v.voting_id as voting_id, v.voting_title as voting_title'])
-                ->select(['v.voting_id, '
-                    . 'v.voting_title, v.voting_text, '
-                    . 'v.voting_date_start, v.voting_date_end, '
-                    . 'v.voting_house_id, '
-                    . 'v.voting_image, '
-                    . 'v.status, '
-                    . 'COUNT(reg.finished) AS count_finished, '
-                    . 'COUNT(reg.voting_id) AS count_participants'])
-                ->from('voting as v')
-                ->join('LEFT JOIN', 'registration_in_voting as reg', 'reg.voting_id = v.voting_id')
-                ->where(['v.voting_house_id' => $house_id])
-                ->orWhere(['reg.status' => RegistrationInVoting::STATUS_ENABLED])
-                ->orWhere(['reg.finished' => RegistrationInVoting::STATUS_FINISH_YES])
-                ->groupBy(['v.voting_id'])
-                ->all();
-        
-//        $votings = self::find()
-//                ->select(['COUNT(*) as t1'])
-//                ->joinWith(['registration'])
-//                ->where(['voting_house_id' => $house_id])
-//                ->groupBy(['voting_id'])
-//                ->asArray()
+//        $query = (new \yii\db\Query)
+////                ->select(['v.voting_id as voting_id, v.voting_title as voting_title'])
+//                ->select(['v.voting_id, '
+//                    . 'v.voting_title, v.voting_text, '
+//                    . 'v.voting_date_start, v.voting_date_end, '
+//                    . 'v.voting_house_id, '
+//                    . 'v.voting_image, '
+//                    . 'v.status, reg.status'
+//                    . 'reg.finished, '
+////                    . 'COUNT(reg.finished) AS count_finished, '
+////                    . 'COUNT(reg.status) AS count_participants'
+//                    ])
+//                ->from('voting as v')
+//                ->join('LEFT JOIN', 'registration_in_voting as reg', 'reg.voting_id = v.voting_id')
+//                ->where(['voting_type' => 'all'])
+//                ->orWhere(['v.voting_house_id' => $house_id])
+////                ->orWhere(['reg.status' => RegistrationInVoting::STATUS_ENABLED])
+////                ->orWhere(['reg.finished' => RegistrationInVoting::STATUS_FINISH_YES])
+//                ->groupBy(['v.voting_id'])
+//                ->orderBy(['v.created_at' => SORT_DESC])
 //                ->all();
         
-        return $query;
+        $votings = self::find()
+                ->joinWith('registration')
+                ->where(['voting_type' => 'all'])
+                ->orWhere(['voting_house_id' => $house_id])
+                ->groupBy(['voting_id'])
+                ->orderBy(['created_at' => SORT_DESC])
+                ->asArray()
+                ->all();
+        return $votings;
     }
     
     /*

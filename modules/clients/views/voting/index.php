@@ -8,6 +8,11 @@
 
 $this->title = Yii::$app->params['site-name'] . 'Опрос';
 $this->params['breadcrumbs'][] = 'Опрос';
+
+//foreach ($voting_list as $key => $voting) {
+//    echo '<pre>'; var_dump($voting['registration']);
+//}
+//die();
 ?>
 
 <?= Breadcrumbs::widget([
@@ -36,10 +41,23 @@ $this->params['breadcrumbs'][] = 'Опрос';
                     <?= FormatHelpers::shortTitleOrText($voting['voting_text'], 250) ?>
                 </div>
                 <div class="vote-card_count">
+                    <?php 
+                        // Количество учатников закончивших голосование
+                        $count_finished = 0;
+                        // Количество зарегистрированных участников
+                        $count_participants = 0;
+                        
+                        foreach ($voting['registration'] as $value) {
+                            if ($value['finished'] == app\models\RegistrationInVoting::STATUS_FINISH_YES) 
+                                $count_finished++;
+                            if ($value['status'] == app\models\RegistrationInVoting::STATUS_ENABLED)
+                                $count_participants++;
+                        }
+                    ?>
                     <div class="col-md-2">Проголосовало</div>
                     <div class="col-md-10 text-right">
                         <span class="vote-bange-count">
-                            <?= $voting['count_finished'] ?>
+                            <?= $count_finished ?>
                         </span>
                     </div>
                 </div>
@@ -47,7 +65,7 @@ $this->params['breadcrumbs'][] = 'Опрос';
                     <div class="col-md-2">Участвуют</div>
                     <div class="col-md-10 text-right">
                         <span class="vote-bange-count">
-                            <?= $voting['count_participants'] ?>
+                            <?= $count_participants ?>
                         </span>
                     </div>
                 </div>
