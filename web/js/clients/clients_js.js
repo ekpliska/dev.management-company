@@ -623,6 +623,14 @@ $(document).ready(function() {
 //        var votingId = $(this).data('votingId');
 //        alert(votingId);
 //    });
+
+    /*
+     * Отправка голоса участника
+     */
+    $('.btn-set-voting').on('click', function() {
+        var idBtn = $(this).prop('id');
+        console.log(idBtn);
+    });
     
     
     /* End Block of Voting */

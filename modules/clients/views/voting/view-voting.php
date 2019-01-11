@@ -5,6 +5,7 @@
     use app\helpers\FormatHelpers;
     use app\modules\clients\widgets\ModalWindows;
     use app\models\Voting;
+    use app\models\Answers;
 
 /* 
  * Просмотр отдельного голосования
@@ -63,6 +64,7 @@ $_now = time();
         </div>
         
         <div class="col-md-9 voting-body_right">
+            <?php if ($is_register == false) : ?>
             <?php foreach ($voting['question'] as $key => $question) : ?>
                 <div class="questions-text">
                     <span><?= $question['questions_text'] ?></span>
@@ -70,21 +72,43 @@ $_now = time();
                 </div>
             <?php endforeach; ?>
             
-            <?php /* Контент для зарегистрировавщихся участников
-            <div class="questions-text-show">
-                <h4>
-                    <i class="glyphicon glyphicon-ok"></i> #QUESTIONS
-                </h4>
-                <div class="btn-group">
-                    <p>1</p>
-                    <button type="button" class="btn btn-primary">Apple</button>
-                    <p>2</p>
-                    <button type="button" class="btn btn-primary">Samsung</button>
-                    <p>3</p>
-                    <button type="button" class="btn btn-primary">Sony</button>
+            <?php else : ?>
+            <?php /* Контент для зарегистрировавщихся участников */ ?>
+            
+            <div class="questions-text-show-form">
+                <?php foreach ($voting['question'] as $key => $question) : ?>
+                <div class="questions-text-show">
+                    <h4>
+                        <i class="glyphicon glyphicon-ok"></i>
+                        <?= $question['questions_text'] ?>
+                    </h4>
+                    <div class="btn-block text-center">
+                        <div class="btn-group btn-group-lg" role="group" aria-label="Small button group">
+                            <?= Html::button('За', [
+                                    'class' => 'btn btn-primary btn-set-voting',
+                                    'id' => "btn-vote-yes-{$key}",
+                                    'data-question' => $question['questions_id'],
+                                    'data-type-answer' => Answers::ANSWER_BEHIND,
+                            ]) ?>
+                            <?= Html::button('Против', [
+                                    'class' => 'btn btn-primary btn-set-voting',
+                                    'id' => "btn-vote-no-{$key}",
+                                    'data-question' => $question['questions_id'],
+                                    'data-type-answer' => Answers::ANSWER_AGAINST,
+                            ]) ?>
+                            <?= Html::button('Воздержаться', [
+                                    'class' => 'btn btn-primary btn-set-voting',
+                                    'id' => "btn-vote-abstain-{$key}",
+                                    'data-question' => $question['questions_id'],
+                                    'data-type-answer' => Answers::ANSWER_ABSTAIN,
+                            ]) ?>
+                        </div>
+                    </div>
                 </div>
+                <?php endforeach; ?>
             </div>
-            */ ?>
+            
+            <?php endif; ?>
             
         </div>
         

@@ -2392,10 +2392,19 @@ p.date-start-vote {
     font-size: 34px;
     text-align: center;
 }
+.questions-text-show {
+    padding: 40px 0px;
+    border-bottom: 1px solid #ddd;
+}
+.questions-text-show > h4 {
+    font-size: 19px;
+    font-weight: bold;
+}
 .questions-text-show > h4 > i {
     color: #23dd6f;
     border: 1px solid #23dd6f;
     padding: 10px;
+    margin-right: 10px;
     border-radius: 100%;
 }
 .vote-message_span {
@@ -2405,6 +2414,30 @@ p.date-start-vote {
     border-radius: 25px;
 }
 /* Конец Страница голосования */
+
+/* Блок кнопок голосования: за, против, воздержаться */
+.btn-set-voting {
+    padding: 20px 0 !important;
+    width: 200px;
+    font-size: 12px !important;
+    text-transform: uppercase;
+    color: #2d18b4;
+    background: #fff;
+    border-color: #2d18b4;
+    outline: none;
+}
+.btn-group-lg > .btn-set-voting {
+    border-radius: 12px;
+}
+.btn-set-voting-active,
+.btn-set-voting:active,
+.btn-set-voting:focus,
+.btn-set-voting:hover {
+    background: #2d18b4;
+    color: #fff;
+    outline: none;
+}
+/* Конец блок кнопок голосования: за, против, воздержаться */
 
 /* Уведомления на странице */
 .notice {

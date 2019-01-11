@@ -40,6 +40,7 @@ class VotingController extends AppClientsController {
         
         // Получаем информацию по текущему голосованию
         $voting = Voting::findVotingById($voting_id);
+//        echo '<pre>'; var_dump($voting); die();
         
         // Получаем информаию о участниках голосования
         $participants = RegistrationInVoting::getParticipants($voting_id);
