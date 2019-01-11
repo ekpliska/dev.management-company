@@ -69,7 +69,7 @@ $_now = time();
             <?php foreach ($voting['question'] as $key => $question) : ?>
                 <div class="questions-text">
                     <span><?= $question['questions_text'] ?></span>
-                    <span class="span-count">#TODO</span> Проголосовало
+                    <span class="span-count"><?= count($question['answer']) ?></span> Проголосовало
                 </div>
             <?php endforeach; ?>
             
