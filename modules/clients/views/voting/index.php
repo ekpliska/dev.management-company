@@ -6,13 +6,12 @@
     use app\models\Voting;
     use app\helpers\FormatHelpers;
 
+/*
+ * Голосование, главная страница
+ */    
+    
 $this->title = Yii::$app->params['site-name'] . 'Опрос';
 $this->params['breadcrumbs'][] = 'Опрос';
-
-//foreach ($voting_list as $key => $voting) {
-//    echo '<pre>'; var_dump($voting['registration']);
-//}
-//die();
 ?>
 
 <?= Breadcrumbs::widget([
@@ -34,7 +33,7 @@ $this->params['breadcrumbs'][] = 'Опрос';
                     <a href="<?= Url::to(['voting/view-voting', 'voting_id' => $voting['voting_id']]) ?>">
                         <?= FormatHelpers::shortTitleOrText($voting['voting_title'], 25) ?>
                     </a>
-                    <i class="glyphicon glyphicon-<?= $voting['status'] == Voting::STATUS_CLOSED ? 'flag' : 'ok' ?>"></i>
+                    <i class="glyphicon glyphicon-<?= $voting['status'] == Voting::STATUS_ACTIVE ? 'ok' : 'flag' ?>"></i>
                     <p class="date-start-vote"><?= FormatHelpers::formatDate($voting['voting_date_start'], false, 0, false) ?></p>
                 </div>
                 <div class="vote-card_text">

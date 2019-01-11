@@ -14,7 +14,7 @@
 class Voting extends ActiveRecord
 {
     
-    // Активено
+    // Активно
     const STATUS_ACTIVE = 0;
     // Завершено
     const STATUS_CLOSED = 1;
