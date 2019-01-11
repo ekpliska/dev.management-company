@@ -139,6 +139,7 @@ class RegistrationInVoting extends ActiveRecord
                 ->join('LEFT JOIN', 'user as u', 'u.user_id = r.user_id')
                 ->join('LEFT JOIN', 'clients as c', 'u.user_client_id = c.clients_id')
                 ->where(['r.voting_id' => $voting_id])
+                ->andWhere(['r.status' => self::STATUS_ENABLED])
                 ->andWhere(['r.finished' => self::STATUS_FINISH_YES])
                 ->all();
         

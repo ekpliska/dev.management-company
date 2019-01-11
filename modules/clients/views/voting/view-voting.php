@@ -1,11 +1,8 @@
 <?php
 
     use yii\helpers\Html;
-    use yii\helpers\Url;
-    use yii\bootstrap\Modal;
     use yii\widgets\Breadcrumbs;
     use app\helpers\FormatHelpers;
-    use app\models\RegistrationInVoting;
     use app\modules\clients\widgets\ModalWindows;
     use app\models\Voting;
 
@@ -39,7 +36,7 @@ $_now = time();
             <p class="voting-description">
                 <?= $voting['voting_text'] ?>
             </p>
-            <?php if (Yii::$app->user->can('clients')) : ?>
+            <?php if (($voting['status'] == Voting::STATUS_ACTIVE || Yii::$app->user->can('clients')) && $is_register == false) : ?>
                 <?= Html::button('Принять участие', [
                         'class' => 'register-in-voting',
                         'id' => 'get-voting-in',
@@ -95,13 +92,13 @@ $_now = time();
     
 </div>
 
-<?php // if ($is_register['status'] == RegistrationInVoting::STATUS_DISABLED && Yii::$app->user->can('clients')) : ?>
+<?php if (Yii::$app->user->can('clients')) : ?>
 
     <?= $this->render('modal/participate-in-voting', [
             'model' => $model,
             'voting_id' => $voting['voting_id']]) ?>
 
-<?php // endif; ?>
+<?php endif; ?>
 
 
 <?php 
