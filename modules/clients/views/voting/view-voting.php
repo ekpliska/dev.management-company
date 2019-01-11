@@ -79,11 +79,14 @@ $_now = time();
                 <?php foreach ($voting['question'] as $key => $question) : ?>
                 <div class="questions-text-show">
                     <h4>
-                        <i class="glyphicon glyphicon-ok"></i>
+                        <i class="glyphicon glyphicon-ok marker-vote-<?= $question['questions_id'] ?> show-marker"></i>
                         <?= $question['questions_text'] ?>
                     </h4>
+                    <div class="answers-block">
+                        11
+                    </div>
                     <div class="btn-block text-center">
-                        <div class="btn-group btn-group-lg" role="group" aria-label="Small button group">
+                        <div class="btn-group btn-group-lg" role="group" aria-label="Button block" id="btn-group-<?= $key ?>">
                             <?= Html::button('За', [
                                     'class' => 'btn btn-primary btn-set-voting',
                                     'id' => "btn-vote-yes-{$key}",

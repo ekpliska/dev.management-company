@@ -6,6 +6,7 @@
     use app\models\Voting;
     use app\models\RegistrationInVoting;
     use app\modules\clients\models\form\CheckSMSVotingForm;
+    use app\models\Answers;
 
 /**
  * Голосование
@@ -182,6 +183,27 @@ class VotingController extends AppClientsController {
         $cookies = Yii::$app->response->cookies;
         $name_modal = '_participateInVoting-' . $voting_id;
         return $cookies->remove($name_modal) ? true : false;
+        
+    }
+    
+    /*
+     * Отправка ответа голосования
+     */
+    public function actionSendAnswer($question_id, $type_answer) {
+        
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        if (!is_numeric($question_id) || !is_numeric($type_answer)) {
+            return ['success' => false];
+        }
+        
+        if (Yii::$app->request->isPost) {
+            $status_send = Answers::sendAnswer($question_id, $type_answer);
+            return [
+                'success' => true,
+                'question_id' => $question_id,
+                'type_answer' => $type_answer,
+            ];
+        }
         
     }
     

@@ -52,6 +52,32 @@ class Answers extends ActiveRecord
         ];
     }
     
+    /*
+     * Сохраняем ответ пользователя
+     */
+    public static function sendAnswer($question_id, $type_answer) {
+        
+        $user_id = Yii::$app->user->identity->id;
+        
+        $result = self::find()
+                ->where(['answers_questions_id' => $question_id, 'answers_user_id' => $user_id])
+                ->one();
+        
+        if ($result == null) {
+            // Создаем новую запись
+            $new_answer = new Answers();
+            $new_answer->answers_questions_id = $question_id;
+            $new_answer->answers_vote = $type_answer;
+            $new_answer->answers_user_id = $user_id;
+            return $new_answer->save() ? true : false;
+        } else {
+            // Перезаписываем ответ
+            $result->answers_vote = $type_answer;
+            return $result->save() ? true : false;
+        }
+        
+    }
+    
     /**
      * Аттрибуты полей
      */

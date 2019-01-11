@@ -2407,6 +2407,9 @@ p.date-start-vote {
     margin-right: 10px;
     border-radius: 100%;
 }
+.show-marker {
+    visibility: hidden;
+}
 .vote-message_span {
     padding: 7px 20px;
     border: 1px solid #8b709d;
