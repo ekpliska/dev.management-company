@@ -30,6 +30,7 @@ $this->params['breadcrumbs'][] = 'Опрос';
                         <?= FormatHelpers::shortTitleOrText($voting['voting_title'], 25) ?>
                     </a>
                     <i class="glyphicon glyphicon-<?= $voting['status'] == Voting::STATUS_CLOSED ? 'flag' : 'ok' ?>"></i>
+                    <p class="date-start-vote"><?= FormatHelpers::formatDate($voting['voting_date_start'], false, 0, false) ?></p>
                 </div>
                 <div class="vote-card_text">
                     <?= FormatHelpers::shortTitleOrText($voting['voting_text'], 250) ?>

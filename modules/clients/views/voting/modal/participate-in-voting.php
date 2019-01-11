@@ -44,7 +44,7 @@ Modal::begin([
         ]); 
     ?>
     
-    <?php //= $model->errorSummary($form); ?>
+    <?php // = $model->errorSummary($form, ['header' => '']); ?>
     
     <?= $form->field($model, 'number1')
             ->input('text', [

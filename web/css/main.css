@@ -2165,7 +2165,7 @@ input[name="date_end-period-pay"]:focus {
 .vote-lists {}
 .vote-card-preview {
     color: #a7a7a7;
-    height: 600px;
+    height: 570px;
     border-radius: 12px;
     border: 1px solid #eee;
     padding: 0 !important;
@@ -2184,7 +2184,7 @@ input[name="date_end-period-pay"]:focus {
 }
 .vote-card_title a {
     color: #2d18b4;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
 }
 .vote-card_title i {
@@ -2200,6 +2200,12 @@ input[name="date_end-period-pay"]:focus {
 .vote-card_title i.glyphicon-flag {
     background: #2d18b4;
 }
+p.date-start-vote {
+    font-size: 12px;
+    color: #000;
+    font-weight: bold;
+    padding: 10px 0;
+}
 .vote-card_text {
     color: #000;
     padding: 10px;
@@ -2212,7 +2218,7 @@ input[name="date_end-period-pay"]:focus {
 .vote-card_count, .vote-card_participants {
     color: #000;
     padding: 20px 10px;
-    height: 80px;
+    height: 60px;
     display: flex;
     align-items: center     
 }

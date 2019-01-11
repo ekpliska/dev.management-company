@@ -55,7 +55,7 @@ class VotingController extends AppClientsController {
                 ->asArray()
                 ->one();
         
-        if ($model->load(Yii::$app->request->post())) {
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->checkSmsCode($is_register['random_number'])) {
                 return 'sms ok';
             }
