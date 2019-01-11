@@ -31,7 +31,7 @@ Modal::begin([
 </h4>
 
 
-<div class="sms-cod text-center">
+<div class="sms-code text-center">
     <?php 
         $form = ActiveForm::begin([
             'id' => 'fill_sms_to_participate',
@@ -40,11 +40,14 @@ Modal::begin([
             'validateOnBlur' => false,            
             'options' => [
                 'class' => 'form-inline',
-            ]
+            ],
+            'fieldConfig' => [
+                'template' => '{input}',
+            ],
         ]); 
     ?>
     
-    <?php // = $model->errorSummary($form, ['header' => '']); ?>
+    <?= Html::errorSummary($model, ['header' => '']); ?>   
     
     <?= $form->field($model, 'number1')
             ->input('text', [
@@ -76,7 +79,7 @@ Modal::begin([
                 'maxlength' => 1, 
                 'size' => 1])
             ->label(false) ?>
-                
+             
 </div>
             
 <div class="text-center">

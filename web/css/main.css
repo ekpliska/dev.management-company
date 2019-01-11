@@ -2367,11 +2367,11 @@ p.date-start-vote {
 .again-sms-btn {
     background-image: url(/images/clients/send_again.svg);
     background-repeat: no-repeat;
-    background-position: 0px 5px;
+    background-position: 0px 18px;
     background-color: transparent;
     border: none;
     cursor: pointer;
-    height: 36px;
+    padding: 20px 0;
     padding-left: 36px;
     vertical-align: middle;
     color: #fff;
@@ -2441,6 +2441,15 @@ p.date-start-vote {
     outline: none;
 }
 /* Конец блок кнопок голосования: за, против, воздержаться */
+
+/* Форма голосования */
+.sms-code li {
+    list-style: none;
+    padding-bottom: 10px;
+    font-size: 12px;
+    color: #ef693a;
+}
+/* Конец Форма голосования */
 
 /* Уведомления на странице */
 .notice {

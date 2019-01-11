@@ -37,7 +37,7 @@ class RegistrationInVoting extends ActiveRecord
      */
     public function rules() {
         return [
-            [['voting_id', 'user_id', 'date_registration'], 'required'],
+            [['voting_id', 'user_id', 'date_registration', 'random_number'], 'required'],
             [['voting_id', 'user_id', 'random_number', 'date_registration', 'status'], 'integer'],
             [['voting_id'], 'exist', 'skipOnError' => true, 'targetClass' => Voting::className(), 'targetAttribute' => ['voting_id' => 'voting_id']],
         ];
@@ -49,8 +49,6 @@ class RegistrationInVoting extends ActiveRecord
     public function getVoting() {
         return $this->hasOne(Voting::className(), ['voting_id' => 'voting_id']);
     }
-    
-    
     
     /*
      * Создаем запись регистрации участия в голосовании пользователя
@@ -144,6 +142,24 @@ class RegistrationInVoting extends ActiveRecord
                 ->all();
         
         return $result;
+        
+    }
+    
+    /*
+     * Регистрация пользователя, как участника голосования
+     */
+    public static function registrationUser($voting_id) {
+        
+        $user_id = Yii::$app->user->identity->id;
+        
+        $record = self::find()
+                ->where(['voting_id' => $voting_id, 'user_id' => $user_id])
+                ->one();
+        
+        $record->random_number = null;
+        $record->status = self::STATUS_ENABLED;
+        
+        return $record->save(false) ? true : false;
         
     }
     

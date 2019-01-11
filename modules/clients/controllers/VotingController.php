@@ -41,7 +41,6 @@ class VotingController extends AppClientsController {
         
         // Получаем информацию по текущему голосованию
         $voting = Voting::findVotingById($voting_id);
-//        echo '<pre>'; var_dump($voting); die();
         
         // Получаем информаию о участниках голосования
         $participants = RegistrationInVoting::getParticipants($voting_id);
@@ -49,25 +48,24 @@ class VotingController extends AppClientsController {
         if ($voting === null) {
             throw new \yii\web\NotFoundHttpException('Вы обратились к несуществующей странице');
         }
-        
-        $model = new CheckSMSVotingForm();
 
-        // Проверяем наличие текущего пользователя в списке зарегистрированных учатников голосования
-        foreach ($participants as $key => $participant) {
-            $is_register = array_search(Yii::$app->user->identity->id , $participant) ? true : false;
-            break;
-        }
+        // Проверяем наличие текущего пользователя в списке зарегистрированных участников голосования
+        $is_register = RegistrationInVoting::find()->where(['user_id' => Yii::$app->user->identity->id, 'voting_id' => $voting_id])->asArray()->one();
         
+        // Загружаем модель на ввод СМС кода
+        $model = new CheckSMSVotingForm($is_register['random_number']);
+
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->checkSmsCode($is_register['random_number'])) {
-                return 'sms ok';
+            if ($model->checkSmsCode($voting_id)) {
+                // Если все ОК, удаляем куку модального окна о регистрации
+                $this->deleteCookieVoting($voting_id);
+                return $this->refresh();
             }
-            return 'sms bad';
         }
         
         return $this->render('view-voting', [
             'voting' => $voting,
-            'is_register' => $is_register,
+            'is_register' => $is_register ? true : false,
             'model' => $model,
             'modal_show' => $modal_show,
             'participants' => $participants,
