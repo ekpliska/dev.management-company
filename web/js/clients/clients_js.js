@@ -637,8 +637,18 @@ $(document).ready(function() {
         $(this).addClass('btn-set-voting-active');
         
         $.post('send-answer?question_id=' + questionID + '&type_answer=' + typeAnswer, function(response) {
-            if (response.success == true) {
+            if (response.success === true) {
                 $('.marker-vote-' + questionID).removeClass('show-marker');
+                $('#finished-voting-btn').removeClass('btn-hidden');
+            }
+        });
+    });
+    
+    $('#finished-voting-btn').on('click', function(){
+        var votingID = $(this).data('voting');
+        $.post('finish-voting?voting_id=' + votingID, function(response) {
+            if (response.success === true) {
+                console.log(response.success);
             }
         });
     });

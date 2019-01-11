@@ -6,6 +6,7 @@
     use app\modules\clients\widgets\ModalWindows;
     use app\models\Voting;
     use app\models\Answers;
+    use app\modules\clients\widgets\AlertsShow;
 
 /* 
  * Просмотр отдельного голосования
@@ -13,7 +14,6 @@
 $this->title = Yii::$app->params['site-name'] . $voting['voting_title'];
 $this->params['breadcrumbs'][] = ['label' => 'Опрос', 'url' => ['voting/index']];
 $this->params['breadcrumbs'][] = $voting['voting_title'];
-
 
 $_start = strtotime($voting['voting_date_start']);
 $_end = strtotime($voting['voting_date_end']);
@@ -24,6 +24,8 @@ $_now = time();
         'homeLink' => ['label' => 'ELSA', 'url' => ['clients/index']],
         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
 ]) ?>
+
+<?= AlertsShow::widget() ?>
 
 <div class="view-voting row">
     <div class="preview-voting">
@@ -79,36 +81,36 @@ $_now = time();
                 <?php foreach ($voting['question'] as $key => $question) : ?>
                 <div class="questions-text-show">
                     <h4>
-                        <i class="glyphicon glyphicon-ok marker-vote-<?= $question['questions_id'] ?> show-marker"></i>
+                        <?php $_answer = $question['answer'][0]['answers_vote']; ?>
+                        <i class="glyphicon glyphicon-ok marker-vote-<?= $question['questions_id'] ?> <?= !isset($_answer) ? 'show-marker' : '' ?>"></i>
                         <?= $question['questions_text'] ?>
                     </h4>
                     <div class="answers-block">
-                        11
+                        #TODO %
                     </div>
                     <div class="btn-block text-center">
                         <div class="btn-group btn-group-lg" role="group" aria-label="Button block" id="btn-group-<?= $key ?>">
-                            <?= Html::button('За', [
-                                    'class' => 'btn btn-primary btn-set-voting',
+                            <?php foreach (Answers::getAnswersArray() as $type_answer => $answer) : ?>
+                                <?php $class = ($_answer == $type_answer) ? 'btn-set-voting-active' : ''; ?>
+                                <?= Html::button($answer, [
+                                    'class' => "btn btn-primary btn-set-voting {$class}",
                                     'id' => "btn-vote-yes-{$key}",
                                     'data-question' => $question['questions_id'],
-                                    'data-type-answer' => Answers::ANSWER_BEHIND,
-                            ]) ?>
-                            <?= Html::button('Против', [
-                                    'class' => 'btn btn-primary btn-set-voting',
-                                    'id' => "btn-vote-no-{$key}",
-                                    'data-question' => $question['questions_id'],
-                                    'data-type-answer' => Answers::ANSWER_AGAINST,
-                            ]) ?>
-                            <?= Html::button('Воздержаться', [
-                                    'class' => 'btn btn-primary btn-set-voting',
-                                    'id' => "btn-vote-abstain-{$key}",
-                                    'data-question' => $question['questions_id'],
-                                    'data-type-answer' => Answers::ANSWER_ABSTAIN,
-                            ]) ?>
+                                    'data-type-answer' => $type_answer,
+                                ]) ?>
+                            <?php endforeach; ?>
                         </div>
                     </div>
                 </div>
                 <?php endforeach; ?>
+            </div>
+            
+            <div class="finished-voting text-center">
+                <?= Html::button('Проголосовать', [
+                        'id' => 'finished-voting-btn',
+                        'class' => 'blue-btn btn-hidden',
+                        'data-voting' => $voting['voting_id'],
+                ]) ?>
             </div>
             
             <?php endif; ?>

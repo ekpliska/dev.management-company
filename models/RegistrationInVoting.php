@@ -163,6 +163,22 @@ class RegistrationInVoting extends ActiveRecord
         
     }
     
+    /*
+     * Завершение голосования
+     */
+    public function finishVoting($voting_id) {
+        
+        $user_id = Yii::$app->user->identity->id;
+        
+        $record = self::find()
+                ->where(['voting_id' => $voting_id, 'user_id' => $user_id])
+                ->one();
+        
+        $record->finished = self::STATUS_FINISH_YES;
+        
+        return $record->save(false) ? true : false;
+    }
+    
     /**
      * Аттрибуты полей
      */

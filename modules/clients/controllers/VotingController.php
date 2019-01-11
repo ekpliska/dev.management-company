@@ -59,8 +59,11 @@ class VotingController extends AppClientsController {
             if ($model->checkSmsCode($voting_id)) {
                 // Если все ОК, удаляем куку модального окна о регистрации
                 $this->deleteCookieVoting($voting_id);
+                Yii::$app->session->setFlash('success', ['message' => "Вы были зарегистрированы на участие в голосовании {$voting['voting_title']}"]);
                 return $this->refresh();
             }
+            Yii::$app->session->setFlash('error', ['message' => 'При передаче показаний возникла ошибка. Обновите страницу и повторите действие заново']);
+            return $this->refresh();
         }
         
         return $this->render('view-voting', [
@@ -195,13 +198,31 @@ class VotingController extends AppClientsController {
         }
         
         if (Yii::$app->request->isPost) {
-            $status_send = Answers::sendAnswer($question_id, $type_answer);
-            return [
-                'success' => true,
-                'question_id' => $question_id,
-                'type_answer' => $type_answer,
-            ];
+            if (Answers::sendAnswer($question_id, $type_answer)) {
+                return ['success' => true];
+            }
+            return ['success' => false];
         }
+        return ['success' => false];
+    }
+    
+    /*
+     * Завершение голосования
+     */
+    public function actionFinishVoting($voting_id) {
+        
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        if (!is_numeric($voting_id)) {
+            return ['success' => false];
+        }
+        
+        if (Yii::$app->request->isPost) {
+            if (RegistrationInVoting::finishVoting($voting_id)) {
+                return ['success' => true];
+            }
+            return ['success' => false];
+        }
+        return ['success' => false];
         
     }
     

@@ -2449,6 +2449,12 @@ p.date-start-vote {
     font-size: 12px;
     color: #ef693a;
 }
+.finished-voting {
+    padding: 40px 0;
+}
+.btn-hidden {
+    display: none;
+}
 /* Конец Форма голосования */
 
 /* Уведомления на странице */

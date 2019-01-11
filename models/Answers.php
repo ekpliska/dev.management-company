@@ -7,11 +7,11 @@
 class Answers extends ActiveRecord
 {
     // Голос "За"
-    const ANSWER_BEHIND = 2;
+    const ANSWER_BEHIND = 1;
     // Голос "Против"
-    const ANSWER_AGAINST = 1;
+    const ANSWER_AGAINST = -1;
     // Голос "Воздержаться"    
-    const ANSWER_ABSTAIN = 0;
+    const ANSWER_ABSTAIN = 2;
     
     /**
      * Таблица БД
