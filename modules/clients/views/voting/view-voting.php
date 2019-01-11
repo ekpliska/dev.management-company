@@ -52,16 +52,17 @@ $_now = time();
     <div class="col-md-12 voting-body">
         <div class=" col-md-3 voting-body_left">
             <p>
-                <span class="span-count">#TODO</span> Проголосовало
+                <span class="span-count"><?= count($participants) ?></span> Проголосовало
             </p>
-            #TODO
-            <br />
-            #TODO
-            <br />
-            #TODO
-            <br />
-            #TODO
-            <br />
+            <?php if (isset($participants) && count($participants) > 0) : ?>
+            <?php foreach ($participants as $participant) : ?>
+                <div class="col-md-4 voting__participant_info text-center">
+                    <?php $avatar = $participant['user_photo'] ? $participant['user_photo'] : "images/no-avatar.jpg" ?>
+                    <?= Html::img("@web/{$avatar}", ['alt' => 'user-name', 'class' => 'img-responsive img-circle']) ?>
+                    <?= Html::a ($participant['clients_name'], ['/']) ?>
+                </div>
+            <?php endforeach; ?>
+            <?php endif; ?>
         </div>
         
         <div class="col-md-9 voting-body_right">

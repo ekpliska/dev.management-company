@@ -102,7 +102,10 @@ class RegistrationInVoting extends ActiveRecord
         
         $user_id = Yii::$app->user->identity->id;
         $register = RegistrationInVoting::find()
-                ->andWhere(['voting_id' => $voting_id, 'user_id' => $user_id])
+                ->andWhere([
+                    'voting_id' => $voting_id, 
+                    'user_id' => $user_id,
+                    'status' => self::STATUS_DISABLED])
                 ->one();
         
         if ($register !== null) {
@@ -129,11 +132,17 @@ class RegistrationInVoting extends ActiveRecord
      */
     public static function getParticipants($voting_id) {
         
-        return self::find()
-                ->where(['voting_id' => $voting_id])
-                ->andWhere(['status' => self::STATUS_ENABLED])
-                ->asArray()
+        $result = (new \yii\db\Query)
+                ->select('u.user_id, u.user_photo, u.created_at, u.last_login,'
+                        . 'c.clients_name')
+                ->from('registration_in_voting as r')
+                ->join('LEFT JOIN', 'user as u', 'u.user_id = r.user_id')
+                ->join('LEFT JOIN', 'clients as c', 'u.user_client_id = c.clients_id')
+                ->where(['r.voting_id' => $voting_id])
+                ->andWhere(['r.finished' => self::STATUS_FINISH_YES])
                 ->all();
+        
+        return $result;
         
     }
     

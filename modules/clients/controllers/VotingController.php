@@ -67,6 +67,7 @@ class VotingController extends AppClientsController {
             'is_register' => $is_register,
             'model' => $model,
             'modal_show' => $modal_show,
+            'participants' => $participants,
         ]);
         
     }

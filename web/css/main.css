@@ -2322,18 +2322,26 @@ p.date-start-vote {
 .voting-body_left {
     border: 1px solid #ddd;
     border-radius: 12px;
+    padding: 0;
 }
 .voting-body_left p {
     border-bottom: 1px solid #ddd;
-    padding: 10px 10px;    
-    margin: 5px -15px 5px -15px;
+    padding: 15px 20px;
 }
 .span-count {
-    padding: 2px 5px;
+    padding: 2px 20px;
     color: #fff;
     margin-right: 5px;    
     border-radius: 25px;
     background: #2d18b4;
+}
+.voting__participant_info a {
+    color: #000;
+    font-weight: bold;
+    font-size: 12px;
+}
+.voting__participant_info a:hover {
+    color: #2d18b4;
 }
 .questions-text {
     margin: 0px -15px 10px 5px;
