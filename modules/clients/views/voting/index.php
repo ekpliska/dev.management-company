@@ -37,11 +37,19 @@ $this->params['breadcrumbs'][] = 'Опрос';
                 </div>
                 <div class="vote-card_count">
                     <div class="col-md-2">Проголосовало</div>
-                    <div class="col-md-10 text-right"><span class="vote-bange-count">#TODO</span></div>
+                    <div class="col-md-10 text-right">
+                        <span class="vote-bange-count">
+                            <?= $voting['count_finished'] ?>
+                        </span>
+                    </div>
                 </div>
                 <div class="vote-card_participants">
                     <div class="col-md-2">Участвуют</div>
-                    <div class="col-md-10 text-right"><span class="vote-bange-count">#TODO</span></div>
+                    <div class="col-md-10 text-right">
+                        <span class="vote-bange-count">
+                            <?= $voting['count_participants'] ?>
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>

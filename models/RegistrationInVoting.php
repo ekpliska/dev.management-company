@@ -11,11 +11,19 @@ class RegistrationInVoting extends ActiveRecord
 {
     /*
      * Статус участния в голосования
+     * on register Пользователь поставлен на регистрацию, Отправлено СМС
+     * participant Пользователь зарегистрирован, как участник
      */
-    // Пользователь поставлен на регистрацию, Отправлено СМС
     const STATUS_DISABLED = 'on register'; 
-    // Пользователь зарегистрирован, как участник
     const STATUS_ENABLED = 'participant';
+
+    /*
+     * Статус завершения голосования
+     * 1 Пользователь завершил голосование
+     * 0 Пользователь к голосованию не приступил
+     */
+    const STATUS_FINISH_YES = 1;
+    const STATUS_FINISH_NO = 0;
 
     /**
      * Таблица в бд

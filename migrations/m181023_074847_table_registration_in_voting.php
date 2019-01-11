@@ -22,6 +22,7 @@ class m181023_074847_table_registration_in_voting extends Migration
             'random_number' => $this->integer(5)->notNull(),
             'date_registration' => $this->integer()->notNull(),
             'status' => $this->string(20)->defaultValue(RegistrationInVoting::STATUS_DISABLED),
+            'finished' => $this->integer()->defaultValue(false),
         ]);
         
         $this->createIndex('idx-registration_in_voting-id', '{{%registration_in_voting}}', 'id');
