@@ -166,7 +166,7 @@ class RegistrationInVoting extends ActiveRecord
     /*
      * Завершение голосования
      */
-    public function finishVoting($voting_id) {
+    public static function finishVoting($voting_id) {
         
         $user_id = Yii::$app->user->identity->id;
         

@@ -62,7 +62,7 @@ class VotingController extends AppClientsController {
                 Yii::$app->session->setFlash('success', ['message' => "Вы были зарегистрированы на участие в голосовании {$voting['voting_title']}"]);
                 return $this->refresh();
             }
-            Yii::$app->session->setFlash('error', ['message' => 'При передаче показаний возникла ошибка. Обновите страницу и повторите действие заново']);
+            Yii::$app->session->setFlash('error', ['message' => 'При регистрации в голосовании возникла ошибка. Обновите страницу и повторите действие заново']);
             return $this->refresh();
         }
         
@@ -211,19 +211,19 @@ class VotingController extends AppClientsController {
      */
     public function actionFinishVoting($voting_id) {
         
-        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         if (!is_numeric($voting_id)) {
-            return ['success' => false];
+            Yii::$app->session->setFlash('error', ['message' => 'Обновите страницу и повторите действие заново ']);
+            return $this->redirect(['view-voting', 'voting_id' => $voting_id]);
         }
         
         if (Yii::$app->request->isPost) {
             if (RegistrationInVoting::finishVoting($voting_id)) {
-                return ['success' => true];
+                Yii::$app->session->setFlash('success', ['message' => 'Finish']);
+                return $this->redirect(['view-voting', 'voting_id' => $voting_id]);
             }
-            return ['success' => false];
+            Yii::$app->session->setFlash('error', ['message' => 'Обновите страницу и повторите действие заново ']);
+            return $this->redirect(['view-voting', 'voting_id' => $voting_id]);
         }
-        return ['success' => false];
-        
     }
     
 }
