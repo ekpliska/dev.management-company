@@ -1326,6 +1326,21 @@ p.right {
 }
 /* Конец Таблица для заявок */
 
+/* Таблица Результаты голосования */
+.table-voting-results {
+    table-layout: fixed;
+}
+.table-voting-results > tbody > tr > td {
+    text-align: center;
+    vertical-align: top;
+    border-top: none; 
+}
+.table-voting-results > tbody > tr > td p.title {
+    font-weight: bold;
+    font-size: 16px;
+}
+/* Конец Таблица Результаты голосования */
+
 /* Постраничная нафигация, таблица */
 .pagination {
     margin: 5px 0;

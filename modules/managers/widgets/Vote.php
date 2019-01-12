@@ -33,7 +33,7 @@ class Vote extends Widget {
         
         // Массив, содержит процент проголосовавших по каждому варинту голосоа
         $results = [];
-        $answers = Answers::getAnswersArray();                  
+        $answers = Answers::getAnswersArray();
         
         foreach ($answers as $key => $answer) {
             // Получаем по каждому варианту Ответа (За, Против, Воздержались) количество процентов
@@ -41,7 +41,8 @@ class Vote extends Widget {
             // Если деление на 0
             $result[$answer] = $this->count == 0 ? '0' : ($vote * 100) / $this->count;
             $results = $result;
-        }        
+        }
+        
         
         return $this->render('vote/default', [
             'answers' => $answers,

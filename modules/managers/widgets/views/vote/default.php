@@ -5,13 +5,12 @@
  */
 ?>
 
-<table width="100%">
+<table class="table table-voting-results">
     <tr>
         <?php foreach ($results as $key => $result) : ?>
             <td>
-                <b><?= $key ?></b>
-                <br />
-                <?= $result ?>%
+                <p class="title"><?= $key ?></p>
+                <p class="results"><?= $result ?>%</p>
             </td>
         <?php endforeach; ?>
     </tr>
