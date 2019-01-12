@@ -123,7 +123,6 @@ $this->params['breadcrumbs'][] = $voting['voting_title'];
                     </div>
                     <?php endforeach; ?>
                 </div>
-                
                 <?php if ($is_register['finished'] == RegistrationInVoting::STATUS_FINISH_NO) : ?>
                     <div class="finished-voting text-center">
                         <?= Html::button('Проголосовать', [

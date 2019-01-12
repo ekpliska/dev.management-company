@@ -68,7 +68,7 @@ class VotingController extends AppClientsController {
         
         return $this->render('view-voting', [
             'voting' => $voting,
-            'is_register' => $is_register ? true : false,
+            'is_register' => $is_register,
             'model' => $model,
             'modal_show' => $modal_show,
             'participants' => $participants,
