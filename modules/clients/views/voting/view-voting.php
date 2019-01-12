@@ -78,10 +78,14 @@ $_now = time();
             <?php /* Контент для зарегистрировавщихся участников */ ?>
             
             <div class="questions-text-show-form">
+                <?php $count_answer = 0; ?>
                 <?php foreach ($voting['question'] as $key => $question) : ?>
                 <div class="questions-text-show">
                     <h4>
-                        <?php $_answer = $question['answer'][0]['answers_vote']; ?>
+                        <?php 
+                            // Ответ
+                            $_answer = $question['answer'][0]['answers_vote'];
+                        ?>
                         <i class="glyphicon glyphicon-ok marker-vote-<?= $question['questions_id'] ?> <?= !isset($_answer) ? 'show-marker' : '' ?>"></i>
                         <?= $question['questions_text'] ?>
                     </h4>
@@ -105,13 +109,17 @@ $_now = time();
                 <?php endforeach; ?>
             </div>
             
-            <div class="finished-voting text-center">
-                <?= Html::button('Проголосовать', [
-                        'id' => 'finished-voting-btn',
-                        'class' => 'blue-btn btn-hidden',
-                        'data-voting' => $voting['voting_id'],
-                ]) ?>
-            </div>
+            <?php if (count($voting['question']) != count($voting['question']['answer'])) : ?>
+            <?php echo '<pre>'; var_dump($count_answer) ?>
+                <div class="finished-voting text-center">
+                    <?= Html::button('Проголосовать', [
+                            'id' => 'finished-voting-btn',
+                            'class' => 'blue-btn',
+                            'data-voting' => $voting['voting_id'],
+                            'data-question' => count($voting['question']),
+                    ]) ?>
+                </div>
+            <?php endif; ?>
             
             <?php endif; ?>
             

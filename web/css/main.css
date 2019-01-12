@@ -2452,9 +2452,6 @@ p.date-start-vote {
 .finished-voting {
     padding: 40px 0;
 }
-.btn-hidden {
-    display: none;
-}
 /* Конец Форма голосования */
 
 /* Уведомления на странице */

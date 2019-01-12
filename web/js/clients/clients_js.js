@@ -646,11 +646,27 @@ $(document).ready(function() {
     
     $('#finished-voting-btn').on('click', function(){
         var votingID = $(this).data('voting');
-        $.post('finish-voting?voting_id=' + votingID, function(response) {
-            if (response.success === true) {
-                console.log(response.success);
-            }
-        });
+        var countQuestions = $(this).data('question');
+        var countAnswers = $('.btn-set-voting-active').length;
+        var modalMessage = $('#participate_modal-message');
+        
+        console.log(votingID + ' ' + countQuestions + ' ' + countAnswers);
+        if (countQuestions !== countAnswers) {
+            modalMessage.find('.vote-message_span').text('Ошибка завершения участия в голосовании');
+            modalMessage.find('.modal-title-vote').text('Пожалуйста вернитесь к голосованию и дайте ответы на все заявленные вопросы');
+            modalMessage.modal('show');
+            console.log('error');
+            return false;
+        } else if (countQuestions === countAnswers) {
+            console.log('all right');
+            $.post('finish-voting?voting_id=' + votingID, function(response) {
+//                if (response.success === true) {
+//                    console.log(response.success);
+//                }
+            });
+            return true;
+        }
+
     });
     
     

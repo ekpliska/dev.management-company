@@ -27,4 +27,4 @@ Modal::begin([
                 'class' => 'btn red-outline-btn bt-bottom2',
         ]) ?>
     </div>
-<?php Modal::end(); ?>
+<?php Modal::end(); ?> 
