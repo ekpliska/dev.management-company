@@ -14,7 +14,7 @@ class RegistrationInVoting extends ActiveRecord
      * on register Пользователь поставлен на регистрацию, Отправлено СМС
      * participant Пользователь зарегистрирован, как участник
      */
-    const STATUS_DISABLED = 'on register'; 
+    const STATUS_DISABLED = 'in register'; 
     const STATUS_ENABLED = 'participant';
 
     /*
@@ -106,7 +106,7 @@ class RegistrationInVoting extends ActiveRecord
                     'status' => self::STATUS_DISABLED])
                 ->one();
         
-        if ($register !== null) {
+        if ($register != null) {
             $register->delete();
         }
         

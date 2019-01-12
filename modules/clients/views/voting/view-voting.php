@@ -39,12 +39,11 @@ $this->params['breadcrumbs'][] = $voting['voting_title'];
             <?php 
                 /* 
                  * "Принять участие" достпуно только в активных голосованиях, 
-                 * Собственнику,
-                 * Участнику со статусом "на регистрации"
+                 * Собственнику
                  */
                 if (
                         ($voting['status'] == Voting::STATUS_ACTIVE || Yii::$app->user->can('clients')) 
-                        && $is_register['status'] == RegistrationInVoting::STATUS_DISABLED
+                        && empty($is_register)
                     ) : 
             ?>
                 <?= Html::button('Принять участие', [
@@ -79,7 +78,7 @@ $this->params['breadcrumbs'][] = $voting['voting_title'];
         
         <div class="col-md-9 voting-body_right">
             <?php /* Контент для участников голосования не подтвердивших свое участие */ ?>
-            <?php if ($is_register['status'] == RegistrationInVoting::STATUS_DISABLED) : ?>
+            <?php if (empty($is_register) || $is_register['status'] == RegistrationInVoting::STATUS_DISABLED) : ?>
                 <?php foreach ($voting['question'] as $key => $question) : ?>
                     <div class="questions-text">
                         <span><?= $question['questions_text'] ?></span>

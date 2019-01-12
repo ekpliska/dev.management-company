@@ -68,7 +68,7 @@ class VotingController extends AppClientsController {
         
         return $this->render('view-voting', [
             'voting' => $voting,
-            'is_register' => $is_register,
+            'is_register' => $is_register ? $is_register : null,
             'model' => $model,
             'modal_show' => $modal_show,
             'participants' => $participants,
@@ -106,11 +106,9 @@ class VotingController extends AppClientsController {
     /*
      * Отказ от участия в голосовании
      */
-    public function actionRenouncementToParticipate() {
+    public function actionRenouncementToParticipate($voting_id) {
         
-        $voting_id = Yii::$app->request->post('votingId');
-        
-        if (Yii::$app->request->isAjax) {
+        if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
             if (RegistrationInVoting::deleteRegisterById($voting_id)) {
                 $this->deleteCookieVoting($voting_id);

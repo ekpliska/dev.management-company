@@ -587,12 +587,8 @@ $(document).ready(function() {
      */
     $('#renouncement_participate, #renouncement_participate_close').on('click', function(){
         var votingId = $(this).data('voting');
-        $.ajax({
-            type: 'POST',
-            url: 'renouncement-to-participate',
-            data: { votingId: votingId, }
-        }).done(function(response) {
-//            console.log('voting');
+        $.post('renouncement-to-participate?voting_id=' + votingId, function(response) {
+//            console.log(response);
         });
     });
     
