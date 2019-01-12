@@ -36,7 +36,7 @@ class Vote extends Widget {
         $answers = Answers::getAnswersArray();                  
         
         foreach ($answers as $key => $answer) {
-            // Получаем по каждому варианту Ответа (За, Против, Воздержались) количество провентов
+            // Получаем по каждому варианту Ответа (За, Против, Воздержались) количество процентов
             $vote = $this->count->andWhere(['answers_vote' => $key])->count();
             // Если деление на 0
             $result[$answer] = $this->count == 0 ? '0' : ($vote * 100) / $this->count;

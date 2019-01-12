@@ -640,6 +640,9 @@ $(document).ready(function() {
         });
     });
     
+    /*
+     * Завершение участия в голосовании
+     */
     $('#finished-voting-btn').on('click', function(){
         var votingID = $(this).data('voting');
         var countQuestions = $(this).data('question');
@@ -663,6 +666,17 @@ $(document).ready(function() {
             return true;
         }
 
+    });
+    
+    /*
+     * Загрузка профиля пользователя в модальном окне
+     */
+    $('a#view-profile').on('click', function(e){
+        var link = $(this).attr('href');
+        $('#view-user-profile').modal('show');
+        $('#view-user-profile .modal-content .modal-body').load(link);
+        e.preventDefault();
+        return false;        
     });
     
     

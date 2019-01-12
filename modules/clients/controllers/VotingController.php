@@ -224,4 +224,18 @@ class VotingController extends AppClientsController {
         }
     }
     
+    /*
+     * Просмотр профиля проголосовавших участников
+     */
+    public function actionViewProfile($user_id) {
+        
+        $user_info = \app\modules\clients\models\UserProfile::userInfo($user_id);
+        
+        if (Yii::$app->request->isAjax) {
+            return $this->renderAjax('modal/view-profile', [
+                'user_info' => $user_info]);
+        }
+        
+    }
+    
 }

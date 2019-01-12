@@ -2442,6 +2442,19 @@ p.date-start-vote {
 }
 /* Конец блок кнопок голосования: за, против, воздержаться */
 
+/* Модальное окно "Профиль пользователя" */
+.card-view-profile img {
+    width: 200px;
+    height: 200px;
+    display: block;
+    margin: 0 auto;
+}
+.card-view-profile h1 {
+    font-size: 18px;
+    font-weight: bold;
+}
+/* Конец Модальное окно "Профиль пользователя" */
+
 /* Форма голосования */
 .sms-code li {
     list-style: none;

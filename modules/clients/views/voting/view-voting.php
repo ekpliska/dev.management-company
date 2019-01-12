@@ -1,6 +1,7 @@
 <?php
 
     use yii\helpers\Html;
+    use yii\bootstrap\Modal;
     use yii\widgets\Breadcrumbs;
     use app\helpers\FormatHelpers;
     use app\modules\clients\widgets\ModalWindows;
@@ -70,7 +71,9 @@ $this->params['breadcrumbs'][] = $voting['voting_title'];
                     <div class="col-md-4 voting__participant_info text-center">
                         <?php $avatar = $participant['user_photo'] ? $participant['user_photo'] : "images/no-avatar.jpg" ?>
                         <?= Html::img("@web/{$avatar}", ['alt' => 'user-name', 'class' => 'img-responsive img-circle']) ?>
-                        <?= Html::a ($participant['clients_name'], ['/']) ?>
+                        <?= Html::a($participant['clients_name'], ['view-profile', 'user_id' => $participant['user_id']], [
+                                    'id' => 'view-profile',
+                            ]) ?>
                     </div>
                 <?php endforeach; ?>
             <?php endif; ?>
@@ -209,4 +212,14 @@ $this->registerJs("
     });
 ");
 ?>
-<?= ModalWindows::widget(['modal_view' => 'participate_modal']) ?> 
+<?= ModalWindows::widget(['modal_view' => 'participate_modal']) ?>
+
+<?php
+    /* Модальное окно для загрузки профиля пользователя */
+    Modal::begin([
+        'id' => 'view-user-profile',
+        'header' => 'Профиль пользователя',
+        'closeButton' => false,
+    ]);
+?>
+<?php Modal::end(); ?>
