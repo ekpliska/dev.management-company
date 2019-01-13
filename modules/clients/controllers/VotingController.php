@@ -191,9 +191,9 @@ class VotingController extends AppClientsController {
     public function actionSendAnswer($question_id, $type_answer) {
         
         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        if (!is_numeric($question_id) || !is_numeric($type_answer)) {
-            return ['success' => false];
-        }
+//        if (!is_numeric($question_id) || !is_numeric($type_answer)) {
+//            return ['success' => false];
+//        }
         
         if (Yii::$app->request->isPost) {
             if (Answers::sendAnswer($question_id, $type_answer)) {

@@ -7,11 +7,11 @@
 class Answers extends ActiveRecord
 {
     // Голос "За"
-    const ANSWER_BEHIND = 1;
+    const ANSWER_BEHIND = 'behind';
     // Голос "Против"
-    const ANSWER_AGAINST = -1;
+    const ANSWER_AGAINST = 'against';
     // Голос "Воздержаться"    
-    const ANSWER_ABSTAIN = 2;
+    const ANSWER_ABSTAIN = 'abstain';
     
     /**
      * Таблица БД
@@ -28,7 +28,8 @@ class Answers extends ActiveRecord
     {
         return [
             [['answers_questions_id', 'answers_vote', 'answers_user_id'], 'required'],
-            [['answers_questions_id', 'answers_vote', 'answers_user_id'], 'integer'],
+            [['answers_questions_id', 'answers_user_id'], 'integer'],
+            ['answers_vote', 'string', 'max' => 10],
             [['created_at'], 'safe'],
             [['answers_questions_id'], 'exist', 'skipOnError' => true, 'targetClass' => Questions::className(), 'targetAttribute' => ['answers_questions_id' => 'questions_id']],
         ];

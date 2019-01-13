@@ -20,11 +20,6 @@ class Vote extends Widget {
             throw new \yii\base\InvalidConfigException('Ошибка передачи параметров');
         }
         
-        // Собираем все ответы на вопрос
-        $this->count = (new \yii\db\Query())
-                ->from('answers')
-                ->where(['answers_questions_id' => $this->question_id]);
-        
         parent::init();
         
     }
@@ -37,7 +32,10 @@ class Vote extends Widget {
         
         foreach ($answers as $key => $answer) {
             // Получаем по каждому варианту Ответа (За, Против, Воздержались) количество процентов
-            $vote = $this->count->andWhere(['answers_vote' => $key])->count();
+            $vote = (new \yii\db\Query())
+                    ->from('answers')
+                    ->where(['answers_questions_id' => $this->question_id])
+                    ->andWhere(['answers_vote' => $key])->count();
             // Если деление на 0
             $result[$answer] = $this->count == 0 ? '0' : ($vote * 100) / $this->count;
             $results = $result;

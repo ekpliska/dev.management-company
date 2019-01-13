@@ -106,7 +106,7 @@ $this->params['breadcrumbs'][] = $voting['voting_title'];
                         </h4>
                         <?php if ($is_register['finished'] == RegistrationInVoting::STATUS_FINISH_YES) : ?>
                             <div class="answers-block">
-                                <?= \app\modules\managers\widgets\Vote::widget(['question_id' => $question['questions_id']]) ?>
+                                <?= app\modules\managers\widgets\Vote::widget(['question_id' => $question['questions_id']]) ?>
                             </div>
                         <?php endif; ?>
                         <?php if ($is_register['finished'] == RegistrationInVoting::STATUS_FINISH_NO) : ?>
