@@ -3,16 +3,11 @@
     namespace app\controllers;
     use Yii;
     use yii\filters\AccessControl;
-    use yii\web\Response;
     use yii\filters\VerbFilter;
     use yii\web\Controller;
-    use yii\base\InvalidParamException;
-    use yii\web\BadRequestHttpException;
-    
-    use app\models\RegistrationForm;
+    use yii\base\InvalidPattpException;
     use app\models\LoginForm;
-    use app\models\User;
-    use app\models\EmailConfirmForm;
+    use app\models\UsailConfirmForm;
     use app\models\PasswordResetRequestForm;
 
 class SiteController extends Controller
@@ -51,6 +46,7 @@ class SiteController extends Controller
         return [
             'error' => [
                 'class' => 'yii\web\ErrorAction',
+                'view' => '@app/views/site/404.php'
             ],
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction',
