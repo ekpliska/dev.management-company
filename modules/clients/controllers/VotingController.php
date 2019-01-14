@@ -50,7 +50,7 @@ class VotingController extends AppClientsController {
         }
 
         // Проверяем наличие текущего пользователя в списке зарегистрированных участников голосования
-        $is_register = RegistrationInVoting::find()->where(['user_id' => Yii::$app->user->identity->id, 'voting_id' => $voting_id])->asArray()->one();
+        $is_register = RegistrationInVoting::findById($voting_id);
         
         // Загружаем модель на ввод СМС кода
         $model = new CheckSMSVotingForm($is_register['random_number']);
