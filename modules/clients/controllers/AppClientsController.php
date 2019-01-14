@@ -46,22 +46,6 @@ class AppClientsController extends Controller {
         ];
     }
     
-    public function init() {
-        parent::init();
-        \Yii::configure($this, [
-            'components' => [
-                'errorHandler' => [
-                    'class' => \yii\web\ErrorHandler::className(),
-                ]
-            ],
-        ]);
-
-        /** @var ErrorHandler $handler */
-        $handler = $this->get('errorHandler');
-        \Yii::$app->set('errorHandler', $handler);
-        $handler->register();
-    }    
-    
     /*
      * Метод, формирования полного профиля для текущего пользователя
      */

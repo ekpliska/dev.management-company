@@ -78,6 +78,8 @@ $this->params['breadcrumbs'][] = $voting['voting_title'];
                 <?php endforeach; ?>
             <?php endif; ?>
         </div>
+
+<?= \app\modules\clients\widgets\ResultsVote::widget(['voting_id' => $voting['voting_id']]) ?>
         
         <div class="col-md-9 voting-body_right">
             <?php /* Контент для участников голосования не подтвердивших свое участие */ ?>
@@ -104,11 +106,6 @@ $this->params['breadcrumbs'][] = $voting['voting_title'];
                             <i class="glyphicon glyphicon-ok marker-vote-<?= $question['questions_id'] ?> <?= !isset($_answer) ? 'show-marker' : '' ?>"></i>
                             <?= $question['questions_text'] ?>
                         </h4>
-                        <?php if ($is_register['finished'] == RegistrationInVoting::STATUS_FINISH_YES) : ?>
-                            <div class="answers-block">
-                                <?= app\modules\managers\widgets\Vote::widget(['question_id' => $question['questions_id']]) ?>
-                            </div>
-                        <?php endif; ?>
                         <?php if ($is_register['finished'] == RegistrationInVoting::STATUS_FINISH_NO) : ?>
                             <div class="btn-block text-center">
                                 <div class="btn-group btn-group-lg" role="group" aria-label="Button block" id="btn-group-<?= $key ?>">
