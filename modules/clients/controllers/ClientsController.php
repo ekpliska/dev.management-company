@@ -20,9 +20,9 @@ class ClientsController extends AppClientsController
     public function actionIndex($block = 'important_information') {
 
         // Получаем ID текущего лицевого счета
-        $accoint_id = $this->_current_account_id;
+        $account_id = $this->_current_account_id;
         // Получаем массив содержащий ID ЖК, ID дома, ID квартиры, номер подъезда
-        $living_space = Yii::$app->userProfile->getLivingSpace($accoint_id);
+        $living_space = Yii::$app->userProfile->getLivingSpace($account_id);
         
         switch ($block) {
             case 'important_information':
