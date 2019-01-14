@@ -14,9 +14,7 @@ class FilterStatusRequest extends Requests {
      * @param integer $account_id по типу заявки 
      * @param integer $status по статусу
      */
-    public function searchRequest($status) {
-        
-        $account_id = Yii::$app->request->cookies->get('_userAccount')->value;
+    public function searchRequest($status, $account_id) {
         
         $query = Requests::find()
                 ->andWhere(['requests_account_id' => $account_id])

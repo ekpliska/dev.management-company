@@ -53,7 +53,7 @@ class m181005_073055_table_voting extends Migration
         $this->createTable('{{%answers}}', [
             'answers_id' => $this->primaryKey(),
             'answers_questions_id' => $this->integer()->notNull(),
-            'answers_vote' => $this->tinyInteger()->notNull(),
+            'answers_vote' => $this->string(10)->notNull(),
             'answers_user_id' => $this->integer()->notNull(),
             'created_at' => $this->timestamp()->defaultValue(new Expression("NOW()")),
         ]);

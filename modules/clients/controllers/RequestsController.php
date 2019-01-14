@@ -26,18 +26,18 @@ class RequestsController extends AppClientsController
      * 
      * @param array $type_requests Массив всех видом зявок
      * @param array $status_requests Пользовательские статусы заявок
-     * @param integer $accoint_id Значение ID лицевого счета из глобального dropDownList (хеддер)
+     * @param integer $account_id Значение ID лицевого счета из глобального dropDownList (хеддер)
      */
     public function actionIndex() {
         
-        $accoint_id = $this->_current_account_id;
+        $account_id = $this->_current_account_id;
         
         $type_requests = TypeRequests::getTypeNameArray();
         $status_requests = StatusRequest::getUserStatusRequests();
        
         // В датапровайдер собираем все заявки по текущему пользователю
         $all_requests = new ActiveDataProvider([
-            'query' => Requests::findByAccountID($accoint_id),
+            'query' => Requests::findByAccountID($account_id),
             'pagination' => [
                 'forcePageParam' => false,
                 'pageSizeParam' => false,
@@ -55,7 +55,7 @@ class RequestsController extends AppClientsController
             ]);
         
         if ($model->load(Yii::$app->request->post())) {
-            $request_number = $model->addRequest($accoint_id);
+            $request_number = $model->addRequest($account_id);
             if ($request_number) {
                 $model->gallery = UploadedFile::getInstances($model, 'gallery');
                 $model->uploadGallery();
@@ -78,10 +78,10 @@ class RequestsController extends AppClientsController
      */    
     public function actionViewRequest($request_numder) {
 
-        $accoint_id = $this->_current_account_id;
+        $account_id = $this->_current_account_id;
         
         // Ищем заявку по уникальному номеру
-        $request_info = Requests::findRequestByIdent($request_numder, $accoint_id);
+        $request_info = Requests::findRequestByIdent($request_numder, $account_id);
         
         /*
          * Если заявка не найдена или передан номер заявки не принадлежащий пользователю, 
@@ -130,6 +130,8 @@ class RequestsController extends AppClientsController
      */
     public function actionFilterByTypeRequest($status) {
         
+        $account_id = $this->_current_account_id;
+        
         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
         if (!is_numeric($status)) {
@@ -138,7 +140,7 @@ class RequestsController extends AppClientsController
         
         if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
             $model_filter = new FilterStatusRequest();
-            $all_requests = $model_filter->searchRequest($status);
+            $all_requests = $model_filter->searchRequest($status, $account_id);
             return $this->renderPartial('data/grid', ['all_requests' => $all_requests]);
         }
         
