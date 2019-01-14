@@ -138,7 +138,7 @@ class RegistrationForm extends Model {
             
             // Дом
             $house = new Houses();
-            $house_data_api = $data['user_info']['user_info']['Жилая площадь'];
+            $house_data_api = $data['user_info']['account_info']['Жилая площадь'];
             $house_id = $house::isExistence(
                             $house_data_api['House adress'], 
                             $house_data_api['Полный адрес Собственника'],
@@ -161,7 +161,7 @@ class RegistrationForm extends Model {
             $account->account_number = $data['account'];
             $account->account_organization_id = 1;
             $account->personal_clients_id = $client->clients_id;
-            $account->account_balance = $data['user_info']['user_info']['Лицевой счет']['Баланс'];
+            $account->account_balance = $data['user_info']['account_info']['Лицевой счет']['Баланс'];
             $account->personal_flat_id = $flat->flats_id;
             // Устанавливаем зарегистрированных лицевой счет как текущий
             $account->isActive = PersonalAccount::STATUS_CURRENT;

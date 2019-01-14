@@ -22,6 +22,8 @@ class SignupController extends Controller {
 //        $session = Yii::$app->session;
 //        $session->destroy();
         
+        $stage = $this->setSessionStep();
+        
         $model_step_one = new SignupStepOne();
         $model_step_two = new SignupStepTwo();
         $model_step_three = new SignupStepThree();
@@ -31,10 +33,26 @@ class SignupController extends Controller {
         $is_step_three = $this->postDataStepThree($model_step_three);
         
         return $this->render('index', [
+            'stage' => $stage,
             'model_step_one' => $model_step_one,
             'model_step_two' => $model_step_two,
             'model_step_three' => $model_step_three,
         ]);
+        
+    }
+    
+    /*
+     * Смена шага регистрации
+     * Каждый успешный шаг записывается в куку
+     */
+    private function setSessionStep($step = null) {
+        
+        $session = Yii::$app->session;
+        
+        if (!isset($session['step_one'])) {
+            $session['step_one'] = true;
+            return true;
+        }
         
     }
     
@@ -95,7 +113,8 @@ class SignupController extends Controller {
         $session['account'] = $data['account_number'];
         $session['last_summ'] = $data['last_summ'];
         $session['square'] = $data['square'];
-        $session['count_step'] = 1;
+        $session['step_one'] = false;
+        $session['step_two'] = true;
         
         return true;
     }
@@ -117,7 +136,9 @@ class SignupController extends Controller {
         
         $session['email'] = $data['email'];
         $session['password'] = $data['password'];
-        $session['count_step'] = 2;
+        $session['step_one'] = false;
+        $session['step_two'] = false;
+        $session['step_three'] = true;
         
         return true;
     }
