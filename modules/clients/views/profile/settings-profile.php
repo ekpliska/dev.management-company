@@ -1,6 +1,7 @@
 <?php
     
     use yii\helpers\Html;
+    use app\modules\clients\widgets\AlertsShow;
     use yii\widgets\Breadcrumbs;
     
 /* 
@@ -15,6 +16,8 @@ $this->params['breadcrumbs'][] = 'Настройки профиля';
         'homeLink' => ['label' => 'ELSA', 'url' => ['clients/index']],
         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
 ]) ?>
+
+<?= AlertsShow::widget() ?>
 
 <div class="profile-settings row">
     

@@ -106,8 +106,6 @@ class ProfileController extends AppClientsController
         
         if (Yii::$app->request->isAjax) {
             $change_account = PersonalAccount::changeCurrentAccount($current_account_id, $new_current_account_id);
-            // Записываем выбранный лицевой счет в куку как текущий
-//            $this->setChoosingAccountCookie($account_id);
             // Ищем арендатора, закрепленного за указанным лицевым счетом
             $model = PersonalAccount::findByRent($new_current_account_id, $client_id);
             
@@ -254,8 +252,11 @@ class ProfileController extends AppClientsController
         
         if ($sms_model->load(Yii::$app->request->post()) && $sms_model->validate()) {
             $sms_model->changeUserInfo($type);
+            Yii::$app->session->setFlash('success', ['message' => 'Измененные настройки профиля сохранены']);
             return $this->redirect(['profile/settings-profile']);
-        }        
+        }
+        Yii::$app->session->setFlash('error', ['message' => 'При изменении найтроек профиля созникла ошибка']);
+        return $this->redirect(['profile/settings-profile']);
         
     }
     
@@ -356,20 +357,6 @@ class ProfileController extends AppClientsController
             $model->saveRentToUser($client, $account);
             return $this->redirect(['profile/index']);
         }
-        
-    } 
-    
-    /*
-     * Перезапись в куку номер текущего лицевого счета
-     */
-    private function setChoosingAccountCookie($account_id) {
-        
-        Yii::$app->session->set('_userAccount', $account_id);
-        Yii::$app->response->cookies->add(new \yii\web\Cookie([
-            'name' => '_userAccount',
-            'value' => $account_id,
-            'expire' => time() + 60*60*24*7,
-        ]));        
         
     }
 

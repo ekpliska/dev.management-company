@@ -19,8 +19,8 @@ $this->title = 'Customers | Регистрация';
     <div class="registration-form-group">
         <ul id="steps">
             <li id="stepDesc0" class="<?= $_SESSION['step_one'] == true ? 'current' : ''?>">Шаг 1<span>Лицевой счет</span></li>
-            <li id="stepDesc1" class="<?= $_SESSION['step_two'] == true ? 'current' : ''?>">Шаг 2<span>Пользовательские данные</span></li>
-            <li id="stepDesc2" class="<?= $_SESSION['step_three'] == true ? 'current' : ''?>">Шаг 3<span>Завершение регистрации</span></li>
+            <li id="stepDesc1" class="<?= isset($_SESSION['step_two']) == true ? 'current' : ''?>">Шаг 2<span>Пользовательские данные</span></li>
+            <li id="stepDesc2" class="<?= isset($_SESSION['step_three']) == true ? 'current' : ''?>">Шаг 3<span>Завершение регистрации</span></li>
         </ul>
 
         <?php if ($_SESSION['step_one'] == true) : ?>
@@ -31,7 +31,7 @@ $this->title = 'Customers | Регистрация';
             </div>
         <?php endif; ?>
 
-        <?php if ($_SESSION['step_two'] == true) : ?>
+        <?php if (isset($_SESSION['step_two']) == true) : ?>
             <div id="step1">
                 <fieldset>
                     <?= $this->render('form/step_two', ['model_step_two' => $model_step_two]) ?>
@@ -39,7 +39,7 @@ $this->title = 'Customers | Регистрация';
             </div>
         <?php endif; ?>
 
-        <?php if ($_SESSION['step_three'] == true) : ?>
+        <?php if (isset($_SESSION['step_three']) == true) : ?>
             <div id="step2">
                 <fieldset>
                     <?= $this->render('form/step_three', ['model_step_three' => $model_step_three]) ?>
