@@ -679,6 +679,23 @@ $(document).ready(function() {
         return false;        
     });
     
+    /*
+     * Обработка ввода СМС-кода в форме регистрации на участние в голосовании
+     */
+    $('.number-sms').on('input', function() {
+        var currentInput = $(this).prop('id');
+        var numInput = currentInput.toString().slice(-1);
+        var nextInput = $('#input-sms-' + ++numInput);
+        
+        if ($(this).length === 1) {
+            $(nextInput).focus();
+        }
+    });
+    
+    // Разрешаем вводить только цифры
+    $('.number-sms').keypress(function(key) {
+        if (key.charCode < 48 || key.charCode > 57 || $(this).val().length > 1) return false;
+    });
     
     /* End Block of Voting */
     

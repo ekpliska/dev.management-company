@@ -3,6 +3,7 @@
     use yii\bootstrap\Modal;
     use yii\widgets\ActiveForm;
     use yii\helpers\Html;
+    use yii\widgets\MaskedInput;
     
 
 /* 
@@ -49,37 +50,12 @@ Modal::begin([
     
     <?= Html::errorSummary($model, ['header' => '']); ?>   
     
-    <?= $form->field($model, 'number1')
-            ->input('text', [
-                'class' => 'number-sms', 
-                'maxlength' => 1, 
-                'size' => 1])
-            ->label(false) ?>
-    <?= $form->field($model, 'number2')
-            ->input('text', [
-                'class' => 'number-sms', 
-                'maxlength' => 1, 
-                'size' => 1])
-            ->label(false) ?>
-    <?= $form->field($model, 'number3')
-            ->input('text', [
-                'class' => 'number-sms', 
-                'maxlength' => 1, 
-                'size' => 1])
-            ->label(false) ?>
-    <?= $form->field($model, 'number4')
-            ->input('text', [
-                'class' => 'number-sms', 
-                'maxlength' => 1, 
-                'size' => 1])
-            ->label(false) ?>
-    <?= $form->field($model, 'number5')
-            ->input('text', [
-                'class' => 'number-sms', 
-                'maxlength' => 1, 
-                'size' => 1])
-            ->label(false) ?>
-             
+    <?= $form->field($model, 'number1')->input('text', ['id' => 'input-sms-1', 'class' => 'number-sms'])->label(false) ?>
+    <?= $form->field($model, 'number2')->input('text', ['id' => 'input-sms-2', 'class' => 'number-sms'])->label(false) ?>
+    <?= $form->field($model, 'number3')->input('text', ['id' => 'input-sms-3', 'class' => 'number-sms'])->label(false) ?>
+    <?= $form->field($model, 'number4')->input('text', ['id' => 'input-sms-4', 'class' => 'number-sms'])->label(false) ?>
+    <?= $form->field($model, 'number5')->input('text', ['id' => 'input-sms-5', 'class' => 'number-sms', 'maxlength' => 1, 'size' => 1])->label(false) ?>
+
 </div>
             
 <div class="text-center">
