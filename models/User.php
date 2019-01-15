@@ -195,6 +195,15 @@ class User extends ActiveRecord implements IdentityInterface
                 ->one();
     }
 
+    public static function findByPhone($phone) {
+        
+        return self::find()
+                ->joinWith(['client', 'rent'])
+                ->where(['user_mobile' => $phone])
+                ->asArray()
+                ->one();
+    }
+
     /*
      *  Получить ID пользователя
      */

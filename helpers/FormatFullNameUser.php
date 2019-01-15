@@ -17,17 +17,11 @@ class FormatFullNameUser {
 
         $full_name = '';
         
-        $client = Clients::find()
-                ->where(['clients_mobile' => $phone])
-                ->orWhere(['clients_phone' => $phone])
-                ->asArray()
-                ->one();
+        $user = User::findByPhone($phone);
+        
+        $client = $user['client'] ?  $user['client'] : null;
 
-        $rent = Rents::find()
-                ->where(['rents_mobile' => $phone])
-                ->orWhere(['rents_mobile_more' => $phone])
-                ->asArray()
-                ->one();
+        $rent = $user['rent'] ? $user['rent'] : null;
         
         if ($client == null && $rent == null) {
             $full_name = 'Не задано';

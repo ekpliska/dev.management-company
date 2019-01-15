@@ -86,7 +86,7 @@ class RequestsController extends AppManagersController {
      */
     public function actionViewRequest($request_number) {
         
-        $request = Requests::findRequestByIdent($request_number);
+        $request = Requests::findRequestToIdent($request_number);
         
         if (!isset($request) && $request == null) {
             throw new \yii\web\NotFoundHttpException('Вы обратились к несуществующей странице');
