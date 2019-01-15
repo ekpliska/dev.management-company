@@ -2636,6 +2636,7 @@ p.date-start-vote {
     background: #fff;
     border-radius: unset;
 }
+.navbar__pills > li a:focus,
 .navbar__pills > li a:hover {
     background: transparent;
     color: #2d18b4;

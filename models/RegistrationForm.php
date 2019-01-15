@@ -66,8 +66,6 @@ class RegistrationForm extends Model {
             
             ['mobile_phone', 'match', 'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/i'],
             
-            ['username', 'checkPersonalAccount'],
-            
             ['password', 'compare', 'message' => 'Указанные пароли не совпадают!'],
             [['password_repeat'], 'string', 'min' => 6, 'max' => 12],
             
@@ -75,19 +73,7 @@ class RegistrationForm extends Model {
             
         ];
     }
-    
-    /*
-     * Проверка валидации введенного лицевого счета при регистрации
-     * Если по введенному лицевому счету запись на найдена - выбросить исключение
-     */
-    public function checkPersonalAccount() {
-        $personalAccount = PersonalAccount::find()->andWhere(['account_number' => $this->username])->select('account_number')->one();
-        if ($personalAccount == null) {
-            $errorMsg = 'Указанный лицевой счет в системе не существует';
-            $this->addError('username', $errorMsg);
-        }
-    }
-    
+        
     /*
      * Метод описывает первый шаг рагистрации пользователя
      */
@@ -104,7 +90,7 @@ class RegistrationForm extends Model {
             // Сохраняем данные Собственника
             $client = new Clients();
             // Данные Собственника, пришедщие по API
-            $client_data_api = $data['user_info']['user_info']['Собственник'];
+            $client_data_api = $data['user_info']['account_info']['Собственник'];
             $client->clients_surname = $client_data_api['Фамилия'] ? $client_data_api['Фамилия'] : 'Не задано';
             $client->clients_name = $client_data_api['Имя'] ? $client_data_api['Имя'] : 'Не задано';
             $client->clients_second_name = $client_data_api['Отчество'] ? $client_data_api['Отчество'] : 'Не задано';
