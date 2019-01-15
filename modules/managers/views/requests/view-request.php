@@ -40,10 +40,10 @@ $this->title = 'Заявка №' . $request['requests_ident'];
                 </div>
                 <div class="col-md-8">
                     
-                    <?php /*= SwitchStatusRequest::widget([
+                    <?= SwitchStatusRequest::widget([
                             'view_name' => 'request',
                             'status' => $request['status'],
-                            'request_id' => $request['requests_id']]) */ ?>
+                            'request_id' => $request['requests_id']]) ?>
                     
                     <?= FormatHelpers::formatDate($request['updated_at']) ?>   
                     <hr />                 
@@ -126,7 +126,7 @@ $this->title = 'Заявка №' . $request['requests_ident'];
     </div>
     
     <div class="clearfix"></div>
-    <?php /* = AddEmployee::widget() */ ?>
+    <?= AddEmployee::widget() ?>
 </div>
 
 

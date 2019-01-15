@@ -18,10 +18,6 @@ class AddEmployee extends Widget {
         $this->dispatcher_list = Dispatchers::getListDispatchers()->all();
         $this->specialist_list = Specialists::getListSpecialists()->all();
         
-        if ($this->dispatcher_list == null || $this->specialist_list == null) {
-            throw new \yii\base\InvalidConfigException('Что-то пошло не так');
-        }
-        
         parent::init();
     }
     

@@ -1,5 +1,6 @@
 <?php
 
+    use yii\bootstrap\Modal;
     use yii\helpers\Html;
 
 /* 
@@ -8,64 +9,74 @@
 
 ?>
 
-<?php if (isset($dispatcher_list) && $dispatcher_list) : ?>
-<div id="add-dispatcher-modal" class="modal fade" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">
-                    Назначить диспетчера
-                </h4>
-            </div>
-            <div class="modal-body">
-                
-                <div class="error-message" style="color: red;"></div>
-                
-                <div class="list-group" id="dispatcherList">
-                    <?php foreach ($dispatcher_list as $dispatcher) : ?>
-                        <a class="list-group-item list-group-item-action" data-employee="<?= $dispatcher['id'] ?>">
-                            <?= $dispatcher['surname'] ?> <?= $dispatcher['name'] ?> <?= $dispatcher['second_name'] ?>
-                        </a>
-                    <?php endforeach; ?>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <?= Html::button('Назначить', ['class' => 'btn btn-primary add_dispatcher__btn', 'data-dismiss' => 'modal']) ?>
-                <?= Html::button('Закрыть', ['class' => 'btn btn-default', 'data-dismiss' => 'modal']) ?>
-            </div>
-        </div>
-    </div>
-</div>
-<?php endif; ?>
+<?php
+    Modal::begin([
+        'id' => 'add-dispatcher-modal',
+        'header' => 'Назначить диспетчера',
+        'closeButton' => [
+            'class' => 'close modal-close-btn',
+        ],
+        'clientOptions' => [
+            'backdrop' => 'static',
+            'keyboard' => false,
+        ],        
+    ]);
+?>
 
-<?php if (isset($specialist_list) && $specialist_list) : ?>
-<div id="add-specialist-modal" class="modal fade" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">
-                    Назначить специалиста
-                </h4>
-            </div>
-            <div class="modal-body">
-                
-                <div class="error-message" style="color: red;"></div>
-                
-                <div class="list-group" id="specialistList">
-                    <?php foreach ($specialist_list as $specialist) : ?>
-                        <a class="list-group-item list-group-item-action" data-employee="<?= $specialist['id'] ?>">
-                            <?= $specialist['surname'] ?> <?= $specialist['name'] ?> <?= $specialist['second_name'] ?>
-                        </a>
-                    <?php endforeach; ?>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <?= Html::button('Назначить', ['class' => 'btn btn-primary add_specialist__btn', 'data-dismiss' => 'modal']) ?>
-                <?= Html::button('Закрыть', ['class' => 'btn btn-default', 'data-dismiss' => 'modal']) ?>
-            </div>
-        </div>
+    <div class="error-message" style="color: red;"></div>
+    
+    <div class="list-group" id="dispatcherList">
+        <?php if (isset($dispatcher_list)) : ?>
+            <?php foreach ($dispatcher_list as $dispatcher) : ?>
+                <a class="list-group-item list-group-item-action" data-employee="<?= $dispatcher['id'] ?>">
+                    <?= $dispatcher['surname'] ?> <?= $dispatcher['name'] ?> <?= $dispatcher['second_name'] ?>
+                </a>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <?= 'not found'; ?>
+        <?php endif; ?>
     </div>
-</div>
-<?php endif; ?>
+    
+    <div class="modal-footer">
+        <?= Html::button('Назначить', ['class' => 'btn btn blue-outline-btn white-btn add_dispatcher__btn', 'data-dismiss' => 'modal']) ?>
+        <?= Html::button('Закрыть', ['class' => 'btn red-outline-btn bt-bottom2', 'data-dismiss' => 'modal']) ?>
+    </div>
+
+<?php Modal::end(); ?>
+
+<?php
+    Modal::begin([
+        'id' => 'add-specialist-modal',
+        'header' => 'Назначить специалиста',
+        'closeButton' => [
+            'class' => 'close modal-close-btn',
+        ],
+        'clientOptions' => [
+            'backdrop' => 'static',
+            'keyboard' => false,
+        ],        
+    ]);
+?>
+
+    <div class="error-message" style="color: red;"></div>
+    
+    <div class="list-group" id="dispatcherList">
+        <?php if (isset($specialist_list) && !empty($specialist_list)) : ?>
+            <?php foreach ($specialist_list as $specialist) : ?>
+                <a class="list-group-item list-group-item-action" data-employee="<?= $specialist['id'] ?>">
+                    <?= $specialist['surname'] ?> <?= $specialist['name'] ?> <?= $specialist['second_name'] ?>
+                </a>
+            <?php endforeach; ?>
+        <?php else : ?>
+            <?= 'not found'; ?>
+        <?php endif; ?>
+    </div>
+    
+    <div class="modal-footer">
+        <?= Html::button('Назначить', ['class' => 'btn btn blue-outline-btn white-btn add_specialist__btn', 'data-dismiss' => 'modal']) ?>
+        <?= Html::button('Закрыть', ['class' => 'btn red-outline-btn bt-bottom2', 'data-dismiss' => 'modal']) ?>
+    </div>
+
+<?php Modal::end(); ?>    
+
+
