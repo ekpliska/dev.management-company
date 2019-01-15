@@ -2411,10 +2411,13 @@ p.date-start-vote {
     padding: 40px 0px;
     border-bottom: 1px solid #ddd;
 }
+.table-voting-results > tbody > tr > td > h4,
 .questions-text-show > h4 {
     font-size: 19px;
     font-weight: bold;
+    text-align: left;
 }
+.table-voting-results > tbody > tr > td > h4 > i,
 .questions-text-show > h4 > i {
     color: #23dd6f;
     border: 1px solid #23dd6f;

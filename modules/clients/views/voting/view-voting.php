@@ -9,6 +9,7 @@
     use app\models\Answers;
     use app\modules\clients\widgets\AlertsShow;
     use app\models\RegistrationInVoting;
+    use app\modules\clients\widgets\ResultsVote;
 
 /* 
  * Просмотр отдельного голосования
@@ -79,9 +80,12 @@ $this->params['breadcrumbs'][] = $voting['voting_title'];
             <?php endif; ?>
         </div>
 
-<?= \app\modules\clients\widgets\ResultsVote::widget(['voting_id' => $voting['voting_id']]) ?>
-        
         <div class="col-md-9 voting-body_right">
+            
+            <?php if ($is_register['finished'] == RegistrationInVoting::STATUS_FINISH_YES) : // Результаты голсования выводим, если пользователь голосование завершил ?>
+                <?= ResultsVote::widget(['voting_id' => $voting['voting_id']]) ?>
+            <?php endif; ?>
+            
             <?php /* Контент для участников голосования не подтвердивших свое участие */ ?>
             <?php if (empty($is_register) || $is_register['status'] == RegistrationInVoting::STATUS_DISABLED) : ?>
                 <?php foreach ($voting['question'] as $key => $question) : ?>
@@ -91,7 +95,7 @@ $this->params['breadcrumbs'][] = $voting['voting_title'];
                     </div>
                 <?php endforeach; ?>
             
-            <?php else : ?>
+            <?php elseif ($is_register['status'] == RegistrationInVoting::STATUS_ENABLED && $is_register['finished'] == RegistrationInVoting::STATUS_FINISH_NO) : ?>
                 <?php /* Контент для зарегистрировавщихся участников */ ?>
             
                 <div class="questions-text-show-form">
