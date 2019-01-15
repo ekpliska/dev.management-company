@@ -3511,6 +3511,16 @@ span.status-vote-1::before {
 .vote-btn-block button {
     margin: 50px 10px;
 }
+.participant-list {
+    border-top: 1px solid #ddd;
+    padding: 20px 10px;
+    margin: 0 -15px;
+}
+.user-photo {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto;
+}
 /* Конец Голосование, форма создания/редактирования голосования */
 
 /* Таблица на форме создания голосования */
@@ -3534,3 +3544,37 @@ span.status-vote-1::before {
     outline: none;
 }
 /* Конец Таблица на форме создания голосования */
+
+/* Модальное окно, просмотр профиля пользователя в разделе Голосование */
+.profile_info {
+    min-height: 170px;
+    font-size: 12px;
+}
+#view-user-profile .modal-content {
+    width: 700px;
+}
+.profile_info h4 {
+    font-size: 20px;
+    color: #fff;
+    margin: 0;
+    padding-bottom: 20px;
+    font-weight: bold;
+}
+.profile_info > span.last-login {
+    padding-left: 10px;
+    color: #ddd;
+}
+.profile_photo__image {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+}
+.user-info > tbody > tr > td {
+    border: none;
+}
+.user-info > tbody > tr > td > span.title {
+    text-transform: uppercase;
+    padding-right: 20px;
+    font-weight: bold;
+}
+/* Конец Модальное окно, просмотр профиля пользователя в разделе Голосование */

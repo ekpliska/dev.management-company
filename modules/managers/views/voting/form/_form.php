@@ -92,30 +92,48 @@ $action = Yii::$app->controller->action->id;
         </div>
     
         <div class="row form-vote-questions">
-            <div class="col-md-4 housing-lists">
-                <?=
-                    $form->field($model->voting, 'voting_type')
-                        ->radioList($type_voting, 
-                            [
-                                'item' => function($index, $label, $name, $checked, $value) {
-                                    $_checked = $checked == 1 ? 'checked' : '';
-                                    $return = '<label class="input-radio">' . ucwords($label);
-                                    $return .= '<input type="radio" name="' . $name . '" value="' . $value . '" id="type-vote_' . $index . '"' . $_checked . '>';
-                                    $return .= '<span class="checkmark"></span>';
-                                    $return .= '</label>';
+            <div class="col-md-4">
+                <div class="housing-lists">
+                    <?=
+                        $form->field($model->voting, 'voting_type')
+                            ->radioList($type_voting, 
+                                [
+                                    'item' => function($index, $label, $name, $checked, $value) {
+                                        $_checked = $checked == 1 ? 'checked' : '';
+                                        $return = '<label class="input-radio">' . ucwords($label);
+                                        $return .= '<input type="radio" name="' . $name . '" value="' . $value . '" id="type-vote_' . $index . '"' . $_checked . '>';
+                                        $return .= '<span class="checkmark"></span>';
+                                        $return .= '</label>';
 
-                                    return $return;
-                                }
-                            ]
-                        )
-                    ->label(false);
-                    ?>
-                <?= $form->field($model->voting, 'voting_house_id', ['template' => '<div class="field"></i>{label}{input}{error}</div>',])
-                        ->dropDownList($houses_array, [
-                            'id' => 'house-lists',
-                            'class' => 'field-input-select',
-                            'prompt' => 'Выбрать дом из списка...'])
-                        ->label($model->voting->getAttributeLabel('voting_house_id'), ['class' => 'field-input-select_label']) ?>
+                                        return $return;
+                                    }
+                                ]
+                            )
+                        ->label(false);
+                        ?>
+                    <?= $form->field($model->voting, 'voting_house_id', ['template' => '<div class="field"></i>{label}{input}{error}</div>',])
+                            ->dropDownList($houses_array, [
+                                'id' => 'house-lists',
+                                'class' => 'field-input-select',
+                                'prompt' => 'Выбрать дом из списка...'])
+                            ->label($model->voting->getAttributeLabel('voting_house_id'), ['class' => 'field-input-select_label']) ?>
+                </div>
+                
+                <?php /* Блок формирования участников, завершивших голосование */ ?>
+                <?php if (isset($participants) && count($participants) > 0) : ?>
+                <div class="participant-list">
+                    <p><span class="span-count"><?= count($participants) ?></span> Проголосовало</p>
+                        <?php foreach ($participants as $participant) : ?>
+                            <div class="col-md-4 voting__participant_info text-center">
+                                <?php $avatar = $participant['user_photo'] ? $participant['user_photo'] : "images/no-avatar.jpg" ?>
+                                <?= Html::img("@web/{$avatar}", ['alt' => 'user-name', 'class' => 'img-responsive img-circle user-photo']) ?>
+                                <?= Html::a($participant['clients_name'], ['view-profile', 'user_id' => $participant['user_id']], [
+                                        'id' => 'view-profile',
+                                ]) ?>
+                            </div>
+                        <?php endforeach; ?>
+                </div>
+                <?php endif; ?>                        
             </div>
             
             <div class="col-md-8 questions-list">

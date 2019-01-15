@@ -1,10 +1,8 @@
 <?php
 
-    use yii\helpers\Html;
+    use yii\bootstrap\Modal;
     use yii\widgets\Breadcrumbs;
     use app\modules\managers\widgets\AlertsShow;
-    use app\helpers\FormatHelpers;
-    use app\helpers\FormatFullNameUser;
     use app\modules\managers\widgets\ModalWindowsManager;
     
 /* 
@@ -27,10 +25,21 @@ $this->params['breadcrumbs'][] = $model->voting->voting_title;
     <?= AlertsShow::widget() ?>
     
     <?= $this->render('form/_form', [
-        'model' => $model,
-        'type_voting' => $type_voting,
-        'houses_array' => $houses_array,
+            'model' => $model,
+            'type_voting' => $type_voting,
+            'houses_array' => $houses_array,
+            'participants' => $participants,
     ]) ?>
     
 </div>
 <?= ModalWindowsManager::widget(['modal_view' => 'delete_voting']) ?>
+
+<?php
+    /* Модальное окно для загрузки профиля пользователя */
+    Modal::begin([
+        'id' => 'view-user-profile',
+        'header' => 'Профиль пользователя',
+        'closeButton' => false,
+    ]);
+?>
+<?php Modal::end(); ?>

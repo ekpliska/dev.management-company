@@ -793,6 +793,17 @@ $(document).ready(function() {
         $(this).find('.modal__text p').html(messageText);
     });   
     
+    /*
+     * Загрузка профиля пользователя в модальном окне
+     */
+    $('a#view-profile').on('click', function(e){
+        var link = $(this).attr('href');
+        $('#view-user-profile').modal('show');
+        $('#view-user-profile .modal-content .modal-body').load(link);
+        e.preventDefault();
+        return false;        
+    });
+    
     
     // ******************************************************** //
     // ************     Start Block of Estates   ************** //

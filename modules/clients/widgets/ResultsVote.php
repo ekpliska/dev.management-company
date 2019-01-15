@@ -6,9 +6,7 @@
     use app\models\Answers;
 
 /**
- * Description of ResultsVote
- *
- * @author dreamer
+ * Виджет вывода результатов голосования
  */
 class ResultsVote extends Widget {
 

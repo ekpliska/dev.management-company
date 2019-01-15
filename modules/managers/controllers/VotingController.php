@@ -8,7 +8,9 @@
     use app\models\Voting;
     use app\models\Houses;
     use app\helpers\FormatHelpers;
+    use app\models\RegistrationInVoting;
     use app\modules\managers\models\form\VotingForm;
+    use app\modules\managers\models\Clients;
 
 /**
  *  Голосование
@@ -101,6 +103,9 @@ class VotingController extends AppManagersController {
         
         $houses_array = Houses::getAdressHousesList();
         
+        // Получаем информаию о участниках голосования
+        $participants = RegistrationInVoting::getParticipants($voting);
+        
         if (Yii::$app->request->post()) {
             
             // Получаем загружаемую оложку для голосования
@@ -121,6 +126,7 @@ class VotingController extends AppManagersController {
         }
         return $this->render('view', [
             'model' => $model,
+            'participants' => $participants,
             'type_voting' => $type_voting,
             'houses_array' => $houses_array]);
     }
@@ -219,6 +225,20 @@ class VotingController extends AppManagersController {
             
         }
         return ['success' => false];
+        
+    }
+    
+    /*
+     * Загрузка профиля пользователя в модальном окне
+     */
+    public function actionViewProfile($user_id) {
+        
+        $user_info = Clients::getClientInfo($user_id);
+        
+        if (Yii::$app->request->isAjax) {
+            return $this->renderAjax('modal/view-user-profile', [
+                'user_info' => $user_info]);
+        }
         
     }
     
