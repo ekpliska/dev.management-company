@@ -5,6 +5,7 @@
     use yii\widgets\LinkPager;
     use app\helpers\FormatHelpers;
     use app\helpers\FormatFullNameUser;
+    use app\models\RegistrationInVoting;
 
 /* 
  * Вид отрисовки списка всех созданных голосований
@@ -45,7 +46,7 @@
                     <?php /* Определяем количество участников, которые закончили голосование */
                         $count = 0;
                         foreach ($voting['registration'] as $participant) :
-                            if ($participant['finished'] == app\models\RegistrationInVoting::STATUS_FINISH_YES) :
+                            if ($participant['finished'] == RegistrationInVoting::STATUS_FINISH_YES) :
                                 $count++;
                             endif; 
                         endforeach; 

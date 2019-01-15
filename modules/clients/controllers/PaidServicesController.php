@@ -24,7 +24,7 @@ class PaidServicesController extends AppClientsController {
     public function actionIndex() {
         
         
-        $accoint_id = $this->_current_account_id;
+        $account_id = $this->_current_account_id;
         
         // Загружаем модель добавления новой заявки
         $new_order = new PaidServices([
@@ -32,7 +32,7 @@ class PaidServicesController extends AppClientsController {
         ]);
         
         if ($new_order->load(Yii::$app->request->post())) {
-            if ($new_order->addOrder($accoint_id)) {
+            if ($new_order->addOrder($account_id)) {
                 return $this->redirect(['paid-services/order-services']);
             } else {
                 Yii::$app->session->setFlash('error', ['message' => 'При создании заявки произошла ошибка. Обновите страницу и повторите действие заново']);

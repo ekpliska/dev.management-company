@@ -3,6 +3,7 @@
     use yii\grid\GridView;
     use yii\helpers\Html;
     use app\helpers\FormatHelpers;
+    use app\helpers\StatusHelpers;
     use app\helpers\FormatFullNameUser;
 
 /*
@@ -12,91 +13,89 @@
 <div class="grid-view">
     <?= GridView::widget([
         'dataProvider' => $requests,
+        'layout' => '{items}{pager}',
+        'tableOptions' => [
+            'class' => 'table managers-table',
+        ],
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+//            ['class' => 'yii\grid\SerialColumn'],
             [
                 'attribute' => 'number',
-                'header' => 'Номер заявки',
-            ],
-            [
-                'attribute' => 'category',
-                'header' => 'Вид',
-            ],
-            [
-                'attribute' => 'second_name',
-                'header' => 'Адрес',
+                'header' => 'ID',
                 'value' => function ($data) {
-                    return FormatHelpers::formatFullAdress(
-                            $data['town'], 
-                            $data['street'], 
-                            $data['house'], 
-                            $data['porch'], 
-                            $data['floor'], 
-                            $data['flat']);
-                }
-            ],
-            [
-                'attribute' => 'comment',
-                'header' => 'Описание',
-            ],
-            [
-                'attribute' => 'name_d',
-                'header' => 'Диспетчер',
-                'value' => function ($data) {
-                    return FormatHelpers::formatFullUserName($data['surname_d'], $data['name_d'], $data['sname_d']);
+                    return Html::a($data['number'], ['requests/view-request', 'request_number' => $data['number']]);
                 },
-            ],
-            [
-                'attribute' => 'name_s',
-                'header' => 'Специалист',
-                'value' => function ($data) {
-                    return FormatHelpers::formatFullUserName($data['surname_s'], $data['name_s'], $data['sname_s']);
-                },
+                'format' => 'raw',
+                'contentOptions' =>[
+                    'class' => 'managers-table_small',
+                ],
             ],
             [
                 'attribute' => 'date_create',
-                'header' => 'Дата создания',
+                'header' => 'Дата постановки',
                 'value' => function ($date){
                     return FormatHelpers::formatDate($date['date_create']);
                 },
             ],
             [
-                'attribute' => 'date_close',
-                'header' => 'Дата закрытия',
-                'value' => function ($date){
-                    return FormatHelpers::formatDate($date['date_close']);
+                'attribute' => 'Клиент',
+                'header' => 'Клиент',
+                'value' => function ($data) {
+                    return $data['clients_surname'] . ' ' . $data['clients_second_name'] . ' ' . $data['clients_name'];
+                },
+                'contentOptions' => [
+                    'class' => 'managers-table_middle managers-table_left',
+                ],
+            ],
+            [
+                'attribute' => 'name_d',
+                'header' => 'Диспетчер',
+                'contentOptions' => [
+                    'class' => 'managers-table_middle',
+                ],
+                'value' => function ($data) {
+                    return FormatFullNameUser::fullNameEmployer($data['employee_id_d'], true, false);
+                },
+                'format' => 'raw',
+            ],
+            [
+                'attribute' => 'name_s',
+                'header' => 'Специалист',
+                'contentOptions' => [
+                    'class' => 'managers-table_middle',
+                ],
+                'value' => function ($data) {
+                    return FormatFullNameUser::fullNameEmployer($data['employee_id_s'], true, false);
                 },
             ],
             [
                 'attribute' => 'status',
                 'header' => 'Статус',
                 'value' => function ($data) {
-                    return FormatHelpers::statusName($data['status']);
+                    return StatusHelpers::requestStatus($data['status'], $data->requests_id);
+                },
+                'format' => 'raw',
+                'contentOptions' => [
+                    'class' => 'managers-table_middle',
+                ],
+            ],
+            [
+                'attribute' => 'status',
+                'header' => 'Рейтинг',
+                'value' => function ($data) {
+                    return '#TODO';
                 },
             ],
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{view-request} {delete-request}',
+                'template' => '{delete-request}',
                 'buttons' => [
-                    'view-request' => function ($url, $data) {                        
-                        return 
-                            Html::a('Просмотр', 
-                                    [
-                                        'requests/view-request',
-                                        'request_number' => $data['number'],
-                                    ], 
-                                    [
-                                        'data-pjax' => false,
-                                        'class' => 'btn btn-info btn-sm',
-                                    ]
-                            );
-                    },
                     'delete-request' => function ($url, $data) {
                         return 
-                            Html::button('Удалить', [
+                            Html::button('<i class="glyphicon glyphicon-trash"></i>', [
                                 'data-pjax' => false,
-                                'class' => 'btn btn-danger btn-sm delete_dispatcher',
-                                'data-target' => '#delete_disp_manager',
+                                'class' => 'btn btn-delete-record__table',
+                                'data-target' => '#',
                                 'data-toggle' => 'modal',
                             ]);
                     },

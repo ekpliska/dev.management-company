@@ -50,26 +50,26 @@ class FormatFullNameUser {
      *      true - Фамилия Имя Отчество
      *      false - Фамилия И. О.
      */
-    public static function fullNameEmployer($employer_id, $disp = false, $full = false) {
+    public static function fullNameEmployer($employee_id, $disp = false, $full = false) {
         
-        $employer = Employers::find()
-                ->where(['employee_id' => $employer_id])
+        $employee = Employees::find()
+                ->where(['employee_id' => $employee_id])
                 ->asArray()
                 ->one();
         
-        $surname = $full ? $employer['employee_surname'] . ' ' : $employer['employee_surname'] . ' ';
-        $name = $full ? $employer['employee_name'] . ' ' : mb_substr($employer['employee_name'], 0, 1, 'UTF-8') . '. ';
-        $second_name = $full ? $employer['employee_second_name'] . ' ' : mb_substr($employer['employee_second_name'], 0, 1, 'UTF-8') . '.';
+        $surname = $full ? $employee['employee_surname'] . ' ' : $employee['employee_surname'] . ' ';
+        $name = $full ? $employee['employee_name'] . ' ' : mb_substr($employee['employee_name'], 0, 1, 'UTF-8') . '. ';
+        $second_name = $full ? $employee['employee_second_name'] . ' ' : mb_substr($employee['employee_second_name'], 0, 1, 'UTF-8') . '.';
         
         $full_name = $surname . $name . $second_name;
         
         if ($disp == true) {
-            $link = ['employers/edit-dispatcher', 'dispatcher_id' => $employer['employee_id']];
+            $link = ['employee-form/employee-profile', 'type' => 'dispatcher', 'employee_id' => $employee['employee_id']];
         } else {
-            $link = ['employers/edit-specialist', 'specialist_id' => $employer['employee_id']];
+            $link = ['employee-form/employee-profile', 'type' => 'specialist', 'employee_id' => $employee['employee_id']];
         }
         
-        return $employer ?
+        return $employee ?
             Html::a($full_name, $link, ['target' => '_blank']) : 'Не назначен';
     }
     

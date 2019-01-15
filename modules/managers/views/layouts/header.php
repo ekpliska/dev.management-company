@@ -28,5 +28,6 @@
     </div>
     <?= SubMenu::widget(['view_name' => 'users']) ?>
     <?= SubMenu::widget(['view_name' => 'voting']) ?>
+    <?= SubMenu::widget(['view_name' => 'requests']) ?>
     <?= NavManager::widget() ?>
 </nav>

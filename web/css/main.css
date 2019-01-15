@@ -3536,6 +3536,9 @@ span.status-vote-1::before {
 #voting-questions > tbody > tr > td.delete-question {
     width: 5%;
 }
+.btn-delete-record__table,
+.btn-delete-record__table:hover,
+.btn-delete-record__table:focus,
 .btn-delete-question,
 .btn-delete-question:hover,
 .btn-delete-question:focus {

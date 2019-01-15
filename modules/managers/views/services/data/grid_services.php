@@ -8,7 +8,6 @@
  * Таблица
  * Услуги
  */
-
 ?>
 <div class="grid-view">
     <?= GridView::widget([
