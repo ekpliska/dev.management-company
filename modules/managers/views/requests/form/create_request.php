@@ -1,5 +1,6 @@
 <?php
 
+    use yii\bootstrap\Modal;
     use yii\widgets\ActiveForm;
     use yii\widgets\MaskedInput;
     use yii\helpers\Html;
@@ -9,55 +10,58 @@
  */
 
 ?>
-<div class="modal fade" id="create-new-requests" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <div class="modal-header">
-                <h4 class="modal-title">Новая заявка</h4>
-            </div>
-            <div class="modal-body">
-                <div class="modal__text">
-                    <?php
-                        $form = ActiveForm::begin([
-                            'id' => 'create-new-request',
-                            'action' => ['create-request'],
-                            'enableAjaxValidation' => true,
-                            'validationUrl' => ['validation-form', 'form' => 'new-request'],
-                        ])
-                    ?>
 
-                    <?= $form->field($model, 'type_request')
-                            ->dropDownList($type_request, [
-                                'prompt' => 'Выбрать из списка...',
-                                'id' => 'category_service'])
-                            ->label() ?>
+<?php
+    Modal::begin([
+        'id' => 'create-new-requests',
+        'header' => 'Новая заявка',
+        'closeButton' => [
+            'class' => 'close modal-close-btn req',
+        ],
+        'clientOptions' => [
+            'backdrop' => 'static',
+            'keyboard' => false,
+        ],        
+    ]);
+?>
 
-                    <?= $form->field($model, 'phone')
-                            ->widget(MaskedInput::className(), [
-                                'mask' => '+7 (999) 999-99-99'])
-                            ->input('text', [
-                                'placeHolder' => $model->getAttributeLabel('phone'),
-                                'class' => 'form-control mobile_phone'])
-                            ->label() ?>
-                    
-                    <?= $form->field($model, 'flat')
-                            ->dropDownList($flat, [
-                                'class' => 'form-control house',
-                                'prompt' => 'Выбрать из списка...'])
-                            ->label() ?>
-                    
-                    <?= $form->field($model, 'description')->textarea()->label() ?>
+<?php
+    $form = ActiveForm::begin([
+        'id' => 'create-new-request',
+        'action' => ['create-request'],
+        'enableAjaxValidation' => true,
+        'validationUrl' => ['validation-form', 'form' => 'new-request'],
+    ])
+?>
 
-                    <?= Html::submitButton('Создать', ['class' => 'btn btn-primary']) ?>
-                    <?= Html::button('Отмена', ['class' => 'btn btn-default', 'data-dismiss' => 'modal']) ?>
+    <?= $form->field($model, 'type_request', [
+                'template' => '<span class="paid-service-dropdown-arrow"><div class="field-modal-select">{label}{input}{error}</div></span>'])
+            ->dropDownList($type_requests, [
+                'prompt' => 'Выберите вид заявки из списка...'])
+            ->label(false) 
+    ?>
 
-                    <?php ActiveForm::end() ?>
-                    
-                </div>
-            </div>
-        </div>
+    <?= $form->field($model, 'phone', ['template' => '<div class="field-modal">{label}{input}{error}</div>'])
+            ->input('text', ['class' => 'field-input-modal cell-phone'])
+            ->label($model->getAttributeLabel('phone'), ['class' => 'field-label-modal']) ?>
+
+    <?= $form->field($model, 'flat', [
+                'template' => '<span class="paid-service-dropdown-arrow"><div class="field-modal-select">{label}{input}{error}</div></span>'])
+            ->dropDownList($flat, [
+                'prompt' => 'Квартира...'])
+            ->label(false) 
+    ?>
+
+    <?= $form->field($model, 'description', [
+                'template' => '<div class="field-modal-textarea">{label}<span id="label-count"></span><span id="label-count-left"></span>{input}{error}</div>'])
+            ->textarea(['rows' => 10, 'class' => 'field-input-textarea-modal comment'])
+            ->label($model->getAttributeLabel('description'), ['class' => 'field-label-modal']) ?>
+            
+    <div class="modal-footer">
+        <?= Html::submitButton('Отправить', ['class' => 'btn blue-outline-btn white-btn']) ?>
+        <?= Html::submitButton('Отмена', ['class' => 'btn red-outline-btn bt-bottom2 request__btn_close', 'data-dismiss' => 'modal']) ?>
     </div>
-</div>
+
+<?php ActiveForm::end() ?>
+
+<?php Modal::end(); ?>

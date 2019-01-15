@@ -68,7 +68,7 @@
         </div>
 
         <div class="modal-footer">
-            <?= Html::submitButton('Отправить', ['class' => 'btn blue-outline-btn white-btn mx-auto']) ?>
+            <?= Html::submitButton('Отправить', ['class' => 'btn blue-outline-btn white-btn']) ?>
             <?= Html::submitButton('Отмена', ['class' => 'btn red-outline-btn bt-bottom2 request__btn_close', 'data-dismiss' => 'modal']) ?>
         </div>    
     

@@ -6,6 +6,7 @@
     use app\models\PersonalAccount;
     use app\models\Clients;
     use app\models\Rents;
+    use app\models\User;
     use yii\base\Model;
     use app\models\StatusRequest;
 
@@ -45,18 +46,15 @@ class RequestForm extends Model {
      */
     public function existenceClient() {
         
-        $client = Clients::find()
-                ->andWhere(['clients_mobile' => $this->phone])
-                ->orWhere(['clients_phone' => $this->phone])
-                ->one();
-
-        $rent = Rents::find()
-                ->andwhere(['rents_mobile' => $this->phone])
-                ->orWhere(['rents_mobile_more' => $this->phone])
+        $user = User::find()
+                ->andWhere(['user_mobile' => $this->phone])
                 ->one();
         
+        $client = $user['user_client_id'];
+        $rent = $user['user_rent_id'];
+        
         if ($client == null && $rent == null) {
-            $errorMsg = 'Собственник или арендатор по указанному номеру мобильного телефона на найден. Укажите существующий номер телефона';
+            $errorMsg = 'Указанный номер мобтльного телефона в системе не зарегистрирован';
             $this->addError('phone', $errorMsg);
         }
 
@@ -107,7 +105,7 @@ class RequestForm extends Model {
      */
     public function findClientPhone($phone) {
         
-        $client = \app\models\Clients::find()
+        $user = \app\models\Clients::find()
                 ->where(['LIKE', new \yii\db\Expression('REPLACE(clients_mobile, " ", "")'), $phone])
                 ->orWhere(['LIKE', new \yii\db\Expression('REPLACE(clients_phone, " ", "")'), $phone])
                 ->asArray()

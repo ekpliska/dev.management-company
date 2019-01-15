@@ -26,32 +26,16 @@ $this->params['breadcrumbs'][] = 'Заявки';
         ]) ?>
     </div>
     
-</div>
+    <?= Html::button('', [
+            'class' => 'create-request-btn',
+            'data-target' => '#create-new-requests',
+            'data-toggle' => 'modal',
+        ]) ?>
 
-<?php /*
-<div class="managers-default-index">
-    <h1><?= $this->title ?></h1>
-    <hr />
-    
-    <?= AlertsShow::widget() ?>
-    
-    <?= Html::button('Заявка (+)', [
-        'class' => 'btn btn-success btn-sm create-request',
-        'data-target' => '#create-new-requests',
-        'data-toggle' => 'modal']) ?>
-    
-    <hr />
-    
-    <?= $this->render('data/grid_requests', [
-        'requests' => $requests
-    ]) ?>
+    <?= $this->render('form/create_request', [
+            'model' => $model, 
+            'type_requests' => $type_requests,
+            'flat' => $flat,
+        ]) ?>
     
 </div>
-
-<?= $this->render('form/create_request', [
-        'model' => $model,
-        'type_request' => $type_request,
-        'flat' => $flat,]) ?>
- * 
- * 
- */ ?>

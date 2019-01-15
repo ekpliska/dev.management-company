@@ -42,9 +42,15 @@ class RequestsController extends AppManagersController {
             ],
         ]);
         
+        // Загружаем виды заявок
+        $type_requests = TypeRequests::getTypeNameArray();
+        
+        // Загружаем модель содания заявки
+        $model = new RequestForm();
+        
         return $this->render('requests', [
             'model' => $model,
-            'type_request' => $type_request,
+            'type_requests' => $type_requests,
             'flat' => $flat,
             'requests' => $requests,
         ]);

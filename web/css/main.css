@@ -1236,6 +1236,7 @@ p.right {
     background-image: url(/images/clients/new_record.svg);
     background-repeat: no-repeat;
     background-position: 0px 5px;
+    background-color: transparent;
     width: 70px;
     height: 70px;
     position: fixed;
@@ -1614,6 +1615,7 @@ p.right {
     line-height: 18px;
     padding-top: 8px;
     text-transform: uppercase;
+    cursor: default;
 }
 .req-badge-new {
     border: 2px solid #598eff;
