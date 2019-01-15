@@ -3077,13 +3077,13 @@ a.sub-menu-item {
     padding: 15px 0;
 }
 .managers-table > tbody > tr > td.status-not-found,
-.managers-table > tbody > tr > td > div.empty {
+tbody > tr > td > div.empty {
     vertical-align: middle;
     text-align: left;
     padding: 15px;
 }
 .managers-table > tbody > tr > td.status-not-found::before,
-.managers-table > tbody > tr > td > div.empty::before {
+tbody > tr > td > div.empty::before {
     color: #2d18b4;
     content: '\02139';
     padding: 7px 10px;
