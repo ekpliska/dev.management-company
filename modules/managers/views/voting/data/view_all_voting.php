@@ -42,8 +42,16 @@
                     <?= FormatHelpers::formatDate($voting['voting_date_end'], true, 1, false) ?>
                 </div>
                 <div class="col-md-3 col-xs-6">
+                    <?php /* Определяем количество участников, которые закончили голосование */
+                        $count = 0;
+                        foreach ($voting['registration'] as $participant) :
+                            if ($participant['finished'] == app\models\RegistrationInVoting::STATUS_FINISH_YES) :
+                                $count++;
+                            endif; 
+                        endforeach; 
+                    ?>
                     <span class="title">Проголосовало: </span>
-                    #TODO
+                    <span class="span-count"><?= $count ?></span>
                 </div>
             </div>
             <div class="col-md-12 vote-card__content_text">

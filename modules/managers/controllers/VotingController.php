@@ -23,6 +23,7 @@ class VotingController extends AppManagersController {
     public function actionIndex() {
         // Получаем все доступные голосования
         $query = Voting::findAllVoting();
+        
         $count_voting = clone $query;
         $pages = new Pagination([
             'totalCount' => $count_voting->count(),
@@ -33,7 +34,7 @@ class VotingController extends AppManagersController {
         $view_all_voting = $query->offset($pages->offset)
                 ->limit($pages->limit)
                 ->all();
-
+        
         return $this->render('index', [
             'view_all_voting' => $view_all_voting,
             'pages' => $pages,
