@@ -109,7 +109,7 @@ class PersonalAccount extends ActiveRecord
      */
     public static function findByFlatId($flat_id) {
         return self::find()
-                ->where(['personal_house_id' => $flat_id])
+                ->where(['personal_flat_id' => $flat_id])
                 ->asArray()
                 ->one();
     }

@@ -112,26 +112,27 @@ class AppManagersController extends Controller {
         
     }
 
-
+    
     public function actionShowHouses($phone) {
         
         $model = new RequestForm();
         $client_id = $model->findClientPhone($phone);
         
-        $house_list = Houses::find()
-                ->andWhere(['houses_client_id' => $client_id])
+        $house_list = \app\models\PersonalAccount::find()
+                ->select(['account_id', 'houses_gis_adress', 'houses_number', 'flats_number'])
+                ->joinWith(['flat', 'flat.house'])
+                ->andWhere(['personal_clients_id' => $client_id])
+                ->orWhere(['personal_rent_id' => $client_id])
                 ->asArray()
                 ->all();
-
+        
         if (!empty($client_id)) {
             foreach ($house_list as $house) {
-                $full_adress = FormatHelpers::formatFullAdress(
-                        $house['houses_town'], 
-                        $house['houses_street'], 
-                        $house['houses_number_house'], 
-                        $house['houses_floor'], 
-                        $house['houses_flat']) ;
-                echo '<option value="' . $house['houses_id'] . '">' . $full_adress . '</option>';
+                $full_adress = 
+                        $house['houses_gis_adress'] . ', д. ' .
+                        $house['houses_number'] . ', кв. ' .
+                        $house['flats_number'];
+                echo '<option value="' . $house['account_id'] . '">' . $full_adress . '</option>';
             }
         } else {
             echo '<option>Адрес не найден</option>';

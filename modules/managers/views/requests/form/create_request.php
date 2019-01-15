@@ -42,12 +42,13 @@
     ?>
 
     <?= $form->field($model, 'phone', ['template' => '<div class="field-modal">{label}{input}{error}</div>'])
-            ->input('text', ['class' => 'field-input-modal cell-phone'])
+            ->input('text', ['class' => 'field-input-modal cell-phone mobile_phone'])
             ->label($model->getAttributeLabel('phone'), ['class' => 'field-label-modal']) ?>
 
     <?= $form->field($model, 'flat', [
                 'template' => '<span class="paid-service-dropdown-arrow"><div class="field-modal-select">{label}{input}{error}</div></span>'])
             ->dropDownList($flat, [
+                'id' => 'house',
                 'prompt' => 'Квартира...'])
             ->label(false) 
     ?>

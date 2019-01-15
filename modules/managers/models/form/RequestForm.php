@@ -27,11 +27,7 @@ class RequestForm extends Model {
         return [
             [['type_request', 'phone', 'description', 'flat'], 'required'],
             
-            ['description', 'string', 'min' => 10, 'max' => 255],
-            ['description', 'match',
-                'pattern' => '/^[А-Яа-яЁёA-Za-z0-9\_\-\@\.]+$/iu',
-                'message' => 'Поле "{attribute}" может содержать только буквы русского и английского алфавита, цифры, знаки "-", "_"',
-            ],            
+            ['description', 'string', 'min' => 10, 'max' => 250],
             
             ['phone', 'existenceClient'],
             ['phone',
@@ -65,7 +61,7 @@ class RequestForm extends Model {
      */
     public function save() {
         
-        $account_id = PersonalAccount::findByFlatId($this->flat);
+//        $account_id = PersonalAccount::findByFlatId($this->flat);
         
         $transaction = Yii::$app->db->beginTransaction();
         
@@ -73,21 +69,23 @@ class RequestForm extends Model {
             $request = new Requests();
 
             /* Формирование идентификатора для заявки:
-             *      последние 7 символов лицевого счета - 
              *      последние 6 символов даты в unix - 
              *      тип заявки
              */
+        
             $date = new \DateTime();
             $int = $date->getTimestamp();
 
-            $numder = substr($account_id['account_number'], 4) . '-' . substr($int, 5) . '-' . str_pad($this->type_request, 2, 0, STR_PAD_LEFT);
+            $request_numder = substr($int, 5) . '-' . str_pad($this->requests_type_id, 2, 0, STR_PAD_LEFT);      
+
+            $numder = $request_numder;
             $request->requests_ident = $numder;
             $request->requests_type_id = $this->type_request;
             $request->requests_phone = $this->phone;
             $request->requests_comment = $this->description;
             $request->status = StatusRequest::STATUS_NEW;
             $request->is_accept = 1;
-            $request->requests_account_id = $account_id['account_id'];
+            $request->requests_account_id = $this->flat;
             
             $request->save();
             
@@ -105,26 +103,14 @@ class RequestForm extends Model {
      */
     public function findClientPhone($phone) {
         
-        $user = \app\models\Clients::find()
-                ->where(['LIKE', new \yii\db\Expression('REPLACE(clients_mobile, " ", "")'), $phone])
-                ->orWhere(['LIKE', new \yii\db\Expression('REPLACE(clients_phone, " ", "")'), $phone])
-                ->asArray()
-                ->one();
-
-        $rent = \app\models\Rents::find()
-                ->where(['LIKE', new \yii\db\Expression('REPLACE(rents_mobile, " ", "")'), $phone])
-                ->orWhere(['LIKE', new \yii\db\Expression('REPLACE(rents_mobile_more, " ", "")'), $phone])
+        $user = User::find()
+                ->where(['LIKE', new \yii\db\Expression('REPLACE(user_mobile, " ", "")'), $phone])
                 ->asArray()
                 ->one();
         
-        if ($client == null && $rent == null) {
-            return false;
-        } elseif ($client != null && $rent == null) {
-            return ['client_id' => $client['clients_id']];
-        } elseif ($client == null && $rent != null) {
-            return ['client_id' => $rent['rents_clients_id']];
-        }
-                
+        $client_id = $user['user_client_id'] ? $user['user_client_id'] : $user['user_rent_id'];
+        return $client_id;
+        
     }
     
     public function attributeLabels() {
