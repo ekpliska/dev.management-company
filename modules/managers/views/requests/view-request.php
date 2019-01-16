@@ -72,7 +72,14 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
                         <div class="client_info-image">
                             <span class="glyphicon glyphicon-home"></span>
                         </div>
-                        <span class="client_info-text">adress</span>
+                        <span class="client_info-text">
+                            <?= FormatHelpers::formatFullAdress(
+                                    $request['houses_gis_adress'], 
+                                    $request['houses_number'], 
+                                    $request['flats_porch'], 
+                                    $request['flats_floor'], 
+                                    $request['flats_number']) ?>
+                        </span>
 
                     </div>
                     <div class="col-lg-6 col-sm-6 col-md-6 text-left">
@@ -82,10 +89,42 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
                         <span class="client_info-text"><?= $request['requests_phone'] ?></span>
                     </div>
                 </div>
-
-                <div class="request-body-rate">
-                    555
-                </div>                
+                
+                <div class="requests-view__setting">
+                    <table class="table table-voting-results">
+                        <tr>
+                            <td id="dispatcher-name">
+                                <?= FormatFullNameUser::fullNameEmployer($request['requests_dispatcher_id'], true, true) ?>
+                            </td>
+                            <td id="specialist-name">
+                                <?= FormatFullNameUser::fullNameEmployer($request['requests_specialist_id'], false, true) ?>
+                            </td>
+                            <td rowspan="2">
+                                <?= Html::button('Отклонить', ['class' => 'btn btn delete-record-btn reject-request']) ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <?= Html::button('<i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Назначить диспетчера', [
+                                        'class' => 'btn blue-border-btn btn-dispatcher',
+                                        'data-type-request' => 'request',
+                                        'data-employee' => $request['requests_dispatcher_id'],
+                                        'data-target' => '#add-dispatcher-modal',
+                                        'data-toggle' => 'modal']) ?>
+                            </td>
+                            <td>
+                                <?= Html::button('<i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Назначить специалиста', [
+                                        'class' => 'btn blue-border-btn',
+                                        'data-type-request' => 'request',
+                                        'data-employee' => $request['requests_specialist_id'],
+                                        'data-target' => '#add-specialist-modal',
+                                        'data-toggle' => 'modal']) ?>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                
+                
             </div>
         </div>
         <div class="col-md-5 col-sm-6 col-xs-12">
@@ -210,6 +249,8 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
     <div class="clearfix"></div>
     <?= AddEmployee::widget() */ ?>
 </div>
+
+<?= AddEmployee::widget() ?>
 
 <?php
 $grade = $request['requests_grade'] ? $request['requests_grade'] : 0; 

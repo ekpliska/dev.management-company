@@ -64,7 +64,7 @@ class FormatFullNameUser {
         }
         
         return $employee ?
-            Html::a($full_name, $link, ['target' => '_blank']) : 'Не назначен';
+            Html::a($full_name, $link, ['target' => '_blank', 'class' => 'employee-profile']) : '<span>(Не назначен)</span>';
     }
     
     /*

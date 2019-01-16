@@ -403,6 +403,28 @@ a, a:hover, a:active {
 }
 /* Конец Кпока удаление записи на странице */
 
+/* Кнопка назначить специалиста */
+.blue-border-btn {
+    height: 56px;
+    width: 250px;
+    border-radius: 12px;
+    border: 2px solid #2d18b4;
+    background-color: #fff;
+    color: #2d18b4;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 0.9px;
+    line-height: 18px;
+    text-align: center;
+    text-transform: uppercase;
+}
+.blue-border-btn:hover {
+    background-color: #2d18b4;
+    box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
+    color: #fff;
+}
+/* Конец Кнопка назначить специалиста */
+
 /* Кнопка, регистрация переход на следующий шаг */
 .blue-circle-btn {
     background-image: url(/images/clients/arrow_right.png);
@@ -1354,8 +1376,14 @@ p.right {
 }
 .table-voting-results > tbody > tr > td {
     text-align: center;
-    vertical-align: top;
+    vertical-align: bottom;
     border-top: none; 
+}
+.table-voting-results > tbody > tr > td#dispatcher-name > span,
+.table-voting-results > tbody > tr > td#specialist-name > span {
+    color: #717171;
+    font-style: italic;
+    font-size: 12px;
 }
 .table-voting-results > tbody > tr > td p.title {
     font-weight: bold;
@@ -1439,13 +1467,11 @@ p.right {
     padding: 10px 0px 0px 15px;    
 }
 .requests-view_body h4 {
-    font-family: "Mplus 1p Medium";
     font-size: 18px;
     letter-spacing: 0.32px;
 }
 .date_requests {
     color: #2D18B4;
-    font-family: "Mplus 1p Medium";
     font-size: 12px;
     letter-spacing: 0.29px;
 }
@@ -3681,3 +3707,16 @@ span.status-vote-1::before {
     margin-left: 10px;
 }
 /* Конец Блок переключения статуса заявок */
+
+/* Заявка, просмотр отдельной заявки */
+.requests-view__setting {
+    padding: 20px 0;
+}
+a.employee-profile {
+    color: #717171;
+    font-size: 14px;    
+}
+a.employee-profile:hover {
+    color: #3e3e3e;
+}
+/* Конец Заявка, просмотр отдельной заявки */
