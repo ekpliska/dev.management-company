@@ -318,4 +318,11 @@ class RequestsController extends AppManagersController {
         
     }
     
+    /*
+     * Форма редактирования заявок
+     */
+    public function actionEditRequest($request_id) {
+        
+    }
+    
 }
