@@ -405,15 +405,17 @@ $(document).ready(function() {
             },
             success: function(response) {
                 if (response.status) {
-                    console.log(response.status);
                     $('.dropdown-menu').find('.disabled').removeClass('disabled');
                     $('#value-btn').html(linkValue + '<span class="caret"></span>');
                     $('.btn-group_status-request').attr('id', 'status-value-' + statusId);
+                    $('#value-btn').removeClass('add-border-' + $('#value-btn').data('status'));
+                    $('#value-btn').data('status', statusId);
+                    $('#value-btn').addClass('add-border-' + statusId);
                     liChoosing.addClass('disabled');
                     if (statusId === 4) {
-                        $('.btn:not(.dropdown-toggle)').attr('disabled', true);
+                        $('.btn:not(.btn-choose-status)').attr('disabled', true);
                     } else {
-                        $('.btn:not(.dropdown-toggle)').attr('disabled', false);
+                        $('.btn:not(.btn-choose-status)').attr('disabled', false);
                     }
                 }
             },
