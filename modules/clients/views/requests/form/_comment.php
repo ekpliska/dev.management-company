@@ -21,7 +21,7 @@
                     </div>
                     <div class="col-sm-8 chat-txt-block">
                         <p class="chat-name">
-                            <?= $comment['user']['client']->clients_name ? $comment['user']['client']->clients_name : $comment['user']['employer']->employers_name ?>
+                            <?= $comment['user']['client']->clients_name ? $comment['user']['client']->clients_name : $comment['user']['employee']->employee_name ?>
                         </p>
                         <?= $comment->comments_text ?>
                     </div>

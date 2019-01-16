@@ -404,7 +404,8 @@ a, a:hover, a:active {
 /* Конец Кпока удаление записи на странице */
 
 /* Кнопка назначить специалиста */
-.blue-border-btn {
+.blue-border-btn,
+.blue-border-btn:focus {
     height: 56px;
     width: 250px;
     border-radius: 12px;
@@ -1502,7 +1503,9 @@ p.right {
     text-align: center;
     margin: 30px;
 }
-.requests-view_chat {}
+.requests-view_chat {
+    margin: 0 -15px 0 0px;
+}
 
 .row-flex {
   display: flex;

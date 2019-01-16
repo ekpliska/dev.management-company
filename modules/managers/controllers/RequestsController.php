@@ -109,7 +109,7 @@ class RequestsController extends AppManagersController {
             }
         }
                 
-        $comments_find = CommentsToRequest::getCommentByRequest($request['requests_id']);
+        $comments_find = CommentsToRequest::findCommentsById($request['requests_id']);
         
         // Получаем прикрепленные к заявке файлы
         $images = Image::find()->andWhere(['itemId' => $request['requests_id']])->all();

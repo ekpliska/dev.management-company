@@ -9,68 +9,75 @@
 /* 
  * Комментарии к заявке
  */
-
+//echo '<pre>';
+//var_dump($comments_find);
+//die();
 ?>
 
 <?php Pjax::begin(['id' => 'comments']) ?>
-<div class="comments">
-    <?php if (isset($comments_find)) : ?>
-        <?php foreach ($comments_find as $comment) : ?>
-    
-            <span class="label label-default">
-                <?= FormatHelpers::formatDateWithMonth($comment['date'])['date'] ?>
-            </span>
-            <br />
+    <div class="comments">
+        <?php if (isset($comments_find)) : ?>
+            <?php foreach ($comments_find as $key => $comment) : ?>
+                <div class="chat-badge-date">
+                        <?= FormatHelpers::formatDateChat($prev_date, $comment->created_at)  ?>            
+                </div>
+                <div class="row">
+                    <div class="col-sm-1 chat_photo">
+                        <?= Html::img($comment['user']->photo, ['class' => 'request-chat-icon']) ?>
+                    </div>
+                    <div class="col-sm-8 chat-txt-block">
+                        <p class="chat-name">
+                            <?= $comment['user']['client']->clients_name ? $comment['user']['client']->clients_name : $comment['user']['employee']->employee_name ?>
+                        </p>
+                        <?= $comment->comments_text ?>
+                    </div>
+                    <div class="col-sm-2 chat_time">
+                        <?= FormatHelpers::formatDate($comment->created_at, true, 0, true) ?>
+                    </div>
+                </div>
+        
+                <?php $prev_date = $comment->created_at; ?>
+            <?php endforeach; ?>
+        <?php endif; ?>
 
-            <div class="col-8 col-sm-12">
-                <strong> #USER ID <?= $comment['user'] ?></strong>
-                <?= FormatHelpers::formatDateWithMonth($comment['date'])['time'] ?>
-            </div>
-            <div class="col-8 col-sm-2">
-                <?php if ($comment['photo']) : ?>
-                    <?= Html::img($comment['photo'], ['style' => 'width: 50px;']) ?>
-                <?php else: ?>
-                    <?= Html::img('@web/images/no-avatar.jpg', ['style' => 'width: 50px;']) ?>                            
-                <?php endif; ?>
-            </div>
+    </div>
+<?php Pjax::end() ?>  
 
-            <div class="col-8 col-sm-10" style="background: #337ab7; padding: 5px; color: #fff; border-radius: 5px; position: relative; top: 5px;">
-                <?= $comment['text'] ?>
-            </div>
-            <div class="clearfix"></div>
-            <hr />
-        <?php endforeach; ?>
-    <?php endif; ?>
-</div>
-<?php Pjax::end() ?>
+<?php Pjax::begin(['id' => 'new_note']) ?>
+    <div class="chat-msg text-right">
 
+        <?php
+            $form = ActiveForm::begin([
+                'id' => 'add-comment',
+                'validateOnSubmit' => true,
+                'validateOnChange' => false,
+                'validateOnBlur' => false,
+                'fieldConfig' => [
+                    'template' => '{input}',
+                ],
+                'options' => [
+                    'data-pjax' => true,
+                ],
+            ]);
+        ?>
+        <?= $form->field($model, 'comments_text', [
+                'template' => '<span id="label-count"></span><span id="label-count-left"></span>{input}'])
+                ->textarea([
+                    'placeHolder' => $model->getAttributeLabel('comments_text'), 
+                    'rows' => 7])
+                ->label(false) ?>    
 
-<?php Pjax::begin(['id' => 'new_comment']) ?>
-    <?php
-        $form = ActiveForm::begin([
-            'id' => 'add-comment',
-            'options' => [
-                'data-pjax' => true,
-            ],
-        ]);
-    ?>
-                    
-    <?= $form->field($model, 'comments_text')
-            ->textarea([
-                'id' => 'comments-text',
-                'placeHolder' => $model->getAttributeLabel('comments_text'), 
-                'rows' => 6])
-            ->label(false) ?>
-                
-    <?= Html::submitButton('Отправить', ['class' => 'btn btn-success btn__add_comment']) ?>
+        <?= Html::submitButton('Отправить <i class="glyphicon glyphicon-arrow-right"></i>', ['class' => 'chat-btn']) ?>
 
-    <?php ActiveForm::end() ?>
-<?php Pjax::end(); ?>
+        <?php ActiveForm::end(); ?>
+
+    </div>
+<?php Pjax::end() ?>  
 
 <?php
     $this->registerJs('
         $("document").ready(function(){
-            $("#new_comment").on("pjax:end", function() {
+            $("#new_note").on("pjax:end", function() {
                 $.pjax.reload({container:"#comments"});
             });
         });
