@@ -30,6 +30,7 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
     <h1 class="page-header requests-view_title">
         <i class="glyphicon glyphicon-ok <?= $request_info['is_accept'] ? 'check' : 'uncheck' ?>"></i>&nbsp;&nbsp;Заявка принята
     </h1>
+    
     <div class="row row-flex">
         <div class="col-md-7 col-sm-6 col-xs-12 requests-border">
             <div class="content requests-view_body">
@@ -47,6 +48,7 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
                 <div class="requests__status-block">
                     <span class="badge request-ident">
                         <?= "ID{$request['requests_ident']}" ?>
+                        <?= $request['status'] ?>
                     </span>
                     <?= SwitchStatusRequest::widget([
                             'view_name' => 'request',

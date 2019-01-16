@@ -254,7 +254,7 @@ class Requests extends ActiveRecord
             $this->requests_grade = null;
         }
         
-        return $this->save() ? true : false;
+        return $this->save(false) ? true : false;
         
     }
     

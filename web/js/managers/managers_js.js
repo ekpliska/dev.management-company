@@ -404,6 +404,7 @@ $(document).ready(function() {
                 requestId: requestId,
             },
             success: function(response) {
+                console.log(response.status);
                 if (response.status) {
                     $('.dropdown-menu').find('.disabled').removeClass('disabled');
                     $('#value-btn').html(linkValue + '<span class="caret"></span>');

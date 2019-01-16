@@ -11,7 +11,7 @@
 <div class="btn-group btn-group_status-request" id="status-value-<?= $status ?>">
     <div class="btn-group">
         <button id="value-btn" type="button" class="btn btn-choose-status dropdown-toggle add-border-<?= $status ?>" data-status="<?= $status ?>" data-toggle="dropdown">
-            <?= FormatHelpers::statusName($status) ?>
+            <?= FormatHelpers::statusName($status) ?> 
             <span class="caret"></span>
         </button>
         <ul class="dropdown-menu dropdown-status" role="menu">

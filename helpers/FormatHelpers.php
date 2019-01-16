@@ -168,7 +168,7 @@ class FormatHelpers {
      */
     public static function statusName($status) {
         
-        return ArrayHelper::getValue(StatusRequest::getStatusNameArray(), $status);
+        return ArrayHelper::getValue(StatusRequest::getUserStatusRequests(), $status);
         
     }
 

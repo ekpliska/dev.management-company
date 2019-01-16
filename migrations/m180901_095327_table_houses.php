@@ -41,7 +41,7 @@ class m180901_095327_table_houses extends Migration
             'flats_number' => $this->integer()->notNull(),
             'flats_rooms' => $this->integer()->notNull(),
             'flats_square' => $this->decimal(10,2)->notNull(),
-            'status' => $this->tinyInteger()->defaultValue(Flats::STATUS_DEBTOR_NO),
+            'is_debtor' => $this->tinyInteger()->defaultValue(Flats::STATUS_DEBTOR_NO),
         ], $table_options);
         $this->createIndex('idx-flats-flats_id', '{{%flats}}', 'flats_id');
         

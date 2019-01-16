@@ -215,7 +215,7 @@ class RequestsController extends AppManagersController {
             $request = Requests::findOne($request_id);
             $request->switchStatus($status);
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-            return ['success' => $request, 'status' => $status];
+            return ['success' => true, 'status' => $status];
         }
         
         return ['success' => false];
