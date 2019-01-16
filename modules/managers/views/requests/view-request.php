@@ -12,7 +12,7 @@
  * Просмотр и редактирование заявки
  */
 $this->title = "Заявка ID{$request['requests_ident']}";
-$this->params['breadcrumbs'][] = ['label' => 'Завяки', 'url' => ['voting/index']];
+$this->params['breadcrumbs'][] = ['label' => 'Завяки', 'url' => ['requests/requests']];
 $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
 ?>
 
@@ -28,7 +28,10 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
 <div class="requests-view">
     
     <h1 class="page-header requests-view_title">
-        <i class="glyphicon glyphicon-ok <?= $request_info['is_accept'] ? 'check' : 'uncheck' ?>"></i>&nbsp;&nbsp;Заявка принята
+        <i class="glyphicon glyphicon-ok <?= $request['is_accept'] ? 'check' : 'uncheck' ?>"></i>&nbsp;&nbsp;Заявка принята
+        <?= Html::button('<i class="glyphicon glyphicon-remove"></i> Удалить заявку', ['class' => 'btn settings-record-btn']) ?>
+        <?= Html::button('<i class="glyphicon glyphicon-bookmark"></i> Отклонить', ['class' => 'btn settings-record-btn reject-request']) ?>
+        <?= Html::a('<i class="glyphicon glyphicon-star"></i> Посмотреть оценку', ['/'], ['class' => 'btn settings-record-btn']) ?>
     </h1>
     
     <div class="row row-flex">
@@ -100,9 +103,6 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
                             </td>
                             <td id="specialist-name">
                                 <?= FormatFullNameUser::fullNameEmployer($request['requests_specialist_id'], false, true) ?>
-                            </td>
-                            <td rowspan="2">
-                                <?= Html::button('Отклонить', ['class' => 'btn btn delete-record-btn reject-request']) ?>
                             </td>
                         </tr>
                         <tr>

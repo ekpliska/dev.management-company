@@ -403,6 +403,30 @@ a, a:hover, a:active {
 }
 /* Конец Кпока удаление записи на странице */
 
+/* Кнопка настройки заявки */
+.settings-record-btn {
+    padding: 10px 20px;
+    border-radius: 12px;
+    border: 1px solid #fff;
+    background-color: #2d18b4;
+    color: #fff;
+    font-size: 10px;
+    letter-spacing: 0.9px;
+    text-transform: uppercase;
+    margin: 0 10px;
+    float: right;
+}
+.settings-record-btn:focus,
+.settings-record-btn:hover {
+    background-color: #fff;
+    box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
+    color: #2d18b4;
+}
+.settings-record-btn > i {
+    padding-right: 10px;
+}
+/* Конец Кнопка настройки заявки */
+
 /* Кнопка назначить специалиста */
 .blue-border-btn,
 .blue-border-btn:focus {
@@ -880,7 +904,9 @@ button#send-request-to-sms:focus{
     background: linear-gradient(180.67deg, #39284E 0, rgba(10,8,8,0.7) 117%);
     box-shadow: 0 10px 14px 2px rgba(0,0,0,0.26); 
 }
-
+.dropdown-menu > li > a {
+    color: #fff;
+}
 .dropdown-menu:before{
     border: none;
 }
