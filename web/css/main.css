@@ -1432,7 +1432,7 @@ p.right {
     border-radius: 100%;
 }
 .requests-view_body {
-    padding: 0px 15px;
+    padding: 0px 15px 0 0;
 }
 .requests-border {
     border-right: 1px solid #ddd;
@@ -1485,10 +1485,10 @@ p.right {
 [class*="col-"] {
   margin-bottom: 0px;
 }
-.requests-view_body img {
-    /*width: 70px;*/
-    /*height: 70px;*/
-    /*margin-bottom: 30px;*/
+.requests-view_body img.info-img {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 30px;
 }
 .requests__status-block {
     padding: 10px 0;
