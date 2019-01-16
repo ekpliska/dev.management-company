@@ -23,23 +23,36 @@
     ]);
 ?>
 
-    <div class="error-message" style="color: red;"></div>
+    <?= Html::input('text', 'search-employee', null, ['id' => 'search-employee', 'class' => 'search-employee_input', 'placeHolder' => 'Поиск...']) ?>
+
+    <div class="error-message" style="color: #ef693a; font-size: 12px;"></div>
     
     <div class="list-group" id="dispatcherList">
+        
+        <ul id="employees-list">
         <?php if (isset($dispatcher_list)) : ?>
             <?php foreach ($dispatcher_list as $dispatcher) : ?>
-                <a class="list-group-item list-group-item-action" data-employee="<?= $dispatcher['id'] ?>">
-                    <?= $dispatcher['surname'] ?> <?= $dispatcher['name'] ?> <?= $dispatcher['second_name'] ?>
-                </a>
+                <li>
+                    <a class="" data-employee="<?= $dispatcher['id'] ?>">
+                        <?= $dispatcher['surname'] ?> <?= $dispatcher['name'] ?> <?= $dispatcher['second_name'] ?>
+                    </a>
+                </li>
             <?php endforeach; ?>
+        </ul>
         <?php else: ?>
-            <?= 'not found'; ?>
+            <div class="notice info">
+                <p>Сотрудники с должностью Диспетчер в системе на найдены</p>
+            </div>
         <?php endif; ?>
     </div>
     
     <div class="modal-footer">
-        <?= Html::button('Назначить', ['class' => 'btn btn blue-outline-btn white-btn add_dispatcher__btn', 'data-dismiss' => 'modal']) ?>
-        <?= Html::button('Закрыть', ['class' => 'btn red-outline-btn bt-bottom2', 'data-dismiss' => 'modal']) ?>
+        <?= Html::button('Назначить', [
+                'class' => 'btn btn blue-outline-btn white-btn add_dispatcher__btn', 
+                'data-dismiss' => 'modal']) ?>
+        <?= Html::button('Закрыть', [
+                'class' => 'btn red-outline-btn bt-bottom2', 
+                'data-dismiss' => 'modal']) ?>
     </div>
 
 <?php Modal::end(); ?>
@@ -58,7 +71,9 @@
     ]);
 ?>
 
-    <div class="error-message" style="color: red;"></div>
+    <?= Html::input('text', 'search-employee', null, ['id' => 'search-employee', 'class' => 'search-employee_input', 'placeHolder' => 'Поиск...']) ?>
+    
+    <div class="error-message" style="color: #ef693a; font-size: 12px;"></div>
     
     <div class="list-group" id="dispatcherList">
         <?php if (isset($specialist_list) && !empty($specialist_list)) : ?>
@@ -68,13 +83,19 @@
                 </a>
             <?php endforeach; ?>
         <?php else : ?>
-            <?= 'not found'; ?>
+            <div class="notice info">
+                <p>Сотрудники с должностью Диспетчер в системе на найдены</p>
+            </div>
         <?php endif; ?>
     </div>
     
     <div class="modal-footer">
-        <?= Html::button('Назначить', ['class' => 'btn btn blue-outline-btn white-btn add_specialist__btn', 'data-dismiss' => 'modal']) ?>
-        <?= Html::button('Закрыть', ['class' => 'btn red-outline-btn bt-bottom2', 'data-dismiss' => 'modal']) ?>
+        <?= Html::button('Назначить', [
+                'class' => 'btn btn blue-outline-btn white-btn add_specialist__btn', 
+                'data-dismiss' => 'modal']) ?>
+        <?= Html::button('Закрыть', [
+                'class' => 'btn red-outline-btn bt-bottom2', 
+                'data-dismiss' => 'modal']) ?>
     </div>
 
 <?php Modal::end(); ?>    

@@ -485,7 +485,7 @@ $(document).ready(function() {
     /*
      * В списке сотрудников, выбранных диспетчеров/специалистов обозначаем активными
      */
-    $('#dispatcherList a, #specialistList a').on('click', function() {
+    $('#employees-list > li > a, #specialistList a').on('click', function() {
         var employeeId = $(this).data('employee');
         $('#dispatcherList, #specialistList').find('.active').removeClass('active');
         $(this).toggleClass('active');
@@ -589,6 +589,29 @@ $(document).ready(function() {
         $('#create-new-request, #create-new-paid-request')[0].reset();
     });
     
+    /*
+     * Поиск по спициалистам
+     */
+    function searchEmployee() {
+        var input, filter, ul, li, a, i, txtValue;
+        input = document.getElementById('search-employee');
+        filter = input.value.toUpperCase();
+        ul = document.getElementById('employees-list');
+        li = ul.getElementsByTagName('li');
+        for (i = 0; i < li.length; i++) {
+            a = li[i].getElementsByTagName('a')[0];
+            txtValue = a.textContent || a.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = '';
+            } else {
+                li[i].style.display = 'none';
+            }
+        }
+    }
+    
+    $('#search-employee').on('input', function() {
+        searchEmployee();
+    });
     
     // ******************************************************** //
     // ************     Start Block of News      ************** //

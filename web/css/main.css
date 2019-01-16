@@ -1855,7 +1855,6 @@ input[id="_search-input"] {
     border-radius: 10em;
     box-sizing: content-box;
     transition: all 0.5s ease 0s;
-    width: 55px;
     background-size: 5%;
     padding: 0 54px;
     width: 250px;
@@ -3719,4 +3718,44 @@ a.employee-profile {
 a.employee-profile:hover {
     color: #3e3e3e;
 }
+#dispatcherList {    
+}
 /* Конец Заявка, просмотр отдельной заявки */
+
+/* Модальное окно назначение сотрудника на заяку */
+.search-employee_input {
+    background-image: url(/images/searchicon.jpg);
+    background-repeat: no-repeat;
+    background-position: 30px 11px;
+    background-size: 4%;
+    background-color: transparent;
+    width: 100%;
+    font-size: 12px;
+    padding: 12px 20px 12px 70px;
+    border: 1px solid #8b709d;
+    margin-bottom: 12px;
+    border-radius: 25px;
+    outline: none;
+}
+#employees-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+#employees-list > li > a {
+    background: transparent;
+    border: 1px solid #8b709d;
+    border-radius: 12px;
+    color: #fff;
+    cursor: default;
+    margin-top: -1px; /* Prevent double borders */
+    padding: 12px;
+    text-decoration: none;
+    display: block
+}
+#employees-list > li > a.active,
+#employees-list > li > a:hover {
+    background: rgba(0, 123, 255, 0.12);
+}
+
+/* Конец Модальное окно назначение сотрудника на заяку */
