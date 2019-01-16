@@ -1,6 +1,7 @@
 <?php
 
     use yii\helpers\Html;
+    use yii\widgets\Breadcrumbs;
     use app\modules\managers\widgets\AlertsShow;
     use app\helpers\FormatHelpers;
     use app\helpers\FormatFullNameUser;
@@ -10,15 +11,96 @@
 /* 
  * Просмотр и редактирование заявки
  */
-$this->title = 'Заявка №' . $request['requests_ident'];
+$this->title = "Заявка ID{$request['requests_ident']}";
+$this->params['breadcrumbs'][] = ['label' => 'Завяки', 'url' => ['voting/index']];
+$this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
 ?>
-<div class="managers-default-index">
-    <h1><?= $this->title ?></h1>
-    <hr />
+
+<div class="manager-main">
     
+    <?= Breadcrumbs::widget([
+            'homeLink' => ['label' => 'ELSA | Администратор', 'url' => ['managers/index']],
+            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+    ]) ?>
+
     <?= AlertsShow::widget() ?>
     
-    <div class="col-md-7">
+<div class="requests-view">
+    
+    <h1 class="page-header requests-view_title">
+        <i class="glyphicon glyphicon-ok <?= $request_info['is_accept'] ? 'check' : 'uncheck' ?>"></i>&nbsp;&nbsp;Заявка принята
+    </h1>
+    <div class="row row-flex">
+        <div class="col-md-7 col-sm-6 col-xs-12 requests-border">
+            <div class="content requests-view_body">
+                <h4>
+                    <?= $request['type_requests_name'] ?>
+                </h4>
+                <p class="date_requests">
+                    <?= FormatHelpers::formatDate($request['created_at'], true, 0, false) ?>
+                </p>
+                
+                <div id="star" data-request="<?= $request['requests_id'] ?>" data-score-reguest="<?= $request['requests_grade'] ?>"></div>
+                
+                <?= Html::a('<i class="glyphicon glyphicon-pencil"></i> Внести изменения', ['/'], ['class' => 'btn edit-request-btn']) ?>
+                
+                <div class="requests__status-block">
+                    <span class="badge request-ident">
+                        <?= "ID{$request['requests_ident']}" ?>
+                    </span>
+                    <?= SwitchStatusRequest::widget([
+                            'view_name' => 'request',
+                            'status' => $request['status'],
+                            'request_id' => $request['requests_id'],
+                            'date_update' => $request['updated_at'],
+                        ]) ?>
+                </div>
+                
+                
+                <p class="request_text">
+                    <?= $request['requests_comment'] ?>
+                </p>
+                
+                <?php if (isset($all_images) && count($all_images) > 0) : ?>
+                    <?php foreach ($all_images as $image) : ?>
+                        <?= FormatHelpers::formatUrlFileRequest($image['filePath']) ?>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+                
+                <div class="client_info">
+                    <div class="col-lg- col-sm-6 col-md-6 text-left">
+                        <div class="client_info-image">
+                            <span class="glyphicon glyphicon-home"></span>
+                        </div>
+                        <span class="client_info-text">adress</span>
+
+                    </div>
+                    <div class="col-lg-6 col-sm-6 col-md-6 text-left">
+                        <div class="client_info-image">
+                            <i class="glyphicon glyphicon-phone"></i>
+                        </div>
+                        <span class="client_info-text"><?= $request['requests_phone'] ?></span>
+                    </div>
+                </div>
+
+                <div class="request-body-rate">
+                    555
+                </div>                
+            </div>
+        </div>
+        <div class="col-md-5 col-sm-6 col-xs-12">
+            <div class="content requests-view_chat">
+                
+                <?= $this->render('comments/view', [
+                    'model' => $model_comment,
+                    'comments_find' => $comments_find]) ?>
+                
+            </div>
+        </div>      
+    </div>
+</div>
+    
+<?php /*    <div class="col-md-7">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <?= $request['is_accept'] ? 'Заявка принята' : 'Заявка не принята' ?>
@@ -126,9 +208,8 @@ $this->title = 'Заявка №' . $request['requests_ident'];
     </div>
     
     <div class="clearfix"></div>
-    <?= AddEmployee::widget() ?>
+    <?= AddEmployee::widget() */ ?>
 </div>
-
 
 <?php
 $grade = $request['requests_grade'] ? $request['requests_grade'] : 0; 

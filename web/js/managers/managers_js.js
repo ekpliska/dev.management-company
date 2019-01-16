@@ -407,7 +407,8 @@ $(document).ready(function() {
                 if (response.status) {
                     console.log(response.status);
                     $('.dropdown-menu').find('.disabled').removeClass('disabled');
-                    $('#value-btn').text(linkValue);
+                    $('#value-btn').html(linkValue + '<span class="caret"></span>');
+                    $('.btn-group_status-request').attr('id', 'status-value-' + statusId);
                     liChoosing.addClass('disabled');
                     if (statusId === 4) {
                         $('.btn:not(.dropdown-toggle)').attr('disabled', true);

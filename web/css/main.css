@@ -687,6 +687,27 @@ button#send-request-to-sms:focus{
 }
 /* Конец Кнопка, Удалить, таблица */
 
+/* Кнопка Редактировать заявку */
+.edit-request-btn {
+    padding: 12px 20px;
+    border: 2px solid #2d18b4;
+    border-radius: 10px;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 0.07em;
+}
+.edit-request-btn > i {
+    padding-right: 10px;
+}
+.edit-request-btn:focus,
+.edit-request-btn:hover {
+    background-color: #2d18b4;
+    box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
+    color: #fff;
+}
+/* Конец Кнопка Редактировать заявку */
+
 /* Собственник, главная страница, Новости */
 .news-lists {
     margin-top: 170px;
@@ -1465,12 +1486,18 @@ p.right {
   margin-bottom: 0px;
 }
 .requests-view_body img {
-    width: 70px;
-    height: 70px;
-    margin-bottom: 30px;
+    /*width: 70px;*/
+    /*height: 70px;*/
+    /*margin-bottom: 30px;*/
 }
-
-/* Конец Просомтр отдельной заявки */
+.requests__status-block {
+    padding: 10px 0;
+    display: flex;
+}
+#star {
+    padding: 0 0 20px 0;
+}
+/* Конец Просмотр отдельной заявки */
 
 /* Завяки, чат */
 .comments .row {
@@ -3583,3 +3610,62 @@ span.status-vote-1::before {
     font-weight: bold;
 }
 /* Конец Модальное окно, просмотр профиля пользователя в разделе Голосование */
+
+/* Блок переключения статуса заявок */
+.btn-group_status-request {
+    padding: 0 15px;
+    background: #fff;
+}
+/*.btn-group_status-request > .btn-group:first-child:not(:last-child) > .dropdown-toggle {
+    border-right: 2px solid red;
+}*/
+.btn-choose-status {
+    font-size: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 5px 15px;
+    background: #fff;
+}
+.btn-choose-status:focus,
+.btn-group.open .dropdown-toggle {
+    outline: none;
+    box-shadow: none;
+}
+.dropdown-status > li > a {
+    color: #fff;
+    text-transform: none;
+    font-size: 12px;
+}
+.dropdown-status > li > a:hover {
+    background: rgba(0, 123, 255, 0.12);
+    color: #fff;
+}
+#status-value-0 {
+    border: 2px solid #598eff;
+    box-shadow: 0px 1px 4px 6px rgba(0,101,255,0.28);
+    border-radius: 25px;
+}
+#status-value-1 {
+    border: 2px solid #7c7c7c;
+    box-shadow: 0px 1px 4px 4px rgba(255,125,125,0.26);
+    border-radius: 25px;
+}
+#status-value-2 {
+    border: 2px solid #1fd68d;
+    box-shadow: 0px 1px 4px 4px rgba(56,231,161,0.54);
+    border-radius: 25px;
+}
+#status-value-3 {
+    border: 2px solid #e17dff;
+    box-shadow: 0px 1px 4px 4px rgba(225,125,255,0.42);
+    border-radius: 25px;
+}
+#status-value-4 {
+    border: 2px solid #ff7d7d;
+    box-shadow: 0px 1px 4px 4px rgba(252,193,193,0.83);    
+    border-radius: 25px;
+}
+.btn-choose-status > .caret {
+    margin-left: 10px;
+}
+/* Конец Блок переключения статуса заявок */
