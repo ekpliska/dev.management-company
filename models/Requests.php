@@ -6,11 +6,10 @@
     use yii\helpers\ArrayHelper;
     use yii\behaviors\TimestampBehavior;
     use yii\helpers\Html;
+    use app\models\User;
     use app\models\TypeRequests;
     use app\models\CommentsToRequest;
     use app\models\StatusRequest;
-    use app\models\Employers;
-    use app\helpers\FormatHelpers;
     use app\models\Image;
 
 /**
@@ -20,6 +19,7 @@ class Requests extends ActiveRecord
 {
 
     const SCENARIO_ADD_REQUEST = 'add_record';
+    const SCENARIO_EDIT_REQUEST = 'edit_record';
     
     const ACCEPT_YES = 1;
     const ACCEPT_NO = 0;
@@ -60,7 +60,7 @@ class Requests extends ActiveRecord
                 'requests_phone', 
                 'match', 
                 'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/i',
-                'on' => self::SCENARIO_ADD_REQUEST,
+                'on' => [self::SCENARIO_ADD_REQUEST, self::SCENARIO_EDIT_REQUEST],
             ],
             
             [['gallery'], 'file', 
@@ -70,10 +70,21 @@ class Requests extends ActiveRecord
                 'mimeTypes' => 'image/*',                
                 'on' => self::SCENARIO_ADD_REQUEST,
             ],
-            [['requests_comment'], 'string', 'on' => self::SCENARIO_ADD_REQUEST],
-            [['requests_comment'], 'string', 'min' => 10, 'max' => 255, 'on' => self::SCENARIO_ADD_REQUEST],
+            [['requests_comment'], 'string', 'on' => [self::SCENARIO_ADD_REQUEST, SCENARIO_EDIT_REQUEST]],
+            [['requests_comment'], 'string', 'min' => 10, 'max' => 255, 'on' => [self::SCENARIO_ADD_REQUEST, SCENARIO_EDIT_REQUEST]],
             
             ['requests_grade', 'integer'],
+            
+            [['requests_type_id', 'requests_comment', 'requests_phone', 'requests_account_id'], 'required', 'on' => self::SCENARIO_EDIT_REQUEST],
+            
+            // Проверка на существования номера телефона, используемого в завке
+            [
+                'requests_phone', 'exist', 
+                'targetClass' => User::className(),
+                'targetAttribute' => 'user_mobile',
+                'message' => 'Указанный номер в системе не найден',
+                'on' => self::SCENARIO_EDIT_REQUEST,
+            ],
             
         ];
     }
@@ -271,7 +282,6 @@ class Requests extends ActiveRecord
     public function getAccount() {
         return $this->requests_account_id;
     }
-    
     
     /**
      * Настройка полей для форм

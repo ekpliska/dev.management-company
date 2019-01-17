@@ -591,7 +591,7 @@ $(document).ready(function() {
     });
     
     /*
-     * Поиск по спициалистам
+     * Поиск по специалистам
      */
     function searchEmployee() {
         var input, filter, ul, li, a, i, txtValue;
@@ -612,6 +612,17 @@ $(document).ready(function() {
     
     $('#search-employee').on('input', function() {
         searchEmployee();
+    });
+    
+    /*
+     * Загрузка модального окна для редактирования Заявки
+     */
+    $('a.edit-request-btn').on('click', function(e){
+        var link = $(this).attr('href');
+        $('#edit-requests').modal('show');
+        $('#edit-requests .modal-dialog .modal-content .modal-body').load(link);
+        e.preventDefault();
+        return false;        
     });
     
     // ******************************************************** //

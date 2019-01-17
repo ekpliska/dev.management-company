@@ -131,7 +131,7 @@ class User extends ActiveRecord implements IdentityInterface
     }  
     
     /*
-     * Связь через промеуточную таблицу
+     * Связь через промежуточную таблицу
      */
     public function getPersonalAccount() {
         return $this->hasMany(PersonalAccount::className(), ['account_id' => 'account_id'])

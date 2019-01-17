@@ -755,6 +755,29 @@ button#send-request-to-sms:focus{
 }
 /* Конец Кнопка Редактировать заявку */
 
+/* Кнопка для модального окна */
+.btn-modal-window {
+    padding: 15px 70px;
+    background: transparent;
+    border: 1px solid #fff;
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 0.9px;
+    font-weight: bold;
+    border-radius: 12px;
+}
+.btn-modal-window-yes:hover {
+    box-shadow: 0px 0px 15px 3px rgba(247, 247, 247, 0.15);
+    color: #1fd68d;
+    border: 1px solid #1fd68d;
+}
+.btn-modal-window-no:hover {
+    box-shadow: 0px 0px 15px 3px rgba(247, 247, 247, 0.15);
+    color: #f0754a;
+    border: 1px solid #f0754a;
+}
+/* Конец Кнопка для модального окна */
+
 /* Собственник, главная страница, Новости */
 .news-lists {
     margin-top: 170px;

@@ -3,6 +3,7 @@
     namespace app\modules\managers\controllers;
     use Yii;
     use yii\data\ActiveDataProvider;
+    use yii\helpers\ArrayHelper;
     use app\modules\managers\controllers\AppManagersController;
     use app\models\TypeRequests;
     use app\models\CategoryServices;
@@ -11,8 +12,7 @@
     use app\modules\managers\models\Requests;
     use app\modules\managers\models\PaidServices;
     use app\models\CommentsToRequest;
-    use app\models\Image;
-    use yii\helpers\ArrayHelper;
+    use app\models\Image;    
 
 /**
  * Заявки
@@ -195,6 +195,9 @@ class RequestsController extends AppManagersController {
             $model = new RequestForm();
         } elseif ($form == 'paid-request') {
             $model = new PaidRequestForm();
+        } elseif ($form == 'edit-request') {
+            $model = new Requests();
+            $model->scenario = Requests::SCENARIO_EDIT_REQUEST;
         }
         
         if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
@@ -322,6 +325,25 @@ class RequestsController extends AppManagersController {
      * Форма редактирования заявок
      */
     public function actionEditRequest($request_id) {
+        
+        $model = Requests::findOne($request_id);
+        $model->scenario = Requests::SCENARIO_EDIT_REQUEST;
+        
+        $type_requests = TypeRequests::getTypeNameArray();
+        $adress_list = $model->getUserAdress($model->requests_phone);
+        
+        if (Yii::$app->request->isAjax) {
+            return $this->renderAjax('modal/edit-request', [
+                'model' => $model,
+                'type_requests' => $type_requests,
+                'adress_list' => $adress_list,
+            ]);
+        }
+        
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', ['message' => 'Информация по заявке была изменена']);
+            return $this->redirect(Yii::$app->request->referrer);
+        }
         
     }
     

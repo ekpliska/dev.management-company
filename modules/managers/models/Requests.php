@@ -1,8 +1,10 @@
 <?php
 
     namespace app\modules\managers\models;
+    use yii\helpers\ArrayHelper;
     use app\models\Requests as BaseRequests;
     use app\models\StatusRequest;
+    use app\helpers\FormatHelpers;
 
 /**
  *  Завяки
@@ -58,6 +60,30 @@ class Requests extends BaseRequests {
         $this->requests_specialist_id = $specialist_id;
         $this->status = StatusRequest::STATUS_PERFORM;
         return $this->save(false) ? true : false;
-    }    
+    }
+    
+    /*
+     * Получить адреса Пользователя, при редактировании завки
+     */
+    public function getUserAdress($phone) {
+        
+        $client_info = \app\models\User::findByPhone($phone);
+        $client_id = $client_info['user_client_id'] ? $client_info['user_client_id'] : $client_info['user_rent_id'];
+        
+        $house_list = \app\models\PersonalAccount::find()
+                ->select(['account_id', 'houses_gis_adress', 'houses_number', 'flats_number'])
+                ->joinWith(['flat', 'flat.house'])
+                ->andWhere(['personal_clients_id' => $client_id])
+                ->orWhere(['personal_rent_id' => $client_id])
+                ->asArray()
+                ->all();
+        
+        $house_lists = ArrayHelper::map($house_list, 'account_id', function ($data) {
+            return FormatHelpers::formatFullAdress($data['houses_gis_adress'], $data['houses_number'], false, false, $data['flats_number']);
+        });
+        
+        return $house_lists ? $house_lists : null;
+        
+    }
     
 }
