@@ -769,8 +769,8 @@ button#send-request-to-sms:focus{
 }
 .btn-modal-window-yes:hover {
     box-shadow: 0px 0px 15px 3px rgba(247, 247, 247, 0.15);
-    color: #78e4ff;
-    border: 1px solid #78e4ff;
+    color: #598eff;
+    border: 1px solid #598eff;
 }
 .btn-modal-window-no:hover {
     box-shadow: 0px 0px 15px 3px rgba(247, 247, 247, 0.15);

@@ -528,7 +528,7 @@ $(document).ready(function() {
                     $('.btn-dispatcher').data('employee', dispatcherId);
                     $('#dispatcher-name').text('');
                     $('#dispatcher-name').html(
-                            '<a href="/web/managers/employers/edit-dispatcher?dispatcher_id=' + dispatcherId + '">' + 
+                            '<a href="/web/managers/employee-form/employee-profile?type=dispatcher&employee_id=' + dispatcherId + '">' + 
                             employeeName + '</a>');
                 },
                 error: function() {
@@ -540,7 +540,7 @@ $(document).ready(function() {
 
     
     /*
-     * Отправляем запрос на добавления диспетчера к выбранной заявке
+     * Отправляем запрос на добавления специалиста к выбранной заявке
      */
     $('.add_specialist__btn').on('click', function(e) {
         e.preventDefault();
@@ -571,7 +571,7 @@ $(document).ready(function() {
                     $('.btn-specialist').data('employee', specialistId);
                     $('#specialist-name').text('');
                     $('#specialist-name').html(
-                            '<a href="/web/managers/employers/edit-specialist?specialist_id=' + specialistId + '">' + 
+                            '<a href="/web/managers/employee-form/employee-profile?type=specialist&employee_id=' + specialistId + '">' + 
                             employeeName + '</a>');
                 },
                 error: function() {

@@ -48,10 +48,10 @@
     
     <div class="modal-footer">
         <?= Html::button('Назначить', [
-                'class' => 'btn btn blue-outline-btn white-btn add_dispatcher__btn', 
+                'class' => 'btn btn-modal-window btn-modal-window-yes add_dispatcher__btn', 
                 'data-dismiss' => 'modal']) ?>
         <?= Html::button('Закрыть', [
-                'class' => 'btn red-outline-btn bt-bottom2', 
+                'class' => 'btn btn-modal-window btn-modal-window-no', 
                 'data-dismiss' => 'modal']) ?>
     </div>
 
@@ -91,10 +91,10 @@
     
     <div class="modal-footer">
         <?= Html::button('Назначить', [
-                'class' => 'btn btn blue-outline-btn white-btn add_specialist__btn', 
+                'class' => 'btn btn-modal-window btn-modal-window-yes add_specialist__btn', 
                 'data-dismiss' => 'modal']) ?>
         <?= Html::button('Закрыть', [
-                'class' => 'btn red-outline-btn bt-bottom2', 
+                'class' => 'btn btn-modal-window btn-modal-window-no', 
                 'data-dismiss' => 'modal']) ?>
     </div>
 
