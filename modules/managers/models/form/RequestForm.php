@@ -76,7 +76,7 @@ class RequestForm extends Model {
             $date = new \DateTime();
             $int = $date->getTimestamp();
 
-            $request_numder = substr($int, 5) . '-' . str_pad($this->requests_type_id, 2, 0, STR_PAD_LEFT);      
+            $request_numder = substr($int, 5) . '-' . str_pad($this->type_request, 2, 0, STR_PAD_LEFT);      
 
             $numder = $request_numder;
             $request->requests_ident = $numder;

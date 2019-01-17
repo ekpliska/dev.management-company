@@ -412,7 +412,6 @@ $(document).ready(function() {
                     $('#value-btn').removeClass('add-border-' + $('#value-btn').data('status'));
                     $('#value-btn').data('status', statusId);
                     $('#value-btn').addClass('add-border-' + statusId);
-                    $('.reject-request').addClass('settings-btn-hide');
                     liChoosing.addClass('disabled');
                     if (statusId === 4 || statusId === 5) {
                         $('.btn:not(.btn-choose-status)').attr('disabled', true);
@@ -637,6 +636,23 @@ $(document).ready(function() {
         return false;        
     });
     
+    /*
+     * Обработка запроса на удаление Заявки, Платной услуги
+     * 
+     */
+    $('#delete-request-message').on('show.bs.modal', function(e){
+        var requestId = $(e.relatedTarget).data('request');
+        var requestType = $(e.relatedTarget).data('requestType');
+        $('#delete-request-message').find('.delete_request').data('request', requestId);
+        $('#delete-request-message').find('.delete_request').data('request-type', requestType);
+    })
+    
+    $('.delete_request').on('click', function() {
+        var requestId = $(this).data('request');
+        var requestType = $(this).data('requestType');
+        $.post('confirm-delete-request?type=' + requestType + '&request_id=' + requestId, function(data) {});
+    });
+    
     // ******************************************************** //
     // ************     Start Block of News      ************** //
     // ******************************************************** //
@@ -771,7 +787,7 @@ $(document).ready(function() {
     $('#delete_voting_manager').on('show.bs.modal', function(e){
         var votingId = $(e.relatedTarget).data('voting');
         $('.delete_voting__del').data('voting', votingId);
-    })
+    });
     
     /*
      * Запрос на удаление голосования

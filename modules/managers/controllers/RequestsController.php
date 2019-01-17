@@ -168,7 +168,7 @@ class RequestsController extends AppManagersController {
         
         if (Yii::$app->request->isPost && $model->load(Yii::$app->request->post())) {
             $number = $model->save();
-            return $this->redirect(['view-paid-request', 'request_number' => $number]);
+            return $this->redirect(['view-request', 'request_number' => $number]);
         }
     }
     
@@ -354,6 +354,33 @@ class RequestsController extends AppManagersController {
         
         if (Yii::$app->request->isAjax) {
             return $this->renderAjax('modal/show-grade-modal');
+        }
+        
+    }
+    
+    /*
+     * Запрос на удаление заявки
+     */
+    public function actionConfirmDeleteRequest($type, $request_id) {
+        
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        
+        if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
+            
+            switch ($type) {
+                case 'requests':
+                    $request = Requests::findByID($request_id);
+                    break;
+                case 'paid-request':
+                    break;
+            }
+            
+            if (!$request->delete()) {
+                Yii::$app->session->setFlash('error', ['message' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз']);
+            }
+            
+            Yii::$app->session->setFlash('success', ['message' => 'Заявка была успешно удалена']);
+            return $this->redirect($type);
         }
         
     }

@@ -9,7 +9,8 @@
     use app\helpers\FormatFullNameUser;
     use app\modules\managers\widgets\SwitchStatusRequest;
     use app\modules\managers\widgets\AddEmployee;
-
+    use app\modules\managers\widgets\ModalWindowsManager;
+    
 /* 
  * Просмотр и редактирование заявки
  */
@@ -32,7 +33,14 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
         <h1 class="page-header requests-view_title">
             <i class="glyphicon glyphicon-ok <?= $request['is_accept'] ? 'check' : 'uncheck' ?>"></i>&nbsp;&nbsp;Заявка принята
             
-            <?= Html::button('<i class="glyphicon glyphicon-remove"></i> Удалить заявку', ['class' => 'btn settings-record-btn']) ?>
+            <?= Html::button('<i class="glyphicon glyphicon-remove"></i> Удалить заявку', [
+                    'id' => 'delete-request',
+                    'class' => 'btn settings-record-btn',
+                    'data-target' => '#delete-request-message',
+                    'data-toggle' => 'modal',
+                    'data-request-type' => 'requests',
+                    'data-request' => $request['requests_id'],
+            ]) ?>
                         
             <?= Html::button('<i class="glyphicon glyphicon-bookmark"></i> Отклонить', [
                     'class' => 'btn settings-record-btn reject-request' . ($request['status'] == StatusRequest::STATUS_REJECT ? ' settings-btn-hide' : ''),
@@ -198,3 +206,5 @@ $('div#star').raty({
     ]);
 ?>
 <?php Modal::end(); ?>
+
+<?= ModalWindowsManager::widget(['modal_view' => 'delete_request_modal']) ?>
