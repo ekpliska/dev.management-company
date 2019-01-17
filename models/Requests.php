@@ -210,11 +210,25 @@ class Requests extends ActiveRecord
     public static function findRequestToIdent($request_numder) {
 
         $request = (new \yii\db\Query)
+                ->select('r.requests_id as requests_id, '
+                        . 'r.requests_ident as requests_ident, '
+                        . 'r.is_accept as is_accept, r.status as status, '
+                        . 'r.created_at as created_at, r.updated_at as updated_at, '
+                        . 'r.requests_grade as requests_grade, '
+                        . 'r.requests_phone as requests_phone, '
+                        . 'r.requests_comment as requests_comment, '
+                        . 'tr.type_requests_name as type_requests_name, '
+                        . 'h.houses_gis_adress as houses_gis_adress, h.houses_number as houses_number, '
+                        . 'f.flats_porch as flats_porch, f.flats_floor as flats_floor, f.flats_number as flats_number, '
+                        . 'ed.employee_id as employee_id_d, ed.employee_surname as surname_d, ed.employee_name as name_d, ed.employee_second_name as sname_d, '
+                        . 'es.employee_id as employee_id_s, ed.employee_surname as surname_s, ed.employee_name as name_s, ed.employee_second_name as sname_s')
                 ->from('requests as r')
                 ->join('LEFT JOIN', 'type_requests as tr', 'r.requests_type_id = tr.type_requests_id')                
                 ->join('LEFT JOIN', 'personal_account as pa', 'pa.account_id = r.requests_account_id')                
                 ->join('LEFT JOIN', 'flats as f', 'f.flats_id = pa.personal_flat_id')                
-                ->join('LEFT JOIN', 'houses as h', 'h.houses_id = f.flats_house_id')                
+                ->join('LEFT JOIN', 'houses as h', 'h.houses_id = f.flats_house_id')
+                ->join('LEFT JOIN', 'employees as ed', 'ed.employee_id = r.requests_dispatcher_id')
+                ->join('LEFT JOIN', 'employees as es', 'es.employee_id = r.requests_specialist_id')
                 ->where(['requests_ident' => $request_numder])
                 ->one();
         

@@ -40,30 +40,26 @@ class FormatFullNameUser {
      * @param integer $employer_id
      * @param boolean $disp Переключатель формирования ссылки на диспетчера (true),
      * @param boolean $disp Переключатель формирования ссылки на специалиста (false),
-     * @param boolean $full Переключатель вывода ФИО сотрудника 
+     * @param boolean $surname Переключатель вывода ФИО сотрудника 
      *      true - Фамилия Имя Отчество
      *      false - Фамилия И. О.
+     * @param array $array_name - Массив содержит Фамилия, имя, отчество
      */
-    public static function fullNameEmployer($employee_id, $disp = false, $full = false) {
-        
-        $employee = Employees::find()
-                ->where(['employee_id' => $employee_id])
-                ->asArray()
-                ->one();
-        
-        $surname = $full ? $employee['employee_surname'] . ' ' : $employee['employee_surname'] . ' ';
-        $name = $full ? $employee['employee_name'] . ' ' : mb_substr($employee['employee_name'], 0, 1, 'UTF-8') . '. ';
-        $second_name = $full ? $employee['employee_second_name'] . ' ' : mb_substr($employee['employee_second_name'], 0, 1, 'UTF-8') . '.';
+    public static function fullNameEmployee($employee_id, $disp = false, $full = false, $array_name = []) {
+                
+        $surname = $full ? $array_name[0] . ' ' : $array_name[0] . ' ';
+        $name = $full ? $array_name[1] . ' ' : mb_substr($array_name[1], 0, 1, 'UTF-8') . '. ';
+        $second_name = $full ? $array_name[2] . ' ' : mb_substr($array_name[2], 0, 1, 'UTF-8') . '.';
         
         $full_name = $surname . $name . $second_name;
         
         if ($disp == true) {
-            $link = ['employee-form/employee-profile', 'type' => 'dispatcher', 'employee_id' => $employee['employee_id']];
+            $link = ['employee-form/employee-profile', 'type' => 'dispatcher', 'employee_id' => $employee_id];
         } else {
-            $link = ['employee-form/employee-profile', 'type' => 'specialist', 'employee_id' => $employee['employee_id']];
+            $link = ['employee-form/employee-profile', 'type' => 'specialist', 'employee_id' => $employee_id];
         }
         
-        return $employee ?
+        return $employee_id ?
             Html::a($full_name, $link, ['target' => '_blank', 'class' => 'employee-profile']) : '<span>(Не назначен)</span>';
     }
     

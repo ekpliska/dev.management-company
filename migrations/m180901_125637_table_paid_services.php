@@ -32,6 +32,7 @@ class m180901_125637_table_paid_services extends Migration
             'services_account_id' => $this->integer()->notNull(),
             // Для служебной информации
             'value' => $this->string(70),
+            'date_closed' => $this->integer(),
         ], $table_options);
         
         $this->createIndex('idx-paid_services-services_id', '{{%paid_services}}', 'services_id');

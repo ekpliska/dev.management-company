@@ -124,10 +124,16 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
                         <table class="table table-voting-results">
                             <tr>
                                 <td id="dispatcher-name">
-                                    <?= FormatFullNameUser::fullNameEmployer($request['requests_dispatcher_id'], true, true) ?>
+                                    <?= FormatFullNameUser::fullNameEmployee(
+                                            $request['employee_id_d'], true, true, [
+                                                $request['surname_d'], $request['name_d'], $request['sname_d']
+                                            ]) ?>
                                 </td>
                                 <td id="specialist-name">
-                                    <?= FormatFullNameUser::fullNameEmployer($request['requests_specialist_id'], false, true) ?>
+                                    <?= FormatFullNameUser::fullNameEmployee(
+                                            $request['employee_id_s'], false, true, [
+                                                $request['surname_s'], $request['name_s'], $request['sname_s']
+                                            ]) ?>
                                 </td>
                             </tr>
                             <tr>

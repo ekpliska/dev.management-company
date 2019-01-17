@@ -33,8 +33,8 @@
             [
                 'attribute' => 'date_create',
                 'header' => 'Дата постановки',
-                'value' => function ($date){
-                    return FormatHelpers::formatDate($date['date_create']);
+                'value' => function ($data){
+                    return FormatHelpers::formatDate($data['date_create']);
                 },
             ],
             [
@@ -54,7 +54,8 @@
                     'class' => 'managers-table_middle',
                 ],
                 'value' => function ($data) {
-                    return FormatFullNameUser::fullNameEmployer($data['employee_id_d'], true, false);
+                    return
+                        FormatFullNameUser::fullNameEmployee($data['employee_id_d'], true, false, [$data['surname_d'], $data['name_d'], $data['sname_d']]);
                 },
                 'format' => 'raw',
             ],
@@ -65,7 +66,8 @@
                     'class' => 'managers-table_middle',
                 ],
                 'value' => function ($data) {
-                    return FormatFullNameUser::fullNameEmployer($data['employee_id_s'], true, false);
+                    return
+                        FormatFullNameUser::fullNameEmployee($data['employee_id_s'], false, false, [$data['surname_s'], $data['name_s'], $data['sname_s']]);
                 },
                 'format' => 'raw',
             ],
