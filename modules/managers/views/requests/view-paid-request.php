@@ -125,7 +125,7 @@ $this->params['breadcrumbs'][] = "Заявка на платную услугу 
                                 <td>
                                     <?= Html::button('<i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Назначить диспетчера', [
                                             'class' => 'btn blue-border-btn btn-dispatcher',
-                                            'data-type-request' => 'request',
+                                            'data-type-request' => 'paid-request',
                                             'data-employee' => $paid_request['employee_id_d'],
                                             'data-target' => '#add-dispatcher-modal',
                                             'data-toggle' => 'modal']) ?>
@@ -133,7 +133,7 @@ $this->params['breadcrumbs'][] = "Заявка на платную услугу 
                                 <td>
                                     <?= Html::button('<i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Назначить специалиста', [
                                             'class' => 'btn blue-border-btn',
-                                            'data-type-request' => 'request',
+                                            'data-type-request' => 'paid-request',
                                             'data-employee' => $paid_request['employee_id_s'],
                                             'data-target' => '#add-specialist-modal',
                                             'data-toggle' => 'modal']) ?>
