@@ -59,8 +59,8 @@
             ->label($model->getAttributeLabel('description'), ['class' => 'field-label-modal']) ?>
             
     <div class="modal-footer">
-        <?= Html::submitButton('Отправить', ['class' => 'btn blue-outline-btn white-btn']) ?>
-        <?= Html::submitButton('Отмена', ['class' => 'btn red-outline-btn bt-bottom2 request__btn_close', 'data-dismiss' => 'modal']) ?>
+        <?= Html::submitButton('Отправить', ['class' => 'btn btn-modal-window btn-modal-window-yes']) ?>
+        <?= Html::submitButton('Отмена', ['class' => 'btn btn-modal-window btn-modal-window-no request__btn_close', 'data-dismiss' => 'modal']) ?>
     </div>
 
 <?php ActiveForm::end() ?>
