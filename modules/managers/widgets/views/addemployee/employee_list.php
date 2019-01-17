@@ -48,7 +48,8 @@
     
     <div class="modal-footer">
         <?= Html::button('Назначить', [
-                'class' => 'btn btn-modal-window btn-modal-window-yes add_dispatcher__btn', 
+                'class' => 'btn btn-modal-window btn-modal-window-yes add_dispatcher__btn',
+                'type-request' => $type,
                 'data-dismiss' => 'modal']) ?>
         <?= Html::button('Закрыть', [
                 'class' => 'btn btn-modal-window btn-modal-window-no', 
@@ -91,7 +92,8 @@
     
     <div class="modal-footer">
         <?= Html::button('Назначить', [
-                'class' => 'btn btn-modal-window btn-modal-window-yes add_specialist__btn', 
+                'class' => 'btn btn-modal-window btn-modal-window-yes add_specialist__btn',
+                'type-request' => $type,
                 'data-dismiss' => 'modal']) ?>
         <?= Html::button('Закрыть', [
                 'class' => 'btn btn-modal-window btn-modal-window-no', 

@@ -51,7 +51,7 @@ $this->params['breadcrumbs'][] = "Заявка на платную услугу 
         </h1>
         
         <div class="row row-flex">
-            <div class="col-md-12 col-sm-12 col-xs-12 requests-border">
+            <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="content requests-view_body">
                     <h4>
                         <?= $paid_request['category'] . '/' . $paid_request['services_name'] ?>
@@ -149,7 +149,7 @@ $this->params['breadcrumbs'][] = "Заявка на платную услугу 
         
     </div>
 </div>
-<?= AddEmployee::widget() ?>
+<?= AddEmployee::widget(['type_request' => 'paid-request']) ?>
 <?php /*
 <div class="managers-default-index">
     <h1><?= $this->title ?></h1>
