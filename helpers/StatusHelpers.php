@@ -15,7 +15,7 @@ class StatusHelpers {
     /*
      * Формирование статусов для таблицы заявки, услуги
      */
-    public static function requestStatus($status, $value = null) {
+    public static function requestStatus($status, $value = null, $client = true) {
         
         $btn_css = '';
         $voting_bnt = '';
@@ -45,7 +45,7 @@ class StatusHelpers {
             $btn_css = '<span class="' . $css_classes[4] . '">' . $status_name . '</span>';
         }
         
-        if ($status == StatusRequest::STATUS_CLOSE) {
+        if ($status == StatusRequest::STATUS_CLOSE && $client == true) {
             $voting_bnt = Html::button('Оценить', ['class' => 'blue-outline-btn req-table-btn', 'data-request' => $value]);
         }
         

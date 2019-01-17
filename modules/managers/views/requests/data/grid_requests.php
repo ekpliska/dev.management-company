@@ -67,12 +67,13 @@
                 'value' => function ($data) {
                     return FormatFullNameUser::fullNameEmployer($data['employee_id_s'], true, false);
                 },
+                'format' => 'raw',
             ],
             [
                 'attribute' => 'status',
                 'header' => 'Статус',
                 'value' => function ($data) {
-                    return StatusHelpers::requestStatus($data['status'], $data->requests_id);
+                    return StatusHelpers::requestStatus($data['status'], $data->requests_id, false);
                 },
                 'format' => 'raw',
                 'contentOptions' => [

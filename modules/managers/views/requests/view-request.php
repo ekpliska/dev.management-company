@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
 ?>
 
 <div class="manager-main">
-    
+    <span id="status_request" hidden><?= $request['status'] ?></span>
     <?= Breadcrumbs::widget([
             'homeLink' => ['label' => 'ELSA | Администратор', 'url' => ['managers/index']],
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
