@@ -146,24 +146,23 @@ class PaidServices extends ActiveRecord
 
         $request = (new \yii\db\Query)
                 ->select('ps.services_id as id, ps.services_number as number,'
-                        . 'ps.created_at as date_cr, ps.updated_at as date_up, ps.date_closed as date_cl,'
+                        . 'ps.created_at as date_cr, ps.updated_at as date_up, ps.date_closed as date_cl, '
                         . 'ps.services_phone as phone, ps.services_comment as text, '
-                        . 'ps.status as status, ps.services_comment as text,'
-                        . 'ps.services_grade as grade,'
-                        . 'ps.services_dispatcher_id as dispatcher,'
-                        . 'ps.services_specialist_id as specialist,'
-                        . 'cs.category_name as category, s.services_name as services_name,'
-                        . 'he.estate_town as town, h.houses_street as street, h.houses_number_house as number_house,'
+                        . 'ps.status as status, ps.services_comment as text, '
+                        . 'ed.employee_id as employee_id_d, ed.employee_surname as surname_d, ed.employee_name as name_d, ed.employee_surname as second_name_d, '
+                        . 'es.employee_id as employee_id_s, es.employee_surname as surname_s, es.employee_name as name_s, es.employee_surname as second_name_s, '
+                        . 'cs.category_name as category, s.services_name as services_name, '
+                        . 'h.houses_gis_adress as gis_adress, h.houses_number as houses_number, '
                         . 'f.flats_porch as porch, f.flats_floor as floor, f.flats_number as flat')
                 ->from('paid_services as ps')
-                ->join('LEFT JOIN', 'category_services as cs', 'cs.category_id = ps.services_category_services_id')
                 ->join('LEFT JOIN', 'services as s', 's.services_id = ps.services_name_services_id')
-                ->join('LEFT JOIN', 'employers as ed', 'ed.employers_id = ps.services_dispatcher_id')
-                ->join('LEFT JOIN', 'employers as es', 'es.employers_id = ps.services_specialist_id')
+                ->join('LEFT JOIN', 'category_services as cs', 'cs.category_id = s.services_category_id')
+                ->join('LEFT JOIN', 'employees as ed', 'ed.employee_id = ps.services_dispatcher_id')
+                ->join('LEFT JOIN', 'employees as es', 'es.employee_id = ps.services_specialist_id')
                 ->join('LEFT JOIN', 'personal_account as pa', 'pa.account_id = ps.services_account_id')
-                ->join('LEFT JOIN', 'flats as f', 'f.flats_id = pa.personal_house_id')
+                ->join('LEFT JOIN', 'flats as f', 'f.flats_id = pa.personal_flat_id')
                 ->join('LEFT JOIN', 'houses as h', 'h.houses_id = f.flats_house_id')
-                ->join('LEFT JOIN', 'housing_estates as he', 'he.estate_id = h.houses_estate_name_id')          
+                ->join('LEFT JOIN', 'clients as c', 'c.clients_id = pa.personal_clients_id')
                 ->where(['services_number' => $request_number])
                 ->one();
         

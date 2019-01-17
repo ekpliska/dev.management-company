@@ -1502,6 +1502,7 @@ p.right {
     background-color: #2d18b4;
     margin: 0;
     font-size: 14px;
+    min-height: 75px;
 }
 .requests-view_title i.check {
     background: #36eadf;
@@ -1523,6 +1524,7 @@ p.right {
 .requests-view_body h4 {
     font-size: 18px;
     letter-spacing: 0.32px;
+    font-weight: bold;
 }
 .date_requests {
     color: #2D18B4;
