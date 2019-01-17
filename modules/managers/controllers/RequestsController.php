@@ -123,7 +123,7 @@ class RequestsController extends AppManagersController {
     }
     
     /*
-     * Просомтр и редактирование заявки, на платную услугу
+     * Просмотр и редактирование заявки, на платную услугу
      */
     public function actionViewPaidRequest($request_number) {
         

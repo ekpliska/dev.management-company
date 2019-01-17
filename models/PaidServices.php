@@ -181,7 +181,6 @@ class PaidServices extends ActiveRecord
             $this->date_closed = time();
         } else {
             $this->date_closed = null;
-            $this->services_grade = null;
         }
         
         return $this->save() ? true : false;

@@ -70,7 +70,7 @@ $this->params['breadcrumbs'][] = "Заявка на платную услугу 
                             <?= $paid_request['status'] ?>
                         </span>
                         <?= SwitchStatusRequest::widget([
-                                'view_name' => 'request',
+                                'view_name' => 'paid_request',
                                 'status' => $paid_request['status'],
                                 'request_id' => $paid_request['id'],
                                 'date_update' => $paid_request['date_up'],
