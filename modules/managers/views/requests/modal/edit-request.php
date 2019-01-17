@@ -25,7 +25,7 @@
             ->label(false) ?>
 
     <?= $form->field($model, 'requests_phone', ['template' => '<div class="field-modal has-label">{label}{input}{error}</div>'])
-            ->widget(MaskedInput::className(), ['mask' => '+7(999) 999-99-99'])
+            ->widget(MaskedInput::className(), ['mask' => '+7 (999) 999-99-99'])
             ->input('text', ['class' => 'field-input-modal'])
             ->label($model->getAttributeLabel('requests_phone'), ['class' => 'field-label-modal']) ?>
 

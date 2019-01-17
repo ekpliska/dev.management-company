@@ -31,6 +31,7 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
 
         <h1 class="page-header requests-view_title">
             <i class="glyphicon glyphicon-ok <?= $request['is_accept'] ? 'check' : 'uncheck' ?>"></i>&nbsp;&nbsp;Заявка принята
+            
             <?= Html::button('<i class="glyphicon glyphicon-remove"></i> Удалить заявку', ['class' => 'btn settings-record-btn']) ?>
                         
             <?= Html::button('<i class="glyphicon glyphicon-bookmark"></i> Отклонить', [
@@ -41,7 +42,11 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
                     ]
             ]) ?>
             
-            <?= Html::a('<i class="glyphicon glyphicon-star"></i> Посмотреть оценку', ['/'], ['class' => 'btn settings-record-btn']) ?>
+            <?= Html::a('<i class="glyphicon glyphicon-star"></i> Посмотреть отзыв', ['show-grade-modal', 'request_id' => $request['requests_id']], [
+                    'id' => 'show-grade-btn',
+                    'class' => 'btn settings-record-btn' . ($request['status'] != StatusRequest::STATUS_CLOSE ? ' settings-btn-hide' : ''),
+            ]) ?>
+            
         </h1>
 
         <div class="row row-flex">
@@ -178,6 +183,18 @@ $('div#star').raty({
             'backdrop' => 'static',
             'keyboard' => false,
         ],        
+    ]);
+?>
+<?php Modal::end(); ?>
+
+<?php
+    /* Модальное окно для просмотра оценки заявки, поставленной пользователем */
+    Modal::begin([
+        'id' => 'show-grade-modal',
+        'header' => "Просмотр отзыва, заявка ID{$request['requests_ident']}",
+        'closeButton' => [
+            'class' => 'close modal-close-btn',
+        ],
     ]);
 ?>
 <?php Modal::end(); ?>

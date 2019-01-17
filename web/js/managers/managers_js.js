@@ -626,6 +626,17 @@ $(document).ready(function() {
         return false;        
     });
     
+    /*
+     * Загрузка модального окна просмотр отзыва
+     */
+    $('a#show-grade-btn').on('click', function(e){
+        var link = $(this).attr('href');
+        $('#show-grade-modal').modal('show');
+        $('#show-grade-modal .modal-dialog .modal-content .modal-body').load(link);
+        e.preventDefault();
+        return false;        
+    });
+    
     // ******************************************************** //
     // ************     Start Block of News      ************** //
     // ******************************************************** //

@@ -36,9 +36,9 @@
 /*
  * Временный костыль, блокирует функциональные кнопки заявки
  */
-$this->registerJs('
-    if ("' . $status . '" == 4) {
-        $(".btn:not(.dropdown-toggle)").attr("disabled", true);
-    }
-')
+//$this->registerJs('
+//    if ("' . $status . '" == 4) {
+//        $(".btn:not(.dropdown-toggle)").attr("disabled", true);
+//    }
+//')
 ?>

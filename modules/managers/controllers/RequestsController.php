@@ -347,4 +347,15 @@ class RequestsController extends AppManagersController {
         
     }
     
+    /*
+     * Модальное окно просмотра оценки заявки
+     */
+    public function actionShowGradeModal($request_id) {
+        
+        if (Yii::$app->request->isAjax) {
+            return $this->renderAjax('modal/show-grade-modal');
+        }
+        
+    }
+    
 }
