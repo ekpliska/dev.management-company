@@ -5,6 +5,7 @@
     use yii\widgets\Breadcrumbs;
     use app\modules\managers\widgets\AlertsShow;
     use app\helpers\FormatHelpers;
+    use app\models\StatusRequest;
     use app\helpers\FormatFullNameUser;
     use app\modules\managers\widgets\SwitchStatusRequest;
     use app\modules\managers\widgets\AddEmployee;
@@ -31,7 +32,15 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
         <h1 class="page-header requests-view_title">
             <i class="glyphicon glyphicon-ok <?= $request['is_accept'] ? 'check' : 'uncheck' ?>"></i>&nbsp;&nbsp;Заявка принята
             <?= Html::button('<i class="glyphicon glyphicon-remove"></i> Удалить заявку', ['class' => 'btn settings-record-btn']) ?>
-            <?= Html::button('<i class="glyphicon glyphicon-bookmark"></i> Отклонить', ['class' => 'btn settings-record-btn reject-request']) ?>
+                        
+            <?= Html::button('<i class="glyphicon glyphicon-bookmark"></i> Отклонить', [
+                    'class' => 'btn settings-record-btn reject-request' . ($request['status'] == StatusRequest::STATUS_REJECT ? ' settings-btn-hide' : ''),
+                    'data' => [
+                        'status' => StatusRequest::STATUS_REJECT,
+                        'request' => $request['requests_id'],
+                    ]
+            ]) ?>
+            
             <?= Html::a('<i class="glyphicon glyphicon-star"></i> Посмотреть оценку', ['/'], ['class' => 'btn settings-record-btn']) ?>
         </h1>
 

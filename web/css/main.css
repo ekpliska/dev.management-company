@@ -425,6 +425,9 @@ a, a:hover, a:active {
 .settings-record-btn > i {
     padding-right: 10px;
 }
+.settings-btn-hide {
+    display: none;
+}
 /* Конец Кнопка настройки заявки */
 
 /* Кнопка назначить специалиста */
@@ -3754,6 +3757,15 @@ span.status-vote-1::before {
 }
 .add-border-4 {
     border-right: 2px solid #ff7d7d;
+}
+#status-value-5 {
+    border: 1px solid #5f697a;
+    border-radius: 25px;
+    color: #5f697a;
+}
+#status-value-5 > .btn-group > button,
+#status-value-5 > button {
+    color: #5f697a;
 }
 .btn-choose-status > .caret {
     margin-left: 10px;

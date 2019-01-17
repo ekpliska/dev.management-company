@@ -54,7 +54,7 @@ class StatusHelpers {
     }
     
     /*
-     * Формирование статусов, для странцы просомтра заявки
+     * Формирование статусов, для страницы просмотреа заявки
      */
     public static function requestStatusPage($status, $date_edit) {
         

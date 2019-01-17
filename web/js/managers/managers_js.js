@@ -390,7 +390,7 @@ $(document).ready(function() {
     /*
      * Переключение статуса заявки
      */
-    $('.switch-request').on('click', function(e){
+    $('.switch-request, .reject-request').on('click', function(e){
         e.preventDefault();
         var linkValue = $(this).text();
         var statusId = $(this).data('status');
@@ -412,8 +412,9 @@ $(document).ready(function() {
                     $('#value-btn').removeClass('add-border-' + $('#value-btn').data('status'));
                     $('#value-btn').data('status', statusId);
                     $('#value-btn').addClass('add-border-' + statusId);
+                    $('.reject-request').addClass('settings-btn-hide');
                     liChoosing.addClass('disabled');
-                    if (statusId === 4) {
+                    if (statusId === 4 || statusId === 5) {
                         $('.btn:not(.btn-choose-status)').attr('disabled', true);
                     } else {
                         $('.btn:not(.btn-choose-status)').attr('disabled', false);

@@ -258,7 +258,7 @@ class Requests extends ActiveRecord
         
         $this->status = $status;
         
-        if ($status == StatusRequest::STATUS_CLOSE) {
+        if ($status == StatusRequest::STATUS_CLOSE || $status == StatusRequest::STATUS_REJECT) {
             $this->date_closed = time();
         } else {
             $this->date_closed = null;
