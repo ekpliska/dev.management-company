@@ -3,6 +3,7 @@
     use yii\helpers\Html;
     use yii\widgets\Breadcrumbs;
     use app\modules\managers\widgets\AlertsShow;
+    use app\modules\managers\widgets\ModalWindowsManager;
 
 /* 
  * Завяки, главная
@@ -37,5 +38,6 @@ $this->params['breadcrumbs'][] = 'Заявки';
             'type_requests' => $type_requests,
             'flat' => $flat,
         ]) ?>
-    
 </div>
+
+<?= ModalWindowsManager::widget(['modal_view' => 'delete_request_modal']) ?>

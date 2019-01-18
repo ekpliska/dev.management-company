@@ -3,6 +3,7 @@
     use yii\helpers\Html;
     use yii\widgets\Breadcrumbs;
     use app\modules\managers\widgets\AlertsShow;
+    use app\modules\managers\widgets\ModalWindowsManager;
 
 /* 
  * Платные услуги, главная
@@ -39,29 +40,4 @@ $this->params['breadcrumbs'][] = 'Платные услуги';
             'flat' => $flat,]) ?></div>
     
 </div>
-
-<?php /*
-<div class="managers-default-index">
-    <h1><?= $this->title ?></h1>
-    <hr />
-    
-    <?= AlertsShow::widget() ?>
-    
-    <?= Html::button('Заявка (+)', [
-        'class' => 'btn btn-success btn-sm create-paid-request',
-        'data-target' => '#create-new-paid-requests',
-        'data-toggle' => 'modal']) ?>
-    
-    <hr />
-    
-    <?= $this->render('data/grid_paid_requests', [
-        'paid_requests' => $paid_requests
-    ]) ?>
-    
-</div>
-
-<?= $this->render('form/create_paid_request', [
-        'model' => $model,
-        'servise_category' => $servise_category,
-        'servise_name' => $servise_name,
-        'flat' => $flat,]) ?></div>
+<?= ModalWindowsManager::widget(['modal_view' => 'delete_request_modal']) ?>

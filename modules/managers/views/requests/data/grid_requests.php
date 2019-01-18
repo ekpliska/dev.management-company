@@ -98,8 +98,10 @@
                             Html::button('<i class="glyphicon glyphicon-trash"></i>', [
                                 'data-pjax' => false,
                                 'class' => 'btn btn-delete-record__table',
-                                'data-target' => '#',
+                                'data-target' => '#delete-request-message',
                                 'data-toggle' => 'modal',
+                                'data-request-type' => 'requests',
+                                'data-request' => $data['requests_id'],
                             ]);
                     },
                 ],
