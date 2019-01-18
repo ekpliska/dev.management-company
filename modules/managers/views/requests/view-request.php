@@ -47,6 +47,7 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
                     'data' => [
                         'status' => StatusRequest::STATUS_REJECT,
                         'request' => $request['requests_id'],
+                        'type-request' => 'request',
                     ]
             ]) ?>
             
@@ -79,10 +80,10 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
                             <?= $request['status'] ?>
                         </span>
                         <?= SwitchStatusRequest::widget([
-                                'view_name' => 'request',
                                 'status' => $request['status'],
                                 'request_id' => $request['requests_id'],
                                 'date_update' => $request['updated_at'],
+                                'type_request' => 'request',
                             ]) ?>
                     </div>
 

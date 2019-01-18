@@ -396,12 +396,14 @@ $(document).ready(function() {
         var statusId = $(this).data('status');
         var requestId = $(this).data('request');
         var liChoosing = $('li#status' + statusId);
+        var typeRequest = $(this).data('typeRequest');
         $.ajax({
             url: 'switch-status-request',
             method: 'POST',
             data: {
                 statusId: statusId,
                 requestId: requestId,
+                typeRequest: typeRequest,
             },
             success: function(response) {
                 console.log(response.status);
@@ -426,46 +428,6 @@ $(document).ready(function() {
         });
     });
 
-    /*
-     * Переключение статуса заявки на платную услугу
-     */
-    $('.switch-paid-request').on('click', function(e){
-        e.preventDefault();
-        var linkValue = $(this).text();
-        var statusId = $(this).data('status');
-        var requestPaidId = $(this).data('request');
-        var liChoosing = $('li#status' + statusId);
-        $.ajax({
-            url: 'switch-status-paid-request',
-            method: 'POST',
-            data: {
-                statusId: statusId,
-                requestPaidId: requestPaidId,
-            },
-            success: function(response) {
-                if (response.status) {
-                    $('.dropdown-menu').find('.disabled').removeClass('disabled');
-                    $('#value-btn').html(linkValue + '<span class="caret"></span>');
-                    $('.btn-group_status-request').attr('id', 'status-value-' + statusId);
-                    $('#value-btn').removeClass('add-border-' + $('#value-btn').data('status'));
-                    $('#value-btn').data('status', statusId);
-                    $('#value-btn').addClass('add-border-' + statusId);
-                    liChoosing.addClass('disabled');
-                    if (statusId === 4) {
-                        $('.btn:not(.dropdown-toggle)').attr('disabled', true);
-                        $('textarea[id="comments-text"]').attr('disabled', true);
-                    } else {
-                        $('.btn:not(.dropdown-toggle)').attr('disabled', false);
-                        $('textarea[id="comments-text"]').attr('disabled', false);                        
-                    }
-                }
-            },
-            error: function() {
-                console.log('error');
-            },
-        });
-    });    
-    
     /*
      * Вызов модального окна "Назначение диспетчера"
      * Вызов модального окна "Назначение специалиста"

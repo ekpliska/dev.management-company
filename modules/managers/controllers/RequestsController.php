@@ -213,35 +213,29 @@ class RequestsController extends AppManagersController {
         
         $status = Yii::$app->request->post('statusId');
         $request_id = Yii::$app->request->post('requestId');
+        $type_request = Yii::$app->request->post('typeRequest');
         
         if (Yii::$app->request->isAjax) {
-            $request = Requests::findOne($request_id);
-            $request->switchStatus($status);
+            
+            switch ($type_request) {
+                case 'request':
+                    $request = Requests::findOne($request_id);
+                    $request->switchStatus($status);                    
+                    break;
+                case 'paid-request':
+                    $request = PaidServices::findOne($request_id);
+                    $request->switchStatus($status);
+                    break;
+                default:
+                    return ['success' => false];
+            }
+            
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
             return ['success' => true, 'status' => $status];
         }
         
         return ['success' => false];
     }
-    
-    /*
-     * Метод переключения статуса для заявки на платную услугу
-     */
-    public function actionSwitchStatusPaidRequest() {
-        
-        $status = Yii::$app->request->post('statusId');
-        $request_id = Yii::$app->request->post('requestPaidId');
-        
-        if (Yii::$app->request->isAjax) {
-            $request = PaidServices::findOne($request_id);
-            $request->switchStatus($status);
-            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-            return ['success' => $request, 'status' => $status, 'request_id' => $request_id];
-        }
-        
-        return ['success' => false];
-        
-    }    
     
     /*
      * Назначение диспетчера для Заявок и Заявок на платные услуги
