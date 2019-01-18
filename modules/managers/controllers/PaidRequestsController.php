@@ -5,58 +5,23 @@
     use yii\data\ActiveDataProvider;
     use yii\helpers\ArrayHelper;
     use app\modules\managers\controllers\AppManagersController;
-    use app\models\TypeRequests;
     use app\models\CategoryServices;
     use app\modules\managers\models\form\RequestForm;
     use app\modules\managers\models\form\PaidRequestForm;
     use app\modules\managers\models\Requests;
     use app\modules\managers\models\PaidServices;
-    use app\models\CommentsToRequest;
-    use app\models\Image;    
 
 /**
  * Заявки
  */
-class RequestsController extends AppManagersController {
+class PaidRequestsController extends AppManagersController {
     
     public $type_request = [
         'requests',
         'paid-requests',
     ];
     
-    /*
-     * Заявки, главная страница
-     */
     public function actionIndex() {
-        
-        $model = new RequestForm();
-        $type_request = TypeRequests::getTypeNameArray();
-        $flat = [];
-        
-        $requests = new ActiveDataProvider([
-            'query' => Requests::getAllRequests(),
-            'pagination' => [
-                'forcePageParam' => false,
-                'pageSizeParam' => false,
-                'pageSize' => 15,
-            ],
-        ]);
-        
-        // Загружаем виды заявок
-        $type_requests = TypeRequests::getTypeNameArray();
-        
-        // Загружаем модель содания заявки
-        $model = new RequestForm();
-        
-        return $this->render('index', [
-            'model' => $model,
-            'type_requests' => $type_requests,
-            'flat' => $flat,
-            'requests' => $requests,
-        ]);
-    }
-    
-    public function actionPaidRequests() {
         
         $model = new PaidRequestForm();
         $servise_category = CategoryServices::getCategoryNameArray();
@@ -72,53 +37,12 @@ class RequestsController extends AppManagersController {
             ],
         ]);
         
-        return $this->render('paid-requests', [
+        return $this->render('index', [
             'model' => $model,
             'servise_category' => $servise_category,
             'servise_name' => $servise_name,
             'flat' => $flat,
             'paid_requests' => $paid_requests,
-        ]);
-    }
-    
-    /*
-     * Просмотр и редактирование заявок
-     */
-    public function actionViewRequest($request_number) {
-        
-        $request = Requests::findRequestToIdent($request_number);
-        
-        if (!isset($request) && $request == null) {
-            throw new \yii\web\NotFoundHttpException('Вы обратились к несуществующей странице');
-        }
-        
-        $model_comment = new CommentsToRequest([
-            'scenario' => CommentsToRequest::SCENARIO_ADD_COMMENTS
-        ]);
-
-        /*
-         * Загружаем модель для добавления комментрария к задаче
-         * Pjax
-         */
-        if (Yii::$app->request->isPjax) {
-            $model_comment = new CommentsToRequest([
-                'scenario' => CommentsToRequest::SCENARIO_ADD_COMMENTS
-            ]);        
-            if ($model_comment->load(Yii::$app->request->post())) {
-                $model_comment->sendComments($request['requests_id']);
-            }
-        }
-                
-        $comments_find = CommentsToRequest::findCommentsById($request['requests_id']);
-        
-        // Получаем прикрепленные к заявке файлы
-        $images = Image::find()->andWhere(['itemId' => $request['requests_id']])->all();
-        
-        return $this->render('view-request', [
-            'request' => $request,
-            'model_comment' => $model_comment,
-            'comments_find' => $comments_find,
-            'all_images' => $images,
         ]);
     }
     
@@ -137,19 +61,6 @@ class RequestsController extends AppManagersController {
             'paid_request' => $paid_request,
             'model_comment' => $model_comment,
         ]);
-    }
-    
-    /*
-     * Метод сохранения созданной заявки
-     */
-    public function actionCreateRequest() {
-        
-        $model = new RequestForm();
-        
-        if (Yii::$app->request->isPost && $model->load(Yii::$app->request->post())) {
-            $number = $model->save();
-            return $this->redirect(['view-request', 'request_number' => $number]);
-        }
     }
     
     /*
@@ -301,43 +212,6 @@ class RequestsController extends AppManagersController {
     }
     
     /*
-     * Форма редактирования заявок
-     */
-    public function actionEditRequest($request_id) {
-        
-        $model = Requests::findOne($request_id);
-        $model->scenario = Requests::SCENARIO_EDIT_REQUEST;
-        
-        $type_requests = TypeRequests::getTypeNameArray();
-        $adress_list = $model->getUserAdress($model->requests_phone);
-        
-        if (Yii::$app->request->isAjax) {
-            return $this->renderAjax('modal/edit-request', [
-                'model' => $model,
-                'type_requests' => $type_requests,
-                'adress_list' => $adress_list,
-            ]);
-        }
-        
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash('success', ['message' => 'Информация по заявке была изменена']);
-            return $this->redirect(Yii::$app->request->referrer);
-        }
-        
-    }
-    
-    /*
-     * Модальное окно просмотра оценки заявки
-     */
-    public function actionShowGradeModal($request_id) {
-        
-        if (Yii::$app->request->isAjax) {
-            return $this->renderAjax('modal/show-grade-modal');
-        }
-        
-    }
-    
-    /*
      * Запрос на удаление заявки
      */
     public function actionConfirmDeleteRequest($type, $request_id) {
@@ -362,7 +236,7 @@ class RequestsController extends AppManagersController {
             }
             
             Yii::$app->session->setFlash('success', ['message' => 'Заявка была успешно удалена']);
-            return $this->redirect($type);
+            return $this->redirect('index');
         }
         
     }

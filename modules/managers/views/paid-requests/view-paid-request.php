@@ -15,7 +15,7 @@
  * Просмотр и редактирование заявки на платную услугу
  */
 $this->title = "Заявка на платную услугу ID{$paid_request['number']}";
-$this->params['breadcrumbs'][] = ['label' => 'Платные услуги', 'url' => ['requests/paid-services']];
+$this->params['breadcrumbs'][] = ['label' => 'Платные услуги', 'url' => ['paid-requests/index']];
 $this->params['breadcrumbs'][] = "Заявка на платную услугу ID{$paid_request['number']}";
 ?>
 

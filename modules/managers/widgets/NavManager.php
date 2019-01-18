@@ -31,11 +31,11 @@ class NavManager extends Widget {
         ],
         'requests' => [
             'name' => 'Заявки',
-            'link' => 'requests/requests',
+            'link' => 'requests/index',
         ],
-        'paid-services' => [
+        'paid-requests' => [
             'name' => 'Платные заявки',
-            'link' => 'requests/paid-requests',
+            'link' => 'paid-requests/index',
         ],
         'news' => [
             'name' => 'Новости',

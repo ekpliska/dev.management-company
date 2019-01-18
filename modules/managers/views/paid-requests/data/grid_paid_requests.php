@@ -23,7 +23,7 @@
                 'attribute' => 'request_number',
                 'header' => 'ID',
                 'value' => function ($data) {
-                    return Html::a($data['number'], ['requests/view-paid-request', 'request_number' => $data['number']]);
+                    return Html::a($data['number'], ['paid-requests/view-paid-request', 'request_number' => $data['number']]);
                 },
                 'format' => 'raw',
                 'contentOptions' =>[

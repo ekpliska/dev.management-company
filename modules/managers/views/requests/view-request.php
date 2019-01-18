@@ -15,7 +15,7 @@
  * Просмотр и редактирование заявки
  */
 $this->title = "Заявка ID{$request['requests_ident']}";
-$this->params['breadcrumbs'][] = ['label' => 'Завяки', 'url' => ['requests/requests']];
+$this->params['breadcrumbs'][] = ['label' => 'Завяки', 'url' => ['requests/index']];
 $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
 ?>
 
