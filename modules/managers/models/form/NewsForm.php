@@ -99,7 +99,7 @@ class NewsForm extends Model {
             // Сохраняем прикрепленные изображения
             $add_news->uploadFiles($files);
             
-            $add_news->isSMS = $this->isNotice[0] ? true : false;
+            $add_news->isPrivateOffice = $this->isNotice[0] ? true : false;
             $add_news->isEmail = $this->isNotice[1] ? true : false;
             $add_news->isPush = $this->isNotice[2] ? true : false;
             

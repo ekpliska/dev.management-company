@@ -21,7 +21,13 @@
 ?>
     <div class="col-md-4 news-form__left-block">
         <div class="load_preview">
-            
+            <div class="text-center">
+                <?= Html::img($model->preview, ['id' => 'photoPreview', 'class' => 'img-rounded', 'alt' => $model->title]) ?>
+            </div>
+            <div class="upload-btn-wrapper">
+                <?= $form->field($model, 'preview', ['template' => '<label class="text-center btn-upload-cover" role="button">{input}{label}{error}</label>'])
+                        ->input('file', ['id' => 'btnLoad', 'class' => 'hidden'])->label('<i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;Загрузить фото') ?>
+            </div>
         </div>
         <div class="for-whom-block">
             

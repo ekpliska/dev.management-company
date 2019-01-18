@@ -3854,8 +3854,20 @@ a.employee-profile:hover {
     border-right: 1px solid #ddd;
 }
 .load_preview {
-    height: 300px;
+    height: 270px;
     background: #ddd;
+    position: relative;
+}
+.load_preview img {
+    max-width: none;
+    min-width: auto;
+    min-height: auto;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 .check-partners-block {
     border: 1px solid #ef693a;

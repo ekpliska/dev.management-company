@@ -66,13 +66,12 @@ class News extends ActiveRecord
                 'news_user_id', 
                 'isPrivateOffice'], 'required'],
             
-            ['news_type_rubric_id', 'string'],
+            ['news_type_rubric_id', 'news_status', 'string'],
             
             [[
                 'news_house_id', 
                 'news_user_id', 
-                'isPrivateOffice', 
-                'news_status',], 'integer'],
+                'isPrivateOffice'], 'integer'],
             
 //            ['news_partner_id', 'default', 'value' => null],
             
@@ -84,7 +83,7 @@ class News extends ActiveRecord
                 }
             }],
                     
-            [['isSMS', 'isEmail', 'isPush'], 'boolean'],
+            [['isPrivateOffice', 'isEmail', 'isPush'], 'boolean'],
             
             [['news_text'], 'string'],
             [['news_title', 'news_preview', 'slug'], 'string', 'max' => 255],
