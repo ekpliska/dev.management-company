@@ -7,7 +7,7 @@
  * Создание новой новости
  */
 $this->title = Yii::$app->params['site-name-manager'] . 'Новости';
-$this->params['breadcrumbs'][] = ['label' => 'Новости', 'url' => ['news/index', 'section'=> 'news']];
+$this->params['breadcrumbs'][] = ['label' => 'Новости', 'url' => ['news/index']];
 $this->params['breadcrumbs'][] = 'Новая запись [Публикация]';
 ?>
 

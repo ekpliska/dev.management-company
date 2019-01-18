@@ -25,6 +25,9 @@ class News extends ActiveRecord
     const NOTICE_EMAIL = 2;
     const NOTICE_PUSH = 3;
     
+    const NOTICE_YES = 1;
+    const NOTICE_NO = 0;
+    
     public $files;
     
     const SCENARIO_EDIT_NEWS = 'edit news';
@@ -62,16 +65,16 @@ class News extends ActiveRecord
         return [
             [[
                 'news_type_rubric_id', 
-                'news_title', 'news_text', 
-                'news_user_id', 
-                'isPrivateOffice'], 'required'],
+                'news_title', 'news_text'], 'required'],
             
-            ['news_type_rubric_id', 'news_status', 'string'],
+            [['news_type_rubric_id', 'news_status'], 'string'],
             
             [[
                 'news_house_id', 
                 'news_user_id', 
-                'isPrivateOffice'], 'integer'],
+                'isPrivateOffice',
+                'isEmail',
+                'isPush'], 'integer'],
             
 //            ['news_partner_id', 'default', 'value' => null],
             
@@ -82,8 +85,6 @@ class News extends ActiveRecord
                     return $this->news_partner_id = null;
                 }
             }],
-                    
-            [['isPrivateOffice', 'isEmail', 'isPush'], 'boolean'],
             
             [['news_text'], 'string'],
             [['news_title', 'news_preview', 'slug'], 'string', 'max' => 255],
@@ -157,7 +158,7 @@ class News extends ActiveRecord
                 ->select(['news_id', 'news_title', 'news_type_rubric_id', 'news_partner_id', 'news_preview', 'news_text', 'created_at', 'slug', 'rubrics_name', 'isAdvert', 'partners_name'])
                 ->joinWith(['rubric', 'partner'])
                 ->where(['slug' => $slug])
-                ->asArray()
+//                ->asArray()
                 ->one();
         
     }

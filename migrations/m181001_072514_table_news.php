@@ -53,9 +53,9 @@ class m181001_072514_table_news extends Migration
             'news_partner_id' => $this->integer(),
             // Статус задает принадлежность публикации (Для всех, Для конкретного дома)
             'news_status' => $this->string(10)->notNull()->defaultValue(News::FOR_ALL),
-            'isPrivateOffice' => $this->integer()->notNull(),
-            'isEmail' => $this->tinyInteger(),
-            'isPush' => $this->tinyInteger(),
+            'isPrivateOffice' => $this->integer(),
+            'isEmail' => $this->integer(),
+            'isPush' => $this->integer(),
             'created_at' => $this->timestamp()->defaultValue(new Expression("NOW()")),
             'updated_at' => $this->timestamp()->defaultValue(new Expression("NOW()")),
             'slug' => $this->string(255),

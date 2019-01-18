@@ -11,6 +11,54 @@
 $status_checkbox = $model->isPrivateOffice ? false : true;
 ?>
 
+<div class="news-form row">
+<?php
+    $form = ActiveForm::begin([
+        'id' => 'news-form',
+        'options' => [
+            'enctype' => 'multipart/form-data',
+        ],
+    ]);
+?>
+    <div class="col-md-4 news-form__left-block">
+        <div class="load_preview">
+            <div class="text-center">
+                <?= Html::img($model->preview, ['id' => 'photoPreview', 'class' => 'img-rounded', 'alt' => $model->news_title]) ?>
+            </div>
+            <div class="upload-btn-wrapper">
+                <?= $form->field($model, 'preview', ['template' => '<label class="text-center btn-upload-cover" role="button">{input}{label}{error}</label>'])
+                        ->input('file', ['id' => 'btnLoad', 'class' => 'hidden'])->label('<i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;Загрузить фото') ?>
+            </div>
+        </div>
+        
+        <div class="for-whom-block">
+            <?= $form->field($model, 'news_status')
+                ->radioList($status_publish, ['id' => 'for_whom_news',
+                    'item' => function($index, $label, $name, $checked, $value) {
+                        $_checked = $checked == 1 ? 'checked' : '';
+                        $return = '<label class="input-radio">' . ucwords($label);
+                        $return .= '<input type="radio" name="' . $name . '" value="' . $value . '" id="type-vote_' . $index . '"' . $_checked . '>';
+                        $return .= '<span class="checkmark"></span>';
+                        $return .= '</label>';
+                        return $return;
+                    }
+                ])
+                ->label(false); ?>
+            
+            <?= $form->field($model, 'news_house_id', ['template' => '<div class="field"></i>{label}{input}{error}</div>'])
+                ->dropDownList($houses, [
+                    'id' => 'adress_list',
+                    'class' => 'field-input-select'])
+                ->label($model->getAttributeLabel('house'), ['class' => 'field-input-select_label']) ?>
+        </div>
+        
+        
+    </div>
+
+<?php ActiveForm::end(); ?>    
+</div>
+
+<?php /*
     <?php
         $form = ActiveForm::begin([
             'id' => 'news-form',
@@ -112,7 +160,7 @@ $status_checkbox = $model->isPrivateOffice ? false : true;
     </div>
     
     <div class="col-md-6">
-        
+        <?php /*
         <?= $form->field($model, 'isSMS')
                 ->checkbox([
                     'id' => 'is_notice',
@@ -129,7 +177,7 @@ $status_checkbox = $model->isPrivateOffice ? false : true;
                 ->checkbox([
                     'id' => 'is_notice',
                     'disabled' => $status_checkbox])
-                ->label(false) ?>
+                ->label(false)  ?>
     </div>
     
     <div class="clearfix"></div>
@@ -150,4 +198,4 @@ $status_checkbox = $model->isPrivateOffice ? false : true;
     
     <?php ActiveForm::end(); ?>
 
-<?= ModalWindowsManager::widget(['modal_view' => 'delete_news']) ?>    
+<?= ModalWindowsManager::widget(['modal_view' => 'delete_news']) */ ?>    

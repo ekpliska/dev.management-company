@@ -185,10 +185,10 @@ class NewsController extends AppManagersController {
         }
         
         $status_publish = News::getStatusPublish();
-        $notice = News::getArrayStatusNotice();
+        $notice = News::getNoticeType();
         $type_notice = News::getNoticeType();
         $rubrics = Rubrics::getArrayRubrics();
-        $houses = HousesEstates::getHouseOrEstate($news->news_status);
+        $houses = Houses::getHousesList();
         $parnters = Partners::getAllParnters();
         
         // Получаем прикрепленные к заявке файлы

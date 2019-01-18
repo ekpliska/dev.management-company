@@ -80,6 +80,7 @@ class NewsForm extends Model {
     public function save($file, $files) {
         
         $transaction = Yii::$app->db->beginTransaction();
+//        var_dump(count($this->isNotice)); die();
         
         try {
             
@@ -87,7 +88,6 @@ class NewsForm extends Model {
             $add_news->news_type_rubric_id = $this->rubric;
             $add_news->news_title = HtmlPurifier::process(strip_tags($this->title));
             $add_news->news_text = HtmlPurifier::process(strip_tags($this->text));
-            $add_news->isPrivateOffice = $this->isPrivateOffice;
             
             // Если значение дома не задано, то публикацию сохраняем как "для всех" (null)
             $add_news->news_house_id = $this->house ? $this->house : null;
@@ -99,9 +99,9 @@ class NewsForm extends Model {
             // Сохраняем прикрепленные изображения
             $add_news->uploadFiles($files);
             
-            $add_news->isPrivateOffice = $this->isNotice[0] ? true : false;
-            $add_news->isEmail = $this->isNotice[1] ? true : false;
-            $add_news->isPush = $this->isNotice[2] ? true : false;
+            $add_news->isPrivateOffice = isset($this->isNotice[0]) ? News::NOTICE_YES : News::NOTICE_NO;
+            $add_news->isEmail = isset($this->isNotice[1]) ? News::NOTICE_YES : News::NOTICE_NO;
+            $add_news->isPush = isset($this->isNotice[2]) ? News::NOTICE_YES : News::NOTICE_NO;
             
             if ($this->isAdvert == 1) {
                 $add_news->isAdvert = 1;
