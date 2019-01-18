@@ -190,7 +190,6 @@ class PaidServices extends ActiveRecord
     public static function findByID($request_id) {
         return self::find()
                 ->where(['services_id' => $request_id])
-                ->asArray()
                 ->one();
     }
     

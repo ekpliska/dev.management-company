@@ -56,7 +56,7 @@ class RequestsController extends AppManagersController {
         ]);
     }
     
-    public function actionPaidServices() {
+    public function actionPaidRequests() {
         
         $model = new PaidRequestForm();
         $servise_category = CategoryServices::getCategoryNameArray();
@@ -72,7 +72,7 @@ class RequestsController extends AppManagersController {
             ],
         ]);
         
-        return $this->render('paid-services', [
+        return $this->render('paid-requests', [
             'model' => $model,
             'servise_category' => $servise_category,
             'servise_name' => $servise_name,
@@ -371,7 +371,10 @@ class RequestsController extends AppManagersController {
                     $request = Requests::findByID($request_id);
                     break;
                 case 'paid-requests':
+                    $request = PaidServices::findByID($request_id);
                     break;
+                default:
+                    return ['success' => false];
             }
             
             if (!$request->delete()) {

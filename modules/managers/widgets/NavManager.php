@@ -35,7 +35,7 @@ class NavManager extends Widget {
         ],
         'paid-services' => [
             'name' => 'Платные заявки',
-            'link' => 'requests/paid-services',
+            'link' => 'requests/paid-requests',
         ],
         'news' => [
             'name' => 'Новости',

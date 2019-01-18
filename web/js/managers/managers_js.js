@@ -604,7 +604,6 @@ $(document).ready(function() {
     
     /*
      * Обработка запроса на удаление Заявки, Платной услуги
-     * 
      */
     $('#delete-request-message').on('show.bs.modal', function(e){
         var requestId = $(e.relatedTarget).data('request');
