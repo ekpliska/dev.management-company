@@ -105,20 +105,18 @@ class Houses extends ActiveRecord
                 ->one();
     }
     
-//    public static function getAllHouses() {
-//        
-//        return self::find()
-//                ->select(['estate_id', 'estate_name', 'estate_town', 'houses_id', 'houses_street', 'houses_number_house', 'houses_description'])
-//                ->joinWith(['estate'])
-//                ->orderBy([
-//                    'estate_name' => SORT_ASC,
-//                    'estate_town' => SORT_ASC,
-//                    'houses_street' => SORT_ASC,
-//                    'houses_number_house' => SORT_ASC])
-//                ->asArray()
-//                ->all();
-//        
-//    }    
+    public static function getHousesList() {
+        
+        $houses = self::find()
+                ->select(['houses_id', 'houses_gis_adress', 'houses_number'])
+                ->orderBy([
+                    'houses_gis_adress' => SORT_ASC,
+                    'houses_number' => SORT_ASC])
+                ->asArray()
+                ->all();
+        
+        return $houses;
+    }    
     
     /*
      * Загрузка прикрепленного документа

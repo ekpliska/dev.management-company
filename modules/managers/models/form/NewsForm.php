@@ -52,7 +52,7 @@ class NewsForm extends Model {
             
             [['title', 'text'], 'filter', 'filter' => 'trim'],
             
-            [['status', 'house', 'isPrivateOffice', 'isNotice', 'partner'], 'integer'],
+            [['house', 'isPrivateOffice', 'isNotice', 'partner'], 'integer'],
             
             [['preview'], 'file', 'extensions' => 'png, jpg, jpeg'],
             [['preview'], 'image', 'maxWidth' => 510, 'maxHeight' => 510],
@@ -60,6 +60,8 @@ class NewsForm extends Model {
             [['files'], 'file', 'extensions' => 'doc, docx, pdf, xls, xlsx, ppt, pptx, txt', 'maxFiles' => 4],
             
             [['partner', 'isAdvert'], 'integer'],
+            
+            ['status', 'string', 'max' => 10],
             
             // Поле контрагент обязательно для заполнения, если стоит переключатель "рекламная запись"
             ['partner', 'required', 'when' => function($model) {

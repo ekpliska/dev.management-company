@@ -638,6 +638,7 @@ $(document).ready(function() {
      */
     $('#for_whom_news').on('change', function(e) {
         var forWhom = $("#news-form input[type='radio']:checked").val();
+        console.log(forWhom);
         
         if (forWhom === '0') {
             $('#adress_list').prop('disabled', true);

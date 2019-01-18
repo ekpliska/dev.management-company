@@ -121,10 +121,11 @@ class News extends ActiveRecord
     /*
      * Тип уведомления публикации
      */
-    public static function getArrayStatusNotice() {
+    public static function getNoticeType() {
         return [
-            self::ONLY_PERSONAL_OFFICE => 'Публикация только в личном кабинете',
-            self::ONLY_PERSONAL_OFFICE_WITH_NOTICE => 'Публикация в личном кабинете с оповещением',
+            self::NOTICE_PUSH => 'Push-оповещения',
+            self::NOTICE_PERSONAL_OFFICE => 'Публикация только личном кабинете',
+            self::NOTICE_EMAIL => 'Email-оповещения',
         ];
     }
     
@@ -134,19 +135,7 @@ class News extends ActiveRecord
     public static function getStatusPublish() {
         return [
             self::FOR_ALL => 'Для всех жильцов',
-            self::FOR_ALL_HOUSE_AREA => 'Для жилого комплекса',
             self::FOR_CURRENT_HOUSE => 'Для конкретного дома',
-        ];
-    }
-    
-    /*
-     * Тип оповещения
-     */
-    public static function getNoticeType() {
-        return [
-            self::NOTICE_SMS => 'СМС',
-            self::NOTICE_EMAIL => 'Email',
-            self::NOTICE_PUSH => 'Push',
         ];
     }
     

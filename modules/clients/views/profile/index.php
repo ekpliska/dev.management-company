@@ -119,7 +119,7 @@ $this->params['breadcrumbs'][] = 'Профиль';
         
         <?= $form->field($user, 'user_check_email', ['template' => '{input}{label}'])->checkbox([], false)->label() ?> 
 
-        <div class="save-btn-group mx-auto">
+        <div class="save-btn-group">
             <div class="text-center">
                 <?= Html::submitButton('Сохранить изменения', ['class' => 'btn blue-btn']) ?>
             </div>

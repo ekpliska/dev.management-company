@@ -3840,3 +3840,29 @@ a.employee-profile:hover {
 }
 
 /* Конец Модальное окно назначение сотрудника на заяку */
+
+/* Новость, форма создания и редатирования публикации */
+.news-form {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+}
+.news-form__left-block {
+    padding: 10px;
+}
+.news-form__left-block {
+    min-height: 1000px;
+    border-right: 1px solid #ddd;
+}
+.load_preview {
+    height: 300px;
+    background: #ddd;
+}
+.check-partners-block {
+    border: 1px solid #ef693a;
+    padding: 10px;
+    border-radius: 12px;
+}
+.news-form__btn-block {
+    margin: 50px 10px;
+}
+/* Конец Новость, форма создания и редатирования публикации */

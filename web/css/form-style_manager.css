@@ -706,6 +706,57 @@ textarea {
 }
 /* End Style for RadioButton */
 
+/* End Style for CheckButtonList */
+.input-checklist {
+    display: block;
+    position: relative;
+    padding: 4px 40px;
+    margin: 20px 20px 0;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: normal;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.input-checklist input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+.checkmark-list {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+.container:hover input ~ .checkmark-list {
+    background-color: #ccc;
+}
+.input-checklist input:checked ~ .checkmark-list {
+    background-color: #2d18b4;
+}
+.checkmark-list:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+.input-checklist input:checked ~ .checkmark-list:after {
+    display: block;
+}
+.input-checklist .checkmark-list:after {
+    content: '\2714';
+    top: 3px;
+    left: 5px;
+    width: 8px;
+    height: 8px;
+    color: #fff;
+}
+/* End Style for CheckButtonList */
 
 /* Выпадающий список навигационная панель, Выбор адреса */
 .custom-select {

@@ -10,7 +10,7 @@
     font-size: 12px;
     position: absolute;
     top: 7%;
-    margin-left: 10px;
+/*    margin-left: 30px;*/
 }
 label.el-radio,
 label.el-checkbox {
@@ -29,10 +29,12 @@ label.el-checkbox {
 .el-checkbox > input[type="checkbox"] + .el-checkbox-style {
     position: relative;
     display: inline-block;
-    width: 1.4em;
+    /*width: 1.4em;*/
     height: 1.4em;
     vertical-align: middle;
     cursor: pointer;
+    padding-left: 30px;
+    font-weight: unset;
 }
 .el-radio > input[type="radio"] + .el-radio-style:hover:before,
 .el-checkbox > input[type="checkbox"] + .el-checkbox-style:hover:before {

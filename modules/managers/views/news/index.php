@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = 'Новости';
     ]) ?>
     
     <div id="_list-res">
-        <?= $this->render("data/grid_{$section}", ['all_news' => $results]) ?>
+        <?= $this->render("data/grid_{$section}", ["all_{$section}" => $results]) ?>
     </div>
     
     <?= Html::a('', ['news/create'], ['class' => 'create-request-btn']) ?>

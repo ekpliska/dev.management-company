@@ -81,44 +81,45 @@ class NewsController extends AppManagersController {
     }
     
     
-    /*
-     * Новости, главная страница
-     */
-    public function actionNews() {
-        
-        $all_news = new ActiveDataProvider([
-            'query' => News::getAllNews($adver = false),
-            'pagination' => [
-                'forcePageParam' => false,
-                'pageSizeParam' => false,
-                'pageSize' => 15,
-            ],
-        ]);
-        
-        return $this->render('news', [
-            'all_news' => $all_news,
-        ]);
-    }
-    
-    /*
-     * Реклама, главная страница
-     */
-    public function actionAdverts() {
-        
-        $all_adverts = new ActiveDataProvider([
-            'query' => News::getAllNews($adver = true),
-            'pagination' => [
-                'forcePageParam' => false,
-                'pageSizeParam' => false,
-                'pageSize' => 15,
-            ],
-        ]);        
-        
-        return $this->render('adverts', [
-            'all_adverts' => $all_adverts,
-        ]);
-    }    
-    
+//    /*
+//     * Новости, главная страница
+//     */
+//    public function actionNews() {
+//        
+//        $all_news = new ActiveDataProvider([
+//            'query' => News::getAllNews($adver = false),
+//            'pagination' => [
+//                'forcePageParam' => false,
+//                'pageSizeParam' => false,
+//                'pageSize' => 15,
+//            ],
+//        ]);
+//        
+//        return $this->render('news', [
+//            'all_news' => $all_news,
+//        ]);
+//    }
+//    
+//    /*
+//     * Реклама, главная страница
+//     */
+//    public function actionAdverts() {
+//        
+//        $all_adverts = new ActiveDataProvider([
+//            'query' => News::getAllNews($adver = true),
+//            'pagination' => [
+//                'forcePageParam' => false,
+//                'pageSizeParam' => false,
+//                'pageSize' => 15,
+//            ],
+//        ]);        
+//        
+//        return $this->render('adverts', [
+//            'all_adverts' => $all_adverts,
+//        ]);
+//    }    
+//    
+
     /*
      * Создание публикации
      * 
@@ -128,11 +129,14 @@ class NewsController extends AppManagersController {
     public function actionCreate() {
         
         $model = new NewsForm();
+        // Тип публикации (Для всех, Для конкретного дома)
         $status_publish = News::getStatusPublish();
-        $notice = News::getArrayStatusNotice();
-        $type_notice = News::getNoticeType();
+        // Тип уведомления
+        $notice = News::getNoticeType();
+        // Тип рубрики
         $rubrics = Rubrics::getArrayRubrics();
         $houses = [];
+        // Партнеры, если публикация - рекламная запись
         $parnters = Partners::getAllParnters();
         
         if (Yii::$app->request->isPost && $model->load(Yii::$app->request->post())) {
@@ -163,7 +167,6 @@ class NewsController extends AppManagersController {
             'model' => $model,
             'status_publish' => $status_publish,
             'notice' => $notice,
-            'type_notice' => $type_notice,
             'rubrics' => $rubrics,
             'houses' => $houses,
             'parnters' => $parnters,
@@ -242,29 +245,17 @@ class NewsController extends AppManagersController {
      */
     public function actionForWhomNews($status) {
         
-        // Полчаем список всех домов
-        $current_house = Houses::getHousesList();
-        // Получаем список всех жилых комплексов
-        $housing_estates = HousingEstates::getHousingEstateList();
+        // Получаем список всех домов
+        $houses_list = Houses::getHousesList();
         
-        if ($status == 0) {
-            echo '<option>Для всех</option>';
-        } elseif ($status == 1) {
-            foreach ($housing_estates as $estate) {
-                $name = FormatHelpers::formatEstateAdress($estate['estate_name'], $estate['estate_town']);
-                echo '<option value="' . $estate['estate_id'] . '">' . $name . '</option>';
-            }
-        } elseif ($status == 2) {
-            foreach ($current_house as $house) {
-                $full_adress = FormatHelpers::formatFullAdress(
-                        $house['estate_town'], 
-                        $house['houses_street'], 
-                        $house['houses_number_house'], 
-                        false, false);
+        if ($status == 'all') {
+            echo '<option value="0">-</option>';
+        } elseif ($status == 'house') {
+            foreach ($houses_list as $house) {
+                $full_adress = $house['houses_gis_adress'] . ', д. ' . $data['houses_number'];
                 echo '<option value="' . $house['houses_id'] . '">' . $full_adress . '</option>';
             }
         }
-        
     }
     
     /*

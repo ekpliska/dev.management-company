@@ -18,14 +18,12 @@ class News extends BaseNews {
                         . 'isAdvert as advert, '
                         . 'news_status as status, '
                         . 'created_at as date, '
-                        . 'he.estate_name as estate_name, he.estate_town as estate_town,'
-                        . 'h.houses_street as street, h.houses_number_house as house')
+                        . 'h.houses_gis_adress as houses_gis_adress, h.houses_number as houses_number')
                 ->from('news as n')
                 ->join('LEFT JOIN', 'rubrics as r', 'n.news_type_rubric_id = r.rubrics_id')
                 ->join('LEFT JOIN', 'houses as h', 'n.news_house_id = h.houses_id')
                 ->where(['isAdvert' => $adver])
                 ->orderBy(['created_at' => SORT_DESC])
-                ->groupBy('news_id')
 //                ->all()
                 ;
         
