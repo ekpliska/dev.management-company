@@ -43,7 +43,42 @@ class NewsController extends AppManagersController {
          
        ]; 
         
-    }    
+    }
+    
+    /*
+     * Новости, главная страница
+     */
+    public function actionIndex($section = 'news') {
+        
+        switch ($section) {
+            case 'news':
+                $results = new ActiveDataProvider([
+                    'query' => News::getAllNews($adver = false),
+                    'pagination' => [
+                        'forcePageParam' => false,
+                        'pageSizeParam' => false,
+                        'pageSize' => 15,
+                    ],
+                ]);
+                break;
+            case 'adverts':
+                $results = new ActiveDataProvider([
+                    'query' => News::getAllNews($adver = true),
+                    'pagination' => [
+                        'forcePageParam' => false,
+                        'pageSizeParam' => false,
+                        'pageSize' => 15,
+                    ],
+                ]);
+                break;
+        }
+        
+        return $this->render('index', [
+            'results' => $results,
+        ]);
+        
+    }
+    
     
     /*
      * Новости, главная страница

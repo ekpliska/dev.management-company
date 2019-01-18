@@ -39,6 +39,9 @@ class SubMenu extends Widget {
             case 'voting':
                 $params = $this->adressLists();
                 break;
+            case 'news':
+                $params = $this->newsSubMenu();
+                break;
         }
         
         return $this->render('submenu/' . $this->view_name, [
@@ -84,6 +87,20 @@ class SubMenu extends Widget {
     private function adressLists() {
         
         return $params = Houses::getAdressHousesList();
+        
+    }
+    
+    /*
+     * Дополнительные разделы для "Носотей"
+     */
+    private function newsSubMenu() {
+        
+        $sub_news_array = [
+            'news' => 'Новости',
+            'adverts' => 'Рекламная запись',
+        ];
+        
+        return $sub_news_array;
         
     }
     

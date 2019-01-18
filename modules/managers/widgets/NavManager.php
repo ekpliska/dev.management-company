@@ -39,11 +39,7 @@ class NavManager extends Widget {
         ],
         'news' => [
             'name' => 'Новости',
-            'link' => 'news/news',
-        ],
-        'news' => [
-            'name' => 'Реклама',
-            'link' => 'news/adverts',
+            'link' => 'news/index',
         ],
         'voting' => [
             'name' => 'Голосование',
