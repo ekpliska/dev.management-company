@@ -61,8 +61,6 @@ class RequestForm extends Model {
      */
     public function save() {
         
-//        $account_id = PersonalAccount::findByFlatId($this->flat);
-        
         $transaction = Yii::$app->db->beginTransaction();
         
         try {

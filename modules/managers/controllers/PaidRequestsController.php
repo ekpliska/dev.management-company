@@ -82,13 +82,8 @@ class PaidRequestsController extends AppManagersController {
      */
     public function actionValidationForm($form) {
         
-        if ($form == 'new-request') {
-            $model = new RequestForm();
-        } elseif ($form == 'paid-request') {
+        if ($form == 'paid-request') {
             $model = new PaidRequestForm();
-        } elseif ($form == 'edit-request') {
-            $model = new Requests();
-            $model->scenario = Requests::SCENARIO_EDIT_REQUEST;
         }
         
         if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {

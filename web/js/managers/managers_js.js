@@ -618,6 +618,16 @@ $(document).ready(function() {
         $.post('confirm-delete-request?type=' + requestType + '&request_id=' + requestId, function(data) {});
     });
     
+    /*
+     * Очистить форму заполнения заявки, если пользователь нажал в модальном окне "Отмена"
+     */ 
+    $('.request__btn_close').on('click', function () {
+        $('#create-new-request')[0].reset();
+        $('.field-modal-textarea span').each(function(){
+            $(this).text('');
+        });        
+    });
+    
     // ******************************************************** //
     // ************     Start Block of News      ************** //
     // ******************************************************** //

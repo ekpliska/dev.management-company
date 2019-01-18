@@ -16,7 +16,7 @@
         'id' => 'create-new-requests',
         'header' => 'Новая заявка',
         'closeButton' => [
-            'class' => 'close modal-close-btn req',
+            'class' => 'close modal-close-btn request__btn_close',
         ],
         'clientOptions' => [
             'backdrop' => 'static',
@@ -38,8 +38,7 @@
                 'template' => '<span class="paid-service-dropdown-arrow"><div class="field-modal-select">{label}{input}{error}</div></span>'])
             ->dropDownList($type_requests, [
                 'prompt' => 'Выберите вид заявки из списка...'])
-            ->label(false) 
-    ?>
+            ->label(false) ?>
 
     <?= $form->field($model, 'phone', ['template' => '<div class="field-modal">{label}{input}{error}</div>'])
             ->input('text', ['class' => 'field-input-modal cell-phone mobile_phone'])
@@ -50,8 +49,7 @@
             ->dropDownList($flat, [
                 'id' => 'house',
                 'prompt' => 'Квартира...'])
-            ->label(false) 
-    ?>
+            ->label(false) ?>
 
     <?= $form->field($model, 'description', [
                 'template' => '<div class="field-modal-textarea">{label}<span id="label-count"></span><span id="label-count-left"></span>{input}{error}</div>'])

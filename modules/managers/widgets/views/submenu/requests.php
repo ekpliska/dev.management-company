@@ -8,10 +8,10 @@
  */    
 $arrya_controllers = [
     'requests',
+    'paid-requests',
 ];
 $arrya_actions = [
-    'requests', 
-    'paid-services', 
+    'index', 
 ];
 ?>
 

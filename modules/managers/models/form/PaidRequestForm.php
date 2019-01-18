@@ -5,6 +5,7 @@
     use yii\base\Model;
     use app\models\PaidServices;
     use app\models\PersonalAccount;
+    use app\models\User;
     use app\models\Clients;
     use app\models\Rents;
     use app\models\StatusRequest;
@@ -28,10 +29,6 @@ class PaidRequestForm extends Model {
             [['servise_category', 'servise_name', 'phone', 'description', 'flat'], 'required'],
             
             ['description', 'string', 'min' => 10, 'max' => 255],
-//            ['description', 'match',
-//                'pattern' => '/^[А-Яа-яЁёA-Za-z0-9\_\-\@\.]+$/iu',
-//                'message' => 'Поле "{attribute}" может содержать только буквы русского и английского алфавита, цифры, знаки "-", "_"',
-//            ],            
             
             ['phone', 'existenceClient'],
             ['phone',
@@ -46,18 +43,15 @@ class PaidRequestForm extends Model {
      */
     public function existenceClient() {
         
-        $client = Clients::find()
-                ->andWhere(['clients_mobile' => $this->phone])
-                ->orWhere(['clients_phone' => $this->phone])
-                ->one();
-
-        $rent = Rents::find()
-                ->andwhere(['rents_mobile' => $this->phone])
-                ->orWhere(['rents_mobile_more' => $this->phone])
+        $user = User::find()
+                ->andWhere(['user_mobile' => $this->phone])
                 ->one();
         
+        $client = $user['user_client_id'];
+        $rent = $user['user_rent_id'];
+        
         if ($client == null && $rent == null) {
-            $errorMsg = 'Собственник или арендатор по указанному номеру мобильного телефона на найден. Укажите существующий номер телефона';
+            $errorMsg = 'Указанный номер мобтльного телефона в системе не зарегистрирован';
             $this->addError('phone', $errorMsg);
         }
 
@@ -65,35 +59,27 @@ class PaidRequestForm extends Model {
     
     public function save() {
         
-        $account_id = PersonalAccount::findByFlatId($this->flat);
-        
         $transaction = Yii::$app->db->beginTransaction();
         
         try {
             $paid_request = new PaidServices();
 
             /* Формирование идентификатора для заявки:
-             *      последние 7 символов лицевого счета - 
              *      последние 6 символов даты в unix - 
              *      код вида платной заявки
-             *      код наименования платной заявки
              */
             
             $date = new \DateTime();
             $int = $date->getTimestamp();
 
-            $numder = substr($account_id['account_number'], 4) . 
-                    '-' . substr($int, 5) . 
-                    '-' . str_pad($this->servise_category, 2, 0, STR_PAD_LEFT) . 
-                    '-' . str_pad($this->servise_name, 2, 0, STR_PAD_LEFT);
+            $numder = substr(substr($int, 5) . '-' . str_pad($this->servise_category, 2, 0, STR_PAD_LEFT));
             
             $paid_request->services_number = $numder;
-            $paid_request->services_category_services_id = $this->servise_category;
             $paid_request->services_name_services_id = $this->servise_name;
             $paid_request->services_phone = $this->phone;
             $paid_request->services_comment = $this->description;
             $paid_request->status = StatusRequest::STATUS_NEW;
-            $paid_request->services_account_id = $account_id['account_id'];
+            $paid_request->services_account_id = $this->flat;
             
             $paid_request->save();
             
