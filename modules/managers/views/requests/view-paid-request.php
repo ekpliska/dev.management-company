@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = "Заявка на платную услугу 
                     'class' => 'btn settings-record-btn',
                     'data-target' => '#delete-request-message',
                     'data-toggle' => 'modal',
-                    'data-request-type' => 'requests',
+                    'data-request-type' => 'paid-requests',
                     'data-request' => $paid_request['id'],
             ]) ?>
                         
@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = "Заявка на платную услугу 
                     'data' => [
                         'status' => StatusRequest::STATUS_REJECT,
                         'request' => $paid_request['id'],
-                        'type-request' => 'paid-request',
+                        'type-request' => 'paid-requests',
                     ]
             ]) ?>
             
@@ -74,7 +74,7 @@ $this->params['breadcrumbs'][] = "Заявка на платную услугу 
                                 'status' => $paid_request['status'],
                                 'request_id' => $paid_request['id'],
                                 'date_update' => $paid_request['date_up'],
-                                'type_request' => 'paid-request',
+                                'type_request' => 'paid-requests',
                             ]) ?>
                     </div>
 
@@ -126,7 +126,7 @@ $this->params['breadcrumbs'][] = "Заявка на платную услугу 
                                 <td>
                                     <?= Html::button('<i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Назначить диспетчера', [
                                             'class' => 'btn blue-border-btn btn-dispatcher',
-                                            'data-type-request' => 'paid-request',
+                                            'data-type-request' => 'paid-requests',
                                             'data-employee' => $paid_request['employee_id_d'],
                                             'data-target' => '#add-dispatcher-modal',
                                             'data-toggle' => 'modal']) ?>
@@ -134,7 +134,7 @@ $this->params['breadcrumbs'][] = "Заявка на платную услугу 
                                 <td>
                                     <?= Html::button('<i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Назначить специалиста', [
                                             'class' => 'btn blue-border-btn',
-                                            'data-type-request' => 'paid-request',
+                                            'data-type-request' => 'paid-requests',
                                             'data-employee' => $paid_request['employee_id_s'],
                                             'data-target' => '#add-specialist-modal',
                                             'data-toggle' => 'modal']) ?>
@@ -151,3 +151,5 @@ $this->params['breadcrumbs'][] = "Заявка на платную услугу 
     </div>
 </div>
 <?= AddEmployee::widget() ?>
+
+<?= ModalWindowsManager::widget(['modal_view' => 'delete_request_modal']) ?>

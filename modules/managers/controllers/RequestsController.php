@@ -20,8 +20,8 @@
 class RequestsController extends AppManagersController {
     
     public $type_request = [
-        'request',
-        'paid-request',
+        'requests',
+        'paid-requests',
     ];
     
     /*
@@ -215,14 +215,19 @@ class RequestsController extends AppManagersController {
         $request_id = Yii::$app->request->post('requestId');
         $type_request = Yii::$app->request->post('typeRequest');
         
+        // Если параметр "тип заявки" пришел не верный отправляем на главную страницу
+        if (ArrayHelper::keyExists($type_request, $this->type_request)) {
+            return $this->goHome();
+        }
+        
         if (Yii::$app->request->isAjax) {
             
             switch ($type_request) {
-                case 'request':
+                case 'requests':
                     $request = Requests::findOne($request_id);
                     $request->switchStatus($status);                    
                     break;
-                case 'paid-request':
+                case 'paid-requests':
                     $request = PaidServices::findOne($request_id);
                     $request->switchStatus($status);
                     break;
@@ -255,13 +260,13 @@ class RequestsController extends AppManagersController {
         
         if (Yii::$app->request->isAjax) {
             switch ($type_request) {
-                case 'request':
+                case 'requests':
                     $request = Requests::findByID($request_id);
                     $request->chooseDispatcher($dispatcher_id);
                     return ['success' => true];
                     break;
                 
-                case 'paid-request':
+                case 'paid-requests':
                     $paid_request = PaidServices::findOne($request_id);
                     $paid_request->chooseDispatcher($dispatcher_id);
                     return ['success' => true];
@@ -295,12 +300,12 @@ class RequestsController extends AppManagersController {
         if (Yii::$app->request->isAjax) {
             
             switch ($type_request) {
-                case 'request':
+                case 'requests':
                     $request = Requests::findByID($request_id);
                     $request->chooseSpecialist($specialist_id);
                     return ['success' => true];
                     break;
-                case 'paid-request':
+                case 'paid-requests':
                     $paid_request = PaidServices::findOne($request_id);
                     $paid_request->chooseSpecialist($specialist_id);
                     return ['success' => true];
@@ -365,7 +370,7 @@ class RequestsController extends AppManagersController {
                 case 'requests':
                     $request = Requests::findByID($request_id);
                     break;
-                case 'paid-request':
+                case 'paid-requests':
                     break;
             }
             

@@ -404,7 +404,9 @@ a, a:hover, a:active {
 /* Конец Кпока удаление записи на странице */
 
 /* Кнопка настройки заявки */
-.settings-record-btn {
+.settings-record-btn,
+.settings-record-btn:active,
+.settings-record-btn:focus {
     padding: 10px 20px;
     border-radius: 12px;
     border: 1px solid #fff;
@@ -415,12 +417,13 @@ a, a:hover, a:active {
     text-transform: uppercase;
     margin: 0 10px;
     float: right;
+    outline: none;
 }
-.settings-record-btn:focus,
 .settings-record-btn:hover {
     background-color: #fff;
     box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
     color: #2d18b4;
+    outline: none;
 }
 .settings-record-btn > i {
     padding-right: 10px;

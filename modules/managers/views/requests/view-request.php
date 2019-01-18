@@ -47,7 +47,7 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
                     'data' => [
                         'status' => StatusRequest::STATUS_REJECT,
                         'request' => $request['requests_id'],
-                        'type-request' => 'request',
+                        'type-request' => 'requests',
                     ]
             ]) ?>
             
@@ -83,7 +83,7 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
                                 'status' => $request['status'],
                                 'request_id' => $request['requests_id'],
                                 'date_update' => $request['updated_at'],
-                                'type_request' => 'request',
+                                'type_request' => 'requests',
                             ]) ?>
                     </div>
 
@@ -141,7 +141,7 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
                                 <td>
                                     <?= Html::button('<i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Назначить диспетчера', [
                                             'class' => 'btn blue-border-btn btn-dispatcher',
-                                            'data-type-request' => 'request',
+                                            'data-type-request' => 'requests',
                                             'data-employee' => $request['requests_dispatcher_id'],
                                             'data-target' => '#add-dispatcher-modal',
                                             'data-toggle' => 'modal']) ?>
@@ -149,7 +149,7 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
                                 <td>
                                     <?= Html::button('<i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Назначить специалиста', [
                                             'class' => 'btn blue-border-btn',
-                                            'data-type-request' => 'request',
+                                            'data-type-request' => 'requests',
                                             'data-employee' => $request['requests_specialist_id'],
                                             'data-target' => '#add-specialist-modal',
                                             'data-toggle' => 'modal']) ?>
