@@ -24,7 +24,7 @@ class m181005_073055_table_voting extends Migration
         // Голосование
         $this->createTable('{{%voting}}', [
             'voting_id' => $this->primaryKey(),
-            'voting_type' => $this->tinyInteger()->notNull(),
+            'voting_type' => $this->string(10)->notNull(),
             'voting_title' => $this->string(255)->notNull(),
             'voting_text' => $this->text(1000)->notNull(),
             'voting_date_start' => $this->timestamp()->defaultValue(new Expression("NOW()")),

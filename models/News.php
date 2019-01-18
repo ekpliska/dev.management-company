@@ -18,14 +18,10 @@
 class News extends ActiveRecord
 {
     
-    const ONLY_PERSONAL_OFFICE = 0;
-    const ONLY_PERSONAL_OFFICE_WITH_NOTICE = 1;
+    const FOR_ALL = 'all';
+    const FOR_CURRENT_HOUSE = 'house';
     
-    const FOR_ALL = 0;
-    const FOR_ALL_HOUSE_AREA = 1;
-    const FOR_CURRENT_HOUSE = 2;
-    
-    const NOTICE_SMS = 1;
+    const NOTICE_PERSONAL_OFFICE = 1;
     const NOTICE_EMAIL = 2;
     const NOTICE_PUSH = 3;
     

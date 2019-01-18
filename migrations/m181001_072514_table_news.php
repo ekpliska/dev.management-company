@@ -51,9 +51,9 @@ class m181001_072514_table_news extends Migration
             'news_house_id' => $this->integer(),
             'news_user_id' => $this->integer()->notNull(),
             'news_partner_id' => $this->integer(),
+            // Статус задает принадлежность публикации (Для всех, Для конкретного дома)
             'news_status' => $this->integer()->notNull()->defaultValue(News::FOR_ALL),
             'isPrivateOffice' => $this->integer()->notNull(),
-            'isSMS' => $this->tinyInteger(),
             'isEmail' => $this->tinyInteger(),
             'isPush' => $this->tinyInteger(),
             'created_at' => $this->timestamp()->defaultValue(new Expression("NOW()")),
@@ -84,7 +84,7 @@ class m181001_072514_table_news extends Migration
                 'CASCADE'
         );
         
-        /* $this->addForeignKey(
+        $this->addForeignKey(
                 'fk-news-news_house_id', 
                 '{{%news}}', 
                 'news_house_id', 
@@ -92,7 +92,7 @@ class m181001_072514_table_news extends Migration
                 'houses_id', 
                 'SET NULL',
                 'CASCADE'
-        ); */
+        );
         
         /* $this->addForeignKey(
                 'fk-news-news_user_id', 
@@ -116,7 +116,6 @@ class m181001_072514_table_news extends Migration
         $this->dropForeignKey('fk-rubrics-rubrics_id', '{{%news}}');
         $this->dropForeignKey('fk-news-news_partner_id', '{{%news}}');
         $this->dropForeignKey('fk-news-news_house_id', '{{%news}}');
-        $this->dropForeignKey('fk-news-news_user_id', '{{%news}}');
         $this->dropTable('{{%partners}}');
         $this->dropTable('{{%rubrics}}');
         $this->dropTable('{{%news}}');

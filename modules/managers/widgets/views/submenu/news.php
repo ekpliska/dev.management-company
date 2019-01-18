@@ -25,4 +25,16 @@ $arrya_actions = [
             <?php endforeach; ?>
         </ul>
     </div>
+
+    <div class="container-fluid submenu-manager text-center">
+        <ul class="nav navbar-nav navbar-left">
+            <li>
+                #TODO
+            </li>
+            <li>
+                #TODO
+            </li>
+        </ul>
+    </div>
+
 <?php endif; ?>

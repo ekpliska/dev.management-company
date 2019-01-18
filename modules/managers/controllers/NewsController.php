@@ -74,6 +74,7 @@ class NewsController extends AppManagersController {
         }
         
         return $this->render('index', [
+            'section' => $section,
             'results' => $results,
         ]);
         

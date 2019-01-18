@@ -3276,6 +3276,9 @@ tbody > tr > td > div.empty::before {
 .manager-main-with-sub {
     margin-top: 110px;
 }
+.manager-main-with-sub-news {
+    margin-top: 200px;
+}
 /* Конец Администратор, контент + доп меню */
 
 /* Администратор, контент */
