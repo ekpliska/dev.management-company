@@ -72,9 +72,10 @@ class PaidRequestForm extends Model {
             $date = new \DateTime();
             $int = $date->getTimestamp();
 
-            $numder = substr(substr($int, 5) . '-' . str_pad($this->servise_category, 2, 0, STR_PAD_LEFT));
+            $numder = substr($int, 5) . '-' . str_pad($this->servise_category, 2, 0, STR_PAD_LEFT);
             
             $paid_request->services_number = $numder;
+            $paid_request->services_servise_category_id = $this->servise_category;
             $paid_request->services_name_services_id = $this->servise_name;
             $paid_request->services_phone = $this->phone;
             $paid_request->services_comment = $this->description;

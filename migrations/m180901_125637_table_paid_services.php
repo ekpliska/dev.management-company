@@ -21,6 +21,7 @@ class m180901_125637_table_paid_services extends Migration
         $this->createTable('{{%paid_services}}', [
             'services_id' => $this->primaryKey(),
             'services_number' => $this->string(16)->notNull(),
+            'services_servise_category_id' => $this->integer()->notNull(),
             'services_name_services_id' => $this->integer()->notNull(),
             'services_comment' => $this->text(255)->notNull(),
             'services_phone' => $this->string(50)->notNull(),
@@ -37,6 +38,16 @@ class m180901_125637_table_paid_services extends Migration
         
         $this->createIndex('idx-paid_services-services_id', '{{%paid_services}}', 'services_id');
         $this->createIndex('idx-paid_services-services_number', '{{%paid_services}}', 'services_number');
+        
+        $this->addForeignKey(
+                'fk-paid_services-services_servise_category_id', 
+                '{{%paid_services}}', 
+                'services_servise_category_id', 
+                '{{%category_services}}', 
+                'category_id', 
+                'RESTRICT',
+                'CASCADE'
+        );        
         
         $this->addForeignKey(
                 'fk-paid_services-services_name_services_id', 
@@ -69,6 +80,7 @@ class m180901_125637_table_paid_services extends Migration
         $this->dropIndex('idx-paid_services-services_number', '{{%paid_services}}');
         $this->dropForeignKey('fk-paid_services-services_name_services_id', '{{%paid_services}}');
         $this->dropForeignKey('fk-paid_services-services_account_id', '{{%paid_services}}');
+        $this->addForeignKey('fk-paid_services-services_servise_category_id', '{{%paid_services}}');
         $this->dropTable('{{%paid_services}}');
     }
     

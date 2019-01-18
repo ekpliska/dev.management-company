@@ -5,9 +5,9 @@
     use yii\behaviors\TimestampBehavior;
     use yii\db\ActiveRecord;
     use yii\helpers\ArrayHelper;
-    use yii\helpers\Html;
     use yii\data\ActiveDataProvider;
     use app\models\StatusRequest;
+    use app\models\User;
 
 /**
  * Платные услуги
@@ -16,6 +16,7 @@ class PaidServices extends ActiveRecord
 {
     
     const SCENARIO_ADD_SERVICE = 'add_record';
+    const SCENARIO_EDIT_REQUEST = 'edit_record';
     
     /**
      * Таблица из БД
@@ -39,21 +40,38 @@ class PaidServices extends ActiveRecord
     {
         return [
             
-            [['services_name_services_id', 'services_phone', 'services_comment'], 'required', 'on' => self::SCENARIO_ADD_SERVICE],
+            [['services_servise_category_id', 'services_name_services_id', 'services_phone', 'services_comment'], 'required', 'on' => self::SCENARIO_ADD_SERVICE],
             
             [
                 'services_phone', 
                 'match', 
                 'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/i',
-                'on' => self::SCENARIO_ADD_SERVICE,
+                'on' => [self::SCENARIO_ADD_SERVICE, self::SCENARIO_EDIT_REQUEST],
             ],
 
-            [['services_comment'], 'string', 'on' => self::SCENARIO_ADD_SERVICE],
-            [['services_comment'], 'string', 'min' => 10, 'max' => 255, 'on' => self::SCENARIO_ADD_SERVICE],
+            [['services_comment'], 'string', 'on' => [self::SCENARIO_ADD_SERVICE, self::SCENARIO_EDIT_REQUEST]],
+            [['services_comment'], 'string', 'min' => 10, 'max' => 255, 'on' => [self::SCENARIO_ADD_SERVICE, self::SCENARIO_EDIT_REQUEST]],
             
-            [['services_name_services_id', 'created_at', 'updated_at', 'status', 'services_dispatcher_id', 'services_specialist_id', 'services_account_id'], 'integer'],
+            [['services_servise_category_id', 'services_name_services_id', 'created_at', 'updated_at', 'status', 'services_dispatcher_id', 'services_specialist_id', 'services_account_id'], 'integer'],
             [['services_number'], 'string', 'max' => 50],
             [['services_phone'], 'string', 'max' => 50],
+            
+            [[
+                'services_servise_category_id', 
+                'services_name_services_id', 
+                'services_phone', 
+                'services_account_id', 
+                'services_comment'], 'required', 'on' => self::SCENARIO_EDIT_REQUEST],
+            
+            // Проверка на существования номера телефона, используемого в завке
+            [
+                'services_phone', 'exist', 
+                'targetClass' => User::className(),
+                'targetAttribute' => 'user_mobile',
+                'message' => 'Указанный номер в системе не найден',
+                'on' => self::SCENARIO_EDIT_REQUEST,
+            ],
+            
         ];
     }
     
@@ -220,6 +238,7 @@ class PaidServices extends ActiveRecord
         $request_body = "Заявка, наименование услуги: {$service_id['services_name']}. Тип прибора учета: {$counter_type}. Уникальный инедтификатор прибора учета: {$counter_id}. [Заявка сформирована автоматически]";
         
         $new->services_number = $order_numder;
+        $new->services_servise_category_id = $service_id['services_category_id'];
         $new->services_name_services_id = $service_id['services_id'];
         $new->services_comment = $request_body;
         $new->services_phone = Yii::$app->userProfile->mobile;

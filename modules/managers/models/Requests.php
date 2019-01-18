@@ -5,6 +5,8 @@
     use app\models\Requests as BaseRequests;
     use app\models\StatusRequest;
     use app\helpers\FormatHelpers;
+    use app\models\User;
+    use app\models\PersonalAccount;
 
 /**
  *  Завяки
@@ -67,10 +69,10 @@ class Requests extends BaseRequests {
      */
     public function getUserAdress($phone) {
         
-        $client_info = \app\models\User::findByPhone($phone);
+        $client_info = User::findByPhone($phone);
         $client_id = $client_info['user_client_id'] ? $client_info['user_client_id'] : $client_info['user_rent_id'];
         
-        $house_list = \app\models\PersonalAccount::find()
+        $house_list = PersonalAccount::find()
                 ->select(['account_id', 'houses_gis_adress', 'houses_number', 'flats_number'])
                 ->joinWith(['flat', 'flat.house'])
                 ->andWhere(['personal_clients_id' => $client_id])

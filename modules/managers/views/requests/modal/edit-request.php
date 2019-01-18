@@ -8,10 +8,6 @@
  * Рендер вида редактирования заявки
  */
 ?>
-<?php 
-//echo '<pre>';
-//var_dump($adress_list);
-?>
 <?php $form = ActiveForm::begin([
     'id' => 'edit-request-form',
     'enableAjaxValidation' => true,

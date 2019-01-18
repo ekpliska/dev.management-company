@@ -6,7 +6,7 @@
     use yii\helpers\ArrayHelper;
     use app\modules\managers\controllers\AppManagersController;
     use app\models\CategoryServices;
-    use app\modules\managers\models\form\RequestForm;
+    use app\models\Services;
     use app\modules\managers\models\form\PaidRequestForm;
     use app\modules\managers\models\Requests;
     use app\modules\managers\models\PaidServices;
@@ -84,6 +84,9 @@ class PaidRequestsController extends AppManagersController {
         
         if ($form == 'paid-request') {
             $model = new PaidRequestForm();
+        } elseif ($form == 'edit-paid-request') {
+            $model = new PaidServices();
+            $model->scenario = PaidServices::SCENARIO_EDIT_REQUEST;
         }
         
         if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
@@ -235,5 +238,33 @@ class PaidRequestsController extends AppManagersController {
         }
         
     }
+    
+    /*
+     * Форма редактирования заявок на платные услуги
+     */
+    public function actionEditPaidRequest($request_id) {
+        
+        $model = PaidServices::findOne($request_id);
+        $model->scenario = PaidServices::SCENARIO_EDIT_REQUEST;
+        
+        $servise_category = CategoryServices::getCategoryNameArray();;
+        $servise_name = Services::getPayServices($model->services_servise_category_id);
+        $adress_list = $model->getUserAdress($model->services_phone);
+        
+        if (Yii::$app->request->isAjax) {
+            return $this->renderAjax('modal/edit-paid-request', [
+                'model' => $model,
+                'servise_category' => $servise_category,
+                'servise_name' => ArrayHelper::map($servise_name, 'services_id', 'services_name'),
+                'adress_list' => $adress_list,
+            ]);
+        }
+        
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', ['message' => 'Информация по заявке была изменена']);
+            return $this->redirect(Yii::$app->request->referrer);
+        }
+        
+    }    
     
 }

@@ -364,8 +364,7 @@ $(document).ready(function() {
     /*
      * Формирование зависимых списков выбора имени услуги от ее категории
      */
-    $('#category_service').on('change', function(e) {
-
+    $(document).on('change', '#category_service', function(e) {
         $.post('/web/managers/app-managers/show-name-service?categoryId=' + $(this).val(),
         function(data) {
             $('#service_name').html(data);

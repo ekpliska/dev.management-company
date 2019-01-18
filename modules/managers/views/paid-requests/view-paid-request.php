@@ -62,7 +62,7 @@ $this->params['breadcrumbs'][] = "Заявка на платную услугу 
                     </p>
 
                     <?= Html::a('<i class="glyphicon glyphicon-pencil"></i> Внести изменения', 
-                            ['edit-request', 'request_id' => $paid_request['id']], 
+                            ['edit-paid-request', 'request_id' => $paid_request['id']], 
                             ['class' => 'btn edit-request-btn']) ?>
 
                     <div class="requests__status-block">
@@ -151,5 +151,21 @@ $this->params['breadcrumbs'][] = "Заявка на платную услугу 
     </div>
 </div>
 <?= AddEmployee::widget() ?>
+    
+<?php
+    /* Модальное окно для загрузки формы редактирования заявки */
+    Modal::begin([
+        'id' => 'edit-requests',
+        'header' => 'Редактирование заявки',
+        'closeButton' => [
+            'class' => 'close modal-close-btn',
+        ],
+        'clientOptions' => [
+            'backdrop' => 'static',
+            'keyboard' => false,
+        ],        
+    ]);
+?>
+<?php Modal::end(); ?>    
 
 <?= ModalWindowsManager::widget(['modal_view' => 'delete_request_modal']) ?>
