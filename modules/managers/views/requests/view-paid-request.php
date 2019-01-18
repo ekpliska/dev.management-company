@@ -54,7 +54,7 @@ $this->params['breadcrumbs'][] = "Заявка на платную услугу 
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="content requests-view_body">
                     <h4>
-                        <?= $paid_request['category'] . '/' . $paid_request['services_name'] ?>
+                        <?= $paid_request['category'] . '<span class="label">' . $paid_request['services_name'] . '</span>' ?>
                     </h4>
                     <p class="date_requests">
                         <?= FormatHelpers::formatDate($paid_request['date_cr'], true, 0, false) ?>
@@ -111,13 +111,13 @@ $this->params['breadcrumbs'][] = "Заявка на платную услугу 
                                 <td id="dispatcher-name">
                                     <?= FormatFullNameUser::fullNameEmployee(
                                             $paid_request['employee_id_d'], true, true, [
-                                                $paid_request['surname_d'], $paid_request['name_d'], $paid_request['sname_d']
+                                                $paid_request['surname_d'], $paid_request['name_d'], $paid_request['second_name_d']
                                             ]) ?>
                                 </td>
                                 <td id="specialist-name">
                                     <?= FormatFullNameUser::fullNameEmployee(
                                             $paid_request['employee_id_s'], false, true, [
-                                                $paid_request['surname_s'], $paid_request['name_s'], $paid_request['sname_s']
+                                                $paid_request['surname_s'], $paid_request['name_s'], $paid_request['second_name_s']
                                             ]) ?>
                                 </td>
                             </tr>
@@ -149,122 +149,4 @@ $this->params['breadcrumbs'][] = "Заявка на платную услугу 
         
     </div>
 </div>
-<?= AddEmployee::widget(['type_request' => 'paid-request']) ?>
-<?php /*
-<div class="managers-default-index">
-    <h1><?= $this->title ?></h1>
-    <hr />
-    
-    <?= AlertsShow::widget() ?>
-    
-    <div class="col-md-7">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <?= $paid_request['category'] ?>
-            </div>
-            <div class="panel-body">
-                
-                <div class="col-md-12">
-                    <?= $paid_request['services_name'] ?>
-                    <br />
-                    <?= FormatHelpers::formatDate($paid_request['date_cr']) ?> 
-                    <div id="star" data-request="<?= $paid_request['id'] ?>" data-score-reguest="<?= $paid_request['grade'] ?>"></div>
-                    <hr />
-                </div>
-                
-                <div class="col-md-4">
-                    <span class="label label-warning">
-                        <?= $paid_request['number'] ?>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    
-                    <?= SwitchStatusRequest::widget([
-                            'view_name' => 'paid_request',
-                            'status' => $paid_request['status'],
-                            'request_id' => $paid_request['id']]) ?>
-                    
-                    <?= FormatHelpers::formatDate($paid_request['date_up']) ?>   
-                    <hr />                 
-                </div>
-                
-                <div class="col-md-12">
-                    <?= $paid_request['text'] ?>
-                    <hr />
-                </div>
-                
-                <div class="col-md-6">
-                    <?= FormatHelpers::formatFullAdress(
-                            $paid_request['town'], 
-                            $paid_request['street'], 
-                            $paid_request['number_house'], 
-                            $paid_request['porch'], 
-                            $paid_request['floor'], 
-                            $paid_request['flat']) ?>
-                </div>
-                <div class="col-md-6">
-                    <?= $paid_request['phone'] ?>
-                    <br />
-                    <?= FormatFullNameUser::fullNameByPhone($paid_request['phone']) ?>
-                </div>
-                
-                <div class="clearfix"></div>
-                <hr />
-                
-                <div class="col-md-12 text-center">
-                    <div class="col-md-4">
-                        <div id="dispatcher-name">
-                            <?= FormatFullNameUser::fullNameEmployee($paid_request['dispatcher'], true, true) ?>
-                        </div>
-                        <br/>
-                        <?= Html::button('Назначить диспетчера', [
-                            'class' => 'btn btn-default btn-dispatcher',
-                            'data-type-request' => 'paid-request',
-                            'data-employee' => $paid_request['dispatcher'],
-                            'data-target' => '#add-dispatcher-modal',
-                            'data-toggle' => 'modal']) ?>
-                    </div>
-                    <div class="col-md-4">
-                        <div id="specialist-name">
-                            <?= FormatFullNameUser::fullNameEmployee($paid_request['specialist'], false, true) ?>
-                        </div>
-                        <br/>
-                        <?= Html::button('Назначить специалиста', [
-                            'class' => 'btn btn-default',
-                            'data-type-request' => 'paid-request',
-                            'data-employee' => $paid_request['specialist'],
-                            'data-target' => '#add-specialist-modal',
-                            'data-toggle' => 'modal']) ?>
-                    </div>
-                    <div class="col-md-4">
-                        <br />
-                        <?= Html::button('Отклонить', ['class' => 'btn btn-danger reject-request']) ?>
-                    </div>
-                </div>
-                
-            </div>
-        </div>        
-    </div>
-    <div class="col-md-5">
-        <div class="panel panel-default">
-            <div class="panel-heading">Комменатрии к заявке</div>
-            <div class="panel-body">
-                #TODO
-            </div>
-        </div>
-    </div>
-    
-    <div class="clearfix"></div>
-    <?= AddEmployee::widget() ?>
-</div>
-
-
-<?php
-$grade = $paid_request['grade'] ? $paid_request['grade'] : 0; 
-$this->registerJs("
-$('div#star').raty({
-    score: " . $grade . ",
-    readOnly: true,
-});    
-")
-?> 
+<?= AddEmployee::widget() ?>

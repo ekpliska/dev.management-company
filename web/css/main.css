@@ -1525,6 +1525,14 @@ p.right {
     font-size: 18px;
     letter-spacing: 0.32px;
     font-weight: bold;
+    padding: 0 0 20px 0;
+}
+.requests-view_body > h4 > span {
+    border: 1px solid #2d18b4;
+    color: #2d18b4;
+    padding: 5px 10px;
+    margin-left: 10px;
+    border-radius: 25px;
 }
 .date_requests {
     color: #2D18B4;

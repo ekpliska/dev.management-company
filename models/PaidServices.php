@@ -149,8 +149,8 @@ class PaidServices extends ActiveRecord
                         . 'ps.created_at as date_cr, ps.updated_at as date_up, ps.date_closed as date_cl, '
                         . 'ps.services_phone as phone, ps.services_comment as text, '
                         . 'ps.status as status, ps.services_comment as text, '
-                        . 'ed.employee_id as employee_id_d, ed.employee_surname as surname_d, ed.employee_name as name_d, ed.employee_surname as second_name_d, '
-                        . 'es.employee_id as employee_id_s, es.employee_surname as surname_s, es.employee_name as name_s, es.employee_surname as second_name_s, '
+                        . 'ed.employee_id as employee_id_d, ed.employee_surname as surname_d, ed.employee_name as name_d, ed.employee_second_name as second_name_d, '
+                        . 'es.employee_id as employee_id_s, es.employee_surname as surname_s, es.employee_name as name_s, es.employee_second_name as second_name_s, '
                         . 'cs.category_name as category, s.services_name as services_name, '
                         . 'h.houses_gis_adress as gis_adress, h.houses_number as houses_number, '
                         . 'f.flats_porch as porch, f.flats_floor as floor, f.flats_number as flat')
