@@ -236,18 +236,17 @@ class NewsController extends AppManagersController {
     /*
      * Запрос на удаление прикрепленного документа
      */
-    public function actionDeleteFile() {
+    public function actionDeleteFile($file) {
         
-        $file_id = Yii::$app->request->post('fileId');
-        if (Yii::$app->request->isAjax) {
-            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-            $file = Image::findOne($file_id);
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        
+        if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
+            
+            $file = Image::findOne($file);
             if (!$file->delete()) {
-                Yii::$app->session->setFlash('news-admin', [
-                    'success' => false, 
-                    'error' => 'Извините, при удалении документа произошла ошибка. Попробуйте обновить страницу и повторите действие еще раз']);
+                Yii::$app->session->setFlash('error', ['messages' => 'Извините, при удалении документа произошла ошибка. Попробуйте обновить страницу и повторите действие еще раз']);
             }
-            return $this->redirect(Yii::$app->request->referrer);
+            return ['success' => true];
         }
     }
     

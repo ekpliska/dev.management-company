@@ -697,32 +697,33 @@ $(document).ready(function() {
         });
     });
     
-//    /*
-//     * Запрос на удаление прикрепленного документа
-//     */
-//    $('.delete_span').on('click', function() {
-//        $(this).hide();
-//        
-//    });
-////    $('.delete_file').on('click', function() {
-////        $(this).append('<span>Here</span>')
-//////       var fileId = $(this).data('files');
-//////       alert(fileId);
-//////       $.ajax({
-//////           url: 'delete-file',
-//////           method: 'POST',
-//////           data: {
-//////               fileId: fileId,
-//////           },
-//////           success: function(response){
-////////               console.log(response.status);
-//////           },
-//////           error: function(){
-//////               console.log('error');
-//////           },
-//////       });
-////    });
-//    
+    /*
+     * Запрос на удаление прикрепленного документа
+     */
+    $('.delete_span').on('click', function() {
+        var fileId = $(this).data('files');
+        $(this).html('');
+        $(this).append(
+                '<a href="javascript:void(0)" id="delete-file-yes-' + fileId + '" data-files="' + fileId + '">Удалить</a>' + ' ' + 
+                '<a href="javascript:void(0)" id="delete-file-no-' + fileId + '" data-files="' + fileId + '">Отмена</a>'
+                );
+    });
+    
+    $(document).on('click' , 'a[id^=delete-file-yes]', function(e){
+        var fileId = $(this).data('files');
+        e.preventDefault();
+        $.post('delete-file?file=' + fileId, function(data) {
+            $('a[id^=delete-file-yes]').closest('tr').remove();
+            e.preventDefault(); 
+        });
+    });
+    
+    $(document).on('click' , 'a[id^=delete-file-no]', function(e){
+        var fileId = $(this).data('files');
+        e.preventDefault();
+        $(this).closest('span').html('Удалить');
+    });
+    
     /*
      * Если выбран параметр "Реклама" то список партнеров делаем доступным
      */

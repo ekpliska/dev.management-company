@@ -4014,9 +4014,9 @@ a.employee-profile:hover {
     color: #999;
     float: right;
 }
-.table-upload-file > tbody > tr > td span.delete_span::before {
+/*.table-upload-file > tbody > tr > td span.delete_span::before {
     content: '\2715';
-}
+}*/
 .table-upload-file > tbody > tr > td button:hover {
     color: #999;
     font-weight: bold;
