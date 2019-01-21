@@ -673,9 +673,7 @@ $(document).ready(function() {
      */
     $('#delete_news_manager').on('show.bs.modal', function(e) {
         var newsId = $(e.relatedTarget).data('news');
-        var isAdvert = $(e.relatedTarget).data('isAdvert');
         $('.delete_news__del').data('news', newsId);
-        $('.delete_news__del').data('isAdvert', isAdvert);
     });
 
     /*
@@ -683,14 +681,12 @@ $(document).ready(function() {
      */
     $('.delete_news__del').on('click', function(){
         var newsId = $(this).data('news');
-        var isAdvert = $(this).data('isAdvert');
         
         $.ajax({
-            url: '/web/managers/news/delete-news',
+            url: 'delete-news',
             method: 'POST',
             data: {
                 newsId: newsId,
-                isAdvert: isAdvert,
             },
             success: function(responce){
 //                console.log(responce.success);

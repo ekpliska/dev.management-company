@@ -2,6 +2,7 @@
 
     use yii\widgets\Breadcrumbs;
     use yii\helpers\Html;
+    use app\modules\managers\widgets\AlertsShow;
 
 /* 
  * Новости главная страница
@@ -16,6 +17,8 @@ $this->params['breadcrumbs'][] = 'Новости';
             'homeLink' => ['label' => 'ELSA | Администратор', 'url' => ['managers/index']],
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]) ?>
+    
+    <?= AlertsShow::widget() ?>
     
     <div id="_list-res">
         <?= $this->render("data/grid_{$section}", ["all_{$section}" => $results]) ?>

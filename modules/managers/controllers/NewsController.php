@@ -217,23 +217,19 @@ class NewsController extends AppManagersController {
     public function actionDeleteNews() {
         
         $news_id = Yii::$app->request->post('newsId');
-        $_redirect = Yii::$app->request->post('isAdvert') == 1 ? ['news/adverts'] : ['news/news'];
         
         if (Yii::$app->request->isAjax) {
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
             $news = News::findOne($news_id);
+            $_advert = $news->isAdvert ? 'adverts' : 'news';
             
             if (!$news->delete()) {
-                Yii::$app->session->setFlash('news-admin', [
-                    'success' => false, 
-                    'error' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз']);
+                Yii::$app->session->setFlash('error', ['message' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз']);
                 return $this->redirect(Yii::$app->request->referrer);
             }
-            Yii::$app->session->setFlash('news-admin', [
-                'success' => true, 
-                'message' => 'Новость ' . $news->news_title . ' была успешно удалена']);
+            Yii::$app->session->setFlash('success', ['message' => 'Новость ' . $news->news_title . ' была успешно удалена']);
         }
-        return $this->redirect($_redirect);        
+        return $this->redirect(['index', 'section' => $_advert]);        
     }
     
     /*
