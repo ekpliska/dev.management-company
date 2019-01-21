@@ -3877,4 +3877,7 @@ a.employee-profile:hover {
 .news-form__btn-block {
     margin: 50px 10px;
 }
+.notice-block {
+    margin: 0 50%;
+}
 /* Конец Новость, форма создания и редатирования публикации */

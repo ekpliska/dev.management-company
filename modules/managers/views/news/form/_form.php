@@ -78,31 +78,30 @@
                 ->textInput(['class' => 'field-input'])
                 ->label($model->getAttributeLabel('title'), ['class' => 'field-label'])?>
         
-        <?= $form->field($model, 'text')->widget(Widget::className(), [
-                'settings' => [
-                    'lang' => 'ru',
-                    'minHeight' => 400,
-                    'imageUpload' => Url::to(['/managers/news/image-upload']),
-                    'imageDelete' => Url::to(['/managers/news/file-delete']),
-                    'plugins' => [
-                        'fullscreen',
-                        'imagemanager',
-                        'fontcolor',
-                        'table',
-                        'fontsize',
-                    ],
-                ],
-            ])->label(false) ?>
-        
+        <?= $form->field($model, 'text')
+                ->widget(Widget::className(), [
+                    'settings' => [
+                        'lang' => 'ru',
+                        'minHeight' => 400,
+                        'imageUpload' => Url::to(['/managers/news/image-upload']),
+                        'imageDelete' => Url::to(['/managers/news/file-delete']),
+                        'plugins' => [
+                            'fullscreen',
+                            'imagemanager',
+                            'fontcolor',
+                            'table',
+                            'fontsize',
+                        ]
+                    ]])
+                ->label(false) ?>
+
         <?= $form->field($model, 'files[]')->input('file', ['multiple' => true])->label() ?>
-        
         
         <?= $form->field($model, 'isNotice')
                 ->checkboxList($notice, [
                     'item' => function($index, $label, $name, $checked, $value) {
-                        $_checked = $checked == 1 ? 'checked' : '';
                         $return = '<label class="input-checklist">' . ucwords($label);
-                        $return .= '<input type="checkbox" name="' . $name . '" value="' . $value . '" id="type-vote_' . $index . '"' . $_checked . '>';
+                        $return .= '<input type="checkbox" name="' . $name . '" value="' . $value . '" id="type-notice_' . $index . '"' . '>';
                         $return .= '<span class="checkmark-list"></span>';
                         $return .= '</label>';
                         return $return;

@@ -80,46 +80,6 @@ class NewsController extends AppManagersController {
         
     }
     
-    
-//    /*
-//     * Новости, главная страница
-//     */
-//    public function actionNews() {
-//        
-//        $all_news = new ActiveDataProvider([
-//            'query' => News::getAllNews($adver = false),
-//            'pagination' => [
-//                'forcePageParam' => false,
-//                'pageSizeParam' => false,
-//                'pageSize' => 15,
-//            ],
-//        ]);
-//        
-//        return $this->render('news', [
-//            'all_news' => $all_news,
-//        ]);
-//    }
-//    
-//    /*
-//     * Реклама, главная страница
-//     */
-//    public function actionAdverts() {
-//        
-//        $all_adverts = new ActiveDataProvider([
-//            'query' => News::getAllNews($adver = true),
-//            'pagination' => [
-//                'forcePageParam' => false,
-//                'pageSizeParam' => false,
-//                'pageSize' => 15,
-//            ],
-//        ]);        
-//        
-//        return $this->render('adverts', [
-//            'all_adverts' => $all_adverts,
-//        ]);
-//    }    
-//    
-
     /*
      * Создание публикации
      * 
@@ -188,7 +148,8 @@ class NewsController extends AppManagersController {
         $notice = News::getNoticeType();
         $type_notice = News::getNoticeType();
         $rubrics = Rubrics::getArrayRubrics();
-        $houses = Houses::getHousesList();
+//        $houses = Houses::getHousesList();
+        $houses = [];
         $parnters = Partners::getAllParnters();
         
         // Получаем прикрепленные к заявке файлы
@@ -206,20 +167,12 @@ class NewsController extends AppManagersController {
                 $files = UploadedFile::getInstances($news, 'files');
                 $news->uploadFiles($files);
                 
-                Yii::$app->session->setFlash('news-admin', [
-                    'success' => true,
-                    'message' => 'Изменения были успешно сохранены',
-                ]);
-                
-                return $this->redirect(Yii::$app->request->referrer);
+                Yii::$app->session->setFlash('success', ['message' => 'Изменения были успешно сохранены']);
+                return $this->redirect(['view', 'slug' => $news->slug]);
                 
             } else {
-                Yii::$app->session->setFlash('news-admin', [
-                    'success' => false,
-                    'error' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз',
-                ]);
-                
-                return $this->redirect(Yii::$app->request->referrer);
+                Yii::$app->session->setFlash('error', ['message' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз']);
+                return $this->redirect(['view', 'slug' => $news->slug]);
 
             }
             
