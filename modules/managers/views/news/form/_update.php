@@ -98,23 +98,33 @@
                     ]])
                 ->label(false) ?>
         
-            <?= $form->field($model, 'files[]')->input('file', ['multiple' => true])->label() ?>
-            <?php if (isset($docs) && count($docs) > 0) : ?>
-                <table class="table table-upload-file">
-                    <tbody>
-                    <?php foreach ($docs as $doc) : ?>
-                        <tr>
-                            <td>
-                                <?= FormatHelpers::formatUrlByDoc($doc['name'], $doc['filePath']) ?>
-                                <?= Html::button('×', [
-                                        'class' => 'delete_file',
-                                        'data-files' => $doc['id']]) ?>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                    </tbody>
-                </table>
-            <?php endif; ?>
+            <?php // = $form->field($model, 'files[]')->input('file', ['multiple' => true])->label() ?>
+
+            <table class="table table-upload-file">
+                <thead>
+                    <tr>
+                        <th>
+                            <?= $form->field($model, 'files[]', ['template' => '<label class="text-center btn-upload-cover" role="button">{input}{label}{error}</label>'])
+                                    ->input('file', ['id' => 'btnLoad', 'class' => 'hidden'])->label('<i class="glyphicon glyphicon-download-alt"></i> Добавить документ') ?>
+                        </th>
+                    </tr>    
+                </thead>
+                
+                <?php if (isset($docs) && count($docs) > 0) : ?>
+                        <tbody>
+                        <?php foreach ($docs as $doc) : ?>
+                            <tr>
+                                <td>
+                                    <?= FormatHelpers::formatUrlByDoc($doc['name'], $doc['filePath']) ?>
+                                    <?= Html::button('&#10005;', [
+                                            'class' => 'delete_file',
+                                            'data-files' => $doc['id']]) ?>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                        </tbody>
+                <?php endif; ?>
+            </table>
 
             <div class="spam-agree-txt notice-block">
                 <?= $form->field($model, 'isPush', ['template' => '{input}{label}'])->checkbox([], false)->label() ?> 
