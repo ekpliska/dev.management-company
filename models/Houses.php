@@ -105,7 +105,12 @@ class Houses extends ActiveRecord
                 ->one();
     }
     
-    public static function getHousesList() {
+    
+    /*
+     * Формирование списка адресов домов
+     * @param boolean $for_list Если требуется предоставить список для dropDownList
+     */
+    public static function getHousesList($for_list = false) {
         
         $houses = self::find()
                 ->select(['houses_id', 'houses_gis_adress', 'houses_number'])
@@ -115,7 +120,7 @@ class Houses extends ActiveRecord
                 ->asArray()
                 ->all();
         
-        return $houses;
+        return $for_list ? ArrayHelper::map($houses, 'houses_id', 'houses_gis_adress') : $houses;
     }    
     
     /*

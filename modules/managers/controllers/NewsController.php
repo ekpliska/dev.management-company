@@ -148,8 +148,7 @@ class NewsController extends AppManagersController {
         $notice = News::getNoticeType();
         $type_notice = News::getNoticeType();
         $rubrics = Rubrics::getArrayRubrics();
-//        $houses = Houses::getHousesList();
-        $houses = [];
+        $houses = empty($news->news_house_id) ? [] : Houses::getHousesList($for_list = true);
         $parnters = Partners::getAllParnters();
         
         // Получаем прикрепленные к заявке файлы
@@ -202,7 +201,7 @@ class NewsController extends AppManagersController {
         $houses_list = Houses::getHousesList();
         
         if ($status == 'all') {
-            echo '<option value="0">-</option>';
+            echo '<option value>-</option>';
         } elseif ($status == 'house') {
             foreach ($houses_list as $house) {
                 $full_adress = $house['houses_gis_adress'] . ', д. ' . $data['houses_number'];
