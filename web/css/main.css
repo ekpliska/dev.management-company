@@ -3841,6 +3841,99 @@ a.employee-profile:hover {
 
 /* Конец Модальное окно назначение сотрудника на заяку */
 
+/* Новости, главная страница */
+.news-item {
+    height: 600px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+}
+.news-item:hover {
+    box-shadow: 0 4px 26px 0 rgba(51, 29, 82, 0.16);
+}
+.news-item__title {
+    padding: 20px;
+    position: relative;
+}
+.news-item__title > p.title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #2d18b4;
+    margin: 0;
+}
+.news-item__title > p.date {
+    font-size: 14px;
+    font-weight: bold;
+    color: #000;
+    margin: 0;
+}
+.bnt-delete-news {
+    position: absolute;
+    right: 5%;
+    top: 20%;
+    background: transparent;
+    color: #fb6d5b;
+    border: 2px solid #fb6d5b;
+    border-radius: 100%;
+    width: 40px;
+    height: 40px;
+    padding: 5px;
+}
+.news-item__image {
+    width: 100%; 
+    height: 320px; 
+    position: relative;
+    overflow: hidden;
+}
+.news_preview {
+    position: absolute; 
+    top: 0; 
+    bottom: 0; 
+    margin: auto;
+    width: 100%;
+}
+.news-item__image > span + span {
+    margin: 50px 10px !important;
+}
+.news-item__image > span.item__image_desc {
+    position: absolute;
+    z-index: 9;
+    border: 1px solid #fff;
+    padding: 5px 10px;
+    border-radius: 25px;
+    margin: 10px;
+    color: #fff;
+    font-size: 12px;
+    cursor: default;
+}
+.news-item__image > span > a {
+    color: #fff;
+    font-size: 12px;
+    padding: 0;
+}
+.news-item__image > span > a:hover {
+    text-decoration: none;
+    color: #fff;
+}
+.news-item__image > span:hover {
+    background: rgba(55,35,35,0.32);
+    cursor: default;
+}
+.news-item__text {
+    padding: 30px 20px;
+    position: relative;
+    text-align: justify;
+}
+.news-item__text > p.change-date {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    font-size: 12px;
+    color: #999;
+    font-style: italic;
+    padding: 10px 0;
+}
+/* Конец Новости, главная страница */
+
 /* Новость, форма создания и редатирования публикации */
 .news-form {
     border: 1px solid #ddd;
@@ -3849,8 +3942,7 @@ a.employee-profile:hover {
 .news-form__left-block {
     padding: 10px;
 }
-/*.news-form__left-block {
-}*/
+.news-form__left-block {}
 .news-form__right-block {
     min-height: 1000px;
     border-left: 1px solid #ddd;    
@@ -3908,11 +4000,14 @@ a.employee-profile:hover {
 .table-upload-file > tbody > tr > td a:hover {
     font-weight: bold;
 }
-.table-upload-file > tbody > tr > td button {
+.table-upload-file > tbody > tr > td span.delete_span {
     background: transparent;
     border: none;
     color: #999;
     float: right;
+}
+.table-upload-file > tbody > tr > td span.delete_span::before {
+    content: '\2715';
 }
 .table-upload-file > tbody > tr > td button:hover {
     color: #999;

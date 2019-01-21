@@ -52,14 +52,15 @@ class NewsController extends AppManagersController {
         
         switch ($section) {
             case 'news':
-                $results = new ActiveDataProvider([
-                    'query' => News::getAllNews($adver = false),
-                    'pagination' => [
-                        'forcePageParam' => false,
-                        'pageSizeParam' => false,
-                        'pageSize' => 15,
-                    ],
-                ]);
+                $results = News::getAllNews($adver = false);
+//                $results = new ActiveDataProvider([
+//                    'query' => News::getAllNews($adver = false),
+//                    'pagination' => [
+//                        'forcePageParam' => false,
+//                        'pageSizeParam' => false,
+//                        'pageSize' => 15,
+//                    ],
+//                ]);
                 break;
             case 'adverts':
                 $results = new ActiveDataProvider([

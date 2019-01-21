@@ -116,9 +116,11 @@
                             <tr>
                                 <td>
                                     <?= FormatHelpers::formatUrlByDoc($doc['name'], $doc['filePath']) ?>
-                                    <?= Html::button('&#10005;', [
+                                    <?= Html::beginTag('span', ['class' => 'delete_span', 'data-files' => $doc['id']]) ?>
+                                    <?= Html::endTag('span') ?>
+                                    <?php /* = Html::button('&#10005;', [
                                             'class' => 'delete_file',
-                                            'data-files' => $doc['id']]) ?>
+                                            'data-files' => $doc['id']]) */ ?>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

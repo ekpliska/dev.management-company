@@ -701,27 +701,32 @@ $(document).ready(function() {
         });
     });
     
-    /*
-     * Запрос на удаление прикрепленного документа
-     */
-    $('.delete_file').on('click', function(){
-       var fileId = $(this).data('files');
-       alert(fileId);
-       $.ajax({
-           url: 'delete-file',
-           method: 'POST',
-           data: {
-               fileId: fileId,
-           },
-           success: function(response){
-//               console.log(response.status);
-           },
-           error: function(){
-               console.log('error');
-           },
-       });
-    });
-    
+//    /*
+//     * Запрос на удаление прикрепленного документа
+//     */
+//    $('.delete_span').on('click', function() {
+//        $(this).hide();
+//        
+//    });
+////    $('.delete_file').on('click', function() {
+////        $(this).append('<span>Here</span>')
+//////       var fileId = $(this).data('files');
+//////       alert(fileId);
+//////       $.ajax({
+//////           url: 'delete-file',
+//////           method: 'POST',
+//////           data: {
+//////               fileId: fileId,
+//////           },
+//////           success: function(response){
+////////               console.log(response.status);
+//////           },
+//////           error: function(){
+//////               console.log('error');
+//////           },
+//////       });
+////    });
+//    
     /*
      * Если выбран параметр "Реклама" то список партнеров делаем доступным
      */
