@@ -1,9 +1,8 @@
 <?php
 
     use yii\widgets\Breadcrumbs;
-    use app\helpers\FormatHelpers;
-    use app\helpers\FormatFullNameUser;
     use app\modules\managers\widgets\AlertsShow;
+    use app\modules\managers\widgets\ModalWindowsManager;
 
 /* 
  * Просмотр/редактирование публикации
@@ -34,30 +33,4 @@ $this->params['breadcrumbs'][] = $news->news_title;
     
 </div>
 
-<?php /*
-<div class="managers-default-index">
-    <h1><?= $this->title ?></h1>
-    <p class="label label-warning">
-        <?= FormatHelpers::formatDate($news->created_at) ?>
-    </p>
-    <br />
-    Последний раз редактировалось: <p class="label label-success">
-        <?= FormatHelpers::formatDate($news->updated_at, true) ?>
-    </p>
-    <br />
-    Автор: <?php // = FormatFullNameUser::nameEmployerByUserID($news->news_user_id) ?>
-    
-    <hr />
-    <?= AlertsShow::widget() ?>
-    
-    <?= $this->render('form/_update', [
-        'model' => $news,
-        'status_publish' => $status_publish,
-        'notice' => $notice,
-        'type_notice' => $type_notice,
-        'rubrics' => $rubrics,
-        'houses' => $houses,
-        'parnters' => $parnters,
-        'docs' => $docs,]) ?>
-    
-</div> */ ?>
+<?= ModalWindowsManager::widget(['modal_view' => 'delete_news']) ?>

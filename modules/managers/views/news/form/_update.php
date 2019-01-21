@@ -98,14 +98,11 @@
                     ]])
                 ->label(false) ?>
         
-            <?php // = $form->field($model, 'files[]')->input('file', ['multiple' => true])->label() ?>
-
             <table class="table table-upload-file">
                 <thead>
                     <tr>
                         <th>
-                            <?= $form->field($model, 'files[]', ['template' => '<label class="text-center btn-upload-cover" role="button">{input}{label}{error}</label>'])
-                                    ->input('file', ['id' => 'btnLoad', 'class' => 'hidden'])->label('<i class="glyphicon glyphicon-download-alt"></i> Добавить документ') ?>
+                            <?= $form->field($model, 'files[]')->input('file', ['multiple' => true])->label() ?>
                         </th>
                     </tr>    
                 </thead>
@@ -141,8 +138,7 @@
                     'class' => 'btn delete-record-btn',
                     'data-target' => '#delete_news_manager',
                     'data-toggle' => 'modal',
-                    'data-news' => $model->news_id,
-                    'data-is-advert' => $model->isAdvert]) ?>            
+                    'data-news' => $model->news_id]) ?>
             
             <?= Html::submitButton('Сохранить', ['class' => 'btn btn blue-btn']) ?>
         </div>
@@ -292,4 +288,3 @@
     
     <?php ActiveForm::end(); ?>
 */ ?>
-<?= ModalWindowsManager::widget(['modal_view' => 'delete_news']) ?>
