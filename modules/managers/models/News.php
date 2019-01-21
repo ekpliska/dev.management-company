@@ -21,10 +21,12 @@ class News extends BaseNews {
                         . 'created_at as date, '
                         . 'updated_at as date_update, '
                         . 'news_user_id as user_id, '
-                        . 'h.houses_gis_adress as houses_gis_adress, h.houses_number as houses_number')
+                        . 'h.houses_gis_adress as houses_gis_adress, h.houses_number as houses_number, '
+                        . 'p.partners_name as partners_name')
                 ->from('news as n')
                 ->join('LEFT JOIN', 'rubrics as r', 'n.news_type_rubric_id = r.rubrics_id')
                 ->join('LEFT JOIN', 'houses as h', 'n.news_house_id = h.houses_id')
+                ->join('LEFT JOIN', 'partners as p', 'p.partners_id = n.news_partner_id')
                 ->where(['isAdvert' => $adver])
                 ->orderBy(['created_at' => SORT_DESC])
                 ->all();

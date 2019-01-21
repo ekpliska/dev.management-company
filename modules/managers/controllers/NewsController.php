@@ -63,14 +63,15 @@ class NewsController extends AppManagersController {
 //                ]);
                 break;
             case 'adverts':
-                $results = new ActiveDataProvider([
-                    'query' => News::getAllNews($adver = true),
-                    'pagination' => [
-                        'forcePageParam' => false,
-                        'pageSizeParam' => false,
-                        'pageSize' => 15,
-                    ],
-                ]);
+                $results = News::getAllNews($adver = true);
+//                $results = new ActiveDataProvider([
+//                    'query' => News::getAllNews($adver = true),
+//                    'pagination' => [
+//                        'forcePageParam' => false,
+//                        'pageSizeParam' => false,
+//                        'pageSize' => 15,
+//                    ],
+//                ]);
                 break;
         }
         

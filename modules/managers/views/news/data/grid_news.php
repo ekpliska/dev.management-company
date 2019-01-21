@@ -3,10 +3,9 @@
     use yii\helpers\Html;
     use app\helpers\FormatHelpers;
     use app\helpers\FormatFullNameUser;
-    use app\modules\managers\widgets\ModalWindowsManager;
 
 /*
- * Вывод таблицы все новости
+ * Вывод новостных публикаций
  */
 ?>
 
@@ -40,5 +39,3 @@
 
 <?php endforeach; ?>
 <?php endif; ?>
-
-<?= ModalWindowsManager::widget(['modal_view' => 'delete_news']) ?>
