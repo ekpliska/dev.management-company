@@ -41,7 +41,7 @@ class FormatHelpers {
     public static function formatUrlByDoc($file_name, $path) {
         
         $link = Yii::getAlias('@web' . '/upload/store/') . $path;
-        $options = ['target' => '_blank', 'class' => 'btn btn-info btn-sm'];
+        $options = ['target' => '_blank', 'class' => ''];
         
         if (empty($file_name) || empty($path)) {
             return Html::a('Документ', $link, $options);

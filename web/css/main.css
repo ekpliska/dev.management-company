@@ -3849,9 +3849,11 @@ a.employee-profile:hover {
 .news-form__left-block {
     padding: 10px;
 }
-.news-form__left-block {
+/*.news-form__left-block {
+}*/
+.news-form__right-block {
     min-height: 1000px;
-    border-right: 1px solid #ddd;
+    border-left: 1px solid #ddd;    
 }
 .load_preview {
     height: 270px;
@@ -3881,3 +3883,39 @@ a.employee-profile:hover {
     margin: 0 50%;
 }
 /* Конец Новость, форма создания и редатирования публикации */
+
+/* Таблица загрузки документов */
+.table-upload-file {
+    border: none;
+}
+.table-upload-file > tbody > tr > td {
+    border-top: none;
+    border-bottom: 1px solid #ddd;
+}
+.table-upload-file > tbody > tr > td::before {
+    content: '\2713';
+    padding-right: 15px;
+    font-weight: bold;
+    color: #999;
+}
+.table-upload-file > tbody > tr > td:hover {
+    border-bottom: 1px solid #2ab5f1;
+}
+.table-upload-file > tbody > tr > td a {
+    color: #999;
+    font-size: 12px;
+}
+.table-upload-file > tbody > tr > td a:hover {
+    font-weight: bold;
+}
+.table-upload-file > tbody > tr > td button {
+    background: transparent;
+    border: none;
+    color: #999;
+    float: right;
+}
+.table-upload-file > tbody > tr > td button:hover {
+    color: #999;
+    font-weight: bold;
+}
+/* Конец Таблица загрузки документов */

@@ -99,17 +99,22 @@
                 ->label(false) ?>
         
             <?= $form->field($model, 'files[]')->input('file', ['multiple' => true])->label() ?>
-            <hr />
             <?php if (isset($docs) && count($docs) > 0) : ?>
-                <?php foreach ($docs as $doc) : ?>
-                    <?= FormatHelpers::formatUrlByDoc($doc['name'], $doc['filePath']) ?>
-                    <?= Html::button('Удалить', [
-                            'class' => 'btn btn-link btn-sm delete_file',
-                            'data-files' => $doc['id'],]) ?>
-                <?php endforeach; ?>
+                <table class="table table-upload-file">
+                    <tbody>
+                    <?php foreach ($docs as $doc) : ?>
+                        <tr>
+                            <td>
+                                <?= FormatHelpers::formatUrlByDoc($doc['name'], $doc['filePath']) ?>
+                                <?= Html::button('×', [
+                                        'class' => 'delete_file',
+                                        'data-files' => $doc['id']]) ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
             <?php endif; ?>
-            <hr />
-
 
             <div class="spam-agree-txt notice-block">
                 <?= $form->field($model, 'isPush', ['template' => '{input}{label}'])->checkbox([], false)->label() ?> 
@@ -119,6 +124,14 @@
 
             
         <div class="news-form__btn-block text-center">
+            
+            <?= Html::button('Удалить', [
+                    'class' => 'btn delete-record-btn',
+                    'data-target' => '#delete_news_manager',
+                    'data-toggle' => 'modal',
+                    'data-news' => $model->news_id,
+                    'data-is-advert' => $model->isAdvert]) ?>            
+            
             <?= Html::submitButton('Сохранить', ['class' => 'btn btn blue-btn']) ?>
         </div>
         
@@ -266,5 +279,5 @@
      
     
     <?php ActiveForm::end(); ?>
-
-<?= ModalWindowsManager::widget(['modal_view' => 'delete_news']) */ ?>    
+*/ ?>
+<?= ModalWindowsManager::widget(['modal_view' => 'delete_news']) ?>
