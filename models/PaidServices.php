@@ -76,14 +76,14 @@ class PaidServices extends ActiveRecord
     }
     
     public function getService() {
-        return $this->hasOne(Services::className(), ['services_id' => 'services_name_services_id']);
+        return $this->hasOne(Services::className(), ['service_id' => 'services_name_services_id']);
     }
 
     /*
      * Получить название категории по ID услуги
      */
     public function getNameCategory() {
-        $serv = Services::find()->andWhere(['services_id' => $this->services_name_services_id])->one();
+        $serv = Services::find()->andWhere(['service_id' => $this->services_name_services_id])->one();
         return ArrayHelper::getValue(CategoryServices::getCategoryNameArray(), $serv->services_category_id);
     }
     
@@ -109,7 +109,7 @@ class PaidServices extends ActiveRecord
                         . 'p.status,'
                         . 'p.updated_at')
                 ->from('paid_services as p')
-                ->join('LEFT JOIN', 'services as s', 's.services_id = p.services_name_services_id')
+                ->join('LEFT JOIN', 'services as s', 's.service_id = p.services_name_services_id')
                 ->join('LEFT JOIN', 'category_services as c', 'c.category_id = s.services_category_id')
                 ->andWhere(['services_account_id' => $account_id])
                 ->orderBy(['created_at' => SORT_DESC]);
@@ -173,7 +173,7 @@ class PaidServices extends ActiveRecord
                         . 'h.houses_gis_adress as gis_adress, h.houses_number as houses_number, '
                         . 'f.flats_porch as porch, f.flats_floor as floor, f.flats_number as flat')
                 ->from('paid_services as ps')
-                ->join('LEFT JOIN', 'services as s', 's.services_id = ps.services_name_services_id')
+                ->join('LEFT JOIN', 'services as s', 's.service_id = ps.services_name_services_id')
                 ->join('LEFT JOIN', 'category_services as cs', 'cs.category_id = s.services_category_id')
                 ->join('LEFT JOIN', 'employees as ed', 'ed.employee_id = ps.services_dispatcher_id')
                 ->join('LEFT JOIN', 'employees as es', 'es.employee_id = ps.services_specialist_id')
@@ -227,19 +227,19 @@ class PaidServices extends ActiveRecord
                 ->asArray()
                 ->one();
         
-        if ($service_id['services_id'] == null) {
+        if ($service_id['service_id'] == null) {
             return false;
         }
         
         $new = new PaidServices();
         
-        $order_numder = static::createNumberRequest($service_id['services_id']);
+        $order_numder = static::createNumberRequest($service_id['service_id']);
         
         $request_body = "Заявка, наименование услуги: {$service_id['services_name']}. Тип прибора учета: {$counter_type}. Уникальный инедтификатор прибора учета: {$counter_id}. [Заявка сформирована автоматически]";
         
         $new->services_number = $order_numder;
         $new->services_servise_category_id = $service_id['services_category_id'];
-        $new->services_name_services_id = $service_id['services_id'];
+        $new->services_name_services_id = $service_id['service_id'];
         $new->services_comment = $request_body;
         $new->services_phone = Yii::$app->userProfile->mobile;
         $new->services_account_id = $account_id;

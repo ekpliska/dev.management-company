@@ -76,12 +76,16 @@
     
     <div class="error-message" style="color: #ef693a; font-size: 12px;"></div>
     
-    <div class="list-group" id="dispatcherList">
+    <div class="list-group" id="specialistList">
+        
+        <ul id="employees-list">
         <?php if (isset($specialist_list) && !empty($specialist_list)) : ?>
             <?php foreach ($specialist_list as $specialist) : ?>
-                <a class="list-group-item list-group-item-action" data-employee="<?= $specialist['id'] ?>">
-                    <?= $specialist['surname'] ?> <?= $specialist['name'] ?> <?= $specialist['second_name'] ?>
-                </a>
+                <li>
+                    <a class="" data-employee="<?= $specialist['id'] ?>">
+                        <?= $specialist['surname'] ?> <?= $specialist['name'] ?> <?= $specialist['second_name'] ?>
+                    </a>
+                </li>
             <?php endforeach; ?>
         <?php else : ?>
             <div class="notice info">

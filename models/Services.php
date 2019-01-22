@@ -71,7 +71,7 @@ class Services extends ActiveRecord
                 ->asArray()
                 ->all();
         
-        return ArrayHelper::map($array, 'services_id', 'services_name');
+        return ArrayHelper::map($array, 'service_id', 'services_name');
     }
 
     /*
@@ -93,7 +93,7 @@ class Services extends ActiveRecord
      * Получить ID услуги
      */
     public function getId() {
-        return $this->services_id;
+        return $this->service_id;
     }
     
     /*
@@ -111,7 +111,7 @@ class Services extends ActiveRecord
      */
     public static function findByID($service_id) {
         return self::find()
-                ->where(['services_id' => $service_id])
+                ->where(['service_id' => $service_id])
                 ->one();
     }
     
@@ -172,7 +172,7 @@ class Services extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'services_id' => 'Services ID',
+            'service_id' => 'Services ID',
             'services_name' => 'Наименование услуги',
             'services_category_id' => 'Вид услуги',
             'services_cost' => 'Стоимость',

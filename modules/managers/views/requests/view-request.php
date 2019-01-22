@@ -142,7 +142,7 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
                                     <?= Html::button('<i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Назначить диспетчера', [
                                             'class' => 'btn blue-border-btn btn-dispatcher',
                                             'data-type-request' => 'requests',
-                                            'data-employee' => $request['requests_dispatcher_id'],
+                                            'data-employee' => $request['employee_id_d'],
                                             'data-target' => '#add-dispatcher-modal',
                                             'data-toggle' => 'modal']) ?>
                                 </td>
@@ -150,7 +150,7 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
                                     <?= Html::button('<i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Назначить специалиста', [
                                             'class' => 'btn blue-border-btn',
                                             'data-type-request' => 'requests',
-                                            'data-employee' => $request['requests_specialist_id'],
+                                            'data-employee' => $request['employee_id_s'],
                                             'data-target' => '#add-specialist-modal',
                                             'data-toggle' => 'modal']) ?>
                                 </td>

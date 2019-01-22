@@ -19,7 +19,7 @@ class m180901_115120_table_services extends Migration
         }
         
         $this->createTable('{{%services}}', [
-            'services_id' => $this->primaryKey(),
+            'service_id' => $this->primaryKey(),
             'services_name' => $this->string(255)->notNull(),
             'services_category_id' => $this->integer()->notNull(),
             'isPay' => $this->tinyInteger(),
@@ -27,7 +27,7 @@ class m180901_115120_table_services extends Migration
             'services_image' => $this->string(255)->notNull(),
             'services_description' => $this->text(1000),
         ], $table_options);
-        $this->createIndex('idx-services-services_id', '{{%services}}', 'services_id');
+        $this->createIndex('idx-services-service_id', '{{%services}}', 'service_id');
         $this->createIndex('idx-services-services_name', '{{%services}}', 'services_name');
         
         $this->createTable('{{%category_services}}', [
@@ -44,7 +44,7 @@ class m180901_115120_table_services extends Migration
                 'services_category_id', 
                 '{{%category_services}}', 
                 'category_id', 
-                'RESTRICT',
+                'CASCADE',
                 'CASCADE'
         );
 
@@ -55,7 +55,7 @@ class m180901_115120_table_services extends Migration
      */
     public function safeDown()
     {
-        $this->dropIndex('idx-services-services_id', '{{%services}}');
+        $this->dropIndex('idx-services-service_id', '{{%services}}');
         $this->dropIndex('idx-services-services_name', '{{%services}}');
 
         $this->dropIndex('idx-category_services-category_id', '{{%category_services}}');

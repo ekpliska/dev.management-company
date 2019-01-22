@@ -23,7 +23,7 @@
         <tbody>
             <?php foreach ($requests_list as $request) : ?>
             <tr>
-                <td><?= Html::a($request['requests_ident'], ['paid-requests/view-paid-request', 'request_number' => $request['requests_ident']]) ?></td>
+                <td><?= Html::a($request['requests_ident'], ['requests/view-request', 'request_number' => $request['requests_ident']]) ?></td>
                 <td><?= $request['type_requests_name'] ?></td>
                 <td><?= FormatHelpers::formatDate($request['created_at'], false, 0, false) ?></td>
                 <td><?= StatusHelpers::requestStatus($request['status']) ?></td>

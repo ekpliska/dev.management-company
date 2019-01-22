@@ -34,7 +34,7 @@ class PaidServices extends BasePaidServices {
                         . 'f.flats_porch as porch, f.flats_floor as floor, '
                         . 'f.flats_number as flat')
                 ->from('paid_services as ps')
-                ->join('LEFT JOIN', 'services as s', 's.services_id = ps.services_name_services_id')
+                ->join('LEFT JOIN', 'services as s', 's.service_id = ps.services_name_services_id')
                 ->join('LEFT JOIN', 'category_services as cs', 'cs.category_id = s.services_category_id')
                 ->join('LEFT JOIN', 'employees as ed', 'ed.employee_id = ps.services_dispatcher_id')
                 ->join('LEFT JOIN', 'employees as es', 'es.employee_id = ps.services_specialist_id')
@@ -97,7 +97,7 @@ class PaidServices extends BasePaidServices {
         $paid_requestr_list = self::find()
                 ->select(['services_number', 'created_at', 'status', 'category_name', 'services_name'])
                 ->joinWith(['service', 'service.category'])
-                ->where(['services_specialist_id' => $emplotee_id])
+                ->where(['services_specialist_id' => $employee_id])
                 ->orderBy(['created_at' => SORT_DESC])
                 ->asArray()
                 ->all();

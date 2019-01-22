@@ -54,7 +54,7 @@ class m180901_125637_table_paid_services extends Migration
                 '{{%paid_services}}', 
                 'services_name_services_id', 
                 '{{%services}}', 
-                'services_id', 
+                'service_id', 
                 'RESTRICT',
                 'CASCADE'
         );
