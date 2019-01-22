@@ -2,7 +2,7 @@
 
     namespace app\models;
     use Yii;
-    use \yii\db\ActiveRecord;
+    use yii\db\ActiveRecord;
     use app\models\Requests;
 
 class Employees extends ActiveRecord

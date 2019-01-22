@@ -5,7 +5,6 @@
     use app\models\PaidServices as BasePaidServices;
     use app\models\StatusRequest;
     use app\helpers\FormatHelpers;
-    use app\models\User;
     use app\models\PersonalAccount;
 
 /**
@@ -90,6 +89,20 @@ class PaidServices extends BasePaidServices {
         });
         
         return $house_lists ? $house_lists : null;
+        
+    }
+    
+    public static function getPaidRequestBySpecialist($employee_id) {
+        
+        $paid_requestr_list = self::find()
+                ->select(['services_number', 'created_at', 'status', 'category_name', 'services_name'])
+                ->joinWith(['service', 'service.category'])
+                ->where(['services_specialist_id' => $emplotee_id])
+                ->orderBy(['created_at' => SORT_DESC])
+                ->asArray()
+                ->all();
+        
+        return $paid_requestr_list;
         
     }
     

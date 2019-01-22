@@ -3427,6 +3427,20 @@ tbody > tr > td > div.empty::before {
 }
 /* Конец Создание нового сотрудника */
 
+/* Профиль сотрудника, блок с заявками */
+.title-type-request {
+    text-align: center;
+    border: 1px solid #2d18b4;
+    padding: 10px 0;
+    font-size: 12px;
+    border-radius: 12px;
+    color: #2d18b4;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    font-weight: bold;
+}
+/* Конец Профиль сотрудника, блок с заявками */
+
 /* Голосование, главная страница */
 .vote-card {
     display: flex;

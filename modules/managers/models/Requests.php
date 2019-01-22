@@ -5,7 +5,6 @@
     use app\models\Requests as BaseRequests;
     use app\models\StatusRequest;
     use app\helpers\FormatHelpers;
-    use app\models\User;
     use app\models\PersonalAccount;
 
 /**
@@ -88,4 +87,20 @@ class Requests extends BaseRequests {
         
     }
     
+    /*
+     * Получаем список всех Заявок и заявок на платные услуги для Специалиста
+     */
+    public static function getRequestBySpecialist($emplotee_id) {
+        
+        $requestr_list = self::find()
+                ->select(['requests_id', 'requests_ident', 'status', 'created_at', 'type_requests_name'])
+                ->joinWith('typeRequest')
+                ->where(['requests_specialist_id' => $emplotee_id])
+                ->orderBy(['created_at' => SORT_DESC])
+                ->asArray()
+                ->all();
+        
+        return $requestr_list;
+        
+    }
 }

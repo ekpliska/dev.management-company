@@ -8,6 +8,7 @@
     use app\modules\managers\widgets\AlertsShow;
     use app\modules\managers\widgets\ModalWindowsManager;
     use app\modules\managers\widgets\ConfirmChangePassword;
+    use app\modules\managers\widgets\RequestBySpecialist;
 
 /* 
  * Рендер вида, профиль сотрудника
@@ -40,7 +41,7 @@ $this->params['breadcrumbs'][] = $employee_info->fullName;
 
     <?= AlertsShow::widget() ?>
     
-    <div class="profile-page">
+    <div class="row profile-page">
     
         <?php
             $form = ActiveForm::begin([
@@ -214,8 +215,15 @@ $this->params['breadcrumbs'][] = $employee_info->fullName;
         </div>
         
         <?php ActiveForm::end() ?>
+
+        <?php if ($type == 'specialist') : ?>
+            <?= RequestBySpecialist::widget(['employee_id' => $employee_info->id]) ?>
+        <?php endif; ?>
+
         
-    </div>            
+    </div>
+    
 </div>
+
 <?= ModalWindowsManager::widget(['modal_view' => 'delete_employee']) ?>
 <?= ConfirmChangePassword::widget(['user_id' => $user_info->user_id]) ?>

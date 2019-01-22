@@ -3,6 +3,7 @@
     namespace app\modules\managers\controllers;
     use Yii;
     use yii\web\UploadedFile;
+    use yii\web\NotFoundHttpException;
     use app\modules\managers\controllers\AppManagersController;
     use app\modules\managers\models\form\EmployeeForm;
     use app\models\Departments;
@@ -10,7 +11,7 @@
     use app\models\Employees;
     use app\modules\managers\models\Posts;
     use app\modules\managers\models\form\ChangePasswordAdministrator;
-    use yii\web\NotFoundHttpException;
+    
 
 /**
  * Единый контролер для обработки формы добавления нового сотрудника (пользователя) в систему
@@ -62,19 +63,24 @@ class EmployeeFormController extends AppManagersController {
             throw new NotFoundHttpException('Вы обратились к несуществующей странице');
         }
 
+        // Получаем информацию о сотруднике
         $employee_info = Employees::findByID($employee_id);
+        // Получаем информацию о пользователе
         $user_info = User::findByEmployeeId($employee_id);
         
+        // Проверяем существование заданного сотрудника
         if ($employee_info === null && $user_info === null) {
             throw new NotFoundHttpException('Вы обратились к несуществующей странице');
         }
         
+        // Список Отделений
         $department_list = Departments::getArrayDepartments();
+        // Список должностей
         $post_list = Posts::getPostList($employee_info->employee_department_id);
-        
+        // Список ролей
         $role = User::getRole($type);
         
-        
+        // Сохраняем данные с формы
         if ($user_info->load(Yii::$app->request->post()) && $employee_info->load(Yii::$app->request->post())) {
             
             $is_valid = $user_info->validate();
