@@ -102,7 +102,7 @@ class AppManagersController extends Controller {
         
         if ($category_list > 0) {
             foreach ($service_list as $service) {
-                echo '<option value="' . $service['services_id'] . '">' . $service['services_name'] . '</option>';
+                echo '<option value="' . $service['service_id'] . '">' . $service['services_name'] . '</option>';
             }
         } else {
             echo '<option>-</option>';
