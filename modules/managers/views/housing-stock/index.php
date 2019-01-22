@@ -166,7 +166,10 @@ $this->params['breadcrumbs'][] = 'Жилищный фонд';
     /* Модальное окно для редактирования описания дома */
     Modal::begin([
         'id' => 'edit-description-house',
-        'header' => 'Редактирование',
+        'header' => 'Редактирование описания дома',
+        'closeButton' => [
+            'class' => 'close modal-close-btn',
+        ],
         'clientOptions' => [
             'backdrop' => 'static', 
             'keyboard' => false,

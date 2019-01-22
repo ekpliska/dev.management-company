@@ -4127,6 +4127,11 @@ a.employee-profile:hover {
 .house-description > span {
     font-size: 12px;
 }
+.house-description > p {
+    text-align: justify;
+    border-top: 1px solid #ddd;
+    padding: 10px;
+}
 .house-description > p > span {
     font-size: 12px;
     color: #ddd;
@@ -4137,6 +4142,7 @@ a.employee-profile:hover {
     text-transform: uppercase;
     letter-spacing: 1.5px;
     padding: 10px 0;
+    font-weight: bold;
 }
 #edit-discription-btn:before {
     font-family: 'Glyphicons Halflings';

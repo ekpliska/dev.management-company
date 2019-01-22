@@ -2,14 +2,17 @@
 
     use yii\widgets\ActiveForm;
     use yii\helpers\Html;
+    use app\helpers\FormatHelpers;
 
 /* 
  * Форма редактировния описания дома
  */
 ?>
-<h4>
-    <?= 'Ул. ' . $model->houses_street . ', ' . $model->houses_number_house ?> 
-</h4>
+
+<p class="modal-confirm">
+    <?= FormatHelpers::formatHousingStosk($model->houses_gis_adress, $model->houses_number) ?>
+</p>
+
 <?php
     $form = ActiveForm::begin([
         'id' => 'edit-form-description',
@@ -17,15 +20,20 @@
         'validationUrl' => ['edit-description-validate', 'form' => 'edit-form-description'],
     ]);
 ?>
-    <?= $form->field($model, 'houses_description')->textarea()->label() ?>
+    <?= $form->field($model, 'houses_description', [
+                'template' => '<div class="field-modal-textarea has-label">{label}<span id="label-count"></span><span id="label-count-left"></span>{input}{error}</div>'])
+            ->textarea(['rows' => 10, 'class' => 'field-input-textarea-modal comment'])
+            ->label($model->getAttributeLabel('houses_description'), ['class' => 'field-label-modal']) ?>
 
-    <?= Html::submitButton('Сохранить', [
-            'class' => 'btn btn-success',
-        ]) ?>
+    <div class="modal-footer">
+        <?= Html::submitButton('Сохранить изменения', [
+                'class' => 'btn btn-modal-window btn-modal-window-yes',
+            ]) ?>
 
-    <?= Html::button('Отмена', [
-            'data-dismiss' => 'modal',
-            'class' => 'btn btn-primary',
-        ]) ?>
+        <?= Html::button('Отмена', [
+                'data-dismiss' => 'modal',
+                'class' => 'btn btn-modal-window btn-modal-window-no',
+            ]) ?>
+    </div>
 
 <?php ActiveForm::end(); ?>
