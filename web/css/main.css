@@ -4013,12 +4013,18 @@ a.employee-profile:hover {
     border: none;
     color: #999;
     float: right;
+    cursor: pointer;
 }
-/*.table-upload-file > tbody > tr > td span.delete_span::before {
-    content: '\2715';
-}*/
-.table-upload-file > tbody > tr > td button:hover {
-    color: #999;
+.table-upload-file > tbody > tr > td span.delete_span:hover {
     font-weight: bold;
+    cursor: pointer;
+}
+.table-upload-file > tbody > tr > td span.delete_span > a:first-child {
+    color: #fb6d5b;
+    font-weight: normal;
+}
+.table-upload-file > tbody > tr > td span.delete_span > a:last-child {
+    color: #2d18b4;
+    font-weight: normal;
 }
 /* Конец Таблица загрузки документов */

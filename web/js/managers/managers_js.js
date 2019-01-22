@@ -704,7 +704,7 @@ $(document).ready(function() {
         var fileId = $(this).data('files');
         $(this).html('');
         $(this).append(
-                '<a href="javascript:void(0)" id="delete-file-yes-' + fileId + '" data-files="' + fileId + '">Удалить</a>' + ' ' + 
+                '<a href="javascript:void(0)" id="delete-file-yes-' + fileId + '" data-files="' + fileId + '">Удалить</a>' + '&nbsp;&nbsp;&nbsp;' + 
                 '<a href="javascript:void(0)" id="delete-file-no-' + fileId + '" data-files="' + fileId + '">Отмена</a>'
                 );
     });
@@ -713,15 +713,14 @@ $(document).ready(function() {
         var fileId = $(this).data('files');
         e.preventDefault();
         $.post('delete-file?file=' + fileId, function(data) {
-            $('a[id^=delete-file-yes]').closest('tr').remove();
+            $('a[id^=delete-file-yes-' + fileId + ']').closest('tr').remove();
             e.preventDefault(); 
         });
     });
     
     $(document).on('click' , 'a[id^=delete-file-no]', function(e){
         var fileId = $(this).data('files');
-        e.preventDefault();
-        $(this).closest('span').html('Удалить');
+        $('#delete-file-no-' + fileId).parent().html('&times;');
     });
     
     /*

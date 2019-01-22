@@ -114,7 +114,7 @@
                                 <td>
                                     <?= FormatHelpers::formatUrlByDoc($doc['name'], $doc['filePath']) ?>
                                     <?= Html::beginTag('span', ['class' => 'delete_span', 'data-files' => $doc['id']]) ?>
-                                        <?= 'Удалить' ?>
+                                        <?= '&times;' ?>
                                     <?= Html::endTag('span') ?>
                                     <?php /* = Html::button('&#10005;', [
                                             'class' => 'delete_file',
