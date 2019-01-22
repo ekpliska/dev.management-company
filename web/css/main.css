@@ -4052,16 +4052,19 @@ a.employee-profile:hover {
     padding: 0;
     margin: 0;
     border-right: 1px solid #ddd;
+    min-height: 700px;
 }
 .housing-stock > div[class*="col-"]:last-child {
     border-right: none;
 }
 .housing-stock > div > h4.title {
-    padding: 10px;
+    padding: 10px 15px 20px 15px;
     color: #2d18b4;
     font-weight: bold;
-    font-size: 14px;
-    border-bottom: 1px solid #ddd;  
+    font-size: 12px;
+    border-bottom: 1px solid #ddd;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
 }
 .action-housing-stock > .dropdown-menu {
     position: initial;
@@ -4094,7 +4097,7 @@ a.employee-profile:hover {
     font-family: 'Glyphicons Halflings';
     content: "\e021";
     position: absolute;
-    left: 5%;
+    left: 3%;
     font-size: 18px;
     color: #2d18b4;
     line-height: 1.8;
@@ -4115,7 +4118,7 @@ a.employee-profile:hover {
     margin-right: 5px;
     font-size: 16px;
     position: absolute;
-    left: 12%;
+    left: 9%;
 }
 .panel-housing-stock > .panel-collapse {
     background: #454545;
@@ -4148,5 +4151,65 @@ a.employee-profile:hover {
     font-family: 'Glyphicons Halflings';
     content: "\270f";
     padding: 0 10px 0 0;
+}
+.flats-info {
+    border-bottom: 1px solid #ddd;
+}
+.flats-info > h3.title {
+    background: #2d18b4;
+    color: #fff;
+    font-size: 14px;
+    padding: 15px 20px;
+    margin: 10px 20px;
+    border-radius: 25px;
+}
+.flats-info > h3.title-debtor {
+    background: #2d18b4;
+    color: #fff;
+    font-size: 14px;
+    padding: 10px 20px 15px 0;
+    margin: 10px 20px;
+    border-radius: 25px;
+}
+.flats-info > h3.title-debtor:before {
+    content: '\2714';
+    margin: -20px;
+    background: #ef693a;
+    padding: 12px 18px;
+    font-size: 22px;
+    border-radius: 50%;
+    box-shadow: 3px 3px 5px -2px #333;
+}
+.flats-info__info {
+    display: flex;
+    padding: 10px 20px;
+}
+.flats-info__info_image img {
+    width: 50px;
+    height: 50px;
+}
+.flats-info__info_content {
+    padding-left: 15px;
+}
+.flats-info__info_content > span {
+    font-size: 10px;
+    color: #2d18b4;
+    text-transform: uppercase;
+    letter-spacing: .09em;
+}
+#add-note {
+    padding: 0;
+    float: right;
+    background: transparent;
+    border: none;
+}
+#add-note:active,
+#add-note:focus,
+#add-note:hover {
+    outline: none;
+}
+#add-note:before {
+    content: '\002B';
+    font-weight: bold;
 }
 /* Конец Жилищный фонд */

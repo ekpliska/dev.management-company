@@ -7,6 +7,47 @@
  * Просмотр квартир
  */
 ?>
+
+<h4 class="title">
+    Квартиры
+    <span class="span-count"><?= count($flats) ?></span>
+</h4>
+
+<?php if (isset($flats) && $flats) : ?>
+<?php 
+    foreach ($flats as $key => $flat) : 
+    // Если баланс лицевого счета собственика отрицателен, то Собственник - должник
+    $debtor = $flat['account']['account_balance'] < 0 ? true : false;
+?>
+<div class="flats-info">
+    <h3 class="<?= $debtor ? 'title-debtor' : 'title' ?>">
+        
+        <?= "Квартира {$flat['flats_number']}, подъезд {$flat['flats_porch']}" ?>
+        
+        <?php if ($debtor) : ?>
+            <?= Html::button('', ['id' => 'add-note', 'data-flat' => $flat['flats_id']]) ?>
+        <?php endif; ?>
+        
+    </h3>
+    <div class="flats-info__info">
+        <div class="flats-info__info_image">
+            <?= FormatHelpers::formatUserPhoto($flat['user_photo']) ?>
+        </div>
+        <div class="flats-info__info_content">
+            <span>Собственник</span>
+            <p><?= FormatHelpers::formatFullUserName($flat['clients_surname'], $flat['clients_name'], $flat['clients_second_name'], true) ?></p>
+            
+            <?php if (isset($flats[$key]['note']) && $flats[$key]['note']) : ?>
+            #TODO
+            <?php endif; ?>
+            
+        </div>
+    </div>
+</div>
+<?php endforeach; ?>
+<?php endif; ?>
+
+<?php /*
 <?php if (isset($flats) && $flats) : ?>
 <table width="100%" border="0" align="center" cellpadding="10" cellspacing="10">
     <?php foreach ($flats as $key => $flat) : ?>
