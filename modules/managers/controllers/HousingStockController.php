@@ -16,7 +16,7 @@
 /**
  * Жилищный фонд
  */
-class EstatesController extends AppManagersController {
+class HousingStockController extends AppManagersController {
     
     /*
      * Жилищный фонд, главная страница
@@ -27,6 +27,7 @@ class EstatesController extends AppManagersController {
         $house_cookie = $this->actionReadCookies();
         
         $houses_list = Houses::getAllHouses();
+        
         $characteristics = $house_cookie ? CharacteristicsHouse::getCharacteristicsByHouse($house_cookie) : null;
         $flats = $house_cookie ? Flats::getFlatsByHouse($house_cookie) : null;
         $files = $house_cookie ? Image::getAllFilesByHouse($house_cookie, 'Houses') : null;

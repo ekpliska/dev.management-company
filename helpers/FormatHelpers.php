@@ -230,15 +230,18 @@ class FormatHelpers {
     }
     
     /*
-     * Форматирование полного адреса жилого комплекса
-     * Наименование комплекса. г. Город
+     * Форматирование полного адреса жилого дома для списка домов в "Жилищном фонде"
      */
-    public static function formatEstateAdress($name, $town) {
+    public static function formatHousingStosk($gis_adress, $house) {
         
-        $name = $name ? $name . ', ' : '';
-        $town = $town ? 'г. ' . $town : '';
+        $gis_array = explode(',', $gis_adress);
+        $full_adress = '';
         
-        return $name . $town;
+        for ($i = 3; $i < count($gis_array); $i++) {
+            $full_adress .= $gis_array[$i] . ', ';
+        }
+        
+        return $full_adress . ' ' . $house;
     }
     
     /*

@@ -105,6 +105,22 @@ class Houses extends ActiveRecord
                 ->one();
     }
     
+    /*
+     * Получить полный список домов, и квартир
+     */
+    public static function getAllHouses() {
+        
+        $houses_list = self::find()
+                ->asArray()
+                ->orderBy([
+                    'houses_name' => SORT_ASC,
+                    'houses_gis_adress' => SORT_ASC,
+                    'houses_number' => SORT_ASC])
+                ->all();
+        
+        return $houses_list;
+        
+    }
     
     /*
      * Формирование списка адресов домов
@@ -113,7 +129,7 @@ class Houses extends ActiveRecord
     public static function getHousesList($for_list = false) {
         
         $houses = self::find()
-                ->select(['houses_id', 'houses_gis_adress', 'houses_number'])
+                ->select(['houses_id', 'houses_gis_adress', 'houses_number', '', ''])
                 ->orderBy([
                     'houses_gis_adress' => SORT_ASC,
                     'houses_number' => SORT_ASC])

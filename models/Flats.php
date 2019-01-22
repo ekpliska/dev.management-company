@@ -82,7 +82,7 @@ class Flats extends ActiveRecord
         
         $list = self::find()
                 ->select([
-                    'flats_id', 'flats_porch', 'flats_number', 'flats.status', 
+                    'flats_id', 'flats_porch', 'flats_number', 'flats.is_debtor', 
                     'clients_surname', 'clients_name', 'clients_second_name', 
                     'user_photo'])
                 ->joinWith(['account', 'account.client', 'account.client.user', 'note'])
