@@ -129,7 +129,7 @@ class Houses extends ActiveRecord
     public static function getHousesList($for_list = false) {
         
         $houses = self::find()
-                ->select(['houses_id', 'houses_gis_adress', 'houses_number', '', ''])
+                ->select(['houses_id', 'houses_gis_adress', 'houses_number'])
                 ->orderBy([
                     'houses_gis_adress' => SORT_ASC,
                     'houses_number' => SORT_ASC])
