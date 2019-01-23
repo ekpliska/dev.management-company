@@ -8,25 +8,21 @@
  */
 ?>
 <?php if (isset($files) && $files) : ?>
-    <table width="100%" border="0" align="center" cellpadding="10" cellspacing="10">
+    <table class="table table-characteristics table-striped ">
         <?php foreach ($files as $file) : ?>
         <tr>
             <td><?= FormatHelpers::formatUrlByDoc($file['name'], $file['filePath']) ?></td>
-            
             <td>
-                <?= Html::button('<span class="glyphicon glyphicon-cloud-download"></span>', [
-                        'id' => 'download-file__house',
-                        'class' => 'btn btn-link btn-sm',
-                        'data-files' => $file['id']]) ?>
-            </td>
-            
-            <td>
-                <?= Html::button('<span class="glyphicon glyphicon-trash"></span>', [
-                        'class' => 'btn btn-link btn-sm',
+                <?= Html::button('', [
+                        'class' => 'housing-block__btn-del',
                         'id' => 'delete_file__house',
                         'data-files' => $file['id'],]) ?>
             </td>
         </tr>
         <?php endforeach; ?>
     </table>
+<?php else: ?>
+<div class="notice info">
+    <p>Вложения отсутствуют</p>
+</div>
 <?php endif; ?>

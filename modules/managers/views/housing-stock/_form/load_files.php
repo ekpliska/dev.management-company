@@ -7,6 +7,7 @@
  * Форма загрузки документов
  */
 ?>
+
 <?php
     $form = ActiveForm::begin([
         'id' => 'form-load-file',
@@ -17,7 +18,9 @@
 ?>
 
     <?= $form->field($model, 'houses_id')->hiddenInput(['value' => $house_cookie, 'class' => 'hidden'])->label(false) ?>
-    <?= $form->field($model, 'upload_file')->input('file')->label() ?>
+    <div class="row">
+        <?= $form->field($model, 'upload_file')->input('file', ['id' => 'file'])->label() ?>
+    </div>
 
     <?= Html::button('Отмена', ['class' => 'btn btn-default']) ?>
     <?= Html::submitButton('Загрузить', ['class' => 'btn btn-primary']) ?>

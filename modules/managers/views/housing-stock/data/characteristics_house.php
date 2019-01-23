@@ -15,12 +15,16 @@
             <td>
                 <?= Html::button('', [
                         'id' => 'delete-characteristic__link',
-                        'class' => 'btn',
+                        'class' => 'housing-block__btn-del',
                         'data-characteristic-id' => $characteristic['characteristics_id'],
                     ]) 
                 ?>
             </td>
         </tr>
         <?php endforeach; ?>
-    </table>        
+    </table>
+<?php else: ?>
+<div class="notice info">
+    <p>Характеристики не заданы</p>
+</div>
 <?php endif; ?> 

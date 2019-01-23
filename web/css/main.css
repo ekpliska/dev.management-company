@@ -4283,8 +4283,14 @@ a.employee-profile:hover {
 .table-characteristics {
     border: none;
 }
-.table-characteristics > tbody > tr > td:last-child {
-    width: 10%;
+.table-characteristics > tbody > tr > td:first-child {
+    width: 95%;
+}
+.table-characteristics > tbody > tr > td > a {
+    color: #2c3e50;
+}
+.table-characteristics > tbody > tr > td > a:hover {
+    font-weight: bold;
 }
 .table-characteristics > tbody > tr > td {
     border-top: none;
@@ -4292,12 +4298,19 @@ a.employee-profile:hover {
     text-align: left;
     vertical-align: middle;
 }
-#delete-characteristic__link {
+.housing-block__btn-del, 
+.housing-block__btn-download {
     background: transparent;
-    color: #ddd;
+    color: #7f8c8d;
+    border: none;
 }
-#delete-characteristic__link:before {
+.housing-block__btn-del:before {
     content: "\e020";
+    font-family: 'Glyphicons Halflings';
+    font-size: 12px;
+}
+.housing-block__btn-download:before {
+    content: "\e197";
     font-family: 'Glyphicons Halflings';
     font-size: 12px;
 }

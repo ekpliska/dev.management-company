@@ -72,6 +72,9 @@ $this->params['breadcrumbs'][] = 'Жилищный фонд';
         
         <div class="col-md-2">
             <h4 class="title">Вложения</h4>
+            <div id="files_list">
+                <?= $this->render('data/view_upload_files', ['files' => $files]) ?>
+            </div>
         </div>
     </div>
     

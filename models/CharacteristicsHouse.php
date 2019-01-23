@@ -34,8 +34,8 @@ class CharacteristicsHouse extends ActiveRecord
             
             [['characteristics_name', 'characteristics_value'], 'required', 'on' => self::SCENARIO_ADD_CHARACTERISTIC],
             [['characteristics_name', 'characteristics_value'], 'filter', 'filter' => 'trim', 'on' => self::SCENARIO_ADD_CHARACTERISTIC],
-            ['characteristics_name', 'string', 'min' => 5, 'max' => 255, 'on' => self::SCENARIO_ADD_CHARACTERISTIC],
-            ['characteristics_value', 'string', 'min' => 1, 'max' => 170, 'on' => self::SCENARIO_ADD_CHARACTERISTIC],
+            ['characteristics_name', 'string', 'min' => 3, 'max' => 70, 'on' => self::SCENARIO_ADD_CHARACTERISTIC],
+            ['characteristics_value', 'string', 'min' => 1, 'max' => 70, 'on' => self::SCENARIO_ADD_CHARACTERISTIC],
             
             [['characteristics_house_id'], 'exist', 'skipOnError' => true, 'targetClass' => Houses::className(), 'targetAttribute' => ['characteristics_house_id' => 'houses_id']],
         ];

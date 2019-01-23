@@ -989,11 +989,6 @@ $(document).ready(function() {
         }
     });
     
-//    $('#estate_note_message_manager').on('shown.bs.modal', function (e) {
-//        var button = $(e.relatedTarget);
-//        console.log(button);
-//    });
-    
     /*
      * Загрузка модального окна для добавление нового примечания
      * по кнопке "Новое примечание"
@@ -1060,7 +1055,7 @@ $(document).ready(function() {
             }
         });
         return false;
-    })
+    });
     
     /*
      * Удаление прикрепленного документа
