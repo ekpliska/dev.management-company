@@ -48,8 +48,8 @@
                 </p>                
 
                 <?php if (isset($flats[$key]['note']) && $flats[$key]['note']) : ?>
-                    <span>Примечание</span>
                     <ul class="notes-flats-list" id="note_flat__tr-<?= $flat['flats_id'] ?>">
+                        <li class="first-title"><span>Примечание</span></li>
                         <?php foreach ($flats[$key]['note'] as $note) : ?>
                         <li>
                             <?= $note['notes_name'] ?>

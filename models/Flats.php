@@ -62,7 +62,6 @@ class Flats extends ActiveRecord
     public static function findById($flat_id) {
         return self::find()
                 ->where(['flats_id' => $flat_id])
-                ->asArray()
                 ->one();
     }
     
@@ -102,7 +101,7 @@ class Flats extends ActiveRecord
     public function afterSave($insert, $changedAttributes) {
         parent::afterSave($insert, $changedAttributes);
         
-        if ($changedAttributes['status'] == self::STATUS_DEBTOR_YES) {
+        if ($changedAttributes['is_debtor'] == self::STATUS_DEBTOR_YES) {
             NotesFlat::deleteAll(['notes_flat_id' => $this->flats_id]);
         }
     }

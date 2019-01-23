@@ -985,12 +985,15 @@ $(document).ready(function() {
         
         if (!$(this).is(':checked')) {
             $('#estate_note_message_manager').modal('show');
-            $('#estate_note_message_manager .estate_note_message__yes').data('flat', flatId);            
-        } else {
-            $('#add-note-modal-form').modal('show');
-            $('#add-note-modal-form .modal-dialog .modal-content .modal-body').load(link, 'flat_id=' + flatId);
+            $('#estate_note_message_manager .estate_note_message__yes').data('flat', flatId);
         }
     });
+    
+//    $('#estate_note_message_manager').on('shown.bs.modal', function (e) {
+//        var button = $(e.relatedTarget);
+//        console.log(button);
+//    });
+    
     /*
      * Загрузка модального окна для добавление нового примечания
      * по кнопке "Новое примечание"

@@ -4205,7 +4205,8 @@ a.employee-profile:hover {
 .flats-info__info_content > p > label {
     float: right;
 }
-.flats-info__info_content > span {
+.flats-info__info_content > span,
+.notes-flats-list > li.first-title {
     font-size: 10px;
     color: #2d18b4;
     text-transform: uppercase;
