@@ -35,19 +35,21 @@
                 <span>Собственник</span>
                 <p class="client-name">
                     <?= FormatHelpers::formatFullUserName($flat['clients_surname'], $flat['clients_name'], $flat['clients_second_name'], true) ?>
-                    <label class="switch pull-right">
-                        <?= Html::checkbox($flat_status, $flat['is_debtor'], [
-                                'id' => "check_status__flat-{$flat['flats_id']}",
-                                'data-flat' => $flat['flats_id'],
-                        ]) ?>
-                        <span class="slider round"></span>
-                    </label>
                     
+                    <?php if ($flat['is_debtor']) : ?>
+                        <label class="switch pull-right">
+                            <?= Html::checkbox($flat_status, $flat['is_debtor'], [
+                                    'id' => "check_status__flat-{$flat['flats_id']}",
+                                    'data-flat' => $flat['flats_id'],
+                            ]) ?>
+                            <span class="slider round"></span>
+                        </label>
+                    <?php endif; ?>
                 </p>                
 
                 <?php if (isset($flats[$key]['note']) && $flats[$key]['note']) : ?>
                     <span>Примечание</span>
-                    <ul class="notes-flats-list">
+                    <ul class="notes-flats-list" id="note_flat__tr-<?= $flat['flats_id'] ?>">
                         <?php foreach ($flats[$key]['note'] as $note) : ?>
                         <li>
                             <?= $note['notes_name'] ?>

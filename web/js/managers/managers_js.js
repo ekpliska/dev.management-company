@@ -1002,7 +1002,7 @@ $(document).ready(function() {
         $('#add-note-modal-form .modal-dialog .modal-content .modal-body').load(link, 'flat_id=' + flatId);
     });
     
-    $('.estate_note_message__yes').on('click', function(){
+    $('.estate_note_message__yes').on('click', function() {
         var flatId = $(this).data('flat');
         $.ajax({
             url: 'take-off-status-debtor',
@@ -1011,9 +1011,10 @@ $(document).ready(function() {
                 flatId: flatId,
             },
             success: function (response) {
+                console.log(response);
                 if (response.success) {
                     // Удаляем html блок со всеми примечаниями
-                    $('tr[id=note_flat__tr-' + flatId + ']').remove();
+                    $('ul[id=note_flat__tr-' + flatId + ']').remove();
                     $('#check_status__flat').attr('checked', false);
                     $('#estate_note_message_manager').modal('hide');
                 }

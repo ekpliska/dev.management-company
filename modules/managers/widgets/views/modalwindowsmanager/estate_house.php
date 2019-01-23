@@ -1,45 +1,51 @@
 <?php
 
-?>
-<?php /* Ошибка добавления характеристики, загрузки документа */ ?>
-<div class="modal fade estate_house" id="estate_house_message_manager" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <div class="modal-header">
-                <h4 class="modal-title"></h4>
-            </div>
-            <div class="modal-body">
-                <div class="modal__text"></div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary" data-dismiss="modal">OK</button>
-            </div>
-        </div>
-    </div>
-</div>
+    use yii\bootstrap\Modal;
+    use yii\helpers\Html;
 
-<?php /* Подтверждение удаления статуса Должник и примечания у квартиры */ ?>
-<div class="modal fade estate_note_message" id="estate_note_message_manager" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <div class="modal-header">
-                <h4 class="modal-title">Снять статус "Должник"</h4>
-            </div>
-            <div class="modal-body">
-                <div class="modal__text">
-                    Вы действительно хотите снять статус "Должник" с выбранной квартиры?
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary estate_note_message__yes">Да</button>
-                <button class="btn btn-default" data-dismiss="modal">Отмена</button>
-            </div>
-        </div>
+?>
+
+<?php
+    // Ошибка добавления характеристики, загрузки документа
+    Modal::begin([
+        'id' => 'estate_house_message_manager',
+        'header' => 'Внимание!',
+        'closeButton' => [
+            'class' => 'close modal-close-btn',
+        ],
+        'clientOptions' => [
+            'backdrop' => 'static', 
+            'keyboard' => false],
+    ]);
+?>
+
+    <div class="modal__text"></div>
+        
+    <div class="modal-footer">
+        <?= Html::button('OK', ['class' => 'btn btn-modal-window btn-modal-window-no', 'data-dismiss' => 'modal']) ?>
     </div>
-</div>
+
+<?php Modal::end(); ?>
+
+<?php
+    // Подтверждение удаления статуса Должник и примечания у квартиры
+    Modal::begin([
+        'id' => 'estate_note_message_manager',
+        'header' => 'Внимание',
+        'closeButton' => [
+            'class' => 'close modal-close-btn estate_note_message__yes',
+        ],
+        'clientOptions' => [
+            'backdrop' => 'static', 
+            'keyboard' => false],
+    ]);
+?>
+
+    <div class="modal__text">Вы действительно хотите снять статус "Должник" с выбранной квартиры?</div>
+        
+    <div class="modal-footer">
+        <?= Html::button('Да', ['class' => 'btn btn-modal-window btn-modal-window-yes estate_note_message__yes']) ?>
+        <?= Html::button('Отмена', ['class' => 'btn btn-modal-window btn-modal-window-no estate_note_message__no', 'data-dismiss' => 'modal']) ?>
+    </div>
+
+<?php Modal::end(); ?>
