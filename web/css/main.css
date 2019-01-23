@@ -4218,4 +4218,42 @@ a.employee-profile:hover {
     content: '\002B';
     font-weight: bold;
 }
+.note-message {
+    color: #ef693a;
+    margin: 0;
+    font-size: 14px;
+    text-align: justify;
+}
+.note-message:hover:before {
+    content: '\002B';
+    border-right: 10px solid red;
+}
+.notes-flats-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+.notes-flats-list > li {
+    padding: 0 35px 0 0;
+    text-decoration: none;
+    font-size: 14px;
+    color: #ef693a;
+    display: block;
+    position: relative;
+    text-align: justify;
+    cursor: default;
+}
+.notes-flats-list > li > span.close {
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 0%;
+    font-size: 14px;
+    padding: 5px;
+    transform: translate(0%, -50%);
+}
+.notes-flats-list > li > span.close:hover {
+    background: #ef693a;
+    color: #fff;
+}
 /* Конец Жилищный фонд */

@@ -862,7 +862,7 @@ $(document).ready(function() {
         return false;        
     });
     
-    $(document).on('click', '#house_link', function(){
+    $(document).on('click', '#house_link', function() {
         var house = $(this).attr('href');
         house = house.replace(/[^0-9]/gim, '');
         // Устанавливаем куку, выбранного дома
@@ -1031,7 +1031,7 @@ $(document).ready(function() {
     $('#flats_list').on('click', '.flat_note__delete', function(e){
         e.preventDefault();
         var noteId = $(this).data('note');
-        var htmlBlock = $(this).closest('tr');
+        var htmlBlock = $(this).closest('li');
         // Количество строк с примечаниями
         var countTr = $('tr[id^=note_flat__tr]').length;
         
@@ -1042,7 +1042,6 @@ $(document).ready(function() {
                 noteId: noteId,
             },
             success: function (responce, textStatus, jqXHR) {
-                console.log('responce.success ' + responce.success);
                 if (responce.success === true) {
                     htmlBlock.remove();
                 }

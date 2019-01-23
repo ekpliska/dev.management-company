@@ -72,7 +72,7 @@ class NotesFlat extends ActiveRecord
         parent::afterSave($insert, $changedAttributes);
         if ($insert) {
             $flat = Flats::findOne($this->notes_flat_id);
-            $flat->status = Flats::STATUS_DEBTOR_YES;
+            $flat->is_debtor = Flats::STATUS_DEBTOR_YES;
             $flat->save(false);
         }
     }
@@ -93,7 +93,7 @@ class NotesFlat extends ActiveRecord
                 ->count();
         $flat = Flats::findOne($this->notes_flat_id);
         if ($note_list <= 1 ) {
-            $flat->status = Flats::STATUS_DEBTOR_NO;
+            $flat->is_debtor = Flats::STATUS_DEBTOR_NO;
             $flat->save(false);
         }
         

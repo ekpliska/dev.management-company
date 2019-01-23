@@ -37,7 +37,23 @@
                 <p><?= FormatHelpers::formatFullUserName($flat['clients_surname'], $flat['clients_name'], $flat['clients_second_name'], true) ?></p>
 
                 <?php if (isset($flats[$key]['note']) && $flats[$key]['note']) : ?>
-                #TODO
+                    <span>Примечание</span>
+                    <ul class="notes-flats-list">
+                        <?php foreach ($flats[$key]['note'] as $note) : ?>
+                        <li>
+                            <?= $note['notes_name'] ?>
+                            <span class="close flat_note__delete" data-note="<?= $note['notes_id'] ?>">&#x2715;</span>
+                        </li>
+                        <?php endforeach; ?>
+                    </ul>
+                    <?php /* foreach ($flats[$key]['note'] as $note) : ?>
+                        <p class="note-message">                            
+                            <?= Html::button('<span class="glyphicon glyphicon-trash"></span>', [
+                                    'class' => 'btn btn-link btn-sm flat_note__delete pull-rigth',
+                                    'data-note' => $note['notes_id']]) ?>
+                            <?= $note['notes_name'] ?>
+                        </p>
+                    <?php endforeach; */ ?>
                 <?php endif; ?>
 
             </div>
