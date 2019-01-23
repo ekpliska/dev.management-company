@@ -62,7 +62,9 @@ $this->params['breadcrumbs'][] = 'Жилищный фонд';
         </div>
         
         <div class="col-md-4">
-            <?= $this->render('data/view_flats', ['flats' => $flats]) ?>
+            <div id="flats_list">
+                <?= $this->render('data/view_flats', ['flats' => $flats]) ?>
+            </div>
         </div>
         
         <div class="col-md-2">

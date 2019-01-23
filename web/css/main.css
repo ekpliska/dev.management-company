@@ -4057,7 +4057,8 @@ a.employee-profile:hover {
 .housing-stock > div[class*="col-"]:last-child {
     border-right: none;
 }
-.housing-stock > div > h4.title {
+.housing-stock > div > h4.title,
+#flats_list > h4.title {
     padding: 10px 15px 20px 15px;
     color: #2d18b4;
     font-weight: bold;
