@@ -7,4 +7,13 @@
  * Конструктор заявок
  */
 class DesignerRequestsController extends AppManagersController {
+    
+    public function actionIndex($section = 'requests') {
+        
+        return $this->render('index', [
+            'section' => $section,
+        ]);
+        
+    }
+    
 }

@@ -31,5 +31,6 @@
     <?= SubMenu::widget(['view_name' => 'voting']) ?>
     <?= SubMenu::widget(['view_name' => 'requests']) ?>
     <?= SubMenu::widget(['view_name' => 'housing-stock']) ?>
+    <?= SubMenu::widget(['view_name' => 'designer-request']) ?>
     <?= NavManager::widget() ?>
 </nav>

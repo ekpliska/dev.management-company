@@ -47,7 +47,7 @@ class NavManager extends Widget {
         ],
         '#' => [
             'name' => 'Конструктор заявок',
-            'link' => '#',
+            'link' => 'designer-requests/index',
         ],
         'housing-stock' => [
             'name' => 'Жилищный фонд',

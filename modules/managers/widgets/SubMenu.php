@@ -42,6 +42,8 @@ class SubMenu extends Widget {
             case 'news':
                 $params = $this->newsSubMenu();
                 break;
+            case 'designer-request':
+                $params = $this->designerSubMenu();
         }
         
         return $this->render('submenu/' . $this->view_name, [
@@ -91,7 +93,7 @@ class SubMenu extends Widget {
     }
     
     /*
-     * Дополнительные разделы для "Носотей"
+     * Дополнительные разделы для "Новостей"
      */
     private function newsSubMenu() {
         
@@ -101,6 +103,20 @@ class SubMenu extends Widget {
         ];
         
         return $sub_news_array;
+        
+    }
+    
+    /*
+     * Дополнительные разделы для "Конструктора заявок"
+     */
+    private function designerSubMenu() {
+        
+        $sub_designer_array = [
+            'requests' => 'Заявки',
+            'paid-services' => 'Платные услуги',
+        ];
+        
+        return $sub_designer_array;
         
     }
     
