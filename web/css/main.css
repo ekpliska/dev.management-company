@@ -763,7 +763,7 @@ button#send-request-to-sms:focus{
 
 /* Кнопка для модального окна */
 .btn-modal-window {
-    width: 220px;
+    width: 210px;
     height: 56px;
     background: transparent;
     border: 1px solid #fff;
@@ -2679,8 +2679,12 @@ p.date-start-vote {
     padding: 0 90px;
 }
 .modal-body form#form-add-note {
-    width: 500px;
+    width: 100%;
     padding: 0;
+}
+.modal-body form#add-characteristic {
+    width: 100%;
+    padding: 0 50px;
 }
 /* Конец Переодпределение ширины, высоты модальных окон */
 
