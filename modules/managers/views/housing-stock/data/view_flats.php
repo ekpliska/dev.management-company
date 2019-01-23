@@ -21,7 +21,6 @@
 ?>
 <div class="flats-info">
     <h3 class="<?= $debtor ? 'title-debtor' : 'title' ?>">
-        
         <?= "Квартира {$flat['flats_number']}, подъезд {$flat['flats_porch']}" ?>
         
         <?php if ($debtor) : ?>

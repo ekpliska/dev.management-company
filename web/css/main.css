@@ -4159,7 +4159,9 @@ a.employee-profile:hover {
     background: #2d18b4;
     color: #fff;
     font-size: 14px;
-    padding: 15px 20px;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 20px;
     margin: 10px 20px;
     border-radius: 25px;
 }
@@ -4167,18 +4169,21 @@ a.employee-profile:hover {
     background: #2d18b4;
     color: #fff;
     font-size: 14px;
-    padding: 10px 20px 15px 0;
+    height: 40px;
+    line-height: 38px;
+    padding: 0 20px 0 55px;
     margin: 10px 20px;
     border-radius: 25px;
 }
 .flats-info > h3.title-debtor:before {
-    content: '\2714';
-    margin: -20px;
+    font-family: cursive;
+    content: '-\20bd';
     background: #ef693a;
-    padding: 12px 18px;
+    padding: 1px 9px;
     font-size: 22px;
     border-radius: 50%;
-    box-shadow: 3px 3px 5px -2px #333;
+    position: absolute;
+    left: 19px;
 }
 .flats-info__info {
     display: flex;
