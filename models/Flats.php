@@ -62,6 +62,7 @@ class Flats extends ActiveRecord
     public static function findById($flat_id) {
         return self::find()
                 ->where(['flats_id' => $flat_id])
+                ->asArray()
                 ->one();
     }
     
@@ -70,7 +71,7 @@ class Flats extends ActiveRecord
      */
     public function takeOffStatus(){
         
-        $this->status = self::STATUS_DEBTOR_NO;
+        $this->is_debtor = self::STATUS_DEBTOR_NO;
         return $this->save(false) ? true : false;
         
     }

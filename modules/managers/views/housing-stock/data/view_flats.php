@@ -37,7 +37,7 @@
                     <?= FormatHelpers::formatFullUserName($flat['clients_surname'], $flat['clients_name'], $flat['clients_second_name'], true) ?>
                     <label class="switch pull-right">
                         <?= Html::checkbox($flat_status, $flat['is_debtor'], [
-                                'id' => 'check_status__flat',
+                                'id' => "check_status__flat-{$flat['flats_id']}",
                                 'data-flat' => $flat['flats_id'],
                         ]) ?>
                         <span class="slider round"></span>

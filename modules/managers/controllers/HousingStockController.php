@@ -229,10 +229,13 @@ class HousingStockController extends AppManagersController {
         $model = new NotesFlat();
         $model->scenario = NotesFlat::SCENARIO_ADD_NOTE;
         
+        $flat_info = Flats::findById($flat_id);
+        
         if (Yii::$app->request->isAjax) {
             return $this->renderAjax('_form/check_status_flat', [
                 'flat_id' => $flat_id,
                 'model' => $model,
+                'flat_info' => $flat_info,
             ]);
         }
         

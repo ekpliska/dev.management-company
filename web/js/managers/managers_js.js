@@ -979,7 +979,7 @@ $(document).ready(function() {
      * Загрузка модального окна для установки статуса "Должник"
      * по чекбоксу "Должник"
      */
-    $('#flats_list').on('change', '#check_status__flat', function(){
+    $('#flats_list').on('change', 'input[id ^= check_status__flat-]', function(){
         var flatId = $(this).data('flat');
         var link = 'check-status-flat';
         

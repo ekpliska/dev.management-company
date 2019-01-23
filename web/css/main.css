@@ -2678,6 +2678,10 @@ p.date-start-vote {
     width: 670px;
     padding: 0 90px;
 }
+.modal-body form#form-add-note {
+    width: 500px;
+    padding: 0;
+}
 /* Конец Переодпределение ширины, высоты модальных окон */
 
 /* Переопреденное модальное окно бутстрапа */
@@ -4259,6 +4263,14 @@ a.employee-profile:hover {
 .notes-flats-list > li > span.close:hover {
     background: #ef693a;
     color: #fff;
+}
+.modal-note-info {
+    text-align: center;
+    color: #fff;
+    font-size: 16px;
+    padding: 20px;
+    margin: 0 -15px;
+    background: rgba(221, 200, 253, 0.15);
 }
 /* Конец Жилищный фонд */
 

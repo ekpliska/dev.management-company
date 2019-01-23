@@ -185,6 +185,9 @@ $this->params['breadcrumbs'][] = 'Жилищный фонд';
     Modal::begin([
         'id' => 'add-characteristic-modal-form',
         'header' => 'Добавить характеристику',
+        'closeButton' => [
+            'class' => 'close modal-close-btn',
+        ],
         'clientOptions' => [
             'backdrop' => 'static', 
             'keyboard' => false],
@@ -197,6 +200,9 @@ $this->params['breadcrumbs'][] = 'Жилищный фонд';
     Modal::begin([
         'id' => 'add-load-files-modal-form',
         'header' => 'Загрузить вложение',
+        'closeButton' => [
+            'class' => 'close modal-close-btn',
+        ],
         'clientOptions' => [
             'backdrop' => 'static', 
             'keyboard' => false],
@@ -209,6 +215,9 @@ $this->params['breadcrumbs'][] = 'Жилищный фонд';
     Modal::begin([
         'id' => 'add-note-modal-form',
         'header' => 'Установка статуса "Должник"',
+        'closeButton' => [
+            'class' => 'close modal-close-btn',
+        ],
         'clientOptions' => [
             'backdrop' => 'static', 
             'keyboard' => false],
