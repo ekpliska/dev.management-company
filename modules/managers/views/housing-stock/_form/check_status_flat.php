@@ -11,7 +11,7 @@
 ?>
 
 <p class="modal-note-info">
-    <?= "Квартира {$flat_info['flats_number']}, подъезд {$flat_info['flats_porch']}" ?>
+    <?= "Квартира {$flat_info->flats_number}, подъезд {$flat_info->flats_porch}" ?>
 </p>
 
 <?php

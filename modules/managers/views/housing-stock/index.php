@@ -59,6 +59,9 @@ $this->params['breadcrumbs'][] = 'Жилищный фонд';
         
         <div class="col-md-2">
             <h4 class="title">Характеристики</h4>
+            <div id="characteristic_list">
+                <?= $this->render('data/characteristics_house', ['characteristics' => $characteristics]) ?>
+            </div>
         </div>
         
         <div class="col-md-4">

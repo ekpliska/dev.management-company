@@ -64,7 +64,9 @@
     </div>
     <?php endforeach; ?>
 <?php else: ?>
-#TODO
+<div class="notice info">
+    <p>В указанном доме квартиры не найдены</p>
+</div>
 <?php endif; ?>
 
 <?php /*

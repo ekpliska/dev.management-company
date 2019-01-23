@@ -705,7 +705,7 @@ $(document).ready(function() {
         $(this).html('');
         $(this).append(
                 '<a href="javascript:void(0)" id="delete-file-yes-' + fileId + '" data-files="' + fileId + '">Удалить</a>' + '&nbsp;&nbsp;&nbsp;' + 
-                '<a href="javascript:void(0)" id="delete-file-no-' + fileId + '" data-files="' + fileId + '">Отмена</a>'
+                '<a href="javascript:void(0)" id="delete-file-no-' + fileId + '" data-files="' + fileId + '">Восстановить</a>'
                 );
     });
     
@@ -898,8 +898,8 @@ $(document).ready(function() {
         var num = chooseArray.length;
 
         block.html(
-                "<span class='rest_char' id='rest_" + num + "'>Восстановить</span> | " + 
-                "<span class='delete_char' id='char_" + characteristicId + "'>Удалить</span>")
+                "<td colspan='2'><span class='rest_char' id='rest_" + num + "'>Восстановить</span> " + 
+                "<span class='delete_char' id='char_" + characteristicId + "'>Удалить</span></td>")
         
         $("span[id='rest_" + num + "']").on('click', function () {
             var num = $(this).attr('id');

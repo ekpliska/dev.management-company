@@ -4042,7 +4042,7 @@ a.employee-profile:hover {
     font-weight: normal;
 }
 .table-upload-file > tbody > tr > td span.delete_span > a:last-child {
-    color: #2d18b4;
+    color: #3498db;
     font-weight: normal;
 }
 /* Конец Таблица загрузки документов */
@@ -4063,7 +4063,8 @@ a.employee-profile:hover {
 }
 .housing-stock > div > h4.title,
 #flats_list > h4.title {
-    padding: 10px 15px 20px 15px;
+    padding: 20px 15px;
+    margin: 0;
     color: #2d18b4;
     font-weight: bold;
     font-size: 12px;
@@ -4224,8 +4225,10 @@ a.employee-profile:hover {
     outline: none;
 }
 #add-note:before {
-    content: '\002B';
     font-weight: bold;
+    content: "\e101";
+    font-family: 'Glyphicons Halflings';
+    font-size: 20px;
 }
 .note-message {
     color: #ef693a;
@@ -4273,7 +4276,45 @@ a.employee-profile:hover {
     margin: 0 -15px;
     background: rgba(221, 200, 253, 0.15);
 }
+.table-characteristics {
+    border: none;
+}
+.table-characteristics > tbody > tr > td:last-child {
+    width: 10%;
+}
+.table-characteristics > tbody > tr > td {
+    border-top: none;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+    vertical-align: middle;
+}
+#delete-characteristic__link {
+    background: transparent;
+    color: #ddd;
+}
+#delete-characteristic__link:before {
+    content: "\e020";
+    font-family: 'Glyphicons Halflings';
+    font-size: 12px;
+}
+.rest_char {
+    font-size: 12px;
+    color: #3498db;
+    font-weight: normal;
+    cursor: pointer;
+}
+.delete_char {
+    font-size: 12px;
+    color: #fb6d5b;
+    font-weight: normal;
+    cursor: pointer;
+}
 /* Конец Жилищный фонд */
+
+
+
+
+
 
 .switch {
     position: relative;

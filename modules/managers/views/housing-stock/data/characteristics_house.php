@@ -8,14 +8,14 @@
 ?>
 
 <?php if (isset($characteristics) && $characteristics) : ?>
-    <table width="100%" border="0" align="center" cellpadding="10" cellspacing="10">
+    <table class="table table-characteristics table-striped ">
         <?php foreach ($characteristics as $characteristic) : ?>
         <tr>
             <td><?= $characteristic['characteristics_name'] ?>: <?= $characteristic['characteristics_value'] ?></td>
             <td>
-                <?= Html::button('<span class="glyphicon glyphicon-trash"></span>', [
+                <?= Html::button('', [
                         'id' => 'delete-characteristic__link',
-                        'class' => 'btn btn-link btn-sm',
+                        'class' => 'btn',
                         'data-characteristic-id' => $characteristic['characteristics_id'],
                     ]) 
                 ?>
