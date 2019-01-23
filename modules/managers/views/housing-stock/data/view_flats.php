@@ -23,18 +23,27 @@
         <h3 class="<?= $debtor ? 'title-debtor' : 'title' ?>">
             <?= "Квартира {$flat['flats_number']}, подъезд {$flat['flats_porch']}" ?>
 
-            <?php if ($debtor) : ?>
-                <?= Html::button('', ['id' => 'add-note', 'data-flat' => $flat['flats_id']]) ?>
-            <?php endif; ?>
+            <?= Html::button('', ['id' => 'add-note', 'data-flat' => $flat['flats_id']]) ?>
 
         </h3>
+        
         <div class="flats-info__info">
             <div class="flats-info__info_image">
                 <?= FormatHelpers::formatUserPhoto($flat['user_photo']) ?>
             </div>
             <div class="flats-info__info_content">
                 <span>Собственник</span>
-                <p><?= FormatHelpers::formatFullUserName($flat['clients_surname'], $flat['clients_name'], $flat['clients_second_name'], true) ?></p>
+                <p class="client-name">
+                    <?= FormatHelpers::formatFullUserName($flat['clients_surname'], $flat['clients_name'], $flat['clients_second_name'], true) ?>
+                    <label class="switch pull-right">
+                        <?= Html::checkbox($flat_status, $flat['is_debtor'], [
+                                'id' => 'check_status__flat',
+                                'data-flat' => $flat['flats_id'],
+                        ]) ?>
+                        <span class="slider round"></span>
+                    </label>
+                    
+                </p>                
 
                 <?php if (isset($flats[$key]['note']) && $flats[$key]['note']) : ?>
                     <span>Примечание</span>
@@ -46,14 +55,6 @@
                         </li>
                         <?php endforeach; ?>
                     </ul>
-                    <?php /* foreach ($flats[$key]['note'] as $note) : ?>
-                        <p class="note-message">                            
-                            <?= Html::button('<span class="glyphicon glyphicon-trash"></span>', [
-                                    'class' => 'btn btn-link btn-sm flat_note__delete pull-rigth',
-                                    'data-note' => $note['notes_id']]) ?>
-                            <?= $note['notes_name'] ?>
-                        </p>
-                    <?php endforeach; */ ?>
                 <?php endif; ?>
 
             </div>
