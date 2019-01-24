@@ -24,27 +24,31 @@ class m180901_115120_table_services extends Migration
             'category_name' => $this->string(255)->notNull(),
         ], $table_options);
         $this->createIndex('idx-category_services-category_id', '{{%category_services}}', 'category_id');
-        $this->createIndex('idx-category_services-category_name', '{{%category_services}}', 'category_name');
         
         // Единицы измерения
         $this->createTable('{{%units}}', [
             'units_id' => $this->primaryKey(),
             'units_name' => $this->integer()->notNull(),
-        ]);        
+        ], $table_options);
+        $this->batchInsert('{{%units}}', 
+                ['units_id', 'units_name'], [
+                    ['1', 'Кв. м.'],
+                    ['2', 'Куб. м.'],
+                    ['3', 'Вт']
+                ]
+        );
         
         // Услуга
         $this->createTable('{{%services}}', [
             'service_id' => $this->primaryKey(),
-            'services_category_id' => $this->integer()->notNull(),
-            'services_name' => $this->string(255)->notNull(),
-            'services_units_id' => $this->integer()->notNull(),
-            'services_price' => $this->decimal(10,2)->notNull(),
-            'services_description' => $this->text(255),
-            'services_image' => $this->string(255)->notNull(),
+            'service_category_id' => $this->integer()->notNull(),
+            'service_name' => $this->string(100)->notNull(),
+            'service_unit_id' => $this->integer()->notNull(),
+            'service_price' => $this->decimal(10,2)->notNull(),
+            'service_description' => $this->string(255)->notNull(),
+            'service_image' => $this->string(255)->notNull(),
         ], $table_options);
         $this->createIndex('idx-services-service_id', '{{%services}}', 'service_id');
-        $this->createIndex('idx-services-services_name', '{{%services}}', 'services_name');
-        
         
         $this->addForeignKey(
                 'fk-services-services_category_id', 
@@ -73,17 +77,17 @@ class m180901_115120_table_services extends Migration
      */
     public function safeDown()
     {
-        $this->createIndex('idx-category_services-category_id', '{{%category_services}}');
-        $this->createIndex('idx-category_services-category_name', '{{%category_services}}');
+        $this->dropIndex('idx-category_services-category_id', '{{%category_services}}');
+        $this->dropIndex('idx-category_services-category_name', '{{%category_services}}');
         
         $this->dropTable('{{%category_services}}');
         $this->dropTable('{{%units}}');
 
-        $this->createIndex('idx-services-service_id', '{{%services}}');
-        $this->createIndex('idx-services-services_name', '{{%services}}');
+        $this->dropIndex('idx-services-service_id', '{{%services}}');
+        $this->dropIndex('idx-services-services_name', '{{%services}}');
         
-        $this->addForeignKey('fk-services-services_category_id', '{{%services}}');
-        $this->addForeignKey('fk-services-services_units_id', '{{%services}}');
+        $this->dropForeignKey('fk-services-services_category_id', '{{%services}}');
+        $this->dropForeignKey('fk-services-services_units_id', '{{%services}}');
         
         $this->dropTable('{{%services}}');
 
