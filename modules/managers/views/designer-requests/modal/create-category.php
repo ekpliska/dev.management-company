@@ -26,7 +26,7 @@
 
 <?php
     $form = ActiveForm::begin([
-        'id' => 'create-rent-form',
+        'id' => 'create-category-form',
         'validateOnChange' => false,
         'validateOnBlur' => false,
         'action' => ['create-record', 'form' => 'new-category'],

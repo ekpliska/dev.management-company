@@ -23,3 +23,8 @@ $this->params['breadcrumbs'][] = 'Конструктор заявок';
 </div>
 
 <?= $this->render('modal/create-category', ['model_category' => $model_category]) ?>
+<?= $this->render('modal/create-service', [
+        'model_service' => $model_service, 
+        'categories_list' => $results['categories'],
+        'units' => $results['units'],
+    ]) ?>

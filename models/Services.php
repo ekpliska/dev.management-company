@@ -13,16 +13,13 @@
 class Services extends ActiveRecord
 {
     
-    const TYPE_SERVICE = 0;
-    const TYPE_PAY = 1;
-    
     /**
      * Таблица из БД
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'services';
     }
+    
 
     /**
      * Правила валидации
@@ -36,16 +33,16 @@ class Services extends ActiveRecord
                 'service_name',
                 'service_unit_id',
                 'service_price',
-                'service_description',
-                'service_image'], 'required'],
+                'service_description'], 'required'],
             
             [['service_category_id', 'service_unit_id'], 'integer'],
             
             ['service_price', 'number', 'numberPattern' => '/^\d+(.\d{1,2})?$/'],
             
-            [['service_name', 'service_image'], 'string', 'min' => '10', 'max' => 255],
+            [['service_name', 'service_image'], 'string', 'min' => 3, 'max' => 255],
             
-            ['services_description', 'string', 'min' => 10, 'max' => 1000],
+            ['service_description', 'string', 'min' => 3, 'max' => 1000],
+            
         ];
     }
     

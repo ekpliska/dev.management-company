@@ -5,6 +5,7 @@
     use app\modules\managers\controllers\AppManagersController;
     use app\models\CategoryServices;
     use app\models\Services;
+    use app\models\Units;
 
 /**
  * Конструктор заявок
@@ -16,6 +17,7 @@ class DesignerRequestsController extends AppManagersController {
         $results = [];
         
         $model_category = new CategoryServices();
+        $model_service = new Services();
         
         switch ($section) {
             case 'requests':
@@ -25,6 +27,7 @@ class DesignerRequestsController extends AppManagersController {
                 $results = [
                     'categories' => CategoryServices::getCategoryNameArray(),
                     'services' => Services::getServicesNameArray(),
+                    'units' => Units::getUnitsArray(),
                 ];
                 break;
         }
@@ -32,6 +35,7 @@ class DesignerRequestsController extends AppManagersController {
         return $this->render('index', [
             'section' => $section,
             'model_category' => $model_category,
+            'model_service' => $model_service,
             'results' => $results,
         ]);
         
@@ -45,6 +49,9 @@ class DesignerRequestsController extends AppManagersController {
         switch ($form) {
             case 'new-category':
                 $model = new CategoryServices();
+                break;
+            case 'new-service':
+                $model = new Services();
                 break;
         }
         
@@ -63,6 +70,10 @@ class DesignerRequestsController extends AppManagersController {
         switch ($form) {
             case 'new-category':
                 $model = new CategoryServices();
+                $section = 'paid-services';
+                break;
+            case 'new-service':
+                $model = new Services();
                 $section = 'paid-services';
                 break;
         }

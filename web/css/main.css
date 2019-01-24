@@ -2686,6 +2686,9 @@ p.date-start-vote {
     width: 100%;
     padding: 0 50px;
 }
+.modal-body form#create-service-form {
+    padding: 0;
+}
 /* Конец Переодпределение ширины, высоты модальных окон */
 
 /* Переопреденное модальное окно бутстрапа */
@@ -4419,6 +4422,13 @@ a.employee-profile:hover {
 }
 .dropdown__settings-service {
     float: right;
+}
+#create-service-form .load_preview {
+    width: 320px;
+    height: 200px;
+    margin: 10px auto;
+    border: none;
+    background: transparent;
 }
 /* Конец Конструктор заявок */
 

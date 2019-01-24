@@ -125,7 +125,22 @@ form .has-error .field::before {
 .field-modal.is-focused::after{
     transform: scaleX(1);
 }
-
+.field-modal select {
+    background: transparent;
+    color: #fff;
+    padding: 0;
+    margin: 15px 0;
+    border: none;
+    outline: none;
+}
+.field-modal select:focus {
+    border: none;
+    box-shadow: none;
+    outline: none;
+}
+.field-modal select option {
+    color: #000;
+}
 /* Конец формы в модальном окне */
 
 /* Шаги, регистрация */
