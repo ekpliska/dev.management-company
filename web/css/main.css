@@ -4331,7 +4331,96 @@ a.employee-profile:hover {
 }
 /* Конец Жилищный фонд */
 
-
+/* Конструктор заявок */
+.designer-block {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+}
+.designer-block > div[class*="col-"] {
+    padding: 0;
+    margin: 0;
+    border-right: 1px solid #ddd;
+    min-height: 700px;
+}
+.designer-block > div[class*="col-"]:last-child {
+    border-right: none;
+}
+.designer-block > div > h4.title {
+    padding: 20px 15px;
+    margin: 0;
+    color: #2d18b4;
+    font-weight: bold;
+    font-size: 12px;
+    border-bottom: 1px solid #ddd;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+}
+.designer-block__search-block {
+    padding: 25px 25px 25px 25px;
+}
+.designer-block__lists {
+    padding: 0;
+}
+.search-block__input {
+    width: 100%;
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: 1px solid #ddd;
+    outline: none;
+}
+.search-block__input::placeholder {
+    color: #ddd;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-size: 7%;
+    background-image: url('../images/searchicon.png');
+    background-position: 57%;
+}
+#categories-list,
+.services-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+#categories-list > li:first-child,
+.services-list > li:first-child {
+    border-top: 1px solid #ddd;
+}
+#categories-list li {
+    position: relative;
+    border-bottom: 1px solid #ddd;
+    margin-top: -1px;
+    padding: 25px;
+    color: #454545;
+    display: block;
+    cursor: pointer;
+}
+#categories-list li:hover {
+    background-color: #454545;
+    color: #fff;
+}
+#categories-list > li > span.close {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    right: 5%;
+    font-size: 14px;
+    color: #454545;
+    padding: 5px;
+    transform: translate(0%, -50%);
+}
+.services-list > li {
+    border-bottom: 1px solid #ddd;
+    margin-top: -1px;
+    padding: 25px;
+    color: #454545;
+    position: relative;
+    cursor: pointer;
+}
+.dropdown__settings-service {
+    float: right;
+}
+/* Конец Конструктор заявок */
 
 
 
