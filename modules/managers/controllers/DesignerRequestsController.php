@@ -73,4 +73,16 @@ class DesignerRequestsController extends AppManagersController {
         }
         
     }
+    
+    public function actionShowServices ($category_id) {
+        
+        if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            $services_list = Services::getPayServices($category_id);
+            $data = $this->renderAjax('data/services-list', ['services_list' => $services_list]);
+            return ['success' => true, 'data' => $data];
+        }
+        
+        return ['success' => false];
+    }
 }

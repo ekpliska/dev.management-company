@@ -14,57 +14,24 @@
             <?= Html::input('text', 'search-services', null, ['class' => 'search-block__input', 'placeholder' => 'Поиск']) ?>
         </div>
         <div class="designer-block__lists">
-            <ul id="categories-list">
-                <li>
-                    Adele
-                    <span class="close category__delete" data-note="26"><i class="glyphicon glyphicon-trash"></i></span>
-                </li>
-                <li>
-                    Adele
-                    <span class="close category__delete" data-note="26"><i class="glyphicon glyphicon-trash"></i></span>
-                </li>
-                <li>
-                    Adele
-                    <span class="close category__delete" data-note="26"><i class="glyphicon glyphicon-trash"></i></span>
-                </li>
-                <li>
-                    Adele
-                    <span class="close category__delete" data-note="26"><i class="glyphicon glyphicon-trash"></i></span>
-                </li>
-            </ul>
+            <?php if ($results['categories']) : ?>
+                <ul id="categories-list">
+                    <?php foreach ($results['categories'] as $key_cat => $category) : ?>
+                        <li data-check-category="<?= $key_cat ?>">
+                            <?= $category ?>
+                            <span class="close category__delete" data-category="<?= $key_cat ?>"><i class="glyphicon glyphicon-trash"></i></span>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php endif; ?>
         </div>
         
     </div>
         
     <div class="col-md-7">
         <h4 class="title">Услуга</h4>
-        <div class="designer-block__lists">
-            <ul class="services-list">
-                <li>
-                    Adele <span class="span-count">#TODO</span>
-                    <div class="dropdown dropdown__settings-service">
-                        <button type="button" class="btn-settings dropdown-toggle" data-toggle="dropdown">
-                            <i class="glyphicon glyphicon-option-horizontal"></i>
-                        </button>
-                        <ul class="dropdown-menu dropdown-setting">
-                            <li>Редактировать</li>
-                            <li>Удалить услугу</li>
-                        </ul>
-                    </div>
-                </li>
-                <li>
-                    Adele <span class="span-count">#TODO</span>
-                    <div class="dropdown dropdown__settings-service">
-                        <button type="button" class="btn-settings dropdown-toggle" data-toggle="dropdown">
-                            <i class="glyphicon glyphicon-option-horizontal"></i>
-                        </button>
-                        <ul class="dropdown-menu dropdown-setting">
-                            <li>Редактировать</li>
-                            <li>Удалить услугу</li>
-                        </ul>
-                    </div>
-                </li>
-            </ul>
+        <div class="designer-block__lists" id="block__lists-services">
+            <?= $this->render('services-list', ['services_list' => $services_list]) ?>
         </div>
     </div>
         

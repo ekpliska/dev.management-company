@@ -52,6 +52,7 @@ class CategoryServices extends ActiveRecord
     public static function getCategoryNameArray() {
         
         $array = static::find()
+                ->orderBy(['category_name' => SORT_ASC])
                 ->asArray()
                 ->all();
         

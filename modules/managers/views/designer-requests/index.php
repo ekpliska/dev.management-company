@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = 'Конструктор заявок';
     ]) ?>
 
     <div id="_list-res">
-        <?= $this->render("data/index-{$section}", ['section' => $section]) ?>
+        <?= $this->render("data/index-{$section}", ['section' => $section, 'results' => $results]) ?>
     </div>
     
 </div>
