@@ -32,7 +32,7 @@ class CategoryServices extends ActiveRecord
      * Связь с таблице Услуги
      */
     public function getService() {
-        return $this->hasMany(Services::className(), ['services_category_id' => 'category_id']);
+        return $this->hasMany(Services::className(), ['service_category_id' => 'category_id']);
     }
     
     /*
@@ -45,16 +45,6 @@ class CategoryServices extends ActiveRecord
                 ->all();
         
         return ArrayHelper::map($array, 'category_id', 'category_name');
-    }    
-    
-    /*
-     * Получить все платные услуги
-     */
-    public static function getAllCategory() {
-        return self::find()
-                ->joinWith(['service'])
-                ->andWhere(['services.isType' => 1])
-                ->all();
     }    
     
     /**

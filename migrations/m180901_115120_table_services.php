@@ -51,9 +51,9 @@ class m180901_115120_table_services extends Migration
         $this->createIndex('idx-services-service_id', '{{%services}}', 'service_id');
         
         $this->addForeignKey(
-                'fk-services-services_category_id', 
+                'fk-services-service_category_id', 
                 '{{%services}}', 
-                'services_category_id', 
+                'service_category_id', 
                 '{{%category_services}}', 
                 'category_id', 
                 'CASCADE',
@@ -61,9 +61,9 @@ class m180901_115120_table_services extends Migration
         );
         
         $this->addForeignKey(
-                'fk-services-services_units_id', 
+                'fk-services-service_unit_id', 
                 '{{%services}}', 
-                'services_units_id', 
+                'service_unit_id', 
                 '{{%units}}', 
                 'units_id', 
                 'CASCADE',
@@ -78,16 +78,14 @@ class m180901_115120_table_services extends Migration
     public function safeDown()
     {
         $this->dropIndex('idx-category_services-category_id', '{{%category_services}}');
-        $this->dropIndex('idx-category_services-category_name', '{{%category_services}}');
         
         $this->dropTable('{{%category_services}}');
         $this->dropTable('{{%units}}');
 
         $this->dropIndex('idx-services-service_id', '{{%services}}');
-        $this->dropIndex('idx-services-services_name', '{{%services}}');
         
-        $this->dropForeignKey('fk-services-services_category_id', '{{%services}}');
-        $this->dropForeignKey('fk-services-services_units_id', '{{%services}}');
+        $this->dropForeignKey('fk-services-service_category_id', '{{%services}}');
+        $this->dropForeignKey('fk-services-service_unit_id', '{{%services}}');
         
         $this->dropTable('{{%services}}');
 
