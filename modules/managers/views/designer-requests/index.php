@@ -1,6 +1,7 @@
 <?php
 
     use yii\widgets\Breadcrumbs;
+    use yii\bootstrap\Modal;
 
 /* 
  * Конструктор заявок, главная страница
@@ -20,3 +21,5 @@ $this->params['breadcrumbs'][] = 'Конструктор заявок';
     </div>
     
 </div>
+
+<?= $this->render('modal/create-category', ['model_category' => $model_category]) ?>

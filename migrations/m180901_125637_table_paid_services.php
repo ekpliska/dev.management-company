@@ -45,7 +45,7 @@ class m180901_125637_table_paid_services extends Migration
                 'services_servise_category_id', 
                 '{{%category_services}}', 
                 'category_id', 
-                'RESTRICT',
+                'CASCADE',
                 'CASCADE'
         );        
         
@@ -55,7 +55,7 @@ class m180901_125637_table_paid_services extends Migration
                 'services_name_services_id', 
                 '{{%services}}', 
                 'service_id', 
-                'RESTRICT',
+                'CASCADE',
                 'CASCADE'
         );
         

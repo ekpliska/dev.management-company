@@ -73,7 +73,13 @@
 <div class="dropup action-housing-stock">
     <button class="action-housing-stock__button dropdown-toggle" type="button" data-toggle="dropdown"></button>
     <ul class="dropdown-menu">
-        <li><a href="<?= Url::to(['/']) ?>" id="add-category-btn">Добавить категорию</a></li>
-        <li><a href="<?= Url::to(['/']) ?>" id="add-service-btn">Добавить услугу</a></li>
+        <li>
+            <?= Html::a('Добавить категорию', ['/'], ['data-target' => '#create-category-modal',
+            'data-toggle' => 'modal']) ?>
+        </li>
+        <li>
+            <?= Html::a('Добавить услугу', ['/'], ['data-target' => '#create-service-modal',
+            'data-toggle' => 'modal']) ?>
+        </li>
     </ul>
-</div>    
+</div>

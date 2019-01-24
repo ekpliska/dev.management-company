@@ -24,7 +24,18 @@ class CategoryServices extends ActiveRecord
     public function rules()
     {
         return [
-            [['category_name'], 'string', 'max' => 255],
+            ['category_name', 'required'],
+            [['category_name'], 'string', 'min' => '3', 'max' => 100],
+            ['category_name', 'unique', 
+                'targetClass' => self::className(),
+                'targetAttribute' => 'category_name',
+                'message' => 'Указанная категория существует',
+            ],
+            [['category_name'],
+                'match', 
+                'pattern' => '/^[А-Яа-я\0-9\ \_\-]+$/iu', 
+                'message' => 'Вы используете запрещенные символы',
+            ],
         ];
     }
     
@@ -53,8 +64,8 @@ class CategoryServices extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'category_id' => 'Category ID',
-            'category_name' => 'Category Name',
+            'category_id' => 'ID',
+            'category_name' => 'Название категории',
         ];
     }
 }
