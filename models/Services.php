@@ -32,17 +32,18 @@ class Services extends ActiveRecord
         return [
             
             [[
-                'services_category_id',
-                'services_name',
-                'services_unit_id',
-                'services_cost', 
-                'isType'], 'required'],
+                'service_category_id',
+                'service_name',
+                'service_unit_id',
+                'service_price',
+                'service_description',
+                'service_image'], 'required'],
             
-            [['services_category_id', 'isType'], 'integer'],
+            [['service_category_id', 'service_unit_id'], 'integer'],
             
-            ['services_cost', 'number', 'numberPattern' => '/^\d+(.\d{1,2})?$/'],
+            ['service_price', 'number', 'numberPattern' => '/^\d+(.\d{1,2})?$/'],
             
-            [['services_name', 'services_image'], 'string', 'min' => '10', 'max' => 255],
+            [['service_name', 'service_image'], 'string', 'min' => '10', 'max' => 255],
             
             ['services_description', 'string', 'min' => 10, 'max' => 1000],
         ];
@@ -52,14 +53,14 @@ class Services extends ActiveRecord
      * Связь с таблицей Категории услуг/Вид услуг
      */
     public function getCategory() {
-        return $this->hasOne(CategoryServices::className(), ['category_id' => 'services_category_id']);
+        return $this->hasOne(CategoryServices::className(), ['category_id' => 'service_category_id']);
     }
     
     /*
      * Связь с таблицей Единицы измерения
      */
     public function getUnit() {
-        return $this->hasOne(Units::className(), ['units_id' => 'services_unit_id']);
+        return $this->hasOne(Units::className(), ['units_id' => 'service_unit_id']);
     }
     
     /*
@@ -71,7 +72,7 @@ class Services extends ActiveRecord
                 ->asArray()
                 ->all();
         
-        return ArrayHelper::map($array, 'service_id', 'services_name');
+        return ArrayHelper::map($array, 'service_id', 'service_name');
     }
 
     /*
@@ -81,9 +82,9 @@ class Services extends ActiveRecord
         
         $pay_services = self::find()
                 ->joinWith('category')
-                ->andWhere(['services_category_id' => $category_id])
+                ->andWhere(['service_category_id' => $category_id])
                 ->asArray()
-                ->orderBy(['category_name' => SORT_ASC, 'services_name' => SORT_ASC])
+                ->orderBy(['category_name' => SORT_ASC, 'service_name' => SORT_ASC])
                 ->all();
         
         return $pay_services;
@@ -97,16 +98,6 @@ class Services extends ActiveRecord
     }
     
     /*
-     * Список типов услуг
-     */
-    public static function getTypeNameArray () {
-        return [
-            self::TYPE_SERVICE => 'Услуга',
-            self::TYPE_PAY => 'Платная услуга',
-        ];
-    }
-    
-    /*
      * Поиск услуги по ID
      */
     public static function findByID($service_id) {
@@ -116,21 +107,6 @@ class Services extends ActiveRecord
     }
     
     /*
-     * Метод смены типы усуги
-     * Усулуга/Платная услуга
-     */
-    public function checkType($type) {
-        
-        if ($type == self::TYPE_PAY) {
-            $this->isType = self::TYPE_PAY;
-        } elseif ($type == self::TYPE_SERVICE) {
-            $this->isType = self::TYPE_SERVICE;
-        }
-        
-        return $this->save() ? true : false;
-    }
-
-    /*
      * Загрузка изображения услуги
      */    
     public function uploadImage($file) {
@@ -139,14 +115,14 @@ class Services extends ActiveRecord
         
         if ($this->validate()) {
             if ($file) {
-                $this->services_image = $file;
+                $this->service_image = $file;
                 $dir = Yii::getAlias('images/services/');
-                $file_name = 'service_' . time() . '.' . $this->services_image->extension;
-                $this->services_image->saveAs($dir . $file_name);
-                $this->services_image = '/' . $dir . $file_name;
+                $file_name = 'service_' . time() . '.' . $this->service_image->extension;
+                $this->service_image->saveAs($dir . $file_name);
+                $this->service_image = '/' . $dir . $file_name;
                 @unlink(Yii::getAlias('@webroot' . $current_image));
             } else {
-                $this->services_image = $current_image;
+                $this->service_image = $current_image;
             }
             return $this->save() ? true : false;
         }
@@ -159,10 +135,10 @@ class Services extends ActiveRecord
      * В случае, если изображени для услуги не было задано - выводится изображение по умолчанию
      */
     public function getImage() {
-        if (empty($this->services_image)) {
+        if (empty($this->service_image)) {
             return Yii::getAlias('@web') . '/images/not_found.png';
         }
-        return Yii::getAlias('@web') . $this->services_image;
+        return Yii::getAlias('@web') . $this->service_image;
     }
 
     
@@ -172,14 +148,13 @@ class Services extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'service_id' => 'Services ID',
-            'services_name' => 'Наименование услуги',
-            'services_category_id' => 'Вид услуги',
-            'services_cost' => 'Стоимость',
-            'services_image' => 'Изображение',
-            'services_description' => 'Описание',
-            'isType' => 'Тип услуги',
-            'services_unit_id' => 'Единица измерения',
+            'service_id' => 'ID',
+            'service_category_id' => 'Категория',
+            'service_name' => 'Наименование',
+            'service_unit_id' => 'Единица измерения',
+            'service_price' => 'Цена',
+            'service_description' => 'Описание',
+            'service_image' => 'Изображение',
         ];
     }
 }

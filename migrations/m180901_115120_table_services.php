@@ -45,7 +45,7 @@ class m180901_115120_table_services extends Migration
             'service_name' => $this->string(100)->notNull(),
             'service_unit_id' => $this->integer()->notNull(),
             'service_price' => $this->decimal(10,2)->notNull(),
-            'service_description' => $this->string(255)->notNull(),
+            'service_description' => $this->text(1000)->notNull(),
             'service_image' => $this->string(255)->notNull(),
         ], $table_options);
         $this->createIndex('idx-services-service_id', '{{%services}}', 'service_id');
