@@ -19,7 +19,7 @@
                     <?php foreach ($results['categories'] as $key_cat => $category) : ?>
                         <li data-check-category="<?= $key_cat ?>" class="">
                             <?= $category ?>
-                            <span class="close category__delete" data-category="<?= $key_cat ?>"><i class="glyphicon glyphicon-trash"></i></span>
+                            <span class="close category__delete" data-record="<?= $key_cat ?>" data-record-type="category"><i class="glyphicon glyphicon-trash"></i></span>
                         </li>
                     <?php endforeach; ?>
                 </ul>

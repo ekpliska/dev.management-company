@@ -1,7 +1,7 @@
 <?php
 
     use yii\widgets\Breadcrumbs;
-    use yii\bootstrap\Modal;
+    use app\modules\managers\widgets\ModalWindowsManager;
 
 /* 
  * Конструктор заявок, главная страница
@@ -30,3 +30,5 @@ $this->params['breadcrumbs'][] = 'Конструктор заявок';
         'units' => $results['units'],
     ]) ?>
 <?php endif; ?>
+
+<?= ModalWindowsManager::widget(['modal_view' => 'designer-confirm-message']) ?>

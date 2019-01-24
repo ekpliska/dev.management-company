@@ -1118,16 +1118,46 @@ $(document).ready(function() {
     // ************     Start Block of Designer   ************** //
     // ******************************************************** // 
 
+
+    /*
+     * Переключение списка Категорий услуг, разд "Платные услуги"
+     */
     $('#categories-list > li').on('click', function() {
         var categoryId = $(this).data('checkCategory');
         $('#categories-list > li').removeClass('active-item');
         $(this).addClass('active-item');
-        $.post('show-services?category_id=' + categoryId, function(response){
+        $.post('show-services?category_id=' + categoryId, function(response) {
             if (response.success === true) {
                 $('#block__lists-services').html(response.data);
             }
         });
     });
+    
+    /*
+     * Запрос на удаление записи
+     */
+    var recordId, recordType;
+    $('.category__delete').on('click', function() {
+        recordId = $(this).data('record');
+        recordType = $(this).data('recordType');
+        $('#designer-confirm-message').modal('show');
+    });
+    $('#designer-confirm-message').on('show.bs.modal', function(e) {
+        if (recordType === 'category') {
+            $(this).find('.modal-confirm').html(
+                    'Вы действительно хотите удалить выбранную ватегорию? Все принадлежащие выбранной категории услуги будут также удалены. Продолжить?');
+        }
+        $(this).find('.delete_record__des').data('record', recordId);
+        $(this).find('.delete_record__des').data('recordType', recordType);
+    });
+    
+    $('.delete_record__des').on('click', function() {
+        $.post('delete-record?type=' + recordType + '&record_id=' + recordId, function(response) {
+            //
+        });
+        alert($(this).data('record'));
+    });
+    
 
     /*
      * Установка куки

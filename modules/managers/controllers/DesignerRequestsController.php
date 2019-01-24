@@ -96,4 +96,26 @@ class DesignerRequestsController extends AppManagersController {
         
         return ['success' => false];
     }
+    
+    public function actionDeleteRecord ($type, $record_id) {
+        
+        if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            
+            switch ($type) {
+                case 'category':
+                    $result = CategoryServices::findOne($record_id);                    
+                    break;
+                default:
+                    return ['success' => false];
+            }
+            
+            if (!$result->delete()) {
+                return ['success' => false];
+            }
+            
+            return ['success' => true];
+            
+        }
+    }
 }
