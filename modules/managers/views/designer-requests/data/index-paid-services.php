@@ -17,7 +17,7 @@
             <?php if ($results['categories']) : ?>
                 <ul id="categories-list">
                     <?php foreach ($results['categories'] as $key_cat => $category) : ?>
-                        <li data-check-category="<?= $key_cat ?>">
+                        <li data-check-category="<?= $key_cat ?>" class="">
                             <?= $category ?>
                             <span class="close category__delete" data-category="<?= $key_cat ?>"><i class="glyphicon glyphicon-trash"></i></span>
                         </li>

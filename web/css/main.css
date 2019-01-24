@@ -4399,7 +4399,8 @@ a.employee-profile:hover {
     display: block;
     cursor: pointer;
 }
-#categories-list li:hover {
+#categories-list li:hover,
+#categories-list li.active-item {
     background-color: #454545;
     color: #fff;
 }

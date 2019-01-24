@@ -1118,8 +1118,10 @@ $(document).ready(function() {
     // ************     Start Block of Designer   ************** //
     // ******************************************************** // 
 
-    $('#categories-list>li').on('click', function() {
+    $('#categories-list > li').on('click', function() {
         var categoryId = $(this).data('checkCategory');
+        $('#categories-list > li').removeClass('active-item');
+        $(this).addClass('active-item');
         $.post('show-services?category_id=' + categoryId, function(response){
             if (response.success === true) {
                 $('#block__lists-services').html(response.data);
