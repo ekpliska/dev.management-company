@@ -28,7 +28,7 @@ class m180901_115120_table_services extends Migration
         // Единицы измерения
         $this->createTable('{{%units}}', [
             'units_id' => $this->primaryKey(),
-            'units_name' => $this->integer()->notNull(),
+            'units_name' => $this->string(100)->notNull(),
         ], $table_options);
         $this->batchInsert('{{%units}}', 
                 ['units_id', 'units_name'], [
