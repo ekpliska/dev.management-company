@@ -8,8 +8,9 @@
 <ul class="services-list">
 <?php foreach ($services_list as $key => $service) : ?>
     <li>
-        <?= $service['service_name'] ?>
-        <span class="span-count"><?= $service['service_id'] ?></span>
+        <p><?= $service['service_name'] ?></p>
+        <span class="span-count"><?= "ID {$service['service_id']}" ?></span>
+        <span class="span-price"><?= "&#8381; {$service['service_price']}" ?></span>
         <div class="dropdown dropdown__settings-service">
             <button type="button" class="btn-settings dropdown-toggle" data-toggle="dropdown">
                 <i class="glyphicon glyphicon-option-horizontal"></i>

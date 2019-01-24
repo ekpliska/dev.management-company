@@ -3,6 +3,7 @@
     use yii\bootstrap\Modal;
     use yii\widgets\ActiveForm;
     use yii\helpers\Html;
+    use yii\widgets\MaskedInput;
 
 /* 
  * Модальное окно "Создание услуги"
@@ -70,6 +71,13 @@
                 'class' => 'field-label-modal']) ?>            
 
     <?= $form->field($model_service, 'service_price')
+            ->widget(MaskedInput::className(), [
+                'clientOptions' => [
+                    'alias' =>  'decimal',
+                    'groupSeparator' => '',
+                    'radixPoint' => '.',
+                    'autoGroup' => false,
+                ]])
             ->input('text', [
                 'class' => 'field-input-modal'])
             ->label($model_service->getAttributeLabel('service_price'), [

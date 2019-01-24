@@ -22,9 +22,11 @@ $this->params['breadcrumbs'][] = 'Конструктор заявок';
     
 </div>
 
+<?php if ($section == 'paid-services') : ?>
 <?= $this->render('modal/create-category', ['model_category' => $model_category]) ?>
 <?= $this->render('modal/create-service', [
         'model_service' => $model_service, 
         'categories_list' => $results['categories'],
         'units' => $results['units'],
     ]) ?>
+<?php endif; ?>

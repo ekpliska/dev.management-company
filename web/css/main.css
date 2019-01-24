@@ -4391,6 +4391,7 @@ a.employee-profile:hover {
 }
 #categories-list li {
     position: relative;
+    font-weight: bold;
     border-bottom: 1px solid #ddd;
     margin-top: -1px;
     padding: 25px;
@@ -4429,6 +4430,13 @@ a.employee-profile:hover {
     margin: 10px auto;
     border: none;
     background: transparent;
+}
+.span-price {
+    padding: 2px 20px;
+    color: #fff;
+    margin-right: 5px;
+    border-radius: 25px;
+    background: #598eff;
 }
 /* Конец Конструктор заявок */
 

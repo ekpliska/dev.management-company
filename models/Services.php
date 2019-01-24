@@ -37,7 +37,7 @@ class Services extends ActiveRecord
             
             [['service_category_id', 'service_unit_id'], 'integer'],
             
-            ['service_price', 'number', 'numberPattern' => '/^\d+(.\d{1,2})?$/'],
+            ['service_price', 'double', 'min' => 00.00, 'max' => 100000.00, 'message' => 'Цена услуги указана не верно. Пример: 790.70'],
             
             [['service_name', 'service_image'], 'string', 'min' => 3, 'max' => 255],
             
