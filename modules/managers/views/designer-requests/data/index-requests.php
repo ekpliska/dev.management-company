@@ -17,7 +17,8 @@
                 <ul id="categories-list">
                     <?php foreach ($results['requests'] as $key_req => $request) : ?>
                         <li data-check-category="<?= $key_req ?>" class="<?= $this->context->request_cookie == $request ? 'active-item' : '' ?>">
-                            <?= $request ?>
+                            <p><?= $request ?></p>
+                            <span class="span-count"><?= "ID {$key_req}" ?></span>
                             <span class="close request__delete" data-record="<?= $key_req ?>" data-record-type="request"><i class="glyphicon glyphicon-trash"></i></span>
                         </li>
                     <?php endforeach; ?>

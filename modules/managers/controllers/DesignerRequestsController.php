@@ -141,6 +141,9 @@ class DesignerRequestsController extends AppManagersController {
                 case 'service':
                     $result = Services::findOne($record_id);                    
                     break;
+                case 'request':
+                    $result = TypeRequests::findOne($record_id);                    
+                    break;
                 default:
                     Yii::$app->session->setFlash('error', ['message' => 'Ошибка удаления. Обновите страницу и повторите действие еще раз']);
                     return $this->redirect(Yii::$app->request->referrer);

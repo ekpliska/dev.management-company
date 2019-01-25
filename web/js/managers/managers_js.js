@@ -1137,7 +1137,7 @@ $(document).ready(function() {
      * Запрос на удаление записи
      */
     var recordId, recordType;
-    $(document).on('click', '.category__delete, #service__delete', function() {
+    $(document).on('click', '.category__delete, #service__delete, .request__delete', function() {
         recordId = $(this).data('record');
         recordType = $(this).data('recordType');
         $('#designer-confirm-message').modal('show');
@@ -1151,10 +1151,14 @@ $(document).ready(function() {
         } else if (recordType === 'service') {
             $(this).find('.modal-confirm').html(
                     'Вы действительно хотите удалить выбранную услугу?');
+        } else if (recordType === 'request') {
+            $(this).find('.modal-confirm').html(
+                    'Вы действительно хотите удалить выбранную заявку?');
         }
 
         $(this).find('.delete_record__des').data('record', recordId);
         $(this).find('.delete_record__des').data('recordType', recordType);
+        
     });
     
     $('.delete_record__des').on('click', function() {
