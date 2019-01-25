@@ -28,7 +28,11 @@ a, a:hover, a:active {
     text-decoration: none;
     color: #2d18b4;
 }
-
+button:active,
+button:focus,
+button:hover {
+    outline: none;
+}
 .wrap {
     min-height: 100%;
     height: auto;
@@ -4424,6 +4428,7 @@ a.employee-profile:hover {
 }
 .dropdown__settings-service {
     float: right;
+    margin-top: -10px;
 }
 #create-service-form .load_preview {
     width: 320px;

@@ -100,21 +100,23 @@ class DesignerRequestsController extends AppManagersController {
     public function actionDeleteRecord ($type, $record_id) {
         
         if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
-            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
             
             switch ($type) {
                 case 'category':
                     $result = CategoryServices::findOne($record_id);                    
                     break;
                 default:
-                    return ['success' => false];
+                    Yii::$app->session->setFlash('error', ['message' => 'Ошибка удаления. Обновите страницу и повторите действие еще раз']);
+                    return $this->redirect(Yii::$app->request->referrer);
             }
             
             if (!$result->delete()) {
-                return ['success' => false];
+                Yii::$app->session->setFlash('error', ['message' => 'Ошибка удаления. Обновите страницу и повторите действие еще раз']);
+                return $this->redirect(Yii::$app->request->referrer);
             }
             
-            return ['success' => true];
+            Yii::$app->session->setFlash('success', ['message' => 'Выбранная запись была успешно удалена']);
+            return $this->redirect(Yii::$app->request->referrer);
             
         }
     }

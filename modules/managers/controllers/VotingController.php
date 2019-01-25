@@ -142,8 +142,7 @@ class VotingController extends AppManagersController {
         if (Yii::$app->request->isAjax) {
             $voting = Voting::findByID($voting_id);
             if (!$voting->delete()) {
-                Yii::$app->session->setFlash('error', ['message' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз',
-                ]);
+                Yii::$app->session->setFlash('error', ['message' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз']);
                 return $this->redirect(Yii::$app->request->referrer);
             }
             Yii::$app->session->setFlash('success', ['message' => 'Голосование ' . $voting->voting_title . ' было успешно удалено']);
