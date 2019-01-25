@@ -10,8 +10,7 @@
 /**
  * Услуги
  */
-class Services extends ActiveRecord
-{
+class Services extends ActiveRecord {
     
     /**
      * Таблица из БД
@@ -108,7 +107,7 @@ class Services extends ActiveRecord
      */    
     public function uploadImage($file) {
         
-        $current_image = $this->services_image;
+        $current_image = $this->service_image;
         
         if ($this->validate()) {
             if ($file) {

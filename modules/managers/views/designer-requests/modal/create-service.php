@@ -36,6 +36,9 @@
         'fieldConfig' => [
             'template' => '<div class="field-modal">{label}{input}{error}</div>'
         ],
+        'options' => [
+            'enctype' => 'multipart/form-data',
+        ],
     ]);
 ?>
 
@@ -51,12 +54,12 @@
 
 <div class="col-md-6">
 
-    <?= $form->field($model_service, 'service_category_id')
+    <?= $form->field($model_service, 'service_category')
             ->dropDownList($categories_list, [
                 'prompt' => '[Категория]'])
             ->label(false) ?>   
 
-    <?= $form->field($model_service, 'service_unit_id')
+    <?= $form->field($model_service, 'service_unit')
             ->dropDownList($units, [
                 'prompt' => '[Единицы измерения]'])
             ->label(false) ?>   

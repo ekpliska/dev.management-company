@@ -2,9 +2,11 @@
 
     namespace app\modules\managers\controllers;
     use Yii;
+    use yii\web\UploadedFile;
     use app\modules\managers\controllers\AppManagersController;
     use app\models\CategoryServices;
     use app\models\Services;
+    use app\modules\managers\models\form\ServiceForm;
     use app\models\Units;
 
 /**
@@ -17,7 +19,7 @@ class DesignerRequestsController extends AppManagersController {
         $results = [];
         
         $model_category = new CategoryServices();
-        $model_service = new Services();
+        $model_service = new ServiceForm();
         
         switch ($section) {
             case 'requests':
@@ -51,7 +53,7 @@ class DesignerRequestsController extends AppManagersController {
                 $model = new CategoryServices();
                 break;
             case 'new-service':
-                $model = new Services();
+                $model = new ServiceForm();
                 break;
         }
         
@@ -73,13 +75,19 @@ class DesignerRequestsController extends AppManagersController {
                 $section = 'paid-services';
                 break;
             case 'new-service':
-                $model = new Services();
+                $model = new ServiceForm();
                 $section = 'paid-services';
                 break;
         }
         
         if (Yii::$app->request->isPost && $model->load(Yii::$app->request->post())) {
-            $number = $model->save();
+            if ($form == 'new-service') {
+                $file = UploadedFile::getInstance($model, 'service_image');
+                $model->service_image = $file;
+                $record = $model->save($file);
+                return $this->redirect(['index', 'section' => $section]);
+            }
+            $record = $model->save();
             return $this->redirect(['index', 'section' => $section]);
         }
         
