@@ -17,7 +17,14 @@ class m180901_131651_table_requests extends Migration
         if ($this->db->driverName === 'mysql') {
             $table_options = 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB';
         }
+
+        // Типы/Виды заявок
+        $this->createTable('{{%type_requests}}', [
+            'type_requests_id' => $this->primaryKey(),
+            'type_requests_name' => $this->string(100)->notNull(),
+        ], $table_options);
         
+        // Заявки
         $this->createTable('{{%requests}}', [
             'requests_id' => $this->primaryKey(),
             'requests_ident' => $this->string(20)->notNull(),
@@ -37,11 +44,6 @@ class m180901_131651_table_requests extends Migration
         ], $table_options);
         $this->createIndex('idx-requests-requests_id', '{{%requests}}', 'requests_id');
         $this->createIndex('idx-requests-requests_ident', '{{%requests}}', 'requests_ident');
-        
-        $this->createTable('{{%type_requests}}', [
-            'type_requests_id' => $this->primaryKey(),
-            'type_requests_name' => $this->string(100)->notNull(),
-        ], $table_options);        
         
         $this->addForeignKey(
                 'fk-requests-requests_type_id', 

@@ -62,6 +62,11 @@ class AppManagersController extends Controller {
                     return Yii::$app->request->cookies->get('choosingCategory')->value;
                 }
                 break;
+            case 'choosingRequest':
+                if (Yii::$app->request->cookies->has('choosingRequest')) {
+                    return Yii::$app->request->cookies->get('choosingRequest')->value;
+                }
+                break;
             default:
                 return false;
                 

@@ -21,18 +21,25 @@ $this->params['breadcrumbs'][] = 'Конструктор заявок';
     <?= AlertsShow::widget() ?>
 
     <div id="_list-res">
-        <?= $this->render("data/index-{$section}", ['section' => $section, 'results' => $results]) ?>
+        <?= $this->render("data/index-{$section}", [
+                'section' => $section, 
+                'results' => $results
+            ]) ?>
     </div>
     
 </div>
 
+<?php if ($section == 'requests') : ?>
+    <?= $this->render('modal/create-request', ['model_request' => $model_request]) ?>
+<?php endif; ?>
+
 <?php if ($section == 'paid-services') : ?>
-<?= $this->render('modal/create-category', ['model_category' => $model_category]) ?>
-<?= $this->render('modal/create-service', [
-        'model_service' => $model_service, 
-        'categories_list' => $results['categories'],
-        'units' => $results['units'],
-    ]) ?>
+    <?= $this->render('modal/create-category', ['model_category' => $model_category]) ?>
+    <?= $this->render('modal/create-service', [
+            'model_service' => $model_service, 
+            'categories_list' => $results['categories'],
+            'units' => $results['units'],
+        ]) ?>
 <?php endif; ?>
 
 

@@ -4,6 +4,7 @@
     use Yii;
     use yii\web\UploadedFile;
     use app\modules\managers\controllers\AppManagersController;
+    use app\models\TypeRequests;
     use app\models\CategoryServices;
     use app\models\Services;
     use app\modules\managers\models\form\ServiceForm;
@@ -15,23 +16,28 @@
 class DesignerRequestsController extends AppManagersController {
     
     public $category_cookie;
+    public $request_cookie;
 
 
     public function actionIndex($section = 'requests') {
         
-        // Из куки получаем выбранную категорию
-        $this->category_cookie = $this->actionReadCookies('choosingCategory');
-        
         $results = [];
-        
+
+        $model_request = new TypeRequests();
         $model_category = new CategoryServices();
         $model_service = new ServiceForm();
         
         switch ($section) {
             case 'requests':
-                $results = [];
+                // Из куки получаем выбранную заявку
+                $this->request_cookie = $this->actionReadCookies('choosingRequest');
+                $results = [
+                    'requests' => TypeRequests::getTypeNameArray(),
+                ];
                 break;
             case 'paid-services':
+                // Из куки получаем выбранную категорию
+                $this->category_cookie = $this->actionReadCookies('choosingCategory');
                 $results = [
                     'categories' => CategoryServices::getCategoryNameArray(),
                     'services' => $this->category_cookie ? Services::getPayServices($this->category_cookie) : null,
@@ -44,6 +50,7 @@ class DesignerRequestsController extends AppManagersController {
             'section' => $section,
             'model_category' => $model_category,
             'model_service' => $model_service,
+            'model_request' => $model_request,
             'results' => $results,
         ]);
         
@@ -63,6 +70,9 @@ class DesignerRequestsController extends AppManagersController {
                 break;
             case 'edit-service-form':
                 $model = new Services();
+                break;
+            case 'new-request':
+                $model = new TypeRequests();
                 break;
         }
         
@@ -86,6 +96,10 @@ class DesignerRequestsController extends AppManagersController {
             case 'new-service':
                 $model = new ServiceForm();
                 $section = 'paid-services';
+                break;
+            case 'new-request':
+                $model = new TypeRequests();
+                $section = 'requests';
                 break;
         }
         

@@ -18,6 +18,18 @@ class TypeRequests extends ActiveRecord
         return 'type_requests';
     }
     
+    /**
+     * Правила валидации
+     */
+    public function rules() {
+        return [
+            
+            ['type_requests_name', 'required'],
+            
+            [['type_requests_name'], 'string', 'min' => 3, 'max' => 255],
+        ];
+    }
+    
     /*
      * Формирование видов (типов) заявок
      */
@@ -27,23 +39,14 @@ class TypeRequests extends ActiveRecord
     }
 
     /**
-     * Правила валидации
-     */
-    public function rules()
-    {
-        return [
-            [['type_requests_name'], 'string', 'max' => 255],
-        ];
-    }
-
-    /**
      * Настройка полей для форм
      */
     public function attributeLabels()
     {
         return [
-            'type_requests_id' => 'Type Requests ID',
-            'type_requests_name' => 'Type Requests Name',
+            'type_requests_id' => 'ID',
+            'type_requests_name' => 'Наименование',
+            'type_requests_description' => 'Описание',
         ];
     }
 }
