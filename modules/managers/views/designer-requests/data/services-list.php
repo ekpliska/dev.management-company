@@ -1,12 +1,15 @@
 <?php
 
+    use yii\helpers\Html;
+    use yii\bootstrap\Modal;
+
 /* 
  * Рендер списка услуг
  */
 ?>
 <?php if (isset($services_list) && count($services_list) > 0) :?>
 <ul class="services-list">
-<?php foreach ($services_list as $key => $service) : ?>
+<?php foreach ($services_list as $service) : ?>
     <li>
         <p><?= $service['service_name'] ?></p>
         <span class="span-count"><?= "ID {$service['service_id']}" ?></span>
@@ -16,8 +19,12 @@
                 <i class="glyphicon glyphicon-option-horizontal"></i>
             </button>
             <ul class="dropdown-menu dropdown-setting">
-                <li>Редактировать</li>
-                <li>Удалить услугу</li>
+                <li>
+                    <?= Html::a('Редактировать', ['edit-service', 'service_id' => $service['service_id']], ['class' => 'edit-service-btn']) ?>
+                </li>
+                <li>
+                    <?= Html::a('Удалить', ['/']) ?>
+                </li>
             </ul>
         </div>
     </li>

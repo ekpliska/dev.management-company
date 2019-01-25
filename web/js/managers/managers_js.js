@@ -1158,6 +1158,15 @@ $(document).ready(function() {
         alert($(this).data('record'));
     });
     
+    $(document).on('click', 'a.edit-service-btn', function(e) {
+        var link = $(this).attr('href');
+        $('#edit-service-modal-form').modal('show');
+        $('#edit-service-modal-form .modal-dialog .modal-content .modal-body').load(link);
+        e.preventDefault();
+        return false;        
+    });
+    
+    
 
     /*
      * Установка куки

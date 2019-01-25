@@ -1,5 +1,6 @@
 <?php
 
+    use yii\bootstrap\Modal;
     use yii\widgets\Breadcrumbs;
     use app\modules\managers\widgets\ModalWindowsManager;
     use app\modules\managers\widgets\AlertsShow;
@@ -33,5 +34,21 @@ $this->params['breadcrumbs'][] = 'Конструктор заявок';
         'units' => $results['units'],
     ]) ?>
 <?php endif; ?>
+
+
+<?php
+    /* Модальное окно для редактирования услуги */
+    Modal::begin([
+        'id' => 'edit-service-modal-form',
+        'header' => 'Редактировать услугу',
+        'closeButton' => [
+            'class' => 'close modal-close-btn',
+        ],
+        'clientOptions' => [
+            'backdrop' => 'static', 
+            'keyboard' => false],
+    ]);
+?>
+<?php Modal::end(); ?>
 
 <?= ModalWindowsManager::widget(['modal_view' => 'designer-confirm-message']) ?>

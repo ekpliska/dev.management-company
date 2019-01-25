@@ -930,7 +930,7 @@ button#send-request-to-sms:focus{
 .in_navbar {
     width: 479px;    
 }
-.dropdown-menu{
+.dropdown-menu {
     border-top-left-radius: 12px !important;
     border-top-right-radius: 12px !important;
     border-bottom-left-radius: 12px;
@@ -940,6 +940,10 @@ button#send-request-to-sms:focus{
 }
 .dropdown-menu > li > a {
     color: #fff;
+}
+.dropdown-menu > li > a:hover {
+/*    color: #fff;
+    background: transparent;*/
 }
 .dropdown-menu:before{
     border: none;

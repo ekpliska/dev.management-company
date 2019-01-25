@@ -120,4 +120,29 @@ class DesignerRequestsController extends AppManagersController {
             
         }
     }
+    
+    
+    /*
+     * Загрузка модального окна на редактирование услуги
+     * Сохранение данных
+     */
+    public function actionEditService($service_id) {
+        
+        $model = Services::findOne($service_id);
+        $categories_list = CategoryServices::getCategoryNameArray();
+        $units = Units::getUnitsArray();
+        
+        if (Yii::$app->request->isAjax) {
+            return $this->renderAjax('modal/edit-service', [
+                'model' => $model,
+                'categories_list' => $categories_list,
+                'units' => $units,
+            ]);
+        }
+        
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['index', 'section' => 'paid-services']);
+        }
+        
+    }
 }
