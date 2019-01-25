@@ -4,6 +4,7 @@
     use Yii;
     use yii\db\ActiveRecord;
     use yii\helpers\ArrayHelper;
+    use app\models\RequestQuestions;
 
 /**
  * Вид заявок
@@ -30,6 +31,13 @@ class TypeRequests extends ActiveRecord
         ];
     }
     
+    /**
+     * Связь с таблцией Вопросы для заявки (Опрос)
+     */
+    public function getQuestions() {
+        return $this->hasMany(RequestQuestions::className(), ['type_request_id' => 'type_requests_id']);
+    }    
+    
     /*
      * Формирование видов (типов) заявок
      */
@@ -46,7 +54,6 @@ class TypeRequests extends ActiveRecord
         return [
             'type_requests_id' => 'ID',
             'type_requests_name' => 'Наименование',
-            'type_requests_description' => 'Описание',
         ];
     }
 }
