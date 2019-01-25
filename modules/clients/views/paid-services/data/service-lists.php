@@ -14,22 +14,26 @@
                     <div class="service-card_title">
                         <?= $service['category']['category_name'] ?>
                     </div>
-                    <?= Html::img($service['services_image'], ['class' => 'service-card_image', 'alt' => 'service-image']) ?>
+                    <?= Html::img($service['service_image'], ['class' => 'service-card_image', 'alt' => 'service-image']) ?>
                     <div class="service-card_title">
-                        <?= $service['services_name'] ?>
+                        <?= $service['service_name'] ?>
                     </div>
                     <div class="service-card__body">
                         <!--  ограничение на 250 символов -->
                         <p>
-                            <?= $service['services_description'] ?>
+                            <?= $service['service_description'] ?>
                         </p>
                     </div>
                     <div class="service-card__btn">
-                        <span class="cost_service"><?= $service['services_cost'] ?> &#8381;</span>
-                        <?= Html::button('Заказать', [
+                        <span class="cost_service"><?= $service['service_price'] ?> &#8381;</span>
+                        <?php /*= Html::button('Заказать', [
                                 'class' => 'btn blue-outline-btn new-rec', 
                                 'data-service-cat' => $service['category']['category_id'],
-                                'data-service' => $service['services_id']]) ?>
+                                'data-service' => $service['service_id']]) */ ?>
+                        
+                        <?= Html::a('Заказать', 
+                                ['create-paid-request', 'category' => $service['category']['category_id'], 'service' => $service['service_id']], 
+                                ['class' => 'btn blue-outline-btn new-rec']) ?>
                     </div>                
                 </div>
             </div>

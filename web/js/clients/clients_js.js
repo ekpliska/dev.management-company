@@ -515,15 +515,22 @@ $(document).ready(function() {
      * Загрузка модального окна "Добавить платную услугу"
      * В dropDownList, hiddenInput загружаем ID выбранной услуги
      */
-    $(document).on('click', '.new-rec', function(){
-        var idService = $(this).data('service');
-        var idCategory = $(this).data('service-cat');
-        $('#add-record-modal').modal('show');
-        $('#add-record-modal').find('#name_services').val(idService);
-        $('#secret-name').val(idService);
-        $('#secret-cat').val(idCategory);
-        $('#name_services').val(idCategory);
-    }); 
+//    $(document).on('click', '.new-rec', function(){
+//        var idService = $(this).data('service');
+//        var idCategory = $(this).data('service-cat');
+//        $('#add-record-modal').modal('show');
+//        $('#add-record-modal').find('#name_services').val(idService);
+//        $('#secret-name').val(idService);
+//        $('#secret-cat').val(idCategory);
+//        $('#name_services').val(idCategory);
+//    }); 
+    $(document).on('click', '.new-rec', function(e) {
+        var link = $(this).attr('href');
+        $('#add-paid-request-modal').modal('show');
+        $('#add-paid-request-modal .modal-dialog .modal-content .modal-body').load(link);
+        e.preventDefault();
+        return false;
+    });
 
     /*
      * Сбросить заполненные поля формы в случае, 

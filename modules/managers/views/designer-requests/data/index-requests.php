@@ -40,12 +40,10 @@
     <button class="action-housing-stock__button dropdown-toggle" type="button" data-toggle="dropdown"></button>
     <ul class="dropdown-menu">
         <li>
-            <?= Html::a('Добавить заявку', ['/'], ['data-target' => '#create-request-modal',
-            'data-toggle' => 'modal']) ?>
+            <?= Html::a('Добавить заявку', ['/'], ['data-target' => '#create-request-modal', 'data-toggle' => 'modal']) ?>
         </li>
         <li>
-            <?= Html::a('Добавить вопрос', ['/'], ['data-target' => '#create-question-modal',
-            'data-toggle' => 'modal']) ?>
+            <?= Html::a('Добавить вопрос', ['/'], ['data-target' => '#create-question-modal', 'data-toggle' => 'modal']) ?>
         </li>
     </ul>
 </div>

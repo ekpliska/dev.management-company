@@ -103,14 +103,14 @@ class PaidServices extends ActiveRecord
         $query = (new \yii\db\Query())
                 ->select('p.services_number, '
                         . 'c.category_name, '
-                        . 's.services_name, '
+                        . 's.service_name, '
                         . 'p.created_at, p.services_comment, '
                         . 'p.services_specialist_id,'
                         . 'p.status,'
                         . 'p.updated_at')
                 ->from('paid_services as p')
                 ->join('LEFT JOIN', 'services as s', 's.service_id = p.services_name_services_id')
-                ->join('LEFT JOIN', 'category_services as c', 'c.category_id = s.services_category_id')
+                ->join('LEFT JOIN', 'category_services as c', 'c.category_id = s.service_category_id')
                 ->andWhere(['services_account_id' => $account_id])
                 ->orderBy(['created_at' => SORT_DESC]);
         
@@ -147,8 +147,8 @@ class PaidServices extends ActiveRecord
     public function addOrder($accoint_id) {
         
         if ($this->validate()) {
-        
             $order_numder = $this->createNumberRequest($this->services_name_services_id);
+            var_dump($order_numder);die();
 
             $this->services_number = $order_numder;
             $this->status = StatusRequest::STATUS_NEW;
@@ -223,7 +223,7 @@ class PaidServices extends ActiveRecord
         }
         
         $service_id = Services::find()
-                ->where(['like', 'services_name', $type_request])
+                ->where(['like', 'service_name', $type_request])
                 ->asArray()
                 ->one();
         
@@ -235,10 +235,10 @@ class PaidServices extends ActiveRecord
         
         $order_numder = static::createNumberRequest($service_id['service_id']);
         
-        $request_body = "Заявка, наименование услуги: {$service_id['services_name']}. Тип прибора учета: {$counter_type}. Уникальный инедтификатор прибора учета: {$counter_id}. [Заявка сформирована автоматически]";
+        $request_body = "Заявка, наименование услуги: {$service_id['service_name']}. Тип прибора учета: {$counter_type}. Уникальный инедтификатор прибора учета: {$counter_id}. [Заявка сформирована автоматически]";
         
         $new->services_number = $order_numder;
-        $new->services_servise_category_id = $service_id['services_category_id'];
+        $new->services_servise_category_id = $service_id['service_category_id'];
         $new->services_name_services_id = $service_id['service_id'];
         $new->services_comment = $request_body;
         $new->services_phone = Yii::$app->userProfile->mobile;

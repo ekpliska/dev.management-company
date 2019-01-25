@@ -40,7 +40,7 @@ class PaidServicesController extends AppClientsController {
             }
         }
 
-        // получаем список всех платных заявок
+        // получаем список всех платных услуг
         $name_services_array = CategoryServices::getCategoryNameArray();
         // Получаем список услуг по первой категории
         $pay_services = Services::getPayServices(key($name_services_array));
@@ -106,6 +106,20 @@ class PaidServicesController extends AppClientsController {
             return ['success' => true, 'is' => true, 'data' => $data];
         }
         return ['success' => false];
+    }
+    
+    public function actionCreatePaidRequest($category, $service) {
+        
+        $new_order = new PaidServices();
+        
+        if (Yii::$app->request->isAjax) {
+            return $this->renderAjax('form/add-paid-request', [
+                'new_order' => $new_order,
+                'category' => $category,
+                'service' => $service,
+            ]);
+        }
+        
     }
         
 }

@@ -7,19 +7,7 @@
  * Форма в модальном окне, создание новой заявки на платную услугу
  */
 ?>
-<?php
-    Modal::begin([
-        'id' => 'add-record-modal',
-        'header' => 'Заявка на платную услугу',
-        'closeButton' => [
-            'class' => 'close modal-close-btn btn__paid_service_close',
-        ],
-        'clientOptions' => [
-            'backdrop' => 'static',
-            'keyboard' => false,
-        ],
-    ]);
-?>
+
     <?php
         $form = ActiveForm::begin([
             'id' => 'add-paid-service',
@@ -29,21 +17,13 @@
     ?>
     
     <?= $form->field($new_order, 'services_category_services_id')
-            ->hiddenInput(['id' => 'secret-cat', 'value' => ''])
+            ->textInput(['id' => 'secret-cat', 'value' => $category])
             ->label(false) ?>
     
     <?= $form->field($new_order, 'services_name_services_id')
-            ->hiddenInput(['id' => 'secret-name', 'value' => ''])
+            ->textInput(['id' => 'secret-name', 'value' => $service])
             ->label(false) ?>
                     
-    <?= $form->field($new_order, 'services_name_services_id', [
-                'template' => '<span class="paid-service-dropdown-arrow"><div class="field-modal-select">{label}{input}{error}</div></span>'])
-            ->dropDownList($name_services_array, [
-                'id' => 'name_services',
-                'class' => 'form-control name_services',
-                'disabled' => true])
-            ->label(false) ?>
-
     <?= $form->field($new_order, 'services_phone', ['template' => '<div class="field-modal">{label}{input}{error}</div>'])
             ->input('text', ['class' => 'field-input-modal phone cell-phone'])
             ->label($new_order->getAttributeLabel('services_phone'), ['class' => 'field-label-modal']) ?>
@@ -62,4 +42,3 @@
     
     <?php ActiveForm::end() ?>    
     
-<?php Modal::end(); ?>
