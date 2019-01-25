@@ -210,6 +210,28 @@ class DesignerRequestsController extends AppManagersController {
         }
         
     }
+
+    /*
+     * Загрузка модального окна на редактирование вопроса
+     * Сохранение данных
+     */
+    public function actionEditQuestion ($question_id) {
+        
+        $model = RequestQuestions::findOne($question_id);
+        $type_requests = TypeRequests::getTypeNameArray();
+        
+        if (Yii::$app->request->isAjax) {
+            return $this->renderAjax('modal/edit-question', [
+                'model' => $model,
+                'type_requests' => $type_requests,
+            ]);
+        }
+        
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['index', 'section' => 'requests']);
+        }        
+        
+    }
     
     
     /*

@@ -1181,6 +1181,14 @@ $(document).ready(function() {
         return false;        
     });
 
+    $(document).on('click', 'a.edit-question-btn', function(e) {
+        var link = $(this).attr('href');
+        $('#edit-question-modal-form').modal('show');
+        $('#edit-question-modal-form .modal-dialog .modal-content .modal-body').load(link);
+        e.preventDefault();
+        return false;        
+    });
+
     /*
      * Установка куки
      */

@@ -35,7 +35,24 @@ $this->params['breadcrumbs'][] = 'Конструктор заявок';
             'model_question' => $model_question,
             'type_requests' => $results['requests'],
         ]) ?>
+
+<?php
+    /* Модальное окно для редактирования вопроса */
+    Modal::begin([
+        'id' => 'edit-question-modal-form',
+        'header' => 'Редактировать вопрос',
+        'closeButton' => [
+            'class' => 'close modal-close-btn',
+        ],
+        'clientOptions' => [
+            'backdrop' => 'static', 
+            'keyboard' => false],
+    ]);
+?>
+<?php Modal::end(); ?>
+
 <?php endif; ?>
+
 
 <?php if ($section == 'paid-services') : ?>
     <?= $this->render('modal/create-category', ['model_category' => $model_category]) ?>
@@ -44,8 +61,6 @@ $this->params['breadcrumbs'][] = 'Конструктор заявок';
             'categories_list' => $results['categories'],
             'units' => $results['units'],
         ]) ?>
-<?php endif; ?>
-
 
 <?php
     /* Модальное окно для редактирования услуги */
@@ -61,5 +76,7 @@ $this->params['breadcrumbs'][] = 'Конструктор заявок';
     ]);
 ?>
 <?php Modal::end(); ?>
+
+<?php endif; ?>
 
 <?= ModalWindowsManager::widget(['modal_view' => 'designer-confirm-message']) ?>
