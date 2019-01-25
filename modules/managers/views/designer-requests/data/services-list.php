@@ -23,7 +23,7 @@
                     <?= Html::a('Редактировать', ['edit-service', 'service_id' => $service['service_id']], ['class' => 'edit-service-btn']) ?>
                 </li>
                 <li>
-                    <?= Html::a('Удалить', ['/']) ?>
+                    <a href="javascript:void(0)" id="service__delete" data-record-type="service" data-record="<?= $service['service_id'] ?>">Удалить</a>
                 </li>
             </ul>
         </div>

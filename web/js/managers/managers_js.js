@@ -1137,16 +1137,22 @@ $(document).ready(function() {
      * Запрос на удаление записи
      */
     var recordId, recordType;
-    $('.category__delete').on('click', function() {
+    $(document).on('click', '.category__delete, #service__delete', function() {
         recordId = $(this).data('record');
         recordType = $(this).data('recordType');
         $('#designer-confirm-message').modal('show');
     });
+    
     $('#designer-confirm-message').on('show.bs.modal', function(e) {
+        
         if (recordType === 'category') {
             $(this).find('.modal-confirm').html(
                     'Вы действительно хотите удалить выбранную ватегорию? Все принадлежащие выбранной категории услуги будут также удалены. Продолжить?');
+        } else if (recordType === 'service') {
+            $(this).find('.modal-confirm').html(
+                    'Вы действительно хотите удалить выбранную услугу?');
         }
+
         $(this).find('.delete_record__des').data('record', recordId);
         $(this).find('.delete_record__des').data('recordType', recordType);
     });

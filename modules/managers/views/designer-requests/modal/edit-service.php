@@ -73,7 +73,7 @@
 </div>
 
 <div class="modal-footer">
-    <?= Html::submitButton('Добавить услугу', ['class' => 'btn btn-modal-window btn-modal-window-yes']) ?>
+    <?= Html::submitButton('Сохранить', ['class' => 'btn btn-modal-window btn-modal-window-yes']) ?>
     <?= Html::submitButton('Отмена', ['class' => 'btn btn-modal-window btn-modal-window-no', 'data-dismiss' => 'modal']) ?>
 </div>
 
