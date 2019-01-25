@@ -1120,24 +1120,26 @@ $(document).ready(function() {
 
 
     /*
-     * Переключение списка Категорий услуг, разд "Платные услуги"
+     * Переключение списка Заявок, разд "Заявки"
+     * Переключение списка Категорий, разд "Платные услуги"
      */
-//    $('#categories-list > li').on('click', function() {
-//        var categoryId = $(this).data('checkCategory');
-//        $('#categories-list > li').removeClass('active-item');
-//        $(this).addClass('active-item');
-//        $.post('show-services?category_id=' + categoryId, function(response) {
-//            if (response.success === true) {
-//                $('#block__lists-services').html(response.data);
-//            }
-//        });
-//    });
+    $('#requests-list > li, #categories-list > li').on('click', function() {
+        var recordID = $(this).data('record');
+        var typeRecord = $(this).data('recordType');
+        $('#requests-list > li, #categories-list > li').removeClass('active-item');
+        $(this).addClass('active-item');
+        $.post('show-results?type_record=' + typeRecord + '&record_id=' + recordID, function(response) {
+            if (response.success === true) {
+                $('#block__lists-services').html(response.data);
+            }
+        });
+    });
     
     /*
      * Запрос на удаление записи
      */
     var recordId, recordType;
-    $(document).on('click', '.category__delete, #service__delete, .request__delete', function() {
+    $(document).on('click', '.category__delete, #service__delete, .request__delete, #question__delete', function() {
         recordId = $(this).data('record');
         recordType = $(this).data('recordType');
         $('#designer-confirm-message').modal('show');
@@ -1154,6 +1156,9 @@ $(document).ready(function() {
         } else if (recordType === 'request') {
             $(this).find('.modal-confirm').html(
                     'Вы действительно хотите удалить выбранную заявку?');
+        } else if (recordType === 'question') {
+            $(this).find('.modal-confirm').html(
+                    'Вы действительно хотите удалить выбранный вопрос?');
         }
 
         $(this).find('.delete_record__des').data('record', recordId);
@@ -1174,22 +1179,6 @@ $(document).ready(function() {
         $('#edit-service-modal-form .modal-dialog .modal-content .modal-body').load(link);
         e.preventDefault();
         return false;        
-    });
-    
-
-    /*
-     * Переключение списка Заявок, разд "Платные услуги"
-     */
-    $('#requests-list > li, #categories-list > li').on('click', function() {
-        var recordID = $(this).data('record');
-        var typeRecord = $(this).data('recordType');
-        $('#requests-list > li, #categories-list > li').removeClass('active-item');
-        $(this).addClass('active-item');
-        $.post('show-results?type_record=' + typeRecord + '&record_id=' + recordID, function(response) {
-            if (response.success === true) {
-                $('#block__lists-services').html(response.data);
-            }
-        });
     });
 
     /*

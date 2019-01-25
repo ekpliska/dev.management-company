@@ -4315,6 +4315,9 @@ a.employee-profile:hover {
     text-align: left;
     vertical-align: middle;
 }
+.table-characteristics > tbody > tr > td.padding-add {
+    padding: 25px;
+}
 .housing-block__btn-del, 
 .housing-block__btn-download {
     background: transparent;

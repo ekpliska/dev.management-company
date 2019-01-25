@@ -3,15 +3,11 @@
     namespace app\modules\managers\controllers;
     use Yii;
     use yii\web\UploadedFile;
-    use yii\data\ActiveDataProvider;
     use app\modules\managers\controllers\AppManagersController;
     use app\modules\managers\models\form\NewsForm;
     use app\modules\managers\models\News;
     use app\models\Rubrics;
     use app\models\Houses;
-    use app\models\HousingEstates;
-    use app\helpers\FormatHelpers;
-    use app\modules\managers\models\HousesEstates;
     use app\models\Image;
     use app\models\Partners;
 

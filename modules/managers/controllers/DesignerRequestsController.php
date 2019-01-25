@@ -25,6 +25,7 @@ class DesignerRequestsController extends AppManagersController {
         $results = [];
 
         $model_request = new TypeRequests();
+        $model_question = new RequestQuestions();
         $model_category = new CategoryServices();
         $model_service = new ServiceForm();
         
@@ -53,6 +54,7 @@ class DesignerRequestsController extends AppManagersController {
             'model_category' => $model_category,
             'model_service' => $model_service,
             'model_request' => $model_request,
+            'model_question' => $model_question,
             'results' => $results,
         ]);
         
@@ -155,6 +157,9 @@ class DesignerRequestsController extends AppManagersController {
                     break;
                 case 'request':
                     $result = TypeRequests::findOne($record_id);                    
+                    break;
+                case 'question':
+                    $result = RequestQuestions::findOne($record_id);                    
                     break;
                 default:
                     Yii::$app->session->setFlash('error', ['message' => 'Ошибка удаления. Обновите страницу и повторите действие еще раз']);

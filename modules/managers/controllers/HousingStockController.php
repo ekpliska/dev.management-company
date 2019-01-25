@@ -24,7 +24,7 @@ class HousingStockController extends AppManagersController {
     public function actionIndex() {
         
         // Из куки получаем выбранный дом
-        $house_cookie = $this->actionReadCookies('choosingHouse');
+        $house_cookie = $this->actionReadCookies('choosing-house');
         
         $houses_list = Houses::getAllHouses();
         
@@ -162,7 +162,7 @@ class HousingStockController extends AppManagersController {
      */
     public function actionCreateCharacteristic() {
         
-        $house_cookie = $this->actionReadCookies('choosingHouse');
+        $house_cookie = $this->actionReadCookies('choosing-house');
         if ($house_cookie === null) {
             Yii::$app->session->setFlash('estate-admin', [
                 'success' => false,
@@ -193,7 +193,7 @@ class HousingStockController extends AppManagersController {
      */
     public function actionLoadFiles() {
         
-        $house_cookie = $this->actionReadCookies('choosingHouse');
+        $house_cookie = $this->actionReadCookies('choosing-house');
         if ($house_cookie === null) {
             Yii::$app->session->setFlash('estate-admin', [
                 'success' => false,
@@ -389,7 +389,7 @@ class HousingStockController extends AppManagersController {
         
         $cookies = Yii::$app->response->cookies;
         $cookies->add(new \yii\web\Cookie ([
-            'name' => 'choosingHouse',
+            'name' => 'choosing-house',
             'value' => $value,
             'expire' => time() + 60*60*24*7,
         ]));
