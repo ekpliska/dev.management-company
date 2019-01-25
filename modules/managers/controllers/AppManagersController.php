@@ -94,13 +94,13 @@ class AppManagersController extends Controller {
                 ->count();
         
         $service_list = Services::find()
-                ->andWhere(['services_category_id' => $categoryId])
+                ->andWhere(['service_category_id' => $categoryId])
                 ->asArray()
                 ->all();
         
         if ($category_list > 0) {
             foreach ($service_list as $service) {
-                echo '<option value="' . $service['service_id'] . '">' . $service['services_name'] . '</option>';
+                echo '<option value="' . $service['service_id'] . '">' . $service['service_name'] . '</option>';
             }
         } else {
             echo '<option>-</option>';

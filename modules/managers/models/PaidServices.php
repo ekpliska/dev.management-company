@@ -24,7 +24,7 @@ class PaidServices extends BasePaidServices {
                         . 'ps.created_at as date_create, ps.date_closed as date_close, '
                         . 'ps.status as status, '
                         . 'cs.category_name as category, '
-                        . 's.services_name as service_name, '
+                        . 's.service_name as service_name, '
                         . 'ed.employee_id as employee_id_d, '
                         . 'ed.employee_surname as surname_d, ed.employee_name as name_d, ed.employee_second_name as sname_d, '
                         . 'es.employee_id as employee_id_s, '
@@ -35,7 +35,7 @@ class PaidServices extends BasePaidServices {
                         . 'f.flats_number as flat')
                 ->from('paid_services as ps')
                 ->join('LEFT JOIN', 'services as s', 's.service_id = ps.services_name_services_id')
-                ->join('LEFT JOIN', 'category_services as cs', 'cs.category_id = s.services_category_id')
+                ->join('LEFT JOIN', 'category_services as cs', 'cs.category_id = s.service_category_id')
                 ->join('LEFT JOIN', 'employees as ed', 'ed.employee_id = ps.services_dispatcher_id')
                 ->join('LEFT JOIN', 'employees as es', 'es.employee_id = ps.services_specialist_id')
                 ->join('LEFT JOIN', 'personal_account as pa', 'pa.account_id = ps.services_account_id')

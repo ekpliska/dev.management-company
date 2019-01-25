@@ -169,12 +169,12 @@ class PaidServices extends ActiveRecord
                         . 'ps.status as status, ps.services_comment as text, '
                         . 'ed.employee_id as employee_id_d, ed.employee_surname as surname_d, ed.employee_name as name_d, ed.employee_second_name as second_name_d, '
                         . 'es.employee_id as employee_id_s, es.employee_surname as surname_s, es.employee_name as name_s, es.employee_second_name as second_name_s, '
-                        . 'cs.category_name as category, s.services_name as services_name, '
+                        . 'cs.category_name as category, s.service_name as services_name, '
                         . 'h.houses_gis_adress as gis_adress, h.houses_number as houses_number, '
                         . 'f.flats_porch as porch, f.flats_floor as floor, f.flats_number as flat')
                 ->from('paid_services as ps')
                 ->join('LEFT JOIN', 'services as s', 's.service_id = ps.services_name_services_id')
-                ->join('LEFT JOIN', 'category_services as cs', 'cs.category_id = s.services_category_id')
+                ->join('LEFT JOIN', 'category_services as cs', 'cs.category_id = s.service_category_id')
                 ->join('LEFT JOIN', 'employees as ed', 'ed.employee_id = ps.services_dispatcher_id')
                 ->join('LEFT JOIN', 'employees as es', 'es.employee_id = ps.services_specialist_id')
                 ->join('LEFT JOIN', 'personal_account as pa', 'pa.account_id = ps.services_account_id')
