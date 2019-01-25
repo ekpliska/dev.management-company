@@ -78,6 +78,9 @@ class DesignerRequestsController extends AppManagersController {
             case 'new-request':
                 $model = new TypeRequests();
                 break;
+            case 'new-question':
+                $model = new RequestQuestions();
+                break;
         }
         
         if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
@@ -103,6 +106,10 @@ class DesignerRequestsController extends AppManagersController {
                 break;
             case 'new-request':
                 $model = new TypeRequests();
+                $section = 'requests';
+                break;
+            case 'new-question':
+                $model = new RequestQuestions();
                 $section = 'requests';
                 break;
         }

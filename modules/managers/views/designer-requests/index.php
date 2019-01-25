@@ -31,6 +31,10 @@ $this->params['breadcrumbs'][] = 'Конструктор заявок';
 
 <?php if ($section == 'requests') : ?>
     <?= $this->render('modal/create-request', ['model_request' => $model_request]) ?>
+    <?= $this->render('modal/create-question', [
+            'model_question' => $model_question,
+            'type_requests' => $results['requests'],
+        ]) ?>
 <?php endif; ?>
 
 <?php if ($section == 'paid-services') : ?>

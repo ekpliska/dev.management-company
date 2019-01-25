@@ -51,9 +51,9 @@ class RequestQuestions extends ActiveRecord
      */
     public function attributeLabels() {
         return [
-            'question_id' => 'Question ID',
-            'type_request_id' => 'Type Request ID',
-            'question_text' => 'Question Text',
+            'question_id' => 'ID',
+            'type_request_id' => 'Вид заявки',
+            'question_text' => 'Текст вопроса',
         ];
     }
 
