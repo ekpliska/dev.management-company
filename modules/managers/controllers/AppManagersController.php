@@ -45,18 +45,27 @@ class AppManagersController extends Controller {
     /*
      * Метод получения cookies
      */
-    public function actionReadCookies() {
+    public function actionReadCookies($cookie_name) {
 
         /*
          * Проверяем наличие выбранного дома из списка Жилых комплексов
          * Если кука есть, то получаем из нее значение номера выбранного дома
          */
-        if (Yii::$app->request->cookies->has('choosingHouse')) {
-            return Yii::$app->request->cookies->get('choosingHouse')->value;
-        } 
-        
-        return false;
-
+        switch ($cookie_name) {
+            case 'choosingHouse':
+                if (Yii::$app->request->cookies->has('choosingHouse')) {
+                    return Yii::$app->request->cookies->get('choosingHouse')->value;
+                }
+                break;
+            case 'choosingCategory':
+                if (Yii::$app->request->cookies->has('choosingCategory')) {
+                    return Yii::$app->request->cookies->get('choosingCategory')->value;
+                }
+                break;
+            default:
+                return false;
+                
+        }
         
     }
     

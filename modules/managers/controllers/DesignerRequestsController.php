@@ -14,7 +14,13 @@
  */
 class DesignerRequestsController extends AppManagersController {
     
+    public $category_cookie;
+
+
     public function actionIndex($section = 'requests') {
+        
+        // Из куки получаем выбранную категорию
+        $this->category_cookie = $this->actionReadCookies('choosingCategory');
         
         $results = [];
         
@@ -28,7 +34,7 @@ class DesignerRequestsController extends AppManagersController {
             case 'paid-services':
                 $results = [
                     'categories' => CategoryServices::getCategoryNameArray(),
-                    'services' => Services::getServicesNameArray(),
+                    'services' => $this->category_cookie ? Services::getPayServices($this->category_cookie) : null,
                     'units' => Units::getUnitsArray(),
                 ];
                 break;
@@ -98,6 +104,8 @@ class DesignerRequestsController extends AppManagersController {
     
     public function actionShowServices ($category_id) {
         
+        $this->setCookieChooseHouse($category_id);
+        
         if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
             $services_list = Services::getPayServices($category_id);
@@ -151,9 +159,25 @@ class DesignerRequestsController extends AppManagersController {
             ]);
         }
         
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            $file = UploadedFile::getInstance($model, 'service_image');
+            $model->uploadImage($file);
             return $this->redirect(['index', 'section' => 'paid-services']);
         }
         
+    }
+    
+    
+    /*
+     * Установка куки выбранной категории
+     */
+    public function setCookieChooseHouse($value) {
+        
+        $cookies = Yii::$app->response->cookies;
+        $cookies->add(new \yii\web\Cookie ([
+            'name' => 'choosingCategory',
+            'value' => $value,
+            'expire' => time() + 60*60*24*7,
+        ]));
     }
 }

@@ -17,7 +17,7 @@
             <?php if ($results['categories']) : ?>
                 <ul id="categories-list">
                     <?php foreach ($results['categories'] as $key_cat => $category) : ?>
-                        <li data-check-category="<?= $key_cat ?>" class="">
+                        <li data-check-category="<?= $key_cat ?>" class="<?= $this->context->category_cookie == $key_cat ? 'active-item' : '' ?>">
                             <?= $category ?>
                             <span class="close category__delete" data-record="<?= $key_cat ?>" data-record-type="category"><i class="glyphicon glyphicon-trash"></i></span>
                         </li>
@@ -31,7 +31,7 @@
     <div class="col-md-7">
         <h4 class="title">Услуга</h4>
         <div class="designer-block__lists" id="block__lists-services">
-            <?= $this->render('services-list', ['services_list' => $services_list]) ?>
+            <?= $this->render('services-list', ['services_list' => $results['services']]) ?>
         </div>
     </div>
         
