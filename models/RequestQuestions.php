@@ -37,6 +37,15 @@ class RequestQuestions extends ActiveRecord
         return $this->hasOne(TypeRequests::className(), ['type_requests_id' => 'type_request_id']);
     }
     
+    public static function getAllQuestions($type_request) {
+        
+        return self::find()
+                ->where(['type_request_id' => $type_request])
+                ->asArray()
+                ->all();
+        
+    }
+    
     /**
      * Атрибуты полей
      */

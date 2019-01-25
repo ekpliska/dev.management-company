@@ -4,16 +4,14 @@
     use yii\bootstrap\Modal;
 
 /* 
- * Рендер списка услуг
+ * Рендер списка вопросов для оспроса по завершенной заявки
  */
 ?>
-<?php if (isset($services_list) && count($services_list) > 0) :?>
+<?php if (isset($results) && count($results) > 0) :?>
 <ul class="services-list">
-<?php foreach ($services_list as $service) : ?>
+<?php foreach ($results as $question) : ?>
     <li>
-        <p><?= $service['service_name'] ?></p>
-        <span class="span-count"><?= "ID {$service['service_id']}" ?></span>
-        <span class="span-price"><?= "&#8381; {$service['service_price']}" ?></span>
+        <?= $question['question_text'] ?>
         <div class="dropdown dropdown__settings-service">
             <button type="button" class="btn-settings dropdown-toggle" data-toggle="dropdown">
                 <i class="glyphicon glyphicon-option-horizontal"></i>
@@ -32,6 +30,6 @@
 </ul>
 <?php else: ?>
 <div class="notice info">
-    <p>Услуги не найдены</p>
+    <p>Вопросы не найдены</p>
 </div>
 <?php endif; ?>

@@ -9,6 +9,7 @@
     use app\models\Services;
     use app\modules\managers\models\form\ServiceForm;
     use app\models\Units;
+    use app\models\RequestQuestions;
 
 /**
  * Конструктор заявок
@@ -30,14 +31,15 @@ class DesignerRequestsController extends AppManagersController {
         switch ($section) {
             case 'requests':
                 // Из куки получаем выбранную заявку
-                $this->request_cookie = $this->actionReadCookies('choosingRequest');
+                $this->request_cookie = $this->actionReadCookies('choosing-request');
                 $results = [
                     'requests' => TypeRequests::getTypeNameArray(),
+                    'questions' => $this->request_cookie ? RequestQuestions::getAllQuestions($this->request_cookie) : null,
                 ];
                 break;
             case 'paid-services':
                 // Из куки получаем выбранную категорию
-                $this->category_cookie = $this->actionReadCookies('choosingCategory');
+                $this->category_cookie = $this->actionReadCookies('choosing-category');
                 $results = [
                     'categories' => CategoryServices::getCategoryNameArray(),
                     'services' => $this->category_cookie ? Services::getPayServices($this->category_cookie) : null,
@@ -116,14 +118,24 @@ class DesignerRequestsController extends AppManagersController {
         
     }
     
-    public function actionShowServices ($category_id) {
+    public function actionShowResults ($type_record, $record_id) {
         
-        $this->setCookieChooseHouse($category_id);
+        $this->setCookieChooseHouse($type_record, $record_id);
         
         if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-            $services_list = Services::getPayServices($category_id);
-            $data = $this->renderAjax('data/services-list', ['services_list' => $services_list]);
+            
+            switch ($type_record) {
+                case 'category':
+                    $results = Services::getPayServices($record_id);
+                    break;
+                case 'request':
+                    $results = RequestQuestions::getAllQuestions($record_id);
+                    break;
+            }
+            
+            
+            $data = $this->renderAjax("data/data-{$type_record}", ['results' => $results]);
             return ['success' => true, 'data' => $data];
         }
         
@@ -191,13 +203,36 @@ class DesignerRequestsController extends AppManagersController {
     /*
      * Установка куки выбранной категории
      */
-    public function setCookieChooseHouse($value) {
+    public function setCookieChooseHouse($type_record, $value) {
         
         $cookies = Yii::$app->response->cookies;
+        
         $cookies->add(new \yii\web\Cookie ([
-            'name' => 'choosingCategory',
+            'name' => "choosing-{$type_record}",
             'value' => $value,
             'expire' => time() + 60*60*24*7,
         ]));
+        
+//        
+//        switch ($type_record) {
+//            case 'category':
+//                $cookies->add(new \yii\web\Cookie ([
+//                    'name' => 'choosingCategory',
+//                    'value' => $value,
+//                    'expire' => time() + 60*60*24*7,
+//                ]));
+//                break;
+//            case 'request':
+//                $cookies->add(new \yii\web\Cookie ([
+//                    'name' => 'choosingRequest',
+//                    'value' => $value,
+//                    'expire' => time() + 60*60*24*7,
+//                ]));
+//                break;
+//        }
+//        
+//        return true;
+        
+        
     }
 }

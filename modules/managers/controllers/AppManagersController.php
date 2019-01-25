@@ -51,26 +51,32 @@ class AppManagersController extends Controller {
          * Проверяем наличие выбранного дома из списка Жилых комплексов
          * Если кука есть, то получаем из нее значение номера выбранного дома
          */
-        switch ($cookie_name) {
-            case 'choosingHouse':
-                if (Yii::$app->request->cookies->has('choosingHouse')) {
-                    return Yii::$app->request->cookies->get('choosingHouse')->value;
-                }
-                break;
-            case 'choosingCategory':
-                if (Yii::$app->request->cookies->has('choosingCategory')) {
-                    return Yii::$app->request->cookies->get('choosingCategory')->value;
-                }
-                break;
-            case 'choosingRequest':
-                if (Yii::$app->request->cookies->has('choosingRequest')) {
-                    return Yii::$app->request->cookies->get('choosingRequest')->value;
-                }
-                break;
-            default:
-                return false;
-                
+        $name_cookie = "{$cookie_name}";
+        if (Yii::$app->request->cookies->has($name_cookie)) {
+            return Yii::$app->request->cookies->get($name_cookie)->value;
         }
+        
+        
+//        switch ($cookie_name) {
+//            case 'choosingHouse':
+//                if (Yii::$app->request->cookies->has('choosingHouse')) {
+//                    return Yii::$app->request->cookies->get('choosingHouse')->value;
+//                }
+//                break;
+//            case 'choosingCategory':
+//                if (Yii::$app->request->cookies->has('choosingCategory')) {
+//                    return Yii::$app->request->cookies->get('choosingCategory')->value;
+//                }
+//                break;
+//            case 'choosingRequest':
+//                if (Yii::$app->request->cookies->has('choosingRequest')) {
+//                    return Yii::$app->request->cookies->get('choosingRequest')->value;
+//                }
+//                break;
+//            default:
+//                return false;
+//                
+//        }
         
     }
     

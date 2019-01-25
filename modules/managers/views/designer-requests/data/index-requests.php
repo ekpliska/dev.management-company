@@ -14,9 +14,9 @@
         </div>
         <div class="designer-block__lists">
             <?php if ($results['requests']) : ?>
-                <ul id="categories-list">
+                <ul id="requests-list">
                     <?php foreach ($results['requests'] as $key_req => $request) : ?>
-                        <li data-check-category="<?= $key_req ?>" class="<?= $this->context->request_cookie == $request ? 'active-item' : '' ?>">
+                        <li data-record-type="<?= 'request' ?>" data-record="<?= $key_req ?>" class="<?= $this->context->request_cookie == $key_req ? 'active-item' : '' ?>">
                             <p><?= $request ?></p>
                             <span class="span-count"><?= "ID {$key_req}" ?></span>
                             <span class="close request__delete" data-record="<?= $key_req ?>" data-record-type="request"><i class="glyphicon glyphicon-trash"></i></span>
@@ -29,6 +29,9 @@
         
     <div class="col-md-7">
         <h4 class="title">Вопросы</h4>
+        <div class="designer-block__lists" id="block__lists-services">
+            <?= $this->render('data-request', ['results' => $results['questions']]) ?>
+        </div>
     </div>
     
 </div>
