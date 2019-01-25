@@ -55,6 +55,9 @@ class DesignerRequestsController extends AppManagersController {
             case 'new-service':
                 $model = new ServiceForm();
                 break;
+            case 'edit-service-form':
+                $model = new Services();
+                break;
         }
         
         if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {

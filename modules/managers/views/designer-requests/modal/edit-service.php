@@ -11,14 +11,16 @@
 
 <?php
     $form = ActiveForm::begin([
-        'id' => 'create-service-form',
+        'id' => 'edit-service-form',
         'validateOnChange' => false,
         'validateOnBlur' => false,
-        'action' => ['create-record', 'form' => 'new-service'],
         'enableAjaxValidation' => true,
-        'validationUrl' => ['validation-form', 'form' => 'new-service'],
+        'validationUrl' => ['validation-form', 'form' => 'edit-service-form'],
         'fieldConfig' => [
             'template' => '<div class="field-modal has-label">{label}{input}{error}</div>'
+        ],
+        'options' => [
+            'enctype' => 'multipart/form-data',
         ],
     ]);
 ?>

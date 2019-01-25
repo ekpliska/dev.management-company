@@ -18,7 +18,14 @@ $this->title = $service->services_name;
     
     <?php
         $form = ActiveForm::begin([
-            'id' => 'create-service',
+            'id' => 'edit-service-form',
+            'validateOnChange' => false,
+            'validateOnBlur' => false,
+            'enableAjaxValidation' => true,
+            'validationUrl' => ['validation-form', 'form' => 'edit-service-form'],
+            'fieldConfig' => [
+                'template' => '<div class="field-modal">{label}{input}{error}</div>'
+            ],
             'options' => [
                 'enctype' => 'multipart/form-data',
             ],

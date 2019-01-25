@@ -2697,6 +2697,9 @@ p.date-start-vote {
 .modal-body form#create-service-form {
     padding: 0;
 }
+.modal-body form#edit-service-form {
+    padding: 0;
+}
 /* Конец Переодпределение ширины, высоты модальных окон */
 
 /* Переопреденное модальное окно бутстрапа */
@@ -4434,7 +4437,8 @@ a.employee-profile:hover {
     float: right;
     margin-top: -10px;
 }
-#create-service-form .load_preview {
+#create-service-form .load_preview,
+#edit-service-form .load_preview {
     width: 320px;
     height: 200px;
     margin: 10px auto;
