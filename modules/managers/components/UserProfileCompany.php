@@ -175,7 +175,7 @@ class UserProfileCompany extends BaseObject {
     }
     
     /*
-     * Мобальный телефон Сотрудника
+     * Мобильный телефон Сотрудника
      */
     public function getMobile() {
         return $this->_user['mobile'];

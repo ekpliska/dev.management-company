@@ -5,6 +5,7 @@
     use app\modules\clients\widgets\Notifications;
     use app\modules\managers\widgets\NavManager;
     use app\modules\managers\widgets\SubMenu;
+    use app\modules\managers\widgets\ManagerUserInfo;
 /*
  * Шапка, меню, хлебные крошки
  */
@@ -22,7 +23,7 @@
             <?= Html::img('/images/navbar/group_46.svg', ['alt' => 'image'])  ?>
         </a>
         <ul class="nav navbar-nav navbar-right user-notification">
-            <?php /*= UserInfo::widget(['_value_choosing' => $this->context->_value_choosing]) */ ?>
+            <?= ManagerUserInfo::widget() ?>
             <?= Notifications::widget() ?>
         </ul>
     </div>

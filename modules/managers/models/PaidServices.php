@@ -95,7 +95,7 @@ class PaidServices extends BasePaidServices {
     public static function getPaidRequestBySpecialist($employee_id) {
         
         $paid_requestr_list = self::find()
-                ->select(['services_number', 'created_at', 'status', 'category_name', 'services_name'])
+                ->select(['services_number', 'created_at', 'status', 'category_name', 'service_name'])
                 ->joinWith(['service', 'service.category'])
                 ->where(['services_specialist_id' => $employee_id])
                 ->orderBy(['created_at' => SORT_DESC])

@@ -54,7 +54,7 @@
             <?php foreach ($paid_requests_list as $paid_request) : ?>
             <tr>
                 <td><?= Html::a($paid_request['services_number'], ['paid-requests/view-paid-request', 'request_number' => $paid_request['services_number']]) ?></td>
-                <td><?= $paid_request['category_name'] . '<br />' . $paid_request['services_name'] ?></td>
+                <td><?= $paid_request['category_name'] . '<br />' . $paid_request['service_name'] ?></td>
                 <td><?= FormatHelpers::formatDate($paid_request['created_at'], false, 0, false) ?></td>
                 <td><?= StatusHelpers::requestStatus($paid_request['status']) ?></td>
             </tr>
