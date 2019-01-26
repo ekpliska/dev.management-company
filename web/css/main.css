@@ -789,6 +789,24 @@ button#send-request-to-sms:focus{
 }
 /* Конец Кнопка для модального окна */
 
+/* Копка добавление патной услуги */
+.add-service-req {
+    padding: 15px 40px;
+    border-radius: 12px;
+    border: 2px solid #2d18b4;
+    background-color: #fff;
+    color: #2d18b4;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 0.9px;
+    text-transform: uppercase;
+}
+.add-service-req:hover {
+    background: #2d18b4;
+    color: #fff;
+}
+/* Конец Копка добавление патной услуги */
+
 /* Собственник, главная страница, Новости */
 .news-lists {
     margin-top: 170px;

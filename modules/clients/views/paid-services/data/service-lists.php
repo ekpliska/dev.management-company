@@ -33,7 +33,7 @@
                         
                         <?= Html::a('Заказать', 
                                 ['create-paid-request', 'category' => $service['category']['category_id'], 'service' => $service['service_id']], 
-                                ['class' => 'btn blue-outline-btn new-rec']) ?>
+                                ['class' => 'btn add-service-req new-rec']) ?>
                     </div>                
                 </div>
             </div>

@@ -1,7 +1,7 @@
 <?php
 
-    use yii\helpers\Html;
     use yii\widgets\Breadcrumbs;
+    use app\modules\clients\widgets\AlertsShow;
     
 /* 
  * Заявки (Обзая страница)
@@ -14,10 +14,12 @@ $this->params['breadcrumbs'][] = 'История услуг';
 
 <div class="paid-requests-history">
     
-        <?= Breadcrumbs::widget([
+    <?= Breadcrumbs::widget([
             'homeLink' => ['label' => 'ELSA', 'url' => ['clients/index']],
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-    ]) ?>   
+    ]) ?>  
+    
+    <?= AlertsShow::widget() ?>
     
     <?= $this->render('data/grid', ['all_orders' => $all_orders]) ?>
 </div>
