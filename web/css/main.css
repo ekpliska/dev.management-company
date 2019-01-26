@@ -2683,8 +2683,9 @@ p.date-start-vote {
 
 /* Переодпределение ширины, высоты модальных окон */
 .modal-body form {
-    width: 670px;
-    padding: 0 90px;
+    padding: 0;
+/*    width: 670px;
+    padding: 0 90px;*/
 }
 .modal-body form#form-add-note {
     width: 100%;
@@ -4296,6 +4297,13 @@ a.employee-profile:hover {
     padding: 20px;
     margin: 0 -15px;
     background: rgba(221, 200, 253, 0.15);
+}
+.modal-note-info span {
+    border: 1px solid white;
+    padding: 5px 10px;
+    border-radius: 12px;
+    margin: 0 10px;
+    font-size: 12px;
 }
 .table-characteristics {
     border: none;

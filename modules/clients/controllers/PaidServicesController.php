@@ -23,22 +23,12 @@ class PaidServicesController extends AppClientsController {
      */
     public function actionIndex() {
         
-        
-        $account_id = $this->_current_account_id;
-        
         // Загружаем модель добавления новой заявки
         $new_order = new PaidServices([
             'scenario' => PaidServices::SCENARIO_ADD_SERVICE,
         ]);
         
-        if ($new_order->load(Yii::$app->request->post())) {
-            if ($new_order->addOrder($account_id)) {
-                return $this->redirect(['paid-services/order-services']);
-            } else {
-                Yii::$app->session->setFlash('error', ['message' => 'При создании заявки произошла ошибка. Обновите страницу и повторите действие заново']);
-                return $this->redirect(['index']);                
-            }
-        }
+        
 
         // получаем список всех платных услуг
         $name_services_array = CategoryServices::getCategoryNameArray();
@@ -110,14 +100,33 @@ class PaidServicesController extends AppClientsController {
     
     public function actionCreatePaidRequest($category, $service) {
         
-        $new_order = new PaidServices();
+        $account_id = $this->_current_account_id;
+        
+        // Загружаем модель добавления новой заявки
+        $new_order = new PaidServices([
+            'scenario' => PaidServices::SCENARIO_ADD_SERVICE,
+        ]);
+        
+        $categoty_name = CategoryServices::getNameCategory($category);
+        $service_name = Services::getServicesName($service);
         
         if (Yii::$app->request->isAjax) {
             return $this->renderAjax('form/add-paid-request', [
                 'new_order' => $new_order,
-                'category' => $category,
-                'service' => $service,
+                'category' => $categoty_name,
+                'service' => $service_name,
             ]);
+        }
+        
+        if ($new_order->load(Yii::$app->request->post())) {
+            $record = $new_order->addOrder($account_id);
+            if ($record) {
+                Yii::$app->session->setFlash('success', ['message' => "Заявка ID{$record} была успешно создана"]);
+                return $this->redirect(['paid-services/order-services']);
+            } else {
+                Yii::$app->session->setFlash('error', ['message' => 'При создании заявки произошла ошибка. Обновите страницу и повторите действие заново']);
+                return $this->redirect(['index']);                
+            }
         }
         
     }

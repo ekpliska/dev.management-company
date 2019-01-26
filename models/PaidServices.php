@@ -40,7 +40,7 @@ class PaidServices extends ActiveRecord
     {
         return [
             
-            [['services_servise_category_id', 'services_name_services_id', 'services_phone', 'services_comment'], 'required', 'on' => self::SCENARIO_ADD_SERVICE],
+            [['services_servise_category_id', 'services_name_services_id', 'services_comment'], 'required', 'on' => self::SCENARIO_ADD_SERVICE],
             
             [
                 'services_phone', 
@@ -148,13 +148,13 @@ class PaidServices extends ActiveRecord
         
         if ($this->validate()) {
             $order_numder = $this->createNumberRequest($this->services_name_services_id);
-            var_dump($order_numder);die();
 
             $this->services_number = $order_numder;
+            $this->services_phone = Yii::$app->userProfile->mobile;
             $this->status = StatusRequest::STATUS_NEW;
             $this->services_account_id = $accoint_id;
             $this->save();
-            return true;
+            return $this->save() ? $order_numder : false;
         }
         return false;
         

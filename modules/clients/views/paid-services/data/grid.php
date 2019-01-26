@@ -39,7 +39,7 @@
                     'header' => 'Категория, <br /> Наименование услуг',
                     'value' => 'category_name',
                     'value' => function ($data) {
-                        return $data['category_name'] . ', <br />' . $data['services_name'];
+                        return $data['category_name'] . ', <br />' . $data['service_name'];
                     },
                     'format' => 'raw',
                     'contentOptions' =>[

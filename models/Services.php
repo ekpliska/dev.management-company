@@ -137,6 +137,18 @@ class Services extends ActiveRecord {
         return Yii::getAlias('@web') . $this->service_image;
     }
 
+    /*
+     * 
+     */
+    public static function getServicesName($service_id) {
+        
+        $name = self::find()
+                ->where(['service_id' => $service_id])
+                ->asArray()
+                ->one();
+        return $name ? $name : null;
+        
+    }
     
     /**
      * Массив статусов заявок

@@ -57,8 +57,19 @@ class CategoryServices extends ActiveRecord
                 ->all();
         
         return ArrayHelper::map($array, 'category_id', 'category_name');
-    }    
+    }
     
+    /*
+     * Получить название категории по ID
+     */
+    public static function getNameCategory($category_id) {
+        
+        $name = self::find()
+                ->where(['category_id' => $category_id])
+                ->asArray()
+                ->one();
+        return $name ? $name : null;
+    }
     /**
      * Массив статусов заявок
      */
