@@ -9,8 +9,8 @@
  * Вопросы для опроса завершенных заявок
  * (Конструктор заявок)
  */
-class RequestQuestions extends ActiveRecord
-{
+class RequestQuestions extends ActiveRecord {
+    
     /**
      * Таблица БД
      */

@@ -40,10 +40,6 @@
                 ->label(false) 
         ?>
 
-        <?= $form->field($model, 'requests_phone', ['template' => '<div class="field-modal">{label}{input}{error}</div>'])
-                ->input('text', ['class' => 'field-input-modal cell-phone'])
-                ->label($model->getAttributeLabel('requests_phone'), ['class' => 'field-label-modal']) ?>
-
         <?= $form->field($model, 'requests_comment', [
                 'template' => '<div class="field-modal-textarea">{label}<span id="label-count"></span><span id="label-count-left"></span>{input}{error}</div>'])
                 ->textarea(['rows' => 10, 'class' => 'field-input-textarea-modal comment'])

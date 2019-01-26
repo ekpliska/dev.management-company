@@ -1,6 +1,7 @@
 <?php
 
     use yii\helpers\Html;
+    use yii\bootstrap\Modal;
     use yii\widgets\Breadcrumbs;
     use app\helpers\FormatHelpers;    
     use app\modules\clients\widgets\RatingRequest;
@@ -35,7 +36,7 @@ $this->params['breadcrumbs'][] = 'Заявка ID ' . $request_info['requests_id
                     <?= FormatHelpers::formatDate($request_info['created_at'], true, 0, false) ?>
                 </p>
                 
-                <?php if ($request_info['status'] == StatusRequest::STATUS_CLOSE) : ?>        
+                <?php if ($request_info['status'] == StatusRequest::STATUS_CLOSE && !empty($request_info['requests_grade'])) : ?>        
                     <div class="req-rate-star">
                         <div class="starrr" id="star1">
 
@@ -81,8 +82,11 @@ $this->params['breadcrumbs'][] = 'Заявка ID ' . $request_info['requests_id
                 </div>
 
                 <div class="request-body-rate">
-                    <?php if ($request_info['status'] == StatusRequest::STATUS_CLOSE) : ?>
-                        <?= Html::button('Оценить', ['class' => 'btn blue-outline-btn']) ?>
+                    <?php if ($request_info['status'] == StatusRequest::STATUS_CLOSE && empty($request_info['requests_grade'])) : ?>
+                        <?= Html::a('Оценить', 
+                                ['requests/add-grade', 'request' => $request_info['requests_id']], 
+                                ['class' => 'btn blue-outline-link' ,'id' => 'add-rate']) 
+                        ?>
                     <?php endif; ?> 
                 </div>                
             </div>
@@ -99,3 +103,21 @@ $this->params['breadcrumbs'][] = 'Заявка ID ' . $request_info['requests_id
         </div>      
     </div>
 </div>
+
+<?php if ($request_info['status'] == StatusRequest::STATUS_CLOSE) : ?>
+<?php
+    Modal::begin([
+        'id' => 'add-grade-modal',
+        'header' => 'Оценка',
+        'closeButton' => [
+            'class' => 'close modal-close-btn',
+        ],
+        'clientOptions' => [
+            'backdrop' => 'static',
+            'keyboard' => false,
+        ],        
+    ]);
+?>
+
+<?php Modal::end(); ?>
+<?php endif; ?>

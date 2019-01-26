@@ -54,7 +54,7 @@ class Requests extends ActiveRecord
     {
         return [
             
-            [['requests_type_id', 'requests_comment', 'requests_phone'], 'required', 'on' => self::SCENARIO_ADD_REQUEST],
+            [['requests_type_id', 'requests_comment'], 'required', 'on' => self::SCENARIO_ADD_REQUEST],
             
             [
                 'requests_phone', 
@@ -115,9 +115,9 @@ class Requests extends ActiveRecord
      * 
      * @param integer $accoint_id ID заявки
      */
-    public function addRequest($accoint_id) {
+    public function addRequest($account_id) {
         
-        if (!is_numeric($accoint_id)) {
+        if (!is_numeric($account_id)) {
             Yii::$app->session->setFlash('request', [
                 'success' => false,
                 'error' => 'При формировании заявки возникла ошибка. Обновите страницу и повторите действия еще раз',
@@ -137,7 +137,8 @@ class Requests extends ActiveRecord
         
         if ($this->validate()) {
             $this->requests_ident = $request_numder;
-            $this->requests_account_id = $accoint_id;
+            $this->requests_account_id = $account_id;
+            $this->requests_phone = Yii::$app->userProfile->mobile;
             $this->status = StatusRequest::STATUS_NEW;
             $this->is_accept = false;
             Yii::$app->session->setFlash('request', [

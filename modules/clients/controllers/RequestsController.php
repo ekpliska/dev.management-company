@@ -14,6 +14,8 @@
     use app\models\Image;
     use app\models\TypeRequests;
     use app\models\StatusRequest;
+    use app\models\RequestQuestions;
+    use app\models\RequestAnswers;
 
 /**
  * Заявки
@@ -148,6 +150,33 @@ class RequestsController extends AppClientsController
     }
     
     /*
+     * Отправка ответа на вопрос
+     */
+    public function actionAddAnswerRequest() {
+        
+       Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        
+        // Получаем с пост запроса ID заявки, ID вопроса, ответ
+        $request_id = Yii::$app->request->post('requestID');
+        $question_id = Yii::$app->request->post('questionsID');
+        $answer = Yii::$app->request->post('answer');
+        
+        // Проверяем на корректность пришедшие данные
+        if (!is_numeric($request_id) || !is_numeric($question_id) && !is_numeric($answer)) {
+            return ['success' => false];
+        }
+
+        // Если пришел ajax запрос
+        if ($request_id && $question_id && $answer && Yii::$app->request->isAjax) {
+            if (RequestAnswers::setAnswer($request_id, $question_id, $answer)) {
+                return ['success' => true];
+            }
+        }
+        
+        return ['success' => false]; 
+    }
+    
+    /*
      * Обработка Ajax запроса на добавления оценки для заявки
      */
     public function actionAddScoreRequest() {
@@ -155,8 +184,8 @@ class RequestsController extends AppClientsController
         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         
         // Получаем с пост запроса оценку и ID заявки
-        $score = Yii::$app->request->post('score');
-        $request_id = Yii::$app->request->post('request_id');
+        $score = Yii::$app->request->post('grade');
+        $request_id = Yii::$app->request->post('requestID');
         
         // Проверяем на корректность пришедшие данные
         if (!is_numeric($score) || !is_numeric($score)) {
@@ -168,10 +197,37 @@ class RequestsController extends AppClientsController
             $request = Requests::findByID($request_id);
             // Вызываем метод добавления оценки из модели
             $request->addGrade($score);
-            return ['status' => true];
+            return ['success' => true];
         }
         
-        return ['status' => false];
+        return ['success' => false];
+        
+    }
+    
+    /*
+     * Добавить оценка завершенной заявки
+     */
+    public function actionAddGrade($request) {
+        
+        $request_info = Requests::findByID($request);
+        
+        if ($request_info == null || $request_info['status'] != StatusRequest::STATUS_CLOSE) {
+            return $this->goHome();
+        }
+        
+        $questions = RequestQuestions::getAllQuestions($request_info['requests_type_id']);
+        $type_answer = [
+            '1' => 'Нет',
+            '2' => 'Да',
+        ];
+        
+        if (Yii::$app->request->isAjax) {
+            return $this->renderAjax('form/add-grade', [
+                'request' => $request,
+                'type_answer' => $type_answer,
+                'questions' => $questions,
+            ]);
+        }
         
     }
 

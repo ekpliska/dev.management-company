@@ -789,8 +789,9 @@ button#send-request-to-sms:focus{
 }
 /* Конец Кнопка для модального окна */
 
-/* Копка добавление патной услуги */
-.add-service-req {
+/* Копка добавление платной услуги */
+.add-service-req,
+.blue-outline-link {
     padding: 15px 40px;
     border-radius: 12px;
     border: 2px solid #2d18b4;
@@ -801,7 +802,8 @@ button#send-request-to-sms:focus{
     letter-spacing: 0.9px;
     text-transform: uppercase;
 }
-.add-service-req:hover {
+.add-service-req:hover,
+.blue-outline-link:hover {
     background: #2d18b4;
     color: #fff;
 }
@@ -1751,6 +1753,12 @@ p.right {
     margin-bottom: 75px;
 }
 /* Конец Оценка заявки, звездочки */
+
+/* Модальное окно "Выставить отценку завершенной заявке" */
+.btn-set-grade-active {
+    background: red;
+}
+/* Конец Модальное окно "Выставить отценку завершенной заявке" */
 
 /* Статусы заявок, таблица */
 .badge {

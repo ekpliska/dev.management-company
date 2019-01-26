@@ -469,42 +469,109 @@ $(document).ready(function() {
         
     });
     
+//    /*
+//     * Добавление оценки для закрытой заявки
+//     */
+//    // Получаем ID заявки через data
+//    var request_id = $('div#star').data('request');
+//    // Получаем оценку текущей заявки
+//    var scoreRequest = $('div#star').data('scoreReguest');
+//    // Вызываем функцию raty из библиотеки плагина по голосованию
+//    $('div#star').raty({
+//        score: scoreRequest, // Оценка
+//        readOnly: scoreRequest === 0 ? false : true, // Если оценка высталена, то возможность голосования закрываем
+//        click: function(score) {
+//            $.ajax({
+//                url: 'add-score-request',
+//                method: 'POST',
+//                data: {
+//                    score: score,
+//                    request_id: request_id,
+//                },
+//                success: function(response) {
+//                    if (response.status === true) {
+//                        $('#score-modal-message').modal('show');
+//                        $('div#star').raty({
+//                            score: score,
+//                            readOnly: true,
+//                        });
+//                    }
+//                },
+//                error: function() {
+//                    console.log('Error #1000-09');
+//                }
+//            });
+//        }
+//    });    
+    
     /*
-     * Добавление оценки для закрытой заявки
+     * Вызов модального окна "Добавление оценки"
      */
-    // Получаем ID заявки через data
-    var request_id = $('div#star').data('request');
-    // Получаем оценку текущей заявки
-    var scoreRequest = $('div#star').data('scoreReguest');
-    // Вызываем функцию raty из библиотеки плагина по голосованию
-    $('div#star').raty({
-        score: scoreRequest, // Оценка
-        readOnly: scoreRequest === 0 ? false : true, // Если оценка высталена, то возможность голосования закрываем
-        click: function(score) {
+    $('a#add-rate').on('click', function(e) {
+        var link = $(this).attr('href');
+        e.preventDefault();
+        $('#add-grade-modal').modal('show');
+        $('#add-grade-modal .modal-content .modal-body').load(link);
+        e.preventDefault();
+        return false;
+    });
+    
+    $(document).on('click', '.btn-set-answer', function() {
+        var idBtn = $(this).prop('id');
+        var requestID = $(this).data('request');
+        var questionsID = $(this).data('question'); 
+        var answer = $(this).data('answer'); 
+        console.log(idBtn + ' ' + requestID +  ' ' + questionsID + ' ' + answer);
+        
+        // Родительский контейнер кнопки
+        var block = $(this).closest('td');
+        $(block).find('.btn-set-grade-active').removeClass('btn-set-grade-active');
+        $(this).addClass('btn-set-grade-active');
+        
+        $.ajax({
+            url: 'add-answer-request',
+            method: 'POST',
+            data: {
+                requestID: requestID,
+                questionsID: questionsID,
+                answer: answer,
+            },
+        }).done(function(response) {
+            console.log(response);
+        });
+        
+    });
+    
+    // 5-тибальная система оценки
+    var currentGrade = 5;
+    $(document).on('click', '#finished-set-grade', function(){
+        var requestID = $(this).data('request');
+        var countQuestions = $(this).data('question');
+        var countAnswers = $('.btn-set-grade-active').length;
+        var countAgreeAnswers = $('.btn-yes.btn-set-grade-active').length;
+        var grade = Math.round(currentGrade/(countQuestions/countAgreeAnswers));
+        
+        console.log(requestID + ' ' + countQuestions + ' ' + countAnswers + ' ' + countAgreeAnswers + ' ' + grade);
+        if (countQuestions !== countAnswers) {
+            $(document).find('#error-message').text('Пожалуйста дайте ответы на все поставленные вопросы');
+            return false;
+        } else if (countQuestions === countAnswers) {
+            $(document).find('#error-message').text('');
             $.ajax({
                 url: 'add-score-request',
                 method: 'POST',
                 data: {
-                    score: score,
-                    request_id: request_id,
+                    grade: grade,
+                    requestID: requestID,
                 },
-                success: function(response) {
-                    if (response.status === true) {
-                        $('#score-modal-message').modal('show');
-                        $('div#star').raty({
-                            score: score,
-                            readOnly: true,
-                        });
-                    }
-                },
-                error: function() {
-                    console.log('Error #1000-09');
-                }
+            }).done(function(response) {
+                console.log(response);
             });
         }
-    });    
-    
-    
+
+    });
+
+
     /* End Block of Requests */
 
     // ************************************************************ //
