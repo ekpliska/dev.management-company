@@ -24,7 +24,7 @@ class NewsController extends AppClientsController {
             throw new NotFoundHttpException('Вы обратились к несуществующей странице');
         }
         
-        // Получаем список прикрепленных документоы к новости
+        // Получаем список прикрепленных документов к новости
         $files = Image::getAllDocByNews($news['news_id'], 'News');
         
         return $this->render('view-news', [
