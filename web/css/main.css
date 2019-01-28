@@ -942,6 +942,27 @@ button#send-request-to-sms:focus{
     color: #ffffff;
     text-decoration: none;
 }
+.load-news-documents {
+    padding: 20px;
+}
+.load-news-documents > h4 {
+    font-size: 14px;
+    margin-top: 15px;
+    text-transform: uppercase;
+    border-bottom: 1px solid #eee;
+}
+.load-news-documents > h4 > span {
+    color: #999;
+    padding: 5px 15px 0;
+    background: #fff;
+    letter-spacing: 0.2em;
+}
+.load-news-documents a {
+    font-size: 12px;
+}
+.load-news-documents a:hover {
+    border-bottom: 2px solid #2d18b4;
+}
 /* Конец Собственник, страница отдельной новости */
 
 /* Выпадающее меню, профиль пользователя */
