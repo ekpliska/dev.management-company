@@ -265,6 +265,7 @@ $(function($) {
 });
 
 /* Скрыть всплывающее сообщение */
+//$(".alert-message").slideUp(1000).delay(800).fadeIn(700);
 $('.alert-message').on('click', function() {
     $(this).fadeOut(2000);
 });
