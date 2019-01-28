@@ -24,7 +24,7 @@
             [
                 'attribute' => 'ID',
                 'value' => function ($data) {
-                    return Html::a($data->requests_ident, ['requests/view-request', 'request_numder' => $data->requests_ident]);
+                    return Html::a($data->requests_ident, ['requests/view-request', 'request_number' => $data->requests_ident]);
                 },
                 'contentOptions' =>[
                     'class' => 'clients-table_main',
@@ -56,9 +56,9 @@
                 'attribute' => 'Исполнитель',
                 'value' => function ($data) {
                     return FormatFullNameUser::nameEmployee(
-                            $data->employeeDispatcher->employee_surname, 
-                            $data->employeeDispatcher->employee_name, 
-                            $data->employeeDispatcher->employee_second_name, 
+                            $data->employeeSpecialist->employee_surname, 
+                            $data->employeeSpecialist->employee_name, 
+                            $data->employeeSpecialist->employee_second_name, 
                             false);
                 },
             ],

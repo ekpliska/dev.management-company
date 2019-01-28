@@ -778,12 +778,10 @@ button#send-request-to-sms:focus{
     border-radius: 12px;
 }
 .btn-modal-window-yes:hover {
-    box-shadow: 0px 0px 15px 3px rgba(247, 247, 247, 0.15);
     color: #598eff;
     border: 1px solid #598eff;
 }
 .btn-modal-window-no:hover {
-    box-shadow: 0px 0px 15px 3px rgba(247, 247, 247, 0.15);
     color: #f0754a;
     border: 1px solid #f0754a;
 }
@@ -1754,9 +1752,50 @@ p.right {
 }
 /* Конец Оценка заявки, звездочки */
 
-/* Модальное окно "Выставить отценку завершенной заявке" */
-.btn-set-grade-active {
-    background: red;
+/* Модальное окно "Выставить оценку завершенной заявке" */
+#add-grade-modal .modal-body {
+    margin: 0;
+    padding: 0;
+}
+.grade-table {
+    margin: 50px 0;
+    border: none;
+}
+.grade-table > tbody > tr > td {
+    border: none;
+    text-align: left;
+    vertical-align: middle;
+}
+.grade-table > tbody > tr:nth-child(odd) {
+  background-color: rgba(255, 255, 255, 0.06);
+}
+.grade-table > tbody > tr > td:last-child button {
+    padding: 5px 10px;
+    background: #4e425c;
+    font-size: 14px;
+}
+.grade-table > tbody > tr > td:last-child button:hover {
+    background: #fff;
+    color: #4e425c;
+}
+.grade-table > tbody > tr > td:first-child {
+    padding-left: 20px;
+}
+.grade-table > tbody > tr > td:last-child {
+    width: 20%;
+}
+.grade-table > tbody > tr > td:last-child button.btn-set-grade-active {
+    background: #8b709d;
+}
+.grade-table > tbody > tr > td:last-child button:focus {
+    outline: none;
+    color: #fff;
+}
+.grade-table > tbody > tr > td > div#error-message {
+    font-size: 12px;
+    color: #ef693a;
+    text-align: center;
+    padding: 20px 0 0 0;
 }
 /* Конец Модальное окно "Выставить отценку завершенной заявке" */
 

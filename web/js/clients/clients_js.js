@@ -551,7 +551,6 @@ $(document).ready(function() {
         var countAgreeAnswers = $('.btn-yes.btn-set-grade-active').length;
         var grade = Math.round(currentGrade/(countQuestions/countAgreeAnswers));
         
-        console.log(requestID + ' ' + countQuestions + ' ' + countAnswers + ' ' + countAgreeAnswers + ' ' + grade);
         if (countQuestions !== countAnswers) {
             $(document).find('#error-message').text('Пожалуйста дайте ответы на все поставленные вопросы');
             return false;
@@ -565,7 +564,7 @@ $(document).ready(function() {
                     requestID: requestID,
                 },
             }).done(function(response) {
-                console.log(response);
+//                console.log(response);
             });
         }
 

@@ -13,8 +13,7 @@
     ]);
 ?>
 
-<div id="error-message"></div>
-<table class="table">
+<table class="table grade-table">
     <tbody>
         <?php foreach ($questions as $key => $question) : ?>
         <tr>
@@ -46,19 +45,23 @@
             </td>
         </tr>
         <?php endforeach; ?>
+        <tr>
+            <td colspan="2">
+                <div id="error-message"></div>
+            </td>
+        </tr>
     </tbody>
 </table>
 
 <div class="modal-footer">
-    
-    <?= Html::button('Отправить', [
-            'class' => 'btn blue-outline-btn white-btn', 
+    <?= Html::button('Оценить', [
+            'class' => 'btn btn-modal-window btn-modal-window-yes', 
             'id' => 'finished-set-grade',
             'data-request' => $request,
             'data-question' => count($questions),
     ]) ?>
     
-    <?= Html::button('Отмена', ['class' => 'btn red-outline-btn bt-bottom2', 'data-dismiss' => 'modal']) ?>
+    <?= Html::button('Отмена', ['class' => 'btn btn-modal-window btn-modal-window-no', 'data-dismiss' => 'modal']) ?>
     
 </div>
 

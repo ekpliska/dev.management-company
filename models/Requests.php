@@ -183,8 +183,8 @@ class Requests extends ActiveRecord
         }
         
         $this->requests_grade = $score;
-        $this->save(false);
-        return true;
+        
+        return $this->save(false) ? true : false;
         
     }
     
@@ -259,10 +259,9 @@ class Requests extends ActiveRecord
     public static function findByAccountID($account_id) {
         
         $requests = self::find()
-                ->with(['image', 'employeeDispatcher'])
+                ->with(['image', 'employeeSpecialist'])
                 ->andWhere(['requests_account_id' => $account_id])
                 ->orderBy(['created_at' => SORT_DESC]);
-        
         
         return $requests;
     }

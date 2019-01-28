@@ -7,6 +7,7 @@
     use app\modules\clients\widgets\RatingRequest;
     use app\helpers\StatusHelpers;
     use app\models\StatusRequest;
+    use app\modules\clients\widgets\AlertsShow;
 
 /* 
  * Детали заявки
@@ -19,7 +20,9 @@ $this->params['breadcrumbs'][] = 'Заявка ID ' . $request_info['requests_id
 <?= Breadcrumbs::widget([
         'homeLink' => ['label' => 'ELSA', 'url' => ['clients/index']],
         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-]) ?> 
+]) ?>
+
+<?= AlertsShow::widget() ?>
 
 <div class="requests-view">
     
@@ -108,7 +111,7 @@ $this->params['breadcrumbs'][] = 'Заявка ID ' . $request_info['requests_id
 <?php
     Modal::begin([
         'id' => 'add-grade-modal',
-        'header' => 'Оценка',
+        'header' => 'Оцените качество обслуживания',
         'closeButton' => [
             'class' => 'close modal-close-btn',
         ],
