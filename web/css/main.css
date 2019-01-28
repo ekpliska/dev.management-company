@@ -788,7 +788,6 @@ button#send-request-to-sms:focus{
 /* Конец Кнопка для модального окна */
 
 /* Копка добавление платной услуги */
-.add-service-req,
 .blue-outline-link {
     padding: 15px 40px;
     border-radius: 12px;
@@ -800,12 +799,31 @@ button#send-request-to-sms:focus{
     letter-spacing: 0.9px;
     text-transform: uppercase;
 }
-.add-service-req:hover,
 .blue-outline-link:hover {
     background: #2d18b4;
     color: #fff;
+    box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
 }
-/* Конец Копка добавление патной услуги */
+/* Конец Копка добавление платной услуги */
+
+/* Внутренная кнопка для блоков (карта усуги) */
+.card-button-blue {
+    padding: 15px 60px;
+    border: 1px solid #2d18b4;
+    color: #2d18b4;
+    border-radius: 12px;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 0.07em;
+}
+.card-button-blue:hover {
+    background: #2d18b4;
+    color: #fff;
+    box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
+}
+/* Конец Внутренная кнопка для блоков (карта усуги) */
+
 
 /* Собственник, главная страница, Новости */
 .news-lists {
@@ -1967,11 +1985,12 @@ p.right {
 .service-card {
     height: 490px;
     border-radius: 12px;
-    background-color: #FFFFFF;
+    background-color: #fff;
     box-shadow: 0 4px 26px 0 rgba(51,29,82,0.16); 
     margin-right: 12px;
     margin-left: 12px;
     margin-top: 15px;
+    position: relative;
 }
 .service-card_title {
     color: #2d18b6;
@@ -1987,17 +2006,19 @@ p.right {
 .service-card__body {
     padding: 0px 10px;
 }
-.service-card__btn {
+.service-card__btn {}
+.service-card__btn a {
     position: absolute;
-    bottom: 20px;
-    right: 40px;
-}
-.service-card__btn button {
+    right: 2%;
+    bottom: 2%;
 }
 .cost_service {
     font-size: 18px;
     padding-right: 10px;
     color: #c1c1c1;
+    position: absolute;
+    bottom: 5%;
+    left: 2%;
 }
 /* Конец Платные услуги */
 
@@ -2012,7 +2033,25 @@ form#search-form {
     display: inline-block;
     padding: 7px;
 }
-input[id="_search-input"] {
+.search-block__input-dark {
+    background: transparent;
+    color: #fff;
+    width: 340px;
+    padding: 7px 20px;
+    border-radius: 25px;
+    border: 1px solid #fff;
+    outline: none;
+}
+.search-block__input-dark::placeholder {
+    color: #fff;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-size: 10%;
+    background-image: url('../images/searchicon_white.png');
+    background-position: 64%;
+}
+
+/*input[id="_search-input"] {
     background: url(/images/clients/search.svg) no-repeat 20px 10px;
     border: 1px solid #ccc;
     border-radius: 10em;
@@ -2041,7 +2080,7 @@ input[id="_search-input"]:-ms-input-placeholder {
 }
 input[id="_search-input"]:-moz-placeholder {
   color: #fff;
-}
+}*/
 /* Конец История платных услуг */
 
 /* Лицевой счет */

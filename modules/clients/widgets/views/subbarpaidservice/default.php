@@ -42,8 +42,9 @@
         ?>
             <?= $form->field($_search, '_input')
                     ->input('text', [
-                        'placeHolder' => $_search->getAttributeLabel('_input'),
-                        'id' => '_search-input'])
+                        'placeHolder' => 'Поиск',
+                        'id' => '_search-input',
+                        'class' => 'search-block__input-dark'])
                     ->label(false) ?>
 
         <?php ActiveForm::end(); ?>

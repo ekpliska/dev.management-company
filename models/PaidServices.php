@@ -105,12 +105,13 @@ class PaidServices extends ActiveRecord
                         . 'c.category_name, '
                         . 's.service_name, '
                         . 'p.created_at, p.services_comment, '
-                        . 'p.services_specialist_id,'
-                        . 'p.status,'
+                        . 'e.employee_surname, e.employee_name, e.employee_second_name, '
+                        . 'p.status, '
                         . 'p.updated_at')
                 ->from('paid_services as p')
                 ->join('LEFT JOIN', 'services as s', 's.service_id = p.services_name_services_id')
                 ->join('LEFT JOIN', 'category_services as c', 'c.category_id = s.service_category_id')
+                ->join('LEFT JOIN', 'employees as e', 'e.employee_id = p.services_specialist_id')
                 ->andWhere(['services_account_id' => $account_id])
                 ->orderBy(['created_at' => SORT_DESC]);
         

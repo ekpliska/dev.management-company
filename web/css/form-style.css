@@ -361,7 +361,7 @@ select[name="category_list"] option {
 .modal_btn-upload {
     color: #fff;
     position: absolute;
-    margin-left: 64%;
+    right: 5%;
     margin-top: -45px;
     cursor: pointer;    
 }

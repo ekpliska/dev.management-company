@@ -32,31 +32,31 @@ class searchInPaidServices extends Model {
     /*
      * Поиск по исполнителю
      */
-    public function search($value) {
+    public function search($value, $account_id) {
         
-        $account = Yii::$app->request->cookies->get('_userAccount')->value;
-                
         $query = (new \yii\db\Query())
                 ->select('p.services_number, '
                         . 'c.category_name, '
-                        . 's.services_name, '
+                        . 's.service_name, '
                         . 'p.created_at, p.services_comment, '
-                        . 'p.services_specialist_id,'
+                        . 'e.employee_surname, e.employee_name, e.employee_second_name, '
                         . 'p.status,'
                         . 'p.updated_at')
                 ->from('paid_services as p')
-                ->join('LEFT JOIN', 'services as s', 's.services_id = p.services_name_services_id')
-                ->join('LEFT JOIN', 'category_services as c', 'c.category_id = s.services_category_id')
-                ->andWhere(['services_account_id' => $account])
+                ->join('LEFT JOIN', 'services as s', 's.service_id = p.services_name_services_id')
+                ->join('LEFT JOIN', 'category_services as c', 'c.category_id = p.services_servise_category_id')
+                ->join('LEFT JOIN', 'employees as e', 'e.employee_id = p.services_specialist_id')
+                ->andWhere(['services_account_id' => $account_id])
                 ->orderBy(['created_at' => SORT_DESC]);
         
         $dataProvider = new \yii\data\ActiveDataProvider([
             'query' => $query,
         ]);
         
-        $this->load($value, $account);
+        $this->load($value, $account_id);
         
-        $query->andFilterWhere(['like', 'p.services_specialist_id', $value]);
+        $query->andFilterWhere(['like', 'e.employee_surname', $value]);
+        $query->orFilterWhere(['like', 'p.services_number', $value]);
         
         return $dataProvider;
         

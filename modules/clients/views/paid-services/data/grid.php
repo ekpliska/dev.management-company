@@ -1,8 +1,7 @@
 <?php
 
     use yii\grid\GridView;
-    use yii\helpers\Html;
-    use app\helpers\FormatHelpers;
+    use app\helpers\FormatFullNameUser;
     use yii\widgets\Pjax;
     use app\helpers\StatusHelpers;
     
@@ -62,18 +61,21 @@
                     ],
                 ],
                 [
-                    'attribute' => 'services_specialist_id',
-                    'label' => 'Исполнитель',
-                    'value' => 'services_specialist_id',
-                    'contentOptions' =>[
-                        'class' => 'clients-table_main',
-                    ],
+                    'attribute' => 'Исполнитель',
+                    'value' => function ($data) {
+                        return FormatFullNameUser::nameEmployee(
+                            $data['employee_surname'], 
+                            $data['employee_name'], 
+                            $data['employee_second_name'], 
+                            false);
+                    },
+                    'format' => 'raw',
                 ],
                 [
                     'attribute' => 'status',
                     'label' => 'Статус',
                     'value' => function ($data) {
-                        return StatusHelpers::requestStatus($data['status']);
+                        return StatusHelpers::requestStatus($data['status'], $data['services_number'], true, null);
                     },
                     'contentOptions' =>[
                         'class' => 'clients-table_main',

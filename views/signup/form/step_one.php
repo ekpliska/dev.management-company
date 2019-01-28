@@ -2,6 +2,8 @@
 
     use yii\widgets\ActiveForm;
     use yii\helpers\Html;
+    use yii\widgets\MaskedInput;
+    
 /* 
  * Форма регистрации, шаг первый
  */
@@ -28,10 +30,23 @@
         ->label($model_step_one->getAttributeLabel('account_number'), ['class' => 'field-label']) ?>
                 
 <?= $form->field($model_step_one, 'last_summ')
+        ->widget(MaskedInput::className(), [
+                'clientOptions' => [
+                    'alias' =>  'decimal',
+                    'groupSeparator' => '',
+                    'radixPoint' => '.',
+                    'autoGroup' => false]])
         ->input('input', ['class' => 'field-input'])
         ->label($model_step_one->getAttributeLabel('last_summ'), ['class' => 'field-label']) ?>
         
 <?= $form->field($model_step_one, 'square')
+        ->widget(MaskedInput::className(), [
+                'clientOptions' => [
+                    'alias' =>  'decimal',
+                    'groupSeparator' => '',
+                    'radixPoint' => '.',
+                    'autoGroup' => false]])
+        ->input('input', ['class' => 'field-input'])
         ->input('text', ['class' => 'field-input'])
         ->label($model_step_one->getAttributeLabel('square'), ['class' => 'field-label']) ?>
 

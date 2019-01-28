@@ -26,14 +26,9 @@
                     </div>
                     <div class="service-card__btn">
                         <span class="cost_service"><?= $service['service_price'] ?> &#8381;</span>
-                        <?php /*= Html::button('Заказать', [
-                                'class' => 'btn blue-outline-btn new-rec', 
-                                'data-service-cat' => $service['category']['category_id'],
-                                'data-service' => $service['service_id']]) */ ?>
-                        
                         <?= Html::a('Заказать', 
                                 ['create-paid-request', 'category' => $service['category']['category_id'], 'service' => $service['service_id']], 
-                                ['class' => 'btn add-service-req new-rec']) ?>
+                                ['class' => 'btn card-button-blue new-rec']) ?>
                     </div>                
                 </div>
             </div>

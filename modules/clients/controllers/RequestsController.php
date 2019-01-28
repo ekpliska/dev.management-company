@@ -181,21 +181,19 @@ class RequestsController extends AppClientsController
      */
     public function actionAddScoreRequest() {
 
-        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        
         // Получаем с пост запроса оценку и ID заявки
-        $score = Yii::$app->request->post('grade');
+        $score = Yii::$app->request->post('grade') ? Yii::$app->request->post('grade') : -1;
         $request_id = Yii::$app->request->post('requestID');
+        $request = Requests::findByID($request_id);
         
         // Проверяем на корректность пришедшие данные
-        if (!is_numeric($score) || !is_numeric($score)) {
+        if (empty($request) || !isset($request)) {
             Yii::$app->session->setFlash('error', ['message' => 'Возникла ошибка. Обновите страницу и повторите действие заново']);
-            return $this->goHome();
+            return $this->redirect(['view-request', 'request_number' => $request['requests_ident']]);
         }
 
         // Если пришел ajax запрос
         if ($score && $request_id && Yii::$app->request->isAjax) {
-            $request = Requests::findByID($request_id);
             // Вызываем метод добавления оценки из модели
             if ($request->addGrade($score)) {
                 Yii::$app->session->setFlash('success', ['message' => 'Спасибо, ваша оценка принята. Ваше мнение очень важно для нас']);

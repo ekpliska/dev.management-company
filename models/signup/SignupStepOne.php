@@ -18,11 +18,9 @@ class SignupStepOne extends Model {
         return [
             [['account_number', 'last_summ', 'square'], 'required'],
             
-//            ['account_number', 'string', 'min' => 11, 'max' => 11],
+            ['last_summ', 'double', 'min' => 00.00, 'max' => 100000.00, 'message' => 'Цена услуги указана не верно. Пример: 790.70'],
+            ['square', 'double', 'min' => 20.00, 'max' => 100000.00, 'message' => 'Площадь жилого помещения указана не верно. Пример, 80.27'],
             
-            ['last_summ', 'match', 'pattern'=>'/^[0-9]{1,12}(\.[0-9]{0,4})?+$/iu', 'message' => 'Сумма последней квитанции указана не верно. Пример: 2578.70'],
-            ['square', 'match', 'pattern'=>'/^[0-9]{1,12}(\.[0-9]{0,4})?+$/iu', 'message' => 'Площадь жилого помещения указана не верно. Пример, 80.27'],
-
         ];
     }
     

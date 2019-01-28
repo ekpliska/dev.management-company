@@ -17,9 +17,7 @@ class PaidServicesController extends AppClientsController {
     
     
     /*
-     * Страница "История услуг"
-     * @param ActiveQuery Все платные услуги для текущего пользователя
-     * @param intereg $accoint_id Значение ID лицевого счета из глобального dropDownList (хеддер)
+     * Страница "Заказать услугу"
      */
     public function actionIndex() {
         
@@ -28,8 +26,6 @@ class PaidServicesController extends AppClientsController {
             'scenario' => PaidServices::SCENARIO_ADD_SERVICE,
         ]);
         
-        
-
         // получаем список всех платных услуг
         $name_services_array = CategoryServices::getCategoryNameArray();
         // Получаем список услуг по первой категории
@@ -44,8 +40,10 @@ class PaidServicesController extends AppClientsController {
     }
     
     /*
-     * Страница "Заказать слугу"
-     */
+     * Страница "История услуг"
+     * @param ActiveQuery Все платные услуги для текущего пользователя
+     * @param intereg $accoint_id Значение ID лицевого счета из глобального dropDownList (хеддер)
+     */    
     public function actionOrderServices() {
         
         $this->permisionUser();
@@ -65,14 +63,14 @@ class PaidServicesController extends AppClientsController {
         Yii::$app->response->format = Response::FORMAT_JSON;
         
         $value = Yii::$app->request->post('searchValue');
-        $account = Yii::$app->request->post('accountId');
+        $account_id = $this->_current_account_id;
         
         if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
             
             // Загружаем модель поиска
             $model = new searchInPaidServices();
             
-            $all_orders = $model->search($value, $account);
+            $all_orders = $model->search($value, $account_id);
             
             $data = $this->renderAjax('data/grid', ['all_orders' => $all_orders]);
             
