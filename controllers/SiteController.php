@@ -44,10 +44,6 @@ class SiteController extends Controller
     public function actions()
     {
         return [
-            'error' => [
-                'class' => 'yii\web\ErrorAction',
-                'view' => '@app/views/site/404.php'
-            ],
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
@@ -55,6 +51,16 @@ class SiteController extends Controller
         ];
     }
 
+    public function actionError() {
+        
+        $this->layout = '@app/views/layouts/error-layout';
+        
+        $exception = Yii::$app->errorHandler->exception;
+        if ($exception !== null) {
+            return $this->render('error', ['message' => 'Страница не найдена']);
+        }
+    }
+    
     /**
      * Главная страница. вход в систему
      */

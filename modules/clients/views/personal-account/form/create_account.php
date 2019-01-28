@@ -3,6 +3,7 @@
     use yii\bootstrap\Modal;
     use yii\widgets\ActiveForm;
     use yii\helpers\Html;
+    use yii\widgets\MaskedInput;
 
 /* 
  * Модальное окно на доабавление лицевого счета
@@ -42,9 +43,21 @@
             ->input('text', ['class' => 'field-input-modal'])
             ->label($model->getAttributeLabel('account_number'), ['class' => 'field-label-modal']) ?>
     <?= $form->field($model, 'last_sum')
+            ->widget(MaskedInput::className(), [
+                    'clientOptions' => [
+                        'alias' =>  'decimal',
+                        'groupSeparator' => '',
+                        'radixPoint' => '.',
+                        'autoGroup' => false]])
             ->input('text', ['class' => 'field-input-modal'])
             ->label($model->getAttributeLabel('last_sum'), ['class' => 'field-label-modal']) ?>
     <?= $form->field($model, 'square')
+            ->widget(MaskedInput::className(), [
+                    'clientOptions' => [
+                        'alias' =>  'decimal',
+                        'groupSeparator' => '',
+                        'radixPoint' => '.',
+                        'autoGroup' => false]])
             ->input('text', ['class' => 'field-input-modal'])
             ->label($model->getAttributeLabel('square'), ['class' => 'field-label-modal']) ?>
 
