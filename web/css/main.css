@@ -3300,10 +3300,10 @@ a.sub-menu-item {
 
 /* Всплывающие уведовления */
 .alert-message[data-notification-status="success"] {
-    background-color: #1fd68d;
+    border-left: 7px solid #1fd68d;
 }
 .alert-message[data-notification-status="error"] {
-    background-color: #ff7d7D;
+    border-left: 7px solid #ff7d7d;
 }
 .alert-message {
     position: fixed;
@@ -3311,17 +3311,18 @@ a.sub-menu-item {
     display: flex;
     align-items: center;
     padding: 20px;
-    color: #fff;
+    color: #454545;
+    background: #fff;
+    font-size: 12px;
     line-height: 1.3;
     box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.35);
     width: 350px;
-     margin: 20px; 
-    bottom: 5%;
+    margin: 20px;
+    top: 20%;
     right: 0;
     cursor: default;
 }
-.alert-message[data-notification-status="success"]:before,
-.alert-message[data-notification-status="error"]:before {
+.alert-message::before {
     content: '\2716';
     display: block;
     width: 30px;
@@ -3329,6 +3330,12 @@ a.sub-menu-item {
     min-width: 30px;
     margin-right: 20px;
     font-size: 24px;
+}
+.alert-message[data-notification-status="success"]:before {
+    color: #1fd68d;
+}
+.alert-message[data-notification-status="error"]:before {
+    color: #ff7d7d;
 }
 /* Конец Всплывающие уведовления */
 
