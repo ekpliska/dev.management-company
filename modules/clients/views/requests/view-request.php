@@ -39,15 +39,14 @@ $this->params['breadcrumbs'][] = 'Заявка ID ' . $request_info['requests_id
                     <?= FormatHelpers::formatDate($request_info['created_at'], true, 0, false) ?>
                 </p>
                 
-                <?php if ($request_info['status'] == StatusRequest::STATUS_CLOSE && !empty($request_info['requests_grade'])) : ?>        
+                
+                <?php if ($request_info['status'] == StatusRequest::STATUS_CLOSE) : ?>
                     <div class="req-rate-star">
                         <div class="starrr" id="star1">
-
                             <?= RatingRequest::widget([
                                 '_status' => $request_info['status'], 
                                 '_request_id' => $request_info['requests_id'],
                                 '_score' => $request_info['requests_grade']]) ?>
-
                         </div>
                     </div>
                 <?php endif; ?>

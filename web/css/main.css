@@ -1554,7 +1554,7 @@ p.right {
     font-size: 18px;
     letter-spacing: 0.32px;
     font-weight: bold;
-    padding: 0 0 20px 0;
+    padding: 0;
 }
 .requests-view_body > h4 > span {
     border: 1px solid #2d18b4;
@@ -1741,7 +1741,7 @@ p.right {
     margin: 15px 0;
 }
 
-.req-rate-star .starrr a {
+/*.req-rate-star .starrr a {
     margin-left: 9.75px;
     margin-right: 9.75px;
 }
@@ -1749,7 +1749,7 @@ p.right {
 .rate-star-white{
     margin-top: 48px;
     margin-bottom: 75px;
-}
+}*/
 /* Конец Оценка заявки, звездочки */
 
 /* Модальное окно "Выставить оценку завершенной заявке" */
