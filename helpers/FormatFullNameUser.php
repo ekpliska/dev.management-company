@@ -3,9 +3,6 @@
     namespace app\helpers;
     use yii\helpers\Html;
     use app\models\User;
-    use app\models\Rents;
-    use app\models\Clients;
-    use app\models\Employees;
 
 /**
  * Форматирование вывода полного имени пользователя 
@@ -91,5 +88,22 @@ class FormatFullNameUser {
             Html::a($full_name, $link, ['target' => '_blank', 'class' => 'btn btn-link btn-xs']) : 'Не назначен';
         
     }    
+    
+    /*
+     * Формирование Фалмилии имени отчества пользователя
+     * @param boolean $full | true Фамилия Имя Отчество | false Фамилия И.О.
+     */
+    public static function nameEmployee($surname, $name, $second_name, $full = false) {
+        
+        if ($surname == null || $name == null ||  $second_nam || null) {
+            return '<span>(Не назначен)</span>';
+        }
+        
+        $name = $full ? $name. ' ' : mb_substr($name, 0, 1, 'UTF-8') . '. ';
+        $second_name = $full ? $second_name . ' ' : mb_substr($second_name, 0, 1, 'UTF-8') . '.';
+        
+        return $surname . ' ' . $name . $second_name;
+        
+    }
     
 }

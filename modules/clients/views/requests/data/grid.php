@@ -4,6 +4,7 @@
     use yii\helpers\Html;
     use app\helpers\FormatHelpers;
     use app\helpers\StatusHelpers;
+    use app\helpers\FormatFullNameUser;
 
 /*
  * Вывод таблицы заявок текущего пользователя
@@ -54,7 +55,11 @@
             [
                 'attribute' => 'Исполнитель',
                 'value' => function ($data) {
-                    return $data->requests_specialist_id;
+                    return FormatFullNameUser::nameEmployee(
+                            $data->employeeDispatcher->employee_surname, 
+                            $data->employeeDispatcher->employee_name, 
+                            $data->employeeDispatcher->employee_second_name, 
+                            false);
                 },
             ],
             [

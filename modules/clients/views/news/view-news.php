@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $news['news_title'];
     <div class="preview-news">
     <?= FormatHelpers::previewNewsOrVote($news['news_preview'], true) ?>
     <div class="news-rubric-block">
-        <span class="rubric-name"><?= $news['rubrics_name'] ?></span>
+        <span class="rubric-name"><?= $news['news_type_rubric_id'] ?></span>
             <?php if ($news['isAdvert'] == 1) : ?>
                 <span class="partner-name"><?= $news['partners_name'] ?></span>
             <?php endif; ?>

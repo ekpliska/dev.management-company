@@ -11,6 +11,7 @@
     use app\models\CommentsToRequest;
     use app\models\StatusRequest;
     use app\models\Image;
+    use app\models\Employees;
 
 /**
  * Заяки
@@ -108,6 +109,20 @@ class Requests extends ActiveRecord
      */
     public function getImage() {
         return $this->hasMany(Image::className(), ['itemId' => 'requests_id'])->andWhere(['modelName' => 'Requests']);
+    }
+    
+    /*
+     * Связь с таблицей сотрудники (Специалисты)
+     */
+    public function getEmployeeSpecialist() {
+        return $this->hasOne(Employees::className(), ['employee_id' => 'requests_specialist_id']);
+    }
+
+    /*
+     * Связь с таблицей сотрудники (Диспетчеры)
+     */
+    public function getEmployeeDispatcher() {
+        return $this->hasOne(Employees::className(), ['employee_id' => 'requests_dispatcher_id']);
     }
         
     /*
@@ -244,9 +259,10 @@ class Requests extends ActiveRecord
     public static function findByAccountID($account_id) {
         
         $requests = self::find()
-                ->with('image')
+                ->with(['image', 'employeeDispatcher'])
                 ->andWhere(['requests_account_id' => $account_id])
                 ->orderBy(['created_at' => SORT_DESC]);
+        
         
         return $requests;
     }
