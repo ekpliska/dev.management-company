@@ -14,8 +14,12 @@ class StatusHelpers {
     
     /*
      * Формирование статусов для таблицы заявки, услуги
+     * @param integet $status Статус заявки
+     * @param integet $value ID завяки
+     * @param boolean $client Рендер звездочек для Собственника (В противном случае на Администратора, Диспетчера)
+     * @param integet $grade Оценка
      */
-    public static function requestStatus($status, $value = null, $client = true) {
+    public static function requestStatus($status, $value = null, $client = true, $grade) {
         
         $btn_css = '';
         $voting_bnt = '';
@@ -45,9 +49,10 @@ class StatusHelpers {
             $btn_css = '<span class="' . $css_classes[4] . '">' . $status_name . '</span>';
         }
         
-//        if ($status == StatusRequest::STATUS_CLOSE && $client == true) {
+        if ($status == StatusRequest::STATUS_CLOSE && $client == true) {
 //            $voting_bnt = Html::button('Оценить', ['class' => 'blue-outline-btn req-table-btn', 'data-request' => $value]);
-//        }
+//            $voting_bnt = '<div id="star" data-request="' . $value . '" data-score-reguest="' . $grade . '"></div>';
+        }
         
         return $btn_css . '<br />' . $voting_bnt;
         

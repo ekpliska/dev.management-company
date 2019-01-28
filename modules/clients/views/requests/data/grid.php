@@ -5,6 +5,7 @@
     use app\helpers\FormatHelpers;
     use app\helpers\StatusHelpers;
     use app\helpers\FormatFullNameUser;
+    use app\modules\clients\widgets\RatingRequest;
 
 /*
  * Вывод таблицы заявок текущего пользователя
@@ -34,8 +35,13 @@
             [
                 'attribute' => 'Вид заявки',
                 'value' => function ($data) {
-                    return $data->getNameRequest();            
+                    return $data->getNameRequest() . 
+                            RatingRequest::widget([
+                                '_status' => $data->status, 
+                                '_request_id' => $data->requests_ident,
+                                '_score' => $data->requests_grade]);
                 },
+                'format' => 'raw',
                 'contentOptions' =>[
                     'class' => 'clients-table_main',
                 ],        
@@ -61,6 +67,7 @@
                             $data->employeeSpecialist->employee_second_name, 
                             false);
                 },
+                'format' => 'raw',
             ],
             [
                 'attribute' => 'Дата создания',
@@ -84,7 +91,7 @@
                 'attribute' => 'Статус',
                 'label' => 'Статус',
                 'value' => function ($data) {
-                    return StatusHelpers::requestStatus($data['status'], $data->requests_id);
+                    return StatusHelpers::requestStatus($data['status'], $data->requests_id, true, $data->requests_grade);
                 },
                 'format' => 'raw',
                 'contentOptions' =>[

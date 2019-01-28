@@ -19,7 +19,7 @@ class Requests extends BaseRequests {
         
         $requests = (new \yii\db\Query)
                 ->select('r.requests_id as requests_id, r.requests_ident as number, '
-                        . 'r.requests_comment as comment, '
+                        . 'r.requests_grade as grade, r.requests_comment as comment, '
                         . 'r.created_at as date_create, r.date_closed as date_close, '
                         . 'r.status as status, '
                         . 'tr.type_requests_name as category, '
