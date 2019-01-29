@@ -99,7 +99,7 @@ class SignupController extends Controller {
                 if ($model->registration($this->current_array)) {
                     $this->setSessionStep();
                     Yii::$app->session->setFlash('success', 
-                            'Благодарим за регистрацию. Для входа на портал используйте номер вышего лицевого счет и пароль указанные при регистрации. '
+                            'Благодарим за регистрацию. Для входа на портал используйте номер вашего лицевого счета и пароль указанные при регистрации. '
                             . Html::a('Перейти на страницу входа', ['site/login']));
                     return true;
                 }

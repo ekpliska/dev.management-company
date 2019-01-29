@@ -2854,7 +2854,7 @@ p.date-start-vote {
 .notice {
     position: relative;
     margin: 2em;
-    background: #F9F9F9;
+    background: #fff;
     padding: 1em 1em 1em 2em;
     border-left: 4px solid #DDD;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.125);
@@ -2881,28 +2881,28 @@ p.date-start-vote {
     text-shadow: 1px 1px rgba(0, 0, 0, 0.5);
 }
 .info {
-    border-color: #4d55d1;
+    border-color: #50beed;
 }
 .info:before {
     content: "\02148";
     margin-top: -15px;
-    background-color: #4d55d1;
+    background-color: #50beed;
 }
 .warning {
-    border-color: #FFDC00;
+    border-color: #fed75b;
 }
 .warning:before {
     margin-top: -15px;
     content: "\02604";
-    background-color: #FFDC00;
+    background-color: #fed75b;
 }
 .success {
-    border-color: #2ECC40;
+    border-color: #1fd68d;
 }
 .success:before {
     margin-top: -15px;
     content: "\02713";
-    background-color: #2ECC40;
+    background-color: #1fd68d;
 }
 .error {
     border-color: #ef693a;

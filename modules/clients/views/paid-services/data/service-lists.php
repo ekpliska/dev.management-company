@@ -35,8 +35,8 @@
 
         <?php endforeach; ?>
     <?php else : ?>
-        <div class="notice notice-info">
-            <strong>Услуги</strong> по заданной категории услуг не найдено.
+        <div class="notice info">
+            <p>По заданной категории услуг не найдено.</p>
         </div>
     <?php endif; ?>
 </div>

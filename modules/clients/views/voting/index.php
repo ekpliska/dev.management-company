@@ -71,5 +71,9 @@ $this->params['breadcrumbs'][] = 'Опрос';
             </div>
         </div>
         <?php endforeach; ?>
+    <?php else : ?>
+        <div class="notice info">
+            <p>Голосования еще не проводились</p>
+        </div>
     <?php endif; ?>
 </div>
