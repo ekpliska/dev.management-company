@@ -54,10 +54,13 @@ class PersonalAccountController extends AppClientsController {
         // Получить номер текущего лицевого счета
         $account_number = $this->_current_account_number;
         
+        // Получаем номер текущего месяца и год
+        $current_period = date('Y-n');
+        
         $array_request = [
             'Номер лицевого счета' => $account_number,
             'Период начало' => null,
-            'Период конец' => null,
+            'Период конец' => $current_period,
         ];
         
         $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
@@ -80,10 +83,13 @@ class PersonalAccountController extends AppClientsController {
         // Получить номер текущего лицевого счета
         $account_number = $this->_current_account_number;
         
+        // Получаем номер текущего месяца и год
+        $current_period = date('Y-n');
+        
         $array_request = [
             'Номер лицевого счета' => $account_number,
             'Период начало' => null,
-            'Период конец' => null,
+            'Период конец' => $current_period,
         ];
         
         $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);

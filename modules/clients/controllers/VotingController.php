@@ -41,14 +41,14 @@ class VotingController extends AppClientsController {
         
         // Получаем информацию по текущему голосованию
         $voting = Voting::findVotingById($voting_id);
+
+        if ($voting == null) {
+            throw new \yii\web\NotFoundHttpException('Вы обратились к несуществующей странице');
+        }
         
         // Получаем информаию о участниках голосования
         $participants = RegistrationInVoting::getParticipants($voting_id);
         
-        if ($voting === null) {
-            throw new \yii\web\NotFoundHttpException('Вы обратились к несуществующей странице');
-        }
-
         // Проверяем наличие текущего пользователя в списке зарегистрированных участников голосования
         $is_register = RegistrationInVoting::findById($voting_id);
         

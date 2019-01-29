@@ -17,7 +17,7 @@ $current_date = date('Y-m');
             // Сравниваем текущаю дату и дату расчетного периода квитанции
             $_date = ($current_date == $date->format('Y-m')) ? true : false;
             // Статус квитанции
-            $status = $receipt['Статус квитанции'] == 'Не оплачено' ? false : true;
+            $status = $receipt['Статус квитанции'] == 'Не оплачено' ? true : false;
             // Формируем ссылку на PDF квитанцию
             $url_pdf = '@web/receipts/' . $account_number . '/' . $account_number . '-' . $receipt['Номер квитанции'] . '.pdf';
         ?>

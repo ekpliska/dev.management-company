@@ -38,7 +38,7 @@ class NavMenu extends Widget {
             'parent_item' => 'personal-account',
         ],
         '1' => [
-            'link' => 'personal-account/payment',
+            'link' => 'personal-account/payments',
             'name' => 'Платежи',
             'parent_item' => 'personal-account',
         ],
