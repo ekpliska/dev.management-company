@@ -55,9 +55,9 @@ class ResultsVote extends Widget {
             }
             // Массив формирует количество ответов (в %) каждого типа по текущему вопросы
             $ansqwers_count = [
-                'behind' => $count == 0 ? '0' : (($against_count * 100) / $count),
-                'against' => $count == 0 ? '0' : (($behind_count * 100) / $count),
-                'abstain' => $count == 0 ? '0' : (($abstain_count * 100) / $count),
+                'behind' => $count == 0 ? '0' : round(($against_count * 100) / $count),
+                'against' => $count == 0 ? '0' : round(($behind_count * 100) / $count),
+                'abstain' => $count == 0 ? '0' : round(($abstain_count * 100) / $count),
             ];
             // Формируем массив по каждому ответу
             $result = [

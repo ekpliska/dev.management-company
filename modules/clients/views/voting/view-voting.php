@@ -104,8 +104,12 @@ $this->params['breadcrumbs'][] = $voting['voting_title'];
                     <div class="questions-text-show">
                         <h4>
                             <?php 
-                                // Ответ
-                                $_answer = $question['answer'][0]['answers_vote'];
+                                /* В цикле находим ответ текущего пользователя по конктерному вопросу */
+                             foreach ($question['answer'] as $answer) {
+                                 if ($answer['answers_user_id'] == Yii::$app->user->identity->id && $answer['answers_questions_id'] == $question['questions_id']) {
+                                     $_answer = $answer['answers_vote'];
+                                 }
+                             }
                             ?>
                             <i class="glyphicon glyphicon-ok marker-vote-<?= $question['questions_id'] ?> <?= !isset($_answer) ? 'show-marker' : '' ?>"></i>
                             <?= $question['questions_text'] ?>

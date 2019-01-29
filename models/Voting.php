@@ -155,7 +155,7 @@ class Voting extends ActiveRecord
         
         $result = self::find()
                 ->joinWith(['question', 'question.answer'])
-                ->where(['voting_id' => $voting_id])
+                ->andWhere(['voting_id' => $voting_id])
                 ->asArray()
                 ->one();
         
