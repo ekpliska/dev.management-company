@@ -79,28 +79,69 @@ button:hover {
 
 /* Футер */
 .footer {
-    height: 100px;
+    height: 240px;
     background-color: #f3f3f3;
-    padding-top: 15px;
+    padding: 15px 0;
     box-shadow: 0 -1px 7px #ddd;
     color: rgb(103, 118, 138);
 }
-.company {
-    display: inline-flex;    
-}
-.footer-logo {
-    width: 50px;
-}
-.company_info h3 {
+.footer__dispatcher h3.footer_title,
+.footer__help-block h3.footer_title,
+.footer__propr h3.footer_title {
+    font-size: 16px;
+    color: #454545;
+    padding: 0;
     margin: 0;
-    font-family: "Mplus 1p Bold";
-    font-size: 18px;
-    padding: 10px 0 0 20px;
 }
-.company_info p {
+.footer__dispatcher {
+    margin-bottom: 30px;
+}
+.distapcher-phone,
+.distapcher-phone:hover {
+    color: #454545;
+    font-size: 22px;
+    padding: 0;
     margin: 0;
-    padding: 0 0 0 20px;
+}
+.footer p {
     font-size: 12px;
+    color: rgb(103, 118, 138);
+    margin: 0;
+    padding: 0;
+}
+.footer_hepl-link,
+.footer_hepl-link:hover {
+    font-size: 12px;
+    color: rgb(103, 118, 138);
+}
+.footer__adress h3.footer_title {
+    font-size: 16px;
+    color: #454545;
+    padding: 0;
+    margin: 0;
+}
+.footer__adress h4 {
+    font-size: 14px;
+    padding: 10px 0 0;
+    color: #454545;
+}
+.footer__adress p {
+    font-size: 12px;
+    padding: 0;
+    margin: 0;
+}
+.footer__propr table {
+    border: none;
+    margin-top: 30px;
+}
+.footer__propr table > tbody > tr > td {
+    padding: 5px;
+    font-size: 12px;
+    text-align: left;
+    vertical-align: middle;
+}
+.footer__propr table > tbody > tr > td:first-child {
+    color: #454545;
 }
 /* Конец Футер */
 
