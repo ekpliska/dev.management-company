@@ -55,7 +55,7 @@ class m180903_073459_table_rbac_init extends Migration
             'updated_at' => $this->integer(),
             'PRIMARY KEY (name)',
             'FOREIGN KEY (rule_name) REFERENCES ' . $auth_manager->ruleTable . ' (name) ON DELETE SET NULL ON UPDATE CASCADE',
-        ]);
+        ], $table_options);
         $this->createIndex('idx-auth_item-type', $auth_manager->itemTable, 'type');
         
         $this->createTable($auth_manager->itemChildTable, [

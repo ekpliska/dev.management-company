@@ -3,6 +3,7 @@
     namespace app\controllers;
     use Yii;
     use yii\web\Controller;
+    use yii\helpers\Html;
     use app\models\RegistrationForm;
     use app\models\signup\SignupStepOne;
     use app\models\signup\SignupStepTwo;
@@ -15,12 +16,14 @@ class SignupController extends Controller {
     
     public $current_array = [];
     public $user_info_array = [];
+    
+    const STATUS_SUCCESS_TRUE = 'success-true';
+    const STATUS_SUCCESS_FALSE = 'success-false';
 
 
     public function actionIndex() {
-        
-//        $session = Yii::$app->session;
-//        $session->destroy();
+
+//        Yii::$app->session->destroy();
         
         $stage = $this->setSessionStep();
         
@@ -50,7 +53,9 @@ class SignupController extends Controller {
         $session = Yii::$app->session;
         
         if (!isset($session['step_one'])) {
-            $session['step_one'] = true;
+            $session['step_one'] = self::STATUS_SUCCESS_TRUE;
+            $session['step_two'] = self::STATUS_SUCCESS_FALSE;
+            $session['step_three'] = self::STATUS_SUCCESS_FALSE;
             return true;
         }
         
@@ -91,8 +96,15 @@ class SignupController extends Controller {
                 $this->setCurrentRegisterData();
                 
                 $model = new RegistrationForm();
-                $model->registration($this->current_array);
-                return $this->redirect(['site/login']);
+                if ($model->registration($this->current_array)) {
+                    $this->setSessionStep();
+                    Yii::$app->session->setFlash('success', 
+                            'Благодарим за регистрацию. Для входа на портал используйте номер вышего лицевого счет и пароль указанные при регистрации. '
+                            . Html::a('Перейти на страницу входа', ['site/login']));
+                    return true;
+                }
+                Yii::$app->session->setFlash('error', 'Ошибка регистрации. Повторить регисрацию ' . Html::a('Повторить регистрацию', ['signup/index']));
+                return false;
             }
         }
         return false;
@@ -113,8 +125,9 @@ class SignupController extends Controller {
         $session['account'] = $data['account_number'];
         $session['last_summ'] = $data['last_summ'];
         $session['square'] = $data['square'];
-        $session['step_one'] = false;
-        $session['step_two'] = true;
+        $session['step_one'] = self::STATUS_SUCCESS_FALSE;
+        $session['step_two'] = self::STATUS_SUCCESS_TRUE;
+        $session['step_three'] = self::STATUS_SUCCESS_FALSE;
         
         return true;
     }
@@ -136,9 +149,9 @@ class SignupController extends Controller {
         
         $session['email'] = $data['email'];
         $session['password'] = $data['password'];
-        $session['step_one'] = false;
-        $session['step_two'] = false;
-        $session['step_three'] = true;
+        $session['step_one'] = self::STATUS_SUCCESS_FALSE;
+        $session['step_two'] = self::STATUS_SUCCESS_FALSE;
+        $session['step_three'] = self::STATUS_SUCCESS_TRUE;
         
         return true;
     }

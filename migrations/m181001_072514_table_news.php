@@ -29,22 +29,21 @@ class m181001_072514_table_news extends Migration
         $this->createIndex('idx-partners-partners_id', '{{%partners}}', 'partners_id');
 
         $this->createTable('{{%rubrics}}', [
-            'rubrics_id' => $this->string(70)->notNull(),
+            'rubrics_id' => $this->primaryKey(),
             'rubrics_name' => $this->string(170)->notNull(),
-            'PRIMARY KEY (rubrics_id)',
-        ]);
+        ], $table_options);
         
         $this->batchInsert('{{%rubrics}}', 
                 ['rubrics_id', 'rubrics_name'], [
-                    ['important_information', 'Важная информация'],
-                    ['special_offers', 'Специальные предложения'],
-                    ['house_news', 'Новости дома']
+                    ['1', 'Важная информация'],
+                    ['2', 'Специальные предложения'],
+                    ['3', 'Новости дома']
                 ]
         );
         
         $this->createTable('{{%news}}', [
             'news_id' => $this->primaryKey(),
-            'news_type_rubric_id' => $this->string(70)->notNull(),
+            'news_type_rubric_id' => $this->integer()->notNull(),
             'news_title' => $this->string(255)->notNull(),
             'news_text' => $this->text(5000)->notNull(),
             'news_preview' => $this->string(255)->notNull(),

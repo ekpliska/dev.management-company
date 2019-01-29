@@ -116,10 +116,10 @@ $this->params['breadcrumbs'][] = $voting['voting_title'];
                                     <?php foreach (Answers::getAnswersArray() as $type_answer => $answer) : ?>
                                         <?php $class = ($_answer == $type_answer) ? 'btn-set-voting-active' : ''; ?>
                                         <?= Html::button($answer, [
-                                            'class' => "btn btn-primary btn-set-voting {$class}",
-                                            'id' => "btn-vote-yes-{$key}",
-                                            'data-question' => $question['questions_id'],
-                                            'data-type-answer' => $type_answer,
+                                                'class' => "btn btn-primary btn-set-voting {$class}",
+                                                'id' => "btn-vote-yes-{$key}",
+                                                'data-question' => $question['questions_id'],
+                                                'data-type-answer' => $type_answer,
                                         ]) ?>
                                     <?php endforeach; ?>
                                 </div>

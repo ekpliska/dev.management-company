@@ -160,7 +160,9 @@ class RegistrationForm extends Model {
             
             $transaction->commit();
             // Дропаем сессию в случае успешной регистрации нового пользователя
-            Yii::$app->session->removeAll();
+            Yii::$app->session->destroy();
+            
+            return true;
             
             
         } catch (Exception $e) {

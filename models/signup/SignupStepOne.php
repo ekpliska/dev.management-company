@@ -49,12 +49,12 @@ class SignupStepOne extends Model {
             $is_account = PersonalAccount::findAccountBeforeRegister($account);
             
             if ($is_account == true) {
-                $this->addError($attribute, 'Указанный номер номер лицевого счета зарегистрирован');
+                $this->addError('account_number', 'Указанный номер номер лицевого счета зарегистрирован');
                 return false;
             }
             
             if ($is_account == false && $result_api['success'] == false) {
-                $this->addError($attribute, 'Регистрационные данные лицевого счета введены некорректно');
+                $this->addError('account_number', 'Регистрационные данные лицевого счета введены некорректно');
                 return false;
             }
             

@@ -31,7 +31,7 @@ class m180903_071239_table_rates extends Migration
                 '{{%rates}}', 
                 'rates_service_id', 
                 '{{%services}}', 
-                'services_id', 
+                'service_id', 
                 'RESTRICT',
                 'CASCADE'
         );

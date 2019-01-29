@@ -95,7 +95,7 @@ class FormatFullNameUser {
      */
     public static function nameEmployee($surname, $name, $second_name, $full = false) {
         
-        if ($surname == null || $name == null ||  $second_nam || null) {
+        if ($surname == null || $name == null ||  $second_name || null) {
             return '<span>(Не назначен)</span>';
         }
         
