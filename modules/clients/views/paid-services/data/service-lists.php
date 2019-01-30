@@ -28,7 +28,7 @@
                         <span class="cost_service"><?= $service['service_price'] ?> &#8381;</span>
                         <?= Html::a('Заказать', 
                                 ['create-paid-request', 'category' => $service['category']['category_id'], 'service' => $service['service_id']], 
-                                ['class' => 'btn card-button-blue new-rec']) ?>
+                                ['class' => 'btn-link card-link-blue new-rec']) ?>
                     </div>                
                 </div>
             </div>

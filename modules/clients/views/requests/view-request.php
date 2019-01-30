@@ -87,7 +87,7 @@ $this->params['breadcrumbs'][] = 'Заявка ID ' . $request_info['requests_id
                     <?php if ($request_info['status'] == StatusRequest::STATUS_CLOSE && empty($request_info['requests_grade'])) : ?>
                         <?= Html::a('Оценить', 
                                 ['requests/add-grade', 'request' => $request_info['requests_id']], 
-                                ['class' => 'btn blue-outline-link' ,'id' => 'add-rate']) 
+                                ['class' => 'btn btn-link white-to-blue-link' ,'id' => 'add-rate']) 
                         ?>
                     <?php endif; ?> 
                 </div>                

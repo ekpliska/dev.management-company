@@ -41,7 +41,7 @@
         
         <div class="text-right">
             <?php if ($is_change_phone == false) : ?>
-                <?= Html::submitButton('Продолжить', ['class' => 'blue-outline-btn req-table-btn']) ?>
+                <?= Html::submitButton('Продолжить', ['class' => 'btn-small btn-changes-yes']) ?>
             <?php endif; ?>
         </div>    
 
@@ -75,9 +75,9 @@
                 ->label()
         ?>
     
-    <div class="block-of-btn text-center">
-        <?= Html::submitButton('Продолжить', ['class' => 'blue-outline-btn req-table-btn']) ?>
-        <?= Html::button('Отмена', ['id' => 'cancel-sms', 'class' => 'btn red-outline-btn req-table-btn']) ?>
+    <div class="block-of-btn text-left">
+        <?= Html::submitButton('Продолжить', ['class' => 'btn-small btn-changes-yes']) ?>
+        <?= Html::button('Отмена', ['id' => 'cancel-sms', 'class' => 'btn-small btn-changes-no']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

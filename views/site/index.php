@@ -15,8 +15,8 @@ $this->title = 'Customers | Вход';
     
     <div class="start-page__btn-block">
         <div class="text-center">
-            <?= Html::a('Зарегистрироваться', ['signup/index'], ['class' => 'btn white-to-bue-btn white-to-bue-a']) ?>
-            <?= Html::a('Войти', ['site/login'], ['class' => 'btn blue-btn-link']) ?>
+            <?= Html::a('Зарегистрироваться', ['signup/index'], ['class' => 'btn btn-link white-to-blue-link']) ?>
+            <?= Html::a('Войти', ['site/login'], ['class' => 'btn btn-link blue-btn-link']) ?>
         </div> 
     </div>    
 </div>

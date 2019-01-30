@@ -31,7 +31,7 @@ $this->title = 'Изменение номера мобильного телеф�
         
         <div class="text-right">
             <?php if ($is_change_password == false) : ?>
-                <?= Html::submitButton('Продолжить', ['class' => 'blue-outline-btn req-table-btn change-record-btn']) ?>            
+                <?= Html::submitButton('Продолжить', ['class' => 'btn-small btn-changes-yes req-table-btn change-record-btn']) ?>            
             <?php endif; ?>            
         </div>    
 
@@ -65,9 +65,9 @@ $this->title = 'Изменение номера мобильного телеф�
                 ->label()
         ?>
     
-    <div class="block-of-btn text-center">
-        <?= Html::submitButton('Продолжить', ['class' => 'blue-outline-btn req-table-btn']) ?>
-        <?= Html::button('Отмена', ['id' => 'cancel-sms', 'class' => 'btn red-outline-btn req-table-btn']) ?>
+    <div class="block-of-btn text-left">
+        <?= Html::submitButton('Продолжить', ['class' => 'btn-small btn-changes-yes']) ?>
+        <?= Html::button('Отмена', ['id' => 'cancel-sms', 'class' => 'btn-small btn-changes-no']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

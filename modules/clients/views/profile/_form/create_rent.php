@@ -82,8 +82,8 @@ Modal::begin([
     </div>
     
     <div class="modal-footer">
-        <?= Html::submitButton('Создать', ['class' => 'btn blue-outline-btn']) ?>
-        <?= Html::button('Отмена', ['class' => 'btn red-outline-btn rent-info__btn_close', 'data-dismiss' => 'modal']) ?>
+        <?= Html::submitButton('Создать', ['class' => 'btn-modal btn-modal-yes']) ?>
+        <?= Html::button('Отмена', ['class' => 'btn-modal btn-modal-no rent-info__btn_close', 'data-dismiss' => 'modal']) ?>
     </div>
 
 <?php ActiveForm::end(); ?>

@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = 'Общая информация';
     <?php if (Yii::$app->user->can('clients')) : ?>
         <div class="paid-account-page_btn text-center">
             <?= Html::button('Добавить лицевой счет', [
-                    'class' => 'blue-btn add-acc-btn',
+                    'class' => 'btn blue-btn add-acc-btn',
                     'data-toggle' => 'modal',
                     'data-target' => '#create-account-modal']) ?>
         </div>

@@ -24,7 +24,7 @@ Modal::begin([
     <div class="modal-footer">
         <?= Html::button('Закрыть', [
                 'data-dismiss' => 'modal', 
-                'class' => 'btn red-outline-btn bt-bottom2',
+                'class' => 'btn-modal btn-modal-no',
         ]) ?>
     </div>
 <?php Modal::end(); ?> 

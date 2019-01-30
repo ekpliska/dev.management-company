@@ -41,8 +41,8 @@
                 ->label($new_order->getAttributeLabel('services_comment'), ['class' => 'field-label-modal']) ?>
     
     <div class="modal-footer no-border">
-        <?= Html::submitButton('Добавить', ['class' => 'btn blue-outline-btn white-btn']) ?>
-        <?= Html::submitButton('Отмена', ['class' => 'btn red-outline-btn bt-bottom2 btn__paid_service_close', 'data-dismiss' => 'modal']) ?>
+        <?= Html::submitButton('Добавить', ['class' => 'btn-modal btn-modal-yes']) ?>
+        <?= Html::submitButton('Отмена', ['class' => 'btn-modal btn-modal-no btn__paid_service_close', 'data-dismiss' => 'modal']) ?>
     </div>
     
 <?php ActiveForm::end() ?>    

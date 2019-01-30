@@ -40,7 +40,7 @@ $this->title = 'Вход';
                 <?= Html::submitButton('Вход', [
                         'class' => 'btn blue-btn', 
                         'name' => 'login-button']) ?>
-                <?= Html::a('Отмена', ['/'], ['class' => 'btn red-btn']) ?>
+                <?= Html::a('Отмена', ['/'], ['class' => 'btn btn-link red-btn-link']) ?>
             </div>
 
             <div class="text-center">

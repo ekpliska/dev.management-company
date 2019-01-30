@@ -28,14 +28,14 @@
                 ?>
                 <div class="btn-group btn-group-lg" role="group" aria-label="Button block" id="btn-group-<?= $key ?>">
                     <?= Html::button($type_answer['2'], [
-                                'class' => "btn btn-set-answer btn-yes",
+                                'class' => "btn-grade btn-set-answer btn-yes",
                                 'id' => "btn-grade-yes-{$key}",
                                 'data-request' => $request,
                                 'data-question' => $question['question_id'],
                                 'data-answer' => 2,
                         ]) ?>
                     <?= Html::button($type_answer['1'], [
-                                'class' => "btn btn-set-answer btn-no",
+                                'class' => "btn-grade btn-set-answer btn-no",
                                 'id' => "btn-grade-no-{$key}",
                                 'data-request' => $request,
                                 'data-question' => $question['question_id'],
@@ -55,13 +55,13 @@
 
 <div class="modal-footer">
     <?= Html::button('Оценить', [
-            'class' => 'btn btn-modal-window btn-modal-window-yes', 
+            'class' => 'btn-modal btn-modal-yes', 
             'id' => 'finished-set-grade',
             'data-request' => $request,
             'data-question' => count($questions),
     ]) ?>
     
-    <?= Html::button('Отмена', ['class' => 'btn btn-modal-window btn-modal-window-no', 'data-dismiss' => 'modal']) ?>
+    <?= Html::button('Отмена', ['class' => 'btn-modal btn-modal-no', 'data-dismiss' => 'modal']) ?>
     
 </div>
 

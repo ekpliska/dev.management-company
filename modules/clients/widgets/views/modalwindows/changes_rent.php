@@ -26,8 +26,8 @@ Modal::begin([
     <p class="modal-confirm">Данные арендатора будут удалены! Продолжить?</p>
 
     <div class="modal-footer no-border">
-        <?= Html::button('Удалить', ['class' => 'btn blue-outline-btn white-btn mx-auto changes_rent__del']) ?>
-        <?= Html::button('Отмена', ['class' => 'btn red-outline-btn bt-bottom2 changes_rent__close', 'data-dismiss' => 'modal']) ?>
+        <?= Html::button('Удалить', ['class' => 'btn white-btn changes_rent__del']) ?>
+        <?= Html::button('Отмена', ['class' => 'btn red-btn changes_rent__close', 'data-dismiss' => 'modal']) ?>
     </div>
 
 <?php Modal::end(); ?>

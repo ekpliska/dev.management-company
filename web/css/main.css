@@ -362,171 +362,108 @@ button:hover {
 /* Конец Регистрация */
 
 /* Кнопки */
-.white-to-bue-btn {
-    /*padding-top: 18px;*/
+.btn {
     height: 56px;
-    width: 250px;
+    width: 250px;    
     border-radius: 12px;
-    border: 1px solid #2D18B4;
-    background-color: white;
-    color: #2d18b4;
     font-size: 12px;
     font-weight: bold;
     letter-spacing: 0.9px;
     line-height: 18px;
     text-align: center;
     text-transform: uppercase;
+    outline: none;
 }
-.white-to-bue-a {
-    padding-top: 18px;
+.btn-small {
+    padding: 10px 15px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 0.9px;
+    line-height: 18px;
+    text-align: center;
+    outline: none;
+    border: none;
 }
-.white-to-bue-btn:hover {
-    background-color: #2D18B4;
+.btn-modal {
+    padding: 20px;
+    width: 200px;
+    background: transparent;
+    border: 1px solid #ddd;
+    color: #ccc;
+    border-radius: 12px;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    transition: 0.7s;
+}
+.btn-grade {
+    border: none;
+    padding: 5px;
+    width: 30px;
+}
+.btn:hover, .btn:active, .btn:focus,
+.btn-small:hover, .btn-small:active, .btn-small:focus {
     box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
-    color: #FFFFFF;
+    outline: none;
+}
+.btn-modal-yes:hover, .btn-modal-yes:active, .btn-modal-yes:focus {
+    border: 1px solid #8b709d;
+    background: #fff;
+    color: #8b709d;
+    outline: none;
+}
+.btn-modal-no:hover, .btn-modal-no:active, .btn-modal-no:focus {
+    border: 1px solid #fc3232;
+    background: #fc3232;
+    color: #fff;
+    outline: none;
 }
 .blue-btn {
-    height: 56px;
-    width: 250px;
-    border-radius: 12px;
-    border: 1px solid #2D18B4;
-    background-color: #2D18B4;
-    color: white;
-    font-size: 12px;
-    font-weight: bold;
-    letter-spacing: 0.9px;
-    line-height: 18px;
-    text-align: center;
-    text-transform: uppercase;
+    border: 1px solid #2d18b4;
+    background-color: #2d18b4;
+    color: #fff;
 }
-.blue-btn:hover {
-    background-color: #2D18B4;
-    box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
-    color: #FFFFFF;
+.blue-btn:hover, .blue-btn:active, .blue-btn:focus {
+    color: #fff;
 }
-
 .red-btn {
-    padding-top: 18px;
-    height: 56px;
-    width: 250px;
-    border: 2px solid #FC3232;
-    border-radius: 12px;
-    background-color: white;
-    color: #EF693A;
-    font-size: 12px;
-    font-weight: bold;
-    letter-spacing: 0.9px;
-    text-transform: uppercase;
-}	
+    border: 1px solid #fc3232;
+    background-color: #fc3232;
+    color: #fff;
+}
 .red-btn:hover {
-    background-color: #FC3232;
-    box-shadow: 0 8px 16px 2px rgba(55,35,35,0.32);
-    color: #FFFFFF;
-}
-.red-btn:active {
-    background-color: #b72424;
-    border: 2px solid #b72424;
-    box-shadow: 1px 2px 3px 2px rgba(55,35,35,0.17);
-    color: #FFFFFF;	
-}
-.blue-btn-link {
-    padding-top: 18px;
-    height: 56px;
-    width: 250px;
-    border-radius: 12px;
-    border: 1px solid #2D18B4;
-    background-color: #2D18B4;
-    color: white;
-    font-size: 12px;
-    font-weight: bold;
-    letter-spacing: 0.9px;
-    line-height: 18px;
-    text-align: center;
-    text-transform: uppercase;
-}
-.blue-btn-link:hover {
-    background-color: #2D18B4;
-    box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
     color: #fff;
 }
-/* Конец Кнопки */
-
-/* Кпока удаление записи на странице */
-.delete-record-btn {
-    height: 56px;
-    width: 250px;
-    border-radius: 12px;
-    border: 1px solid #fb6d5b;
-    background-color: #fb6d5b;
-    color: #fff;
-    font-size: 12px;
-    font-weight: bold;
-    letter-spacing: 0.9px;
-    line-height: 18px;
-    text-align: center;
-    text-transform: uppercase;
-}
-.delete-record-btn:hover {
-    background-color: #fb6d5b;
-    box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
-    color: #fff;
-}
-/* Конец Кпока удаление записи на странице */
-
-/* Кнопка настройки заявки */
-.settings-record-btn,
-.settings-record-btn:active,
-.settings-record-btn:focus {
-    padding: 10px 20px;
-    border-radius: 12px;
-    border: 1px solid #fff;
-    background-color: #2d18b4;
-    color: #fff;
-    font-size: 10px;
-    letter-spacing: 0.9px;
-    text-transform: uppercase;
-    margin: 0 10px;
-    float: right;
-    outline: none;
-}
-.settings-record-btn:hover {
-    background-color: #fff;
-    box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
-    color: #2d18b4;
-    outline: none;
-}
-.settings-record-btn > i {
-    padding-right: 10px;
-}
-.settings-btn-hide {
-    display: none;
-}
-/* Конец Кнопка настройки заявки */
-
-/* Кнопка назначить специалиста */
-.blue-border-btn,
-.blue-border-btn:focus {
-    height: 56px;
-    width: 250px;
-    border-radius: 12px;
-    border: 2px solid #2d18b4;
+.white-btn {
+    border: 1px solid #2d18b4;
     background-color: #fff;
     color: #2d18b4;
-    font-size: 12px;
-    font-weight: bold;
-    letter-spacing: 0.9px;
-    line-height: 18px;
-    text-align: center;
-    text-transform: uppercase;
 }
-.blue-border-btn:hover {
-    background-color: #2d18b4;
-    box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
+.white-btn:hover {
+    background: #2d18b4;
     color: #fff;
 }
-/* Конец Кнопка назначить специалиста */
 
-/* Кнопка, регистрация переход на следующий шаг */
+.btn-changes-yes {
+    background: #fff;
+    border: 1px solid #2d18b4;
+    color: #2d18b4;
+}
+.btn-changes-yes:hover {
+    background: #2d18b4;
+    color: #fff;
+}
+.btn-changes-no {
+    background: #fff;
+    border: 1px solid #fc3232;
+    color: #fc3232;
+}
+.btn-changes-no:hover {
+    background: #fc3232;
+    color: #fff;
+}
+
 .blue-circle-btn {
     background-image: url(/images/clients/arrow_right.png);
     background-repeat: no-repeat;
@@ -549,10 +486,7 @@ button:hover {
 .blue-circle-btn:focus {
     outline: none;
 }
-/* Кнопка, регистрация переход на следующий шаг */
-
-/* Кнопка отправки СМС кода, регистрация */
-button#send-request-to-sms {
+#send-request-to-sms {
     position: absolute;
     top: 40px;
     left: 79%;
@@ -562,194 +496,10 @@ button#send-request-to-sms {
     color: #2d18b4;
     cursor: pointer;
 }
-button#send-request-to-sms:focus{
+#send-request-to-sms:focus{
     outline: none;
 }
 
-/* Кнопка Применить, модальное окно */
-.blue-outline-btn {
-    height: 56px;
-    width: 220px;
-    border-radius: 12px;
-    border: 1px solid #2D18B4;
-    background-color: white;
-    color: #2D18B4;
-    font-size: 12px;
-    font-weight: bold;
-    letter-spacing: 0.9px;
-    text-transform: uppercase;
-    outline: none;
-}
-
-.blue-outline-btn:hover {
-    background-color: #2D18B4;
-    box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
-    color: #FFFFFF;
-}
-
-.blue-outline-btn.req-modal-btn {
-    background-color: rgba(255, 255, 255, 0);
-    color: white;
-}
-.blue-outline-btn.req-modal-btn:hover {
-    background-color: #afabb1;
-}
-
-.blue-outline-btn.req-modal-btn:active {
-    background-color: #8b878f;
-}
-
-.blue-outline-btn:active {
-    background-color: #201183;
-    box-shadow: 1px 2px 3px 2px rgba(55,35,35,0.17);
-    color: #FFFFFF;	
-}
-.blue-outline-btn:focus {
-    outline: none;
-}
-/* Конец Кнопка Применить, модальное окно */
-
-/* Кнопка Отмена, модальное окно */
-.red-outline-btn {
-    height: 56px;
-    width: 220px;
-    border: 2px solid #fc3232;
-    border-radius: 12px;
-    background-color: #fff;
-    color: #ef693a;
-    font-size: 12px;
-    font-weight: bold;
-    letter-spacing: 0.9px;
-    text-transform: uppercase;
-    outline: none;
-}	
-.red-outline-btn:hover {
-    background-color: #FC3232;
-    box-shadow: 0 8px 16px 2px rgba(55,35,35,0.32);
-    color: #FFFFFF;
-}
-.red-outline-btn:active {
-    background-color: #b72424;
-    border: 2px solid #b72424;
-    box-shadow: 1px 2px 3px 2px rgba(55,35,35,0.17);
-    color: #FFFFFF;	
-}
-.red-outline-btn:focus {
-    outline: none;
-}
-/* Конец Кнопка Отмена, модальное окно */
-
-/* Кнопка блокировать пользователя */
-.btn-block-user {
-    padding: 3px 10px;
-    border: 1px solid #ef693a;
-    border-radius: 12px;
-    background-color: #f0754a;
-    color: #fff;
-    font-size: 10px;
-    letter-spacing: 0.9px;
-    text-transform: uppercase;
-    outline: none;
-}
-.btn-block-user:hover,
-.btn-block-user:focus,
-.btn-block-user:active {
-    color: #fff;
-    background-color: #ef693a;
-    box-shadow: 4px 4px 6px 2px rgba(55,35,35,0.32);
-    outline: none;    
-}
-/* Конец Кнопка блокировать пользователя */
-
-/* Кнопка разблокировать пользователя */
-.btn-unblock-user {
-    padding: 3px 10px;
-    border: 1px solid #23dd6f;
-    border-radius: 12px;
-    background-color: #23dd6f;
-    color: #fff;
-    font-size: 10px;
-    letter-spacing: 0.9px;
-    text-transform: uppercase;
-    outline: none;
-}
-.btn-unblock-user:hover,
-.btn-unblock-user:focus,
-.btn-unblock-user:active {
-    color: #fff;
-    background-color: #23dd6f;
-    box-shadow: 4px 4px 6px 2px rgba(55,35,35,0.32);
-    outline: none;
-}
-/* Конец Кнопка разблокировать пользователя */
-
-/* Кнопка удалить пользователя */
-.btn-delete-user {
-    padding: 3px 10px;
-    border: 1px solid #fc3232;
-    border-radius: 12px;
-    background-color: #fc3232;
-    color: #fff;
-    font-size: 10px;
-    letter-spacing: 0.9px;
-    text-transform: uppercase;
-    outline: none;
-}
-.btn-delete-user:hover,
-.btn-delete-user:focus,
-.btn-delete-user:active {
-    color: #fff;
-    background-color: #f36;
-    box-shadow: 4px 4px 6px 2px rgba(55,35,35,0.32);
-    outline: none;
-}
-/* Конец Кнопка удалить пользователя */
-
-/* Кнопка сменить пароль пользователя */
-.btn-change-password {
-    padding: 3px 10px;
-    border: 1px solid #8f55e9;
-    border-radius: 12px;
-    background-color: #8f55e9;
-    color: #fff;
-    font-size: 10px;
-    letter-spacing: 0.9px;
-    text-transform: uppercase;
-    outline: none;
-}
-.btn-change-password:hover,
-.btn-change-password:focus,
-.btn-change-password:active {
-    color: #fff;
-    background-color: #6e39c4;
-    border-color: #6e39c4;
-    box-shadow: 4px 4px 6px 2px rgba(55,35,35,0.32);
-    outline: none;
-}
-/* Конец Кнопка удалить пользователя */
-
-/* Кнопка, отправить квитанцию, администратор */
-.send-receipts {
-    width: 55px;
-    height: 55px;
-    position: fixed;
-    right: 2%;
-    bottom: 10%;
-    outline: none;
-    border: none;
-    border-radius: 50%;
-    background: #2d18b4;
-    color: #fff;
-    box-shadow: 2px 3px 4px -1px #656464;
-}
-.send-receipts:hover,
-.send-receipts:active,
-.send-receipts:focus {
-    background: #241390;
-}
-/* Конец Кнопка, отправить квитанцию, администратор */
-
-/* Кнопка поиска по запросу, администратора */
 .btn-send-request {
     margin: 0 10px;
     background: #fff;
@@ -762,119 +512,51 @@ button#send-request-to-sms:focus{
 .btn-send-request:focus {
     outline: none;
 }
-/* Конец Кнопка поиска по запросу */
 
-/* Кнопка, Просмтр, таблица */
-.btn-edit-in-table {
-    padding: 10px 30px;
-    border: 2px solid #2d18b4;
-    color: #fc3838;
-    border-radius: 12px;
-    text-transform: uppercase;
-    font-size: 12px;
-    background: #fff;
-    font-weight: 900;
-    outline: none;
-}
-.btn-edit-in-table::before {
-    content: '\0270E';
-    padding: 0 5px 0 0;
-}
-.btn-edit-in-table:hover {
-    background-color: #2d18b4;
-    box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
-    color: #fff;
-}
-/* Конец Кнопка, Просмтр, таблица */
+/* Конец Кнопки */
 
-/* Кнопка, Удалить, таблица */
-.btn-delete-in-table {
-    padding: 10px 30px;
-    border: 2px solid #ef693a;
-    color: #fc3838;
-    border-radius: 12px;
-    text-transform: uppercase;
-    font-size: 12px;
-    background: #fff;
-    font-weight: 900;
-    outline: none;
-}
-.btn-delete-in-table::before {
-    content: '\02715';
-    padding: 0 5px 0 0;
-}
-.btn-delete-in-table:hover {
-    background-color: #ef693a;
-    box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
-    color: #fff;
-}
-/* Конец Кнопка, Удалить, таблица */
-
-/* Кнопка Редактировать заявку */
-.edit-request-btn {
-    padding: 12px 20px;
-    border: 2px solid #2d18b4;
-    border-radius: 10px;
-    font-size: 12px;
-    text-transform: uppercase;
-    font-weight: bold;
-    letter-spacing: 0.07em;
-}
-.edit-request-btn > i {
-    padding-right: 10px;
-}
-.edit-request-btn:focus,
-.edit-request-btn:hover {
-    background-color: #2d18b4;
-    box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
-    color: #fff;
-}
-/* Конец Кнопка Редактировать заявку */
-
-/* Кнопка для модального окна */
-.btn-modal-window {
-    width: 210px;
+/* Кнопки-ссылки */
+.btn-link {
+    padding: 20px;
     height: 56px;
-    background: transparent;
-    border: 1px solid #fff;
-    text-transform: uppercase;
+    width: 250px;
+    border-radius: 12px;
     font-size: 12px;
-    letter-spacing: 0.9px;
     font-weight: bold;
-    border-radius: 12px;
+    letter-spacing: 0.9px;
+    text-transform: uppercase;
 }
-.btn-modal-window-yes:hover {
-    color: #598eff;
-    border: 1px solid #598eff;
+.btn-link:hover,
+.btn-link:active,
+.btn-link:focus {
+    box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
+    text-decoration: none;
 }
-.btn-modal-window-no:hover {
-    color: #f0754a;
-    border: 1px solid #f0754a;
-}
-/* Конец Кнопка для модального окна */
-
-/* Копка добавление платной услуги */
-.blue-outline-link {
-    padding: 15px 40px;
-    border-radius: 12px;
-    border: 2px solid #2d18b4;
+.white-to-blue-link {
+    border: 1px solid #2d18b4;
     background-color: #fff;
     color: #2d18b4;
-    font-size: 12px;
-    font-weight: bold;
-    letter-spacing: 0.9px;
-    text-transform: uppercase;
 }
-.blue-outline-link:hover {
-    background: #2d18b4;
+.white-to-blue-link:hover,
+.blue-btn-link:hover {
+    background-color: #2d18b4;
     color: #fff;
-    box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
 }
-/* Конец Копка добавление платной услуги */
-
-/* Внутренная кнопка для блоков (карта усуги) */
-.card-button-blue {
-    padding: 15px 60px;
+.blue-btn-link {
+    background-color: #2d18b4;
+    color: #fff;
+}
+.red-btn-link {
+    border: 1px solid #fc3232;
+    background-color: #fc3232;
+    color: #fff;
+}
+.red-btn-link:hover {
+    background-color: #fc3232;
+    color: #fff;
+}
+.card-link-blue {
+    width: 160px;
     border: 1px solid #2d18b4;
     color: #2d18b4;
     border-radius: 12px;
@@ -882,13 +564,13 @@ button#send-request-to-sms:focus{
     text-transform: uppercase;
     font-weight: bold;
     letter-spacing: 0.07em;
+    text-align: center;
 }
-.card-button-blue:hover {
+.card-link-blue:hover, .card-link-blue:active, .card-link-blue:focus {
     background: #2d18b4;
     color: #fff;
-    box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
 }
-/* Конец Внутренная кнопка для блоков (карта усуги) */
+/* Конец Кнопки-ссылки */
 
 /* Страница 404 */
 .page_error {
@@ -1918,19 +1600,21 @@ p.right {
   background-color: rgba(255, 255, 255, 0.06);
 }
 .grade-table > tbody > tr > td:last-child button {
-    padding: 5px 10px;
+    padding: 10px;
+    width: 50px;
     background: #4e425c;
     font-size: 14px;
+    border-radius: 12px;
 }
 .grade-table > tbody > tr > td:last-child button:hover {
-    background: #fff;
-    color: #4e425c;
+    background: #8b709d;
+    color: #fff;
 }
 .grade-table > tbody > tr > td:first-child {
     padding-left: 20px;
 }
 .grade-table > tbody > tr > td:last-child {
-    width: 20%;
+    width: 25%;
 }
 .grade-table > tbody > tr > td:last-child button.btn-set-grade-active {
     background: #8b709d;
@@ -1979,13 +1663,6 @@ p.right {
 .req-badge-close {
     border: 2px solid #ff7d7d;
     box-shadow: 0px 1px 4px 6px rgba(252,193,193,0.83);
-}
-.req-table-btn {
-    width: 120px;
-    height: 36px;
-    text-transform: none;
-    margin: 10px 0;
-    outline: none;
 }
 .request-ident {
     background: #2d18b4;
@@ -2081,9 +1758,10 @@ p.right {
     border: 1px solid #fff;
     background-color: #2d18b4;
     color: #fff;
-    font-size: 14px;
-    letter-spacing: 0.9px;
+    font-size: 12px;
+    letter-spacing: 0.3em;
     text-transform: uppercase;
+    font-weight: bold;
 }
 .navbar-nav a.btn-history:hover {
     background: #fff;
@@ -2092,7 +1770,7 @@ p.right {
     border-radius: 12px;
 }
 .service-card {
-    height: 490px;
+    height: 550px;
     border-radius: 12px;
     background-color: #fff;
     box-shadow: 0 4px 26px 0 rgba(51,29,82,0.16); 
@@ -2114,6 +1792,9 @@ p.right {
 }
 .service-card__body {
     padding: 0px 10px;
+}
+.service-card__body p {
+    text-align: justify;
 }
 .service-card__btn {}
 .service-card__btn a {

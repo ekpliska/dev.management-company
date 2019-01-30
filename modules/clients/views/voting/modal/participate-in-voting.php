@@ -71,13 +71,13 @@ Modal::begin([
 <div class="modal-footer">
     <?= Html::submitButton('Продолжить', [
             'id' => 'participate_in', 
-            'class' => 'btn blue-outline-btn',
+            'class' => 'btn white-btn',
             'data-voting-id' => $voting_id,
         ]) ?>
     
     <?= Html::button('Отмена', [
             'data-dismiss' => 'modal', 
-            'class' => 'btn red-outline-btn',
+            'class' => 'btn red-btn',
             'id' => 'renouncement_participate',
             'data-voting' => $voting_id,
         ]) ?>

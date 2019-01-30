@@ -37,7 +37,7 @@ $this->title = "Customers | Восстановаление пароля";
 
             <div class="login-form__button text-center">
                 <?= Html::submitButton('Отправить', ['class' => 'btn blue-btn', 'name' => 'login-button']) ?>
-                <?= Html::a('Отмена', ['/'], ['class' => 'btn red-btn']) ?>
+                <?= Html::a('Отмена', ['/'], ['class' => 'btn btn-link red-btn-link']) ?>
             </div>
 
 

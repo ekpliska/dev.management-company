@@ -136,7 +136,7 @@ $this->params['breadcrumbs'][] = $voting['voting_title'];
                     <div class="finished-voting text-center">
                         <?= Html::button('Проголосовать', [
                                 'id' => 'finished-voting-btn',
-                                'class' => 'blue-btn',
+                                'class' => 'btn blue-btn',
                                 'data-voting' => $voting['voting_id'],
                                 'data-question' => count($voting['question']),
                         ]) ?>
