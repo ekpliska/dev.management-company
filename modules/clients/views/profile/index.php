@@ -46,7 +46,7 @@ $this->params['breadcrumbs'][] = 'Профиль';
             </p>
         </div>
         <div class="profile-upload">
-            <?= $form->field($user, 'user_photo', ['template' => '<label class="text-center btn btn-upload" role="button">{input}{label}{error}'])
+            <?= $form->field($user, 'user_photo', ['template' => '<label class="text-center btn-upload" role="button">{input}{label}{error}'])
                     ->input('file', ['id' => 'btnLoad', 'class' => 'hidden'])->label('Загрузить фото') ?>
         </div>   
     </div>

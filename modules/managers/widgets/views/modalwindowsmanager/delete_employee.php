@@ -27,10 +27,10 @@ Modal::begin([
 
 <div class="modal-footer">
     <?= Html::button('Удалить', [
-            'class' => 'btn btn red-outline-btn bt-bottom2 delete_empl__del', 
+            'class' => 'btn white-btn delete_empl__del', 
             'id' => 'confirm_delete-empl', 
             'data-dismiss' => 'modal']) ?>
-    <?= Html::button('Отмена', ['class' => 'btn btn blue-outline-btn white-btn', 'data-dismiss' => 'modal']) ?>
+    <?= Html::button('Отмена', ['class' => 'btn red-btn', 'data-dismiss' => 'modal']) ?>
 </div>
 
 <?php Modal::end() ?>

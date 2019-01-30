@@ -27,8 +27,8 @@ Modal::begin([
     <p class="modal-confirm"></p>
     
     <div class="modal-footer">
-        <?= Html::button('Удалить', ['class' => 'btn btn red-outline-btn bt-bottom2 delete_record__des', 'data-dismiss' => 'modal']) ?>
-        <?= Html::button('Отмена', ['class' => 'btn btn blue-outline-btn white-btn', 'data-dismiss' => 'modal']) ?>
+        <?= Html::button('Удалить', ['class' => 'btn-modal btn-modal-yes delete_record__des', 'data-dismiss' => 'modal']) ?>
+        <?= Html::button('Отмена', ['class' => 'btn-modal btn-modal-no', 'data-dismiss' => 'modal']) ?>
     </div>
     
 <?php

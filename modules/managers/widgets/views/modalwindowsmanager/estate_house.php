@@ -22,7 +22,7 @@
     <div class="modal__text"></div>
         
     <div class="modal-footer">
-        <?= Html::button('OK', ['class' => 'btn btn-modal-window btn-modal-window-no', 'data-dismiss' => 'modal']) ?>
+        <?= Html::button('OK', ['class' => 'btn-modal btn-modal-no', 'data-dismiss' => 'modal']) ?>
     </div>
 
 <?php Modal::end(); ?>
@@ -44,8 +44,8 @@
     <div class="modal__text">Вы действительно хотите снять статус "Должник" с выбранной квартиры?</div>
         
     <div class="modal-footer">
-        <?= Html::button('Да', ['class' => 'btn btn-modal-window btn-modal-window-yes estate_note_message__yes']) ?>
-        <?= Html::button('Отмена', ['class' => 'btn btn-modal-window btn-modal-window-no estate_note_message__no', 'data-dismiss' => 'modal']) ?>
+        <?= Html::button('Да', ['class' => 'btn-modal btn-modal-yes estate_note_message__yes']) ?>
+        <?= Html::button('Отмена', ['class' => 'btn-modal btn-modal-no estate_note_message__no', 'data-dismiss' => 'modal']) ?>
     </div>
 
 <?php Modal::end(); ?>

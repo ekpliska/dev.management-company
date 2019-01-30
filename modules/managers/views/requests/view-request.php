@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
             
             <?= Html::button('<i class="glyphicon glyphicon-remove"></i> Удалить заявку', [
                     'id' => 'delete-request',
-                    'class' => 'btn settings-record-btn',
+                    'class' => 'settings-record-btn',
                     'data-target' => '#delete-request-message',
                     'data-toggle' => 'modal',
                     'data-request-type' => 'requests',
@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
             ]) ?>
                         
             <?= Html::button('<i class="glyphicon glyphicon-bookmark"></i> Отклонить', [
-                    'class' => 'btn settings-record-btn reject-request' . ($request['status'] == StatusRequest::STATUS_REJECT ? ' settings-btn-hide' : ''),
+                    'class' => 'settings-record-btn reject-request' . ($request['status'] == StatusRequest::STATUS_REJECT ? ' settings-btn-hide' : ''),
                     'data' => [
                         'status' => StatusRequest::STATUS_REJECT,
                         'request' => $request['requests_id'],
@@ -53,7 +53,7 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
             
             <?= Html::a('<i class="glyphicon glyphicon-star"></i> Посмотреть отзыв', ['show-grade-modal', 'request_id' => $request['requests_id']], [
                     'id' => 'show-grade-btn',
-                    'class' => 'btn settings-record-btn' . ($request['status'] != StatusRequest::STATUS_CLOSE ? ' settings-btn-hide' : ''),
+                    'class' => 'settings-record-btn' . ($request['status'] != StatusRequest::STATUS_CLOSE ? ' settings-btn-hide' : ''),
             ]) ?>
             
         </h1>
@@ -70,10 +70,12 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
 
                     <div id="star" data-request="<?= $request['requests_id'] ?>" data-score-reguest="<?= $request['requests_grade'] ?>"></div>
 
+                    <div class="page-btn-block text-left">
                     <?= Html::a('<i class="glyphicon glyphicon-pencil"></i> Внести изменения', 
                             ['edit-request', 'request_id' => $request['requests_id']], 
-                            ['class' => 'btn edit-request-btn']) ?>
-
+                            ['class' => 'edit-request-btn']) ?>
+                    </div>
+                
                     <div class="requests__status-block">
                         <span class="badge request-ident">
                             <?= "ID{$request['requests_ident']}" ?>
@@ -140,7 +142,7 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
                             <tr>
                                 <td>
                                     <?= Html::button('<i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Назначить диспетчера', [
-                                            'class' => 'btn blue-border-btn btn-dispatcher',
+                                            'class' => 'btn blue-btn btn-dispatcher',
                                             'data-type-request' => 'requests',
                                             'data-employee' => $request['employee_id_d'],
                                             'data-target' => '#add-dispatcher-modal',
@@ -148,7 +150,7 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
                                 </td>
                                 <td>
                                     <?= Html::button('<i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Назначить специалиста', [
-                                            'class' => 'btn blue-border-btn',
+                                            'class' => 'btn blue-btn',
                                             'data-type-request' => 'requests',
                                             'data-employee' => $request['employee_id_s'],
                                             'data-target' => '#add-specialist-modal',

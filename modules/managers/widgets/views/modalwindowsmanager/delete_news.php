@@ -26,8 +26,8 @@ Modal::begin([
 <p class="modal-confirm">Вы действительно хотите удалить выбранную публикацию?</p>
 
 <div class="modal-footer">
-    <?= Html::button('Удалить', ['class' => 'btn red-outline-btn bt-bottom2 delete_news__del', 'data-dismiss' => 'modal']) ?>
-    <?= Html::button('Отмена', ['class' => 'btn blue-outline-btn white-btn', 'data-dismiss' => 'modal']) ?>
+    <?= Html::button('Удалить', ['class' => 'btn-modal btn-modal-yes delete_news__del', 'data-dismiss' => 'modal']) ?>
+    <?= Html::button('Отмена', ['class' => 'btn-modal btn-modal-no white-btn', 'data-dismiss' => 'modal']) ?>
 </div>
 
 <?php Modal::end(); ?>

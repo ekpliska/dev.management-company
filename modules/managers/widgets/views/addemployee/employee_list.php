@@ -48,11 +48,11 @@
     
     <div class="modal-footer">
         <?= Html::button('Назначить', [
-                'class' => 'btn btn-modal-window btn-modal-window-yes add_dispatcher__btn',
+                'class' => 'btn-modal btn-modal-yes add_dispatcher__btn',
                 'type-request' => $type,
                 'data-dismiss' => 'modal']) ?>
         <?= Html::button('Закрыть', [
-                'class' => 'btn btn-modal-window btn-modal-window-no', 
+                'class' => 'btn-modal btn-modal-no', 
                 'data-dismiss' => 'modal']) ?>
     </div>
 
@@ -96,11 +96,11 @@
     
     <div class="modal-footer">
         <?= Html::button('Назначить', [
-                'class' => 'btn btn-modal-window btn-modal-window-yes add_specialist__btn',
+                'class' => 'btn-modal btn-modal-yes add_specialist__btn',
                 'type-request' => $type,
                 'data-dismiss' => 'modal']) ?>
         <?= Html::button('Закрыть', [
-                'class' => 'btn btn-modal-window btn-modal-window-no', 
+                'class' => 'btn-modal btn-modal-no', 
                 'data-dismiss' => 'modal']) ?>
     </div>
 

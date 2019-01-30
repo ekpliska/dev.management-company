@@ -25,8 +25,8 @@ Modal::begin([
 <p class="modal-confirm">Вы действительно хотите удалить заявку?</p>
 
 <div class="modal-footer">
-    <?= Html::button('Удалить', ['class' => 'btn btn red-outline-btn bt-bottom2 delete_request', 'data-dismiss' => 'modal']) ?>
-    <?= Html::button('Отмена', ['class' => 'btn btn blue-outline-btn white-btn', 'data-dismiss' => 'modal']) ?>
+    <?= Html::button('Удалить', ['class' => 'btn white-btn delete_request', 'data-dismiss' => 'modal']) ?>
+    <?= Html::button('Отмена', ['class' => 'btn red-btn', 'data-dismiss' => 'modal']) ?>
 </div>
 
 <?php Modal::end() ?>

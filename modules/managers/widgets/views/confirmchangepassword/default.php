@@ -41,8 +41,8 @@ Modal::begin([
     <?= $form->field($model, 'new_password_repeat')->input('password', ['class' => 'field-input-modal'])->label($model->getAttributeLabel('new_password_repeat'), ['class' => 'field-label-modal']) ?>
 
     <div class="modal-footer">
-        <?= Html::submitButton('Сохранить', ['class' => 'btn btn red-outline-btn bt-bottom2']) ?>
-        <?= Html::button('Отмена', ['class' => 'btn btn blue-outline-btn white-btn changes-password-form_close', 'data-dismiss' => 'modal']) ?>
+        <?= Html::submitButton('Изменить', ['class' => 'btn-modal btn-modal-yes']) ?>
+        <?= Html::button('Отмена', ['class' => 'btn-modal btn-modal-no changes-password-form_close', 'data-dismiss' => 'modal']) ?>
     </div>
 
 <?php ActiveForm::end() ?>

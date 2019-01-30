@@ -68,7 +68,7 @@
                                     ], 
                                     [
                                         'data-pjax' => false,
-                                        'class' => 'btn btn-sm btn-edit-in-table',
+                                        'class' => 'btn-sm btn-edit-in-table',
                                     ]
                             );
                     },
@@ -77,7 +77,7 @@
                         return 
                             Html::button('Удалить', [
                                 'data-pjax' => false,
-                                'class' => 'btn btn-sm btn-delete-in-table',
+                                'class' => 'btn-sm btn-delete-in-table',
                                 'data-target' => '#delete_employee_manager',
                                 'data-toggle' => 'modal',
                                 'data-role' => 'administrator',

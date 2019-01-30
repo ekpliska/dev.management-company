@@ -402,6 +402,9 @@ button:hover {
     padding: 5px;
     width: 30px;
 }
+.btn-dropdown {
+    border: none;
+}
 .btn:hover, .btn:active, .btn:focus,
 .btn-small:hover, .btn-small:active, .btn-small:focus {
     box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
@@ -514,6 +517,189 @@ button:hover {
 }
 
 /* Конец Кнопки */
+
+/* Кнопка в таблице */
+.btn-edit-in-table {
+    padding: 10px 30px;
+    border: 2px solid #2d18b4;
+    color: #fc3838;
+    border-radius: 12px;
+    text-transform: uppercase;
+    font-size: 12px;
+    background: #fff;
+    font-weight: 900;
+    outline: none;
+}
+.btn-edit-in-table::before {
+    content: '\0270E';
+    padding: 0 5px 0 0;
+}
+.btn-edit-in-table:hover {
+    background-color: #2d18b4;
+    box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
+    color: #fff;
+}
+
+.btn-delete-in-table {
+    padding: 10px 30px;
+    border: 2px solid #ef693a;
+    color: #fc3838;
+    border-radius: 12px;
+    text-transform: uppercase;
+    font-size: 12px;
+    background: #fff;
+    font-weight: 900;
+    outline: none;
+}
+.btn-delete-in-table::before {
+    content: '\02715';
+    padding: 0 5px 0 0;
+}
+.btn-delete-in-table:hover {
+    background-color: #ef693a;
+    box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
+    color: #fff;
+}
+/* Конец Кнопка в таблице */
+/* Кнопка сменить пароль пользователя */
+.btn-change-password {
+    padding: 3px 10px;
+    border: 1px solid #8f55e9;
+    border-radius: 12px;
+    background-color: #8f55e9;
+    color: #fff;
+    font-size: 10px;
+    letter-spacing: 0.9px;
+    text-transform: uppercase;
+    outline: none;
+}
+.btn-change-password:hover,
+.btn-change-password:focus,
+.btn-change-password:active {
+    color: #fff;
+    background-color: #6e39c4;
+    border-color: #6e39c4;
+    box-shadow: 4px 4px 6px 2px rgba(55,35,35,0.32);
+    outline: none;
+}
+/* Конец Кнопка сменить пароль пользователя */
+/* Кнопка блокировать пользователя */
+.btn-block-user {
+    padding: 3px 10px;
+    border: 1px solid #ef693a;
+    border-radius: 12px;
+    background-color: #f0754a;
+    color: #fff;
+    font-size: 10px;
+    letter-spacing: 0.9px;
+    text-transform: uppercase;
+    outline: none;
+}
+.btn-block-user:hover,
+.btn-block-user:focus,
+.btn-block-user:active {
+    color: #fff;
+    background-color: #ef693a;
+    box-shadow: 4px 4px 6px 2px rgba(55,35,35,0.32);
+    outline: none;    
+}
+/* Конец Кнопка блокировать пользователя */
+/* Кнопка разблокировать пользователя */
+.btn-unblock-user {
+    padding: 3px 10px;
+    border: 1px solid #23dd6f;
+    border-radius: 12px;
+    background-color: #23dd6f;
+    color: #fff;
+    font-size: 10px;
+    letter-spacing: 0.9px;
+    text-transform: uppercase;
+    outline: none;
+}
+.btn-unblock-user:hover,
+.btn-unblock-user:focus,
+.btn-unblock-user:active {
+    color: #fff;
+    background-color: #23dd6f;
+    box-shadow: 4px 4px 6px 2px rgba(55,35,35,0.32);
+    outline: none;
+}
+/* Конец Кнопка разблокировать пользователя */
+/* Кнопка удалить пользователя */
+.btn-delete-user {
+    padding: 3px 10px;
+    border: 1px solid #fc3232;
+    border-radius: 12px;
+    background-color: #fc3232;
+    color: #fff;
+    font-size: 10px;
+    letter-spacing: 0.9px;
+    text-transform: uppercase;
+    outline: none;
+}
+.btn-delete-user:hover,
+.btn-delete-user:focus,
+.btn-delete-user:active {
+    color: #fff;
+    background-color: #f36;
+    box-shadow: 4px 4px 6px 2px rgba(55,35,35,0.32);
+    outline: none;
+}
+/* Конец Кнопка удалить пользователя */
+/* Кнопка настройки заявки */
+.settings-record-btn,
+.settings-record-btn:active,
+.settings-record-btn:focus {
+    padding: 10px 20px;
+    border-radius: 12px;
+    border: 1px solid #fff;
+    background-color: #2d18b4;
+    color: #fff;
+    font-size: 10px;
+    letter-spacing: 0.9px;
+    text-transform: uppercase;
+    margin: 0 10px;
+    float: right;
+    outline: none;
+}
+.settings-record-btn:hover {
+    background-color: #fff;
+    box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
+    color: #2d18b4;
+    outline: none;
+}
+.settings-record-btn > i {
+    padding-right: 10px;
+}
+.settings-btn-hide {
+    display: none;
+}
+/* Конец Кнопка настройки заявки */
+/* Кнопка Редактировать заявку */
+.edit-request-btn {
+    padding: 12px 20px;
+    border: 2px solid #2d18b4;
+    border-radius: 10px;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 0.07em;
+    text-decoration: none;
+}
+.edit-request-btn > i {
+    padding-right: 10px;
+}
+.edit-request-btn:focus,
+.edit-request-btn:hover {
+    background-color: #2d18b4;
+    box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
+    color: #fff;
+    text-decoration: none;
+}
+/* Конец Кнопка Редактировать заявку */
+
+
+
 
 /* Кнопки-ссылки */
 .btn-link {
@@ -931,11 +1117,10 @@ button:hover {
     background-image: url(/images/clients/upload_icon.svg);
     background-repeat: no-repeat;
     background-position: 0px 5px;
-    padding-left: 25px;
+    padding: 5px 25px;
     border: none;
     background-color: transparent;
     color: #fff;
-    font-family: "Mplus 1p Medium";
     font-size: 12px;
     letter-spacing: 0.9px;
 }
@@ -1446,7 +1631,7 @@ p.right {
     display: flex;
 }
 #star {
-    padding: 0 0 20px 0;
+    padding: 5px 0;
 }
 /* Конец Просмотр отдельной заявки */
 
@@ -3633,6 +3818,7 @@ span.status-vote-1::before {
     color: #fb6d5b;
     background: transparent;
     outline: none;
+    border: none;
 }
 /* Конец Таблица на форме создания голосования */
 
@@ -3679,7 +3865,7 @@ span.status-vote-1::before {
     font-size: 10px;
     font-weight: bold;
     text-transform: uppercase;
-    padding: 5px 15px;
+    padding: 6px 15px;
     background: #fff;
 }
 .btn-choose-status:focus,
@@ -3752,6 +3938,9 @@ span.status-vote-1::before {
 
 /* Заявка, просмотр отдельной заявки */
 .requests-view__setting {
+    padding: 20px 0;
+}
+.page-btn-block {
     padding: 20px 0;
 }
 a.employee-profile {
