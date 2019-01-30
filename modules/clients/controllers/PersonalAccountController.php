@@ -126,7 +126,7 @@ class PersonalAccountController extends AppClientsController {
         // Статус текущих показаний
         $is_current = true;
         // Получаем номер текущего месяца
-        $current_month = date('n');
+        $current_month = date('m');
         // Получаем номер текущего года
         $current_year = date('Y');
         
@@ -148,6 +148,9 @@ class PersonalAccountController extends AppClientsController {
         $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
 
         $indications = Yii::$app->client_api->getPreviousCounters($data_json);
+        
+        
+//        echo '<pre>'; var_dump($indications); die();
         
         $model_indication = new SendIndicationForm();
                 

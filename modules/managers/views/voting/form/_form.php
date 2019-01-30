@@ -215,14 +215,14 @@ $action = Yii::$app->controller->action->id;
                     <?php if ($controller == 'voting' && $action == 'view') : ?>
                     
                         <?= Html::button('Удалить', [
-                                'class' => 'btn delete-record-btn',
+                                'class' => 'btn orange-btn delete-record-btn',
                                 'data-toggle' => 'modal',
                                 'data-target' => '#delete_voting_manager',
                                 'data-voting' => $model->voting->voting_id]) ?>
 
                         <?php if ($model->voting->status !== 1) : ?>
                             <?= Html::button('Завершить голосование', [
-                                    'class' => 'btn white-to-bue-btn close_voting_btn',
+                                    'class' => 'btn blue-btn close_voting_btn',
                                     'data-toggle' => 'modal',
                                     'data-target' => '#close_voting',
                                     'data-voting' => $model->voting->voting_id]) ?>
@@ -230,7 +230,7 @@ $action = Yii::$app->controller->action->id;
 
                     <?php endif; ?>
                     
-                    <?= Html::submitButton($model->voting->isNewRecord ? 'Опубликовать' : 'Сохранить', ['class' => 'btn blue-btn']); ?>
+                    <?= Html::submitButton($model->voting->isNewRecord ? 'Опубликовать' : 'Сохранить', ['class' => 'btn white-btn']); ?>
                 </div>
             </div>
         </div>

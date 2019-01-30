@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = "Заявка на платную услугу 
         <h1 class="page-header requests-view_title">
             <?= Html::button('<i class="glyphicon glyphicon-remove"></i> Удалить заявку', [
                     'id' => 'delete-request',
-                    'class' => 'btn settings-record-btn',
+                    'class' => 'settings-record-btn',
                     'data-target' => '#delete-request-message',
                     'data-toggle' => 'modal',
                     'data-request-type' => 'paid-requests',
@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = "Заявка на платную услугу 
             ]) ?>
                         
             <?= Html::button('<i class="glyphicon glyphicon-bookmark"></i> Отклонить', [
-                    'class' => 'btn settings-record-btn reject-request' . ($paid_request['status'] == StatusRequest::STATUS_REJECT ? ' settings-btn-hide' : ''),
+                    'class' => 'settings-record-btn reject-request' . ($paid_request['status'] == StatusRequest::STATUS_REJECT ? ' settings-btn-hide' : ''),
                     'data' => [
                         'status' => StatusRequest::STATUS_REJECT,
                         'request' => $paid_request['id'],
@@ -61,9 +61,11 @@ $this->params['breadcrumbs'][] = "Заявка на платную услугу 
                         <?= FormatHelpers::formatDate($paid_request['date_cr'], true, 0, false) ?>
                     </p>
 
-                    <?= Html::a('<i class="glyphicon glyphicon-pencil"></i> Внести изменения', 
-                            ['edit-paid-request', 'request_id' => $paid_request['id']], 
-                            ['class' => 'btn edit-request-btn']) ?>
+                    <div class="page-btn-block text-left">
+                        <?= Html::a('<i class="glyphicon glyphicon-pencil"></i> Внести изменения', 
+                                ['edit-paid-request', 'request_id' => $paid_request['id']], 
+                                ['class' => 'edit-request-btn']) ?>
+                    </div>
 
                     <div class="requests__status-block">
                         <span class="badge request-ident">
@@ -125,7 +127,7 @@ $this->params['breadcrumbs'][] = "Заявка на платную услугу 
                             <tr>
                                 <td>
                                     <?= Html::button('<i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Назначить диспетчера', [
-                                            'class' => 'btn blue-border-btn btn-dispatcher',
+                                            'class' => 'btn blue-btn btn-dispatcher',
                                             'data-type-request' => 'paid-requests',
                                             'data-employee' => $paid_request['employee_id_d'],
                                             'data-target' => '#add-dispatcher-modal',
@@ -133,7 +135,7 @@ $this->params['breadcrumbs'][] = "Заявка на платную услугу 
                                 </td>
                                 <td>
                                     <?= Html::button('<i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Назначить специалиста', [
-                                            'class' => 'btn blue-border-btn',
+                                            'class' => 'btn blue-btn',
                                             'data-type-request' => 'paid-requests',
                                             'data-employee' => $paid_request['employee_id_s'],
                                             'data-target' => '#add-specialist-modal',

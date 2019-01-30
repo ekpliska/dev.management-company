@@ -71,9 +71,9 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
                     <div id="star" data-request="<?= $request['requests_id'] ?>" data-score-reguest="<?= $request['requests_grade'] ?>"></div>
 
                     <div class="page-btn-block text-left">
-                    <?= Html::a('<i class="glyphicon glyphicon-pencil"></i> Внести изменения', 
-                            ['edit-request', 'request_id' => $request['requests_id']], 
-                            ['class' => 'edit-request-btn']) ?>
+                        <?= Html::a('<i class="glyphicon glyphicon-pencil"></i> Внести изменения', 
+                                ['edit-request', 'request_id' => $request['requests_id']], 
+                                ['class' => 'edit-request-btn']) ?>
                     </div>
                 
                     <div class="requests__status-block">

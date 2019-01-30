@@ -110,7 +110,7 @@
                 ->label(false); ?>
         
         <div class="news-form__btn-block text-center">
-            <?= Html::submitButton('Опубликовать', ['class' => 'btn btn blue-btn']) ?>
+            <?= Html::submitButton('Опубликовать', ['class' => 'btn blue-btn']) ?>
         </div>
         
     </div>

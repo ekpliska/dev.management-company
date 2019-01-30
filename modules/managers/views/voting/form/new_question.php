@@ -13,12 +13,11 @@
                 'class' => 'field-input'])
             ->label($question->getAttributeLabel('questions_text'), ['class' => 'field-label']) ?>
     
-    <?php // = \app\modules\managers\widgets\Vote::widget(['question_id' => $key]) ?>
 </td>
 <td class="delete-question">
     <?php if ($status !== 1) : ?>
         <?= Html::button('<i class="glyphicon glyphicon-trash"></i>', [
-                'class' => 'voting-remove-question-button btn btn-delete-question btn-xs',
+                'class' => 'voting-remove-question-button btn-delete-question',
                 'data-toggle' => 'modal',
                 'data-target' => '#delete_question_vote_message',
         ]) ?>

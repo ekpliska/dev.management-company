@@ -136,12 +136,12 @@
         <div class="news-form__btn-block text-center">
             
             <?= Html::button('Удалить', [
-                    'class' => 'btn delete-record-btn',
+                    'class' => 'btn orange-btn',
                     'data-target' => '#delete_news_manager',
                     'data-toggle' => 'modal',
                     'data-news' => $model->news_id]) ?>
             
-            <?= Html::submitButton('Сохранить', ['class' => 'btn btn blue-btn']) ?>
+            <?= Html::submitButton('Сохранить', ['class' => 'btn blue-btn']) ?>
         </div>
         
     </div>

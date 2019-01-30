@@ -438,6 +438,14 @@ button:hover {
 .red-btn:hover {
     color: #fff;
 }
+.orange-btn {
+    border: 1px solid #ef693a;
+    background-color: #ef693a;
+    color: #fff;
+}
+.orange-btn:hover {
+    color: #fff;
+}
 .white-btn {
     border: 1px solid #2d18b4;
     background-color: #fff;
@@ -3579,6 +3587,7 @@ tbody > tr > td > div.empty::before {
     display: flex;
     width: 100%;
     margin: 0 0 20px;
+    border: 1px solid #ddd;
     border-radius: 12px;
 }
 .vote-card:hover {
@@ -3587,6 +3596,8 @@ tbody > tr > td > div.empty::before {
 .vote-card__image {
     width: 350px;
     height: 200px;
+    padding: 0;
+    margin: 0;
 }
 .vote-card__image img {
     height: 100%;
@@ -3595,28 +3606,39 @@ tbody > tr > td > div.empty::before {
     border-top-left-radius: 12px;
     border-bottom-left-radius: 12px;    
 }
-.vote-card__content_author {
-    padding: 0 0 10px 0;
+.vote-card__info {
+    padding: 0;
+    margin: 0;
+    border-right: 1px solid #ddd;
+}
+.vote-card__info table {
+    height: 100%;
+    width: 100%;
+}
+.vote-card__info table > tbody > tr > td {
+    padding: 0 10px;
+    text-align: left;
+    vertical-align: middle;
+}
+.vote-card__info table > tbody > tr > td span.title {
+    font-size: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #2d18b4;
+}
+.vote-card__info table > tbody > tr > td p {
     font-size: 12px;
+    padding: 0;
+    margin: 0;
 }
-.vote-card__content_author span {
-    background: #ffffff;
-    border-radius: 12px;
-    color: #1fd68d;
-    padding: 3px 15px;
-    border: 1px solid #1fd68d;
-}
-.vote-card__content_author span > a {
-    color: #000;
-}
-.vote-card__content_author span > a:hover {
-    text-decoration: none;
-    color: #000;
+.vote-card__info table > tbody > tr > td a {
+    color: #454545;
+    font-size: 12px;
 }
 .vote-card__content {
     width: 100%;
     padding: 0 20px;
-    border: 1px solid #ddd;
+/*    border: 1px solid #ddd;*/
     border-left: none;
     border-top-right-radius: 12px;
     border-bottom-right-radius: 12px;    
@@ -3646,18 +3668,21 @@ tbody > tr > td > div.empty::before {
 .vote-card__content_info div[class*="col-"]:last-child {
     border-right: none;
 }
+span[class^=status-vote-] {font-size: 12px;
+    font-weight: bold;
+}
 span.status-vote-0::before {
     content: '\02691';
     padding: 0 5px;
     background: #2d18b4;
-    margin: 0 5px;
+    margin: 0 5px 0 0;
     color: #fff;
 }
 span.status-vote-1::before {
     content: '\02713';
     padding: 0 3px;
     background: #1fd68d;
-    margin: 0 5px;
+    margin: 0 5px 0 0;
     color: #fff;
 }
 .vote-card__content_info span.title {
@@ -3816,6 +3841,7 @@ span.status-vote-1::before {
 .btn-delete-question:hover,
 .btn-delete-question:focus {
     color: #fb6d5b;
+    font-size: 12px;
     background: transparent;
     outline: none;
     border: none;

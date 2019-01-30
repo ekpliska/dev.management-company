@@ -84,7 +84,7 @@
                 'attribute' => 'status',
                 'header' => 'Статус',
                 'value' => function ($data) {
-                    return StatusHelpers::requestStatus($data['status'], $data->requests_id, false);
+                    return StatusHelpers::requestStatus($data['status'], $data['id'], false, null);
                 },
                 'format' => 'raw',
                 'contentOptions' => [
@@ -99,7 +99,7 @@
                         return 
                             Html::button('<i class="glyphicon glyphicon-trash"></i>', [
                                 'data-pjax' => false,
-                                'class' => 'btn btn-delete-record__table',
+                                'class' => 'btn-delete-record__table',
                                 'data-target' => '#delete-request-message',
                                 'data-toggle' => 'modal',
                                 'data-request-type' => 'paid-requests',

@@ -85,7 +85,7 @@ class FormatFullNameUser {
         $link = ['employee-form/employee-profile', 'type' => $user['role'], 'employee_id' => $user['id']];
         
         return $user ?
-            Html::a($full_name, $link, ['target' => '_blank', 'class' => 'btn btn-link btn-xs']) : 'Не назначен';
+            Html::a($full_name, $link, ['target' => '_blank', 'class' => '']) : 'Не назначен';
         
     }    
     
