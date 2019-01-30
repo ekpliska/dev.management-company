@@ -4309,8 +4309,16 @@ a.employee-profile:hover {
     color: #fff;
     text-transform: uppercase;
     letter-spacing: 1.5px;
-    padding: 10px 0;
+    padding: 10px;
     font-weight: bold;
+}
+#edit-discription-btn:hover,
+#edit-discription-btn:active,
+#edit-discription-btn:focus {
+    border: 1px solid #fff;
+    padding: 10px;
+    border-radius: 12px;
+    text-decoration: none;
 }
 #edit-discription-btn:before {
     font-family: 'Glyphicons Halflings';

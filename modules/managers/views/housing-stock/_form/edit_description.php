@@ -26,13 +26,13 @@
             ->label($model->getAttributeLabel('houses_description'), ['class' => 'field-label-modal']) ?>
 
     <div class="modal-footer">
-        <?= Html::submitButton('Сохранить изменения', [
-                'class' => 'btn btn-modal-window btn-modal-window-yes',
+        <?= Html::submitButton('Сохранить', [
+                'class' => 'btn-modal btn-modal-yes',
             ]) ?>
 
         <?= Html::button('Отмена', [
                 'data-dismiss' => 'modal',
-                'class' => 'btn btn-modal-window btn-modal-window-no',
+                'class' => 'btn-modal btn-modal-no',
             ]) ?>
     </div>
 

@@ -47,7 +47,7 @@ $this->params['breadcrumbs'][] = 'Жилищный фонд';
                                     <?= $house['houses_description'] ? $house['houses_description'] : '<span>(Описание отсутствует)</span>' ?>
                                 </p>
                                 <?= Html::a('Редактировать описание', ['update-description', 'house_id' => $house['houses_id']], [
-                                        'class' => 'btn btn-sm',
+                                        'class' => 'btn-sm',
                                         'id' => 'edit-discription-btn',
                                 ]) ?>
                             </div>
