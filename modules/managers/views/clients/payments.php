@@ -34,11 +34,10 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
             <div class="payments-date-block">
                 <p class="payment_title"><i class="glyphicon glyphicon-calendar"></i> Период</p>
                 <div class="col-md-3 date-block">
-                    <span>с</span>
                     <?= DatePicker::widget([
                             'name' => 'date_start-period-pay',
                             'type' => DatePicker::TYPE_INPUT,
-                            'value' => date('d-m-Y'),
+                            'value' => 'С',
                             'layout' => '<span class="input-group-text">Birth Date</span>',
                             'pluginOptions' => [
                                 'autoclose'=>true,
@@ -48,11 +47,11 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
                     ?>
                 </div>
                 <div class="col-md-3 date-block">
-                    <span>по</span>
+                    <span>-</span>
                     <?= DatePicker::widget([
                             'name' => 'date_end-period-pay',
                             'type' => DatePicker::TYPE_INPUT,
-                            'value' => date('d-m-Y'),
+                            'value' => 'По',
                             'pluginOptions' => [
                                 'autoclose'=>true,
                                 'format' => 'dd-mm-yyyy'

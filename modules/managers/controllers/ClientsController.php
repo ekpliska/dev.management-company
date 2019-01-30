@@ -241,16 +241,18 @@ class ClientsController extends AppManagersController {
         
         $info = $this->getClientsInfo($client_id, $account_number);
         
+        // Получаем номер текущего месяца и год
+        $current_period = date('Y-m');
+        
         $array_request = [
             'Номер лицевого счета' => $account_number,
-            'Период начало' => '',
-            'Период конец' => '',
+            'Период начало' => null,
+            'Период конец' => $current_period,
         ];
         
         $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
         
-//        $receipts_lists = Yii::$app->client_api->getReceipts($data_json);
-        $receipts_lists = Yii::$app->params['Квитанции ЖКУ'];
+        $receipts_lists = Yii::$app->client_api->getReceipts($data_json);
         
         return $this->render('receipts-of-hapu', [
             'client_info' => $info['client_info'],
@@ -258,8 +260,7 @@ class ClientsController extends AppManagersController {
             'user_info' => $info['user_info'],
             'list_account' => $info['list_account'],
             'account_number' => $account_number,
-//            'receipts_lists' => $receipts_lists['receipts'],
-            'receipts_lists' => $receipts_lists,
+            'receipts_lists' => $receipts_lists['receipts'],
         ]);
         
     }
@@ -281,24 +282,26 @@ class ClientsController extends AppManagersController {
         
         $info = $this->getClientsInfo($client_id, $account_number);
         
+        // Получаем номер текущего месяца и год
+        $current_period = date('Y-m');
+        
         $array_request = [
             'Номер лицевого счета' => $account_number,
-            'Период начало' => '',
-            'Период конец' => '',
+            'Период начало' => null,
+            'Период конец' => $current_period,
         ];
         
         $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
         
-//        $payments_lists = Yii::$app->client_api->getPayments($data_json);
-        $payments_lists = Yii::$app->params['Платежи'];        
+        $payments_lists = Yii::$app->client_api->getPayments($data_json);
         
         return $this->render('payments', [
             'client_info' => $info['client_info'],
             'account_choosing' => $info['account_info'],
             'user_info' => $info['user_info'],
             'list_account' => $info['list_account'],
-//            'payments_lists' => $receipts_lists['receipts'],
-            'payments_lists' => $payments_lists,            
+            'account_number' => $account_number,
+            'payments_lists' => $payments_lists['payments'],
         ]);
         
     }
@@ -311,12 +314,9 @@ class ClientsController extends AppManagersController {
         $info = $this->getClientsInfo($client_id, $account_number);
         
         // Получаем номер текущего месяца
-        $current_month = date('n');
+        $current_month = date('m');
         // Получаем номер текущего года
         $current_year = date('Y');
-        
-        // Получаем все приборы учета по лицевому счету, которые имею сформированную заявку на поверку
-        $not_verified = Counters::notVerified($info['account_info']->account_id);
         
         $array_request = [
             'Номер лицевого счета' => $account_number,
@@ -325,27 +325,15 @@ class ClientsController extends AppManagersController {
         ];
         
         $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
-//        $counters_lists_api = Yii::$app->client_api->getPreviousCounters($data_json);
-        $counters_lists = Yii::$app->params['Приборы учета'];
+        $counters_lists_api = Yii::$app->client_api->getPreviousCounters($data_json);
+//        echo '<pre>'; var_dump($counters_lists_api); die();
 
-        // Переключатель наличия проблемного счетчика
-        $can_set_indication = false;
-        foreach ($counters_lists as $key => $counter) {
-            $temp_date = Yii::$app->formatter->asDate($counter['Дата снятия показания'], 'M');
-            if (++$temp_date == $current_month) 
-                $can_set_indication = true;
-            break;
-        }
-        
         return $this->render('counters', [
             'client_info' => $info['client_info'],
             'account_choosing' => $info['account_info'],
             'user_info' => $info['user_info'],
             'list_account' => $info['list_account'],
-//            'counters_lists' => $counters_lists['Приборы учета'],
-            'counters_lists' => $counters_lists,
-            'not_verified' => $not_verified,
-            'can_set_indication' => $can_set_indication,
+            'counters_lists' => $counters_lists_api['indications'],
         ]);
         
     }

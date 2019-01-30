@@ -27,7 +27,6 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
                 'form' => $form,
                 'user_info' => $user_info,
                 'client_info' => $client_info,
-                'add_rent' => $add_rent,
                 'list_account' => $list_account,
                 'account_choosing' => $account_choosing,
         ]) ?>
@@ -36,22 +35,21 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
             <div class="col-md-5 receipts_period">
                 <p class="period_title"><i class="glyphicon glyphicon-calendar"></i> Период</p>
                 <div class="receipts_period-calendar">                    
-                    <span>С</span>
                     <?= DatePicker::widget([
                             'name' => 'date_start-period',
                             'type' => DatePicker::TYPE_INPUT,
-                            'value' => date('d-m-Y'),
+                            'value' => 'С',
                             'pluginOptions' => [
                                 'autoclose'=>true,
                                 'format' => 'dd-mm-yyyy'
                             ],
                         ]);        
                     ?>
-                        <span>ПО</span>
+                    <span>-</span>
                     <?= DatePicker::widget([
                             'name' => 'date_end-period',
                             'type' => DatePicker::TYPE_INPUT,
-                            'value' => date('d-m-Y'),
+                            'value' => 'По',
                             'pluginOptions' => [
                                 'autoclose'=>true,
                                 'format' => 'dd-mm-yyyy'

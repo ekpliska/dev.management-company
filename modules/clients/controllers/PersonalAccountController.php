@@ -84,7 +84,7 @@ class PersonalAccountController extends AppClientsController {
         $account_number = $this->_current_account_number;
         
         // Получаем номер текущего месяца и год
-        $current_period = date('Y-n');
+        $current_period = date('Y-m');
         
         $array_request = [
             'Номер лицевого счета' => $account_number,
@@ -148,9 +148,6 @@ class PersonalAccountController extends AppClientsController {
         $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
 
         $indications = Yii::$app->client_api->getPreviousCounters($data_json);
-        
-        
-//        echo '<pre>'; var_dump($indications); die();
         
         $model_indication = new SendIndicationForm();
                 

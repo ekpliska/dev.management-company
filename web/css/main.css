@@ -2413,6 +2413,9 @@ input[name="date_end-period-pay"]:focus {
     font-weight: normal;
     color: #000;
 }
+.counters-page .managers-table {
+    margin-top: 0;
+}
 /* Конец Приборы учета */
 
 /* Опрос */

@@ -10,7 +10,7 @@
 <?php foreach ($payments_lists as $key => $payment) : ?>
 <tr>
     <td>
-        <?= $payment['Расчетный месяц'] ?>
+        <?= $payment['Расчетный период'] ?>
     </td>
     <td>
         <?= Yii::$app->formatter->asDate($payment['Дата платежа'], 'long') ?>
