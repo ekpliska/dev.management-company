@@ -71,32 +71,5 @@
             [
                 'class' => BlockClientColumn::className(),
             ],
-//            [
-//                'class' => 'yii\grid\ActionColumn',
-//                'template' => '{view-client} {delete-client}',
-//                'buttons' => [
-//                    'view-client' => function ($url, $data) {
-//                        return 
-//                            Html::a('Просмотр', 
-//                                    [
-//                                        'clients/view-client',
-//                                        'client_id' => $data['client_id'],
-//                                        'account_number' => $data['number'],
-//                                    ], 
-//                                    [
-//                                        'data-pjax' => false,
-//                                        'class' => 'btn btn-info btn-sm',
-//                                    ]
-//                            );
-//                    },
-//                    'delete-client' => function ($url, $data) {
-//                        return 
-//                            Html::a('Удалить', ['clients/delete-client', 'client_id' => $data['client_id']], [
-//                                'data-pjax' => false,
-//                                'class' => 'btn btn-danger btn-sm',
-//                            ]);
-//                    },
-//                ],
-//            ],
         ],
     ]); ?>

@@ -3,6 +3,7 @@
     namespace app\modules\managers\widgets;
     use yii\base\Widget;
     use app\models\Houses;
+    use app\modules\managers\models\searchForm\searchClients;
 
 /**
  * Дополнительное под меню
@@ -32,6 +33,9 @@ class SubMenu extends Widget {
         $params = [];
         
         switch ($this->view_name) {
+            case 'clients': 
+                $model = new searchClients();
+                break;
             case 'profile':
                 // Меню профиля Собственника
                 $params = $this->subMenuProfile();
@@ -50,6 +54,7 @@ class SubMenu extends Widget {
             'params' => $params,
             'client_id' => $this->client_id,
             'account_number' => $this->account_number,
+            'model' => $model,
         ]);
         
     }

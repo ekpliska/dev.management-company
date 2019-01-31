@@ -4,7 +4,6 @@
     use Yii;
     use yii\web\Response;
     use yii\web\NotFoundHttpException;
-    use yii\data\ActiveDataProvider;
     use yii\web\UploadedFile;
     use yii\widgets\ActiveForm;
     use app\modules\managers\controllers\AppManagersController;
@@ -13,9 +12,9 @@
     use app\models\PersonalAccount;
     use app\models\Rents;
     use app\modules\managers\models\AddRent;
-    use app\models\Counters;
     use app\modules\managers\models\form\CounterIndicationsForm;
     use app\models\CommentsToCounters;
+    use app\modules\managers\models\searchForm\searchClients;
 
 /**
  * Клиенты
@@ -29,14 +28,8 @@ class ClientsController extends AppManagersController {
      */
     public function actionIndex() {
         
-        $client_list = new ActiveDataProvider([
-            'query' => Clients::getListClients(),
-            'pagination' => [
-                'forcePageParam' => false,
-                'pageSizeParam' => false,
-                'pageSize' => 30,
-            ]
-        ]);
+        $model = new searchClients();
+        $client_list = $model->search(Yii::$app->request->post()['searchClients']['input_value']);
         
         return $this->render('index', [
             'client_list' => $client_list,
@@ -465,5 +458,5 @@ class ClientsController extends AppManagersController {
                 echo 'error'; die();
         }
     }
-        
+    
 }
