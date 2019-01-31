@@ -3,7 +3,7 @@
     namespace app\models;
     use Yii;
     use yii\db\ActiveRecord;
-    use app\models\Employees;
+    use yii\helpers\ArrayHelper;
 
 /**
  * Должности сотрудников
@@ -32,10 +32,17 @@ class Posts extends ActiveRecord
     /**
      * Связь с таблицей сотрудники
      */
-    public function getEmployees()
-    {
+    public function getEmployees() {
         return $this->hasMany(Employees::className(), ['employee_posts_id' => 'post_id']);
     }    
+    
+    /*
+     * Список всех должностей
+     */
+    public static function getArrayPosts() {
+        $array = self::find()->asArray()->all();
+        return ArrayHelper::map($array, 'post_id', 'post_name');
+    }
 
     /**
      * Метки полей

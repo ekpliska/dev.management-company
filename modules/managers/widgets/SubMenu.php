@@ -4,6 +4,9 @@
     use yii\base\Widget;
     use app\models\Houses;
     use app\modules\managers\models\searchForm\searchClients;
+    use app\modules\managers\models\searchForm\searchEmployees;
+    use app\models\Departments;
+    use app\models\Posts;
 
 /**
  * Дополнительное под меню
@@ -35,6 +38,10 @@ class SubMenu extends Widget {
         switch ($this->view_name) {
             case 'clients': 
                 $model = new searchClients();
+                break;
+            case 'employees': 
+                $model = new searchEmployees();
+                $params = $this->departmentsAndPosts();
                 break;
             case 'profile':
                 // Меню профиля Собственника
@@ -122,6 +129,20 @@ class SubMenu extends Widget {
         ];
         
         return $sub_designer_array;
+        
+    }
+    
+    /*
+     * Список Подразделений и Должностей сотрудников
+     */
+    private function departmentsAndPosts() {
+        
+        $lists = [
+            'departments' => Departments::getArrayDepartments(),
+            'posts' => Posts::getArrayPosts(),
+        ];
+        
+        return $lists;
         
     }
     

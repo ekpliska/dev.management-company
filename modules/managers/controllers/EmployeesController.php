@@ -11,7 +11,7 @@
     use app\modules\managers\models\User;
     use app\modules\managers\models\Dispatchers;
     use app\modules\managers\models\Specialists;
-    use app\modules\managers\models\searchForm\searchEmployer;
+    use app\modules\managers\models\searchForm\searchEmployees;
     use app\models\Employers;
     use app\modules\managers\models\Posts;
 
@@ -25,20 +25,18 @@ class EmployeesController extends AppManagersController {
      */
     public function actionDispatchers() {
         
-        $dispatchers = new ActiveDataProvider([
-            'query' => Dispatchers::getListDispatchers(),
-            'pagination' => [
-                'forcePageParam' => false,
-                'pageSizeParam' => false,
-                'pageSize' => 30,
-            ]            
-        ]);
+        $model = new searchEmployees();
         
-        $search_model = new searchEmployer();
+        $dispatchers = $model->search(Yii::$app->request->queryParams);
+        
+        $departments = Departments::getArrayDepartments();
+        $posts = Posts::getArrayPosts();
         
         return $this->render('dispatchers', [
+            'model' => $model,
             'dispatchers' => $dispatchers,
-            'search_model' => $search_model,
+            'departments' => $departments,
+            'posts' => $posts,
         ]);
     }
 

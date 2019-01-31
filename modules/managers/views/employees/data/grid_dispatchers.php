@@ -16,7 +16,7 @@
         'columns' => [
 //            ['class' => 'yii\grid\SerialColumn'],
             [
-                'attribute' => 'id',
+                'attribute' => 'employee_id',
                 'header' => 'ID',
                 'contentOptions' =>[
                     'class' => 'managers-table_small',
@@ -25,16 +25,16 @@
             [
                 'header' => 'Фамилия <br /> имя отчество',
                 'value' => function ($data) {
-                    return $data['surname'] . ' ' .
-                            $data['name'] . ' ' .
-                            $data['second_name'];
+                    return $data['employee_surname'] . ' ' .
+                            $data['employee_name'] . ' ' .
+                            $data['employee_second_name'];
                 },
                 'contentOptions' => [
                     'class' => 'managers-managers-table_big managers-table_left',
                 ],
             ],            
             [
-                'attribute' => 'department_name',
+                'attribute' => 'employee_department_id',
                 'header' => 'Подразделение',
             ],                        
             [
@@ -42,7 +42,7 @@
                 'header' => 'Должность',
             ],
             [
-                'attribute' => 'login',
+                'attribute' => 'user_login',
                 'header' => 'Логин',
             ],
             [
@@ -62,7 +62,7 @@
                                     [
                                         'employee-form/employee-profile',
                                         'type' => 'dispatcher',
-                                        'employee_id' => $data['id'],
+                                        'employee_id' => $data->employee_id,
                                     ], 
                                     [
                                         'data-pjax' => false,
@@ -71,7 +71,7 @@
                             );
                     },
                     'delete-dispatcher' => function ($url, $data) {
-                        $full_name = $data['surname'] . ' ' . $data['name'] . ' ' . $data['second_name'];
+                        $full_name = $data->employee_surname . ' ' . $data->employee_name . ' ' . $data->employee_second_name;
                         return 
                             Html::button('Удалить', [
                                 'data-pjax' => false,
@@ -79,7 +79,7 @@
                                 'data-target' => '#delete_employee_manager',
                                 'data-toggle' => 'modal',
                                 'data-role' => 'dispatcher',
-                                'data-employee' => $data['id'],
+                                'data-employee' => $data->employee_id,
                                 'data-full-name' => $full_name,
                             ]);
                     },

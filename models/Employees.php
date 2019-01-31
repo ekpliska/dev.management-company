@@ -32,6 +32,13 @@ class Employees extends ActiveRecord
         ];
     }
     
+    /*
+     * Связь с таблицей Пользователи
+     */
+    public function getUser() {
+        return $this->hasOne(User::className(), ['user_employee_id' => 'employee_id']);
+    }
+    
     /**
      * Свзяь с таблице Подразделения
      */
