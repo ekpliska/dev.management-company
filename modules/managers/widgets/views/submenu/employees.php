@@ -10,7 +10,6 @@
  */    
 ?>
 
-<?php if (Yii::$app->controller->id == '_employees' && Yii::$app->controller->action->id == 'dispatchers') : ?>
 <div class="container-fluid submenu-manager text-center">
     <ul class="nav navbar-nav navbar-left">
         <li>
@@ -47,4 +46,3 @@
         </li>
     </ul>
 </div>
-<?php endif; ?>

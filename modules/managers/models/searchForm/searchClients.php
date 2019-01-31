@@ -1,17 +1,17 @@
 <?php
 
     namespace app\modules\managers\models\searchForm;
-    use yii\base\Model;
     use yii\data\ActiveDataProvider;
+    use app\models\Clients;
     
 /**
  * Модаль поиска собственников, через дополнительное навигационное меню
  */
-class searchClients extends Model {
+class searchClients extends Clients {
     
     public $input_value;
     
-    public function run() {
+    public function rules() {
         
         return [
             [['input_value'], 'string'],
@@ -20,7 +20,7 @@ class searchClients extends Model {
         
     }
     
-    public function search($param) {
+    public function search($params) {
         
         $query = (new \yii\db\Query)
                 ->select('c.clients_id as client_id, '
@@ -37,28 +37,33 @@ class searchClients extends Model {
                 ->join('LEFT JOIN', 'houses as h', 'h.houses_id = f.flats_house_id')
                 ->orderBy('c.clients_surname')
                 ->groupBy('a.account_number');
-        
-        $dataProvider = new \yii\data\ActiveDataProvider([
-            'query' => $query,
-            'pagination' => [
-                'forcePageParam' => false,
-                'pageSizeParam' => false,
-                'pageSize' => 30,
-            ],
+
+        $data_provider = new ActiveDataProvider([
+            'query' => $query
         ]);
         
-        $this->load($param);
-        
-        $query->andFilterWhere(['like', 'c.clients_name', $param])
-                ->orFilterWhere(['like', 'clients_second_name', $param])
-                ->orFilterWhere(['like', 'c.clients_surname', $param])
-                ->orFilterWhere(['like', 'a.account_number', $param])
-                ->orFilterWhere(['like', 'h.houses_gis_adress', $param]);
+        $this->load($params);
         
         if (!$this->validate()) {
-          return $dataProvider;
+            return $data_provider;
         }
-        return $dataProvider;
+        
+        if (!empty($this->input_value)) {
+            $full_name = explode(' ', $this->input_value);
+            $this->clients_surname = $full_name[0];
+            $this->clients_name = count($full_name) == 2 ? $full_name[1] : $full_name[0];
+            $this->clients_second_name = count($full_name) == 3 ? $full_name[2] : $full_name[0];
+            
+            $query->andFilterWhere(['or', 
+                ['like', 'c.clients_surname', $this->clients_surname],
+                ['like', 'c.clients_name', $this->clients_name],
+                ['like', 'c.clients_second_name', $this->clients_second_name],
+                ['like', 'a.account_number', $full_name[0]],
+            ]);
+            
+        }
+        
+        return $data_provider;
         
     }
     

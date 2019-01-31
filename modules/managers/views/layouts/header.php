@@ -28,8 +28,6 @@
         </ul>
     </div>
     <?= SubMenu::widget(['view_name' => 'news']) ?>
-    <?= SubMenu::widget(['view_name' => 'clients']) ?>
-    <?= SubMenu::widget(['view_name' => 'employees']) ?>
     <?= SubMenu::widget(['view_name' => 'voting']) ?>
     <?= SubMenu::widget(['view_name' => 'requests']) ?>
     <?= SubMenu::widget(['view_name' => 'housing-stock']) ?>

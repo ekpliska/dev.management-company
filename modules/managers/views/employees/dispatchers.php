@@ -1,11 +1,10 @@
 <?php
 
     use yii\helpers\Html;
+    use yii\widgets\ActiveForm;
     use yii\widgets\Breadcrumbs;
     use app\modules\managers\widgets\AlertsShow;
     use app\modules\managers\widgets\ModalWindowsManager;
-    
-    use yii\widgets\ActiveForm;
 
 /* 
  * Диспетчеры
@@ -32,7 +31,7 @@ $this->params['breadcrumbs'][] = 'Диспетчеры';
                 ]);
             ?>
             
-            <?= $form->field($model, 'name')->input('text', ['class' => '_search-input', 'placeHolder' => 'Фамилия имя отчество'])->label() ?>
+            <?= $form->field($model, 'name')->input('text', ['class' => '_search-input', 'placeHolder' => 'Фамилия имя отчество'])->label(false) ?>
             
             <div class="form-group">
                 

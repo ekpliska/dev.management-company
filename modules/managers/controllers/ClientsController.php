@@ -29,9 +29,11 @@ class ClientsController extends AppManagersController {
     public function actionIndex() {
         
         $model = new searchClients();
-        $client_list = $model->search(Yii::$app->request->post()['searchClients']['input_value']);
+        
+        $client_list = $model->search(Yii::$app->request->queryParams);
         
         return $this->render('index', [
+            'model' => $model,
             'client_list' => $client_list,
         ]);
         
