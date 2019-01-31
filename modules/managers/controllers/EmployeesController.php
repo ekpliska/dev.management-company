@@ -27,7 +27,7 @@ class EmployeesController extends AppManagersController {
         
         $model = new searchEmployees();
         
-        $dispatchers = $model->search(Yii::$app->request->queryParams);
+        $dispatchers = $model->search(Yii::$app->request->queryParams, 'dispatcher');
         
         $departments = Departments::getArrayDepartments();
         $posts = Posts::getArrayPosts();
@@ -45,6 +45,13 @@ class EmployeesController extends AppManagersController {
      */
     public function actionSpecialists() {
         
+        $model = new searchEmployees();
+        
+        $dispatchers = $model->search(Yii::$app->request->queryParams, 'specialist');
+        
+        $departments = Departments::getArrayDepartments();
+        $posts = Posts::getArrayPosts();
+        
         $specialists = new ActiveDataProvider([
             'query' => Specialists::getListSpecialists(),
             'pagination' => [
@@ -54,11 +61,11 @@ class EmployeesController extends AppManagersController {
             ]            
         ]);
         
-        $search_model = new searchEmployer();
-        
         return $this->render('specialists' , [
             'specialists' => $specialists,
-            'search_model' => $search_model,
+            'model' => $model,
+            'departments' => $departments,
+            'posts' => $posts,
         ]);
     }
     
