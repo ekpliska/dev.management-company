@@ -47,19 +47,10 @@ class EmployeesController extends AppManagersController {
         
         $model = new searchEmployees();
         
-        $dispatchers = $model->search(Yii::$app->request->queryParams, 'specialist');
+        $specialists = $model->search(Yii::$app->request->queryParams, 'specialist');
         
         $departments = Departments::getArrayDepartments();
         $posts = Posts::getArrayPosts();
-        
-        $specialists = new ActiveDataProvider([
-            'query' => Specialists::getListSpecialists(),
-            'pagination' => [
-                'forcePageParam' => false,
-                'pageSizeParam' => false,
-                'pageSize' => 30,
-            ]            
-        ]);
         
         return $this->render('specialists' , [
             'specialists' => $specialists,

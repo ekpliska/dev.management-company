@@ -16,7 +16,7 @@
         'columns' => [
 //            ['class' => 'yii\grid\SerialColumn'],
             [
-                'attribute' => 'id',
+                'attribute' => 'employee_id',
                 'header' => 'ID',
                 'contentOptions' =>[
                     'class' => 'managers-table_small',
@@ -25,9 +25,9 @@
             [
                 'header' => 'Фамилия <br /> имя отчество',
                 'value' => function ($data) {
-                    return $data['surname'] . ' ' .
-                            $data['name'] . ' ' .
-                            $data['second_name'];
+                    return $data['employee_surname'] . ' ' .
+                            $data['employee_name'] . ' ' .
+                            $data['employee_second_name'];
                 },
                 'contentOptions' => [
                     'class' => 'managers-managers-table_big managers-table_left',

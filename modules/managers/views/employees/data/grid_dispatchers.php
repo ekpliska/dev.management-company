@@ -34,7 +34,7 @@
                 ],
             ],            
             [
-                'attribute' => 'employee_department_id',
+                'attribute' => 'department_name',
                 'header' => 'Подразделение',
             ],                        
             [

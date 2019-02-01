@@ -38,8 +38,8 @@ class searchEmployees extends \app\models\Employees {
                 ->join('LEFT JOIN', 'departments as d', 'e.employee_department_id = d.department_id')
                 ->join('LEFT JOIN', 'posts as p', 'e.employee_posts_id = p.post_id')
                 ->join('LEFT JOIN','auth_assignment as au','au.user_id = u.user_id')
-                ->where(['au.item_name' => $role])
-                ->orderBy(['e.employee_surname' => SORT_ASC]);
+                ->andWhere(['item_name' => $role])
+                ->orderBy(['employee_surname' => SORT_ASC]);
         
         $data_provider = new ActiveDataProvider([
             'query' => $query
