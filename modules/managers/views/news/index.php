@@ -12,6 +12,12 @@ $this->title = Yii::$app->params['site-name-manager'] .  'Новости';
 $this->params['breadcrumbs'][] = 'Новости';
 ?>
 
+<?= $this->render('form/_search', [
+        'section' => $section,
+        'search_model' => $search_model,
+        'house_lists' => $house_lists,
+]) ?>
+    
 <div class="manager-main-with-sub-news">
 
     <?= Breadcrumbs::widget([
@@ -22,7 +28,11 @@ $this->params['breadcrumbs'][] = 'Новости';
     <?= AlertsShow::widget() ?>
     
     <div id="_list-res">
-        <?= $this->render("data/grid_{$section}", ["all_{$section}" => $results]) ?>
+        <?= $this->render("data/grid_{$section}", [
+                "all_{$section}" => $results,
+                'pages' => $pages,
+            ]) 
+        ?>
     </div>
     
     <?= Html::a('', ['news/create'], ['class' => 'create-request-btn']) ?>

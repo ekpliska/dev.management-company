@@ -136,7 +136,10 @@ class Houses extends ActiveRecord
                 ->asArray()
                 ->all();
         
-        return $for_list ? ArrayHelper::map($houses, 'houses_id', 'houses_gis_adress') : $houses;
+        return $for_list == false ? 
+                ArrayHelper::map($houses, 'houses_id', function($data) {
+                    return $data['houses_gis_adress'] . ', ' . $data['houses_number'];
+                }) : $houses;
     }    
     
     /*

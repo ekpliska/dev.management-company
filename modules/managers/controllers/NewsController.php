@@ -3,6 +3,7 @@
     namespace app\modules\managers\controllers;
     use Yii;
     use yii\web\UploadedFile;
+    use yii\data\Pagination;
     use app\modules\managers\controllers\AppManagersController;
     use app\modules\managers\models\form\NewsForm;
     use app\modules\managers\models\News;
@@ -10,6 +11,7 @@
     use app\models\Houses;
     use app\models\Image;
     use app\models\Partners;
+    use app\modules\managers\models\searchForm\searchNews;    
 
 /**
  * Новости
@@ -46,34 +48,36 @@ class NewsController extends AppManagersController {
      */
     public function actionIndex($section = 'news') {
         
+        $house_lists = Houses::getHousesList(false);
+        
         switch ($section) {
             case 'news':
-                $results = News::getAllNews($adver = false);
-//                $results = new ActiveDataProvider([
-//                    'query' => News::getAllNews($adver = false),
-//                    'pagination' => [
-//                        'forcePageParam' => false,
-//                        'pageSizeParam' => false,
-//                        'pageSize' => 15,
-//                    ],
-//                ]);
+                $search_model = new searchNews();
+                $results = $search_model->search(Yii::$app->request->queryParams, $only_advert = false);
                 break;
             case 'adverts':
-                $results = News::getAllNews($adver = true);
-//                $results = new ActiveDataProvider([
-//                    'query' => News::getAllNews($adver = true),
-//                    'pagination' => [
-//                        'forcePageParam' => false,
-//                        'pageSizeParam' => false,
-//                        'pageSize' => 15,
-//                    ],
-//                ]);
+                $search_model = new searchNews();
+                $results = $search_model->search(Yii::$app->request->queryParams, $only_advert = true);
                 break;
         }
         
+        $pages = new Pagination([
+            'totalCount' => $results->count(), 
+            'pageSize' => 9, 
+            'forcePageParam' => false, 
+            'pageSizeParam' => false,
+        ]);
+        
+        $posts = $results->offset($pages->offset)
+                ->limit($pages->limit)
+                ->all();
+        
         return $this->render('index', [
+            'house_lists' => $house_lists,
+            'search_model' => $search_model,            
             'section' => $section,
-            'results' => $results,
+            'results' => $posts,
+            'pages' => $pages,
         ]);
         
     }

@@ -8,13 +8,13 @@
  * Форма поиска
  */
 ?>
-<div class="container-fluid submenu-manager text-center">
+<div class="container-fluid submenu-manager text-center news-margin">
     <ul class="nav navbar-nav navbar-left">
         <li>
             <?php 
                 $form = ActiveForm::begin([
-                    'id' => 'search-request-form',
-                    'action' => ['index'],
+                    'id' => 'search-news-form',
+                    'action' => ['index', 'section' => $section],
                     'method' => 'get',
                     'fieldConfig' => [
                         'template' => '{input}',
@@ -24,16 +24,12 @@
                     ],
                 ]);
             ?>
+
+           
+            <?= $form->field($search_model, 'value')->input('text', ['class' => '_search-input', 'placeHolder' => 'Заголовок публикации'])->label(false) ?>
             
-            <?= $form->field($search_model, 'value')->input('text', ['class' => '_search-input', 'placeHolder' => 'ID заявки'])->label(false) ?>
-            
-                
-            <?= $form->field($search_model, 'requests_type_id')->dropDownList($type_requests, [
-                    'prompt' => '[Вид заявки]',
-                    'class' => '_dropdown-subpanel']) ?>
-                
-            <?= $form->field($search_model, 'requests_specialist_id')->dropDownList($specialist_lists, [
-                    'prompt' => '[Специалист]',
+            <?= $form->field($search_model, 'news_house_id')->dropDownList($house_lists, [
+                    'prompt' => '[Адрес]',
                     'class' => '_dropdown-subpanel']) ?>
             
             <?= $form->field($search_model, 'date_start')
@@ -65,6 +61,7 @@
                             'format' => 'yyyy-mm-dd',
                         ]])
                     ->label(false) ?>
+
             
             <?= Html::submitButton('', ['class' => 'btn search-block__button']) ?>
             

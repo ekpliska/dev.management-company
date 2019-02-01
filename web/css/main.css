@@ -4046,6 +4046,10 @@ a.employee-profile:hover {
 /* Конец Модальное окно назначение сотрудника на заяку */
 
 /* Новости, главная страница */
+.news-margin {
+    margin-top: 100px;
+    z-index: 10;
+}
 .news-item {
     height: 600px;
     border: 1px solid #ddd;

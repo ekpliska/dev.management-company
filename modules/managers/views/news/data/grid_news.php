@@ -1,6 +1,7 @@
 <?php
 
     use yii\helpers\Html;
+    use yii\widgets\LinkPager;
     use app\helpers\FormatHelpers;
     use app\helpers\FormatFullNameUser;
 
@@ -39,3 +40,11 @@
 
 <?php endforeach; ?>
 <?php endif; ?>
+
+
+
+<?= 
+    LinkPager::widget([
+        'pagination' => $pages,
+    ]);
+?>
