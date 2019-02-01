@@ -1,6 +1,8 @@
 <?php
+
     use yii\grid\GridView;
     use yii\helpers\Html;
+    use app\helpers\FormatHelpers;
 
 /*
  * Вывод таблицы зарегистрированных пользователей с ролью Диспетчер
@@ -48,6 +50,9 @@
             [
                 'attribute' => 'last_login',
                 'header' => 'Последний раз был',
+                'value' => function ($data) {
+                    return FormatHelpers::formatDate($data['last_login'], true, 1, false);
+                },
             ],
             [
                 'class' => 'yii\grid\ActionColumn',
@@ -62,7 +67,7 @@
                                     [
                                         'employee-form/employee-profile',
                                         'type' => 'specialist',
-                                        'employee_id' => $data['id'],
+                                        'employee_id' => $data['employee_id'],
                                     ], 
                                     [
                                         'data-pjax' => false,
@@ -71,7 +76,7 @@
                             );
                     },
                     'delete-specialist' => function ($url, $data) {
-                        $full_name = $data['surname'] . ' ' . $data['name'] . ' ' . $data['second_name'];
+                        $full_name = $data['employee_surname'] . ' ' . $data['employee_name'] . ' ' . $data['employee_second_name'];
                         return 
                             Html::button('Удалить', [
                                 'data-pjax' => false,
@@ -79,7 +84,7 @@
                                 'data-target' => '#delete_employee_manager',
                                 'data-toggle' => 'modal',
                                 'data-role' => 'specialist',
-                                'data-employee' => $data['id'],
+                                'data-employee' => $data['employee_id'],
                                 'data-full-name' => $full_name,
                             ]);
                     },

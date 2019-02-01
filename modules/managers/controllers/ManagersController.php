@@ -10,6 +10,7 @@
     use app\models\Departments;
     use app\modules\managers\models\Posts;
     use app\models\ChangePasswordForm;
+    use app\modules\managers\models\searchForm\searchEmployees;
 
 /**
  * Профиль Админимтратора
@@ -23,17 +24,27 @@ class ManagersController extends AppManagersController {
      */
     public function actionIndex() {
         
-        $manager_list = new ActiveDataProvider([
-            'query' => Managers::getListManagers(),
-            'pagination' => [
-                'forcePageParam' => false,
-                'pageSizeParam' => false,
-                'pageSize' => 30,
-            ]
-        ]);
+        $model = new searchEmployees();
+        
+        $departments = Departments::getArrayDepartments();
+        $posts = Posts::getArrayPosts();
+        
+        $manager_list = $model->search(Yii::$app->request->queryParams, 'administrator');
+        
+//        $manager_list = new ActiveDataProvider([
+//            'query' => Managers::getListManagers(),
+//            'pagination' => [
+//                'forcePageParam' => false,
+//                'pageSizeParam' => false,
+//                'pageSize' => 30,
+//            ]
+//        ]);
         
         return $this->render('index', [
+            'model' => $model,
             'manager_list' => $manager_list,
+            'departments' => $departments,
+            'posts' => $posts,
         ]);
         
     }
