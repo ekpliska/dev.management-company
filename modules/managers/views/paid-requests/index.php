@@ -12,6 +12,12 @@ $this->title = Yii::$app->params['site-name-manager'] .  'Платные усл�
 $this->params['breadcrumbs'][] = 'Платные услуги';
 ?>
 
+<?= $this->render('form/_search', [
+        'search_model' => $search_model,
+        'name_services' => $name_services,
+        'specialist_lists' => $specialist_lists,
+]) ?>
+
 <div class="manager-main-with-sub">
     
     <?= Breadcrumbs::widget([

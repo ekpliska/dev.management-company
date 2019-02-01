@@ -2,7 +2,6 @@
 
     namespace app\modules\managers\controllers;
     use Yii;
-    use yii\data\ActiveDataProvider;
     use yii\helpers\ArrayHelper;
     use app\modules\managers\controllers\AppManagersController;
     use app\models\CategoryServices;
@@ -10,7 +9,10 @@
     use app\modules\managers\models\form\PaidRequestForm;
     use app\modules\managers\models\Requests;
     use app\modules\managers\models\PaidServices;
-
+    use app\modules\managers\models\searchForm\searchPaidRequests;
+    use app\modules\managers\models\Specialists;
+    use app\helpers\FormatFullNameUser;
+    
 /**
  * Заявки
  */
@@ -23,25 +25,37 @@ class PaidRequestsController extends AppManagersController {
     
     public function actionIndex() {
         
+        // Загружаем модель добавления заявки
         $model = new PaidRequestForm();
+        
+        // Формируем массив для Категорий услуг
         $servise_category = CategoryServices::getCategoryNameArray();
+        // Массив для наименования услуг
         $servise_name = [];
+        // Массив квартир (для привязки заявки к лицевому счету)
         $flat = [];
         
-        $paid_requests = new ActiveDataProvider([
-            'query' => PaidServices::getAllPaidRequests(),
-            'pagination' => [
-                'forcePageParam' => false,
-                'pageSizeParam' => false,
-                'pageSize' => 15,
-            ],
-        ]);
+        // Загружаем модель поиска
+        $search_model = new searchPaidRequests();
+        
+        // Загружаем список всех спициалистов
+        $specialist_lists = ArrayHelper::map(Specialists::getListSpecialists()->all(), 'id', function ($data) {
+            return FormatFullNameUser::nameEmployee($data['surname'], $data['name'], $data['second_name']);
+        });
+        
+        // Загружаем список услуг для формы поиска
+        $name_services = Services::getServicesNameArray();
+        
+        $paid_requests = $search_model->search(Yii::$app->request->queryParams);
         
         return $this->render('index', [
             'model' => $model,
+            'search_model' => $search_model,
             'servise_category' => $servise_category,
             'servise_name' => $servise_name,
             'flat' => $flat,
+            'specialist_lists' => $specialist_lists,
+            'name_services' => $name_services,
             'paid_requests' => $paid_requests,
         ]);
     }

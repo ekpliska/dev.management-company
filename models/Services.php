@@ -66,6 +66,7 @@ class Services extends ActiveRecord {
         
         $array = static::find()
                 ->asArray()
+                ->orderBy(['service_name' => SORT_ASC])
                 ->all();
         
         return ArrayHelper::map($array, 'service_id', 'service_name');
