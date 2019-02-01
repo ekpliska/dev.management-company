@@ -41,7 +41,7 @@ class NavManager extends Widget {
             'name' => 'Голосование',
             'link' => 'voting/index',
         ],
-        '#' => [
+        'designer-requests' => [
             'name' => 'Конструктор заявок',
             'link' => 'designer-requests/index',
         ],

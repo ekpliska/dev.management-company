@@ -15,7 +15,7 @@ $this->title = Yii::$app->params['site-name-manager'] .  'Жилищный фо�
 $this->params['breadcrumbs'][] = 'Жилищный фонд';
 ?>
 
-<div class="manager-main-with-sub">
+<div class="manager-main">
 
     <?= Breadcrumbs::widget([
             'homeLink' => ['label' => 'ELSA | Администратор', 'url' => ['managers/index']],

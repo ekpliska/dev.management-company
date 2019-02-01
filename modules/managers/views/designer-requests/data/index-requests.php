@@ -10,11 +10,11 @@
     <div class="col-md-5">
         <h4 class="title">Заявки</h4>
         <div class="designer-block__search-block">
-            <?= Html::input('text', 'search-services', null, ['class' => 'search-block__input', 'placeholder' => 'Поиск']) ?>
+            <?= Html::input('text', 'search-services', null, ['id' => 'search-input-designer', 'class' => 'search-block__input', 'placeholder' => 'Поиск']) ?>
         </div>
         <div class="designer-block__lists">
             <?php if ($results['requests']) : ?>
-                <ul id="requests-list">
+                <ul id="search-lists" class="requests-list">
                     <?php foreach ($results['requests'] as $key_req => $request) : ?>
                         <li data-record-type="<?= 'request' ?>" data-record="<?= $key_req ?>" class="<?= $this->context->request_cookie == $key_req ? 'active-item' : '' ?>">
                             <p><?= $request ?></p>

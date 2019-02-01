@@ -4588,20 +4588,20 @@ a.employee-profile:hover {
     background-image: url('../images/searchicon.png');
     background-position: 57%;
 }
-#categories-list,
-#requests-list,
+.categories-list,
+.requests-list,
 .services-list {
     list-style-type: none;
     padding: 0;
     margin: 0;
 }
-#categories-list > li:first-child,
-#requests-list > li:first-child,
+.categories-list > li:first-child,
+.requests-list > li:first-child,
 .services-list > li:first-child {
     border-top: 1px solid #ddd;
 }
-#categories-list li,
-#requests-list li {
+.categories-list li,
+.requests-list li {
     position: relative;
     font-weight: bold;
     border-bottom: 1px solid #ddd;
@@ -4611,15 +4611,15 @@ a.employee-profile:hover {
     display: block;
     cursor: pointer;
 }
-#categories-list li:hover,
-#requests-list li:hover,
-#categories-list li.active-item,
-#requests-list li.active-item {
+.categories-list li:hover,
+.requests-list li:hover,
+.categories-list li.active-item,
+.requests-list li.active-item {
     background-color: #454545;
     color: #fff;
 }
-#categories-list > li > span.close,
-#requests-list > li > span.close {
+.categories-list > li > span.close,
+.requests-list > li > span.close {
     cursor: pointer;
     position: absolute;
     top: 50%;

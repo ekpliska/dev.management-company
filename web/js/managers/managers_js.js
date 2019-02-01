@@ -1123,10 +1123,10 @@ $(document).ready(function() {
      * Переключение списка Заявок, разд "Заявки"
      * Переключение списка Категорий, разд "Платные услуги"
      */
-    $('#requests-list > li, #categories-list > li').on('click', function() {
+    $('.requests-list > li, .categories-list > li').on('click', function() {
         var recordID = $(this).data('record');
         var typeRecord = $(this).data('recordType');
-        $('#requests-list > li, #categories-list > li').removeClass('active-item');
+        $('.requests-list > li, .categories-list > li').removeClass('active-item');
         $(this).addClass('active-item');
         $.post('show-results?type_record=' + typeRecord + '&record_id=' + recordID, function(response) {
             if (response.success === true) {
@@ -1188,6 +1188,35 @@ $(document).ready(function() {
         e.preventDefault();
         return false;        
     });
+    
+    function searchDesignerForm() {
+        var input, filter, ul, li, a, i, txtValue;
+        input = document.getElementById('search-input-designer');
+        filter = input.value.toUpperCase();
+        ul = document.getElementById('search-lists');
+        li = ul.getElementsByTagName('li');
+        for (i = 0; i < li.length; i++) {
+            a = li[i].getElementsByTagName('p')[0];
+            txtValue = a.textContent || a.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = '';
+            } else {
+                li[i].style.display = 'none';
+            }
+        }
+    }
+    $('#search-input-designer').on('input', function(){
+        searchDesignerForm();
+    });
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     /*
      * Установка куки

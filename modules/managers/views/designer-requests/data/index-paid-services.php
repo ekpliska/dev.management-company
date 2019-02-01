@@ -10,14 +10,14 @@
     <div class="col-md-5">
         <h4 class="title">Категория</h4>
         <div class="designer-block__search-block">
-            <?= Html::input('text', 'search-services', null, ['class' => 'search-block__input', 'placeholder' => 'Поиск']) ?>
+            <?= Html::input('text', 'search-services', null, ['id' => 'search-input-designer', 'class' => 'search-block__input', 'placeholder' => 'Поиск']) ?>
         </div>
         <div class="designer-block__lists">
             <?php if ($results['categories']) : ?>
-                <ul id="categories-list">
+                <ul id="search-lists" class="categories-list">
                     <?php foreach ($results['categories'] as $key_cat => $category) : ?>
                         <li data-record-type="<?= 'category' ?>" data-record="<?= $key_cat ?>" class="<?= $this->context->category_cookie == $key_cat ? 'active-item' : '' ?>">
-                            <?= $category ?>
+                            <p><?= $category ?></p>
                             <span class="close category__delete" data-record="<?= $key_cat ?>" data-record-type="category"><i class="glyphicon glyphicon-trash"></i></span>
                         </li>
                     <?php endforeach; ?>
