@@ -11,6 +11,7 @@
     use app\models\RegistrationInVoting;
     use app\modules\managers\models\form\VotingForm;
     use app\modules\managers\models\Clients;
+    use app\modules\managers\models\searchForm\searchVote;
 
 /**
  *  Голосование
@@ -21,8 +22,11 @@ class VotingController extends AppManagersController {
      * Голосование, главная страница
      */
     public function actionIndex() {
-        // Получаем все доступные голосования
-        $query = Voting::findAllVoting();
+        
+        // Загружаем модель поиска
+        $search_model = new searchVote();
+        
+        $query = $search_model->search(Yii::$app->request->queryParams);
         
         $count_voting = clone $query;
         $pages = new Pagination([
@@ -35,9 +39,13 @@ class VotingController extends AppManagersController {
                 ->limit($pages->limit)
                 ->all();
         
+        $house_lists = Houses::getHousesList(false);
+        
         return $this->render('index', [
+            'search_model' => $search_model,
             'view_all_voting' => $view_all_voting,
             'pages' => $pages,
+            'house_lists' => $house_lists,
         ]);
         
     }

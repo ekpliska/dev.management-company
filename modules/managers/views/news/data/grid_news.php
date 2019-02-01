@@ -39,6 +39,10 @@
 </div>
 
 <?php endforeach; ?>
+<?php else: ?>
+<div class="notice info">
+    <p>Публикации не найдены.</p>
+</div>
 <?php endif; ?>
 
 
