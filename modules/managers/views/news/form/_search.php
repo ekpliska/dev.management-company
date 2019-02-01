@@ -30,7 +30,7 @@
             
             <?= $form->field($search_model, 'news_house_id')->dropDownList($house_lists, [
                     'prompt' => '[Адрес]',
-                    'class' => '_dropdown-subpanel']) ?>
+                    'class' => '_dropdown-subpanel _large']) ?>
             
             <?= $form->field($search_model, 'date_start')
                     ->widget(DatePicker::className(), [

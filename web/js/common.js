@@ -9,7 +9,15 @@ $('.house-phone').mask('+7 (9999) 999-99-99');
 $('.sms-code-input').mask('99999');
 //$('.indication-input').mask('9.?99');
 $.mask.definitions['h']='[0-9]';
-$('.account-number').mask('№hhhhhhhhhhh')
+$('.account-number').mask('№hhhhhhhhhhh');
+
+/*
+ * Автоматическое выделение текста в текстовых полях поиска
+ */
+$('._search-input').on('click', function(){
+    $(this).select();
+});
+
 /*
  * Предварительная загрузка превью одной фотографии
  */

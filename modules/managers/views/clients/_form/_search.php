@@ -1,20 +1,20 @@
 <?php
 
-    use yii\bootstrap\ActiveForm;
-    use kartik\date\DatePicker;
+    use yii\widgets\ActiveForm;
     use yii\helpers\Html;
 
 /* 
  * Форма поиска
  */
 ?>
+
 <div class="container-fluid submenu-manager text-center">
     <ul class="nav navbar-nav navbar-left">
         <li>
             <?php 
                 $form = ActiveForm::begin([
-                    'id' => 'search-news-form',
-                    'action' => ['index', 'section' => $section],
+                    'id' => 'search-clients-form',
+                    'action' => ['index'],
                     'method' => 'get',
                     'fieldConfig' => [
                         'template' => '{input}',
@@ -24,13 +24,8 @@
                     ],
                 ]);
             ?>
-
-           
-            <?= $form->field($search_model, 'value')->input('text', ['class' => '_search-input', 'placeHolder' => 'Заголовок публикации'])->label(false) ?>
-
-            <?= $form->field($search_model, 'voting_house_id')->dropDownList($house_lists, [
-                    'prompt' => '[Адрес]',
-                    'class' => '_dropdown-subpanel _large']) ?>
+            
+            <?= $form->field($model, 'input_value')->input('text', ['class' => '_search-input', 'placeHolder' => 'Фамилия имя отчество'])->label(false) ?>
             
             <?= Html::submitButton('', ['class' => 'btn search-block__button']) ?>
             
@@ -38,4 +33,3 @@
         </li>
     </ul>
 </div>
-

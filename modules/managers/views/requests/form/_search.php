@@ -30,11 +30,11 @@
                 
             <?= $form->field($search_model, 'requests_type_id')->dropDownList($type_requests, [
                     'prompt' => '[Вид заявки]',
-                    'class' => '_dropdown-subpanel']) ?>
+                    'class' => '_dropdown-subpanel _small']) ?>
                 
             <?= $form->field($search_model, 'requests_specialist_id')->dropDownList($specialist_lists, [
                     'prompt' => '[Специалист]',
-                    'class' => '_dropdown-subpanel']) ?>
+                    'class' => '_dropdown-subpanel _small']) ?>
             
             <?= $form->field($search_model, 'date_start')
                     ->widget(DatePicker::className(), [

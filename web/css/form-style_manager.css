@@ -889,13 +889,18 @@ textarea {
     background: transparent;
     border: 1px solid #fff;
     color: #fff;
-    background-image: url(../images/calendar.png);
-    background-size: 10%;
+    background-image: url(../images/input-icon/calendar_3.png);
+    background-size: 8%;
     background-repeat: no-repeat;
     background-position: 12% 47%;
-    padding: 0 0 0 35px;
-    width: 70% !important;
+    padding: 0 0 0 40px;
     font-size: 12px;
+    width: 150px !important;
+    cursor: pointer;
+}
+.search-date:hover {
+    /*border: 1px solid #2fb6f0;*/
+    box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
 }
 .search-date::placeholder {
     color: #fff;

@@ -28,7 +28,6 @@
         </ul>
     </div>
     <?= SubMenu::widget(['view_name' => 'news']) ?>
-    <?= SubMenu::widget(['view_name' => 'housing-stock']) ?>
     <?= SubMenu::widget(['view_name' => 'designer-request']) ?>
     <?= NavManager::widget() ?>
 </nav>

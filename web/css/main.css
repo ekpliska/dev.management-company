@@ -2034,19 +2034,15 @@ form#search-form {
     background-position: 64%;
 }
 .search-block__button {
-    width: 70px;
+    width: 60px;
     height: 35px;
-    /*border-radius: 12px;*/
-    border-top-right-radius: 12px !important; 
-    border-bottom-right-radius: 12px !important; 
-    border-top-left-radius: 0px !important; 
-    border-bottom-left-radius: 0px !important; 
+    border-radius: 12px;
     font-size: 10px;
-    background: #fff;
+    background: transparent;
     border: 1px solid #fff;
     background-repeat: no-repeat;
-    background-size: 64%;
-    background-image: url(../images/searchicon_blue.png);
+    background-size: 60%;
+    background-image: url(../images/searchicon_white.png);
     background-position: 40%;
     margin-left: 10px;
     outline: none;
@@ -3458,13 +3454,22 @@ tbody > tr > td > div.empty::before {
     background: transparent;
     border: 1px solid #fff;
     border-radius: 25px;
-    padding: 7px 15px;
+    padding: 7px 15px 7px 40px;
     color: #fff;
     font-size: 12px;
     outline: none;
+    background-image: url(../images/input-icon/text.png);
+    background-size: 5%;
+    background-repeat: no-repeat;
+    background-position: 5% 47%;  
 }
 ._search-input::placeholder {
     color: #fff;
+}
+._search-input:hover,
+._dropdown-subpanel:hover {
+    /*border: 1px solid #2fb6f0;*/
+    box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
 }
 ._dropdown-subpanel {
     padding: 6px 40px;
@@ -3477,6 +3482,20 @@ tbody > tr > td > div.empty::before {
 }
 ._dropdown-subpanel option {
     color: #000;
+}
+._small {
+    width: 240px;
+    background-image: url(../images/input-icon/filter.png);
+    background-size: 5%;
+    background-repeat: no-repeat;
+    background-position: 10% 47%;
+}
+._large {
+    width: 400px;
+    background-image: url(../images/input-icon/location.png);
+    background-size: 3%;
+    background-repeat: no-repeat;
+    background-position: 5% 47%;
 }
 /* Конец Поиск */
 /* Конец Администратор, инпуты */
