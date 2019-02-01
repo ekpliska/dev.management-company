@@ -882,3 +882,24 @@ textarea {
     background: rgba(0, 123, 255, 0.12);
 }
 /* Конец Выпадающий список навигационная панель, Платные услуги */
+
+/* Диапазон дат для навигационной панели */
+#searchrequests-date_start,
+#searchrequests-date_finish {
+    border-radius: 25px;
+    background: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+    background-image: url(../images/calendar.png);
+    background-size: 10%;
+    background-repeat: no-repeat;
+    background-position: 10%;
+    padding: 0 0 0 35px;
+    width: 70%;
+    font-size: 12px;
+}
+#searchrequests-date_start::placeholder,
+#searchrequests-date_finish::placeholder {
+    color: #fff;
+}
+/* Конец Диапазон дат для навигационной панели */

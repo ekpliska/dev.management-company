@@ -42,7 +42,12 @@ class searchEmployees extends \app\models\Employees {
                 ->orderBy(['employee_surname' => SORT_ASC]);
         
         $data_provider = new ActiveDataProvider([
-            'query' => $query
+            'query' => $query,
+            'pagination' => [
+                'forcePageParam' => false,
+                'pageSizeParam' => false,
+                'pageSize' => 30,
+            ],
         ]);
         
         $this->load($params);

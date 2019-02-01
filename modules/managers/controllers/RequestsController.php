@@ -12,7 +12,10 @@
     use app\modules\managers\models\Requests;
     use app\modules\managers\models\PaidServices;
     use app\models\CommentsToRequest;
-    use app\models\Image;    
+    use app\models\Image;
+    use app\modules\managers\models\searchForm\searchRequests;
+    use app\modules\managers\models\Specialists;
+    use app\helpers\FormatFullNameUser;
 
 /**
  * Заявки
@@ -29,30 +32,29 @@ class RequestsController extends AppManagersController {
      */
     public function actionIndex() {
         
+        // Загружаем модель создания новой заявки
         $model = new RequestForm();
-        $type_request = TypeRequests::getTypeNameArray();
+        
+        // Загружаем модель поиска
+        $search_model = new searchRequests();
+        // Загружаем виды заявок        
+        $type_requests = TypeRequests::getTypeNameArray();
         $flat = [];
         
-        $requests = new ActiveDataProvider([
-            'query' => Requests::getAllRequests(),
-            'pagination' => [
-                'forcePageParam' => false,
-                'pageSizeParam' => false,
-                'pageSize' => 15,
-            ],
-        ]);
+        // Загружаем список всех спициалистов
+        $specialist_lists = ArrayHelper::map(Specialists::getListSpecialists()->all(), 'id', function ($data) {
+            return FormatFullNameUser::nameEmployee($data['surname'], $data['name'], $data['second_name']);
+        });
         
-        // Загружаем виды заявок
-        $type_requests = TypeRequests::getTypeNameArray();
-        
-        // Загружаем модель содания заявки
-        $model = new RequestForm();
+        $requests = $search_model->search(Yii::$app->request->queryParams);
         
         return $this->render('index', [
             'model' => $model,
+            'search_model' => $search_model,
             'type_requests' => $type_requests,
             'flat' => $flat,
             'requests' => $requests,
+            'specialist_lists' => $specialist_lists,
         ]);
     }
     

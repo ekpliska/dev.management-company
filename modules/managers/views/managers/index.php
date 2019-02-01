@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = 'Администраторы';
         <li>
             <?php 
                 $form = ActiveForm::begin([
-                    'id' => 'search-dispatchers-form',
+                    'id' => 'search-managers-form',
                     'action' => ['index'],
                     'method' => 'get',
                     'fieldConfig' => [

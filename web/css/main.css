@@ -2035,16 +2035,20 @@ form#search-form {
 }
 .search-block__button {
     width: 70px;
-    height: 40px;
-    border-radius: 12px;
+    height: 35px;
+    /*border-radius: 12px;*/
+    border-top-right-radius: 12px !important; 
+    border-bottom-right-radius: 12px !important; 
+    border-top-left-radius: 0px !important; 
+    border-bottom-left-radius: 0px !important; 
     font-size: 10px;
-    background: transparent;
+    background: #fff;
     border: 1px solid #fff;
     background-repeat: no-repeat;
     background-size: 64%;
-    background-image: url(../images/searchicon_white.png);
+    background-image: url(../images/searchicon_blue.png);
     background-position: 40%;
-    margin-left: 30px;
+    margin-left: 10px;
     outline: none;
 }
 /*input[id="_search-input"] {
@@ -3456,10 +3460,11 @@ tbody > tr > td > div.empty::before {
     border-radius: 25px;
     padding: 7px 15px;
     color: #fff;
+    font-size: 12px;
     outline: none;
 }
 ._search-input::placeholder {
-    color: #ddd;
+    color: #fff;
 }
 ._dropdown-subpanel {
     padding: 6px 40px;
@@ -3468,6 +3473,7 @@ tbody > tr > td > div.empty::before {
     border-radius: 25px;
     color: #fff;
     outline: none;
+    font-size: 12px;
 }
 ._dropdown-subpanel option {
     color: #000;

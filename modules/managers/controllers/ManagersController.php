@@ -31,15 +31,6 @@ class ManagersController extends AppManagersController {
         
         $manager_list = $model->search(Yii::$app->request->queryParams, 'administrator');
         
-//        $manager_list = new ActiveDataProvider([
-//            'query' => Managers::getListManagers(),
-//            'pagination' => [
-//                'forcePageParam' => false,
-//                'pageSizeParam' => false,
-//                'pageSize' => 30,
-//            ]
-//        ]);
-        
         return $this->render('index', [
             'model' => $model,
             'manager_list' => $manager_list,
