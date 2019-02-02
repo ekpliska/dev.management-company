@@ -27,6 +27,10 @@ $config = [
             'class' => 'app\modules\managers\Modules',
             'layout' => 'main-managers',
         ],
+        // Модуль API
+        'api' => [
+            'class' => 'app\modules\api\Api',
+        ],
         /*
          * Расширение использует загрузку файлов
          */
@@ -43,6 +47,9 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'LPpnZwt-SMNcuRhZ-S24tU9dMRSkvSkF',
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ],
         ],
         
         /*

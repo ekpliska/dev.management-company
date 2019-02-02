@@ -7,6 +7,7 @@
     use yii\behaviors\TimestampBehavior;
     use app\models\PersonalAccount;
     use app\models\Employees;
+    use app\models\Token;
     
 
 /**
@@ -146,6 +147,13 @@ class User extends ActiveRecord implements IdentityInterface
     }
     
     /*
+     * Связь с таблицей Токен, для авторизации по API
+     */
+    public function getTokens() {
+        return $this->hasMany(Token::className(), ['user_uid' => 'user_id']);
+    }
+    
+    /*
      * Поиск экземпляра identity, используя ID пользователя со статусом подтверденной регистрации
      * Для поддержки состояние аутентификации через сессии
      */    
@@ -154,11 +162,16 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /*
-     * Аутентификация на основе токена, требуется объявить
-     * В проекте не используется    
+     * Аутентификация на основе токена
      */
     public static function findIdentityByAccessToken($token, $type = null) {
-        throw new \yii\base\NotSupportedException('Аутентификация на основе токена не поддерживается');
+        
+        return static::find()
+            ->joinWith('tokens t')
+            ->andWhere(['t.token' => $token])
+            ->andWhere(['>', 't.expired_at', time()])
+            ->one();
+        
     }
 
     /*
