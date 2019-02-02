@@ -50,6 +50,16 @@ class ProfileController extends Controller {
         return UserProfile::userProfile(Yii::$app->user->id);
     }
     
+    public function actionUpdate() {
+        
+        $model = \app\models\User::findOne(Yii::$app->user->id);
+        $model->load(Yii::$app->request->getBodyParams(), '');
+        if ($model->save() === false && !$model->hasErrors()) {
+            throw new ServerErrorHttpException('Ошибка обновления профиля');
+        }
+        return $model;
+    }
+    
     
     
 }

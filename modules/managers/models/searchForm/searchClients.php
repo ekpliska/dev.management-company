@@ -9,6 +9,10 @@
  */
 class searchClients extends Clients {
     
+    public function formName() {
+        return 'clients';
+    }
+    
     public $input_value;
     
     public function rules() {
