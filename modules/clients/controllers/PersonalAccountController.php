@@ -84,7 +84,7 @@ class PersonalAccountController extends AppClientsController {
         $account_number = $this->_current_account_number;
         
         // Получаем номер текущего месяца и год
-        $current_period = date('Y-m');
+        $current_period = date('Y-m-d');
         
         $array_request = [
             'Номер лицевого счета' => $account_number,
@@ -347,8 +347,8 @@ class PersonalAccountController extends AppClientsController {
      */
     public function actionSearchDataOnPeriod($account_number, $date_start, $date_end, $type) {
         
-        $date_start = Yii::$app->formatter->asDate($date_start, 'Y-M-d');
-        $date_end = Yii::$app->formatter->asDate($date_end, 'Y-M-d');
+        $date_start = Yii::$app->formatter->asDate($date_start, 'YYYY-MM');
+        $date_end = Yii::$app->formatter->asDate($date_end, 'YYYY-MM');
                 
         Yii::$app->response->format = Response::FORMAT_JSON;
         

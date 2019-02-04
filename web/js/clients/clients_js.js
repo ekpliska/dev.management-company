@@ -391,34 +391,34 @@ $(document).ready(function() {
         });
     });
     
-    var month = [
-        'январь',
-        'февраль',
-        'март',
-        'апрель',
-        'май',
-        'июнь',
-        'июль',
-        'август',
-        'сентябрь',
-        'октябрь',
-        'ноябрь',
-        'декабрь',
-    ];
+    var month = {
+        'январь': '01',
+        'февраль': '02',
+        'март': '03',
+        'апрель': '04',
+        'май': '05',
+        'июнь': '06',
+        'июль': '07',
+        'август': '08',
+        'сентябрь': '09',
+        'октябрь': '10',
+        'ноябрь': '11',
+        'декабрь': '12',
+    };
     
     /*
      * Запрос на формирование предыдущих показаний приборов учета
      */
     $('#date_start-period-counter').on('change', function() {
         var dateValue = $(this).val();
-        var numMonth = dateValue.split('-')[0];
+        var nameMonth = dateValue.split('-')[0];
         var year = dateValue.split('-')[1];
-        var monthNumber = month.indexOf(numMonth.toLowerCase()) + 1;
+        var monthNumber = month[nameMonth.toLowerCase()];
         console.log(monthNumber + ' ' + year);
         
         $.post('find-indications?month=' + monthNumber + '&year=' + year, function(response) {
             $('#indication-table').html(response.result);
-            console.log(response.result);
+//            console.log(response.result);
         });
     });
     

@@ -39,8 +39,7 @@ class searchClients extends Clients {
                 ->join('LEFT JOIN', 'personal_account as a', 'a.personal_clients_id = c.clients_id')
                 ->join('LEFT JOIN', 'flats as f', 'f.flats_id = a.personal_flat_id')
                 ->join('LEFT JOIN', 'houses as h', 'h.houses_id = f.flats_house_id')
-                ->orderBy('c.clients_surname')
-                ->groupBy('a.account_number');
+                ->orderBy('c.clients_surname');
 
         $data_provider = new ActiveDataProvider([
             'query' => $query

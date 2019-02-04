@@ -71,8 +71,8 @@ class Requests extends ActiveRecord
                 'mimeTypes' => 'image/*',                
                 'on' => self::SCENARIO_ADD_REQUEST,
             ],
-            [['requests_comment'], 'string', 'on' => [self::SCENARIO_ADD_REQUEST, SCENARIO_EDIT_REQUEST]],
-            [['requests_comment'], 'string', 'min' => 10, 'max' => 255, 'on' => [self::SCENARIO_ADD_REQUEST, SCENARIO_EDIT_REQUEST]],
+            [['requests_comment'], 'string', 'on' => [self::SCENARIO_ADD_REQUEST, self::SCENARIO_EDIT_REQUEST]],
+            [['requests_comment'], 'string', 'min' => 10, 'max' => 255, 'on' => [self::SCENARIO_ADD_REQUEST, self::SCENARIO_EDIT_REQUEST]],
             
             ['requests_grade', 'integer'],
             

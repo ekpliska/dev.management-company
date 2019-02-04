@@ -56,7 +56,7 @@ $this->params['breadcrumbs'][] = 'Квитанции КЖУ';
         <div id="receipts-lists">
             <?= $this->render('data/receipts-lists', [
                     'receipts_lists' => $receipts_lists,
-                    'account_number' => $accoint_number,
+                    'account_number' => $account_number,
                 ]) ?>
         </div>
         
