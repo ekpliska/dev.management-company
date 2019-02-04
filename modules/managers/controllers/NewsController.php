@@ -199,7 +199,7 @@ class NewsController extends AppManagersController {
     public function actionForWhomNews($status) {
         
         // Получаем список всех домов
-        $houses_list = Houses::getHousesList();
+        $houses_list = Houses::getHousesListt(true);
         
         if ($status == 'all') {
             echo '<option value>-</option>';
