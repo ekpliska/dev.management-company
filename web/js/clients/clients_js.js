@@ -537,7 +537,7 @@ $(document).ready(function() {
                 answer: answer,
             },
         }).done(function(response) {
-            console.log(response);
+            console.log(response.t);
         });
         
     });

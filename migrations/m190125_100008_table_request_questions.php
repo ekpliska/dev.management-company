@@ -54,17 +54,6 @@ class m190125_100008_table_request_questions extends Migration
                 'CASCADE'
         );
         
-        $this->addForeignKey(
-                'fk-request_answers-anwswer_request_id', 
-                '{{%request_answers}}', 
-                'anwswer_request_id', 
-                '{{%paid_services}}', 
-                'services_id', 
-                'CASCADE',
-                'CASCADE'
-        );
-        
-        
     }
 
     /**

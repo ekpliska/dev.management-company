@@ -31,11 +31,18 @@ class RequestQuestions extends ActiveRecord {
     }
 
     /**
-     * Связь с таблцией Виды Заявки
+     * Связь с таблицей Виды Заявки
      */
     public function getTypeRequest() {
         return $this->hasOne(TypeRequests::className(), ['type_requests_id' => 'type_request_id']);
     }
+    
+    /**
+     * Связь с таблицей Ответы
+     */
+    public function getAnswers() {
+        return $this->hasOne(RequestAnswers::className(), ['anwswer_question_id' => 'question_id']);
+    }    
     
     public static function getAllQuestions($type_request) {
         

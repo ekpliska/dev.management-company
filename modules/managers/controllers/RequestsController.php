@@ -89,7 +89,7 @@ class RequestsController extends AppManagersController {
     public function actionViewRequest($request_number) {
         
         $request = Requests::findRequestToIdent($request_number);
-        
+
         if (!isset($request) && $request == null) {
             throw new \yii\web\NotFoundHttpException('Вы обратились к несуществующей странице');
         }
@@ -110,7 +110,7 @@ class RequestsController extends AppManagersController {
                 $model_comment->sendComments($request['requests_id']);
             }
         }
-                
+        
         $comments_find = CommentsToRequest::findCommentsById($request['requests_id']);
         
         // Получаем прикрепленные к заявке файлы
@@ -334,7 +334,16 @@ class RequestsController extends AppManagersController {
     public function actionShowGradeModal($request_id) {
         
         if (Yii::$app->request->isAjax) {
-            return $this->renderAjax('modal/show-grade-modal');
+            
+            $grade_info = \app\models\RequestQuestions::find()
+                    ->joinWith(['answers a'])
+                    ->where(['a.anwswer_request_id' => $request_id])
+                    ->asArray()
+                    ->all();
+            
+            return $this->renderAjax('modal/show-grade-modal', [
+                'grade_info' => $grade_info,
+            ]);
         }
         
     }
