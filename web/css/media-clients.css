@@ -64,4 +64,63 @@
     }
 }
 
+/* Nav menu */
+@media screen and (max-width: 991px) {
+    .user-notification {
+        display: none;
+    }
+    .navbar-general-page {
+        margin-top: 70px;
+    }
+    .navbar__pills > li, .navbar__pills > li:first-child {
+        width: 150px;
+        height: 50px;
+        padding: 0;
+    }
+    .navbar__pills > li > a {
+        font-size: 10px;
+    }
+}
+@media screen and (max-width: 770px) {
+    .navbar-general-page {
+        margin-top: 150px;
+    }
+}
+@media screen and (max-width: 520px) {
+    .navbar-general-page {
+        margin-top: 170px;
+    }
+}
+/* End Nav menu */
+
 /* End Register Page, Login Page */
+@media screen and (max-width: 1199px) {
+    .news-card-preview {
+        height: 380px;
+    }
+    .news-card-preview-title a {
+        font-size: 16px;
+    }
+    .news-card-preview-text {
+        font-size: 12px;
+    }
+}
+@media screen and (max-width: 590px) {
+    .news-card-preview {
+        height: 400px;
+    }
+    .news-card-preview-title,
+    .news-card-preview-date {
+        margin: 10px;
+    }
+    .news-card-preview-text {
+        padding: 10px;
+    }
+}
+@media screen and (max-width: 550px) {
+    .col-xs-6 {
+        width: 100%;
+    }
+}
+/* News Page, View news */
+/* End News Page, View news */

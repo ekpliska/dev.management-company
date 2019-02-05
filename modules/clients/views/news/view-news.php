@@ -38,15 +38,15 @@ $this->params['breadcrumbs'][] = $news['news_title'];
         <?= $news['news_text'] ?>
     </div>
     
-    <div class="load-news-documents">
-        <h4><span>Вложения</span></h4>
-        <?php if (isset($files) && count($files)) : ?>
-            <?php foreach ($files as $file) : ?>
-                <p class="load-documents">
-                    <?= FormatHelpers::formatUrlByDoc($file['name'], $file['filePath']) ?>
-                </p>
-            <?php endforeach; ?>
-        <?php endif; ?>        
-    </div>
+    <?php if (isset($files) && count($files)) : ?>
+        <div class="load-news-documents">
+            <h4><span>Вложения</span></h4>
+                <?php foreach ($files as $file) : ?>
+                    <p class="load-documents">
+                        <?= FormatHelpers::formatUrlByDoc($file['name'], $file['filePath']) ?>
+                    </p>
+                <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
     
 </div>

@@ -11,7 +11,7 @@ $this->title = Yii::$app->params['site-name'] . "Главная";
 <div class="row news-lists">
     <?php if (isset($news) && count($news) > 0) : ?>
     <?php foreach ($news as $key => $post) : ?>
-        <div class="col-md-4">
+        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
             <div class="news-card-preview">
                 <?= FormatHelpers::previewNewsOrVote($post['news_preview'], false) ?>
 
@@ -29,9 +29,6 @@ $this->title = Yii::$app->params['site-name'] . "Главная";
                     </p>
                 </div>
             </div>
-            <?php if (($key + 1) % 3 == 0) : ?>
-                <div class="clearfix"></div>
-            <?php endif; ?>
         </div>
     <?php endforeach; ?>
     <?php else : ?>
