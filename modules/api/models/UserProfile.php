@@ -18,6 +18,7 @@ class UserProfile extends User {
                         . 'u.created_at as date_created , u.last_login as last_login, '
                         . 'u.status as status, '
                         . 'pa.account_number as account_number,'
+                        . 'h.houses_id as house_id, '
                         . 'h.houses_gis_adress as gis_adress, h.houses_number, f.flats_number')
                 ->from('user as u')
                 ->join('LEFT JOIN', 'clients as c', 'u.user_client_id = c.clients_id')

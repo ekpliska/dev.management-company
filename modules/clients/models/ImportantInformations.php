@@ -11,7 +11,7 @@
 class ImportantInformations extends Model {
     
     // Количество блоков для вывода важной информации
-    public $count_news = 6;
+    public $count_news = 9;
 
     public function informations($living_space) {
         
