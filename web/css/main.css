@@ -1776,7 +1776,9 @@ p.right {
 /* Конец Оценка заявки, звездочки */
 
 /* Модальное окно "Выставить оценку завершенной заявке" */
-#add-grade-modal .modal-body {
+#add-grade-modal .modal-body,
+#show-grade-modal .modal-body {
+    width: 700px;
     margin: 0;
     padding: 0;
 }
@@ -1795,32 +1797,38 @@ p.right {
 .grade-table > tbody > tr > td:last-child button {
     padding: 10px;
     width: 50px;
-    background: #4e425c;
+    background: transparent;
     font-size: 14px;
     border-radius: 12px;
+    border: 1px solid #ccc;
 }
 .grade-table > tbody > tr > td:last-child button:hover {
-    background: #8b709d;
-    color: #fff;
+    background: #ddd;
+    color: #000;
 }
 .grade-table > tbody > tr > td:first-child {
-    padding-left: 20px;
+    /*padding-left: 20px;*/
+    padding: 20px;
 }
 .grade-table > tbody > tr > td:last-child {
     width: 25%;
 }
 .grade-table > tbody > tr > td:last-child button.btn-set-grade-active {
-    background: #8b709d;
+    background: #ddd;
+    color: #000;
 }
 .grade-table > tbody > tr > td:last-child button:focus {
     outline: none;
-    color: #fff;
+    color: #000;
 }
 .grade-table > tbody > tr > td > div#error-message {
     font-size: 12px;
     color: #ef693a;
     text-align: center;
     padding: 20px 0 0 0;
+}
+.grade-table > tbody > tr > td:last-child span.btn-span {
+    padding: 20px;
 }
 /* Конец Модальное окно "Выставить отценку завершенной заявке" */
 
@@ -2845,7 +2853,7 @@ p.date-start-vote {
     color: #fff;
     border-bottom: none;
     text-align: center;
-    font-size: 18px;
+    font-size: 21px;
 }
 .modal-header .close {
     /*margin: 0 !important;*/

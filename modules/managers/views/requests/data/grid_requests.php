@@ -5,6 +5,7 @@
     use app\helpers\FormatHelpers;
     use app\helpers\StatusHelpers;
     use app\helpers\FormatFullNameUser;
+    use app\modules\clients\widgets\RatingRequest;
 
 /*
  * Вывод таблицы заявки пользователя
@@ -86,8 +87,12 @@
                 'attribute' => 'status',
                 'header' => 'Рейтинг',
                 'value' => function ($data) {
-                    return '#TODO';
+                    return RatingRequest::widget([
+                        '_status' => $data['status'], 
+                        '_request_id' => $data['number'],
+                        '_score' => $data['grade']]);
                 },
+                'format' => 'raw',
             ],
             [
                 'class' => 'yii\grid\ActionColumn',
