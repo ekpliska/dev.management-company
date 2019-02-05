@@ -1,13 +1,13 @@
 <?php
 
-    namespace app\modules\api\controllers;
+    namespace app\modules\api\v1\controllers;
     use Yii;
     use yii\rest\Controller;
     use yii\filters\AccessControl;
     use yii\filters\auth\HttpBasicAuth;
     use yii\filters\auth\HttpBearerAuth;
     use yii\web\ServerErrorHttpException;
-    use app\modules\api\models\UserProfile;
+    use app\modules\api\v1\models\UserProfile;
 
 /**
  * Профиль пользователя

@@ -80,7 +80,7 @@
                 },
                 'format' => 'raw',
                 'contentOptions' => [
-                    'class' => 'managers-table_middle',
+                    'class' => 'managers-table_small',
                 ],
             ],
             [
@@ -93,6 +93,9 @@
                         '_score' => $data['grade']]);
                 },
                 'format' => 'raw',
+                'contentOptions' =>[
+                    'class' => 'managers-table_middle',
+                ],
             ],
             [
                 'class' => 'yii\grid\ActionColumn',

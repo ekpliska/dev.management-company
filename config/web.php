@@ -24,12 +24,17 @@ $config = [
         ],
         // Модуль для Администратора
         'managers' => [
-            'class' => 'app\modules\managers\Modules',
+            'class' => 'app\modules\managers\ManagersModule',
             'layout' => 'main-managers',
         ],
+        // Модуль для Диспетчера
+        'dispatchers' => [
+            'class' => 'app\modules\dispatchers\Dispatchers',
+            'layout' => 'main-dispatchers',
+        ],
         // Модуль API
-        'api' => [
-            'class' => 'app\modules\api\Api',
+        'v1' => [
+            'class' => 'app\modules\api\v1\Module',
         ],
         /*
          * Расширение использует загрузку файлов
@@ -143,6 +148,19 @@ $config = [
                 'login' => 'site/login',
                 'registration' => 'site/registration',
                 'request-password-reset' => 'site/request-password-reset',
+                
+//                '<module:clients>/clients/<block:\w+>' => '<module>/clients/index',
+                
+                [
+                    'class' => 'yii\rest\UrlRule', 
+                    'controller' => 'v1/news',
+                    'extraPatterns' => [
+                        'GET /' => 'index',
+                        'GET {id}/view' => 'view',
+                    ],
+                    
+                ],
+                
             ],
         ],
         'sms' => $sms,

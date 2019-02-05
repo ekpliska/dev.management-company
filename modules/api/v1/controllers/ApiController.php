@@ -1,9 +1,9 @@
 <?php
 
-    namespace app\modules\api\controllers;
+    namespace app\modules\api\v1\controllers;
     use Yii;
     use yii\rest\Controller;
-    use app\modules\api\models\LoginForm;
+    use app\modules\api\v1\models\LoginForm;
 
 /**
  * API контроллер
