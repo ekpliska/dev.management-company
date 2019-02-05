@@ -112,7 +112,7 @@ $this->params['breadcrumbs'][] = 'Заявка ID ' . $request_info['requests_id
         'id' => 'add-grade-modal',
         'header' => 'Оцените качество обслуживания',
         'closeButton' => [
-            'class' => 'close modal-close-btn',
+            'class' => 'close modal-close-btn grade-modal__close',
         ],
         'clientOptions' => [
             'backdrop' => 'static',

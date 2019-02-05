@@ -61,7 +61,10 @@
             'data-question' => count($questions),
     ]) ?>
     
-    <?= Html::button('Отмена', ['class' => 'btn-modal btn-modal-no', 'data-dismiss' => 'modal']) ?>
+    <?= Html::button('Отмена', [
+            'class' => 'btn-modal btn-modal-no grade-modal__close', 
+            'data-request' => $request,
+            'data-dismiss' => 'modal']) ?>
     
 </div>
 

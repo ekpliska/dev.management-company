@@ -537,13 +537,16 @@ $(document).ready(function() {
                 answer: answer,
             },
         }).done(function(response) {
-            console.log(response.t);
+//            console.log(response);
         });
         
     });
     
     // 5-тибальная система оценки
     var currentGrade = 5;
+    /*
+     * Завершение выставления оценки завершенной заявки
+     */
     $(document).on('click', '#finished-set-grade', function(){
         var requestID = $(this).data('request');
         var countQuestions = $(this).data('question');
@@ -568,6 +571,16 @@ $(document).ready(function() {
             });
         }
 
+    });
+    
+    /*
+     * Закрыть модальное окно "Оцените заявку"
+     */
+    $(document).on('click', '.grade-modal__close', function(){
+        var requestID = $(this).data('request');
+        $.post('close-grade-window?request=' + requestID, function(response) {
+//            console.log(response.success);
+        });
     });
 
 

@@ -231,5 +231,22 @@ class RequestsController extends AppClientsController
         }
         
     }
+    
+    /*
+     * Закрыть модальное окно ""
+     * При закрытии модального окна, отправляем запрос на удаление ответов
+     */
+    public function actionCloseGradeWindow($request) {
+        
+        if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            if (!RequestAnswers::deleteAll(['anwswer_request_id' => $request])) {
+                return ['success' => false];
+            }
+            return ['success' => true];
+        }
+        return ['success' => false];
+        
+    }
 
  }
