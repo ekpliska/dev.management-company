@@ -1,0 +1,67 @@
+/*
+    media css for clients app
+*/
+
+/* Slader */
+@media screen and (max-width: 1260px) {
+    .btn, .btn-link {
+        padding: 15px;
+        height: 50px;
+        width: 200px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .carousel-caption {
+        left: 0;
+        right: 0;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .carousel-caption {
+        left: 0;
+        right: 0;
+    }
+}
+@media screen and (max-width: 650px) {
+    .slider-product-icon {
+        height: 154px;
+        width: 154px;
+    }
+}
+@media screen and (max-width: 580px) {
+    .start-page {
+        background-size: 70%;
+    }
+    .carousel-caption {
+        left: 10%;
+        right: 10%;
+    }
+    .app-btn-group.text-center {
+        display: grid;
+    }
+}
+/* End Slader */
+
+/* Register Page, Login Page */
+@media screen and (max-width: 1260px) {
+    .registration-form-group, .login-form-group {
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+}
+@media screen and (max-width: 992px) {
+    .registration-form-group, .login-form-group {
+        padding-left: 17%;
+        padding-right: 17%;
+    }
+}
+@media screen and (max-width: 650px) {
+    .registration-form-group, .login-form-group {
+        padding-left: 7%;
+        padding-right: 7%;
+    }
+}
+
+/* End Register Page, Login Page */

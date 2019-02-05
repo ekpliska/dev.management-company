@@ -740,12 +740,18 @@ button:hover {
     background-color: #2d18b4;
     color: #fff;
 }
+.red-border-btn-link {
+    border: 2px solid #fc3232;
+    background-color: #fff;
+    color: #fc3232;
+}
 .red-btn-link {
     border: 1px solid #fc3232;
     background-color: #fc3232;
     color: #fff;
 }
-.red-btn-link:hover {
+.red-btn-link:hover, 
+.red-border-btn-link:hover {
     background-color: #fc3232;
     color: #fff;
 }

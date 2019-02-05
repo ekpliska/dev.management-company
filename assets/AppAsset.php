@@ -17,6 +17,7 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/main.css',
+        'css/media-clients.css',
         'css/checkbox.css',
         '//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css',
     ];
@@ -27,6 +28,6 @@ class AppAsset extends AssetBundle
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
-        'yii\bootstrap\BootstrapPluginAsset',
+//        'yii\bootstrap\BootstrapPluginAsset',
     ];
 } 
