@@ -127,20 +127,15 @@ $('.menu-toggle').on('click', function(e) {
     e.preventDefault();
     $(this).toggleClass('menu-toggle_active');
     $('.navbar-menu__items').toggleClass('menu-show');
-    $('.menu-wrap-manager').toggleClass('menu-show-manager');
+    $('.navbar-mobile-menu__items').toggleClass('mobile-menu_show');
     $('.menu-toggle_message').text('Меню');
-    $('.navbar-general-page').show();
-    $('.navbar_repusets').show();
-    $('.navbar_paid-request').show();
-    $('.sub-menu_account').show();
+    $('.menu-wrap-manager').toggleClass('menu-show-manager');
+    $('.menu_sub-bar').show();
 });
 $(document).on('click', '.menu-toggle_active', function() {
     $(document.body).css('overflow', 'hidden');    
     $('.menu-toggle_message').text('Закрыть');
-    $('.navbar-general-page').hide();    
-    $('.navbar_repusets').hide();    
-    $('.navbar_paid-request').hide();    
-    $('.sub-menu_account').hide();    
+    $('.menu_sub-bar').hide();
 });
 
 $('#menu').on('wheel', function(e){

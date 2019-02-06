@@ -8,6 +8,9 @@
  */
 class NavMenu extends Widget {
     
+    public $view_name = 'menu';
+
+
     public $menu_array = [
         'personal-account' => [
             'link' => 'personal-account/index',
@@ -52,7 +55,7 @@ class NavMenu extends Widget {
 
     public function run() {
         
-        return $this->render('navmenu/clients-menu', [
+        return $this->render("navmenu/{$this->view_name}", [
             'menu_array' => $this->menu_array,
             'child_array' => $this->child_array,
         ]);

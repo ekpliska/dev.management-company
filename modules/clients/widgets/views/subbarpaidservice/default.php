@@ -11,7 +11,7 @@
 ?>
 
 <?php if (Yii::$app->controller->id == 'paid-services' && Yii::$app->controller->action->id == 'index') : ?>
-    <div class="container-fluid navbar_paid-request text-center">
+    <div class="container-fluid navbar_paid-request text-center menu_sub-bar">
         <ul class="nav navbar-nav navbar-left">
             <li>
                 <div class="category-select">
@@ -31,7 +31,7 @@
      </div>
 
 <?php elseif(Yii::$app->controller->id == 'paid-services' && Yii::$app->controller->action->id == 'order-services') : ?>
-    <div class="container-fluid navbar_paid-request text-center">
+    <div class="container-fluid navbar_paid-request text-center menu_sub-bar">
         <?php
             $form = ActiveForm::begin([
                 'id' => 'search-form',

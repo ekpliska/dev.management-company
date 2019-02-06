@@ -9,7 +9,7 @@
 
 <?php if (Yii::$app->controller->id == 'personal-account') : ?>
 <?php $action = Yii::$app->controller->action->id; ?>
-    <div class="container-fluid navbar_personal-account">
+    <div class="container-fluid navbar_personal-account menu_sub-bar">
         <ul class="nav nav-pills sub-menu_account">
             <li class="<?= $action == 'index' ? 'active' : '' ?>">
                 <a href="<?= Url::to(['personal-account/index']) ?>"> Общая информация</a>

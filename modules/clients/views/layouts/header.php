@@ -31,6 +31,9 @@
     <div class="container-fluid navbar-menu__items text-center">
         <?= NavMenu::widget(); ?>   
     </div>
+    <div class="container-fluid navbar-mobile-menu__items text-center">
+        <?= NavMenu::widget(['view_name' => 'mobile-menu']); ?>
+    </div>
     <?= SubBarGeneralPage::widget() ?>
     <?= StatusRequest::widget(['account_id' => $this->context->_current_account_id]) ?>
     <?= SubBarPaidService::widget() ?>
