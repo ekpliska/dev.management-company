@@ -643,8 +643,7 @@ select[name="category_list"] option {
     position: relative;
     display: inline-block;
     user-select: none;
-    margin-left: 77px;
-    font-family: "Mplus 1p";
+    margin-left: 20px;
 }
 .custom-select-wrapper-services select {
     display: none;

@@ -12,22 +12,16 @@
 
 <?php if (Yii::$app->controller->id == 'paid-services' && Yii::$app->controller->action->id == 'index') : ?>
     <div class="container-fluid navbar_paid-request text-center menu_sub-bar">
-        <ul class="nav navbar-nav navbar-left">
-            <li>
-                <div class="category-select">
-                    <?= Html::dropDownList('category_list', 1, $category_list, [
-                            'placeholder' => reset($category_list),
-                            'id' => 'sources-services',
-                            'class' => 'custom-select-services sources-services']) 
-                    ?>
-                </div>
-            </li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                <?= Html::a('История', ['paid-services/order-services'], ['class' => 'btn-history']) ?>
-            </li>
-        </ul>
+        <div class="text-left">
+            <div class="category-select">
+                <?= Html::dropDownList('category_list', 1, $category_list, [
+                        'placeholder' => reset($category_list),
+                        'id' => 'sources-services',
+                        'class' => 'custom-select-services sources-services']) 
+                ?>
+            </div>
+            <?= Html::a('История', ['paid-services/order-services'], ['class' => 'btn-history']) ?>
+        </div>
      </div>
 
 <?php elseif(Yii::$app->controller->id == 'paid-services' && Yii::$app->controller->action->id == 'order-services') : ?>

@@ -40,11 +40,6 @@ $this->params['breadcrumbs'][] = 'Услуги';
     
 <?php Modal::end(); ?>
 
-<?php /*= $this->render('form/add-paid-request', [
-        'new_order' => $new_order, 
-        'name_services_array' => $name_services_array]) */ ?>
-
-
 <?php
 $this->registerCss("
         .navbar-menu {

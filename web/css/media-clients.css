@@ -7,7 +7,7 @@
     .btn, .btn-link {
         padding: 15px;
         height: 50px;
-        width: 200px;
+        width: 170px;
         font-size: 11px;
     }
 }
@@ -291,3 +291,64 @@
     }
 }
 /* End Personal-account Page */
+
+/* Paid-request Page */
+@media screen and (max-width: 1190px) {
+    .cost_service {
+        font-size: 16px;
+    }
+    .service-card__body p {
+        font-size: 13px;
+    }
+}
+@media screen and (max-width: 991px) {
+    .navbar-nav a.btn-history {
+        height: 45px;
+        width: 190px;
+        padding: 12px;
+    }
+}
+@media screen and (max-width: 768px) {
+    .custom-select-trigger-services {
+        width: 280px !important;
+    }
+    a.btn-history {
+        padding: 0px 30px;
+        font-size: 10px;
+        line-height: 5em;
+    }
+}
+@media screen and (max-width: 650px) {
+    .cost_service {
+        font-size: 14px;
+        bottom: 3%;
+    }
+}
+@media screen and (max-width: 570px) {
+    .service-card__body p {
+        font-size: 12px;
+    }
+}
+@media screen and (max-width: 550px) {
+    .service-card_image {
+        height: 50%;
+    }
+    .service-card__body p {
+        font-size: 14px;
+    }
+}
+@media screen and (max-width: 520px) {
+    .custom-select-trigger-services {
+        width: 180px !important;
+        font-size: 12px !important;
+    }
+    .custom-option-services {
+        font-size: 12px !important;
+    }
+    a.btn-history {
+        padding: 0px 15px;
+        font-size: 9px;
+        line-height: 5em;
+    }
+}
+/* End Paid-request Page */
