@@ -51,12 +51,14 @@ $this->params['breadcrumbs'][] = 'Заявка ID ' . $request_info['requests_id
                     </div>
                 <?php endif; ?>
                 
-                <span class="badge request-ident">
-                    <?= 'ID ' . $request_info['requests_ident'] ?>
-                </span>
-                
-                <?= StatusHelpers::requestStatusPage($request_info['status'], $request_info['updated_at']) ?>
-                
+                <div class="requests__status-block">
+                    <span class="request-ident">
+                        <?= 'ID ' . $request_info['requests_ident'] ?>
+                    </span>
+
+                    <?= StatusHelpers::requestStatusPage($request_info['status'], $request_info['updated_at']) ?>
+                </div>
+                    
                 <p class="request_text">
                     <?= $request_info['requests_comment'] ?>
                 </p>
@@ -68,14 +70,14 @@ $this->params['breadcrumbs'][] = 'Заявка ID ' . $request_info['requests_id
                 <?php endif; ?>
                 
                 <div class="client_info">
-                    <div class="col-lg- col-sm-6 col-md-6 text-left">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-left">
                         <div class="client_info-image">
                             <span class="glyphicon glyphicon-home"></span>
                         </div>
                         <span class="client_info-text"><?= Yii::$app->userProfile->getFullAdress($this->context->_current_account_id)?></span>
 
                     </div>
-                    <div class="col-lg-6 col-sm-6 col-md-6 text-left">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-left">
                         <div class="client_info-image">
                             <i class="glyphicon glyphicon-phone"></i>
                         </div>

@@ -36,11 +36,7 @@ class SubMenu extends Widget {
         $params = [];
         
         switch ($this->view_name) {
-            case 'clients': 
-                $model = new searchClients();
-                break;
             case 'employees': 
-                $model = new searchEmployees();
                 $params = $this->departmentsAndPosts();
                 break;
             case 'profile':
@@ -61,7 +57,6 @@ class SubMenu extends Widget {
             'params' => $params,
             'client_id' => $this->client_id,
             'account_number' => $this->account_number,
-            'model' => $model,
         ]);
         
     }

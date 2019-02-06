@@ -247,7 +247,10 @@ class UserProfile extends BaseObject {
                 ->asArray()
                 ->one();
         
-        $adress_string = $info['houses_gis_adress'] . ', д. ' . $info['houses_number'] . ', кв. ' . $info['flats_number'];
+        $houses_gis_adress = explode(',', $info['houses_gis_adress']);
+        unset($houses_gis_adress[0]);
+                
+        $adress_string = implode(',', $houses_gis_adress) . ', д. ' . $info['houses_number'] . ', кв. ' . $info['flats_number'];
         
         return $info ? $adress_string : 'Адрес не определен';
     }
