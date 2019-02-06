@@ -249,6 +249,11 @@
     .receipte-number {
         font-size: 12px;
     }
+    .btn-save-reading, 
+    .btn-edit-reading {
+        width: 170px;
+        font-size: 10px;
+    }
 }
 @media screen and (max-width: 780px) {
     .sub-menu_account > li > a {

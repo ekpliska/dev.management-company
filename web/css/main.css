@@ -2275,8 +2275,7 @@ input[name="date_end-period-pay"]:focus {
     outline: 0;
     box-shadow: none;
 }
-.btn-show-payment,
-.btn-edit-reading {
+.btn-show-payment {
     height: 45px;
     margin: 0 30px;
     border-radius: 12px;
@@ -2288,6 +2287,18 @@ input[name="date_end-period-pay"]:focus {
     text-transform: uppercase;
     font-weight: bold;
     outline: none;
+}
+.btn-edit-reading {
+    height: 48px;
+    width: 220px;
+    border-radius: 12px;
+    border: 1px solid #2d18b4;
+    background-color: #fff;
+    color: #3436ae;
+    font-size: 12px;
+    letter-spacing: 0.9px;
+    text-transform: uppercase;
+    font-weight: bold;
 }
 .btn-show-payment:hover,
 .btn-edit-reading:hover,

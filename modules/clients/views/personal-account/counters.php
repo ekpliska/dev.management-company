@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = 'Показания приборов учета
 
 <div class="counters-page row">
 
-    <div class="col-md-3 options-panel">
+    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 options-panel">
         <p class="payment_title"><i class="glyphicon glyphicon-calendar"></i> Месяц и Год</p>
         <?= DatePicker::widget([
                 'id' => 'date_start-period-counter',
@@ -52,7 +52,7 @@ $this->params['breadcrumbs'][] = 'Показания приборов учета
         ]);
     ?>
     
-    <div class="col-md-9 text-right options-panel">
+    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 text-right options-panel">
         <?php if ($is_current) : ?>
             <?= Html::button('Внести показания', ['class' => 'btn-edit-reading']) ?>
             <?= Html::submitButton('Сохранить', ['class' => 'btn-save-reading', 'disabled' => true]) ?>
