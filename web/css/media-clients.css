@@ -8,6 +8,7 @@
         padding: 15px;
         height: 50px;
         width: 200px;
+        font-size: 11px;
     }
 }
 
@@ -233,4 +234,42 @@
 /* End Request Page */
 
 /* Personal-account Page */
+@media screen and (max-width: 991px) {
+    .breadcrumb-padding {
+        margin-top: 125px;
+    }    
+    .sub-menu_account > li > a {
+        padding: 20px 30px;
+        font-size: 12px;
+    }
+}
+@media screen and (max-width: 780px) {
+    .sub-menu_account > li > a {
+        padding: 15px 15px;
+        font-size: 12px;
+    }
+}
+@media screen and (max-width: 660px) {
+    .sub-menu_account > li > a {
+        padding: 15px 15px;
+        font-size: 10px;
+    }
+}
+@media screen and (max-width: 560px) {
+    .sub-menu_account > li > a {
+        padding: 15px 7px;
+        font-size: 10px;
+    }
+    .wrap > .container {
+        padding-top: 30px;
+    }
+    .table-account {
+        font-size: 12px;
+    }
+}
+@media screen and (max-width: 500px) {
+    .navbar_personal-account {
+        display: none;
+    }
+}
 /* End Personal-account Page */

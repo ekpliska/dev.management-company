@@ -2104,6 +2104,9 @@ input[id="_search-input"]:-moz-placeholder {
     font-weight: bold;
     padding: 20px 0;
 }
+.table-account > tbody > tr > td:first-child {
+    width: 30%;
+}
 .table-account > thead > tr > td,
 .table-account > tbody > tr > td {
     padding: 20px;
