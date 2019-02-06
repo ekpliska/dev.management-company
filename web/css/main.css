@@ -2490,6 +2490,7 @@ input[name="date_end-period-pay"]:focus {
     padding: 10px;
     height: 72px;
     border-bottom: 1px solid #ddd;
+    position: relative;
 }
 .vote-card_title a {
     color: #2d18b4;
@@ -2497,7 +2498,9 @@ input[name="date_end-period-pay"]:focus {
     font-weight: bold;
 }
 .vote-card_title i {
-    float: right;
+    position: absolute;
+    right: 3%;
+    top: 16%;
     padding: 23px;
     margin: -11px -10px -10px 0;
     font-size: 26px;

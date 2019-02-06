@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = 'Опрос';
     <?php if (isset($voting_list) && count($voting_list) > 0) : ?>
         <?php foreach ($voting_list as $key => $voting) : ?>
 
-        <div class="col-md-4">
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
             <div class="vote-card-preview">
                 <?= Html::img('@web' . $voting['voting_image'], ['class' => 'vote-card-img']) ?>
                 <span class="vote-card_date-end">

@@ -352,3 +352,14 @@
     }
 }
 /* End Paid-request Page */
+
+/* Vote Page */
+@media screen and (max-width: 1199px) {
+    .vote-card_title {
+        height: 66px;
+    }
+    .vote-card_title i {
+        padding: 20px;
+    }
+}
+/* End Vote Page */
