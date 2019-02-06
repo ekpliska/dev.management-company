@@ -2255,6 +2255,9 @@ a.receipte-btn-dowload {
     color: #2d1d83;
     padding:  0px 0px 0px 10px;
 }
+.payments-page__date-block {
+    display: flex;
+}
 .date-block span {
     padding: 10px;
     font-size: 12px;
@@ -2274,11 +2277,11 @@ input[name="date_end-period-pay"]:focus {
 }
 .btn-show-payment,
 .btn-edit-reading {
-    height: 48px;
-    width: 220px;
+    height: 45px;
+    margin: 0 30px;
     border-radius: 12px;
     border: 1px solid #2d18b4;
-    background-color: #ffffff;
+    background-color: #fff;
     color: #3436ae;
     font-size: 12px;
     letter-spacing: 0.9px;
@@ -2296,7 +2299,7 @@ input[name="date_end-period-pay"]:focus {
     box-shadow: 0 2px 5px 2px rgba(0,0,0,0.26);    
 }
 .payments-page table {
-    margin-top: 100px;
+    margin-top: 50px;
 }
 .payment_btn-pay {
     background: #2d18b4;

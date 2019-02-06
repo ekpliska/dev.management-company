@@ -9,7 +9,7 @@
 // Текущая дата (Год и номер месяца)
 $current_date = date('Y-m');
 ?>
-<?php if ($receipts_lists != null || count($receipts_lists) > 0) : ?>
+<?php if (!empty($receipts_lists) || count($receipts_lists) > 0) : ?>
 <ul class="list-group receipte-of-lists">
     <?php foreach ($receipts_lists as $key => $receipt) : ?>
         <?php

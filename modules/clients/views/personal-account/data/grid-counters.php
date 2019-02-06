@@ -33,7 +33,7 @@ $array_image = [
             </tr>
         </thead>            
         <tbody>
-            <?php if (isset($indications) && is_array($indications)) : ?>
+            <?php if (!empty($indications) && is_array($indications)) : ?>
                 <?php foreach ($indications as $key => $indication) : ?>
                     <?php $data_check = (strtotime($current_date) >= strtotime($indication['Дата следующей поверки'])) ? true : false ?>
                     <tr class="<?= ($data_check == true) ? 'block-edit-reading' : '' ?>">

@@ -242,11 +242,24 @@
         padding: 20px 30px;
         font-size: 12px;
     }
+    .receipte-of-lists > li {
+        padding: 10px;
+    }
+    span.receipte-btn-pay-debt,
+    .receipte-number {
+        font-size: 12px;
+    }
 }
 @media screen and (max-width: 780px) {
     .sub-menu_account > li > a {
         padding: 15px 15px;
         font-size: 12px;
+    }
+}
+@media screen and (max-width: 768px) {
+    .receipts_period {
+        border-right: none;
+        border-bottom: 1px solid #ddd;
     }
 }
 @media screen and (max-width: 660px) {

@@ -285,6 +285,7 @@ $(document).ready(function() {
             $('.message-block').removeClass('invalid-message-show').html('');
             $.post('search-data-on-period?account_number=' + accountNumber + '&date_start=' + startDate + '&date_end=' + endDate + '&type=' + type,
                 function(data) {
+                        console.log(data.success);
                     if (data.success === false) {
                         $('.message-block').addClass('invalid-message-show').html('Ошибка запроса');
                     } else if (data.success === true) {

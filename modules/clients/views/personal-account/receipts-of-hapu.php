@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = 'Квитанции КЖУ';
 ]) ?>
 
 <div class="receipts-page row">
-    <div class="col-md-5 receipts_period">
+    <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12 receipts_period">
         <p class="period_title"><i class="glyphicon glyphicon-calendar"></i> Период</p>
         <div class="receipts_period-calendar">
             <?= DatePicker::widget([
@@ -61,7 +61,7 @@ $this->params['breadcrumbs'][] = 'Квитанции КЖУ';
         </div>
         
     </div>
-    <div class="col-md-7 receipts_body">
+    <div class="col-lg-7 col-md-7 col-sm-6 col-xs-12 receipts_body">
         
 <!--    <div class="operations-block">
         <ul class="nav nav-pills operations-block_items">

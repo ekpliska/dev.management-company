@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = 'Платежи';
 
 <div class="payments-page row">
     <p class="payment_title"><i class="glyphicon glyphicon-calendar"></i> Период</p>
-    <div class="col-md-3 date-block">
+    <div class="payments-page__date-block">
         <?= DatePicker::widget([
                 'name' => 'date_start-period-pay',
                 'type' => DatePicker::TYPE_INPUT,
@@ -35,9 +35,8 @@ $this->params['breadcrumbs'][] = 'Платежи';
             ]);        
         ?>
         
-    </div>
-    <div class="col-md-3 date-block">
-        <span>&#45;</span>
+        &nbsp;&nbsp;&nbsp;
+        
         <?= DatePicker::widget([
                 'name' => 'date_end-period-pay',
                 'type' => DatePicker::TYPE_INPUT,
@@ -48,16 +47,16 @@ $this->params['breadcrumbs'][] = 'Платежи';
                 ]
             ]);        
         ?>        
-    </div>
-    <div class="col-md-6">
         <?= Html::button('Показать', [
                 'id' => 'btn-show-payment',
                 'class' => 'btn-show-payment',
                 'data-account-number' => $account_number,
             ]) 
         ?>
+        
+        <div class="col-md-12 message-block"></div>
+        
     </div>
-    <div class="col-md-12 message-block"></div>
     
     <table class="table clients-table">
         <thead>
