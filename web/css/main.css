@@ -2871,8 +2871,8 @@ p.date-start-vote {
 
 /* Переопреденное модальное окно бутстрапа */
 .modal-content {
-    position: absolute;
-    top: 100px;
+    position: relative;
+    /*top: 100px;*/
     background: linear-gradient(180.67deg, #39284E 0%, rgba(10,8,8,0.7) 100%);
     margin: 0;
     padding-top: 30px;

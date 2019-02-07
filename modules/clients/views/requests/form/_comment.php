@@ -17,16 +17,16 @@
                     <?= FormatHelpers::formatDateChat($prev_date, $comment->created_at)  ?>
                 </div>
                 <div class="row">
-                    <div class="col-sm-1 chat_photo">
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 chat_photo">
                         <?= Html::img($comment['user']->photo, ['class' => 'request-chat-icon']) ?>
                     </div>
-                    <div class="col-sm-8 chat-txt-block">
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 chat-txt-block">
                         <p class="chat-name">
                             <?= $comment['user']['client']->clients_name ? $comment['user']['client']->clients_name : $comment['user']['employee']->employee_name ?>
                         </p>
                         <?= $comment->comments_text ?>
                     </div>
-                    <div class="col-sm-2 chat_time">
+                    <div class="col-lg-2 col-md-2 col-sm-1 col-xs-2 chat_time">
                         <?= FormatHelpers::formatDate($comment->created_at, true, 0, true) ?>
                     </div>
                 </div>

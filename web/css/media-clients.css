@@ -178,6 +178,11 @@
 /* End News Page, View news */
 
 /* Request Page */
+@media screen and (max-width: 1200px) {
+    .chat-txt-block {
+        margin-left: 25px;
+    }
+}
 @media screen and (max-width: 1190px) {
     .status-request > li > a {
         font-size: 10px;
