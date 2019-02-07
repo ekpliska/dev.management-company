@@ -354,6 +354,19 @@
 /* End Paid-request Page */
 
 /* Vote Page */
+@media screen and (max-width: 1200px) {
+    .table-voting-results > tbody > tr > td > h4, 
+    .questions-text-show > h4 {
+        font-size: 16px;
+    }
+    .table-voting-results > tbody > tr > td > h4 > i, 
+    .questions-text-show > h4 > i {
+        padding: 7px;
+    }
+    .table-voting-results > tbody > tr > td p.title {
+        font-size: 14px;
+    }
+}
 @media screen and (max-width: 1199px) {
     .vote-card_title {
         height: 66px;
@@ -367,6 +380,9 @@
         font-size: 11px;
         padding: 10px;
     }
+    .voting-body_right {
+        padding: 10px 15px 10px 0;
+    }
 }
 @media screen and (max-width: 768px) {
     .vote-card_date-end {
@@ -374,6 +390,24 @@
         padding: 10px;
         font-size: 10px;
         left: 22%;
+    }
+    .voting-title-block h2 {
+        font-size: 22px;
+    }
+    .voting-info {
+        display: grid;
+    }
+    .voting-info span {
+        margin: 10px;
+    }
+    .btn-set-voting {
+        padding: 15px 0 !important;
+    }
+}
+@media screen and (max-width: 680px) {
+    .btn-group > .btn {
+        width: 130px;
+        font-size: 10px  !important;
     }
 }
 @media screen and (max-width: 550px) {
@@ -388,6 +422,15 @@
     }
     .vote-card_text {
         height: 133px;
+    }
+    .register-in-voting {
+        padding: 12px 20px;
+    }
+}
+@media screen and (max-width: 480px) {
+    .btn-group > .btn {
+        width: 100px;
+        font-size: 10px  !important;
     }
 }
 @media screen and (max-width: 400px) {

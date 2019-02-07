@@ -69,7 +69,7 @@ $this->params['breadcrumbs'][] = $voting['voting_title'];
                 if (isset($participants) && count($participants) > 0) : 
             ?>
                 <?php foreach ($participants as $participant) : ?>
-                    <div class="col-md-4 voting__participant_info text-center">
+                    <div class="col-lg-4 col-md-4 col-sm-2 col-xs-2 voting__participant_info text-center">
                         <?php $avatar = $participant['user_photo'] ? $participant['user_photo'] : "images/no-avatar.jpg" ?>
                         <?= Html::img("@web/{$avatar}", ['alt' => 'user-name', 'class' => 'img-responsive img-circle']) ?>
                         <?= Html::a($participant['clients_name'], ['view-profile', 'user_id' => $participant['user_id']], [
