@@ -504,6 +504,10 @@
     .custom-select-trigger {
         width: 300px !important;
     }
+    .user-full-name {
+        font-size: 16px;
+        text-align: center;
+    }
 }
 
 /* End Profile Page */
