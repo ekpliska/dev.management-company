@@ -68,7 +68,7 @@ $this->params['breadcrumbs'][] = 'Профиль';
     <div class="row">
         
         <!--Собственник-->
-        <div class="col-md-6 clients-profile-info">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 clients-profile-info">
             <p class="profile-title">
                 Мои контактные данные&nbsp;
                 <?= Html::a('<i class="glyphicon glyphicon-cog"></i>', ['profile/settings-profile']) ?>
@@ -94,7 +94,7 @@ $this->params['breadcrumbs'][] = 'Профиль';
 
         <!--Арендатор-->
         <?php if (Yii::$app->user->can('clients')) : ?>
-        <div class="col-md-6 rent-profile-info">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 rent-profile-info">
             <p class="profile-title-rent">
                 <label class="el-switch">
                     <?= Html::checkbox('is_rent', $is_rent ? 'checked' : '', ['id' => 'is_rent']) ?>

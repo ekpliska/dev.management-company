@@ -458,3 +458,52 @@
     }
 }
 /* End Vote Page */
+
+/* Profile Page */
+@media screen and (max-width: 1260px) {
+    .profile-page .btn {
+        width: 200px;
+    }
+}
+@media screen and (max-width: 991px) {
+    .rent-profile-info {
+        border-top: 1px solid #ddd;
+        padding: 40px 0;
+        margin-top: 40px;
+    }
+    .spam-agree-txt label {
+        font-size: 14px;
+    }
+    .spam-agree-txt label:before {
+        width: 25px !important;
+        height: 25px !important;
+        margin-left: -32px !important;
+    }
+    .profile-bg {
+        height: 300px;
+    }
+    .face-container {
+        top: 60px;
+    }
+    .profile-name {
+        margin-top: 100px;
+    }
+    .profile-name p {
+        font-size: 22px;
+    }
+    .profile-bg .face {
+        box-shadow: 0px 0px 0px 30px rgba(45, 24, 180, 0.5);
+        width: 90px;
+        height: 90px;
+    }
+    .badge-personal-account, 
+    .profile-title,
+    .margin-r {
+        font-size: 14px;
+    }
+    .custom-select-trigger {
+        width: 300px !important;
+    }
+}
+
+/* End Profile Page */
