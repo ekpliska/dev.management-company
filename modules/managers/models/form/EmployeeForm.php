@@ -33,6 +33,10 @@ class EmployeeForm extends Model {
     // Разрешение на добавление новостей
     public $is_new = false;
     
+    // Разрешения для учетной записи Администратор
+    public $permission_list = [];
+
+
     /*
      * Правила валидации
      */
@@ -94,14 +98,14 @@ class EmployeeForm extends Model {
             [['photo'], 'file', 'extensions' => 'png, jpg, jpeg'],
             [['photo'], 'image', 'maxWidth' => 510, 'maxHeight' => 510],
             
-            
+            ['permission_list', 'safe'],
         ];
     }
     
     /*
      * Метод отвечает за добавление сведений о новом сотруднике и создание учетной записи для него
      */
-    public function addEmployer($file, $role) {
+    public function addEmployer($file, $role, $permission_list_post) {
         
         $transaction = Yii::$app->db->beginTransaction();
         try {
@@ -117,7 +121,7 @@ class EmployeeForm extends Model {
                 $employee->employee_birthday = $this->birthday;
                 
                 if(!$employee->save()) {
-                    throw new \yii\db\Exception('Ошибка сохранения арендатора. Ошибка: ' . join(', ', $employer->getFirstErrors()));
+                    throw new \yii\db\Exception('Ошибка сохранения арендатора. Ошибка: ' . join(', ', $employee->getFirstErrors()));
                 }
                 
                 // Создаем нового пользователя для сотрудника
@@ -140,8 +144,16 @@ class EmployeeForm extends Model {
                 
                 // Устанавливаем права на добавление новостей
                 if ($this->is_new === 1) {
-                    $permission_news = Yii::$app->authManager->getPermission('AddNews');
+                    $permission_news = Yii::$app->authManager->getPermission('CreateNewsDispatcher');
                     Yii::$app->authManager->assign($permission_news, $user->user_id);
+                }
+                
+                // Назначение доступа к разделам кабинета Администратора
+                if (!empty($permission_list_post)) {
+                    foreach ($permission_list_post as $key => $value) {
+                        $permission_name = Yii::$app->authManager->getPermission($key);
+                        Yii::$app->authManager->assign($permission_name, $user->user_id);
+                    }
                 }
                 
             }

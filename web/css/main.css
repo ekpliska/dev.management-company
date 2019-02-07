@@ -1785,8 +1785,6 @@ p.right {
 /* Модальное окно "Выставить оценку завершенной заявке" */
 #add-grade-modal .modal-body,
 #show-grade-modal .modal-body {
-    width: 700px;
-    margin: 0;
     padding: 0;
 }
 .grade-table {
@@ -3689,6 +3687,43 @@ tbody > tr > td > div.empty::before {
 }
 .dispatch-privileges-block {
     padding: 30px;
+}
+.save-btn-group {
+    margin-bottom: 40px;
+}
+.privileges-block {
+    margin: 20px 0;
+    padding: 0 40px;
+}
+.privileges-block h3.title {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 20px;
+    text-align: center;
+}
+.privileges-block__privilege h4 {
+    font-size: 14px;
+    font-weight: bold;
+    padding: 10px;
+}
+.privileges-block__privilege {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 0;
+    /*height: 140px;*/
+    margin: 15px 0;
+}
+.privileges-block__lists {
+    list-style: none;
+    padding: 0;
+}
+.privileges-block__lists > li {
+    padding: 10px;
+    border-top: 1px solid #ddd;
+}
+div#permission_lists {
+    text-align: right;
+    margin-right: 10px;
 }
 /* Конец Создание нового сотрудника */
 

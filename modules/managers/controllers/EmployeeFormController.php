@@ -11,6 +11,7 @@
     use app\models\Employees;
     use app\modules\managers\models\Posts;
     use app\modules\managers\models\form\ChangePasswordAdministrator;
+    use app\modules\managers\models\permission\PermissionsList;
     
 
 /**
@@ -25,17 +26,26 @@ class EmployeeFormController extends AppManagersController {
      */
     public function actionIndex($new_employee) {
         
+        // Загружаем модель для создания нового Сотрудника
         $model = new EmployeeForm();
         
+        // Формируем список Подразделений
         $department_list = Departments::getArrayDepartments();
+        // Должности
         $post_list = [];
         
+        // Формируем список для натсройки прав доступа
+        $permissions_list = PermissionsList::getList();
+        
+        
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            
+            $permission_list_post = Yii::$app->request->post()['permission_list'];
             
             $file = UploadedFile::getInstance($model, 'photo');
             $model->photo = $file;
             
-            $employee_id = $model->addEmployer($file, $new_employee);
+            $employee_id = $model->addEmployer($file, $new_employee, $permission_list_post);
             
             if ($employee_id != null) {
                 return $this->redirect(['employee-profile', 
@@ -51,6 +61,7 @@ class EmployeeFormController extends AppManagersController {
             'model' => $model,
             'department_list' => $department_list,
             'post_list' => $post_list,
+            'permissions_list' => $permissions_list,
         ]);
     }
     

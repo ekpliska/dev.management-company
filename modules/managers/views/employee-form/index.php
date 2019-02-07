@@ -145,23 +145,70 @@ $this->params['breadcrumbs'][] = 'Новая запись [Сотрудник]';
                 </div>
             </div>
         </div>
-
-        <div class="spam-agree-txt text-center">
-            <?php if ($role == 'dispatcher') : ?>
+            
+        <?php if ($role == 'dispatcher') : ?>
+            <div class="spam-agree-txt text-center">
                 <div class="dispatch-privileges-block">
                     <?= Html::checkbox('can-add-news', false, ['id' => 'can-add-news']) ?>
                     <label for="can-add-news">Возможность добавлять новости</label>
-                </div>
-            <?php endif; ?>
-            <div class="save-btn-group">
-                <div class="text-center">
-                    <?= Html::submitButton('Добавить', ['class' => 'btn blue-btn']) ?>
-                </div>
             </div>
-
+        <?php endif; ?>
+                
+        <?php if ($role == 'administrator') : ?>
+            <div class="privileges-block row">
+                <h3 class="title">Настройка прав доступа</h3>
+                <?php if (isset($permissions_list) && !empty($permissions_list)) : ?>
+                <?php foreach ($permissions_list as $key => $permission) : ?>
+                    <div class="col-lg-4 col-md-4 col-sm-3 col-xs-4">
+                        <div class="privileges-block__privilege">
+                            <h4><?= $permission['name'] ?></h4>
+                
+                            <ul>            
+                <?php /* = $form->field($model, 'permission_list', [
+                        'template' => "{label}\n{input}\n{hint}\n<div class='col-sm-12'>{error}</div>",
+                    ])->checkboxList(
+                        $permission['permission'], [
+                            'item' => function ($index, $label, $name, $checked, $value) {
+                                return Html::tag('li', Html::label(
+                                    Html::checkbox($name, $checked, [
+                                        'value' => $label->id,
+                                    ]) . Html::tag('i') . Html::tag('span', $label->name), null, [
+                                        'class' => 'participants-types__item',
+                                    ]
+                                ));
+                            }
+                        ]
+                    )->label(false) */ ?>
+                    </ul>         
+                            
+                            <?= $form->field($model, 'permission_list', ['template' => "{label}\n{input}\n{hint}\n<div class='col-sm-12'>{error}</div>"])
+                                    ->checkboxList($permission['permission'], ['id' => "permission_lists",
+                                        'item' => function($index, $label, $name, $checked, $value) {
+                                            $return = '<label class="switch">' . 'here';
+                                            $return .= '<input type="checkbox" name="permission_list[' . $value . ']">';
+                                            $return .= '<span class="slider round"></span>';
+                                            $return .= '</label>';
+                                            return $return;
+                                        }
+                                    ])
+                                    ->label(false); ?>
+                               
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+                <?php endif; ?>
+            </div>
+        <?php endif; ?>
+                
+        <div class="save-btn-group">
+            <div class="text-center">
+                <?= Html::submitButton('Добавить', ['class' => 'btn blue-btn']) ?>
+            </div>
         </div>
-     <?php ActiveForm::end() ?>
+
+        </div>     
     
-    </div> 
+    </div>
     
+    <?php ActiveForm::end() ?>
 </div>
