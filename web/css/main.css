@@ -2499,10 +2499,10 @@ input[name="date_end-period-pay"]:focus {
 }
 .vote-card_title i {
     position: absolute;
-    right: 3%;
-    top: 16%;
+    right: 0%;
+    top: 0%;
     padding: 23px;
-    margin: -11px -10px -10px 0;
+    /*margin: -11px -10px -10px 0;*/
     font-size: 26px;
     color: #fff;    
 }

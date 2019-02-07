@@ -362,4 +362,56 @@
         padding: 20px;
     }
 }
+@media screen and (max-width: 991px) {
+    .vote-card_date-end {
+        font-size: 11px;
+        padding: 10px;
+    }
+}
+@media screen and (max-width: 768px) {
+    .vote-card_date-end {
+        width: 180px;
+        padding: 10px;
+        font-size: 10px;
+        left: 22%;
+    }
+}
+@media screen and (max-width: 550px) {
+    .vote-card-img {
+        height: 255px;
+    }
+    .vote-card_date-end {
+        width: 200px;
+        font-size: 10px;
+        left: 30%;
+        top: 30%;
+    }
+    .vote-card_text {
+        height: 133px;
+    }
+}
+@media screen and (max-width: 400px) {
+    .vote-card_date-end {
+        left: 20%;
+    }
+    .vote-card_title i {
+        padding: 15px;
+    }
+    .vote-card_text {
+        font-size: 12px;
+    }
+    [class*="col-"] {
+        font-size: 12px;
+    }
+    .vote-card_title {
+        height: 56px;
+    }
+    .vote-card_title a {
+        font-size: 14px;
+    }
+    p.date-start-vote {
+        font-size: 10px;
+        padding: 0;
+    }
+}
 /* End Vote Page */
