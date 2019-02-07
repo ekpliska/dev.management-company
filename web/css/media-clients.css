@@ -99,10 +99,11 @@
         color: #fff;
         text-transform: uppercase;
     }
-    .mobile-menu__items > li:hover {
+    .mobile-menu__items > li a:focus {
+        text-decoration: none;
+    }
+    .mobile-menu__items > li > a:hover {
         font-weight: bold;
-        border-bottom: 1px solid;
-        background: linear-gradient(to right, rgba(0, 0, 0, 0), #8b709d, rgba(0, 0, 0, 0));
     }
     .mobile-menu__hr {
         border: 0;
@@ -155,6 +156,9 @@
     }
 }
 @media screen and (max-width: 590px) {
+    .news-lists {
+        margin-top: 200px;
+    }
     .news-card-preview {
         height: 400px;
     }

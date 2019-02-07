@@ -3064,6 +3064,39 @@ p.date-start-vote {
 .menu-toggle_message:hover {
     text-decoration: none;
 }
+.mobile-menu__items__sub {
+    display: none;
+}
+.mobile-menu__items__sub > li {
+    color: #fff;
+    list-style: none;
+    text-align: center;
+    padding-right: 35px;
+    padding-top: 10px;
+}
+.mobile-menu__items__sub > li > a {
+    color: #fff;
+}
+.mobile-menu__items__sub > li > a:hover {
+    border: 1px solid #fff;
+    padding: 5px;
+    border-radius: 12px;
+}
+.mobile-menu__sub-show {
+    display: block;
+}
+.caret-arrow {
+    border: solid #fff;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+.up-arrow {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+}
 
 /* Выпадающее меню навигации */
 .menu-items {

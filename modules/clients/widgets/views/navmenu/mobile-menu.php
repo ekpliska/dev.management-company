@@ -7,6 +7,7 @@
  * Разрешение экрана < 991px
  */
 ?>
+
 <ul class="mobile-menu__items">
     <li>
         <?= Html::a($menu_array['clients']['name'], [$menu_array['clients']['link']], ['class' => '']) ?>
@@ -15,7 +16,12 @@
         <?= Html::a($menu_array['requests']['name'], [$menu_array['requests']['link']], ['class' => '']) ?>
     </li>
     <li>
-        <?= Html::a($menu_array['personal-account']['name'], [$menu_array['personal-account']['link']], ['class' => '']) ?>
+        <a href="javascript:void(0)" id="sub-menu_open">Лицевой счет <i class="caret-arrow down-arrow"></i></a>
+        <ul class="mobile-menu__items__sub">
+            <li><?= Html::a($child_array['0']['name'], [$child_array['0']['link']], ['class' => '']) ?></li>
+            <li><?= Html::a($child_array['1']['name'], [$child_array['1']['link']], ['class' => '']) ?></li>
+            <li><?= Html::a($child_array['2']['name'], [$child_array['2']['link']], ['class' => '']) ?></li>
+        </ul>
     </li>
     <li>
         <?= Html::a($menu_array['paid-services']['name'], [$menu_array['paid-services']['link']], ['class' => '']) ?>

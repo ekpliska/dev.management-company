@@ -138,6 +138,14 @@ $(document).on('click', '.menu-toggle_active', function() {
     $('.menu_sub-bar').hide();
 });
 
+/*
+ * Сабменю, в мобтльной версии
+ */
+$(document).on('click', '#sub-menu_open', function() {
+    $('.mobile-menu__items__sub').toggleClass('mobile-menu__sub-show');
+    $('.caret-arrow').toggleClass('up-arrow');
+});
+
 $('#menu').on('wheel', function(e){
     
     var delta = e.originalEvent.wheelDelta /120;
