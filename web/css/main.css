@@ -3717,13 +3717,18 @@ tbody > tr > td > div.empty::before {
     list-style: none;
     padding: 0;
 }
-.privileges-block__lists > li {
+.privileges-block__lists > .form-group {
+    margin: 0;
+}
+#permission_lists > li {
     padding: 10px;
     border-top: 1px solid #ddd;
 }
+#permission_lists > li > span {
+    float: left;
+}
 div#permission_lists {
     text-align: right;
-    margin-right: 10px;
 }
 /* Конец Создание нового сотрудника */
 

@@ -162,37 +162,20 @@ $this->params['breadcrumbs'][] = 'Новая запись [Сотрудник]';
                     <div class="col-lg-4 col-md-4 col-sm-3 col-xs-4">
                         <div class="privileges-block__privilege">
                             <h4><?= $permission['name'] ?></h4>
-                
-                            <ul>            
-                <?php /* = $form->field($model, 'permission_list', [
-                        'template' => "{label}\n{input}\n{hint}\n<div class='col-sm-12'>{error}</div>",
-                    ])->checkboxList(
-                        $permission['permission'], [
-                            'item' => function ($index, $label, $name, $checked, $value) {
-                                return Html::tag('li', Html::label(
-                                    Html::checkbox($name, $checked, [
-                                        'value' => $label->id,
-                                    ]) . Html::tag('i') . Html::tag('span', $label->name), null, [
-                                        'class' => 'participants-types__item',
-                                    ]
-                                ));
-                            }
-                        ]
-                    )->label(false) */ ?>
-                    </ul>         
-                            
-                            <?= $form->field($model, 'permission_list', ['template' => "{label}\n{input}\n{hint}\n<div class='col-sm-12'>{error}</div>"])
-                                    ->checkboxList($permission['permission'], ['id' => "permission_lists",
-                                        'item' => function($index, $label, $name, $checked, $value) {
-                                            $return = '<label class="switch">' . 'here';
-                                            $return .= '<input type="checkbox" name="permission_list[' . $value . ']">';
-                                            $return .= '<span class="slider round"></span>';
-                                            $return .= '</label>';
-                                            return $return;
-                                        }
-                                    ])
-                                    ->label(false); ?>
-                               
+                            <ul class="privileges-block__lists">    
+                                <?= $form->field($model, 'permission_list', ['template' => '{label}{input}'])
+                                        ->checkboxList($permission['permission'], ['id' => "permission_lists",
+                                            'item' => function($index, $label, $name, $checked, $value) {
+                                                $return = '<li><span>' . $label . '</span>';
+                                                $return .= '<label class="switch">' . '';
+                                                $return .= '<input type="checkbox" name="permission_list[' . $value . ']">';
+                                                $return .= '<span class="slider round"></span>';
+                                                $return .= '</label>';
+                                                $return .= '</li>';
+                                                return $return;
+                                            }])
+                                        ->label(false) ?>
+                            </ul>       
                         </div>
                     </div>
                 <?php endforeach; ?>

@@ -90,6 +90,11 @@ class EmployeeFormController extends AppManagersController {
         $post_list = Posts::getPostList($employee_info->employee_department_id);
         // Список ролей
         $role = User::getRole($type);
+        // Список прав пользователя (для checkBoxList)
+        $permissions_list = PermissionsList::getList();
+        
+        $current_permissions = PermissionsList::getUserPermission($user_info->id);
+        echo '<pre>'; var_dump(\yii\helpers\ArrayHelper::keyExists('ClientsEdit',$current_permissions)); die();
         
         // Сохраняем данные с формы
         if ($user_info->load(Yii::$app->request->post()) && $employee_info->load(Yii::$app->request->post())) {
@@ -117,6 +122,8 @@ class EmployeeFormController extends AppManagersController {
             'department_list' => $department_list,
             'post_list' => $post_list,
             'role' => $role,
+            'permissions_list' => $permissions_list,
+            'current_permissions' => $current_permissions,
         ]);
         
     }

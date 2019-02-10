@@ -5,6 +5,7 @@
     use yii\base\Model;
     use app\models\User;
     use app\models\Employees;
+    use app\modules\managers\models\permission\SetPermissions;
 
 /**
  * Новый Диспетчер
@@ -150,10 +151,7 @@ class EmployeeForm extends Model {
                 
                 // Назначение доступа к разделам кабинета Администратора
                 if (!empty($permission_list_post)) {
-                    foreach ($permission_list_post as $key => $value) {
-                        $permission_name = Yii::$app->authManager->getPermission($key);
-                        Yii::$app->authManager->assign($permission_name, $user->user_id);
-                    }
+                    $_permissions = SetPermissions::addPermissions($user->user_id, null, $permission_list_post);
                 }
                 
             }

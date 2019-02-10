@@ -88,4 +88,12 @@ class PermissionsList {
         return $permissions_list;
         
     }
+    
+    public static function getUserPermission($user_id) {
+        return (new \yii\db\Query)
+                ->select(['item_name'])
+                ->from('auth_assignment')
+                ->where(['user_id' => $user_id])
+                ->all();
+    }
 }
