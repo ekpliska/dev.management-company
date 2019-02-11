@@ -19,7 +19,7 @@ class StatusHelpers {
      * @param boolean $client Рендер звездочек для Собственника (В противном случае на Администратора, Диспетчера)
      * @param integet $grade Оценка
      */
-    public static function requestStatus($status, $value = null, $client = true, $grade) {
+    public static function requestStatus($status, $value = null, $client = true, $grade = null) {
         
         $btn_css = '';
         $voting_bnt = '';

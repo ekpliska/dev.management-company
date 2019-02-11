@@ -17,6 +17,7 @@ class News extends BaseNews {
                 ->select(['news_id', 'news_title', 'news_preview', 'LEFT(news_text, 250) as news_text', 'created_at'])
                 ->andWhere(['news_house_id' => $house_id])
                 ->orderBy(['created_at' => SORT_DESC])
+                ->orWhere(['news_status' => 'all'])
                 ->asArray()
                 ->limit($count_news)
                 ->all();
