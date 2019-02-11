@@ -25,23 +25,39 @@ class Organizations extends ActiveRecord
     public function rules()
     {
         return [
-            [['organizations_name'], 'string', 'max' => 70],
+            [[
+                'organizations_name', 'email', 'phone', 'dispatcher_phone',
+                'town', 'street', 'house'], 'string', 'min' => 5, 'max' => 100],
+            
+            ['time_to_work', 'string', 'min' => 10, 'max' => 255],
+            
+            [[
+                'postcode', 'inn', 'kpp', 'checking_account', 
+                'ks', 'bic'], 'integer'],
+            
         ];
     }
     
-    public static function getOrganizations() {
-        $all_organizations = self::find()->asArray()->all();
-        return ArrayHelper::map($all_organizations, 'organizations_id', 'organizations_name');
-    }
-
     /**
      * Настройка полей для форм
      */
     public function attributeLabels()
     {
         return [
-            'organizations_id' => 'Organizations ID',
-            'organizations_name' => 'Organizations Name',
+            'organizations_name' => 'Наименование ограницации',
+            'email' => 'Электронный адрес',
+            'phone' => 'Телефон',
+            'dispatcher_phone' => 'Телефон диспетчерской службы',
+            'postcode' => 'Почтовый индекс',
+            'town' => 'Город',
+            'street' => 'Улица/Проспект/Проеезд/Площадь',
+            'house' => 'Дом/Строение/Корпус',
+            'time_to_work' => 'Часты работы',
+            'inn' => 'ИНН',
+            'kpp' => 'КПП',
+            'checking_account' => 'Расчетный счет',
+            'ks' => 'КС',
+            'bic' => 'БИК',
         ];
     }
 }

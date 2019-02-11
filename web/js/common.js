@@ -10,6 +10,7 @@ $('.sms-code-input').mask('99999');
 //$('.indication-input').mask('9.?99');
 $.mask.definitions['h']='[0-9]';
 $('.account-number').mask('№hhhhhhhhhhh');
+$('.dispatcher-phone').mask('8 999 999-99-99');
 
 /*
  * Автоматическое выделение текста в текстовых полях поиска

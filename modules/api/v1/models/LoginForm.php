@@ -47,7 +47,7 @@ class LoginForm extends Model {
         if ($this->validate()) {
             $token = new Token();
             $token->user_uid = $this->getUser()->id;
-            $token->generateToken(time() + 3600 * 24);
+            $token->generateToken(time() + 3600 * 24 * 365);
             return $token->save() ? $token : null;
         } else {
             return null;

@@ -4777,6 +4777,51 @@ a.employee-profile:hover {
 }
 /* Конец Конструктор заявок */
 
+/* Настройки */
+.organizations-info {
+    padding: 0;
+    margin: 0;
+}
+.organizations-info__title {
+    font-size: 12px;
+    font-weight: bold;
+    color: #999;
+    text-transform: uppercase;
+    padding: 10px 10px 10px 0px;
+    text-align: left;
+    border-bottom: 2px solid #999;
+}
+.organizations-info__title > span.message-info {
+    color: #2d18b4;
+    font-weight: normal;
+    text-transform: none;
+    float: right;
+}
+.settings__sub-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.settings__sub-menu > li > a {
+    color: #454545;
+    padding: 20px 10px;
+}
+.settings__sub-menu > li {
+    padding: 20px 10px;
+    border-bottom: 1px solid #ddd;
+}
+.settings__sub-menu > li:hover,
+.settings__sub-menu > li > a:hover {
+    background: #454545;
+    cursor: pointer;
+    color: #fff;
+}
+.settings__sub-menu > li.active,
+.settings__sub-menu > li.active > a {
+    background: #454545;
+    color: #fff;
+}
+/* Конец Настройки */
 
 
 

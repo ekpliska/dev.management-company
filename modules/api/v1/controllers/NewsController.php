@@ -56,7 +56,8 @@ class NewsController extends Controller
     public function actionImportantInformation() {
         
         $user_info = UserProfile::userProfile(Yii::$app->user->id);
-        $news_lists = News::importantInformation($user_info['house_id']);
+        $house_id = array_shift($user_info['personal_account'])['living_area']['house_id'];
+        $news_lists = News::importantInformation($house_id);
         
         if (empty($news_lists)) {
             return ['success' => false];
@@ -74,7 +75,8 @@ class NewsController extends Controller
     public function actionAdvertsInformation() {
         
         $user_info = UserProfile::userProfile(Yii::$app->user->id);
-        $news_lists = $results = News::otherNews($user_info['house_id'], true);
+        $house_id = array_shift($user_info['personal_account'])['living_area']['house_id'];
+        $news_lists = $results = News::otherNews($house_id, true);
         
         if (empty($news_lists)) {
             return ['success' => false];
@@ -92,7 +94,8 @@ class NewsController extends Controller
     public function actionHousingInformation() {
         
         $user_info = UserProfile::userProfile(Yii::$app->user->id);
-        $news_lists = $results = News::otherNews($user_info['house_id'], false);
+        $house_id = array_shift($user_info['personal_account'])['living_area']['house_id'];
+        $news_lists = $results = News::otherNews($house_id, false);
         
         if (empty($news_lists)) {
             return ['success' => false];
