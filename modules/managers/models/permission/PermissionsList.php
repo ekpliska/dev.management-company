@@ -103,9 +103,6 @@ class PermissionsList {
             $permission_list[$value['item_name']] = $key;
         }
         
-//        echo '<pre>';
-//        var_dump($permission_list);
-//        die();
         return $permission_list;
         
     }

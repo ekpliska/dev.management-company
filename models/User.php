@@ -261,7 +261,7 @@ class User extends ActiveRecord implements IdentityInterface
     }
     
     /*
-     * Создаем хешь пароля четной записи
+     * Создаем хеш пароля четной записи
      */
     public function setUserPassword($password) {
         return $this->user_password = Yii::$app->security->generatePasswordHash($password);

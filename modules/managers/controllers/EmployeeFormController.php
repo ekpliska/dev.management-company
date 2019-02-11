@@ -12,6 +12,7 @@
     use app\modules\managers\models\Posts;
     use app\modules\managers\models\form\ChangePasswordAdministrator;
     use app\modules\managers\models\permission\PermissionsList;
+    use app\modules\managers\models\permission\SetPermissions;
     
 
 /**
@@ -98,6 +99,8 @@ class EmployeeFormController extends AppManagersController {
         // Сохраняем данные с формы
         if ($user_info->load(Yii::$app->request->post()) && $employee_info->load(Yii::$app->request->post())) {
             
+            $permission_list_post = Yii::$app->request->post()['permission_list'];
+            
             $is_valid = $user_info->validate();
             $is_valid = $employee_info->validate() && $is_valid;
             
@@ -105,6 +108,8 @@ class EmployeeFormController extends AppManagersController {
                 $file = UploadedFile::getInstance($user_info, 'user_photo');
                 $user_info->uploadPhoto($file);
                 $employee_info->save();
+                $set_permissions = SetPermissions::changePermissions($user_info->id, $role = $type, $permission_list_post);
+                
             } else {
                 Yii::$app->session->setFlash('error', ['message' => 'Во время обновления профиля произошла ошибка. Обновите страницу и повторите действие заново']);
                 return $this->redirect(Yii::$app->request->referrer);
