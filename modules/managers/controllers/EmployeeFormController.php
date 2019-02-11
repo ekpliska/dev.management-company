@@ -93,12 +93,13 @@ class EmployeeFormController extends AppManagersController {
         $role = User::getRole($type);
         // Список прав пользователя (для checkBoxList)
         $permissions_list = PermissionsList::getList();
-        
+        // Получаем массив текущих прав пользователя
         $current_permissions = PermissionsList::getUserPermission($user_info->id);
         
         // Сохраняем данные с формы
         if ($user_info->load(Yii::$app->request->post()) && $employee_info->load(Yii::$app->request->post())) {
             
+            // Получаем массив разрешений для администратора
             $permission_list_post = Yii::$app->request->post()['permission_list'];
             
             $is_valid = $user_info->validate();
@@ -108,7 +109,10 @@ class EmployeeFormController extends AppManagersController {
                 $file = UploadedFile::getInstance($user_info, 'user_photo');
                 $user_info->uploadPhoto($file);
                 $employee_info->save();
-                $set_permissions = SetPermissions::changePermissions($user_info->id, $role = $type, $permission_list_post);
+                
+                if (!empty($permission_list_post)) {
+                    $set_permissions = SetPermissions::changePermissions($user_info->id, $role = $type, $permission_list_post);
+                }
                 
             } else {
                 Yii::$app->session->setFlash('error', ['message' => 'Во время обновления профиля произошла ошибка. Обновите страницу и повторите действие заново']);
