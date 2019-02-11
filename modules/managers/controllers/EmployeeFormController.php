@@ -94,7 +94,6 @@ class EmployeeFormController extends AppManagersController {
         $permissions_list = PermissionsList::getList();
         
         $current_permissions = PermissionsList::getUserPermission($user_info->id);
-        echo '<pre>'; var_dump(\yii\helpers\ArrayHelper::keyExists('ClientsEdit',$current_permissions)); die();
         
         // Сохраняем данные с формы
         if ($user_info->load(Yii::$app->request->post()) && $employee_info->load(Yii::$app->request->post())) {

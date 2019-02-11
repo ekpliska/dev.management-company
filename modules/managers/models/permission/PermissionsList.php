@@ -90,10 +90,23 @@ class PermissionsList {
     }
     
     public static function getUserPermission($user_id) {
-        return (new \yii\db\Query)
+        
+        $permission_list = [];
+        
+        $query = (new \yii\db\Query)
                 ->select(['item_name'])
                 ->from('auth_assignment')
                 ->where(['user_id' => $user_id])
                 ->all();
+        
+        foreach ($query as $key => $value) {
+            $permission_list[$value['item_name']] = $key;
+        }
+        
+//        echo '<pre>';
+//        var_dump($permission_list);
+//        die();
+        return $permission_list;
+        
     }
 }

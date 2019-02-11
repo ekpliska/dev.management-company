@@ -3716,12 +3716,13 @@ tbody > tr > td > div.empty::before {
 .privileges-block__lists {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 .privileges-block__lists > .form-group {
     margin: 0;
 }
 #permission_lists > li {
-    padding: 10px;
+    padding: 15px 10px 0 10px;
     border-top: 1px solid #ddd;
 }
 #permission_lists > li > span {
@@ -4820,7 +4821,7 @@ a.employee-profile:hover {
 }
 
 input:checked + .slider {
-  background-color: #ef693a;
+  background-color: #2d18b4;
 }
 
 input:focus + .slider {

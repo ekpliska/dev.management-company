@@ -152,7 +152,7 @@ class User extends ActiveRecord implements IdentityInterface
     public function getTokens() {
         return $this->hasMany(Token::className(), ['user_uid' => 'user_id']);
     }
-    
+        
     /*
      * Поиск экземпляра identity, используя ID пользователя со статусом подтверденной регистрации
      * Для поддержки состояние аутентификации через сессии

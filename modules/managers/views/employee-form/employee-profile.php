@@ -5,6 +5,7 @@
     use yii\helpers\Html;
     use kartik\date\DatePicker;
     use app\helpers\FormatHelpers;
+    use yii\helpers\ArrayHelper;
     use app\modules\managers\widgets\AlertsShow;
     use app\modules\managers\widgets\ModalWindowsManager;
     use app\modules\managers\widgets\ConfirmChangePassword;
@@ -212,7 +213,7 @@ $this->params['breadcrumbs'][] = $employee_info->fullName;
                     </div>
                 </div>
             </div>
-            
+
         <?php if ($type == 'administrator') : ?>
             <div class="privileges-block row">
                 <h3 class="title">Настройка прав доступа</h3>
@@ -225,9 +226,9 @@ $this->params['breadcrumbs'][] = $employee_info->fullName;
                             <ul class="privileges-block__lists">
                                 <?= $form->field($user_info, 'permission_list', ['template' => '{label}{input}'])
                                         ->checkboxList($permission['permission'], ['id' => "permission_lists",
-                                            'item' => function($index, $label, $name, $checked, $value) {
-                                                $_checked = \yii\helpers\ArrayHelper::keyExists('$value', $current_permissions) ? 'checked' : '';
-                                                $return = '<li><span>' . $label . '=' . $_checked . '</span>';
+                                            'item' => function($index, $label, $name, $checked, $value) use ($current_permissions) {
+                                                $_checked = ArrayHelper::keyExists($value, $current_permissions) ? 'checked' : '';
+                                                $return = '<li><span>' . $label . '</span>';
                                                 $return .= '<label class="switch">' . '';
                                                 $return .= '<input type="checkbox" name="permission_list[' . $value . ']"' . $_checked . '>';
                                                 $return .= '<span class="slider round"></span>';
