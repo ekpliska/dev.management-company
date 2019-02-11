@@ -13,6 +13,8 @@
 <?php
     $form = ActiveForm::begin([
         'id' => 'edit-organizations-form',
+        'validateOnChange' => false,
+        'validateOnBlur' => false,
         'fieldConfig' => [
             'template' => '<div class="field"></i>{label}{input}{error}</div>',
         ],
@@ -55,7 +57,7 @@
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <p class="organizations-info__title">
         Время работы
-        <span class="message-info">Формат День-День: ЧЧ:ММ - ЧЧ:ММ;</span>
+        <span class="message-info">Формат День-День: ЧЧ:ММ - ЧЧ:ММ; </span>
     </p>
     <?= $form->field($model, 'time_to_work')
             ->input('text', ['class' => 'field-input'])
