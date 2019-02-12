@@ -66,7 +66,7 @@
                         ]])
                     ->label(false) ?>
             
-            <?= Html::submitButton('', ['class' => 'btn search-block__button']) ?>
+            <?= Html::submitButton('', ['class' => 'search-block__button']) ?>
             
             <?php ActiveForm::end(); ?>
         </li>
