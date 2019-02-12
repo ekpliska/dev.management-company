@@ -44,7 +44,7 @@ class SetPermissions extends User {
         $role_name = Yii::$app->authManager->getRole($role);
         Yii::$app->authManager->assign($role_name, $user_id);
         
-        // Назначаем права
+        // Назначаем разрешений
         if (is_array($array_permissions)) {
             foreach ($array_permissions as $key => $value) {
                 $permission_name = Yii::$app->authManager->getPermission($key);

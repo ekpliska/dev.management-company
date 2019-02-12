@@ -9,10 +9,12 @@ class AdministratorRule extends Rule {
     
     public function execute($user, $item, $params) {
         
-        if ($params['user_id'] == $user && $params['permission'] == $item) {
-            return true;
-        }
-        return false;
+        return;
+        
+//        if ($params['user_id'] == $user && $params['permission'] == $item) {
+//            return true;
+//        }
+//        return false;
         
     }
     

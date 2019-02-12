@@ -15,6 +15,11 @@
         'tableOptions' => [
             'class' => 'table managers-table',
         ],
+        'rowOptions' => function ($data, $key, $index, $grid) {
+            if ($data['balance'] < 0) {
+                return ['style' => 'background: #fce7df'];
+            }
+        },
         'columns' => [
             [
                 'header' => 'ID',

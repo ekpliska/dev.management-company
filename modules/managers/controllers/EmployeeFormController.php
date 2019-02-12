@@ -35,9 +35,12 @@ class EmployeeFormController extends AppManagersController {
         // Должности
         $post_list = [];
         
-        // Формируем список для натсройки прав доступа
-        $permissions_list = PermissionsList::getList();
-        
+        if ($new_employee == 'administrator') {
+            // Формируем список для натсройки прав доступа
+            $permissions_list = PermissionsList::getPermissionList($for_admnin = true);
+        } elseif ($new_employee == 'dispatcher') {
+            $permissions_list = PermissionsList::getPermissionList($for_admnin = false);
+        }
         
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             
@@ -91,8 +94,15 @@ class EmployeeFormController extends AppManagersController {
         $post_list = Posts::getPostList($employee_info->employee_department_id);
         // Список ролей
         $role = User::getRole($type);
+        
         // Список прав пользователя (для checkBoxList)
-        $permissions_list = PermissionsList::getList();
+        if ($type == 'administrator') {
+            // Формируем список для натсройки прав доступа
+            $permissions_list = PermissionsList::getPermissionList($for_admnin = true);
+        } elseif ($type == 'dispatcher') {
+            $permissions_list = PermissionsList::getPermissionList($for_admnin = false);
+        }
+        
         // Получаем массив текущих прав пользователя
         $current_permissions = PermissionsList::getUserPermission($user_info->id);
         
@@ -110,9 +120,7 @@ class EmployeeFormController extends AppManagersController {
                 $user_info->uploadPhoto($file);
                 $employee_info->save();
                 
-                if (!empty($permission_list_post)) {
-                    $set_permissions = SetPermissions::changePermissions($user_info->id, $role = $type, $permission_list_post);
-                }
+                $set_permissions = SetPermissions::changePermissions($user_info->id, $role = $type, $permission_list_post);
                 
             } else {
                 Yii::$app->session->setFlash('error', ['message' => 'Во время обновления профиля произошла ошибка. Обновите страницу и повторите действие заново']);

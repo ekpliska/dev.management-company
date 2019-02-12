@@ -52,7 +52,7 @@ class UserProfile extends User {
                     'rents_name' => $account['rents_name'],
                     'rents_second_name' => $account['rents_second_name'],
                     'rents_mobile' => $account['rents_mobile'],
-                    'rents_mobile_more' => $account['rents_mobile_more'],
+                    'rents_mobile_more' => $account['other_phone'],
                 ];
             }
             

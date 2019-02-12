@@ -17,7 +17,7 @@
  */    
 class PermissionsList {
     
-    public function getList() {
+    public function getPermissionList($for_admnin) {
         
         $permissions_list = [
             'clients' => [
@@ -85,7 +85,10 @@ class PermissionsList {
             ],
         ];
         
-        return $permissions_list;
+        return $for_admnin ? $permissions_list : 
+                $permissions_list = [
+                    'value' => 'CreateNewsDispatcher', 
+                    'name' => 'Создание новостей'];
         
     }
     

@@ -27,7 +27,7 @@
             
             <?= $form->field($model, 'input_value')->input('text', ['class' => '_search-input', 'placeHolder' => 'Фамилия имя отчество'])->label(false) ?>
             
-            <?= Html::submitButton('', ['class' => 'btn search-block__button']) ?>
+            <?= Html::submitButton('', ['class' => 'search-block__button']) ?>
             
             <?php ActiveForm::end(); ?>
         </li>

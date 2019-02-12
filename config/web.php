@@ -104,10 +104,10 @@ $config = [
         'user' => [
             'class' => 'yii\web\User',
             'identityClass' => 'app\models\User',
-            'enableAutoLogin' => false, // Отключение логина на основе фалов cookies
-            'absoluteAuthTimeout' => 1200, // Время сессии 20мин
-            'authTimeout' => 600, // Автоматический выход из сиситемы, когда пользователь неактивен 10мин
-            'absoluteAuthTimeoutParam' => '_identity',
+//            'enableAutoLogin' => false, // Отключение логина на основе фалов cookies
+//            'absoluteAuthTimeout' => 1200, // Время сессии 20мин
+//            'authTimeout' => 600, // Автоматический выход из сиситемы, когда пользователь неактивен 10мин
+//            'absoluteAuthTimeoutParam' => '_identity',
             'loginUrl' => ['site/login'],
             'as afterLogin' => 'app\behaviors\LoginTimestampBehavior',
             

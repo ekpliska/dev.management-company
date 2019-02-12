@@ -149,8 +149,10 @@ $this->params['breadcrumbs'][] = 'Новая запись [Сотрудник]';
         <?php if ($role == 'dispatcher') : ?>
             <div class="spam-agree-txt text-center">
                 <div class="dispatch-privileges-block">
-                    <?= Html::checkbox('can-add-news', false, ['id' => 'can-add-news']) ?>
-                    <label for="can-add-news">Возможность добавлять новости</label>
+                    
+                    <?= $form->field($model, 'permission_list', ['template' => '{input}{label}'])
+                            ->checkbox(['name' => "permission_list[{$permissions_list['value']}]"], false)->label($permissions_list['name']) ?> 
+                    
             </div>
         <?php endif; ?>
                 
