@@ -1,0 +1,1674 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 12.02.2019, 15:47:50
+    Author     : Ekaterina
+*/
+
+/* Выпадающее навигационное меню, Администратор */
+.menu-wrap-manager {
+    background-color: #6968AB;
+    position: fixed;
+    top: 0;
+    height: 100%;
+    width: 280px;
+    margin-left: -280px;
+    font-size: 1em;
+    font-weight: 700;
+    overflow: auto;
+    transition: .25s;
+    z-index: 10;
+    background: linear-gradient(180.67deg, #39284E 69%, rgba(10,8,8,0.7) 100%);
+}
+.menu-show-manager {
+    margin-left: 0;
+    box-shadow: 0px 0px 3px 0px #000;
+}
+.menu-sidebar-manager {
+    margin-top: 116px;
+}
+.menu > li:first-child {
+    border-top: 1px solid #604c6e;    
+}
+.menu > li {
+    padding: 20px;
+    border-bottom: 1px solid #604c6e;
+    margin-left: -40px;
+}
+.menu > li > a {
+    color: #fff;
+    font-weight: normal;
+    font-size: 14px;
+}
+.menu > li:hover,
+.menu > li.active {
+    background: rgba(247, 247, 247, 0.3);    
+}
+/* Конец Выпадающее навигационное меню, Администратор */
+/* Конец Навигационное меню */
+
+/* Конец Дополнительное навигационное меню, главная страница */
+
+/* Дополнительное навигационное меню, заявки */
+.navbar_repusets {
+    background: #fff;
+    padding: 20px;
+}
+/* Статусы меню, заявки, главная страница */
+.status-request {
+    display: flex;
+    justify-content: center;
+}
+.status-request > li > a {
+    border-radius: 25px;
+    font-size: 12px;
+    color: #000;
+    width: 175px;
+    height: 50px;
+    padding: 14px 0;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.status-request > li > a:hover,
+.status-request > li > a:focus {
+    text-decoration: none;
+    background-color: transparent;
+    border-radius: 25px;
+}
+.status-request > li + li {
+    margin-left: 15px;
+}
+.req-bange-default {
+    border: 2px solid #4e2ae2;
+    box-shadow: 0px 1px 4px 4px rgba(51,0,255,0.33);    
+}
+.req-bange-new {
+    border: 2px solid #598eff;
+    background-color: #598eff;    
+}
+.req-bange-new:hover,
+.req-bange-new:focus {
+    background-color: #598eff !important;    
+    box-shadow: 0px 1px 4px 4px rgba(0,101,255,0.28);
+}
+.req-bange-work {
+    border: 2px solid #7c7c7c;
+}
+.req-bange-work:hover,
+.req-bange-work:focus {
+    box-shadow: 0px 1px 4px 4px rgba(255,125,125,0.26);    
+}
+.req-bange-rectification {
+    border: 2px solid #e17dff;
+}
+.req-bange-rectification:hover,
+.req-bange-rectification:focus {
+    box-shadow: 0px 1px 4px 4px rgba(225,125,255,0.42);
+}
+.req-bange-complete {
+    border: 2px solid #1fd68d;
+}
+.req-bange-complete:hover,
+.req-bange-complete:focus {
+    box-shadow: 0px 1px 4px 4px rgba(56,231,161,0.54);
+}
+.req-bange-close {
+    border: 2px solid #FF7D7D;
+}
+.req-bange-close:hover,
+.req-bange-close:focus {
+    box-shadow: 0px 1px 4px 4px rgba(252,193,193,0.83);    
+}
+/* Конец Дополнительное навигационное меню, заявки */
+
+/* Дополнительное навигационное меню, платные услуги */
+.navbar_paid-request {
+    background: #2d18b4;
+    padding: 15px;
+    height: 80px;
+    box-shadow: 0px 1px 14px -1px rgb(0, 0, 0);
+}
+.navbar_paid-request > ul {
+    margin-right: 15px;
+}
+/* Конец Дополнительное навигационное меню, платные услуги */
+/* Дополнительное навигационное меню, лицевой счет */
+.navbar_personal-account {
+    background: linear-gradient(190.67deg, rgba(0, 0, 0, .5) 50%, rgba(132, 131, 131, 0.65) 100%);
+    box-shadow: 0 2px 5px 2px rgba(0,0,0,0.26);
+}
+.sub-menu_account {
+    margin-left: -15px;
+    margin-right: -15px;
+}
+.sub-menu_account > li + li {
+    margin-left: 0px;
+}
+.sub-menu_account > li > a {
+    padding: 30px 40px;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+.sub-menu_account > li.active > a,
+.sub-menu_account li > a:hover,
+.sub-menu_account li > a:focus,
+.sub-menu_account > li.active > a:hover {
+    color: #fff;
+    background-color: rgba(247, 247, 247, 0.22);
+    border-radius: 0px;
+}
+/* Конец Дополнительное навигационное меню, лицевой счет */
+
+/* Всплывающие уведовления */
+.alert-message[data-notification-status="success"] {
+    border-left: 7px solid #1fd68d;
+}
+.alert-message[data-notification-status="error"] {
+    border-left: 7px solid #ff7d7d;
+}
+.alert-message {
+    position: fixed;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    color: #454545;
+    background: #fff;
+    font-size: 12px;
+    line-height: 1.3;
+    box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.35);
+    width: 350px;
+    margin: 20px;
+    top: 20%;
+    right: 0;
+    cursor: default;
+}
+.alert-message::before {
+    content: '\2716';
+    display: block;
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+    margin-right: 20px;
+    font-size: 24px;
+}
+.alert-message[data-notification-status="success"]:before {
+    color: #1fd68d;
+}
+.alert-message[data-notification-status="error"]:before {
+    color: #ff7d7d;
+}
+/* Конец Всплывающие уведовления */
+
+/* Администратор, Собственники */
+.dropdown-setting {
+    margin: 0px -100px;
+}
+.dropdown-setting > li {
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 12px;
+    padding: 10px 10px;
+    cursor: pointer;
+    letter-spacing: 0.07em;
+}
+.dropdown-setting > li:hover {
+    background: rgba(247, 247, 247, 0.3);
+    color: #fff;
+}
+.btn-settings {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #2d18b4;
+}
+/* Конец Администратор, Собственники */
+
+/* Таблица, Администраторы */
+.managers-table {
+    border-collapse: unset;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    font-size: 12px;
+    margin-bottom: 0px;
+}
+.managers-table-in {
+    border-collapse: unset;
+    border-top: 1px solid #ddd;
+    border-left: none;
+    border-right: none;
+    font-size: 12px;
+    border-radius: 0;
+    margin-bottom: 30px;
+}
+.managers-table thead {
+    color: #2d18b4;
+    text-transform: uppercase;
+    text-align: center;
+    vertical-align: top;
+}
+.managers-table > thead > tr > th {
+    font-size: 12px;
+    vertical-align: middle;
+    text-align: center;
+    border: none;
+    padding: 25px 0;
+}
+.managers-table > tbody > tr > td {
+    vertical-align: middle;
+    text-align: center;
+    padding: 15px 0;
+}
+.managers-table > tbody > tr > td.status-not-found,
+tbody > tr > td > div.empty {
+    vertical-align: middle;
+    text-align: left;
+    padding: 15px;
+}
+.managers-table > tbody > tr > td.status-not-found::before,
+tbody > tr > td > div.empty::before {
+    color: #2d18b4;
+    content: '\02139';
+    padding: 7px 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.managers-table > tbody > tr.form-notice-in-table > td {
+    vertical-align: middle;
+    text-align: left;
+    padding: 30px 15px;
+    border: none;
+    border-top: 1px solid #ddd;
+}
+.managers-table > tbody > tr.btn-block-in-table > td {
+    vertical-align: middle;
+    text-align: center;
+    padding: 30px;
+    border: none;
+}
+.managers-table > tbody > tr.form-notice-in-table:hover, 
+.managers-table > tbody > tr.btn-block-in-table:hover {
+    background: #fff !important;
+}
+.managers-table > tbody > tr:hover {
+    background: #d1ccef;
+}
+.managers-table_small {
+    width: 5%;
+    text-align: left;
+}
+.managers-table_middle {
+    width: 15%;
+}
+.managers-table_big {
+    width: 25%;
+    text-align: left !important;
+}
+.managers-table_left {
+    text-align: left !important;    
+}
+.managers-table i.glyphicon-map-marker {
+    color: #2d18b4;
+}
+.managers-table > tbody > tr > td > a {
+    color: #2d18b4;
+}
+.no-border-bottom {
+    border-bottom: none;
+}
+/* Таблица, Администраторы */
+
+
+
+/* Дополнительное навигационное меню Администратор */
+.submenu-manager {
+    background: #2d18b4;
+    padding: 15px 0 5px 0;
+    position: fixed;
+    margin: 0 0 0 -30px;
+    width: 100%;
+    z-index: 10;
+}
+.submenu-manager > ul {
+    padding: 10px 25px;
+}
+/* Конец Дополнительное навигационное меню Администратор */
+
+/* Администратор, контент + доп меню */
+.manager-main-with-sub {
+    margin-top: 100px;
+}
+.manager-main-with-sub-news {
+    margin-top: 200px;
+}
+.manager-main-with-sub-designer {
+    margin-top: 130px;
+}
+/* Конец Администратор, контент + доп меню */
+
+/* Администратор, контент */
+.manager-main {
+    margin-top: -40px;
+}
+/* Конец Администратор, контент */
+
+/* Администратор, инпуты */
+/* Поиск */
+._search-input {
+    width: 320px;
+    background: transparent;
+    border: 1px solid #fff;
+    border-radius: 25px;
+    padding: 7px 15px 7px 40px;
+    color: #fff;
+    font-size: 12px;
+    outline: none;
+    background-image: url(../images/input-icon/text.png);
+    background-size: 5%;
+    background-repeat: no-repeat;
+    background-position: 5% 47%;  
+}
+._search-input::placeholder {
+    color: #fff;
+}
+._search-input:hover,
+._dropdown-subpanel:hover {
+    /*border: 1px solid #2fb6f0;*/
+    box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
+}
+._dropdown-subpanel {
+    padding: 6px 40px;
+    background: transparent;
+    border: 1px solid #fff;
+    border-radius: 25px;
+    color: #fff;
+    outline: none;
+    font-size: 12px;
+}
+._dropdown-subpanel option {
+    color: #000;
+}
+._small {
+    width: 240px;
+    background-image: url(../images/input-icon/filter.png);
+    background-size: 5%;
+    background-repeat: no-repeat;
+    background-position: 10% 47%;
+}
+._large {
+    width: 400px;
+    background-image: url(../images/input-icon/location.png);
+    background-size: 3%;
+    background-repeat: no-repeat;
+    background-position: 5% 47%;
+}
+/* Конец Поиск */
+/* Конец Администратор, инпуты */
+
+/* Администратор, профиль */
+.face-user {
+    min-height: 370px;
+}
+.face-user img {
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    border: 4px solid #2d18b4;
+    border-radius: 100%;
+    box-shadow: 0px 0px 0px 50px rgba(45, 24, 180, 0.5);
+}
+.user-info-block {
+    padding: 110px 20px;
+}
+.user-info-block_name {
+    color: #fff;
+    font-size: 24px;
+}
+/* Конец Администратор, профиль */
+
+/* Подменю, профиль собсвенника */
+.profile-sub_menu {
+    background: linear-gradient(190.67deg, #42314e 50%, rgba(132, 131, 131, 0.65) 100%);
+}
+.profile-sub_menu_ul {
+    margin: 0;
+    display: inline-flex;
+    list-style-type: none;
+}
+.profile-sub_menu_ul > li {
+    padding: 30px;
+    margin: 0px 40px 0px -40px;
+}
+.profile-sub_menu_ul > li.active,
+.profile-sub_menu_ul > li:hover {
+    background: rgba(247, 247, 247, 0.16);
+}
+.profile-sub_menu_ul > li > a {
+    color: #fff;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+.clients-profile-info_manager {
+    padding: 30px 150px;
+    text-align: left;
+}
+.rent-profile-info_manager {
+    padding: 30px 150px;
+    text-align: left;
+}
+.payments-date-block {
+    padding: 20px 15px 80px;
+}
+.control-block, 
+.status-block {
+    margin: 10px 0px;
+}
+.status-block .title {
+    display: inline-block;
+    padding-right: 50px;
+    color: #fff;
+    font-size: 12px;
+    text-align: right;
+}
+.status-block span.role-administrator,
+.status-block span.role-specialist,
+.status-block span.role-dispatcher {
+    padding: 2px 0px;
+    color: #fff;
+    font-size: 12px;
+}
+.debt-client {
+    background: #ef693a;
+    font-family: cursive;
+    padding: 3px 7px;
+    font-size: 22px;
+    border-radius: 50%;
+    box-shadow: 3px 3px 5px -2px #333;
+}
+/* Конец Подменю, профиль собсвенника */
+
+/* Платежи, Профиль Собственника, Администратор */
+.payments-profile {
+    min-height: 600px;
+}
+/* Конец Платежи, Профиль Собственника, Администратор */
+
+/* Создание нового сотрудника */
+.profile-upload-btn {
+    margin-top: 170px;
+}
+.profile-upload-btn-employee {
+    position: absolute;
+    bottom: -1%;
+    left: 30%;
+}
+.field-btnLoad > label > label.control-label {
+    font-weight: normal;
+    cursor: pointer;
+}
+.btn-upload label {
+    color: #fff;
+}
+.dispatch-privileges-block {
+    padding: 30px;
+}
+.save-btn-group {
+    margin-bottom: 40px;
+}
+.privileges-block {
+    margin: 20px 0;
+    padding: 0 40px;
+}
+.privileges-block h3.title {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 20px;
+    text-align: center;
+}
+.privileges-block__privilege h4 {
+    font-size: 14px;
+    font-weight: bold;
+    padding: 10px;
+}
+.privileges-block__privilege {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 0;
+    /*height: 140px;*/
+    margin: 15px 0;
+}
+.privileges-block__lists {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.privileges-block__lists > .form-group {
+    margin: 0;
+}
+#permission_lists > li {
+    padding: 15px 10px 0 10px;
+    border-top: 1px solid #ddd;
+}
+#permission_lists > li > span {
+    float: left;
+}
+div#permission_lists {
+    text-align: right;
+}
+/* Конец Создание нового сотрудника */
+
+/* Профиль сотрудника, блок с заявками */
+.title-type-request {
+    text-align: center;
+    border: 1px solid #2d18b4;
+    padding: 10px 0;
+    font-size: 12px;
+    border-radius: 12px;
+    color: #2d18b4;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    font-weight: bold;
+}
+/* Конец Профиль сотрудника, блок с заявками */
+
+/* Голосование, главная страница */
+.vote-card {
+    display: flex;
+    width: 100%;
+    margin: 0 0 20px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+}
+.vote-card:hover {
+    box-shadow: 0 4px 26px 0 rgba(51, 29, 82, 0.16);
+}
+.vote-card__image {
+    width: 350px;
+    height: 200px;
+    padding: 0;
+    margin: 0;
+}
+.vote-card__image img {
+    height: 100%;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;    
+}
+.vote-table {
+    border: none;
+}
+.vote-table > tbody > tr > td {
+    border: none;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 12px;
+    border-right: 1px solid #ddd;
+    padding: 0;
+}
+.vote-table > tbody > tr > td:first-child {
+    text-align: left;
+}
+.vote-table > tbody > tr > td:last-child {
+    border-right: none;
+}
+.vote-table > tbody > tr > td span {
+    color: #2d18b4;
+    font-weight: bold;
+}
+.vote-card__content {
+    width: 100%;
+    padding: 0 20px;
+/*    border: 1px solid #ddd;*/
+    border-left: none;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;    
+}
+.vote-card__content h1 > a > span {
+    background: #2d18b4;
+    color: #fff;
+    padding: 2px 15px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: normal;
+}
+.vote-card__content_title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #2d18b4;
+}
+.vote-card__content_info div[class*="col-"] {
+    text-align: center;
+    font-size: 12px;
+    border-right: 1px solid #ddd;
+}
+.vote-card__content_info div[class*="col-"]:first-child {
+    text-align: left;
+    font-size: 10px;
+}
+.vote-card__content_info div[class*="col-"]:last-child {
+    border-right: none;
+}
+span[class^=status-vote-] {font-size: 12px;
+    font-weight: bold;
+}
+span.status-vote-0::before {
+    content: '\02691';
+    padding: 0 5px;
+    background: #2d18b4;
+    margin: 0 5px 0 0;
+    color: #fff;
+}
+span.status-vote-1::before {
+    content: '\02713';
+    padding: 0 3px;
+    background: #1fd68d;
+    margin: 0 5px 0 0;
+    color: #fff;
+}
+.vote-card__content_info span.title {
+    color: #2d18b4;
+    font-weight: bold;
+}
+.vote-card__content_text {
+    padding: 10px 0;
+    text-align: justify;
+    font-size: 14px;
+}
+/* Конец Голосование, главная страница */
+
+/* Голосование, форма создания/редактирования голосования */
+.cover-block-title {
+    position: absolute;
+    bottom: 0;
+    background: #6f4c8f;
+    opacity: 0.9;    
+}
+.cover-block-title .field span.input-group-addon {
+    background-color: #3c2676;
+    border: 1px solid #8b709d;
+    color: #fff;
+}
+.cover-block-title .field > label.date-label, .field > label.field-input-select_label {
+    color: #fff;
+}
+.cover-block-title .field-label {
+    color: #fff;
+}
+.cover-block-title .field-input {
+    color: #ddd;
+}
+.cover-block-title .is-focused .field-label{
+    color: #fff;
+}
+.cover-block-title .field::after, .field::before {
+    background-color: #fff;
+}
+.create-vote-profile {}
+.cover-vote {
+    border: 1px solid #ddd;
+    min-height: 650px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    display: block;
+    position: relative;
+    overflow: hidden;
+}
+.cover-vote img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+.form-vote {
+    border: 1px solid #ddd;
+    border-top: none;
+    padding: 20px 0;
+}
+.form-vote-questions {
+    border: 1px solid #ddd;
+    border-top: none;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.upload-btn-wrapper {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+
+.btn-upload-cover {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.32);
+    padding: 10px 70px 0 70px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: bold;
+}
+.btn-upload-cover:hover {
+    box-shadow: 0px 1px 6px 1px rgba(55,35,35,0.32);
+}
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+.questions-list {
+    min-height: 700px;
+    border-left: 1px solid #ddd;
+}
+#title-block-of-questions {
+    text-align: center;
+    border: 1px solid #2d18b4;
+    border-radius: 12px;
+    margin: 20px 0;
+    padding: 10px 0;
+}
+.add-question-btn {
+    color: #2d18b4;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+.add-question-btn:focus {
+    color: #2d18b4;
+    outline: none;
+    text-decoration: none;
+}
+.add-question-btn::before {
+    content: '\002b';
+    font-size: 17px;
+    padding: 0 5px;
+}
+.vote-btn-block button {
+    margin: 50px 10px;
+}
+.participant-list {
+    border-top: 1px solid #ddd;
+    padding: 20px 10px;
+    margin: 0 -15px;
+}
+.user-photo {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto;
+}
+/* Конец Голосование, форма создания/редактирования голосования */
+
+/* Таблица на форме создания голосования */
+#voting-questions {
+    margin: 10px 0;
+}
+#voting-questions > tbody > tr {
+    border: 1px solid #ddd;
+}
+#voting-questions > tbody > tr > td.text-question {
+    padding: 0 20px;
+}
+#voting-questions > tbody > tr > td.delete-question {
+    width: 5%;
+}
+.btn-delete-record__table,
+.btn-delete-record__table:hover,
+.btn-delete-record__table:focus,
+.btn-delete-question,
+.btn-delete-question:hover,
+.btn-delete-question:focus {
+    color: #fb6d5b;
+    font-size: 12px;
+    background: transparent;
+    outline: none;
+    border: none;
+}
+/* Конец Таблица на форме создания голосования */
+
+/* Модальное окно, просмотр профиля пользователя в разделе Голосование */
+.profile_info {
+    min-height: 170px;
+    font-size: 12px;
+}
+#view-user-profile .modal-content {
+    /*width: 700px;*/
+}
+.profile_info h4 {
+    font-size: 20px;
+    color: #fff;
+    margin: 0;
+    padding-bottom: 20px;
+    font-weight: bold;
+}
+.profile_info > span.last-login {
+    padding-left: 10px;
+    color: #ddd;
+}
+.profile_photo__image {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+}
+.user-info > tbody > tr > td {
+    border: none;
+}
+.user-info > tbody > tr > td > span.title {
+    text-transform: uppercase;
+    padding-right: 20px;
+    font-weight: bold;
+}
+/* Конец Модальное окно, просмотр профиля пользователя в разделе Голосование */
+
+/* Блок переключения статуса заявок */
+.btn-group_status-request {
+    padding: 0 15px;
+    background: #fff;
+}
+.btn-choose-status {
+    font-size: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 6px 15px;
+    background: #fff;
+}
+.btn-choose-status:focus,
+.btn-group.open .dropdown-toggle {
+    outline: none;
+    box-shadow: none;
+}
+.dropdown-status > li > a {
+    color: #fff;
+    text-transform: none;
+    font-size: 12px;
+}
+.dropdown-status > li > a:hover {
+    background: rgba(0, 123, 255, 0.12);
+    color: #fff;
+}
+#status-value-0 {
+    border: 2px solid #598eff;
+    box-shadow: 0px 1px 4px 6px rgba(0,101,255,0.28);
+    border-radius: 25px;
+}
+.add-border-0 {
+    border-right: 2px solid #598eff;
+}
+#status-value-1 {
+    border: 2px solid #7c7c7c;
+    box-shadow: 0px 1px 4px 4px rgba(255,125,125,0.26);
+    border-radius: 25px;
+}
+.add-border-1 {
+    border-right: 2px solid #7c7c7c;
+}
+#status-value-2 {
+    border: 2px solid #1fd68d;
+    box-shadow: 0px 1px 4px 4px rgba(56,231,161,0.54);
+    border-radius: 25px;
+}
+.add-border-2 {
+    border-right: 2px solid #1fd68d;
+}
+#status-value-3 {
+    border: 2px solid #e17dff;
+    box-shadow: 0px 1px 4px 4px rgba(225,125,255,0.42);
+    border-radius: 25px;
+}
+.add-border-3 {
+    border-right: 2px solid #e17dff;
+}
+#status-value-4 {
+    border: 2px solid #ff7d7d;
+    box-shadow: 0px 1px 4px 4px rgba(252,193,193,0.83);    
+    border-radius: 25px;
+}
+.add-border-4 {
+    border-right: 2px solid #ff7d7d;
+}
+#status-value-5 {
+    border: 1px solid #5f697a;
+    border-radius: 25px;
+    color: #5f697a;
+}
+#status-value-5 > .btn-group > button,
+#status-value-5 > button {
+    color: #5f697a;
+}
+.btn-choose-status > .caret {
+    margin-left: 10px;
+}
+/* Конец Блок переключения статуса заявок */
+
+/* Заявка, просмотр отдельной заявки */
+.requests-view__setting {
+    padding: 20px 0;
+}
+.page-btn-block {
+    padding: 20px 0;
+}
+a.employee-profile {
+    color: #717171;
+    font-size: 12px;    
+}
+a.employee-profile:hover {
+    color: #3e3e3e;
+}
+#dispatcherList {    
+}
+/* Конец Заявка, просмотр отдельной заявки */
+
+/* Модальное окно назначение сотрудника на заяку */
+.search-employee_input {
+    background-image: url(/images/searchicon.jpg);
+    background-repeat: no-repeat;
+    background-position: 30px 11px;
+    background-size: 4%;
+    background-color: transparent;
+    width: 100%;
+    font-size: 12px;
+    padding: 12px 20px 12px 70px;
+    border: 1px solid #8b709d;
+    margin-bottom: 12px;
+    border-radius: 25px;
+    outline: none;
+}
+#employees-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+#employees-list > li > a {
+    background: transparent;
+    border: 1px solid #8b709d;
+    border-radius: 12px;
+    color: #fff;
+    cursor: default;
+    margin-top: -1px; /* Prevent double borders */
+    padding: 12px;
+    text-decoration: none;
+    display: block
+}
+#employees-list > li > a.active,
+#employees-list > li > a:hover {
+    background: rgba(0, 123, 255, 0.12);
+}
+
+/* Конец Модальное окно назначение сотрудника на заяку */
+
+/* Новости, главная страница */
+.news-margin {
+    margin-top: 100px;
+    z-index: 10;
+}
+.news-item {
+    height: 600px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    margin-bottom: 30px;
+}
+.news-item:hover {
+    box-shadow: 0 4px 26px 0 rgba(51, 29, 82, 0.16);
+}
+.news-item__title {
+    padding: 20px;
+    position: relative;
+}
+.news-item__title > a.title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #2d18b4;
+    margin: 0;
+}
+.news-item__title > p.date {
+    font-size: 14px;
+    font-weight: bold;
+    color: #000;
+    margin: 0;
+}
+.bnt-delete-news {
+    position: absolute;
+    right: 5%;
+    top: 20%;
+    background: transparent;
+    color: #fb6d5b;
+    border: 2px solid #fb6d5b;
+    border-radius: 100%;
+    width: 40px;
+    height: 40px;
+    padding: 5px;
+    outline: none;
+}
+.bnt-delete-news:focus,
+.bnt-delete-news:active,
+.bnt-delete-news:hover {
+    color: #fb6d5b;
+    outline: none;
+}
+.news-item__image {
+    width: 100%; 
+    height: 320px; 
+    position: relative;
+    overflow: hidden;
+}
+.news_preview {
+    position: absolute; 
+    top: 0; 
+    bottom: 0; 
+    margin: auto;
+    width: 100%;
+}
+.news-item__image > span + span {
+    margin: 50px 10px !important;
+}
+.news-item__image > span.item__image_desc {
+    position: absolute;
+    z-index: 9;
+    border: 1px solid #fff;
+    padding: 5px 10px;
+    border-radius: 25px;
+    margin: 10px;
+    color: #fff;
+    font-size: 12px;
+    cursor: default;
+}
+.news-item__image > span > a {
+    color: #fff;
+    font-size: 12px;
+    padding: 0;
+}
+.news-item__image > span > a:hover {
+    text-decoration: none;
+    color: #fff;
+}
+.news-item__image > span:hover {
+    background: rgba(55,35,35,0.32);
+    cursor: default;
+}
+.news-item__text {
+    padding: 30px 20px;
+    position: relative;
+    text-align: justify;
+}
+.news-item__text > p.change-date {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    font-size: 12px;
+    color: #999;
+    font-style: italic;
+    padding: 10px 0;
+}
+/* Конец Новости, главная страница */
+
+/* Новость, форма создания и редатирования публикации */
+.news-form {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+}
+.news-form__left-block {
+    padding: 10px;
+}
+.news-form__left-block {}
+.news-form__right-block {
+    min-height: 1000px;
+    border-left: 1px solid #ddd;    
+}
+.load_preview {
+    height: 270px;
+    background: #ddd;
+    position: relative;
+}
+.load_preview img {
+    max-width: none;
+    min-width: auto;
+    min-height: auto;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.check-partners-block {
+    border: 1px solid #ef693a;
+    padding: 10px;
+    border-radius: 12px;
+}
+.news-form__btn-block {
+    margin: 50px 10px;
+}
+.notice-block {
+    margin: 70px 50%;
+}
+/* Конец Новость, форма создания и редатирования публикации */
+
+/* Таблица загрузки документов */
+.table-upload-file {
+    border: none;
+}
+.table-upload-file > tbody > tr > td {
+    border-top: none;
+    border-bottom: 1px solid #ddd;
+}
+.table-upload-file > tbody > tr > td::before {
+    content: '\2713';
+    padding-right: 15px;
+    font-weight: bold;
+    color: #999;
+}
+.table-upload-file > tbody > tr > td:hover {
+    border-bottom: 1px solid #2ab5f1;
+}
+.table-upload-file > tbody > tr > td a {
+    color: #999;
+    font-size: 12px;
+}
+.table-upload-file > tbody > tr > td a:hover {
+    font-weight: bold;
+}
+.table-upload-file > tbody > tr > td span.delete_span {
+    background: transparent;
+    border: none;
+    color: #999;
+    float: right;
+    cursor: pointer;
+}
+.table-upload-file > tbody > tr > td span.delete_span:hover {
+    font-weight: bold;
+    cursor: pointer;
+}
+.table-upload-file > tbody > tr > td span.delete_span > a:first-child {
+    color: #fb6d5b;
+    font-weight: normal;
+}
+.table-upload-file > tbody > tr > td span.delete_span > a:last-child {
+    color: #3498db;
+    font-weight: normal;
+}
+/* Конец Таблица загрузки документов */
+
+/* Жилищный фонд */
+.housing-stock {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+}
+.housing-stock > div[class*="col-"] {
+    padding: 0;
+    margin: 0;
+    border-right: 1px solid #ddd;
+    /*min-height: 700px;*/
+}
+.housing-stock > div[class*="col-"]:last-child {
+    border-right: none;
+}
+.housing-stock > div > h4.title,
+#flats_list > h4.title {
+    padding: 20px 15px;
+    margin: 0;
+    color: #2d18b4;
+    font-weight: bold;
+    font-size: 12px;
+    border-bottom: 1px solid #ddd;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+}
+.action-housing-stock > .dropdown-menu {
+    position: initial;
+    margin-right: -30px;
+    margin-top: -50px;
+}
+.action-housing-stock > .dropdown-menu > li > a {
+    padding: 10px 20px;
+}
+.action-housing-stock {
+    position: fixed;
+    right: 2%;
+    bottom: 10%;    
+}
+.action-housing-stock__button {
+    background-image: url(/images/clients/new_record.svg);
+    background-repeat: no-repeat;
+    background-position: 0px 5px;
+    background-color: transparent;
+    width: 70px;
+    height: 70px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+.panel-housing-stock > .panel-heading {
+    padding-left: 60px;
+}
+.panel-housing-stock > .panel-heading:before {
+    font-family: 'Glyphicons Halflings';
+    content: "\e021";
+    position: absolute;
+    left: 3%;
+    font-size: 18px;
+    color: #2d18b4;
+    line-height: 1.8;
+}
+.panel-housing-stock > .panel-heading > h4 > a {
+    font-size: 16px;
+    color: #000;
+    font-weight: bold;
+}
+.house-adress {
+    font-size: 14px;
+    color: #2d18b4;
+    padding-left: 20px;
+}
+.house-adress:before {
+    font-family: 'Glyphicons Halflings';
+    content: "\e062";
+    margin-right: 5px;
+    font-size: 16px;
+    position: absolute;
+    left: 9%;
+}
+.panel-housing-stock > .panel-collapse {
+    background: #454545;
+    color: #fff;
+}
+.house-description {
+    font-size: 14px;
+}
+.house-description > span {
+    font-size: 12px;
+}
+.house-description > p {
+    text-align: justify;
+    border-top: 1px solid #ddd;
+    padding: 10px;
+}
+.house-description > p > span {
+    font-size: 12px;
+    color: #ddd;
+    font-style: italic;
+}
+#edit-discription-btn {
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 10px;
+    font-weight: bold;
+}
+#edit-discription-btn:hover,
+#edit-discription-btn:active,
+#edit-discription-btn:focus {
+    border: 1px solid #fff;
+    padding: 10px;
+    border-radius: 12px;
+    text-decoration: none;
+}
+#edit-discription-btn:before {
+    font-family: 'Glyphicons Halflings';
+    content: "\270f";
+    padding: 0 10px 0 0;
+}
+.flats-info {
+    border-bottom: 1px solid #ddd;
+}
+.flats-info > h3.title {
+    background: #2d18b4;
+    color: #fff;
+    font-size: 14px;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 20px;
+    margin: 10px 20px;
+    border-radius: 25px;
+}
+.flats-info > h3.title-debtor {
+    background: #2d18b4;
+    color: #fff;
+    font-size: 14px;
+    height: 40px;
+    line-height: 38px;
+    padding: 0 20px 0 55px;
+    margin: 10px 20px;
+    border-radius: 25px;
+}
+.flats-info > h3.title-debtor:before {
+    font-family: cursive;
+    content: '-\20bd';
+    background: #ef693a;
+    padding: 1px 9px;
+    font-size: 22px;
+    border-radius: 50%;
+    position: absolute;
+    left: 19px;
+}
+.flats-info__info {
+    display: flex;
+    padding: 10px 20px;
+}
+.flats-info__info_image img {
+    width: 50px;
+    height: 50px;
+}
+.flats-info__info_content {
+    padding-left: 15px;
+    width: 100%;
+}
+.flats-info__info_content > p > label {
+    float: right;
+}
+.flats-info__info_content > span,
+.notes-flats-list > li.first-title {
+    font-size: 10px;
+    color: #2d18b4;
+    text-transform: uppercase;
+    letter-spacing: .09em;
+}
+#add-note {
+    padding: 0;
+    float: right;
+    background: transparent;
+    border: none;
+}
+#add-note:active,
+#add-note:focus,
+#add-note:hover {
+    outline: none;
+}
+#add-note:before {
+    font-weight: bold;
+    content: "\e101";
+    font-family: 'Glyphicons Halflings';
+    font-size: 20px;
+}
+.note-message {
+    color: #ef693a;
+    margin: 0;
+    font-size: 14px;
+    text-align: justify;
+}
+.note-message:hover:before {
+    content: '\002B';
+    border-right: 10px solid red;
+}
+.notes-flats-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+.notes-flats-list > li {
+    padding: 0 35px 0 0;
+    text-decoration: none;
+    font-size: 14px;
+    color: #ef693a;
+    display: block;
+    position: relative;
+    text-align: justify;
+    cursor: default;
+}
+.notes-flats-list > li > span.close {
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 0%;
+    font-size: 14px;
+    padding: 5px;
+    transform: translate(0%, -50%);
+}
+.notes-flats-list > li > span.close:hover {
+    background: #ef693a;
+    color: #fff;
+}
+.modal-note-info {
+    text-align: center;
+    color: #fff;
+    font-size: 16px;
+    padding: 20px;
+    margin: 0 -15px;
+    background: rgba(221, 200, 253, 0.15);
+}
+.modal-note-info span {
+    border: 1px solid white;
+    padding: 5px 10px;
+    border-radius: 12px;
+    margin: 0 10px;
+    font-size: 12px;
+}
+.table-characteristics {
+    border: none;
+}
+.table-characteristics > tbody > tr > td:first-child {
+    width: 95%;
+}
+.table-characteristics > tbody > tr > td > a {
+    color: #2c3e50;
+}
+.table-characteristics > tbody > tr > td > a:hover {
+    font-weight: bold;
+}
+.table-characteristics > tbody > tr > td {
+    border-top: none;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+    vertical-align: middle;
+}
+.table-characteristics > tbody > tr > td.padding-add {
+    padding: 25px;
+}
+.housing-block__btn-del, 
+.housing-block__btn-download {
+    background: transparent;
+    color: #7f8c8d;
+    border: none;
+}
+.housing-block__btn-del:before {
+    content: "\e020";
+    font-family: 'Glyphicons Halflings';
+    font-size: 12px;
+}
+.housing-block__btn-download:before {
+    content: "\e197";
+    font-family: 'Glyphicons Halflings';
+    font-size: 12px;
+}
+.rest_char {
+    font-size: 12px;
+    color: #3498db;
+    font-weight: normal;
+    cursor: pointer;
+}
+.delete_char {
+    font-size: 12px;
+    color: #fb6d5b;
+    font-weight: normal;
+    cursor: pointer;
+}
+/* Конец Жилищный фонд */
+
+/* Конструктор заявок */
+.designer-block {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+}
+.designer-block > div[class*="col-"] {
+    padding: 0;
+    margin: 0;
+    border-right: 1px solid #ddd;
+    min-height: 700px;
+}
+.designer-block > div[class*="col-"]:last-child {
+    border-right: none;
+}
+.designer-block > div > h4.title {
+    padding: 20px 15px;
+    margin: 0;
+    color: #2d18b4;
+    font-weight: bold;
+    font-size: 12px;
+    border-bottom: 1px solid #ddd;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+}
+.designer-block__search-block {
+    padding: 25px 25px 25px 25px;
+}
+.designer-block__lists {
+    padding: 0;
+}
+.search-block__input {
+    width: 100%;
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: 1px solid #ddd;
+    outline: none;
+}
+.search-block__input::placeholder {
+    color: #ddd;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-size: 7%;
+    background-image: url('../images/searchicon.png');
+    background-position: 57%;
+}
+.categories-list,
+.requests-list,
+.services-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+.categories-list > li:first-child,
+.requests-list > li:first-child,
+.services-list > li:first-child {
+    border-top: 1px solid #ddd;
+}
+.categories-list li,
+.requests-list li {
+    position: relative;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+    margin-top: -1px;
+    padding: 25px;
+    color: #454545;
+    display: block;
+    cursor: pointer;
+}
+.categories-list li:hover,
+.requests-list li:hover,
+.categories-list li.active-item,
+.requests-list li.active-item {
+    background-color: #454545;
+    color: #fff;
+}
+.categories-list > li > span.close,
+.requests-list > li > span.close {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    right: 5%;
+    font-size: 14px;
+    color: #454545;
+    padding: 5px;
+    transform: translate(0%, -50%);
+}
+.services-list > li {
+    border-bottom: 1px solid #ddd;
+    margin-top: -1px;
+    padding: 25px;
+    color: #454545;
+    position: relative;
+    cursor: pointer;
+}
+.dropdown__settings-service {
+    float: right;
+    margin-top: -10px;
+}
+#create-service-form .load_preview,
+#edit-service-form .load_preview {
+    width: 320px;
+    height: 200px;
+    margin: 10px auto;
+    border: none;
+    background: transparent;
+}
+.span-price {
+    padding: 2px 20px;
+    color: #fff;
+    margin-right: 5px;
+    border-radius: 25px;
+    background: #598eff;
+}
+/* Конец Конструктор заявок */
+
+/* Настройки */
+.settings-page {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+}
+.settings-page > div {
+    padding: 0;
+    margin: 0;
+}
+.settings-page h4.title {
+    padding: 10px 0 15px 10px;
+    color: #2d18b4;
+    font-size: 12px;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+}
+.settings-page__content {
+    border-left: 1px solid #ddd;
+}
+.organizations-info__title {
+    font-size: 12px;
+    font-weight: bold;
+    color: #999;
+    text-transform: uppercase;
+    padding: 10px 10px 10px 0px;
+    text-align: left;
+    border-bottom: 2px solid #999;
+}
+.organizations-info__title > span.message-info {
+    color: #2d18b4;
+    font-weight: normal;
+    text-transform: none;
+    float: right;
+}
+.settings__sub-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.settings__sub-menu > li > a {
+    color: #454545;
+    padding: 20px 10px;
+}
+.settings__sub-menu > li {
+    padding: 20px 10px;
+    border-bottom: 1px solid #ddd;
+}
+.settings__sub-menu > li:hover,
+.settings__sub-menu > li > a:hover {
+    background: #454545;
+    cursor: pointer;
+    color: #fff;
+}
+.settings__sub-menu > li.active,
+.settings__sub-menu > li.active > a {
+    background: #454545;
+    color: #fff;
+}
+/* Конец Настройки */

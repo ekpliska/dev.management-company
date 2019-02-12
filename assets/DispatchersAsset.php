@@ -13,6 +13,7 @@ class DispatchersAsset extends AssetBundle {
     public $baseUrl = '@web';
     
     public $css = [
+        'css/dispatchers/dispatchers-style.css',
         'css/form-style_manager.css',
     ];
     

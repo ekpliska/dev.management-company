@@ -1,0 +1,74 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 12.02.2019, 15:49:41
+    Author     : Ekaterina
+*/
+
+/* Диспетчер, контент + доп меню */
+.dispatcher-main-with-sub {
+    margin-top: 100px;
+}
+.dispatcher-main-with-sub-general {
+    margin-top: 125px;
+}
+.dispatcher-main-with-sub-designer {
+    margin-top: 130px;
+}
+/* Конец Диспетчер, контент + доп меню */
+
+/* Диспетчер, контент */
+.dispatcher-main {
+    margin-top: -40px;
+}
+/* Конец Диспетчер, контент */
+
+/* Диспетчер, главная страница */
+.dispatcher__genaral-page {}
+.dispatcher__genaral-page > div[class^="col-"] {
+    padding: 0;
+    margin: 0;
+}
+.dispatcher__genaral-page__notice,
+.dispatcher__genaral-page__news-block {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    margin: 10px;
+    min-height: 700px;
+    box-shadow: 0 4px 26px 0 rgba(51, 29, 82, 0.16);
+}
+.dispatcher__genaral-page__request {
+    margin: 10px;
+    min-height: 700px;
+}
+.notice__user_block {
+    display: inline-block;
+    position: relative;
+    padding: 0 25px;
+    margin: 15px;
+    height: 50px;
+    width: 90%;
+    font-size: 16px;
+    line-height: 50px;
+    border-radius: 25px;
+    background-color: #f1f1f1;
+}
+.notice__user_block img {
+  float: left;
+  margin: 0 10px 0 -25px;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+.notice__user_block span.notice__count {
+    font-size: 10px;
+    background: #ef693a;
+    color: #fff;
+    border-radius: 100%;
+    position: absolute;
+    right: 5%;
+}
+/* Конец Диспетчер, главная страница */

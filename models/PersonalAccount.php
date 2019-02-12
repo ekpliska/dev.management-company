@@ -9,6 +9,7 @@
     use app\models\Organizations;
     use yii\helpers\ArrayHelper;
     use app\models\AccountToUsers;
+    use app\models\Requests;
 
 /**
  * Лицевой счет
@@ -55,6 +56,10 @@ class PersonalAccount extends ActiveRecord
     
     public function getOrganization() {
         return $this->hasOne(Organizations::className(), ['organizations_id' => 'account_organization_id']);
+    }
+    
+    public function getRequest() {
+        return $this->hasMany(Requests::className(), ['requests_account_id' => 'account_id']);
     }
     
     /*
