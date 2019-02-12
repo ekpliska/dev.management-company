@@ -73,7 +73,6 @@ $config = [
         
         'authManager' => [
             'class' => 'yii\rbac\DbManager',
-            'defaultRoles' => ['clients', 'clients_rent', 'dispatcher', 'specialist', 'administrator'],
             
         ],        
         'cache' => [

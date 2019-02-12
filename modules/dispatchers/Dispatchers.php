@@ -2,6 +2,7 @@
 
     namespace app\modules\dispatchers;
     use yii\base\Module;
+    use yii\filters\AccessControl;
 
 /**
  * Модуль "Диспетчер"
