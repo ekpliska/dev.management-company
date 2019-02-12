@@ -2,7 +2,6 @@
 
     namespace app\modules\api\v1\models;
     use app\models\News as BaseNews;
-    use app\models\Voting;
 
 /**
  * Новости

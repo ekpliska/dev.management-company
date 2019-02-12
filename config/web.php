@@ -73,6 +73,8 @@ $config = [
         
         'authManager' => [
             'class' => 'yii\rbac\DbManager',
+            'defaultRoles' => ['clients', 'clients_rent', 'dispatcher', 'specialist', 'administrator'],
+            
         ],        
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -102,9 +104,13 @@ $config = [
         'user' => [
             'class' => 'yii\web\User',
             'identityClass' => 'app\models\User',
-            'enableAutoLogin' => true,
+            'enableAutoLogin' => false, // Отключение логина на основе фалов cookies
+            'absoluteAuthTimeout' => 1200, // Время сессии 20мин
+            'authTimeout' => 600, // Автоматический выход из сиситемы, когда пользователь неактивен 10мин
+            'absoluteAuthTimeoutParam' => '_identity',
             'loginUrl' => ['site/login'],
             'as afterLogin' => 'app\behaviors\LoginTimestampBehavior',
+            
             /*
             'identityCookie' => [
                 'name' => '_identity',
