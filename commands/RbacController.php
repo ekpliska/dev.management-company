@@ -1,7 +1,9 @@
 <?php
+
     namespace app\commands;
     use yii\console\Controller;
     use Yii;
+    use \app\rbac\AdministratorRule;
 
 
 /*
@@ -76,7 +78,7 @@ class RbacController extends Controller {
         /*
          * Разрешения для Администратора
          */
-        // Собсвенники
+        // Собственники
         $clients_view = $auth->createPermission('ClientsView');
         $clients_view->description('Просмотр раздела Собственники');
         $auth->add($clients_view);
@@ -168,6 +170,15 @@ class RbacController extends Controller {
         
         
         $this->stdout('here', PHP_EOL);
+        
+    }
+    
+    public function actionAddRule() {
+        
+        $auth_manager = Yii::$app->authManager;
+        
+        $administrator_rule = new AdministratorRule();
+        $auth_manager->add($administrator_rule);
         
     }
 }
