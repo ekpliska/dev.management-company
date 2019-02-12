@@ -12,7 +12,6 @@ class LoginForm extends Model
 {
     public $username;
     public $password;
-    public $rememberMe = true;
 
     private $_user = false;
 
@@ -23,7 +22,6 @@ class LoginForm extends Model
     public function rules() {
         return [
             [['username', 'password'], 'required'],
-            ['rememberMe', 'boolean'],
             ['password', 'validatePassword'],
         ];
     }
@@ -35,7 +33,6 @@ class LoginForm extends Model
         return [
             'username' => 'Логин',
             'password' => 'Пароль',
-            'rememberMe' => 'Запомнить меня',
         ];        
     }
 
@@ -66,16 +63,16 @@ class LoginForm extends Model
         // Есди валидация формы прошла успешно
         if ($this->validate()) {
             // Если установлен флаг "Запомнить меня"
-            if ($this->rememberMe) {
-                // Получаем текущего пользователя
-                $user = $this->getUser();
-                // Записываем в БД снегерированный ключ для аутентивикации по cookie
-                $user->generateAuthKey();
-                // Дата последнего входа на портал
-//                $user->date_login = time();
-                $user->save();
-            }            
-            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600*24*30 : 0);
+//            if ($this->rememberMe) {
+//                // Получаем текущего пользователя
+//                $user = $this->getUser();
+//                // Записываем в БД снегерированный ключ для аутентивикации по cookie
+//                $user->generateAuthKey();
+//                // Дата последнего входа на портал
+////                $user->date_login = time();
+//                $user->save();
+//            }            
+            return Yii::$app->user->login($this->getUser(), 0);
         }
         return false;
     }

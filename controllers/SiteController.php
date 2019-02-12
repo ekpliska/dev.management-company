@@ -20,13 +20,18 @@ class SiteController extends Controller
         return [            
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['index'],
+                'only' => ['index', 'login', 'logout'],
                 'rules' => [
                     [
-                        'actions' => ['index'],
+                        'actions' => ['index', 'login'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
+                ],
+                [
+                    'actions' => ['logout'],
+                    'allow' => true,
+                    'roles' => ['@'],
                 ],
             ],
             'verbs' => [
@@ -75,7 +80,7 @@ class SiteController extends Controller
     public function actionLogin() {
         
         if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
+            return $this->redirect(['/']);
         }
 
         $model = new LoginForm();
