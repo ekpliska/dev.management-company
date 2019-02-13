@@ -12,7 +12,8 @@ $key_account = 0;
 <?php if (isset($user_lists) && (!empty($user_lists))) : ?>
 <?php foreach ($user_lists as $key => $user) : ?>
 <div class="notice__user_block">
-    <?= Html::img($user['user']['user_photo'], ['class' => '']) ?>
+    <?php $user_avatar = $user['user']['user_photo'] ? $user['user']['user_photo'] : '@web/images/no-avatar.jpg'; ?>
+    <?= Html::img($user_avatar, ['class' => '']) ?>
     <span class="notice__username">
         <?= FormatFullNameUser::nameEmployee($user['clients_surname'], $user['clients_name'], null, true) ?>
     </span>

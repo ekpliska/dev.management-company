@@ -380,16 +380,15 @@ class FormatHelpers {
     
     /*
      * Формирование списка изображений прикрепленных к заяке
+     * @param objec $image_list
      */
     public static function imageRequestList($image_list) {
         
         $lists = '';
         
-        if ($image_list === null) {
-            return $lists;
+        if (empty($image_list)) {
+            return false;
         }
-        
-        $lists;
         
         foreach ($image_list as $key => $image) {
             $list = '<img src="' . '/web/upload/store/' . $image->filePath . '" class="request">';
@@ -398,4 +397,25 @@ class FormatHelpers {
         
         return $lists;
     }
+    
+    /*
+     * Формирование списка изображений прикрепленных к заяке
+     * @param array $image_list
+     */
+    public static function imageRequestListByDispatcher($image_list) {
+        
+        $lists = '';
+        
+        if (empty($image_list)) {
+            return false;
+        }
+        
+        foreach ($image_list as $key => $image) {
+            $list = Html::img('@web/upload/store/' . $image['filePath']);
+            $lists .= $list;
+        }
+        
+        return $lists;
+    }
+    
 }
