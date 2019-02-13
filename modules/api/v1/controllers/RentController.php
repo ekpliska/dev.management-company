@@ -31,6 +31,16 @@ class RentController extends ActiveController {
             ],
         ];
         return $behaviors;
-    }    
+    }
+    
+    public function actions() {
+        
+        $actions = parent::actions();
+        
+        // Удаляем действие Index
+        unset($actions['index']);
+
+        return $actions;
+    }
     
 }

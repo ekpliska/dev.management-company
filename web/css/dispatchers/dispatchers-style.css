@@ -70,5 +70,15 @@ and open the template in the editor.
     border-radius: 100%;
     position: absolute;
     right: 5%;
+    top: 30%;
+    width: 25px;
+    height: 25px;
+    line-height: 0;
+    text-align: center;
+    padding-top: 12px;
+}
+.notice__user_block span.notice__username {
+    font-size: 14px;
+    font-weight: bold;
 }
 /* Конец Диспетчер, главная страница */

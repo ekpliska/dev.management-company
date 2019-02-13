@@ -93,9 +93,9 @@ class FormatFullNameUser {
      * Формирование Фалмилии имени отчества пользователя
      * @param boolean $full | true Фамилия Имя Отчество | false Фамилия И.О.
      */
-    public static function nameEmployee($surname, $name, $second_name, $full = false) {
+    public static function nameEmployee($surname, $name, $second_name = null, $full = false) {
         
-        if ($surname == null || $name == null ||  $second_name == null) {
+        if ($surname == null || $name == null) {
             return '<span>(Не назначен)</span>';
         }
         

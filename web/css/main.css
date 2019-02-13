@@ -3178,6 +3178,262 @@ a.sub-menu-item {
 }
 /* Конец Дополнительное навигационное меню, главная страница */
 
+/* Статусы меню, заявки, главная страница */
+.status-request {
+    display: flex;
+    justify-content: center;
+}
+.status-request > li > a {
+    border-radius: 25px;
+    font-size: 12px;
+    color: #000;
+    width: 175px;
+    height: 50px;
+    padding: 14px 0;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.status-request > li > a:hover,
+.status-request > li > a:focus {
+    text-decoration: none;
+    background-color: transparent;
+    border-radius: 25px;
+}
+.status-request > li + li {
+    margin-left: 15px;
+}
+.req-bange-default {
+    border: 2px solid #4e2ae2;
+    box-shadow: 0px 1px 4px 4px rgba(51,0,255,0.33);    
+}
+.req-bange-new {
+    border: 2px solid #598eff;
+    background-color: #598eff;    
+}
+.req-bange-new:hover,
+.req-bange-new:focus {
+    background-color: #598eff !important;    
+    box-shadow: 0px 1px 4px 4px rgba(0,101,255,0.28);
+}
+.req-bange-work {
+    border: 2px solid #7c7c7c;
+}
+.req-bange-work:hover,
+.req-bange-work:focus {
+    box-shadow: 0px 1px 4px 4px rgba(255,125,125,0.26);    
+}
+.req-bange-rectification {
+    border: 2px solid #e17dff;
+}
+.req-bange-rectification:hover,
+.req-bange-rectification:focus {
+    box-shadow: 0px 1px 4px 4px rgba(225,125,255,0.42);
+}
+.req-bange-complete {
+    border: 2px solid #1fd68d;
+}
+.req-bange-complete:hover,
+.req-bange-complete:focus {
+    box-shadow: 0px 1px 4px 4px rgba(56,231,161,0.54);
+}
+.req-bange-close {
+    border: 2px solid #FF7D7D;
+}
+.req-bange-close:hover,
+.req-bange-close:focus {
+    box-shadow: 0px 1px 4px 4px rgba(252,193,193,0.83);    
+}
+/* Конец Дополнительное навигационное меню, заявки */
+
+/* Дополнительное навигационное меню, платные услуги */
+.navbar_paid-request {
+    background: #2d18b4;
+    padding: 15px;
+    height: 80px;
+    box-shadow: 0px 1px 14px -1px rgb(0, 0, 0);
+}
+.navbar_paid-request > ul {
+    margin-right: 15px;
+}
+/* Конец Дополнительное навигационное меню, платные услуги */
+/* Дополнительное навигационное меню, лицевой счет */
+.navbar_personal-account {
+    background: linear-gradient(190.67deg, rgba(0, 0, 0, .5) 50%, rgba(132, 131, 131, 0.65) 100%);
+    box-shadow: 0 2px 5px 2px rgba(0,0,0,0.26);
+}
+.sub-menu_account {
+    margin-left: -15px;
+    margin-right: -15px;
+}
+.sub-menu_account > li + li {
+    margin-left: 0px;
+}
+.sub-menu_account > li > a {
+    padding: 30px 40px;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+.sub-menu_account > li.active > a,
+.sub-menu_account li > a:hover,
+.sub-menu_account li > a:focus,
+.sub-menu_account > li.active > a:hover {
+    color: #fff;
+    background-color: rgba(247, 247, 247, 0.22);
+    border-radius: 0px;
+}
+/* Конец Дополнительное навигационное меню, лицевой счет */
+
+/* Всплывающие уведовления */
+.alert-message[data-notification-status="success"] {
+    border-left: 7px solid #1fd68d;
+}
+.alert-message[data-notification-status="error"] {
+    border-left: 7px solid #ff7d7d;
+}
+.alert-message {
+    position: fixed;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    color: #454545;
+    background: #fff;
+    font-size: 12px;
+    line-height: 1.3;
+    box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.35);
+    width: 350px;
+    margin: 20px;
+    top: 20%;
+    right: 0;
+    cursor: default;
+}
+.alert-message::before {
+    content: '\2716';
+    display: block;
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+    margin-right: 20px;
+    font-size: 24px;
+}
+.alert-message[data-notification-status="success"]:before {
+    color: #1fd68d;
+}
+.alert-message[data-notification-status="error"]:before {
+    color: #ff7d7d;
+}
+/* Конец Всплывающие уведовления */
+
+/* Блок переключения статуса заявок */
+.btn-group_status-request {
+    padding: 0 15px;
+    background: #fff;
+}
+.btn-choose-status {
+    font-size: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 6px 15px;
+    background: #fff;
+}
+.btn-choose-status:focus,
+.btn-group.open .dropdown-toggle {
+    outline: none;
+    box-shadow: none;
+}
+.dropdown-status > li > a {
+    color: #fff;
+    text-transform: none;
+    font-size: 12px;
+}
+.dropdown-status > li > a:hover {
+    background: rgba(0, 123, 255, 0.12);
+    color: #fff;
+}
+#status-value-0 {
+    border: 2px solid #598eff;
+    box-shadow: 0px 1px 4px 6px rgba(0,101,255,0.28);
+    border-radius: 25px;
+}
+.add-border-0 {
+    border-right: 2px solid #598eff;
+}
+#status-value-1 {
+    border: 2px solid #7c7c7c;
+    box-shadow: 0px 1px 4px 4px rgba(255,125,125,0.26);
+    border-radius: 25px;
+}
+.add-border-1 {
+    border-right: 2px solid #7c7c7c;
+}
+#status-value-2 {
+    border: 2px solid #1fd68d;
+    box-shadow: 0px 1px 4px 4px rgba(56,231,161,0.54);
+    border-radius: 25px;
+}
+.add-border-2 {
+    border-right: 2px solid #1fd68d;
+}
+#status-value-3 {
+    border: 2px solid #e17dff;
+    box-shadow: 0px 1px 4px 4px rgba(225,125,255,0.42);
+    border-radius: 25px;
+}
+.add-border-3 {
+    border-right: 2px solid #e17dff;
+}
+#status-value-4 {
+    border: 2px solid #ff7d7d;
+    box-shadow: 0px 1px 4px 4px rgba(252,193,193,0.83);    
+    border-radius: 25px;
+}
+.add-border-4 {
+    border-right: 2px solid #ff7d7d;
+}
+#status-value-5 {
+    border: 1px solid #5f697a;
+    border-radius: 25px;
+    color: #5f697a;
+}
+#status-value-5 > .btn-group > button,
+#status-value-5 > button {
+    color: #5f697a;
+}
+.btn-choose-status > .caret {
+    margin-left: 10px;
+}
+/* Конец Блок переключения статуса заявок */
+
+/* Заявка, просмотр отдельной заявки */
+.requests-view__setting {
+    padding: 20px 0;
+}
+.page-btn-block {
+    padding: 20px 0;
+}
+a.employee-profile {
+    color: #717171;
+    font-size: 12px;    
+}
+a.employee-profile:hover {
+    color: #3e3e3e;
+}
+#dispatcherList {    
+}
+/* Конец Заявка, просмотр отдельной заявки */
+
+/* Дополнительное навигационное меню, заявки */
+.navbar_repusets {
+    background: #fff;
+    padding: 20px;
+}
+/* Конец Дополнительное навигационное меню, заявки */
+
+
+
+
 .switch {
     position: relative;
     display: inline-block;
