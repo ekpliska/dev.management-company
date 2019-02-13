@@ -25,8 +25,8 @@ $this->params['breadcrumbs'][] = 'Главная';
             </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-            <div class="dispatcher__genaral-page__request">
-                <?= $this->render('request-block/request_list', ['user_lists' => $user_lists]) ?>
+            <div class="dispatcher__genaral-page__request" id="request_lists">
+                <?= $this->render('request-block/requests_list', ['user_lists' => $user_lists]) ?>
             </div>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
