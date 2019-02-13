@@ -35,10 +35,38 @@ and open the template in the editor.
 .dispatcher__genaral-page__notice,
 .dispatcher__genaral-page__news-block {
     border: 1px solid #ddd;
-    border-radius: 12px;
     margin: 10px;
     height: 700px;
     box-shadow: 0 4px 26px 0 rgba(51, 29, 82, 0.16);
+    overflow: auto;
+    position: relative;
+}
+.dispatcher__genaral-page__notice {
+    border-radius: 12px;    
+}
+.dispatcher__genaral-page__news-block {
+    margin-top: -10px;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+.dispatcher__genaral-page__notice::-webkit-scrollbar-track,
+.dispatcher__genaral-page__news-block::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #ddd;
+}
+
+.dispatcher__genaral-page__notice::-webkit-scrollbar,
+.dispatcher__genaral-page__news-block::-webkit-scrollbar {
+    width: 12px;
+    background-color: #ddd;
+}
+
+.dispatcher__genaral-page__notice::-webkit-scrollbar-thumb,
+.dispatcher__genaral-page__news-block::-webkit-scrollbar-thumb {
+    border-radius: 12px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #524e53;
 }
 .dispatcher__genaral-page__request {
     margin: 10px;
@@ -122,5 +150,65 @@ and open the template in the editor.
     font-size: 12px;
     text-align: center;
 }
-
+.news-block__news-item {
+    border-bottom: 1px solid #ddd;
+}
+.news-block__news-item__title {
+    padding: 10px;
+}
+.news-block__news-item__title p {
+    padding: 0;
+    margin: 0;
+}
+.news-block__news-item__title a.a_title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #000;
+}
+.news-block__news-item__title a.a_title:hover {
+    color: #2d18b4;
+}
+.news-block__news-item__title p.date {
+    font-size: 12px;
+    color: #2d18b4;
+    font-weight: bold;
+}
+.news-block__news-item__image {
+    width: 100%;
+    height: 240px;
+    position: relative;
+    overflow: hidden;
+}
+.news-block__news-item__image img {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    width: 100%;
+}
+.news-block__news-item__content {
+    padding: 10px;
+    font-size: 14px;
+    text-align: justify;
+}
+.margin-btn {
+    right: 30%;
+}
+.dispatcher__genaral-page__news-btn {
+    background: #454545;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    z-index: 1;
+}
+a.news-block__create-link {
+    color: #fff;
+    font-size: 12px;
+}
+a.news-block__create-link:before {
+    content: '\0271A';
+    padding-right: 10px;
+}
 /* Конец Диспетчер, главная страница */

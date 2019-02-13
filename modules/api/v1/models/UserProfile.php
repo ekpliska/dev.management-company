@@ -31,11 +31,13 @@ class UserProfile extends User {
                 ->select('pa.account_number as number, '
                         . 'r.rents_surname as rents_surname, r.rents_name as rents_name, r.rents_second_name as rents_second_name, '
                         . 'r.rents_mobile as rents_mobile, r.rents_mobile_more as other_phone, '
+                        . 'u_r.user_email as email_rent, '
                         . 'h.houses_id as house_id, '
                         . 'h.houses_gis_adress as gis_adress, h.houses_number as houses_number, f.flats_number as flats_number')
                 ->from('personal_account as pa')
                 ->join('LEFT JOIN', 'clients as c', 'pa.personal_clients_id = c.clients_id')
                 ->join('LEFT JOIN', 'rents as r', 'pa.personal_rent_id = r.rents_id')
+                ->join('LEFT JOIN', 'user as u_r', 'u_r.user_rent_id= r.rents_id')
                 ->join('LEFT JOIN', 'flats as f', 'f.flats_id = pa.personal_flat_id')
                 ->join('LEFT JOIN', 'houses as h', 'h.houses_id = f.flats_house_id')
                 ->where(['pa.personal_clients_id' => $clients['clients_id']])
@@ -53,6 +55,7 @@ class UserProfile extends User {
                     'rents_second_name' => $account['rents_second_name'],
                     'rents_mobile' => $account['rents_mobile'],
                     'rents_mobile_more' => $account['other_phone'],
+                    'email_rent' => $account['email_rent'],
                 ];
             }
             

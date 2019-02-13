@@ -30,13 +30,18 @@ $this->params['breadcrumbs'][] = 'Главная';
             </div>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-            <div class="dispatcher__genaral-page__news-block">
-                
+            <div class="dispatcher__genaral-page__news-btn">
+                <?= Html::a('Создать публикацию', ['/'], ['class' => 'news-block__create-link']) ?>
+            </div>
+            <div class="dispatcher__genaral-page__news-block news-block__margin">
+                <div class="dispatcher__genaral-page__news-content">
+                    <?= $this->render('data/news_block', ['news_lists' => $news_lists]) ?>
+                </div>               
             </div>
         </div>
     </div>
     
-    <?= Html::a('', ['employee-form/index', 'new_employee' => 'administrator'], ['class' => 'create-request-btn']) ?>
+    <?= Html::a('', ['employee-form/index', 'new_employee' => 'administrator'], ['class' => 'create-request-btn margin-btn']) ?>
     
 </div>
 
