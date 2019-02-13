@@ -15,7 +15,7 @@
         'id' => 'create-new-requests',
         'header' => 'Новая заявка',
         'closeButton' => [
-            'class' => 'close modal-close-btn request__btn_close',
+            'class' => 'close modal-close-btn',
         ],
         'clientOptions' => [
             'backdrop' => 'static',
@@ -24,7 +24,7 @@
     ]);
 ?>
 
-<?php
+<?php 
     $form = ActiveForm::begin([
         'id' => 'create-new-request',
         'action' => ['create-request'],

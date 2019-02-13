@@ -41,7 +41,18 @@ $this->params['breadcrumbs'][] = 'Главная';
         </div>
     </div>
     
-    <?= Html::a('', ['employee-form/index', 'new_employee' => 'administrator'], ['class' => 'create-request-btn margin-btn']) ?>
+    <?php if ($block == 'requests') : ?>
+        <?= Html::button('', [
+                'class' => 'create-request-btn margin-btn',
+                'data-target' => '#create-new-requests',
+                'data-toggle' => 'modal',
+        ]) ?>
+        <?= $this->render('form/create-request', [
+                'model' => $model, 
+                'type_requests' => $type_requests,
+                'flat' => $flat,
+        ]) ?>
+    <?php endif; ?>
     
 </div>
 
