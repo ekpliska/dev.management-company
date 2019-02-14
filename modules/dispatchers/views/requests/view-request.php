@@ -97,16 +97,14 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
                         <table class="table table-voting-results">
                             <tr>
                                 <td id="specialist-name">
-                                    <?= FormatFullNameUser::fullNameEmployee(
-                                            $request['employee_id_s'], false, true, [
-                                                $request['surname_s'], $request['name_s'], $request['sname_s']
-                                            ]) ?>
+                                    <?= FormatFullNameUser::nameEmployee($request['surname_s'], $request['name_s'], $request['sname_s'], true) ?>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <?= Html::button('<i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Назначить специалиста', [
                                             'class' => 'btn blue-btn',
+                                            'data-request' => $request['requests_id'],
                                             'data-type-request' => 'requests',
                                             'data-employee' => $request['employee_id_s'],
                                             'data-target' => '#add-specialist-modal',

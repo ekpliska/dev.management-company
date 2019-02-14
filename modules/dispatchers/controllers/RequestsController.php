@@ -8,6 +8,7 @@
     use app\models\CommentsToRequest;
     use app\models\Image;
     use app\models\StatusRequest;
+    use app\modules\dispatchers\models\RequestsList;
 
 /**
  * Заявки, Платные услуги
@@ -60,14 +61,50 @@ class RequestsController extends AppDispatchersController {
         
     }
     
+    /*
+     * Назначение специалиста для Заявок и Заявок на платные услуги
+     */
+    public function actionChooseSpecialist() {
+        
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        
+        $request_id = Yii::$app->request->post('requestId');
+        $specialist_id = Yii::$app->request->post('specialistId');
+        $type_request = Yii::$app->request->post('typeRequest');
+        
+        if (Yii::$app->request->isAjax) {
+            
+            switch ($type_request) {
+                case 'requests':
+                    $request = RequestsList::findByID($request_id);
+                    $request->chooseSpecialist($specialist_id);
+                    // После назначения Диспетчером Специалиста, заявка считается "Принятой", статус "На исполнении"
+                    $this->setStatusRequest($request_id);
+                    return ['success' => true];
+                    break;
+                case 'paid-requests':
+//                    $paid_request = PaidServices::findOne($request_id);
+//                    $paid_request->chooseSpecialist($specialist_id);
+                    return ['success' => true];
+                    break;
+                default:
+                    return ['success' => false];                    
+                    break;
+            }
+        }
+        
+        return ['success' => false];
+        
+    }
+    
     
     /*
-     * 
+     * Назначение статуса для выбранной заявки
      */
     private function setStatusRequest($request_id) {
         
         $request = Requests::findOne($request_id);
-        return $request->setSatusRequest(StatusRequest::STATUS_IN_WORK);
+        return $request->setSatusRequest(StatusRequest::STATUS_PERFORM);
         
     }
     

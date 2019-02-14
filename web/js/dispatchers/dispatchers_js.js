@@ -60,5 +60,74 @@ $(document).ready(function(){
         });
     });
     
+    /*
+     * Вызов модального окна "Назначение диспетчера"
+     * Вызов модального окна "Назначение специалиста"
+     */
+    $('#add-specialist-modal').on('show.bs.modal', function(e) {
+        var requestId = $(e.relatedTarget).data('request');
+        var employeeId = $(e.relatedTarget).data('employee');
+        var typeRequest = $(e.relatedTarget).data('typeRequest');
+        $('.error-message').text('');
+        $('.add_specialist__btn').data('request', requestId);
+        $('.add_specialist__btn').data('typeRequest', typeRequest);
+        // Если сотрудник уже назначен, то обозначаем его активным в списке выбора сотрудников
+        $('a[data-employee=' + employeeId + ']').addClass('active');
+    });
+    
+    $('#add-specialist-modal').on('hide.bs.modal', function() {
+        $('#specialistList').find('.active').removeClass('active');
+    });
+    
+    /*
+     * В списке сотрудников, выбранных специалистов обозначаем активными
+     */
+    $('#specialistList a').on('click', function() {
+        var employeeId = $(this).data('employee');
+        $('#specialistList').find('.active').removeClass('active');
+        $(this).toggleClass('active');
+        $('.add_specialist__btn').data('specialist', employeeId);
+    });
+    
+    /*
+     * Отправляем запрос на добавления специалиста к выбранной заявке
+     */
+    $('.add_specialist__btn').on('click', function(e) {
+        e.preventDefault();
+        // Получаем ФИО выбранного сотрудника
+        var employeeName = $('#specialistList').find('.active').text();
+        var specialistId = $(this).data('specialist');
+        var requestId = $(this).data('request');
+        var typeRequest = $(this).data('typeRequest');
+        
+        // Проверяем налицие дата параметров
+        if (specialistId === undefined || requestId === undefined) {
+            $('.error-message').text('Прежде чем назначить специалиста, выберите его из списка');
+            return false;
+        } else {
+            $.ajax({
+                url: 'choose-specialist',
+                method: 'POST',
+                data: {
+                    specialistId: specialistId,
+                    requestId: requestId,
+                    typeRequest: typeRequest,
+                },
+                success: function(response) {
+                    if (response.success === false) {
+                        $('.error-message').text('Ошибка');
+                        return false;
+                    }
+                    $('.btn-specialist').data('employee', specialistId);
+                    $('#specialist-name').text('');
+                    $('#specialist-name').html(employeeName);
+                },
+                error: function() {
+                    $('.error-message').text('Ошибка');
+                },
+            });
+        }
+    });
+    
     
 });
