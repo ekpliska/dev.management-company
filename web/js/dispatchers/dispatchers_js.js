@@ -28,7 +28,9 @@ $(document).ready(function(){
                 type: type,
             },
         }).done(function(response) {
-            $('#request_lists').html(response.data);
+            if (response.success === true) {
+                $('#request_lists').html(response.data);
+            }
         });
     });
     
@@ -44,9 +46,7 @@ $(document).ready(function(){
         strValue = strValue.replace(/[^-0-9,(,)]/gim, '');
         $.post('show-houses?phone=' + strValue,
         function(data) {
-            if (data.success === true) {
-                $('#house').html(data);
-            }
+            $('#house').html(data);
         });
     });
     

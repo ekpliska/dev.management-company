@@ -22,4 +22,10 @@ class Rent extends Rents {
 
     }
     
+    public function deleteRent($rent_id) {
+        
+        
+        
+    }
+    
 }

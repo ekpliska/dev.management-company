@@ -53,6 +53,20 @@ $this->params['breadcrumbs'][] = 'Главная';
                 'flat' => $flat,
         ]) ?>
     <?php endif; ?>
+
+    <?php if ($block == 'paid-requests') : ?>
+        <?= Html::button('', [
+                'class' => 'create-request-btn margin-btn',
+                'data-target' => '#create-new-paid-requests',
+                'data-toggle' => 'modal',
+        ]) ?>
+        <?= $this->render('form/create-paid-request', [
+                'model' => $model, 
+                'servise_category' => $servise_category,
+                'servise_name' => $servise_name,
+                'flat' => $flat,
+        ]) ?>
+    <?php endif; ?>
     
 </div>
 

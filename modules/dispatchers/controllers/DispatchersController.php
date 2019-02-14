@@ -6,7 +6,9 @@
     use app\modules\dispatchers\models\UserRequests;
     use app\modules\dispatchers\models\News;
     use app\modules\dispatchers\models\form\RequestForm;
+    use app\modules\dispatchers\models\form\PaidRequestForm;
     use app\models\TypeRequests;
+    use app\models\CategoryServices;
     use app\models\PersonalAccount;
 
 /**
@@ -23,6 +25,10 @@ class DispatchersController extends AppDispatchersController {
         $news_lists = News::getNewsList($count_news = 7);
         // Тип заявок
         $type_requests = TypeRequests::getTypeNameArray();
+        // Формируем массив для Категорий услуг
+        $servise_category = CategoryServices::getCategoryNameArray();
+        // Массив для наименования услуг
+        $servise_name = [];        
         // Жилой массив
         $flat = [];
         
@@ -32,7 +38,7 @@ class DispatchersController extends AppDispatchersController {
                 $user_lists = UserRequests::getRequestsByUser();
                 break;
             case 'paid-requests':
-                $model = [];
+                $model = new PaidRequestForm();
                 $user_lists = UserRequests::getPaidRequestsByUser();;
                 break;
         }
@@ -43,6 +49,8 @@ class DispatchersController extends AppDispatchersController {
             'user_lists' => $user_lists,
             'news_lists' => $news_lists,
             'type_requests' => $type_requests,
+            'servise_category' => $servise_category,
+            'servise_name' => $servise_name,
             'flat' => $flat,
         ]);
         
@@ -89,6 +97,19 @@ class DispatchersController extends AppDispatchersController {
             return $this->redirect(['view-request', 'request_number' => $number]);
         }
     }
+    
+    /*
+     * Метод сохранения созданной заявки на платную услугу
+     */
+    public function actionCreatePaidRequest() {
+        
+        $model = new PaidRequestForm();
+        
+        if (Yii::$app->request->isPost && $model->load(Yii::$app->request->post())) {
+            $number = $model->save();
+            return $this->redirect(['view-paid-request', 'request_number' => $number]);
+        }
+    }    
     
     /*
      * Валидация форм

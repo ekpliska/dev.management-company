@@ -41,11 +41,7 @@ class RentController extends ActiveController {
         
         $actions = parent::actions();
         
-        // Удаляем действие Index
-        unset($actions['index']);
-        // Удаляем действие Create, переопределяем свой
-        unset($actions['create']);
-        unset($actions['view']);
+        unset($actions['index'], $actions['create'], $actions['view']);
 
         return $actions;
     }
@@ -56,9 +52,7 @@ class RentController extends ActiveController {
         
         $model->load(Yii::$app->getRequest()->getBodyParams(), '');
         if ($rent_id = $model->save()) {
-            $response = Yii::$app->getResponse();
-            $response->setStatusCode(201);
-            $response->getHeaders()->set('Location', Url::toRoute(['view', 'rent_id' => $rent_id], true));
+            return ['success' => true];
         } elseif (!$model->hasErrors()) {
             throw new ServerErrorHttpException('Ошибка создания учетной записи арендатора.');
         }
@@ -80,15 +74,3 @@ class RentController extends ActiveController {
     }
     
 }
-
-//{
-//  "rents_name": "два",
-//  "rents_surname": "раз", 
-//  "rents_second_name": "раз", 
-//  "rents_mobile": "+7 (123) 123-70-70", 
-//  "rents_email": "jhk@dsdf.sdf", 
-//  "client_id": "1", 
-//  "password": "123456", 
-//  "password_repeat": "123456",
-//  "account_number": "123123"
-//}
