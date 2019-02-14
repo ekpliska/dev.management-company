@@ -97,7 +97,9 @@ and open the template in the editor.
 }
 .notice__user_block:hover,
 .notice__user__active {
-    box-shadow: 0px 1px 4px 4px rgba(133, 134, 136, 0.2);
+    box-shadow: 0px 1px 10px 1px #777;
+    background-color: #7039c4;
+    color: #fff;
 }
 .notice__user_block img {
   float: left;
@@ -107,7 +109,7 @@ and open the template in the editor.
   border-radius: 50%;
 }
 .notice__user_block span.notice__count {
-    font-size: 10px;
+    font-size: 12px;
     background: #ef693a;
     color: #fff;
     border-radius: 100%;
@@ -122,7 +124,7 @@ and open the template in the editor.
 }
 .notice__user_block span.notice__username {
     font-size: 14px;
-    font-weight: bold;
+    /*font-weight: bold;*/
 }
 .dispatcher_genaral-page__request_block {
     border: 1px solid #ddd;

@@ -11,7 +11,7 @@ $key_account = 0;
 
 <?php if (isset($user_lists) && (!empty($user_lists))) : ?>
 <?php foreach ($user_lists as $key => $user) : ?>
-<div class="notice__user_block" id="user-<?= $user['user']['user_id'] ?>" data-user="<?= $user['user']['user_id'] ?>" data-type="paid-requests">
+<div class="notice__user_block <?= $key == 0 ? 'notice__user__active' : '' ?>" id="user-<?= $user['user']['user_id'] ?>" data-user="<?= $user['user']['user_id'] ?>" data-type="paid-requests">
     <?php $user_avatar = $user['user']['user_photo'] ? $user['user']['user_photo'] : '@web/images/no-avatar.jpg'; ?>
     <?= Html::img($user_avatar, ['class' => '']) ?>
     <span class="notice__username">
