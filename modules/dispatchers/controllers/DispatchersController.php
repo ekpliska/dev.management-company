@@ -19,19 +19,21 @@ class DispatchersController extends AppDispatchersController {
      */
     public function actionIndex($block = 'requests') {
         
+        // Блок новостей
+        $news_lists = News::getNewsList($count_news = 7);
+        // Тип заявок
         $type_requests = TypeRequests::getTypeNameArray();
+        // Жилой массив
         $flat = [];
         
         switch ($block) {
             case 'requests':
                 $model = new RequestForm();
                 $user_lists = UserRequests::getRequestsByUser();
-                $news_lists = News::getNewsList($count_news = 7);
                 break;
             case 'paid-requests':
                 $model = [];
-                $user_lists = [];
-                $requests_lists = [];
+                $user_lists = UserRequests::getPaidRequestsByUser();;
                 break;
         }
         
@@ -60,7 +62,8 @@ class DispatchersController extends AppDispatchersController {
                 case 'requests':
                     $request_list = UserRequests::getRequestsByUserID($user_id);
                     break;
-                case 'paid-request':
+                case 'paid-requests':
+                    $request_list = UserRequests::getPaidRequestsByUserID($user_id);
                     break;
                 default:
                     return ['success' => false];
@@ -71,6 +74,19 @@ class DispatchersController extends AppDispatchersController {
                 'success' => true,
                 'data' => $data,
             ];
+        }
+    }
+    
+    /*
+     * Метод сохранения созданной заявки
+     */
+    public function actionCreateRequest() {
+        
+        $model = new RequestForm();
+        
+        if (Yii::$app->request->isPost && $model->load(Yii::$app->request->post())) {
+            $number = $model->save();
+            return $this->redirect(['view-request', 'request_number' => $number]);
         }
     }
     

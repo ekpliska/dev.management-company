@@ -59,7 +59,12 @@ class PersonalAccount extends ActiveRecord
     }
     
     public function getRequest() {
+//        return $this->hasMany(Requests::className(), ['requests_account_id' => 'account_id'])->orderBy(['created_at' => SORT_ASC]);
         return $this->hasMany(Requests::className(), ['requests_account_id' => 'account_id']);
+    }
+
+    public function getPaidRequest() {
+        return $this->hasMany(PaidServices::className(), ['services_account_id' => 'account_id']);
     }
     
     /*

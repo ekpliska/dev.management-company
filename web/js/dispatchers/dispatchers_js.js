@@ -16,6 +16,7 @@ $(document).ready(function(){
     $('.notice__user_block').on('click', function() {
         var userID = $(this).data('user');
         var type = $(this).data('type');
+        console.log(userID + ' ' + type);
         var allBlock = $('.notice__user_block');
         allBlock.removeClass('notice__user__active');
         $(this).addClass('notice__user__active');
@@ -43,7 +44,9 @@ $(document).ready(function(){
         strValue = strValue.replace(/[^-0-9,(,)]/gim, '');
         $.post('show-houses?phone=' + strValue,
         function(data) {
-            $('#house').html(data);
+            if (data.success === true) {
+                $('#house').html(data);
+            }
         });
     });
     
