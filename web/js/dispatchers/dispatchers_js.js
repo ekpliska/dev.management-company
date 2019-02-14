@@ -50,4 +50,15 @@ $(document).ready(function(){
         });
     });
     
+    /*
+     * Формирование зависимых списков выбора имени услуги от ее категории
+     */
+    $(document).on('change', '#category_service', function() {
+        $.post('show-name-service?categoryId=' + $(this).val(),
+        function(data) {
+            $('#service_name').html(data);
+        });
+    });
+    
+    
 });

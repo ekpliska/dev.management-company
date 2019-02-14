@@ -9,6 +9,7 @@
     use app\modules\dispatchers\models\form\PaidRequestForm;
     use app\models\TypeRequests;
     use app\models\CategoryServices;
+    use app\models\Services;
     use app\models\PersonalAccount;
 
 /**
@@ -155,6 +156,31 @@ class DispatchersController extends AppDispatchersController {
         } else {
             echo '<option>Адрес не найден</option>';
         }        
+        
+    }
+    
+    /*
+     * Поиск наименование услуги по выбранной категории
+     */
+    public function actionShowNameService($categoryId) {
+        
+        $category_list = CategoryServices::find()
+                ->andWhere(['category_id' => $categoryId])
+                ->asArray()
+                ->count();
+        
+        $service_list = Services::find()
+                ->andWhere(['service_category_id' => $categoryId])
+                ->asArray()
+                ->all();
+        
+        if ($category_list > 0) {
+            foreach ($service_list as $service) {
+                echo '<option value="' . $service['service_id'] . '">' . $service['service_name'] . '</option>';
+            }
+        } else {
+            echo '<option>-</option>';
+        }
         
     }
     

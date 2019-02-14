@@ -51,7 +51,7 @@ class RentController extends ActiveController {
         $model = new RentForm();
         
         $model->load(Yii::$app->getRequest()->getBodyParams(), '');
-        if ($rent_id = $model->save()) {
+        if ($model->save()) {
             return ['success' => true];
         } elseif (!$model->hasErrors()) {
             throw new ServerErrorHttpException('Ошибка создания учетной записи арендатора.');

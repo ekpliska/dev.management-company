@@ -46,6 +46,13 @@ class ProfileController extends Controller {
         
     }
     
+    public function actionUpdate() {
+        
+        $user_id = Yii::$app->user->id;
+        return $user_id;
+        
+    }
+    
     private function userProfile() {
         return UserProfile::userProfile(Yii::$app->user->id);
     }
