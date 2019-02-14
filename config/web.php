@@ -58,14 +58,21 @@ $config = [
         ],
         
         /*
-         * Компонент Профиль пользователя
+         * Компонент Профиль пользователя, Собственник, Арендатор
          */
         'userProfile' => [
             'class' => 'app\modules\clients\components\UserProfile',
         ],
 
         /*
-         * Компонент Профиль пользователя
+         * Компонент Профиль пользователя, Диспетчер
+         */
+        'profileDispatcher' => [
+            'class' => 'app\modules\dispatchers\components\ProfileDispatcher',
+        ],
+
+        /*
+         * Компонент Профиль пользователя, Администратор
          */
         'userProfileCompany' => [
             'class' => 'app\modules\managers\components\UserProfileCompany',

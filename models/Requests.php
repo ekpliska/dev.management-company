@@ -284,9 +284,13 @@ class Requests extends ActiveRecord
         }
     }
     
+    /*
+     * Переключение статусов для заявок
+     */
     public function switchStatus($status) {
         
         $this->status = $status;
+        $this->is_accept = true;
         
         if ($status == StatusRequest::STATUS_CLOSE || $status == StatusRequest::STATUS_REJECT) {
             $this->date_closed = time();
@@ -296,6 +300,20 @@ class Requests extends ActiveRecord
         }
         
         return $this->save(false) ? true : false;
+        
+    }
+    
+    /*
+     * Установка статуса и автоматическое назначение диспетчера для текущей заявки
+     */
+    public function setSatusRequest($status) {
+
+        $this->status = $status;
+        $this->is_accept = true;
+        $this->requests_dispatcher_id = 1;
+        
+        return $this->save(false) ? true : false;
+
         
     }
     

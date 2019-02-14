@@ -41,6 +41,7 @@ class UserProfile extends User {
                 ->join('LEFT JOIN', 'flats as f', 'f.flats_id = pa.personal_flat_id')
                 ->join('LEFT JOIN', 'houses as h', 'h.houses_id = f.flats_house_id')
                 ->where(['pa.personal_clients_id' => $clients['clients_id']])
+                ->orderBy(['pa.account_id' => SORT_ASC])
                 ->all();
         
         foreach ($personal_account as $key => $account) {
