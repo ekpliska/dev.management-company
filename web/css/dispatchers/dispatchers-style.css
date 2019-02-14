@@ -8,6 +8,17 @@ and open the template in the editor.
     Author     : Ekaterina
 */
 
+
+/* Дополнительное навигационное меню, диспетчер Главная страница */
+.menu_sub-bar__span {
+    background: #ef693a;
+    padding: 1px 6px;
+    border-radius: 25px;
+    color: #fff;
+    margin: 0 5px;
+}
+/* Конец Дополнительное навигационное меню, диспетчер Главная страница */
+
 /* Диспетчер, контент + доп меню */
 .dispatcher-main-with-sub {
     margin-top: 100px;
