@@ -37,7 +37,7 @@ class ProfileDispatcher extends BaseObject {
             throw new InvalidConfigException('Ошибка в передаче аргументов. При вызове компонента не был задан ID пользователя');
         }
         
-        if (Yii::$app->user->can('administrator')) {
+        if (Yii::$app->user->can('dispatcher')) {
             $info = (new \yii\db\Query)
                     ->select('e.employee_id as employee_id, '
                         . 'e.employee_name as name, e.employee_second_name as second_name, e.employee_surname as surname, '
@@ -52,8 +52,6 @@ class ProfileDispatcher extends BaseObject {
                     ->join('LEFT JOIN', 'departments as d', 'e.employee_department_id = d.department_id')
                     ->where(['u.user_id' => $this->_user_id])
                     ->one();
-            
-            var_dump($info); die();
             
             return $this->_user = $info;
             

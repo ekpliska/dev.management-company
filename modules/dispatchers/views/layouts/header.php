@@ -3,7 +3,7 @@
     use yii\helpers\Url;
     use yii\helpers\Html;
     use app\modules\dispatchers\widgets\NavDispatchers;
-//    use app\modules\dispatchers\widgets\ManagerUserInfo;
+    use app\modules\dispatchers\widgets\DispatcherUserInfo;
     use app\modules\clients\widgets\Notifications;
     use app\modules\dispatchers\widgets\SubMenuGeneralPage;
     
@@ -24,7 +24,7 @@
             <?= Html::img('/images/navbar/group_46.svg', ['alt' => 'image'])  ?>
         </a>
         <ul class="nav navbar-nav navbar-right user-notification">
-            <?php // = UserInfo::widget(['_value_choosing' => $this->context->_current_account_number]) ?>
+            <?= DispatcherUserInfo::widget() ?>
             <?= Notifications::widget() ?>
         </ul>
     </div>  
