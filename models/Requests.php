@@ -310,7 +310,7 @@ class Requests extends ActiveRecord
 
         $this->status = $status;
         $this->is_accept = true;
-        $this->requests_dispatcher_id = 1;
+        $this->requests_dispatcher_id = Yii::$app->profileDispatcher->employeeID;
         
         return $this->save(false) ? true : false;
 

@@ -28,15 +28,6 @@ class RequestsController extends AppDispatchersController {
             throw new NotFoundHttpException('Вы обратились к несуществующей странице');
         }
         
-        /*
-         * При открытии заявки диспетчером, проверяем статус заявки, 
-         * если заявка иеет статус Новая, то автоматически назвачаем текущего диспетчера.
-         * Для заявки устанавливаем статус "Принята", "В работе"
-         */
-        if ($request['status'] == StatusRequest::STATUS_NEW) {
-            $this->setStatusRequest($request['requests_id']);
-        }
-        
         $model_comment = new CommentsToRequest([
             'scenario' => CommentsToRequest::SCENARIO_ADD_COMMENTS
         ]);
@@ -69,6 +60,10 @@ class RequestsController extends AppDispatchersController {
         
     }
     
+    
+    /*
+     * 
+     */
     private function setStatusRequest($request_id) {
         
         $request = Requests::findOne($request_id);

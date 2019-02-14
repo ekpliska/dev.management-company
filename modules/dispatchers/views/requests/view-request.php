@@ -3,8 +3,10 @@
     use yii\helpers\Html;
     use yii\widgets\Breadcrumbs;
     use app\models\StatusRequest;
+    use app\helpers\StatusHelpers;
     use app\helpers\FormatHelpers;
     use app\helpers\FormatFullNameUser;
+    use app\modules\dispatchers\widgets\AddSpecialist;
 
 
 /* 
@@ -13,11 +15,6 @@
 $this->title = "Заявка ID{$request['requests_ident']}";
 $this->params['breadcrumbs'][] = ['label' => 'Завяки', 'url' => ['requests/index']];
 $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
-?>
-
-<?php
-echo '<pre>';
-var_dump(Yii::$app->profileDispatcher);
 ?>
 
 <div class="dispatcher-main">
@@ -59,12 +56,7 @@ var_dump(Yii::$app->profileDispatcher);
                         <span class="badge request-ident">
                             <?= "ID{$request['requests_ident']}" ?>
                         </span>
-                        <?php /* = SwitchStatusRequest::widget([
-                                'status' => $request['status'],
-                                'request_id' => $request['requests_id'],
-                                'date_update' => $request['updated_at'],
-                                'type_request' => 'requests',
-                            ]) */ ?>
+                        <?= StatusHelpers::requestStatusPage($request['status'], $request['updated_at']) ?>
                     </div>
 
 
@@ -140,3 +132,5 @@ var_dump(Yii::$app->profileDispatcher);
     </div>
     
 </div>
+
+<?= AddSpecialist::widget() ?>

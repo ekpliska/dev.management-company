@@ -239,3 +239,62 @@ a.request__link-view:hover {
     color: #f0754a;
 }
 /* Конец Диспетчер, главная страница */
+
+/* Модальное окно назначение сотрудника на заяку */
+.employee-lists {
+    height: 300px;
+    overflow: auto;
+    padding: 20px 0;
+}
+.search-employee_input {
+    background-image: url(/images/searchicon.jpg);
+    background-repeat: no-repeat;
+    background-position: 30px 11px;
+    background-size: 3%;
+    background-color: transparent;
+    width: 100%;
+    font-size: 12px;
+    padding: 12px 20px 12px 70px;
+    border: 1px solid #8b709d;
+    margin-bottom: 12px;
+    border-radius: 25px;
+    outline: none;
+}
+#employees-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+#employees-list > li > a {
+    background: transparent;
+    border: 1px solid #8b709d;
+    border-radius: 12px;
+    color: #fff;
+    cursor: pointer;
+    margin-top: -1px; /* Prevent double borders */
+    padding: 12px;
+    text-decoration: none;
+    display: block;
+    width: 98%;
+}
+#employees-list > li > a.active,
+#employees-list > li > a:hover {
+    background: #2d18b4;
+}
+.employee-lists::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #ddd;
+}
+
+.employee-lists::-webkit-scrollbar {
+    width: 7px;
+    background-color: #ddd;
+}
+
+.employee-lists::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #8b709d;
+}
+
+/* Конец Модальное окно назначение сотрудника на заяку */

@@ -27,7 +27,7 @@
 
     <div class="error-message" style="color: #ef693a; font-size: 12px;"></div>
     
-    <div class="list-group" id="dispatcherList">
+    <div class="list-group employee-lists" id="dispatcherList">
         
         <ul id="employees-list">
         <?php if (isset($dispatcher_list)) : ?>
@@ -76,7 +76,7 @@
     
     <div class="error-message" style="color: #ef693a; font-size: 12px;"></div>
     
-    <div class="list-group" id="specialistList">
+    <div class="list-group employee-lists" id="specialistList">
         
         <ul id="employees-list">
         <?php if (isset($specialist_list) && !empty($specialist_list)) : ?>
