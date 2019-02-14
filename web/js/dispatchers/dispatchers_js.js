@@ -31,4 +31,20 @@ $(document).ready(function(){
         });
     });
     
+    
+    /*
+     * Поиск собственника по введенному номеру телефона
+     * Поиск срабатывает когда поле ввода теряем фокус
+     */
+    $('body').on('blur', '.mobile_phone', function() {
+        // Получаем текущее значение
+        var strValue = $(this).val();
+        // В полученном значении удаляем все символы кроме цифр, знака -, (, )
+        strValue = strValue.replace(/[^-0-9,(,)]/gim, '');
+        $.post('show-houses?phone=' + strValue,
+        function(data) {
+            $('#house').html(data);
+        });
+    });
+    
 });

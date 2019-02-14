@@ -19,6 +19,7 @@ $key = 0;
                 <span class="request_number">
                     <?= "ID{$request['requests_ident']}" ?>
                 </span>
+                <?= Html::a('Перейти к заявке', ['/'], ['class' => 'request__link-view']) ?>
             </div>
             <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 request_block__adress text-right">
                 <?= FormatHelpers::formatFullAdress(

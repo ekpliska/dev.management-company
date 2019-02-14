@@ -136,10 +136,11 @@ and open the template in the editor.
 .request_block__content_img img {
     width: 40px;
     height: 40px;
-    margin-right: 5px
+    margin-right: 5px;
+    border-radius: 12px;
 }
 .request_block__info > span {
-    margin: 5px;
+    margin: 10px 0;
 }
 .request_block__info > span.request_number {
     padding: 7px 10px;
@@ -210,5 +211,18 @@ a.news-block__create-link {
 a.news-block__create-link:before {
     content: '\0271A';
     padding-right: 10px;
+}
+a.request__link-view {
+    font-size: 13px;
+    font-weight: bold;
+    padding: 5px 0;
+    color: #2d18b4;
+}
+a.request__link-view:before {
+    content: '\0270E';
+    padding-right: 5px;
+}
+a.request__link-view:hover {
+    color: #f0754a;
 }
 /* Конец Диспетчер, главная страница */
