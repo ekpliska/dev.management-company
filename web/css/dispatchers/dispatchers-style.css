@@ -298,3 +298,97 @@ a.request__link-view:hover {
 }
 
 /* Конец Модальное окно назначение сотрудника на заяку */
+
+/* Таблица, Диспетчеры */
+.dispatcher-table {
+    border-collapse: unset;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    font-size: 12px;
+    margin-bottom: 0px;
+}
+.dispatcher-table-in {
+    border-collapse: unset;
+    border-top: 1px solid #ddd;
+    border-left: none;
+    border-right: none;
+    font-size: 12px;
+    border-radius: 0;
+    margin-bottom: 30px;
+}
+.dispatcher-table thead {
+    color: #2d18b4;
+    text-transform: uppercase;
+    text-align: center;
+    vertical-align: top;
+}
+.dispatcher-table > thead > tr > th {
+    font-size: 12px;
+    vertical-align: middle;
+    text-align: center;
+    border: none;
+    padding: 25px 0;
+}
+.dispatcher-table > tbody > tr > td {
+    vertical-align: middle;
+    text-align: center;
+    padding: 15px 5px;
+}
+.dispatcher-table > tbody > tr > td.status-not-found,
+tbody > tr > td > div.empty {
+    vertical-align: middle;
+    text-align: left;
+    padding: 15px;
+}
+.dispatcher-table > tbody > tr > td.status-not-found::before,
+tbody > tr > td > div.empty::before {
+    color: #2d18b4;
+    content: '\02139';
+    padding: 7px 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.dispatcher-table > tbody > tr.form-notice-in-table > td {
+    vertical-align: middle;
+    text-align: left;
+    padding: 30px 15px;
+    border: none;
+    border-top: 1px solid #ddd;
+}
+.dispatcher-table > tbody > tr.btn-block-in-table > td {
+    vertical-align: middle;
+    text-align: center;
+    padding: 30px;
+    border: none;
+}
+.dispatcher-table > tbody > tr.form-notice-in-table:hover, 
+.dispatcher-table > tbody > tr.btn-block-in-table:hover {
+    background: #fff !important;
+}
+.dispatcher-table > tbody > tr:hover {
+    background: #d1ccef;
+}
+.dispatcher-table_small {
+    width: 5%;
+    text-align: left;
+}
+.dispatcher-table_middle {
+    width: 15%;
+}
+.dispatcher-table_big {
+    width: 25%;
+    text-align: left !important;
+}
+.dispatcher-table_left {
+    text-align: left !important;    
+}
+.dispatcher-table i.glyphicon-map-marker {
+    color: #2d18b4;
+}
+.dispatcher-table > tbody > tr > td > a {
+    color: #2d18b4;
+}
+.no-border-bottom {
+    border-bottom: none;
+}
+/* Таблица, Диспетчеры */

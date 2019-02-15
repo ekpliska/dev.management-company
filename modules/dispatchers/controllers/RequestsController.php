@@ -12,6 +12,7 @@
     use app\models\StatusRequest;
     use app\modules\dispatchers\models\RequestsList;
     use app\modules\dispatchers\models\PaidServicesList;
+    use app\modules\dispatchers\models\searchForm\searchRequests;
 
 /**
  * Заявки, Платные услуги
@@ -20,7 +21,20 @@ class RequestsController extends AppDispatchersController {
     
     public function actionIndex($block = 'requests') {
         
-        return $this->render('index');
+        switch ($block) {
+            case 'requests':
+                // Загружаем модель поиска
+                $search_model = new searchRequests();
+                $results = $search_model->search(Yii::$app->request->queryParams);
+                break;
+            case 'paid-requests':
+                break;
+        }
+        
+        return $this->render('index', [
+            'block' => $block,
+            'results' => $results,
+        ]);
         
     }
     
