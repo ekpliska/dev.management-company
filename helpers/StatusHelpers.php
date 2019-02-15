@@ -76,6 +76,7 @@ class StatusHelpers {
             'req-badge-complete-page badge-page', 
             'req-badge-rectification-page badge-page', 
             'req-badge-close-page badge-page',
+            'req-badge-reject-page badge-page',
         ];
         
         // Получаем текстовое обозначение статуса
@@ -91,6 +92,8 @@ class StatusHelpers {
             $btn_css = '<span class="' . $css_classes[3] . '">' . '<span>' . $status_name .  '</span><span>' . $date_full . '</span></span>';
         } elseif ($status == StatusRequest::STATUS_CLOSE) {
             $btn_css = '<span class="' . $css_classes[4] . '">' . '<span>' . $status_name .  '</span><span>' . $date_full . '</span></span>';
+        } elseif ($status == StatusRequest::STATUS_REJECT) {
+            $btn_css = '<span class="' . $css_classes[5] . '">' . '<span>' . $status_name .  '</span><span>' . $date_full . '</span></span>';
         }
         
         return $btn_css;

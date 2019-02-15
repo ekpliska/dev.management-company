@@ -7,6 +7,7 @@
     use app\helpers\FormatHelpers;
     use app\helpers\FormatFullNameUser;
     use app\modules\dispatchers\widgets\AddSpecialist;
+    use app\modules\dispatchers\widgets\ModalWindowsDispatcher;
 
 
 /* 
@@ -29,14 +30,16 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
         <h1 class="page-header requests-view_title">
             <i class="glyphicon glyphicon-ok <?= $request['is_accept'] ? 'check' : 'uncheck' ?>"></i>&nbsp;&nbsp;Заявка принята
             
-            <?= Html::button('<i class="glyphicon glyphicon-bookmark"></i> Отклонить', [
-                    'class' => 'settings-record-btn reject-request' . ($request['status'] == StatusRequest::STATUS_REJECT ? ' settings-btn-hide' : ''),
-                    'data' => [
-                        'status' => StatusRequest::STATUS_REJECT,
-                        'request' => $request['requests_id'],
-                        'type-request' => 'requests',
-                    ]
-            ]) ?>
+            <?php if ($request['status'] != StatusRequest::STATUS_CLOSE) : ?>
+                <?= Html::button('<i class="glyphicon glyphicon-bookmark"></i> Отклонить', [
+                        'class' => 'settings-record-btn reject-request' . ($request['status'] == StatusRequest::STATUS_REJECT ? ' settings-btn-hide' : ''),
+                        'data' => [
+                            'status' => StatusRequest::STATUS_REJECT,
+                            'request' => $request['requests_id'],
+                            'type-request' => 'requests',
+                        ]
+                ]) ?>
+            <?php endif; ?>
             
         </h1>
 
@@ -93,6 +96,7 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
                         </div>
                     </div>
 
+                    <?php if ($request['status'] != StatusRequest::STATUS_CLOSE) : ?>
                     <div class="requests-view__setting">
                         <table class="table table-voting-results">
                             <tr>
@@ -113,6 +117,7 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
                             </tr>
                         </table>
                     </div>
+                    <?php endif; ?>
 
 
                 </div>
@@ -131,4 +136,7 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
     
 </div>
 
-<?= AddSpecialist::widget() ?>
+<?php if ($request['status'] != StatusRequest::STATUS_CLOSE) : ?>
+    <?= AddSpecialist::widget() ?>
+    <?= ModalWindowsDispatcher::widget(['modal_view' => 'confirm_request_modal']) ?>
+<?php endif; ?>

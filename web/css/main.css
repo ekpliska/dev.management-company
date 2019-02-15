@@ -1916,6 +1916,9 @@ p.right {
     border: 2px solid #ff7d7d;
     box-shadow: 0px 1px 4px 6px rgba(252,193,193,0.83);
 }
+.req-badge-reject-page {
+    border: 2px solid #5f697a;
+}
 
 .req-badge-new-page span:first-child {
     border-right: 1px solid #598eff;
@@ -1950,6 +1953,13 @@ p.right {
     padding: 8px 15px;
 }
 .req-badge-close-page span:last-child {
+    padding: 8px 15px;
+}
+.req-badge-reject-page span:first-child {
+    border-right: 1px solid #5f697a;
+    padding: 8px 15px;
+}
+.req-badge-reject-page span:last-child {
     padding: 8px 15px;
 }
 /* Конец Статусы заявок, отдельная страница */

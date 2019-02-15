@@ -3,6 +3,7 @@
     namespace app\modules\dispatchers\controllers;
     use Yii;
     use yii\web\NotFoundHttpException;
+    use yii\helpers\ArrayHelper;
     use app\modules\dispatchers\controllers\AppDispatchersController;
     use app\models\Requests;
     use app\models\CommentsToRequest;
@@ -97,15 +98,35 @@ class RequestsController extends AppDispatchersController {
         
     }
     
-    
-    /*
-     * Назначение статуса для выбранной заявки
-     */
-    private function setStatusRequest($request_id) {
+    public function actionConfirmRejectRequest() {
         
-        $request = Requests::findOne($request_id);
-        return $request->setSatusRequest(StatusRequest::STATUS_PERFORM);
+        $request_id = Yii::$app->request->post('requestID');
+        $request_status = Yii::$app->request->post('requestStatus');
+        $request_type = Yii::$app->request->post('requestType');
         
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        
+        // Проверяем существование пришедшего статуса
+        if (!ArrayHelper::keyExists($request_status, StatusRequest::getStatusNameArray()) || !is_numeric($request_id)) {
+            return ['success' => false];
+        }
+        
+        if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
+            
+            switch ($request_type) {
+                case 'requests':
+                    $request = Requests::findOne($request_id);
+                    $request->setSatusRequest($request_status);
+                    break;
+                case 'paid-requests':
+                    break;
+                default:
+                    return ['success' => false];
+            }
+            return ['success' => true];
+        }
+        
+        return ['success' => true];
     }
     
 }

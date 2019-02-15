@@ -129,5 +129,51 @@ $(document).ready(function(){
         }
     });
     
+    /*
+     * Запрос на отклонение заявки
+     */
+    $('.reject-request').on('click', function() {
+        $('#confirm-reject-request-message').modal('show');
+    });    
+    
+    /*
+     * Вызов модального окна "Назначение диспетчера"
+     * Вызов модального окна "Назначение специалиста"
+     */
+    $('.request_reject_yes').on('click', function() {
+        var button = $('.reject-request');
+        var requestID = button.data('request');
+        var requestStatus = button.data('status');
+        var requestType = button.data('typeRequest');
+        console.log(button + ' ' + requestID + ' ' + requestStatus + ' ' + requestType);
+        $.ajax({
+            url: 'confirm-reject-request',
+            method: 'POST',
+            data: {
+                requestID: requestID,
+                requestStatus: requestStatus,
+                requestType: requestType,
+            },
+            success: function(response) {
+                if (response.success === true) {
+                    
+                }
+                console.log(response);
+            },
+            error: function() {
+                $('.error-message').text('Ошибка');
+            },
+        });
+    });    
+    
+       
+    /*
+     * Сброс форм 
+     *      Новая завяка
+     *      Новая заявка на платную услугу
+     */
+    $('.create-request, .create-paid-request').on('click', function(){
+        $('#create-new-request, #create-new-paid-request')[0].reset();
+    });
     
 });
