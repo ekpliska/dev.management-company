@@ -118,7 +118,7 @@ $(document).ready(function(){
                         $('.error-message').text('Ошибка');
                         return false;
                     }
-                    $('.btn-specialist').data('employee', specialistId);
+                    $('.btn-employee').data('employee', specialistId);
                     $('#specialist-name').text('');
                     $('#specialist-name').html(employeeName);
                 },
@@ -130,7 +130,7 @@ $(document).ready(function(){
     });
     
     /*
-     * Вызов модального окна "Назначение специалиста"
+     * Смена статуса "Отклонена" для заявок и платных услуг
      */
     $('.request_reject_yes').on('click', function() {
         var button = $('.reject-request');

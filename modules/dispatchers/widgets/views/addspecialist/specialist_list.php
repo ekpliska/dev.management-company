@@ -38,6 +38,7 @@
                     </a>
                 </li>
             <?php endforeach; ?>
+        </ul>
         <?php else : ?>
             <div class="notice info">
                 <p>Сотрудники с должностью Диспетчер в системе на найдены</p>

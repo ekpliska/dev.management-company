@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = "Заявка на платную услугу 
 $hide_btn = ($paid_request['status'] == StatusRequest::STATUS_CLOSE || $paid_request['status'] == StatusRequest::STATUS_REJECT) ? false : true;
 ?>
 
-<div class="manager-main">
+<div class="dispatcher-main">
     <?= Breadcrumbs::widget([
             'homeLink' => ['label' => 'ELSA | Администратор', 'url' => ['managers/index']],
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
@@ -99,7 +99,7 @@ $hide_btn = ($paid_request['status'] == StatusRequest::STATUS_CLOSE || $paid_req
                             <tr>
                                 <td>
                                     <?= Html::button('<i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Назначить специалиста', [
-                                            'class' => 'btn blue-btn',
+                                            'class' => 'btn blue-btn btn-employee',
                                             'data-request' => $paid_request['id'],
                                             'data-type-request' => 'paid-requests',
                                             'data-employee' => $paid_request['employee_id_s'],

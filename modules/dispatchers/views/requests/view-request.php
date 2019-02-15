@@ -114,7 +114,7 @@ $hide_btn = ($request['status'] == StatusRequest::STATUS_CLOSE || $request['stat
                             <tr>
                                 <td>
                                     <?= Html::button('<i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Назначить специалиста', [
-                                            'class' => 'btn blue-btn',
+                                            'class' => 'btn blue-btn btn-employee',
                                             'data-request' => $request['requests_id'],
                                             'data-type-request' => 'requests',
                                             'data-employee' => $request['employee_id_s'],
