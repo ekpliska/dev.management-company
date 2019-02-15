@@ -104,7 +104,7 @@ $hide_btn = ($request['status'] == StatusRequest::STATUS_CLOSE || $request['stat
                         <table class="table table-add-employee">
                             <tr><td id="employee-post">Специалист</td></tr>
                             <tr>
-                                <td>
+                                <td id="specialist-name">
                                     <?= FormatFullNameUser::nameEmployee($request['surname_s'], $request['name_s'], $request['sname_s'], true) ?>
                                 </td>
                             </tr>

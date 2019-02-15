@@ -61,7 +61,6 @@ $(document).ready(function(){
     });
     
     /*
-     * Вызов модального окна "Назначение диспетчера"
      * Вызов модального окна "Назначение специалиста"
      */
     $('#add-specialist-modal').on('show.bs.modal', function(e) {

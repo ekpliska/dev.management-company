@@ -80,7 +80,7 @@ class RequestsController extends AppDispatchersController {
                     $request = RequestsList::findByID($request_id);
                     $request->chooseSpecialist($specialist_id);
                     // После назначения Диспетчером Специалиста, заявка считается "Принятой", статус "На исполнении"
-                    $this->setStatusRequest($request_id);
+                    $request->setSatusRequest(StatusRequest::STATUS_PERFORM);
                     return ['success' => true];
                     break;
                 case 'paid-requests':

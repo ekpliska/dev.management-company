@@ -95,7 +95,7 @@ class DispatchersController extends AppDispatchersController {
         
         if (Yii::$app->request->isPost && $model->load(Yii::$app->request->post())) {
             $number = $model->save();
-            return $this->redirect(['view-request', 'request_number' => $number]);
+            return $this->redirect(['requests/view-request', 'request_number' => $number]);
         }
     }
     
@@ -108,7 +108,7 @@ class DispatchersController extends AppDispatchersController {
         
         if (Yii::$app->request->isPost && $model->load(Yii::$app->request->post())) {
             $number = $model->save();
-            return $this->redirect(['view-paid-request', 'request_number' => $number]);
+            return $this->redirect(['requests/view-paid-request', 'request_number' => $number]);
         }
     }    
     
