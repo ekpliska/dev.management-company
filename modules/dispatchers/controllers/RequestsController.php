@@ -123,7 +123,10 @@ class RequestsController extends AppDispatchersController {
                 default:
                     return ['success' => false];
             }
-            return ['success' => true];
+            return [
+                'success' => true,
+                'status_name' => StatusRequest::statusName($request_status),
+            ];
         }
         
         return ['success' => true];

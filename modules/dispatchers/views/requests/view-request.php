@@ -16,6 +16,9 @@
 $this->title = "Заявка ID{$request['requests_ident']}";
 $this->params['breadcrumbs'][] = ['label' => 'Завяки', 'url' => ['requests/index']];
 $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
+
+// Проверяем для текущей завяки наличие статусов "Закрыто", "Отклонена"
+$hide_btn = ($request['status'] == StatusRequest::STATUS_CLOSE || $request['status'] == StatusRequest::STATUS_REJECT) ? false : true;
 ?>
 
 <div class="dispatcher-main">
@@ -30,7 +33,7 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
         <h1 class="page-header requests-view_title">
             <i class="glyphicon glyphicon-ok <?= $request['is_accept'] ? 'check' : 'uncheck' ?>"></i>&nbsp;&nbsp;Заявка принята
             
-            <?php if ($request['status'] != StatusRequest::STATUS_CLOSE) : ?>
+            <?php if ($hide_btn) : ?>
                 <?= Html::button('<i class="glyphicon glyphicon-bookmark"></i> Отклонить', [
                         'class' => 'settings-record-btn reject-request' . ($request['status'] == StatusRequest::STATUS_REJECT ? ' settings-btn-hide' : ''),
                         'data' => [
@@ -95,8 +98,8 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
                             <span class="client_info-text"><?= $request['requests_phone'] ?></span>
                         </div>
                     </div>
-
-                    <?php if ($request['status'] != StatusRequest::STATUS_CLOSE) : ?>
+                    
+                    <?php if ($hide_btn) : ?>
                     <div class="requests-view__setting">
                         <table class="table table-voting-results">
                             <tr>
@@ -119,7 +122,6 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
                     </div>
                     <?php endif; ?>
 
-
                 </div>
             </div>
             <div class="col-md-5 col-sm-6 col-xs-12">
@@ -136,7 +138,7 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
     
 </div>
 
-<?php if ($request['status'] != StatusRequest::STATUS_CLOSE) : ?>
+<?php if ($hide_btn) : ?>
     <?= AddSpecialist::widget() ?>
     <?= ModalWindowsDispatcher::widget(['modal_view' => 'confirm_request_modal']) ?>
 <?php endif; ?>

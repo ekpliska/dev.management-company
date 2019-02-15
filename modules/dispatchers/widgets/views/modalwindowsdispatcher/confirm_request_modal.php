@@ -30,3 +30,25 @@ Modal::begin([
 </div>
 
 <?php Modal::end() ?>
+
+<?php
+Modal::begin([
+    'id' => 'confirm-request-error',
+    'header' => 'Внимание!',
+    'closeButton' => [
+        'class' => 'close modal-close-btn',
+    ],
+    'clientOptions' => [
+        'backdrop' => 'static', 
+        'keyboard' => false,
+    ],    
+]);
+?>
+
+<p class="modal-confirm">Произошла ошибка. Попробуйте обновить страницу браузера или повторить попытку через несколько минут.</p>
+
+<div class="modal-footer">
+    <?= Html::button('Закрыть', ['class' => 'btn red-btn', 'data-dismiss' => 'modal']) ?>
+</div>
+
+<?php Modal::end() ?>
