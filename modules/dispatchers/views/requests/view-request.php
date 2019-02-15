@@ -99,14 +99,16 @@ $hide_btn = ($request['status'] == StatusRequest::STATUS_CLOSE || $request['stat
                         </div>
                     </div>
                     
-                    <?php if ($hide_btn) : ?>
+                    
                     <div class="requests-view__setting">
-                        <table class="table table-voting-results">
+                        <table class="table table-add-employee">
+                            <tr><td id="employee-post">Специалист</td></tr>
                             <tr>
-                                <td id="specialist-name">
+                                <td>
                                     <?= FormatFullNameUser::nameEmployee($request['surname_s'], $request['name_s'], $request['sname_s'], true) ?>
                                 </td>
                             </tr>
+                            <?php if ($hide_btn) : ?>
                             <tr>
                                 <td>
                                     <?= Html::button('<i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Назначить специалиста', [
@@ -118,9 +120,9 @@ $hide_btn = ($request['status'] == StatusRequest::STATUS_CLOSE || $request['stat
                                             'data-toggle' => 'modal']) ?>
                                 </td>
                             </tr>
+                            <?php endif; ?>
                         </table>
-                    </div>
-                    <?php endif; ?>
+                    </div>                    
 
                 </div>
             </div>

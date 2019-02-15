@@ -1491,8 +1491,7 @@ p.right {
     vertical-align: bottom;
     border-top: none; 
 }
-.table-voting-results > tbody > tr > td#dispatcher-name > span,
-.table-voting-results > tbody > tr > td#specialist-name > span {
+.table-voting-results > tbody > tr > td#dispatcher-name > span {
     color: #717171;
     font-style: italic;
     font-size: 12px;
@@ -3441,7 +3440,16 @@ a.employee-profile:hover {
 }
 /* Конец Дополнительное навигационное меню, заявки */
 
-
+/* Таблица Сотрудники */
+.table-add-employee {
+    text-align: center;
+}
+.table-add-employee > tbody > tr > td#employee-post {
+    background: #2d18b4;
+    color: #fff;
+    font-weight: bold;
+}
+/* Конец Таблица Сотрудники */
 
 
 .switch {
