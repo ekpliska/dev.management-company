@@ -6,6 +6,7 @@
     use yii\helpers\ArrayHelper;
     use app\modules\dispatchers\controllers\AppDispatchersController;
     use app\models\Requests;
+    use app\models\PaidServices;
     use app\models\CommentsToRequest;
     use app\models\Image;
     use app\models\StatusRequest;
@@ -101,8 +102,8 @@ class RequestsController extends AppDispatchersController {
                     return ['success' => true];
                     break;
                 case 'paid-requests':
-//                    $paid_request = PaidServices::findOne($request_id);
-//                    $paid_request->chooseSpecialist($specialist_id);
+                    $paid_request = PaidServicesList::findOne($request_id);
+                    $paid_request->chooseSpecialist($specialist_id);
                     return ['success' => true];
                     break;
                 default:
@@ -115,6 +116,9 @@ class RequestsController extends AppDispatchersController {
         
     }
     
+    /*
+     * Запрос на установку статуса "Отлонено"
+     */
     public function actionConfirmRejectRequest() {
         
         $request_id = Yii::$app->request->post('requestID');
@@ -133,12 +137,15 @@ class RequestsController extends AppDispatchersController {
             switch ($request_type) {
                 case 'requests':
                     $request = Requests::findOne($request_id);
-                    $request->setSatusRequest($request_status);
                     break;
                 case 'paid-requests':
+                    $request = PaidServices::findOne($request_id);
                     break;
                 default:
                     return ['success' => false];
+            }
+            if (!$request->setSatusRequest($request_status)) {
+                return ['success' => false];
             }
             return [
                 'success' => true,

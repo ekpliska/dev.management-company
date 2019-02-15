@@ -679,9 +679,6 @@ button:hover {
 .settings-record-btn > i {
     padding-right: 10px;
 }
-.settings-btn-hide {
-    display: none;
-}
 /* Конец Кнопка настройки заявки */
 /* Кнопка Редактировать заявку */
 .edit-request-btn {

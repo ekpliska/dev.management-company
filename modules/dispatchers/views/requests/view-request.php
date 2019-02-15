@@ -14,7 +14,7 @@
  * Просмотр заявки
  */
 $this->title = "Заявка ID{$request['requests_ident']}";
-$this->params['breadcrumbs'][] = ['label' => 'Завяки', 'url' => ['requests/index']];
+$this->params['breadcrumbs'][] = ['label' => 'Завяки', 'url' => ['requests/index', 'block' => 'requests']];
 $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
 
 // Проверяем для текущей завяки наличие статусов "Закрыто", "Отклонена"
@@ -35,11 +35,13 @@ $hide_btn = ($request['status'] == StatusRequest::STATUS_CLOSE || $request['stat
             
             <?php if ($hide_btn) : ?>
                 <?= Html::button('<i class="glyphicon glyphicon-bookmark"></i> Отклонить', [
-                        'class' => 'settings-record-btn reject-request' . ($request['status'] == StatusRequest::STATUS_REJECT ? ' settings-btn-hide' : ''),
+                        'class' => 'settings-record-btn reject-request',
                         'data' => [
                             'status' => StatusRequest::STATUS_REJECT,
                             'request' => $request['requests_id'],
                             'type-request' => 'requests',
+                            'target' => '#confirm-reject-request-message',
+                            'toggle' => 'modal'
                         ]
                 ]) ?>
             <?php endif; ?>

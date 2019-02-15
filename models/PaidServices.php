@@ -265,7 +265,18 @@ class PaidServices extends ActiveRecord
         return ArrayHelper::map($array, 'value', 'services_number');
     }
     
-    
+    /*
+     * Установка статуса и автоматическое назначение диспетчера для текущей заявки
+     */
+    public function setSatusRequest($status) {
+
+        $this->status = $status;
+        $this->services_dispatcher_id = Yii::$app->profileDispatcher->employeeID;
+        
+        return $this->save(false) ? true : false;
+        
+    }
+
     /**
      * Настройка полей для форм
      */

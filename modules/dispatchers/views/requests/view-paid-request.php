@@ -14,7 +14,7 @@
  * Просмотр и редактирование заявки
  */
 $this->title = "Заявка на платную услугу ID{$paid_request['number']}";
-$this->params['breadcrumbs'][] = ['label' => 'Завяки', 'url' => ['requests/index']];
+$this->params['breadcrumbs'][] = ['label' => 'Завяки', 'url' => ['requests/index', 'block' => 'paid-requests']];
 $this->params['breadcrumbs'][] = "Заявка на платную услугу ID{$paid_request['number']}";
 
 // Проверяем для текущей завяки наличие статусов "Закрыто", "Отклонена"
@@ -32,11 +32,13 @@ $hide_btn = ($paid_request['status'] == StatusRequest::STATUS_CLOSE || $paid_req
             <?= $paid_request['category'] . '<span class="label_service-name">' . $paid_request['services_name'] . '</span>' ?>
             <?php if ($hide_btn) : ?>
             <?= Html::button('<i class="glyphicon glyphicon-bookmark"></i> Отклонить', [
-                    'class' => 'settings-record-btn reject-request' . ($paid_request['status'] == StatusRequest::STATUS_REJECT ? ' settings-btn-hide' : ''),
+                    'class' => 'settings-record-btn reject-request',
                     'data' => [
                         'status' => StatusRequest::STATUS_REJECT,
                         'request' => $paid_request['id'],
                         'type-request' => 'paid-requests',
+                        'target' => '#confirm-reject-request-message',
+                        'toggle' => 'modal'
                     ]
             ]) ?>
             <?php endif; ?>
@@ -90,7 +92,7 @@ $hide_btn = ($paid_request['status'] == StatusRequest::STATUS_CLOSE || $paid_req
                             <tr><td id="employee-post">Специалист</td></tr>
                             <tr>
                                 <td id="specialist-name">
-                                    <?= FormatFullNameUser::nameEmployee($request['surname_s'], $request['name_s'], $request['sname_s'], true) ?>
+                                    <?= FormatFullNameUser::nameEmployee($paid_request['surname_s'], $paid_request['name_s'], $paid_request['second_name_s'], true) ?>
                                 </td>
                             </tr>
                             <?php if ($hide_btn) : ?>
@@ -98,9 +100,9 @@ $hide_btn = ($paid_request['status'] == StatusRequest::STATUS_CLOSE || $paid_req
                                 <td>
                                     <?= Html::button('<i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Назначить специалиста', [
                                             'class' => 'btn blue-btn',
-                                            'data-request' => $request['requests_id'],
-                                            'data-type-request' => 'requests',
-                                            'data-employee' => $request['employee_id_s'],
+                                            'data-request' => $paid_request['id'],
+                                            'data-type-request' => 'paid-requests',
+                                            'data-employee' => $paid_request['employee_id_s'],
                                             'data-target' => '#add-specialist-modal',
                                             'data-toggle' => 'modal']) ?>
                                 </td>
@@ -120,5 +122,6 @@ $hide_btn = ($paid_request['status'] == StatusRequest::STATUS_CLOSE || $paid_req
 
 <?php if ($hide_btn) : ?>
     <?= AddSpecialist::widget() ?>
-    <?= ModalWindowsDispatcher::widget(['modal_view' => 'confirm_request_modal']) ?>
 <?php endif; ?>
+
+<?= ModalWindowsDispatcher::widget(['modal_view' => 'confirm_request_modal']) ?>

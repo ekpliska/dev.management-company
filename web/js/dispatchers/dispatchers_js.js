@@ -98,6 +98,7 @@ $(document).ready(function(){
         var specialistId = $(this).data('specialist');
         var requestId = $(this).data('request');
         var typeRequest = $(this).data('typeRequest');
+        console.log(employeeName + ' ' + specialistId + ' ' + requestId + ' ' + typeRequest);
         
         // Проверяем налицие дата параметров
         if (specialistId === undefined || requestId === undefined) {
@@ -129,14 +130,6 @@ $(document).ready(function(){
     });
     
     /*
-     * Запрос на отклонение заявки
-     */
-    $('.reject-request').on('click', function() {
-        $('#confirm-reject-request-message').modal('show');
-    });    
-    
-    /*
-     * Вызов модального окна "Назначение диспетчера"
      * Вызов модального окна "Назначение специалиста"
      */
     $('.request_reject_yes').on('click', function() {
