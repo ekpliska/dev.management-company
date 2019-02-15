@@ -925,7 +925,7 @@ span.status-vote-1::before {
     padding: 0;
     margin: 0;
     border-right: 1px solid #ddd;
-    /*min-height: 700px;*/
+    min-height: 700px;
 }
 .housing-stock > div[class*="col-"]:last-child {
     border-right: none;
@@ -1103,9 +1103,9 @@ span.status-vote-1::before {
 }
 #add-note:before {
     font-weight: bold;
-    content: "\e101";
+    content: "\e081";
     font-family: 'Glyphicons Halflings';
-    font-size: 20px;
+    font-size: 18px;
 }
 .note-message {
     color: #ef693a;

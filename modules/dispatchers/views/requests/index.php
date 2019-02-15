@@ -31,10 +31,4 @@ $this->params['breadcrumbs'][] = 'Заявки';
         ]) ?>
     </div>
     
-    <?= Html::button('', [
-            'class' => 'create-request-btn',
-            'data-target' => '#create-new-requests',
-            'data-toggle' => 'modal',
-        ]) ?>
-
 </div>
