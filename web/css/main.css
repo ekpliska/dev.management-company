@@ -1552,7 +1552,6 @@ p.right {
     min-height: 750px;
 }
 .requests-view_title {
-    font-family: "Mplus 1p Bold";
     padding: 20px 30px;
     color: #fff;
     border-radius: 12px 12px 0 0;
@@ -1560,6 +1559,26 @@ p.right {
     margin: 0;
     font-size: 14px;
     min-height: 75px;
+}
+.requests-paid-view_title {
+    padding: 25px 30px;
+    color: #fff;
+    border-radius: 12px 12px 0 0;
+    background-color: #2d18b4;
+    margin: 0;
+    font-size: 18px;
+    min-height: 75px;
+    font-weight: bold;
+}
+.requests-paid-view_title .label_service-name {
+    border: 1px solid white;
+    border-radius: 25px;
+    font-size: 12px;
+    padding: 5px 20px;
+    margin: 0 20px;
+}
+.requests-paid-view_title .label_service-date {
+    background: #fff;
 }
 .requests-view_title i.check {
     background: #36eadf;
@@ -1572,7 +1591,7 @@ p.right {
     border-radius: 100%;
 }
 .requests-view_body {
-    padding: 0px 15px 0 0;
+    padding: 5px 0 0 0;
 }
 .requests-border {
     border-right: 1px solid #ddd;
@@ -1843,7 +1862,7 @@ p.right {
     background: #fff;
     color: #000;
     border-radius: 25px;
-    font-size: 10px;
+    font-size: 9px;
     line-height: 18px;
     padding-top: 8px;
     text-transform: uppercase;

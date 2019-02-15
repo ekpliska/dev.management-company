@@ -10,6 +10,7 @@
     use app\models\Image;
     use app\models\StatusRequest;
     use app\modules\dispatchers\models\RequestsList;
+    use app\modules\dispatchers\models\PaidServicesList;
 
 /**
  * Заявки, Платные услуги
@@ -60,6 +61,22 @@ class RequestsController extends AppDispatchersController {
             'all_images' => $images,
         ]);
         
+    }
+    
+    /*
+     * Просмотр и редактирование заявки, на платную услугу
+     */
+    public function actionViewPaidRequest($request_number) {
+        
+        $paid_request = PaidServicesList::findRequestByIdent($request_number);
+        
+        if (!isset($paid_request) && $paid_request == null) {
+            throw new NotFoundHttpException('Вы обратились к несуществующей странице');
+        }
+        
+        return $this->render('view-paid-request', [
+            'paid_request' => $paid_request,
+        ]);
     }
     
     /*

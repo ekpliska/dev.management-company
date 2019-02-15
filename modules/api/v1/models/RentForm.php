@@ -36,9 +36,7 @@ class RentForm extends Model {
                 'client_id', 'account_number',
                 'password'], 'required'],
             
-            [['rents_surname', 'rents_name', 'rents_second_name'], 'filter', 'filter' => 'trim'],
-            
-            [['rents_surname', 'rents_name', 'rents_second_name'], 'string', 'min' => 3, 'max' => 50],
+            [['rents_surname', 'rents_name', 'rents_second_name'], 'string', 'min' => 1, 'max' => 50],
             
             [
                 ['rents_surname', 'rents_name', 'rents_second_name'], 

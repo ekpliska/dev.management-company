@@ -11,7 +11,7 @@
 
 
 /* 
- * Просмотр и редактирование заявки
+ * Просмотр заявки
  */
 $this->title = "Заявка ID{$request['requests_ident']}";
 $this->params['breadcrumbs'][] = ['label' => 'Завяки', 'url' => ['requests/index']];
@@ -24,7 +24,7 @@ $hide_btn = ($request['status'] == StatusRequest::STATUS_CLOSE || $request['stat
 <div class="dispatcher-main">
     
     <?= Breadcrumbs::widget([
-            'homeLink' => ['label' => 'ELSA | Администратор', 'url' => ['managers/index']],
+            'homeLink' => ['label' => 'ELSA | Администратор', 'url' => ['dispatchers/index']],
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]) ?>
     

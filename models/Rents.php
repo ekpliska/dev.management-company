@@ -42,7 +42,7 @@ class Rents extends ActiveRecord
         return [
             [['rents_name', 'rents_second_name', 'rents_surname', 'rents_mobile'], 'required'],
             [['rents_name', 'rents_second_name', 'rents_surname'], 'filter', 'filter' => 'trim'],
-            [['rents_name', 'rents_second_name', 'rents_surname'], 'string', 'min' => 3, 'max' => 50],
+            [['rents_name', 'rents_second_name', 'rents_surname'], 'string', 'min' => 2, 'max' => 50],
             [
                 ['rents_name', 'rents_second_name', 'rents_surname'], 
                 'match',

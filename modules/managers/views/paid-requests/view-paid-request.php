@@ -150,6 +150,7 @@ $this->params['breadcrumbs'][] = "Заявка на платную услугу 
             </div>        
         
         
+        </div>
     </div>
 </div>
 <?= AddEmployee::widget() ?>
