@@ -63,6 +63,7 @@
                 'contentOptions' =>[
                     'class' => 'dispatcher-table_middle dispatcher-table_left',
                 ],
+                'format' => 'raw',
             ],
             [
                 'attribute' => 'name_s',
@@ -72,7 +73,7 @@
                 ],
                 'value' => function ($data) {
                     return
-                        FormatFullNameUser::fullNameEmployee($data['employee_id_s'], false, false, [$data['surname_s'], $data['name_s'], $data['sname_s']]);
+                        FormatFullNameUser::nameEmployee($data['surname_s'], $data['name_s'], $data['sname_s'], false);
                 },
                 'format' => 'raw',
             ],
@@ -104,12 +105,7 @@
                 'attribute' => 'status',
                 'header' => 'Статус',
                 'value' => function ($data) {
-                    return 
-                        StatusHelpers::requestStatus($data['status'], $data->requests_id, false, $data['requests_grade']) .
-                        RatingRequest::widget([
-                            '_status' => $data['status'], 
-                            '_request_id' => $data['number'],
-                            '_score' => $data['grade']]);
+                    return StatusHelpers::requestStatus($data['status'], $data->requests_id, false, $data['requests_grade']);
                 },
                 'format' => 'raw',
                 'contentOptions' => [
