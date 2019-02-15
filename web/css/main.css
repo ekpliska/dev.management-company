@@ -1885,6 +1885,9 @@ p.right {
     border: 2px solid #ff7d7d;
     box-shadow: 0px 1px 4px 6px rgba(252,193,193,0.83);
 }
+.req-badge-reject {
+    border: 2px solid #5f697a
+}
 .request-ident {
     background: #2d18b4;
     border-radius: 25px;

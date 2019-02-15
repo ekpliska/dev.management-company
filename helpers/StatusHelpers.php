@@ -31,6 +31,7 @@ class StatusHelpers {
             'badge req-badge-complete', 
             'badge req-badge-rectification', 
             'badge req-badge-close',
+            'badge req-badge-reject',
         ];
     
         
@@ -47,6 +48,8 @@ class StatusHelpers {
             $btn_css = '<span class="' . $css_classes[3] . '">' . $status_name . '</span>';
         } elseif ($status == StatusRequest::STATUS_CLOSE) {
             $btn_css = '<span class="' . $css_classes[4] . '">' . $status_name . '</span>';
+        } elseif ($status == StatusRequest::STATUS_REJECT) {
+            $btn_css = '<span class="' . $css_classes[5] . '">' . $status_name . '</span>';
         }
         
         if ($status == StatusRequest::STATUS_CLOSE && $client == true) {
