@@ -79,6 +79,8 @@ class RegistrationForm extends Model {
      */
     public function registration($data) {
         
+//        echo '<pre>'; var_dump($data); die();
+        
         if ($data == null) {
             return false;
         }

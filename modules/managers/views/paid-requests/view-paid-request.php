@@ -135,7 +135,7 @@ $this->params['breadcrumbs'][] = "Заявка на платную услугу 
                                 </td>
                                 <td>
                                     <?= Html::button('<i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Назначить специалиста', [
-                                            'class' => 'btn blue-btn',
+                                            'class' => 'btn blue-btn btn-specialist',
                                             'data-type-request' => 'paid-requests',
                                             'data-employee' => $paid_request['employee_id_s'],
                                             'data-target' => '#add-specialist-modal',

@@ -150,7 +150,7 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
                                 </td>
                                 <td>
                                     <?= Html::button('<i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Назначить специалиста', [
-                                            'class' => 'btn blue-btn',
+                                            'class' => 'btn blue-btn btn-specialist',
                                             'data-type-request' => 'requests',
                                             'data-employee' => $request['employee_id_s'],
                                             'data-target' => '#add-specialist-modal',

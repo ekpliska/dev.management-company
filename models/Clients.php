@@ -42,12 +42,12 @@ class Clients extends ActiveRecord
 //                'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{4}\)?[\- ]?)?[\d\- ]{7,10}$/i', 
 //            ],
             
-            [[
-                'clients_name', 'clients_second_name', 'clients_surname'], 
-                'match',
-                'pattern' => '/^[А-Яа-яЁё\ \-]+$/iu',
-                'message' => 'Поле "{attribute}" может содержать только буквы русского алфавита, и знак "-"',
-            ],
+//            [[
+//                'clients_name', 'clients_second_name', 'clients_surname'], 
+//                'match',
+//                'pattern' => '/^[А-Яа-яЁё\ \-]+$/iu',
+//                'message' => 'Поле "{attribute}" может содержать только буквы русского алфавита, и знак "-"',
+//            ],
             
             ['clients_phone', 'string', 'max' => 50],
             

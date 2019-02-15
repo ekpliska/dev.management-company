@@ -17,6 +17,7 @@ class ClientAPI extends Object {
     public function accountRegister($data) {
         
         $account_info = $this->readUrl('account/register', $data);
+        echo '<pre>'; var_dump($account_info); die();
         
         return [
             'success' => $account_info['Лицевой счет']['success'],
