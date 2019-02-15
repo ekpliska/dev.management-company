@@ -13,7 +13,9 @@
     use app\modules\dispatchers\models\RequestsList;
     use app\modules\dispatchers\models\PaidServicesList;
     use app\modules\dispatchers\models\searchForm\searchRequests;
+    use app\modules\dispatchers\models\searchForm\searchPaidRequests;
     use app\models\TypeRequests;
+    use app\models\Services;
     use app\modules\dispatchers\models\Specialists;
     use app\helpers\FormatFullNameUser;
 
@@ -26,6 +28,8 @@ class RequestsController extends AppDispatchersController {
         
         // Загружаем виды заявок        
         $type_requests = TypeRequests::getTypeNameArray();
+        // Загружаем список услуг для формы поиска
+        $name_services = Services::getServicesNameArray();
         
         // Загружаем список всех спициалистов
         $specialist_lists = ArrayHelper::map(Specialists::getListSpecialists()->all(), 'id', function ($data) {
@@ -39,12 +43,16 @@ class RequestsController extends AppDispatchersController {
                 $results = $search_model->search(Yii::$app->request->queryParams);
                 break;
             case 'paid-requests':
+                // Загружаем модель поиска
+                $search_model = new searchPaidRequests();
+                $results = $search_model->search(Yii::$app->request->queryParams);
                 break;
         }
         
         return $this->render('index', [
             'block' => $block,
             'type_requests' => $type_requests,
+            'name_services' => $name_services,
             'specialist_lists' => $specialist_lists,
             'search_model' => $search_model,
             'results' => $results,

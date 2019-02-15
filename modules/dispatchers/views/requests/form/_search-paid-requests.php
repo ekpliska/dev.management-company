@@ -8,13 +8,13 @@
  * Форма поиска
  */
 ?>
-<div class="container-fluid submenu-manager">
+<div class="container-fluid submenu-manager text-center">
     <ul class="nav navbar-nav navbar-left">
         <li>
             <?php 
                 $form = ActiveForm::begin([
-                    'id' => 'search-request-form',
-                    'action' => ['index'],
+                    'id' => 'search-paid-request-form',
+                    'action' => ['index', 'block' => 'paid-requests'],
                     'method' => 'get',
                     'fieldConfig' => [
                         'template' => '{input}',
@@ -30,11 +30,11 @@
             <?= $form->field($search_model, 'account_number')->input('text', ['class' => '_search-input', 'placeHolder' => 'Лицевой счет'])->label(false) ?>
             
                 
-            <?= $form->field($search_model, 'requests_type_id')->dropDownList($type_requests, [
-                    'prompt' => '[Вид заявки]',
+            <?= $form->field($search_model, 'services_name_services_id')->dropDownList($name_services, [
+                    'prompt' => '[Услуга]',
                     'class' => '_dropdown-subpanel _small']) ?>
                 
-            <?= $form->field($search_model, 'requests_specialist_id')->dropDownList($specialist_lists, [
+            <?= $form->field($search_model, 'services_specialist_id')->dropDownList($specialist_lists, [
                     'prompt' => '[Специалист]',
                     'class' => '_dropdown-subpanel _small']) ?>
             
@@ -74,4 +74,3 @@
         </li>
     </ul>
 </div>
-
