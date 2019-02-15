@@ -11,7 +11,13 @@ $this->title = Yii::$app->params['site-name-manager'] .  'Заявки';
 $this->params['breadcrumbs'][] = 'Заявки';
 ?>
 
-<div class="dispatcher-main-with-sub-general">
+<?= $this->render('form/_search-request', [
+        'search_model' => $search_model,
+        'type_requests' => $type_requests,
+        'specialist_lists' => $specialist_lists,
+]) ?>
+
+<div class="dispatcher-main-with-sub-general margin-search-panel">
     
     <?= Breadcrumbs::widget([
             'homeLink' => ['label' => 'ELSA | Администратор', 'url' => ['dispatchers/index']],

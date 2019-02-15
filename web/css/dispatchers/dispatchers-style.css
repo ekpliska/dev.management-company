@@ -26,6 +26,9 @@ and open the template in the editor.
 .dispatcher-main-with-sub-general {
     margin-top: 125px;
 }
+.margin-search-panel {
+    margin-top: 190px;
+}
 .dispatcher-main-with-sub-designer {
     margin-top: 130px;
 }
@@ -36,6 +39,20 @@ and open the template in the editor.
     margin-top: -40px;
 }
 /* Конец Диспетчер, контент */
+
+/* Дополнительное навигационное меню Администратор */
+.submenu-manager {
+    background: #2d18b4;
+    padding: 15px 0 5px 0;
+    position: fixed;
+    margin: 100px 0 0 -30px;
+    width: 100%;
+    z-index: 10;
+}
+.submenu-manager > ul {
+    padding: 10px 25px;
+}
+/* Конец Дополнительное навигационное меню Администратор */
 
 /* Диспетчер, главная страница */
 .dispatcher__genaral-page {}

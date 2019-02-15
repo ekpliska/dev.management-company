@@ -13,6 +13,9 @@
     use app\modules\dispatchers\models\RequestsList;
     use app\modules\dispatchers\models\PaidServicesList;
     use app\modules\dispatchers\models\searchForm\searchRequests;
+    use app\models\TypeRequests;
+    use app\modules\dispatchers\models\Specialists;
+    use app\helpers\FormatFullNameUser;
 
 /**
  * Заявки, Платные услуги
@@ -20,6 +23,14 @@
 class RequestsController extends AppDispatchersController {
     
     public function actionIndex($block = 'requests') {
+        
+        // Загружаем виды заявок        
+        $type_requests = TypeRequests::getTypeNameArray();
+        
+        // Загружаем список всех спициалистов
+        $specialist_lists = ArrayHelper::map(Specialists::getListSpecialists()->all(), 'id', function ($data) {
+            return FormatFullNameUser::nameEmployee($data['surname'], $data['name'], $data['second_name']);
+        });
         
         switch ($block) {
             case 'requests':
@@ -33,6 +44,9 @@ class RequestsController extends AppDispatchersController {
         
         return $this->render('index', [
             'block' => $block,
+            'type_requests' => $type_requests,
+            'specialist_lists' => $specialist_lists,
+            'search_model' => $search_model,
             'results' => $results,
         ]);
         
