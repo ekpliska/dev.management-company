@@ -2,8 +2,9 @@
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
-$sms = require __DIR__ . '/sms.php';
-$client_api = require __DIR__ . '/client_api.php';
+//$sms = require __DIR__ . '/sms.php';
+//$client_api = require __DIR__ . '/client_api.php';
+//$orangedata_client = require __DIR__ . '/OrangeDataClient.php';
 
 $config = [
     'id' => 'management-company',
@@ -174,8 +175,21 @@ $config = [
                 
             ],
         ],
-        'sms' => $sms,
-        'client_api' => $client_api,
+        'sms' => [
+            'class' => 'app\components\sms\Sms',
+//            'login' => '',
+//            'password' => '',
+//            'post' => true,
+//            'https' => true,
+//            'charset' => 'utf-8',
+//            'debug' => false,
+        ],
+        'client_api' => [
+            'class' => 'app\components\clientapi\ClientAPI',
+        ],
+        'orangedata_client' => [
+            'class' => 'app\components\orangedataclient\OrangeDataClient',
+        ],
     ],
     'params' => $params,
 ];

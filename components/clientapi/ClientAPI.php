@@ -1,6 +1,6 @@
 <?php
 
-    namespace app\components\ClientAPI;
+    namespace app\components\clientapi;
     use yii\base\Object;
 
 /**

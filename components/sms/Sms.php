@@ -1,6 +1,6 @@
 <?php
     
-    namespace app\components\SMS;
+    namespace app\components\sms;
     use yii\base\Object;
     use yii\helpers\ArrayHelper;
     
