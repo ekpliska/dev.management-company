@@ -2,9 +2,9 @@
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
-//$sms = require __DIR__ . '/sms.php';
-//$client_api = require __DIR__ . '/client_api.php';
-//$orangedata_client = require __DIR__ . '/OrangeDataClient.php';
+$sms = require __DIR__ . '/sms.php';
+$client_api = require __DIR__ . '/client_api.php';
+$orangedata_client = require __DIR__ . '/orange_data_client.php';
 
 $config = [
     'id' => 'management-company',
@@ -14,6 +14,7 @@ $config = [
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
+        '@orangedata'   => '@app/orangedata',
     ],
     'language' => 'ru',
     // Подключение модулей
@@ -175,21 +176,9 @@ $config = [
                 
             ],
         ],
-        'sms' => [
-            'class' => 'app\components\sms\Sms',
-//            'login' => '',
-//            'password' => '',
-//            'post' => true,
-//            'https' => true,
-//            'charset' => 'utf-8',
-//            'debug' => false,
-        ],
-        'client_api' => [
-            'class' => 'app\components\clientapi\ClientAPI',
-        ],
-        'orangedata_client' => [
-            'class' => 'app\components\orangedataclient\OrangeDataClient',
-        ],
+        'sms' => $sms,
+        'client_api' => $client_api,
+        'orangedata_client' => $orangedata_client,
     ],
     'params' => $params,
 ];

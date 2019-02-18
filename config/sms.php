@@ -4,7 +4,7 @@
  */
 
 return [
-    'class' => 'app\components\SMS\sms',
+    'class' => 'app\components\sms\Sms',
     'login' => '',  // Логин
     'password' => '',   // Пароль или MD5-хеш в нижнем регистре
     'post' => true,     // Использовать POST запрос

@@ -6,12 +6,12 @@
  * @version 2.1.1
  */
 
-    namespace app\components\orangedataclient;
-    use yii\base\Object;
-    use \DateTime;
-    use \Exception;
+        namespace app\components\orangedata;
 
-class OrangeDataClient extends Object {
+        use \DateTime;
+        use \Exception;
+
+class orangedata_client {
 
     private $order_request;
     private $correction_request;

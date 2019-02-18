@@ -31,3 +31,6 @@ tests/_support/_generated
 
 #vagrant folder
 /.vagrant
+
+# file for test of orange data client
+/components/orangedata/secure_path

@@ -1,5 +1,5 @@
 <?php
 return [
-    'class' => 'app\components\ClientAPI\ClientAPI',    
+    'class' => 'app\components\clientapi\ClientAPI',
 ];
 ?>
