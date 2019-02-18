@@ -80,8 +80,6 @@ class ClientsController extends AppManagersController {
         
         $user_info->scenario = User::SCENARIO_EDIT_CLIENT_PROFILE;
         
-        $add_rent = new AddRent();
-        
         if ($account_info->personal_rent_id) {
             $is_rent = true;
             $edit_rent = Rents::findOne(['rents_id' => $account_info->personal_rent_id]);
@@ -108,7 +106,6 @@ class ClientsController extends AppManagersController {
             'account_choosing' => $account_info,
             'list_account' => $list_account,
             'rent_info' => $edit_rent,
-            'add_rent' => $add_rent,
         ]);
         
     }
