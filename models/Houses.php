@@ -119,7 +119,7 @@ class Houses extends ActiveRecord
     public static function getAllHouses() {        
         
         $houses_list = self::find()
-                ->with(['flat', 'characteristic', 'flat.account', 'flat.note', 'flat.account.client', 'image'])
+                ->with(['flat', 'characteristic', 'flat.account', 'flat.note', 'flat.account.client', 'image', 'flat.account.client.user'])
                 ->asArray()
                 ->orderBy([
                     'houses_name' => SORT_ASC,
