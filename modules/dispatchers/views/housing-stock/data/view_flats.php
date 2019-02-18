@@ -22,9 +22,6 @@
     <div class="flats-info">
         <h3 class="<?= $debtor ? 'title-debtor' : 'title' ?>">
             <?= "Квартира {$flat['flats_number']}, подъезд {$flat['flats_porch']}" ?>
-
-            <?= Html::button('', ['id' => 'add-note', 'data-flat' => $flat['flats_id']]) ?>
-
         </h3>
         
         <div class="flats-info__info">
@@ -35,16 +32,6 @@
                 <span>Собственник</span>
                 <p class="client-name">
                     <?= FormatHelpers::formatFullUserName($flat['clients_surname'], $flat['clients_name'], $flat['clients_second_name'], true) ?>
-                    
-                    <?php if ($flat['is_debtor']) : ?>
-                        <label class="switch pull-right">
-                            <?= Html::checkbox($flat_status, $flat['is_debtor'], [
-                                    'id' => "check_status__flat-{$flat['flats_id']}",
-                                    'data-flat' => $flat['flats_id'],
-                            ]) ?>
-                            <span class="slider round"></span>
-                        </label>
-                    <?php endif; ?>
                 </p>                
 
                 <?php if (isset($flats[$key]['note']) && $flats[$key]['note']) : ?>
@@ -53,7 +40,6 @@
                         <?php foreach ($flats[$key]['note'] as $note) : ?>
                         <li>
                             <?= $note['notes_name'] ?>
-                            <span class="close flat_note__delete" data-note="<?= $note['notes_id'] ?>">&#x2715;</span>
                         </li>
                         <?php endforeach; ?>
                     </ul>

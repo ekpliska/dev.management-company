@@ -7,6 +7,7 @@
     use rico\yii2images\behaviors\ImageBehave;
     use app\models\Flats;
     use app\models\CharacteristicsHouse;
+    use app\models\Image;
 
 /**
  * Дома
@@ -99,6 +100,13 @@ class Houses extends ActiveRecord
         return $this->hasMany(CharacteristicsHouse::className(), ['characteristics_house_id' => 'houses_id']);
     }
     
+    /**
+     * Связь с таблицей "Вложения" (Image)
+     */
+    public function getImage() {
+        return $this->hasMany(Image::className(), ['itemId' => 'houses_id'])->andWhere(['modelName' => 'Houses']);
+    }
+    
     public static function findHouseById($house_id) {
         return self::find()
                 ->where(['houses_id' => $house_id])
@@ -111,7 +119,7 @@ class Houses extends ActiveRecord
     public static function getAllHouses() {        
         
         $houses_list = self::find()
-                ->joinWith(['flat', 'characteristic', 'flat.account', 'flat.note', 'flat.account.client'])
+                ->with(['flat', 'characteristic', 'flat.account', 'flat.note', 'flat.account.client', 'image'])
                 ->asArray()
                 ->orderBy([
                     'houses_name' => SORT_ASC,
@@ -121,7 +129,7 @@ class Houses extends ActiveRecord
         
 //        echo '<pre>';
 //        var_dump($houses_list);
-//        
+        
         return $houses_list;
         
     }

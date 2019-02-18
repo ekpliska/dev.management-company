@@ -190,13 +190,15 @@ $(document).ready(function(){
      */
     $(document).on('click', '#house_link', function() {
         var house = $(this).attr('href');
+        var key = $(this).data('key');
         house = house.replace(/[^0-9]/gim, '');
-//        console.log('--', house);
+//        console.log('--', house, '--', key);
         
         $.ajax({
             url: 'view-characteristic-house',
             method: 'POST',
             data: {
+                key: key,
                 house: house,
             },
             success: function (response) {

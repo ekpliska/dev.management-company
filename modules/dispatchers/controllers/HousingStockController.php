@@ -21,6 +21,7 @@ class HousingStockController extends AppDispatchersController {
         $houses_list = Houses::getAllHouses();
         
         return $this->render('index', [
+            'house_cookie' => $house_cookie,
             'houses_list' => $houses_list,
         ]);
         
@@ -33,8 +34,10 @@ class HousingStockController extends AppDispatchersController {
      */
     public function actionViewCharacteristicHouse() {
         
+        $key = Yii::$app->request->post('key');
         $house_id = Yii::$app->request->post('house');
-        $this->setCookieChooseHouse($house_id);
+        
+        $this->setCookieChooseHouse($key, $house_id);
         
         if (Yii::$app->request->isAjax) {
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
@@ -44,22 +47,21 @@ class HousingStockController extends AppDispatchersController {
             
             $data_characteristics = $this->renderPartial('data/characteristics_house', ['characteristics' => $characteristics]);
             $data_flats = $this->renderPartial('data/view_flats', ['flats' => $flats]);
-//            $data_files = $this->renderPartial('data/view_upload_files', ['files' => $files]);
+            $data_files = $this->renderPartial('data/view_upload_files', ['files' => $files]);
             
-//            return ['data' => $data_characteristics, 'flats' => $data_flats, 'files' => $data_files];
-            return ['data' => $data_characteristics, 'flats' => $data_flats];
+            return ['data' => $data_characteristics, 'flats' => $data_flats, 'files' => $data_files];
         }
     }
     
     /*
      * Установка куки выбранного дома
      */
-    public function setCookieChooseHouse($value) {
+    public function setCookieChooseHouse($key, $house_id) {
         
         $cookies = Yii::$app->response->cookies;
         $cookies->add(new \yii\web\Cookie ([
             'name' => 'choosing-house-d',
-            'value' => $value,
+            'value' => ['key' => $key, 'value' => $house_id],
             'expire' => time() + 60*60*24*7,
         ]));
     }
