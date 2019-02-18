@@ -23,27 +23,6 @@
             <?php endif; ?>                
         </p>
 
-        <div class="control-block">
-            <?php if ($user_info->status == 1) : ?>
-                <?= Html::button('Заблокировать', [
-                        'class' => 'btn-block-user block_user',
-                        'data-user' => $user_info->user_id,
-                        'data-status' => 2]) 
-                ?>
-            <?php elseif ($user_info->status == 2)  : ?>
-                <?= Html::button('Разблокировать', [
-                        'class' => 'btn-unblock-user block_user',
-                        'data-user' => $user_info->user_id,
-                        'data-status' => 1]) 
-                ?>
-            <?php endif; ?>
-            <?= Html::button('Удалить', [
-                        'class' => 'btn-delete-user',
-                        'data-user' => $user_info->user_id]) 
-            ?>
-        </div>
-  
-
         <?= Html::dropDownList('clients-account_list', $account_choosing->account_id, $list_account, [
                 'placeHolder' => $account_choosing->account_number,
                 'id' => 'select-dark',

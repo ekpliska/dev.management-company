@@ -731,6 +731,9 @@ tbody > tr > td > div.empty::before {
 /* Конец Администратор, профиль */
 
 /* Подменю, профиль собсвенника */
+.profile-content {
+    min-height: 700px;
+}
 .profile-sub_menu {
     background: linear-gradient(190.67deg, #42314e 50%, rgba(132, 131, 131, 0.65) 100%);
 }

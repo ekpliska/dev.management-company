@@ -6,6 +6,7 @@
     use app\models\Clients;
     use app\models\PersonalAccount;
     use app\models\User;
+    use app\models\Rents;
 
 /**
  * Профиль собственника
@@ -26,6 +27,8 @@ class ClientProfileController extends AppDispatchersController {
      */
     public function actionViewClient($client_id, $account_number) {
         
+        $is_rent = false;
+        
         $client_info = Clients::findById($client_id);
         $account_info = PersonalAccount::findByNumber($account_number);
         $list_account = PersonalAccount::findByClient($client_id, true);
@@ -33,10 +36,10 @@ class ClientProfileController extends AppDispatchersController {
         
         if ($account_info->personal_rent_id) {
             $is_rent = true;
-            $edit_rent = Rents::findOne(['rents_id' => $account_info->personal_rent_id]);
+            $rent_info = Rents::findOne(['rents_id' => $account_info->personal_rent_id]);
         } else {
             $is_rent = false;
-            $edit_rent = null;
+            $rent_info = null;
         }
         
         if ($client_info == null || $account_info == null) {
@@ -49,6 +52,7 @@ class ClientProfileController extends AppDispatchersController {
             'user_info' => $user_info,
             'account_choosing' => $account_info,
             'list_account' => $list_account,
+            'rent_info' => $rent_info,
         ]);
         
     }

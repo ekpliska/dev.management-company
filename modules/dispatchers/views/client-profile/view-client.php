@@ -38,13 +38,12 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
                 'form' => $form,
                 'user_info' => $user_info,
                 'client_info' => $client_info,
-                'add_rent' => $add_rent,
                 'list_account' => $list_account,
                 'account_choosing' => $account_choosing,
         ]) ?>
     
     
-        <div class="row">
+        <div class="profile-content row">
 
             <!--Собственник-->
             <div class="col-md-6 clients-profile-info_manager">
@@ -52,27 +51,27 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
                     Контактные данные
                 </p>
                 <?= $form->field($client_info, 'clients_surname')
-                        ->input('text', ['class' => 'field-input'])
+                        ->input('text', ['class' => 'field-input', 'disabled' => true])
                         ->label($client_info->getAttributeLabel('clients_surname'), ['class' => 'field-label']) ?>
 
                 <?= $form->field($client_info, 'clients_name')
-                        ->input('text', ['class' => 'field-input'])
+                        ->input('text', ['class' => 'field-input', 'disabled' => true])
                         ->label($client_info->getAttributeLabel('clients_name'), ['class' => 'field-label']) ?>
 
                 <?= $form->field($client_info, 'clients_second_name')
-                        ->input('text', ['class' => 'field-input'])
+                        ->input('text', ['class' => 'field-input', 'disabled' => true])
                         ->label($client_info->getAttributeLabel('clients_second_name'), ['class' => 'field-label']) ?>
 
                 <?= $form->field($user_info, 'user_mobile')
-                        ->input('text', ['class' => 'field-input cell-phone'])
+                        ->input('text', ['class' => 'field-input cell-phone', 'disabled' => true])
                         ->label($client_info->getAttributeLabel('user_mobile'), ['class' => 'field-label']) ?>
 
                 <?= $form->field($client_info, 'clients_phone')
-                        ->input('text', ['class' => 'field-input house-phone'])
+                        ->input('text', ['class' => 'field-input house-phone', 'disabled' => true])
                         ->label($client_info->getAttributeLabel('clients_phone'), ['class' => 'field-label']) ?>
 
                 <?= $form->field($user_info, 'user_email')
-                        ->input('text', ['class' => 'field-input'])
+                        ->input('text', ['class' => 'field-input', 'disabled' => true])
                         ->label($user_info->getAttributeLabel('user_email'), ['class' => 'field-label']) ?>
             </div>
 
