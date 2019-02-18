@@ -911,16 +911,16 @@ textarea {
 /* Поиск */
 ._search-input {
     background: transparent;
-    border: 1px solid #fff;
-    border-radius: 25px;
-    padding: 7px 15px 7px 40px;
+    border: none;
+    padding: 7px 15px 7px 25px;
     color: #fff;
     font-size: 12px;
     outline: none;
     background-image: url(../images/input-icon/text.png);
     background-size: 5%;
     background-repeat: no-repeat;
-    background-position: 5% 47%;  
+    background-position: 5% 50%;
+    border-bottom: 1px solid #ddd;
 }
 ._search-input::placeholder {
     color: #fff;
@@ -931,13 +931,13 @@ textarea {
     box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
 }
 ._dropdown-subpanel {
-    padding: 6px 40px;
+    padding: 6px 25px;
     background: transparent;
-    border: 1px solid #fff;
-    border-radius: 25px;
+    border: none;
     color: #fff;
     outline: none;
     font-size: 12px;
+    border-bottom: 1px solid #ddd;
 }
 ._dropdown-subpanel option {
     color: #000;
@@ -947,7 +947,7 @@ textarea {
     background-image: url(../images/input-icon/filter.png);
     background-size: 5%;
     background-repeat: no-repeat;
-    background-position: 10% 47%;
+    background-position: 5% 50%;
 }
 ._large {
     width: 400px;
