@@ -108,9 +108,10 @@ class Houses extends ActiveRecord
     /*
      * Получить полный список домов, и квартир
      */
-    public static function getAllHouses() {
+    public static function getAllHouses() {        
         
         $houses_list = self::find()
+                ->joinWith(['flat', 'characteristic', 'flat.account', 'flat.note', 'flat.account.client'])
                 ->asArray()
                 ->orderBy([
                     'houses_name' => SORT_ASC,
@@ -118,6 +119,9 @@ class Houses extends ActiveRecord
                     'houses_number' => SORT_ASC])
                 ->all();
         
+//        echo '<pre>';
+//        var_dump($houses_list);
+//        
         return $houses_list;
         
     }

@@ -409,3 +409,298 @@ tbody > tr > td > div.empty::before {
     border-bottom: none;
 }
 /* Таблица, Диспетчеры */
+
+/* Жилищный фонд */
+.housing-stock {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+}
+.housing-stock > div[class*="col-"] {
+    padding: 0;
+    margin: 0;
+    border-right: 1px solid #ddd;
+    min-height: 700px;
+}
+.housing-stock > div[class*="col-"]:last-child {
+    border-right: none;
+}
+.housing-stock > div > h4.title,
+#flats_list > h4.title {
+    padding: 20px 15px;
+    margin: 0;
+    color: #2d18b4;
+    font-weight: bold;
+    font-size: 12px;
+    border-bottom: 1px solid #ddd;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+}
+.action-housing-stock > .dropdown-menu {
+    position: initial;
+    margin-right: -30px;
+    margin-top: -50px;
+}
+.action-housing-stock > .dropdown-menu > li > a {
+    padding: 10px 20px;
+}
+.action-housing-stock {
+    position: fixed;
+    right: 2%;
+    bottom: 10%;    
+}
+.action-housing-stock__button {
+    background-image: url(/images/clients/new_record.svg);
+    background-repeat: no-repeat;
+    background-position: 0px 5px;
+    background-color: transparent;
+    width: 70px;
+    height: 70px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+.panel-housing-stock > .panel-heading {
+    padding-left: 60px;
+}
+.panel-housing-stock > .panel-heading:before {
+    font-family: 'Glyphicons Halflings';
+    content: "\e021";
+    position: absolute;
+    left: 3%;
+    font-size: 18px;
+    color: #2d18b4;
+    line-height: 1.8;
+}
+.panel-housing-stock > .panel-heading > h4 > a {
+    font-size: 16px;
+    color: #000;
+    font-weight: bold;
+}
+.house-adress {
+    font-size: 14px;
+    color: #2d18b4;
+    padding-left: 20px;
+}
+.house-adress:before {
+    font-family: 'Glyphicons Halflings';
+    content: "\e062";
+    margin-right: 5px;
+    font-size: 16px;
+    position: absolute;
+    left: 9%;
+}
+.panel-housing-stock > .panel-collapse {
+    background: #454545;
+    color: #fff;
+}
+.house-description {
+    font-size: 14px;
+}
+.house-description > span {
+    font-size: 12px;
+}
+.house-description > p {
+    text-align: justify;
+    border-top: 1px solid #ddd;
+    padding: 10px;
+}
+.house-description > p > span {
+    font-size: 12px;
+    color: #ddd;
+    font-style: italic;
+}
+#edit-discription-btn {
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 10px;
+    font-weight: bold;
+}
+#edit-discription-btn:hover,
+#edit-discription-btn:active,
+#edit-discription-btn:focus {
+    border: 1px solid #fff;
+    padding: 10px;
+    border-radius: 12px;
+    text-decoration: none;
+}
+#edit-discription-btn:before {
+    font-family: 'Glyphicons Halflings';
+    content: "\270f";
+    padding: 0 10px 0 0;
+}
+.flats-info {
+    border-bottom: 1px solid #ddd;
+}
+.flats-info > h3.title {
+    background: #2d18b4;
+    color: #fff;
+    font-size: 14px;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 20px;
+    margin: 10px 20px;
+    border-radius: 25px;
+}
+.flats-info > h3.title-debtor {
+    background: #2d18b4;
+    color: #fff;
+    font-size: 14px;
+    height: 40px;
+    line-height: 38px;
+    padding: 0 20px 0 55px;
+    margin: 10px 20px;
+    border-radius: 25px;
+}
+.flats-info > h3.title-debtor:before {
+    font-family: cursive;
+    content: '-\20bd';
+    background: #ef693a;
+    padding: 1px 9px;
+    font-size: 22px;
+    border-radius: 50%;
+    position: absolute;
+    left: 19px;
+}
+.flats-info__info {
+    display: flex;
+    padding: 10px 20px;
+}
+.flats-info__info_image img {
+    width: 50px;
+    height: 50px;
+}
+.flats-info__info_content {
+    padding-left: 15px;
+    width: 100%;
+}
+.flats-info__info_content > p > label {
+    float: right;
+}
+.flats-info__info_content > span,
+.notes-flats-list > li.first-title {
+    font-size: 10px;
+    color: #2d18b4;
+    text-transform: uppercase;
+    letter-spacing: .09em;
+}
+#add-note {
+    padding: 0;
+    float: right;
+    background: transparent;
+    border: none;
+}
+#add-note:active,
+#add-note:focus,
+#add-note:hover {
+    outline: none;
+}
+#add-note:before {
+    font-weight: bold;
+    content: "\e081";
+    font-family: 'Glyphicons Halflings';
+    font-size: 18px;
+}
+.note-message {
+    color: #ef693a;
+    margin: 0;
+    font-size: 14px;
+    text-align: justify;
+}
+.note-message:hover:before {
+    content: '\002B';
+    border-right: 10px solid red;
+}
+.notes-flats-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+.notes-flats-list > li {
+    padding: 0 35px 0 0;
+    text-decoration: none;
+    font-size: 14px;
+    color: #ef693a;
+    display: block;
+    position: relative;
+    text-align: justify;
+    cursor: default;
+}
+.notes-flats-list > li > span.close {
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 0%;
+    font-size: 14px;
+    padding: 5px;
+    transform: translate(0%, -50%);
+}
+.notes-flats-list > li > span.close:hover {
+    background: #ef693a;
+    color: #fff;
+}
+.modal-note-info {
+    text-align: center;
+    color: #fff;
+    font-size: 16px;
+    padding: 20px;
+    margin: 0 -15px;
+    background: rgba(221, 200, 253, 0.15);
+}
+.modal-note-info span {
+    border: 1px solid white;
+    padding: 5px 10px;
+    border-radius: 12px;
+    margin: 0 10px;
+    font-size: 12px;
+}
+.table-characteristics {
+    border: none;
+}
+.table-characteristics > tbody > tr > td:first-child {
+    width: 95%;
+}
+.table-characteristics > tbody > tr > td > a {
+    color: #2c3e50;
+}
+.table-characteristics > tbody > tr > td > a:hover {
+    font-weight: bold;
+}
+.table-characteristics > tbody > tr > td {
+    border-top: none;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+    vertical-align: middle;
+}
+.table-characteristics > tbody > tr > td.padding-add {
+    padding: 25px;
+}
+.housing-block__btn-del, 
+.housing-block__btn-download {
+    background: transparent;
+    color: #7f8c8d;
+    border: none;
+}
+.housing-block__btn-del:before {
+    content: "\e020";
+    font-family: 'Glyphicons Halflings';
+    font-size: 12px;
+}
+.housing-block__btn-download:before {
+    content: "\e197";
+    font-family: 'Glyphicons Halflings';
+    font-size: 12px;
+}
+.rest_char {
+    font-size: 12px;
+    color: #3498db;
+    font-weight: normal;
+    cursor: pointer;
+}
+.delete_char {
+    font-size: 12px;
+    color: #fb6d5b;
+    font-weight: normal;
+    cursor: pointer;
+}
+/* Конец Жилищный фонд */

@@ -176,8 +176,38 @@ $(document).ready(function(){
      *      Новая завяка
      *      Новая заявка на платную услугу
      */
-    $('.create-request, .create-paid-request').on('click', function(){
-        $('#create-new-request, #create-new-paid-request')[0].reset();
+//    $('.create-request, .create-paid-request').on('click', function(){
+//        $('#create-new-request, #create-new-paid-request')[0].reset();
+//    });
+    
+
+    // ******************************************************** //
+    // ***********    General Page of Dispaycher   ************ //
+    // ******************************************************** //
+    
+    /*
+     * Переключение домов
+     */
+    $(document).on('click', '#house_link', function() {
+        var house = $(this).attr('href');
+        house = house.replace(/[^0-9]/gim, '');
+//        console.log('--', house);
+        
+        $.ajax({
+            url: 'view-characteristic-house',
+            method: 'POST',
+            data: {
+                house: house,
+            },
+            success: function (response) {
+                $('#characteristic_list').html(response.data);
+                $('#flats_list').html(response.flats);
+                $('#files_list').html(response.files);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(textStatus);
+            }
+        });
     });
     
 });

@@ -31,4 +31,19 @@ class AppDispatchersController extends Controller {
         return Yii::$app->profileDispatcher;
     }
     
+    /*
+     * Метод получения cookies
+     * Работает для запоминания значений выбранных их списков в Разделах:
+     * Жилищный фонд, ID выбранного дома
+     * Главная страница, ID выбранного пользователя
+     */
+    public function actionReadCookies($cookie_name) {
+
+        $name_cookie = "{$cookie_name}";
+        if (Yii::$app->request->cookies->has($name_cookie)) {
+            return Yii::$app->request->cookies->get($name_cookie)->value;
+        }
+        
+    }
+    
 }
