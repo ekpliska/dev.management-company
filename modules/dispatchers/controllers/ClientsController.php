@@ -181,6 +181,22 @@ class ClientsController extends AppDispatchersController {
     }
     
     /*
+     * Собственник, Общая информация по лицевому счету
+     */
+    public function actionAccountInfo($client_id, $account_number) {
+        
+        $info = $this->getClientsInfo($client_id, $account_number);
+        
+        return $this->render('account-info', [
+            'client_info' => $info['client_info'],
+            'account_choosing' => $info['account_info'],
+            'user_info' => $info['user_info'],
+            'list_account' => $info['list_account'],
+        ]);
+        
+    }
+    
+    /*
      * Получение всех данных о собственнике
      */
     protected function getClientsInfo($client_id, $account_number) {
