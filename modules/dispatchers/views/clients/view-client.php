@@ -10,13 +10,13 @@
  */
 $this->title = 'Собственники';
 $this->title = Yii::$app->params['site-name-manager'] .  'Собственники';
-$this->params['breadcrumbs'][] = ['label' => 'Собственники', 'url' => ['client-profile/index']];
+$this->params['breadcrumbs'][] = ['label' => 'Собственники', 'url' => ['clients/index']];
 $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosing->account_number . ']';
 ?>
 
 <div class="dispatcher-main">
     <?= Breadcrumbs::widget([
-            'homeLink' => ['label' => 'ELSA | Диспетчер', 'url' => ['managers/index']],
+            'homeLink' => ['label' => 'ELSA | Диспетчер', 'url' => ['dispatchers/index']],
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]) ?>
 

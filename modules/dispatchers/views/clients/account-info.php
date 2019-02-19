@@ -14,9 +14,9 @@ $this->params['breadcrumbs'][] = ['label' => 'Собственники', 'url' =
 $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosing->account_number . ']';
 ?>
 
-<div class="manager-main">
+<div class="dispatcher-main">
     <?= Breadcrumbs::widget([
-            'homeLink' => ['label' => 'ELSA | Администратор', 'url' => ['managers/index']],
+            'homeLink' => ['label' => 'ELSA | Диспетчер', 'url' => ['dispatchers/index']],
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]) ?>
     
