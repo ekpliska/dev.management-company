@@ -57,7 +57,7 @@ class ClientsController extends AppDispatchersController {
         
     }
     
-/*
+    /*
      * Собственник, Квитанции ЖКУ
      * 
      * Формируем запрос, преобразуем в JSON, отправляем по API:
@@ -94,6 +94,47 @@ class ClientsController extends AppDispatchersController {
             'list_account' => $info['list_account'],
             'account_number' => $account_number,
             'receipts_lists' => $receipts_lists['receipts'],
+        ]);
+        
+    }
+    
+    /*
+     * Собственник, Платежи
+     * 
+     * Формируем запрос, преобразуем в JSON, отправляем по API:
+     * $data_array = [
+     *      "Номер лицевого счета" => $account_number,
+     *      "Период начало" => null,
+     *      "Период конец" => null
+     * ]
+     * 
+     * Если период начала и период конца null, то возвращает список всех квитанций
+     * 
+     */
+    public function actionPayments($client_id, $account_number) {
+        
+        $info = $this->getClientsInfo($client_id, $account_number);
+        
+        // Получаем номер текущего месяца и год
+        $current_period = date('Y-m');
+        
+        $array_request = [
+            'Номер лицевого счета' => $account_number,
+            'Период начало' => null,
+            'Период конец' => $current_period,
+        ];
+        
+        $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
+        
+        $payments_lists = Yii::$app->client_api->getPayments($data_json);
+        
+        return $this->render('payments', [
+            'client_info' => $info['client_info'],
+            'account_choosing' => $info['account_info'],
+            'user_info' => $info['user_info'],
+            'list_account' => $info['list_account'],
+            'account_number' => $account_number,
+            'payments_lists' => $payments_lists['payments'],
         ]);
         
     }

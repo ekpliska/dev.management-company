@@ -333,6 +333,15 @@ a.request__link-view:hover {
     border-radius: 0;
     margin-bottom: 30px;
 }
+.dispatcher-table-in {
+    border-collapse: unset;
+    border-top: 1px solid #ddd;
+    border-left: none;
+    border-right: none;
+    font-size: 12px;
+    border-radius: 0;
+    margin-bottom: 30px;
+}
 .dispatcher-table thead {
     color: #2d18b4;
     text-transform: uppercase;
@@ -794,9 +803,3 @@ tbody > tr > td > div.empty::before {
     box-shadow: 3px 3px 5px -2px #333;
 }
 /* Конец Подменю, профиль собсвенника */
-
-/* Платежи, Профиль Собственника, Администратор */
-.payments-profile {
-    min-height: 600px;
-}
-/* Конец Платежи, Профиль Собственника, Администратор */
