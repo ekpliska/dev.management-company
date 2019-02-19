@@ -8,7 +8,7 @@
  * Форма поиска
  */
 ?>
-<div class="container-fluid submenu-manager text-center">
+<div class="container-fluid submenu-dispatcher text-center">
     <ul class="nav navbar-nav navbar-left">
         <li>
             <?php 

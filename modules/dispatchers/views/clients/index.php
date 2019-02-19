@@ -8,7 +8,10 @@
 $this->title = Yii::$app->params['site-name-manager'] .  'Собственники';
 $this->params['breadcrumbs'][] = 'Собственники';
 ?>
-<div class="dispatcher-main">
+
+<?= $this->render('_form/_search', ['model' => $model]) ?>
+
+<div class="dispatcher-main-with-sub">
     
     <?= Breadcrumbs::widget([
             'homeLink' => ['label' => 'ELSA | Диспетчер', 'url' => ['dispatchers/index']],

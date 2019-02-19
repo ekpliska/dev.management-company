@@ -8,7 +8,7 @@
  */
 ?>
 
-<div class="container-fluid submenu-manager text-center">
+<div class="container-fluid submenu-dispatcher submenu-dispatcher__top">
     <ul class="nav navbar-nav navbar-left">
         <li>
             <?php 
