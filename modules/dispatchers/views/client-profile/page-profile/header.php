@@ -1,7 +1,7 @@
 <?php
 
     use yii\helpers\Html;
-    use app\modules\managers\widgets\SubMenu;
+    use app\modules\dispatchers\widgets\SubMenu;
 
 /* 
  * Шапка профиля собсвенника

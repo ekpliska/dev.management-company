@@ -87,7 +87,7 @@ class ClientAPI extends Object {
      */
     private function readUrl($path, $data) {
         
-        $url = 'https://juox.ru/api/' . $path;
+        $url = 'https://api.myelsa.ru/' . $path;
         
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
