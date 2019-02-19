@@ -41,10 +41,8 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
         ?>
 
         <?= $this->render('page-profile/header', [
-                'form' => $form,
                 'user_info' => $user_info,
                 'client_info' => $client_info,
-                'add_rent' => $add_rent,
                 'list_account' => $list_account,
                 'account_choosing' => $account_choosing,
         ]) ?>

@@ -1,11 +1,11 @@
 <?php
 
-    use yii\widgets\Breadcrumbs;
     use yii\helpers\Html;
+    use yii\widgets\Breadcrumbs;
     use kartik\date\DatePicker;
 
 /* 
- * Профиль собсвенника, раздел Платежи
+ * Профиль собсвенника, раздел Квитанции ЖКУ
  */
 
 $this->title = 'Собственники';
@@ -28,26 +28,23 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
                 'account_choosing' => $account_choosing,
         ]) ?>
 
-        <div class="payments-profile row">
-            <div class="payments-date-block">
-                <p class="payment_title"><i class="glyphicon glyphicon-calendar"></i> Период</p>
-                <div class="col-md-3 date-block">
+        <div class="profile-content row">
+            <div class="col-md-5 receipts_period">
+                <p class="period_title"><i class="glyphicon glyphicon-calendar"></i> Период</p>
+                <div class="receipts_period-calendar">                    
                     <?= DatePicker::widget([
-                            'name' => 'date_start-period-pay',
+                            'name' => 'date_start-period',
                             'type' => DatePicker::TYPE_INPUT,
                             'value' => 'С',
-                            'layout' => '<span class="input-group-text">Birth Date</span>',
                             'pluginOptions' => [
                                 'autoclose'=>true,
                                 'format' => 'dd-mm-yyyy'
-                            ]
+                            ],
                         ]);        
                     ?>
-                </div>
-                <div class="col-md-3 date-block">
                     <span>-</span>
                     <?= DatePicker::widget([
-                            'name' => 'date_end-period-pay',
+                            'name' => 'date_end-period',
                             'type' => DatePicker::TYPE_INPUT,
                             'value' => 'По',
                             'pluginOptions' => [
@@ -55,31 +52,22 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
                                 'format' => 'dd-mm-yyyy'
                             ]
                         ]);        
-                    ?>        
+                    ?>
+                    <?= Html::button('<i class="glyphicon glyphicon-search"></i>', ['id' => 'get-receipts', 'class' => 'btn-send-request']) ?>
                 </div>
-                <div class="col-md-6">
-                    <?= Html::button('Показать', ['class' => 'btn-show-payment']) ?>
+                <div class="message-block"></div>
+                <div id="receipts-lists">
+                    <?php /* = $this->render('data/receipts-lists', [
+                            'receipts_lists' => $receipts_lists,
+                            'account_number' => $account_number
+                    ]) */ ?>
                 </div>
-                <div class="col-md-12 message-block"></div>
+            </div>
+            <div class="col-md-7 receipts_body">
             </div>
 
-            <table class="table managers-table managers-table-in">
-                <thead>
-                <tr>
-                    <th>Расчетный месяц</th>
-                    <th>Дата платежа</th>
-                    <th>Тип оплаты</th>
-                    <th>Сумма платежа</th>
-                </tr>
-                </thead>
-                <tbody id="payments-lists">
-                    <?= $this->render('data/payments-lists', [
-                            'payments_lists' => $payments_lists,
-                            'account_number' => $account_number,
-                    ]) ?>
-                </tbody>
-            </table>
-            
         </div>
-    </div>
+            
+    </div>    
+    
 </div>

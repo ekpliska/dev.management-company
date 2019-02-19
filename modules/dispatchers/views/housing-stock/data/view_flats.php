@@ -28,7 +28,7 @@
         <div class="flats-info__info">
             <div class="flats-info__info_image">
                 <a href="<?= Url::to([
-                    'client-profile/view-client', 
+                    'clients/view-client', 
                     'client_id' => $flat['account']['client']['clients_id'], 
                     'account_number' => $flat['account']['account_number']]) ?>">
                     

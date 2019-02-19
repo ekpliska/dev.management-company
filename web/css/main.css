@@ -2163,7 +2163,7 @@ input[id="_search-input"]:-moz-placeholder {
 .receipts_period {
     padding: 0px;
     border-right: 1px solid #ddd;
-    min-height: 600px;
+    min-height: 700px;
 }
 .receipts_period-calendar {
     display: flex;
