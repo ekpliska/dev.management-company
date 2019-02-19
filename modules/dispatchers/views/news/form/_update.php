@@ -116,9 +116,6 @@
                                     <?= Html::beginTag('span', ['class' => 'delete_span', 'data-files' => $doc['id']]) ?>
                                         <?= '&times;' ?>
                                     <?= Html::endTag('span') ?>
-                                    <?php /* = Html::button('&#10005;', [
-                                            'class' => 'delete_file',
-                                            'data-files' => $doc['id']]) */ ?>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -134,12 +131,6 @@
 
             
         <div class="news-form__btn-block text-center">
-            
-            <?= Html::button('Удалить', [
-                    'class' => 'btn orange-btn',
-                    'data-target' => '#delete_news_manager',
-                    'data-toggle' => 'modal',
-                    'data-news' => $model->news_id]) ?>
             
             <?= Html::submitButton('Сохранить', ['class' => 'btn blue-btn']) ?>
         </div>

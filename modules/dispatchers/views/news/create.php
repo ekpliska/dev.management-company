@@ -6,14 +6,14 @@
 /* 
  * Создание новой новости
  */
-$this->title = Yii::$app->params['site-name-manager'] . 'Новости';
+$this->title = Yii::$app->params['site-name-dispatcher'] . 'Новости';
 $this->params['breadcrumbs'][] = ['label' => 'Новости', 'url' => ['news/index']];
 $this->params['breadcrumbs'][] = 'Новая запись [Публикация]';
 ?>
 
 <div class="manager-main">
     <?= Breadcrumbs::widget([
-            'homeLink' => ['label' => 'ELSA | Администратор', 'url' => ['managers/index']],
+            'homeLink' => ['label' => 'ELSA | Диспетчер', 'url' => ['dispatchers/index']],
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]) ?>
 

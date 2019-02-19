@@ -212,7 +212,7 @@ $(document).ready(function(){
         });
     });
    
-/* Кастомизация элеметнов управления формой, категории услуг */
+    /* Кастомизация элеметнов управления формой, лицевой счет в профите пользователя */
     $(".custom-select-dark").each(function() {
         var classes = $(this).attr("class"),
             id = $(this).attr("id"),
@@ -265,6 +265,45 @@ $(document).ready(function(){
         $(this).addClass("selection-dark");
         $(this).parents(".custom-select-dark").removeClass("opened");
         $(this).parents(".custom-select-dark").find(".custom-select-trigger-dark").text(textSelect);
-    });    
+    });
+    
+    
+    // ******************************************************** //
+    // ************     Start Block of News      ************** //
+    // ******************************************************** //
+    /*
+     * Переключатель, статус публикации новости
+     *      Для всех
+     *      Для жилого комплекса
+     *      Для отдельного дома
+     */
+    $('#for_whom_news').on('change', function(e) {
+        var forWhom = $("#news-form input[type='radio']:checked").val();
+        console.log(forWhom);
+        
+        if (forWhom === '0') {
+            $('#adress_list').prop('disabled', true);
+        } else {
+            $('#adress_list').prop('disabled', false);
+        }
+        
+        $.post('for-whom-news?status=' + forWhom,
+            function(data) {
+                $('#adress_list').html(data);
+            }
+        );
+    });
+    
+    /*
+     * Если выбран параметр "Реклама" то список партнеров делаем доступным
+     */
+    $('#check_advet').on('change', function(){
+       if ($('#check_advet').is(':checked')) {
+           $('#parnters_list').prop('disabled', false);
+       } else {
+           $('#parnters_list').val('0');
+           $('#parnters_list').prop('disabled', true);
+       }
+    });
     
 });

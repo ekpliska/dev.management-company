@@ -7,7 +7,6 @@
 /* 
  * Просмотр/редактирование публикации
  */
-$this->title = $news->news_title;
 $this->params['breadcrumbs'][] = ['label' => 'Новости', 'url' => ['news/index']];
 $this->params['breadcrumbs'][] = $news->news_title;
 ?>
@@ -15,7 +14,7 @@ $this->params['breadcrumbs'][] = $news->news_title;
 <div class="manager-main">
     
     <?= Breadcrumbs::widget([
-            'homeLink' => ['label' => 'ELSA | Администратор', 'url' => ['managers/index']],
+            'homeLink' => ['label' => 'ELSA | Диспетчер', 'url' => ['dispatchers/index']],
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]) ?>
 
