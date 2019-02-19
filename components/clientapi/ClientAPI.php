@@ -95,6 +95,11 @@ class ClientAPI extends Object {
         curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/json","Authorization: OAuth 2.0 token here"));
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        
+//        curl_setopt($c, CURLOPT_CONNECTTIMEOUT, 5);
+//        curl_setopt($c, CURLOPT_TIMEOUT, 30);
+//        curl_setopt($c, CURLOPT_SSL_VERIFYPEER, 0);
+        
         $result = curl_exec($ch);
 
         return json_decode($result, true);        
