@@ -11,7 +11,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Новости', 'url' => ['news/i
 $this->params['breadcrumbs'][] = 'Новая запись [Публикация]';
 ?>
 
-<div class="manager-main">
+<div class="dispatcher-main">
     <?= Breadcrumbs::widget([
             'homeLink' => ['label' => 'ELSA | Диспетчер', 'url' => ['dispatchers/index']],
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],

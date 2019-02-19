@@ -193,7 +193,7 @@ class NewsController extends AppDispatchersController {
         
         // Получаем список всех домов
         $houses_list = Houses::getHousesList(true);
-        
+
         if ($status == 'all') {
             echo '<option value="0">-</option>';
         } elseif ($status == 'house') {
