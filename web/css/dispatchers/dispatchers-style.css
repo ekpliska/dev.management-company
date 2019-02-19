@@ -914,3 +914,81 @@ tbody > tr > td > div.empty::before {
     padding: 10px 0;
 }
 /* Конец Новости, главная страница */
+
+/* Новость, форма создания и редатирования публикации */
+.news-form {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+}
+.news-form__left-block {
+    padding: 10px;
+}
+.news-form__left-block {}
+.news-form__right-block {
+    min-height: 1000px;
+    border-left: 1px solid #ddd;    
+}
+.load_preview {
+    height: 270px;
+    background: #ddd;
+    position: relative;
+}
+.load_preview img {
+    max-width: none;
+    min-width: auto;
+    min-height: auto;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.check-partners-block {
+    border: 1px solid #ef693a;
+    padding: 10px;
+    border-radius: 12px;
+}
+.news-form__btn-block {
+    margin: 50px 10px;
+}
+.notice-block {
+    margin: 70px 50%;
+}
+/* Конец Новость, форма создания и редатирования публикации */
+
+/* Кнопка загрузки изображений */
+.upload-btn-wrapper {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+.btn-upload-cover {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.32);
+    padding: 10px 70px 0 70px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: bold;
+}
+.btn-upload-cover:hover {
+    box-shadow: 0px 1px 6px 1px rgba(55,35,35,0.32);
+}
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+.field-btnLoad > label > label.control-label {
+    font-weight: normal;
+    cursor: pointer;
+}
+.btn-upload label {
+    color: #fff;
+}
+/* Конец Кнопка загрузки изображений */
