@@ -140,6 +140,47 @@ class ClientsController extends AppDispatchersController {
     }
     
     /*
+     * Собственник, Приборы учета
+     * 
+     * Формируем запрос, преобразуем в JSON, отправляем по API:
+     * $data_array = [
+     *      "Номер лицевого счета" => $account_number,
+     *      "Номер месяца" => null,
+     *      "Год" => null
+     * ]
+     * 
+     * Если период начала и период конца null, то возвращает список всех квитанций
+     * 
+     */
+    public function actionCounters($client_id, $account_number) {
+        
+        $info = $this->getClientsInfo($client_id, $account_number);
+        
+        // Получаем номер текущего месяца
+        $current_month = date('m');
+        // Получаем номер текущего года
+        $current_year = date('Y');
+        
+        $array_request = [
+            'Номер лицевого счета' => $account_number,
+            'Номер месяца' => $current_month,
+            'Год' => $current_year,
+        ];
+        
+        $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
+        $counters_lists_api = Yii::$app->client_api->getPreviousCounters($data_json);
+
+        return $this->render('counters', [
+            'client_info' => $info['client_info'],
+            'account_choosing' => $info['account_info'],
+            'user_info' => $info['user_info'],
+            'list_account' => $info['list_account'],
+            'counters_lists' => $counters_lists_api['indications'],
+        ]);
+        
+    }
+    
+    /*
      * Получение всех данных о собственнике
      */
     protected function getClientsInfo($client_id, $account_number) {

@@ -743,6 +743,9 @@ tbody > tr > td > div.empty::before {
 .profile-content {
     min-height: 700px;
 }
+.profile-content table {
+    margin-top: 0;
+}
 .profile-sub_menu {
     background: linear-gradient(190.67deg, #42314e 50%, rgba(132, 131, 131, 0.65) 100%);
 }
