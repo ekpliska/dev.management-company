@@ -2,11 +2,11 @@
 
     use yii\widgets\Breadcrumbs;
     use app\modules\managers\widgets\AlertsShow;
-    use app\modules\managers\widgets\ModalWindowsManager;
 
 /* 
  * Просмотр/редактирование публикации
  */
+$this->title = $news->news_title;
 $this->params['breadcrumbs'][] = ['label' => 'Новости', 'url' => ['news/index']];
 $this->params['breadcrumbs'][] = $news->news_title;
 ?>
@@ -31,5 +31,3 @@ $this->params['breadcrumbs'][] = $news->news_title;
             'docs' => $docs,]) ?>
     
 </div>
-
-<?= ModalWindowsManager::widget(['modal_view' => 'delete_news']) ?>

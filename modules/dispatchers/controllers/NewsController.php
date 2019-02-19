@@ -104,16 +104,10 @@ class NewsController extends AppDispatchersController {
             
             $slug = $model->save($file, $files);            
             if ($slug) {
-                Yii::$app->session->setFlash('news-admin', [
-                    'success' => true,
-                    'message' => 'Новость была успешно добавлена',
-                ]);                
+                Yii::$app->session->setFlash('success', ['message' => 'Новость была успешно создана']);
                 return $this->redirect(['view', 'slug' => $slug]);
             } else {
-                Yii::$app->session->setFlash('news-admin', [
-                    'success' => false,
-                    'error' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз',
-                ]);
+                Yii::$app->session->setFlash('error', ['message' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз']);
                 return $this->redirect(Yii::$app->request->referrer);
             }
         }
