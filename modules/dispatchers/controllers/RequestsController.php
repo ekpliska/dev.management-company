@@ -16,8 +16,12 @@
     use app\modules\dispatchers\models\searchForm\searchPaidRequests;
     use app\models\TypeRequests;
     use app\models\Services;
+    use app\models\PersonalAccount;
     use app\modules\dispatchers\models\Specialists;
     use app\helpers\FormatFullNameUser;
+    use app\modules\dispatchers\models\form\RequestForm;
+    use app\modules\dispatchers\models\form\PaidRequestForm;
+    use app\models\CategoryServices;
 
 /**
  * Заявки, Платные услуги
@@ -30,6 +34,8 @@ class RequestsController extends AppDispatchersController {
         $type_requests = TypeRequests::getTypeNameArray();
         // Загружаем список услуг для формы поиска
         $name_services = Services::getServicesNameArray();
+        // Формируем массив для Категорий услуг
+        $servise_category = CategoryServices::getCategoryNameArray();
         
         // Загружаем список всех спициалистов
         $specialist_lists = ArrayHelper::map(Specialists::getListSpecialists()->all(), 'id', function ($data) {
@@ -38,11 +44,15 @@ class RequestsController extends AppDispatchersController {
         
         switch ($block) {
             case 'requests':
+                // Загружаем модель создания новой заявки
+                $model = new RequestForm();
                 // Загружаем модель поиска
                 $search_model = new searchRequests();
                 $results = $search_model->search(Yii::$app->request->queryParams);
                 break;
             case 'paid-requests':
+                // Загружаем модель для загрузки заявки на платную услугу
+                $model = new PaidRequestForm();
                 // Загружаем модель поиска
                 $search_model = new searchPaidRequests();
                 $results = $search_model->search(Yii::$app->request->queryParams);
@@ -56,6 +66,9 @@ class RequestsController extends AppDispatchersController {
             'specialist_lists' => $specialist_lists,
             'search_model' => $search_model,
             'results' => $results,
+            'model' => $model,
+            'flat' => [],
+            'servise_category' => $servise_category,
         ]);
         
     }
@@ -190,6 +203,104 @@ class RequestsController extends AppDispatchersController {
         }
         
         return ['success' => true];
+    }
+    
+    /*
+     * Метод сохранения созданной заявки
+     */
+    public function actionCreateRequest() {
+        
+        $model = new RequestForm();
+        
+        if (Yii::$app->request->isPost && $model->load(Yii::$app->request->post())) {
+            $number = $model->save();
+            return $this->redirect(['view-request', 'request_number' => $number]);
+        }
+    }
+    
+    /*
+     * Метод сохранения созданной заявки на платную услугу
+     */
+    public function actionCreatePaidRequest() {
+        
+        $model = new PaidRequestForm();
+        
+        if (Yii::$app->request->isPost && $model->load(Yii::$app->request->post())) {
+            $number = $model->save();
+            return $this->redirect(['view-paid-request', 'request_number' => $number]);
+        }
+    }
+    
+    /*
+     * Валидация форм
+     */
+    public function actionValidationForm($form) {
+        
+        if ($form == 'new-request') {
+            $model = new RequestForm();
+        } elseif ($form == 'paid-request') {
+            $model = new PaidRequestForm();
+        }
+        
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return \yii\widgets\ActiveForm::validate($model);
+        }
+    }
+    
+    /*
+     * Поиск адресов по введенному номеру телефона пользователя
+     */
+    public function actionShowHouses($phone) {
+        
+        $model = new RequestForm();
+        $client_id = $model->findClientPhone($phone);
+        
+        $house_list = PersonalAccount::find()
+                ->select(['account_id', 'houses_gis_adress', 'houses_number', 'flats_number'])
+                ->joinWith(['flat', 'flat.house'])
+                ->andWhere(['personal_clients_id' => $client_id])
+                ->orWhere(['personal_rent_id' => $client_id])
+                ->asArray()
+                ->all();
+        
+        if (!empty($client_id)) {
+            foreach ($house_list as $house) {
+                $full_adress = 
+                        $house['houses_gis_adress'] . ', д. ' .
+                        $house['houses_number'] . ', кв. ' .
+                        $house['flats_number'];
+                echo '<option value="' . $house['account_id'] . '">' . $full_adress . '</option>';
+            }
+        } else {
+            echo '<option>Адрес не найден</option>';
+        }        
+        
+    }
+    
+    /*
+     * Поиск наименование услуги по выбранной категории
+     */
+    public function actionShowNameService($categoryId) {
+        
+        $category_list = CategoryServices::find()
+                ->andWhere(['category_id' => $categoryId])
+                ->asArray()
+                ->count();
+        
+        $service_list = Services::find()
+                ->andWhere(['service_category_id' => $categoryId])
+                ->asArray()
+                ->all();
+        
+        if ($category_list > 0) {
+            foreach ($service_list as $service) {
+                echo '<option value="' . $service['service_id'] . '">' . $service['service_name'] . '</option>';
+            }
+        } else {
+            echo '<option>-</option>';
+        }
+        
     }
     
 }

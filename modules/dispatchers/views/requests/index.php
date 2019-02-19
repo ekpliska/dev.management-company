@@ -31,4 +31,31 @@ $this->params['breadcrumbs'][] = 'Заявки';
         ]) ?>
     </div>
     
+    <?php if ($block == 'requests') : ?>
+        <?= Html::button('', [
+                'class' => 'create-request-btn',
+                'data-target' => '#create-new-requests',
+                'data-toggle' => 'modal',
+            ]) ?>
+        <?= $this->render('form/create_request', [
+                'model' => $model,
+                'type_requests' => $type_requests,
+                'flat' => $flat,
+            ])
+        ?>
+    <?php endif; ?>
+    
+    <?php if ($block == 'paid-requests') : ?>
+        <?= Html::button('', [
+                'class' => 'create-request-btn',
+                'data-target' => '#create-new-paid-requests',
+                'data-toggle' => 'modal',
+            ]) ?>
+        <?= $this->render('form/create-paid-request', [
+                'model' => $model, 
+                'servise_category' => $servise_category,
+                'servise_name' => [],
+                'flat' => $flat,
+        ]) ?>
+    <?php endif; ?>
 </div>
