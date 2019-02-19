@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = 'Главная';
         </div>
         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
             <div class="dispatcher__genaral-page__news-btn">
-                <?= Html::a('Создать публикацию', ['/'], ['class' => 'news-block__create-link']) ?>
+                <?= Html::a('Создать публикацию', ['news/create'], ['class' => 'news-block__create-link']) ?>
             </div>
             <div class="dispatcher__genaral-page__news-block news-block__margin">
                 <div class="dispatcher__genaral-page__news-content">

@@ -14,7 +14,7 @@
 
 <div class="news-block__news-item">
     <div class="news-block__news-item__title">
-        <?= Html::a($post['news_title'], ['/'], ['class' => 'a_title']) ?>
+        <?= Html::a($post['news_title'], ['news/view', 'slug' => $post['slug']], ['class' => 'a_title']) ?>
         <p class="date">
             <?= FormatHelpers::formatDate($post['created_at'], false, 0, false) ?>
         </p>
