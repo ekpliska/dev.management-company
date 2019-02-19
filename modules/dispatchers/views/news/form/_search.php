@@ -25,10 +25,14 @@
             ?>
 
            
-            <?= $form->field($model, 'value')->input('text', ['class' => '_search-input', 'placeHolder' => 'Заголовок публикации'])->label(false) ?>
+            <?= $form->field($model, 'news_title')->input('text', ['class' => '_search-input', 'placeHolder' => 'Заголовок публикации'])->label(false) ?>
             
             <?= $form->field($model, 'news_house_id')->dropDownList($house_lists, [
                     'prompt' => '[Адрес]',
+                    'class' => '_dropdown-subpanel _large']) ?>
+            
+            <?= $form->field($model, 'isAdvert')->dropDownList($type_publication, [
+                    'prompt' => '[Тип публикации]',
                     'class' => '_dropdown-subpanel _large']) ?>
             
             <?= $form->field($model, 'date_start')

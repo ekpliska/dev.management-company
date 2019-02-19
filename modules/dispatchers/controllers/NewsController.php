@@ -18,6 +18,7 @@ class NewsController extends AppDispatchersController {
     public function actionIndex() {
         
         $house_lists = Houses::getHousesList(false);
+        $type_publication = Houses::getTypePublication();
         
         $model = new searchNews();
         $results = $model->search(Yii::$app->request->queryParams);
@@ -35,6 +36,7 @@ class NewsController extends AppDispatchersController {
         
         return $this->render('index', [
             'house_lists' => $house_lists,
+            'type_publication' => $type_publication,
             'model' => $model,
             'all_news' => $posts,
             'pages' => $pages,

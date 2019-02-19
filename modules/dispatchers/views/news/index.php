@@ -13,6 +13,7 @@ $this->params['breadcrumbs'][] = 'Новости';
 <?= $this->render('form/_search', [
         'model' => $model,
         'house_lists' => $house_lists,
+        'type_publication' => $type_publication,
 ]) ?>
 
 <div class="dispatcher-main-with-sub">

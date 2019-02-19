@@ -17,6 +17,9 @@ class Houses extends ActiveRecord
     const SCENARIO_EDIT_DESCRIPRION = 'edit description house';
     const SCENARIO_LOAD_FILE = 'load new file';
     
+    const TYPE_OF_NEWS = 0;
+    const TYPE_OF_ADVERT = 1;
+
     public $upload_file;
     public $upload_files;
 
@@ -113,6 +116,15 @@ class Houses extends ActiveRecord
                 ->one();
     }
     
+    public static function getTypePublication() {
+        
+        return [
+            self::TYPE_OF_NEWS => 'Новости',
+            self::TYPE_OF_ADVERT => 'Реклама',
+        ];
+        
+    }
+    
     /*
      * Получить полный список домов, и квартир
      */
@@ -126,9 +138,6 @@ class Houses extends ActiveRecord
                     'houses_gis_adress' => SORT_ASC,
                     'houses_number' => SORT_ASC])
                 ->all();
-        
-//        echo '<pre>';
-//        var_dump($houses_list);
         
         return $houses_list;
         

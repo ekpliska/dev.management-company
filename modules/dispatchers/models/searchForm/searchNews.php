@@ -15,8 +15,10 @@ class searchNews extends News {
     public function rules() {
         
         return [
-            [['value'], 'string'],
-            [['value'], 'trim'],
+            
+            ['news_title', 'string', 'max' => 150],
+            
+            ['isAdvert', 'integer'],
             
             [['news_house_id'], 'integer'],
             
@@ -54,7 +56,10 @@ class searchNews extends News {
             return $query;
         }
         
-        $query->andFilterWhere(['like', 'news_title', $this->value]);
+        $query->andFilterWhere(['like', 'news_title', $this->news_title]);
+        
+        $query->andFilterWhere(['=', 'isAdvert', $this->isAdvert]);
+        
         
         if (!empty($this->date_start) && !empty($this->date_finish)) {
             $query->andFilterWhere(['between', 'created_at', $this->date_start, $this->date_finish]);
