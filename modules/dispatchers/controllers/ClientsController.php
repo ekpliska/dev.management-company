@@ -7,6 +7,7 @@
     use app\models\PersonalAccount;
     use app\models\User;
     use app\models\Rents;
+    use app\modules\dispatchers\models\searchForm\searchClients;
 
 /**
  * Профиль собственника
@@ -14,7 +15,16 @@
 class ClientsController extends AppDispatchersController {
     
     public function actionIndex() {
-        return $this->render('index');
+        
+        $model = new searchClients();
+        
+        $client_list = $model->search(Yii::$app->request->queryParams);
+        
+        return $this->render('index', [
+            'model' => $model,
+            'client_list' => $client_list,
+        ]);
+        
     }
     
     /*

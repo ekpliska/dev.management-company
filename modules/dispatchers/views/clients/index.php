@@ -1,9 +1,19 @@
 <?php
 
+    use yii\widgets\Breadcrumbs;
+
 /* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Собственники
  */
+$this->title = Yii::$app->params['site-name-manager'] .  'Собственники';
+$this->params['breadcrumbs'][] = 'Собственники';
 ?>
-index
+<div class="dispatcher-main">
+    
+    <?= Breadcrumbs::widget([
+            'homeLink' => ['label' => 'ELSA | Диспетчер', 'url' => ['dispatchers/index']],
+            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+    ]) ?>    
+    
+    <?= $this->render('data/grid', ['client_list' => $client_list]) ?>
+</div>
