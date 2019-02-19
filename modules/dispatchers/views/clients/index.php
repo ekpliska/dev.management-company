@@ -5,7 +5,7 @@
 /* 
  * Собственники
  */
-$this->title = Yii::$app->params['site-name-manager'] .  'Собственники';
+$this->title = Yii::$app->params['site-name-dispatcher'] .  'Собственники';
 $this->params['breadcrumbs'][] = 'Собственники';
 ?>
 

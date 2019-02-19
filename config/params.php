@@ -4,6 +4,7 @@ return [
     
     'site-name' => 'ELSA | ',
     'site-name-manager' => 'ELSA | Администратор | ',
+    'site-name-dispatcher' => 'ELSA | Диспетчер | ',
     
     'adminEmail' => 'admin@example.com',
     

@@ -809,3 +809,108 @@ tbody > tr > td > div.empty::before {
     box-shadow: 3px 3px 5px -2px #333;
 }
 /* Конец Подменю, профиль собсвенника */
+
+/* Новости, главная страница */
+.news-margin {
+    margin-top: 100px;
+    z-index: 10;
+}
+.news-item {
+    height: 600px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    margin-bottom: 30px;
+}
+.news-item:hover {
+    box-shadow: 0 4px 26px 0 rgba(51, 29, 82, 0.16);
+}
+.news-item__title {
+    padding: 20px;
+    position: relative;
+}
+.news-item__title > a.title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #2d18b4;
+    margin: 0;
+}
+.news-item__title > p.date {
+    font-size: 14px;
+    font-weight: bold;
+    color: #000;
+    margin: 0;
+}
+.bnt-delete-news {
+    position: absolute;
+    right: 5%;
+    top: 20%;
+    background: transparent;
+    color: #fb6d5b;
+    border: 2px solid #fb6d5b;
+    border-radius: 100%;
+    width: 40px;
+    height: 40px;
+    padding: 5px;
+    outline: none;
+}
+.bnt-delete-news:focus,
+.bnt-delete-news:active,
+.bnt-delete-news:hover {
+    color: #fb6d5b;
+    outline: none;
+}
+.news-item__image {
+    width: 100%; 
+    height: 320px; 
+    position: relative;
+    overflow: hidden;
+}
+.news_preview {
+    position: absolute; 
+    top: 0; 
+    bottom: 0; 
+    margin: auto;
+    width: 100%;
+}
+.news-item__image > span + span {
+    margin: 50px 10px !important;
+}
+.news-item__image > span.item__image_desc {
+    position: absolute;
+    z-index: 9;
+    border: 1px solid #fff;
+    padding: 5px 10px;
+    border-radius: 25px;
+    margin: 10px;
+    color: #fff;
+    font-size: 12px;
+    cursor: default;
+}
+.news-item__image > span > a {
+    color: #fff;
+    font-size: 12px;
+    padding: 0;
+}
+.news-item__image > span > a:hover {
+    text-decoration: none;
+    color: #fff;
+}
+.news-item__image > span:hover {
+    background: rgba(55,35,35,0.32);
+    cursor: default;
+}
+.news-item__text {
+    padding: 30px 20px;
+    position: relative;
+    text-align: justify;
+}
+.news-item__text > p.change-date {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    font-size: 12px;
+    color: #999;
+    font-style: italic;
+    padding: 10px 0;
+}
+/* Конец Новости, главная страница */
