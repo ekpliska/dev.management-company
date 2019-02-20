@@ -34,13 +34,15 @@ $this->params['breadcrumbs'][] = $voting['voting_title'];
             <span><?= FormatHelpers::numberOfDaysToFinishVote($voting['voting_date_start'], $voting['voting_date_end']) ?></span>
         </div>
         <div class="voting-title-block">
-            <h2 class="voting-title"><?= $voting['voting_title'] ?></h2>
+            <h2 class="voting-title">
+                <?= $voting['voting_title'] ?>
+            </h2>
             <p class="voting-description">
-                <?= $voting['voting_text'] ?>
+                <?= FormatHelpers::shortTitleOrText($voting['voting_text'], 255) ?>
             </p>
             <?php 
                 /* 
-                 * "Принять участие" достпуно только в активных голосованиях, 
+                 * "Принять участие" доступно только в активных голосованиях, 
                  * Собственнику
                  */
                 if (

@@ -195,9 +195,7 @@ class News extends ActiveRecord
                     'news_status' => 'all',
                     'isAdvert' => $is_advert,
                 ])
-                ->orderBy(['created_at' => SORT_DESC])
-                ->asArray()
-                ->all();
+                ->orderBy(['created_at' => SORT_DESC]);
         
         return $news;
     }

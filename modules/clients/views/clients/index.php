@@ -1,5 +1,6 @@
 <?php
 
+    use yii\widgets\LinkPager;
     use app\helpers\FormatHelpers;
 
 /*
@@ -37,3 +38,9 @@ $this->title = Yii::$app->params['site-name'] . "Главная";
         </div>
     <?php endif; ?>
 </div>
+
+<?= 
+    isset($pages) && !empty($pages) ? LinkPager::widget([
+        'pagination' => $pages,
+    ]) : '';
+?>

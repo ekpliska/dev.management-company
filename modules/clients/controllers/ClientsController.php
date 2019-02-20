@@ -2,6 +2,7 @@
 
     namespace app\modules\clients\controllers;
     use Yii;
+    use yii\data\Pagination;
     use app\modules\clients\controllers\AppClientsController;
     use app\models\News;
     use app\modules\clients\models\ImportantInformations;
@@ -34,7 +35,6 @@ class ClientsController extends AppClientsController
             case 'special_offers': {
                 $news = News::getNewsByClients($living_space, true);
                 break;
-                break;
             }
             case 'house_news': {
                 $news = News::getNewsByClients($living_space, false);
@@ -42,8 +42,22 @@ class ClientsController extends AppClientsController
             }
         }
         
+        if ($block == 'special_offers' || $block == 'house_news') {
+            $pages = new Pagination([
+                'totalCount' => $news->count(), 
+                'pageSize' => 9, 
+                'forcePageParam' => false, 
+                'pageSizeParam' => false,
+            ]);
+
+            $news = $news->offset($pages->offset)
+                    ->limit($pages->limit)
+                    ->all();
+        }
+        
         return $this->render('index', [
             'news' => $news,
+            'pages' => $pages,
         ]);
     }
     
