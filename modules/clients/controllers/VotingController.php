@@ -235,6 +235,11 @@ class VotingController extends AppClientsController {
             return $this->renderAjax('modal/view-profile', [
                 'user_info' => $user_info]);
         }
+    }
+    
+    public function actionValidateRentForm() {
+        
+        
         
     }
     

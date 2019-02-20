@@ -1231,6 +1231,8 @@ button:hover {
     background: #6d39c3;
     color: #ffffff;
     font-size: 12px;
+    text-align: center;
+    margin: 10px auto;
 }
 .user-span-text {
     font-size: 12px;
@@ -2827,6 +2829,10 @@ p.date-start-vote {
 /* Конец блок кнопок голосования: за, против, воздержаться */
 
 /* Модальное окно "Профиль пользователя" */
+#view-user-profile .modal-content {
+    width: 50%;
+    margin: 0 auto;
+}
 .card-view-profile img {
     width: 200px;
     height: 200px;
@@ -2836,6 +2842,9 @@ p.date-start-vote {
 .card-view-profile h1 {
     font-size: 18px;
     font-weight: bold;
+}
+.card-view-profile p.title {
+    font-size: 12px;
 }
 /* Конец Модальное окно "Профиль пользователя" */
 

@@ -25,7 +25,7 @@
 <div class="modal-footer">
     <?= Html::button('Закрыть', [
             'data-dismiss' => 'modal', 
-            'class' => 'btn red-outline-btn',
+            'class' => 'btn-modal btn-modal-no',
     ]) ?>
                 
 </div>

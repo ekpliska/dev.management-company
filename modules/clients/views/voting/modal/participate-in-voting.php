@@ -3,7 +3,6 @@
     use yii\bootstrap\Modal;
     use yii\widgets\ActiveForm;
     use yii\helpers\Html;
-    use yii\widgets\MaskedInput;
     
 
 /* 
@@ -36,9 +35,11 @@ Modal::begin([
     <?php 
         $form = ActiveForm::begin([
             'id' => 'fill_sms_to_participate',
+            'enableAjaxValidation' => true,
             'validateOnSubmit' => false,
             'validateOnChange' => false,
-            'validateOnBlur' => false,            
+            'validateOnBlur' => false,
+            'validationUrl' => ['validate-rent-form'],
             'options' => [
                 'class' => 'form-inline',
             ],
