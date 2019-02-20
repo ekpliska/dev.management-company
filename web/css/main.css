@@ -2191,7 +2191,7 @@ input[id="_search-input"]:-moz-placeholder {
     padding: 10px;
 }
 .receipte-of-lists {
-    margin: 40px 0 20px 0;    
+    margin: 0 0 20px 0;    
 }
 .receipte-of-lists > li {
     padding: 20px 20px;
@@ -2290,6 +2290,29 @@ a.receipte-btn-dowload {
 .invalid-message-show::before {
     content: "\02716";
     padding: 0 10px;    
+}
+#receipts-lists {
+    height: 600px;
+    overflow: auto;
+    min-height: 600px;
+    margin: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+#receipts-lists::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #ddd;
+}
+
+#receipts-lists::-webkit-scrollbar {
+    width: 12px;
+    background-color: #ddd;
+}
+
+#receipts-lists::-webkit-scrollbar-thumb {
+    border-radius: 12px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #524e53;
 }
 /* Конец Квитанции 
 
