@@ -26,7 +26,7 @@
                         <?= Yii::$app->profileDispatcher->fullNameEmployee ?>                        
                     </p>
                     <div class="dropdown-menu_link-profile">
-                        <?= Html::a('Мой профиль', ['employee-form/employee-profile', 'type' => 'administrator', 'employee_id' => Yii::$app->profileDispatcher->employeeID]) ?>
+                        <?= Html::a('Мой профиль', ['profile/index']) ?>
                     </div>                    
                     <div class="mail-border">
                         <p class="mail-color">

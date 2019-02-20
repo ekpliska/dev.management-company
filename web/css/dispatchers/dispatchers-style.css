@@ -740,6 +740,11 @@ tbody > tr > td > div.empty::before {
     color: #fff;
     font-size: 24px;
 }
+.btn-upload__pos {
+    position: absolute;
+    bottom: 0;
+    left: 30%;
+}
 /* Конец Администратор, профиль */
 
 /* Подменю, профиль собсвенника */
@@ -992,3 +997,6 @@ tbody > tr > td > div.empty::before {
     color: #fff;
 }
 /* Конец Кнопка загрузки изображений */
+
+/* Профиль пользователя */
+/* Конец Профиль пользователя */

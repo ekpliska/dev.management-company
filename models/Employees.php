@@ -57,6 +57,7 @@ class Employees extends ActiveRecord
 
     public static function findByID($employer_id) {
         return self::find()
+                ->with(['employeeDepartment', 'employeePosts'])
                 ->andWhere(['employee_id' => $employer_id])
                 ->one();
     }
