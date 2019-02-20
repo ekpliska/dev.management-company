@@ -4,13 +4,15 @@
 
 $(document).ready(function() {
 
-$('.cell-phone').mask('+7 (999) 999-99-99');
-$('.house-phone').mask('+7 (9999) 999-99-99');
-$('.sms-code-input').mask('99999');
-//$('.indication-input').mask('9.?99');
-$.mask.definitions['h']='[0-9]';
-$('.account-number').mask('№hhhhhhhhhhh');
-$('.dispatcher-phone').mask('8 999 999-99-99');
+    $('.image-link').magnificPopup({type:'image'});
+    
+    $('.cell-phone').mask('+7 (999) 999-99-99');
+    $('.house-phone').mask('+7 (9999) 999-99-99');
+    $('.sms-code-input').mask('99999');
+    //$('.indication-input').mask('9.?99');
+    $.mask.definitions['h']='[0-9]';
+    $('.account-number').mask('№hhhhhhhhhhh');
+    $('.dispatcher-phone').mask('8 999 999-99-99');
 
 /*
  * Автоматическое выделение текста в текстовых полях поиска

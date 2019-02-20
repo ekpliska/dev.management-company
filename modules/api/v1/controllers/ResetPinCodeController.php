@@ -62,7 +62,7 @@ class ResetPinCodeController extends Controller {
         
         return [
             'success' => true,
-            'sms_code' => $sms_code,
+            'sms_code' => (string)$sms_code,
         ];
         
     }

@@ -25,8 +25,10 @@ class FormatHelpers {
         // Формируем путь
         $path = Yii::getAlias('@web') . '/upload/store/' . $file;
         
+//        <a class="test-popup-link" href="path-to-image.jpg">Open popup</a>
+                
         // Формируем html
-        $html_path = Html::beginTag('a', ['href' => $path])
+        $html_path = Html::beginTag('a', ['href' => $path, 'class' => 'image-link'])
                 . Html::img($path, ['class' => 'info-img'])
                 . Html::endTag('a');
         
