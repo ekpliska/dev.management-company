@@ -57,12 +57,12 @@ $('._search-input').on('click', function(){
          for (var i = 0; i < files.length; i++) {
              var file = files[i];
  
-             if ( !file.type.match(/image\/(jpeg|jpg|png|gif)/) ) {
+             if (!file.type.match(/image\/(jpeg|jpg|png|gif)/)) {
                  alert( 'Фотография должна быть в формате jpg, png или gif' );
                  continue;
              }
  
-             if ( file.size > maxFileSize ) {
+             if (file.size > maxFileSize) {
                  alert( 'Размер фотографии не должен превышать 2 Мб' );
                  continue;
              }

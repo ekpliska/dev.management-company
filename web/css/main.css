@@ -1409,6 +1409,9 @@ p.right {
 }
 .form__upload-image {
     display: table;
+    position: absolute;
+    bottom: 28%;
+    left: 8%;
 }
 .count-label {
     position: absolute;

@@ -58,7 +58,7 @@
                     <span class="img-wrap">
                         <img src="" alt="">
                     </span>
-                    <span class="delete-link" title="Удалить"><i class="fa fa-times" aria-hidden="true"></i></span>
+                    <span class="delete-link" title="Удалить">&#10005;</span>
                 </li>
             </ul>
         </div>

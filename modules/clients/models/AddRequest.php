@@ -36,9 +36,12 @@ class AddRequest extends Model {
             
             ['request_phone', 'match', 'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/i'],
             
-            [['gallery'], 'file', 'extensions' => 'png, jpg, jpeg', 'maxFiles' => 4],
-            
-            [['gallery'], 'image' /* , 'maxWidth' => 510, 'maxHeight' => 470 */],
+            [['gallery'], 'file', 
+                'extensions' => 'png, jpg, jpeg', 
+                'maxFiles' => 4, 
+                'maxSize' => 2 * 1024 * 1024,
+                'mimeTypes' => 'image/*',                
+            ],
             
         ];
     }
