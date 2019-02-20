@@ -9,7 +9,7 @@
     
 
 /**
- * Default controller for the `clients` module
+ * Собственник, Новостная лента
  */
 class ClientsController extends AppClientsController
 {

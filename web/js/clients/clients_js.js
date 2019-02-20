@@ -348,18 +348,45 @@ $(document).ready(function() {
      * Раздел 'Приборы учета'
      * Поля ввода для показания приборов учета блокируем
      */ 
-    var ind = $('.indication_val');
-    ind.prop('disabled', true);
+//    var ind = $('.indication_val');
+//    ind.prop('disabled', true);
     
     /*
      * Если нажата кнопка 'Ввести показания'
      * текстовые поля для ввода показаний делаем доступными
      */
-    $('.btn-edit-reading').on('click', function() {
-        $(this).prop('disabled', true);
-        ind.prop('disabled', false);
-        ind.first().focus();
-        $('.btn-save-reading').prop('disabled', false);
+//    $('.btn-edit-reading').on('click', function() {
+//        $(this).prop('disabled', true);
+//        ind.prop('disabled', false);
+//        ind.first().focus();
+//        $('.btn-save-reading').prop('disabled', false);
+//    });
+    
+    $('.reading-input').on('input', function() {
+        var uniqueCounter = $(this).data('uniqueCounter');
+        $("button[id=send-indication-" + uniqueCounter + "]").prop('disabled', false);
+    });
+    
+    $('.send-indication-counter').on('click', function(e) {
+        var uniqueCounter = +$(this).data('uniqueCounter'),
+            prevIndication = +$(this).data('prevIndication'),
+            curIndication = +$("input[name=" + uniqueCounter + "_current_indication]").val(),
+            labelMess = $("label[class=error-ind-" + uniqueCounter + "]");
+        
+        var isCheck = (!curIndication || curIndication <= prevIndication) ? false : true;
+        
+        if  (isCheck === false) {
+            labelMess.text('Показание указано не верно');
+            $(this).prop('disabled', true);
+            e.preventDefault();
+        } else if (isCheck === true) {
+            labelMess.text('');
+            $.post('send-indication?counter=' + uniqueCounter + '&indication=' + curIndication, function(data) {
+                console.log(data);
+            });
+        }
+        
+        console.log('--', uniqueCounter, prevIndication, curIndication);
     });
     
     /*

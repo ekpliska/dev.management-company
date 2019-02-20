@@ -34,6 +34,10 @@ $array_image = [
         </thead>            
         <tbody>
             <?php if (!empty($indications) && is_array($indications)) : ?>
+            <?php
+//            echo '<pre>';
+//            var_dump($indications);
+            ?>
                 <?php foreach ($indications as $key => $indication) : ?>
                     <?php $data_check = (strtotime($current_date) >= strtotime($indication['Дата следующей поверки'])) ? true : false ?>
                     <tr class="<?= ($data_check == true) ? 'block-edit-reading' : '' ?>">
@@ -71,19 +75,36 @@ $array_image = [
                                 <?php endif; ?>
                             </td>
                         <?php else: ?>
-                            <td>
+                            <td class="input-indication">
+                            <!--<td>-->
                                 <?php if ($indication['Текущее показание'] != null) : ?>
                                     <?= $indication['Текущее показание'] ?>
                                 <?php elseif ($is_current) : ?>
-                                    <?= $form->field($model_indication, "[{$indication['ID']}]previous_indication")
+                                    <?php /* = $form->field($model_indication, "[{$indication['ID']}]previous_indication")
                                             ->hiddenInput(['class' => 'reading-input', 'value' => $indication['Предыдущие показание'], 'disabled' => true])
                                             ->label(false) ?>
                                     <?= $form->field($model_indication, "[{$indication['ID']}]ID")
                                             ->hiddenInput(['class' => 'reading-input', 'value' => $indication['ID'], 'disabled' => true])
-                                            ->label(false) ?>
+                                            ->label(false)  ?>
                                     <?= $form->field($model_indication, "[{$indication['ID']}]current_indication")
                                             ->input('text', ['class' => "reading-input indication_val val_cr_{$key}", 'disabled' => true])
-                                            ->label(false) ?>
+                                            ->label(false) */ ?>
+                                
+                                    <?= Html::input('text', "{$indication['ID']}_current_indication", null, [
+                                            'id' => 'indication',
+                                            'class' => 'reading-input',
+                                            'data-unique-counter' => $indication['ID'],
+                                        ]) ?>
+                                    <label class="<?= "error-ind-{$indication['ID']}" ?>"></label>
+                                    <?= Html::button('Отправить', [
+                                            'id' => "send-indication-{$indication['ID']}",
+                                            'class' => 'btn btn-sm send-indication-counter',
+                                            'data' => [
+                                                'prev-indication' => $indication['Предыдущие показание'],
+                                                'unique-counter' => $indication['ID'],
+                                            ],
+//                                            'disabled' => true,
+                                        ]) ?>
                                 <?php endif; ?>
                             </td>                
                             <td>

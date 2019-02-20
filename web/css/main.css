@@ -363,8 +363,8 @@ button:hover {
 
 /* Кнопки */
 .btn {
-    height: 56px;
-    width: 250px;    
+    /*height: 56px;*/
+    /*width: 250px;*/
     border-radius: 12px;
     font-size: 12px;
     font-weight: bold;
@@ -373,6 +373,9 @@ button:hover {
     text-align: center;
     text-transform: uppercase;
     outline: none;
+}
+.btn-width {
+    width: 250px;
 }
 .btn-small {
     padding: 10px 15px;
@@ -2538,6 +2541,32 @@ input[name="date_end-period-pay"]:focus {
 }
 .counters-page .managers-table {
     margin-top: 0;
+}
+.send-indication-counter {
+    background: #2d18b4;
+    border: none;
+    color: #fff;
+    border-radius: 12px;
+    letter-spacing: 2px;
+    font-weight: normal;
+    outline: none;
+}
+.send-indication-counter:hover,
+.send-indication-counter:focus,
+.send-indication-counter:active {
+    background: #4326b2;
+    color: #fff;
+}
+.send-indication-counter[disabled]:hover {
+    color: #fff;
+}
+label[class^='error-ind-'] {
+    color: #ef693a;
+    font-weight: normal;
+    text-align: center;
+}
+.input-indication {
+    display: grid;    
 }
 /* Конец Приборы учета */
 
