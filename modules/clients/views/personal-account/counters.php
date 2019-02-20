@@ -43,12 +43,12 @@ $this->params['breadcrumbs'][] = 'Показания приборов учета
         ?>        
     </div>
     
-        <?= $this->render('data/grid-counters', [
-                'indications' => $indications,
-                'auto_request' => $auto_request,
-                'is_current' => $is_current,
-                'model_indication' => $model_indication,
-        ]) ?>
+    <?= $this->render('data/grid-counters', [
+            'indications' => $indications,
+            'auto_request' => $auto_request,
+            'is_current' => $is_current,
+            'model_indication' => $model_indication,
+    ]) ?>
 
     <?php if (isset($comments_to_counters)) : ?>
     <div class="col-md-12 counters-message">

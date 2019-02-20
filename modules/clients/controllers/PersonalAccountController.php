@@ -170,10 +170,14 @@ class PersonalAccountController extends AppClientsController {
             
             Yii::$app->response->format = Response::FORMAT_JSON;
             
-            $array_request['Приборы учета'] = [
+            $array = [
                 "ID" => $counter,
                 "Дата снятия показания" => date('Y-m-d'),
                 "Текущее показание" => $indication,
+            ];
+    
+            $array_request['Приборы учета'] = [
+                $array,
             ];
             
             $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
