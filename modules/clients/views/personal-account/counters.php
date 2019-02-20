@@ -43,36 +43,13 @@ $this->params['breadcrumbs'][] = 'Показания приборов учета
         ?>        
     </div>
     
-    <?php /*
-        $form = ActiveForm::begin([
-            'id' => 'send-indications-form',
-            'action' => ['send-indications'],
-            'validateOnChange' => false,
-            'validateOnBlur' => false,
-        ]); */
-    ?>
-    
-    <?php /*
-    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 text-right options-panel">
-        <?php if ($is_current) : ?>
-            <?= Html::button('Внести показания', ['class' => 'btn-edit-reading']) ?>
-            <?= Html::submitButton('Сохранить', ['class' => 'btn-save-reading', 'disabled' => true]) ?>
-        <?php endif; ?>
-    </div>
-     */ ?>
-    
         <?= $this->render('data/grid-counters', [
                 'indications' => $indications,
-//                'form' => $form,
                 'auto_request' => $auto_request,
                 'is_current' => $is_current,
                 'model_indication' => $model_indication,
         ]) ?>
 
-    
-    <?php // ActiveForm::end(); ?>
-    
-    
     <?php if (isset($comments_to_counters)) : ?>
     <div class="col-md-12 counters-message">
         <p class="title">

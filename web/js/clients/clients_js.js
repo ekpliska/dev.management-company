@@ -348,20 +348,6 @@ $(document).ready(function() {
      * Раздел 'Приборы учета'
      * Поля ввода для показания приборов учета блокируем
      */ 
-//    var ind = $('.indication_val');
-//    ind.prop('disabled', true);
-    
-    /*
-     * Если нажата кнопка 'Ввести показания'
-     * текстовые поля для ввода показаний делаем доступными
-     */
-//    $('.btn-edit-reading').on('click', function() {
-//        $(this).prop('disabled', true);
-//        ind.prop('disabled', false);
-//        ind.first().focus();
-//        $('.btn-save-reading').prop('disabled', false);
-//    });
-    
     $('.reading-input').on('input', function() {
         var uniqueCounter = $(this).data('uniqueCounter');
         $("button[id=send-indication-" + uniqueCounter + "]").prop('disabled', false);
@@ -372,6 +358,7 @@ $(document).ready(function() {
             prevIndication = +$(this).data('prevIndication'),
             curIndication = +$("input[name=" + uniqueCounter + "_current_indication]").val(),
             labelMess = $("label[class=error-ind-" + uniqueCounter + "]");
+            resultMess = $("span[id=result-" + uniqueCounter + "]");
         
         var isCheck = (!curIndication || curIndication <= prevIndication) ? false : true;
         
@@ -381,12 +368,16 @@ $(document).ready(function() {
             e.preventDefault();
         } else if (isCheck === true) {
             labelMess.text('');
-            $.post('send-indication?counter=' + uniqueCounter + '&indication=' + curIndication, function(data) {
-                console.log(data);
+            $.post('send-indication?counter=' + uniqueCounter + '&indication=' + curIndication, function(responce) {
+                if (responce.success === false) {
+                    labelMess.text('Ошибка отправки показаний');
+                    return false;
+                } else if (responce.success === true) {
+                    labelMess.text('Показания отправлены');
+                    resultMess.text(curIndication - prevIndication);
+                }
             });
         }
-        
-        console.log('--', uniqueCounter, prevIndication, curIndication);
     });
     
     /*
