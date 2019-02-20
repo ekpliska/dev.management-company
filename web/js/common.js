@@ -239,11 +239,11 @@ $('#send-request-to-sms').on('click', function() {
 
 
 /* Форма */
-    $(document).on('focus', '.field-input, .field-input-modal', function(){
+    $(document).on('focus', '.field-input, .field-input-modal, .field-input-textarea-modal, .field-input-textarea-page', function(){
         $(this).parent().addClass('is-focused has-label');
     });
 
-    $(document).on('blur', '.field-input, .field-input-modal', function(){
+    $(document).on('blur', '.field-input, .field-input-modal, .field-input-textarea-modal, .field-input-textarea-page', function(){
         $parent = $(this).parent();
         if ($(this).val() == '') {
             $parent.removeClass('has-label');
@@ -251,32 +251,31 @@ $('#send-request-to-sms').on('click', function() {
         $parent.removeClass('is-focused');
     });
 
-    $('.field-input, .field-input-modal').each(function(){
+    $('.field-input, .field-input-modal, .field-input-textarea-modal, .field-input-textarea-page').each(function(){
         if ($(this).val() !== '') {
             $(this).parent().addClass('has-label');
         }
     });
 
-
-$(function($) {
-    $('.field-input-textarea-modal, .field-input-textarea-page').focus(function(){
-        $(this).parent().addClass('is-focused has-label');
-    });
-
-    $('.field-input-textarea-modal, .field-input-textarea-page').blur(function(){
-        $parent = $(this).parent();
-        if($(this).val() == ''){
-            $parent.removeClass('has-label');
-        }
-        $parent.removeClass('is-focused');
-    });
-
-    $('.field-input-textarea-modal, .field-input-textarea-page').each(function(){
-        if($(this).val() !== ''){
-            $(this).parent().addClass('has-label');
-        }
-    });
-});
+//$(function($) {
+//    $('.field-input-textarea-modal, .field-input-textarea-page').focus(function(){
+//        $(this).parent().addClass('is-focused has-label');
+//    });
+//
+//    $('.field-input-textarea-modal, .field-input-textarea-page').blur(function(){
+//        $parent = $(this).parent();
+//        if($(this).val() == ''){
+//            $parent.removeClass('has-label');
+//        }
+//        $parent.removeClass('is-focused');
+//    });
+//
+//    $('.field-input-textarea-modal, .field-input-textarea-page').each(function(){
+//        if($(this).val() !== ''){
+//            $(this).parent().addClass('has-label');
+//        }
+//    });
+//});
 
 /* Скрыть всплывающее сообщение */
 //$(".alert-message").slideUp(1000).delay(800).fadeIn(700);

@@ -967,7 +967,7 @@ $(document).ready(function() {
      * Счетчик подсчета количества введенных символов в textarea
      */
     function limitLettrs(DOMObject, max, labelCount, lostLetter) {
-        $(DOMObject).on('keyup keypress blur change', function(){
+        $(document).on('keyup keypress blur change', DOMObject, function(){
             // Количество введенных символов
             var count = $(this).val().length;
             

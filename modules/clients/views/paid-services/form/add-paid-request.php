@@ -15,7 +15,6 @@
         'validateOnBlur' => false,
         'fieldConfig' => [
             'template' => '<div class="field-modal">{label}{input}{error}</div>',
-            'labelOptions' => ['class' => 'label-registration hidden'],
         ],
     ]);
 ?>

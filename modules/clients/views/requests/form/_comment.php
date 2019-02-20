@@ -6,6 +6,7 @@
 /* 
  * Форма добавления комментариев
  */
+$prev_date = 0;    
 ?>
 
 <?php Pjax::begin(['id' => 'comments']) ?>

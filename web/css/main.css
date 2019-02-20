@@ -1622,7 +1622,7 @@ p.right {
     letter-spacing: 0.25px;
 }
 .client_info {
-    margin: 0 -15px;
+    margin: 0 0 0 -15px;
     background: #fcfcfc;
     height: 80px;
     color: #2d1d88;
@@ -2053,6 +2053,21 @@ a.btn-history:hover {
 }
 .category-select {
     float: left;
+}
+.modal-note-info {
+    text-align: center;
+    color: #fff;
+    font-size: 16px;
+    padding: 20px;
+    margin: 0 -15px;
+    background: rgba(221, 200, 253, 0.15);
+}
+.modal-note-info span {
+    border: 1px solid white;
+    padding: 5px 10px;
+    border-radius: 12px;
+    margin: 0 10px;
+    font-size: 12px;
 }
 /* Конец Платные услуги */
 
