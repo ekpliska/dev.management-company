@@ -2087,12 +2087,12 @@ form#search-form {
     color: #fff;
     width: 340px;
     padding: 7px 20px;
-    border-radius: 25px;
-    border: 1px solid #fff;
+    border: none;
+    border-bottom: 1px solid #ddd;
     outline: none;
 }
 .search-block__input-dark::placeholder {
-    color: #fff;
+    color: #ddd;
     text-align: center;
     background-repeat: no-repeat;
     background-size: 10%;
@@ -3297,7 +3297,7 @@ a.sub-menu-item {
     background: #2d18b4;
     padding: 15px;
     height: 80px;
-    box-shadow: 0px 1px 14px -1px rgb(0, 0, 0);
+    box-shadow: inset 0px 1px 10px -1px rgb(0, 0, 0);
 }
 .navbar_paid-request > ul {
     margin-right: 15px;
