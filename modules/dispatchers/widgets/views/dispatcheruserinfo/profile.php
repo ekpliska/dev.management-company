@@ -17,7 +17,7 @@
         <li class="user-info-box">
             <div class="row">
                 <div class="col-lg-5 col-sm-5 col-md-5 text-center">
-                    <a href="<?= Url::to(['employee-form/employee-profile', 'type' => 'administrator', 'employee_id' => Yii::$app->profileDispatcher->employeeID]) ?>">
+                    <a href="<?= Url::to(['profile/index']) ?>">
                         <?= Html::img(Yii::$app->profileDispatcher->photo, ['class' => 'img-rounded photo-user-dropdown']) ?>                        
                     </a>
                 </div>

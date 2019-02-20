@@ -26,8 +26,8 @@ class ImportantInformations extends Model {
         
         $news_list = News::find()
                 ->select(['news_id', 'news_title', 'news_preview', 'news_text', 'created_at', 'slug'])
-                ->andWhere([
-                    'news_house_id' => $living_space['houses_id']])
+                ->andWhere(['news_house_id' => $living_space['houses_id']])
+                ->orWhere(['news_status' => 'all'])
                 ->orderBy(['created_at' => SORT_DESC])
                 ->asArray()
                 ->limit($this->count_news - count($voling_list))
