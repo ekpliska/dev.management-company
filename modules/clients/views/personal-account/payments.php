@@ -27,7 +27,6 @@ $this->params['breadcrumbs'][] = 'Платежи';
                 'name' => 'date_start-period-pay',
                 'type' => DatePicker::TYPE_INPUT,
                 'value' => 'С',
-                'layout' => '<span class="input-group-text">Birth Date</span>',
                 'pluginOptions' => [
                     'autoclose'=>true,
                     'format' => 'dd-mm-yyyy'
