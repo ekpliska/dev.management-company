@@ -33,8 +33,16 @@
     <li>
         <?= Html::a('Профиль', ['profile/index'], ['class' => '']) ?>
     </li>
+<?php /*
     <li>
         <?= Html::a('Уведомления', ['/'], ['class' => '']) ?>
+    </li>
+*/ ?>
+    <li>
+        <?= Html::a('Выйти <i class="fa fa-sign-out" aria-hidden="true"></i>', ['/site/logout'], [
+                'data' => [
+                    'method' => 'post'], 
+                    'class' => 'float-right footer_link-logout']) ?>
     </li>
     
 </ul>
