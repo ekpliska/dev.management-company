@@ -18,13 +18,12 @@ class searchInPaidServices extends Model {
         
         return [
             ['_input', 'filter', 'filter' => 'trim'],
-            /* ['_input', 'string', 'min' => 3, 'max' => 70],
-            ['_input', 
-                'match',
-                'pattern' => '/^[А-Яа-яёЁ\s,]+$/u',
-                'message' => 'Данное поле может содержать только буквы русского алфавита',
-            ],
-             */
+            ['_input', 'string', 'min' => 3, 'max' => 70],
+//            ['_input', 
+//                'match',
+//                'pattern' => '/^[А-Яа-яёЁ\s,]+$/u',
+//                'message' => 'Данное поле может содержать только буквы русского алфавита',
+//            ],
         ];
         
     }
@@ -46,7 +45,7 @@ class searchInPaidServices extends Model {
                 ->join('LEFT JOIN', 'services as s', 's.service_id = p.services_name_services_id')
                 ->join('LEFT JOIN', 'category_services as c', 'c.category_id = p.services_servise_category_id')
                 ->join('LEFT JOIN', 'employees as e', 'e.employee_id = p.services_specialist_id')
-                ->andWhere(['services_account_id' => $account_id])
+                ->where(['services_account_id' => $account_id])
                 ->orderBy(['created_at' => SORT_DESC]);
         
         $dataProvider = new \yii\data\ActiveDataProvider([
@@ -55,8 +54,8 @@ class searchInPaidServices extends Model {
         
         $this->load($value, $account_id);
         
-        $query->andFilterWhere(['like', 'e.employee_surname', $value]);
-        $query->orFilterWhere(['like', 'p.services_number', $value]);
+        $query->andFilterWhere(['like', 'employee_surname', $value]);
+        $query->orFilterWhere(['=', 'services_number', $value]);
         
         return $dataProvider;
         

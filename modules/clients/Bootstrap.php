@@ -25,6 +25,9 @@ class Bootstrap implements BootstrapInterface {
                 'requests/<request_number>' => 'clients/requests/view-request',
                 'requests' => 'clients/requests/index',
                 
+                'paid-services/filter-category-services' => 'clients/paid-services/filter-category-services',
+                'paid-services/search-by-specialist' => 'clients/paid-services/search-by-specialist',
+                'paid-services/order-services' => 'clients/paid-services/order-services',
                 'paid-services' => 'clients/paid-services/index',
                 
                 

@@ -670,10 +670,18 @@ $(document).ready(function() {
      */
     function filterServicesCategory(categoryId) {
 
-        $.post('filter-category-services?category=' + categoryId, function(response) {
-            $('#services-list').html(response.data);                
-        });         
-        
+        $.ajax({
+            url: 'paid-services/filter-category-services',
+            method: 'POST',
+            data: {
+                categoryId: categoryId,
+            },
+            success: function(response) {
+                $('#services-list').html(response.data);
+            },
+            error: function() {}
+        });
+
     }
     
     /*

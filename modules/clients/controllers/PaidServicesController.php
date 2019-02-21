@@ -81,13 +81,21 @@ class PaidServicesController extends AppClientsController {
         return ['status' => false];
         
     }
-    
-    public function actionFilterCategoryServices($category) {
+
+    /*
+     * Фильтр услуг по категориям
+     */
+    public function actionFilterCategoryServices() {
         
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        
+        if (is_numeric($category)) {
+            return ['success' => false];
+        }
+        
+        $category = Yii::$app->request->post('categoryId');
         if (Yii::$app->request->isPost) {
-            Yii::$app->response->format = Response::FORMAT_JSON;
             $pay_services = Services::getPayServices($category);
-            
             $data = $this->renderPartial('data/service-lists', [
                 'pay_services' => $pay_services, 
             ]);            
@@ -96,6 +104,9 @@ class PaidServicesController extends AppClientsController {
         return ['success' => false];
     }
     
+    /*
+     * Создание заявки на платную услугу
+     */
     public function actionCreatePaidRequest($category, $service) {
         
         $account_id = $this->_current_account_id;
