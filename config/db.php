@@ -8,7 +8,10 @@ return [
     'charset' => 'utf8',
 
     // Schema cache options (for production environment)
-    //'enableSchemaCache' => true,
-    //'schemaCacheDuration' => 60,
-    //'schemaCache' => 'cache',
+    // Флаг включения кеширования
+    'enableSchemaCache' => false,
+    // Продолжительность кеширования схемы.
+    'schemaCacheDuration' => 600 * 24,
+    // Название компонента кеша, используемого для хранения информации о схеме
+    'schemaCache' => 'cache',
 ];

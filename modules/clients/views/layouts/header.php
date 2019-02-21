@@ -25,7 +25,7 @@
         </a>
         <ul class="nav navbar-nav navbar-right user-notification">
             <?= UserInfo::widget(['_value_choosing' => $this->context->_current_account_number]) ?>
-            <?= Notifications::widget() ?>            
+            <?php // = Notifications::widget() ?>            
         </ul>
     </div>  
     <div class="container-fluid navbar-menu__items text-center">
