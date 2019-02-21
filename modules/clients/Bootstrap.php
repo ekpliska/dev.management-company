@@ -17,9 +17,9 @@ class Bootstrap implements BootstrapInterface {
                 
                 'news/<slug>' => 'clients/news/view-news',
                 
-                'voting/<voting_id>' => 'clients/voting/view-voting',
+//                'voting/<voting_id>' => 'clients/voting/view-voting',
                 'voting' => 'clients/voting/index',
-                
+                'voting/<action>' => 'voting/voting/<action>',
                 
                 'requests/filter-by-type-request' => 'clients/requests/filter-by-type-request',
                 'requests/<request_number>' => 'clients/requests/view-request',
@@ -30,9 +30,13 @@ class Bootstrap implements BootstrapInterface {
                 'paid-services/order-services' => 'clients/paid-services/order-services',
                 'paid-services' => 'clients/paid-services/index',
                 
+                'personal-account' => 'clients/personal-account/index',
+                'personal-account/<action>' => 'clients/personal-account/<action>',
+                
+                
                 
 //                'news/view-news/<slug:\w+>' => 'clients/news/view-news',
-                '<controller:\w+>/<action:\w+>' => '<module>/<controller>/<action>',
+//                '<controller:\w+>/<action:\w+>' => '<module>/<controller>/<action>',
                 
             ]
         );
