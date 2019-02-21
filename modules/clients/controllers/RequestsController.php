@@ -130,7 +130,9 @@ class RequestsController extends AppClientsController
      *      @param integer $account_id ID лицевого счета, 
      *      @param integer $status ID статус заявки
      */
-    public function actionFilterByTypeRequest($status) {
+    public function actionFilterByTypeRequest() {
+        
+        $status = Yii::$app->request->post('status');
         
         $account_id = $this->_current_account_id;
         

@@ -474,7 +474,7 @@ $(document).ready(function() {
         $(this).addClass('active');
         
         $.ajax({
-            url: 'filter-by-type-request?status=' + status,
+            url: 'requests/filter-by-type-request',
             method: 'POST',
             data: {
                 status: status,

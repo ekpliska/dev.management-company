@@ -7,10 +7,13 @@ $client_api = require __DIR__ . '/client_api.php';
 $orangedata_client = require __DIR__ . '/orange_data_client.php';
 
 $config = [
-    'id' => 'management-company',
-    'name' => 'Management Company',
+    'id' => 'elsa-company',
+    'name' => 'Electronic Smart Assistant',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'bootstrap' => [
+        'log',
+        'app\modules\clients\Bootstrap',
+    ],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
@@ -112,9 +115,9 @@ $config = [
         'user' => [
             'class' => 'yii\web\User',
             'identityClass' => 'app\models\User',
-//            'enableAutoLogin' => false, // Отключение автологина на основе фалов cookies
-//            'absoluteAuthTimeout' => 1200, // Время сессии 20мин
-//            'authTimeout' => 600, // Автоматический выход из сиситемы, когда пользователь неактивен 10мин
+            'enableAutoLogin' => false, // Отключение автологина на основе фалов cookies
+            'absoluteAuthTimeout' => 1200, // Время сессии 20мин
+            'authTimeout' => 1200, // Автоматический выход из сиситемы, когда пользователь неактивен 20мин
             'loginUrl' => ['site/login'],
             'as afterLogin' => 'app\behaviors\LoginTimestampBehavior',
             
@@ -161,18 +164,24 @@ $config = [
                 'login' => 'site/login',
                 'registration' => 'site/registration',
                 'request-password-reset' => 'site/request-password-reset',
+/*
+                // Clients Rules
+                '<module:clients>/clients/<block:\w+>' => '<module>/clients/index',
+//                '<module:clients>/news/view-news/<slug:\w+>' => '<module>/news/view-news',
                 
-//                '<module:clients>/clients/<block:\w+>' => '<module>/clients/index',
+                '<module:clients>/clients' => '<module>/clients/index',
+*/                
                 
+                // REST Rules
                 [
                     'class' => 'yii\rest\UrlRule', 
+                    'pluralize' => false, 
                     'controller' => 'v1/news',
                     'extraPatterns' => [
-                        'GET /' => 'index',
-                        'GET {id}/view' => 'view',
-                    ],
-                    
+                       'GET view/<id:\d+>' => 'view',
+                     ]
                 ],
+//                ['class' => 'yii\rest\UrlRule', 'pluralize'=>false, 'controller' => 'restv1/contacts'],
                 
             ],
         ],
