@@ -7,7 +7,7 @@
  * Форма поиска
  */
 ?>
-<div class="container-fluid submenu-manager text-center">
+<div class="container-fluid submenu-manager text-center _sub-double">
     <ul class="nav navbar-nav navbar-left">
         <li>
             <?php 

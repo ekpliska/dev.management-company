@@ -161,7 +161,7 @@ $this->params['breadcrumbs'][] = 'Новая запись [Сотрудник]';
                 <h3 class="title">Настройка прав доступа</h3>
                 <?php if (isset($permissions_list) && !empty($permissions_list)) : ?>
                 <?php foreach ($permissions_list as $key => $permission) : ?>
-                    <div class="col-lg-4 col-md-4 col-sm-3 col-xs-4">
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
                         <div class="privileges-block__privilege">
                             <h4><?= $permission['name'] ?></h4>
                             <ul class="privileges-block__lists">    
@@ -187,7 +187,7 @@ $this->params['breadcrumbs'][] = 'Новая запись [Сотрудник]';
                 
         <div class="save-btn-group">
             <div class="text-center">
-                <?= Html::submitButton('Добавить', ['class' => 'btn blue-btn']) ?>
+                <?= Html::submitButton('Сохранить', ['class' => 'btn blue-btn']) ?>
             </div>
         </div>
 

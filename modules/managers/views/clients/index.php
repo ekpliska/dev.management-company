@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = 'Собственники';
 
 <?= $this->render('_form/_search', ['model' => $model]) ?>
 
-<div class="manager-main-with-sub">
+<div class="manager-main-with-sub _sub-2">
 
     <?= Breadcrumbs::widget([
             'homeLink' => ['label' => 'ELSA | Администратор', 'url' => ['managers/index']],

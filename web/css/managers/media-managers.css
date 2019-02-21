@@ -4,11 +4,14 @@
 
 /* Search Form Panel */
 @media screen and (max-width: 768px) {
-    .manager-main-with-sub {
+    ._sub-4 {
         margin-top: 240px;
     }
     .submenu-manager {
         margin-top: -10px;
+    }
+    ._sub-2 {
+        margin-top: 150px;
     }
     ._search-input, ._dropdown-subpanel {
         width: 100%;
@@ -24,10 +27,13 @@
     }
 }
 @media screen and (max-width: 560px) {
+    .manager-main-with-sub {
+        margin-top: 170px;
+    }
     .submenu-manager {
         margin-top: 30px;
     }
-    .manager-main-with-sub {
+    ._sub-4 {
         margin-top: 280px;
     }
 }
@@ -42,3 +48,26 @@
 }
 /* End Create employee form */
 
+/* Clients Profile */
+@media screen and (max-width: 1380px) {
+    .profile-sub_menu_ul > li {
+        padding: 20px;
+        margin: 0px 20px 0px -20px;
+    }
+    .profile-sub_menu_ul > li > a {
+        font-size: 12px;
+    }
+}
+@media screen and (max-width: 1110px) {
+    .profile-sub_menu_ul > li {
+        padding: 10px;
+    }
+}
+@media screen and (max-width: 991px) {
+    .profile-sub_menu_ul {
+/*        display: block;
+        text-align: left;*/
+    }
+}
+
+/* End Clients Profile */
