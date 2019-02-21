@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = 'Опрос';
                     <p class="date-start-vote"><?= FormatHelpers::formatDate($voting['voting_date_start'], false, 0, false) ?></p>
                 </div>
                 <div class="vote-card_text">
-                    <?= FormatHelpers::shortTitleOrText($voting['voting_text'], 250) ?>
+                    <?= FormatHelpers::shortTitleOrText($voting['voting_text'], 200) ?>
                 </div>
                 <div class="vote-card_count">
                     <?php 

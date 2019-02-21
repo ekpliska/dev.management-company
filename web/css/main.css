@@ -41,7 +41,7 @@ button:hover {
 }
 
 .wrap > .container {
-    padding: 70px 15px 20px;
+    padding: 80px 15px 20px;
 }
 
 /* 100% ширина */
@@ -2628,6 +2628,8 @@ p.date-start-vote {
     padding: 10px;
     height: 160px;
     border-bottom: 1px solid #ddd;
+    letter-spacing: 0.44px;
+    line-height: 20px;
 }
 .vote-card_count {
     border-bottom: 1px solid #ddd;    

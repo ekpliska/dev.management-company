@@ -11,32 +11,32 @@ class Bootstrap implements BootstrapInterface {
     {
         $app->getUrlManager()->addRules(
             [
-                // объявление правил здесь
+                // Собственники, главная
                 'clients/<block:\w+>' => 'clients/clients/index',
                 'clients' => 'clients/clients/index',
                 
+                // Собственники, отдельная новость
                 'news/<slug>' => 'clients/news/view-news',
                 
+                // Собственники, голосование
 //                'voting/<voting_id>' => 'clients/voting/view-voting',
                 'voting' => 'clients/voting/index',
                 'voting/<action>' => 'voting/voting/<action>',
                 
+                // Собственники, заявки
                 'requests/filter-by-type-request' => 'clients/requests/filter-by-type-request',
                 'requests/<request_number>' => 'clients/requests/view-request',
                 'requests' => 'clients/requests/index',
                 
+                // Собственники, услуги
                 'paid-services/filter-category-services' => 'clients/paid-services/filter-category-services',
                 'paid-services/search-by-specialist' => 'clients/paid-services/search-by-specialist',
                 'paid-services/order-services' => 'clients/paid-services/order-services',
                 'paid-services' => 'clients/paid-services/index',
                 
+                // Собственники, лицевой счет
                 'personal-account' => 'clients/personal-account/index',
                 'personal-account/<action>' => 'clients/personal-account/<action>',
-                
-                
-                
-//                'news/view-news/<slug:\w+>' => 'clients/news/view-news',
-//                '<controller:\w+>/<action:\w+>' => '<module>/<controller>/<action>',
                 
             ]
         );

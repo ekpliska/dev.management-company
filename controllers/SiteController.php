@@ -86,7 +86,7 @@ class SiteController extends Controller
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             if (Yii::$app->user->can('clients') || Yii::$app->user->can('clients_rent')) {
-                return $this->redirect(['clients/clients']);
+                return $this->redirect(['/clients']);
             } elseif (Yii::$app->user->can('dispatcher')) {
                 return $this->redirect(['dispatchers/dispatchers']);
             } elseif (Yii::$app->user->can('administrator')) {
