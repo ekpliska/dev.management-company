@@ -426,6 +426,8 @@ button:hover {
     outline: none;
 }
 .blue-btn {
+    height: 56px;
+    width: 250px;
     border: 1px solid #2d18b4;
     background-color: #2d18b4;
     color: #fff;
@@ -434,6 +436,8 @@ button:hover {
     color: #fff;
 }
 .red-btn {
+    height: 56px;
+    width: 250px;
     border: 1px solid #fc3232;
     background-color: #fc3232;
     color: #fff;
@@ -442,6 +446,8 @@ button:hover {
     color: #fff;
 }
 .orange-btn {
+    height: 56px;
+    width: 250px;
     border: 1px solid #ef693a;
     background-color: #ef693a;
     color: #fff;
