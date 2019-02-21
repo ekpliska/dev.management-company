@@ -69,7 +69,7 @@ class PersonalAccountController extends AppClientsController {
         
         return $this->render('receipts-of-hapu', [
             'account_number' => $account_number,
-            'receipts_lists' => $receipts_lists['receipts'],
+            'receipts_lists' => $receipts_lists ? $receipts_lists : null,
         ]);
     }
     
@@ -98,7 +98,7 @@ class PersonalAccountController extends AppClientsController {
         
         return $this->render('payments', [
             'account_number' => $account_number,
-            'payments_lists' => $payments_lists['payments'],
+            'payments_lists' => $payments_lists ? $payments_lists : null,
         ]);
     }
     
@@ -322,8 +322,8 @@ class PersonalAccountController extends AppClientsController {
      */
     public function actionSearchDataOnPeriod($account_number, $date_start, $date_end, $type) {
         
-        $date_start = Yii::$app->formatter->asDate($date_start, 'YYYY-MM');
-        $date_end = Yii::$app->formatter->asDate($date_end, 'YYYY-MM');
+        $date_start = Yii::$app->formatter->asDate($date_start, 'YYYY-MM-d');
+        $date_end = Yii::$app->formatter->asDate($date_end, 'YYYY-MM-d');
                 
         Yii::$app->response->format = Response::FORMAT_JSON;
         
@@ -342,27 +342,26 @@ class PersonalAccountController extends AppClientsController {
             
             switch ($type) {
                 case 'receipts':
-                    $results = Yii::$app->client_api->getReceipts($data_json)['receipts'];
+                    $results = Yii::$app->client_api->getReceipts($data_json);
                     break;
                 case 'payments':
-                    $results = Yii::$app->client_api->getPayments($data_json)['payments'];
+                    $results = Yii::$app->client_api->getPayments($data_json);
                     break;
                 default:
                     $results['status'] == 'error';
                     break;
             }
             
-            if ($results['status'] == 'error') {
-                return ['success' => false];
-            }
-            
             $data_render = $this->renderPartial('data/' . $type . '-lists', [
-                $type . '_lists' => $results,
+                $type . '_lists' => $results ? $results : null,
                 'account_number' => $account_number]);
             
             return [
                 'success' => true,
                 'data_render' => $data_render,
+                'results' => $results,
+                'date_start' => $date_start,
+                'date_end' => $date_end,
             ];
         }
         

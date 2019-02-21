@@ -18,10 +18,12 @@ class ClientAPI extends Object {
         
         $account_info = $this->readUrl('account/register', $data);
         
-        return [
-            'success' => $account_info['Лицевой счет']['success'],
-            'account_info' => $account_info,
-        ];
+        if (isset($account_info['Лицевой счет']['success'])) {
+            return false;
+        }
+        
+        return $account_info;
+        
     }    
     
     /*
@@ -32,10 +34,12 @@ class ClientAPI extends Object {
         
         $indications = $this->readUrl('counters/get', $data);
         
-        return [
-            'success' => $indications['status'],
-            'indications' => $indications['Приборы учета'],
-        ];
+        if (isset($indications['status']) == 'error') {
+            return false;
+        }
+        
+        return $indications['Приборы учета'];
+        
     }
     
     /*
@@ -45,10 +49,11 @@ class ClientAPI extends Object {
         
         $new_indications = $this->readUrl('counters/set', $data);
         
-        return [
-            'status' => $new_indications['status'],
-            'success' => $new_indications['accepted'],
-        ];
+        if (isset($new_indications['status']) == false) {
+            return false;
+        }
+        
+        return $new_indications['accepted'];
         
     }
     
@@ -60,10 +65,11 @@ class ClientAPI extends Object {
         
         $receipts = $this->readUrl('receipt/get', $data);
         
-        return [
-            'success' => $receipts['status'],
-            'receipts' => $receipts['Квитанции ЖКУ']
-        ];
+        if (isset($receipts['status']) == 'error') {
+            return false;
+        }
+        
+        return $receipts['Квитанции ЖКУ'];
         
     }
     
@@ -75,10 +81,11 @@ class ClientAPI extends Object {
         
         $payments = $this->readUrl('payments/get', $data);
         
-        return [
-            'success' => $payments['status'],
-            'payments' => $payments['Платежи']
-        ];
+        if (isset($payments['success']) == 'error') {
+            return false;
+        }
+        
+        return $payments['Платежи'];
         
     }
     
