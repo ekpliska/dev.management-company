@@ -62,15 +62,16 @@ class RegistrationInVoting extends ActiveRecord
                 ->asArray()
                 ->one();
         
-//        if ($register !== null) {
-//            return false;
-//        }
-        
         $number = mt_rand(10000, 99999);
         $this->voting_id = $voting_id;
         $this->user_id = Yii::$app->user->identity->id;
         $this->random_number = $number;
         $this->date_registration = time();
+        
+//        if (!$this->sendSms($code)) {
+//            return false;
+//        }
+        
         return $this->save() ? true : false;
         
     }
@@ -115,7 +116,7 @@ class RegistrationInVoting extends ActiveRecord
     }
     
     /*
-     * Генерауия нового СМС кода
+     * Генерация нового СМС кода
      */
     public function generateNewSMSCode() {
         
@@ -177,6 +178,24 @@ class RegistrationInVoting extends ActiveRecord
         $record->finished = self::STATUS_FINISH_YES;
         
         return $record->save(false) ? true : false;
+    }
+    
+    /*
+     * Отправка СМС-кода на телефон Собственнику
+     */
+    private function sendSms($code) {
+        
+        $phone = preg_replace('/[^0-9]/', '', Yii::$app->userProfile->mobile);
+
+        $code = (int)$code;
+        $sms = Yii::$app->sms;
+        $result = $sms->send_sms($phone, "Для подтверждения участния в голосовании укажите СМС-код {$code}");
+        if (!$sms->isSuccess($result)) {
+//            echo $sms->getError($result);
+            return false;
+        }
+        
+        return true;
     }
     
     /**
