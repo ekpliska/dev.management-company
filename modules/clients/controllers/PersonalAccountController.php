@@ -125,10 +125,6 @@ class PersonalAccountController extends AppClientsController {
         
         // Статус текущих показаний
         $is_current = true;
-        // Получаем номер текущего месяца
-        $current_month = date('m');
-        // Получаем номер текущего года
-        $current_year = date('Y');
         
         $account_id = $this->_current_account_id;
         $account_number = $this->_current_account_number;
@@ -138,23 +134,20 @@ class PersonalAccountController extends AppClientsController {
         
         // Получаем комментарии по приборам учета Собсвенника. Комментарий формирует Администратор системы
         $comments_to_counters = CommentsToCounters::getComments($account_id);
-        
+
+        // Формируем запрос для текущего расчетного перирода
         $array_request = [
             'Номер лицевого счета' => $account_number,
-            'Номер месяца' => $current_month,
-            'Год' => $current_year,
+            'Номер месяца' => date('m'),
+            'Год' => date('Y'),
         ];
         
         $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
-
         $indications = Yii::$app->client_api->getPreviousCounters($data_json);
         
-        $model_indication = new SendIndicationForm();
-                
         return $this->render('counters', [
-            'indications' => $indications['indications'],
+            'indications' => $indications ? $indications : null,
             'comments_to_counters' => $comments_to_counters,
-            'model_indication' => $model_indication,
             'is_current' => $is_current,
             'auto_request' => $auto_request,
         ]);
@@ -253,7 +246,7 @@ class PersonalAccountController extends AppClientsController {
             $indications = Yii::$app->client_api->getPreviousCounters($data_json);
             
             $data = $this->renderPartial('data/grid-counters', [
-                'indications' => $indications['indications'],
+                'indications' => $indications ? $indications : null,
                 'form' => null,
                 'auto_request' => null,
                 'is_current' => false,
