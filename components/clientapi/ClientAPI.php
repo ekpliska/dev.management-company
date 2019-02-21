@@ -49,7 +49,7 @@ class ClientAPI extends Object {
         
         $new_indications = $this->readUrl('counters/set', $data);
         
-        if (isset($new_indications['status']) == false) {
+        if (isset($new_indications['status']) == 'error') {
             return false;
         }
         

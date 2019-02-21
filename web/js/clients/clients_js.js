@@ -285,7 +285,6 @@ $(document).ready(function() {
             $('.message-block').removeClass('invalid-message-show').html('');
             $.post('search-data-on-period?account_number=' + accountNumber + '&date_start=' + startDate + '&date_end=' + endDate + '&type=' + type,
                 function(data) {
-                    console.log(data);
                     if (data.success === false) {
                         $('.message-block').addClass('invalid-message-show').html('Ошибка запроса');
                     } else if (data.success === true) {
@@ -369,6 +368,7 @@ $(document).ready(function() {
         } else if (isCheck === true) {
             labelMess.text('');
             $.post('send-indication?counter=' + uniqueCounter + '&indication=' + curIndication, function(responce) {
+                console.log(responce);
                 if (responce.success === false) {
                     labelMess.text('Ошибка отправки показаний');
                     return false;
