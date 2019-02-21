@@ -103,7 +103,7 @@ class SignupController extends Controller {
                             . Html::a('Перейти на страницу входа', ['site/login']));
                     return true;
                 }
-                Yii::$app->session->setFlash('error', 'Ошибка регистрации. Повторить регисрацию ' . Html::a('Повторить регистрацию', ['signup/index']));
+                Yii::$app->session->setFlash('error', 'Ошибка регистрации. Повторить регистрацию ' . Html::a('Повторить регистрацию', ['signup/index']));
                 return false;
             }
         }

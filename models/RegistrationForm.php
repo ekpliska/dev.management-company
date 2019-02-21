@@ -99,7 +99,9 @@ class RegistrationForm extends Model {
             $client->clients_phone = $client_data_api['Домашний телефон'] ? $client_data_api['Домашний телефон'] : 'Не задано';
             
             if (!$client->save()) {
-                throw new \yii\db\Exception('Ошибка создания новой записи' . 'Ошибка: ' . join(', ', $client->getFirstErrors()));
+//                throw new \yii\db\Exception('Ошибка создания новой записи' . 'Ошибка: ' . join(', ', $client->getFirstErrors()));
+                Yii::$app->session->setFlash('error', 'Ошибка регистрации. Повторить регисрацию ' . Html::a('Повторить регистрацию', ['signup/index']));
+                return false;
             }
             
             // Создаем нового пользователя
@@ -117,7 +119,9 @@ class RegistrationForm extends Model {
             $user->user_check_email = true;
             
             if (!$user->save()) {
-                throw new \yii\db\Exception('Ошибка создания новой записи' . 'Ошибка: ' . join(', ', $user->getFirstErrors()));
+//                throw new \yii\db\Exception('Ошибка создания новой записи' . 'Ошибка: ' . join(', ', $user->getFirstErrors()));
+                Yii::$app->session->setFlash('error', 'Ошибка регистрации. Повторить регисрацию ' . Html::a('Повторить регистрацию', ['signup/index']));
+                return false;
             }
             
             // Назначение роли пользователю
@@ -141,7 +145,8 @@ class RegistrationForm extends Model {
             $flat->flats_rooms = $house_data_api['Количество комнат'];
             $flat->flats_square = $data['square'];
             if (!$flat->save()) {
-                throw new \yii\db\Exception('Ошибка создания новой записи' . 'Ошибка: ' . join(', ', $flat->getFirstErrors()));
+//                throw new \yii\db\Exception('Ошибка создания новой записи' . 'Ошибка: ' . join(', ', $flat->getFirstErrors()));
+                return false;
             }
         
             // Лицевой счет
@@ -154,7 +159,8 @@ class RegistrationForm extends Model {
             // Устанавливаем зарегистрированных лицевой счет как текущий
             $account->isActive = PersonalAccount::STATUS_CURRENT;
             if (!$account->save()) {
-                throw new \yii\db\Exception('Ошибка создания новой записи' . 'Ошибка: ' . join(', ', $account->getFirstErrors()));
+//                throw new \yii\db\Exception('Ошибка создания новой записи' . 'Ошибка: ' . join(', ', $account->getFirstErrors()));
+                return false;
             }
             
             // Отправляем регистрационные данные на электронную почту пользователя
@@ -170,6 +176,7 @@ class RegistrationForm extends Model {
         } catch (Exception $e) {
             $transaction->rollBack();
 //            echo $e->getTraceAsString();
+            return false;
         }
         
     }

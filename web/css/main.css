@@ -374,9 +374,6 @@ button:hover {
     text-transform: uppercase;
     outline: none;
 }
-.btn-width {
-    width: 250px;
-}
 .btn-small {
     padding: 10px 15px;
     border-radius: 12px;
@@ -456,6 +453,8 @@ button:hover {
     color: #fff;
 }
 .white-btn {
+    height: 56px;
+    width: 250px;
     border: 1px solid #2d18b4;
     background-color: #fff;
     color: #2d18b4;

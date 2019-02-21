@@ -3,7 +3,7 @@
     namespace app\models\signup;
     use Yii;
     use yii\base\Model;
-    use app\models\PersonalAccount;
+    use app\models\User;
 
 /**
  * Регистрация, шаг второй
@@ -21,6 +21,10 @@ class SignupStepThree extends Model {
         ];
     }
     
+    /*
+     * Валидация введенного СМС-кода
+     * Проверка на уникальность введенного номера телефона
+     */
     public function afterValidate() {
         
         if (!$this->hasErrors()) {
@@ -31,6 +35,15 @@ class SignupStepThree extends Model {
                 $this->addError($attribute, 'Вы указали не верный СМС код');
                 return false;
             }
+            
+            $phone = $this->phone;
+            $is_user = User::findByPhone($phone);
+
+            if ($is_user != null) {
+                $this->addError($attribute, 'Указанный номер телефона используется в системе');
+                return false;
+            }
+            
         }
         
         parent::afterValidate();        
@@ -42,7 +55,5 @@ class SignupStepThree extends Model {
             'sms_code' => 'СМС код',
         ];
     }
-    
-    
     
 }
