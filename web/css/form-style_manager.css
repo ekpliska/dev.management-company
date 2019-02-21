@@ -916,7 +916,6 @@ textarea {
     color: #fff;
     font-size: 12px;
     outline: none;
-    background-image: url(../images/input-icon/text.png);
     background-size: 5%;
     background-repeat: no-repeat;
     background-position: 5% 50%;
@@ -931,7 +930,7 @@ textarea {
     box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
 }
 ._dropdown-subpanel {
-    padding: 6px 25px;
+    padding: 6px 5px;
     background: transparent;
     border: none;
     color: #fff;
@@ -942,19 +941,25 @@ textarea {
 ._dropdown-subpanel option {
     color: #000;
 }
-._small {
-    width: 240px;
-    background-image: url(../images/input-icon/filter.png);
-    background-size: 5%;
-    background-repeat: no-repeat;
-    background-position: 5% 50%;
-}
 ._large {
     width: 400px;
-    background-image: url(../images/input-icon/location.png);
-    background-size: 3%;
+}
+.search-block__button {
+    padding: 15px;
+    width: 60px;
+    height: 33px;
+    border-radius: 12px;
+    background: #fff;
+    border: none;
     background-repeat: no-repeat;
-    background-position: 5% 47%;
+    background-size: 70%;
+    background-image: url(../images/searchicon_blue.png);
+    background-position: 40%;
+    margin-left: 10px;
+    outline: none;
+}
+.search-block__button:hover {
+    box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
 }
 /* Конец Поиск */
 /* Конец Администратор, инпуты */

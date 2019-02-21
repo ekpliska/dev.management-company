@@ -88,9 +88,9 @@ class SiteController extends Controller
             if (Yii::$app->user->can('clients') || Yii::$app->user->can('clients_rent')) {
                 return $this->redirect(['/clients']);
             } elseif (Yii::$app->user->can('dispatcher')) {
-                return $this->redirect(['dispatchers/dispatchers']);
+                return $this->redirect(['/dispatchers']);
             } elseif (Yii::$app->user->can('administrator')) {
-                return $this->redirect(['managers/managers']);
+                return $this->redirect(['/managers']);
             }
         }
 

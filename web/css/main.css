@@ -536,7 +536,7 @@ button:hover {
 
 /* Кнопка в таблице */
 .btn-edit-in-table {
-    padding: 10px 30px;
+    padding: 8px 10px;
     border: 2px solid #2d18b4;
     color: #fc3838;
     border-radius: 12px;
@@ -557,7 +557,7 @@ button:hover {
 }
 
 .btn-delete-in-table {
-    padding: 10px 30px;
+    padding: 8px 16px;
     border: 2px solid #ef693a;
     color: #fc3838;
     border-radius: 12px;
@@ -2108,22 +2108,6 @@ form#search-form {
     background-size: 10%;
     background-image: url('../images/searchicon_white.png');
     background-position: 64%;
-}
-.search-block__button {
-    display: inline-block;
-    padding: 12px;
-    width: 60px;
-    height: 35px;
-    border-radius: 12px;
-    font-size: 10px;
-    background: transparent;
-    border: 1px solid #fff;
-    background-repeat: no-repeat;
-    background-size: 60%;
-    background-image: url(../images/searchicon_white.png);
-    background-position: 40%;
-    margin-left: 10px;
-    outline: none;
 }
 /*input[id="_search-input"] {
     background: url(/images/clients/search.svg) no-repeat 20px 10px;

@@ -150,7 +150,7 @@ tbody > tr > td > div.empty::before {
     text-align: left;
 }
 .managers-table_middle {
-    width: 15%;
+    width: 18%;
 }
 .managers-table_big {
     width: 25%;
@@ -167,6 +167,9 @@ tbody > tr > td > div.empty::before {
 }
 .no-border-bottom {
     border-bottom: none;
+}
+.managers-table_button {
+    display: table-cell;
 }
 /* Таблица, Администраторы */
 

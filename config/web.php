@@ -13,6 +13,7 @@ $config = [
     'bootstrap' => [
         'log',
         'app\modules\clients\Bootstrap',
+        'app\modules\managers\Bootstrap',
     ],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
@@ -115,9 +116,9 @@ $config = [
         'user' => [
             'class' => 'yii\web\User',
             'identityClass' => 'app\models\User',
-            'enableAutoLogin' => false, // Отключение автологина на основе фалов cookies
-            'absoluteAuthTimeout' => 1200, // Время сессии 20мин
-            'authTimeout' => 1200, // Автоматический выход из сиситемы, когда пользователь неактивен 20мин
+//            'enableAutoLogin' => false, // Отключение автологина на основе фалов cookies
+//            'absoluteAuthTimeout' => 1200, // Время сессии 20мин
+//            'authTimeout' => 1200, // Автоматический выход из сиситемы, когда пользователь неактивен 20мин
             'loginUrl' => ['site/login'],
             'as afterLogin' => 'app\behaviors\LoginTimestampBehavior',
             
@@ -164,13 +165,6 @@ $config = [
                 'login' => 'site/login',
                 'registration' => 'site/registration',
                 'request-password-reset' => 'site/request-password-reset',
-/*
-                // Clients Rules
-                '<module:clients>/clients/<block:\w+>' => '<module>/clients/index',
-//                '<module:clients>/news/view-news/<slug:\w+>' => '<module>/news/view-news',
-                
-                '<module:clients>/clients' => '<module>/clients/index',
-*/                
                 
                 // REST Rules
                 [

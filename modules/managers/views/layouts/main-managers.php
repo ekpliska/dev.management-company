@@ -30,8 +30,8 @@ ManagersAsset::register($this);
         </div>        
     </div>
 
-    <?php $this->beginContent('@app/modules/managers/views/layouts/footer.php') ?>
-    <?php $this->endContent() ?>
+    <?php // $this->beginContent('@app/modules/managers/views/layouts/footer.php') ?>
+    <?php // $this->endContent() ?>
     <?php $this->endBody() ?>
     
 </body>

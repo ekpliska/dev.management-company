@@ -29,12 +29,12 @@
             <div class="form-group">
                 
             <?= $form->field($model, 'employee_department_id')->dropDownList($departments, [
-                    'prompt' => '[Подразделение]',
-                    'class' => '_dropdown-subpanel _small']) ?>
+                    'prompt' => '[Все подразделения]',
+                    'class' => '_dropdown-subpanel']) ?>
                 
             <?= $form->field($model, 'employee_posts_id')->dropDownList($posts, [
-                    'prompt' => '[Должность]',
-                    'class' => '_dropdown-subpanel _small']) ?>
+                    'prompt' => '[Все должности]',
+                    'class' => '_dropdown-subpanel']) ?>
                 
             </div>
             <?= Html::submitButton('', ['class' => 'search-block__button']) ?>

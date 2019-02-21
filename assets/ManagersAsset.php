@@ -14,6 +14,7 @@ class ManagersAsset extends AssetBundle {
     
     public $css = [
         'css/managers/managers-style.css',
+        'css/managers/media-managers.css',
         'css/form-style_manager.css',
     ];
     
