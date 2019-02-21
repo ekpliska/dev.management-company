@@ -912,7 +912,7 @@ textarea {
 ._search-input {
     background: transparent;
     border: none;
-    padding: 7px 15px 7px 25px;
+    padding: 7px 15px 7px 10px;
     color: #fff;
     font-size: 12px;
     outline: none;

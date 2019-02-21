@@ -1,0 +1,44 @@
+/*
+    media css for clients app
+*/
+
+/* Search Form Panel */
+@media screen and (max-width: 768px) {
+    .manager-main-with-sub {
+        margin-top: 240px;
+    }
+    .submenu-manager {
+        margin-top: -10px;
+    }
+    ._search-input, ._dropdown-subpanel {
+        width: 100%;
+    }
+    .search-block__button {
+        width: 100% !important;
+        background-size: 6% !important;
+        background-position: center !important;
+        margin-left: 0 !important;
+    }
+    .btn-edit-in-table, .btn-delete-in-table {
+        font-size: 10px;
+    }
+}
+@media screen and (max-width: 560px) {
+    .submenu-manager {
+        margin-top: 30px;
+    }
+    .manager-main-with-sub {
+        margin-top: 280px;
+    }
+}
+/* End Search Form Panel */
+
+/* Create employee form */
+@media screen and (max-width: 1200px) {
+    .rent-profile-info_manager,
+    .clients-profile-info_manager {
+        padding: 30px 50px;
+    }
+}
+/* End Create employee form */
+
