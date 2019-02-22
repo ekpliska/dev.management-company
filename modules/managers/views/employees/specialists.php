@@ -2,7 +2,6 @@
 
     use app\modules\managers\widgets\AlertsShow;
     use yii\helpers\Html;
-    use yii\widgets\ActiveForm;
     use yii\widgets\Breadcrumbs;
     use app\modules\managers\widgets\ModalWindowsManager;
 
@@ -19,7 +18,7 @@ $this->params['breadcrumbs'][] = 'Специалисты';
         'posts' => $posts,
 ]) ?>
 
-<div class="manager-main-with-sub">
+<div class="manager-main-with-sub _sub-4">
 
     <?= Breadcrumbs::widget([
             'homeLink' => ['label' => 'ELSA | Администратор', 'url' => ['managers/index']],
