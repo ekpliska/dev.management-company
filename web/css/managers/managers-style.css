@@ -297,7 +297,7 @@ tbody > tr > td > div.empty::before {
     min-height: 600px;
 }
 #panel-search {
-    display: flex;
+    display: inline-flex;
 }
 /* Конец Платежи, Профиль Собственника, Администратор */
 

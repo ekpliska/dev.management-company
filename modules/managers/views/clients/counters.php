@@ -31,21 +31,23 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
 
         <div class="counters-page row">
             <div class="payments-date-block">
-                <div class="col-md-3">
-                    <p class="payment_title"><i class="glyphicon glyphicon-calendar"></i> Месяц и год</p>
+                <p class="payment_title"><i class="glyphicon glyphicon-calendar"></i> Период</p>
+                <div id="panel-search">
                     <?= DatePicker::widget([
                             'name' => 'date_start-period-pay',
+                            'class' => '__width-small',
                             'type' => DatePicker::TYPE_INPUT,
-                            'value' => date('d-M-Y'),
-                            'layout' => '<span class="input-group-text">Birth Date</span>',
+                            'value' => 'Месяц-Год',
                             'pluginOptions' => [
                                 'autoclose'=>true,
-                                'format' => 'dd-M-yyyy'
+                                'format' => 'M-yyyy'
                             ]
                         ]);        
-                    ?>        
+                    ?>
+                    <?= Html::button('Показать', ['class' => 'btn-show-payment']) ?>
                 </div>
-            </div>    
+                <div class="col-md-12 message-block"></div>
+            </div>            
 
             <table class="table managers-table managers-table-in table-striped">
                 <thead>
