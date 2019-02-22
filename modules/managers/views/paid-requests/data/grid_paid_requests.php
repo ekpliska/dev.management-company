@@ -37,6 +37,9 @@
                     return $data['category'] . '<br />' . $data['service_name'];
                 },
                 'format' => 'raw',
+                'contentOptions' =>[
+                    'class' => 'managers-table_middle',
+                ],
             ],
             [
                 'attribute' => 'date_create',
@@ -52,7 +55,7 @@
                     return $data['clients_surname'] . ' ' . $data['clients_second_name'] . ' ' . $data['clients_name'];
                 },
                 'contentOptions' => [
-                    'class' => 'managers-table_middle managers-table_left',
+                    'class' => 'managers-table_middle',
                 ],
                 'format' => 'raw',
             ],
@@ -88,7 +91,7 @@
                 },
                 'format' => 'raw',
                 'contentOptions' => [
-                    'class' => 'managers-table_middle',
+                    'class' => 'managers-table_small',
                 ],
             ],
             [

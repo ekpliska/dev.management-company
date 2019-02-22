@@ -30,7 +30,9 @@ $this->params['breadcrumbs'][] = "Заявка на платную услугу 
     
     <div class="requests-view">
         
-        <h1 class="page-header requests-view_title">
+        <h1 class="page-header requests-paid-view_title">
+            <?= $paid_request['category'] . '<span class="label_service-name">' . $paid_request['services_name'] . '</span>' ?>
+            
             <?= Html::button('<i class="glyphicon glyphicon-remove"></i> Удалить заявку', [
                     'id' => 'delete-request',
                     'class' => 'settings-record-btn',
@@ -51,12 +53,9 @@ $this->params['breadcrumbs'][] = "Заявка на платную услугу 
             
         </h1>
         
-        <div class="row row-flex">
-            <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 requests-paid-content">
                 <div class="content requests-view_body">
-                    <h4>
-                        <?= $paid_request['category'] . '<span class="label">' . $paid_request['services_name'] . '</span>' ?>
-                    </h4>
                     <p class="date_requests">
                         <?= FormatHelpers::formatDate($paid_request['date_cr'], true, 0, false) ?>
                     </p>
@@ -67,8 +66,8 @@ $this->params['breadcrumbs'][] = "Заявка на платную услугу 
                                 ['class' => 'edit-request-btn']) ?>
                     </div>
 
-                    <div class="requests__status-block">
-                        <span class="badge request-ident">
+                    <div class="requests__status-block _display-fix">
+                        <span class="request-ident">
                             <?= "ID{$paid_request['number']}" ?>
                             <?= $paid_request['status'] ?>
                         </span>

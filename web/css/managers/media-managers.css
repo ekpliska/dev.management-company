@@ -176,6 +176,7 @@
     }
     .settings-record-btn {
         padding: 10px;
+        margin: -3px 10px;
     }
     .settings-record-btn > i {
         padding: 0;
@@ -231,3 +232,34 @@
     }
 }
 /* End Requests Page */
+
+/* Paid-Requests Page */
+@media screen and (max-width: 991px) {
+    .requests-paid-view_title {
+        padding: 25px 10px;
+    }
+}
+@media screen and (max-width: 720px) {
+    .requests-paid-view_title {
+        padding: 10px;
+        display: grid;
+        text-align: center;
+    }
+    .requests-paid-view_title .label_service-name {
+        margin: 5px 0 25px 0;
+        background: #fff;
+        color: #2d18b4;
+    }
+}
+@media screen and (max-width: 540px) {
+    .btn-group_status-request {
+        margin-top: 20px;
+    }
+    .client_info-text, .client_info-text {
+        font-size: 12px;
+    }
+    .client_info {
+        padding: 1px;
+    }
+}
+/* End Paid-Requests Page */

@@ -663,9 +663,7 @@ button:hover {
 }
 /* Конец Кнопка удалить пользователя */
 /* Кнопка настройки заявки */
-.settings-record-btn,
-.settings-record-btn:active,
-.settings-record-btn:focus {
+.settings-record-btn {
     padding: 10px 20px;
     border-radius: 12px;
     border: 1px solid #fff;
@@ -677,6 +675,7 @@ button:hover {
     margin: 0 10px;
     float: right;
     outline: none;
+    font-weight: normal;
 }
 .settings-record-btn:hover {
     background-color: #fff;
@@ -1586,9 +1585,14 @@ p.right {
     font-size: 12px;
     padding: 5px 20px;
     margin: 0 20px;
+    background: #fff;
+    color: #2d18b4;
 }
 .requests-paid-view_title .label_service-date {
     background: #fff;
+}
+.requests-paid-content {
+    padding: 0;
 }
 .requests-view_title i.check {
     background: #36eadf;
@@ -1601,11 +1605,11 @@ p.right {
     border-radius: 100%;
 }
 .requests-view_body {
-    padding: 5px 0 0 0;
+    padding: 10px;
 }
 .requests-border {
     border-right: 1px solid #ddd;
-    padding: 10px 0px 0px 15px;    
+    padding: 0;    
 }
 .requests-view_body h4 {
     font-size: 18px;
@@ -1632,7 +1636,7 @@ p.right {
     letter-spacing: 0.25px;
 }
 .client_info {
-    margin: 0 0 0 -15px;
+    margin: 0 -10px;
     background: #fcfcfc;
     height: 80px;
     color: #2d1d88;
@@ -3433,7 +3437,7 @@ a.sub-menu-item {
     font-size: 10px;
     font-weight: bold;
     text-transform: uppercase;
-    padding: 8px 15px;
+    padding: 10px 15px;
     background: #fff;
 }
 .btn-choose-status:focus,
