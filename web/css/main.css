@@ -1562,7 +1562,7 @@ p.right {
     min-height: 750px;
 }
 .requests-view_title {
-    padding: 20px 30px;
+    padding: 20px 0 20px 30px;
     color: #fff;
     border-radius: 12px 12px 0 0;
     background-color: #2d18b4;
@@ -1700,7 +1700,7 @@ p.right {
 }
 .chat-txt-block {
     min-width: 92px;
-    max-width: 398px;
+    /*max-width: 398px;*/
     border-radius: 12px;
     background: linear-gradient(180.67deg, #412b5d 32%, rgba(10,8,8,0.7) 96%);
     padding: 15px;
@@ -3433,7 +3433,7 @@ a.sub-menu-item {
     font-size: 10px;
     font-weight: bold;
     text-transform: uppercase;
-    padding: 6px 15px;
+    padding: 8px 15px;
     background: #fff;
 }
 .btn-choose-status:focus,

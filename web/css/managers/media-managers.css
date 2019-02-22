@@ -170,9 +170,64 @@
 /* End Clients Profile */
 
 /* Requests Page */
-@media screen and (max-width: 901px) {
-/*    .search-date {
-        width: 70px !important;
-    }*/
+@media screen and (max-width: 991px) {
+    .requests-border {
+        border: none;
+    }
+    .settings-record-btn {
+        padding: 10px;
+    }
+    .settings-record-btn > i {
+        padding: 0;
+    }
+    .requests-view_chat {
+        padding-top: 20px;
+        border-top: 1px solid #ddd;
+        margin: 0 -15px;
+    }
+    .chat-msg {
+        margin: 0;
+    }
+    ._display-fix {
+        display: block;
+    }
+}
+@media screen and (max-width: 720px) {
+    .requests-view_title {
+        padding: 10px;
+        display: grid;
+        text-align: center;
+    }
+    .settings-record-btn {
+        padding: 5px;
+        font-size: 10px;
+        margin: 3px;
+        text-align: center;
+    }
+    .requests-view_title i.check {
+        background: #36eadf;
+        padding: 5px;
+        border-radius: 12px;
+        text-align: center;
+    }
+    .check_message {
+        padding: 10px;
+        font-size: 16px;
+        font-weight: bold;
+    }
+    .btn-choose-status {
+        padding: 3px;
+    }
+}
+@media screen and (max-width: 625px) {
+    .edit-request-btn {
+        padding: 7px 10px;
+        font-size: 12px;
+    }
+    .btn-dispatcher, .btn-specialist {
+        width: 200px;
+        height: 50px;
+        font-size: 10px;
+    }
 }
 /* End Requests Page */

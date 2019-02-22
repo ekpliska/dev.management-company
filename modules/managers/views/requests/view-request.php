@@ -31,7 +31,8 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
     <div class="requests-view">
 
         <h1 class="page-header requests-view_title">
-            <i class="glyphicon glyphicon-ok <?= $request['is_accept'] ? 'check' : 'uncheck' ?>"></i>&nbsp;&nbsp;Заявка принята
+            <i class="glyphicon glyphicon-ok <?= $request['is_accept'] ? 'check' : 'uncheck' ?>"></i>  
+            <span class="check_message">Заявка принята</span>
             
             <?= Html::button('<i class="glyphicon glyphicon-remove"></i> Удалить заявку', [
                     'id' => 'delete-request',
@@ -58,8 +59,8 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
             
         </h1>
 
-        <div class="row row-flex">
-            <div class="col-md-7 col-sm-6 col-xs-12 requests-border">
+        <div class="row">
+            <div class="col-lg-7 col-md-8 col-sm-12 col-xs-12 requests-border">
                 <div class="content requests-view_body">
                     <h4>
                         <?= $request['type_requests_name'] ?>
@@ -76,8 +77,8 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
                                 ['class' => 'edit-request-btn']) ?>
                     </div>
                 
-                    <div class="requests__status-block">
-                        <span class="badge request-ident">
+                    <div class="requests__status-block _display-fix">
+                        <span class="request-ident">
                             <?= "ID{$request['requests_ident']}" ?>
                             <?= $request['status'] ?>
                         </span>
@@ -101,7 +102,7 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
                     <?php endif; ?>
 
                     <div class="client_info">
-                        <div class="col-lg- col-sm-6 col-md-6 text-left">
+                        <div class="col-lg-6 col-sm-6 col-md-6 text-left">
                             <div class="client_info-image">
                                 <span class="glyphicon glyphicon-home"></span>
                             </div>
@@ -163,7 +164,7 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
 
                 </div>
             </div>
-            <div class="col-md-5 col-sm-6 col-xs-12">
+            <div class="col-lg-5 col-md-4 col-sm-12 col-xs-12">
                 <div class="content requests-view_chat">
 
                     <?= $this->render('comments/view', [
