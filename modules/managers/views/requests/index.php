@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = 'Заявки';
         'specialist_lists' => $specialist_lists,
 ]) ?>
 
-<div class="manager-main-with-sub">
+<div class="manager-main-with-sub _sub-910">
     
     <?= Breadcrumbs::widget([
             'homeLink' => ['label' => 'ELSA | Администратор', 'url' => ['managers/index']],

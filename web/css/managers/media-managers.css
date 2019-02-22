@@ -8,7 +8,32 @@
         margin-top: 0;
     }
 }
-/* End Content */
+@media screen and (max-width: 910px) {
+    ._sub-910 {
+        margin-top: 100px;
+    }
+}
+@media screen and (max-width: 868px) {
+    ._sub-910 {
+        margin-top: 120px;
+    }
+}
+@media screen and (max-width: 768px) {
+    ._sub-910 {
+        margin-top: 340px;
+    }
+    .search-date {
+        background-size: 2% !important;
+        background-position: 2% 45% !important;
+        padding: 0 0 0 40px !important;
+        text-align: left !important;
+    }
+}
+@media screen and (max-width: 560px) {
+    ._sub-910 {
+        margin-top: 380px !important;
+    }
+}/* End Content */
 
 /* Search Form Panel */
 @media screen and (max-width: 768px) {
@@ -17,6 +42,9 @@
     }
     .submenu-manager {
         margin-top: -10px;
+    }
+    .submenu-manager > ul {
+        padding: 10px 20px;
     }
     ._sub-2 {
         margin-top: 150px;
@@ -141,4 +169,10 @@
 }
 /* End Clients Profile */
 
-/* */
+/* Requests Page */
+@media screen and (max-width: 901px) {
+/*    .search-date {
+        width: 70px !important;
+    }*/
+}
+/* End Requests Page */

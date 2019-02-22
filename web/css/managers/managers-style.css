@@ -183,7 +183,7 @@ tbody > tr > td > div.empty::before {
     z-index: 10;
 }
 .submenu-manager > ul {
-    padding: 10px 25px;
+    padding: 10px 5px;
 }
 /* Конец Дополнительное навигационное меню Администратор */
 

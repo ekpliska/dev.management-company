@@ -890,12 +890,12 @@ textarea {
     border: 1px solid #fff;
     color: #fff;
     background-image: url(../images/input-icon/calendar_3.png);
-    background-size: 8%;
+    background-size: 7%;
     background-repeat: no-repeat;
-    background-position: 12% 47%;
-    padding: 0 0 0 40px;
+    background-position: 8% 45%;
+    padding: 0;
+    text-align: center;
     font-size: 12px;
-    width: 150px !important;
     cursor: pointer;
 }
 .search-date:hover {
