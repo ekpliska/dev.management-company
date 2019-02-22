@@ -262,7 +262,7 @@ tbody > tr > td > div.empty::before {
     text-align: left;
 }
 .payments-date-block {
-    padding: 20px 15px 80px;
+    padding: 20px 15px 30px;
 }
 .control-block, 
 .status-block {
@@ -295,6 +295,9 @@ tbody > tr > td > div.empty::before {
 /* Платежи, Профиль Собственника, Администратор */
 .payments-profile {
     min-height: 600px;
+}
+#panel-search {
+    display: flex;
 }
 /* Конец Платежи, Профиль Собственника, Администратор */
 

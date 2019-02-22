@@ -3,8 +3,6 @@
     use yii\helpers\Html;
     use yii\widgets\Breadcrumbs;
     use kartik\date\DatePicker;
-    use yii\helpers\Url;
-    use app\modules\managers\widgets\ModalWindowsManager;
 
 /* 
  * Профиль собсвенника, раздел Квитанции ЖКУ
@@ -31,7 +29,7 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
         ]) ?>
 
         <div class="row">
-            <div class="col-md-5 receipts_period">
+            <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12 receipts_period">
                 <p class="period_title"><i class="glyphicon glyphicon-calendar"></i> Период</p>
                 <div class="receipts_period-calendar">                    
                     <?= DatePicker::widget([
@@ -65,10 +63,9 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
                     ]) ?>
                 </div>
             </div>
-            <div class="col-md-7 receipts_body">
+            <div class="col-lg-7 col-md-7 col-sm-6 col-xs-12 receipts_body">
             </div>
 
-            <?= Html::button('<i class="glyphicon glyphicon-send"></i>', ['class' => 'send-receipts pull-right']) ?>
         </div>
             
     </div>    
