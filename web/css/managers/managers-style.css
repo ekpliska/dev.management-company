@@ -861,7 +861,7 @@ span.status-vote-1::before {
     border-left: 1px solid #ddd;    
 }
 .load_preview {
-    height: 270px;
+    height: 350px;
     background: #ddd;
     position: relative;
 }

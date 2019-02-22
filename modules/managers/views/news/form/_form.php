@@ -19,7 +19,7 @@
         ],
     ]);
 ?>
-    <div class="col-md-4 news-form__left-block">
+    <div class="col-lg-4 col-md-4 col-sm-12 col-md-12 news-form__left-block">
         <div class="load_preview">
             <div class="text-center">
                 <?= Html::img($model->preview, ['id' => 'photoPreview', 'class' => 'img-rounded', 'alt' => $model->title]) ?>
@@ -68,7 +68,7 @@
                     ->label($model->getAttributeLabel('partner'), ['class' => 'field-input-select_label']) ?>
         </div>
     </div>
-    <div class="col-md-8 news-form__right-block">
+    <div class="col-lg-8 col-md-8 col-sm-12 col-md-12 news-form__right-block">
         
         <?= $form->field($model, 'rubric', ['template' => '<div class="field"></i>{label}{input}{error}</div>'])
                 ->dropDownList($rubrics, ['class' => 'field-input-select', 'prompt' => '[Рубрика]'])
