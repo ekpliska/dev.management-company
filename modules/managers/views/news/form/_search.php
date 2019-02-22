@@ -25,12 +25,11 @@
                 ]);
             ?>
 
-           
             <?= $form->field($search_model, 'value')->input('text', ['class' => '_search-input', 'placeHolder' => 'Заголовок публикации'])->label(false) ?>
             
             <?= $form->field($search_model, 'news_house_id')->dropDownList($house_lists, [
-                    'prompt' => '[Адрес]',
-                    'class' => '_dropdown-subpanel _large']) ?>
+                    'prompt' => '[Все адреса]',
+                    'class' => '_dropdown-subpanel']) ?>
             
             <?= $form->field($search_model, 'date_start')
                     ->widget(DatePicker::className(), [
