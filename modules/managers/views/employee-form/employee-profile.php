@@ -60,7 +60,7 @@ $this->params['breadcrumbs'][] = $employee_info->fullName;
         ?>
         
         <div class="profile-bg text-center">
-            <div class="col-md-3 col-xs-6 face-user">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 face-user">
                 <?= Html::img($user_info->photo, [
                         'id' => 'photoPreview',
                         'class' => 'img-rounded',
@@ -74,7 +74,7 @@ $this->params['breadcrumbs'][] = $employee_info->fullName;
             </div>
                 
             </div>
-            <div class="col-md-8 col-xs-6 text-left user-info-block">
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-left user-info-block">
                 <p class="user-info-block_name">
                     <?= $employee_info->fullName ?>
                 </p>

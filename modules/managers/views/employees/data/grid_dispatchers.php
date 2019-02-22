@@ -44,7 +44,7 @@
                 'header' => 'Должность',
             ],
             [
-                'attribute' => 'user_login',
+                'attribute' => 'login',
                 'header' => 'Логин',
             ],
             [
@@ -57,7 +57,7 @@
             [
                 'class' => 'yii\grid\ActionColumn',
                 'contentOptions' =>[
-                    'class' => 'managers-table_big',
+                    'class' => 'managers-table_middle managers-table_button',
                 ],
                 'template' => '{edit-dispatcher} {delete-dispatcher}',
                 'buttons' => [
@@ -71,7 +71,7 @@
                                     ], 
                                     [
                                         'data-pjax' => false,
-                                        'class' => 'btn-sm btn-edit-in-table',
+                                        'class' => 'btn btn-sm btn-edit-in-table',
                                     ]
                             );
                     },
@@ -80,7 +80,7 @@
                         return 
                             Html::button('Удалить', [
                                 'data-pjax' => false,
-                                'class' => 'btn-sm btn-delete-in-table',
+                                'class' => 'btn btn-sm btn-delete-in-table',
                                 'data-target' => '#delete_employee_manager',
                                 'data-toggle' => 'modal',
                                 'data-role' => 'dispatcher',

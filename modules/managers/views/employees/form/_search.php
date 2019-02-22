@@ -9,7 +9,7 @@
 $action = Yii::$app->controller->action->id;
 ?>
 
-<div class="container-fluid submenu-manager text-center">
+<div class="container-fluid submenu-manager text-center _sub-double">
     <ul class="nav navbar-nav navbar-left">
         <li>
             <?php 
@@ -31,11 +31,11 @@ $action = Yii::$app->controller->action->id;
             <div class="form-group">
                 
             <?= $form->field($model, 'employee_department_id')->dropDownList($departments, [
-                    'prompt' => '[Подразделение]',
+                    'prompt' => '[Все поздразделения]',
                     'class' => '_dropdown-subpanel _small']) ?>
                 
             <?= $form->field($model, 'employee_posts_id')->dropDownList($posts, [
-                    'prompt' => '[Должность]',
+                    'prompt' => '[Все долждности]',
                     'class' => '_dropdown-subpanel _small']) ?>
                 
             </div>

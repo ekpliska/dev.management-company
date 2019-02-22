@@ -66,8 +66,14 @@
     .clients-profile-info_manager {
         padding: 30px 50px;
     }
+    .profile-upload-btn {
+        margin-top: 150px;
+    }
 }
 /* End Create employee form */
+
+/* Update employee form */
+/* End Update employee form */
 
 /* Clients Profile */
 @media screen and (max-width: 1380px) {
@@ -134,3 +140,5 @@
     }
 }
 /* End Clients Profile */
+
+/* */
