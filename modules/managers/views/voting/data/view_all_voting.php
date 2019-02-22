@@ -12,12 +12,22 @@
 ?>
 <?php if (isset($view_all_voting) && (count($view_all_voting) > 0)) : ?>
     <?php foreach ($view_all_voting as $voting) : ?>
+
+
+<div class="col-lg-3 col-md-12 col-sm-12 col-md-12 vote-card__image">
+    image
+</div>
+<div class="col-lg-9 col-md-12 col-sm-12 col-md-12 vote-card__content">
+    content
+</div>
+
+<?php /*
     <div class="vote-card">
-        <div class="col-md-3 vote-card__image">
+        <div class="col-lg-3 col-md-12 col-sm-12 col-md-12 vote-card__image">
             <?= Html::img("@web{$voting['voting_image']}", [
                     'alt' => $voting['voting_title']]) ?>
         </div>
-        <div class="col-md-7 vote-card__content">
+        <div class="col-lg-9 col-md-12 col-sm-12 col-md-12 vote-card__content">
             <h1 class="vote-card__content_title">
                 <?= Html::a($voting['voting_title'] . " <span>ID{$voting['voting_id']}</span>", ['voting/view', 'voting' => $voting['voting_id']]) ?>
                 <?= Html::button('<i class="glyphicon glyphicon-trash"></i>', [
@@ -43,7 +53,8 @@
                         </td>
                         <td>
                             <span class="title">Проголосовало</span>
-                            <?php /* Определяем количество участников, которые закончили голосование */
+                            <?php 
+                                //  Определяем количество участников, которые закончили голосование 
                                 $count = 0;
                                 foreach ($voting['registration'] as $participant) :
                                     if ($participant['finished'] == RegistrationInVoting::STATUS_FINISH_YES) :
@@ -61,6 +72,8 @@
             </div>
         </div>
     </div>
+
+ *  */ ?>
     <?php endforeach; ?>
     <?= LinkPager::widget([
             'pagination' => $pages

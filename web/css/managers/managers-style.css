@@ -389,27 +389,28 @@ div#permission_lists {
 
 /* Голосование, главная страница */
 .vote-card {
-    display: flex;
+/*    display: flex;
     width: 100%;
     margin: 0 0 20px;
     border: 1px solid #ddd;
-    border-radius: 12px;
+    border-radius: 12px;*/
 }
 .vote-card:hover {
     box-shadow: 0 4px 26px 0 rgba(51, 29, 82, 0.16);
 }
 .vote-card__image {
-    width: 350px;
-    height: 200px;
+/*    width: 350px;
+    height: 200px;*/
     padding: 0;
     margin: 0;
 }
 .vote-card__image img {
-    height: 100%;
+    /*height: 100%;*/
     width: 100%;
     border: 1px solid #ddd;
     border-top-left-radius: 12px;
-    border-bottom-left-radius: 12px;    
+    border-bottom-left-radius: 12px;
+    height: 240px;
 }
 .vote-table {
     border: none;
@@ -433,7 +434,7 @@ div#permission_lists {
     font-weight: bold;
 }
 .vote-card__content {
-    width: 100%;
+    /*width: 100%;*/
     padding: 0 20px;
 /*    border: 1px solid #ddd;*/
     border-left: none;

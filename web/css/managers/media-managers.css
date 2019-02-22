@@ -350,3 +350,16 @@
     }
 }
 /* End News Page */
+
+/* Voting Page */
+@media screen and (max-width: 767px) {
+    .__vote-767 {
+        margin-top: 190px;
+    }
+}
+@media screen and (max-width: 560px) {
+    .__vote-767 {
+        margin-top: 230px;
+    }
+}
+/* End Voting Page */

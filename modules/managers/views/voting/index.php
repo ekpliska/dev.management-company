@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = 'Голосование';
         'house_lists' => $house_lists,
 ]) ?>
 
-<div class="manager-main-with-sub">
+<div class="manager-main-with-sub __vote-767">
 
     <?= Breadcrumbs::widget([
             'homeLink' => ['label' => 'ELSA | Администратор', 'url' => ['managers/index']],

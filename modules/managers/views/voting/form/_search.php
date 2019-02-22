@@ -30,7 +30,7 @@
 
             <?= $form->field($search_model, 'voting_house_id')->dropDownList($house_lists, [
                     'prompt' => '[Адрес]',
-                    'class' => '_dropdown-subpanel _large']) ?>
+                    'class' => '_dropdown-subpanel']) ?>
             
             <?= Html::submitButton('', ['class' => 'search-block__button']) ?>
             
