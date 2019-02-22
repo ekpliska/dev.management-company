@@ -78,8 +78,6 @@ class ClientsController extends AppManagersController {
         $list_account = PersonalAccount::findByClient($client_id, true);
         $user_info = User::findByClientId($client_id);
         
-        $user_info->scenario = User::SCENARIO_EDIT_CLIENT_PROFILE;
-        
         if ($account_info->personal_rent_id) {
             $is_rent = true;
             $edit_rent = Rents::findOne(['rents_id' => $account_info->personal_rent_id]);
