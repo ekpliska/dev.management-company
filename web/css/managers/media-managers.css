@@ -2,6 +2,14 @@
     media css for clients app
 */
 
+/* Content */
+@media screen and (max-width: 560px) {
+    .manager-main {
+        margin-top: 0;
+    }
+}
+/* End Content */
+
 /* Search Form Panel */
 @media screen and (max-width: 768px) {
     ._sub-4 {
@@ -41,6 +49,19 @@
 
 /* Create employee form */
 @media screen and (max-width: 1200px) {
+    .profile-bg {
+        height: 300px;
+    }
+    .face-user {
+        min-height: 300px;
+    }
+    .face-user img {
+        width: 120px;
+        height: 120px;
+    }
+    .user-info-block {
+        padding-top: 80px;
+    }
     .rent-profile-info_manager,
     .clients-profile-info_manager {
         padding: 30px 50px;
@@ -64,10 +85,52 @@
     }
 }
 @media screen and (max-width: 991px) {
-    .profile-sub_menu_ul {
-/*        display: block;
-        text-align: left;*/
+    .face-user img {
+        box-shadow: 0px 0px 0px 28px rgba(45, 24, 180, 0.5);
+    }
+    .user-info-block_name {
+        font-size: 22px;
+    }
+    .debt-client {
+        font-size: 18px;
+        padding: 3px 6px;
+    }
+    .custom-select-trigger-dark {
+        width: 340px !important;
+    }
+    .custom-option-dark {
+        font-size: 12px !important;
+        line-height: 35px !important;
     }
 }
-
+@media screen and (max-width: 650px) {
+    .face-user img {
+        width: 100px;
+        height: 100px;
+    }
+    .user-info-block_name {
+        font-size: 19px;
+    }
+    .profile-sub_menu_ul > li {
+        padding: 5px;
+    }
+    .profile-sub_menu_ul > li > a {
+        font-size: 10px;
+    }
+    .profile-sub_menu_ul {
+        display: block;
+    }
+    .custom-select-trigger-dark {
+        width: 280px !important;
+    }
+}
+@media screen and (max-width: 560px) {
+    .face-user img {
+        width: 70px;
+        height: 70px;
+    }
+    .custom-select-trigger-dark {
+        width: 200px !important;
+    }
+}
 /* End Clients Profile */

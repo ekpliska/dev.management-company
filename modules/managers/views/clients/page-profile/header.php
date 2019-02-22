@@ -9,13 +9,13 @@
  */
 ?>
 <div class="profile-bg text-center">
-    <div class="col-md-3 col-xs-6 face-user">
+    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 face-user">
         <?= Html::img($user_info->user_photo, [
                 'class' => 'img-rounded',
                 'alt' => 'user-photo',
         ]) ?>
     </div>
-    <div class="col-md-8 col-xs-6 text-left user-info-block">
+    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-left user-info-block">
         <p class="user-info-block_name">
             <?= $client_info->fullName ?>
             <?php if ($account_choosing->account_balance < 0) : ?>
