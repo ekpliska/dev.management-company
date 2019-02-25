@@ -122,6 +122,7 @@ class SiteController extends Controller
                 return $this->redirect(['request-password-reset']);
             } else {
                 Yii::$app->session->setFlash('success', 'Новый пароль был выслан в СМС на указанный номер');
+                return $this->redirect(['request-password-reset']);
             }
         }
         return $this->render('request-password-reset', ['model' => $model]);

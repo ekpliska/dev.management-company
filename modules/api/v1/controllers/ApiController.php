@@ -5,6 +5,7 @@
     use yii\rest\Controller;
     use app\modules\api\v1\models\LoginForm;
     use app\modules\api\v1\models\RegisterForm;
+    use app\modules\api\v1\models\ResetPassword;
 
 /**
  * API контроллер
@@ -80,9 +81,6 @@ class ApiController extends Controller
      * Восстановление пароля
      */
     public function actionResetPassword() {
-        
-        
-        
     }
     
     
