@@ -53,7 +53,7 @@ class SignupStepOne extends Model {
                 return false;
             }
             
-            if ($is_account == false && $result_api['success'] == false) {
+            if ($is_account == false && $result_api['Лицевой счет']['success'] == false) {
                 $this->addError('account_number', 'Регистрационные данные лицевого счета введены некорректно');
                 return false;
             }

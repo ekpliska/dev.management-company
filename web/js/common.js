@@ -220,11 +220,10 @@ $('#send-request-to-sms').on('click', function() {
                 phoneNumber: phoneNumber,
             },
             success: function (data, textStatus, jqXHR) {
-                console.log('ok');
-                console.log(data.nubmer);
+//                console.log(data);
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                console.log('ok');                
+//                console.log(textStatus);                
             }
         });
         $(this).hide();

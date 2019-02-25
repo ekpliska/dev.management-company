@@ -18,10 +18,6 @@ class ClientAPI extends Object {
         
         $account_info = $this->readUrl('account/register', $data);
         
-        if (isset($account_info['Лицевой счет']['success'])) {
-            return false;
-        }
-        
         return $account_info;
         
     }    

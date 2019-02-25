@@ -103,7 +103,8 @@ class SignupController extends Controller {
                             . Html::a('Перейти на страницу входа', ['site/login']));
                     return true;
                 }
-                Yii::$app->session->setFlash('error', 'Ошибка регистрации. Повторить регистрацию ' . Html::a('Повторить регистрацию', ['signup/index']));
+                $this->setSessionStep();
+                Yii::$app->session->setFlash('error', 'К сожаления во время регистрации произошла ошибка. Повторите попытку позже');
                 return false;
             }
         }
@@ -184,14 +185,32 @@ class SignupController extends Controller {
         $phone = Yii::$app->request->post('phoneNumber');
         
         if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
-            
             // Генерируем СМС код, и записываем его в сессию
             $sms_code = mt_rand(10000, 99999);
-            Yii::$app->session->set('sms_code', $sms_code);
             
+            if (!$result = $this->sendSms($phone, $sms_code)) {
+                return ['success' => false];
+            }
+            
+            Yii::$app->session->set('sms_code', $sms_code);
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-            return ['nubmer' => $sms_code];
+            return ['success' => true];
         }
+        
+    }
+    
+    private function sendSms($phone, $sms_code) {
+        
+        $sms = Yii::$app->sms;
+        
+        $result = $sms->send_sms($phone,
+                'Благодарим за участие в регистрации на портале управляющей компании "ELSA". СМС-код для завершения регистрации ' . $sms_code);
+        
+        if (!$sms->isSuccess($result)) {
+//            return $sms->getError($result);
+            return $sms->getError($result);
+        }
+        return true;
     }
     
     private function setCurrentRegisterData() {
