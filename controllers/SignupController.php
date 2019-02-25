@@ -208,7 +208,7 @@ class SignupController extends Controller {
         
         if (!$sms->isSuccess($result)) {
 //            return $sms->getError($result);
-            return $sms->getError($result);
+            return false;
         }
         return true;
     }

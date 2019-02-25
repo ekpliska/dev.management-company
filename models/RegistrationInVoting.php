@@ -68,9 +68,9 @@ class RegistrationInVoting extends ActiveRecord
         $this->random_number = $number;
         $this->date_registration = time();
         
-//        if (!$this->sendSms($code)) {
-//            return false;
-//        }
+        if (!$this->sendSms($number)) {
+            return false;
+        }
         
         return $this->save() ? true : false;
         
@@ -122,6 +122,11 @@ class RegistrationInVoting extends ActiveRecord
         
         $new_value = $number = mt_rand(10000, 99999);
         $this->random_number = $new_value;
+        
+        if (!$this->sendSms($number)) {
+            return false;
+        }
+        
         return $this->save(false);
         
     }
@@ -187,9 +192,8 @@ class RegistrationInVoting extends ActiveRecord
         
         $phone = preg_replace('/[^0-9]/', '', Yii::$app->userProfile->mobile);
 
-        $code = (int)$code;
         $sms = Yii::$app->sms;
-        $result = $sms->send_sms($phone, "Для подтверждения участния в голосовании укажите СМС-код {$code}");
+        $result = $sms->send_sms($phone, 'Для участия в голосовании укажите СМС-код ' . $code);
         if (!$sms->isSuccess($result)) {
 //            echo $sms->getError($result);
             return false;

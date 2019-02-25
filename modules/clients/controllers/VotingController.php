@@ -7,6 +7,7 @@
     use app\models\RegistrationInVoting;
     use app\modules\clients\models\form\CheckSMSVotingForm;
     use app\models\Answers;
+    use app\modules\clients\models\UserProfile;
 
 /**
  * Голосование
@@ -229,18 +230,12 @@ class VotingController extends AppClientsController {
      */
     public function actionViewProfile($user_id) {
         
-        $user_info = \app\modules\clients\models\UserProfile::userInfo($user_id);
+        $user_info = UserProfile::userInfo($user_id);
         
         if (Yii::$app->request->isAjax) {
             return $this->renderAjax('modal/view-profile', [
                 'user_info' => $user_info]);
         }
-    }
-    
-    public function actionValidateRentForm() {
-        
-        
-        
     }
     
 }
