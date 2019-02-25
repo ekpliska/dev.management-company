@@ -505,7 +505,8 @@ button:hover {
 .blue-circle-btn:focus {
     outline: none;
 }
-#send-request-to-sms {
+#send-request-to-sms,
+#reset-password-sms {
     position: absolute;
     top: 40px;
     left: 79%;
@@ -515,7 +516,8 @@ button:hover {
     color: #2d18b4;
     cursor: pointer;
 }
-#send-request-to-sms:focus{
+#send-request-to-sms:focus, 
+reset-password-sms:focus{
     outline: none;
 }
 

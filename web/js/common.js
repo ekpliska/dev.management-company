@@ -196,7 +196,7 @@ function startTimer(duration, display) {
         if (--timer < 0) {
             timer = duration;
             clearInterval(startTimer);
-            $('#send-request-to-sms').show();
+            $('#send-request-to-sms, #reset-password-sms').show();
             $('#timer-to-send').html('');
         }
 
@@ -221,6 +221,41 @@ $('#send-request-to-sms').on('click', function() {
             },
             success: function (data, textStatus, jqXHR) {
 //                console.log(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+//                console.log(textStatus);                
+            }
+        });
+        $(this).hide();
+        display = $('#timer-to-send');
+        startTimer(timeMinute, display);
+        return labelError.text('СМС код был выслан на указанный номер телефона');
+    }
+    return labelError.text('Укажите номер мобильного телефона');
+    
+});
+
+/*
+ * Восстановление пароля
+ */
+$('#reset-password-sms').on('click', function(e) {
+    var labelError = $('#error-message');
+    var phoneNumber = $('input[name*="phone"]').val();
+    var re = /^\+7\ \([\d]{3}\)\ [\d]{3}-[\d]{2}-[\d]{2}$/;
+    var valid = re.test(phoneNumber);
+    if (valid === true && phoneNumber.length == 18) {
+        $.ajax({
+            url: 'site/reset-password',
+            method: 'POST',
+            data: {
+                phoneNumber: phoneNumber,
+            },
+            success: function (data, textStatus, jqXHR) {
+                if (data.time === false) {
+                    labelError.html('Время действия СМС-кода истекло');
+                    e.preventDefault();
+                }
+                console.log(data.time);
             },
             error: function (jqXHR, textStatus, errorThrown) {
 //                console.log(textStatus);                

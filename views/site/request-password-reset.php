@@ -11,9 +11,13 @@ $this->title = "Customers | Восстановаление пароля";
 </a>
 <div class="slide-content">
     <h2 class="text-center registration-title">
-        Восстановление пароля
+        Восстановление пароля        
     </h2>
     <div class="login-form-group">
+        <?php 
+            var_dump(Yii::$app->session['reset_sms_code']);
+            var_dump(Yii::$app->session['reset_expired_at']);
+        ?>
         
         <?php
             $form = ActiveForm::begin([
@@ -21,7 +25,7 @@ $this->title = "Customers | Восстановаление пароля";
                 'validateOnChange' => false,
                 'validateOnBlur' => false,
                 'fieldConfig' => [
-                    'template' => '<div class="field">{label}{input}</div>',
+                    'template' => '{label}{input}',
                     'labelOptions' => ['class' => 'label-registration hidden'],
                 ],
                 'options' => [
@@ -29,11 +33,25 @@ $this->title = "Customers | Восстановаление пароля";
                 ],
             ])
         ?>   
-            <?= $form->field($model, 'email')
-                    ->input('text', ['class' => 'field-input'])
-                    ->label($model->getAttributeLabel('email'), ['class' => 'field-label']) ?>
+        
+            <div class="field">
+                <?= $form->field($model, 'phone')
+                        ->input('text', ['class' => 'field-input cell-phone'])
+                        ->label($model->getAttributeLabel('phone'), ['class' => 'field-label'])
+                ?> 
+                <?= Html::button('Получить код', ['id' => 'reset-password-sms']) ?>
+                <p id="error-message"></p>
+            </div>
 
-            <small>Для восстановление пароля введите адрес электронной почты, указанный при регистрации</small>
+            <div class="field-sms">
+                <?= $form->field($model, 'sms_code', [
+                            'template' => '{label}{input}<span id="timer-to-send"></span>'])
+                        ->input('text', ['class' => 'field-input sms-code-input'])
+                        ->label($model->getAttributeLabel('sms_code'), ['class' => 'field-label'])
+                ?>
+            </div>
+
+            <small>Для восстановление пароля введите номер вашего мобильного телефона, указанный при регистрации</small>
 
             <div class="login-form__button text-center">
                 <?= Html::submitButton('Отправить', ['class' => 'btn blue-btn', 'name' => 'login-button']) ?>

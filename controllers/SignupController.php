@@ -185,6 +185,7 @@ class SignupController extends Controller {
         $phone = Yii::$app->request->post('phoneNumber');
         
         if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
+            
             // Генерируем СМС код, и записываем его в сессию
             $sms_code = mt_rand(10000, 99999);
             
