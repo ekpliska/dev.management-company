@@ -175,6 +175,14 @@ $config = [
                        'GET view/<id:\d+>' => 'view',
                      ]
                 ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'pluralize' => false,
+                    'controller' => 'v1/api',
+                    'extraPatterns' => [
+                        'POST sign-up/<step>' => 'sign-up',
+                    ]
+                ],
 //                ['class' => 'yii\rest\UrlRule', 'pluralize'=>false, 'controller' => 'restv1/contacts'],
                 
             ],
