@@ -32,7 +32,7 @@ class PasswordResetRequestForm extends Model {
      * Валидация введенного СМС-кода
      * Проверка на уникальность введенного номера телефона
      */
-    public function beforeValidate() {
+    public function afterValidate() {
         
         if (!$this->hasErrors()) {
             
@@ -51,7 +51,7 @@ class PasswordResetRequestForm extends Model {
             
         }
         
-        parent::beforeValidate();        
+        parent::afterValidate();        
     }
     
     /*
@@ -69,13 +69,15 @@ class PasswordResetRequestForm extends Model {
         // Генерируем новый пароль (случайные 6 символов)
         $new_password = Yii::$app->security->generateRandomString(6);
         
-//        if (!$this->sendSms($user->user_mobile, $new_password)) {
-//            return false;
-//        }
+        if (!$this->sendSms($user->user_mobile, $new_password)) {
+            return false;
+        }
         
         // Хешируем новый пароль
         $user->user_password = Yii::$app->security->generatePasswordHash($new_password);
         $user->save();
+        
+        Yii::$app->session->destroy();
             
         return true;
     }

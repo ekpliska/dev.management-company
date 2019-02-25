@@ -136,6 +136,7 @@ class SiteController extends Controller
         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         
         $phone = Yii::$app->request->post('phoneNumber');
+        $phone = preg_replace('/[^0-9]/', '', $phone);
         
         // Текущее время
         $current_time = time();
@@ -150,9 +151,9 @@ class SiteController extends Controller
         if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
             // Генерируем СМС код
             $sms_code = mt_rand(10000, 99999);
-//            if (!$result = $this->sendSms($phone, $sms_code)) {
-//                return ['success' => false];
-//            }
+            if (!$result = $this->sendSms($phone, $sms_code)) {
+                return ['success' => false];
+            }
             // Записываем в сессию СМС-код и время его действия (10 минут)
             Yii::$app->session->set('reset_sms_code', $sms_code);
             Yii::$app->session->set('reset_expired_at', time() + 10*60);

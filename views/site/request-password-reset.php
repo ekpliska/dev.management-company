@@ -14,10 +14,6 @@ $this->title = "Customers | Восстановаление пароля";
         Восстановление пароля        
     </h2>
     <div class="login-form-group">
-        <?php 
-            var_dump(Yii::$app->session['reset_sms_code']);
-            var_dump($expired_at = Yii::$app->session->has('reset_expired_at'));
-        ?>
         
         <?php
             $form = ActiveForm::begin([
