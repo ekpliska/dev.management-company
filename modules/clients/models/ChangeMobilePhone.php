@@ -58,14 +58,40 @@ class ChangeMobilePhone extends Model {
             $sms_model = new SmsOperations();
             $sms_model->operations_type = SmsOperations::TYPE_CHANGE_PHONE;
             $sms_model->user_id = Yii::$app->user->identity->id;
-            $sms_model->sms_code = mt_rand(10000, 99999);
+            
+            $sms_code = mt_rand(10000, 99999);
+            $sms_model->sms_code = $sms_code;
+            
             $sms_model->date_registration = time();
             $sms_model->value = $this->new_phone;
+            
+            $new_phone = preg_replace('/[^0-9]/', '', $this->new_phone);
+            
+            if (!$this->sendSms($new_phone, $sms_code)) {
+                return false;
+            }
+            
             $sms_model->save(false);
             return true;
         }
         return false;
     }
+    
+/*
+     * Отправка СМС-кода на телефон Собственнику
+     */
+    private function sendSms($new_phone, $code) {
+        
+
+        $sms = Yii::$app->sms;
+        $result = $sms->send_sms($new_phone, 'Вы отправили запрос на смену номера мобильного телефона на портале. Ваш СМС-код ' . $code);
+        if (!$sms->isSuccess($result)) {
+//            echo $sms->getError($result);
+            return false;
+        }
+        
+        return true;
+    }    
     
     /*
      * Метки для полей

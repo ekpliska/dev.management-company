@@ -110,7 +110,7 @@ class SmsOperations extends ActiveRecord
         $phone = preg_replace('/[^0-9]/', '', Yii::$app->userProfile->mobile);
 
         $sms = Yii::$app->sms;
-        $result = $sms->send_sms($phone, 'Повторный запрос на для смены пароля для входа на портал. Ваш СМС-код ' . $code);
+        $result = $sms->send_sms($phone, 'Повторный запрос на смену пароля для входа на портал. Ваш СМС-код ' . $code);
         if (!$sms->isSuccess($result)) {
 //            echo $sms->getError($result);
             return false;
