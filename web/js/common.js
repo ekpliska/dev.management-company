@@ -238,7 +238,7 @@ $('#send-request-to-sms').on('click', function() {
 /*
  * Восстановление пароля
  */
-$('#reset-password-sms').on('click', function(e) {
+$('#reset-password-sms').on('click', function() {
     var labelError = $('#error-message');
     var phoneNumber = $('input[name*="phone"]').val();
     var re = /^\+7\ \([\d]{3}\)\ [\d]{3}-[\d]{2}-[\d]{2}$/;
@@ -251,11 +251,7 @@ $('#reset-password-sms').on('click', function(e) {
                 phoneNumber: phoneNumber,
             },
             success: function (data, textStatus, jqXHR) {
-                if (data.time === false) {
-                    labelError.html('Время действия СМС-кода истекло');
-                    e.preventDefault();
-                }
-                console.log(data.time);
+                console.log(data);
             },
             error: function (jqXHR, textStatus, errorThrown) {
 //                console.log(textStatus);                

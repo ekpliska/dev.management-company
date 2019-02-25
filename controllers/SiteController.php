@@ -116,11 +116,12 @@ class SiteController extends Controller
         
         $model = new PasswordResetRequestForm();
         
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->resetPassword()) {
-                Yii::$app->session->setFlash('success', 'На указанный email были высланы инструкции для восстановления пароля');
+        if ($model->load(Yii::$app->request->post())) {
+            if (!$model->resetPassword()) {
+                Yii::$app->session->setFlash('error', 'К сожаления во время восстановления произошла ошибка. Повторите попытку позже');
+                return $this->redirect(['request-password-reset']);
             } else {
-                Yii::$app->session->setFlash('error', 'При восстановлении пароля произошла ошибка');
+                Yii::$app->session->setFlash('success', 'Новый пароль был выслан в СМС на указанный номер');
             }
         }
         return $this->render('request-password-reset', ['model' => $model]);
@@ -139,27 +140,23 @@ class SiteController extends Controller
         // Текущее время
         $current_time = time();
         // Время хранения смс-кода
-        $expired_at = Yii::$app->session['reset_expired_at'];
+        $expired_at = Yii::$app->session->has('reset_expired_at') ? Yii::$app->session['reset_expired_at'] : 0;
         // Если прошло время, смс код не валидный
-//        if ((($current_time - $expired_at) /60) > 10) {
-//            // Данные сессии очищаем
-//            Yii::$app->session->destroy();
-//            return ['time' => false];
-//        }
+        if ($current_time > $expired_at) {
+            // Данные сессии очищаем
+            Yii::$app->session->destroy();
+        }
         
         if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
-            
             // Генерируем СМС код
             $sms_code = mt_rand(10000, 99999);
-            
-            if (!$result = $this->sendSms($phone, $sms_code)) {
-                return ['success' => false];
-            }
-            
+//            if (!$result = $this->sendSms($phone, $sms_code)) {
+//                return ['success' => false];
+//            }
             // Записываем в сессию СМС-код и время его действия (10 минут)
             Yii::$app->session->set('reset_sms_code', $sms_code);
-            Yii::$app->session->set('reset_expired_at', time());
-            return ['time' => true];
+            Yii::$app->session->set('reset_expired_at', time() + 10*60);
+            return ['time' => $sms_code];
         }
         
     }

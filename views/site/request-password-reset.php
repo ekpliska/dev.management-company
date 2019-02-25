@@ -16,7 +16,7 @@ $this->title = "Customers | Восстановаление пароля";
     <div class="login-form-group">
         <?php 
             var_dump(Yii::$app->session['reset_sms_code']);
-            var_dump(Yii::$app->session['reset_expired_at']);
+            var_dump($expired_at = Yii::$app->session->has('reset_expired_at'));
         ?>
         
         <?php
@@ -32,13 +32,16 @@ $this->title = "Customers | Восстановаление пароля";
                     'class' => 'form-signin',
                 ],
             ])
-        ?>   
+        ?>
+        
+            <?= $form->errorSummary($model, ['header' => '']); ?>
+        
+            <small>Для восстановление пароля введите номер вашего мобильного телефона, указанный при регистрации</small>
         
             <div class="field">
                 <?= $form->field($model, 'phone')
                         ->input('text', ['class' => 'field-input cell-phone'])
-                        ->label($model->getAttributeLabel('phone'), ['class' => 'field-label'])
-                ?> 
+                        ->label($model->getAttributeLabel('phone'), ['class' => 'field-label']) ?> 
                 <?= Html::button('Получить код', ['id' => 'reset-password-sms']) ?>
                 <p id="error-message"></p>
             </div>
@@ -47,11 +50,8 @@ $this->title = "Customers | Восстановаление пароля";
                 <?= $form->field($model, 'sms_code', [
                             'template' => '{label}{input}<span id="timer-to-send"></span>'])
                         ->input('text', ['class' => 'field-input sms-code-input'])
-                        ->label($model->getAttributeLabel('sms_code'), ['class' => 'field-label'])
-                ?>
+                        ->label($model->getAttributeLabel('sms_code'), ['class' => 'field-label']) ?>
             </div>
-
-            <small>Для восстановление пароля введите номер вашего мобильного телефона, указанный при регистрации</small>
 
             <div class="login-form__button text-center">
                 <?= Html::submitButton('Отправить', ['class' => 'btn blue-btn', 'name' => 'login-button']) ?>

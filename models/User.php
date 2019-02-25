@@ -213,7 +213,7 @@ class User extends ActiveRecord implements IdentityInterface
         return self::find()
                 ->joinWith(['client', 'rent'])
                 ->where(['user_mobile' => $phone])
-                ->asArray()
+//                ->asArray()
                 ->one();
     }
 
