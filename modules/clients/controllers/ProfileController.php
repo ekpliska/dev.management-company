@@ -255,7 +255,7 @@ class ProfileController extends AppClientsController
             Yii::$app->session->setFlash('success', ['message' => 'Измененные настройки профиля сохранены']);
             return $this->redirect(['profile/settings-profile']);
         }
-        Yii::$app->session->setFlash('error', ['message' => 'При изменении найтроек профиля созникла ошибка']);
+        Yii::$app->session->setFlash('error', ['message' => 'При изменении найтроек профиля возникла ошибка']);
         return $this->redirect(['profile/settings-profile']);
         
     }

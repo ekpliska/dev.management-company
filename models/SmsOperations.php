@@ -76,6 +76,11 @@ class SmsOperations extends ActiveRecord
         
         $new_code = mt_rand(10000, 99999);
         $this->sms_code = $new_code;
+        
+        if (!$this->sendSms($new_code)) {
+            return false;
+        }
+        
         return $this->save(false) ? true : false;
     }
     
@@ -96,6 +101,23 @@ class SmsOperations extends ActiveRecord
         return true;        
         
     }
+    
+    /*
+     * Отправка СМС-кода на телефон Собственнику
+     */
+    private function sendSms($code) {
+        
+        $phone = preg_replace('/[^0-9]/', '', Yii::$app->userProfile->mobile);
+
+        $sms = Yii::$app->sms;
+        $result = $sms->send_sms($phone, 'Повторный запрос на для смены пароля для входа на портал. Ваш СМС-код ' . $code);
+        if (!$sms->isSuccess($result)) {
+//            echo $sms->getError($result);
+            return false;
+        }
+        
+        return true;
+    }    
     
     /**
      * Аттрибуты полей

@@ -72,13 +72,38 @@ class ChangePasswordForm extends Model {
             $sms_model = new SmsOperations();
             $sms_model->operations_type = SmsOperations::TYPE_CHANGE_PASSWORD;
             $sms_model->user_id = Yii::$app->user->identity->id;
-            $sms_model->sms_code = mt_rand(10000, 99999);
+            
+            $sms_code = mt_rand(10000, 99999);
+            $sms_model->sms_code = $sms_code;
+            
             $sms_model->date_registration = time();
             $sms_model->value = Yii::$app->security->generatePasswordHash($this->new_password);
+            
+            if (!$this->sendSms($sms_code)) {
+                return false;
+            }
+            
             $sms_model->save(false);
             return true;
         }
         return false;
+    }
+    
+    /*
+     * Отправка СМС-кода на телефон Собственнику
+     */
+    private function sendSms($code) {
+        
+        $phone = preg_replace('/[^0-9]/', '', Yii::$app->userProfile->mobile);
+
+        $sms = Yii::$app->sms;
+        $result = $sms->send_sms($phone, 'Вы отправили запрос на смену пароля для входа на нормал. Ваш СМС-код ' . $code);
+        if (!$sms->isSuccess($result)) {
+//            echo $sms->getError($result);
+            return false;
+        }
+        
+        return true;
     }
     
     /*
