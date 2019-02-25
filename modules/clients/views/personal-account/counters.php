@@ -62,17 +62,3 @@ $this->params['breadcrumbs'][] = 'Показания приборов учета
     <?php endif; ?>
     
 </div>
-
-<?php
-//$this->registerJs("
-//    $('#send-indications-form').on('beforeSubmit.yii', function (e) {        
-//        if ($('#send-indications-form').hasClass('has-error')) {
-//            e.preventDefault();
-//            return false;
-//        } else {
-//            e.preventDefault();
-//            return true;
-//        }
-//    });
-//");
-?>

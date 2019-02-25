@@ -177,15 +177,12 @@ class PersonalAccountController extends AppClientsController {
             
             $result = Yii::$app->client_api->setCurrentIndications($data_json);
             
-//            if (!$result) {
-//                return ['success' => false];
-//            }
+            if (!$result) {
+                return ['success' => false];
+            }
             
             return [
                 'success' => true,
-                'data' => $array_request,
-                'result' => $result,
-                'json' => $data_json,
             ];
         }
         

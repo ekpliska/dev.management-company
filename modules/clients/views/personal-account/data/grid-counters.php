@@ -72,12 +72,12 @@ $array_image = [
                             </td>
                         <?php else: ?>
                             <td>
-                                <?php if ($indication['Текущее показание'] != null) : ?>
+                                <?php if (!$is_current) : ?>
                                     <?= $indication['Текущее показание'] ?>
                                 <?php elseif ($is_current) : ?>
                                 
                                     <div class="input-indication">
-                                    <?= Html::input('text', "{$indication['ID']}_current_indication", null, [
+                                    <?= Html::input('text', "{$indication['ID']}_current_indication", $indication['Текущее показание'] ? $indication['Текущее показание'] : null , [
                                             'id' => 'indication',
                                             'class' => 'reading-input',
                                             'data-unique-counter' => $indication['ID'],
