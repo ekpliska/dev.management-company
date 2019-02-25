@@ -113,33 +113,33 @@ class m180903_073459_table_rbac_init extends Migration
         
         
         // Права
-        $this->batchInsert($auth_manager->itemChildTable, [
-            'parent', 'child'], [
-                ['clients', 'ParticipantToVote'],
-                ['clients', 'CreateAccount'],
-                ['dispatcher', 'CreateNewsDispatcher'],
-                ['administrator', 'ClientsView'],
-                ['administrator', 'ClientsEdit'],
-                ['administrator', 'EmployeesView'],
-                ['administrator', 'EmployeesEdit'],
-                ['administrator', 'ServicesView'],
-                ['administrator', 'ServicesEdit'],
-                ['administrator', 'RequestsView'],
-                ['administrator', 'RequestsEdit'],
-                ['administrator', 'PaidReuestsView'],
-                ['administrator', 'PaidReuestsEdit'],
-                ['administrator', 'NewsView'],
-                ['administrator', 'NewsEdit'],
-                ['administrator', 'VotingsView'],
-                ['administrator', 'VotingsEdit'],
-                ['administrator', 'EstatesView'],
-                ['administrator', 'EstatesEdit'],
-                ['administrator', 'DesignerView'],
-                ['administrator', 'DesignerEdit'],
-                ['administrator', 'SettingsView'],
-                ['administrator', 'SettingsEdit'],
-            ]
-        );
+//        $this->batchInsert($auth_manager->itemChildTable, [
+//            'parent', 'child'], [
+//                ['clients', 'ParticipantToVote'],
+//                ['clients', 'CreateAccount'],
+//                ['dispatcher', 'CreateNewsDispatcher'],
+//                ['administrator', 'ClientsView'],
+//                ['administrator', 'ClientsEdit'],
+//                ['administrator', 'EmployeesView'],
+//                ['administrator', 'EmployeesEdit'],
+//                ['administrator', 'ServicesView'],
+//                ['administrator', 'ServicesEdit'],
+//                ['administrator', 'RequestsView'],
+//                ['administrator', 'RequestsEdit'],
+//                ['administrator', 'PaidReuestsView'],
+//                ['administrator', 'PaidReuestsEdit'],
+//                ['administrator', 'NewsView'],
+//                ['administrator', 'NewsEdit'],
+//                ['administrator', 'VotingsView'],
+//                ['administrator', 'VotingsEdit'],
+//                ['administrator', 'EstatesView'],
+//                ['administrator', 'EstatesEdit'],
+//                ['administrator', 'DesignerView'],
+//                ['administrator', 'DesignerEdit'],
+//                ['administrator', 'SettingsView'],
+//                ['administrator', 'SettingsEdit'],
+//            ]
+//        );
         
     }
 

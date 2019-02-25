@@ -214,6 +214,7 @@ class Houses extends ActiveRecord
                 ->all();
         
         $houses_lists = ArrayHelper::map($array, 'houses_id', function ($array) {
+            $str_adress = '';
             $str_array = explode(', ', $array['houses_gis_adress']);
             // В цикле, начиная с 3 позиции получаем, город/поселок, улицу/площадь.. и т.д, заканчивая номером дома/корпус
             for ($i = 3; $i < count($str_array); $i++) {

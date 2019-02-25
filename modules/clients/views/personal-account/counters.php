@@ -47,7 +47,6 @@ $this->params['breadcrumbs'][] = 'Показания приборов учета
             'indications' => $indications,
             'auto_request' => $auto_request,
             'is_current' => $is_current,
-            'model_indication' => $model_indication,
     ]) ?>
 
     <?php if (isset($comments_to_counters)) : ?>

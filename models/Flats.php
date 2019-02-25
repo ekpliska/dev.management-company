@@ -101,8 +101,10 @@ class Flats extends ActiveRecord
     public function afterSave($insert, $changedAttributes) {
         parent::afterSave($insert, $changedAttributes);
         
-        if ($changedAttributes['is_debtor'] == self::STATUS_DEBTOR_YES) {
-            NotesFlat::deleteAll(['notes_flat_id' => $this->flats_id]);
+        if (!$insert) {
+            if ($changedAttributes['is_debtor'] == self::STATUS_DEBTOR_YES) {
+                NotesFlat::deleteAll(['notes_flat_id' => $this->flats_id]);
+            }
         }
     }
     

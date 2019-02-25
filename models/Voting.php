@@ -53,7 +53,7 @@ class Voting extends ActiveRecord
 //                'voting_image', 
                 'voting_date_start', 'voting_date_end'], 'required'],
             
-            [['voting_house_id', 'voting_porch', 'status', 'voting_user_id'], 'integer'],
+            [['voting_house_id', 'status', 'voting_user_id'], 'integer'],
             
             ['voting_type', 'string'],
             

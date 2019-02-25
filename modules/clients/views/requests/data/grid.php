@@ -62,9 +62,9 @@
                 'attribute' => 'Исполнитель',
                 'value' => function ($data) {
                     return FormatFullNameUser::nameEmployee(
-                            $data->employeeSpecialist->employee_surname, 
-                            $data->employeeSpecialist->employee_name, 
-                            $data->employeeSpecialist->employee_second_name, 
+                            $data->employeeSpecialist['employee_surname'], 
+                            $data->employeeSpecialist['employee_name'], 
+                            $data->employeeSpecialist['employee_second_name'], 
                             false);
                 },
                 'format' => 'raw',

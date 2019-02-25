@@ -162,7 +162,7 @@ class RegistrationInVoting extends ActiveRecord
                 ->where(['voting_id' => $voting_id, 'user_id' => $user_id])
                 ->one();
         
-        $record->random_number = null;
+        $record->random_number = 0;
         $record->status = self::STATUS_ENABLED;
         
         return $record->save(false) ? true : false;

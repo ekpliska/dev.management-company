@@ -158,7 +158,7 @@ class Requests extends ActiveRecord
             $this->is_accept = false;
             Yii::$app->session->setFlash('request', [
                 'success' => true,
-                'message' => 'Ваша заявка была успешно  сформирована на лицевой счет №' . $account->account_number . '<br />'
+                'message' => 'Ваша заявка была успешно  сформирована.' . '<br />'
                     . 'Номер вашей заявки №' . $request_numder . '<br />'
                     . 'Ознакомиться с деталями заявки можно пройдя по ' . Html::a('ссылке', ['requests/view-request', 'request_numder' => $request_numder])
             ]);
