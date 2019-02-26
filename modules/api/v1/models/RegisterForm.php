@@ -114,7 +114,7 @@ class RegisterForm extends Model {
         $sms_code = mt_rand(10000, 99999);
         return [
             'success' => true,
-            'sms_code' => $sms_code,
+            'sms_code' => (string)$sms_code,
         ];
         
     }
@@ -218,8 +218,17 @@ class RegisterForm extends Model {
             // Дропаем сессию в случае успешной регистрации нового пользователя
             Yii::$app->session->destroy();
             
-            return ['success' => true];
+            // Для зарегистрированного пользователя формируем токен, для автологина
+            $token = new Token();
+            $token->user_uid = $user->user_id;
+            $token->generateToken(time() + 3600 * 24 * 365);
+            $token = $token->save() ? $token->token : null;
             
+            
+            return [
+                'success' => true,
+                'token' => $token->token,
+            ];
             
         } catch (Exception $e) {
             Yii::$app->session->destroy();

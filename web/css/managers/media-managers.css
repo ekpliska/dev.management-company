@@ -352,14 +352,85 @@
 /* End News Page */
 
 /* Voting Page */
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1470px) {
+    .vote-card__text {
+        font-size: 13px;
+    }
+}
+@media screen and (max-width: 1300px) {
+    .vote-card {
+        height: 250px;
+    }
+    .vote-card__image > img {
+        height: 248px;
+    }
+}
+@media screen and (max-width: 1200px) {
+    .vote-card {
+        height: 470px;
+    }
+    .vote-card__image {
+        border: none;
+    }
+    .vote-card__image > img {
+        width: 100%;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+        border-bottom-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+}
+@media screen and (max-width: 991px) {
+    .vote-card {
+        height: 500px;
+    }
+    .vote-card__content_title {
+        font-size: 16px;
+        display: flow-root;
+    }
+    .vote-card__content h1 > a > span {
+        font-size: 12px;
+    }
+}
+@media screen and (max-width: 901px) {
+    .vote-card__content_title {
+        font-size: 14px;
+    }
+    .vote-card__status-info > div {
+        padding: 5px;
+    }
+}
+@media screen and (max-width: 768px) {
     .__vote-767 {
         margin-top: 190px;
+    }
+    .vote-card {
+        height: 600px;
+    }
+    .vote-card__text {
+        font-size: 12px;
+    }
+    .vote-card__status-info {
+        display: grid;
+    }
+    .vote-card__status-info > div {
+        text-align: left;
+        border-right: none;
+    }
+}
+@media screen and (max-width: 730px) {
+    .vote-card {
+        height: 670px !important;
     }
 }
 @media screen and (max-width: 560px) {
     .__vote-767 {
         margin-top: 230px;
     }
+}
+@media screen and (max-width: 550px) {
+    .vote-card {
+        height: 670px !important;
+    }    
 }
 /* End Voting Page */
