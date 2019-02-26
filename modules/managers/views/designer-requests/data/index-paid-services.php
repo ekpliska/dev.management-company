@@ -7,7 +7,7 @@
  */
 ?>
 <div class="row designer-block">
-    <div class="col-md-5">
+    <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">
         <h4 class="title">Категория</h4>
         <div class="designer-block__search-block">
             <?= Html::input('text', 'search-services', null, ['id' => 'search-input-designer', 'class' => 'search-block__input', 'placeholder' => 'Поиск']) ?>
@@ -27,7 +27,7 @@
         
     </div>
         
-    <div class="col-md-7">
+    <div class="col-lg-7 col-md-7 col-sm-6 col-xs-12">
         <h4 class="title">Услуга</h4>
         <div class="designer-block__lists" id="block__lists-services">
             <?= $this->render('data-category', ['results' => $results['services']]) ?>
@@ -40,12 +40,10 @@
     <button class="action-housing-stock__button dropdown-toggle" type="button" data-toggle="dropdown"></button>
     <ul class="dropdown-menu">
         <li>
-            <?= Html::a('Добавить категорию', ['/'], ['data-target' => '#create-category-modal',
-            'data-toggle' => 'modal']) ?>
+            <a href="javascript:void(0);" data-target="#create-category-modal" data-toggle="modal">Добавить категорию</a>
         </li>
         <li>
-            <?= Html::a('Добавить услугу', ['/'], ['data-target' => '#create-service-modal',
-            'data-toggle' => 'modal']) ?>
+            <a href="javascript:void(0);" data-target="#create-service-modal" data-toggle="modal">Добавить услугу</a>
         </li>
     </ul>
 </div>

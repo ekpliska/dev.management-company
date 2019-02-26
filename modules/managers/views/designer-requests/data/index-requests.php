@@ -7,7 +7,7 @@
  */
 ?>
 <div id="_list-res" class="row housing-stock">
-    <div class="col-md-5">
+    <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">
         <h4 class="title">Заявки</h4>
         <div class="designer-block__search-block">
             <?= Html::input('text', 'search-services', null, ['id' => 'search-input-designer', 'class' => 'search-block__input', 'placeholder' => 'Поиск']) ?>
@@ -27,7 +27,7 @@
         </div>
     </div>
         
-    <div class="col-md-7">
+    <div class="col-lg-7 col-md-7 col-sm-6 col-xs-12">
         <h4 class="title">Вопросы</h4>
         <div class="designer-block__lists" id="block__lists-services">
             <?= $this->render('data-request', ['results' => $results['questions']]) ?>
@@ -40,10 +40,10 @@
     <button class="action-housing-stock__button dropdown-toggle" type="button" data-toggle="dropdown"></button>
     <ul class="dropdown-menu">
         <li>
-            <?= Html::a('Добавить заявку', ['/'], ['data-target' => '#create-request-modal', 'data-toggle' => 'modal']) ?>
+            <a href="javascript:void(0);" data-target="#create-request-modal" data-toggle="modal">Добавить заявку</a>
         </li>
         <li>
-            <?= Html::a('Добавить вопрос', ['/'], ['data-target' => '#create-question-modal', 'data-toggle' => 'modal']) ?>
+            <a href="javascript:void(0);" data-target="#create-question-modal" data-toggle="modal">Добавить вопрос</a>
         </li>
     </ul>
 </div>

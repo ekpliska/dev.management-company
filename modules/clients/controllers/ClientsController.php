@@ -42,7 +42,7 @@ class ClientsController extends AppClientsController
             }
         }
         
-//        if ($block == 'special_offers' || $block == 'house_news') {
+        if ($block == 'special_offers' || $block == 'house_news') {
             $pages = new Pagination([
                 'totalCount' => $news->count(), 
                 'pageSize' => 9, 
@@ -53,7 +53,7 @@ class ClientsController extends AppClientsController
             $news = $news->offset($pages->offset)
                     ->limit($pages->limit)
                     ->all();
-//        }
+        }
         
         return $this->render('index', [
             'news' => $news,

@@ -77,7 +77,7 @@ $action = Yii::$app->controller->action->id;
     
         <div class="row form-vote">
             
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <?= $form->field($model->voting, 'voting_text')->widget(Widget::className(), [
                     'settings' => [
                         'lang' => 'ru',

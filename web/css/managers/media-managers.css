@@ -443,3 +443,23 @@
     }    
 }
 /* End Voting Page */
+
+/* Designer Request */
+@media screen and (max-width: 1200px) {
+    .categories-list li, .requests-list li {
+        padding: 15px;
+    }
+}
+@media screen and (max-width: 768px) {
+    .designer-block > div[class*="col-"],
+    .housing-stock > div[class*="col-"] {
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+    }
+}
+@media screen and (max-width: 560px) {
+    ._sub-designer {
+        margin-top: 160px;
+    }
+}
+/* End Designer Request */

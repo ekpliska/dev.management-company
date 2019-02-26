@@ -115,7 +115,7 @@
     .navbar__pills > li, .navbar__pills > li:first-child {
         width: 150px;
         height: 50px;
-        padding: 0;
+        /*padding: 0;*/
     }
     .navbar__pills > li > a {
         font-size: 10px;

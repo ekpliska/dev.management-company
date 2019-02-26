@@ -996,8 +996,8 @@ reset-password-sms:focus{
     color: #fff;
 }
 .dropdown-menu > li > a:hover {
-/*    color: #fff;
-    background: transparent;*/
+    color: #fff;
+    background: transparent;
 }
 .dropdown-menu:before{
     border: none;

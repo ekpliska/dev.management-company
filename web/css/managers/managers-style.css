@@ -1304,6 +1304,10 @@ span.status-vote-1::before {
     font-weight: normal;
     cursor: pointer;
 }
+.action-housing-stock > ul > li:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, .15);
+}
 /* Конец Жилищный фонд */
 
 /* Конструктор заявок */
