@@ -179,4 +179,11 @@ class SiteController extends Controller
         return true;
     }
     
+    public function actionTestAccount() {
+        
+        $this->layout = false;
+        return $this->render('test-account');
+        
+    }
+    
 }

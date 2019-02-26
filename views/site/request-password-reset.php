@@ -13,6 +13,7 @@ $this->title = "Customers | Восстановаление пароля";
     <h2 class="text-center registration-title">
         Восстановление пароля        
     </h2>
+    
     <div class="login-form-group">
         
         <?php
@@ -29,10 +30,22 @@ $this->title = "Customers | Восстановаление пароля";
                 ],
             ])
         ?>
+
+        <?php if (Yii::$app->session->hasFlash('success')): ?>
+            <div class="alert alert-register-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <?php echo Yii::$app->session->getFlash('success'); ?>
+            </div>
+        <?php endif; ?>
+        <?php if (Yii::$app->session->hasFlash('error')): ?>
+            <div class="alert alert-register-error alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <?php echo Yii::$app->session->getFlash('error'); ?>
+            </div>
+        <?php endif; ?>
+
         
             <?= $form->errorSummary($model, ['header' => '']); ?>
-        
-            <small>Для восстановление пароля введите номер вашего мобильного телефона, указанный при регистрации</small>
         
             <div class="field">
                 <?= $form->field($model, 'phone')
