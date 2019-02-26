@@ -66,7 +66,7 @@ $action = Yii::$app->controller->action->id;
                                 ]])
                             ->label($model->voting->getAttributeLabel('voting_date_end'), ['class' => 'date-label']) ?> 
                 </div>
-                <div class="col-md-12">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <?= $form->field($model->voting, 'voting_title', ['template' => '<div class="field"></i>{label}{input}{error}</div>'])
                             ->textInput(['class' => 'field-input'])
                             ->label($model->voting->getAttributeLabel('voting_title'), ['class' => 'field-label'])?>
@@ -77,7 +77,7 @@ $action = Yii::$app->controller->action->id;
     
         <div class="row form-vote">
             
-            <div class="col-md-12">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <?= $form->field($model->voting, 'voting_text')->widget(Widget::className(), [
                     'settings' => [
                         'lang' => 'ru',
@@ -94,7 +94,7 @@ $action = Yii::$app->controller->action->id;
         </div>
     
         <div class="row form-vote-questions">
-            <div class="col-md-4">
+            <div class="col-md-4 col-md-4 col-xs-12 col-md-12">
                 <div class="housing-lists">
                     <?=
                         $form->field($model->voting, 'voting_type')
@@ -138,7 +138,7 @@ $action = Yii::$app->controller->action->id;
                 <?php endif; ?>                        
             </div>
             
-            <div class="col-md-8 questions-list">
+            <div class="col-md-8 col-md-8 col-xs-12 col-md-12 questions-list">
                 <fieldset>
                     <?php $question = new Questions(); ?>
                     <table id="voting-questions" class="table">

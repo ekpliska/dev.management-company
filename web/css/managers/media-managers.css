@@ -379,6 +379,9 @@
         border-bottom-left-radius: 0;
         border-bottom-left-radius: 0;
     }
+    .cover-vote {
+        min-height: 600px;
+    }
 }
 @media screen and (max-width: 991px) {
     .vote-card {
@@ -390,6 +393,12 @@
     }
     .vote-card__content h1 > a > span {
         font-size: 12px;
+    }
+    .questions-list {
+        border: none;
+    }
+    .upload-btn-wrapper {
+        top: 40%;
     }
 }
 @media screen and (max-width: 901px) {
