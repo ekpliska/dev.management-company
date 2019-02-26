@@ -963,3 +963,41 @@ textarea {
 }
 /* Конец Поиск */
 /* Конец Администратор, инпуты */
+
+/* DateTimePicker */
+.datetimepicker-days,
+.datetimepicker-months {
+    color: #fff;
+    font-size: 12px;
+}
+#date_voting_start, 
+#date_voting_end {
+    
+}
+.datetimepicker th.switch,
+.datetimepicker td, 
+.datetimepicker th {
+    font-weight: normal;
+}
+.datetimepicker thead tr:first-child th:hover,
+.datetimepicker tfoot th:hover {
+    background: rgba(255, 255, 255, .15) !important;
+}
+.datetimepicker table tr td.day:hover {
+    background: rgba(255, 255, 255, .15);
+}
+.datetimepicker table tr td.active.active,
+.datetimepicker table tr td span.active.active {
+    color: #2e1e82;
+    background-color: #fff;
+    border-color: #fff;
+}
+.datetimepicker table tr td span.active {
+    background-color: #ddd;
+    background-image: none;
+}
+.datetimepicker table tr td span.active.active, 
+.datetimepicker table tr td span.active:hover.active {
+    background: rgba(255, 255, 255, .15) !important;
+}
+/* End DateTimePicker */

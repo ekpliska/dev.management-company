@@ -34,11 +34,12 @@ $action = Yii::$app->controller->action->id;
             </div>
             
             <div class="cover-block-title">
-                <div class="col-md-6">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                     <?= $form->field($model->voting, 'voting_date_start', ['template' => '<div class="field"></i>{label}{input}{error}</div>'])
                             ->widget(DateTimePicker::className(), [
                                 'id' => 'date_voting_start',
                                 'language' => 'ru',
+                                'value' => date('Y-m-d'),
                                 'options' => [
                                     'placeholder' => 'ГГГГ-ММ-ДД ЧЧ:ММ',
                                 ],
@@ -49,11 +50,12 @@ $action = Yii::$app->controller->action->id;
                                 ]])
                             ->label($model->voting->getAttributeLabel('voting_date_start'), ['class' => 'date-label']) ?>
                 </div>
-                <div class="col-md-6">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                     <?= $form->field($model->voting, 'voting_date_end', ['template' => '<div class="field"></i>{label}{input}{error}</div>'])
                             ->widget(DateTimePicker::className(), [
                                 'id' => 'date_voting_end',
                                 'language' => 'ru',
+                                'value' => date('yyyy-mm-dd hh:ii'),
                                 'options' => [
                                     'placeholder' => 'ГГГГ-ММ-ДД ЧЧ:ММ',
                                 ],

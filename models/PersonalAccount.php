@@ -94,12 +94,12 @@ class PersonalAccount extends ActiveRecord
     public static function findAccountBeforeRegister($account) {
         
         $is_account = self::find()
-                ->select(['account_number', 'account_balance', 'flats_square'])
+                ->select(['account_number', 'account_balance', 'flats_square', 'personal_flat_id'])
                 ->joinWith('flat')
                 ->where(['account_number' => $account])
                 ->asArray()
                 ->one();
-        return $is_account ? true : false;
+        return !empty($is_account) ? true : false;
     }
     
     /*

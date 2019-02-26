@@ -8,6 +8,7 @@
     use app\models\Clients;
     use app\models\Houses;
     use app\models\Flats;
+    use app\models\Token;
 
 /**
  * Регистрация по API
@@ -112,6 +113,18 @@ class RegisterForm extends Model {
         
         // Формируем случайный смс-код
         $sms_code = mt_rand(10000, 99999);
+        
+        $phone = preg_replace('/[^0-9]/', '', $data['phone']);
+        $sms = Yii::$app->sms;
+        $result = $sms->send_sms($phone, 'Благодарим за участие в регистрации на портале управляющей компании "ELSA". СМС-код для завершения регистрации ' . $sms_code);
+        
+        if (!$sms->isSuccess($result)) {
+            return [
+                'success' => true,
+                'message' => 'Ошибка отправки СМС-кода',
+            ];
+        }        
+        
         return [
             'success' => true,
             'sms_code' => (string)$sms_code,
@@ -157,6 +170,7 @@ class RegisterForm extends Model {
             if (!$client->save()) {
                 Yii::$app->session->destroy();
                 return ['success' => false];
+                
             }
             
             // Создаем нового пользователя
@@ -214,20 +228,20 @@ class RegisterForm extends Model {
                 return ['success' => false];
             }
             
-            $transaction->commit();
-            // Дропаем сессию в случае успешной регистрации нового пользователя
-            Yii::$app->session->destroy();
-            
             // Для зарегистрированного пользователя формируем токен, для автологина
             $token = new Token();
             $token->user_uid = $user->user_id;
             $token->generateToken(time() + 3600 * 24 * 365);
             $token = $token->save() ? $token->token : null;
             
+            // Дропаем сессию в случае успешной регистрации нового пользователя
+            Yii::$app->session->destroy();
+
+            $transaction->commit();
             
             return [
                 'success' => true,
-                'token' => $token->token,
+                'token' => $token,
             ];
             
         } catch (Exception $e) {
