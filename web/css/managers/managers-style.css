@@ -437,7 +437,7 @@ div#permission_lists {
 }
 .vote-card__status-info > div {
     border-right: 1px solid #ddd;
-    padding: 5px 30px;
+    padding: 5px 20px;
     text-align: center;
 }
 .vote-card__status-info > div:last-child {
