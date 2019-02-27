@@ -11,16 +11,16 @@
  */
 class User extends BaseUser {
     
-//    public $permission_list;
-//    
-//    public function rules() {
-//        
-//        return [
-//            ['permission_list', 'safe'],
-//            ['']
-//        ];
-//        
-//    }
+    public $permission_list;
+    
+    public function rules() {
+        
+        return [
+            ['permission_list', 'safe'],
+            ['']
+        ];
+        
+    }
 
 
     public function block($client_id, $status) {

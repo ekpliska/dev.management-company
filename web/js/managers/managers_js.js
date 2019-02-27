@@ -180,6 +180,63 @@ $(document).ready(function() {
         });
     });
     
+/*
+     * Валидация ввода показаний приборов учета
+     * @type $|_$
+     */
+    $('input[class*="val_cr_"]').on('input', function () {
+        var currentIndicaton = +$(this).val();
+        var parentContainer = $(this).parent();
+        var tdBlock = $(this).closest('td');
+        var previousIndication = +tdBlock.find('input:first').val();
+        if (currentIndicaton < previousIndication || currentIndicaton == 0 || !$.isNumeric(currentIndicaton)) {
+            $(parentContainer).removeClass('has-success').addClass('has-error');
+            $(parentContainer).find('.help-block').text('Некорректные показания');
+            tdBlock.css('border', '1px solid #f28a71');
+        } else {
+            $(parentContainer).removeClass('has-error').addClass('has-success');
+            $(parentContainer).find('.help-block').text('');
+            tdBlock.css('border', 'none');
+        }
+        console.log(currentIndicaton);
+    });
+    
+    /*
+     * Раздел 'Приборы учета'
+     * Поля ввода для показания приборов учета блокируем
+     */ 
+    $('.reading-input').on('input', function() {
+        var uniqueCounter = $(this).data('uniqueCounter');
+        $("button[id=send-indication-" + uniqueCounter + "]").prop('disabled', false);
+    });
+    
+    $('.send-indication-counter').on('click', function(e) {
+        var uniqueCounter = +$(this).data('uniqueCounter'),
+            prevIndication = +$(this).data('prevIndication'),
+            curIndication = +$("input[name=" + uniqueCounter + "_current_indication]").val(),
+            labelMess = $("label[class=error-ind-" + uniqueCounter + "]");
+            resultMess = $("span[id=result-" + uniqueCounter + "]");
+        
+        var isCheck = (!curIndication || curIndication <= prevIndication) ? false : true;
+        
+        if  (isCheck === false) {
+            labelMess.text('Показание указано не верно');
+            $(this).prop('disabled', true);
+            e.preventDefault();
+        } else if (isCheck === true) {
+            labelMess.text('');
+            $.post('send-indication?counter=' + uniqueCounter + '&indication=' + curIndication, function(responce) {
+                if (responce.success === false) {
+                    labelMess.text('Ошибка отправки показаний');
+                    return false;
+                } else if (responce.success === true) {
+                    labelMess.text('Показания отправлены');
+                    resultMess.text((curIndication - prevIndication).toFixed(2));
+                }
+            });
+        }
+    });    
+    
     /*
      * Приборы учета, профиль Собственника
      */

@@ -540,5 +540,39 @@ class ClientsController extends AppManagersController {
         }
         return ['success' => false];
     }
+    
+    /*
+     * Отправка показаний приборов учета
+     */
+
+    public function actionSendIndication($counter, $indication) {
+
+        if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
+
+            Yii::$app->response->format = Response::FORMAT_JSON;
+
+            $array = [
+                "ID" => $counter,
+                "Дата снятия показания" => date('Y-m'),
+                "Текущее показание" => $indication,
+            ];
+
+            $array_request['Приборы учета'] = [
+                $array,
+            ];
+
+            $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
+
+            $result = Yii::$app->client_api->setCurrentIndications($data_json);
+
+            if (!$result) {
+                return ['success' => false];
+            }
+
+            return [
+                'success' => true,
+            ];
+        }
+    }
 
 }
