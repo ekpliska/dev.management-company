@@ -243,7 +243,6 @@ class PersonalAccountController extends AppClientsController {
             
             $data = $this->renderPartial('data/grid-counters', [
                 'indications' => $indications ? $indications : null,
-                'form' => null,
                 'auto_request' => null,
                 'is_current' => false,
                 'model_indication' => null,

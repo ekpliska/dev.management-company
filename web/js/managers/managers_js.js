@@ -144,6 +144,42 @@ $(document).ready(function() {
         
     });
     
+    var month = {
+        'январь': '01',
+        'февраль': '02',
+        'март': '03',
+        'апрель': '04',
+        'май': '05',
+        'июнь': '06',
+        'июль': '07',
+        'август': '08',
+        'сентябрь': '09',
+        'октябрь': '10',
+        'ноябрь': '11',
+        'декабрь': '12',
+    };
+    
+    /*
+     * Запрос на формирование предыдущих показаний приборов учета
+     */
+    $('#show-prev-indication').on('click', function() {
+        var dateValue = $('input[name=date_start-period-pay').val();
+        var nameMonth = dateValue.split('-')[0];
+        var year = dateValue.split('-')[1];
+        var monthNumber = month[nameMonth.toLowerCase()];
+        var accountNumber = $(this).data('account');
+        
+        if (!$.isNumeric(monthNumber) || !$.isNumeric(year)) {
+            $('.message-block').addClass('invalid-message-show').html('Ошибка запроса');
+            return false;
+        }
+        
+        $.post('find-indications?month=' + monthNumber + '&year=' + year + '&account=' + accountNumber, function(response) {
+            $('#indication-table').html(response.result);
+            console.log(response.result);
+        });
+    });
+    
     /*
      * Приборы учета, профиль Собственника
      */

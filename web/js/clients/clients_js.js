@@ -432,7 +432,6 @@ $(document).ready(function() {
         var nameMonth = dateValue.split('-')[0];
         var year = dateValue.split('-')[1];
         var monthNumber = month[nameMonth.toLowerCase()];
-        console.log(monthNumber + ' ' + year);
         
         $.post('find-indications?month=' + monthNumber + '&year=' + year, function(response) {
             $('#indication-table').html(response.result);

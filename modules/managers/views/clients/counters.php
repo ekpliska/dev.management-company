@@ -37,14 +37,20 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
                             'name' => 'date_start-period-pay',
                             'class' => '__width-small',
                             'type' => DatePicker::TYPE_INPUT,
-                            'value' => 'Месяц-Год',
+                            'value' => date('F-Y'),
                             'pluginOptions' => [
                                 'autoclose'=>true,
-                                'format' => 'M-yyyy'
+                                'format' => 'MM-yyyy',
                             ]
                         ]);        
                     ?>
-                    <?= Html::button('Показать', ['class' => 'btn-show-payment']) ?>
+                    <?= Html::button('Показать', [
+                            'id' => 'show-prev-indication',
+                            'class' => 'show-indication',
+                            'data' => [
+                                'account' => $account_choosing->account_number,
+                            ]
+                        ]) ?>
                 </div>
                 <div class="col-md-12 message-block"></div>
             </div>            
@@ -61,11 +67,12 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
                     <th>Расход</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id="indication-table">
                     <?= $this->render('data/counters-lists', [
                             'counters_lists' => $counters_lists,
                             'is_current' => $is_current,
                             'auto_request' => $auto_request,
+                            'account_number' => $account_choosing->account_number,
                     ]) ?>
                 </tbody>
             </table>

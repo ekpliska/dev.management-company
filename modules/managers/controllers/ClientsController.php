@@ -4,7 +4,6 @@
     use Yii;
     use yii\web\Response;
     use yii\web\NotFoundHttpException;
-    use yii\web\UploadedFile;
     use yii\widgets\ActiveForm;
     use app\modules\managers\controllers\AppManagersController;
     use app\modules\managers\models\Clients;
@@ -15,6 +14,7 @@
     use app\modules\managers\models\form\CounterIndicationsForm;
     use app\models\CommentsToCounters;
     use app\modules\managers\models\searchForm\searchClients;
+    use app\models\PaidServices;
 
 /**
  * Клиенты
@@ -336,7 +336,7 @@ class ClientsController extends AppManagersController {
         // Статус текущих показаний
         $is_current = true;
         // Получаем список зявок сформированных автоматически на поверу приборов учета
-        $auto_request = \app\models\PaidServices::notVerified(192);
+        $auto_request = PaidServices::notVerified($info['account_info']->account_id);
         
         $array_request = [
             'Номер лицевого счета' => $account_number,
@@ -385,6 +385,10 @@ class ClientsController extends AppManagersController {
         $user_info = User::findByClientId($client_id);
         $list_account = PersonalAccount::findByClient($client_id, true);
 
+        if (empty($client_info) || empty($account_info) || empty($user_info) || empty($list_account)) {
+            throw new NotFoundHttpException();
+        }
+        
         return [
             'client_info' => $client_info,
             'account_info' => $account_info,
@@ -503,6 +507,38 @@ class ClientsController extends AppManagersController {
         
         Yii::$app->session->setFlash('error', ['message' => 'Ошибка удаления. Обновите страницу и повторите действие еще раз']);
         return $this->redirect(Yii::$app->request->referrer);
-    }    
+    }
     
+    /*
+     * Запрос поиска предыдущих показаний приборов учета
+     */
+    public function actionFindIndications($month, $year, $account) {
+
+        Yii::$app->response->format = Response::FORMAT_JSON;
+
+        if (Yii::$app->request->isPost) {
+
+            // Формируем запрос в массиве
+            $array_request = [
+                'Номер лицевого счета' => $account,
+                'Номер месяца' => $month,
+                'Год' => $year,
+            ];
+
+            // Преобразуем массив в формат JSON
+            $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
+
+            $indications = Yii::$app->client_api->getPreviousCounters($data_json);
+
+            $data = $this->renderPartial('data/counters-lists', [
+                'counters_lists' => $indications ? $indications : null,
+                'auto_request' => null,
+                'is_current' => false,
+                'model_indication' => null,
+            ]);
+            return ['success' => true, 'result' => $data];
+        }
+        return ['success' => false];
+    }
+
 }
