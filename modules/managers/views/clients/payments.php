@@ -54,7 +54,7 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
                             ]
                         ]);        
                     ?>        
-                    <?= Html::button('Показать', ['class' => 'btn-show-payment']) ?>
+                    <?= Html::button('Показать', ['class' => 'btn-show-payment btn-show-info']) ?>
                 </div>
                 <div class="col-md-12 message-block"></div>
             </div>

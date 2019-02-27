@@ -50,7 +50,7 @@ $array_image = [
                             'data-counter-type' => $indication['Тип прибора учета'],
                             'data-counter-id' => $indication['ID']]) ?>
                 
-                <?php else: ?>
+                <?php elseif ($is_current) : ?>
                     <span class="message-request">
                         <?php $reduest_number = ArrayHelper::getValue($auto_request, $indication['ID']) ?>
                         <?= Html::a("ID заявки {$reduest_number}", ['paid-requests/view-paid-request', 'request_number' => $reduest_number]) ?>

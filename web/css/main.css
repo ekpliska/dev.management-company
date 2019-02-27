@@ -2350,7 +2350,7 @@ input[name="date_end-period-pay"]:focus {
     outline: 0;
     box-shadow: none;
 }
-.btn-show-payment {
+.btn-show-info {
     height: 45px;
     margin: 0 30px;
     border-radius: 12px;
@@ -2375,7 +2375,7 @@ input[name="date_end-period-pay"]:focus {
     text-transform: uppercase;
     font-weight: bold;
 }
-.btn-show-payment:hover,
+.btn-show-info:hover,
 .btn-edit-reading:hover,
 .btn-send-request:hover {
     border-radius: 12px;

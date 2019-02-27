@@ -46,7 +46,7 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
                     ?>
                     <?= Html::button('Показать', [
                             'id' => 'show-prev-indication',
-                            'class' => 'show-indication',
+                            'class' => 'show-indication btn-show-info',
                             'data' => [
                                 'account' => $account_choosing->account_number,
                             ]
