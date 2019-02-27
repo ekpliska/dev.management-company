@@ -150,7 +150,7 @@ $this->params['breadcrumbs'][] = 'Новая запись [Сотрудник]';
             <div class="spam-agree-txt text-center">
                 <div class="dispatch-privileges-block">
                     
-                    <?= $form->field($model, 'permission_list', ['template' => '{input}{label}'])
+                    <?= $form->field($model, 'permission_list[]', ['template' => '{input}{label}'])
                             ->checkbox(['name' => "permission_list[{$permissions_list['value']}]"], false)->label($permissions_list['name']) ?> 
                     
             </div>
@@ -169,7 +169,7 @@ $this->params['breadcrumbs'][] = 'Новая запись [Сотрудник]';
                                         ->checkboxList($permission['permission'], ['id' => "permission_lists",
                                             'item' => function($index, $label, $name, $checked, $value) {
                                                 $return = '<li><span>' . $label . '</span>';
-                                                $return .= '<label class="switch">' . '';
+                                                $return .= '<label class="switch-rule">' . '';
                                                 $return .= '<input type="checkbox" name="permission_list[' . $value . ']">';
                                                 $return .= '<span class="slider round"></span>';
                                                 $return .= '</label>';

@@ -128,7 +128,7 @@ class EmployeeFormController extends AppManagersController {
             }
             Yii::$app->session->setFlash('success', ['message' => 'Профиль сотрудника успешно обновлем']);
             return $this->redirect(Yii::$app->request->referrer);
-        }        
+        }
         
         
         return $this->render('employee-profile', [

@@ -202,7 +202,8 @@ $this->params['breadcrumbs'][] = $employee_info->fullName;
                 
                 <?php if ($type == 'dispatcher') : ?>
                     <div class="dispatch-privileges-block">
-                        <?= $form->field($user_info, 'permission_list', ['template' => '{input}{label}'])
+                        <?= 'HERE' . $permissions_list['value'] ?>
+                        <?= $form->field($user_info, 'permission_list[]', ['template' => '{input}{label}'])
                                 ->checkbox(['name' => "permission_list[{$permissions_list['value']}]"], false)->label($permissions_list['name']) ?> 
                         
                     </div>
@@ -230,7 +231,7 @@ $this->params['breadcrumbs'][] = $employee_info->fullName;
                                             'item' => function($index, $label, $name, $checked, $value) use ($current_permissions) {
                                                 $_checked = ArrayHelper::keyExists($value, $current_permissions) ? 'checked' : '';
                                                 $return = '<li><span>' . $label . '</span>';
-                                                $return .= '<label class="switch">' . '';
+                                                $return .= '<label class="switch-rule">' . '';
                                                 $return .= '<input type="checkbox" name="permission_list[' . $value . ']"' . $_checked . '>';
                                                 $return .= '<span class="slider round"></span>';
                                                 $return .= '</label>';

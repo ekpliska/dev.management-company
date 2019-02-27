@@ -17,7 +17,6 @@ class User extends BaseUser {
         
         return [
             ['permission_list', 'safe'],
-            ['']
         ];
         
     }
