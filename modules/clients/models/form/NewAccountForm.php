@@ -34,6 +34,8 @@ class NewAccountForm extends Model {
             
             ['account_number', 'checkPersonalAccount'],
             
+            ['client_info', 'safe'],
+            
         ];
     }
     
@@ -64,18 +66,16 @@ class NewAccountForm extends Model {
         $is_account = PersonalAccount::findAccountBeforeRegister($account);
         
         if ($is_account == true) {
-            $errorMsg = 'Указанный лицевой счет используется';
-            $this->addError('account_number', $errorMsg);            
-        } elseif ($is_account == false && $result_api['success'] == false) {
-            $this->addError('account_number', 'Регистрационные данные лицевого счета введены некорректно');            
+            $this->addError('account_number', 'Указанный номер номер лицевого счета зарегистрирован');
+            return false;
         }
-        
-//        if ($is_account == false && ($result_api['success'] == 'error')) {
-//            $this->addError('account_number', 'Регистрационные данные лицевого счета введены некорректно');
-//            return false;
-//        }
-        
-        $this->client_info = $result_api['account_info'];
+
+        if ($is_account == false && $result_api['Лицевой счет']['success'] == false) {
+            $this->addError('account_number', 'Регистрационные данные лицевого счета введены некорректно');
+            return false;
+        }
+
+        $this->client_info = $result_api;
         
         return true;
         

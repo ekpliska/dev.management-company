@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = 'Жилищный фонд';
     <?= AlertsShow::widget() ?>
     
     <div id="_list-res" class="row housing-stock">
-        <div class="col-md-4">
+        <div class="col-lg-4 col-md-4 col-sm-6 housing-stock__description">
             <h4 class="title">Жилой комплекс (Дома)</h4>
             <div class="panel-group" id="accordion">
                 <?php foreach ($houses_list as $house) : ?>
@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = 'Жилищный фонд';
                                 </a>
                             </h4>
                             <h4 class="house-adress">
-                                <?= FormatHelpers::formatHousingStosk($house['houses_gis_adress'], $house['houses_number']) ?>
+                                <i class="glyphicon glyphicon-map-marker"></i> <?= FormatHelpers::formatHousingStosk($house['houses_gis_adress'], $house['houses_number']) ?>
                             </h4>
                         </div>
                         <div id="house<?= $house['houses_id'] ?>" class="panel-collapse collapse house_accordion <?= $house_cookie == $house['houses_id'] ? 'in' : '' ?>">
@@ -57,20 +57,20 @@ $this->params['breadcrumbs'][] = 'Жилищный фонд';
             </div>
         </div>
         
-        <div class="col-md-2">
+        <div class="col-lg-2 col-md-3 col-sm-6 housing-stock__characteristics">
             <h4 class="title">Характеристики</h4>
             <div id="characteristic_list">
                 <?= $this->render('data/characteristics_house', ['characteristics' => $characteristics]) ?>
             </div>
         </div>
         
-        <div class="col-md-4">
+        <div class="col-lg-4 col-md-5 col-sm-6 housing-stock__flats">
             <div id="flats_list">
                 <?= $this->render('data/view_flats', ['flats' => $flats]) ?>
             </div>
         </div>
         
-        <div class="col-md-2">
+        <div class="col-lg-2 col-md-12 col-sm-6 housing-stock__files">
             <h4 class="title">Вложения</h4>
             <div id="files_list">
                 <?= $this->render('data/view_upload_files', ['files' => $files]) ?>

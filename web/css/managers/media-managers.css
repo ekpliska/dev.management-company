@@ -463,3 +463,34 @@
     }
 }
 /* End Designer Request */
+
+ /* Housing stock */
+@media screen and (max-width: 1200px) {
+    .housing-stock__flats {
+        border-right: none !important;
+    }
+    .housing-stock__files {
+        border-top: 1px solid #ddd;
+    }
+}
+@media screen and (max-width: 991px) {
+    .housing-stock__characteristics {
+        border-right: none !important;
+    }
+    .housing-stock__flats {
+        border-top: 1px solid #ddd;
+        border-right: 1px solid #ddd !important;
+    }
+}
+@media screen and (max-width: 768px) {
+    .housing-stock__flats {
+        border-top: none;
+        border-right: none !important;
+    }    
+    .housing-stock__files {
+        border-top: none;
+        border-bottom: none !important;
+    }
+}
+ /* End Housing stock */
+ 

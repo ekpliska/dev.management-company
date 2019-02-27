@@ -1020,7 +1020,7 @@ span.status-vote-1::before {
     padding: 0;
     margin: 0;
     border-right: 1px solid #ddd;
-    min-height: 700px;
+    min-height: 1200px;
 }
 .housing-stock > div[class*="col-"]:last-child {
     border-right: none;
@@ -1080,15 +1080,6 @@ span.status-vote-1::before {
 .house-adress {
     font-size: 14px;
     color: #2d18b4;
-    padding-left: 20px;
-}
-.house-adress:before {
-    font-family: 'Glyphicons Halflings';
-    content: "\e062";
-    margin-right: 5px;
-    font-size: 16px;
-    position: absolute;
-    left: 9%;
 }
 .panel-housing-stock > .panel-collapse {
     background: #454545;
