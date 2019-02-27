@@ -333,20 +333,19 @@ class ClientsController extends AppManagersController {
         
         $info = $this->getClientsInfo($client_id, $account_number);
         
-        // Получаем номер текущего месяца
-        $current_month = date('m');
-        // Получаем номер текущего года
-        $current_year = date('Y');
+        // Статус текущих показаний
+        $is_current = true;
+        // Получаем список зявок сформированных автоматически на поверу приборов учета
+        $auto_request = \app\models\PaidServices::notVerified(192);
         
         $array_request = [
             'Номер лицевого счета' => $account_number,
-            'Номер месяца' => $current_month,
-            'Год' => $current_year,
+            'Номер месяца' => date('m'),
+            'Год' => date('Y'),
         ];
         
         $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
         $counters_lists_api = Yii::$app->client_api->getPreviousCounters($data_json);
-//        echo '<pre>'; var_dump($counters_lists_api); die();
 
         return $this->render('counters', [
             'client_info' => $info['client_info'],
@@ -354,6 +353,8 @@ class ClientsController extends AppManagersController {
             'user_info' => $info['user_info'],
             'list_account' => $info['list_account'],
             'counters_lists' => $counters_lists_api ? $counters_lists_api : null,
+            'is_current' => $is_current,
+            'auto_request' => $auto_request,
         ]);
         
     }
@@ -481,9 +482,7 @@ class ClientsController extends AppManagersController {
     }
     
     /*
-     * Удалить Собственника
-     * 
-     * На главной странице, для талицы
+     * Запрос на удаление учетной записи собсвенника
      */
     public function actionDeleteClient() {
                 

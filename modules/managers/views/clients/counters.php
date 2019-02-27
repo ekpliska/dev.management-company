@@ -64,6 +64,8 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
                 <tbody>
                     <?= $this->render('data/counters-lists', [
                             'counters_lists' => $counters_lists,
+                            'is_current' => $is_current,
+                            'auto_request' => $auto_request,
                     ]) ?>
                 </tbody>
             </table>
