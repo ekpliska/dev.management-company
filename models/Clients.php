@@ -123,6 +123,20 @@ class Clients extends ActiveRecord
                 $this->clients_second_name;
     }
     
+    /*
+     * После удаления Собсвенника, удаляем также Учетную запись арендатора
+     */
+    public function afterDelete() {
+        
+        parent::afterDelete();
+        
+        $rent_info = Rents::findByRent($this->clients_id);
+        if (!empty($rent_info)) {
+            $rent_info->delete();
+        }
+        
+    }
+    
     /**
      * Настройка полей для форм
      */

@@ -478,4 +478,30 @@ class ClientsController extends AppManagersController {
         }
     }
     
+    /*
+     * Удалить Собственника
+     * 
+     * На главной странице, для талицы
+     */
+    public function actionDeleteClient() {
+                
+        $client_id = Yii::$app->request->post('clientId');
+        
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        
+        if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
+            $client_info = Clients::findById($client_id);
+            $full_name = $client_info->fullName;
+            if (!$client_info->delete()) {
+                Yii::$app->session->setFlash('error', ['message' => 'Ошибка удаления. Обновите страницу и повторите действие еще раз']);
+                return $this->redirect(Yii::$app->request->referrer);
+            }
+            Yii::$app->session->setFlash('success', ['message' => "Учетная запись собсвенника {$full_name} успешно удалена из системы"]);
+            return $this->redirect(Yii::$app->request->referrer);
+        }
+        
+        Yii::$app->session->setFlash('error', ['message' => 'Ошибка удаления. Обновите страницу и повторите действие еще раз']);
+        return $this->redirect(Yii::$app->request->referrer);
+    }    
+    
 }

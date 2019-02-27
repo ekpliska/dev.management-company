@@ -52,6 +52,6 @@ class User extends BaseUser {
         
         return $user_info->save() ? true : false;
         
-    }     
+    }
     
 }

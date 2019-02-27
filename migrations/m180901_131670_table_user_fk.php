@@ -31,6 +31,16 @@ class m180901_131670_table_user_fk extends Migration
                 'CASCADE',
                 'CASCADE'
         );
+        
+        $this->addForeignKey(
+                'fk-user-user_employee_id', 
+                '{{%user}}', 
+                'user_employee_id', 
+                '{{%employees}}', 
+                'employee_id', 
+                'CASCADE',
+                'CASCADE'
+        );
 
     }
 

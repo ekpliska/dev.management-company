@@ -5,13 +5,13 @@
 
 /* 
  * Модальное окно
- * Удалить сотрудника
+ * Удалить собственника
  */ 
 ?>
 
 <?php
 Modal::begin([
-    'id' => 'delete_employee_manager',
+    'id' => 'delete_clients_manager',
     'header' => 'Внимание!',
     'closeButton' => [
         'class' => 'close modal-close-btn',
@@ -23,11 +23,11 @@ Modal::begin([
 ]);
 ?>
 
-<p class="modal-confirm">Вы действительно хотите удалить пользователя <span id="disp-fullname"></span> из системы?</p>
+<p class="modal-confirm">Вы действительно хотите удалить пользователя <span id="client-fullname"></span> из системы?</p>
 
 <div class="modal-footer">
     <?= Html::button('Удалить', [
-            'class' => 'btn white-btn delete_empl__del', 
+            'class' => 'btn white-btn delete_client__del', 
             'id' => 'confirm_delete-empl', 
             'data-dismiss' => 'modal']) ?>
     <?= Html::button('Отмена', ['class' => 'btn red-btn', 'data-dismiss' => 'modal']) ?>

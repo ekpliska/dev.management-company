@@ -14,8 +14,10 @@ class BlockClientColumn extends DataColumn {
     public $attribute = 'status';
     // Заголовок колонки
     public $header = 'Статус';
-    // Действие контроллера
-    public $action = 'block-client';
+    // Действие контроллера для блокировки собсвенника
+    public $block_action = 'block-client';
+    // Действие контроллера для удаления собсвенника
+    public $delete_action = 'delete-client';
     // Пост параметр
     public $client_key = 'clientId';
     // Пост параметр
@@ -29,17 +31,20 @@ class BlockClientColumn extends DataColumn {
     public function init() {
         
         $this->grid->view->registerJs("
-            $('body').on('click', 'ul.dropdown-setting li', function(e) {
-                e.preventDefault();                
+        
+            var clientId;
+
+            $('body').on('click', 'ul.dropdown-setting li#block_client', function(e) {
+                e.preventDefault();
                 // Получаем data атрибут ID собственика
-                var clientId = $(this).data('clientId');
+                clientId = $(this).data('clientId');
                 // Получаем data атрибут статус собственика
                 var statusClient = $(this).data('status');
                 // Собираем все элементы, которые содержат одинаковые data атрибут ID собственика
-                var btnValue = $('[data-client-id=' + clientId + ']');
+                var btnValue = $(this);
 
                 $.ajax({
-                    url: '" . $this->action . "',
+                    url: '" . $this->block_action . "',
                     type: '" . $this->ajax_method . "',
                     data: {
                         {$this->client_key} : clientId,
@@ -62,8 +67,31 @@ class BlockClientColumn extends DataColumn {
                 });
                 
                 return false;
-                
             });
+            
+            $('body').on('click', 'ul.dropdown-setting li#delete_client', function(e) {
+                e.preventDefault();
+                // Получаем data атрибут ID собственика
+                clientId = $(this).data('clientId');
+                $('#delete_clients_manager').modal('show');
+            });
+            
+            $('body').on('click', '.delete_client__del', function(){
+                $.ajax({
+                    url: '" . $this->delete_action . "',
+                    type: '" . $this->ajax_method . "',
+                    data: {
+                        {$this->client_key} : clientId,
+                    },
+                    success: function(response) {
+                        // console.log(response);
+                    },
+                    error: function() {
+                        console.log('#2000 - 01: Ошибка Ajax запроса');
+                    },
+                });
+            });
+            
         ");
         
     }
@@ -94,10 +122,10 @@ class BlockClientColumn extends DataColumn {
             Html::beginTag('div', ['class' => 'dropdown']) .
             Html::button('<i class="glyphicon glyphicon-option-horizontal"></i>', ['class' => 'btn-settings dropdown-toggle', 'type' => 'button', 'data-toggle' => 'dropdown']) .
                 Html::beginTag('ul', ['class' => 'dropdown-menu dropdown-setting']) . 
-                    Html::beginTag('li', ['data' => $data_array]) .
+                    Html::beginTag('li', ['id' => 'block_client', 'data' => $data_array]) .
                         "&Oslash;&nbsp;&nbsp;{$label}" .
                     Html::endTag('li') .
-                    Html::beginTag('li') .
+                    Html::beginTag('li', ['id' => 'delete_client', 'data' => $data_array]) .
                         '&times;&nbsp;&nbsp;Удалить собсвенника' .
                     Html::endTag('li') .
                 Html::endTag('ul') . 
