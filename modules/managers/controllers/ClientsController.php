@@ -76,7 +76,8 @@ class ClientsController extends AppManagersController {
         $client_info = Clients::findById($client_id);
         $account_info = PersonalAccount::findByNumber($account_number);
         $list_account = PersonalAccount::findByClient($client_id, true);
-        $user_info = User::findByClientId($client_id);
+        $user_info = User::findOne(['user_client_id' => $client_id]);
+//        $user_info->scenario = User::SCENARIO_EDIT_CLIENT_PROFILE;
         
         if ($account_info->personal_rent_id) {
             $is_rent = true;
@@ -90,12 +91,25 @@ class ClientsController extends AppManagersController {
             throw new NotFoundHttpException('Вы обратились к несуществующей странице');
         }
         
-        if ($user_info->load(Yii::$app->request->post())) {
-            $file = UploadedFile::getInstance($user_info, 'user_photo');
+        if ($user_info->load(Yii::$app->request->post()) 
+                && $client_info->load(Yii::$app->request->post()) && $client_info->load(Yii::$app->request->post())) {
+            
+            if (!$user_info->validate()) {
+                Yii::$app->session->setFlash('error', ['message' => 'Ошибка обновления профиля пользователя. Обновите страницу и повторите действие еще раз']);
+                return $this->redirect(Yii::$app->request->referrer);
+            }
+            
             $user_info->uploadPhoto($file);
             $this->updateClientInfo($client_info, $edit_rent);
-            return $this->redirect(Yii::$app->request->referrer);
+            
         }
+
+//        if ($user_info->load(Yii::$app->request->post())) {
+//            $file = UploadedFile::getInstance($user_info, 'user_photo');
+//            $user_info->uploadPhoto($file);
+//            $this->updateClientInfo($client_info, $edit_rent);
+//            return $this->redirect(Yii::$app->request->referrer);
+//        }
         
         return $this->render('view-client', [
             'is_rent' => $is_rent,
@@ -121,7 +135,7 @@ class ClientsController extends AppManagersController {
                     if ($edit_rent->load(Yii::$app->request->post())) {
                         // Если есть ошибки валидации
                         if ($edit_rent->hasErrors()) {
-                            Yii::$app->session->setFlash('profile-admin-error');
+                            Yii::$app->session->setFlash('error', ['message' => 'Ошибка обновления профиля пользователя. Обновите страницу и повторите действие еще раз']);
                             return $this->redirect(Yii::$app->request->referrer);
                         }
                         $edit_rent->save();
@@ -132,20 +146,19 @@ class ClientsController extends AppManagersController {
                     $rent = new AddRent();
                     if ($rent->load(Yii::$app->request->post())) {
                         if ($rent->hasErrors()) {
-                            Yii::$app->session->setFlash('profile-admin-error');
+                            Yii::$app->session->setFlash('error', ['message' => 'Ошибка обновления профиля пользователя. Обновите страницу и повторите действие еще раз']);
                             return $this->redirect(Yii::$app->request->referrer);
                         }
                         $rent->addNewRent();
                     }
                 }
-                
-                Yii::$app->session->setFlash('profile-admin');
+                Yii::$app->session->setFlash('success', ['message' => "Учетная запись собсвенника {$client_info->fullName} успешно обновлена"]);
                 $client_info->save();
             }
         } else {
             // Если переключатель Арендатор, не пришли из пост, сохраняем данные только собственника
             if ($client_info->load(Yii::$app->request->post())) {
-                Yii::$app->session->setFlash('profile-admin');
+                Yii::$app->session->setFlash('success', ['message' => "Учетная запись собсвенника {$client_info->fullName} успешно обновлена"]);
                 $client_info->save();
             }
         }

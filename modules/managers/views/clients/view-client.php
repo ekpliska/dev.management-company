@@ -69,7 +69,7 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
 
                 <?= $form->field($user_info, 'user_mobile')
                         ->input('text', ['class' => 'field-input cell-phone'])
-                        ->label($client_info->getAttributeLabel('user_mobile'), ['class' => 'field-label']) ?>
+                        ->label($user_info->getAttributeLabel('user_mobile'), ['class' => 'field-label']) ?>
 
                 <?= $form->field($client_info, 'clients_phone')
                         ->input('text', ['class' => 'field-input house-phone'])

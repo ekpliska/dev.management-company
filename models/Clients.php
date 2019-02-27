@@ -30,24 +30,18 @@ class Clients extends ActiveRecord
         return [
             
             [[
-                'clients_name', 'clients_second_name', 'clients_surname', 
-                'clients_phone'], 'required'],
+                'clients_name', 'clients_second_name', 'clients_surname'], 'required'],
             
             [['clients_name', 'clients_second_name', 'clients_surname'], 'filter', 'filter' => 'trim'],
             
             [['clients_name', 'clients_second_name', 'clients_surname'], 'string', 'min' => 3, 'max' => 70],
             
-//            ['clients_phone',
-//                'match', 
-//                'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{4}\)?[\- ]?)?[\d\- ]{7,10}$/i', 
-//            ],
-            
-//            [[
-//                'clients_name', 'clients_second_name', 'clients_surname'], 
-//                'match',
-//                'pattern' => '/^[А-Яа-яЁё\ \-]+$/iu',
-//                'message' => 'Поле "{attribute}" может содержать только буквы русского алфавита, и знак "-"',
-//            ],
+            [[
+                'clients_name', 'clients_second_name', 'clients_surname'], 
+                'match',
+                'pattern' => '/^[А-Яа-яЁё\ \-]+$/iu',
+                'message' => 'Поле должно содержать буквы русского алфавита',
+            ],
             
             ['clients_phone', 'string', 'max' => 50],
             

@@ -10,7 +10,7 @@
 ?>
 <div class="profile-bg text-center">
     <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 face-user">
-        <?= Html::img($user_info->user_photo, [
+        <?= Html::img($user_info->photo, [
                 'class' => 'img-rounded',
                 'alt' => 'user-photo',
         ]) ?>
