@@ -5,8 +5,7 @@
  */
 ?>
 
-
-<?php if (isset($payments_lists)) : ?>
+<?php if (!empty($payments_lists) && count($payments_lists) > 0) : ?>
 <?php foreach ($payments_lists as $key => $payment) : ?>
 <tr>
     <td>

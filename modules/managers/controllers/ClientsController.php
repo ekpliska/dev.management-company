@@ -77,7 +77,6 @@ class ClientsController extends AppManagersController {
         $account_info = PersonalAccount::findByNumber($account_number);
         $list_account = PersonalAccount::findByClient($client_id, true);
         $user_info = User::findOne(['user_client_id' => $client_id]);
-//        $user_info->scenario = User::SCENARIO_EDIT_CLIENT_PROFILE;
         
         if ($account_info->personal_rent_id) {
             $is_rent = true;
@@ -104,13 +103,6 @@ class ClientsController extends AppManagersController {
             
         }
 
-//        if ($user_info->load(Yii::$app->request->post())) {
-//            $file = UploadedFile::getInstance($user_info, 'user_photo');
-//            $user_info->uploadPhoto($file);
-//            $this->updateClientInfo($client_info, $edit_rent);
-//            return $this->redirect(Yii::$app->request->referrer);
-//        }
-        
         return $this->render('view-client', [
             'is_rent' => $is_rent,
             'client_info' => $client_info,
@@ -122,7 +114,10 @@ class ClientsController extends AppManagersController {
         
     }
     
-    public function updateClientInfo($client_info, $edit_rent) {
+    /*
+     * Обновление данных собственника, арендатора
+     */
+    private function updateClientInfo($client_info, $edit_rent) {
         
         // Если переключатель Арендатор пришел из пост
         if (isset($_POST['is_rent'])) {
@@ -411,8 +406,8 @@ class ClientsController extends AppManagersController {
      */
     public function actionSearchDataOnPeriod($account_number, $date_start, $date_end, $type) {
         
-        $date_start = Yii::$app->formatter->asDate($date_start, 'Y-M-d');
-        $date_end = Yii::$app->formatter->asDate($date_end, 'Y-M-d');
+        $date_start = Yii::$app->formatter->asDate($date_start, 'YYYY-MM-d');
+        $date_end = Yii::$app->formatter->asDate($date_end, 'YYYY-MM-d');
                 
         Yii::$app->response->format = Response::FORMAT_JSON;
         
@@ -431,20 +426,14 @@ class ClientsController extends AppManagersController {
             
             switch ($type) {
                 case 'receipts':
-//                    $results = Yii::$app->client_api->getReceipts($data_json);
-                    $results = Yii::$app->params['Квитанции ЖКУ_4'];
+                    $results = Yii::$app->client_api->getReceipts($data_json);
                     break;
                 case 'payments':
-//                    $results = Yii::$app->client_api->getReceipts($data_json);
-                    $results = Yii::$app->params['Платежи'];
+                    $results = Yii::$app->client_api->getPayments($data_json);
                     break;
                 default:
                     $results['status'] == 'error';
                     break;
-            }
-            
-            if ($results['status'] == 'error') {
-                return ['success' => false];
             }
             
             $data_render = $this->renderPartial('data/' . $type . '-lists', [
