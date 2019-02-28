@@ -26,3 +26,5 @@ $this->params['breadcrumbs'][] = 'Настройки';
     </div>
     
 </div>
+
+<?= $this->render('form/add-partner', ['model' => $model]) ?>

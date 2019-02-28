@@ -75,6 +75,8 @@ class SettingsController extends AppManagersController {
         
         $partners = Partners::find()->all();
         
+        $model = new Partners();
+        
         if (Model::loadMultiple($partners, Yii::$app->request->post()) && Model::validateMultiple($partners)) {
             foreach ($partners as $partner) {
                 $partner->save(false);
@@ -82,7 +84,8 @@ class SettingsController extends AppManagersController {
             return $this->redirect('partners-list');
         }
         return $this->render('partners-list', [
-           'partners' => $partners, 
+           'partners' => $partners,
+            'model' => $model,
         ]);
         
     }
@@ -96,12 +99,15 @@ class SettingsController extends AppManagersController {
             switch ($type) {
                 case 'department':
                     $result = Departments::findOne($item);
+                    $link = 'service-duty';
                     break;
                 case 'post':
                     $result = Posts::findOne($item);
+                    $link = 'service-duty';
                     break;
                 case 'partner':
                     $result = Partners::findOne($item);
+                    $link = 'partners-list';
                     break;
             }
 
@@ -110,7 +116,7 @@ class SettingsController extends AppManagersController {
             }
         }
         
-        return $this->redirect('service-duty');
+        return $this->redirect($link);
         
     }
     
@@ -125,6 +131,9 @@ class SettingsController extends AppManagersController {
                 break;
             case 'add-post';
                 $model = new Posts();
+                break;
+            case 'add-partner';
+                $model = new Partners();
                 break;
         }
         
@@ -143,15 +152,21 @@ class SettingsController extends AppManagersController {
         switch ($model) {
             case 'department':
                 $model = new Departments();
+                $link = 'service-duty';
                 break;
             case 'post';
+                $link = 'service-duty';
                 $model = new Posts();
+                break;
+            case 'partner';
+                $model = new Partners();
+                $link = 'partners-list';
                 break;
         }
         
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $model->save();
-            return $this->redirect('service-duty');
+            return $this->redirect($link);
         }
         
     }

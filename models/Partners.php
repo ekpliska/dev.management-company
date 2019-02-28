@@ -57,8 +57,8 @@ class Partners extends ActiveRecord
     {
         return [
             'partners_id' => 'Partners ID',
-            'partners_name' => 'Partners Name',
-            'partners_adress' => 'Partners Adress',
+            'partners_name' => 'Партнер/Организация',
+            'partners_adress' => 'Физический адрес',
         ];
     }
 }

@@ -13,7 +13,7 @@
     Партнеры 
     <?= Html::button('', [
             'class' => 'add-item-settings pull-right',
-            'data-target' => '#add-department-modal-form',
+            'data-target' => '#add-partner-modal-form',
             'data-toggle' => 'modal',
         ]) ?>
 </h4>
