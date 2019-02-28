@@ -1613,6 +1613,7 @@ p.right {
 }
 .requests-view_body {
     padding: 10px;
+    min-height: 700px;
 }
 .requests-border {
     border-right: 1px solid #ddd;

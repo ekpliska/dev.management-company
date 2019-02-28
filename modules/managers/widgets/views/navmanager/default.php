@@ -7,13 +7,14 @@
  * Выпадающее навигационное меню, Администраторы
  */
 $controller = Yii::$app->controller->id;
+$action = Yii::$app->controller->action->id;
 ?>
 <?php if (isset($menu)) : ?>
 <div class="menu-wrap-manager">
     <div class="menu-sidebar-manager">
         <ul class="menu">
-            <?php foreach ($menu as $key => $item) :  ?>
-                <li class="<?= $controller == $key ? 'active' : '' ?>">
+            <?php foreach ($menu as $key => $item) : ?>
+                <li class="<?= ($controller == $key || $action == $key) ? 'active' : '' ?>">
                     <a href="<?= Url::to([$item['link']]) ?>">
                         <?= $item['name'] ?>
                     </a>

@@ -32,11 +32,11 @@ class ChangePasswordAdministrator extends Model {
             [['new_password', 'new_password_repeat'], 
                 'match', 
                 'pattern' => '/^[A-Za-z0-9\_\-]+$/iu', 
-                'message' => 'Пароль может содержать только буквы английского алфавита, цифры, знаки "-", "_"',
+                'message' => 'Пароль может содержать только буквы английского алфавита, цифры, - и _',
             ],            
             
             [['new_password', 'new_password_repeat'], 'string', 'min' => 6, 'max' => 12],
-            ['new_password', 'compare', 'compareAttribute' => 'new_password_repeat'],
+            ['new_password', 'compare', 'compareAttribute' => 'new_password_repeat', 'message' => 'Указанные пароли не совпадают'],
         ];
     }
     

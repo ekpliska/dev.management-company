@@ -34,9 +34,10 @@ Modal::begin([
             ],
         ])
     ?>
-        <?= $form->field($model, 'new_password')
-                ->input('password', ['class' => 'field-input-modal'])
-                ->label($model->getAttributeLabel('new_password'), ['class' => 'field-label-modal']) ?>
+
+    <?= $form->field($model, 'new_password')
+            ->input('password', ['class' => 'field-input-modal'])
+            ->label($model->getAttributeLabel('new_password'), ['class' => 'field-label-modal']) ?>
 
     <?= $form->field($model, 'new_password_repeat')->input('password', ['class' => 'field-input-modal'])->label($model->getAttributeLabel('new_password_repeat'), ['class' => 'field-label-modal']) ?>
 

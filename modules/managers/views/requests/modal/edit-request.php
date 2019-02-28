@@ -9,9 +9,9 @@
  */
 ?>
 <?php $form = ActiveForm::begin([
-    'id' => 'edit-request-form',
-    'enableAjaxValidation' => true,
-    'validationUrl' => ['validation-form', 'form' => 'edit-request'],
+        'id' => 'edit-request-form',
+        'enableAjaxValidation' => true,
+        'validationUrl' => ['validation-form', 'form' => 'edit-request'],
 ]);
 ?>
 

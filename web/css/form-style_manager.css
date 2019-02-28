@@ -1063,3 +1063,18 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 /* End Switch for roles */
+
+/* Multiple Form at Settings */
+.settings-page .has-error > input {
+    border: 1px solid #ef693a;
+}
+.save-settings-small {
+    background: #fff;
+    color: #2d18b4;
+    border: 2px solid #2d18b4;
+}
+.save-settings-small:hover {
+    color: #fff;
+    background: #2d18b4;    
+}
+/* End Multiple Form at Settings */
