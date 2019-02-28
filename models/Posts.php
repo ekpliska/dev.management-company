@@ -23,8 +23,9 @@ class Posts extends ActiveRecord
     public function rules()
     {
         return [
-            [['post_name'], 'required'],
+            [['post_name', 'posts_department_id'], 'required'],
             [['post_name'], 'string', 'max' => 100],
+            ['posts_department_id', 'integer'],
             [['p_description'], 'string', 'max' => 255],
         ];
     }
@@ -51,7 +52,8 @@ class Posts extends ActiveRecord
     {
         return [
             'post_id' => 'Post ID',
-            'post_name' => 'Post Name',
+            'post_name' => 'Должность',
+            'posts_department_id' => 'Подразделение',
             'p_description' => 'P Description',
         ];
     }

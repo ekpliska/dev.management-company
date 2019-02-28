@@ -33,4 +33,4 @@ $this->params['breadcrumbs'][] = 'Настройки';
 </div>
 
 <?= $this->render('form/add-department', ['department_model' => $department_model]) ?>
-<?= $this->render('form/add-post') ?>
+<?= $this->render('form/add-post', ['post_model' => $post_model, 'department_lists' => $department_lists]) ?>

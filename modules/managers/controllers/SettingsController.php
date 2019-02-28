@@ -41,6 +41,7 @@ class SettingsController extends AppManagersController {
         $department_lists = Departments::getArrayDepartments();
         
         $department_model = new Departments();
+        $post_model = new Posts();
         
         if (Model::loadMultiple($departments, Yii::$app->request->post()) && Model::validateMultiple($departments)) {
             foreach ($departments as $department) {
@@ -61,6 +62,7 @@ class SettingsController extends AppManagersController {
             'posts' => $posts,
             'department_lists' => $department_lists,
             'department_model' => $department_model,
+            'post_model' => $post_model,
         ]);
         
     }
@@ -98,7 +100,9 @@ class SettingsController extends AppManagersController {
             case 'add-department':
                 $model = new Departments();
                 break;
-            case '';
+            case 'add-post';
+                $model = new Posts();
+                break;
         }
         
         if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
@@ -117,7 +121,9 @@ class SettingsController extends AppManagersController {
             case 'department':
                 $model = new Departments();
                 break;
-            case '';
+            case 'post';
+                $model = new Posts();
+                break;
         }
         
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {

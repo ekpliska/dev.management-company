@@ -25,18 +25,25 @@
 <?php
     $form = ActiveForm::begin([
         'id' => 'add-post',
+        'action' => ['create-record', 'model' => 'post'],
         'enableAjaxValidation' => true,
-        'validationUrl' => ['edit-description-validate', 'form' => 'add-post'],
         'validateOnChange' => false,
         'validateOnBlur' => false,
+        'validationUrl' => ['validate-form', 'form' => 'add-post'],
         'fieldConfig' => [
             'template' => '<div class="field-modal">{label}{input}{error}</div>',
         ],
     ]);
 ?>
-    <?php /* = $form->field($model, 'characteristics_name')
+
+    <?= $form->field($post_model, 'posts_department_id', [
+                'template' => '<span class="paid-service-dropdown-arrow"><div class="field-modal-select">{label}{input}{error}</div></span>'])
+            ->dropDownList($department_lists, ['prompt' => '[Подразделение]'])
+            ->label(false) ?>
+
+    <?= $form->field($post_model, 'post_name')
             ->input('text', ['class' => 'field-input-modal'])
-            ->label($model->getAttributeLabel('characteristics_name'), ['class' => 'field-label-modal']) */ ?>
+            ->label($post_model->getAttributeLabel('post_name'), ['class' => 'field-label-modal']) ?>
 
     <div class="modal-footer">
         <?= Html::submitButton('Добавить', ['class' => 'btn-modal btn-modal-yes']) ?>
