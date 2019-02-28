@@ -26,13 +26,10 @@
         <div class="news-item__image">
             <span class="item__image_desc"><?= $advert['partners_name'] ?></span>
             <span class="item__image_desc"><?= FormatFullNameUser::nameEmployeeByUserID($advert['user_id']) ?></span>
-            <?= Html::img("@web/{$advert['preview']}", ['class' => 'news_preview']) ?>
+            <?= Html::img("/web/{$advert['preview']}", ['class' => 'news_preview']) ?>
         </div>
         <div class="news-item__text">
             <?= FormatHelpers::shortTextNews($advert['text'], 40) ?>
-            <p class="change-date">
-                Последний раз редактировалось, <?= FormatHelpers::formatDate($advert['date_update'], true, 1, false) ?>
-            </p>
         </div>
     </div>
 </div>

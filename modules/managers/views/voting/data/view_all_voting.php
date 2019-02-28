@@ -16,7 +16,7 @@
     <div class="vote-card row">
         <div class="col-lg-3 col-md-12 col-sm-12 col-md-12">
             <div class="vote-card__image">
-                <?= Html::img("@web{$voting['voting_image']}", ['alt' => $voting['voting_title']]) ?>
+                <?= Html::img("/web/{$voting['voting_image']}", ['alt' => $voting['voting_title']]) ?>
             </div>
         </div>
         <div class="col-lg-9 col-md-12 col-sm-12 col-md-12">
@@ -59,7 +59,7 @@
                     </div>
                 </div>
                 <div class="vote-card__text">
-                    <?= HtmlPurifier::process(strip_tags($voting['voting_text'])) ?>
+                    <?= FormatHelpers::shortTextNews($voting['voting_text'], 70) ?>
                 </div>
             </div>
         </div>

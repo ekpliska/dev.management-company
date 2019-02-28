@@ -428,7 +428,7 @@ div#permission_lists {
     font-size: 18px;
     font-weight: bold;
     color: #2d18b4;
-    margin: 10px;
+    margin: 20px 10px;
 }
 .vote-card__status-info {
     display: inline-flex;
@@ -437,7 +437,7 @@ div#permission_lists {
 }
 .vote-card__status-info > div {
     border-right: 1px solid #ddd;
-    padding: 5px 20px;
+    padding: 5px 10px;
     text-align: center;
 }
 .vote-card__status-info > div:last-child {
