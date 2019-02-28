@@ -65,7 +65,7 @@ class EmployeeFormController extends AppManagersController {
             'model' => $model,
             'department_list' => $department_list,
             'post_list' => $post_list,
-            'permissions_list' => $permissions_list,
+            'permissions_list' => isset($permissions_list) ? $permissions_list : null,
         ]);
     }
     
