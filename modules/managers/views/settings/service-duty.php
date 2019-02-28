@@ -1,7 +1,7 @@
 <?php
 
     use yii\widgets\Breadcrumbs;
-    use yii\helpers\Html;
+    use app\modules\managers\widgets\SubSettings;
 
 /* 
  * Настройки, главная
@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = 'Настройки';
     <div class="row settings-page">
         <div class="col-lg-3 col-md-3 col-sm-6 col-md-12">
             <h4 class="title">Управление</h4>
-            <?= $this->render('sub-menu/menu') ?>
+            <?= SubSettings::widget() ?>
         </div>
         <div class="col-lg-9 col-md-9 col-sm-6 col-md-12 settings-page__content text-center">
             <?= $this->render('pages/service-duty-info', [
