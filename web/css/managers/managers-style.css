@@ -1488,4 +1488,22 @@ span.status-vote-1::before {
     background: #454545;
     color: #fff;
 }
+.add-item-settings {
+    margin: -7px 10px;
+    background: transparent;
+    border: none;
+}
+.add-item-settings:before {
+    font-weight: bold;
+    content: "\e081";
+    font-family: 'Glyphicons Halflings';
+    font-size: 22px;
+    color: #1fd68d
+}
+button.delete-department-settings {
+    background: transparent;
+    border: none;
+    color: #ef693a;
+    font-size: 12px;
+}
 /* Конец Настройки */

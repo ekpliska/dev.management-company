@@ -10,7 +10,14 @@
 ?>
 
 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-    <h4 class="title">Поздразделения</h4>
+    <h4 class="title">
+        Поздразделения 
+        <?= Html::button('', [
+                'class' => 'add-item-settings pull-right',
+                'data-target' => '#add-department-modal-form',
+                'data-toggle' => 'modal',
+            ]) ?>
+    </h4>
     <?php
         $form_departments = ActiveForm::begin([
             'id' => 'multiple-form-departments',
@@ -43,7 +50,14 @@
     <?php ActiveForm::end(); ?>
 </div>
 <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
-    <h4 class="title">Должности</h4>
+    <h4 class="title">
+        Должности
+        <?= Html::button('', [
+                'class' => 'add-item-settings pull-right',
+                'data-target' => '#add-post-modal-form',
+                'data-toggle' => 'modal',
+            ]) ?>
+    </h4>
     <?php
         $form_posts = ActiveForm::begin([
             'id' => 'multiple-form-posts',
@@ -78,3 +92,6 @@
     <?= Html::submitButton('Сохранить', ['class' => 'btn save-settings-small']) ?>
     <?php ActiveForm::end(); ?>
 </div>
+
+<?= $this->render('../form/add-department') ?>
+<?= $this->render('../form/add-post') ?>
