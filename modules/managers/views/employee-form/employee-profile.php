@@ -202,7 +202,6 @@ $this->params['breadcrumbs'][] = $employee_info->fullName;
                 
                 <?php if ($type == 'dispatcher') : ?>
                     <div class="dispatch-privileges-block">
-                        <?= 'HERE' . $permissions_list['value'] ?>
                         <?= $form->field($user_info, 'permission_list[]', ['template' => '{input}{label}'])
                                 ->checkbox(['name' => "permission_list[{$permissions_list['value']}]"], false)->label($permissions_list['name']) ?> 
                         

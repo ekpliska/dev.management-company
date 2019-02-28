@@ -11,7 +11,7 @@ $(document).ready(function() {
      * Формирование зависимых списков выбора Подразделения и Должности Администратора
      */
     $('.department_list').on('change', function(e) {
-        $.post('/web/managers/app-managers/show-post?departmentId=' + $(this).val(),
+        $.post('/managers/app-managers/show-post?departmentId=' + $(this).val(),
         function(data) {
             $('.posts_list').html(data);
         });
@@ -25,7 +25,7 @@ $(document).ready(function() {
         var userId = $(this).data('user');
         var statusUser = $(this).data('status');        
         $.ajax({
-            url: '/web/managers/app-managers/block-user-in-view',
+            url: '/managers/app-managers/block-user-in-view',
             method: 'POST',
             data: {
                 userId: userId,
@@ -60,7 +60,7 @@ $(document).ready(function() {
     $(document).on('click', '.list-group-item', function() {
         var liItem = $(this).data('receipt');
         var accountNumber = $(this).data('account');
-        var url = location.origin + '/web/receipts/' + accountNumber + '/' + accountNumber + '-' + liItem + '.pdf';
+        var url = location.origin + '/receipts/' + accountNumber + '/' + accountNumber + '-' + liItem + '.pdf';
         var conteiner = $('.receipts_body');
         $('ul.receipte-of-lists li').removeClass('active');
         $(this).addClass('active');
@@ -289,7 +289,7 @@ $(document).ready(function() {
         var employerId = $(this).data('employer');
         var role = $(this).data('role');
         $.ajax({
-            url: '/web/managers/app-managers/query-delete-employee',
+            url: '/managers/app-managers/query-delete-employee',
             method: 'POST',
             dataType: 'json',
             data: {
@@ -458,7 +458,7 @@ $(document).ready(function() {
      * Формирование зависимых списков выбора имени услуги от ее категории
      */
     $(document).on('change', '#category_service', function(e) {
-        $.post('/web/managers/app-managers/show-name-service?categoryId=' + $(this).val(),
+        $.post('/managers/app-managers/show-name-service?categoryId=' + $(this).val(),
         function(data) {
             $('#service_name').html(data);
         });
@@ -473,7 +473,7 @@ $(document).ready(function() {
         var strValue = $(this).val();
         // В полученном значении удаляем все символы кроме цифр, знака -, (, )
         strValue = strValue.replace(/[^-0-9,(,)]/gim, '');
-        $.post('/web/managers/app-managers/show-houses?phone=' + strValue,
+        $.post('/managers/app-managers/show-houses?phone=' + strValue,
         function(data) {
             $('#house').html(data);
         });
@@ -586,7 +586,7 @@ $(document).ready(function() {
                     $('.btn-dispatcher').data('employee', dispatcherId);
                     $('#dispatcher-name').text('');
                     $('#dispatcher-name').html(
-                            '<a href="/web/managers/employee-form/employee-profile?type=dispatcher&employee_id=' + dispatcherId + '">' + 
+                            '<a href="/managers/employee-form/employee-profile?type=dispatcher&employee_id=' + dispatcherId + '">' + 
                             employeeName + '</a>');
                 },
                 error: function() {
@@ -629,7 +629,7 @@ $(document).ready(function() {
                     $('.btn-specialist').data('employee', specialistId);
                     $('#specialist-name').text('');
                     $('#specialist-name').html(
-                            '<a href="/web/managers/employee-form/employee-profile?type=specialist&employee_id=' + specialistId + '">' + 
+                            '<a href="/managers/employee-form/employee-profile?type=specialist&employee_id=' + specialistId + '">' + 
                             employeeName + '</a>');
                 },
                 error: function() {

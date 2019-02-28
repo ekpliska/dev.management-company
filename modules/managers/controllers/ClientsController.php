@@ -94,11 +94,11 @@ class ClientsController extends AppManagersController {
                 && $client_info->load(Yii::$app->request->post()) && $client_info->load(Yii::$app->request->post())) {
             
             if (!$user_info->validate()) {
-                Yii::$app->session->setFlash('error', ['message' => 'Ошибка обновления профиля пользователя. Обновите страницу и повторите действие еще раз']);
+                Yii::$app->session->setFlash('error', ['message' => '<b>Ошибка обновления профиля пользователя.</b> Обновите страницу и повторите действие еще раз']);
                 return $this->redirect(Yii::$app->request->referrer);
             }
             
-            $user_info->uploadPhoto($file);
+            $user_info->save();
             $this->updateClientInfo($client_info, $edit_rent);
             
         }
