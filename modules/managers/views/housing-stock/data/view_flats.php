@@ -37,7 +37,7 @@
                     <?= FormatHelpers::formatFullUserName($flat['clients_surname'], $flat['clients_name'], $flat['clients_second_name'], true) ?>
                     
                     <?php if ($flat['is_debtor']) : ?>
-                        <label class="switch pull-right">
+                        <label class="switch-rule pull-right">
                             <?= Html::checkbox($flat_status, $flat['is_debtor'], [
                                     'id' => "check_status__flat-{$flat['flats_id']}",
                                     'data-flat' => $flat['flats_id'],
