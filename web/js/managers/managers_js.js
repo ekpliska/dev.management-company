@@ -838,21 +838,24 @@ $(document).ready(function() {
      */
     $('.input-radio').on('change', function(e) {
         var forWhom = $("#form-voting input[type='radio']:checked").val();
-        if (forWhom === 'all') {
+        console.log(forWhom);
+        
+        if (forWhom === '0') {
             $('#house-lists').prop('disabled', true);
-            $('#house-lists').val(0);
-        } else if (forWhom === 'house') {
+        } else {
             $('#house-lists').prop('disabled', false);
         }
-    });
+        
+        $.post('for-whom-news?status=' + forWhom,
+            function(data) {
+                $('#house-lists').html(data);
+            }
+        );
+    });    
     
     /*
-     * При выборе Адреса на форме голосование, автоматически устанавливаем переключатель "Для конкретного дома"
+     * Предзагрузка модального окна с запросом на удаление записи голосования
      */
-    $('#house-lists').on('change', function() {
-        $('#type-vote_1').prop('checked', true);
-    });
-
     $('#delete_voting_manager').on('show.bs.modal', function(e){
         var votingId = $(e.relatedTarget).data('voting');
         $('.delete_voting__del').data('voting', votingId);

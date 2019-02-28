@@ -7,7 +7,6 @@
     use app\modules\managers\controllers\AppManagersController;
     use app\models\Voting;
     use app\models\Houses;
-    use app\helpers\FormatHelpers;
     use app\models\RegistrationInVoting;
     use app\modules\managers\models\form\VotingForm;
     use app\modules\managers\models\Clients;
@@ -63,7 +62,8 @@ class VotingController extends AppManagersController {
         
         $type_voting = Voting::getTypeVoting();
         
-        $houses_array = Houses::getAdressHousesList();
+//        $houses_array = Houses::getAdressHousesList();
+        $houses_array = [];
         
         if (Yii::$app->request->post() && $model->validate()) {
             // Приводим дату завершения, дату окончания к формату бд
@@ -110,7 +110,8 @@ class VotingController extends AppManagersController {
         
         $type_voting = Voting::getTypeVoting();
         
-        $houses_array = Houses::getAdressHousesList();
+//        $houses_array = Houses::getAdressHousesList();
+        $houses_array = empty($model->voting->voting_house_id) ? [] : Houses::getHousesList($for_list = false);
         
         // Получаем информаию о участниках голосования
         $participants = RegistrationInVoting::getParticipants($voting);
@@ -203,37 +204,57 @@ class VotingController extends AppManagersController {
         
     }
     
+//    /*
+//     * Фильтр данных по ID дома
+//     * 
+//     * @param $type string:
+//     *      Голосование
+//     */
+//    public function actionFilterByHouseAdress($house_id) {
+//
+//        if (Yii::$app->request->isPost) {
+//                        
+//            $results = Voting::find()->where(['voting_house_id' => $house_id])->asArray();
+//            $count_voting = clone $results;
+//            $pages = new Pagination([
+//                'totalCount' => $count_voting->count(),
+//                'pageSize' => 15,
+//                'defaultPageSize' => 15,
+//            ]);
+//        
+//            $view_all_voting = $results->offset($pages->offset)
+//                    ->limit($pages->limit)
+//                    ->all();            
+//            
+//            $data = $this->renderPartial('data/view_all_voting', [
+//                'view_all_voting' => $view_all_voting, 'pages' => $pages]);
+//            
+//            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;            
+//            return ['success' => true, 'data' => $data];
+//            
+//        }
+//        return ['success' => false];
+//        
+//    }
+    
     /*
-     * Фильтр данных по ID дома
-     * 
-     * @param $type string:
-     *      Голосование
+     * Зависимый переключатель статуса публикации
+     *      Для всех
+     *      Для конкретного дома
      */
-    public function actionFilterByHouseAdress($house_id) {
-
-        if (Yii::$app->request->isPost) {
-                        
-            $results = Voting::find()->where(['voting_house_id' => $house_id])->asArray();
-            $count_voting = clone $results;
-            $pages = new Pagination([
-                'totalCount' => $count_voting->count(),
-                'pageSize' => 15,
-                'defaultPageSize' => 15,
-            ]);
+    public function actionForWhomNews($status) {
         
-            $view_all_voting = $results->offset($pages->offset)
-                    ->limit($pages->limit)
-                    ->all();            
-            
-            $data = $this->renderPartial('data/view_all_voting', [
-                'view_all_voting' => $view_all_voting, 'pages' => $pages]);
-            
-            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;            
-            return ['success' => true, 'data' => $data];
-            
+        // Получаем список всех домов
+        $houses_list = Houses::getHousesList($for_list = true);
+        
+        if ($status == 'all') {
+            echo '<option value="0">-</option>';
+        } elseif ($status == 'house') {
+            foreach ($houses_list as $house) {
+                $full_adress = $house['houses_gis_adress'] . ', д. ' . $house['houses_number'];
+                echo '<option value="' . $house['houses_id'] . '">' . $full_adress . '</option>';
+            }
         }
-        return ['success' => false];
-        
     }
     
     /*

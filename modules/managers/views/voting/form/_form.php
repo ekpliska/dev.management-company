@@ -66,7 +66,7 @@ $action = Yii::$app->controller->action->id;
                                 ]])
                             ->label($model->voting->getAttributeLabel('voting_date_end'), ['class' => 'date-label']) ?> 
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <?= $form->field($model->voting, 'voting_title', ['template' => '<div class="field"></i>{label}{input}{error}</div>'])
                             ->textInput(['class' => 'field-input'])
                             ->label($model->voting->getAttributeLabel('voting_title'), ['class' => 'field-label'])?>
@@ -117,7 +117,7 @@ $action = Yii::$app->controller->action->id;
                             ->dropDownList($houses_array, [
                                 'id' => 'house-lists',
                                 'class' => 'field-input-select',
-                                'prompt' => 'Выбрать дом из списка...'])
+                                'prompt' => '[Адрес]'])
                             ->label($model->voting->getAttributeLabel('voting_house_id'), ['class' => 'field-input-select_label']) ?>
                 </div>
                 
