@@ -77,7 +77,7 @@
                 'header' => 'Статус',
                 'value' => function ($data) {
                     return 
-                        StatusHelpers::requestStatus($data['status'], $data->requests_id, false, $data['requests_grade']) .
+                        StatusHelpers::requestStatus($data['status'], $data['requests_id'], false, $data['grade']) .
                         RatingRequest::widget([
                             '_status' => $data['status'], 
                             '_request_id' => $data['number'],
@@ -88,20 +88,6 @@
                     'class' => 'managers-table_middle',
                 ],
             ],
-//            [
-//                'attribute' => 'status',
-//                'header' => 'Рейтинг',
-//                'value' => function ($data) {
-//                    return RatingRequest::widget([
-//                        '_status' => $data['status'], 
-//                        '_request_id' => $data['number'],
-//                        '_score' => $data['grade']]);
-//                },
-//                'format' => 'raw',
-//                'contentOptions' =>[
-//                    'class' => 'managers-table_middle',
-//                ],
-//            ],
             [
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{delete-request}',

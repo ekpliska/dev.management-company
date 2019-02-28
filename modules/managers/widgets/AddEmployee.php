@@ -10,8 +10,16 @@
  */
 class AddEmployee extends Widget {
     
+    /*
+     * Тип завки 
+     * requests => Заявка
+     * paid_requests => Заявка на платную услугу
+     */
+    public $type;
+    
     public $dispatcher_list = [];
     public $specialist_list = [];
+    
 
     public function init() {
         
@@ -26,6 +34,7 @@ class AddEmployee extends Widget {
         return $this->render('addemployee/employee_list', [
             'dispatcher_list' => $this->dispatcher_list,
             'specialist_list' => $this->specialist_list,
+            'type' => $this->type,
         ]);
         
     }

@@ -177,7 +177,7 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
     </div>
 </div>
 
-<?= AddEmployee::widget() ?>
+<?= AddEmployee::widget(['type' => 'requests']) ?>
 
 <?php
 $grade = $request['requests_grade'] ? $request['requests_grade'] : 0; 
