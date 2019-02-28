@@ -73,7 +73,6 @@ class PaidRequestsController extends AppManagersController {
         
         return $this->render('view-paid-request', [
             'paid_request' => $paid_request,
-            'model_comment' => $model_comment,
         ]);
     }
     
