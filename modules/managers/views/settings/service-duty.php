@@ -25,8 +25,12 @@ $this->params['breadcrumbs'][] = 'Настройки';
             <?= $this->render('pages/service-duty-info', [
                     'departments' => $departments,
                     'posts' => $posts,
-                    'department_lists' => $department_lists]) ?>
+                    'department_lists' => $department_lists,
+                ]) ?>
         </div>
     </div>
     
 </div>
+
+<?= $this->render('form/add-department', ['department_model' => $department_model]) ?>
+<?= $this->render('form/add-post') ?>

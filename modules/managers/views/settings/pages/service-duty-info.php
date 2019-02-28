@@ -92,6 +92,3 @@
     <?= Html::submitButton('Сохранить', ['class' => 'btn save-settings-small']) ?>
     <?php ActiveForm::end(); ?>
 </div>
-
-<?= $this->render('../form/add-department') ?>
-<?= $this->render('../form/add-post') ?>

@@ -40,6 +40,7 @@ class SettingsController extends AppManagersController {
         $posts = Posts::find()->indexBy('post_id')->all();
         $department_lists = Departments::getArrayDepartments();
         
+        $department_model = new Departments();
         
         if (Model::loadMultiple($departments, Yii::$app->request->post()) && Model::validateMultiple($departments)) {
             foreach ($departments as $department) {
@@ -59,6 +60,7 @@ class SettingsController extends AppManagersController {
             'departments' => $departments,
             'posts' => $posts,
             'department_lists' => $department_lists,
+            'department_model' => $department_model,
         ]);
         
     }
@@ -84,6 +86,44 @@ class SettingsController extends AppManagersController {
         }
         
         return $this->redirect('service-duty');
+        
+    }
+    
+    /*
+     * Валидация форм
+     */
+    public function actionValidateForm($form) {
+        
+        switch ($form) {
+            case 'add-department':
+                $model = new Departments();
+                break;
+            case '';
+        }
+        
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return \yii\widgets\ActiveForm::validate($model);
+        }
+    }
+    
+    /*
+     * Сохранение новых
+     * Поразделение, Должность, Партнер 
+     */
+    public function actionCreateRecord($model) {
+       
+        switch ($model) {
+            case 'department':
+                $model = new Departments();
+                break;
+            case '';
+        }
+        
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $model->save();
+            return $this->redirect('service-duty');
+        }
         
     }
     

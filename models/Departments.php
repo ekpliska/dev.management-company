@@ -48,8 +48,8 @@ class Departments extends ActiveRecord
     public function attributeLabels() {
         return [
             'department_id' => 'Department ID',
-            'department_name' => 'Department Name',
-            'd_description' => 'D Description',
+            'department_name' => 'Наименование поздразделения',
+            'd_description' => 'Описание',
         ];
     }
 
