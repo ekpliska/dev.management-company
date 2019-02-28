@@ -35,7 +35,7 @@
                 </td>
                 <td>
                     <?= Html::button('<i class="glyphicon glyphicon-trash"></i>', [
-                            'class' => 'delete-department-settings',
+                            'class' => 'delete-item-settings delete-department-settings',
                             'data' => [
                                 'record' => $index_department,
                                 'type' => 'department',
@@ -78,7 +78,7 @@
                 </td>
                 <td>
                     <?= Html::button('<i class="glyphicon glyphicon-trash"></i>', [
-                            'class' => 'delete-department-settings',
+                            'class' => 'delete-item-settings delete-department-settings',
                             'data' => [
                                 'record' => $index_post,
                                 'type' => 'post',

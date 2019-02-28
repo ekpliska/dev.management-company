@@ -14,7 +14,7 @@
         <?= Html::a('Подразделения/Должности', ['settings/service-duty']) ?>
     </li>
     <li>
-        <?= Html::a('Партнеры', ['/']) ?>
+        <?= Html::a('Партнеры', ['settings/partners-list']) ?>
     </li>
     <li>
         <?= Html::a('Настройка слайдера', ['/']) ?>

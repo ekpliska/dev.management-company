@@ -25,7 +25,7 @@ class Partners extends ActiveRecord
     public function rules()
     {
         return [
-            [['partners_name', 'partners_adress'], 'required'],
+            [['partners_name'], 'required'],
             [['partners_name'], 'string', 'max' => 170],
             [['partners_adress'], 'string', 'max' => 255],
         ];

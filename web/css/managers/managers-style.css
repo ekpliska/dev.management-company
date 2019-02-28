@@ -1500,7 +1500,7 @@ span.status-vote-1::before {
     font-size: 22px;
     color: #1fd68d
 }
-button.delete-department-settings {
+.delete-item-settings {
     background: transparent;
     border: none;
     color: #ef693a;

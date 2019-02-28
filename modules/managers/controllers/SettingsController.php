@@ -7,6 +7,7 @@
     use app\models\Organizations;
     use app\models\Departments;
     use app\models\Posts;
+    use app\models\Partners;
 
 /**
  * Тарифы
@@ -68,6 +69,25 @@ class SettingsController extends AppManagersController {
     }
     
     /*
+     * Партнеры
+     */
+    public function actionPartnersList() {
+        
+        $partners = Partners::find()->all();
+        
+        if (Model::loadMultiple($partners, Yii::$app->request->post()) && Model::validateMultiple($partners)) {
+            foreach ($partners as $partner) {
+                $partner->save(false);
+            }
+            return $this->redirect('partners-list');
+        }
+        return $this->render('partners-list', [
+           'partners' => $partners, 
+        ]);
+        
+    }
+    
+    /*
      * Удаление выбранного подразделения, должности
      */
     public function actionDeleteRecord($item, $type) {
@@ -79,6 +99,9 @@ class SettingsController extends AppManagersController {
                     break;
                 case 'post':
                     $result = Posts::findOne($item);
+                    break;
+                case 'partner':
+                    $result = Partners::findOne($item);
                     break;
             }
 
