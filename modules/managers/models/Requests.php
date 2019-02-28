@@ -72,7 +72,7 @@ class Requests extends BaseRequests {
         $client_id = $client_info['user_client_id'] ? $client_info['user_client_id'] : $client_info['user_rent_id'];
         
         $house_list = PersonalAccount::find()
-                ->select(['account_id', 'houses_gis_adress', 'houses_number', 'flats_number'])
+                ->select(['account_id', 'houses_gis_adress', 'houses_number', 'flats_number', 'personal_flat_id'])
                 ->joinWith(['flat', 'flat.house'])
                 ->andWhere(['personal_clients_id' => $client_id])
                 ->orWhere(['personal_rent_id' => $client_id])
