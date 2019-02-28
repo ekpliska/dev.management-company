@@ -28,8 +28,12 @@
                 </td>
                 <td>
                     <?= Html::button('<i class="glyphicon glyphicon-trash"></i>', [
-                            'id' => 'delete-item-settings',
-                            'class' => 'btn-delete-question']) ?>
+                            'class' => 'delete-department-settings',
+                            'data' => [
+                                'record' => $index_department,
+                                'type' => 'department',
+                            ]
+                        ]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>
@@ -60,8 +64,12 @@
                 </td>
                 <td>
                     <?= Html::button('<i class="glyphicon glyphicon-trash"></i>', [
-                            'id' => 'delete-item-settings',
-                            'class' => 'btn-delete-question']) ?>
+                            'class' => 'delete-department-settings',
+                            'data' => [
+                                'record' => $index_post,
+                                'type' => 'post',
+                            ]
+                        ]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

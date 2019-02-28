@@ -1306,8 +1306,17 @@ $(document).ready(function() {
     });
     
     
+    // ******************************************************** //
+    // ************     Start Block of Settings  ************** //
+    // ******************************************************** //
     
-    
+    $('.delete-department-settings').on('click', function() {
+        var recordId = $(this).data('record');
+        var recordType = $(this).data('type');
+        $.post('delete-record?item=' + recordId + '&type=' + recordType, function(response) {
+            console.log(response);
+        });
+    });
     
     
     

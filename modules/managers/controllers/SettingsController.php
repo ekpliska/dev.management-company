@@ -63,4 +63,28 @@ class SettingsController extends AppManagersController {
         
     }
     
+    /*
+     * Удаление выбранного подразделения, должности
+     */
+    public function actionDeleteRecord($item, $type) {
+
+        if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
+            switch ($type) {
+                case 'department':
+                    $result = Departments::findOne($item);
+                    break;
+                case 'post':
+                    $result = Posts::findOne($item);
+                    break;
+            }
+
+            if (!empty($result)) {
+                $result->delete();
+            }
+        }
+        
+        return $this->redirect('service-duty');
+        
+    }
+    
 }
