@@ -316,6 +316,9 @@
     }
 }
 @media screen and (max-width: 991px) {
+    .news-item__title > a.title {
+        font-size: 14px;
+    }
     .news-bar > li {
         display: flex;
         align-items: center;
@@ -347,6 +350,14 @@
 @media screen and (max-width: 650px) {
     .load_preview {
         height: 400px;
+    }
+}
+@media screen and (max-width: 560px) {
+    .news-margin {
+        margin-top: 120px;
+    }
+    .__sub-news-1087 {
+        margin-top: 420px;
     }
 }
 /* End News Page */

@@ -5,7 +5,6 @@
     use yii\widgets\ActiveForm;
     use vova07\imperavi\Widget;
     use app\helpers\FormatHelpers;
-    use app\modules\managers\widgets\ModalWindowsManager;    
 
 /*
  * Форма редатирования новости
@@ -116,9 +115,6 @@
                                     <?= Html::beginTag('span', ['class' => 'delete_span', 'data-files' => $doc['id']]) ?>
                                         <?= '&times;' ?>
                                     <?= Html::endTag('span') ?>
-                                    <?php /* = Html::button('&#10005;', [
-                                            'class' => 'delete_file',
-                                            'data-files' => $doc['id']]) */ ?>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

@@ -149,9 +149,9 @@ class News extends ActiveRecord
      */
     public function getPreview() {
         if (empty($this->news_preview)) {
-            return Yii::getAlias('@web') . 'images/news_preview';
+            return Yii::getAlias('/web') . 'images/news_preview';
         }
-        return Yii::getAlias('@web') . $this->news_preview;
+        return Yii::getAlias('/web') . $this->news_preview;
     }
     
     /*
