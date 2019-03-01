@@ -10,6 +10,7 @@
     use app\models\Partners;
     use app\models\SliderSettings;
     use app\models\ApiSettings;
+    use app\models\FaqSettings;
 
 /**
  * Тарифы
@@ -85,6 +86,7 @@ class SettingsController extends AppManagersController {
             }
             return $this->redirect('partners-list');
         }
+        
         return $this->render('partners-list', [
            'partners' => $partners,
             'model' => $model,
@@ -132,6 +134,29 @@ class SettingsController extends AppManagersController {
     }
     
     /*
+     * FAQ
+     */
+    public function actionFaqSettings() {
+        
+        $faq_settings = FaqSettings::find()->all();
+        
+        $model = new FaqSettings();
+        
+        if (Model::loadMultiple($faq_settings, Yii::$app->request->post()) && Model::validateMultiple($faq_settings)) {
+            foreach ($faq_settings as $faq_setting) {
+                $faq_setting->save(false);
+            }
+            return $this->redirect('faq-settings');
+        }
+        
+        return $this->render('faq-settings', [
+            'faq_settings' => $faq_settings,
+            'model' => $model,
+        ]);
+        
+    }
+    
+    /*
      * Удаление выбранного подразделения, должности
      */
     public function actionDeleteRecord($item, $type) {
@@ -153,6 +178,10 @@ class SettingsController extends AppManagersController {
                 case 'slider':
                     $result = SliderSettings::findOne($item);
                     $link = 'slider-settings';
+                    break;
+                case 'faq':
+                    $result = FaqSettings::findOne($item);
+                    $link = 'faq-settings';
                     break;
             }
 
@@ -182,6 +211,9 @@ class SettingsController extends AppManagersController {
                 break;
             case 'add-slider';
                 $model = new SliderSettings();
+                break;
+            case 'add-faq';
+                $model = new FaqSettings();
                 break;
         }
         
@@ -213,6 +245,10 @@ class SettingsController extends AppManagersController {
             case 'slider';
                 $model = new SliderSettings();
                 $link = 'slider-settings';
+                break;
+            case 'faq';
+                $model = new FaqSettings();
+                $link = 'faq-settings';
                 break;
         }
         

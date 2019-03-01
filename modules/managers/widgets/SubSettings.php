@@ -29,9 +29,9 @@ class SubSettings extends Widget {
             'label' => 'Настройки API',
             'url' => 'settings/api-settings',
         ],
-        '3' => [
-            'label' => 'Частые вопросы',
-            'url' => '',
+        'faq-settings' => [
+            'label' => 'Часто задаваевые вопросы',
+            'url' => 'settings/faq-settings',
         ],
     ];
     
