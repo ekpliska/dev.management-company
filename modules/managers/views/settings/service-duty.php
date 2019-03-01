@@ -4,7 +4,7 @@
     use app\modules\managers\widgets\SubSettings;
 
 /* 
- * Настройки, главная
+ * Настройки, Подразделения, Должности
  */
 $this->title = Yii::$app->params['site-name-manager'] .  'Настройки';
 $this->params['breadcrumbs'][] = 'Настройки';
