@@ -69,8 +69,7 @@ class SiteController extends Controller
     /**
      * Главная страница. вход в систему
      */
-    public function actionIndex()
-    {
+    public function actionIndex() {
         return $this->render('index');
     }
     

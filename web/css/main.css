@@ -180,7 +180,8 @@ button:hover {
     margin-top: 38px;
     margin-bottom: 52px;
     font-size: 16px;
-    letter-spacing: 1px; 
+    letter-spacing: 1px;
+    padding: 0 150px;
 }
 .slider-title {
     font-size: 32px;
