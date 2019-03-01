@@ -21,18 +21,53 @@ class m181217_063051_table_employees extends Migration
         $this->createTable('{{%departments}}', [
             'department_id' => $this->primaryKey(),
             'department_name' => $this->string(100)->notNull(),
-            'd_description' => $this->string(255),
         ]);
         $this->createIndex('idx-departments-department_id', '{{%departments}}', 'department_id');
+        
+        // Подразделения по умолчанию
+        $this->batchInsert('{{%departments}}', 
+                ['department_id', 'department_name'], [
+                    ['1', 'Аварийно-диспетчерская служба'],
+                    ['2', 'Отдел эксплуатации и содержания'],
+                    ['3', 'Электромонтажная служба'],
+                    ['4', 'Сантехническая служба'],
+                    ['5', 'Клининговая служба'],
+                    ['6', 'Лифтовая служба'],
+                    ['7', 'Общестроительный отдел'],
+                    ['8', 'Бухгалтерия'],
+                    ['9', 'Паспортно-регистрационный отдел'],
+                    ['10', 'ИТ отдел'],
+                    ['11', 'Отдел по работе с жалобами и претензиями'],
+                    ['12', 'Отдел утилизации бытовых отходов'],
+                    ['13', 'Служба безопасности'],
+                ]);
         
         // Должность
         $this->createTable('{{%posts}}', [
             'post_id' => $this->primaryKey(),
             'post_name' => $this->string(100)->notNull(),
             'posts_department_id' => $this->integer()->notNull(),
-            'p_description' => $this->string(255),            
         ]);
         $this->createIndex('idx-posts-post_id', '{{%posts}}', 'post_id');
+        
+        // Должности по умолчанию
+        $this->batchInsert('{{%posts}}', 
+                ['post_name', 'posts_department_id'], [
+                    ['Управляющий', '7'],
+                    ['Инженер', '2'],
+                    ['Электрик', '3'],
+                    ['Сантехник', '4'],
+                    ['Паспортист', '7'],
+                    ['Бухгалтер', '8'],
+                    ['Слесарь', '4'],
+                    ['Электромеханник', '3'],
+                    ['Мастер участка', '11'],
+                    ['ИТ-специалист', '10'],
+                    ['Отделочник', '2'],
+                    ['Эколог', '12'],
+                    ['Менеджер по клинингу', '5'],
+                    ['Охранник', '13'],
+                ]);
         
         // Сотрудники
         $this->createTable('{{%employees}}', [
