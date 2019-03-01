@@ -43,7 +43,7 @@
                 <td>
                     <?= Html::button('<i class="glyphicon glyphicon-ok"></i>', [
                             'id' => "switch-status-{$index_slider}",
-                            'class' => ($slider->is_show == SliderSettings::STATUS_SHOW) ? 'switch-status-slider-on' : 'switch-status-slider-off',
+                            'class' => ($slider->is_show == SliderSettings::STATUS_SHOW) ? 'switch-status-slider-on ' : 'switch-status-slider-on __slider-off',
                             'data' => [
                                 'record' => $slider->slider_id,
                             ]

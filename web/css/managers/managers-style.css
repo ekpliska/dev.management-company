@@ -1512,10 +1512,7 @@ span.status-vote-1::before {
     color: #1fd68d;
     font-size: 18px;
 }
-.switch-status-slider-off {
-    background: transparent;
-    border: none;
+.__slider-off {
     color: #999;
-    font-size: 18px;
 }
 /* Конец Настройки */

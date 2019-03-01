@@ -1325,7 +1325,7 @@ $(document).ready(function() {
         var sliderId = $(this).data('record');
         var button = $(this);
         $.post('switch-status-slider?item=' + sliderId, function(response) {
-            button.toggleClass('switch-status-slider-off');
+            button.toggleClass('__slider-off');
         });
     });
     
