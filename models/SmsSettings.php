@@ -14,6 +14,7 @@ class SmsSettings extends ActiveRecord {
     const TYPE_NOTICE_REPEAT_SMS = 'repeat sms';
     const TYPE_NOTICE_PARTICIPANT_VOTING = 'participant at voting';
     const TYPE_NOTICE_RECOVERY_PASSWORD = 'recovery password';
+    const TYPE_NOTICE_NEW_PASSWORD = 'new password';
     const TYPE_NOTICE_CHANGE_PASSWORD = 'change password';
     const TYPE_NOTICE_CHANGE_MOBILE = 'change mobile phone';
     const TYPE_NOTICE_SIGN_IN = 'sign in';
@@ -43,8 +44,9 @@ class SmsSettings extends ActiveRecord {
             self::TYPE_NOTICE_REPEAT_SMS => 'Повторный СМС код',
             self::TYPE_NOTICE_PARTICIPANT_VOTING => 'Принять участние в голосовании',
             self::TYPE_NOTICE_RECOVERY_PASSWORD => 'Восстановление пароля',
-            self::TYPE_NOTICE_CHANGE_PASSWORD => 'Запрос на смену пароля',
-            self::TYPE_NOTICE_CHANGE_MOBILE => 'Запрос на смену мобильного телефона',
+            self::TYPE_NOTICE_NEW_PASSWORD => 'Cгенерирован новый пароль',
+            self::TYPE_NOTICE_CHANGE_PASSWORD => 'Подтверждение смены пароля',
+            self::TYPE_NOTICE_CHANGE_MOBILE => 'Подтверждение смены номера мобильного телефона',
             self::TYPE_NOTICE_SIGN_IN => 'Подтверждение входа',
         ];
         

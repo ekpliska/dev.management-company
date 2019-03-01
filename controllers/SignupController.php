@@ -8,6 +8,7 @@
     use app\models\signup\SignupStepOne;
     use app\models\signup\SignupStepTwo;
     use app\models\signup\SignupStepThree;
+    use app\models\SmsSettings;
 
 /**
  * Регистрация
@@ -182,36 +183,20 @@ class SignupController extends Controller {
      */
     public function actionSendSmsToRegister() {
         
-        $phone = Yii::$app->request->post('phoneNumber');
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         
+        $phone = Yii::$app->request->post('phoneNumber');
         if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
-            
             // Генерируем СМС код, и записываем его в сессию
             $sms_code = mt_rand(10000, 99999);
-            
-            if (!$result = $this->sendSms($phone, $sms_code)) {
-                return ['success' => false];
+            // Отправляем смс на указанный номер телефона
+            if (!$result = Yii::$app->sms->generalMethodSendSms(SmsSettings::TYPE_NOTICE_REGISTER, $phone, $sms_code)) {
+                return ['success' => false, 'message' => $result];
             }
-            
             Yii::$app->session->set('sms_code', $sms_code);
-            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
             return ['success' => true];
         }
         
-    }
-    
-    private function sendSms($phone, $sms_code) {
-        
-        $sms = Yii::$app->sms;
-        
-        $result = $sms->send_sms($phone,
-                'Благодарим за участие в регистрации на портале управляющей компании "ELSA". СМС-код для завершения регистрации ' . $sms_code);
-        
-        if (!$sms->isSuccess($result)) {
-//            return $sms->getError($result);
-            return false;
-        }
-        return true;
     }
     
     private function setCurrentRegisterData() {

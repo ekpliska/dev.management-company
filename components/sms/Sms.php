@@ -3,6 +3,7 @@
     namespace app\components\sms;
     use yii\base\Object;
     use yii\helpers\ArrayHelper;
+    use app\models\SmsSettings;
     
 /**
  * СМС сервис
@@ -28,6 +29,36 @@ class Sms extends Object {
         8 => 'Сообщение на указанный номер не может быть досталено',
         9 => 'Отправка более одного одинакового запроса на передачу SMS-сообщения либо более пяти запросов на получение стоимости сообщения в течении минуты',
     ];
+    
+    public $sms_notice;
+    
+    /*
+     * Формируем список оповещений
+     */
+    public function init() {
+        
+        parent::init();
+        $_notice = SmsSettings::find()->asArray()->all();
+        
+        return $this->sms_notice = ArrayHelper::map($_notice, 'sms_code', 'sms_text');
+    }
+    
+    /*
+     * Главный метод, используемый в системе для отправки СМС на телефон
+     */
+    public function generalMethodSendSms($type_notice, $phone, $value) {
+        
+        $notice = ArrayHelper::getValue($this->sms_notice, $type_notice);
+        $message = $notice . $sms_code;
+        
+        $result = $this->send_sms($phone, $value);
+        if (!$this->isSuccess($result)) {
+            return $this->getError($result);
+        }
+        
+        return true;
+        
+    }
     
     public function getErrorMsg($code) {
         

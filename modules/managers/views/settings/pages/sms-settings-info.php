@@ -14,7 +14,10 @@
     <p class="balancy-sms pull-right">
         Баланс: 
         <span>
-            <?= Yii::$app->sms->get_balance() ?> &#8381;
+            <?php
+                $balancy = Yii::$app->sms->get_balance() ? Yii::$app->sms->get_balance() : 0;
+                echo "{$balancy} &#8381;";
+            ?>
         </span>
     </p>
 </h4>
