@@ -4,14 +4,11 @@
     use Yii;
     use yii\web\NotFoundHttpException;
     use yii\web\Response;
-    use yii\base\Model;
     use app\modules\clients\controllers\AppClientsController;
     use app\models\PersonalAccount;
     use app\modules\clients\models\form\NewAccountForm;
     use app\models\CommentsToCounters;
-    use app\modules\clients\models\form\SendIndicationForm;
     use app\models\PaidServices;
-    use app\models\Counters;
 
 /**
  * Контроллер по работе с разделом "Лицевой счет"
@@ -217,6 +214,9 @@ class PersonalAccountController extends AppClientsController {
         return ['success' => false];
     }
     
+    /*
+     * Запрос предыдущих показаний приборов учета
+     */
     public function actionFindIndications($month, $year) {
         
         $account_number = $this->_current_account_number;

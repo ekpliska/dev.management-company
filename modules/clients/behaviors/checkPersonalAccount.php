@@ -57,47 +57,4 @@ class checkPersonalAccount extends Behavior {
         return $this->getPersonalAccountList();
     }
     
-    
-//    /*
-//     * Метод чтения cookie выбранного лицевого счета
-//     * Если кука пустая, то берем значение из сессии
-//     * В противном случае для куки и сесси устанавливаем параметром первый ID лицевого счета из списка dorpDownList
-//     */
-//    public function sessionAccount() {
-//        
-//        $cookies = Yii::$app->response->cookies;
-//        $choosing = '';
-//        
-//        // Получаем список лицевых счетов пользователя
-//        $array_account = $this->getListAccount(Yii::$app->user->identity->id);
-//        
-//        // Получить первый ID лицевого счета из списка dropDownList
-//        $first_account = key($array_account);
-//        
-//        /*
-//         * Проверяем наличие выбранного лицевого счета в куке
-//         * Если кука есть, то получаем из нее значение лицевого счета
-//         */
-//        if (Yii::$app->request->cookies->has('_userAccount')) {
-//            $choosing = Yii::$app->request->cookies->get('_userAccount')->value;
-//        } else {
-//            $cookies->add(new \yii\web\Cookie ([
-//                'name' => '_userAccount',
-//                'value' => $first_account,
-//                'expire' => time() + 60*60*24*7,
-//            ]));
-//        }
-//        
-//        // Получаем ID лицевого счета
-//        $this->_choosing = $choosing;
-//        // Получаем номер лицевого счета
-//        $this->_value_choosing = $choosing ? $array_account[$choosing] : $array_account[$first_account];
-//        
-//        
-//        return [
-//            '_choosing' => $this->_choosing,
-//            '_value_choosing' => $this->_value_choosing,
-//        ];
-//        
-//    }
 }

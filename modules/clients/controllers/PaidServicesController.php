@@ -3,7 +3,6 @@
     namespace app\modules\clients\controllers;
     use Yii;
     use yii\web\Response;
-    use yii\helpers\ArrayHelper;
     use app\modules\clients\controllers\AppClientsController;
     use app\models\Services;
     use app\models\CategoryServices;
@@ -133,7 +132,7 @@ class PaidServicesController extends AppClientsController {
                 Yii::$app->session->setFlash('success', ['message' => "Заявка ID{$record} была успешно создана"]);
                 return $this->redirect(['paid-services/order-services']);
             } else {
-                Yii::$app->session->setFlash('error', ['message' => 'При создании заявки произошла ошибка. Обновите страницу и повторите действие заново']);
+                Yii::$app->session->setFlash('error', ['message' => 'Ошибка создания заявки. Обновите страницу и повторите действие заново']);
                 return $this->redirect(['index']);                
             }
         }

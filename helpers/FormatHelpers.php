@@ -276,9 +276,9 @@ class FormatHelpers {
     public static function previewNewsOrVote($path, $full = false) {
         
         if (empty($path)) {
-            $full_path = Yii::getAlias('@web') . '/images/not_found.png';
+            $full_path = '/web/images/not_found.png';
         } else {
-            $full_path = Yii::getAlias('@web') . $path;
+            $full_path = "/web/$path";
         }
         
         $class_css = $full ? 'news-image' : 'news-card-img';

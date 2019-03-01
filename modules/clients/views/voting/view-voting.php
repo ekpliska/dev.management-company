@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $voting['voting_title'];
 
 <div class="view-voting row">
     <div class="preview-voting">
-        <?= Html::img('@web' . $voting['voting_image'], ['class' => 'voting-image', 'alt' => 'preview-vote']) ?>
+        <?= Html::img("/web/{$voting['voting_image']}", ['class' => 'voting-image', 'alt' => 'preview-vote']) ?>
         <div class="voting-info">
             <span><?= FormatHelpers::statusVotingInView($voting['status']) ?></span>
             <span><?= FormatHelpers::numberOfDaysToFinishVote($voting['voting_date_start'], $voting['voting_date_end']) ?></span>

@@ -18,7 +18,6 @@ $this->params['breadcrumbs'][] = $news['news_title'];
         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
 ]) ?>
 
-<?php // var_dump($news); die(); ?>
 <div class="new-conteiner">
     <div class="preview-news">
     <?= FormatHelpers::previewNewsOrVote($news['news_preview'], true) ?>

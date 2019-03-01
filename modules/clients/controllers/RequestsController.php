@@ -8,7 +8,6 @@
     use yii\helpers\ArrayHelper;
     use app\modules\clients\controllers\AppClientsController;
     use app\models\Requests;
-    use app\models\Houses;
     use app\modules\clients\models\_searchForm\FilterStatusRequest;
     use app\models\CommentsToRequest;
     use app\models\Image;
@@ -63,7 +62,7 @@ class RequestsController extends AppClientsController
                 $model->uploadGallery();
                 return $this->redirect(['view-request', 'request_number' => $request_number]);
             }
-            Yii::$app->session->setFlash('error', ['message' => 'При создании заявки произошла ошибка. Обновите страницу и повторите действие заново']);
+            Yii::$app->session->setFlash('error', ['message' => 'Ошибка создания заявки. Обновите страницу и повторите действие заново']);
             return $this->redirect(['index']);
         }
 
@@ -190,7 +189,7 @@ class RequestsController extends AppClientsController
         
         // Проверяем на корректность пришедшие данные
         if (empty($request) || !isset($request)) {
-            Yii::$app->session->setFlash('error', ['message' => 'Возникла ошибка. Обновите страницу и повторите действие заново']);
+            Yii::$app->session->setFlash('error', ['message' => 'Возникла внутренная ошибка. Обновите страницу и повторите действие заново']);
             return $this->redirect(['view-request', 'request_number' => $request['requests_ident']]);
         }
 
@@ -198,12 +197,12 @@ class RequestsController extends AppClientsController
         if ($score && $request_id && Yii::$app->request->isAjax) {
             // Вызываем метод добавления оценки из модели
             if ($request->addGrade($score)) {
-                Yii::$app->session->setFlash('success', ['message' => 'Спасибо, ваша оценка принята. Ваше мнение очень важно для нас']);
+                Yii::$app->session->setFlash('success', ['message' => 'Спасибо, ваша оценка принята']);
                 return $this->redirect(['view-request', 'request_number' => $request['requests_ident']]);
             }
         }
         
-        Yii::$app->session->setFlash('error', ['message' => 'Возникла ошибка. Обновите страницу и повторите действие заново']);
+        Yii::$app->session->setFlash('error', ['message' => 'Возникла внутренная ошибка. Обновите страницу и повторите действие заново']);
         return $this->redirect(['view-request', 'request_number' => $request['requests_ident']]);        
     }
     

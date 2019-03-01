@@ -68,11 +68,11 @@ class ProfileController extends AppClientsController
                         // Сохраняем профиль Арендатора
                         $rent_info->save();
 
-                        Yii::$app->session->setFlash('success', ['message' => 'Профиль успешно обновлем']);
+                        Yii::$app->session->setFlash('success', ['message' => 'Ваш профиль был успешно обновлен']);
                         return $this->redirect(Yii::$app->request->referrer);
                         
                     }
-                    Yii::$app->session->setFlash('error', ['message' => 'При обновлении профиль произошла ошибка. Обновите страницу и повторите действие заново']);
+                    Yii::$app->session->setFlash('error', ['message' => 'Ошибка обновления профиля. Обновите страницу и повторите действие заново']);
                     return $this->redirect(Yii::$app->request->referrer);                    
                 }
             } else {
@@ -81,13 +81,13 @@ class ProfileController extends AppClientsController
                 if ($user_info->load(Yii::$app->request->post()) && $user_info->validate()) {
                     $file = UploadedFile::getInstance($user_info, 'user_photo');
                     $user_info->uploadPhoto($file);
-                    Yii::$app->session->setFlash('success', ['message' => 'Профиль успешно обновлем']);
+                    Yii::$app->session->setFlash('success', ['message' => 'Ваш профиль был успешно обновлен']);
                     return $this->redirect(Yii::$app->request->referrer);
                 }
             }
         }
         
-        Yii::$app->session->setFlash('error', ['message' => 'При обновлении профиль произошла ошибка. Обновите страницу и повторите действие заново']);
+        Yii::$app->session->setFlash('error', ['message' => 'Ошибка обновления профиля. Обновите страницу и повторите действие заново']);
         return $this->redirect(Yii::$app->request->referrer);
     }
     
@@ -252,10 +252,10 @@ class ProfileController extends AppClientsController
         
         if ($sms_model->load(Yii::$app->request->post()) && $sms_model->validate()) {
             $sms_model->changeUserInfo($type);
-            Yii::$app->session->setFlash('success', ['message' => 'Измененные настройки профиля сохранены']);
+            Yii::$app->session->setFlash('success', ['message' => 'Настройки профиля были успешно обновлены']);
             return $this->redirect(['profile/settings-profile']);
         }
-        Yii::$app->session->setFlash('error', ['message' => 'При изменении найтроек профиля возникла ошибка']);
+        Yii::$app->session->setFlash('error', ['message' => 'Ошибка сохранения настроек профиля. Обновите страницу и повторите действие заново']);
         return $this->redirect(['profile/settings-profile']);
         
     }
