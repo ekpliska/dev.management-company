@@ -1364,7 +1364,7 @@ span.status-vote-1::before {
     font-weight: bold;
     border-bottom: 1px solid #ddd;
     margin-top: -1px;
-    padding: 25px;
+    padding: 15px;
     color: #454545;
     display: block;
     cursor: pointer;
@@ -1472,9 +1472,10 @@ span.status-vote-1::before {
 .settings__sub-menu > li > a {
     color: #454545;
     padding: 20px 10px;
+    display: flex;
 }
 .settings__sub-menu > li {
-    padding: 20px 10px;
+    /*padding: 20px 10px;*/
     border-bottom: 1px solid #ddd;
 }
 .settings__sub-menu > li:hover,

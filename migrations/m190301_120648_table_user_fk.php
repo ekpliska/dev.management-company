@@ -3,9 +3,9 @@
 use yii\db\Migration;
 
 /**
- * Class m180901_131670_table_user_fk
+ * Class m190301_120648_table_user_fk
  */
-class m180901_131670_table_user_fk extends Migration
+class m190301_120648_table_user_fk extends Migration
 {
     /**
      * {@inheritdoc}
@@ -28,16 +28,6 @@ class m180901_131670_table_user_fk extends Migration
                 'user_rent_id', 
                 '{{%rents}}', 
                 'rents_id', 
-                'CASCADE',
-                'CASCADE'
-        );
-        
-        $this->addForeignKey(
-                'fk-user-user_employee_id', 
-                '{{%user}}', 
-                'user_employee_id', 
-                '{{%employees}}', 
-                'employee_id', 
                 'CASCADE',
                 'CASCADE'
         );
