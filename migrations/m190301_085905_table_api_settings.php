@@ -20,7 +20,7 @@ class m190301_085905_table_api_settings extends Migration {
         ], $table_options);
         
         $this->batchInsert('{{%api_settings}}', 
-                ['api_url', 'protocol'], [
+                ['api_url'], [
                     ['https://api.myelsa.ru/api/'],
                 ]);
         
