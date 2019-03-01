@@ -513,3 +513,12 @@
 }
  /* End Housing stock */
  
+ /* Settings Page */
+ @media screen and (max-width: 991px) {
+    .settings-page__content > div[class*='col-']:first-child {
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+        min-height: auto;
+    }
+ }
+ /* End Settings Page */

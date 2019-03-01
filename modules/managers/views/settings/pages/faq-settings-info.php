@@ -58,7 +58,9 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
-        <?= Html::submitButton('Сохранить', ['class' => 'btn save-settings-small']) ?>
+        <div class="save-btn-group text-center">
+            <?= Html::submitButton('Сохранить', ['class' => 'btn save-settings-small']) ?>
+        </div>
         <?php ActiveForm::end(); ?>
     <?php endif; ?>
 </div>

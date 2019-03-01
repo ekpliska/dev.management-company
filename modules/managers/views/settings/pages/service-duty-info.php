@@ -9,7 +9,7 @@
  */
 ?>
 
-<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
     <h4 class="title">
         Поздразделения 
         <?= Html::button('', [
@@ -46,10 +46,12 @@
             <?php endforeach; ?>
         </tbody>
     </table>
-    <?= Html::submitButton('Сохранить', ['class' => 'btn save-settings-small']) ?>
+    <div class="save-btn-group text-center">
+        <?= Html::submitButton('Сохранить', ['class' => 'btn save-settings-small']) ?>
+    </div>
     <?php ActiveForm::end(); ?>
 </div>
-<div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
     <h4 class="title">
         Должности
         <?= Html::button('', [
@@ -89,6 +91,9 @@
             <?php endforeach; ?>
         </tbody>
     </table>
-    <?= Html::submitButton('Сохранить', ['class' => 'btn save-settings-small']) ?>
+            
+    <div class="save-btn-group text-center">
+        <?= Html::submitButton('Сохранить', ['class' => 'btn save-settings-small']) ?>
+    </div>
     <?php ActiveForm::end(); ?>
 </div>
