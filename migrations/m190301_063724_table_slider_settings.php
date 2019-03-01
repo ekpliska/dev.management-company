@@ -1,6 +1,7 @@
 <?php
 
     use yii\db\Migration;
+    use app\models\SliderSettings;
 
 /**
  * Слайдер
@@ -19,15 +20,21 @@ class m190301_063724_table_slider_settings extends Migration {
             'slider_text' => $this->string(255),
             'button_1' => $this->string(255),
             'button_2' => $this->string(255),
+            'is_show' => $this->integer()->defaultValue(SliderSettings::STATUS_SHOW),
         ], $table_options);
         
-        $this->createIndex('idx-token-slider_id', '{{%slider_settings}}', 'slider_id');
+        $this->createIndex('idx-slider_settings-slider_id', '{{%slider_settings}}', 'slider_id');
+        
+        $this->batchInsert('{{%slider_settings}}', 
+                ['slider_title', 'slider_text', 'button_1', 'button_2', 'is_show'], [
+                    ['ELSA', 'Установите наше приложение и будьте всегда в курсе последних событий, оплачивайте услуги и участвуйте в голосованиях в любом месте', '', '', 1],
+                ]);
         
     }
 
     public function safeDown() {
         
-        $this->dropIndex('idx-token-slider_id', '{{%slider_settings}}');
+        $this->dropIndex('idx-slider_settings-slider_id', '{{%slider_settings}}');
         $this->dropTable('{{%slider_settings}}');
         
     }

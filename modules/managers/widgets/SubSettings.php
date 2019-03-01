@@ -21,9 +21,9 @@ class SubSettings extends Widget {
             'label' => 'Партнеры',
             'url' => 'settings/partners-list',
         ],
-        '1' => [
+        'slider-settings' => [
             'label' => 'Настройка слайдера',
-            'url' => '',
+            'url' => 'settings/slider-settings',
         ],
         '2' => [
             'label' => 'API',
