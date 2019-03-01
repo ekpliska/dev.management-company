@@ -11,6 +11,7 @@
     use app\models\SliderSettings;
     use app\models\ApiSettings;
     use app\models\FaqSettings;
+    use app\models\SmsSettings;
 
 /**
  * Тарифы
@@ -152,6 +153,26 @@ class SettingsController extends AppManagersController {
         return $this->render('faq-settings', [
             'faq_settings' => $faq_settings,
             'model' => $model,
+        ]);
+        
+    }
+    
+    /*
+     * СМС оповещения
+     */
+    public function actionSmsSettings() {
+        
+        $sms_notices = SmsSettings::find()->all();
+        
+        if (Model::loadMultiple($sms_notices, Yii::$app->request->post()) && Model::validateMultiple($sms_notices)) {
+            foreach ($sms_notices as $notice) {
+                $notice->save(false);
+            }
+            return $this->redirect('sms-settings');
+        }
+        
+        return $this->render('sms-settings', [
+            'sms_notices' => $sms_notices,
         ]);
         
     }

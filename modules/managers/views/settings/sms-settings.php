@@ -21,15 +21,11 @@ $this->params['breadcrumbs'][] = 'Настройки';
             <h4 class="title">Управление</h4>
             <?= SubSettings::widget() ?>
         </div>
-        <div class="col-lg-9 col-md-9 col-sm-6 col-md-12 settings-page__content text-center">
-            <?= $this->render('pages/service-duty-info', [
-                    'departments' => $departments,
-                    'posts' => $posts,
-                    'department_lists' => $department_lists,
+        <div class="col-lg-9 col-md-9 col-sm-6 col-md-12 settings-page__content">
+            <?= $this->render('pages/sms-settings-info', [
+                    'sms_notices' => $sms_notices,
                 ]) ?>
         </div>
     </div>
     
 </div>
-
-<?= $this->render('form/add-sms-notice', ['model' => $model]) ?>

@@ -3,6 +3,7 @@
     namespace app\models;
     use Yii;
     use yii\db\ActiveRecord;
+    use yii\helpers\ArrayHelper;
 
 /**
  * Настрофка СМС оповещений
@@ -46,6 +47,12 @@ class SmsSettings extends ActiveRecord {
             self::TYPE_NOTICE_CHANGE_MOBILE => 'Запрос на смену мобильного телефона',
             self::TYPE_NOTICE_SIGN_IN => 'Подтверждение входа',
         ];
+        
+    }
+    
+    public function getTypeName($type) {
+        
+        return ArrayHelper::getValue($this->getTypeNotices(), $type);
         
     }
 

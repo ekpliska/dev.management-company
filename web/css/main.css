@@ -1297,7 +1297,7 @@ p.right {
 .settings-input {
     padding: 5px 10px;
     border: 1px solid #ddd;
-    border-radius: 25px;
+    border-radius: 12px;
     width: 100%;
     outline: none;
 }

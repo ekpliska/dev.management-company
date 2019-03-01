@@ -33,6 +33,10 @@ class SubSettings extends Widget {
             'label' => 'Часто задаваевые вопросы',
             'url' => 'settings/faq-settings',
         ],
+        'sms-settings' => [
+            'label' => 'СМС оповещения',
+            'url' => 'settings/sms-settings',
+        ],
     ];
     
     public function run() {
