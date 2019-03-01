@@ -1515,6 +1515,20 @@ span.status-vote-1::before {
 .__slider-off {
     color: #999;
 }
+.type-sms-notice {
+    padding: 10px 0 0;
+    font-weight: bold;
+    font-size: 12px;
+    color: #2d18b4;
+}
+.balancy-sms {
+    font-style: unset;
+    text-transform: capitalize;
+    margin-right: 20px;
+}
+.balancy-sms > span {
+    color: #ef693a;;
+}
 #form-api-settings {
     padding: 0 15px;
 }

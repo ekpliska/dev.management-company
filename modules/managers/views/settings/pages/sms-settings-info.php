@@ -11,6 +11,12 @@
 
 <h4 class="title">
     СМС оповещения
+    <p class="balancy-sms pull-right">
+        Баланс: 
+        <span>
+            <?= Yii::$app->sms->get_balance() ?> &#8381;
+        </span>
+    </p>
 </h4>
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <?php
@@ -27,7 +33,7 @@
             <?php foreach ($sms_notices as $index_notice => $notice) : ?> 
             <tr>
                 <td>
-                    Тип оповещения: <?= $notice->getTypeName($notice->sms_code) ?>
+                    <p class="type-sms-notice">Тип оповещения: <?= $notice->getTypeName($notice->sms_code) ?></p>
                     <?= $form->field($notice, "[$index_notice]sms_text")
                             ->textarea(['class' => 'settings-input', 'rows' => 4])->label(false); ?>
                 </td>
