@@ -2,6 +2,7 @@
 
     use yii\widgets\ActiveForm;
     use yii\helpers\Html;
+    use app\models\SliderSettings;
 
 /* 
  * Справочники
@@ -11,6 +12,11 @@
 
 <h4 class="title">
     Настройки слайдера на главной странице
+    <?= Html::button('', [
+            'class' => 'add-item-settings pull-right',
+            'data-target' => '#add-slider-modal-form',
+            'data-toggle' => 'modal',
+        ]) ?>
 </h4>
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
     <?php
@@ -37,7 +43,7 @@
                 <td>
                     <?= Html::button('<i class="glyphicon glyphicon-ok"></i>', [
                             'id' => "switch-status-{$index_slider}",
-                            'class' => 'switch-status-slider-on',
+                            'class' => ($slider->is_show == SliderSettings::STATUS_SHOW) ? 'switch-status-slider-on' : 'switch-status-slider-off',
                             'data' => [
                                 'record' => $slider->slider_id,
                             ]
@@ -61,7 +67,7 @@
                     <?= Html::button('<i class="glyphicon glyphicon-trash"></i>', [
                             'class' => 'delete-item-settings delete-partner-settings',
                             'data' => [
-                                'record' => $index_slider,
+                                'record' => $slider->slider_id,
                                 'type' => 'slider',
                             ]
                         ]) ?>

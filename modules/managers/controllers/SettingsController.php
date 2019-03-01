@@ -98,6 +98,8 @@ class SettingsController extends AppManagersController {
         
         $sliders = SliderSettings::find()->all();
         
+        $model = new SliderSettings();
+        
         if (Model::loadMultiple($sliders, Yii::$app->request->post()) && Model::validateMultiple($sliders)) {
             foreach ($sliders as $slider) {
                 $slider->save(false);
@@ -107,6 +109,7 @@ class SettingsController extends AppManagersController {
         
         return $this->render('slider-settings', [
             'sliders' => $sliders,
+            'model' => $model,
         ]);
         
     }
@@ -160,6 +163,9 @@ class SettingsController extends AppManagersController {
             case 'add-partner';
                 $model = new Partners();
                 break;
+            case 'add-slider';
+                $model = new SliderSettings();
+                break;
         }
         
         if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
@@ -186,6 +192,10 @@ class SettingsController extends AppManagersController {
             case 'partner';
                 $model = new Partners();
                 $link = 'partners-list';
+                break;
+            case 'slider';
+                $model = new SliderSettings();
+                $link = 'slider-settings';
                 break;
         }
         

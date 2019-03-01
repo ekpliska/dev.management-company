@@ -29,7 +29,7 @@ class SliderSettings extends ActiveRecord {
             ['slider_title', 'required'],
             [['slider_title'], 'string', 'max' => 100],
             [['slider_text', 'button_1', 'button_1'], 'string', 'max' => 255],
-            [['button_1', 'button_2'], UrlValidator::className()],
+            [['button_1', 'button_2'], UrlValidator::className(), 'message' => 'Ссылка должна начинаться с http:// или https://'],
             ['is_show', 'integer'],
         ];
         
@@ -59,8 +59,8 @@ class SliderSettings extends ActiveRecord {
             'slider_id' => 'Slider ID',
             'slider_title' => 'Заголовок',
             'slider_text' => 'Краткий комментарий',
-            'button_1' => 'Ссылка на AppStore приложение',
-            'button_2' => 'Ссылка на GooglePlay приложение',
+            'button_1' => 'Ссылка на web-ресурс (левая кнопка на слайдере)',
+            'button_2' => 'Ссылка на web-ресурс (правая кнопка на слайдере)',
             'is_show' => 'Показывать слайдер на главной'
         ];
     }
