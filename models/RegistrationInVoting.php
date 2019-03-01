@@ -3,6 +3,7 @@
     namespace app\models;
     use Yii;
     use yii\db\ActiveRecord;
+    use app\models\SmsSettings;
 
 /**
  * Регистрация в голосованиии
@@ -68,8 +69,11 @@ class RegistrationInVoting extends ActiveRecord
         $this->random_number = $number;
         $this->date_registration = time();
         
-        if (!$this->sendSms($number)) {
-            return false;
+        $phone = preg_replace('/[^0-9]/', '', Yii::$app->userProfile->mobile);
+        
+        if (!$result = Yii::$app->sms->generalMethodSendSms(SmsSettings::TYPE_NOTICE_PARTICIPANT_VOTING, $phone, $number)) {
+            // return ['success' => false, 'message' => $result];
+            return ['success' => false];
         }
         
         return $this->save() ? true : false;
@@ -120,11 +124,14 @@ class RegistrationInVoting extends ActiveRecord
      */
     public function generateNewSMSCode() {
         
+        $phone = preg_replace('/[^0-9]/', '', Yii::$app->userProfile->mobile);
+        
         $new_value = $number = mt_rand(10000, 99999);
         $this->random_number = $new_value;
         
-        if (!$this->sendSms($number)) {
-            return false;
+        if (!$result = Yii::$app->sms->generalMethodSendSms(SmsSettings::TYPE_NOTICE_REPEAT_SMS, $phone, $new_value)) {
+//            return ['success' => false, 'message' => $result];
+            return ['success' => false];
         }
         
         return $this->save(false);

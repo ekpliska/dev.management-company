@@ -16,7 +16,7 @@ class m190301_120646_table_sms_settings extends Migration {
         
         $this->createTable('{{%sms_settings}}', [
             'id' => $this->primaryKey(),
-            'sms_code' => $this->string(20)->notNull(),
+            'sms_code' => $this->string(70)->notNull(),
             'sms_text' => $this->text(250)->notNull(),
         ], $table_options);
         
