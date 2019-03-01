@@ -34,6 +34,22 @@ class SliderSettings extends ActiveRecord {
         ];
         
     }
+    
+    /*
+     * Переключение статуса слайдера (Показать/Скрыть)
+     */
+    public function switchStatus() {
+        
+        if ($this->is_show == self::STATUS_SHOW) {
+            $this->is_show = self::STATUS_HIDE;
+        } elseif ($this->is_show == self::STATUS_HIDE) {
+            $this->is_show = self::STATUS_SHOW;
+        }
+        
+        return $this->save(false) ? true : false;
+        
+        
+    }
 
     /**
      * Атрибуты полей

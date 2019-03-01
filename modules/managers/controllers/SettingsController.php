@@ -8,6 +8,7 @@
     use app\models\Departments;
     use app\models\Posts;
     use app\models\Partners;
+    use app\models\SliderSettings;
 
 /**
  * Тарифы
@@ -91,6 +92,26 @@ class SettingsController extends AppManagersController {
     }
     
     /*
+     * Настройки слайдера
+     */
+    public function actionSliderSettings() {
+        
+        $sliders = SliderSettings::find()->all();
+        
+        if (Model::loadMultiple($sliders, Yii::$app->request->post()) && Model::validateMultiple($sliders)) {
+            foreach ($sliders as $slider) {
+                $slider->save(false);
+            }
+            return $this->redirect('slider-settings');
+        }
+        
+        return $this->render('slider-settings', [
+            'sliders' => $sliders,
+        ]);
+        
+    }
+    
+    /*
      * Удаление выбранного подразделения, должности
      */
     public function actionDeleteRecord($item, $type) {
@@ -108,6 +129,10 @@ class SettingsController extends AppManagersController {
                 case 'partner':
                     $result = Partners::findOne($item);
                     $link = 'partners-list';
+                    break;
+                case 'slider':
+                    $result = SliderSettings::findOne($item);
+                    $link = 'slider-settings';
                     break;
             }
 
@@ -168,6 +193,33 @@ class SettingsController extends AppManagersController {
             $model->save();
             return $this->redirect($link);
         }
+        
+    }
+    
+    /*
+     * Переключение статуса слайдера
+     */
+    public function actionSwitchStatusSlider($item) {
+        
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        
+        if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
+            
+            $slider = SliderSettings::findOne($item);
+            if (empty($slider)) {
+                return ['success' => false];
+            }
+            
+            $slider->switchStatus();
+            
+            return [
+                'success' => true, 
+                'item' => $item,
+            ];
+            
+        }
+        
+        return ['success' => false];
         
     }
     

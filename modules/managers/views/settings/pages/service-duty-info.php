@@ -37,7 +37,7 @@
                     <?= Html::button('<i class="glyphicon glyphicon-trash"></i>', [
                             'class' => 'delete-item-settings delete-department-settings',
                             'data' => [
-                                'record' => $index_department,
+                                'record' => $department->department_id,
                                 'type' => 'department',
                             ]
                         ]) ?>
@@ -80,7 +80,7 @@
                     <?= Html::button('<i class="glyphicon glyphicon-trash"></i>', [
                             'class' => 'delete-item-settings delete-department-settings',
                             'data' => [
-                                'record' => $index_post,
+                                'record' => $post->post_id,
                                 'type' => 'post',
                             ]
                         ]) ?>

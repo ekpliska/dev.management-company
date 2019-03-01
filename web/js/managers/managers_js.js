@@ -1314,10 +1314,20 @@ $(document).ready(function() {
         var recordId = $(this).data('record');
         var recordType = $(this).data('type');
         $.post('delete-record?item=' + recordId + '&type=' + recordType, function(response) {
-            console.log(response);
+//            console.log(response);
         });
     });
     
+    /*
+     * Переключение статуса слайдера
+     */
+    $('button[id^=switch-status-]').on('click', function() {
+        var sliderId = $(this).data('record');
+        var button = $(this);
+        $.post('switch-status-slider?item=' + sliderId, function(response) {
+            button.toggleClass('switch-status-slider-off');
+        });
+    });
     
     
     

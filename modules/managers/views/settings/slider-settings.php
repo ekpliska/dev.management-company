@@ -21,8 +21,8 @@ $this->params['breadcrumbs'][] = 'Настройки';
             <h4 class="title">Управление</h4>
             <?= SubSettings::widget() ?>
         </div>
-        <div class="col-lg-9 col-md-9 col-sm-6 col-md-12 settings-page__content text-center">
-            <?= $this->render('pages/slider-settings') ?>
+        <div class="col-lg-9 col-md-9 col-sm-6 col-md-12 settings-page__content">
+            <?= $this->render('pages/slider-settings-info', ['sliders' => $sliders]) ?>
         </div>
     </div>
     

@@ -1,9 +1,75 @@
 <?php
 
+    use yii\widgets\ActiveForm;
+    use yii\helpers\Html;
+
 /* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Справочники
+ * Партнеры
  */
 ?>
-slider-settings
+
+<h4 class="title">
+    Настройки слайдера на главной странице
+</h4>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+    <?php
+        $form_slider = ActiveForm::begin([
+            'id' => 'multiple-form-sliders',
+            'fieldConfig' => [
+                'template' => '{label}{input}',
+            ],
+        ]);
+    ?>
+    <table class="table table-striped ">
+        <thead>
+            <tr>
+                <td>Статус</td>
+                <td>Заголовок</td>
+                <td>Комментарий</td>
+                <td>Кнопка</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($sliders as $index_slider => $slider) : ?> 
+            <tr>
+                <td>
+                    <?= Html::button('<i class="glyphicon glyphicon-ok"></i>', [
+                            'id' => "switch-status-{$index_slider}",
+                            'class' => 'switch-status-slider-on',
+                            'data' => [
+                                'record' => $slider->slider_id,
+                            ]
+                        ]) ?>
+                </td>
+                <td>
+                    <?= $form_slider->field($slider, "[$index_slider]slider_title")
+                        ->input('text', ['class' => 'settings-input'])->label(false); ?>
+                </td>
+                <td>
+                    <?= $form_slider->field($slider, "[$index_slider]slider_text")
+                        ->textarea(['class' => 'settings-input', 'rows' => 6])->label(false); ?>
+                </td>
+                <td>
+                    <?= $form_slider->field($slider, "[$index_slider]button_1")
+                        ->input('text', ['class' => 'settings-input', 'placeHolder' => 'https://site-name.com'])->label(false); ?>
+                    <?= $form_slider->field($slider, "[$index_slider]button_2")
+                        ->input('text', ['class' => 'settings-input', 'placeHolder' => 'https://site-name.com'])->label(false); ?>
+                </td>
+                <td>
+                    <?= Html::button('<i class="glyphicon glyphicon-trash"></i>', [
+                            'class' => 'delete-item-settings delete-partner-settings',
+                            'data' => [
+                                'record' => $index_slider,
+                                'type' => 'slider',
+                            ]
+                        ]) ?>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+    <?= Html::submitButton('Сохранить', ['class' => 'btn save-settings-small']) ?>
+    <?php ActiveForm::end(); ?>
+</div>

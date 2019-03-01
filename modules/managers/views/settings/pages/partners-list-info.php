@@ -49,7 +49,7 @@
                     <?= Html::button('<i class="glyphicon glyphicon-trash"></i>', [
                             'class' => 'delete-item-settings delete-partner-settings',
                             'data' => [
-                                'record' => $index_partner,
+                                'record' => $partner->partners_id,
                                 'type' => 'partner',
                             ]
                         ]) ?>
