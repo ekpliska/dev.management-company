@@ -323,7 +323,7 @@ tbody > tr > td > div.empty::before {
     padding: 30px;
 }
 .save-btn-group {
-    margin-bottom: 40px;
+    margin: 40px 0;
 }
 .privileges-block {
     margin: 20px 0;
@@ -1514,5 +1514,8 @@ span.status-vote-1::before {
 }
 .__slider-off {
     color: #999;
+}
+#form-api-settings {
+    padding: 0 15px;
 }
 /* Конец Настройки */

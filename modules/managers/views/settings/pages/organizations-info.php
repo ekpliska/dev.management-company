@@ -84,7 +84,7 @@
 </div>
 
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center save-btn-group">
-    <?= Html::submitButton('Сохранить', ['class' => 'btn blue-btn']) ?>
+    <?= Html::submitButton('Сохранить', ['class' => 'btn save-settings-small']) ?>
 </div>
 
 <?php ActiveForm::end(); ?>

@@ -9,6 +9,7 @@
     use app\models\Posts;
     use app\models\Partners;
     use app\models\SliderSettings;
+    use app\models\ApiSettings;
 
 /**
  * Тарифы
@@ -111,6 +112,22 @@ class SettingsController extends AppManagersController {
             'sliders' => $sliders,
             'model' => $model,
         ]);
+        
+    }
+    
+    /*
+     * Настройки API
+     */
+    public function actionApiSettings() {
+        
+        $model = ApiSettings::findOne(['id' => 1]);
+        
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $model->save();
+            return $this->redirect('api-settings');
+        }
+        
+        return $this->render('api-settings', ['model' => $model]);
         
     }
     

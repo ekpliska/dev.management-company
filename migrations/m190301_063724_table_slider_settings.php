@@ -7,6 +7,7 @@
  * Слайдер
  */
 class m190301_063724_table_slider_settings extends Migration {
+    
     public function safeUp() {
         
         $table_options = null;

@@ -25,9 +25,9 @@ class SubSettings extends Widget {
             'label' => 'Настройка слайдера',
             'url' => 'settings/slider-settings',
         ],
-        '2' => [
-            'label' => 'API',
-            'url' => '',
+        'api-settings' => [
+            'label' => 'Настройки API',
+            'url' => 'settings/api-settings',
         ],
         '3' => [
             'label' => 'Частые вопросы',

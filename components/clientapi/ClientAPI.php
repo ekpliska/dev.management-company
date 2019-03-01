@@ -2,6 +2,7 @@
 
     namespace app\components\clientapi;
     use yii\base\Object;
+    use app\models\ApiSettings;
 
 /**
  * API для реализации 
@@ -9,6 +10,24 @@
  *      добавление нового лицевого счета,
  */
 class ClientAPI extends Object {
+    
+    public $url_api = 'https://api.myelsa.ru/api/';
+
+
+    public function init() {
+        
+        parent::init();
+        
+        $_url = ApiSettings::find()
+                ->indexBy('id')
+                ->asArray()
+                ->one();
+        
+        if (!empty($_url)) {
+            $this->url_api = $_url['api_url'];
+        }
+        
+    }
     
     /*
      * Регистрация нового пользователя
@@ -90,7 +109,7 @@ class ClientAPI extends Object {
      */
     private function readUrl($path, $data) {
         
-        $url = 'https://api.myelsa.ru/api/' . $path;
+        $url = $this->url_api . $path;
         
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
