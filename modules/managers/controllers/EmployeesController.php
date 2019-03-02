@@ -60,197 +60,213 @@ class EmployeesController extends AppManagersController {
         ]);
     }
     
-    
     /*
-     * Создать нового диспетчера
-     * 
-     * @param model $model Модель Новый сотрудник
-     * @param array $department_list Список подраздерений
-     * @param array $roles Роли пользователя
+     * Все Администраторы
      */
-    public function actionAddDispatcher() {
+    public function actionAdministrators() {
         
-        $this->view->title = 'Диспетчер (+)';
+        $model = new searchEmployees();
         
-        $model = new EmployeeForm();
+        $departments = Departments::getArrayDepartments();
+        $posts = Posts::getArrayPosts();
         
-        $department_list = Departments::getArrayDepartments();
-        $post_list = [];
-        $roles = User::getRoles();
+        $manager_list = $model->search(Yii::$app->request->queryParams, 'administrator');
         
-        
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            $file = UploadedFile::getInstance($model, 'photo');
-            $model->photo = $file;
-            $employer_id = $model->addDispatcher($file);
-            if ($employer_id) {
-                return $this->redirect(['edit-dispatcher', 'dispatcher_id' => $employer_id]);
-            }
-        }
-        
-        return $this->render('add-employee', [
+        return $this->render('administrators', [
             'model' => $model,
-            'department_list' => $department_list,
-            'post_list' => $post_list,
-            'roles' => $roles,
+            'manager_list' => $manager_list,
+            'departments' => $departments,
+            'posts' => $posts,
         ]);
-    }
-
-    /*
-     * Создать нового Специалиста
-     * 
-     * @param model $model Модель Новый сотрудник
-     * @param array $department_list Список подраздерений
-     * @param array $roles Роли пользователя
-     */    
-    public function actionAddSpecialist() {
-        
-        $this->view->title = 'Специалист (+)';
-        
-        $model = new EmployeeForm();
-        
-        $department_list = Departments::getArrayDepartments();
-        $post_list = [];
-        $roles = User::getRoles();
-        
-        
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            $file = UploadedFile::getInstance($model, 'photo');
-            $model->photo = $file;
-            $employer_id = $model->addDispatcher($file);
-            if ($employer_id) {
-                return $this->redirect(['edit-specialist', 'specialist_id' => $employer_id]);
-            }
-        }
-        
-        return $this->render('add-employer', [
-            'model' => $model,
-            'department_list' => $department_list,
-            'post_list' => $post_list,
-            'roles' => $roles,
-        ]);        
-        
     }
     
-    /*
-     * Редактирование профиля Диспетчера
-     */
-    public function actionEditDispatcher($dispatcher_id) {
-        
-        $dispatcher_info = Employers::findByID($dispatcher_id);
-        $user_info = User::findByEmployerId($dispatcher_id);
-        
-        if ($dispatcher_info === null && $user_info === null) {
-            throw new \yii\web\NotFoundHttpException('Вы обратились к несуществующей странице');
-        }
-        
-        $department_list = Departments::getArrayDepartments();
-        $post_list = Posts::getPostList($dispatcher_info->employers_department_id);
-        $roles = User::getRoles();
-        
-        $name_role = array_keys(Yii::$app->authManager->getRolesByUser($user_info->id))[0];
-        $role = User::getRole($name_role);
-        
-        if ($user_info->load(Yii::$app->request->post()) && $dispatcher_info->load(Yii::$app->request->post())) {
-            
-            $is_valid = $user_info->validate();
-            $is_valid = $dispatcher_info->validate() && $is_valid;
-            
-            if ($is_valid) {
-                $file = UploadedFile::getInstance($user_info, 'user_photo');
-                $user_info->uploadPhoto($file);
-                $dispatcher_info->save();
-            } else {
-                Yii::$app->session->setFlash('profile-admin-error');
-            }
-            Yii::$app->session->setFlash('profile-admin');
-            return $this->redirect(Yii::$app->request->referrer);
-        }
-
-        
-        return $this->render('edit-dispatcher', [
-            'dispatcher_info' => $dispatcher_info,
-            'user_info' => $user_info,
-            'department_list' => $department_list,
-            'post_list' => $post_list,
-            'roles' => $roles,
-            'name_role' => $name_role,
-            'role' => $role,
-        ]);
-        
-    }
-
-    /*
-     * Редактирование профиля Специалиста
-     */
-    public function actionEditSpecialist($specialist_id) {
-        
-        $specialist_info = Employers::findByID($specialist_id);
-        $user_info = User::findByEmployerId($specialist_id);
-        
-        if ($specialist_info === null && $user_info === null) {
-            throw new \yii\web\NotFoundHttpException('Вы обратились к несуществующей странице');
-        }
-        
-        $department_list = Departments::getArrayDepartments();
-        $post_list = Posts::getPostList($specialist_info->employers_department_id);
-        $roles = User::getRoles();
-        
-        $name_role = array_keys(Yii::$app->authManager->getRolesByUser($user_info->id))[0];
-        $role = User::getRole($name_role);
-        
-        $requests = $specialist_info->requests; 
-        $paid_services = $specialist_info->paidServices;
-        
-        if ($user_info->load(Yii::$app->request->post()) && $specialist_info->load(Yii::$app->request->post())) {
-            
-            $is_valid = $user_info->validate();
-            $is_valid = $specialist_info->validate() && $is_valid;
-            
-            if ($is_valid) {
-                $file = UploadedFile::getInstance($user_info, 'user_photo');
-                $user_info->uploadPhoto($file);
-                $specialist_info->save();
-            } else {
-                Yii::$app->session->setFlash('profile-admin-error');
-            }
-            Yii::$app->session->setFlash('profile-admin');
-            return $this->redirect(Yii::$app->request->referrer);
-        }
-
-        
-        return $this->render('edit-specialist', [
-            'specialist_info' => $specialist_info,
-            'user_info' => $user_info,
-            'department_list' => $department_list,
-            'post_list' => $post_list,
-            'roles' => $roles,
-            'name_role' => $name_role,
-            'role' => $role,
-            'requests' => $requests,
-            'paid_services' => $paid_services,
-        ]);
-        
-    }
     
-    /*
-     * Сквозной поиск по таблице Диспетчеры
-     */
-    public function actionSearchDispatcher() {
-        
-        Yii::$app->response->format = Response::FORMAT_JSON;
-        $value = Yii::$app->request->post('searchValue');
-        
-        if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
-            // Загружаем модель поиска
-            $model = new searchEmployer();
-            $dispatchers = $model->searshDispatcher($value);
-            $data = $this->renderAjax('data/grid_dispatchers', ['dispatchers' => $dispatchers]);
-            return ['status' => true, 'data' => $data];
-        }
-        return ['status' => false];
-        
-    }
+//    /*
+//     * Создать нового диспетчера
+//     * 
+//     * @param model $model Модель Новый сотрудник
+//     * @param array $department_list Список подраздерений
+//     * @param array $roles Роли пользователя
+//     */
+//    public function actionAddDispatcher() {
+//        
+//        $model = new EmployeeForm();
+//        
+//        $department_list = Departments::getArrayDepartments();
+//        $post_list = [];
+//        $roles = User::getRoles();
+//        
+//        
+//        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+//            $file = UploadedFile::getInstance($model, 'photo');
+//            $model->photo = $file;
+//            $employer_id = $model->addDispatcher($file);
+//            if ($employer_id) {
+//                return $this->redirect(['edit-dispatcher', 'dispatcher_id' => $employer_id]);
+//            }
+//        }
+//        
+//        return $this->render('add-employee', [
+//            'model' => $model,
+//            'department_list' => $department_list,
+//            'post_list' => $post_list,
+//            'roles' => $roles,
+//        ]);
+//    }
+//
+//    /*
+//     * Создать нового Специалиста
+//     * 
+//     * @param model $model Модель Новый сотрудник
+//     * @param array $department_list Список подраздерений
+//     * @param array $roles Роли пользователя
+//     */    
+//    public function actionAddSpecialist() {
+//        
+//        $model = new EmployeeForm();
+//        
+//        $department_list = Departments::getArrayDepartments();
+//        $post_list = [];
+//        $roles = User::getRoles();
+//        
+//        
+//        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+//            $file = UploadedFile::getInstance($model, 'photo');
+//            $model->photo = $file;
+//            $employer_id = $model->addDispatcher($file);
+//            if ($employer_id) {
+//                return $this->redirect(['edit-specialist', 'specialist_id' => $employer_id]);
+//            }
+//        }
+//        
+//        return $this->render('add-employer', [
+//            'model' => $model,
+//            'department_list' => $department_list,
+//            'post_list' => $post_list,
+//            'roles' => $roles,
+//        ]);        
+//        
+//    }
+//    
+//    /*
+//     * Редактирование профиля Диспетчера
+//     */
+//    public function actionEditDispatcher($dispatcher_id) {
+//        
+//        $dispatcher_info = Employers::findByID($dispatcher_id);
+//        $user_info = User::findByEmployerId($dispatcher_id);
+//        
+//        if ($dispatcher_info === null && $user_info === null) {
+//            throw new \yii\web\NotFoundHttpException('Вы обратились к несуществующей странице');
+//        }
+//        
+//        $department_list = Departments::getArrayDepartments();
+//        $post_list = Posts::getPostList($dispatcher_info->employers_department_id);
+//        $roles = User::getRoles();
+//        
+//        $name_role = array_keys(Yii::$app->authManager->getRolesByUser($user_info->id))[0];
+//        $role = User::getRole($name_role);
+//        
+//        if ($user_info->load(Yii::$app->request->post()) && $dispatcher_info->load(Yii::$app->request->post())) {
+//            
+//            $is_valid = $user_info->validate();
+//            $is_valid = $dispatcher_info->validate() && $is_valid;
+//            
+//            if ($is_valid) {
+//                $file = UploadedFile::getInstance($user_info, 'user_photo');
+//                $user_info->uploadPhoto($file);
+//                $dispatcher_info->save();
+//            } else {
+//                Yii::$app->session->setFlash('profile-admin-error');
+//            }
+//            Yii::$app->session->setFlash('profile-admin');
+//            return $this->redirect(Yii::$app->request->referrer);
+//        }
+//
+//        
+//        return $this->render('edit-dispatcher', [
+//            'dispatcher_info' => $dispatcher_info,
+//            'user_info' => $user_info,
+//            'department_list' => $department_list,
+//            'post_list' => $post_list,
+//            'roles' => $roles,
+//            'name_role' => $name_role,
+//            'role' => $role,
+//        ]);
+//        
+//    }
+//
+//    /*
+//     * Редактирование профиля Специалиста
+//     */
+//    public function actionEditSpecialist($specialist_id) {
+//        
+//        $specialist_info = Employers::findByID($specialist_id);
+//        $user_info = User::findByEmployerId($specialist_id);
+//        
+//        if ($specialist_info === null && $user_info === null) {
+//            throw new \yii\web\NotFoundHttpException('Вы обратились к несуществующей странице');
+//        }
+//        
+//        $department_list = Departments::getArrayDepartments();
+//        $post_list = Posts::getPostList($specialist_info->employers_department_id);
+//        $roles = User::getRoles();
+//        
+//        $name_role = array_keys(Yii::$app->authManager->getRolesByUser($user_info->id))[0];
+//        $role = User::getRole($name_role);
+//        
+//        $requests = $specialist_info->requests; 
+//        $paid_services = $specialist_info->paidServices;
+//        
+//        if ($user_info->load(Yii::$app->request->post()) && $specialist_info->load(Yii::$app->request->post())) {
+//            
+//            $is_valid = $user_info->validate();
+//            $is_valid = $specialist_info->validate() && $is_valid;
+//            
+//            if ($is_valid) {
+//                $file = UploadedFile::getInstance($user_info, 'user_photo');
+//                $user_info->uploadPhoto($file);
+//                $specialist_info->save();
+//            } else {
+//                Yii::$app->session->setFlash('profile-admin-error');
+//            }
+//            Yii::$app->session->setFlash('profile-admin');
+//            return $this->redirect(Yii::$app->request->referrer);
+//        }
+//
+//        
+//        return $this->render('edit-specialist', [
+//            'specialist_info' => $specialist_info,
+//            'user_info' => $user_info,
+//            'department_list' => $department_list,
+//            'post_list' => $post_list,
+//            'roles' => $roles,
+//            'name_role' => $name_role,
+//            'role' => $role,
+//            'requests' => $requests,
+//            'paid_services' => $paid_services,
+//        ]);
+//        
+//    }
+//    
+//    /*
+//     * Сквозной поиск по таблице Диспетчеры
+//     */
+//    public function actionSearchDispatcher() {
+//        
+//        Yii::$app->response->format = Response::FORMAT_JSON;
+//        $value = Yii::$app->request->post('searchValue');
+//        
+//        if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
+//            // Загружаем модель поиска
+//            $model = new searchEmployer();
+//            $dispatchers = $model->searshDispatcher($value);
+//            $data = $this->renderAjax('data/grid_dispatchers', ['dispatchers' => $dispatchers]);
+//            return ['status' => true, 'data' => $data];
+//        }
+//        return ['status' => false];
+//        
+//    }
 
     /*
      * Сквозной поиск по таблице Специалисты

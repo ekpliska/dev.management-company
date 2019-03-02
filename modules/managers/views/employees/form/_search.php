@@ -31,7 +31,7 @@ $action = Yii::$app->controller->action->id;
             <div class="form-group">
                 
             <?= $form->field($model, 'employee_department_id')->dropDownList($departments, [
-                    'prompt' => '[Все поздразделения]',
+                    'prompt' => '[Все подразделения]',
                     'class' => '_dropdown-subpanel _small']) ?>
                 
             <?= $form->field($model, 'employee_posts_id')->dropDownList($posts, [

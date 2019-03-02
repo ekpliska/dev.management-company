@@ -48,6 +48,12 @@ class AppManagersController extends Controller {
         return $this->render('error', ['message' => $exception->getMessage()]);
     }
     
+    public function actionIndex() {
+        
+        return $this->render('index');
+        
+    }
+    
     public function permisionUser() {
         return Yii::$app->userProfileCompany;
     }

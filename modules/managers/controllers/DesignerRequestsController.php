@@ -19,6 +19,25 @@ class DesignerRequestsController extends AppManagersController {
     public $category_cookie;
     public $request_cookie;
 
+    public function behaviors() {
+        return [
+            'access' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['index'],
+                        'allow' => true,
+                        'roles' => ['DesignerView']
+                    ],
+                    [
+                        'actions' => ['view-client', 'block-client', 'block-client-in-view', 'delete-client'],
+                        'allow' => true,
+                        'roles' => ['DesignerEdit']
+                    ],
+                ],
+            ],
+        ];
+    }
 
     public function actionIndex($section = 'requests') {
         

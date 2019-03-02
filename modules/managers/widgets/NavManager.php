@@ -21,9 +21,9 @@ class NavManager extends Widget {
             'name' => 'Специалисты',
             'link' => 'employees/specialists',
         ],
-        'managers' => [
+        'administrators' => [
             'name' => 'Администраторы',
-            'link' => 'managers/index',
+            'link' => 'employees/administrators',
         ],
         'requests' => [
             'name' => 'Заявки',

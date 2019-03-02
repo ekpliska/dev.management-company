@@ -47,11 +47,7 @@ class ClientsController extends AppManagersController {
      * Собственники
      */
     public function actionIndex() {
-        
-        if (!Yii::$app->user->can('ClientsView')) {            
-            throw new \yii\web\HttpException(403);
-        }
-        
+                
         $model = new searchClients();
         
         $client_list = $model->search(Yii::$app->request->queryParams);
