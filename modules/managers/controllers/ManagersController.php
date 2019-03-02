@@ -2,15 +2,7 @@
 
     namespace app\modules\managers\controllers;
     use Yii;
-    use yii\web\UploadedFile;
-    use yii\data\ActiveDataProvider;
-    use app\modules\managers\controllers\AppManagersController;
-    use app\models\Employees;
-    use app\modules\managers\models\Managers;
-    use app\models\Departments;
-    use app\modules\managers\models\Posts;
-    use app\models\ChangePasswordForm;
-    use app\modules\managers\models\searchForm\searchEmployees;
+    use app\modules\managers\models\News;
 
 /**
  * Профиль Админимтратора
@@ -19,93 +11,23 @@
 class ManagersController extends AppManagersController {
     
     
-    /*
-     * Главная страница - Администраторы
-     */
+    public function actionError() {
+        
+        $exception = Yii::$app->errorHandler->exception;
+        $exception->statusCode == '404' ? $this->view->title = "Ошибка 404" : '';
+        $exception->statusCode == '403' ? $this->view->title = "Доступ запрещён" : '';
+        $exception->statusCode == '500' ? $this->view->title = "Внутренняя ошибка сервера" : '';
+        
+        return $this->render('error', ['message' => $exception->getMessage()]);
+    }
+    
     public function actionIndex() {
         
-        $model = new searchEmployees();
-        
-        $departments = Departments::getArrayDepartments();
-        $posts = Posts::getArrayPosts();
-        
-        $manager_list = $model->search(Yii::$app->request->queryParams, 'administrator');
-        
+        $news_content = News::getAllNewsAndVoting();
         return $this->render('index', [
-            'model' => $model,
-            'manager_list' => $manager_list,
-            'departments' => $departments,
-            'posts' => $posts,
+            'news_content' => $news_content,
         ]);
         
     }
     
-    /*
-     * Страница Профиль Администратора
-     * 
-     * @param array $user_info Информация о текущем пользователе
-     * @param object $user_model Модель профиля пользователя
-     * @param array $employee_info Информация о сотруднике
-     * @param array $department_list Список подразделений
-     * @param array $post_lis Списко должностей
-     */
-    public function actionViewProfile() {
-        
-        $user_info = $this->permisionUser();
-        $user_model = $user_info->_model;
-        $user_model->scenario = 'edit administration profile';
-        
-        $employee_info = Employees::find()->andWhere(['employee_id' => $user_info->employeeID])->one();
-        
-        $department_list = Departments::getArrayDepartments();
-        $post_list = Posts::getPostList($employee_info->employee_department_id);
-        
-        if ($user_model->load(Yii::$app->request->post()) && $employer_info->load(Yii::$app->request->post())) {
-            
-            $is_valid = $user_model->validate();
-            $is_valid = $employee_info->validate() && $is_valid;
-            
-            if ($is_valid) {
-                $file = UploadedFile::getInstance($user_model, 'user_photo');
-                $user_model->uploadPhoto($file);
-                $employee_info->save();
-            } else {
-                Yii::$app->session->setFlash('profile-admin-error');
-            }
-            Yii::$app->session->setFlash('profile-admin');
-            return $this->redirect(Yii::$app->request->referrer);
-        }
-        
-        return $this->render('view-profile', [
-            'user_info' => $user_info,
-            'user_model' => $user_model,
-            'employee_info' => $employee_info,
-            'department_list' => $department_list,
-            'post_list' => $post_list,
-        ]);
-    }
-    
-    public function actionSettingsProfile() {
-        
-        $user_info = $this->permisionUser();
-        $user_model = $user_info->_model;
-        
-        // Загружаем модель смены пароля
-        $model_password = new ChangePasswordForm($user_model);
-        
-        if ($model_password->load(Yii::$app->request->post())) {
-            if ($model_password->changePassword()) {
-                Yii::$app->session->setFlash('profile-admin');
-                return $this->refresh();
-            } else {
-                Yii::$app->session->setFlash('profile-admin-error');
-            }
-        }
-        
-        return $this->render('settings-profile', [
-            'model_password' => $model_password,
-        ]);
-        
-    }
-
 }

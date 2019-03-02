@@ -48,9 +48,82 @@ and open the template in the editor.
     background: rgba(247, 247, 247, 0.3);    
 }
 /* Конец Выпадающее навигационное меню, Администратор */
-/* Конец Навигационное меню */
 
-/* Конец Дополнительное навигационное меню, главная страница */
+/* Администратор, Главная страница */
+.manager-main__general {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+}
+.manager-main__general-left {
+    border-right: 1px solid #ddd;
+    min-height: 1200px;
+    padding: 0;
+    margin: 0;
+}
+.manager-main__general-left > h4 {
+    padding: 15px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0;
+    color: #fff;
+    border-top-left-radius: 12px;
+    background: #454545;
+}
+.manager-main__general-left__content {
+    padding: 10px;
+}
+.manager-main__general-left__content a.title {
+    font-size: 14px;
+    font-weight: bold;
+    color: #000;
+}
+.manager-main__general-left__content a.title:hover {
+    color: #2d18b4;
+}
+.__content-news {
+    border-bottom: 1px solid #ddd;
+    height: 190px;
+    margin: 10px 0;
+}
+.__content-news:first-child {
+    margin: 0;
+}
+.__content-news-item {
+    display: flex;
+}
+.__content-date {
+    font-size: 12px;
+    font-weight: bold;
+    padding: 0 0 10px;
+    margin: 0;
+    color: #2d18b4;
+}
+.__content-image {
+    position: relative;
+    padding: 0;
+}
+.__content-image > img {
+    width: 100%;
+    height: 120px;
+    /*height: 100%;*/
+    position: absolute;
+}
+.__content-text {
+    font-size: 14px;
+    text-align: justify;
+}
+.settings-news {
+    float: right;
+}
+.settings-news > button {
+    background: transparent;
+    border: none;
+}
+.settings-news > ul > li:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+/* Конец Администратор, Главная страница */
 
 /* Администратор, Собственники */
 .dropdown-setting {

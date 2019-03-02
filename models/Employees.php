@@ -98,18 +98,6 @@ class Employees extends ActiveRecord
                 ->all();
     }
     
-    /*
-     * После удаления сотрудника, удаляем также профиль пользователя
-     */
-    public function afterDelete() {
-        
-        $user = User::findByEmployeeId($this->employee_id);
-        $user->delete(false);
-        
-        parent::afterDelete();
-        
-    }
-    
     /**
      * Метки полей
      */
