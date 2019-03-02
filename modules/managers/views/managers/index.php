@@ -46,7 +46,6 @@ $this->params['breadcrumbs'][] = 'Главная';
                                 <?= FormatHelpers::shortTextNews($post['news_text'], 25) ?>
                             </div>                            
                         </div>
-                        
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -55,7 +54,33 @@ $this->params['breadcrumbs'][] = 'Главная';
             <?php endif; ?>
         </div>
         <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 manager-main__general-rigth">
-            #TODO
+            <div class="general-rigth__welcome">
+                <h4>Добрый день: <?= Yii::$app->userProfileCompany->fullNameEmployee ?></h4>
+                <h4>Сегодня: <?= Yii::$app->formatter->asDate(time(), 'full') ?></h4>
+                <hr />
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 general-right__request">
+                    <h4>
+                        Заявки
+                        <span class="pull-right">1</span>
+                    </h4>
+                    <div class="general-right__request-body">
+                        <h5>
+                            <span class="requiest-id">ID123456-45</span>
+                            <?= Html::a('Перейти', ['/'], ['class' => 'pull-right']) ?>
+                        </h5>
+                        <div>
+                            <p>Вид заявки: <?= 'here' ?></p>
+                            <p>Адрес: <?= 'here' ?></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 general-right__request">
+                    <h4>
+                        Платые услуги
+                        <span class="pull-right">1</span>
+                    </h4>
+                </div>
+            </div>
         </div>
     </div>
     

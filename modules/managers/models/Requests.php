@@ -43,6 +43,32 @@ class Requests extends BaseRequests {
     }
     
     /*
+     * Последние 10 заявок, со статусом Новая
+     */
+    public static function getOnlyNewRequest($count = 10) {
+        
+        $requests = (new \yii\db\Query)
+                ->select('r.requests_id as requests_id, r.requests_ident as number, '
+                        . 'r.created_at as date_create, '
+                        . 'r.status as status, '
+                        . 'tr.type_requests_name as category, '
+                        . 'h.houses_gis_adress as gis_adress, h.houses_number as house, '
+                        . 'f.flats_porch as porch, f.flats_floor as floor, '
+                        . 'f.flats_number as flat')
+                ->from('requests as r')
+                ->join('LEFT JOIN', 'type_requests as tr', 'tr.type_requests_id = r.requests_type_id')
+                ->join('LEFT JOIN', 'personal_account as pa', 'pa.account_id = r.requests_account_id')
+                ->join('LEFT JOIN', 'flats as f', 'f.flats_id = pa.personal_flat_id')
+                ->join('LEFT JOIN', 'houses as h', 'h.houses_id = f.flats_house_id')
+                ->where(['status' => StatusRequest::STATUS_NEW])
+                ->limit($count)
+                ->orderBy(['r.created_at' => SORT_DESC]);
+        
+        return $requests;
+        
+    }
+    
+    /*
      * Назначение диспетчера
      */
     public function chooseDispatcher($dispatcher_id) {

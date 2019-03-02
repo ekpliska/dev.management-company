@@ -23,7 +23,15 @@ class ManagersController extends AppManagersController {
     
     public function actionIndex() {
         
+        // Формируем список последних новостей и голосования, 10
         $news_content = News::getAllNewsAndVoting();
+        
+        // Формируем список последних 10 новых заявок
+        $request_list = [];
+        
+        // Формируем список последних 10 новых заявок на платные услуги
+        $paid_request_list = [];
+        
         return $this->render('index', [
             'news_content' => $news_content,
         ]);

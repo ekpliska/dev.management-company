@@ -123,6 +123,55 @@ and open the template in the editor.
 .settings-news > ul > li:hover {
     background: rgba(255, 255, 255, 0.15);
 }
+.general-rigth__welcome > h4 {
+    font-size: 14px;
+    text-align: right;
+}
+.general-right__request:first-child {
+    border-right: 1px solid #ddd;
+}
+.general-right__request > h4 {
+    padding: 10px;
+    border: 1px solid #2d18b4;
+    color: #2d18b4;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+}
+.general-right__request > h4 > span {
+    font-weight: normal;
+    padding: 4px 7px;
+    font-size: 12px;
+    background: #f0754a;
+    color: #fff;
+    border-radius: 25px;
+    margin: -4px;
+}
+.general-right__request-body {
+    height: 130px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0 4px 26px 0 rgba(51, 29, 82, 0.16);
+}
+.general-right__request-body > div:first-child {
+    align-items: center;
+    width: 30%;
+}
+.general-right__request-body > h5 {
+    padding: 10px;
+}
+.general-right__request-body > h5 > span.requiest-id {
+    background: #2d18b4;
+    border-radius: 25px;
+    padding: 5px 10px;
+    color: #fff;
+    font-size: 12px;
+}
+.general-right__request-body > div {
+    padding: 5px 10px;
+    font-size: 12px;
+}
 /* Конец Администратор, Главная страница */
 
 /* Администратор, Собственники */
