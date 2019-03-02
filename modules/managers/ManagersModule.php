@@ -1,8 +1,8 @@
 <?php
 
     namespace app\modules\managers;
-    use yii\filters\AccessControl;
     use yii\base\Module;
+    use yii\web\ErrorHandler;
 
 /**
  * Модуль "Администратор"
@@ -14,27 +14,24 @@ class ManagersModule extends Module
      */
     public $controllerNamespace = 'app\modules\managers\controllers';
     
-    public function behaviors() {
-       return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'roles' => ['administrator'],
-                    ],
-                ],
-            ],
-        ];
-    }
-
     /**
      * {@inheritdoc}
      */
-    public function init()
-    {
+    public function init() {
         parent::init();
 
-        // custom initialization code goes here
+        \Yii::configure($this, [
+            'components' => [
+                'errorHandler' => [
+                    'class' => ErrorHandler::className(),
+                    'errorAction' => '/managers/app-managers/error',
+                ]
+            ],
+        ]);
+
+        /** @var ErrorHandler $handler */
+        $handler = $this->get('errorHandler');
+        \Yii::$app->set('errorHandler', $handler);
+        $handler->register();
     }
 }

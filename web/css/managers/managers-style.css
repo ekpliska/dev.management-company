@@ -203,6 +203,9 @@ tbody > tr > td > div.empty::before {
 .manager-main {
     margin-top: -40px;
 }
+.manager-main-error {
+    margin-top: 40px;
+}
 /* Конец Администратор, контент */
 
 /* Администратор, профиль */

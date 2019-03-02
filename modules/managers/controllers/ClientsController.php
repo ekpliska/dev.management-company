@@ -21,27 +21,25 @@
  */
 class ClientsController extends AppManagersController {
     
-//    public function behaviors() {
-//        return [
-//            'access' => [
-//                'class' => \yii\filters\AccessControl::className(),
-//                'rules' => [
-//                    [
-//                        'actions' => ['index'],
-//                        'allow' => true,
-//                        'roles' => ['ClientsView']
-//                    ],
-//                ],
-//                'rules' => [
-//                    [
-//                        'actions' => ['view-client'],
-//                        'allow' => true,
-//                        'roles' => ['ClientsEdit']
-//                    ],
-//                ],
-//            ],
-//        ];
-//    }
+    public function behaviors() {
+        return [
+            'access' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['index'],
+                        'allow' => true,
+                        'roles' => ['ClientsView']
+                    ],
+                    [
+                        'actions' => ['view-client', 'block-client', 'block-client-in-view', 'delete-client'],
+                        'allow' => true,
+                        'roles' => ['ClientsEdit']
+                    ],
+                ],
+            ],
+        ];
+    }
     
     /*
      * Главная страница
@@ -49,6 +47,10 @@ class ClientsController extends AppManagersController {
      * Собственники
      */
     public function actionIndex() {
+        
+        if (!Yii::$app->user->can('ClientsView')) {            
+            throw new \yii\web\HttpException(403);
+        }
         
         $model = new searchClients();
         
