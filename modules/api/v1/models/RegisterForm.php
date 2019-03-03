@@ -21,8 +21,9 @@ class RegisterForm extends Model {
      * Запоминает данные прищедшие по API
      */
     public static function registerStepOne($data) {
-        
-        if (empty($data)) {
+
+        if (!array_key_exists('account_number', $data) || 
+                !array_key_exists('last_summ', $data) || !array_key_exists('square', $data)) {
             return [
                 'success' => false,
                 'message' => 'Ошибка передачи данных',
@@ -248,9 +249,7 @@ class RegisterForm extends Model {
             Yii::$app->session->destroy();
             $transaction->rollBack();
             return false;
-        } 
-            
-        return ['success' => true];
+        }
         
     }
 
