@@ -36,10 +36,12 @@ class RequestsController extends AppManagersController {
                         'actions' => [
                             'view-request', 
                             'create-request', 
-                            'switch-status-request', 
+                            'validation-form', 
+                            'switch-status-request',
                             'choose-dispatcher', 
                             'choose-specialist', 
                             'edit-request',
+                            'show-grade-modal', 
                             'confirm-delete-request'],
                         'allow' => true,
                         'roles' => ['RequestsEdit']

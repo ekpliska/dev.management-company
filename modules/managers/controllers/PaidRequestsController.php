@@ -18,6 +18,33 @@
  */
 class PaidRequestsController extends AppManagersController {
     
+    public function behaviors() {
+        return [
+            'access' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['index'],
+                        'allow' => true,
+                        'roles' => ['PaidRequestsView']
+                    ],
+                    [
+                        'actions' => ['view-paid-request',
+                            'create-paid-request', 
+                            'validation-form',
+                            'switch-status-request',
+                            'choose-dispatcher',
+                            'choose-specialist',
+                            'confirm-delete-request',
+                            'edit-paid-request'],
+                        'allow' => true,
+                        'roles' => ['PaidRequestsEdit']
+                    ],
+                ],
+            ],
+        ];
+    }
+    
     public $type_request = [
         'requests',
         'paid-requests',

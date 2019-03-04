@@ -44,8 +44,8 @@ class PermissionsList {
             'paid-requests' => [
                 'name' => 'Платные услуги',
                 'permission' => [
-                    'PaidReuestsView' => 'Просмотр',
-                    'PaidReuestsEdit' => 'Редактирование',
+                    'PaidRequestsView' => 'Просмотр',
+                    'PaidRequestsEdit' => 'Редактирование',
                 ]
             ],
             'news' => [

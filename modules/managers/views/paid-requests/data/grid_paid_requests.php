@@ -96,6 +96,7 @@
             ],
             [
                 'class' => 'yii\grid\ActionColumn',
+                'visible' => Yii::$app->user->can('PaidRequestsEdit') ? true : false,
                 'template' => '{view-paid-request} {delete-request}',
                 'buttons' => [
                     'delete-request' => function ($url, $data) {

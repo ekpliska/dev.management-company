@@ -33,17 +33,22 @@ $this->params['breadcrumbs'][] = 'Платные услуги';
         ]) ?>
     </div>
     
-    <?= Html::button('', [
-            'class' => 'create-request-btn',
-            'data-target' => '#create-new-paid-requests',
-            'data-toggle' => 'modal',
-        ]) ?>
+    <?php if (Yii::$app->user->can('PaidRequestsEdit')) : ?>
+    
+        <?= Html::button('', [
+                'class' => 'create-request-btn',
+                'data-target' => '#create-new-paid-requests',
+                'data-toggle' => 'modal',
+            ]) ?>
 
-    <?= $this->render('form/create_paid_request', [
-            'model' => $model,
-            'servise_category' => $servise_category,
-            'servise_name' => $servise_name,
-            'flat' => $flat,]) ?></div>
+        <?= $this->render('form/create_paid_request', [
+                'model' => $model,
+                'servise_category' => $servise_category,
+                'servise_name' => $servise_name,
+                'flat' => $flat]) ?>
+    
+    <?php endif; ?>
+
     
 </div>
 <?= ModalWindowsManager::widget(['modal_view' => 'delete_request_modal']) ?>

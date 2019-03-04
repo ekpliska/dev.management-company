@@ -26,7 +26,11 @@ class EmployeeFormController extends AppManagersController {
                 'class' => \yii\filters\AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index', 'employee-profile', 'change-password'],
+                        'actions' => [
+                            'index', 
+                            'employee-profile', 
+                            'change-password'
+                        ],
                         'allow' => true,
                         'roles' => ['EmployeesEdit']
                     ],

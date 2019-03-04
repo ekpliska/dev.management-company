@@ -22,12 +22,19 @@ class EmployeesController extends AppManagersController {
                 'class' => \yii\filters\AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['dispatchers', 'specialists', 'administrators'],
+                        'actions' => [
+                            'dispatchers', 
+                            'specialists', 
+                            'administrators',
+                        ],
                         'allow' => true,
                         'roles' => ['EmployeesView']
                     ],
                     [
-                        'actions' => ['query-delete-dispatcher', 'query-delete-specialist'],
+                        'actions' => [
+                            'query-delete-dispatcher', 
+                            'query-delete-specialist',
+                        ],
                         'allow' => true,
                         'roles' => ['EmployeesEdit']
                     ],

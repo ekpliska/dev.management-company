@@ -32,18 +32,22 @@ $this->params['breadcrumbs'][] = 'Заявки';
                 'requests' => $requests
         ]) ?>
     </div>
-    
-    <?= Html::button('', [
-            'class' => 'create-request-btn',
-            'data-target' => '#create-new-requests',
-            'data-toggle' => 'modal',
-        ]) ?>
 
-    <?= $this->render('form/create_request', [
-            'model' => $model, 
-            'type_requests' => $type_requests,
-            'flat' => $flat,
-        ]) ?>
+    <?php if (Yii::$app->user->can('RequestsEdit')) : ?>
+    
+        <?= Html::button('', [
+                'class' => 'create-request-btn',
+                'data-target' => '#create-new-requests',
+                'data-toggle' => 'modal',
+            ]) ?>
+
+        <?= $this->render('form/create_request', [
+                'model' => $model, 
+                'type_requests' => $type_requests,
+                'flat' => $flat,
+            ]) ?>
+    
+    <?php endif; ?>
 </div>
 
 <?= ModalWindowsManager::widget(['modal_view' => 'delete_request_modal']) ?>
