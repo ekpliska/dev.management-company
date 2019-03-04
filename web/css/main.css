@@ -1244,10 +1244,11 @@ reset-password-sms:focus{
     padding: 2px 20px;
     border-radius: 25px;
     background: #6d39c3;
-    color: #ffffff;
+    color: #fff;
     font-size: 12px;
     text-align: center;
     margin: 10px auto;
+    width: 30%;
 }
 .user-span-text {
     font-size: 12px;
@@ -2862,10 +2863,10 @@ p.date-start-vote {
 /* Конец блок кнопок голосования: за, против, воздержаться */
 
 /* Модальное окно "Профиль пользователя" */
-#view-user-profile .modal-content {
+/*#view-user-profile .modal-content {
     width: 50%;
     margin: 0 auto;
-}
+}*/
 .card-view-profile img {
     width: 200px;
     height: 200px;

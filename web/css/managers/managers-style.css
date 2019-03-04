@@ -877,17 +877,20 @@ span.status-vote-1::before {
     color: #ddd;
 }
 .profile_photo__image {
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     margin: 0 auto;
 }
 .user-info > tbody > tr > td {
     border: none;
 }
+.profile_photo {
+    text-align: center;
+    padding-bottom: 20px;
+}
 .user-info > tbody > tr > td > span.title {
     text-transform: uppercase;
     padding-right: 20px;
-    font-weight: bold;
 }
 /* Конец Модальное окно, просмотр профиля пользователя в разделе Голосование */
 

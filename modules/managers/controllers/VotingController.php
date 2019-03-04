@@ -17,6 +17,34 @@
  */
 class VotingController extends AppManagersController {
     
+    public function behaviors() {
+        return [
+            'access' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['index'],
+                        'allow' => true,
+                        'roles' => ['VotingsView']
+                    ],
+                    [
+                        'actions' => [
+                            'create',
+                            'view', 
+                            'confirm-delete-voting',
+                            'confirm-close-voting',
+                            'close-voting',
+                            'for-whom-news',
+                            'view-profile',
+                        ],
+                        'allow' => true,
+                        'roles' => ['VotingsEdit']
+                    ],
+                ],
+            ],
+        ];
+    }
+    
     /*
      * Голосование, главная страница
      */
@@ -203,39 +231,6 @@ class VotingController extends AppManagersController {
         }
         
     }
-    
-//    /*
-//     * Фильтр данных по ID дома
-//     * 
-//     * @param $type string:
-//     *      Голосование
-//     */
-//    public function actionFilterByHouseAdress($house_id) {
-//
-//        if (Yii::$app->request->isPost) {
-//                        
-//            $results = Voting::find()->where(['voting_house_id' => $house_id])->asArray();
-//            $count_voting = clone $results;
-//            $pages = new Pagination([
-//                'totalCount' => $count_voting->count(),
-//                'pageSize' => 15,
-//                'defaultPageSize' => 15,
-//            ]);
-//        
-//            $view_all_voting = $results->offset($pages->offset)
-//                    ->limit($pages->limit)
-//                    ->all();            
-//            
-//            $data = $this->renderPartial('data/view_all_voting', [
-//                'view_all_voting' => $view_all_voting, 'pages' => $pages]);
-//            
-//            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;            
-//            return ['success' => true, 'data' => $data];
-//            
-//        }
-//        return ['success' => false];
-//        
-//    }
     
     /*
      * Зависимый переключатель статуса публикации

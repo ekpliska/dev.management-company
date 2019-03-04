@@ -17,11 +17,15 @@
         <div class="news-item__title">
             <?= Html::a($advert['title'], ['news/view', 'slug' => $advert['slug']], ['class' => 'title']) ?>
             <p class="date"><?= FormatHelpers::formatDate($advert['date'], false, 0, false) ?></p>
-            <?= Html::button('<i class="glyphicon glyphicon-trash"></i>', [
-                    'class' => 'btn bnt-delete-news',
-                    'data-target' => '#delete_news_manager',
-                    'data-toggle' => 'modal',
-                    'data-news' => $advert['id']]) ?>
+            
+            <?php if (Yii::$app->user->can('NewsEdit')) : ?>
+                <?= Html::button('<i class="glyphicon glyphicon-trash"></i>', [
+                        'class' => 'btn bnt-delete-news',
+                        'data-target' => '#delete_news_manager',
+                        'data-toggle' => 'modal',
+                        'data-news' => $advert['id']]) ?>
+            <?php endif; ?>
+            
         </div>
         <div class="news-item__image">
             <span class="item__image_desc"><?= $advert['partners_name'] ?></span>

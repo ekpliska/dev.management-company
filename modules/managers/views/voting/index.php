@@ -30,7 +30,9 @@ $this->params['breadcrumbs'][] = 'Голосование';
         <?= $this->render('data/view_all_voting', ['view_all_voting' => $view_all_voting, 'pages' => $pages]) ?>
     </div>
     
-    <?= Html::a('', ['voting/create'], ['class' => 'create-request-btn']) ?>
+    <?php if (Yii::$app->user->can('VotingsEdit')) : ?>
+        <?= Html::a('', ['voting/create'], ['class' => 'create-request-btn']) ?>
+    <?php endif; ?>
     
 </div>
 

@@ -23,11 +23,15 @@
             <div class="vote-card__content">
                 <h1 class="vote-card__content_title">
                     <?= Html::a($voting['voting_title'] . " <span>ID{$voting['voting_id']}</span>", ['voting/view', 'voting' => $voting['voting_id']]) ?>
-                    <?= Html::button('<i class="glyphicon glyphicon-trash"></i>', [
-                            'class' => 'pull-right btn-delete-question',
-                            'data-toggle' => 'modal',
-                            'data-target' => '#delete_voting_manager',
-                            'data-voting' => $voting['voting_id']]) ?>
+                    
+                    <?php if (Yii::$app->user->can('VotingsEdit')) : ?>
+                        <?= Html::button('<i class="glyphicon glyphicon-trash"></i>', [
+                                'class' => 'pull-right btn-delete-question',
+                                'data-toggle' => 'modal',
+                                'data-target' => '#delete_voting_manager',
+                                'data-voting' => $voting['voting_id']]) ?>
+                    <?php endif; ?>
+                    
                 </h1>
                 <div class="vote-card__status-info">
                     <div>

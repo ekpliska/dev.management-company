@@ -8,16 +8,18 @@
  */
 ?>
 <?php if (isset($user_info)) : ?>
-<div class="col-md-4 profile_photo">
+<div class="col-lg-4 col-md-4 col-xs-12 col-sm-4 profile_photo">
     <?php $user_photo = $user_info['photo'] ? $user_info['photo'] : "images/no-avatar.jpg" ?>
-    <?= Html::img("@web/{$user_photo}", ['alt' => 'user-name', 'class' => 'profile_photo__image']) ?>
+    <?= Html::img("/web/{$user_photo}", ['alt' => 'user-name', 'class' => 'profile_photo__image']) ?>
 </div>
-<div class="col-md-8 profile_info">
+<div class="col-lg-8 col-md-8 col-xs-12 col-sm-8 profile_info">
     <h4>
         <?= $user_info['name'] . ' ' . $user_info['second_name'] . ' ' . $user_info['surname'] ?>
     </h4>
-    <span class="user-role-name">Собственник</span>
-    <span class="last-login"> Последний раз был: <?= FormatHelpers::formatDate($user_info['last_login'], false, 0, false) ?></span>
+    <div class="profile_info__block-role">
+        <span class="user-role-name">Собственник</span>
+        <span class="last-login"> Последний раз был: <?= FormatHelpers::formatDate($user_info['last_login'], false, 0, false) ?></span>        
+    </div>
     <hr>
     <table class="table user-info">
         <tbody>
@@ -40,7 +42,7 @@
 <div class="modal-footer">
     <?= Html::button('Закрыть', [
             'data-dismiss' => 'modal', 
-            'class' => 'btn red-outline-btn',
+            'class' => 'btn-modal btn-modal-no',
     ]) ?>
 </div>
 <?php endif ;?>
