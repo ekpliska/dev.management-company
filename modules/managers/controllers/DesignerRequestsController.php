@@ -25,12 +25,21 @@ class DesignerRequestsController extends AppManagersController {
                 'class' => \yii\filters\AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index'],
+                        'actions' => [
+                            'index',
+                            'show-results',
+                        ],
                         'allow' => true,
                         'roles' => ['DesignerView']
                     ],
                     [
-                        'actions' => ['view-client', 'block-client', 'block-client-in-view', 'delete-client'],
+                        'actions' => [
+                            'validation-form', 
+                            'create-record', 
+                            'delete-record', 
+                            'edit-service', 
+                            'edit-question', 
+                        ],
                         'allow' => true,
                         'roles' => ['DesignerEdit']
                     ],

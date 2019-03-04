@@ -29,6 +29,8 @@ $this->params['breadcrumbs'][] = 'Конструктор заявок';
     
 </div>
 
+<?php if (Yii::$app->user->can('DesignerEdit')) : ?>
+
 <?php if ($section == 'requests') : ?>
     <?= $this->render('modal/create-request', ['model_request' => $model_request]) ?>
     <?= $this->render('modal/create-question', [
@@ -80,3 +82,5 @@ $this->params['breadcrumbs'][] = 'Конструктор заявок';
 <?php endif; ?>
 
 <?= ModalWindowsManager::widget(['modal_view' => 'designer-confirm-message']) ?>
+
+<?php endif; ?>

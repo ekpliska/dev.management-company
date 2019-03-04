@@ -1475,14 +1475,16 @@ span.status-vote-1::before {
     border-radius: 25px;
     border: 1px solid #ddd;
     outline: none;
+    text-align: center;
+    color: #777;
 }
 .search-block__input::placeholder {
     color: #ddd;
     text-align: center;
     background-repeat: no-repeat;
     background-size: 7%;
-    background-image: url('../images/searchicon.png');
-    background-position: 57%;
+    background-image: url('/images/searchicon.png');
+    background-position: 41%;
 }
 .categories-list,
 .requests-list,

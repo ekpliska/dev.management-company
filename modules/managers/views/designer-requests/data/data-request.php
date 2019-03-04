@@ -13,21 +13,23 @@
     <?php foreach ($results as $question) : ?>
         <tr>
             <td class="padding-add"><?= $question['question_text'] ?></td>
-            <td class="padding-add">
-                <div class="dropdown">
-                    <button type="button" class="btn-settings dropdown-toggle" data-toggle="dropdown">
-                        <i class="glyphicon glyphicon-option-horizontal"></i>
-                    </button>
-                    <ul class="dropdown-menu dropdown-setting">
-                        <li>
-                            <?= Html::a('Редактировать', ['edit-question', 'question_id' => $question['question_id']], ['class' => 'edit-question-btn']) ?>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" id="question__delete" data-record-type="question" data-record="<?= $question['question_id'] ?>">Удалить</a>
-                        </li>
-                    </ul>
-                </div>
-            </td>
+            <?php if (Yii::$app->user->can('DesignerEdit')) : ?>
+                <td class="padding-add">
+                    <div class="dropdown">
+                        <button type="button" class="btn-settings dropdown-toggle" data-toggle="dropdown">
+                            <i class="glyphicon glyphicon-option-horizontal"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-setting">
+                            <li>
+                                <?= Html::a('Редактировать', ['edit-question', 'question_id' => $question['question_id']], ['class' => 'edit-question-btn']) ?>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" id="question__delete" data-record-type="question" data-record="<?= $question['question_id'] ?>">Удалить</a>
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+            <?php endif; ?>
         </tr>
     <?php endforeach; ?>
     </tbody>        

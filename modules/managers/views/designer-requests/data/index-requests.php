@@ -19,7 +19,9 @@
                         <li data-record-type="<?= 'request' ?>" data-record="<?= $key_req ?>" class="<?= $this->context->request_cookie == $key_req ? 'active-item' : '' ?>">
                             <p><?= $request ?></p>
                             <span class="span-count"><?= "ID {$key_req}" ?></span>
-                            <span class="close request__delete" data-record="<?= $key_req ?>" data-record-type="request"><i class="glyphicon glyphicon-trash"></i></span>
+                            <?php if (Yii::$app->user->can('DesignerEdit')) : ?>
+                                <span class="close request__delete" data-record="<?= $key_req ?>" data-record-type="request"><i class="glyphicon glyphicon-trash"></i></span>
+                            <?php endif; ?>
                         </li>
                     <?php endforeach; ?>
                 </ul>
@@ -36,14 +38,16 @@
     
 </div>
 
-<div class="dropup action-housing-stock">
-    <button class="action-housing-stock__button dropdown-toggle" type="button" data-toggle="dropdown"></button>
-    <ul class="dropdown-menu">
-        <li>
-            <a href="javascript:void(0);" data-target="#create-request-modal" data-toggle="modal">Добавить заявку</a>
-        </li>
-        <li>
-            <a href="javascript:void(0);" data-target="#create-question-modal" data-toggle="modal">Добавить вопрос</a>
-        </li>
-    </ul>
-</div>
+<?php if (Yii::$app->user->can('DesignerEdit')) : ?>
+    <div class="dropup action-housing-stock">
+        <button class="action-housing-stock__button dropdown-toggle" type="button" data-toggle="dropdown"></button>
+        <ul class="dropdown-menu">
+            <li>
+                <a href="javascript:void(0);" data-target="#create-request-modal" data-toggle="modal">Добавить заявку</a>
+            </li>
+            <li>
+                <a href="javascript:void(0);" data-target="#create-question-modal" data-toggle="modal">Добавить вопрос</a>
+            </li>
+        </ul>
+    </div>
+<?php endif; ?>

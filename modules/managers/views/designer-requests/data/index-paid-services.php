@@ -18,7 +18,10 @@
                     <?php foreach ($results['categories'] as $key_cat => $category) : ?>
                         <li data-record-type="<?= 'category' ?>" data-record="<?= $key_cat ?>" class="<?= $this->context->category_cookie == $key_cat ? 'active-item' : '' ?>">
                             <p><?= $category ?></p>
-                            <span class="close category__delete" data-record="<?= $key_cat ?>" data-record-type="category"><i class="glyphicon glyphicon-trash"></i></span>
+                            
+                            <?php if (Yii::$app->user->can('DesignerEdit')) : ?>
+                                <span class="close category__delete" data-record="<?= $key_cat ?>" data-record-type="category"><i class="glyphicon glyphicon-trash"></i></span>
+                            <?php endif; ?>
                         </li>
                     <?php endforeach; ?>
                 </ul>
@@ -36,14 +39,16 @@
         
 </div>
 
-<div class="dropup action-housing-stock">
-    <button class="action-housing-stock__button dropdown-toggle" type="button" data-toggle="dropdown"></button>
-    <ul class="dropdown-menu">
-        <li>
-            <a href="javascript:void(0);" data-target="#create-category-modal" data-toggle="modal">Добавить категорию</a>
-        </li>
-        <li>
-            <a href="javascript:void(0);" data-target="#create-service-modal" data-toggle="modal">Добавить услугу</a>
-        </li>
-    </ul>
-</div>
+<?php if (Yii::$app->user->can('DesignerEdit')) : ?>
+    <div class="dropup action-housing-stock">
+        <button class="action-housing-stock__button dropdown-toggle" type="button" data-toggle="dropdown"></button>
+        <ul class="dropdown-menu">
+            <li>
+                <a href="javascript:void(0);" data-target="#create-category-modal" data-toggle="modal">Добавить категорию</a>
+            </li>
+            <li>
+                <a href="javascript:void(0);" data-target="#create-service-modal" data-toggle="modal">Добавить услугу</a>
+            </li>
+        </ul>
+    </div>
+<?php endif; ?>
