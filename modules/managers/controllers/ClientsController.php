@@ -97,14 +97,14 @@ class ClientsController extends AppManagersController {
         }
         
         if ($client_info == null || $account_info == null) {
-            throw new NotFoundHttpException('Вы обратились к несуществующей странице');
+            throw new NotFoundHttpException(404);
         }
         
         if ($user_info->load(Yii::$app->request->post()) 
                 && $client_info->load(Yii::$app->request->post()) && $client_info->load(Yii::$app->request->post())) {
             
             if (!$user_info->validate()) {
-                Yii::$app->session->setFlash('error', ['message' => '<b>Ошибка обновления профиля пользователя.</b> Обновите страницу и повторите действие еще раз']);
+                Yii::$app->session->setFlash('error', ['message' => 'Ошибка обновления профиля пользователя. Обновите страницу и повторите действие еще раз.']);
                 return $this->redirect(Yii::$app->request->referrer);
             }
             
@@ -140,7 +140,7 @@ class ClientsController extends AppManagersController {
                     if ($edit_rent->load(Yii::$app->request->post())) {
                         // Если есть ошибки валидации
                         if ($edit_rent->hasErrors()) {
-                            Yii::$app->session->setFlash('error', ['message' => 'Ошибка обновления профиля пользователя. Обновите страницу и повторите действие еще раз']);
+                            Yii::$app->session->setFlash('error', ['message' => 'Ошибка обновления профиля пользователя. Обновите страницу и повторите действие еще раз.']);
                             return $this->redirect(Yii::$app->request->referrer);
                         }
                         $edit_rent->save();
@@ -151,19 +151,19 @@ class ClientsController extends AppManagersController {
                     $rent = new AddRent();
                     if ($rent->load(Yii::$app->request->post())) {
                         if ($rent->hasErrors()) {
-                            Yii::$app->session->setFlash('error', ['message' => 'Ошибка обновления профиля пользователя. Обновите страницу и повторите действие еще раз']);
+                            Yii::$app->session->setFlash('error', ['message' => 'Ошибка обновления профиля пользователя. Обновите страницу и повторите действие еще раз.']);
                             return $this->redirect(Yii::$app->request->referrer);
                         }
                         $rent->addNewRent();
                     }
                 }
-                Yii::$app->session->setFlash('success', ['message' => "Учетная запись собсвенника {$client_info->fullName} успешно обновлена"]);
+                Yii::$app->session->setFlash('success', ['message' => "Учетная запись собсвенника {$client_info->fullName} успешно обновлена."]);
                 $client_info->save();
             }
         } else {
             // Если переключатель Арендатор, не пришли из пост, сохраняем данные только собственника
             if ($client_info->load(Yii::$app->request->post())) {
-                Yii::$app->session->setFlash('success', ['message' => "Учетная запись собсвенника {$client_info->fullName} успешно обновлена"]);
+                Yii::$app->session->setFlash('success', ['message' => "Учетная запись собсвенника {$client_info->fullName} успешно обновлена."]);
                 $client_info->save();
             }
         }
@@ -396,7 +396,7 @@ class ClientsController extends AppManagersController {
         $list_account = PersonalAccount::findByClient($client_id, true);
 
         if (empty($client_info) || empty($account_info) || empty($user_info) || empty($list_account)) {
-            throw new NotFoundHttpException();
+            throw new NotFoundHttpException(404);
         }
         
         return [
@@ -468,34 +468,6 @@ class ClientsController extends AppManagersController {
     }
     
     /*
-     * Валидация и отправка формы "Текущие показания приборов учета"
-     */
-    public function actionSendIndicationForm() {
-        
-        $model_indication = [new CounterIndicationsForm()];
-        $model_notice = new CommentsToCounters();
-        
-        
-        if (Yii::$app->request->isPost) {
-        
-            $post_data = Yii::$app->request->post($model_indication[0]->formName());
-            $models = [];
-
-            foreach ($post_data as $key => $data) {
-                $model = new CounterIndicationsForm();
-                $model->load($data);
-                $models[$key] = $model;
-            }
-
-            if (\yii\base\Model::loadMultiple($models, Yii::$app->request->post()) && \yii\base\Model::validateMultiple($models)) {
-                echo 'ok'; die();
-            }
-
-                echo 'error'; die();
-        }
-    }
-    
-    /*
      * Запрос на удаление учетной записи собсвенника
      */
     public function actionDeleteClient() {
@@ -508,14 +480,14 @@ class ClientsController extends AppManagersController {
             $client_info = Clients::findById($client_id);
             $full_name = $client_info->fullName;
             if (!$client_info->delete()) {
-                Yii::$app->session->setFlash('error', ['message' => 'Ошибка удаления. Обновите страницу и повторите действие еще раз']);
+                Yii::$app->session->setFlash('error', ['message' => 'Ошибка удаления учетной записи собсвенника. Обновите страницу и повторите действие еще раз.']);
                 return $this->redirect(Yii::$app->request->referrer);
             }
-            Yii::$app->session->setFlash('success', ['message' => "Учетная запись собсвенника {$full_name} успешно удалена из системы"]);
+            Yii::$app->session->setFlash('success', ['message' => "Учетная запись собсвенника {$full_name} успешно удалена из системы."]);
             return $this->redirect(Yii::$app->request->referrer);
         }
         
-        Yii::$app->session->setFlash('error', ['message' => 'Ошибка удаления. Обновите страницу и повторите действие еще раз']);
+        Yii::$app->session->setFlash('error', ['message' => 'Ошибка удаления учетной записи собсвенника. Обновите страницу и повторите действие еще раз.']);
         return $this->redirect(Yii::$app->request->referrer);
     }
     

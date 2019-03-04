@@ -191,9 +191,6 @@ $config = [
         'sms' => $sms,
         'client_api' => $client_api,
         'orangedata_client' => $orangedata_client,
-        'messages_block' => [
-            'class' => 'app\components\messagesBlock\MessagesBlock',
-        ],
     ],
     'params' => $params,
 ];

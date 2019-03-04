@@ -75,7 +75,7 @@ class EmployeeFormController extends AppManagersController {
                     'type' => $new_employee,
                     'employee_id' => $employee_id]);
             }
-            Yii::$app->session->setFlash('error', ['message' => 'Во время создания профиля сотрудника произошла ошибка. Обновите страницу и повторите действие заново']);
+            Yii::$app->session->setFlash('error', ['message' => 'Во время создания профиля сотрудника произошла ошибка. Обновите страницу и повторите действие заново.']);
         }
         
         
@@ -94,7 +94,7 @@ class EmployeeFormController extends AppManagersController {
     public function actionEmployeeProfile($type, $employee_id) {
         
         if ($type == null || $employee_id == null) {
-            throw new NotFoundHttpException('Вы обратились к несуществующей странице');
+            throw new NotFoundHttpException(404);
         }
 
         // Получаем информацию о сотруднике
@@ -104,7 +104,7 @@ class EmployeeFormController extends AppManagersController {
         
         // Проверяем существование заданного сотрудника
         if ($employee_info === null && $user_info === null) {
-            throw new NotFoundHttpException('Вы обратились к несуществующей странице');
+            throw new NotFoundHttpException(404);
         }
         
         // Список Отделений
@@ -142,10 +142,10 @@ class EmployeeFormController extends AppManagersController {
                 $set_permissions = SetPermissions::changePermissions($user_info->id, $role = $type, $permission_list_post);
                 
             } else {
-                Yii::$app->session->setFlash('error', ['message' => 'Во время обновления профиля произошла ошибка. Обновите страницу и повторите действие заново']);
+                Yii::$app->session->setFlash('error', ['message' => 'Во время обновления профиля произошла ошибка. Обновите страницу и повторите действие заново.']);
                 return $this->redirect(Yii::$app->request->referrer);
             }
-            Yii::$app->session->setFlash('success', ['message' => 'Профиль сотрудника успешно обновлем']);
+            Yii::$app->session->setFlash('success', ['message' => "Профиль сотрудника {$employee_info->fullName} успешно обновлен."]);
             return $this->redirect(Yii::$app->request->referrer);
         }
         
@@ -173,10 +173,10 @@ class EmployeeFormController extends AppManagersController {
         
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->changePassword()) {
-                Yii::$app->session->setFlash('success', ['message' => "Пароль пользователя {$user->user_login} был успешно изменен"]);
+                Yii::$app->session->setFlash('success', ['message' => "Пароль пользователя {$user->user_login} был успешно изменен."]);
                 return $this->redirect(Yii::$app->request->referrer);
             }
-            Yii::$app->session->setFlash('error', ['message' => 'Во время смены пароля произошла ошибка. Обновите страницу и повторите действие заново']);
+            Yii::$app->session->setFlash('error', ['message' => 'Во время смены пароля произошла ошибка. Обновите страницу и повторите действие заново.']);
             return $this->redirect(Yii::$app->request->referrer);
         }
     }

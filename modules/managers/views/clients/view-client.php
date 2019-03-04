@@ -4,7 +4,6 @@
     use yii\helpers\Html;
     use yii\widgets\Breadcrumbs;
     use app\modules\managers\widgets\AlertsShow;
-    use app\modules\managers\widgets\ModalWindowsManager;
 
 /* 
  * Просмотр инофрмации о Собственнике

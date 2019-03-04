@@ -180,7 +180,7 @@ class AppManagersController extends Controller {
                     break;
                 case 'administrator':
                     $requests = false;
-                    $url = 'managers/index';
+                    $url = 'employees/administrators';
                     break;
                 default:
                     $requests = false;

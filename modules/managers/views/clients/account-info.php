@@ -1,8 +1,6 @@
 <?php
 
     use yii\widgets\Breadcrumbs;
-    use yii\helpers\Html;
-    use kartik\date\DatePicker;
 
 /* 
  * Профиль собсвенника, раздел Приборы устройства

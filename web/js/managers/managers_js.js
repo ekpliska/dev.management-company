@@ -297,9 +297,8 @@ $(document).ready(function() {
                 role: role,
             },
             success: function(response) {
-                console.log(response.employee);
                 if (response.isClose === true) {                
-                    $('#delete_disp_manager_message').modal('show');
+                    $('#delete_employee_error').modal('show');
                 } else if (response.isClose === false) {
                     console.log('все заявки закрыты');
                 }

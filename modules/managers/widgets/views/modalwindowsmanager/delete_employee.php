@@ -34,3 +34,25 @@ Modal::begin([
 </div>
 
 <?php Modal::end() ?>
+
+<?php
+Modal::begin([
+    'id' => 'delete_employee_error',
+    'header' => 'Ошибка!',
+    'closeButton' => [
+        'class' => 'close modal-close-btn',
+    ],
+    'clientOptions' => [
+        'backdrop' => 'static', 
+        'keyboard' => false,
+    ],    
+]);
+?>
+
+<p class="modal-confirm">Данный сотрудник имеет не закрытые заявки!</p>
+
+<div class="modal-footer">
+    <?= Html::button('Закрыть', ['class' => 'btn red-btn', 'data-dismiss' => 'modal']) ?>
+</div>
+
+<?php Modal::end() ?>

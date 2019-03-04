@@ -53,9 +53,7 @@ $this->params['breadcrumbs'][] = 'Главная';
             </div>
             <?php else: ?>
                 <div class="notice info">
-                    <p>
-                        <?= Yii::$app->messages_block->getAdministrationMessage('news-not-found') ?>
-                    </p>
+                    <p>Публикации еще не создавались.</p>
                 </div>
             <?php endif; ?>
         </div>
@@ -74,9 +72,9 @@ $this->params['breadcrumbs'][] = 'Главная';
                         <div class="general-right__request-body">
                             <h5>
                                 <span class="requiest-id"><?= "ID {$request['number']}" ?></span>
-                                <?php if (Yii::$app->user->can('RequestsEdit')) : ?>
-                                    <?= Html::a('Перейти', ['requests/view-request', 'request_number' => $request['number']], ['class' => 'pull-right']) ?>
-                                <?php endif; ?>
+                                <span class="requiest-date pull-right">
+                                    <?= FormatHelpers::formatDate($request['date_create'], true, 0, false) ?>
+                                </span>
                             </h5>
                             <div>
                                 <p><span class="title">Вид заявки: </span><?= $request['type_requests'] ?></p>
@@ -86,14 +84,15 @@ $this->params['breadcrumbs'][] = 'Главная';
                                             $request['house'],
                                             false, false, $request['flat']) ?>
                                 </p>
+                                <?php if (Yii::$app->user->can('RequestsEdit')) : ?>
+                                    <?= Html::a('Перейти', ['requests/view-request', 'request_number' => $request['number']], ['class' => 'pull-right']) ?>
+                                <?php endif; ?>
                             </div>
                         </div>
                     <?php endforeach; ?>
                     <?php else: ?>
                         <div class="notice info">
-                            <p>
-                                <?= Yii::$app->messages_block->getAdministrationMessage('request-not-found') ?>
-                            </p>
+                            <p>Новых заявок нет.</p>
                         </div>
                     <?php endif; ?>
                 </div>
@@ -107,9 +106,9 @@ $this->params['breadcrumbs'][] = 'Главная';
                         <div class="general-right__request-body">
                             <h5>
                                 <span class="requiest-id"><?= "ID {$paid_request['number']}" ?></span>
-                                <?php if (Yii::$app->user->can('PaidRequestsEdit')) : ?>
-                                    <?= Html::a('Перейти', ['paid-requests/view-paid-request', 'request_number' => $paid_request['number']], ['class' => 'pull-right']) ?>
-                                <?php endif; ?>
+                                <span class="requiest-date pull-right">
+                                    <?= FormatHelpers::formatDate($paid_request['date_create'], true, 0, false) ?>
+                                </span>
                             </h5>
                             <div>
                                 <p><span class="title">Категория, услуга: </span><?= "{$paid_request['category']}, {$paid_request['service_name']}" ?></p>
@@ -119,14 +118,15 @@ $this->params['breadcrumbs'][] = 'Главная';
                                             $paid_request['house'],
                                             false, false, $paid_request['flat']) ?>
                                 </p>
+                                <?php if (Yii::$app->user->can('PaidRequestsEdit')) : ?>
+                                    <?= Html::a('Перейти', ['paid-requests/view-paid-request', 'request_number' => $paid_request['number']], ['class' => 'pull-right']) ?>
+                                <?php endif; ?>
                             </div>
                         </div>
                     <?php endforeach; ?>
                     <?php else: ?>
                         <div class="notice info">
-                            <p>
-                                <?= Yii::$app->messages_block->getAdministrationMessage('paid-request-not-found') ?>
-                            </p>
+                            <p>Новых заявок на платные услуги нет.</p>
                         </div>
                     <?php endif; ?>
                 </div>

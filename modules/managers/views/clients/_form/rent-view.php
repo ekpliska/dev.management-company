@@ -49,5 +49,5 @@
                 'class' => 'field-input'])
             ->label($rent_info->getAttributeLabel('rents_mobile_more'), ['class' => 'field-label']) ?>
 <?php else : ?>
-    Арендатор отсутствует
+    Арендатор отсутствует.
 <?php endif; ?>
