@@ -32,7 +32,7 @@ class ClientsController extends AppManagersController {
                         'roles' => ['ClientsView']
                     ],
                     [
-                        'actions' => ['view-client', 'block-client', 'block-client-in-view', 'delete-client'],
+                        'actions' => ['view-client', 'receipts-of-hapu', 'payments', 'counters', 'account-info', 'block-client', 'block-client-in-view', 'delete-client'],
                         'allow' => true,
                         'roles' => ['ClientsEdit']
                     ],

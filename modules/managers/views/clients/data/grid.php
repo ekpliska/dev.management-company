@@ -75,6 +75,7 @@
             ],
             [
                 'class' => BlockClientColumn::className(),
+                'visible' => Yii::$app->user->can('ClientsEdit') ? true : false,
             ],
         ],
     ]); ?>

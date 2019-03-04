@@ -24,7 +24,7 @@ class ManagersModule extends Module
             'components' => [
                 'errorHandler' => [
                     'class' => ErrorHandler::className(),
-                    'errorAction' => '/managers/app-managers/error',
+                    'errorAction' => '/managers/managers/error',
                 ]
             ],
         ]);
