@@ -81,7 +81,7 @@ class RequestsController extends AppManagersController {
             'type_requests' => $type_requests,
             'flat' => $flat,
             'requests' => $requests,
-            'specialist_lists' => $specialist_lists,
+            'specialist_lists' => $specialist_lists ? $specialist_lists : null,
         ]);
     }
     
