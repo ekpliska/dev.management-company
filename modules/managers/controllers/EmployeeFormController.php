@@ -20,6 +20,21 @@
  */
 class EmployeeFormController extends AppManagersController {
     
+    public function behaviors() {
+        return [
+            'access' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['index', 'employee-profile', 'change-password'],
+                        'allow' => true,
+                        'roles' => ['EmployeesEdit']
+                    ],
+                ],
+            ],
+        ];
+    }
+    
     /*
      * Главная, форма добавления нового сотрудника
      * 

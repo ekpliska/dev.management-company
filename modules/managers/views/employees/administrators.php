@@ -31,7 +31,9 @@ $this->params['breadcrumbs'][] = 'Администраторы';
     
     <?= $this->render('data/grid_administrator', ['manager_list' => $manager_list]) ?>
     
-    <?= Html::a('', ['employee-form/index', 'new_employee' => 'administrator'], ['class' => 'create-request-btn']) ?>
+    <?php if (Yii::$app->user->can('EmployeesEdit')) : ?>
+        <?= Html::a('', ['employee-form/index', 'new_employee' => 'administrator'], ['class' => 'create-request-btn']) ?>
+    <?php endif; ?>
     
 </div>
 

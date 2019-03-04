@@ -90,6 +90,7 @@
             ],
             [
                 'class' => 'yii\grid\ActionColumn',
+                'visible' => Yii::$app->user->can('RequestsEdit') ? true : false,
                 'template' => '{delete-request}',
                 'buttons' => [
                     'delete-request' => function ($url, $data) {

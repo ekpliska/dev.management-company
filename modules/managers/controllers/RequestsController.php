@@ -22,6 +22,33 @@
  */
 class RequestsController extends AppManagersController {
     
+    public function behaviors() {
+        return [
+            'access' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['index'],
+                        'allow' => true,
+                        'roles' => ['RequestsView']
+                    ],
+                    [
+                        'actions' => [
+                            'view-request', 
+                            'create-request', 
+                            'switch-status-request', 
+                            'choose-dispatcher', 
+                            'choose-specialist', 
+                            'edit-request',
+                            'confirm-delete-request'],
+                        'allow' => true,
+                        'roles' => ['RequestsEdit']
+                    ],
+                ],
+            ],
+        ];
+    }
+    
     public $type_request = [
         'requests',
         'paid-requests',
@@ -55,31 +82,6 @@ class RequestsController extends AppManagersController {
             'flat' => $flat,
             'requests' => $requests,
             'specialist_lists' => $specialist_lists,
-        ]);
-    }
-    
-    public function actionPaidRequests() {
-        
-        $model = new PaidRequestForm();
-        $servise_category = CategoryServices::getCategoryNameArray();
-        $servise_name = [];
-        $flat = [];
-        
-        $paid_requests = new ActiveDataProvider([
-            'query' => PaidServices::getAllPaidRequests(),
-            'pagination' => [
-                'forcePageParam' => false,
-                'pageSizeParam' => false,
-                'pageSize' => 15,
-            ],
-        ]);
-        
-        return $this->render('paid-requests', [
-            'model' => $model,
-            'servise_category' => $servise_category,
-            'servise_name' => $servise_name,
-            'flat' => $flat,
-            'paid_requests' => $paid_requests,
         ]);
     }
     
@@ -125,23 +127,6 @@ class RequestsController extends AppManagersController {
     }
     
     /*
-     * Просмотр и редактирование заявки, на платную услугу
-     */
-    public function actionViewPaidRequest($request_number) {
-        
-        $paid_request = PaidServices::findRequestByIdent($request_number);
-        
-        if (!isset($paid_request) && $paid_request == null) {
-            throw new \yii\web\NotFoundHttpException('Вы обратились к несуществующей странице');
-        }
-        
-        return $this->render('view-paid-request', [
-            'paid_request' => $paid_request,
-            'model_comment' => $model_comment,
-        ]);
-    }
-    
-    /*
      * Метод сохранения созданной заявки
      */
     public function actionCreateRequest() {
@@ -153,19 +138,6 @@ class RequestsController extends AppManagersController {
             return $this->redirect(['view-request', 'request_number' => $number]);
         }
     }
-    
-    /*
-     * Метод сохранения созданной заявки на платную услугу
-     */
-    public function actionCreatePaidRequest() {
-        
-        $model = new PaidRequestForm();
-        
-        if (Yii::$app->request->isPost && $model->load(Yii::$app->request->post())) {
-            $number = $model->save();
-            return $this->redirect(['view-paid-request', 'request_number' => $number]);
-        }
-    }    
     
     /*
      * Валидация формы в модальном окне "Создать заявку"

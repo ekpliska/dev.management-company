@@ -2,13 +2,9 @@
 
     namespace app\modules\managers\controllers;
     use Yii;
-    use yii\web\UploadedFile;
-    use yii\data\ActiveDataProvider;
     use yii\web\Response;
     use app\modules\managers\controllers\AppManagersController;
-    use app\modules\managers\models\form\EmployeeForm;
     use app\models\Departments;
-    use app\modules\managers\models\User;
     use app\modules\managers\models\Dispatchers;
     use app\modules\managers\models\Specialists;
     use app\modules\managers\models\searchForm\searchEmployees;
@@ -19,6 +15,26 @@
  * Диспетчеры
  */
 class EmployeesController extends AppManagersController {
+    
+    public function behaviors() {
+        return [
+            'access' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['dispatchers', 'specialists', 'administrators'],
+                        'allow' => true,
+                        'roles' => ['EmployeesView']
+                    ],
+                    [
+                        'actions' => ['query-delete-dispatcher', 'query-delete-specialist'],
+                        'allow' => true,
+                        'roles' => ['EmployeesEdit']
+                    ],
+                ],
+            ],
+        ];
+    }
     
     /*
      * Все Диспетчеры

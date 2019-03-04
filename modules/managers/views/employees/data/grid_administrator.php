@@ -57,6 +57,7 @@
             ],
             [
                 'class' => 'yii\grid\ActionColumn',
+                'visible' => Yii::$app->user->can('EmployeesEdit') ? true : false,
                 'contentOptions' =>[
                     'class' => 'managers-table_middle managers-table_button',
                 ],

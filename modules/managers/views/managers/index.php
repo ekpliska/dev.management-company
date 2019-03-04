@@ -50,7 +50,9 @@ $this->params['breadcrumbs'][] = 'Главная';
                 <?php endforeach; ?>
             </div>
             <?php else: ?>
-                <?= '=(' ?>
+                <div class="notice info">
+                    <p>За указанный период квитанции не найдены.</p>
+                </div>
             <?php endif; ?>
         </div>
         <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 manager-main__general-rigth">
@@ -72,10 +74,19 @@ $this->params['breadcrumbs'][] = 'Главная';
                             </h5>
                             <div>
                                 <p><span class="title">Вид заявки: </span><?= $request['type_requests'] ?></p>
-                                <p><span class="title">Адрес:</span> <?= FormatHelpers::formatFullAdress($request['gis_adress'], $request['house']) ?></p>
+                                <p><span class="title">Адрес:</span> 
+                                    <?= FormatHelpers::formatFullAdress(
+                                            $request['gis_adress'], 
+                                            $request['house'],
+                                            false, false, $request['flat']) ?>
+                                </p>
                             </div>
                         </div>
                     <?php endforeach; ?>
+                    <?php else: ?>
+                        <div class="notice info">
+                            <p>Новых заявок нет.</p>
+                        </div>
                     <?php endif; ?>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 general-right__request">
@@ -92,10 +103,19 @@ $this->params['breadcrumbs'][] = 'Главная';
                             </h5>
                             <div>
                                 <p><span class="title">Категория, услуга: </span><?= "{$paid_request['category']}, {$paid_request['service_name']}" ?></p>
-                                <p><span class="title">Адрес:</span> <?= FormatHelpers::formatFullAdress($paid_request['gis_adress'], $paid_request['house']) ?></p>
+                                <p><span class="title">Адрес:</span> 
+                                    <?= FormatHelpers::formatFullAdress(
+                                            $paid_request['gis_adress'], 
+                                            $paid_request['house'],
+                                            false, false, $paid_request['flat']) ?>
+                                </p>
                             </div>
                         </div>
                     <?php endforeach; ?>
+                    <?php else: ?>
+                        <div class="notice info">
+                            <p>Новых заявок на платные услуги нет.</p>
+                        </div>
                     <?php endif; ?>
                 </div>
             </div>

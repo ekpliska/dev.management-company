@@ -29,7 +29,9 @@ $this->params['breadcrumbs'][] = 'Специалисты';
     
     <?= $this->render('data/grid_specialists', ['specialists' => $specialists]) ?>
     
-    <?= Html::a('', ['employee-form/index', 'new_employee' => 'specialist'], ['class' => 'create-request-btn']) ?>
+    <?php if (Yii::$app->user->can('EmployeesEdit')) : ?>
+        <?= Html::a('', ['employee-form/index', 'new_employee' => 'specialist'], ['class' => 'create-request-btn']) ?>
+    <?php endif; ?>
     
 </div>
 

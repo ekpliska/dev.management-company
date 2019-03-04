@@ -200,7 +200,7 @@ $this->params['breadcrumbs'][] = $employee_info->fullName;
 
             <div class="spam-agree-txt text-center">
                 
-                <?php if ($type == 'dispatcher') : ?>
+                <?php if ($type == 'dispatcher' && Yii::$app->user->can('EmployeesEdit')) : ?>
                     <div class="dispatch-privileges-block">
                         <?= $form->field($user_info, 'permission_list[]', ['template' => '{input}{label}'])
                                 ->checkbox(['name' => "permission_list[{$permissions_list['value']}]"], false)->label($permissions_list['name']) ?> 
@@ -215,36 +215,36 @@ $this->params['breadcrumbs'][] = $employee_info->fullName;
                 </div>
             </div>
 
-        <?php if ($type == 'administrator') : ?>
-            <div class="privileges-block row">
-                <h3 class="title">Настройка прав доступа</h3>
-                <?php if (isset($permissions_list) && !empty($permissions_list)) : ?>
-                <?php foreach ($permissions_list as $key => $permission) : ?>
-                    <div class="col-lg-4 col-md-4 col-sm-3 col-xs-4">
-                        <div class="privileges-block__privilege">
-                            <h4><?= $permission['name'] ?>
-                            </h4>
-                            <ul class="privileges-block__lists">
-                                <?= $form->field($user_info, 'permission_list', ['template' => '{label}{input}'])
-                                        ->checkboxList($permission['permission'], ['id' => "permission_lists",
-                                            'item' => function($index, $label, $name, $checked, $value) use ($current_permissions) {
-                                                $_checked = ArrayHelper::keyExists($value, $current_permissions) ? 'checked' : '';
-                                                $return = '<li><span>' . $label . '</span>';
-                                                $return .= '<label class="switch-rule">' . '';
-                                                $return .= '<input type="checkbox" name="permission_list[' . $value . ']"' . $_checked . '>';
-                                                $return .= '<span class="slider round"></span>';
-                                                $return .= '</label>';
-                                                $return .= '</li>';
-                                                return $return;
-                                            }])
-                                        ->label(false) ?>
-                            </ul>       
+            <?php if ($type == 'administrator' && Yii::$app->user->can('EmployeesEdit')) : ?>
+                <div class="privileges-block row">
+                    <h3 class="title">Настройка прав доступа</h3>
+                    <?php if (isset($permissions_list) && !empty($permissions_list)) : ?>
+                    <?php foreach ($permissions_list as $key => $permission) : ?>
+                        <div class="col-lg-4 col-md-4 col-sm-3 col-xs-4">
+                            <div class="privileges-block__privilege">
+                                <h4><?= $permission['name'] ?>
+                                </h4>
+                                <ul class="privileges-block__lists">
+                                    <?= $form->field($user_info, 'permission_list', ['template' => '{label}{input}'])
+                                            ->checkboxList($permission['permission'], ['id' => "permission_lists",
+                                                'item' => function($index, $label, $name, $checked, $value) use ($current_permissions) {
+                                                    $_checked = ArrayHelper::keyExists($value, $current_permissions) ? 'checked' : '';
+                                                    $return = '<li><span>' . $label . '</span>';
+                                                    $return .= '<label class="switch-rule">' . '';
+                                                    $return .= '<input type="checkbox" name="permission_list[' . $value . ']"' . $_checked . '>';
+                                                    $return .= '<span class="slider round"></span>';
+                                                    $return .= '</label>';
+                                                    $return .= '</li>';
+                                                    return $return;
+                                                }])
+                                            ->label(false) ?>
+                                </ul>       
+                            </div>
                         </div>
-                    </div>
-                <?php endforeach; ?>
-                <?php endif; ?>
-            </div>
-        <?php endif; ?>            
+                    <?php endforeach; ?>
+                    <?php endif; ?>
+                </div>
+            <?php endif; ?>            
             
         </div>
         

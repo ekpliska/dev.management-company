@@ -30,7 +30,9 @@ $this->params['breadcrumbs'][] = 'Диспетчеры';
     
     <?= $this->render('data/grid_dispatchers', ['dispatchers' => $dispatchers]) ?>
     
-    <?= Html::a('', ['employee-form/index', 'new_employee' => 'dispatcher'], ['class' => 'create-request-btn']) ?>
+    <?php if (Yii::$app->user->can('EmployeesEdit')) : ?>
+        <?= Html::a('', ['employee-form/index', 'new_employee' => 'dispatcher'], ['class' => 'create-request-btn']) ?>
+    <?php endif; ?>
     
 </div>
 
