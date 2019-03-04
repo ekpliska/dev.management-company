@@ -173,6 +173,15 @@ and open the template in the editor.
     padding: 5px 10px;
     font-size: 12px;
 }
+.general-right__request-body > div > p {
+    margin: 5px 0;
+    padding: 0;
+}
+.general-right__request-body > div > p > span.title {
+    font-weight: bold;
+    color: #2d18b4;
+    margin: 0;
+}
 /* Конец Администратор, Главная страница */
 
 /* Администратор, Собственники */

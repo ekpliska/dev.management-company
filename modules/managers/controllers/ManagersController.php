@@ -4,6 +4,7 @@
     use Yii;
     use app\modules\managers\models\News;
     use app\modules\managers\models\Requests;
+    use app\modules\managers\models\PaidServices;
 
 /**
  * Профиль Админимтратора
@@ -28,15 +29,16 @@ class ManagersController extends AppManagersController {
         $news_content = News::getAllNewsAndVoting();
         
         // Формируем список последних 10 новых заявок
-        $request_list = Requests::getOnlyNewRequest();
-//        echo '<pre>'; var_dump($request_list); die();
+        $request_list = Requests::getOnlyNewRequest(10);
         
         // Формируем список последних 10 новых заявок на платные услуги
-        $paid_request_list = [];
+        $paid_request_list = PaidServices::getOnlyNewPaidRequest(10);
+//        echo '<pre>'; var_dump($paid_request_list); die();
         
         return $this->render('index', [
             'news_content' => $news_content,
             'request_list' => $request_list,
+            'paid_request_list' => $paid_request_list,
         ]);
         
     }

@@ -48,6 +48,38 @@ class PaidServices extends BasePaidServices {
     }
     
     /*
+     * Формируем запрос на получение всех заявок на платные услуги
+     * Стасут: Новая
+     */
+    public static function getOnlyNewPaidRequest($count = 10) {
+        
+        $requests = (new \yii\db\Query)
+                ->select('ps.services_id as id, '
+                        . 'ps.services_number as number, '
+                        . 'ps.services_comment as comment, '
+                        . 'ps.created_at as date_create, ps.date_closed as date_close, '
+                        . 'ps.status as status, '
+                        . 'cs.category_name as category, '
+                        . 's.service_name as service_name, '
+                        . 'h.houses_gis_adress as gis_adress, h.houses_number as house, '
+                        . 'f.flats_porch as porch, f.flats_floor as floor, '
+                        . 'f.flats_number as flat')
+                ->from('paid_services as ps')
+                ->join('LEFT JOIN', 'services as s', 's.service_id = ps.services_name_services_id')
+                ->join('LEFT JOIN', 'category_services as cs', 'cs.category_id = s.service_category_id')
+                ->join('LEFT JOIN', 'personal_account as pa', 'pa.account_id = ps.services_account_id')
+                ->join('LEFT JOIN', 'flats as f', 'f.flats_id = pa.personal_flat_id')
+                ->join('LEFT JOIN', 'houses as h', 'h.houses_id = f.flats_house_id')
+                ->join('LEFT JOIN', 'clients as c', 'c.clients_id = pa.personal_clients_id')
+                ->where(['status' => StatusRequest::STATUS_NEW])
+                ->limit($count)
+                ->orderBy(['ps.created_at' => SORT_DESC])
+                ->all();
+        
+        return $requests;
+    }    
+    
+    /*
      * Назначение диспетчера
      */
     public function chooseDispatcher($dispatcher_id) {
