@@ -42,7 +42,7 @@ class News extends BaseNews {
     public static function getAllNewsAndVoting() {
         
         // Количество блоков для вывода важной информации
-        $count_news = 10;
+        $count_news = 7;
     
         $voling_list = Voting::find()
                 ->select(['voting_id as slug', 'voting_image as news_preview', 'voting_title as news_title', 'voting_text as news_text', 'created_at'])

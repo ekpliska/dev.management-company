@@ -39,11 +39,11 @@ $this->params['breadcrumbs'][] = 'Главная';
                         <?= Html::a($post['news_title'], ['/'], ['class' => 'title']) ?>
                         <p class="__content-date"><?= Yii::$app->formatter->asDate($post['created_at'], 'long') ?></p>
                         <div class="__content-news-item">
-                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 __content-image">
+                            <div class="col-lg-4 col-md-12 col-sm-2 col-xs-6 __content-image">
                                 <?= Html::img("/web/{$post['news_preview']}") ?>
                             </div>
-                            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 __content-text">
-                                <?= FormatHelpers::shortTextNews($post['news_text'], 25) ?>
+                            <div class="col-lg-8 col-md-12 col-sm-10 col-xs-6 __content-text">
+                                <?= FormatHelpers::shortTextNews($post['news_text'], 15) ?>
                             </div>                            
                         </div>
                     </div>

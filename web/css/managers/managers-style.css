@@ -102,11 +102,11 @@ and open the template in the editor.
 .__content-image {
     position: relative;
     padding: 0;
+    height: 100px;
 }
 .__content-image > img {
     width: 100%;
-    height: 120px;
-    /*height: 100%;*/
+    height: 100%;
     position: absolute;
 }
 .__content-text {
