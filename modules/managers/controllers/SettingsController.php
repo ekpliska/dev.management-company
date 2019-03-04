@@ -18,6 +18,33 @@
  */
 class SettingsController extends AppManagersController {
     
+    public function behaviors() {
+        return [
+            'access' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => [
+                            'index',
+                            'service-duty',
+                            'partners-list',
+                            'slider-settings',
+                            'api-settings',
+                            'faq-settings',
+                            'sms-settings',
+                            'delete-record',
+                            'validate-form',
+                            'create-record',
+                            'switch-status-slider',
+                        ],
+                        'allow' => true,
+                        'roles' => ['SettingsView', 'SettingsEdit']
+                    ],
+                ],
+            ],
+        ];
+    }
+    
     /*
      * Настройка, главная страница
      * Реквизиты компании
