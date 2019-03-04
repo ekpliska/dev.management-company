@@ -18,6 +18,41 @@
  */
 class HousingStockController extends AppManagersController {
     
+    public function behaviors() {
+        return [
+            'access' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['index', 'view-characteristic-house'],
+                        'allow' => true,
+                        'roles' => ['EstatesView']
+                    ],
+                    [
+                        'actions' => [
+                            'update-description',
+                            'create-characteristic',
+                            'load-files',
+                            'check-status-flat',
+                            'edit-description-validate',
+                            'view-characteristic-house',
+                            'delete-characteristic',
+                            'delete-files-house',
+                            'take-off-status-debtor',
+                            'take-off-statusDebtor',
+                            '',
+                            '',
+                            '',
+                            '',
+                        ],
+                        'allow' => true,
+                        'roles' => ['EstatesEdit']
+                    ],
+                ],
+            ],
+        ];
+    }
+    
     /*
      * Жилищный фонд, главная страница
      */
@@ -39,100 +74,6 @@ class HousingStockController extends AppManagersController {
             'files' => $files,
             'house_cookie' => $house_cookie,
         ]);
-        
-    }
-    
-    /*
-     * Создание нового жилого объекта ЖК + Дом
-     */
-    public function actionCreateHouse() {
-        
-        $estates_list = ArrayHelper::map(HousingEstates::getHousingEstateList(), 'estate_id', 'estate_name');
-        
-        $model = new HouseForm();
-        $model->houses = new Houses;
-        $model->houses->loadDefaultValues();
-        $model->setAttributes(Yii::$app->request->post());
-        
-        if (Yii::$app->request->post() && $model->validate()) {
-            // Получаем загружаемые документа
-            $files = UploadedFile::getInstances($model->houses, 'upload_files');
-            $model->houses->upload_files = $files;
-            // Сохраняем
-            if ($model->save()) {
-                // Загружаем прикрепленне файлы
-                $model->houses->uploadFiles($files);
-                Yii::$app->session->setFlash('estate-admin', [
-                    'success' => true,
-                    'message' => 'Запись успешно создана',
-                ]);
-                return $this->redirect(['view-house', 'house_id' => $model->houses->houses_id]);
-            } else {
-                Yii::$app->session->setFlash('estate-admin', [
-                    'success' => false,
-                    'error' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз',
-                ]);
-                return $this->redirect(Yii::$app->request->referrer);                
-            }
-        }
-        
-        return $this->render('create-house', [
-            'model' => $model,
-            'estates_list' => $estates_list,
-        ]);
-        
-    }
-    
-    /*
-     * Просмотр и редактирование записи жилой дом
-     */
-    public function actionViewHouse($house_id) {
-        
-        $model = new HouseForm();
-        $model->houses = Houses::findHouseById($house_id);
-        
-        if ($model->houses === null) {
-            throw new \yii\web\NotFoundHttpException('Вы обратились к несуществующей странице');
-        }
-        
-        $model->setAttributes(Yii::$app->request->post());
-
-        $estates_list = ArrayHelper::map(HousingEstates::getHousingEstateList(), 'estate_id', 'estate_name');
-        // Получаем прикрепленные к заявке файлы
-        $upload_files = Image::getAllDocByNews($model->houses->houses_id, $model_name = 'Houses');
-        
-        if (Yii::$app->request->post()) {
-            $files = UploadedFile::getInstances($model->houses, 'upload_files');
-            $model->houses->upload_files = $files;
-            $model->houses->uploadFiles($files);
-            $model->houses->upload_files = null;
-            if (!$model->save()) {
-                Yii::$app->session->setFlash('estate-admin', [
-                    'success' => false,
-                    'error' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз',
-                ]);
-                return $this->redirect(Yii::$app->request->referrer);
-            }
-            
-            Yii::$app->session->setFlash('estate-admin', [
-                'success' => true,
-                'message' => 'Изменения были успешно обновлены',
-            ]);
-            return $this->redirect(['view-house', 'house_id' => $model->houses->houses_id]);
-            
-        }
-        
-        return $this->render('view-house', [
-            'model' => $model,
-            'estates_list' => $estates_list,
-            'upload_files' => $upload_files,
-        ]);        
-        
-    }
-    
-    public function actionCreateFlat() {
-        
-        return $this->render('create-flat');
         
     }
     

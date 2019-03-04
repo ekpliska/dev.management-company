@@ -23,7 +23,9 @@
         <h3 class="<?= $debtor ? 'title-debtor' : 'title' ?>">
             <?= "Квартира {$flat['flats_number']}, подъезд {$flat['flats_porch']}" ?>
 
-            <?= Html::button('', ['id' => 'add-note', 'data-flat' => $flat['flats_id']]) ?>
+            <?php if (Yii::$app->user->can('EstatesEdit')) : ?>
+                <?= Html::button('', ['id' => 'add-note', 'data-flat' => $flat['flats_id']]) ?>
+            <?php endif; ?>
 
         </h3>
         
@@ -36,24 +38,27 @@
                 <p class="client-name">
                     <?= FormatHelpers::formatFullUserName($flat['clients_surname'], $flat['clients_name'], $flat['clients_second_name'], true) ?>
                     
-                    <?php if ($flat['is_debtor']) : ?>
+                    <?php if (Yii::$app->user->can('EstatesEdit') && $flat['is_debtor']) : ?>
                         <label class="switch-rule pull-right">
                             <?= Html::checkbox($flat_status, $flat['is_debtor'], [
                                     'id' => "check_status__flat-{$flat['flats_id']}",
-                                    'data-flat' => $flat['flats_id'],
-                            ]) ?>
+                                    'data-flat' => $flat['flats_id']]) ?>
                             <span class="slider round"></span>
                         </label>
                     <?php endif; ?>
+                    
                 </p>                
 
                 <?php if (isset($flats[$key]['note']) && $flats[$key]['note']) : ?>
                     <ul class="notes-flats-list" id="note_flat__tr-<?= $flat['flats_id'] ?>">
                         <li class="first-title"><span>Примечание</span></li>
+                        
                         <?php foreach ($flats[$key]['note'] as $note) : ?>
                         <li>
                             <?= $note['notes_name'] ?>
-                            <span class="close flat_note__delete" data-note="<?= $note['notes_id'] ?>">&#x2715;</span>
+                            <?php if (Yii::$app->user->can('EstatesEdit')) : ?>
+                                <span class="close flat_note__delete" data-note="<?= $note['notes_id'] ?>">&#x2715;</span>
+                            <?php endif; ?>
                         </li>
                         <?php endforeach; ?>
                     </ul>

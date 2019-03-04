@@ -12,6 +12,8 @@
         <?php foreach ($characteristics as $characteristic) : ?>
         <tr>
             <td><?= $characteristic['characteristics_name'] ?>: <?= $characteristic['characteristics_value'] ?></td>
+            
+            <?php if (Yii::$app->user->can('EstatesEdit')) : ?>
             <td>
                 <?= Html::button('', [
                         'id' => 'delete-characteristic__link',
@@ -20,6 +22,8 @@
                     ]) 
                 ?>
             </td>
+            <?php endif; ?>
+            
         </tr>
         <?php endforeach; ?>
     </table>
