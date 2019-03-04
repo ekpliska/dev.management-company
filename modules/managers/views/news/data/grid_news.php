@@ -18,11 +18,14 @@
         <div class="news-item__title">
             <?= Html::a($news['title'], ['news/view', 'slug' => $news['slug']], ['class' => 'title']) ?>
             <p class="date"><?= FormatHelpers::formatDate($news['date'], false, 0, false) ?></p>
-            <?= Html::button('<i class="glyphicon glyphicon-trash"></i>', [
-                    'class' => 'btn bnt-delete-news',
-                    'data-target' => '#delete_news_manager',
-                    'data-toggle' => 'modal',
-                    'data-news' => $news['id']]) ?>
+            
+                <?php if (Yii::$app->user->can('NewsEdit')) : ?>
+                    <?= Html::button('<i class="glyphicon glyphicon-trash"></i>', [
+                        'class' => 'btn bnt-delete-news',
+                        'data-target' => '#delete_news_manager',
+                        'data-toggle' => 'modal',
+                        'data-news' => $news['id']]) ?>
+                <?php endif; ?>
         </div>
         <div class="news-item__image">
             <span class="item__image_desc"><?= $news['rubric'] ?></span>

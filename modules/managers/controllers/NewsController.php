@@ -18,6 +18,34 @@
  */
 class NewsController extends AppManagersController {
     
+    public function behaviors() {
+        return [
+            'access' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['index'],
+                        'allow' => true,
+                        'roles' => ['NewsView']
+                    ],
+                    [
+                        'actions' => [
+                            'create',
+                            'view', 
+                            'for-whom-news',
+                            'delete-news',
+                            'delete-file',
+                            'image-upload',
+                            'file-delete',
+                        ],
+                        'allow' => true,
+                        'roles' => ['NewsEdit']
+                    ],
+                ],
+            ],
+        ];
+    }
+    
     /*
      * Действия
      *      image-upload Загрузка изображений используемых в редакторе текста новостей
