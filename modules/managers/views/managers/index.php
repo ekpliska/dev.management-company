@@ -61,18 +61,22 @@ $this->params['breadcrumbs'][] = 'Главная';
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 general-right__request">
                     <h4>
                         Заявки
-                        <span class="pull-right">1</span>
+                        <span class="pull-right"><?= count($request_list) ?></span>
                     </h4>
-                    <div class="general-right__request-body">
-                        <h5>
-                            <span class="requiest-id">ID123456-45</span>
-                            <?= Html::a('Перейти', ['/'], ['class' => 'pull-right']) ?>
-                        </h5>
-                        <div>
-                            <p>Вид заявки: <?= 'here' ?></p>
-                            <p>Адрес: <?= 'here' ?></p>
+                    <?php if (!empty($request_list) && count($request_list) > 0) : ?>
+                    <?php foreach ($request_list as $request) : ?>
+                        <div class="general-right__request-body">
+                            <h5>
+                                <span class="requiest-id"><?= "ID {$request['number']}" ?></span>
+                                <?= Html::a('Перейти', ['requests/view-request', 'request_number' => $request['number']], ['class' => 'pull-right']) ?>
+                            </h5>
+                            <div>
+                                <p>Вид заявки: <?= $request['type_requests'] ?></p>
+                                <p>Адрес: <?= FormatHelpers::formatFullAdress($request['gis_adress'], $request['house']) ?></p>
+                            </div>
                         </div>
-                    </div>
+                    <?php endforeach; ?>
+                    <?php endif; ?>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 general-right__request">
                     <h4>

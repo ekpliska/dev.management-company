@@ -51,7 +51,7 @@ class Requests extends BaseRequests {
                 ->select('r.requests_id as requests_id, r.requests_ident as number, '
                         . 'r.created_at as date_create, '
                         . 'r.status as status, '
-                        . 'tr.type_requests_name as category, '
+                        . 'tr.type_requests_name as type_requests, '
                         . 'h.houses_gis_adress as gis_adress, h.houses_number as house, '
                         . 'f.flats_porch as porch, f.flats_floor as floor, '
                         . 'f.flats_number as flat')
@@ -62,7 +62,8 @@ class Requests extends BaseRequests {
                 ->join('LEFT JOIN', 'houses as h', 'h.houses_id = f.flats_house_id')
                 ->where(['status' => StatusRequest::STATUS_NEW])
                 ->limit($count)
-                ->orderBy(['r.created_at' => SORT_DESC]);
+                ->orderBy(['r.created_at' => SORT_DESC])
+                ->all();
         
         return $requests;
         

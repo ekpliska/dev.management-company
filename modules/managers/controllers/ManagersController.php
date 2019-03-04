@@ -3,6 +3,7 @@
     namespace app\modules\managers\controllers;
     use Yii;
     use app\modules\managers\models\News;
+    use app\modules\managers\models\Requests;
 
 /**
  * Профиль Админимтратора
@@ -27,13 +28,15 @@ class ManagersController extends AppManagersController {
         $news_content = News::getAllNewsAndVoting();
         
         // Формируем список последних 10 новых заявок
-        $request_list = [];
+        $request_list = Requests::getOnlyNewRequest();
+//        echo '<pre>'; var_dump($request_list); die();
         
         // Формируем список последних 10 новых заявок на платные услуги
         $paid_request_list = [];
         
         return $this->render('index', [
             'news_content' => $news_content,
+            'request_list' => $request_list,
         ]);
         
     }

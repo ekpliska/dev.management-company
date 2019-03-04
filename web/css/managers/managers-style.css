@@ -142,14 +142,15 @@ and open the template in the editor.
 .general-right__request > h4 > span {
     font-weight: normal;
     padding: 4px 7px;
-    font-size: 12px;
+    font-size: 10px;
     background: #f0754a;
     color: #fff;
     border-radius: 25px;
     margin: -4px;
 }
 .general-right__request-body {
-    height: 130px;
+    margin: 10px 0;
+    height: 140px;
     border: 1px solid #ddd;
     border-radius: 12px;
     box-shadow: 0 4px 26px 0 rgba(51, 29, 82, 0.16);

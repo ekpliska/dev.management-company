@@ -69,7 +69,7 @@ class RegisterForm extends Model {
      */
     public static function registerStepTwo($data) {
         
-        if (empty($data['email'])) {
+        if (!array_key_exists('email', $data)) {
             return [
                 'success' => false,
                 'message' => 'Ошибка передачи данных',
@@ -96,7 +96,7 @@ class RegisterForm extends Model {
      */
     public static function registerStepThree($data) {
         
-        if (empty($data['phone'])) {
+        if (!array_key_exists('phone', $data)) {
             return [
                 'success' => false,
                 'message' => 'Ошибка передачи данных',
