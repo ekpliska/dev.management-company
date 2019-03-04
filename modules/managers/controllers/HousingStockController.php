@@ -3,15 +3,12 @@
     namespace app\modules\managers\controllers;
     use Yii;
     use yii\web\UploadedFile;
-    use yii\helpers\ArrayHelper;
     use app\modules\managers\controllers\AppManagersController;
     use app\models\Houses;
     use app\models\Image;
     use app\models\CharacteristicsHouse;
     use app\models\Flats;
     use app\models\NotesFlat;
-    use app\models\HousingEstates;
-    use app\modules\managers\models\form\HouseForm;
 
 /**
  * Жилищный фонд
@@ -40,10 +37,6 @@ class HousingStockController extends AppManagersController {
                             'delete-files-house',
                             'take-off-status-debtor',
                             'take-off-statusDebtor',
-                            '',
-                            '',
-                            '',
-                            '',
                         ],
                         'allow' => true,
                         'roles' => ['EstatesEdit']
@@ -302,23 +295,6 @@ class HousingStockController extends AppManagersController {
                 return ['success' => false];
             }
             return ['success' => true];
-        }
-        
-    }
-    
-    /*
-     * Скачивание запрашиваемого файла с сервера
-     */
-    public function actionDownloadFilesHouse() {
-        
-        $file_id = Yii::$app->request->post('fileId');
-        $file = Image::findById($file_id);
-        $path = 'upload/store/' . $file->filePath;
-        
-        if (file_exists($path)) {
-            return Yii::$app->response->sendFile($path);
-        } else {
-            throw new \yii\web\NotFoundHttpException('Такого файла не существует ');
         }
         
     }

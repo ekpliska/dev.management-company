@@ -24,6 +24,7 @@ $this->params['breadcrumbs'][] = 'Главная';
         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 manager-main__general-left">
             <h4>
                 Новости, Голосование
+                <?php if (Yii::$app->user->can('NewsEdit') && Yii::$app->user->can('VotingsEdit')) : ?>
                 <div class="dropdown settings-news">
                     <button class="dropdown-toggle" type="button" data-toggle="dropdown">+</button>
                     <ul class="dropdown-menu">
@@ -31,6 +32,7 @@ $this->params['breadcrumbs'][] = 'Главная';
                       <li><a href="<?= Url::to(['voting/create']) ?>">Добавить голосование</a></li>
                     </ul>
                 </div>
+                <?php endif; ?>
             </h4>
             <?php if (!empty($news_content) && count($news_content) > 0) : ?>
             <div class="manager-main__general-left__content">
@@ -51,7 +53,9 @@ $this->params['breadcrumbs'][] = 'Главная';
             </div>
             <?php else: ?>
                 <div class="notice info">
-                    <p>За указанный период квитанции не найдены.</p>
+                    <p>
+                        <?= Yii::$app->messages_block->getAdministrationMessage('news-not-found') ?>
+                    </p>
                 </div>
             <?php endif; ?>
         </div>
@@ -70,7 +74,9 @@ $this->params['breadcrumbs'][] = 'Главная';
                         <div class="general-right__request-body">
                             <h5>
                                 <span class="requiest-id"><?= "ID {$request['number']}" ?></span>
-                                <?= Html::a('Перейти', ['requests/view-request', 'request_number' => $request['number']], ['class' => 'pull-right']) ?>
+                                <?php if (Yii::$app->user->can('RequestsEdit')) : ?>
+                                    <?= Html::a('Перейти', ['requests/view-request', 'request_number' => $request['number']], ['class' => 'pull-right']) ?>
+                                <?php endif; ?>
                             </h5>
                             <div>
                                 <p><span class="title">Вид заявки: </span><?= $request['type_requests'] ?></p>
@@ -85,7 +91,9 @@ $this->params['breadcrumbs'][] = 'Главная';
                     <?php endforeach; ?>
                     <?php else: ?>
                         <div class="notice info">
-                            <p>Новых заявок нет.</p>
+                            <p>
+                                <?= Yii::$app->messages_block->getAdministrationMessage('request-not-found') ?>
+                            </p>
                         </div>
                     <?php endif; ?>
                 </div>
@@ -99,7 +107,9 @@ $this->params['breadcrumbs'][] = 'Главная';
                         <div class="general-right__request-body">
                             <h5>
                                 <span class="requiest-id"><?= "ID {$paid_request['number']}" ?></span>
-                                <?= Html::a('Перейти', ['paid-requests/view-paid-request', 'request_number' => $paid_request['number']], ['class' => 'pull-right']) ?>
+                                <?php if (Yii::$app->user->can('PaidRequestsEdit')) : ?>
+                                    <?= Html::a('Перейти', ['paid-requests/view-paid-request', 'request_number' => $paid_request['number']], ['class' => 'pull-right']) ?>
+                                <?php endif; ?>
                             </h5>
                             <div>
                                 <p><span class="title">Категория, услуга: </span><?= "{$paid_request['category']}, {$paid_request['service_name']}" ?></p>
@@ -114,7 +124,9 @@ $this->params['breadcrumbs'][] = 'Главная';
                     <?php endforeach; ?>
                     <?php else: ?>
                         <div class="notice info">
-                            <p>Новых заявок на платные услуги нет.</p>
+                            <p>
+                                <?= Yii::$app->messages_block->getAdministrationMessage('paid-request-not-found') ?>
+                            </p>
                         </div>
                     <?php endif; ?>
                 </div>

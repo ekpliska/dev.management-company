@@ -7,7 +7,9 @@
 ?>
 
 <div class="manager-main-error">
-    <?= $message ?>
+    <h4>
+        <?= $message ?>
+    </h4>
 </div>
 
 

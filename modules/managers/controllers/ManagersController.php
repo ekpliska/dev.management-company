@@ -2,6 +2,7 @@
 
     namespace app\modules\managers\controllers;
     use Yii;
+    use yii\filters\AccessControl;
     use app\modules\managers\models\News;
     use app\modules\managers\models\Requests;
     use app\modules\managers\models\PaidServices;
@@ -12,6 +13,22 @@
  */
 class ManagersController extends AppManagersController {
     
+    /*
+     * Назначение прав доступа к модулю "Администратор"
+     */
+    public function behaviors() {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['administrator'],
+                    ],
+                ],
+            ],
+        ];
+    }
     
     public function actionError() {
         
@@ -33,7 +50,6 @@ class ManagersController extends AppManagersController {
         
         // Формируем список последних 10 новых заявок на платные услуги
         $paid_request_list = PaidServices::getOnlyNewPaidRequest(10);
-//        echo '<pre>'; var_dump($paid_request_list); die();
         
         return $this->render('index', [
             'news_content' => $news_content,
