@@ -15,9 +15,9 @@ class BlockClientColumn extends DataColumn {
     // Заголовок колонки
     public $header = 'Статус';
     // Действие контроллера для блокировки собсвенника
-    public $block_action = 'block-client';
+    public $block_action = 'clients/block-client';
     // Действие контроллера для удаления собсвенника
-    public $delete_action = 'delete-client';
+    public $delete_action = 'clients/delete-client';
     // Пост параметр
     public $client_key = 'clientId';
     // Пост параметр

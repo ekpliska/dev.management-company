@@ -104,7 +104,7 @@ $(document).ready(function() {
             $('.message-block').addClass('invalid-message-show').html('Вы указали некорректный диапазон');
         } else if (parseStartDate - parseEndDate <= 0) {
             $('.message-block').removeClass('invalid-message-show').html('');
-            $.post('search-data-on-period?account_number=' + accountNumber + '&date_start=' + startDate + '&date_end=' + endDate + '&type=' + type,
+            $.post('/managers/clients/search-data-on-period?account_number=' + accountNumber + '&date_start=' + startDate + '&date_end=' + endDate + '&type=' + type,
                 function(data) {
                     if (data.success === false) {
                         $('.message-block').addClass('invalid-message-show').html('Ошибка запроса');
@@ -174,7 +174,7 @@ $(document).ready(function() {
             return false;
         }
         
-        $.post('find-indications?month=' + monthNumber + '&year=' + year + '&account=' + accountNumber, function(response) {
+        $.post('/managers/clients/find-indications?month=' + monthNumber + '&year=' + year + '&account=' + accountNumber, function(response) {
             $('#indication-table').html(response.result);
             console.log(response.result);
         });
@@ -706,7 +706,7 @@ $(document).ready(function() {
     $('.delete_request').on('click', function() {
         var requestId = $(this).data('request');
         var requestType = $(this).data('requestType');
-        $.post('confirm-delete-request?type=' + requestType + '&request_id=' + requestId, function(data) {});
+        $.post('/managers/requests/confirm-delete-request?type=' + requestType + '&request_id=' + requestId, function(data) {});
     });
     
     /*

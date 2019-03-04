@@ -343,7 +343,7 @@ class RequestsController extends AppManagersController {
             }
             
             if (!$request->delete()) {
-                Yii::$app->session->setFlash('error', ['message' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз']);
+                Yii::$app->session->setFlash('error', ['message' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз.']);
             }
             
             Yii::$app->session->setFlash('success', ['message' => 'Заявка была успешно удалена']);

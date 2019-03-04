@@ -11,7 +11,23 @@ class Bootstrap implements BootstrapInterface {
     {
         $app->getUrlManager()->addRules(
             [
-                'managers' => 'managers/managers/index'
+                'managers' => 'managers/managers/index',
+                
+                'managers/clients' => 'managers/clients/index',
+                'managers/clients/view-client/<client_id>/<account_number>' => 'managers/clients/view-client',
+                'managers/clients/receipts-of-hapu/<client_id>/<account_number>' => 'managers/clients/receipts-of-hapu',
+                'managers/clients/payments/<client_id>/<account_number>' => 'managers/clients/payments',
+                'managers/clients/counters/<client_id>/<account_number>' => 'managers/clients/counters',
+                'managers/clients/account-info/<client_id>/<account_number>' => 'managers/clients/account-info',
+                
+                'managers/employee-form/<new_employee>' => 'managers/employee-form/index',
+                'managers/employee-form/employee-profile/<type>/<employee_id>' => 'managers/employee-form/employee-profile',
+                
+                'managers/requests' => 'managers/requests/index',
+                'managers/requests/view-request/<request_number>' => 'managers/requests/view-request',
+                
+//                '' => '',
+                
             ]
         );
     }
