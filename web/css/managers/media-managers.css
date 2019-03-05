@@ -107,7 +107,7 @@
 @media screen and (max-width: 1380px) {
     .profile-sub_menu_ul > li {
         padding: 20px;
-        margin: 0px 20px 0px -20px;
+        /*margin: 0px 20px 0px -20px;*/
     }
     .profile-sub_menu_ul > li > a {
         font-size: 12px;
@@ -135,6 +135,11 @@
     .debt-client {
         font-size: 18px;
         padding: 3px 6px;
+    }
+}
+@media screen and (max-width: 780px) {
+    .user-info-block {
+        padding: 88px 20px;
     }
 }
 @media screen and (max-width: 650px) {

@@ -26,7 +26,7 @@ Modal::begin([
     <?php 
         $form = ActiveForm::begin([
             'id' => 'changes-password-form',
-            'action' => ['employee-form/change-password', 'user_id' => $user->user_id],
+            'action' => ['change-password', 'user_id' => $user->user_id],
             'validateOnChange' => false,
             'validateOnBlur' => false,
             'fieldConfig' => [

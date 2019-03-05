@@ -174,10 +174,10 @@ class EmployeeFormController extends AppManagersController {
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->changePassword()) {
                 Yii::$app->session->setFlash('success', ['message' => "Пароль пользователя {$user->user_login} был успешно изменен."]);
-                return $this->redirect('employee-profile');
+                return $this->redirect(Yii::$app->request->referrer);
             }
             Yii::$app->session->setFlash('error', ['message' => 'Во время смены пароля произошла ошибка. Обновите страницу и повторите действие заново.']);
-            return $this->redirect('employee-profile');
+            return $this->redirect(Yii::$app->request->referrer);
         }
     }
     

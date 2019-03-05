@@ -22,6 +22,7 @@ class Bootstrap implements BootstrapInterface {
                 
                 'managers/employee-form/<new_employee>' => 'managers/employee-form/index',
                 'managers/employee-form/employee-profile/<type>/<employee_id>' => 'managers/employee-form/employee-profile',
+                'managers/employee-form/change-password/<user_id>' => 'managers/employee-form/change-password',
                 
                 'managers/requests' => 'managers/requests/index',
                 'managers/requests/view-request/<request_number>' => 'managers/requests/view-request',

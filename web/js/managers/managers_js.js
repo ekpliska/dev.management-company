@@ -176,7 +176,6 @@ $(document).ready(function() {
         
         $.post('/managers/clients/find-indications?month=' + monthNumber + '&year=' + year + '&account=' + accountNumber, function(response) {
             $('#indication-table').html(response.result);
-            console.log(response.result);
         });
     });
     
