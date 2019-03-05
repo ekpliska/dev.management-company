@@ -23,7 +23,7 @@ class FormatHelpers {
         }
         
         // Формируем путь
-        $path = Yii::getAlias('@web') . '/upload/store/' . $file;
+        $path = Yii::getAlias('/web') . '/upload/store/' . $file;
         
 //        <a class="test-popup-link" href="path-to-image.jpg">Open popup</a>
                 

@@ -136,13 +136,14 @@
 /* End Register Page, Login Page */
 @media screen and (max-width: 1199px) {
     .news-card-preview {
-        height: 380px;
+        height: 400px;
     }
     .news-card-preview-title a {
         font-size: 14px;
     }
     .news-card-preview-text {
         font-size: 12px;
+        line-height: 18px;
     }
 }
 @media screen and (max-width: 590px) {

@@ -1766,7 +1766,7 @@ p.right {
     border: none;
     position: absolute;
     right: 25px;
-    bottom: 25px;    
+    bottom: 40px;    
 }
 .chat-btn:focus {
     outline: none;
