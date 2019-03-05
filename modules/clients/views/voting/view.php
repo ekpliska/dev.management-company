@@ -210,11 +210,11 @@ $this->registerJs("
               data: {voting: voting}
             }).done(function(response) {
                 if (response.success === true) {
-                    console.log(response.voting_id);
+                    // console.log(response.voting_id);
                     $(this).attr('disabled', true);
                     $('#participate-in-voting-" . $voting['voting_id'] . "').modal('show');
                 } else if (response.success === false) {
-                    console.log(response);
+                    // console.log(response);
                 }
             });
         }

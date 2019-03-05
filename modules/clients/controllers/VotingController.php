@@ -212,16 +212,16 @@ class VotingController extends AppClientsController {
         
         if (!is_numeric($voting_id)) {
             Yii::$app->session->setFlash('error', ['message' => 'Возникла ошибка. Обновите страницу и повторите действие заново']);
-            return $this->redirect(['view-voting', 'voting_id' => $voting_id]);
+            return $this->redirect(['view', 'voting_id' => $voting_id]);
         }
         
         if (Yii::$app->request->isPost) {
             if (RegistrationInVoting::finishVoting($voting_id)) {
                 Yii::$app->session->setFlash('success', ['message' => 'Спасибо, ваш голос учтен. Участие в голосовании завершено']);
-                return $this->redirect(['view-voting', 'voting_id' => $voting_id]);
+                return $this->redirect(['view', 'voting_id' => $voting_id]);
             }
             Yii::$app->session->setFlash('error', ['message' => 'Возникла ошибка. Обновите страницу и повторите действие заново']);
-            return $this->redirect(['view-voting', 'voting_id' => $voting_id]);
+            return $this->redirect(['view', 'voting_id' => $voting_id]);
         }
     }
     

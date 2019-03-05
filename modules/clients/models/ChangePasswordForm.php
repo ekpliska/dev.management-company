@@ -5,6 +5,7 @@
     use yii\base\Model;
     use app\models\User;
     use app\models\SmsOperations;
+    use app\models\SmsSettings;
 
 /**
  * Смена пароля учетной записи
@@ -79,31 +80,16 @@ class ChangePasswordForm extends Model {
             $sms_model->date_registration = time();
             $sms_model->value = Yii::$app->security->generatePasswordHash($this->new_password);
             
-            if (!$this->sendSms($sms_code)) {
-                return false;
+            // Отправляем смс на указанный номер телефона
+            $phone = preg_replace('/[^0-9]/', '', Yii::$app->userProfile->mobile);
+            if (!$result = Yii::$app->sms->generalMethodSendSms(SmsSettings::TYPE_NOTICE_CHANGE_PASSWORD, $phone, $sms_code)) {
+                return ['success' => false, 'message' => $result];
             }
             
             $sms_model->save(false);
             return true;
         }
         return false;
-    }
-    
-    /*
-     * Отправка СМС-кода на телефон Собственнику
-     */
-    private function sendSms($code) {
-        
-        $phone = preg_replace('/[^0-9]/', '', Yii::$app->userProfile->mobile);
-
-        $sms = Yii::$app->sms;
-        $result = $sms->send_sms($phone, 'Вы отправили запрос на смену пароля для входа на портал. Ваш СМС-код ' . $code);
-        if (!$sms->isSuccess($result)) {
-//            echo $sms->getError($result);
-            return false;
-        }
-        
-        return true;
     }
     
     /*

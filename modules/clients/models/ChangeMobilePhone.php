@@ -5,6 +5,7 @@
     use yii\base\Model;
     use app\models\User;
     use app\models\SmsOperations;
+    use app\models\SmsSettings;
 
 /**
  * Смена номера мобильного телефона
@@ -67,8 +68,10 @@ class ChangeMobilePhone extends Model {
             
             $new_phone = preg_replace('/[^0-9]/', '', $this->new_phone);
             
-            if (!$this->sendSms($new_phone, $sms_code)) {
-                return false;
+            // Отправляем смс на указанный номер телефона
+            $phone = preg_replace('/[^0-9]/', '', Yii::$app->userProfile->mobile);
+            if (!$result = Yii::$app->sms->generalMethodSendSms(SmsSettings::TYPE_NOTICE_CHANGE_MOBILE, $new_phone, $sms_code)) {
+                return ['success' => false, 'message' => $result];
             }
             
             $sms_model->save(false);
@@ -76,22 +79,6 @@ class ChangeMobilePhone extends Model {
         }
         return false;
     }
-    
-/*
-     * Отправка СМС-кода на телефон Собственнику
-     */
-    private function sendSms($new_phone, $code) {
-        
-
-        $sms = Yii::$app->sms;
-        $result = $sms->send_sms($new_phone, 'Вы отправили запрос на смену номера мобильного телефона на портале. Ваш СМС-код ' . $code);
-        if (!$sms->isSuccess($result)) {
-//            echo $sms->getError($result);
-            return false;
-        }
-        
-        return true;
-    }    
     
     /*
      * Метки для полей
