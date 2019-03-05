@@ -27,7 +27,9 @@ class Bootstrap implements BootstrapInterface {
                 'managers/requests' => 'managers/requests/index',
                 'managers/requests/view-request/<request_number>' => 'managers/requests/view-request',
 //                '/managers/requests/confirm-delete-request/<type>/<request_id>' => '/managers/requests/confirm-delete-request',
-                
+
+                'managers/paid-requests' => 'managers/paid-requests/index',
+                'managers/paid-requests/view-paid-request/<request_number>' => 'managers/paid-requests/view-paid-request',
                 
             ]
         );

@@ -334,9 +334,11 @@ class RequestsController extends AppManagersController {
             switch ($type) {
                 case 'requests':
                     $request = Requests::findByID($request_id);
+                    $link = '/managers/requests';
                     break;
                 case 'paid-requests':
                     $request = PaidServices::findByID($request_id);
+                    $link = '/managers/paid-requests';
                     break;
                 default:
                     return ['success' => false];
@@ -347,7 +349,7 @@ class RequestsController extends AppManagersController {
             }
             
             Yii::$app->session->setFlash('success', ['message' => 'Заявка была успешно удалена']);
-            return $this->redirect('/managers/requests');
+            return $this->redirect($link);
         }
         
     }

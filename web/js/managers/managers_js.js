@@ -574,7 +574,6 @@ $(document).ready(function() {
                     typeRequest: typeRequest,
                 },
                 success: function(response) {
-                    console.log(response.type_request);
                     if (response.success === false) {
                         $('.error-message').text('Ошибка');
                         return false;
