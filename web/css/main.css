@@ -232,24 +232,24 @@ button:hover {
     background-position: right;
     height: 100vh;
 }
-.start-page__title {
+/*.start-page__title {
     color: #ef693a;
     font-size: 26px;
     letter-spacing: 1.05px;
     line-height: 36px;
     padding: 60px 10px 10px 20px;
-}
+}*/
 .start-page__welcome-txt {
-    width: 300px;
+    width: 350px;
     color: #2D18B4;
     font-size: 14px;
     letter-spacing: 1.05px;
     line-height: 20px;
-    margin-left: 31px;    
+    padding: 60px 10px 10px 20px;
 }
 .start-page__btn-block {
     position: absolute;
-    bottom: 10px;
+    bottom: 50px;
     left: 20%;
 }
 .login-page__reset-password {

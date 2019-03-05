@@ -5,18 +5,16 @@
     use yii\filters\AccessControl;
     use yii\filters\VerbFilter;
     use yii\web\Controller;
-    use yii\base\InvalidPattpException;
     use app\models\LoginForm;
-    use app\models\UsailConfirmForm;
     use app\models\PasswordResetRequestForm;
+    use app\models\SiteSettings;
 
 class SiteController extends Controller
 {
     /**
      * {@inheritdoc}
      */
-    public function behaviors()
-    {
+    public function behaviors() {
         return [            
             'access' => [
                 'class' => AccessControl::className(),
@@ -70,7 +68,15 @@ class SiteController extends Controller
      * Главная страница. вход в систему
      */
     public function actionIndex() {
-        return $this->render('index');
+        
+        $welcome_text = SiteSettings::find()
+                ->where(['id' => 1])
+                ->asArray()
+                ->one();
+        
+        return $this->render('index', [
+            'welcome_text' => !empty($welcome_text) ? $welcome_text['welcome_text'] : 'welcome_text',
+        ]);
     }
     
     /**

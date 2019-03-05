@@ -6,10 +6,10 @@ $this->title = 'Customers | Вход';
 ?>
 
 <div class="start-page">
-    <p class="start-page__title">Быcтро и удобно</p>
-    <p class="start-page__welcome-txt">
-        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-    </p>
+    <!--<p class="start-page__title">Быcтро и удобно</p>-->
+    <div class="start-page__welcome-txt">
+        <?= $welcome_text ?>
+    </div>
     
     <div class="start-page__btn-block">
         <div class="text-center">

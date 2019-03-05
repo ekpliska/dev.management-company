@@ -13,6 +13,14 @@ class SubSettings extends Widget {
             'label' => 'Управляющая организация',
             'url' => 'settings/index',
         ],
+        'site-settings' => [
+            'label' => 'Настройки портала',
+            'url' => 'settings/site-settings',
+        ],
+        'slider-settings' => [
+            'label' => 'Настройка слайдера',
+            'url' => 'settings/slider-settings',
+        ],
         'service-duty' => [
             'label' => 'Подразделения/Должности',
             'url' => 'settings/service-duty',
@@ -20,14 +28,6 @@ class SubSettings extends Widget {
         'partners-list' => [
             'label' => 'Партнеры',
             'url' => 'settings/partners-list',
-        ],
-        'slider-settings' => [
-            'label' => 'Настройка слайдера',
-            'url' => 'settings/slider-settings',
-        ],
-        'site-settings' => [
-            'label' => 'Настройки портала',
-            'url' => 'settings/site-settings',
         ],
         'faq-settings' => [
             'label' => 'Часто задаваевые вопросы',

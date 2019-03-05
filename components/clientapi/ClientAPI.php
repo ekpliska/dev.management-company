@@ -2,7 +2,7 @@
 
     namespace app\components\clientapi;
     use yii\base\Object;
-    use app\models\ApiSettings;
+    use app\models\SiteSettings;
 
 /**
  * API для реализации 
@@ -18,7 +18,7 @@ class ClientAPI extends Object {
         
         parent::init();
         
-        $_url = ApiSettings::find()
+        $_url = SiteSettings::find()
                 ->indexBy('id')
                 ->asArray()
                 ->one();
