@@ -30,16 +30,15 @@ class Bootstrap implements BootstrapInterface {
                 // Заявкм
                 'managers/requests' => 'managers/requests/index',
                 'managers/requests/view-request/<request_number>' => 'managers/requests/view-request',
-//                '/managers/requests/confirm-delete-request/<type>/<request_id>' => '/managers/requests/confirm-delete-request',
 
                 // Платные услуги
                 'managers/paid-requests' => 'managers/paid-requests/index',
                 'managers/paid-requests/view-paid-request/<request_number>' => 'managers/paid-requests/view-paid-request',
                 
                 // Новости
-                'managers/news/<section:\w+>' => 'managers/news/index',
                 'managers/news' => 'managers/news/index',
-                'managers/news/view/<slug>' => 'managers/news/view',
+                'managers/news/view/<slug:\w+>' => 'managers/news/view',
+                'managers/news/<action>' => 'managers/news/<action>',
                 
                 // Голосование
                 'managers/voting' => 'managers/voting/index',

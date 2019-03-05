@@ -34,28 +34,7 @@ $this->params['breadcrumbs'][] = 'Главная';
                 </div>
                 <?php endif; ?>
             </h4>
-            <?php if (!empty($news_content) && count($news_content) > 0) : ?>
-            <div class="manager-main__general-left__content">
-                <?php foreach ($news_content as $key => $post) : ?>
-                    <div class="__content-news">
-                        <?= Html::a($post['news_title'], ['/'], ['class' => 'title']) ?>
-                        <p class="__content-date"><?= Yii::$app->formatter->asDate($post['created_at'], 'long') ?></p>
-                        <div class="__content-news-item">
-                            <div class="col-lg-4 col-md-12 col-sm-2 col-xs-6 __content-image">
-                                <?= Html::img("/web/{$post['news_preview']}") ?>
-                            </div>
-                            <div class="col-lg-8 col-md-12 col-sm-10 col-xs-6 __content-text">
-                                <?= FormatHelpers::shortTextNews($post['news_text'], 15) ?>
-                            </div>                            
-                        </div>
-                    </div>
-                <?php endforeach; ?>
-            </div>
-            <?php else: ?>
-                <div class="notice info">
-                    <p>Публикации еще не создавались.</p>
-                </div>
-            <?php endif; ?>
+            <?= $this->render('data/news-block', ['news_content' => $news_content]) ?>
         </div>
         <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 manager-main__general-rigth">
             <div class="general-rigth__welcome">
@@ -67,68 +46,14 @@ $this->params['breadcrumbs'][] = 'Главная';
                         Заявки
                         <span class="pull-right"><?= count($request_list) ?></span>
                     </h4>
-                    <?php if (!empty($request_list) && count($request_list) > 0) : ?>
-                    <?php foreach ($request_list as $request) : ?>
-                        <div class="general-right__request-body">
-                            <h5>
-                                <span class="requiest-id"><?= "ID {$request['number']}" ?></span>
-                                <span class="requiest-date pull-right">
-                                    <?= FormatHelpers::formatDate($request['date_create'], true, 0, false) ?>
-                                </span>
-                            </h5>
-                            <div>
-                                <p><span class="title">Вид заявки: </span><?= $request['type_requests'] ?></p>
-                                <p><span class="title">Адрес:</span> 
-                                    <?= FormatHelpers::formatFullAdress(
-                                            $request['gis_adress'], 
-                                            $request['house'],
-                                            false, false, $request['flat']) ?>
-                                </p>
-                                <?php if (Yii::$app->user->can('RequestsEdit')) : ?>
-                                    <?= Html::a('Перейти', ['requests/view-request', 'request_number' => $request['number']], ['class' => 'pull-right']) ?>
-                                <?php endif; ?>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
-                    <?php else: ?>
-                        <div class="notice info">
-                            <p>Новых заявок нет.</p>
-                        </div>
-                    <?php endif; ?>
+                    <?= $this->render('data/requests-block', ['request_list' => $request_list]) ?>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 general-right__request">
                     <h4>
                         Платые услуги
                         <span class="pull-right"><?= count($paid_request_list) ?></span>
                     </h4>
-                    <?php if (!empty($paid_request_list) && count($paid_request_list) > 0) : ?>
-                    <?php foreach ($paid_request_list as $paid_request) : ?>
-                        <div class="general-right__request-body">
-                            <h5>
-                                <span class="requiest-id"><?= "ID {$paid_request['number']}" ?></span>
-                                <span class="requiest-date pull-right">
-                                    <?= FormatHelpers::formatDate($paid_request['date_create'], true, 0, false) ?>
-                                </span>
-                            </h5>
-                            <div>
-                                <p><span class="title">Категория, услуга: </span><?= "{$paid_request['category']}, {$paid_request['service_name']}" ?></p>
-                                <p><span class="title">Адрес:</span> 
-                                    <?= FormatHelpers::formatFullAdress(
-                                            $paid_request['gis_adress'], 
-                                            $paid_request['house'],
-                                            false, false, $paid_request['flat']) ?>
-                                </p>
-                                <?php if (Yii::$app->user->can('PaidRequestsEdit')) : ?>
-                                    <?= Html::a('Перейти', ['paid-requests/view-paid-request', 'request_number' => $paid_request['number']], ['class' => 'pull-right']) ?>
-                                <?php endif; ?>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
-                    <?php else: ?>
-                        <div class="notice info">
-                            <p>Новых заявок на платные услуги нет.</p>
-                        </div>
-                    <?php endif; ?>
+                    <?= $this->render('data/paid-requests-block', ['paid_request_list' => $paid_request_list]) ?>
                 </div>
             </div>
         </div>
