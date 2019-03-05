@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = 'Опрос';
                     <?= FormatHelpers::numberOfDaysToFinishVote($voting['voting_date_start'], $voting['voting_date_end']) ?>
                 </span>
                 <div class="vote-card_title">
-                    <a href="<?= Url::to(['voting/view-voting', 'voting_id' => $voting['voting_id']]) ?>">
+                    <a href="<?= Url::to(['voting/view', 'voting_id' => $voting['voting_id']]) ?>">
                         <?= FormatHelpers::shortTitleOrText($voting['voting_title'], 25) ?>
                     </a>
                     <i class="glyphicon glyphicon-<?= $voting['status'] == Voting::STATUS_ACTIVE ? 'ok' : 'flag' ?>"></i>

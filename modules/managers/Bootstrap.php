@@ -37,12 +37,12 @@ class Bootstrap implements BootstrapInterface {
                 
                 // Новости
                 'managers/news' => 'managers/news/index',
-                'managers/news/view/<slug:\w+>' => 'managers/news/view',
+                'managers/news/view/<slug>' => 'managers/news/view',
                 'managers/news/<action>' => 'managers/news/<action>',
                 
                 // Голосование
+                'managers/voting/view/<voting_id:\+d>' => 'managers/voting/view',
                 'managers/voting' => 'managers/voting/index',
-                'managers/voting/view/<voting:\+d>' => 'managers/voting/view',
                 'managers/voting/<action>' => 'managers/voting/<action>',
                 
                 // Конструктор заявок

@@ -22,7 +22,7 @@
         <div class="col-lg-9 col-md-12 col-sm-12 col-md-12">
             <div class="vote-card__content">
                 <h1 class="vote-card__content_title">
-                    <?= Html::a($voting['voting_title'] . " <span>ID{$voting['voting_id']}</span>", ['voting/view', 'voting' => $voting['voting_id']]) ?>
+                    <?= Html::a($voting['voting_title'] . " <span>ID{$voting['voting_id']}</span>", ['voting/view', 'voting_id' => $voting['voting_id']]) ?>
                     
                     <?php if (Yii::$app->user->can('VotingsEdit')) : ?>
                         <?= Html::button('<i class="glyphicon glyphicon-trash"></i>', [

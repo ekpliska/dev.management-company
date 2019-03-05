@@ -14,7 +14,7 @@ class NewsController extends AppClientsController {
     /*
      * Страница просмотра отдельной новости
      */
-    public function actionViewNews($slug) {
+    public function actionView($slug) {
         
         $news = News::findNewsBySlug($slug);
         if ($news === null) {
@@ -24,7 +24,7 @@ class NewsController extends AppClientsController {
         // Получаем список прикрепленных документов к новости
         $files = Image::getAllDocByNews($news['news_id'], 'News');
         
-        return $this->render('view-news', [
+        return $this->render('view', [
             'news' => $news,
             'files' => $files,
         ]);

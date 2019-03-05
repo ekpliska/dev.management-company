@@ -32,7 +32,7 @@ class VotingController extends AppClientsController {
     /*
      * Страница конечного голосования
      */
-    public function actionViewVoting($voting_id) {
+    public function actionView($voting_id) {
         
         /*
          *  Проверем наличие куки на загрузку модального окна ввода СМС кода, 
@@ -67,7 +67,7 @@ class VotingController extends AppClientsController {
             return $this->refresh();
         }
         
-        return $this->render('view-voting', [
+        return $this->render('view', [
             'voting' => $voting,
             'is_register' => $is_register ? $is_register : null,
             'model' => $model,

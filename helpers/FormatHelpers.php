@@ -62,9 +62,9 @@ class FormatHelpers {
         $path = '';
         
         if (is_numeric($slug)) {
-            $path = ['voting/view-voting', 'voting_id' => $slug];
+            $path = ['voting/view', 'voting_id' => $slug];
         } elseif (is_string($slug)) {
-            $path = ['news/view-news', 'slug' => $slug];
+            $path = ['news/view', 'slug' => $slug];
         }
         
         return Html::a($title, $path);
@@ -413,7 +413,7 @@ class FormatHelpers {
         }
         
         foreach ($image_list as $key => $image) {
-            $list = Html::img('@web/upload/store/' . $image['filePath']);
+            $list = Html::img('/web/upload/store/' . $image['filePath']);
             $lists .= $list;
         }
         

@@ -125,10 +125,10 @@ class VotingController extends AppManagersController {
     /*
      * Просмотр страницы голосования
      */
-    public function actionView($voting) {
+    public function actionView($voting_id) {
         
         $model = new VotingForm();
-        $model->voting = Voting::findOne($voting);
+        $model->voting = Voting::findOne($voting_id);
         
         if ($model->voting == null) {
             throw new \yii\web\NotFoundHttpException('Вы обратились к несуществующей странице');
@@ -142,7 +142,7 @@ class VotingController extends AppManagersController {
         $houses_array = empty($model->voting->voting_house_id) ? [] : Houses::getHousesList($for_list = false);
         
         // Получаем информаию о участниках голосования
-        $participants = RegistrationInVoting::getParticipants($voting);
+        $participants = RegistrationInVoting::getParticipants($voting_id);
         
         if (Yii::$app->request->post()) {
             
