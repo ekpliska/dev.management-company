@@ -950,6 +950,8 @@ reset-password-sms:focus{
     padding: 20px;
     color: #000;
     text-align: justify;
+    line-height: 2em;
+    text-indent: 1.5em;
 }
 .news-title-block a {
     background: rgba(0, 123, 255, 0.25);
@@ -3223,42 +3225,25 @@ p.date-start-vote {
 .menu-items > li {
     padding: 10px;
     /*cursor: none;*/
-    cursor: url("../images/cursor/scroll.png"), auto;
 }
 .menu-items > li a {
     color: rgba(255, 255, 255, 0.44);
     text-decoration: none;
     text-transform: uppercase;
-    cursor: none;
-}
-.menu-items > li:first-child,
-.menu-items > li:last-child {
-    padding: 0;
-}
-    
-.menu-items > li:first-child a,
-.menu-items > li:last-child a {
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.24);
-}
-.menu-items > li#item-menu-1,
-.menu-items > li#item-menu-3 {
-    padding: 10px;
-}
-.menu-items > li#item-menu-2 {
-    padding: 10px;
-}
-.menu-items > li#item-menu-2 a {
-    font-size: 18px;
 }
 .menu-items > li.active-item a {
     display: inline-block;    
     color: #fff;
     font-weight: bold;
-    cursor: pointer;
+}
+.menu-items > li:hover {
+    color: #fff;
+    font-weight: bold;
+}
+.menu-items > li:hover > a {
+    color: #fff;    
 }
 .menu-items > li.active-item {
-    cursor: pointer;
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
     -moz-border-image: -moz-linear-gradient(to right, rgba(0, 0, 0, 0), rgba(255, 255, 255, 7), rgba(0, 0, 0, 0));  
@@ -3266,24 +3251,32 @@ p.date-start-vote {
     border-image-slice: 1; 
     
 }
-.menu-items > li#item-menu-2 a {
-    margin: 0 15px;
-}
-.menu-items > li#item-menu-2 a.sub-menu-item {
+.menu-items > li.personal-account-menu:hover > a.sub-menu-item {
     font-size: 12px;
     font-weight: 100;
     text-transform: none;
     box-sizing: border-box;
-    padding: 5px 15px;
-    margin: 0px -5px;
-    display: inline-block;
+    padding: 5px;
+    margin: 0px 11px;
+    display: initial;
+    /*display: inline-block;*/
 }
 a.sub-menu-item {
     display: none;
 }
-.menu-items > li#item-menu-2 a.sub-menu-item:hover {
+a.active-sub-item,
+a.sub-menu-item:hover {
     border-radius: 12px;
     border: 1px solid #fff;
+}
+.menu-items > li.active-item > a.sub-menu-item {
+    font-size: 12px;
+    font-weight: 100;
+    text-transform: none;
+    box-sizing: border-box;
+    padding: 5px;
+    margin: 0px 11px;
+    display: initial;
 }
 /* Конец Выпадающее меню навигации */
 

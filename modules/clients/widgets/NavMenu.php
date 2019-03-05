@@ -12,17 +12,17 @@ class NavMenu extends Widget {
 
 
     public $menu_array = [
-        'personal-account' => [
-            'link' => 'personal-account/index',
-            'name' => 'Лицевой счет',
+        'clients' => [
+            'link' => 'clients/index',
+            'name' => 'Новости',
         ],
         'requests' => [
             'link' => 'requests/index',
             'name' => 'Заявки',
         ],
-        'clients' => [
-            'link' => 'clients/index',
-            'name' => 'Новости',
+        'personal-account' => [
+            'link' => 'personal-account/index',
+            'name' => 'Лицевой счет',
         ],
         'paid-services' => [
             'link' => 'paid-services/index',
