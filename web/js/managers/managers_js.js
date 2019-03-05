@@ -772,7 +772,7 @@ $(document).ready(function() {
         var newsId = $(this).data('news');
         
         $.ajax({
-            url: 'delete-news',
+            url: '/managers/news/delete-news',
             method: 'POST',
             data: {
                 newsId: newsId,

@@ -12,7 +12,7 @@
 <?php if (isset($all_adverts) && !empty($all_adverts) && count($all_adverts) > 0) : ?>
 <?php foreach ($all_adverts as $key => $advert) : ?>
 
-<div class="col-md-4">
+<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
     <div class="news-item">
         <div class="news-item__title">
             <?= Html::a($advert['title'], ['news/view', 'slug' => $advert['slug']], ['class' => 'title']) ?>

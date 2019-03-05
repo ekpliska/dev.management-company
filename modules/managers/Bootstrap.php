@@ -31,6 +31,10 @@ class Bootstrap implements BootstrapInterface {
                 'managers/paid-requests' => 'managers/paid-requests/index',
                 'managers/paid-requests/view-paid-request/<request_number>' => 'managers/paid-requests/view-paid-request',
                 
+                'managers/news/<section:\w+>' => 'managers/news/index',
+                'managers/news' => 'managers/news/index',
+                'managers/news/view/<slug>' => 'managers/news/view',
+                
             ]
         );
     }

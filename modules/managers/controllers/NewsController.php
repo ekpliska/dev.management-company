@@ -253,7 +253,8 @@ class NewsController extends AppManagersController {
             
             if (!$news->delete()) {
                 Yii::$app->session->setFlash('error', ['message' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз']);
-                return $this->redirect(Yii::$app->request->referrer);
+                return $this->redirect(['index', 'section' => $_advert]);
+//                return $this->redirect(Yii::$app->request->referrer);
             }
             Yii::$app->session->setFlash('success', ['message' => 'Новость ' . $news->news_title . ' была успешно удалена']);
         }
