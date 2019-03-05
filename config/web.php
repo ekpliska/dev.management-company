@@ -13,6 +13,7 @@ $config = [
     'bootstrap' => [
         'log',
         'app\modules\clients\Bootstrap',
+        'app\modules\dispatchers\Bootstrap',
         'app\modules\managers\Bootstrap',
     ],
     'aliases' => [
@@ -35,7 +36,7 @@ $config = [
         ],
         // Модуль для Диспетчера
         'dispatchers' => [
-            'class' => 'app\modules\dispatchers\Dispatchers',
+            'class' => 'app\modules\dispatchers\DispatchersModule',
             'layout' => 'main-dispatchers',
         ],
         // Модуль API

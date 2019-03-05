@@ -11,14 +11,6 @@ class NavDispatchers extends Widget {
     public $view_name = 'default';
 
     public $menu_array = [
-        'reports' => [
-            'link' => 'reports/index',
-            'name' => 'Отчеты',
-        ],
-        'news' => [
-            'link' => 'news/index',
-            'name' => 'Новости',
-        ],
         'dispatchers' => [
             'link' => 'dispatchers/index',
             'name' => 'Главная',
@@ -27,9 +19,17 @@ class NavDispatchers extends Widget {
             'link' => 'requests/index',
             'name' => 'Заявки',
         ],
+        'news' => [
+            'link' => 'news/index',
+            'name' => 'Новости',
+        ],
         'housing-stock' => [
             'link' => 'housing-stock/index',
             'name' => 'Жилищный фонд',
+        ],
+        'reports' => [
+            'link' => 'reports/index',
+            'name' => 'Отчеты',
         ],
     ];
     

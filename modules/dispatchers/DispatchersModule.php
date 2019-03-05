@@ -3,11 +3,12 @@
     namespace app\modules\dispatchers;
     use yii\base\Module;
     use yii\filters\AccessControl;
+    use yii\web\ErrorHandler;
 
 /**
  * Модуль "Диспетчер"
  */
-class Dispatchers extends Module
+class DispatchersModule extends Module
 {
     /**
      * {@inheritdoc}
@@ -31,10 +32,23 @@ class Dispatchers extends Module
     /**
      * {@inheritdoc}
      */
-    public function init()
-    {
+    public function init() {
+        
         parent::init();
 
-        // custom initialization code goes here
+        \Yii::configure($this, [
+            'components' => [
+                'errorHandler' => [
+                    'class' => ErrorHandler::className(),
+                    'errorAction' => '/dispatchers/dispatchers/error',
+                ]
+            ],
+        ]);
+
+        /** @var ErrorHandler $handler */
+        $handler = $this->get('errorHandler');
+        \Yii::$app->set('errorHandler', $handler);
+        $handler->register();    
+        
     }
 }
