@@ -488,7 +488,7 @@ $(document).ready(function() {
         var liChoosing = $('li#status' + statusId);
         var typeRequest = $(this).data('typeRequest');
         $.ajax({
-            url: 'switch-status-request',
+            url: '/managers/requests/switch-status-request',
             method: 'POST',
             data: {
                 statusId: statusId,
@@ -496,7 +496,6 @@ $(document).ready(function() {
                 typeRequest: typeRequest,
             },
             success: function(response) {
-                console.log(response.status);
                 if (response.status) {
                     $('.dropdown-menu').find('.disabled').removeClass('disabled');
                     $('#value-btn').html(linkValue + '<span class="caret"></span>');
@@ -513,7 +512,7 @@ $(document).ready(function() {
                 }
             },
             error: function() {
-                console.log('error');
+//                console.log('error');
             },
         });
     });
@@ -567,7 +566,7 @@ $(document).ready(function() {
             return false;
         } else {
             $.ajax({
-                url: 'choose-dispatcher',
+                url: '/managers/requests/choose-dispatcher',
                 method: 'POST',
                 data: {
                     dispatcherId: dispatcherId,
@@ -612,7 +611,7 @@ $(document).ready(function() {
             return false;
         } else {
             $.ajax({
-                url: 'choose-specialist',
+                url: '/managers/requests/choose-specialist',
                 method: 'POST',
                 data: {
                     specialistId: specialistId,

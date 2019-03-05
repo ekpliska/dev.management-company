@@ -347,7 +347,7 @@ class RequestsController extends AppManagersController {
             }
             
             Yii::$app->session->setFlash('success', ['message' => 'Заявка была успешно удалена']);
-            return $this->redirect('index');
+            return $this->redirect('/managers/requests');
         }
         
     }

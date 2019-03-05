@@ -11,7 +11,7 @@ class Bootstrap implements BootstrapInterface {
     {
         $app->getUrlManager()->addRules(
             [
-                'managers' => 'managers/managers/index',
+                '/managers' => 'managers/managers/index',
                 
                 'managers/clients' => 'managers/clients/index',
                 'managers/clients/view-client/<client_id>/<account_number>' => 'managers/clients/view-client',
@@ -26,8 +26,8 @@ class Bootstrap implements BootstrapInterface {
                 
                 'managers/requests' => 'managers/requests/index',
                 'managers/requests/view-request/<request_number>' => 'managers/requests/view-request',
+//                '/managers/requests/confirm-delete-request/<type>/<request_id>' => '/managers/requests/confirm-delete-request',
                 
-//                '' => '',
                 
             ]
         );
