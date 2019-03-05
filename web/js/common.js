@@ -189,11 +189,9 @@ $('#send-request-to-sms').on('click', function() {
             data: {
                 phoneNumber: phoneNumber,
             },
-            success: function (data, textStatus, jqXHR) {
-//                console.log(data);
-            },
+            success: function (data, textStatus, jqXHR) {},
             error: function (jqXHR, textStatus, errorThrown) {
-//                console.log(textStatus);                
+                console.log(textStatus);                
             }
         });
         $(this).hide();
@@ -220,11 +218,9 @@ $('#reset-password-sms').on('click', function() {
             data: {
                 phoneNumber: phoneNumber,
             },
-            success: function (data, textStatus, jqXHR) {
-                console.log(data);
-            },
+            success: function (data, textStatus, jqXHR) {},
             error: function (jqXHR, textStatus, errorThrown) {
-//                console.log(textStatus);                
+                console.log(textStatus);                
             }
         });
         $(this).hide();

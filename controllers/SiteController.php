@@ -8,6 +8,7 @@
     use app\models\LoginForm;
     use app\models\PasswordResetRequestForm;
     use app\models\SiteSettings;
+    use app\models\SmsSettings;
 
 class SiteController extends Controller
 {
@@ -41,19 +42,6 @@ class SiteController extends Controller
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function actions()
-    {
-        return [
-            'captcha' => [
-                'class' => 'yii\captcha\CaptchaAction',
-                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
-            ],
-        ];
-    }
-
     public function actionError() {
         
         $this->layout = '@app/views/layouts/error-layout';
@@ -65,7 +53,7 @@ class SiteController extends Controller
     }
     
     /**
-     * Главная страница. вход в систему
+     * Главная страница, вход в систему
      */
     public function actionIndex() {
         
@@ -157,8 +145,9 @@ class SiteController extends Controller
         if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
             // Генерируем СМС код
             $sms_code = mt_rand(10000, 99999);
-            if (!$result = $this->sendSms($phone, $sms_code)) {
-                return ['success' => false];
+            // Отправляем смс на указанный номер телефона
+            if (!$result = Yii::$app->sms->generalMethodSendSms(SmsSettings::TYPE_NOTICE_RECOVERY_PASSWORD, $phone, $sms_code)) {
+                return ['success' => false, 'message' => $result];
             }
             // Записываем в сессию СМС-код и время его действия (10 минут)
             Yii::$app->session->set('reset_sms_code', $sms_code);
@@ -167,24 +156,8 @@ class SiteController extends Controller
         }
         
     }
-    
-    /*
-     * Отправка СМС-кода
-     */
-    private function sendSms($phone, $sms_code) {
-        
-        $sms = Yii::$app->sms;
-        $result = $sms->send_sms($phone,
-                'Для продолжения восстановления пароля укажите СМС-код ' . $sms_code);
-        
-        if (!$sms->isSuccess($result)) {
-//            return $sms->getError($result);
-            return false;
-        }
-        return true;
-    }
-    
-    public function actionTestAccount() {
+   
+     public function actionTestAccount() {
         
         $this->layout = false;
         return $this->render('test-account');
