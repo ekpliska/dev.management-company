@@ -35,6 +35,7 @@ class HousingStockController extends AppManagersController {
                             'view-characteristic-house',
                             'delete-characteristic',
                             'delete-files-house',
+                            'delete-note-flat',
                             'take-off-status-debtor',
                             'take-off-statusDebtor',
                         ],

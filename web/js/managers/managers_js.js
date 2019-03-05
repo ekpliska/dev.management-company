@@ -961,7 +961,7 @@ $(document).ready(function() {
         setCookie('_house', house);
         
         $.ajax({
-            url: 'view-characteristic-house',
+            url: '/managers/housing-stock/view-characteristic-house',
             method: 'POST',
             data: {
                 house: house,
@@ -1006,7 +1006,7 @@ $(document).ready(function() {
             var charId = $(this).attr('id');
             charId = charId.replace(/[^0-9]/gim, '');
             $.ajax({
-                url: 'delete-characteristic',
+                url: '/managers/housing-stock/delete-characteristic',
                 method: 'POST',
                 data: {
                     charId: charId,
@@ -1073,7 +1073,7 @@ $(document).ready(function() {
      */
     $('#flats_list').on('change', 'input[id ^= check_status__flat-]', function(){
         var flatId = $(this).data('flat');
-        var link = 'check-status-flat';
+        var link = '/managers/housing-stock/check-status-flat';
         
         if (!$(this).is(':checked')) {
             $('#estate_note_message_manager').modal('show');
@@ -1087,7 +1087,7 @@ $(document).ready(function() {
      */
     $('#flats_list').on('click', '#add-note', function(){
         var flatId = $(this).data('flat');
-        var link = 'check-status-flat';
+        var link = '/managers/housing-stock/check-status-flat';
         $('#add-note-modal-form').modal('show');
         $('#add-note-modal-form .modal-dialog .modal-content .modal-body').load(link, 'flat_id=' + flatId);
     });
@@ -1127,7 +1127,7 @@ $(document).ready(function() {
         var countTr = $('tr[id^=note_flat__tr]').length;
         
         $.ajax({
-            url: 'delete-note-flat',
+            url: '/managers/housing-stock/delete-note-flat',
             method: 'POST',
             data: {
                 noteId: noteId,
@@ -1157,7 +1157,7 @@ $(document).ready(function() {
         var fileId = $(this).data('files');
         e.preventDefault();
         $.ajax({
-            url: 'delete-files-house',
+            url: '/managers/housing-stock/delete-files-house',
             method: 'POST',
             data: {
                 fileId: fileId,
@@ -1177,35 +1177,6 @@ $(document).ready(function() {
         return false;
     });
     
-    /*
-     * Запрос на загрузку файла с сервера
-     */
-    $('#files_list').on('click', '#download-file__house', function(e) {
-        var blockHtml = $(this).closest('tr');
-        var fileId = $(this).data('files');
-        e.preventDefault();
-        $.ajax({
-            url: 'download-files-house',
-            method: 'POST',
-            data: {
-                fileId: fileId,
-            },
-            success: function (response) {
-                if (response.success === true){
-                    blockHtml.remove();
-                } else if (response.success === false) {
-                    blockHtml.html('Ошибка удаления документа');
-                }
-
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.log(textStatus);
-            },
-        });
-        return false;
-    });
-
-
     // ******************************************************** //
     // ************     Start Block of Designer   ************** //
     // ******************************************************** // 
@@ -1220,7 +1191,7 @@ $(document).ready(function() {
         var typeRecord = $(this).data('recordType');
         $('.requests-list > li, .categories-list > li').removeClass('active-item');
         $(this).addClass('active-item');
-        $.post('show-results?type_record=' + typeRecord + '&record_id=' + recordID, function(response) {
+        $.post('/managers/designer-requests/show-results?type_record=' + typeRecord + '&record_id=' + recordID, function(response) {
             if (response.success === true) {
                 $('#block__lists-services').html(response.data);
             }
@@ -1259,10 +1230,7 @@ $(document).ready(function() {
     });
     
     $('.delete_record__des').on('click', function() {
-        $.post('delete-record?type=' + recordType + '&record_id=' + recordId, function(response) {
-            //
-        });
-        alert($(this).data('record'));
+        $.post('/managers/designer-requests/delete-record?type=' + recordType + '&record_id=' + recordId, function(response) {});
     });
     
     $(document).on('click', 'a.edit-service-btn', function(e) {
