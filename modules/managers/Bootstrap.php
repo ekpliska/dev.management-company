@@ -35,6 +35,11 @@ class Bootstrap implements BootstrapInterface {
                 'managers/news' => 'managers/news/index',
                 'managers/news/view/<slug>' => 'managers/news/view',
                 
+                'managers/voting' => 'managers/voting/index',
+                'managers/voting/view/<voting:\+d>' => 'managers/voting/view',
+                'managers/voting/<action>' => 'managers/voting/<action>',
+                
+                
             ]
         );
     }

@@ -863,7 +863,7 @@ $(document).ready(function() {
     $('.delete_voting__del').on('click', function(){
         var votingId = $(this).data('voting');
         $.ajax({
-            url: 'confirm-delete-voting',
+            url: '/managers/voting/confirm-delete-voting',
             method: 'POST',
             data: {
                 votingId: votingId,
@@ -884,7 +884,7 @@ $(document).ready(function() {
     $('.close_voting_btn').on('click', function(e){
         var votingId = $(this).data('voting');
         $.ajax({
-            url: 'confirm-close-voting',
+            url: '/managers/voting/confirm-close-voting',
             method: 'POST',
             data: {
                 votingId: votingId,
