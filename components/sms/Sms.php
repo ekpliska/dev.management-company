@@ -30,28 +30,14 @@ class Sms extends Object {
         9 => 'Отправка более одного одинакового запроса на передачу SMS-сообщения либо более пяти запросов на получение стоимости сообщения в течении минуты',
     ];
     
-    public $sms_notice;
-    
-    /*
-     * Формируем список оповещений
-     */
-    public function init() {
-        
-        parent::init();
-        $_notice = SmsSettings::find()->asArray()->all();
-        
-        return $this->sms_notice = ArrayHelper::map($_notice, 'sms_code', 'sms_text');
-    }
-    
     /*
      * Главный метод, используемый в системе для отправки СМС на телефон
      */
     public function generalMethodSendSms($type_notice, $phone, $value) {
         
-        $notice = ArrayHelper::getValue($this->sms_notice, $type_notice);
-        $message = $notice . $sms_code;
+        $notice = SmsSettings::find()->where(['sms_code' => $type_notice])->one();
         
-        $result = $this->send_sms($phone, $value);
+        $result = $this->send_sms($phone, "{$notice->sms_text} $value");
         if (!$this->isSuccess($result)) {
             return $this->getError($result);
         }
