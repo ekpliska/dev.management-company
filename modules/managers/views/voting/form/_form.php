@@ -5,7 +5,6 @@
     use kartik\datetime\DateTimePicker;
     use vova07\imperavi\Widget;
     use app\models\Questions;
-    use app\models\Voting;
 
 /*
  * Форма голосования

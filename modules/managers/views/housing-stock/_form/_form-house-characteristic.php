@@ -1,6 +1,7 @@
 <?php
-    use app\models\ChangePasswordForm;
+
     use yii\helpers\Html;
+    
 ?>
 <td>
     <?= $form->field($characteristic, 'characteristics_name')->textInput([

@@ -8,13 +8,12 @@
 /**
  * Настройки API Заказчика
  */
-class ApiSettings extends ActiveRecord
-{
+class SiteSettings extends ActiveRecord {
     /**
      * Таблица БД
      */
     public static function tableName() {
-        return 'api_settings';
+        return 'site_settings';
     }
 
     /**
@@ -22,8 +21,10 @@ class ApiSettings extends ActiveRecord
      */
     public function rules() {
         return [
-            [['api_url'], 'required', 'message' => 'Укажите url-адрес'],
+            [['api_url', 'user_agreement'], 'required', 'message' => 'Поле обязательно для заполнения'],
+            [['welcome_text'], 'string', 'max' => 1000],
             [['api_url'], 'string', 'max' => 100],
+            [['user_agreement'], 'string', 'min' => 10, 'max' => 2000],
             ['api_url', UrlValidator::className(), 'message' => 'Не верный формат адреса']
         ];
     }
@@ -35,6 +36,8 @@ class ApiSettings extends ActiveRecord
         return [
             'id' => 'ID',
             'api_url' => 'URL адрес ',
+            'welcome_text' => 'Текст приветствия на главной странице',
+            'user_agreement' => 'Пользовательское соглашение',
         ];
     }
 }

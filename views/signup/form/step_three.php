@@ -40,7 +40,7 @@
 
     <div class="text-center third-step-offer">
         <p>Нажимая на кнопку Далее, вы соглашаетесь на обработку 
-        <a href="#" target="_blank">Персональных данных </a>и принимаете условия <a href="#" target="_blank">Пользовательского соглашения.</a>
+        Персональных данных и принимаете условия <a href="#" target="_blank">Пользовательского соглашения.</a>
         </p>
 
         <?= Html::submitButton('', ['class' => 'blue-circle-btn']) ?>    

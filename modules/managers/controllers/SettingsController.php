@@ -9,7 +9,7 @@
     use app\models\Posts;
     use app\models\Partners;
     use app\models\SliderSettings;
-    use app\models\ApiSettings;
+    use app\models\SiteSettings;
     use app\models\FaqSettings;
     use app\models\SmsSettings;
 
@@ -29,7 +29,7 @@ class SettingsController extends AppManagersController {
                             'service-duty',
                             'partners-list',
                             'slider-settings',
-                            'api-settings',
+                            'site-settings',
                             'faq-settings',
                             'sms-settings',
                             'delete-record',
@@ -148,16 +148,16 @@ class SettingsController extends AppManagersController {
     /*
      * Настройки API
      */
-    public function actionApiSettings() {
+    public function actionSiteSettings() {
         
-        $model = ApiSettings::findOne(['id' => 1]);
+        $model = SiteSettings::findOne(['id' => 1]);
         
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $model->save();
-            return $this->redirect('api-settings');
+            return $this->redirect('site-settings');
         }
         
-        return $this->render('api-settings', ['model' => $model]);
+        return $this->render('site-settings', ['model' => $model]);
         
     }
     

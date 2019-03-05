@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = 'Настройки';
             <?= SubSettings::widget() ?>
         </div>
         <div class="col-lg-9 col-md-9 col-sm-6 col-md-12 settings-page__content">
-            <?= $this->render('pages/api-settings-info', ['model' => $model]) ?>
+            <?= $this->render('pages/site-settings-info', ['model' => $model]) ?>
         </div>
     </div>
     
