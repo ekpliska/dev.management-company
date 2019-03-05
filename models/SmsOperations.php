@@ -77,9 +77,15 @@ class SmsOperations extends ActiveRecord
         $new_code = mt_rand(10000, 99999);
         $this->sms_code = $new_code;
         
-        // Отправляем смс на указанный номер телефона
+        // Получаем текущий номер мобильного телефона
         $phone = preg_replace('/[^0-9]/', '', Yii::$app->userProfile->mobile);
-        if (!$result = Yii::$app->sms->generalMethodSendSms(SmsSettings::TYPE_NOTICE_REPEAT_SMS, $phone, $new_code)) {
+        
+        // Отправляем смс на новый номер телефона (Операция смена номера телефона)
+        $new_phone = $this->value ? preg_replace('/[^0-9]/', '', $this->value) : null;
+        
+        $send_phone = ($this->operations_type == self::TYPE_CHANGE_PHONE && $new_phone != null) ? $new_phone : $phone;
+        
+        if (!$result = Yii::$app->sms->generalMethodSendSms(SmsSettings::TYPE_NOTICE_REPEAT_SMS, $send_phone, $new_code)) {
             return ['success' => false, 'message' => $result];
         }
 

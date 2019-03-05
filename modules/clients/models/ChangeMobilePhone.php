@@ -67,6 +67,7 @@ class ChangeMobilePhone extends Model {
             $sms_model->value = $this->new_phone;
             
             $new_phone = preg_replace('/[^0-9]/', '', $this->new_phone);
+            Yii::$app->session->set('change-new-phone', $new_phone);
             
             // Отправляем смс на указанный номер телефона
             $phone = preg_replace('/[^0-9]/', '', Yii::$app->userProfile->mobile);
