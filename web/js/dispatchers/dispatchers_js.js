@@ -139,7 +139,7 @@ $(document).ready(function(){
         var requestType = button.data('typeRequest');
         
         $.ajax({
-            url: 'confirm-reject-request',
+            url: '/dispatchers/requests/confirm-reject-request',
             method: 'POST',
             data: {
                 requestID: requestID,
@@ -192,7 +192,6 @@ $(document).ready(function(){
         var house = $(this).attr('href');
         var key = $(this).data('key');
         house = house.replace(/[^0-9]/gim, '');
-//        console.log('--', house, '--', key);
         
         $.ajax({
             url: 'view-characteristic-house',
@@ -279,7 +278,6 @@ $(document).ready(function(){
      */
     $('#for_whom_news').on('change', function(e) {
         var forWhom = $("#news-form input[type='radio']:checked").val();
-        console.log(forWhom);
         
         if (forWhom === '0') {
             $('#adress_list').prop('disabled', true);
@@ -287,7 +285,7 @@ $(document).ready(function(){
             $('#adress_list').prop('disabled', false);
         }
         
-        $.post('for-whom-news?status=' + forWhom,
+        $.post('/dispatchers/news/for-whom-news?status=' + forWhom,
             function(data) {
                 $('#adress_list').html(data);
             }
