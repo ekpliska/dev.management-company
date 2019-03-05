@@ -898,9 +898,7 @@ $(document).ready(function() {
                 $('#close_voting_manager .close_voting_yes').data('voting', votingId);
                 $('#close_voting_manager').modal('show');
             },
-            error: function(){
-                console.log('error');
-            },
+            error: function(){},
         });
     });
     
@@ -911,14 +909,12 @@ $(document).ready(function() {
         e.preventDefault();
         var votingId = $(this).data('voting');
         $.ajax({
-            url: 'close-voting',
+            url: '/managers/voting/close-voting',
             method: 'POST',
             data: {
                 votingId: votingId,
             },
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.log(textStatus);
-            },
+            error: function (jqXHR, textStatus, errorThrown) {},
         });
         return false;
     });

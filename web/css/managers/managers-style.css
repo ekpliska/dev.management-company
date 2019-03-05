@@ -145,7 +145,7 @@ and open the template in the editor.
     background: #f0754a;
     color: #fff;
     border-radius: 25px;
-    margin: -2px 10px;
+    margin: -2px 5px;
     font-weight: bold;
 }
 .general-right__request-body {
@@ -1522,6 +1522,11 @@ span.status-vote-1::before {
 .requests-list li.active-item {
     background-color: #454545;
     color: #fff;
+}
+.requests-list li:hover > span.span-count,
+.requests-list li.active-item > span.span-count {
+    background-color: #fff;
+    color: #2d18b4 !important;
 }
 .categories-list > li > span.close,
 .requests-list > li > span.close {

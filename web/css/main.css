@@ -2752,6 +2752,10 @@ p.date-start-vote {
     border-radius: 25px;
     background: #2d18b4;
 }
+.span-count-white {
+    color: #454545 !important;
+    background: #fff;
+}
 .voting__participant_info a {
     color: #000;
     font-weight: bold;
@@ -2925,12 +2929,12 @@ p.date-start-vote {
     text-shadow: 1px 1px rgba(0, 0, 0, 0.5);
 }
 .info {
-    border-color: #50beed;
+    border-color: #2d18b4;
 }
 .info:before {
     content: "\02148";
     margin-top: -15px;
-    background-color: #50beed;
+    background-color: #2d18b4;
 }
 .warning {
     border-color: #fed75b;
