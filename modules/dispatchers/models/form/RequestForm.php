@@ -86,7 +86,7 @@ class RequestForm extends Model {
             
             $transaction->commit();
             
-            return $numder;
+            return $request->requests_ident;
             
         } catch (Exception $ex) {
             $transaction->rollBack();

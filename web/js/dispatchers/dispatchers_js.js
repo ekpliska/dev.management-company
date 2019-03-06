@@ -44,7 +44,7 @@ $(document).ready(function(){
         var strValue = $(this).val();
         // В полученном значении удаляем все символы кроме цифр, знака -, (, )
         strValue = strValue.replace(/[^-0-9,(,)]/gim, '');
-        $.post('show-houses?phone=' + strValue,
+        $.post('/dispatchers/dispatchers/show-houses?phone=' + strValue,
         function(data) {
             $('#house').html(data);
         });
