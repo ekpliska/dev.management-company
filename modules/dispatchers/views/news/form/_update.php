@@ -22,7 +22,7 @@
         ],
     ]);
 ?>
-    <div class="col-md-4 news-form__left-block">       
+    <div class="col-lg-4 col-md-4 col-sm-12 col-md-12 news-form__left-block">       
         
         <div class="load_preview">
             <div class="text-center">
@@ -72,7 +72,7 @@
         
     </div>
     
-    <div class="col-md-8 news-form__right-block">
+    <div class="col-lg-8 col-md-8 col-sm-12 col-md-12 news-form__right-block">
         <?= $form->field($model, 'news_type_rubric_id', ['template' => '<div class="field"></i>{label}{input}{error}</div>'])
                 ->dropDownList($rubrics, ['class' => 'field-input-select', 'prompt' => '[Рубрика]'])
                 ->label($model->getAttributeLabel('news_type_rubric_id'), ['class' => 'field-input-select_label']) ?>

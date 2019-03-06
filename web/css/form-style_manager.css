@@ -925,6 +925,12 @@ textarea {
 ._search-input::placeholder {
     color: #fff;
 }
+.search-panel__btn {
+    height: 7em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 ._search-input:hover,
 ._dropdown-subpanel:hover {
     /*border: 1px solid #2fb6f0;*/
@@ -941,9 +947,6 @@ textarea {
 }
 ._dropdown-subpanel option {
     color: #000;
-}
-._large {
-    width: 400px;
 }
 .search-panel {
     padding:  10px 50px;

@@ -13,7 +13,7 @@
 <?php if (isset($all_news) && !empty($all_news) && count($all_news) > 0) : ?>
 <?php foreach ($all_news as $key => $news) : ?>
 
-<div class="col-md-4">
+<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
     <div class="news-item">
         <div class="news-item__title">
             <?= Html::a($news['title'], ['news/view', 'slug' => $news['slug']], ['class' => 'title']) ?>
@@ -25,9 +25,6 @@
         </div>
         <div class="news-item__text">
             <?= FormatHelpers::shortTextNews($news['text'], 40) ?>
-            <p class="change-date">
-                Последний раз редактировалось, <?= FormatHelpers::formatDate($news['date_update'], true, 1, false) ?>
-            </p>
         </div>
     </div>
 </div>
