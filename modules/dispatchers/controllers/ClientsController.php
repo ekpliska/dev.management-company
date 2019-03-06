@@ -103,7 +103,7 @@ class ClientsController extends AppDispatchersController {
             'user_info' => $info['user_info'],
             'list_account' => $info['list_account'],
             'account_number' => $account_number,
-            'receipts_lists' => $receipts_lists['receipts'],
+            'receipts_lists' => $receipts_lists,
         ]);
         
     }
@@ -144,7 +144,7 @@ class ClientsController extends AppDispatchersController {
             'user_info' => $info['user_info'],
             'list_account' => $info['list_account'],
             'account_number' => $account_number,
-            'payments_lists' => $payments_lists['payments'],
+            'payments_lists' => $payments_lists,
         ]);
         
     }
@@ -185,7 +185,7 @@ class ClientsController extends AppDispatchersController {
             'account_choosing' => $info['account_info'],
             'user_info' => $info['user_info'],
             'list_account' => $info['list_account'],
-            'counters_lists' => $counters_lists_api['indications'],
+            'counters_lists' => $counters_lists_api,
         ]);
         
     }

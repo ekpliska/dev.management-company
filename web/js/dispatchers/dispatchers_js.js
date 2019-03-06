@@ -194,7 +194,7 @@ $(document).ready(function(){
         house = house.replace(/[^0-9]/gim, '');
         
         $.ajax({
-            url: 'view-characteristic-house',
+            url: '/dispatchers/housing-stock/view-characteristic-house',
             method: 'POST',
             data: {
                 key: key,
