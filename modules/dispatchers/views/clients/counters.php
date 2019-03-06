@@ -31,8 +31,8 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
 
         <div class="profile-content counters-page row">
             <div class="payments-date-block">
-                <div class="col-md-3">
-                    <p class="payment_title"><i class="glyphicon glyphicon-calendar"></i> Месяц и год</p>
+                <p class="payment_title"><i class="glyphicon glyphicon-calendar"></i> Месяц и год</p>
+                <div id="panel-search">
                     <?= DatePicker::widget([
                             'name' => 'date_start-period-pay',
                             'type' => DatePicker::TYPE_INPUT,
@@ -43,7 +43,14 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
                                 'format' => 'dd-M-yyyy'
                             ]
                         ]);        
-                    ?>        
+                    ?>
+                    <?= Html::button('Показать', [
+                            'id' => 'show-prev-indication',
+                            'class' => 'show-indication btn-show-info',
+                            'data' => [
+                                'account' => $account_choosing->account_number,
+                            ]
+                        ]) ?>
                 </div>
             </div>    
 

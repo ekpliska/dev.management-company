@@ -9,7 +9,7 @@
  */
 
 $this->title = 'Собственники';
-$this->title = Yii::$app->params['site-name-manager'] .  'Собственники';
+$this->title = Yii::$app->params['site-name-dispatcher'] .  'Собственники';
 $this->params['breadcrumbs'][] = ['label' => 'Собственники', 'url' => ['clients/index']];
 $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosing->account_number . ']';
 ?>
@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
         ]) ?>
 
         <div class="profile-content row">
-            <div class="col-md-5 receipts_period">
+            <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12 receipts_period">
                 <p class="period_title"><i class="glyphicon glyphicon-calendar"></i> Период</p>
                 <div class="receipts_period-calendar">                    
                     <?= DatePicker::widget([
@@ -63,7 +63,7 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
                     ]) ?>
                 </div>
             </div>
-            <div class="col-md-7 receipts_body">
+            <div class="col-lg-7 col-md-7 col-sm-6 col-xs-12 receipts_body">
             </div>
 
         </div>
