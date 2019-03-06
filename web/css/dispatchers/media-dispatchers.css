@@ -1,0 +1,68 @@
+/*
+    media css for dispatchers app
+*/
+
+/* General Page */
+@media screen and (max-width: 1680px) {
+    .news-block__news-item__image {
+        height: 190px;
+    }
+}
+@media screen and (max-width: 1600px) {
+    .news-block__news-item__image {
+        height: 170px;
+    }
+}
+@media screen and (max-width: 1300px) {
+    .news-block__news-item__image {
+        height: 150px;
+    }
+    .badge-page {
+        font-size: 9px !important;
+    }
+    .req-badge-new-page span:last-child {
+        padding: 8px 10px;
+    }
+}
+@media screen and (max-width: 1200px) {
+    .news-block__news-item__image {
+        height: 130px;
+    }
+    .news-block__news-item__content {
+        font-size: 12px;
+    }
+    .dispatcher_genaral-page__request_block {
+        height: 220px;
+        margin: 0 10px 10px 0;
+    }
+    .request_block__info > span.request_number {
+        padding: 2px;
+        margin: 5px 0;
+    }
+    .request_block__adress {
+        text-align: left;
+        padding: 10px;
+    }
+}
+@media screen and (max-width: 1130px) {
+    .news-block__news-item__image {
+        height: 110px;
+    }
+}
+@media screen and (max-width: 991px) {
+    .news-block__news-item__image {
+        height: 240px;
+    }
+    .news-block__news-item__content {
+        font-size: 14px;
+    }
+}
+@media screen and (max-width: 560px) {
+    .dispatcher-main-with-sub-general {
+        margin-top: 150px;
+    }
+    .news-block__news-item__image {
+        height: 220px;
+    }   
+}
+/* End General Page */

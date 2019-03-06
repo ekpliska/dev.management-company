@@ -24,7 +24,7 @@ and open the template in the editor.
     margin-top: 90px;
 }
 .dispatcher-main-with-sub-general {
-    margin-top: 125px;
+    margin-top: 120px;
 }
 .margin-search-panel {
     margin-top: 180px;
@@ -217,7 +217,7 @@ and open the template in the editor.
 }
 .news-block__news-item__image {
     width: 100%;
-    height: 240px;
+    height: 220px;
     position: relative;
     overflow: hidden;
 }

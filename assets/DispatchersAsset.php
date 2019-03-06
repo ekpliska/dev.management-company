@@ -14,6 +14,7 @@ class DispatchersAsset extends AssetBundle {
     
     public $css = [
         'css/dispatchers/dispatchers-style.css',
+        'css/dispatchers/media-dispatchers.css',
         'css/form-style_manager.css',
     ];
     
