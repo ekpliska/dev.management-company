@@ -2,6 +2,28 @@
     media css for dispatchers app
 */
 
+/* Search panel */
+@media screen and (max-width: 991px) {
+    .search-panel {
+        padding: 0 !important; 
+    }
+}
+@media screen and (max-width: 768px) {
+    .search-panel form {
+        padding: 5px;
+    }
+    .search-panel__btn {
+        text-align: center;
+    }
+    .search-panel {
+        padding: 0px !important;
+    }
+    .search-block__button {
+        padding: 6px 12px !important;
+    }
+}
+/* End Search panel */
+
 /* General Page */
 @media screen and (max-width: 1680px) {
     .news-block__news-item__image {
@@ -32,7 +54,7 @@
         font-size: 12px;
     }
     .dispatcher_genaral-page__request_block {
-        height: 220px;
+        height: 270px;
         margin: 0 10px 10px 0;
     }
     .request_block__info > span.request_number {
@@ -66,3 +88,11 @@
     }   
 }
 /* End General Page */
+
+/* Request Page */
+@media screen and (max-width: 991px) {
+    .margin-search-panel {
+        margin-top: 280px;
+    }
+}
+/* End Request Page */

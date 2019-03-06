@@ -6,6 +6,12 @@ Form styles
 */
 
 /* Основная форма */
+
+.has-success .form-control:focus {
+    -webkit-box-shadow: none !important; 
+    box-shadow: none !important;
+}
+
 .field {
     position: relative;
     height: 72px;
@@ -890,7 +896,7 @@ textarea {
     border: 1px solid #fff;
     color: #fff;
     background-image: url(../images/input-icon/calendar_3.png);
-    background-size: 7%;
+    background-size: 4%;
     background-repeat: no-repeat;
     background-position: 8% 45%;
     padding: 0;
@@ -899,7 +905,6 @@ textarea {
     cursor: pointer;
 }
 .search-date:hover {
-    /*border: 1px solid #2fb6f0;*/
     box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
 }
 .search-date::placeholder {
@@ -912,13 +917,9 @@ textarea {
 ._search-input {
     background: transparent;
     border: none;
-    padding: 7px 15px 7px 10px;
     color: #fff;
     font-size: 12px;
     outline: none;
-    background-size: 5%;
-    background-repeat: no-repeat;
-    background-position: 5% 50%;
     border-bottom: 1px solid #ddd;
 }
 ._search-input::placeholder {
@@ -944,21 +945,19 @@ textarea {
 ._large {
     width: 400px;
 }
+.search-panel {
+    padding:  10px 50px;
+}
 .search-block__button {
-    padding: 15px;
-    width: 60px;
-    height: 33px;
-    border-radius: 12px;
-    background: #fff;
-    border: none;
-    background-repeat: no-repeat;
-    background-size: 70%;
-    background-image: url(../images/searchicon_blue.png);
-    background-position: 40%;
-    margin-left: 10px;
-    outline: none;
+    background: #2d18b4;
+    border: 2px solid #fff;
+    font-size: 12px;
+    text-transform: none;
+    padding: 7px 20px;
+    color: #fff;
 }
 .search-block__button:hover {
+    color: #fff;
     box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
 }
 /* Конец Поиск */
