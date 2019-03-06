@@ -2,6 +2,7 @@
 
     namespace app\modules\dispatchers\controllers;
     use Yii;
+    use yii\data\Pagination;
     use app\modules\dispatchers\controllers\AppDispatchersController;
     use app\modules\dispatchers\models\UserRequests;
     use app\modules\dispatchers\models\News;

@@ -23,16 +23,16 @@ DispatchersAsset::register($this);
     
     <?php $this->beginBody() ?>
     <div class="wrap">        
-        <?php $this->beginContent('@app/modules/dispatchers/views/layouts/header.php') ?>
-        <?php $this->endContent() ?>            
+        <?php $this->beginContent('@app/modules/dispatchers/views/layouts/header.php'); ?>
+        <?php $this->endContent(); ?> 
         <div class="container container-full">
             <?= $content ?>
         </div>        
     </div>
 
-    <?php $this->beginContent('@app/modules/dispatchers/views/layouts/footer.php') ?>
-    <?php $this->endContent() ?>
-    <?php $this->endBody() ?>
+    <?php // $this->beginContent('@app/modules/dispatchers/views/layouts/footer.php'); ?>
+    <?php // $this->endContent(); ?>
+    <?php $this->endBody(); ?>
     
 </body>
 </html>

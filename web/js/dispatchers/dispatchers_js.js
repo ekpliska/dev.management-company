@@ -21,7 +21,7 @@ $(document).ready(function(){
         allBlock.removeClass('notice__user__active');
         $(this).addClass('notice__user__active');
         $.ajax({
-            url: 'show-user-requests',
+            url: '/dispatchers/dispatchers/show-user-requests',
             method: 'POST',
             data: {
                 userID: userID,

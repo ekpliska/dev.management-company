@@ -16,40 +16,22 @@ class UserRequests extends Clients {
      */
     public static function getRequestsByUser() {
         
-//        $query = self::find()
-//                ->joinWith([
-//                    'user u', 
-//                    'personalAccount pa', 
-//                    'personalAccount.request rq', 
-//                    'personalAccount.request.image i', 
-//                    'personalAccount.flat fl', 
-//                    'personalAccount.flat.house hs'])
-//                ->where(['!=', 'rq.status', StatusRequest::STATUS_CLOSE])
-//                ->orderBy(['rq.created_at' => SORT_ASC])
-//                ->asArray()
-//                ->all();
-        $query = self::find()
-                ->with([
-                    'user', 
-                    'personalAccount', 
-                    'personalAccount.request' => function($data) {
-                        $data->andWhere([
-//                            'status' => StatusRequest::STATUS_NEW, 
-                            'requests_dispatcher_id' => 30
-                        ]);
-                        $data->orderBy(['created_at' => SORT_ASC]);
+        $result = self::find()
+                ->joinWith([
+                    'user u', 
+                    'personalAccount pa', 
+                    'personalAccount.request rq' => function($query) {
+                        $query->andWhere(['rq.requests_dispatcher_id' => 30]);
+                        $query->orWhere(['rq.status' => StatusRequest::STATUS_NEW]);
+                        $query->orderBy(['rq.created_at' => SORT_DESC]);
                     }, 
-                    'personalAccount.request.image', 
-                    'personalAccount.flat', 
-                    'personalAccount.flat.house'])
+                    'personalAccount.request.image i', 
+                    'personalAccount.flat fl', 
+                    'personalAccount.flat.house hs'])
                 ->asArray()
                 ->all();
-        
-//        echo '<pre>';
-//        var_dump($query);
-//        die();
-        
-        return $query;
+
+        return $result;
     }
 
     /*
