@@ -95,4 +95,22 @@
         margin-top: 280px;
     }
 }
+@media screen and (max-width: 768px) {
+    .margin-search-panel {
+        margin-top: 310px;
+    }
+}
+@media screen and (max-width: 560px) {
+    .search-panel {
+        margin-top: 50px;
+    }
+    .margin-search-panel {
+        margin-top: 370px;
+    }
+}
+@media screen and (max-width: 550px) {
+    .margin-search-panel {
+        margin-top: 515px;
+    }    
+}
 /* End Request Page */
