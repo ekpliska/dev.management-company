@@ -18,6 +18,31 @@
  */
 class NewsController extends AppDispatchersController {
     
+    public function behaviors() {
+        return [
+            'access' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['index', 'view'],
+                        'allow' => true,
+                        'roles' => ['dispatcher']
+                    ],
+                    [
+                        'actions' => [
+                            'create',
+                            'for-whom-news', 
+                            'image-upload',
+                            'file-delete',
+                        ],
+                        'allow' => true,
+                        'roles' => ['CreateNewsDispatcher']
+                    ],
+                ],
+            ],
+        ];
+    }
+    
     /*
      * Действия
      *      image-upload Загрузка изображений используемых в редакторе текста новостей

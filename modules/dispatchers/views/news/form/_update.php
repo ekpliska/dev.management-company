@@ -130,10 +130,11 @@
             </div>            
 
             
-        <div class="news-form__btn-block text-center">
-            
-            <?= Html::submitButton('Сохранить', ['class' => 'btn blue-btn']) ?>
-        </div>
+        <?php if (Yii::$app->user->can('CreateNewsDispatcher')) : ?>
+            <div class="news-form__btn-block text-center">
+                <?= Html::submitButton('Сохранить', ['class' => 'btn blue-btn']) ?>
+            </div>
+        <?php endif; ?>
         
     </div>
 

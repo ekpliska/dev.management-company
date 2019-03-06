@@ -28,6 +28,8 @@ $this->params['breadcrumbs'][] = 'Новости';
                 'pages' => $pages,
     ]) ?>
     
-    <?= Html::a('', ['news/create'], ['class' => 'create-request-btn']) ?>
+    <?php if (Yii::$app->user->can('CreateNewsDispatcher')) : ?>
+        <?= Html::a('', ['news/create'], ['class' => 'create-request-btn']) ?>
+    <?php endif; ?>
     
 </div>

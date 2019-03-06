@@ -31,3 +31,10 @@ $this->params['breadcrumbs'][] = $news->news_title;
             'docs' => $docs,]) ?>
     
 </div>
+
+<?php if (!Yii::$app->user->can('CreateNewsDispatcher')) {
+    $this->registerJs('
+        $(":input").prop("disabled", true);
+    ');
+}
+?>

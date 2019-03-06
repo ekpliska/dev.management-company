@@ -21,7 +21,7 @@
         </div>
         <div class="news-item__image">
             <span class="item__image_desc"><?= $news['rubric'] ?></span>
-            <?= Html::img("@web/{$news['preview']}", ['class' => 'news_preview']) ?>
+            <?= Html::img("/web/{$news['preview']}", ['class' => 'news_preview']) ?>
         </div>
         <div class="news-item__text">
             <?= FormatHelpers::shortTextNews($news['text'], 40) ?>
