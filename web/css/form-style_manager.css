@@ -932,10 +932,10 @@ textarea {
     justify-content: center;
 }
 .search-panel__btn-1 {
-    height: 4em;
+/*    height: 4em;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center;*/
 }
 ._search-input:hover,
 ._dropdown-subpanel:hover {

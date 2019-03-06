@@ -20,6 +20,9 @@
     ._sub-910, ._sub-910-paid {
         margin-top: 135px;
     }
+    .__vote-767 {
+        margin-top: 90px;
+    }
 }
 @media screen and (max-width: 768px) {
     ._sub-910 {
@@ -50,7 +53,8 @@
         padding: 0 !important;
     }
     .search-panel__btn-1 {
-        height: 7em !important;
+        height: 3em !important;
+        padding: 5px 0;
     }
 }
 @media screen and (max-width: 991px) {

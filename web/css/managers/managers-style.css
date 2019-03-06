@@ -328,16 +328,19 @@ tbody > tr > td > div.empty::before {
 
 /* Администратор, контент + доп меню */
 .manager-main-with-sub {
-    margin-top: 120px;
+    margin-top: 110px;
 }
 .manager-main-with-sub-news {
-    margin-top: 200px;
+    margin-top: 210px;
 }
 .manager-main-with-sub-designer {
     margin-top: 130px;
 }
 ._sub-910, ._sub-910-paid {
     margin-top: 160px;
+}
+.__vote-767 {
+    margin-top: 115px;
 }
 /* Конец Администратор, контент + доп меню */
 

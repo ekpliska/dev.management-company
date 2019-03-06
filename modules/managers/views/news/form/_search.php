@@ -9,44 +9,49 @@
  */
 ?>
 <div class="container-fluid submenu-manager text-center news-margin">
-    <ul class="nav navbar-nav navbar-left">
-        <li>
-            <?php 
-                $form = ActiveForm::begin([
-                    'id' => 'search-news-form',
-                    'action' => ['index', 'section' => $section],
-                    'method' => 'get',
-                    'fieldConfig' => [
-                        'template' => '{input}',
-                    ],
-                    'options' => [
-                        'class' => 'form-inline',
-                    ],
-                ]);
-            ?>
-
-            <?= $form->field($search_model, 'value')->input('text', ['class' => '_search-input', 'placeHolder' => 'Заголовок публикации'])->label(false) ?>
-            
-            <?= $form->field($search_model, 'news_house_id')->dropDownList($house_lists, [
-                    'prompt' => '[Все адреса]',
-                    'class' => '_dropdown-subpanel']) ?>
-            
-            <?= $form->field($search_model, 'date_start')
-                    ->widget(DatePicker::className(), [
-                        'id' => 'date-start',
-                        'language' => 'ru',
-                        'options' => [
-                            'placeHolder' => 'Выберите дату',
-                            'class' => 'search-date',
-                        ],
-                        'type' => DatePicker::TYPE_INPUT,
-                        'pluginOptions' => [
-                            'autoClose' => true,
-                            'format' => 'yyyy-mm-dd',
-                        ]])
-                    ->label(false) ?>
-            
-            <?= $form->field($search_model, 'date_finish')
+    <div class="row search-panel">
+        <?php 
+            $form = ActiveForm::begin([
+                'id' => 'search-news-form',
+                'action' => ['index', 'section' => $section],
+                'method' => 'get',
+                'fieldConfig' => [
+                    'template' => '{input}',
+                ]]);
+        ?>
+        
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <?= $form->field($search_model, 'value')
+                        ->input('text', [
+                            'class' => 'form-control _search-input', 
+                            'placeHolder' => 'Заголовок публикации'])
+                        ->label(false) ?>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <?= $form->field($search_model, 'news_house_id')
+                        ->dropDownList($house_lists, [
+                            'prompt' => '[Все адреса]',
+                            'class' => 'form-control _dropdown-subpanel']) ?>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <?= $form->field($search_model, 'date_start')
+                        ->widget(DatePicker::className(), [
+                            'id' => 'date-start',
+                            'language' => 'ru',
+                            'options' => [
+                                'placeHolder' => 'Выберите дату',
+                                'class' => 'search-date',
+                            ],
+                            'type' => DatePicker::TYPE_INPUT,
+                            'pluginOptions' => [
+                                'autoClose' => true,
+                                'format' => 'yyyy-mm-dd',
+                            ]])
+                        ->label(false) ?>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <?= $form->field($search_model, 'date_finish')
                     ->widget(DatePicker::className(), [
                         'id' => 'date-finish',
                         'language' => 'ru',
@@ -60,12 +65,14 @@
                             'format' => 'yyyy-mm-dd',
                         ]])
                     ->label(false) ?>
+            </div>
+        </div>
+        
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 search-panel__btn-1">
+            <?= Html::submitButton('Найти', ['class' => 'btn search-block__button']) ?>
+        </div>
+    </div>
 
-            
-            <?= Html::submitButton('', ['class' => 'search-block__button']) ?>
-            
-            <?php ActiveForm::end(); ?>
-        </li>
-    </ul>
+    <?php ActiveForm::end(); ?>
 </div>
 
