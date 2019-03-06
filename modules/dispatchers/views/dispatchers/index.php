@@ -6,7 +6,7 @@
 /*
  * Диспетчер, главная страница
  */
-$this->title = Yii::$app->params['site-name-manager'] .  'Главная';
+$this->title = Yii::$app->params['site-name-dispatcher'] .  'Главная';
 $this->params['breadcrumbs'][] = 'Главная';
 ?>
 

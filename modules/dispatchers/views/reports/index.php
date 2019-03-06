@@ -5,14 +5,14 @@
 /*
  * Отчеты, главная страница
  */
-$this->title = 'Отчеты';
+$this->title = Yii::$app->params['site-name-dispatcher'] . 'Отчеты';
 $this->params['breadcrumbs'][] = 'Отчеты';
 ?>
 
 <div class="dispatcher-main">
     
     <?= Breadcrumbs::widget([
-            'homeLink' => ['label' => 'ELSA | Администратор', 'url' => ['dispatchers/index']],
+            'homeLink' => ['label' => 'ELSA | Диспетчер', 'url' => ['dispatchers/index']],
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]) ?>
     

@@ -18,7 +18,7 @@ class News extends BaseNews {
         $querty = self::find()
                 ->limit($count_news)
                 ->asArray()
-                ->orderBy(['created_at' => SORT_ASC])
+                ->orderBy(['created_at' => SORT_DESC])
                 ->all();
         
         

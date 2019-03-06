@@ -24,7 +24,7 @@ $hide_btn = ($request['status'] == StatusRequest::STATUS_CLOSE || $request['stat
 <div class="dispatcher-main">
     
     <?= Breadcrumbs::widget([
-            'homeLink' => ['label' => 'ELSA | Администратор', 'url' => ['dispatchers/index']],
+            'homeLink' => ['label' => 'ELSA | Диспетчер', 'url' => ['dispatchers/index']],
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]) ?>
     

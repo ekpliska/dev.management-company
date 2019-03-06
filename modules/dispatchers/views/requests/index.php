@@ -2,12 +2,11 @@
 
     use yii\helpers\Html;
     use yii\widgets\Breadcrumbs;
-    use app\modules\managers\widgets\AlertsShow;
 
 /* 
  * Завяки, главная
  */
-$this->title = Yii::$app->params['site-name-manager'] .  'Заявки';
+$this->title = Yii::$app->params['site-name-dispatcher'] . 'Заявки';
 $this->params['breadcrumbs'][] = 'Заявки';
 ?>
 
@@ -21,7 +20,7 @@ $this->params['breadcrumbs'][] = 'Заявки';
 <div class="dispatcher-main-with-sub-general margin-search-panel">
     
     <?= Breadcrumbs::widget([
-            'homeLink' => ['label' => 'ELSA | Администратор', 'url' => ['dispatchers/index']],
+            'homeLink' => ['label' => 'ELSA | Диспетчер', 'url' => ['dispatchers/index']],
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]) ?>
     

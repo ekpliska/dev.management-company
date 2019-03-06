@@ -1,6 +1,7 @@
 <?php
 
     namespace app\modules\dispatchers\models;
+    use Yii;
     use app\models\Clients;
     use app\models\StatusRequest;
     
@@ -21,8 +22,9 @@ class UserRequests extends Clients {
                     'user u', 
                     'personalAccount pa', 
                     'personalAccount.request rq' => function($query) {
-                        $query->andWhere(['rq.requests_dispatcher_id' => 30]);
+                        $query->andWhere(['rq.requests_dispatcher_id' => Yii::$app->profileDispatcher->employeeID]);
                         $query->orWhere(['rq.status' => StatusRequest::STATUS_NEW]);
+                        $query->andWhere(['!=', 'rq.status', StatusRequest::STATUS_CLOSE]);
                         $query->orderBy(['rq.created_at' => SORT_DESC]);
                     }, 
                     'personalAccount.request.image i', 
@@ -40,19 +42,22 @@ class UserRequests extends Clients {
      */
     public static function getPaidRequestsByUser() {
         
-        $query = self::find()
+        $result = self::find()
                 ->joinWith([
                     'user u', 
                     'personalAccount pa', 
-                    'personalAccount.paidRequest ps', 
+                    'personalAccount.paidRequest ps' => function($query) {
+                        $query->andWhere(['ps.services_dispatcher_id' => Yii::$app->profileDispatcher->employeeID]);
+                        $query->orWhere(['ps.status' => StatusRequest::STATUS_NEW]);
+                        $query->andWhere(['!=', 'ps.status', StatusRequest::STATUS_CLOSE]);
+                        $query->orderBy(['ps.created_at' => SORT_DESC]);
+                    }, 
                     'personalAccount.flat fl', 
                     'personalAccount.flat.house hs'])
-                ->where(['!=', 'ps.status', StatusRequest::STATUS_CLOSE])
-                ->orderBy(['ps.created_at' => SORT_ASC])
                 ->asArray()
                 ->all();
         
-        return $query;
+        return $result;
     }
 
     /*

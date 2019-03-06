@@ -7,7 +7,7 @@
 /*
  * Жилищный фонд, главная страница
  */
-$this->title = 'Жилищный фонд';
+$this->title = Yii::$app->params['site-name-dispatcher'] . 'Жилищный фонд';
 $this->params['breadcrumbs'][] = 'Жилищный фонд';
 
 /*
@@ -22,7 +22,7 @@ $active_item = $house_cookie
 <div class="dispatcher-main">
     
     <?= Breadcrumbs::widget([
-            'homeLink' => ['label' => 'ELSA | Администратор', 'url' => ['dispatchers/index']],
+            'homeLink' => ['label' => 'ELSA | Диспетчер', 'url' => ['dispatchers/index']],
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]) ?>
     
