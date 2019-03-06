@@ -27,7 +27,7 @@ $active_item = $house_cookie
     ]) ?>
     
     <div id="_list-res" class="row housing-stock">
-        <div class="col-md-4">
+        <div class="col-lg-4 col-md-4 col-sm-6 housing-stock__description">
             <h4 class="title">Жилой комплекс (Дома)</h4>
             <div class="panel-group" id="accordion">
                 <?php if (isset($houses_list) && is_array($houses_list) && !empty($houses_list)) : ?>
@@ -57,20 +57,20 @@ $active_item = $house_cookie
             </div>
         </div>
         
-        <div class="col-md-2">
+        <div class="col-lg-2 col-md-3 col-sm-6 housing-stock__characteristics">
             <h4 class="title">Характеристики</h4>
             <div id="characteristic_list">
                 <?= $this->render('data/characteristics_house', ['characteristics' => $houses_list[$house_cookie['key']]['characteristic']]) ?>
             </div>
         </div>
         
-        <div class="col-md-4">
+        <div class="col-lg-4 col-md-5 col-sm-6 housing-stock__flats">
             <div id="flats_list">
                 <?= $this->render('data/view_flats', ['flats' => $houses_list[$house_cookie['key']]['flat']]) ?>
             </div>
         </div>
         
-        <div class="col-md-2">
+        <div class="col-lg-2 col-md-12 col-sm-6 housing-stock__files">
             <h4 class="title">Вложения</h4>
             <div id="files_list">
                 <?= $this->render('data/view_upload_files', ['files' => $houses_list[$house_cookie['key']]['image']]) ?>

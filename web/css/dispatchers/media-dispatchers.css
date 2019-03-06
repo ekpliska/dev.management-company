@@ -237,3 +237,24 @@
     }
 }
 /* End News Page */
+
+/* Housing stock Page */
+@media screen and (max-width: 991px) {
+    .housing-stock__characteristics {
+        border-right: none !important;
+    }
+    .housing-stock__flats, .housing-stock__files {
+        border-top: 1px solid #ddd;
+    }
+}
+@media screen and (max-width: 768px) {
+    .housing-stock__description, 
+    .housing-stock__flats, 
+    .housing-stock__files {
+        border-right: none !important;
+    }
+    .housing-stock__characteristics {
+        border-top: 1px solid #ddd;
+    }
+}
+/* End Housing stock Page */
