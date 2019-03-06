@@ -3,7 +3,15 @@
 */
 
 /* Content */
+@media screen and (max-width: 768px) {
+    .manager-main-with-sub {
+        margin-top: 110px;
+    }
+}
 @media screen and (max-width: 560px) {
+    .manager-main-with-sub {
+        margin-top: 195px;
+    }
     .manager-main {
         margin-top: 0;
     }
@@ -36,9 +44,28 @@
 }/* End Content */
 
 /* Search Form Panel */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 991px) {
+    .search-panel {
+        padding: 0 !important;
+    }
+    .search-panel__btn-1 {
+        height: 7em !important;
+    }
+}
+@media screen and (max-width: 991px) {
     ._sub-4 {
-        margin-top: 240px;
+        margin-top: 140px;
+    }
+}
+@media screen and (max-width: 768px) {
+    .search-panel {
+        margin-top: 10px;
+    }
+    .search-panel__btn-1 {
+        height: 4em !important;
+    }
+    ._sub-4 {
+        margin-top: 190px;
     }
     .submenu-manager {
         margin-top: -10px;
@@ -52,20 +79,11 @@
     ._search-input, ._dropdown-subpanel {
         width: 100%;
     }
-    .search-block__button {
-        width: 100% !important;
-        background-size: 6% !important;
-        background-position: center !important;
-        margin-left: 0 !important;
-    }
     .btn-edit-in-table, .btn-delete-in-table {
         font-size: 10px;
     }
 }
 @media screen and (max-width: 560px) {
-    .manager-main-with-sub {
-        margin-top: 170px;
-    }
     .submenu-manager {
         margin-top: 30px;
     }
