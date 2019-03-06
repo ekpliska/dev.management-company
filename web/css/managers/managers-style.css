@@ -86,6 +86,14 @@ and open the template in the editor.
     height: 190px;
     margin: 10px 0;
 }
+.__content-news > a {
+    font-size: 16px;
+    color: #454545;
+    font-weight: bold;
+}
+.__content-news > a:hover {
+    color: #2d18b4;
+}
 .__content-news:first-child {
     margin: 0;
 }
