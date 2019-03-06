@@ -11,7 +11,7 @@ $this->params['breadcrumbs'][] = 'Собственники';
 
 <?= $this->render('_form/_search', ['model' => $model]) ?>
 
-<div class="dispatcher-main-with-sub">
+<div class="dispatcher-main-with-sub-1">
     
     <?= Breadcrumbs::widget([
             'homeLink' => ['label' => 'ELSA | Диспетчер', 'url' => ['dispatchers/index']],
