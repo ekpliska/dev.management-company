@@ -4,6 +4,9 @@
 
 /* Content */
 @media screen and (max-width: 991px) {
+    .dispatcher-main-with-sub-1 {
+        margin-top: 90px;
+    }
     .dispatcher-main-with-sub {
         margin-top: 185px;
     }
@@ -24,6 +27,9 @@
 @media screen and (max-width: 550px) {
     .dispatcher-main-with-sub {
         margin-top: 380px;
+    }
+    .dispatcher-main-with-sub-1 {
+        margin-top: 190px;
     }
 }
 /* End Content */

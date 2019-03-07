@@ -31,12 +31,6 @@
     ._sub-910-paid {
         margin-top: 325px;
     }
-    .search-date {
-        background-size: 2% !important;
-        background-position: 2% 45% !important;
-        padding: 0 0 0 40px !important;
-        text-align: left !important;
-    }
 }
 @media screen and (max-width: 560px) {
     ._sub-910 {

@@ -896,7 +896,7 @@ textarea {
     border: 1px solid #fff;
     color: #fff;
     background-image: url(../images/input-icon/calendar_3.png);
-    background-size: 4%;
+    background-size: 15px;
     background-repeat: no-repeat;
     background-position: 8% 45%;
     padding: 0;
@@ -932,6 +932,9 @@ textarea {
     justify-content: center;
 }
 .search-panel__btn-1 {
+    padding: 6px 0;
+    text-align: center;
+    justify-content: center;
 /*    height: 4em;
     display: flex;
     align-items: center;
