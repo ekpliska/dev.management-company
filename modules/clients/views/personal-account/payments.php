@@ -48,7 +48,7 @@ $this->params['breadcrumbs'][] = 'Платежи';
         ?>        
         <?= Html::button('Показать', [
                 'id' => 'btn-show-payment',
-                'class' => 'btn-show-payment',
+                'class' => 'btn-show-info btn-show-payment',
                 'data-account-number' => $account_number,
             ]) 
         ?>

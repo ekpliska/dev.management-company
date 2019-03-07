@@ -369,10 +369,8 @@ $(document).ready(function() {
             labelMess.text('');
             $.post('send-indication?counter=' + uniqueCounter + '&indication=' + curIndication, function(responce) {
                 if (responce.success === false) {
-                    labelMess.text('Ошибка отправки показаний');
                     return false;
                 } else if (responce.success === true) {
-                    labelMess.text('Показания отправлены');
                     resultMess.text((curIndication - prevIndication).toFixed(2));
                 }
             });

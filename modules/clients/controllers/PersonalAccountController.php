@@ -158,8 +158,6 @@ class PersonalAccountController extends AppClientsController {
         
         if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
             
-            Yii::$app->response->format = Response::FORMAT_JSON;
-            
             $array = [
                 "ID" => $counter,
                 "Дата снятия показания" => date('Y-m'),
@@ -175,12 +173,12 @@ class PersonalAccountController extends AppClientsController {
             $result = Yii::$app->client_api->setCurrentIndications($data_json);
             
             if (!$result) {
-                return ['success' => false];
+                Yii::$app->session->setFlash('error', ['message' => 'Ошибка отправки показания']);
+                return $this->redirect(Yii::$app->request->referrer);
             }
             
-            return [
-                'success' => true,
-            ];
+            Yii::$app->session->setFlash('success', ['message' => 'Показания были успешно отправлены']);
+            return $this->redirect(Yii::$app->request->referrer);
         }
         
     }
