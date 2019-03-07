@@ -303,4 +303,136 @@ $(document).ready(function(){
        }
     });
     
+    
+    
+    
+    // *********************************************************** //
+    // ************     Start Block of Profile      ************** //
+    // ********************************************************** //
+    /*
+     * Список квитанций, Профиль Собственника
+     */
+    $(document).on('click', '.list-group-item', function() {
+        var liItem = $(this).data('receipt');
+        var accountNumber = $(this).data('account');
+        var url = location.origin + '/receipts/' + accountNumber + '/' + accountNumber + '-' + liItem + '.pdf';
+        var conteiner = $('.receipts_body');
+        $('ul.receipte-of-lists li').removeClass('active');
+        $(this).addClass('active');
+        
+        // Проверяем сущестование pdf, если существует - загружаем фрейм
+        $.get(url)
+                .done(function (){
+                    conteiner.html('<iframe src="' + url + '" style="width: 100%; height: 600px;" frameborder="0">Ваш браузер не поддерживает фреймы</iframe>');
+                }).fail(function(){
+                    conteiner.html('<div class="notice error"><p>Квитанция на сервере не найдена.</p></div>');
+                });
+        });
+
+        /*
+         * Функция парсинга даты
+         * Смена номер месяца и дня местами
+         */
+        function dateParse(date) {
+            var dateArray = date.split('-');
+            var dateString = dateArray[1] + '-' + dateArray[0] + '-' + dateArray[2];
+            var newDate = new Date(dateString);
+            return newDate;
+        }
+    
+        /*
+         * 
+         * Общий метод формирования AJAX запросов для профиль Собственника, ЛК Администратор
+         * @param {type} accountNumber Лицевой счет
+         * @param {type} startDate Дата начала даипазона
+         * @param {type} endDate Дата конца диапазона
+         * @param {type} idError ID блока, в котором будет выведены ошибки запроса
+         * @param {type} idContent ID блока, в котором будет выведен результат запроса
+         * @param {type} type Тип запроса (Квитанции, Платежи, Приборы учета)
+         * @returns {undefined}
+         */
+        function getDataClients (accountNumber, startDate, endDate, idContent, type) {
+            var parseStartDate = dateParse(startDate);
+            var parseEndDate = dateParse(endDate);
+
+            if (parseStartDate - parseEndDate > 0) {
+                $('.message-block').addClass('invalid-message-show').html('Вы указали некорректный диапазон');
+            } else if (parseStartDate - parseEndDate <= 0) {
+                $('.message-block').removeClass('invalid-message-show').html('');
+                $.post('/dispatchers/clients/search-data-on-period?account_number=' + accountNumber + '&date_start=' + startDate + '&date_end=' + endDate + '&type=' + type,
+                    function(data) {
+                        if (data.success === false) {
+                            $('.message-block').addClass('invalid-message-show').html('Ошибка запроса');
+                        } else if (data.success === true) {
+                            $('.message-block').removeClass('invalid-message-show').html('');
+                            $(idContent).html(data.data_render);
+                        }
+                    }
+                );
+            }
+
+            return;
+
+        }
+    
+    /*
+     * Запрос на получение списка квитанций в заданный диапазон
+     */
+    $('#get-receipts').on('click', function(){
+        var accountNumber = +$('#select-dark :selected').text();
+        var startDate = $('input[name="date_start-period"]').val();
+        var endDate = $('input[name="date_end-period"]').val();
+        
+        getDataClients(accountNumber, startDate, endDate, '#receipts-lists', 'receipts');
+        
+    });
+    
+    /*
+     * Список платежей, профиль Собственника
+     */
+    $('.btn-show-payment').on('click', function(){
+        var accountNumber = +$('#select-dark :selected').text();
+        var startDate = $('input[name="date_start-period-pay"]').val();
+        var endDate = $('input[name="date_end-period-pay"]').val();
+
+        getDataClients(accountNumber, startDate, endDate, '#payments-lists', 'payments');
+        
+    });
+    
+    var month = {
+        'январь': '01',
+        'февраль': '02',
+        'март': '03',
+        'апрель': '04',
+        'май': '05',
+        'июнь': '06',
+        'июль': '07',
+        'август': '08',
+        'сентябрь': '09',
+        'октябрь': '10',
+        'ноябрь': '11',
+        'декабрь': '12',
+    };
+    
+    /*
+     * Запрос на формирование предыдущих показаний приборов учета
+     */
+    $('#show-prev-indication').on('click', function() {
+        var dateValue = $('input[name=date_start-period-pay').val();
+        var nameMonth = dateValue.split('-')[0];
+        var year = dateValue.split('-')[1];
+        var monthNumber = month[nameMonth.toLowerCase()];
+        var accountNumber = $(this).data('account');
+        
+        if (!$.isNumeric(monthNumber) || !$.isNumeric(year)) {
+            $('.message-block').addClass('invalid-message-show').html('Ошибка запроса');
+            return false;
+        }
+        
+        $.post('/dispatchers/clients/find-indications?month=' + monthNumber + '&year=' + year + '&account=' + accountNumber, function(response) {
+            $('#indication-table').html(response.result);
+        });
+    });
+    
+    
 });
