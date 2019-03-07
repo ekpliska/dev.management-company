@@ -431,6 +431,7 @@ $(document).ready(function(){
         
         $.post('/dispatchers/clients/find-indications?month=' + monthNumber + '&year=' + year + '&account=' + accountNumber, function(response) {
             $('#indication-table').html(response.result);
+            $('.message-block').removeClass('invalid-message-show').html('');
         });
     });
     

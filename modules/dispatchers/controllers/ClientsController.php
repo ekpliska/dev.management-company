@@ -285,4 +285,33 @@ class ClientsController extends AppDispatchersController {
         
     }
     
+    /*
+     * Запрос поиска предыдущих показаний приборов учета
+     */
+    public function actionFindIndications($month, $year, $account) {
+
+        Yii::$app->response->format = Response::FORMAT_JSON;
+
+        if (Yii::$app->request->isPost) {
+
+            // Формируем запрос в массиве
+            $array_request = [
+                'Номер лицевого счета' => $account,
+                'Номер месяца' => $month,
+                'Год' => $year,
+            ];
+
+            // Преобразуем массив в формат JSON
+            $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
+
+            $indications = Yii::$app->client_api->getPreviousCounters($data_json);
+
+            $data = $this->renderPartial('data/counters-lists', [
+                'counters_lists' => $indications ? $indications : null,
+            ]);
+            return ['success' => true, 'result' => $data];
+        }
+        return ['success' => false];
+    }
+    
 }

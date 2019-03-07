@@ -36,11 +36,11 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
                     <?= DatePicker::widget([
                             'name' => 'date_start-period-pay',
                             'type' => DatePicker::TYPE_INPUT,
-                            'value' => date('d-M-Y'),
+                            'value' => date('F-Y'),
                             'layout' => '<span class="input-group-text">Birth Date</span>',
                             'pluginOptions' => [
                                 'autoclose'=>true,
-                                'format' => 'dd-M-yyyy'
+                                'format' => 'MM-yyyy'
                             ]
                         ]);        
                     ?>
@@ -52,6 +52,7 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
                             ]
                         ]) ?>
                 </div>
+                <div class="message-block"></div>
             </div>    
 
             <table class="table dispatcher-table dispatcher-table-in table-striped">
@@ -66,7 +67,7 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
                     <th>Расход</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id="indication-table">
                     <?= $this->render('data/counters-lists', [
                             'counters_lists' => $counters_lists,
                     ]) ?>

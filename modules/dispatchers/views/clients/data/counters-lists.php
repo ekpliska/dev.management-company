@@ -33,7 +33,9 @@ $array_image = [
         <p class="counter-number"><?= $indication['Регистрационный номер прибора учета'] ?></p>
     </td>
     <td><?= Yii::$app->formatter->asDate($indication['Дата следующей поверки'], 'long') ?></td>
-    <td><?= Yii::$app->formatter->asDate($indication['Дата снятия предыдущего показания'], 'long') ?></td>
+    <td>
+        <?= !empty($indication['Дата снятия предыдущего показания']) ? 
+                Yii::$app->formatter->asDate($indication['Дата снятия предыдущего показания'], 'long') : 'Не известно' ?></td>
     <td>
         <?= $indication['Предыдущие показание'] ?>
     </td>
