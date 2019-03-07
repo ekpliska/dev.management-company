@@ -17,6 +17,7 @@ class Notifications extends Widget {
         $this->_notifications = ModelNotifications::find()
                 ->where(['user_uid' => Yii::$app->user->id])
                 ->orderBy(['created_at' => SORT_DESC])
+                ->limit(7)
                 ->all();
         
         parent::init();

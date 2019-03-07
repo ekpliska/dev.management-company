@@ -3,6 +3,7 @@
     namespace app\modules\dispatchers\models;
     use app\models\Requests as BaseRequests;
     use app\models\StatusRequest;
+    use app\models\Notifications;
 
 /**
  * Заявки
@@ -46,7 +47,21 @@ class RequestsList extends BaseRequests {
         
         $this->requests_specialist_id = $specialist_id;
         $this->status = StatusRequest::STATUS_PERFORM;
-        return $this->save(false) ? true : false;
+        
+        if (!$this->save(false)) {
+            return false;
+        }
+        
+        if (empty($this->requests_specialist_id)) {
+            $notification = new Notifications();
+            $notification->createNoticeStatus(
+                    151, 
+                    Notifications::TYPE_CHANGE_STATUS_IN_REQUEST, 
+                    $this->requests_ident,
+                    StatusRequest::STATUS_PERFORM);
+        }
+        
+        return true;
     }
     
 }

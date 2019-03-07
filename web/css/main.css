@@ -832,12 +832,12 @@ reset-password-sms:focus{
 .notification__dropdown {
     padding: 10px;
     height: 220px;
-    width: 310px !important;
     cursor: default;
 }
 .notification__dropdown a.notification_reset {
     color: #bcbcbc;
     font-size: 12px;
+    padding: 0 0 20px;
     cursor: pointer;
 }
 .notification__dropdown a.notification_link {

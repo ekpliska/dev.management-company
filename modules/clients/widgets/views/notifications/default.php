@@ -1,7 +1,7 @@
 <?php
 
     use yii\helpers\Html;
-    use yii\helpers\Url;
+    use app\models\Notifications;
 
 /* 
  * Уведомления
@@ -18,7 +18,15 @@
             <a href="javascript:void(0);" class="notification_reset">Отметить как прочитанные</a>
         </li>
         <li class="user-info-box">
-            <?= Html::a('<span class="dot"></span> TODO', ['/'], ['class' => 'notification_link']) ?>
+            
+            <?php foreach ($notifications_lists as $note) : ?>
+                <?php if ($note->type_notification == Notifications::TYPE_CHANGE_STATUS_IN_REQUEST) : ?>
+                    <?= Html::a("<span class='dot'></span>{$note->message}", ['requests/view-request', 'request_number' => $note->value_1], ['class' => 'notification_link']) ?>
+                <?php elseif ($note->type_notification == Notifications::TYPE_CHANGE_STATUS_IN_PAID_REQUEST) : ?>
+                    <?= Html::a("<span class='dot'></span>{$note->message}", ['paid-services/index'], ['class' => 'notification_link']) ?>
+                <?php endif; ?>
+            <?php endforeach; ?>
+            
         </li>
         <?php else: ?>
             <p>Новых уведомлений нет.</p>
