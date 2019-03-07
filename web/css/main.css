@@ -828,6 +828,42 @@ reset-password-sms:focus{
 }
 /* Конец Страница 404 */
 
+/* Notifications Bar */
+.notification__dropdown {
+    padding: 10px;
+    height: 220px;
+    width: 310px !important;
+    cursor: default;
+}
+.notification__dropdown a.notification_reset {
+    color: #bcbcbc;
+    font-size: 12px;
+    cursor: pointer;
+}
+.notification__dropdown a.notification_link {
+    font-size: 12px;
+    color: #fff;
+    cursor: pointer;
+}
+span.dot {
+    height: 7px;
+    width: 7px;
+    background-color: #1fd68d;;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 10px;
+}
+.notification__dropdown p {
+    color: #bcbcbc;
+    font-size: 12px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+/* End Notifications Bar */
+
 /* Собственник, главная страница, Новости */
 .news-lists {
     margin-top: 170px;
