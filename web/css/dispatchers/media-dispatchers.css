@@ -239,9 +239,20 @@
 /* End News Page */
 
 /* Housing stock Page */
+@media screen and (max-width: 1200px) {
+    .housing-stock__flats {
+        border-right: none !important;
+    }
+    .housing-stock__files {
+        border-top: 1px solid #ddd;
+    }
+}
 @media screen and (max-width: 991px) {
     .housing-stock__characteristics {
         border-right: none !important;
+    }
+    .housing-stock__flats {
+        border-right: 1px solid #ddd !important;
     }
     .housing-stock__flats, .housing-stock__files {
         border-top: 1px solid #ddd;

@@ -98,7 +98,6 @@ $(document).ready(function(){
         var specialistId = $(this).data('specialist');
         var requestId = $(this).data('request');
         var typeRequest = $(this).data('typeRequest');
-        console.log(employeeName + ' ' + specialistId + ' ' + requestId + ' ' + typeRequest);
         
         // Проверяем налицие дата параметров
         if (specialistId === undefined || requestId === undefined) {
