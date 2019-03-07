@@ -849,11 +849,12 @@ reset-password-sms:focus{
     margin-right: 24px;
     margin-bottom: 5px;
     text-align: justify;
+    height: 45px;
 }
 .news-card-preview-title a {
     color: #2d18b4;
     font-size: 18px;
-    font-weight: bold;    
+    font-weight: bold;
 }
 .news-card-preview-date {
     color: #000;
@@ -874,7 +875,7 @@ reset-password-sms:focus{
 .news-card-img {
     border-top-right-radius: 12px;
     border-top-left-radius: 12px;
-    height: 50%;
+    height: 45%;
     width: 100%;
 }
 .nav > li > a:hover, .nav > li > a:focus, 

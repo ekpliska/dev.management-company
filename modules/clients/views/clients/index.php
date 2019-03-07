@@ -17,7 +17,7 @@ $this->title = Yii::$app->params['site-name'] . "Главная";
                 <?= FormatHelpers::previewNewsOrVote($post['news_preview'], false) ?>
 
                 <h5 class="news-card-preview-title">
-                    <?= FormatHelpers::formatUrlNewsOrVote($post['news_title'], $post['slug']) ?>
+                    <?= FormatHelpers::formatUrlNewsOrVote(FormatHelpers::shortTitleOrText($post['news_title'], 45), $post['slug']) ?>
                 </h5>
 
                 <h5 class="news-card-preview-date">
@@ -26,7 +26,7 @@ $this->title = Yii::$app->params['site-name'] . "Главная";
 
                 <div class="news-card-preview-body">
                     <p class="card-text news-card-preview-text ">
-                        <?= FormatHelpers::shortTextNews($post['news_text'], 20) ?>
+                        <?= FormatHelpers::shortTextNews($post['news_text'], 25) ?>
                     </p>
                 </div>
             </div>
