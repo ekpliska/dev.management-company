@@ -189,7 +189,9 @@ $('#send-request-to-sms').on('click', function() {
             data: {
                 phoneNumber: phoneNumber,
             },
-            success: function (data, textStatus, jqXHR) {},
+            success: function (data, textStatus, jqXHR) {
+                console.log(data);
+            },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log(textStatus);                
             }

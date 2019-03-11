@@ -80,8 +80,6 @@ class RegistrationForm extends Model {
      */
     public function registration($data) {
         
-//        echo '<pre>'; var_dump($data); die();
-        
         if ($data == null) {
             return false;
         }
@@ -94,10 +92,10 @@ class RegistrationForm extends Model {
             $client = new Clients();
             // Данные Собственника, пришедщие по API
             $client_data_api = $data['user_info']['Собственник'];
-            $client->clients_surname = $client_data_api['Фамилия'] ? $client_data_api['Фамилия'] : 'Не задано';
-            $client->clients_name = $client_data_api['Имя'] ? $client_data_api['Имя'] : 'Не задано';
-            $client->clients_second_name = $client_data_api['Отчество'] ? $client_data_api['Отчество'] : 'Не задано';
-            $client->clients_phone = $client_data_api['Домашний телефон'] ? $client_data_api['Домашний телефон'] : 'Не задано';
+            $client->clients_surname = $client_data_api['Фамилия'] ? trim($client_data_api['Фамилия']) : 'Не задано';
+            $client->clients_name = $client_data_api['Имя'] ? trim($client_data_api['Имя']) : 'Не задано';
+            $client->clients_second_name = $client_data_api['Отчество'] ? trim($client_data_api['Отчество']) : 'Не задано';
+            $client->clients_phone = $client_data_api['Домашний телефон'] ? trim($client_data_api['Домашний телефон']) : 'Не задано';
             
             if (!$client->save()) {
                 // throw new \yii\db\Exception('Ошибка создания новой записи' . 'Ошибка: ' . join(', ', $client->getFirstErrors()));
