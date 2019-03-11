@@ -12,7 +12,7 @@ class StatusRequest {
     const STATUS_NEW = 0;
     const STATUS_IN_WORK = 1;
     const STATUS_PERFORM = 2;
-    const STATUS_FEEDBAK = 3;
+    const STATUS_FEEDBACK = 3;
     const STATUS_CLOSE = 4;
     const STATUS_REJECT = 5;
     const STATUS_CONFIRM = 6;
@@ -26,7 +26,7 @@ class StatusRequest {
             self::STATUS_NEW => 'Новая',
             self::STATUS_IN_WORK => 'В работе',
             self::STATUS_PERFORM => 'На исполнении',
-            self::STATUS_FEEDBAK => 'На уточнении',
+            self::STATUS_FEEDBACK => 'На уточнении',
             self::STATUS_CLOSE => 'Закрыто',
             self::STATUS_REJECT => 'Отклонена',
             self::STATUS_CONFIRM => 'Подтверждена пользователем',
@@ -42,7 +42,7 @@ class StatusRequest {
             self::STATUS_NEW => 'Новая',
             self::STATUS_IN_WORK => 'В работе',
             self::STATUS_PERFORM => 'На исполнении',
-            self::STATUS_FEEDBAK => 'На уточнении',
+            self::STATUS_FEEDBACK => 'На уточнении',
             self::STATUS_CLOSE => 'Закрыто',
         ];       
     }    
@@ -55,7 +55,7 @@ class StatusRequest {
             self::STATUS_NEW => 'new',
             self::STATUS_IN_WORK => 'in_work',
             self::STATUS_PERFORM => 'perform',
-            self::STATUS_FEEDBAK => 'feedbak',
+            self::STATUS_FEEDBACK => 'feedback',
             self::STATUS_CLOSE => 'close',
         ];       
     }        

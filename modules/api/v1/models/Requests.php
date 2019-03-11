@@ -20,8 +20,8 @@ class Requests extends BaseRequests {
                 ->joinWith([
                     'typeRequest',
                     'personalAccount' => function ($query) use ($account_number) {
-                        $query->onCondition(['account_number' => $account_number]);
-                    }])
+                        $query->andWhere(['account_number' => $account_number]);
+                    }], false)
                 ->where(['status' => $key])
                 ->orderBy(['created_at' => SORT_DESC])
                 ->asArray()

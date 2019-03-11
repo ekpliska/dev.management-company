@@ -65,14 +65,7 @@ class RequestsController extends Controller
         }
         $requests_list = Requests::getAllRequests($data_post['account']);
         
-//        if (empty($requests_list)) {
-//            return [
-//                'success' => false,
-//                'message' => 'Указанный лицевой счет не содержит заявок',
-//            ];
-//        }
-        
-        
+        return $requests_list;
         
     }
 
