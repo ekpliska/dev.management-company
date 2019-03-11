@@ -40,7 +40,7 @@
                     
                     <?php if (Yii::$app->user->can('EstatesEdit') && $flat['is_debtor']) : ?>
                         <label class="switch-rule pull-right">
-                            <?= Html::checkbox($flat_status, $flat['is_debtor'], [
+                            <?= Html::checkbox('flat_status', $flat['is_debtor'], [
                                     'id' => "check_status__flat-{$flat['flats_id']}",
                                     'data-flat' => $flat['flats_id']]) ?>
                             <span class="slider round"></span>

@@ -30,7 +30,7 @@
         <div class="news-item__image">
             <span class="item__image_desc"><?= $advert['partners_name'] ?></span>
             <span class="item__image_desc"><?= FormatFullNameUser::nameEmployeeByUserID($advert['user_id']) ?></span>
-            <?= Html::img("/web/{$advert['preview']}", ['class' => 'news_preview']) ?>
+            <?= Html::img("{$advert['preview']}", ['class' => 'news_preview']) ?>
         </div>
         <div class="news-item__text">
             <?= FormatHelpers::shortTextNews($advert['text'], 40) ?>

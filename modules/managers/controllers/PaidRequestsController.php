@@ -134,5 +134,33 @@ class PaidRequestsController extends AppManagersController {
             return \yii\widgets\ActiveForm::validate($model);
         }
     }
+    
+    /*
+     * Форма редактирования заявок на платные услуги
+     */
+    public function actionEditPaidRequest($request_id) {
+        
+        $model = PaidServices::findOne($request_id);
+        $model->scenario = PaidServices::SCENARIO_EDIT_REQUEST;
+        
+        $servise_category = CategoryServices::getCategoryNameArray();;
+        $servise_name = Services::getPayServices($model->services_servise_category_id);
+        $adress_list = $model->getUserAdress($model->services_phone);
+        
+        if (Yii::$app->request->isAjax) {
+            return $this->renderAjax('modal/edit-paid-request', [
+                'model' => $model,
+                'servise_category' => $servise_category,
+                'servise_name' => ArrayHelper::map($servise_name, 'service_id', 'service_name'),
+                'adress_list' => $adress_list,
+            ]);
+        }
+        
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', ['message' => 'Информация по заявке была изменена']);
+            return $this->redirect(Yii::$app->request->referrer);
+        }
+        
+    } 
         
 }

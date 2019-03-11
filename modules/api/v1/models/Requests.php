@@ -40,7 +40,11 @@ class Requests extends BaseRequests {
     public static function findRequestByID($request_id) {
 
         $request = self::find()
-                ->with(['typeRequest', 'employeeDispatcher', 'image'])
+                ->with([
+                    'typeRequest', 
+                    'employeeDispatcher', 
+                    'image', 
+                    'personalAccount', 'personalAccount.flat', 'personalAccount.flat.house'])
                 ->where(['requests_id' => $request_id])
                 ->one();
         
@@ -65,11 +69,12 @@ class Requests extends BaseRequests {
                 'type_requests_name' => $request->typeRequest->type_requests_name,
                 'requests_comment' => $request->requests_comment,
                 'requests_phone' => $request->requests_phone,
+                'adress' => $request->personalAccount->flat->fullAdress,
                 'created_at' => $request->created_at,
                 'updated_at' => $request->updated_at,
                 'date_closed' => $request->date_closed,
+                'specialist' => !empty($request['employeeSpecialist']['fullName']) ? $request['employeeSpecialist']['fullName'] : 'Не незначен',
             ],
-            'specialist' => !empty($request['employeeSpecialist']['fullName']) ? $request['employeeSpecialist']['fullName'] : null,
             'images' => !empty($images) ? $images : null,
         ];
        

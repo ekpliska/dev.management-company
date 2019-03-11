@@ -10,7 +10,7 @@
 
     <?= $form->field($rent_info, 'rents_id', ['options' => ['class' => 'hidden']])
             ->hiddenInput([
-                'value' => $model_rent->rents_id, 
+                'value' => $rent_info->rents_id, 
                 'id' => '_rents'])
             ->label(false) ?>
 

@@ -32,7 +32,7 @@ class SignupStepThree extends Model {
             $sms_code = Yii::$app->session->get('sms_code');
 
             if ($sms_code != $this->sms_code) {
-                $this->addError($attribute, 'Вы указали не верный СМС код');
+                $this->addError('phone', 'Вы указали не верный СМС код');
                 return false;
             }
             
@@ -40,7 +40,7 @@ class SignupStepThree extends Model {
             $is_user = User::findByPhone($phone);
 
             if ($is_user != null) {
-                $this->addError($attribute, 'Указанный номер телефона используется в системе');
+                $this->addError('phone', 'Указанный номер телефона используется в системе');
                 return false;
             }
             

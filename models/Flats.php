@@ -7,6 +7,7 @@
     use app\models\NotesFlat;
     use app\models\PersonalAccount;
     use app\models\Clients;
+    use app\helpers\FormatHelpers;
 
 /**
  * Квартиры
@@ -114,9 +115,11 @@ class Flats extends ActiveRecord
     public function getFullAdress() {
         
         $adress = Flats::find()
-                ->joinWith(['house']);
+                ->with(['house'])
+                ->one();
         
-        return $adress;
+        return FormatHelpers::formatFullAdress(
+                $adress->house->houses_gis_adress, $adress->house->houses_number, false, false, $adress->flats_number);
     }
     
     /**

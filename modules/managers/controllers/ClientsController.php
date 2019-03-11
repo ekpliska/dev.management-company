@@ -11,8 +11,6 @@
     use app\models\PersonalAccount;
     use app\models\Rents;
     use app\modules\managers\models\AddRent;
-    use app\modules\managers\models\form\CounterIndicationsForm;
-    use app\models\CommentsToCounters;
     use app\modules\managers\models\searchForm\searchClients;
     use app\models\PaidServices;
 

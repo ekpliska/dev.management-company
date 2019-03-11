@@ -1091,7 +1091,7 @@ $(document).ready(function() {
     $('.estate_note_message__yes').on('click', function() {
         var flatId = $(this).data('flat');
         $.ajax({
-            url: 'take-off-status-debtor',
+            url: '/managers/housing-stock/take-off-status-debtor',
             method: 'POST',
             data: {
                 flatId: flatId,
