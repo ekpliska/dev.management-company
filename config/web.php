@@ -185,7 +185,15 @@ $config = [
                         'POST sign-up/<step>' => 'sign-up',
                     ]
                 ],
-//                ['class' => 'yii\rest\UrlRule', 'pluralize'=>false, 'controller' => 'restv1/contacts'],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'pluralize' => false,
+                    'controller' => 'v1/requests',
+                    'extraPatterns' => [
+                        'GET view/<request_id>' => 'view',
+                        'POST /' => 'index',
+                    ]
+                ],
                 
             ],
         ],

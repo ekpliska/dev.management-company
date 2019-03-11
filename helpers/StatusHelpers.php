@@ -44,7 +44,7 @@ class StatusHelpers {
             $btn_css = '<span class="' . $css_classes[1] . '">' . $status_name . '</span>';
         } elseif ($status == StatusRequest::STATUS_PERFORM) {
             $btn_css = '<span class="' . $css_classes[2] . '">' . $status_name . '</span>';
-        } elseif ($status == StatusRequest::STATUS_FEEDBAK) {
+        } elseif ($status == StatusRequest::STATUS_FEEDBACK) {
             $btn_css = '<span class="' . $css_classes[3] . '">' . $status_name . '</span>';
         } elseif ($status == StatusRequest::STATUS_CLOSE) {
             $btn_css = '<span class="' . $css_classes[4] . '">' . $status_name . '</span>';
@@ -91,7 +91,7 @@ class StatusHelpers {
             $btn_css = '<span class="' . $css_classes[1] . '">' . '<span>' . $status_name .  '</span><span>' . $date_full . '</span></span>'; 
         } elseif ($status == StatusRequest::STATUS_PERFORM) {
             $btn_css = '<span class="' . $css_classes[2] . '">' . '<span>' . $status_name .  '</span><span>' . $date_full . '</span></span>';
-        } elseif ($status == StatusRequest::STATUS_FEEDBAK) {
+        } elseif ($status == StatusRequest::STATUS_FEEDBACK) {
             $btn_css = '<span class="' . $css_classes[3] . '">' . '<span>' . $status_name .  '</span><span>' . $date_full . '</span></span>';
         } elseif ($status == StatusRequest::STATUS_CLOSE) {
             $btn_css = '<span class="' . $css_classes[4] . '">' . '<span>' . $status_name .  '</span><span>' . $date_full . '</span></span>';

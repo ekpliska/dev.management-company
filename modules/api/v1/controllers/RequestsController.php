@@ -8,6 +8,7 @@
     use yii\filters\auth\HttpBearerAuth;
     use yii\web\ServerErrorHttpException;
     use app\modules\api\v1\models\Requests;
+    use app\modules\api\v1\models\RequestForm;
     
 
 /**
@@ -26,7 +27,7 @@ class RequestsController extends Controller
         
         $behaviors['access'] = [
             'class' => AccessControl::className(),
-            'only' => ['create', 'view'],
+            'only' => ['index', 'create', 'view'],
             'rules' => [
                 [
                     'allow' => true,
@@ -66,6 +67,16 @@ class RequestsController extends Controller
         $requests_list = Requests::getAllRequests($data_post['account']);
         
         return $requests_list;
+        
+    }
+    
+    /*
+     * Просмотр отдельной заявки
+     */
+    public function actionView($request_id) {
+        
+        $request = Requests::findRequestByID($request_id);
+        return $request;
         
     }
 
