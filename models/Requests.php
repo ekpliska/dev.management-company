@@ -12,6 +12,7 @@
     use app\models\StatusRequest;
     use app\models\Image;
     use app\models\Employees;
+    use app\models\PersonalAccount;
 
 /**
  * Заяки
@@ -123,6 +124,13 @@ class Requests extends ActiveRecord
      */
     public function getEmployeeDispatcher() {
         return $this->hasOne(Employees::className(), ['employee_id' => 'requests_dispatcher_id']);
+    }
+    
+    /*
+     * Связь с таблицей Лицевой счет
+     */
+    public function getPersonalAccount() {
+        return $this->hasOne(PersonalAccount::className(), ['account_id' => 'requests_account_id']);
     }
         
     /*

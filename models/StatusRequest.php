@@ -46,6 +46,19 @@ class StatusRequest {
             self::STATUS_CLOSE => 'Закрыто',
         ];       
     }    
+
+    /*
+     * Массив статусов заявок для пользователя
+     */
+    public static function getUserRequests() {
+        return [
+            self::STATUS_NEW => 'new',
+            self::STATUS_IN_WORK => 'in_work',
+            self::STATUS_PERFORM => 'perform',
+            self::STATUS_FEEDBAK => 'feedbak',
+            self::STATUS_CLOSE => 'close',
+        ];       
+    }        
     
     /*
      * Получить название статуса по его номеру

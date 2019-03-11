@@ -7,6 +7,7 @@
     use yii\filters\auth\HttpBasicAuth;
     use yii\filters\auth\HttpBearerAuth;
     use yii\web\ServerErrorHttpException;
+    use app\modules\api\v1\models\Requests;
     
 
 /**
@@ -40,10 +41,40 @@ class RequestsController extends Controller
     public function verbs() {
         
         return [
+            'index' => ['post'],
             'create' => ['post'], 
             'view' => ['get'],
         ];
-    }    
+    }
+    
+    /*
+     * Получение всех заявок собсвенника
+     * по указанному лицевому счету
+     * 
+     * {"account": "1"}
+     */
+    public function actionIndex() {
+        
+        $data_post = Yii::$app->getRequest()->getBodyParams();
+        
+        if (empty($data_post['account'])) {
+            return [
+                'success' => false,
+                'message' => 'Не указан лицевой счет',
+            ];
+        }
+        $requests_list = Requests::getAllRequests($data_post['account']);
+        
+//        if (empty($requests_list)) {
+//            return [
+//                'success' => false,
+//                'message' => 'Указанный лицевой счет не содержит заявок',
+//            ];
+//        }
+        
+        
+        
+    }
 
     /*
      * Создание Заявки
