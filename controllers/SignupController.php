@@ -194,7 +194,7 @@ class SignupController extends Controller {
                 return ['success' => false, 'message' => $result];
             }
             Yii::$app->session->set('sms_code', $sms_code);
-            return ['success' => true];
+            return ['success' => true, 'sms_code' => $sms_code];
         }
         
     }

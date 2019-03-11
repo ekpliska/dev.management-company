@@ -113,14 +113,14 @@ class ClientAPI extends Object {
         
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/json","Authorization: OAuth 2.0 token here"));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/json", "charset=UTF-8"));
+        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
         
-//        curl_setopt($c, CURLOPT_CONNECTTIMEOUT, 5);
-//        curl_setopt($c, CURLOPT_TIMEOUT, 30);
-//        curl_setopt($c, CURLOPT_SSL_VERIFYPEER, 0);
         
         $result = curl_exec($ch);
 
