@@ -82,18 +82,13 @@ class m180903_073459_table_rbac_init extends Migration
                 ['dispatcher', '1', 'Сотрудник (Диспетчер)', NULL, NULL, time(), time()],
                 ['specialist', '1', 'Специалист', NULL, NULL, time(), time()],
                 ['administrator', '1', 'Администратор', NULL, NULL, time(), time()],
-                
                 ['ParticipantToVote', '2', 'Участие в голосовании', NULL, NULL, time(), time()],
                 ['CreateAccount', '2', 'Создание лицевого счета', NULL, NULL, time(), time()],
-                
                 ['CreateNewsDispatcher', '2', 'Добавление новостей', NULL, NULL, time(), time()],
-                
                 ['ClientsView', '2', 'Просмотр раздела Собственники', NULL, NULL, time(), time()],
                 ['ClientsEdit', '2', 'Редактирование учетных записей Собственников', NULL, NULL, time(), time()],
                 ['EmployeesView', '2', 'Просмотр раздела Сотрудники (Диспетчеры, Специалисты)', NULL, NULL, time(), time()],
                 ['EmployeesEdit', '2', 'Редактирование учетных записей Сотрудников (Диспетчеры, Специалисты)', NULL, NULL, time(), time()],
-//                ['ServicesView', '2', 'Просмотр раздела Услуги', NULL, NULL, time(), time()],
-//                ['ServicesEdit', '2', 'Редактирование раздела Услуги', NULL, NULL, time(), time()],
                 ['RequestsView', '2', 'Просмотр раздела Заявки', NULL, NULL, time(), time()],
                 ['RequestsEdit', '2', 'Редактирование раздела Заявки', NULL, NULL, time(), time()],
                 ['PaidRequestsView', '2', 'Просмотр раздела Заявки на платные услуги', NULL, NULL, time(), time()],
@@ -110,6 +105,30 @@ class m180903_073459_table_rbac_init extends Migration
                 ['SettingsEdit', '2', 'Редактирование раздела Настройки', NULL, NULL, time(), time()],
             ]
         );
+        
+        // Добавляем роль для Администратора
+        $this->batchInsert($auth_manager->assignmentTable, 
+                ['item_name', 'user_id', 'created_at'], [
+                    ['administrator', 1, time()],
+                    ['ClientsView', 1, time()],
+                    ['ClientsEdit', 1, time()],
+                    ['EmployeesView', 1, time()],
+                    ['EmployeesEdit', 1, time()],
+                    ['RequestsView', 1, time()],
+                    ['RequestsEdit', 1, time()],
+                    ['PaidRequestsView', 1, time()],
+                    ['PaidRequestsEdit', 1, time()],
+                    ['NewsView', 1, time()],
+                    ['NewsEdit', 1, time()],
+                    ['VotingsView', 1, time()],
+                    ['VotingsEdit', 1, time()],
+                    ['EstatesView', 1, time()],
+                    ['EstatesEdit', 1, time()],
+                    ['DesignerView', 1, time()],
+                    ['DesignerEdit', 1, time()],
+                    ['SettingsView', 1, time()],
+                    ['SettingsEdit', 1, time()]
+        ]);
         
         
         // Права

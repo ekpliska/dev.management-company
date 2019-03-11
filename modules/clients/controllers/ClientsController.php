@@ -57,7 +57,7 @@ class ClientsController extends AppClientsController
         
         return $this->render('index', [
             'news' => $news,
-            'pages' => $pages,
+            'pages' => isset($pages) ? $pages : null,
         ]);
     }
     
