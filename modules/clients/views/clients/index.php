@@ -26,7 +26,7 @@ $this->title = Yii::$app->params['site-name'] . "Главная";
 
                 <div class="news-card-preview-body">
                     <p class="card-text news-card-preview-text ">
-                        <?= FormatHelpers::shortTextNews($post['news_text'], 25) ?>
+                        <?= FormatHelpers::shortTextNews($post['news_text'], 20) ?>
                     </p>
                 </div>
             </div>

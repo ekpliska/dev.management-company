@@ -58,7 +58,7 @@ class Rents extends ActiveRecord
             ],
             
             ['rents_mobile', 'unique',
-                'targetClass' => self::className(),
+                'targetClass' => User::className(),
                 'targetAttribute' => 'user_mobile',
                 'message' => 'Пользователь с введенным номером мобильного телефона в системе уже зарегистрирован',
             ],

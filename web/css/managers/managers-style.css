@@ -1067,7 +1067,7 @@ span.status-vote-1::before {
     cursor: default;
 }
 .news-item__text {
-    padding: 20px;
+    padding: 20px 10px;
     position: relative;
     text-align: justify;
     letter-spacing: 0.2px;

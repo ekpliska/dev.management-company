@@ -33,7 +33,7 @@
             <?= Html::img("{$advert['preview']}", ['class' => 'news_preview']) ?>
         </div>
         <div class="news-item__text">
-            <?= FormatHelpers::shortTextNews($advert['text'], 40) ?>
+            <?= FormatHelpers::shortTextNews($advert['text'], 30) ?>
         </div>
     </div>
 </div>
