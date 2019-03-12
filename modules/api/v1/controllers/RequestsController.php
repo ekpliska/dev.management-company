@@ -94,15 +94,12 @@ class RequestsController extends Controller
         
         $model = new RequestForm();
         $model->load(Yii::$app->getRequest()->getBodyParams(), '');
-        if ($result = $model->save()) {
-            return [
-                'success' => true,
-                'request_id' => $result,
-            ];
-        } elseif (!$model->hasErrors()) {
+        if ($model->save()) {
+            return ['success' => true];
+        } elseif ($model->hasErrors()) {
             throw new ServerErrorHttpException('Ошибка создания создания заявки.');
         }
-        return $model;
+        return ['success' => false];
     }
     
     

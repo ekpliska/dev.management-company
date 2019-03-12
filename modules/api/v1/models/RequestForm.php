@@ -61,10 +61,7 @@ class RequestForm extends Model {
             $account_info = PersonalAccount::findOne(['account_number' => $this->account]);
             
             if (empty($type_request_name) || empty($account_info)) {
-                return [
-                    'success' => false,
-                    'message' => 'Ошибка формирования заявки',
-                ];
+                return false;
             }
             
             $add_request = new Requests();
@@ -80,23 +77,17 @@ class RequestForm extends Model {
             $add_request->requests_account_id = $account_info->account_id;
 
             if(!$add_request->save()) {
-                return [
-                    'success' => false,
-                    'message' => 'Ошибка формирования заявки',
-                ];
+                return false;
             }
             
             // Сохраняем пришедшие изображения 
-            if (!$this->uploadImage($this->gallery, $add_request->requests_id)) {
-                return [
-                    'success' => false,
-                    'message' => 'Масимальное количество загружаемых файлов: 4 файла.',
-                ];
+            if (!empty($this->gallery) && !$this->uploadImage($this->gallery, $add_request->requests_id)) {
+                return false;
             }
                 
             $transaction->commit();
             
-            return $add_request->requests_ident;
+            return true;
                 
         } catch (Exception $ex) {
             $transaction->rollBack();
@@ -118,7 +109,7 @@ class RequestForm extends Model {
         // Создаем директорию, для сохранения вложений
         $folder_path = self::DIR_NAME . "/Requests{$request_id}/";
         if (!file_exists($folder_path)) { 
-            mkdir($path, 0777);
+            mkdir($folder_path, 0777);
         }
         
         foreach ($images_srt as $key => $image) {
