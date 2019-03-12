@@ -26,7 +26,9 @@ $this->params['breadcrumbs'][] = 'Платежи';
         <?= DatePicker::widget([
                 'name' => 'date_start-period-pay',
                 'type' => DatePicker::TYPE_INPUT,
-                'value' => 'С',
+                'options' => [
+                    'placeholder' => 'Указать период с',
+                ],
                 'pluginOptions' => [
                     'autoclose'=>true,
                     'format' => 'dd-mm-yyyy'
@@ -39,7 +41,9 @@ $this->params['breadcrumbs'][] = 'Платежи';
         <?= DatePicker::widget([
                 'name' => 'date_end-period-pay',
                 'type' => DatePicker::TYPE_INPUT,
-                'value' => 'По',
+                'options' => [
+                    'placeholder' => 'Указать период по',
+                ],
                 'pluginOptions' => [
                     'autoclose'=>true,
                     'format' => 'dd-mm-yyyy'

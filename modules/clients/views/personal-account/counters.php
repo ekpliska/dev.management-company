@@ -33,7 +33,9 @@ $this->params['breadcrumbs'][] = 'Показания приборов учета
                 'id' => 'date_start-period-counter',
                 'name' => 'date_start-period-pay',
                 'type' => DatePicker::TYPE_INPUT,
-                'value' => date('F-Y'),
+                'options' => [
+                    'placeholder' => Yii::$app->formatter->asDate(time(), 'LLLL-yyyy')
+                ],
                 'language' => 'ru',
                 'pluginOptions' => [
                     'autoclose'=>true,
