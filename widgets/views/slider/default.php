@@ -36,7 +36,7 @@
                 <?php endif; ?>
                 
                 <h3 class="slider-title">
-                    <?= Html::img('/images/main/H-logo.svg', ['class' => 'slider-title__img', 'alt' => 'Slider title']) ?>
+                    <?= Html::img('/images/main/h_logo.svg', ['class' => 'slider-title__img', 'alt' => 'Slider title']) ?>
                 </h3>
                 
                 <p class="slide-txt-block">
