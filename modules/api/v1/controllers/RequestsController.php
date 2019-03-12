@@ -86,8 +86,8 @@ class RequestsController extends Controller
      * {
      *      "account": "1234567890", 
      *      "type_request": "Освещение", 
-     *      "body_request": "Текст Заявки",
-     *      "user_mobile": "+7 (999) 999-99-99",
+     *      "request_body": "Текст Заявки",
+     *      "gallery": {"1": "image_1", "2": "image_2"}
      * }
      */
     public function actionCreate() {

@@ -3,6 +3,8 @@
     namespace app\modules\api\v1\models;
     use Yii;
     use yii\base\Model;
+    use yii\behaviors\TimestampBehavior;
+    use app\models\Image;
     use app\models\TypeRequests;
     use app\models\Requests;
     use app\models\PersonalAccount;
@@ -11,6 +13,14 @@
  * Добавление заявки
  */
 class RequestForm extends Model {
+
+    const DIR_NAME = 'upload/store/Requests';
+    
+    public function behaviors() {
+        return [
+            TimestampBehavior::className(),
+        ];
+    }    
     
     public $account;
     public $type_request;
@@ -26,6 +36,7 @@ class RequestForm extends Model {
             ['account', 'integer'],
             ['type_request', 'string', 'max' => 70],
             ['request_body', 'string', 'max' => 255],
+            ['gallery', 'safe'],
             
         ];
     }
@@ -65,12 +76,21 @@ class RequestForm extends Model {
             $add_request->requests_ident = $request_numder;
             $add_request->requests_type_id = $type_request_name->type_requests_id;
             $add_request->requests_comment = $this->request_body;
-            $add_request->requests_phone = $this->rents_mobile;
+            $add_request->requests_phone = Yii::$app->user->identity->user_mobile;
+            $add_request->requests_account_id = $account_info->account_id;
 
             if(!$add_request->save()) {
                 return [
                     'success' => false,
                     'message' => 'Ошибка формирования заявки',
+                ];
+            }
+            
+            // Сохраняем пришедшие изображения 
+            if (!$this->uploadImage($this->gallery, $add_request->requests_id)) {
+                return [
+                    'success' => false,
+                    'message' => 'Масимальное количество загружаемых файлов: 4 файла.',
                 ];
             }
                 
@@ -83,6 +103,42 @@ class RequestForm extends Model {
             // $ex->getMessage();
         }
         
+    }
+    
+    /*
+     * Загрузка на сервер вложений к заявке
+     */
+    private function uploadImage($images_srt, $request_id) {
+        
+        // Количество загружаемых файлов 4
+        if (count($images_srt) > 4 ) {
+            return false;
+        }
+
+        // Создаем директорию, для сохранения вложений
+        $folder_path = self::DIR_NAME . "/Requests{$request_id}/";
+        if (!file_exists($folder_path)) { 
+            mkdir($path, 0777);
+        }
+        
+        foreach ($images_srt as $key => $image) {
+            // Конвертируем пришедший файл из base64
+            $data = base64_decode($image); 
+            $source_img = imagecreatefromstring($data);
+            $rotated_img = imagerotate($source_img, 0, 0);
+            $file_name = uniqid(). '.png';
+            $file_path = $folder_path . $file_name;
+            // Записываем в БД пути загруженных вложений
+            $image = new Image();
+            $image->filePath = "Requests/Requests{$request_id}/{$file_name}";
+            $image->itemId = $request_id;
+            $image->modelName = 'Requests';
+            $image->save(false);
+            $imageSave = imagejpeg($rotated_img, $file_path, 70);
+            imagedestroy($source_img);
+        }
+        
+        return true;
         
     }
     
