@@ -9,10 +9,6 @@ $this->title = 'Customers | Вход';
     <!--<p class="start-page__title">Быcтро и удобно</p>-->
     <div class="start-page__welcome-txt">
         <?= $welcome_text ?>
-        <?php
-            $client = "Викторович, Илья";
-            echo preg_replace('/[^a-zа-яё\ \d]/ui', '', $client);
-        ?>
     </div>
     
     <div class="start-page__btn-block">

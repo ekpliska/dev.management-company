@@ -152,7 +152,7 @@ button:hover {
 
 /* Слайдер на главной странице */
 .carousel-caption {
-    top: 0;
+    top: 35px;
     font-family: "Mplus 1p";
 }
 .general-slider,
@@ -184,10 +184,14 @@ button:hover {
     padding: 0 150px;
 }
 .slider-title {
-    font-size: 32px;
+    background-size: 185px;
     letter-spacing: 1.4px;
     line-height: 47px;
-    margin-top: 79px; 
+    margin-top: 55px;
+    font-size: 32px;
+}
+.slider-title > img {
+    width: 195px;
 }
 .app-btn-group a {
     padding: 7px 30px 7px 50px;
@@ -211,6 +215,9 @@ button:hover {
     background-repeat: no-repeat;
     background-size: 20px;
     background-position: 20px center;
+}
+.carousel-indicators {
+    bottom: 20%;
 }
 .carousel-indicators .active {
     width: 20px;

@@ -32,12 +32,13 @@
             <div class="carousel-caption">
                 
                 <?php if ($slider['button_1'] && $slider['button_2']) : ?>
-                    <?= Html::img('/images/slider/ELSA_product_icon.png', ['class' => 'slider-product-icon', 'alt' => 'Product icon']) ?>
+                    <?= Html::img('/images/slider/ELSA_product_icon.png', ['class' => 'slider-product-icon', 'alt' => 'App icon']) ?>
                 <?php endif; ?>
                 
                 <h3 class="slider-title">
-                    <?= !empty($slider['slider_title']) ? $slider['slider_title'] : '' ?>
+                    <?= Html::img('/images/main/H-logo.svg', ['class' => 'slider-title__img', 'alt' => 'Slider title']) ?>
                 </h3>
+                
                 <p class="slide-txt-block">
                     <?= !empty($slider['slider_text']) ? $slider['slider_text'] : '' ?>
                 </p>
