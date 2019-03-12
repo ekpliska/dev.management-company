@@ -305,6 +305,7 @@ class Requests extends ActiveRecord
         } else {
             $this->date_closed = null;
             $this->requests_grade = null;
+            $request_answers = RequestAnswers::deleteAll(['anwswer_request_id' => $this->requests_id]);
         }
         
         return $this->save(false) ? true : false;

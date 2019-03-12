@@ -13,7 +13,7 @@ class SendAnswers extends RequestAnswers {
     /*
      * Отправка оценки
      */
-    public function send($data_answers) {
+    public static function send($data_answers) {
         
         if (empty($data_answers['request_id'])) {
             return false;

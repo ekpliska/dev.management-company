@@ -140,9 +140,7 @@ class RequestsController extends Controller
             return false;
         }
         
-        $answers = new SendAnswers();
-        
-        if (!$answers->send($post_data)) {
+        if (!SendAnswers::send($post_data)) {
             return ['success' => false];
         }
         return ['success' => true];

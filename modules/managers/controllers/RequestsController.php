@@ -2,11 +2,9 @@
 
     namespace app\modules\managers\controllers;
     use Yii;
-    use yii\data\ActiveDataProvider;
     use yii\helpers\ArrayHelper;
     use app\modules\managers\controllers\AppManagersController;
     use app\models\TypeRequests;
-    use app\models\CategoryServices;
     use app\modules\managers\models\form\RequestForm;
     use app\modules\managers\models\form\PaidRequestForm;
     use app\modules\managers\models\Requests;
