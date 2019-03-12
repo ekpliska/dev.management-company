@@ -1943,20 +1943,20 @@ p.right {
     box-shadow: 0px 1px 4px 6px rgba(0,101,255,0.28);
 }
 .req-badge-work {
-    border: 2px solid #7c7c7c;
-    box-shadow: 0px 1px 4px 6px rgba(255,125,125,0.26);
+    border: 2px solid #ff7d7d;
+    box-shadow: 0px 1px 4px 6px rgba(252,193,193,0.83);
 }
 .req-badge-complete {
-    border: 2px solid #1fd68d;
-    box-shadow: 0px 1px 4px 6px rgba(56,231,161,0.54);
+    border: 2px solid #7c7c7c;
+    box-shadow: 0px 1px 4px 6px rgba(255,125,125,0.26);    
 }
 .req-badge-rectification {
     border: 2px solid #e17dff;
     box-shadow: 0px 1px 4px 6px rgba(225,125,255,0.42);
 }
 .req-badge-close {
-    border: 2px solid #ff7d7d;
-    box-shadow: 0px 1px 4px 6px rgba(252,193,193,0.83);
+    border: 2px solid #1fd68d;
+    box-shadow: 0px 1px 4px 6px rgba(56,231,161,0.54);    
 }
 .req-badge-reject {
     border: 2px solid #5f697a
@@ -3370,11 +3370,11 @@ a.sub-menu-item:hover {
     box-shadow: 0px 1px 4px 4px rgba(0,101,255,0.28);
 }
 .req-bange-work {
-    border: 2px solid #7c7c7c;
+    border: 2px solid #ff7d7d;
 }
 .req-bange-work:hover,
 .req-bange-work:focus {
-    box-shadow: 0px 1px 4px 4px rgba(255,125,125,0.26);    
+    box-shadow: 0px 1px 4px 4px rgba(252,193,193,0.83);
 }
 .req-bange-rectification {
     border: 2px solid #e17dff;
@@ -3384,18 +3384,18 @@ a.sub-menu-item:hover {
     box-shadow: 0px 1px 4px 4px rgba(225,125,255,0.42);
 }
 .req-bange-complete {
-    border: 2px solid #1fd68d;
+    border: 2px solid #7c7c7c;    
 }
 .req-bange-complete:hover,
 .req-bange-complete:focus {
-    box-shadow: 0px 1px 4px 4px rgba(56,231,161,0.54);
+    box-shadow: 0px 1px 4px 4px rgba(255,125,125,0.26);    
 }
 .req-bange-close {
-    border: 2px solid #FF7D7D;
+    border: 2px solid #1fd68d;
 }
 .req-bange-close:hover,
 .req-bange-close:focus {
-    box-shadow: 0px 1px 4px 4px rgba(252,193,193,0.83);    
+    box-shadow: 0px 1px 4px 4px rgba(56,231,161,0.54);
 }
 /* Конец Дополнительное навигационное меню, заявки */
 
