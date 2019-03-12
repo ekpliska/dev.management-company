@@ -171,9 +171,9 @@ class Voting extends ActiveRecord
     
     public function getImage() {
         if (empty($this->voting_image)) {
-            return Yii::getAlias('/web' . '/images/not_found.png');
+            return Yii::getAlias('@web') . '/images/not_found.png';
         }
-        return Yii::getAlias('/web') . $this->voting_image;
+        return Yii::getAlias('@web') . $this->voting_image;
     }
     
     /*

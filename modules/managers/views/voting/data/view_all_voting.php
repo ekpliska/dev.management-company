@@ -16,7 +16,7 @@
     <div class="vote-card row">
         <div class="col-lg-3 col-md-12 col-sm-12 col-md-12">
             <div class="vote-card__image">
-                <?= Html::img("/web/{$voting['voting_image']}", ['alt' => $voting['voting_title']]) ?>
+                <?= Html::img(Yii::getAlias('@web') . "{$voting['voting_image']}", ['alt' => $voting['voting_title']]) ?>
             </div>
         </div>
         <div class="col-lg-9 col-md-12 col-sm-12 col-md-12">

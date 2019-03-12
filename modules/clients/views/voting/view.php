@@ -17,6 +17,7 @@
 $this->title = Yii::$app->params['site-name'] . $voting['voting_title'];
 $this->params['breadcrumbs'][] = ['label' => 'Опрос', 'url' => ['voting/index']];
 $this->params['breadcrumbs'][] = $voting['voting_title'];
+$_answer = '';
 ?>
 
 <?= Breadcrumbs::widget([
@@ -28,7 +29,7 @@ $this->params['breadcrumbs'][] = $voting['voting_title'];
 
 <div class="view-voting row">
     <div class="preview-voting">
-        <?= Html::img("/web{$voting['voting_image']}", ['class' => 'voting-image', 'alt' => 'preview-vote']) ?>
+        <?= Html::img(Yii::getAlias('@web') . $voting['voting_image'], ['class' => 'voting-image', 'alt' => 'preview-vote']) ?>
         <div class="voting-info">
             <span><?= FormatHelpers::statusVotingInView($voting['status']) ?></span>
             <span><?= FormatHelpers::numberOfDaysToFinishVote($voting['voting_date_start'], $voting['voting_date_end']) ?></span>

@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = 'Опрос';
 
         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
             <div class="vote-card-preview">
-                <?= Html::img("/web{$voting['voting_image']}", ['class' => 'vote-card-img']) ?>
+                <?= Html::img(Yii::getAlias('@web') . $voting['voting_image'], ['class' => 'vote-card-img']) ?>
                 <span class="vote-card_date-end">
                     <?= FormatHelpers::numberOfDaysToFinishVote($voting['voting_date_start'], $voting['voting_date_end']) ?>
                 </span>

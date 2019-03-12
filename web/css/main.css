@@ -2746,7 +2746,8 @@ p.date-start-vote {
     padding-right: 5px;
 }
 .voting-body_left {
-    min-height: 700px;
+    /*min-height: 700px;*/
+    height: 100vh;
 }
 .voting-title-block {
     position: absolute;

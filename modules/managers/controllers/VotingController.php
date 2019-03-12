@@ -109,7 +109,7 @@ class VotingController extends AppManagersController {
             // Сохраняем модель
             if ($model->save()) {
                 Yii::$app->session->setFlash('success', ['message' => 'Новое голосование было успешно создано']);
-                return $this->redirect(['view', 'voting' => $model->voting->voting_id]);
+                return $this->redirect(['view', 'voting_id' => $model->voting->voting_id]);
             } else {
                 Yii::$app->session->setFlash('error', ['message' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз']);
                 return $this->redirect(Yii::$app->request->referrer);
@@ -160,7 +160,7 @@ class VotingController extends AppManagersController {
                 return $this->redirect(Yii::$app->request->referrer);
             }
             Yii::$app->session->setFlash('success', ['message' => 'Изменения были успешно сохранены']);
-            return $this->redirect(['view', 'voting' => $model->voting->voting_id]);
+            return $this->redirect(['view', 'voting_id' => $model->voting->voting_id]);
         }
         return $this->render('view', [
             'model' => $model,
