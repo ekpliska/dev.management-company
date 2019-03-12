@@ -7,9 +7,10 @@
     use yii\filters\auth\HttpBasicAuth;
     use yii\filters\auth\HttpBearerAuth;
     use yii\web\ServerErrorHttpException;
-    use app\modules\api\v1\models\Requests;
-    use app\modules\api\v1\models\RequestForm;
-    
+    use app\modules\api\v1\models\request\Requests;
+    use app\modules\api\v1\models\request\RequestForm;
+    use app\modules\api\v1\models\request\RequestQuestions;
+    use app\modules\api\v1\models\request\SendAnswers;
 
 /**
  * Заявки
@@ -45,6 +46,8 @@ class RequestsController extends Controller
             'index' => ['post'],
             'create' => ['post'], 
             'view' => ['get'],
+            'get-questions' => ['get'],
+            'send-grade' => ['post'],
         ];
     }
     
@@ -102,5 +105,49 @@ class RequestsController extends Controller
         return ['success' => false];
     }
     
+    /*
+     * Оценка заявки
+     */
+    public function actionGetQuestions($type_name) {
+        
+        if (empty($type_name)) {
+            return false;
+        }
+        $question_list = RequestQuestions::getQuestions($type_name);
+        return $question_list;
+        
+    }
+    
+    /*
+     * Отправка оценки
+     * {
+     *      "request_id": "1",
+     *      "answers": {
+     *          "question_id": {
+     *              "value": "1",
+     *          },
+     *          "question_id": {
+     *              "value": "0",
+     *          }
+     *      }
+     * }
+     */
+    public function actionSendGrade() {
+        
+        $post_data = Yii::$app->getRequest()->getBodyParams();
+        
+        if (empty($post_data)) {
+            return false;
+        }
+        
+        $answers = new SendAnswers();
+        
+        if (!$answers->send($post_data)) {
+            return ['success' => false];
+        }
+        return ['success' => true];
+        
+        
+    }
     
 }

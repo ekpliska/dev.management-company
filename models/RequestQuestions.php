@@ -44,6 +44,9 @@ class RequestQuestions extends ActiveRecord {
         return $this->hasOne(RequestAnswers::className(), ['anwswer_question_id' => 'question_id']);
     }    
     
+    /*
+     * Получить список вопросов для указанного Вида заявки
+     */
     public static function getAllQuestions($type_request) {
         
         return self::find()

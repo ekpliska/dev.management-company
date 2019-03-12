@@ -1,6 +1,6 @@
 <?php
 
-    namespace app\modules\api\v1\models;
+    namespace app\modules\api\v1\models\request;
     use app\models\Requests as BaseRequests;
     use app\models\StatusRequest;
 
