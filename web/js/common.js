@@ -190,10 +190,10 @@ $('#send-request-to-sms').on('click', function() {
                 phoneNumber: phoneNumber,
             },
             success: function (data, textStatus, jqXHR) {
-                console.log(data);
+//                console.log(data);
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                console.log(textStatus);                
+//                console.log(textStatus);
             }
         });
         $(this).hide();
