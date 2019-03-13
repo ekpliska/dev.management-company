@@ -88,11 +88,11 @@ class PaidServicesController extends AppClientsController {
         
         Yii::$app->response->format = Response::FORMAT_JSON;
         
-        if (is_numeric($category)) {
+        $category = Yii::$app->request->post('categoryId');
+        if (!is_numeric($category)) {
             return ['success' => false];
         }
         
-        $category = Yii::$app->request->post('categoryId');
         if (Yii::$app->request->isPost) {
             $pay_services = Services::getPayServices($category);
             $data = $this->renderPartial('data/service-lists', [
