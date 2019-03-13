@@ -21,15 +21,9 @@ class ServiceForm extends Model {
         return [
             [[
                 'service_name', 'service_category',
-                'service_price', 'service_unit'], 'required'],
+                'service_price', 'service_unit'], 'required', 'message' => 'Поле обязательно для заполнения'],
             
             [['service_name', 'service_description'], 'string', 'min' => 3, 'max' => 255],
-            
-            [['service_name'],
-                'match', 
-                'pattern' => '/^[А-Яа-я\0-9\ \_\-]+$/iu', 
-                'message' => 'Вы используете запрещенные символы',
-            ],
             
             ['service_price', 'double', 'min' => 00.00, 'max' => 100000.00, 'message' => 'Цена услуги указана не верно. Пример: 790.70'],
             ['service_price', 'validatePrice'],

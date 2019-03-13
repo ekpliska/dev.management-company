@@ -25,17 +25,12 @@ class CategoryServices extends ActiveRecord
     public function rules()
     {
         return [
-            ['category_name', 'required'],
+            ['category_name', 'required', 'message' => 'Поле обязательно для заполнения'],
             [['category_name'], 'string', 'min' => '3', 'max' => 100],
             ['category_name', 'unique', 
                 'targetClass' => self::className(),
                 'targetAttribute' => 'category_name',
                 'message' => 'Указанная категория существует',
-            ],
-            [['category_name'],
-                'match', 
-                'pattern' => '/^[А-Яа-я\0-9\ \_\-]+$/iu', 
-                'message' => 'Вы используете запрещенные символы',
             ],
         ];
     }

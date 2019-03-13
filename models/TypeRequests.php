@@ -26,7 +26,7 @@ class TypeRequests extends ActiveRecord
     public function rules() {
         return [
             
-            ['type_requests_name', 'required'],
+            ['type_requests_name', 'required', 'message' => 'Поле обязательно для заполнения'],
             
             [['type_requests_name'], 'string', 'min' => 3, 'max' => 255],
         ];

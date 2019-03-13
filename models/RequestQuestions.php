@@ -23,7 +23,7 @@ class RequestQuestions extends ActiveRecord {
      */
     public function rules() {
         return [
-            [['type_request_id', 'question_text'], 'required'],
+            [['type_request_id', 'question_text'], 'required', 'message' => 'Поле обязательно для заполнения'],
             [['type_request_id'], 'integer'],
             [['question_text'], 'string', 'min' => 10, 'max' => 255],
             [['type_request_id'], 'exist', 'skipOnError' => true, 'targetClass' => TypeRequests::className(), 'targetAttribute' => ['type_request_id' => 'type_requests_id']],

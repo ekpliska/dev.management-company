@@ -32,7 +32,7 @@ class Services extends ActiveRecord {
                 'service_name',
                 'service_unit_id',
                 'service_price',
-                'service_description'], 'required'],
+                'service_description'], 'required', 'message' => 'Поле обязательно для заполнения'],
             
             [['service_category_id', 'service_unit_id'], 'integer'],
             
