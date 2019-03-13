@@ -194,6 +194,16 @@ $config = [
                         'POST /' => 'index',
                     ]
                 ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'pluralize' => false,
+                    'controller' => 'v1/paid-requests',
+                    'extraPatterns' => [
+                        'GET get-services/<category_id>' => 'get-services',
+                        'GET info-service/<service_id>' => 'info-service',
+                        'GET /' => 'index',
+                    ]
+                ],
                 
             ],
         ],

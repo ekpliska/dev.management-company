@@ -28,7 +28,7 @@ class RequestsController extends Controller
         
         $behaviors['access'] = [
             'class' => AccessControl::className(),
-            'only' => ['index', 'create', 'view'],
+            'only' => ['index', 'create', 'view', 'get-questions', 'send-grade'],
             'rules' => [
                 [
                     'allow' => true,
