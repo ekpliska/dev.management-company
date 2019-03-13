@@ -120,7 +120,7 @@ class Requests extends BaseRequests {
     public static function getRequestBySpecialist($emplotee_id) {
         
         $requestr_list = self::find()
-                ->select(['requests_id', 'requests_ident', 'status', 'created_at', 'type_requests_name'])
+                ->select(['requests_id', 'requests_ident', 'status', 'created_at', 'requests_type_id', 'type_requests_name'])
                 ->joinWith('typeRequest')
                 ->where(['requests_specialist_id' => $emplotee_id])
                 ->orderBy(['created_at' => SORT_DESC])
