@@ -32,12 +32,13 @@ class SendAnswers extends RequestAnswers {
         // Количество вопросов
         $count_answer = count($data_answers['answers']);
         
+        
         foreach ($data_answers['answers'] as $key => $answer) {
             $new_answer = new RequestAnswers();
             $new_answer->anwswer_question_id = $key;
             $new_answer->anwswer_request_id = $data_answers['request_id'];
-            $new_answer->answer_value = $answer['value'];
-            if ($answer['value'] == RequestAnswers::ANSWER_YES) {
+            $new_answer->answer_value = $answer;
+            if ($answer == RequestAnswers::ANSWER_YES) {
                 $_grade++;
             }
             $new_answer->save(false);

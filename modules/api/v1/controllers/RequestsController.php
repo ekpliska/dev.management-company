@@ -130,14 +130,13 @@ class RequestsController extends Controller
      * {
      *      "request_id": "1",
      *      "answers": {
-     *          "question_id": {
-     *              "value": "1"
-     *          },
-     *          "question_id": {
-     *              "value": "0"
-     *          }
-     *      }
+     *          "question_id": "1",
+     *          "question_id": "2"
+     *      },
+     *      "comment": "",
      * }
+     * 
+     * где, question_id - ID вопроса
      */
     public function actionSendGrade() {
         

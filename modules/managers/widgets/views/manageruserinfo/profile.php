@@ -14,6 +14,7 @@
         <?= Html::img('/images/navbar/user.svg') ?>
     </a>
     <ul class="dropdown-menu in_navbar">
+        <?php if(!Yii::$app->user->identity->user_login == 'administrator') : ?>
         <li class="user-info-box">
             <div class="row">
                 <div class="col-lg-5 col-sm-5 col-md-5 text-center">
@@ -40,10 +41,9 @@
                 </div>
             </div>
         </li>
+        <?php endif; ?>
         <li class="text-light dropdown_footer">
-            <div class="col-lg-6 col-sm-6 col-md-6 text-center">
-            </div>
-            <div class="col-lg-6 col-sm-6 col-md-6 text-center">
+            <div class="col-lg-12 col-sm-12 col-md-12 text-right">
                 <?= Html::a('Выйти <i class="fa fa-sign-out" aria-hidden="true"></i>', ['/site/logout'], [
                         'data' => [
                             'method' => 'post'], 

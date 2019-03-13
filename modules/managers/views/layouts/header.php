@@ -23,10 +23,8 @@
             <?= Html::img('/images/navbar/group_46.svg', ['alt' => 'image'])  ?>
         </a>
         <ul class="nav navbar-nav navbar-right user-notification">
-            <?php if(!Yii::$app->user->identity->user_login == 'administrator') : ?>
-                <?= ManagerUserInfo::widget() ?>
-                <?= Notifications::widget() ?>
-            <?php endif; ?>
+            <?= ManagerUserInfo::widget() ?>
+            <?= Notifications::widget() ?>
         </ul>
     </div>
     <?= SubMenu::widget(['view_name' => 'news']) ?>

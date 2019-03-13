@@ -23,7 +23,7 @@ class RequestQuestions extends BaseRequestQuestions {
         }
         
         foreach ($question_lists as $key => $question) {
-            $result[] = [
+            $result['questions'][] = [
                 'question_id' => $question['question_id'],
                 'question_text' => $question['question_text']
             ];
