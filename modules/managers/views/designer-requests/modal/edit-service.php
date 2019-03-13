@@ -27,7 +27,7 @@
 
 <div class="load_preview">
     <div class="text-center">
-        <?= Html::img($model->service_image, ['id' => 'photoPreview', 'class' => 'img-rounded']) ?>
+        <?= Html::img($model->service_image, ['id' => 'photoPreview-to-endit', 'class' => 'img-rounded']) ?>
     </div>
     <div class="upload-btn-wrapper">
         <?= $form->field($model, 'service_image', ['template' => '<label class="text-center btn-upload-cover" role="button">{input}{label}{error}</label>'])

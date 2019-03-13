@@ -95,7 +95,7 @@ class News extends ActiveRecord
             ['slug', 'string'],
             
             [['files'], 'file', 
-                'extensions' => 'doc, docx, pdf, xls, xlsx, ppt, pptx, txt', 
+                'extensions' => 'doc, docx, pdf, xls, xlsx, ppt, pptx, txt, jpg, jpeg', 
                 'maxFiles' => 4, 
                 'maxSize' => 256 * 1024,
             ],
