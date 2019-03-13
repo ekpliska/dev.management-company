@@ -143,7 +143,7 @@ class RequestsController extends Controller
         $post_data = Yii::$app->getRequest()->getBodyParams();
         
         if (empty($post_data)) {
-            return false;
+            return ['success' => false];
         }
         
         if (!SendAnswers::send($post_data)) {

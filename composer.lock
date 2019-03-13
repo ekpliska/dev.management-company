@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "04376bc85b9f88a4e1f306318eba79cd",
+    "content-hash": "ac80adc0a1b1f58aa7251aa48e921ca4",
     "packages": [
         {
             "name": "abeautifulsite/simpleimage",
@@ -556,6 +556,43 @@
             "time": "2018-11-05T12:32:51+00:00"
         },
         {
+            "name": "rubaxa/fileapi",
+            "version": "0.4.11",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/RubaXa/jquery.fileapi.git",
+                "reference": "5fc1013e103bb0931f5fbd18f15a9194ddf573d4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/RubaXa/jquery.fileapi/zipball/5fc1013e103bb0931f5fbd18f15a9194ddf573d4",
+                "reference": "5fc1013e103bb0931f5fbd18f15a9194ddf573d4",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Konstantin Lebedev",
+                    "email": "ibnRubaXa@gmail.com"
+                }
+            ],
+            "description": "jQuery plugin for FileAPI (multiupload, image upload, crop, resize and etc.)",
+            "homepage": "https://github.com/RubaXa/jquery.fileapi",
+            "keywords": [
+                "file upload",
+                "fileapi",
+                "jquery",
+                "multiupload",
+                "upload"
+            ],
+            "abandoned": true,
+            "time": "2015-09-11T15:56:14+00:00"
+        },
+        {
             "name": "swiftmailer/swiftmailer",
             "version": "v5.4.12",
             "source": {
@@ -608,6 +645,52 @@
                 "mailer"
             ],
             "time": "2018-07-31T09:26:32+00:00"
+        },
+        {
+            "name": "vova07/yii2-fileapi-widget",
+            "version": "0.1.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vova07/yii2-fileapi-widget.git",
+                "reference": "110086027b6da7755834ff93ebc4476ef7b10b15"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vova07/yii2-fileapi-widget/zipball/110086027b6da7755834ff93ebc4476ef7b10b15",
+                "reference": "110086027b6da7755834ff93ebc4476ef7b10b15",
+                "shasum": ""
+            },
+            "require": {
+                "rubaxa/fileapi": "*",
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "vova07\\fileapi\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Crudu Vasile",
+                    "email": "bazillio07@yandex.ru"
+                }
+            ],
+            "description": "The FileAPI widget for Yii2 framework.",
+            "keywords": [
+                "fileapi",
+                "files",
+                "multiupload",
+                "upload",
+                "widget",
+                "yii 2",
+                "yii2"
+            ],
+            "time": "2017-03-24T09:55:40+00:00"
         },
         {
             "name": "vova07/yii2-imperavi-widget",

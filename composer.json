@@ -23,7 +23,8 @@
         "kartik-v/yii2-widget-alert": "*",
         "kartik-v/yii2-widget-datepicker": "@dev",
         "vova07/yii2-imperavi-widget": "*",
-        "kartik-v/yii2-widget-datetimepicker": "dev-master"
+        "kartik-v/yii2-widget-datetimepicker": "dev-master",
+        "vova07/yii2-fileapi-widget": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
