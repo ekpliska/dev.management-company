@@ -93,7 +93,7 @@ class UserProfileCompany extends BaseObject {
      */
     public function getPhoto() {
         if (empty($this->_user['photo'])) {
-            return Yii::getAlias('@web') . 'images/no-avatar.jpg';
+            return Yii::getAlias('@web') . '/images/no-avatar.jpg';
         }
         return Yii::getAlias('@web') . $this->_user['photo'];
     }

@@ -12,7 +12,7 @@
         <?php 
             $form = ActiveForm::begin([
                 'id' => 'search-news-form',
-                'action' => ['index', 'section' => $section],
+                'action' => ['index'],
                 'method' => 'get',
                 'fieldConfig' => [
                     'template' => '{input}',

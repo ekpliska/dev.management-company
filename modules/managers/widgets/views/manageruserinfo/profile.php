@@ -14,9 +14,9 @@
         <?= Html::img('/images/navbar/user.svg') ?>
     </a>
     <ul class="dropdown-menu in_navbar">
-        <?php if(!Yii::$app->user->identity->user_login == 'administrator') : ?>
         <li class="user-info-box">
             <div class="row">
+                <?php if (!empty(Yii::$app->userProfileCompany->employeeID)) : ?>
                 <div class="col-lg-5 col-sm-5 col-md-5 text-center">
                     <a href="<?= Url::to(['employee-form/employee-profile', 'type' => 'administrator', 'employee_id' => Yii::$app->userProfileCompany->employeeID]) ?>">
                         <?= Html::img(Yii::$app->userProfileCompany->photo, ['class' => 'img-rounded photo-user-dropdown']) ?>                        
@@ -39,9 +39,9 @@
                         <p class="dropdown_account-number"><?= Yii::$app->userProfileCompany->mobile ?> </p>  
                     </div>
                 </div>
+                <?php endif; ?>
             </div>
         </li>
-        <?php endif; ?>
         <li class="text-light dropdown_footer">
             <div class="col-lg-12 col-sm-12 col-md-12 text-right">
                 <?= Html::a('Выйти <i class="fa fa-sign-out" aria-hidden="true"></i>', ['/site/logout'], [
