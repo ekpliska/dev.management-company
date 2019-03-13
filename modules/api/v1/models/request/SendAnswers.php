@@ -44,7 +44,7 @@ class SendAnswers extends RequestAnswers {
         }
         
         // Вычисляем оценку по 5тибальной системе
-        $grade = round($max_grade/($count_answer/$_grade), 0);
+        $grade = $_grade != 0 ? round($max_grade/($count_answer/$_grade), 0) : -1;
         // Сохраняем оценку
         $request_info->requests_grade = $grade;
         

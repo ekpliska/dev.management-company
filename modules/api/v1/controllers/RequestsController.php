@@ -46,7 +46,7 @@ class RequestsController extends Controller
             'index' => ['post'],
             'create' => ['post'], 
             'view' => ['get'],
-            'get-questions' => ['get'],
+            'get-questions' => ['post'],
             'send-grade' => ['post'],
         ];
     }
@@ -107,13 +107,20 @@ class RequestsController extends Controller
     
     /*
      * Оценка заявки
+     * {"type_name": "Освещение"}
      */
-    public function actionGetQuestions($type_name) {
+    public function actionGetQuestions() {
         
-        if (empty($type_name)) {
-            return false;
+        $post_data = Yii::$app->getRequest()->getBodyParams('type_name');
+
+        if (empty($post_data)) {
+            return [
+                'success' => false,
+                'message' => 'Ошибка передачи параметров',
+            ];
         }
-        $question_list = RequestQuestions::getQuestions($type_name);
+        
+        $question_list = RequestQuestions::getQuestions($post_data);
         return $question_list;
         
     }
@@ -124,10 +131,10 @@ class RequestsController extends Controller
      *      "request_id": "1",
      *      "answers": {
      *          "question_id": {
-     *              "value": "1",
+     *              "value": "1"
      *          },
      *          "question_id": {
-     *              "value": "0",
+     *              "value": "0"
      *          }
      *      }
      * }

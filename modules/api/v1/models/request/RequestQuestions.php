@@ -14,7 +14,7 @@ class RequestQuestions extends BaseRequestQuestions {
         
         $question_lists = self::find()
                 ->joinWith('typeRequest type')
-                ->where(['=', 'type.type_requests_name', $type_name])
+                ->where(['type.type_requests_name' => $type_name])
                 ->asArray()
                 ->all();
         
