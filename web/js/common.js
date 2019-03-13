@@ -27,7 +27,7 @@ $('._search-input').on('click', function(){
         if (input.files && input.files[0]) {
             var reader = new FileReader();            
             reader.onload = function (e) {
-                $('#photoPreview, #photoPreview-to-endit').attr('src', e.target.result);
+                $('#photoPreview, #photoPreview-to-edit').attr('src', e.target.result);
             }
             
             reader.readAsDataURL(input.files[0]);
