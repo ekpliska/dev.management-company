@@ -30,7 +30,7 @@ class ServiceLists extends CategoryServices {
                     'image' => $service->service_image,
                 ];
             }
-            $full_lists[$key] = [
+            $full_lists['category_lists'][$key] = [
                 'category_id' => $category->category_id,
                 'category' => $category->category_name,
                 'services' => $services,

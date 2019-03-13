@@ -8,6 +8,9 @@
     use yii\data\ActiveDataProvider;
     use app\models\StatusRequest;
     use app\models\User;
+    use app\models\Services;
+    use app\models\CategoryServices;
+    use app\models\PersonalAccount;
 
 /**
  * Платные услуги
@@ -75,9 +78,26 @@ class PaidServices extends ActiveRecord
         ];
     }
     
+    /*
+     * Связь с талицей Наименование услуг
+     */
     public function getService() {
         return $this->hasOne(Services::className(), ['service_id' => 'services_name_services_id']);
     }
+    
+    /*
+     * Связь с таблицей Категории услуг
+     */
+    public function getCategoryService() {
+        return $this->hasOne(CategoryServices::className(), ['category_id' => 'services_servise_category_id']);        
+    }
+    
+    /*
+     * Связь с таблицей Лицевой счет
+     */
+    public function getPersonalAccount() {
+        return $this->hasOne(PersonalAccount::className(), ['account_id' => 'services_account_id']);        
+    }    
 
     /*
      * Получить название категории по ID услуги

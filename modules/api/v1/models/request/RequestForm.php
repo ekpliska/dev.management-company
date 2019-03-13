@@ -20,7 +20,7 @@ class RequestForm extends Model {
         return [
             TimestampBehavior::className(),
         ];
-    }    
+    }
     
     public $account;
     public $type_request;
