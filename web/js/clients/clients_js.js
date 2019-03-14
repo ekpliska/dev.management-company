@@ -249,7 +249,7 @@ $(document).ready(function() {
         // Проверяем сущестование pdf, если существует - загружаем фрейм
         $.get(url)
                 .done(function (){
-                    conteiner.html('<iframe src="' + url + '" style="width: 100%; height: 600px;" frameborder="0">Ваш браузер не поддерживает фреймы</iframe>');
+                    conteiner.html('<iframe src="' + url + '" style="width: 100%; height: 660px;" frameborder="0">Ваш браузер не поддерживает фреймы</iframe>');
                 }).fail(function(){
                     conteiner.html('<div class="notice error"><p>Квитанция на сервере не найдена.</p></div>');
                 });
@@ -437,12 +437,31 @@ $(document).ready(function() {
         });
     });
     
-    $(document).on('click', '#print_receipt', function(e) {
+    $(document).on('click', '.print_receipt', function(e) {
         e.preventDefault();
         var urlPDF = $(this).attr('href');
         var w = window.open(urlPDF);
         w.print();
         console.log('--', urlPDF);
+    });
+    
+    /*
+     * Отправка квитанции по почте
+     */
+    $(document).on('click', '.send_receipt', function(e){
+        var dateReceipt = $(this).data('number-receipt');
+        var fileURL = $(this).attr('href');
+        e.preventDefault();
+        $.ajax({
+            url: 'send-receipt-to-email',
+            method: 'POST',
+            data: {
+                fileUrl: fileURL,
+                dateReceipt: dateReceipt,
+            }
+        }).done(function(data) {
+            console.log(data);
+        });
     });
     
     /* End Block of Personal Account */

@@ -9,6 +9,7 @@
     use app\modules\clients\models\form\NewAccountForm;
     use app\models\CommentsToCounters;
     use app\models\PaidServices;
+    use app\components\mail\Mail;
 
 /**
  * Контроллер по работе с разделом "Лицевой счет"
@@ -349,6 +350,30 @@ class PersonalAccountController extends AppClientsController {
                 'date_start' => $date_start,
                 'date_end' => $date_end,
             ];
+        }
+        
+        return ['success' => false];
+        
+    }
+    
+    /*
+     * Отправка квитанции на электронную почту пользователя
+     */
+    public function actionSendReceiptToEmail() {
+        
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $file_url = Yii::$app->request->post('fileUrl');
+        $date_receipt = Yii::$app->request->post('dateReceipt');
+        $user_email = Yii::$app->userProfile->email;
+        
+        if (empty($user_email)) {
+            return [
+                'success' => false,
+            ];
+        }
+        if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
+            Mail::send($user_email, "Квитанция {$date_receipt}", 'SendReceipt', $file_name = $file_url, ['receipt_number' => $date_receipt]);
+            return ['success' => true];
         }
         
         return ['success' => false];

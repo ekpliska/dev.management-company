@@ -6,6 +6,9 @@ return [
     'site-name-manager' => 'ELSA | Администратор | ',
     'site-name-dispatcher' => 'ELSA | Диспетчер | ',
     
+    'company-name' => 'ELSA Company',
+    'company-email' => 'elsa@elsa.ru',
+    
     'adminEmail' => 'admin@example.com',
     
     /*

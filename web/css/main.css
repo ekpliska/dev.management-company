@@ -2321,6 +2321,7 @@ a.receipte-btn-dowload {
 }
 .receipts_body {
     padding: 20px 10px;
+    min-height: 700px;
 }
 /*.operations-block {
     margin-left: 5%;
@@ -2422,6 +2423,11 @@ input[name="date_end-period-pay"]:focus {
     outline: 0;
     box-shadow: none;
 }
+input[name="date_start-period-pay"]::placeholder,
+input[name="date_end-period-pay"]::placeholder {
+    text-transform: capitalize;
+}
+
 .btn-show-info {
     height: 45px;
     margin: 0 30px;

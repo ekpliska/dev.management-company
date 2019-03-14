@@ -138,10 +138,16 @@ $config = [
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
-            // send all mails to a file by default. You have to set
-            // 'useFileTransport' to false and configure a transport
-            // for the mailer to send real emails.
+            // Сохранять отправленные письма на диске
             'useFileTransport' => true,
+//            'transport' => [
+//                'class' => 'Swift_SmtpTransport',
+//                'host' => 'smtp.ukr.net',
+//                'username' => 'user@ukr.net',
+//                'password' => 'password',
+//                'port' => '2525',
+//                'encryption' => 'ssl',
+//            ],
         ],
         'assetManager' => [
             'appendTimestamp' => true,

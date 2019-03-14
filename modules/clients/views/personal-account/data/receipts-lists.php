@@ -43,8 +43,12 @@ $current_date = date('Y-m');
                 <?php if ($_date == true && $status == false) : ?>
                     <a href="<?= Url::to(['personal-account/payment']) ?>" class=""><i class="glyphicon glyphicon-ruble"></i> Оплатить</a>
                 <?php endif; ?>
-                <a href="javascript:void(0)" class=""><i class="glyphicon glyphicon-send"></i> Отправить</a>
-                <a href="<?= Url::to($url_pdf, true) ?>" id="print_receipt"><i class="glyphicon glyphicon-print"></i> Распечатать</a>
+                
+                <a href="<?= Url::to($url_pdf) ?>" class="send_receipt" data-number-receipt="<?= $receipt['Номер квитанции'] ?>">
+                    <i class="glyphicon glyphicon-send"></i> Отправить
+                </a>
+                    
+                <a href="<?= Url::to($url_pdf, true) ?>" class="print_receipt"><i class="glyphicon glyphicon-print"></i> Распечатать</a>
             </div>
         </li>
     <?php endforeach; ?>
