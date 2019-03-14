@@ -9,7 +9,10 @@
  * @param string $subject Тема письма
  * 
  * @param string $view Вид письма
+ * @param string $file_name Вложение
+ * @param array $params Дополнительные параметры
  */    
+    
 class Mail {
     
     public static function send($to, $subject, $view, $file_name = null, $params = []) {

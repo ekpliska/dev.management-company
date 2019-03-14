@@ -10,6 +10,7 @@
     use app\models\CommentsToCounters;
     use app\models\PaidServices;
     use app\components\mail\Mail;
+    use app\models\Organizations;
 
 /**
  * Контроллер по работе с разделом "Лицевой счет"
@@ -106,10 +107,11 @@ class PersonalAccountController extends AppClientsController {
     public function actionPayment() {
         
         $user_info = $this->permisionUser();
-        
+        $organization_info = Organizations::findOne(['organizations_id' => 1]);
         
         return $this->render('payment', [
             'user_info' => $user_info,
+            'organization_info' => $organization_info,
         ]);
     }
     

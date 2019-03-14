@@ -20,7 +20,7 @@ $current_date = date('Y-m');
             // Статус квитанции
             $status = $receipt['Статус квитанции'] == 'Не оплачено' ? true : false;
             // Формируем ссылку на PDF квитанцию
-            $url_pdf = Yii::getAlias('@web') . 'receipts/' . $account_number . '/' . $account_number . '-' . $receipt['Номер квитанции'] . '.pdf';
+            $url_pdf = Yii::getAlias('@web') . '/receipts/' . $account_number . '/' . $account_number . '-' . $receipt['Номер квитанции'] . '.pdf';
         ?>
         <li class="list-group-item" data-receipt="<?= $receipt['Номер квитанции'] ?>" data-account="<?= $account_number ?>">
             <p class="receipte-month"><?= $date->format('F Y') ?></p>
@@ -41,11 +41,11 @@ $current_date = date('Y-m');
             <?php endif; ?>
             
             <div class="receipte-of-lists__operations">
-                <?php if ($_date == true && $status == false) : ?>
+                <?php // if ($_date == true && $status == false) : // Кнопка оплатить выводим только для текущего расчетного периода ?>
                     <a href="<?= Url::to(['personal-account/payment']) ?>" class=""><i class="glyphicon glyphicon-ruble"></i> Оплатить</a>
-                <?php endif; ?>
+                <?php // endif; ?>
                 
-                <a href="<?= Url::to($url_pdf) ?>" class="send_receipt" data-number-receipt="<?= $receipt['Номер квитанции'] ?>">
+                <a href="<?= Url::to($url_pdf, true) ?>" class="send_receipt" data-number-receipt="<?= $receipt['Номер квитанции'] ?>">
                     <i class="glyphicon glyphicon-send"></i> Отправить
                 </a>
                     

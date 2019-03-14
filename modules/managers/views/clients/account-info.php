@@ -44,7 +44,7 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
                     </tr>
                     <tr>
                         <td scope="row" class="text-left-tb">Арендатор</td>
-                        <td><?= $account_choosing['rent']->fullName ?></td>
+                        <td><?= isset($account_choosing['rent']) ? $account_choosing['rent']->fullName : 'Арендатор отсутствует.' ?></td>
                     </tr>
                     <tr>
                         <td scope="row" class="text-left-tb">Контактный телефон</td>

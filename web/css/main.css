@@ -1251,7 +1251,7 @@ span.dot {
 .profile-settings {
     border: 1px solid #ddd;
     border-radius: 12px;
-    padding: 10px;
+    padding: 20px 10px;
 }
 .user-image {
     height: 260px;
@@ -2499,8 +2499,6 @@ input[name="date_end-period-pay"]::placeholder {
 
 /* Оплата */
 .payment-page {
-    border: 1px solid #ddd;
-    border-radius: 12px;
 }
 .payment-page_block img {
     padding: 20px;
@@ -2508,7 +2506,6 @@ input[name="date_end-period-pay"]::placeholder {
 }
 .payment-page_block {
     padding: 40px;
-    border-right: 1px solid #ddd;
 }
 .payment_user-fullname {
     font-size: 24px;

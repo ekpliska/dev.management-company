@@ -38,6 +38,10 @@ class Organizations extends ActiveRecord
         ];
     }
     
+    public function getName() {
+        return $this->organizations_name;
+    }
+    
     /**
      * Настройка полей для форм
      */

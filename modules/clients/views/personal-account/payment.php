@@ -40,12 +40,24 @@ $this->params['breadcrumbs'][] = 'Оплата' . ' #TODO';
         </p>
     </div>
     <div class="col-md-7 col-sm-6 col-xs-12 payment-page_block">
+        <div class="field">
+            <label for="user_mobile" class="field-label">Управляющая компания</label>
+            <?= Html::input('text', 'organization-name', "{$organization_info->name}", ['class' => 'field-input', 'readonly' => false]) ?>
+        </div>
+        
+        
+        
+        
+        
+        <?php /*
         <?= Html::beginForm([
             'id' => 'payment-form',
         ]) ?>
             <?= Html::input('text') ?>
         <?= Html::endForm(); ?>
         <?= Html::button('Оплатить', ['class' => 'blue-btn add-acc-btn']) ?>
+         * 
+         */ ?>
     </div>
 </div>
 
