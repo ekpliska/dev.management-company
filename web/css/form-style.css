@@ -4,6 +4,10 @@
 */
 
 
+.save-btn-group {
+    margin: 40px 0; 
+}
+
 /* Основная форма */
 .field {
     position: relative;

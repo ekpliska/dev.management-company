@@ -11,6 +11,7 @@
     use app\models\PaidServices;
     use app\components\mail\Mail;
     use app\models\Organizations;
+    use app\modules\clients\models\form\PaymentForm;
 
 /**
  * Контроллер по работе с разделом "Лицевой счет"
@@ -106,11 +107,15 @@ class PersonalAccountController extends AppClientsController {
      */
     public function actionPayment() {
         
-        $user_info = $this->permisionUser();
+        // Загружаем модель оплаты квитанции
+        $model = new PaymentForm();
+        
         $organization_info = Organizations::findOne(['organizations_id' => 1]);
         
+        // https://pay.alfabank.ru/ecommerce/instructions/merchantManual/pages/index/plugins.html
+        
         return $this->render('payment', [
-            'user_info' => $user_info,
+            'model' => $model,
             'organization_info' => $organization_info,
         ]);
     }
