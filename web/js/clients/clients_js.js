@@ -437,6 +437,14 @@ $(document).ready(function() {
         });
     });
     
+    $(document).on('click', '#print_receipt', function(e) {
+        e.preventDefault();
+        var urlPDF = $(this).attr('href');
+        var w = window.open(urlPDF);
+        w.print();
+        console.log('--', urlPDF);
+    });
+    
     /* End Block of Personal Account */
 
 

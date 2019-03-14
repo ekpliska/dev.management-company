@@ -26,6 +26,7 @@ class ServiceLists extends CategoryServices {
             $services = [];
             foreach ($category->service as $service) {
                 $services[] = [
+                    'service_id' => $service->service_id,
                     'name' => $service->service_name,
                     'image' => $service->service_image,
                 ];

@@ -2248,6 +2248,7 @@ input[id="_search-input"]:-moz-placeholder {
     margin: 0 0 20px 0;    
 }
 .receipte-of-lists > li {
+    position: relative;
     padding: 20px 20px;
     border-left: none;
     border-right: none;
@@ -2260,6 +2261,23 @@ input[id="_search-input"]:-moz-placeholder {
     background: transparent;
     border: none;
     color: #000;
+}
+.receipte-of-lists__operations {
+    position: absolute;
+    right: 5%;
+    display: inline-grid;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+.receipte-of-lists__operations a {
+    padding: 5px 15px;
+    background: #1fd68d;
+    color: #fff;
+    border-radius: 12px;
+    margin: 2px 0;
+}
+.receipte-of-lists__operations a:hover {
+    background: #5747c3;
 }
 .receipte-month {
     font-size: 12px;
@@ -2304,9 +2322,9 @@ a.receipte-btn-dowload {
 .receipts_body {
     padding: 20px 10px;
 }
-.operations-block {
+/*.operations-block {
     margin-left: 5%;
-    /*right: 10%;*/
+    right: 10%;
     bottom: 10%;
     background: #2d18b4;
     position: fixed;
@@ -2334,7 +2352,7 @@ a.receipte-btn-dowload {
 .operations-block_items > li > a.right-block:hover {
     border-radius: 0px 12px 12px 0px;
     background-color: rgba(247, 247, 247, 0.22);
-}
+}*/
 .invalid-message-show {
     max-width: 100%;
     /*margin: 10px;*/
