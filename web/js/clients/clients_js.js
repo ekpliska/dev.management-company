@@ -460,7 +460,13 @@ $(document).ready(function() {
                 dateReceipt: dateReceipt,
             }
         }).done(function(data) {
-            console.log(data);
+            var textMess = $('#default_modal-message').find('#default_modal-message__text');
+            if (data.success === true) {
+                textMess.html(`Квитанция ${dateReceipt} была успешно отправлена на ваш электронный адрес!`);
+            } else if (data.success === false) {
+                textMess.html('При отправке квитанции возникла ошибка. Обновите страницу и повторите действие еще раз.');
+            }
+            $('#default_modal-message').modal('show');
         });
     });
     

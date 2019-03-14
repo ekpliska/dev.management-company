@@ -2323,6 +2323,11 @@ a.receipte-btn-dowload {
     padding: 20px 10px;
     min-height: 700px;
 }
+#default_modal-message__text {
+    font-size: 16px;
+    padding: 20px;
+    text-align: center;
+}
 /*.operations-block {
     margin-left: 5%;
     right: 10%;

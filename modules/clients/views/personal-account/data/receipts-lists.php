@@ -2,6 +2,7 @@
 
     use yii\helpers\Url;
     use yii\helpers\Html;
+    use app\modules\clients\widgets\ModalWindows;
 
 /*
  * Рендер вида Квитанции ЖКУ Собственника
@@ -58,3 +59,5 @@ $current_date = date('Y-m');
     <p>За указанный период квитанции не найдены.</p>
 </div>
 <?php endif; ?>
+
+<?= ModalWindows::widget(['modal_view' => 'default_dialog']) ?>
