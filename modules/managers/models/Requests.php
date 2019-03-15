@@ -130,4 +130,19 @@ class Requests extends BaseRequests {
         return $requestr_list;
         
     }
+    
+    /*
+     * Отключение чата в заявке
+     */
+    public static function closeChat($request_id) {
+        
+        $request = self::findOne($condition);
+        
+        if ($this->close_chat == BaseRequests::CHAT_OPEN) {
+            $this->close_chat = BaseRequests::CHAT_CLOSE;
+        }
+        $this->close_chat = BaseRequests::CHAT_OPEN;
+        return $this->save(false) ? true : false;
+        
+    }
 }

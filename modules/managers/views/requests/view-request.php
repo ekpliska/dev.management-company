@@ -57,6 +57,12 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
                     'class' => 'settings-record-btn' . ($request['status'] != StatusRequest::STATUS_CLOSE ? ' settings-btn-hide' : ''),
             ]) ?>
             
+            <?= Html::button('<i class="glyphicon glyphicon-lock"></i> Отключить чат', [
+                    'id' => 'close-chat',
+                    'class' => 'settings-record-btn _close-chat',
+                    'data-request' => $request['requests_id'],
+            ]) ?>
+            
         </h1>
 
         <div class="row">

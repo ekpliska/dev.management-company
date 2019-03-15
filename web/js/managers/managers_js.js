@@ -709,11 +709,22 @@ $(document).ready(function() {
     /*
      * Очистить форму заполнения заявки, если пользователь нажал в модальном окне "Отмена"
      */ 
-    $('.request__btn_close').on('click', function () {
+    $('.request__btn_close').on('click', function() {
         $('#create-new-request')[0].reset();
         $('.field-modal-textarea span').each(function(){
             $(this).text('');
         });        
+    });
+    
+    /*
+     * Запрос на отключение статуса у заявки
+     */
+    $('#close-chat').on('click', function() {
+        var requestID = $(this).data('request');
+        $.post('/managers/requests/confirm-close-chat?request_id=' + requestID, function(data) {
+            console.log(data);
+        });
+        console.log(requestID);
     });
     
     // ******************************************************** //

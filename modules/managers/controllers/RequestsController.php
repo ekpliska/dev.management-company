@@ -40,7 +40,8 @@ class RequestsController extends AppManagersController {
                             'choose-specialist', 
                             'edit-request',
                             'show-grade-modal', 
-                            'confirm-delete-request'],
+                            'confirm-delete-request',
+                            'confirm-close-chat'],
                         'allow' => true,
                         'roles' => ['RequestsEdit']
                     ],
@@ -348,6 +349,22 @@ class RequestsController extends AppManagersController {
             
             Yii::$app->session->setFlash('success', ['message' => 'Заявка была успешно удалена']);
             return $this->redirect($link);
+        }
+        
+    }
+    
+    /*
+     * Запрос на отключение чата у заявки
+     */
+    public function actionConfirmCloseChat($request_id) {
+        
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        
+        if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
+            
+            $request = Requests::closeChat($request_id);
+            
+            return ['success' => $request_id];
         }
         
     }
