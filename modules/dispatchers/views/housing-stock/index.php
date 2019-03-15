@@ -60,20 +60,23 @@ $active_item = $house_cookie
         <div class="col-lg-2 col-md-3 col-sm-6 housing-stock__characteristics">
             <h4 class="title">Характеристики</h4>
             <div id="characteristic_list">
-                <?= $this->render('data/characteristics_house', ['characteristics' => $houses_list[$house_cookie['key']]['characteristic']]) ?>
+                <?= $this->render('data/characteristics_house', [
+                        'characteristics' => isset($house_cookie) ? $houses_list[$house_cookie['key']]['characteristic'] : $houses_list[0]['characteristic']]) ?>
             </div>
         </div>
         
         <div class="col-lg-4 col-md-5 col-sm-6 housing-stock__flats">
             <div id="flats_list">
-                <?= $this->render('data/view_flats', ['flats' => $houses_list[$house_cookie['key']]['flat']]) ?>
+                <?= $this->render('data/view_flats', [
+                        'flats' => isset($house_cookie) ? $houses_list[$house_cookie['key']]['flat'] : $houses_list[0]['flat']]) ?>
             </div>
         </div>
         
         <div class="col-lg-2 col-md-12 col-sm-6 housing-stock__files">
             <h4 class="title">Вложения</h4>
             <div id="files_list">
-                <?= $this->render('data/view_upload_files', ['files' => $houses_list[$house_cookie['key']]['image']]) ?>
+                <?= $this->render('data/view_upload_files', [
+                        'files' => isset($house_cookie) ? $houses_list[$house_cookie['key']]['image'] : $houses_list[$house_cookie[0]]['image']]) ?>
             </div>
         </div>
     </div>

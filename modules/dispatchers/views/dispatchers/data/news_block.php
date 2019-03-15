@@ -20,7 +20,7 @@
         </p>
     </div>
     <div class="news-block__news-item__image">
-        <?= Html::img("/web/{$post['news_preview']}") ?>
+        <?= Html::img(Yii::getAlias('@web') . $post['news_preview']) ?>
     </div>
     <div class="news-block__news-item__content">
         <?= FormatHelpers::shortTitleOrText($post['news_text'], 170) ?>

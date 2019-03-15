@@ -19,6 +19,8 @@ class HousingStockController extends AppDispatchersController {
         $house_cookie = $this->actionReadCookies('choosing-house-d');
         
         $houses_list = Houses::getAllHouses();
+        echo '<pre>';
+        var_dump($house_cookie); die();
         
         return $this->render('index', [
             'house_cookie' => $house_cookie,

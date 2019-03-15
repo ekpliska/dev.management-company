@@ -91,7 +91,7 @@
                 'attribute' => 'status',
                 'header' => 'Статус',
                 'value' => function ($data) {
-                    return StatusHelpers::requestStatus($data['status'], $data->requests_id, false, $data['requests_grade']);
+                    return StatusHelpers::requestStatus($data['status'], $data['id'], false, false);
                 },
                 'format' => 'raw',
                 'contentOptions' => [
