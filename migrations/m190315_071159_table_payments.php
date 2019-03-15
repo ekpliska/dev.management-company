@@ -1,42 +1,71 @@
 <?php
 
-use yii\db\Migration;
+    use yii\db\Migration;
+    use yii\db\Expression;
+    use app\models\Payments;
 
 /**
- * Class m190315_071159_table_payments
+ * Платежи
  */
-class m190315_071159_table_payments extends Migration
-{
+class m190315_071159_table_payments extends Migration {
+    
     /**
      * {@inheritdoc}
      */
-    public function safeUp()
-    {
-
+    public function safeUp() {
+        
+        $table_option = null;
+        if ($this->db->driverName === 'mysql') {
+            $table_option = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
+        }
+        
+        $this->createTable('{{%payments}}', [
+            'id_payment' => $this->primaryKey(),
+            'unique_number' => $this->string(255)->notNull(),
+            'receipt_period' => $this->integer()->notNull(),
+            'receipt_number' => $this->string(70)->notNull(),
+            'payment_sum' => $this->decimal(10,2)->notNull(),
+            'payment_status' => $this->integer()->defaultValue(Payments::NOT_PAID),
+            'account_uid' => $this->integer()->notNull(),
+            'user_uid' => $this->integer()->notNull(),
+            'create_at' => $this->timestamp()->defaultValue(new Expression("NOW()"))
+        ]);
+        
+        $this->createIndex('idx-payments-id_payment', '{{%payments}}', 'id_payment');
+        
+        $this->addForeignKey(
+                'fk-payments-account_uid', 
+                '{{%payments}}', 
+                'account_uid', 
+                '{{%personal_account}}', 
+                'account_id',
+                'CASCADE',
+                'CASCADE'
+        );
+        
+        $this->addForeignKey(
+                'fk-payments-user_uid', 
+                '{{%payments}}', 
+                'user_uid', 
+                '{{%user}}', 
+                'user_id',
+                'CASCADE',
+                'CASCADE'
+        );
+        
     }
 
     /**
      * {@inheritdoc}
      */
-    public function safeDown()
-    {
-        echo "m190315_071159_table_payments cannot be reverted.\n";
-
-        return false;
+    public function safeDown() {
+        
+        $this->dropIndex('idx-payments-id_payment', '{{%payments}}');
+        $this->dropForeignKey('fk-payments-account_uid', '{{%payments}}');
+        $this->dropForeignKey('fk-payments-user_uid', '{{%payments}}');
+        
+        $this->dropTable('{{%payments}}');
+        
     }
 
-    /*
-    // Use up()/down() to run migration code without a transaction.
-    public function up()
-    {
-
-    }
-
-    public function down()
-    {
-        echo "m190315_071159_table_payments cannot be reverted.\n";
-
-        return false;
-    }
-    */
 }
