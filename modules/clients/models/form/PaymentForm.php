@@ -3,6 +3,8 @@
     namespace app\modules\clients\models\form;
     use Yii;
     use yii\base\Model;
+    use app\models\Payments;
+    use app\components\paymentSystem\PaymentSystem;
 
 /**
  * Форма оплаты квитанции
@@ -14,13 +16,16 @@
  */
 class PaymentForm extends Model {
     
-    public $receipt_period;
-    public $receipt_number;
     public $payment_sum;
     
-//    public function __construct() {
-//        
-//    }
+    // Платеж
+    private $_payment;
+
+    public function __construct(Payments $payment, $config = []) {
+        $this->_payment = $payment;
+        parent::__construct();
+        
+    }
     
     /*
      *  Правила валидации
@@ -29,7 +34,7 @@ class PaymentForm extends Model {
         
         return [
             [['payment_sum'], 'required', 'message' => 'Поле обязательно для заполнения'],
-            ['payment_sum', 'checkAmount'],
+            ['payment_sum', 'checkAmount', 'skipOnEmpty'=> false],
         ];
         
     }
@@ -37,10 +42,37 @@ class PaymentForm extends Model {
     /*
      * Валидация 
      */
-    public function checkAmount($attribute, $params) {
-        if ($this->attributes > 1) {
-            $this->addError($attribute, 'Указана некорректная сумма');
+    public function checkAmount() {
+        if ($this->payment_sum < 1) {
+            $this->addError('payment_sum', 'Указана некорректная сумма');
         }
+    }
+    
+    /*
+     * Отправка платежа
+     */
+    public function send() {
+        
+        if (!$this->validate()) {
+            return false;
+        }
+        
+        $post_data = [
+            'orderNumber' => $this->_payment->unique_number,
+            'amount' => $this->payment_sum,
+        ];
+        
+        // Отправляем запрос на проведение оплаты платежа
+        $send_payment = new PaymentSystem();
+        $result = $send_payment->send_payment($method, $post_data);
+        
+        // Если при проведение платежа возникла ошибка, получаем ее код и пояснение
+        if (isset($result['error'])) {
+            return $result['error'];
+        }
+        
+        return true;
+        
     }
     
     /*
@@ -49,7 +81,7 @@ class PaymentForm extends Model {
     public function attributeLabels() {
         
         return [
-            'payment_sum' => 'Сумма к оплате',
+            'payment_sum' => 'Сумма платежа',
         ];
         
     }

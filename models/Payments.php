@@ -69,7 +69,7 @@ class Payments extends \yii\db\ActiveRecord {
         if (!empty($info) && $info->payment_status == self::YES_PAID) {
             return [
                 'status' => self::YES_PAID,
-                'message' => "Платеж по квитанции {$_nubmer} за расчетный период {$_period} был оплачен"
+                'message' => "Платеж по квитанции {$_nubmer} за расчетный период {$_period} был оплачен",
             ];
         } elseif (empty($info)) {
             $paymant = new Payments();
@@ -82,11 +82,11 @@ class Payments extends \yii\db\ActiveRecord {
             if (!$paymant->save(false)) {
                 throw new \yii\web\NotFoundHttpException(404);
             }
-            return ['status' => self::NOT_PAID];
+            return ['status' => self::NOT_PAID, 'payment' => $info];
         }
         
         
-        return false;
+        return ['status' => self::NOT_PAID, 'payment' => $info];
         
     }
     

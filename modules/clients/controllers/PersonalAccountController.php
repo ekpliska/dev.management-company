@@ -127,16 +127,21 @@ class PersonalAccountController extends AppClientsController {
             return $this->render('payment', [
                 'paiment_info' => $paiment_info,
             ]);
-        } elseif ($paiment_info['status'] = Payments::NOT_PAID) { 
+        } elseif ($paiment_info['status'] == Payments::NOT_PAID) { 
             /*
              * Если статус платежа Не оплачено
              * Загружаем модель оплаты квитанции
              */
-            $model = new PaymentForm();
+            $model = new PaymentForm($paiment_info['payment']);
             $organization_info = Organizations::findOne(['organizations_id' => 1]);
+            
+            if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+                $model->send();
+            }
             
             return $this->render('payment', [
                 'model' => $model,
+                'paiment_info' => $paiment_info,
                 'organization_info' => $organization_info,
                 'sum' => $sum,
             ]);
@@ -144,6 +149,23 @@ class PersonalAccountController extends AppClientsController {
         }
         
     }
+    
+//    /*
+//     * Отправка формы платежа
+//     * @param srting payment Уникальный идентификатор платежа
+//     */
+//    public function actionSendPayment($payment) {
+//        
+//        $payment_info = Payments::findOne(['unique_number' => $payment]);
+//        $model = new PaymentForm($payment_info);
+//        
+//        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+//        }
+//        
+//        var_dump($model->errors); die();
+//        
+//        
+//    }
     
     /*
      * Страница "Показания приборов учета"

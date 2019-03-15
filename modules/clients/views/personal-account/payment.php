@@ -49,16 +49,15 @@ $this->params['breadcrumbs'][] = 'Оплата' . ' #TODO';
                 <label for="user_mobile" class="field-label">Управляющая компания</label>
                 <?= Html::input('text', 'organization-name', "{$organization_info->name}", ['class' => 'field-input', 'readonly' => true]) ?>
             </div>
-        
             <?php
                 $form = ActiveForm::begin([
                     'id' => 'payment-from',
-                    'method' => 'GET',
                     'fieldConfig' => [
                         'template' => '<div class="field">{label}{input}{error}</div>',
                     ], 
                 ])
             ?>
+        
 
             <?= $form->field($model, 'payment_sum')
                     ->widget(MaskedInput::className(), [
@@ -67,9 +66,11 @@ $this->params['breadcrumbs'][] = 'Оплата' . ' #TODO';
                             'groupSeparator' => '',
                             'radixPoint' => '.',
                             'autoGroup' => false]])
-                    ->input('text', ['class' => 'field-input', 'value' => isset($sum) ? $sum : ''])
+                    ->input('text', ['class' => 'field-input'])
                     ->label($model->getAttributeLabel('payment_sum'), ['class' => 'field-label']) ?>
 
+            <p class="payment-from_control_summ">Сумма к оплате: <?= isset($sum) ? $sum : '' ?> </p>
+            
             <div class="save-btn-group text-center">
                 <?= Html::submitButton('Оплатить', ['class' => 'btn blue-btn']) ?>
             </div>

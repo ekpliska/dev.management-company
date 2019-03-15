@@ -2643,6 +2643,12 @@ label[class^='error-ind-'] {
 .input-indication {
     display: grid;    
 }
+.payment-from_control_summ {
+    padding: 20px;
+    text-align: center;
+    font-size: 14px;
+    color: #2d18b4;
+}
 /* Конец Приборы учета */
 
 /* Опрос */
