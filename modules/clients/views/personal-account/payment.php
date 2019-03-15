@@ -10,10 +10,9 @@
  */
 $this->title = Yii::$app->params['site-name'] . 'Оплата';
 $this->params['breadcrumbs'][] = ['label' => 'Лицевой счет', 'url' => ['personal-account/index']];
-$this->params['breadcrumbs'][] = ['label' => 'Платежи', 'url' => ['personal-account/payments']];
-$this->params['breadcrumbs'][] = 'Оплата' . ' #TODO';    
+$this->params['breadcrumbs'][] = ['label' => 'Квитанции', 'url' => ['personal-account/receipts-of-hapu']];
+$this->params['breadcrumbs'][] = "Оплата, квитанции {$paiment_info['payment']->receipt_number}";    
 ?>
-
 <?= Breadcrumbs::widget([
         'homeLink' => ['label' => 'ELSA', 'url' => ['clients/index']],
         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
@@ -79,7 +78,11 @@ $this->params['breadcrumbs'][] = 'Оплата' . ' #TODO';
         
         <?php else: ?>
         
-            <div><?= isset($paiment_info['message']) ? $paiment_info['message'] : '' ?></div>
+            <div>
+                <?php
+                 var_dump($paiment_info);
+                ?>
+            </div>
         
         <?php endif; ?>
         

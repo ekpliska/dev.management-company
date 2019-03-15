@@ -122,7 +122,7 @@ class PersonalAccountController extends AppClientsController {
         // Проверяем наличие платежа и его статус
         $paiment_info = Payments::isPayment($_period, $_nubmer, $_sum, $accoint_id);
         
-        // Если статус платежа Оптачено
+        // Если статус платежа Оплачено
         if ($paiment_info['status'] == Payments::YES_PAID) {
             return $this->render('payment', [
                 'paiment_info' => $paiment_info,

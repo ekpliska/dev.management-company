@@ -33,7 +33,7 @@ class PaymentForm extends Model {
     public function rules() {
         
         return [
-            [['payment_sum'], 'required', 'message' => 'Поле обязательно для заполнения'],
+            [['payment_sum'], 'required', 'message' => 'Укажите сумму платежа'],
             ['payment_sum', 'checkAmount', 'skipOnEmpty'=> false],
         ];
         

@@ -69,7 +69,7 @@ class Payments extends \yii\db\ActiveRecord {
         if (!empty($info) && $info->payment_status == self::YES_PAID) {
             return [
                 'status' => self::YES_PAID,
-                'message' => "Платеж по квитанции {$_nubmer} за расчетный период {$_period} был оплачен",
+                'payment' => $info,
             ];
         } elseif (empty($info)) {
             $paymant = new Payments();
