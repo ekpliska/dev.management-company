@@ -1075,6 +1075,15 @@ input:checked + .slider:before {
 }
 /* End Switch for roles */
 
+/* Switch (Orange) */
+.switch-rule-orange {
+    margin-top: 5px;
+}
+input:checked + .slider-orange {
+    background-color: #ef693a;
+}
+/* End Switch (Orange) */
+
 /* Multiple Form at Settings */
 .settings-page .has-error > input {
     border: 1px solid #ef693a;

@@ -362,9 +362,11 @@ class RequestsController extends AppManagersController {
         
         if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
             
-            $request = Requests::closeChat($request_id);
+            if (!Requests::closeChat($request_id)) {
+                return ['success' => false];
+            }
             
-            return ['success' => $request_id];
+            return ['success' => true];
         }
         
     }

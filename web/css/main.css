@@ -1717,13 +1717,21 @@ p.right {
 .requests-view_chat {
     margin: 0 -15px 0 0px;
 }
-
+.requests__chat-status {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.requests__chat-status > .__label {
+    padding: 0 10px;
+    color: #999;
+}
 .row-flex {
-  display: flex;
-  flex-wrap: wrap;
+    display: flex;
+    flex-wrap: wrap;
 }
 [class*="col-"] {
-  margin-bottom: 0px;
+    margin-bottom: 0px;
 }
 .requests-view_body img.info-img {
     width: 70px;

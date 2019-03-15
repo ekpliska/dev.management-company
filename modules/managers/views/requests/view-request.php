@@ -57,12 +57,6 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
                     'class' => 'settings-record-btn' . ($request['status'] != StatusRequest::STATUS_CLOSE ? ' settings-btn-hide' : ''),
             ]) ?>
             
-            <?= Html::button('<i class="glyphicon glyphicon-lock"></i> Отключить чат', [
-                    'id' => 'close-chat',
-                    'class' => 'settings-record-btn _close-chat',
-                    'data-request' => $request['requests_id'],
-            ]) ?>
-            
         </h1>
 
         <div class="row">
@@ -171,6 +165,17 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
                 </div>
             </div>
             <div class="col-lg-5 col-md-4 col-sm-12 col-xs-12">
+                <?php if ($request['status'] == StatusRequest::STATUS_REJECT || $request['status'] == StatusRequest::STATUS_CLOSE) : ?>
+                <div class="text-right requests__chat-status">
+                    <label class="switch-rule switch-rule-orange">
+                        <?= Html::checkbox('chat_status', $request['close_chat'], [
+                                'id' => 'close-chat',
+                                'data-request' => $request['requests_id']]) ?>
+                        <span class="slider slider-orange round"></span>
+                    </label>
+                    <span class="__label">Отключить чат</span>
+                </div>
+                <?php endif; ?>
                 <div class="content requests-view_chat">
 
                     <?= $this->render('comments/view', [

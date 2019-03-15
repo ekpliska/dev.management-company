@@ -252,6 +252,7 @@ class Requests extends ActiveRecord
                         . 'r.requests_grade as requests_grade, '
                         . 'r.requests_phone as requests_phone, '
                         . 'r.requests_comment as requests_comment, '
+                        . 'r.close_chat as close_chat, '
                         . 'tr.type_requests_name as type_requests_name, '
                         . 'h.houses_gis_adress as houses_gis_adress, h.houses_number as houses_number, '
                         . 'f.flats_porch as flats_porch, f.flats_floor as flats_floor, f.flats_number as flats_number, '

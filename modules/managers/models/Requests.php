@@ -136,13 +136,14 @@ class Requests extends BaseRequests {
      */
     public static function closeChat($request_id) {
         
-        $request = self::findOne($condition);
+        $request = self::findOne($request_id);
         
-        if ($this->close_chat == BaseRequests::CHAT_OPEN) {
-            $this->close_chat = BaseRequests::CHAT_CLOSE;
+        if ($request->close_chat == BaseRequests::CHAT_OPEN) {
+            $request->close_chat = BaseRequests::CHAT_CLOSE;
+        } else {
+            $request->close_chat = BaseRequests::CHAT_OPEN;
         }
-        $this->close_chat = BaseRequests::CHAT_OPEN;
-        return $this->save(false) ? true : false;
+        return $request->save(false) ? true : false;
         
     }
 }
