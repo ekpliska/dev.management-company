@@ -11,6 +11,7 @@
     use app\models\PaidServices;
     use app\components\mail\Mail;
     use app\models\Organizations;
+    use app\models\Payments;
     use app\modules\clients\models\form\PaymentForm;
 
 /**
@@ -104,20 +105,44 @@ class PersonalAccountController extends AppClientsController {
     
     /*
      * Страница "Платеж" (форма оплаты)
+     * 
+     * @param integer $period Расчетный период квитанции
+     * @param string $nubmer Номер квитанции
+     * @param decimal $sum Сумма к оплате по квитанции
      */
-    public function actionPayment() {
+    public function actionPayment($period, $nubmer, $sum) {
         
-        // Загружаем модель оплаты квитанции
-        $model = new PaymentForm();
+        $_period = urldecode($period);
+        $_nubmer = urldecode($nubmer); 
+        $_sum = urldecode($sum);
         
-        $organization_info = Organizations::findOne(['organizations_id' => 1]);
+        // Получаем ID текущего лицевого счета
+        $accoint_id = $this->_current_account_id;
         
-        // https://pay.alfabank.ru/ecommerce/instructions/merchantManual/pages/index/plugins.html
+        // Проверяем наличие платежа и его статус
+        $paiment_info = Payments::isPayment($_period, $_nubmer, $_sum, $accoint_id);
         
-        return $this->render('payment', [
-            'model' => $model,
-            'organization_info' => $organization_info,
-        ]);
+        // Если статус платежа Оптачено
+        if ($paiment_info['status'] == Payments::YES_PAID) {
+            return $this->render('payment', [
+                'paiment_info' => $paiment_info,
+            ]);
+        } elseif ($paiment_info['status'] = Payments::NOT_PAID) { 
+            /*
+             * Если статус платежа Не оплачено
+             * Загружаем модель оплаты квитанции
+             */
+            $model = new PaymentForm();
+            $organization_info = Organizations::findOne(['organizations_id' => 1]);
+            
+            return $this->render('payment', [
+                'model' => $model,
+                'organization_info' => $organization_info,
+                'sum' => $sum,
+            ]);
+            
+        }
+        
     }
     
     /*

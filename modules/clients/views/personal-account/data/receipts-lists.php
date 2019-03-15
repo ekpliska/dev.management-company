@@ -41,9 +41,14 @@ $current_date = date('Y-m');
             <?php endif; ?>
             
             <div class="receipte-of-lists__operations">
-                <?php // if ($_date == true && $status == false) : // Кнопка оплатить выводим только для текущего расчетного периода ?>
-                    <a href="<?= Url::to(['personal-account/payment']) ?>" class=""><i class="glyphicon glyphicon-ruble"></i> Оплатить</a>
-                <?php // endif; ?>
+                <?php if ($status == false) : // Кнопка Оплатить выводим только для неоплаченных квитанций ?>
+                    <?= Html::a('<i class="glyphicon glyphicon-ruble"></i> Оплатить</a>', [
+                            'personal-account/payment', 
+                            'period' => urlencode($receipt['Расчетный период']), 
+                            'nubmer' => urlencode($receipt['Номер квитанции']), 
+                            'sum' => urlencode($receipt['Сумма к оплате'])
+                        ]) ?>
+                <?php endif; ?>
                 
                 <a href="<?= Url::to($url_pdf, true) ?>" class="send_receipt" data-number-receipt="<?= $receipt['Номер квитанции'] ?>">
                     <i class="glyphicon glyphicon-send"></i> Отправить

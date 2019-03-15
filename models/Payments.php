@@ -10,8 +10,8 @@
  */
 class Payments extends \yii\db\ActiveRecord {
     
-    const YES_PAID = 1;
-    const NOT_PAID = 0;
+    const YES_PAID = 'paid';
+    const NOT_PAID = 'not paid';
 
     /**
      * Таблица в БД
@@ -49,6 +49,45 @@ class Payments extends \yii\db\ActiveRecord {
      */
     public function getUser() {
         return $this->hasOne(User::className(), ['user_id' => 'user_uid']);
+    }
+    
+    /*
+     * Проверка наличися платежа
+     */
+    public static function isPayment($_period, $_nubmer, $_sum, $accoint_id) {
+        
+        $info = self::find()
+                ->andWhere([
+                    'receipt_period' => $_period, 
+                    'receipt_number' => $_nubmer,
+                    'payment_sum' => $_sum,
+                    'user_uid' => Yii::$app->user->identity->id,
+                ])
+                ->one();
+        
+        // Если платеж существует и его статус Оплачено
+        if (!empty($info) && $info->payment_status == self::YES_PAID) {
+            return [
+                'status' => self::YES_PAID,
+                'message' => "Платеж по квитанции {$_nubmer} за расчетный период {$_period} был оплачен"
+            ];
+        } elseif (empty($info)) {
+            $paymant = new Payments();
+            $paymant->unique_number = uniqid('payment_');
+            $paymant->receipt_period = $_period;
+            $paymant->receipt_number = $_nubmer;
+            $paymant->payment_sum = $_sum;
+            $paymant->account_uid = $accoint_id;
+            $paymant->user_uid = Yii::$app->user->identity->id;
+            if (!$paymant->save(false)) {
+                throw new \yii\web\NotFoundHttpException(404);
+            }
+            return ['status' => self::NOT_PAID];
+        }
+        
+        
+        return false;
+        
     }
     
     /**

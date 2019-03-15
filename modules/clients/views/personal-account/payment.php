@@ -3,6 +3,7 @@
     use yii\helpers\Html;
     use yii\widgets\Breadcrumbs;
     use yii\widgets\ActiveForm;
+    use yii\widgets\MaskedInput;
 
 /* 
  * Страница "Платеж" (оплата квитанции)
@@ -41,31 +42,45 @@ $this->params['breadcrumbs'][] = 'Оплата' . ' #TODO';
         </p>
     </div>
     <div class="col-md-7 col-sm-6 col-xs-12 payment-page_block">
-        <div class="field">
-            <label for="user_mobile" class="field-label">Управляющая компания</label>
-            <?= Html::input('text', 'organization-name', "{$organization_info->name}", ['class' => 'field-input', 'readonly' => true]) ?>
-        </div>
         
-        <?php
-            $form = ActiveForm::begin([
-                'id' => 'payment-from',
-                'method' => 'GET',
-                'fieldConfig' => [
-                    'template' => '<div class="field">{label}{input}{error}</div>',
-                ], 
-            ])
-        ?>
+        <?php if (isset($model)) : // Если модель для платежа передана ?>
         
-        <?= $form->field($model, 'order_id')->input('text', ['class' => 'field-input'])->label($model->getAttributeLabel('order_id'), ['class' => 'field-label']) ?>
-        <?= $form->field($model, 'amount')->input('text', ['class' => 'field-input'])->label($model->getAttributeLabel('amount'), ['class' => 'field-label']) ?>
+            <div class="field">
+                <label for="user_mobile" class="field-label">Управляющая компания</label>
+                <?= Html::input('text', 'organization-name', "{$organization_info->name}", ['class' => 'field-input', 'readonly' => true]) ?>
+            </div>
         
-        <div class="save-btn-group text-center">
-            <?= Html::submitButton('Оплатить', ['class' => 'btn blue-btn']) ?>
-        </div>
+            <?php
+                $form = ActiveForm::begin([
+                    'id' => 'payment-from',
+                    'method' => 'GET',
+                    'fieldConfig' => [
+                        'template' => '<div class="field">{label}{input}{error}</div>',
+                    ], 
+                ])
+            ?>
+
+            <?= $form->field($model, 'payment_sum')
+                    ->widget(MaskedInput::className(), [
+                        'clientOptions' => [
+                            'alias' =>  'decimal',
+                            'groupSeparator' => '',
+                            'radixPoint' => '.',
+                            'autoGroup' => false]])
+                    ->input('text', ['class' => 'field-input', 'value' => isset($sum) ? $sum : ''])
+                    ->label($model->getAttributeLabel('payment_sum'), ['class' => 'field-label']) ?>
+
+            <div class="save-btn-group text-center">
+                <?= Html::submitButton('Оплатить', ['class' => 'btn blue-btn']) ?>
+            </div>
+
+            <?php ActiveForm::end(); ?>
         
-        <?php ActiveForm::end(); ?>
+        <?php else: ?>
         
+            <div><?= isset($paiment_info['message']) ? $paiment_info['message'] : '' ?></div>
         
+        <?php endif; ?>
         
         
         <?php /*

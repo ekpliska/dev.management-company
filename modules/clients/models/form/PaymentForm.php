@@ -7,17 +7,16 @@
 /**
  * Форма оплаты квитанции
  * 
- * @param string $username Логин магазина, полученный при подключении
- * @param string $password Пароль магазина, полученный при подключении
- * @param integer $orderId Номер заказа в платежной системе. Уникален в пределах системы
- * @param integer $amount Сумма списания в валюте заказа. Может быть меньше или равна сумме преавторизации. Не может быть меньше 1 рубля
+ * @param string $unique_number Уникальный идентификатор платежа
+ * @param integer $receipt_period Расчетный период
+ * @param string $receipt_number Номер квитанции
+ * @param decimal $payment_sum Сумма к оплате
  */
 class PaymentForm extends Model {
     
-    public $username;
-    public $password;
-    public $order_id;
-    public $amount;
+    public $receipt_period;
+    public $receipt_number;
+    public $payment_sum;
     
 //    public function __construct() {
 //        
@@ -29,9 +28,8 @@ class PaymentForm extends Model {
     public function rules() {
         
         return [
-            [['order_id', 'amount'], 'required', 'message' => 'Поле обязательно для заполнения'],
-            ['order_id', 'integer'],
-            ['amount', 'checkAmount'],
+            [['payment_sum'], 'required', 'message' => 'Поле обязательно для заполнения'],
+            ['payment_sum', 'checkAmount'],
         ];
         
     }
@@ -51,8 +49,7 @@ class PaymentForm extends Model {
     public function attributeLabels() {
         
         return [
-            'order_id' => 'Номер заказа (?)',
-            'amount' => 'Сумма к оплате',
+            'payment_sum' => 'Сумма к оплате',
         ];
         
     }

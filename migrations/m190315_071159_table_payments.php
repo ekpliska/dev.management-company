@@ -22,10 +22,10 @@ class m190315_071159_table_payments extends Migration {
         $this->createTable('{{%payments}}', [
             'id_payment' => $this->primaryKey(),
             'unique_number' => $this->string(255)->notNull(),
-            'receipt_period' => $this->integer()->notNull(),
+            'receipt_period' => $this->string(25)->notNull(),
             'receipt_number' => $this->string(70)->notNull(),
             'payment_sum' => $this->decimal(10,2)->notNull(),
-            'payment_status' => $this->integer()->defaultValue(Payments::NOT_PAID),
+            'payment_status' => $this->string(25)->defaultValue(Payments::NOT_PAID),
             'account_uid' => $this->integer()->notNull(),
             'user_uid' => $this->integer()->notNull(),
             'create_at' => $this->timestamp()->defaultValue(new Expression("NOW()"))
