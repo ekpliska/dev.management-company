@@ -25,7 +25,7 @@ $prev_date = 0;
                     </div>
                     <div class="col-lg-8 col-md-8 col-sm-9 col-xs-9 chat-txt-block">
                         <p class="chat-name">
-                            <?= $comment['user']['client']->clients_name ? $comment['user']['client']->clients_name : $comment['user']['employee']->employee_name ?>
+                            <?= isset($comment['user']['client']->clients_name) ? $comment['user']['client']->clients_name : $comment['user']['employee']->employee_name ?>
                         </p>
                         <?= $comment->comments_text ?>
                     </div>
