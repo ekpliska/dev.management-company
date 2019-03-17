@@ -182,7 +182,7 @@ $(document).ready(function(){
     /*
      * Запрос на отключение статуса у заявки
      */
-    $('#close-chat').on('click', function () {
+    $(document).on('click', '#close-chat', function () {
         var requestID = $(this).data('request');
         $.post('/dispatchers/requests/confirm-close-chat?request_id=' + requestID, function (data) {});
     });

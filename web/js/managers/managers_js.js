@@ -698,7 +698,7 @@ $(document).ready(function() {
         var requestType = $(e.relatedTarget).data('requestType');
         $('#delete-request-message').find('.delete_request').data('request', requestId);
         $('#delete-request-message').find('.delete_request').data('request-type', requestType);
-    })
+    });
     
     $('.delete_request').on('click', function() {
         var requestId = $(this).data('request');
@@ -719,7 +719,7 @@ $(document).ready(function() {
     /*
      * Запрос на отключение статуса у заявки
      */
-    $('#close-chat').on('click', function() {
+    $(document).on('click', '#close-chat', function() {
         var requestID = $(this).data('request');
         $.post('/managers/requests/confirm-close-chat?request_id=' + requestID, function(data) {});
     });
