@@ -721,10 +721,7 @@ $(document).ready(function() {
      */
     $('#close-chat').on('click', function() {
         var requestID = $(this).data('request');
-        $.post('/managers/requests/confirm-close-chat?request_id=' + requestID, function(data) {
-            console.log(data);
-        });
-        console.log(requestID);
+        $.post('/managers/requests/confirm-close-chat?request_id=' + requestID, function(data) {});
     });
     
     // ******************************************************** //

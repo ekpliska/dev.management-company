@@ -138,6 +138,10 @@ class Requests extends BaseRequests {
         
         $request = self::findOne($request_id);
         
+        if ($request->status != StatusRequest::STATUS_CLOSE && $request != StatusRequest::STATUS_REJECT) {
+            return false;
+        }
+        
         if ($request->close_chat == BaseRequests::CHAT_OPEN) {
             $request->close_chat = BaseRequests::CHAT_CLOSE;
         } else {

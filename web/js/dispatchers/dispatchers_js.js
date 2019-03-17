@@ -178,6 +178,14 @@ $(document).ready(function(){
 //    $('.create-request, .create-paid-request').on('click', function(){
 //        $('#create-new-request, #create-new-paid-request')[0].reset();
 //    });
+
+    /*
+     * Запрос на отключение статуса у заявки
+     */
+    $('#close-chat').on('click', function () {
+        var requestID = $(this).data('request');
+        $.post('/dispatchers/requests/confirm-close-chat?request_id=' + requestID, function (data) {});
+    });
     
 
     // ******************************************************** //

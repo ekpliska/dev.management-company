@@ -47,6 +47,7 @@ class RequestsList extends BaseRequests {
         
         $this->requests_specialist_id = $specialist_id;
         $this->status = StatusRequest::STATUS_PERFORM;
+        $this->is_accept = true;
         
         if (!$this->save(false)) {
             return false;
@@ -62,6 +63,26 @@ class RequestsList extends BaseRequests {
         }
         
         return true;
+    }
+    
+    /*
+     * Отключение чата в заявке
+     */
+    public static function closeChat($request_id) {
+        
+        $request = self::findOne($request_id);
+        
+        if ($request->status != StatusRequest::STATUS_CLOSE && $request != StatusRequest::STATUS_REJECT) {
+            return false;
+        }
+        
+        if ($request->close_chat == BaseRequests::CHAT_OPEN) {
+            $request->close_chat = BaseRequests::CHAT_CLOSE;
+        } else {
+            $request->close_chat = BaseRequests::CHAT_OPEN;
+        }
+        return $request->save(false) ? true : false;
+        
     }
     
 }

@@ -129,12 +129,23 @@ $hide_btn = ($request['status'] == StatusRequest::STATUS_CLOSE || $request['stat
                 </div>
             </div>
             <div class="col-md-5 col-sm-6 col-xs-12">
-                <div class="content requests-view_chat">
+                <?php if ($request['status'] == StatusRequest::STATUS_REJECT || $request['status'] == StatusRequest::STATUS_CLOSE) : ?>
+                    <div class="text-right requests__chat-status">
+                        <label class="switch-rule switch-rule-orange">
+                            <?= Html::checkbox('chat_status', $request['close_chat'], [
+                                    'id' => 'close-chat',
+                                    'data-request' => $request['requests_id']])
+                            ?>
+                            <span class="slider slider-orange round"></span>
+                        </label>
+                        <span class="__label">Отключить чат</span>
+                    </div>
+                <?php endif; ?>
 
+                <div class="content requests-view_chat">
                     <?= $this->render('comments/view', [
                         'model' => $model_comment,
                         'comments_find' => $comments_find]) ?>
-
                 </div>
             </div>      
         </div>

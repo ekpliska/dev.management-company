@@ -5,7 +5,6 @@
     use yii\web\NotFoundHttpException;
     use yii\helpers\ArrayHelper;
     use app\modules\dispatchers\controllers\AppDispatchersController;
-    use app\models\Requests;
     use app\models\PaidServices;
     use app\models\CommentsToRequest;
     use app\models\Image;
@@ -75,7 +74,7 @@ class RequestsController extends AppDispatchersController {
     
     public function actionViewRequest($request_number) {
         
-        $request = Requests::findRequestToIdent($request_number);
+        $request = RequestsList::findRequestToIdent($request_number);
         
         if ($request == null) {
             throw new NotFoundHttpException('Вы обратились к несуществующей странице');
@@ -185,7 +184,7 @@ class RequestsController extends AppDispatchersController {
             
             switch ($request_type) {
                 case 'requests':
-                    $request = Requests::findOne($request_id);
+                    $request = RequestsList::findOne($request_id);
                     break;
                 case 'paid-requests':
                     $request = PaidServices::findOne($request_id);
@@ -303,4 +302,21 @@ class RequestsController extends AppDispatchersController {
         
     }
     
+    /*
+     * Запрос на отключение чата у заявки
+     */
+    public function actionConfirmCloseChat($request_id) {
+        
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        
+        if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
+            
+            if (!RequestsList::closeChat($request_id)) {
+                return ['success' => false];
+            }
+            
+            return ['success' => true];
+        }
+        
+    }
 }
