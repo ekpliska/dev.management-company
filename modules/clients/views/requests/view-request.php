@@ -99,9 +99,10 @@ $this->params['breadcrumbs'][] = 'Заявка ID ' . $request_info['requests_id
             <div class="content requests-view_chat">
                 
                 <?= $this->render('form/_comment', [
-                    'model' => $comments, 
-                    'comments_find' => $comments_find, 
-                    'request_id' => $request_info['requests_id']
+                        'model' => $comments, 
+                        'comments_find' => $comments_find, 
+                        'request_id' => $request_info['requests_id'],
+                        'status_chat' => $request_info['close_chat'],
                 ]); ?>                  
             </div>
         </div>      

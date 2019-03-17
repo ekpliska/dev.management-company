@@ -3,6 +3,7 @@
     use yii\helpers\Html;
     use yii\widgets\Pjax;
     use app\helpers\FormatHelpers;
+    use app\models\Requests;
 /* 
  * Форма добавления комментариев
  */
@@ -40,34 +41,38 @@ $prev_date = 0;
 <?php Pjax::end() ?>  
 
 <?php Pjax::begin(['id' => 'new_note']) ?>
-    <div class="chat-msg text-right">
+    <?php if ($status_chat == Requests::CHAT_OPEN) :?>
+        <div class="chat-msg text-right">
+            <?php
+                $form = ActiveForm::begin([
+                    'id' => 'add-comment',
+                    'validateOnSubmit' => true,
+                    'validateOnChange' => false,
+                    'validateOnBlur' => false,
+                    'fieldConfig' => [
+                        'template' => '{input}',
+                    ],
+                    'options' => [
+                        'data-pjax' => true,
+                    ],
+                ]);
+            ?>
+            <?= $form->field($model, 'comments_text', [
+                    'template' => '<span id="label-count"></span><span id="label-count-left"></span>{input}'])
+                    ->textarea([
+                        'placeHolder' => $model->getAttributeLabel('comments_text'), 
+                        'rows' => 7])
+                    ->label(false) ?>    
 
-        <?php
-            $form = ActiveForm::begin([
-                'id' => 'add-comment',
-                'validateOnSubmit' => true,
-                'validateOnChange' => false,
-                'validateOnBlur' => false,
-                'fieldConfig' => [
-                    'template' => '{input}',
-                ],
-                'options' => [
-                    'data-pjax' => true,
-                ],
-            ]);
-        ?>
-        <?= $form->field($model, 'comments_text', [
-                'template' => '<span id="label-count"></span><span id="label-count-left"></span>{input}'])
-                ->textarea([
-                    'placeHolder' => $model->getAttributeLabel('comments_text'), 
-                    'rows' => 7])
-                ->label(false) ?>    
+            <?= Html::submitButton('Отправить <i class="glyphicon glyphicon-arrow-right"></i>', ['class' => 'chat-btn']) ?>
 
-        <?= Html::submitButton('Отправить <i class="glyphicon glyphicon-arrow-right"></i>', ['class' => 'chat-btn']) ?>
-
-        <?php ActiveForm::end(); ?>
-
-    </div>
+            <?php ActiveForm::end(); ?>
+        </div>
+    <?php else: ?>
+        <div class="chat-msg__off">
+            <p>Внимание! Общение в системе чате отключено.</p>
+        </div>
+    <?php endif; ?>
 <?php Pjax::end() ?>  
 
 <?php

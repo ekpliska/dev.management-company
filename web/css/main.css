@@ -1809,6 +1809,14 @@ p.right {
     box-shadow: none;
     -webkit-box-shadow: none;
 }
+.chat-msg__off > p {
+    padding: 10px;
+    color: #777;
+    font-size: 12px;
+    text-align: center;
+    margin: 50px 50px 0 35px;
+    background-color: #ddd;
+}
 .chat-btn {
     color: #2d18b4;
     font-family: "Mplus 1p Medium";

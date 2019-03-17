@@ -317,6 +317,7 @@ class Requests extends ActiveRecord
         } else {
             $this->date_closed = null;
             $this->requests_grade = null;
+            $this->close_chat = Requests::CHAT_OPEN;
             $request_answers = RequestAnswers::deleteAll(['anwswer_request_id' => $this->requests_id]);
         }
         
