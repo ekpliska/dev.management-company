@@ -3,6 +3,7 @@
     namespace app\modules\managers\controllers;
     use Yii;
     use yii\web\UploadedFile;
+    use yii\helpers\Url;
     use yii\data\Pagination;
     use app\modules\managers\controllers\AppManagersController;
     use app\modules\managers\models\form\NewsForm;
@@ -57,15 +58,15 @@ class NewsController extends AppManagersController {
             
             'image-upload' => [
                 'class' => 'vova07\imperavi\actions\UploadFileAction',
-                'url' => 'http://dev.management-company/web/upload/news', // Directory URL address, where files are stored.
+                'url' => Url::base() . '/web/upload/news', // Directory URL address, where files are stored.
                 'path' => '@webroot/upload/news', // Or absolute path to directory where files are stored.
             ],
             
             'file-delete' => [
                 'class' => 'vova07\imperavi\actions\DeleteFileAction',
-                'url' => 'http://dev.management-company/web/upload/news', // Directory URL address, where files are stored.
+                'url' => Url::base() . '/web/upload/news', // Directory URL address, where files are stored.
                 'path' => '/var/www/my-site.com/dev.management-company/web/upload/news', // Or absolute path to directory where files are stored.
-            ],            
+            ],
          
        ]; 
         

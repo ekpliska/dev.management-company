@@ -2,6 +2,7 @@
 
     use yii\bootstrap\Modal;
     use yii\bootstrap\ActiveForm;
+    use kartik\file\FileInput;
     use yii\helpers\Html;
 
 /* 
@@ -45,12 +46,30 @@
                 ->textarea(['rows' => 10, 'class' => 'field-input-textarea-modal comment'])
                 ->label($model->getAttributeLabel('requests_comment'), ['class' => 'field-label-modal']) ?>
 
-        <?= $form->field($model, 'gallery[]', [
+        <?php /* = $form->field($model, 'gallery[]', [
                 'template' => '<label class="modal_btn-upload" role="button"><i class="fa fa-paperclip" aria-hidden="true"></i>{input}{label}{error}</label>'])
                 ->input('file', [
                     'class' => 'addImages hidden', 
                     'multiple' => true])
-                ->label(false) ?>
+                ->label(false) */ ?>
+
+        <?= $form->field($model, 'gallery[]')
+                ->widget(FileInput::classname(), [
+                    'options' => [
+                        'accept' => 'image/*',
+                        'multiple' => true,
+                    ],
+                    'pluginOptions' => [
+                        'maxFileCount' => 4,
+                        'maxFileSize' => 2800,
+                        'showCaption' => false,
+                        'showRemove' => false,
+                        'showUpload' => false,
+                        'browseClass' => 'btn btn-primary btn-block',
+                        'browseIcon' => '<i class="glyphicon glyphicon-camera"></i> ',
+                        'browseLabel' =>  'Загрузить фотографии'
+                    ]
+            ])->label(false) ?>
 
         <div class="form__upload-image">
             <ul id="uploadImagesList">
