@@ -3,6 +3,7 @@
     use yii\helpers\Html;
     use yii\widgets\Breadcrumbs;
     use app\models\StatusRequest;
+    use app\modules\dispatchers\widgets\AlertsShow;
     use app\helpers\StatusHelpers;
     use app\helpers\FormatHelpers;
     use app\helpers\FormatFullNameUser;
@@ -27,6 +28,8 @@ $hide_btn = ($request['status'] == StatusRequest::STATUS_CLOSE || $request['stat
             'homeLink' => ['label' => 'ELSA | Диспетчер', 'url' => ['dispatchers/index']],
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]) ?>
+    
+    <?= AlertsShow::widget() ?>
     
     <div class="requests-view">
 

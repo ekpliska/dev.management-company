@@ -43,35 +43,37 @@ class Notifications extends ActiveRecord {
     
     /*
      * Формирование уведомления для Собственника
-     * @param integer $user_id ID пользователя
      * @param string $type_notice Тип уведомления
      * @param string $request_num Номер заявки
-     * @param string $value Статус заявки
      */
-    public function createNoticeStatus($user_id, $type_notice, $request_num, $value) {
+    public static function createNoticeStatus($type_notice, $request_id, $status_name) {
+                
+        $status_request = StatusRequest::statusName($status_name);
         
-        if (empty($user_id) || empty($type_notice)) {
-            return false;
-        }
-        
-        $status_request = StatusRequest::statusName($value);
-        
-        $this->user_uid = 151;
-        $this->type_notification = $type_notice;
+        $notice = new Notifications();
 
         switch ($type_notice) {
             case self::TYPE_CHANGE_STATUS_IN_REQUEST:
-                $message = "У заявки ID{$request_num} установлен статус {$status_request}";
+                // ФОрмируем запрос по заявке
+                $request_info = Requests::getFullInfoRequest($request_id);
+                // Проверяем существование заявки
+                if ($request_info == null) {
+                    return false;
+                }
+                // Определяем статус заявки
+                $notice->user_uid = $request_info->personalAccount->client->user->user_id;
+                $notice->type_notification = $type_notice;
+                $message = "У заявки ID{$request_info->requests_ident} установлен статус {$status_request}";
+                $notice->value_1 = $request_info->requests_ident;
                 break;
             case self::TYPE_CHANGE_STATUS_IN_PAID_REQUEST:
                 $url = null;
                 break;
         }
         
-        $this->message = $message;
-        $this->value_1 = $request_num;
+        $notice->message = $message;
         
-        return $this->save(false) ? true : false;
+        return $notice->save(false) ? true : false;
         
     }
 

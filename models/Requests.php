@@ -224,6 +224,19 @@ class Requests extends ActiveRecord
     }
     
     /*
+     * Получить подробную информацию о заявке
+     */
+    public static function getFullInfoRequest($request_id) {
+        
+        return self::find()
+                ->with(['personalAccount', 'personalAccount.client.user'])
+                ->where(['requests_id' => $request_id])
+                ->one();
+    
+    }
+
+
+    /*
      * Поиск заявки по его уникальному номеру и Лицевому счету
      */
     public static function findRequestByIdent($request_numder, $account_id) {

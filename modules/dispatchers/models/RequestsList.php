@@ -1,6 +1,7 @@
 <?php
 
     namespace app\modules\dispatchers\models;
+    use Yii;
     use app\models\Requests as BaseRequests;
     use app\models\StatusRequest;
     use app\models\Notifications;
@@ -45,22 +46,21 @@ class RequestsList extends BaseRequests {
      */
     public function chooseSpecialist($specialist_id) {
         
+        // Формируем уведомление
+        if (empty($this->requests_specialist_id)) {
+            Notifications::createNoticeStatus(Notifications::TYPE_CHANGE_STATUS_IN_REQUEST, $this->requests_id, StatusRequest::STATUS_PERFORM);
+        }
+        
+        $this->requests_dispatcher_id = Yii::$app->profileDispatcher->employeeID;
         $this->requests_specialist_id = $specialist_id;
         $this->status = StatusRequest::STATUS_PERFORM;
         $this->is_accept = true;
         
-        if (!$this->save(false)) {
+        
+        if (!$this->save()) {
             return false;
         }
         
-        if (empty($this->requests_specialist_id)) {
-            $notification = new Notifications();
-            $notification->createNoticeStatus(
-                    151, 
-                    Notifications::TYPE_CHANGE_STATUS_IN_REQUEST, 
-                    $this->requests_ident,
-                    StatusRequest::STATUS_PERFORM);
-        }
         
         return true;
     }

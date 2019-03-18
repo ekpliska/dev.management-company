@@ -133,7 +133,7 @@ class RequestsController extends AppDispatchersController {
      */
     public function actionChooseSpecialist() {
         
-        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+//        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         
         $request_id = Yii::$app->request->post('requestId');
         $specialist_id = Yii::$app->request->post('specialistId');
@@ -143,24 +143,26 @@ class RequestsController extends AppDispatchersController {
             
             switch ($type_request) {
                 case 'requests':
-                    $request = RequestsList::findByID($request_id);
-                    $request->chooseSpecialist($specialist_id);
-                    // После назначения Диспетчером Специалиста, заявка считается "Принятой", статус "На исполнении"
-                    $request->setSatusRequest(StatusRequest::STATUS_PERFORM);
-                    return ['success' => true];
+                    $result = RequestsList::findByID($request_id);
+                    $result->chooseSpecialist($specialist_id);
                     break;
                 case 'paid-requests':
-                    $paid_request = PaidServicesList::findOne($request_id);
-                    $paid_request->chooseSpecialist($specialist_id);
-                    return ['success' => true];
+                    $result = PaidServicesList::findOne($request_id);
+                    $result->chooseSpecialist($specialist_id);
                     break;
                 default:
-                    return ['success' => false];                    
                     break;
             }
+            
+            if (!$result) {
+                Yii::$app->session->setFlash('error', ['message' => 'Возникла внутренная ошибка. Обновите страницу и повторите действие заново']);
+                return $this->redirect(Yii::$app->request->referrer);
+            }
+            
+            Yii::$app->session->setFlash('success', ['message' => 'Изменения в теле заявки были успешно сохранены']);
+            return $this->redirect(Yii::$app->request->referrer);
+                        
         }
-        
-        return ['success' => false];
         
     }
     

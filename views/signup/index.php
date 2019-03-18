@@ -36,29 +36,29 @@ $this->title = 'Customers | Регистрация';
             <li id="stepDesc2" class="<?= $_SESSION['step_three'] == 'success-true' ? 'current' : ''?>">Шаг 3<span>Завершение регистрации</span></li>
         </ul>
 
-        <?php // if ($_SESSION['step_one'] == 'success-true') : ?>
+        <?php if ($_SESSION['step_one'] == 'success-true') : ?>
             <div id="step0">
                 <fieldset>
                     <?= $this->render('form/step_one', ['model_step_one' => $model_step_one]) ?>
                 </fieldset>
             </div>
-        <?php // endif; ?>
+        <?php endif; ?>
 
-        <?php // if ($_SESSION['step_two'] == 'success-true') : ?>
+        <?php if ($_SESSION['step_two'] == 'success-true') : ?>
             <div id="step1">
                 <fieldset>
                     <?= $this->render('form/step_two', ['model_step_two' => $model_step_two]) ?>
                 </fieldset>
             </div>
-        <?php // endif; ?>
+        <?php endif; ?>
 
-        <?php // if ($_SESSION['step_three'] == 'success-true') : ?>
+        <?php if ($_SESSION['step_three'] == 'success-true') : ?>
             <div id="step2">
                 <fieldset>
                     <?= $this->render('form/step_three', ['model_step_three' => $model_step_three]) ?>
                 </fieldset>
             </div>
-        <?php // endif; ?>
+        <?php endif; ?>
         
     </div>
     
