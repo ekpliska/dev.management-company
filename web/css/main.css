@@ -1816,6 +1816,7 @@ p.right {
     text-align: center;
     margin: 50px 50px 0 35px;
     background-color: #ddd;
+    border-radius: 50px;
 }
 .chat-btn {
     color: #2d18b4;
@@ -2009,20 +2010,20 @@ p.right {
     box-shadow: 0px 1px 4px 6px rgba(0,101,255,0.28);
 }
 .req-badge-work-page {
-    border: 2px solid #7c7c7c;
-    box-shadow: 0px 1px 4px 6px rgba(255,125,125,0.26);
+    border: 2px solid #ff7d7d;
+    box-shadow: 0px 1px 4px 6px rgba(252,193,193,0.83);
 }
 .req-badge-complete-page {
-    border: 2px solid #1fd68d;
-    box-shadow: 0px 1px 4px 6px rgba(56,231,161,0.54);
+    border: 2px solid #7c7c7c;
+    box-shadow: 0px 1px 4px 6px rgba(255,125,125,0.26);
 }
 .req-badge-rectification-page {
     border: 2px solid #e17dff;
     box-shadow: 0px 1px 4px 6px rgba(225,125,255,0.42);
 }
 .req-badge-close-page {
-    border: 2px solid #ff7d7d;
-    box-shadow: 0px 1px 4px 6px rgba(252,193,193,0.83);
+    border: 2px solid #1fd68d;
+    box-shadow: 0px 1px 4px 6px rgba(56,231,161,0.54);
 }
 .req-badge-reject-page {
     border: 2px solid #5f697a;
@@ -2036,14 +2037,14 @@ p.right {
     padding: 8px 15px;
 }
 .req-badge-work-page span:first-child {
-    border-right: 1px solid #7c7c7c;
+    border-right: 1px solid #ff7d7d;
     padding: 8px 15px;
 }
 .req-badge-work-page span:last-child {
     padding: 8px 15px;
 }
 .req-badge-complete-page span:first-child {
-    border-right: 1px solid #1fd68d;
+    border-right: 1px solid #7c7c7c;
     padding: 8px 15px;
 }
 .req-badge-complete-page span:last-child {
@@ -2057,7 +2058,7 @@ p.right {
     padding: 8px 15px;
 }
 .req-badge-close-page span:first-child {
-    border-right: 1px solid #ff7d7d;
+    border-right: 1px solid #1fd68d;
     padding: 8px 15px;
 }
 .req-badge-close-page span:last-child {
