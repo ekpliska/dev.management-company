@@ -74,6 +74,7 @@ class Requests extends BaseRequests {
                 'updated_at' => $request->updated_at,
                 'date_closed' => $request->date_closed,
                 'specialist' => !empty($request['employeeSpecialist']['fullName']) ? $request['employeeSpecialist']['fullName'] : 'Не незначен',
+                'isChat' => $request->close_chat,
             ],
             'images' => !empty($images) ? $images : null,
         ];
