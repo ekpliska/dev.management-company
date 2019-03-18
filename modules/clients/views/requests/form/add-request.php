@@ -65,7 +65,7 @@
                         'showCaption' => false,
                         'showRemove' => false,
                         'showUpload' => false,
-                        'browseClass' => 'btn btn-primary btn-block',
+                        'browseClass' => 'btn btn-block',
                         'browseIcon' => '<i class="glyphicon glyphicon-camera"></i> ',
                         'browseLabel' =>  'Загрузить фотографии'
                     ]

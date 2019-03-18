@@ -3645,3 +3645,54 @@ a.employee-profile:hover {
     font-weight: bold;
 }
 /* Конец Таблица Сотрудники */
+
+/* Drag and Drop files */
+.file-preview {
+    border: none;
+    padding: 0;
+}
+.file-drop-zone-title {
+    color: #999;
+    font-size: 16px;
+    padding: 39px 10px;
+    cursor: default;
+}
+.fileinput-remove {
+    visibility: hidden;
+}
+.load-images {
+    background: transparent;
+}
+.btn-block {
+    color: #999;
+}
+.btn-block:hover {
+    color: #fff;
+}
+.krajee-default.file-preview-frame {
+    margin: 0;
+}
+.krajee-default.file-preview-frame .kv-file-content {
+    width: 118px;
+    height: 70px;
+}
+.krajee-default .file-caption-info, .krajee-default .file-size-info {
+    width: 118px;
+}
+.file-upload-indicator {
+    visibility: hidden;
+}
+.file-zoom-dialog .btn-navigate {
+    opacity: unset;
+    color: #fff;    
+}
+.file-error-message {
+    color: #ef693a;
+    background-color: transparent;
+    border: 1px solid #ef693a;
+    padding: 10px;
+}
+.krajee-default .file-other-icon {
+    font-size: 1em;
+}
+/* End Drag and Drop files */
