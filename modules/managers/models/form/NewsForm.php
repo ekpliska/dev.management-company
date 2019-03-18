@@ -37,26 +37,6 @@ class NewsForm extends Model {
     // Контрагент
     public $partner;
 
-    public function behaviors() {
-        return [
-            'uploadBehavior' => [
-                'class' => UploadBehavior::className(),
-                'attributes' => [
-                    'preview_url' => [
-                        'path' => '/path/to/previews',
-                        'tempPath' => '/path/to/temp/files/previews',
-                        'url' => '/url/to/previews'
-                    ],
-                    'image_url' => [
-                        'path' => '/path/to/images',
-                        'tempPath' => '/path/to/temp/files/images',
-                        'url' => '/url/to/images'
-                    ]
-                ]
-            ]
-        ];
-    }
-
     public function rules() {
         return [
             [[
