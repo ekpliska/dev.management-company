@@ -28,6 +28,10 @@ $this->params['breadcrumbs'][] = "Оплата, квитанции {$paiment_inf
             <?= Yii::$app->userProfile->fullNameClient ?>
         </p>
         <p class="payment_user-info">
+            <b>Лицевой счет</b>
+            <?= $this->context->_current_account_number ?>
+        </p>
+        <p class="payment_user-info">
             <i class="glyphicon glyphicon-home"></i>&nbsp;
             <?= Yii::$app->userProfile->getFullAdress($this->context->_current_account_id) ?>
         </p>
@@ -56,8 +60,7 @@ $this->params['breadcrumbs'][] = "Оплата, квитанции {$paiment_inf
                     ], 
                 ])
             ?>
-        
-
+            
             <?= $form->field($model, 'payment_sum')
                     ->widget(MaskedInput::className(), [
                         'clientOptions' => [

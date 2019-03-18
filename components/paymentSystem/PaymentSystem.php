@@ -78,10 +78,17 @@ class PaymentSystem {
      * Отправка платежа
      */
     public function send_payment($method, $post_data) {
-        var_dump($post_data); die();
+        
         $data = [
             'userName' => $this->username,
             'password' => $this->password,
+            
+//            'accountNumber' => '',
+//            'fullNameClient' => '', 
+//            'periodPay' => '',
+//            'forWhat' => '',
+//            'addressFlat' => '',
+            
             'PurchaseAmt' => $post_data['PurchaseAmt'],
             'PurchaseDesc' => $post_data['PurchaseDesc'],
             'CountryCode' => $this->country_code,
