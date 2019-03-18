@@ -173,6 +173,7 @@ $config = [
                 'login' => 'site/login',
                 'registration' => 'site/registration',
                 'request-password-reset' => 'site/request-password-reset',
+                'signup' => 'signup/index',
                 
                 // REST Rules
                 [
