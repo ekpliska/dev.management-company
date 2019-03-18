@@ -16,8 +16,9 @@
  */
 class PaymentForm extends Model {
     
+    // Сумма платежа
     public $payment_sum;
-    
+
     // Платеж
     private $_payment;
 
@@ -57,9 +58,13 @@ class PaymentForm extends Model {
             return false;
         }
         
+        /*
+         * PurchaseAmt     Сумма оплаты
+         * PurchaseDesc    Уникакльный номер заказа
+         */
         $post_data = [
-            'orderNumber' => $this->_payment->unique_number,
-            'amount' => $this->payment_sum,
+            'PurchaseAmt' => $this->payment_sum,
+            'PurchaseDesc' => $this->_payment->unique_number,
         ];
         
         // Отправляем запрос на проведение оплаты платежа

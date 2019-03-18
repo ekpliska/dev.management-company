@@ -3647,6 +3647,12 @@ a.employee-profile:hover {
 /* Конец Таблица Сотрудники */
 
 /* Drag and Drop files */
+.file-drop-zone {
+    border: 1px dashed #8b709d;
+}
+.file-drop-zone-title {
+    color: #8b709d !important;
+}
 .file-preview {
     border: none;
     padding: 0;
@@ -3664,7 +3670,7 @@ a.employee-profile:hover {
     background: transparent;
 }
 .btn-block {
-    color: #999;
+    color: #8b709d;
 }
 .btn-block:hover {
     color: #fff;
@@ -3674,6 +3680,9 @@ a.employee-profile:hover {
 }
 .krajee-default.file-preview-frame .kv-file-content {
     width: 118px;
+    height: 70px;
+}
+.file-preview-pdf {
     height: 70px;
 }
 .krajee-default .file-caption-info, .krajee-default .file-size-info {

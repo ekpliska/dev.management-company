@@ -3,7 +3,6 @@
     namespace app\modules\managers\models\form;
     use Yii;
     use yii\base\Model;
-    use vova07\fileapi\behaviors\UploadBehavior;
     use app\models\News;
     use yii\helpers\HtmlPurifier;
 
@@ -57,7 +56,7 @@ class NewsForm extends Model {
             [['preview'], 'file', 'extensions' => 'png, jpg, jpeg'],
             [['preview'], 'image', 'maxWidth' => 510, 'maxHeight' => 510],
             
-            [['files'], 'file', 'extensions' => 'doc, docx, pdf, xls, xlsx, ppt, pptx, txt', 'maxFiles' => 4],
+            [['files'], 'file', 'extensions' => 'doc, docx, pdf, xls, xlsx, ppt, pptx, png, jpg, jpeg', 'maxFiles' => 4],
             
             [['partner', 'isAdvert'], 'integer'],
             
