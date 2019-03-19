@@ -43,7 +43,7 @@ class PaidServiceLists extends PaidServices {
         
         foreach ($requests as $key => $request) {
             $results['paid-requests'][] = [
-                'services_id' => $request->services_id,
+                'paid_request_id' => $request->services_id,
                 'servise_category' => $request->categoryService->category_name,
                 'name_service' => $request->service->service_name,
                 'comment' => $request->services_comment,

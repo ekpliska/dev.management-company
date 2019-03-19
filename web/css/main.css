@@ -1,27 +1,15 @@
 /*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
+ * Main CSS style
 */
-/* 
-    Created on : 16.11.2018, 14:19:54
-    Author     : Ekaterina
-*/
+
+
 @font-face{
-    font-family: "Mplus 1p";
-    src: url('fonts/MPLUS1p-Regular.ttf');
-}
-@font-face{
-    font-family: "Mplus 1p Medium";
-    src: url('fonts/MPLUS1p-Medium.ttf');
-}
-@font-face{
-    font-family: "Mplus 1p Bold";
-    src: url('fonts/MPLUS1p-Bold.ttf');
+    font-family: 'Mplus1p';
+    src: url('fonts/Mplus1p.ttf');
 }
 
 html, body {
-    font-family: "Mplus 1p";
+    font-family: 'Mplus1p';
     height:100%;
 }
 a, a:hover, a:active {
@@ -153,7 +141,6 @@ button:hover {
 /* Слайдер на главной странице */
 .carousel-caption {
     top: 35px;
-    font-family: "Mplus 1p";
 }
 .general-slider,
 .general-right-block, 
@@ -198,8 +185,7 @@ button:hover {
     border-radius: 18px;
     margin: 10px;
     background-color: rgba(0, 0, 0, 0.64);
-    color: #FFFFFF;
-    font-family: "Mplus 1p";
+    color: #fff;
     font-size: 16px;
     letter-spacing: 1.2px;
     line-height: 23px;
@@ -255,9 +241,9 @@ button:hover {
     padding: 60px 10px 10px 20px;
 }
 .start-page__btn-block {
+    width: 100%;
     position: absolute;
     bottom: 50px;
-    left: 20%;
 }
 .login-page__reset-password {
     bottom: 0;
@@ -319,6 +305,7 @@ button:hover {
     color: #2d18b4;
     font-size: 24px;
     letter-spacing: 4px;
+    font-weight: bold;
 }
 .registration-form-group, 
 .login-form-group {

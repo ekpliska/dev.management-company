@@ -3,6 +3,23 @@
 */
 
 /* Sliders */
+@media screen and (max-width: 1200px) {
+    .slider-product-icon {
+        margin-top: 80px;
+        height: 170px;
+        width: 170px;
+    }
+}
+@media screen and (max-width: 1090px) {
+    .slider-product-icon {
+        height: 170px;
+        width: 170px;
+        margin-top: 50px;
+    }
+    .slide-txt-block {
+        padding: 0 70px;
+    }
+}
 @media screen and (min-width: 768px) {
     .carousel-caption {
         left: 0;
@@ -13,6 +30,9 @@
     .carousel-caption {
         left: 0;
         right: 0;
+    }
+    .slide-txt-block {
+        padding: 0 30px;
     }
 }
 @media screen and (max-width: 650px) {
@@ -32,28 +52,69 @@
     .app-btn-group.text-center {
         display: grid;
     }
+    .slide-txt-block {
+        font-size: 14px;
+        padding: 10px;
+    }
+    .carousel-indicators {
+        bottom: 5%;
+    }
+    .app-btn-group a {
+        font-size: 14px;
+    }
 }
 /* End Sliders */
 
 /* Register Page, Login Page */
+@media screen and (max-width: 1360px) {
+    #send-request-to-sms {
+        top: 20px;
+    }
+}
 @media screen and (max-width: 1260px) {
+    #send-request-to-sms {
+        top: 40px;
+    }
     .registration-form-group, .login-form-group {
         padding-left: 10%;
         padding-right: 10%;
     }
 }
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 1120px) {
+    #send-request-to-sms {
+        top: 20px;
+    }    
+}
+@media screen and (max-width: 991px) {
+    #send-request-to-sms {
+        top: 40px;
+    }
     .registration-form-group, .login-form-group {
         padding-left: 17%;
         padding-right: 17%;
     }
 }
+@media screen and (max-width: 699px) {
+    #send-request-to-sms {
+        top: 20px;
+    }
+}
 @media screen and (max-width: 650px) {
+    #send-request-to-sms {
+        top: 40px;
+        font-size: 12px;
+    }
     .registration-form-group, .login-form-group {
         padding-left: 7%;
         padding-right: 7%;
     }
 }
+@media screen and (max-width: 540px) {
+    #send-request-to-sms {
+        top: 20px;
+    }
+}
+
 
 /* Nav menu */
 @media screen and (min-width: 991px) {

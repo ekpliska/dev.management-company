@@ -131,41 +131,6 @@ form .has-error .field::before {
 
 /* Конец формы в модальном окне */
 
-/* Шаги, регистрация */
-legend { 
-    font-size: 18px; 
-    margin: 0px; 
-    padding: 10px 0px; 
-    color: #b0232a; 
-    font-weight: bold;
-}
-
-#steps { 
-    list-style: none; 
-    width: 100%; 
-    overflow: hidden;
-    margin: 0px; 
-    padding: 0px;
-}
-
-#steps li {
-    font-size: 20px; 
-    float: left; 
-    padding: 10px; 
-    color: #b0b1b3;
-    font-family: "Mplus 1p Medium";
-}
-
-#steps li span {
-    font-size: 11px; 
-    display: block;
-}
-
-#steps li.current { 
-    color: #123750;
-}
-/* Конец шаги, регистрация */
-
 /* Поле ввода СМС кода */
 .field-sms {
     position: relative;

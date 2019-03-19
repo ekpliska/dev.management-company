@@ -82,16 +82,21 @@ legend {
     float: left; 
     padding: 10px; 
     color: #b0b1b3;
-    font-family: "Mplus 1p Medium";
 }
 
 #steps li span {
-    font-size: 11px; 
+    font-size: 12px; 
     display: block;
+    font-weight: normal;
 }
 
 #steps li.current { 
-    color: #123750;
+    color: #2d18b4;
+    font-weight: bold;
+}
+.error-summary > ul {
+    list-style: none;
+    padding: 10px 0;
 }
 /* Конец шаги, регистрация */
 
