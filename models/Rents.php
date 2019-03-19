@@ -46,7 +46,7 @@ class Rents extends ActiveRecord
             [
                 ['rents_name', 'rents_second_name', 'rents_surname'], 
                 'match',
-                'pattern' => '/^[А-Яа-я\ \-]+$/iu',
+                'pattern' => '/^[А-Яа-я\ \-]+$/i',
                 'message' => 'Поле должно содержать буквы русского алфавита',
             ],
             

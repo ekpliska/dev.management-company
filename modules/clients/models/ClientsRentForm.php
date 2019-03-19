@@ -32,7 +32,7 @@ class ClientsRentForm extends Model {
                 'rents_surname', 'rents_name', 'rents_second_name', 
                 'rents_mobile', 
                 'rents_email', 
-                'password', 'password_repeat'], 'required', 'on' => self::SCENARIO_AJAX_VALIDATION],
+                'password', 'password_repeat'], 'required', 'on' => self::SCENARIO_AJAX_VALIDATION, 'message' => 'Это поле обязательно для заполнения'],
             
             [['rents_surname', 'rents_name', 'rents_second_name'], 'filter', 'filter' => 'trim', 'on' => self::SCENARIO_AJAX_VALIDATION],
             
@@ -41,7 +41,7 @@ class ClientsRentForm extends Model {
             [
                 ['rents_surname', 'rents_name', 'rents_second_name'], 
                 'match', 
-                'pattern' => '/^[А-Яа-я\ \-]+$/iu', 
+                'pattern' => '/^[А-Яа-я\ \-]$/i', 
                 'on' => self::SCENARIO_AJAX_VALIDATION,
                 'message' => 'Поле может содержать только буквы русского алфавита, и знак "-"',
             ],
@@ -66,7 +66,7 @@ class ClientsRentForm extends Model {
             ['rents_email', 'email', 'on' => self::SCENARIO_AJAX_VALIDATION],
             
             ['rents_email', 'match',
-                'pattern' => '/^[A-Za-z0-9\_\-\@\.]+$/iu',
+                'pattern' => '/^[A-Za-z0-9\_\-\@\.]+$/i',
                 'message' => 'Поле "{attribute}" может содержать только буквы английского алфавита, цифры, знаки "-", "_"',
                 'on' => self::SCENARIO_AJAX_VALIDATION,
             ],            
@@ -74,7 +74,7 @@ class ClientsRentForm extends Model {
             [['password', 'password_repeat'], 'string', 'min' => 6, 'max' => 12, 'on' => self::SCENARIO_AJAX_VALIDATION],
             [['password', 'password_repeat'],
                 'match', 
-                'pattern' => '/^[A-Za-z0-9\_\-]+$/iu', 
+                'pattern' => '/^[A-Za-z0-9\_\-]+$/i', 
                 'message' => 'Поле "{attribute}" может содержать только буквы английского алфавита, цифры, знаки "-", "_"',
                 'on' => self::SCENARIO_AJAX_VALIDATION,
             ],
