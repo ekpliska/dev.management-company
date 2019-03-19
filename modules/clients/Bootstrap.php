@@ -32,6 +32,7 @@ class Bootstrap implements BootstrapInterface {
                 'paid-services/filter-category-services' => 'clients/paid-services/filter-category-services',
                 'paid-services/search-by-specialist' => 'clients/paid-services/search-by-specialist',
                 'paid-services/order-services' => 'clients/paid-services/order-services',
+                'paid-services/add-score-request' => 'clients/paid-services/add-score-request',
                 'paid-services' => 'clients/paid-services/index',
                 
                 // Собственники, лицевой счет

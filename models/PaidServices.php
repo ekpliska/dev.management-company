@@ -55,7 +55,17 @@ class PaidServices extends ActiveRecord
             [['services_comment'], 'string', 'on' => [self::SCENARIO_ADD_SERVICE, self::SCENARIO_EDIT_REQUEST]],
             [['services_comment'], 'string', 'min' => 10, 'max' => 255, 'on' => [self::SCENARIO_ADD_SERVICE, self::SCENARIO_EDIT_REQUEST]],
             
-            [['services_servise_category_id', 'services_name_services_id', 'created_at', 'updated_at', 'status', 'services_dispatcher_id', 'services_specialist_id', 'services_account_id'], 'integer'],
+            [[
+                'services_servise_category_id', 
+                'services_name_services_id', 
+                'created_at', 
+                'updated_at', 
+                'status', 
+                'services_dispatcher_id', 
+                'services_specialist_id', 
+                'services_account_id',
+                'grade'], 'integer'],
+            
             [['services_number'], 'string', 'max' => 50],
             [['services_phone'], 'string', 'max' => 50],
             
@@ -122,11 +132,13 @@ class PaidServices extends ActiveRecord
         
         $query = (new \yii\db\Query())
                 ->select('p.services_number, '
+                        . 'p.services_id, '
                         . 'c.category_name, '
                         . 's.service_name, '
                         . 'p.created_at, p.services_comment, '
                         . 'e.employee_surname, e.employee_name, e.employee_second_name, '
                         . 'p.status, '
+                        . 'p.grade, '
                         . 'p.updated_at')
                 ->from('paid_services as p')
                 ->join('LEFT JOIN', 'services as s', 's.service_id = p.services_name_services_id')
@@ -296,6 +308,21 @@ class PaidServices extends ActiveRecord
         return $this->save(false) ? true : false;
         
     }
+    
+    /*
+     * Добавление оценки заявке
+     */
+    public function addGrade($score) {
+        
+        // Если заявка пришла как не Закрыта, кидаем исключение
+        if ($this->status != StatusRequest::STATUS_CLOSE) {
+            return false;
+        }
+        
+        $this->grade = $score;
+        return $this->save(false) ? true : false;
+        
+    }
 
     /**
      * Настройка полей для форм
@@ -314,6 +341,7 @@ class PaidServices extends ActiveRecord
             'services_dispatcher_id' => 'Диспетчер',
             'services_specialist_id' => 'Специалист',
             'services_account_id' => 'Лицевой счет',
+            'grade' => 'Оценка',
         ];
     }
 }

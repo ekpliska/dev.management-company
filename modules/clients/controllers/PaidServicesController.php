@@ -138,5 +138,31 @@ class PaidServicesController extends AppClientsController {
         }
         
     }
+    
+    /*
+     * Добавление оценки на заявку
+     */
+    public function actionAddScoreRequest() {
+        
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        
+        $score = Yii::$app->request->post('score');
+        $request_id = Yii::$app->request->post('request_id');
+        
+        if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
+            
+            // Ищем заявку на платную услугу
+            $result = PaidServices::findOne(['services_id' => $request_id]);
+            // Если заявка найдена и оценка поставлена
+            if ($result && $result->addGrade($score)) {
+                return ['success' => true];
+            }
+            
+            return ['success' => false];
+        }
+        
+        return ['success' => false];
+        
+    }
         
 }

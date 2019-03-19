@@ -2,6 +2,7 @@
 
     use yii\widgets\Breadcrumbs;
     use app\modules\clients\widgets\AlertsShow;
+    use app\modules\clients\widgets\ModalWindows;
     
 /* 
  * Заявки (Обзая страница)
@@ -31,3 +32,5 @@ $this->registerCss("
         }
 ");
 ?>
+
+<?= ModalWindows::widget(['modal_view' => 'default_dialog']) ?>

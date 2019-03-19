@@ -717,6 +717,46 @@ $(document).ready(function() {
     limitLettrs('.comment', 250, '#label-count', '#label-count-left');
     limitLettrs('#commentstorequest-comments_text', 250, '#label-count', '#label-count-left');
 
+
+    /*
+     * Добавление оценки для закрытой заявки на платную услугу
+     */
+    $('div[id ^= grade-]').raty({
+        score: function() {
+            return $(this).attr('data-rating');
+        },
+        readOnly: function() {
+            return $(this).attr('data-rating') == 0 ? false : true;
+        },
+        click: function(score) {
+            let requestID = $(this).attr('data-request');
+            
+            $.ajax({
+                url: 'add-score-request',
+                method: 'POST',
+                data: {
+                    score: score,
+                    request_id: requestID,
+                },
+                success: function(response) {
+                    var modalWindow = $('#default_modal-message');
+                    var modalMessage = modalWindow.find('#default_modal-message__text');
+                    modalWindow.find('.modal-header').html('Оценка качества обслужавания');
+                    
+                    if (response.success === true) {
+                        modalMessage.html('Спасибо, оценка принята! Ваше мнение очень важно для нас');
+                    } else if (response.success === false) {
+                        modalMessage.html('Ошибка высталения оценки. Обновите страницу и повторите действие еще раз.');
+                    }
+                    modalWindow.modal('show');
+                },
+                error: function() {
+                    console.log('Error #1000-09');
+                }
+            });
+        }
+    });    
+
     /* End Block of Paid Services */
 
 

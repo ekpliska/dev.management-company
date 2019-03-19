@@ -4,6 +4,8 @@
     use app\helpers\FormatFullNameUser;
     use yii\widgets\Pjax;
     use app\helpers\StatusHelpers;
+    use app\helpers\FormatHelpers;
+    use app\modules\clients\widgets\GradePaidService;
     
 /*
  * Вывод истории платных услуг
@@ -85,7 +87,14 @@
                 [
                     'attribute' => 'updated_at',
                     'label' => 'Дата закрытия',
-                    'format' => ['date', 'php:d.m.Y'],
+                    'value' => function ($data) {
+                        return FormatHelpers::formatDate($data['updated_at'], false, 0, false) . 
+                                GradePaidService::widget([
+                                    'request_id' => $data['services_id'], 
+                                    'request_status' => $data['status'],
+                                    'request_grade' => $data['grade']]);
+                    },
+                    'format' => 'raw',
                     'contentOptions' =>[
                         'class' => 'clients-table_main',
                     ],
