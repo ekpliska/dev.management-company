@@ -62,9 +62,19 @@ class StatusRequest {
     
     /*
      * Получить название статуса по его номеру
+     * Название статуса на русском
      */
     public static function statusName($status) {
         return ArrayHelper::getValue(self::getStatusNameArray(), $status);
+    }
+    
+    /*
+     * Получить название статуса по его номеру
+     * Название статуса ключем
+     * new, in_work,...
+     */
+    public static function statusNameKey($status) {
+        return ArrayHelper::getValue(self::getUserRequests(), $status);
     }
     
 }

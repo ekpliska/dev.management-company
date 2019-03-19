@@ -7,6 +7,8 @@
     use app\models\PersonalAccount;
     use app\models\PaidServices;
     use app\models\StatusRequest;
+    use app\models\Services;
+    use app\models\CategoryServices;
 
 /**
  * Создание заявки
@@ -40,6 +42,10 @@ class PaidRequestForm extends Model {
     public function save() {
         
         if (!$this->validate()) {
+            return false;
+        }
+        
+        if (Services::findOne(['service_id' => $this->service_id]) == null || CategoryServices::findOne(['category_id' => $this->category_id]) == null) {
             return false;
         }
         

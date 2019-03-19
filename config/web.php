@@ -208,6 +208,7 @@ $config = [
                     'extraPatterns' => [
                         'GET get-services/<category_id>' => 'get-services',
                         'GET info-service/<service_id>' => 'info-service',
+                        'GET view/<request_id>' => 'view',
                         'GET /' => 'index',
                     ]
                 ],

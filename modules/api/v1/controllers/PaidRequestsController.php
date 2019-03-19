@@ -25,7 +25,7 @@ class PaidRequestsController extends Controller {
         
         $behaviors['access'] = [
             'class' => AccessControl::className(),
-            'only' => ['index', 'get-services', 'info-service', 'history', 'create'],
+            'only' => ['index', 'get-services', 'info-service', 'history', 'create', 'view'],
             'rules' => [
                 [
                     'allow' => true,
@@ -44,7 +44,8 @@ class PaidRequestsController extends Controller {
             'get-services' => ['get'],
             'info-service' => ['get'],
             'history' => ['post'],
-            'create' => ['post']
+            'create' => ['post'],
+            'View' => ['get'],
         ];
     }
 
@@ -111,9 +112,20 @@ class PaidRequestsController extends Controller {
         if ($model->save()) {
             return ['success' => true];
         } else {
-            return $model;
+            return ['success' => false];
         }
         
+        
+    }
+    
+    /*
+     * Просмотр отдальной заявки на платную услугу
+     */
+    public function actionView($request_id) {
+        
+        $request_info = PaidServiceLists::getBodyRequest($request_id);
+        
+        return $request_info;
         
     }
     

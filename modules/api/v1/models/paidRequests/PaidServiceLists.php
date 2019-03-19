@@ -44,7 +44,7 @@ class PaidServiceLists extends PaidServices {
         foreach ($requests as $key => $request) {
             $results['paid-requests'][] = [
                 'services_id' => $request->services_id,
-//                'servise_category' => $request->categoryService->category_name,
+                'servise_category' => $request->categoryService->category_name,
                 'name_service' => $request->service->service_name,
                 'comment' => $request->services_comment,
                 'image' => $request->service->service_image,
@@ -53,6 +53,40 @@ class PaidServiceLists extends PaidServices {
 
         return $results;
         
+    }
+    
+    /*
+     * Получить тело заявки
+     */
+    public static function getBodyRequest($request_id) {
+        
+        $body_request = self::find()
+                ->with([
+                    'service',
+                    'categoryService',
+                    'personalAccount', 'personalAccount.flat', 'personalAccount.flat.house'])
+                ->where(['services_id' => $request_id])
+                ->one();
+        
+        if (empty($body_request)) {
+            return [
+                'success' => false,
+            ];
+        }
+        
+        $result = [
+            'paid_request_id' => $body_request->services_id,
+            'paid_number' => $body_request->services_number,
+            'category_name' => $body_request->categoryService->category_name,
+            'service_name' => $body_request->service->service_name,
+            'comment' => $body_request->services_comment,
+            'date_created' => $body_request->created_at,
+            'date_closed' => $body_request->date_closed,
+            'status' => \app\models\StatusRequest::statusNameKey($body_request->status),
+        ];
+        
+        return $result;
+                    
     }
     
 }
