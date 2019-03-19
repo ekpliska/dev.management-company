@@ -79,6 +79,7 @@ class PaidServiceLists extends PaidServices {
             'paid_number' => $body_request->services_number,
             'category_name' => $body_request->categoryService->category_name,
             'service_name' => $body_request->service->service_name,
+            'service_iamge' => $body_request->service->service_image,
             'comment' => $body_request->services_comment,
             'date_created' => $body_request->created_at,
             'date_closed' => $body_request->date_closed,

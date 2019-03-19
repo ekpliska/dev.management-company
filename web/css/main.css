@@ -2,7 +2,6 @@
  * Main CSS style
 */
 
-
 @font-face{
     font-family: 'Mplus1p';
     src: url('fonts/Mplus1p.ttf');
@@ -92,7 +91,7 @@ button:hover {
 .distapcher-phone,
 .distapcher-phone:hover {
     color: #454545;
-    font-size: 22px;
+    font-size: 21px;
     padding: 0;
     margin: 0;
 }

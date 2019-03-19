@@ -117,7 +117,7 @@ class AppManagersController extends Controller {
         $client_id = $model->findClientPhone($phone);
         
         $house_list = \app\models\PersonalAccount::find()
-                ->select(['account_id', 'houses_gis_adress', 'houses_number', 'flats_number'])
+                ->select(['account_id', 'houses_gis_adress', 'houses_number', 'flats_number', 'personal_flat_id'])
                 ->joinWith(['flat', 'flat.house'])
                 ->andWhere(['personal_clients_id' => $client_id])
                 ->orWhere(['personal_rent_id' => $client_id])
