@@ -584,9 +584,7 @@ $(document).ready(function() {
                 questionsID: questionsID,
                 answer: answer,
             },
-        }).done(function(response) {
-//            console.log(response);
-        });
+        }).done(function(response) {});
         
     });
     
@@ -614,9 +612,7 @@ $(document).ready(function() {
                     grade: grade,
                     requestID: requestID,
                 },
-            }).done(function(response) {
-//                console.log(response);
-            });
+            }).done(function(response) {});
         }
 
     });
