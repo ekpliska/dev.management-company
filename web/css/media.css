@@ -31,9 +31,6 @@
         left: 0;
         right: 0;
     }
-    .slide-txt-block {
-        padding: 0 30px;
-    }
 }
 @media screen and (max-width: 650px) {
     .slider-product-icon {

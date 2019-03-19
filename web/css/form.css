@@ -56,7 +56,7 @@
     transform: scaleX(1);
 }
 form .has-error .field::before {
-    background-color: #ef693a;
+    /*background-color: #ef693a;*/
 }
 /* Конец основной формы */
 
@@ -98,6 +98,9 @@ legend {
     list-style: none;
     padding: 10px 0;
 }
+.circle-btn-block {
+    margin-top: 70px;
+}
 /* Конец шаги, регистрация */
 
 /* Поле ввода СМС кода */
@@ -112,7 +115,7 @@ legend {
     display: block;
     color:  #bfbfbf;
     line-height: 16px;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 400;
     transform: translateY(24px);
     transition: transform 0.3s, color 0.3s;

@@ -23,7 +23,7 @@
                 </div>
                 <div class="col-lg-6 col-sm-6 col-md-6 dropdown_user-info">
                     <p class="dropdown_user-name">
-                        <?= Yii::$app->userProfile->fullNameClient ?>                        
+                        <?= Yii::$app->userProfile->getFullNameClient(false) ?>                        
                     </p>
                     <div class="dropdown-menu_link-profile">
                         <?= Html::a('Мой профиль', ['profile/index']) ?>

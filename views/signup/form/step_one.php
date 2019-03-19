@@ -50,7 +50,7 @@
         ->input('text', ['class' => 'field-input'])
         ->label($model_step_one->getAttributeLabel('square'), ['class' => 'field-label']) ?>
 
-<div class="text-center circle-btn-block mx-auto">
+<div class="text-center circle-btn-block">
     <?= Html::submitButton('', ['class' => 'blue-circle-btn']) ?>    
 </div>
 

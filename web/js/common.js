@@ -184,7 +184,7 @@ $('#send-request-to-sms').on('click', function() {
     var valid = re.test(phoneNumber);
     if (valid === true && phoneNumber.length == 18) {
         $.ajax({
-            url: 'send-sms-to-register',
+            url: 'signup/send-sms-to-register',
             method: 'POST',
             data: {
                 phoneNumber: phoneNumber,
