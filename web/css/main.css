@@ -287,6 +287,9 @@ button:hover {
 .login-form__button {
     margin: 50px 0 70px 0;
 }
+.slide-content {
+    margin-top: 10%;
+}
 /* Кoнец Вход */
 
 /* Регистрация */
