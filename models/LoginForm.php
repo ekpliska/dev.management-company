@@ -46,9 +46,9 @@ class LoginForm extends Model
             $user = $this->getUser();
             
             if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Данной комбинации логина и пароля не существует. Попробуйте ввести данные еще раз');
+                $this->addError($attribute, 'Данной комбинации логина и пароля не существует');
             } else if ($user && $user->status == User::STATUS_DISABLED) {
-                $this->addError($attribute, 'Вы не прошли подтвержение регистрации на портале. Проверьте вашу электронную почту');
+                $this->addError($attribute, 'Вы не прошли подтвержение регистрации на портале');
             } else if ($user && $user->status == User::STATUS_BLOCK) {
                 $this->addError($attribute, 'Ваша учетная запись была заблокирована');
             }

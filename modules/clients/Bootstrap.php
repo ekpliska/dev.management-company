@@ -27,6 +27,7 @@ class Bootstrap implements BootstrapInterface {
                 'requests/filter-by-type-request' => 'clients/requests/filter-by-type-request',
                 'requests/add-answer-request' => 'clients/requests/add-answer-request',
                 'requests/add-score-request' => 'clients/requests/add-score-request',
+                'requests/close-grade-window' => 'clients/requests/close-grade-window',
                 'requests/<request_number>' => 'clients/requests/view-request',
                 'requests' => 'clients/requests/index',
                 

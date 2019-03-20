@@ -229,6 +229,7 @@ $this->registerJs("
     Modal::begin([
         'id' => 'view-user-profile',
         'header' => 'Профиль пользователя',
+        'size' => Modal::SIZE_SMALL,
         'closeButton' => false,
     ]);
 ?>

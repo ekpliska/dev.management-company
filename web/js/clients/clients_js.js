@@ -387,7 +387,6 @@ $(document).ready(function() {
         var typeCounter = $(this).data('counterType');
         var idCounter = $(this).data('counterId');
         
-        console.log(button + ' ' + accountID + ' ' + typeCounter + ' ' + idCounter);
         $.ajax({
             url: 'create-paid-request',
             method: 'POST',
@@ -569,7 +568,6 @@ $(document).ready(function() {
         var requestID = $(this).data('request');
         var questionsID = $(this).data('question'); 
         var answer = $(this).data('answer'); 
-        console.log(idBtn + ' ' + requestID +  ' ' + questionsID + ' ' + answer);
         
         // Родительский контейнер кнопки
         var block = $(this).closest('td');
