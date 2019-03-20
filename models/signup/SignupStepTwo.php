@@ -15,7 +15,8 @@ class SignupStepTwo extends Model {
     
     public function rules() {
         return [
-            [['email', 'password', 'password_repeat'], 'required'],
+            [['email'], 'required', 'message' => 'Введите корректный e-mail'],
+            [['password', 'password_repeat'], 'required', 'message' => 'Требуется ввести пароль'],
             
             ['email', 'email'],
             
@@ -27,8 +28,8 @@ class SignupStepTwo extends Model {
             
             [['password', 'password_repeat'],
                 'match', 
-                'pattern' => '/^[A-Za-z0-9\_\-]+$/iu', 
-                'message' => 'Поле "{attribute}" может содержать только буквы английского алфавита, цифры, знаки "-", "_"',
+                'pattern' => '/^[A-Za-z0-9\_\-]+$/i', 
+                'message' => 'Вы используете не допустимые символы в пароле',
             ],
             
         ];
