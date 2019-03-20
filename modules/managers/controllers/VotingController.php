@@ -90,6 +90,7 @@ class VotingController extends AppManagersController {
         
         $type_voting = Voting::getTypeVoting();
         
+//        $houses_array = Houses::getAdressHousesList();
         $houses_array = [];
         
         if (Yii::$app->request->post() && $model->validate()) {

@@ -22,7 +22,7 @@ class VotingForm extends Model
         return [
             [['Voting'], 'required'],
             [['Questions'], 'required'],
-            [['imageFile'], 'image',
+            [['imageFile'], 'file',
                 'skipOnEmpty' => true,
                 'extensions' => 'png, jpg',
                 'maxSize' => 256 * 1024,
