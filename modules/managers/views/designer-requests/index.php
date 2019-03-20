@@ -63,7 +63,6 @@ $this->params['breadcrumbs'][] = 'Конструктор заявок';
             'categories_list' => $results['categories'],
             'units' => $results['units'],
         ]) ?>
-
 <?php
     /* Модальное окно для редактирования услуги */
     Modal::begin([

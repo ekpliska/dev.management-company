@@ -27,11 +27,11 @@
 
 <div class="load_preview">
     <div class="text-center">
-        <?= Html::img($model->service_image, ['id' => 'photoPreview-to-edit', 'class' => 'img-rounded']) ?>
+        <?= Html::img($model->service_image, ['id' => 'photoPreview', 'class' => 'img-rounded']) ?>
     </div>
     <div class="upload-btn-wrapper">
-        <?= $form->field($model, 'service_image', ['template' => '<label class="text-center btn-upload-cover" role="button">{input}{label}{error}</label>'])
-                ->input('file', ['id' => 'btnLoad', 'class' => 'hidden'])->label('<i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;Загрузить фото') ?>
+        <?= $form->field($model, 'image', ['template' => '<label class="text-center btn-upload-cover" role="button">{input}{label}{error}</label>'])
+                ->input('file', ['id' => 'btnLoad-edit', 'class' => 'hidden'])->label('<i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;Загрузить фото') ?>
     </div>
 </div>
 

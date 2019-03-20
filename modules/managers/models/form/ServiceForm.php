@@ -34,7 +34,7 @@ class ServiceForm extends Model {
                 'message' => 'Указанная услуга существует',
             ],
             
-            [['service_image'], 'file', 'extensions' => 'png, jpg, jpeg'],
+            [['service_image'], 'file', 'extensions' => 'png, jpg, jpeg', 'skipOnEmpty' => false],
             [['service_image'], 'image', 'maxWidth' => 510, 'maxHeight' => 510],
             
         ];

@@ -232,7 +232,8 @@ class DesignerRequestsController extends AppManagersController {
         }
         
         if ($model->load(Yii::$app->request->post())) {
-            $file = UploadedFile::getInstance($model, 'service_image');
+            $file = UploadedFile::getInstance($model, 'image');
+//            var_dump($file);die();
             $model->uploadImage($file);
             return $this->redirect(['index', 'section' => 'paid-services']);
         }
@@ -274,27 +275,6 @@ class DesignerRequestsController extends AppManagersController {
             'value' => $value,
             'expire' => time() + 60*60*24*7,
         ]));
-        
-//        
-//        switch ($type_record) {
-//            case 'category':
-//                $cookies->add(new \yii\web\Cookie ([
-//                    'name' => 'choosingCategory',
-//                    'value' => $value,
-//                    'expire' => time() + 60*60*24*7,
-//                ]));
-//                break;
-//            case 'request':
-//                $cookies->add(new \yii\web\Cookie ([
-//                    'name' => 'choosingRequest',
-//                    'value' => $value,
-//                    'expire' => time() + 60*60*24*7,
-//                ]));
-//                break;
-//        }
-//        
-//        return true;
-        
         
     }
 }

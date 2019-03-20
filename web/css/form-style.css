@@ -663,6 +663,7 @@ select[name="category_list"] option {
     transform: rotate(-135deg) translateY(-50%);
 }
 .custom-options-services {
+    position: absolute;
     display: block;
     top: 100%; 
     left: 0; 
