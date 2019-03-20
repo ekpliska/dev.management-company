@@ -3489,7 +3489,7 @@ a.sub-menu-item:hover {
     box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.35);
     width: 350px;
     margin: 40px 20px;
-    top: 20%;
+    /*top: 20%;*/
     right: 0;
     cursor: default;
 }
