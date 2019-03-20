@@ -153,3 +153,16 @@ legend {
 .field.is-focused::after{
     transform: scaleX(1);
 }
+
+/* Show password */
+.form__show-password {
+    font-size: 18px;
+    background: transparent;
+    color: rgba(0,0,0,0.54);
+}
+.form__show-password:hover,
+.form__show-password:active,
+.form__show-password:focus {
+    box-shadow: none;
+}
+/* ENd Show password */

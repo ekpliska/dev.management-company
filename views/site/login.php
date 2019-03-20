@@ -31,11 +31,16 @@ $this->title = 'Вход';
                         'class' => 'input-registration field-input'])
                     ->label($model->getAttributeLabel('username'), ['class' => 'field-label']) ?>
 
-            <?= $form->field($model, 'password')
-                    ->input('password', [
-                        'class' => 'input-registration field-input'])
-                    ->label($model->getAttributeLabel('password'), ['class' => 'field-label']) ?>
-
+            <div class="input-group">
+                <?= $form->field($model, 'password')
+                        ->input('password', [
+                            'class' => 'input-registration field-input pwd_value'])
+                        ->label($model->getAttributeLabel('password'), ['class' => 'field-label']) ?>
+                <span class="input-group-btn">
+                    <?= Html::button('<i class="glyphicon glyphicon-eye-open"></i>', ['class' => 'btn form__show-password']) ?>
+                </span> 
+            </div>
+        
             <div class="login-form__button text-center">
                 <?= Html::submitButton('Вход', [
                         'class' => 'btn blue-btn', 

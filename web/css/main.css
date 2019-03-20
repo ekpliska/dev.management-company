@@ -20,10 +20,12 @@ input,
 select,
 textarea,
 img,
+button,
 button:active,
 button:focus,
 button:hover {
-    outline: none;
+    outline: 0px !important;
+    -webkit-appearance: none;
 }
 .wrap {
     min-height: 100%;
