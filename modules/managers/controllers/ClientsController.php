@@ -43,7 +43,8 @@ class ClientsController extends AppManagersController {
                             'search-data-on-period',
                             'delete-client',
                             'find-indications',
-                            'send-indication'],
+                            'send-indication',
+                            'create-paid-request'],
                         'allow' => true,
                         'roles' => ['ClientsEdit']
                     ],
@@ -554,6 +555,32 @@ class ClientsController extends AppManagersController {
                 'success' => true,
             ];
         }
+    }
+    
+    /*
+     * Формирование автоматической заявки на платную услугу
+     * Наименование услуги: Поверка приборов учета
+     */
+    public function actionCreatePaidRequest() {
+        
+        $account_id = Yii::$app->request->post('accountID');
+        $counter_type = Yii::$app->request->post('typeCounter');
+        $counter_id = Yii::$app->request->post('idCounter');
+        
+        Yii::$app->response->format = Response::FORMAT_JSON;        
+        
+        if (!is_numeric($account_id) && !is_string($counter_type || !is_numeric($counter_id))) {
+            return ['success' => false];
+        }
+        
+        if (Yii::$app->request->isAjax) {
+            $result = $new_request = PaidServices::automaticRequest($account_id, 'Поверка', $counter_type, $counter_id);
+            if (!$result) {
+                return ['success' => false];
+            }
+            return ['success' => true, 'request_number' => $result];
+        }
+        return ['success' => false];
     }
 
 }

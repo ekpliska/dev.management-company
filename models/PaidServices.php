@@ -260,9 +260,15 @@ class PaidServices extends ActiveRecord
                 ->asArray()
                 ->one();
         
-        if ($service_id['service_id'] == null) {
+        $user_info = PersonalAccount::find()
+                ->with(['client.user'])
+                ->where(['account_id' => $account_id])
+                ->one();
+        
+        if ($service_id['service_id'] == null && $user_info == null) {
             return false;
         }
+        
         
         $new = new PaidServices();
         
@@ -274,7 +280,7 @@ class PaidServices extends ActiveRecord
         $new->services_servise_category_id = $service_id['service_category_id'];
         $new->services_name_services_id = $service_id['service_id'];
         $new->services_comment = $request_body;
-        $new->services_phone = Yii::$app->userProfile->mobile;
+        $new->services_phone = $user_info->client->user->user_mobile;
         $new->services_account_id = $account_id;
         $new->value = $counter_id;
         

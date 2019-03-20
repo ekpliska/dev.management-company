@@ -224,7 +224,7 @@ $(document).ready(function() {
             e.preventDefault();
         } else if (isCheck === true) {
             labelMess.text('');
-            $.post('send-indication?counter=' + uniqueCounter + '&indication=' + curIndication, function(responce) {
+            $.post('/managers/clients/send-indication?counter=' + uniqueCounter + '&indication=' + curIndication, function(responce) {
                 if (responce.success === false) {
                     labelMess.text('Ошибка отправки показаний');
                     return false;
@@ -234,7 +234,37 @@ $(document).ready(function() {
                 }
             });
         }
-    });    
+    }); 
+    
+    /*
+     * Формирование автоматической заявки на платную услугу
+     * "Поверка приборов учета"
+     */
+    $('button[id*="create-request-"').on('click', function() {
+        var button = $(this).attr('id');
+        var accountID = $(this).data('account');
+        var typeCounter = $(this).data('counterType');
+        var idCounter = $(this).data('counterId');
+        console.log(button, '--', accountID, '--', typeCounter, '--', idCounter);
+        
+        $.ajax({
+            url: '/managers/clients/create-paid-request',
+            method: 'POST',
+            data: {
+                accountID: accountID,
+                typeCounter: typeCounter,
+                idCounter: idCounter,
+            },
+            success: function (data) {
+                if (data.success == true) {
+                    $('#' + button).replaceWith('<span class="message-request">Сформирована заявка ID' + data.request_number + '</span>');
+                }
+            },
+            error: function (textStatus) {
+                console.log(textStatus);                
+            }
+        });
+    });
     
     /*
      * Приборы учета, профиль Собственника
@@ -1333,7 +1363,7 @@ $(document).ready(function() {
         
         $(this).find("option").each(function() {
             var classSelection = ($(this).attr("value") == currentValue) ? 'selection-dark ' : '';            
-            template += '<a href="' + currentAction + '?client_id=' + currentClient + '&account_number=' + $(this).text() + '" class="custom-option-dark ' + classSelection + $(this).attr("class") 
+            template += '<a href="' + $(this).text() + '" class="custom-option-dark ' + classSelection + $(this).attr("class") 
                         + '" data-value="' + $(this).attr("value") + '">' 
                         + $(this).html() + '</a>';
             
