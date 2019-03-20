@@ -2,6 +2,8 @@
 
     use yii\widgets\ActiveForm;
     use yii\helpers\Html;
+    use app\widgets\UserAgreement;
+    
 /* 
  * Регистрация, шаг 3
  */
@@ -39,8 +41,10 @@
     </div>
 
     <div class="text-center third-step-offer">
-        <p>Нажимая на кнопку Далее, вы соглашаетесь на обработку 
-        Персональных данных и принимаете условия <a href="#" target="_blank">Пользовательского соглашения.</a>
+        <p>
+            Нажимая на кнопку Далее, вы соглашаетесь на обработку 
+            Персональных данных и принимаете условия 
+            <a href="#user_agreement" data-toggle="modal">Пользовательского соглашения.</a>
         </p>
 
         <?= Html::submitButton('', ['class' => 'blue-circle-btn']) ?>    
@@ -48,3 +52,5 @@
 
 
 <?php ActiveForm::end(); ?>
+
+<?= UserAgreement::widget() ?>
