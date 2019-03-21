@@ -912,7 +912,7 @@ span.dot {
 .news-card-img {
     border-top-right-radius: 12px;
     border-top-left-radius: 12px;
-    /*height: 45%;*/
+    height: 100%;
     width: 100%;
 }
 .nav > li > a:hover, .nav > li > a:focus, 
@@ -2102,9 +2102,14 @@ a.btn-history:hover {
     padding: 10px;
     font-weight: bold;
 }
+.service-card_preview {
+    height: 218px;
+    position: relative;
+    overflow: hidden;
+}
 .service-card_image {
     width: 100%;
-    height: 40%;
+    height: 100%;
 }
 .service-card__body {
     padding: 0px 10px;
@@ -2130,6 +2135,7 @@ a.btn-history:hover {
     float: left;
 }
 .modal-note-info {
+    display: grid;
     text-align: center;
     color: #fff;
     font-size: 16px;
@@ -2141,7 +2147,7 @@ a.btn-history:hover {
     border: 1px solid white;
     padding: 5px 10px;
     border-radius: 12px;
-    margin: 0 10px;
+    margin: 10px;
     font-size: 12px;
 }
 /* Конец Платные услуги */
@@ -2748,7 +2754,7 @@ p.date-start-vote {
 .vote-card-img {
     border-top-right-radius: 12px;
     border-top-left-radius: 12px;
-    /*height: 218px;*/
+    height: 100%;
     width: 100%;    
 }
 .vote-card-preview__overlay {

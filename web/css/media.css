@@ -397,9 +397,6 @@
     }
 }
 @media screen and (max-width: 550px) {
-    .service-card_image {
-        height: 50%;
-    }
     .service-card__body p {
         font-size: 14px;
     }

@@ -15,11 +15,13 @@
                     <div class="service-card_title">
                         <?= $service['category']['category_name'] ?>
                     </div>
-                    <?php if (!empty($service['service_image'])) : ?>
-                        <?= Html::img($service['service_image'], ['class' => 'service-card_image', 'alt' => 'service-image']) ?>
-                    <?php else: ?>
-                        <?= Html::img('/web/images/not_found.png', ['class' => 'service-card_image', 'alt' => 'service-image']) ?>
-                    <?php endif; ?>
+                    <div class="service-card_preview">
+                        <?php if (!empty($service['service_image'])) : ?>
+                            <?= Html::img($service['service_image'], ['class' => 'service-card_image', 'alt' => 'service-image']) ?>
+                        <?php else: ?>
+                            <?= Html::img(Yii::getAlias('@web') . '/images/not_found.png', ['class' => 'service-card_image', 'alt' => 'service-image']) ?>
+                        <?php endif; ?>
+                    </div>
                     <div class="service-card_title">
                         <?= $service['service_name'] ?>
                     </div>
