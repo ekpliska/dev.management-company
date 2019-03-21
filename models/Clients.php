@@ -39,7 +39,7 @@ class Clients extends ActiveRecord
             [[
                 'clients_name', 'clients_second_name', 'clients_surname'], 
                 'match',
-                'pattern' => '/^[А-Яа-яЁё\ \-]+$/iu',
+                'pattern' => '/^[А-Яа-яЁё\ \-]+/iu',
                 'message' => 'Поле должно содержать буквы русского алфавита',
             ],
             
