@@ -105,7 +105,7 @@ class UserProfile extends User {
         
         $this->user_mobile = $data['mobile'];
         $this->user_email = $data['email'];
-        $client->clients_phone = $data['home_phone'];
+        $client->clients_phone = $data['other_phone'];
         
         if (!$this->save()) {
             return false;

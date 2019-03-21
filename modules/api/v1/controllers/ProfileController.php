@@ -58,13 +58,13 @@ class ProfileController extends Controller {
     public function actionUpdate() {
         
         $data_post = Yii::$app->getRequest()->getBodyParams();
-        if (empty($data_post['mobile']) || empty($data_post['home_phone']) || empty($data_post['email'])) {
+        if (empty($data_post['mobile']) || empty($data_post['other_phone']) || empty($data_post['email'])) {
             return ['success' => false];
         }
         
         $model = UserProfile::findOne(['user_id' => Yii::$app->user->id]);
         if (!$model->updateUser($data_post)) {
-            return ['success' => false];
+            return $model;
         }
         
         return ['success' => true];
