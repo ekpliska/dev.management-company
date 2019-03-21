@@ -26,7 +26,6 @@ class Posts extends ActiveRecord
             [['post_name', 'posts_department_id'], 'required'],
             [['post_name'], 'string', 'max' => 100],
             ['posts_department_id', 'integer'],
-            [['p_description'], 'string', 'max' => 255],
         ];
     }
     
@@ -54,7 +53,6 @@ class Posts extends ActiveRecord
             'post_id' => 'Post ID',
             'post_name' => 'Должность',
             'posts_department_id' => 'Подразделение',
-            'p_description' => 'P Description',
         ];
     }
 

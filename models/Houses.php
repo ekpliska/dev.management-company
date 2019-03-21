@@ -66,7 +66,7 @@ class Houses extends ActiveRecord
             
             [['upload_files'],
                 'file', 
-                'maxSize' => 256 * 1000,
+                'maxSize' => 580 * 1000,
                 'extensions' => 'doc, docx, pdf, xls, xlsx, png, jpg, jpeg',
                 'maxFiles' => 4,
             ],            

@@ -25,7 +25,6 @@ class Departments extends ActiveRecord
         return [
             [['department_name'], 'required'],
             [['department_name'], 'string', 'max' => 100],
-            [['d_description'], 'string', 'max' => 255],
         ];
     }
 
@@ -49,7 +48,6 @@ class Departments extends ActiveRecord
         return [
             'department_id' => 'Department ID',
             'department_name' => 'Наименование поздразделения',
-            'd_description' => 'Описание',
         ];
     }
 

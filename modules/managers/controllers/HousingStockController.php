@@ -148,8 +148,8 @@ class HousingStockController extends AppManagersController {
         }
         
         if ($model->load(Yii::$app->request->post())) {
-            $file = UploadedFile::getInstance($model, 'upload_file');
-            if ($model->uploadFile($file)) {
+            $file = UploadedFile::getInstances($model, 'upload_files');
+            if ($model->uploadFiles($file)) {
                 return $this->redirect(['index']);
             }
         }

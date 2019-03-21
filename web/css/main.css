@@ -3676,61 +3676,61 @@ a.employee-profile:hover {
 
 /* Drag and Drop files */
 .file-drop-zone {
-    border: 1px dashed #8b709d;
+    border: 1px dashed #8b709d !important;
 }
 .file-drop-zone-title {
     color: #8b709d !important;
 }
 .file-preview {
-    border: none;
-    padding: 0;
+    border: none !important;
+    padding: 0 !important;
 }
 .file-drop-zone-title {
-    color: #999;
-    font-size: 16px;
-    padding: 39px 10px;
-    cursor: default;
+    color: #999 !important;
+    font-size: 16px !important;
+    padding: 39px 10px !important;
+    cursor: default !important;
 }
 .fileinput-remove {
-    visibility: hidden;
+    visibility: hidden !important;
 }
 .load-images {
-    background: transparent;
+    background: transparent !important;
 }
 .btn-block {
-    color: #8b709d;
+    color: #8b709d !important;
 }
 .btn-block:hover {
-    color: #fff;
+    color: #fff !important;
 }
 .krajee-default.file-preview-frame {
-    margin: 0;
+    margin: 0 !important;
 }
 .krajee-default.file-preview-frame .kv-file-content {
-    width: 118px;
-    height: 70px;
+    width: 118px !important;
+    height: 70px !important;
 }
 .file-preview-pdf {
-    height: 70px;
+    height: 70px !important;
 }
 .krajee-default .file-caption-info, .krajee-default .file-size-info {
-    width: 118px;
+    width: 118px !important;
 }
 .file-upload-indicator {
-    visibility: hidden;
+    visibility: hidden !important;
 }
 .file-zoom-dialog .btn-navigate {
-    opacity: unset;
-    color: #fff;    
+    opacity: unset !important;
+    color: #fff !important;
 }
 .file-error-message {
-    color: #ef693a;
-    background-color: transparent;
-    border: 1px solid #ef693a;
-    padding: 10px;
+    color: #ef693a !important;
+    background-color: transparent !important;
+    border: 1px solid #ef693a !important;
+    padding: 10px !important;
 }
 .krajee-default .file-other-icon {
-    font-size: 1em;
+    font-size: 1em !important;
 }
 /* End Drag and Drop files */
 

@@ -1305,8 +1305,10 @@ $(document).ready(function() {
      * Сброс форм
      */
     $('.modal').on('hide.bs.modal', function () {
-        $('form')[0].reset();
-        $(this).find('.help-block').text('');
+        if ($('form').length > 0) {
+            $('form')[0].reset();
+            $(this).find('.help-block').text('');
+        }
     });
     
     
