@@ -42,7 +42,7 @@ class Bootstrap implements BootstrapInterface {
                 
                 // Голосование
                 'managers/voting' => 'managers/voting/index',
-                'managers/view/<voting_id>' => 'managers/voting/view',
+                'managers/voting/view/<voting_id>' => 'managers/voting/view',
 //                'managers/voting/<action>' => 'managers/voting/<action>',
                 
                 // Конструктор заявок

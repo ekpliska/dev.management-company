@@ -97,8 +97,7 @@ $action = Yii::$app->controller->action->id;
                 <div class="housing-lists">
                     <?=
                         $form->field($model->voting, 'voting_type')
-                            ->radioList($type_voting, 
-                                [
+                            ->radioList($type_voting, ['id' => 'for_whom_voting',
                                     'item' => function($index, $label, $name, $checked, $value) {
                                         $_checked = $checked == 1 ? 'checked' : '';
                                         $return = '<label class="input-radio">' . ucwords($label);

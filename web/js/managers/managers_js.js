@@ -765,7 +765,6 @@ $(document).ready(function() {
      */
     $('#for_whom_news').on('change', function(e) {
         var forWhom = $("#news-form input[type='radio']:checked").val();
-        console.log(forWhom);
         
         if (forWhom === '0') {
             $('#adress_list').prop('disabled', true);
@@ -773,7 +772,7 @@ $(document).ready(function() {
             $('#adress_list').prop('disabled', false);
         }
         
-        $.post('for-whom-news?status=' + forWhom,
+        $.post('/managers/news/for-whom-news?status=' + forWhom,
             function(data) {
                 $('#adress_list').html(data);
             }
@@ -870,9 +869,8 @@ $(document).ready(function() {
      *      Для всех
      *      Для конкретного дома
      */
-    $('.input-radio').on('change', function(e) {
+    $('#for_whom_voting').on('change', function(e) {
         var forWhom = $("#form-voting input[type='radio']:checked").val();
-        console.log(forWhom);
         
         if (forWhom === '0') {
             $('#house-lists').prop('disabled', true);
@@ -880,7 +878,7 @@ $(document).ready(function() {
             $('#house-lists').prop('disabled', false);
         }
         
-        $.post('for-whom-news?status=' + forWhom,
+        $.post('/managers/voting/for-whom-news?status=' + forWhom,
             function(data) {
                 $('#house-lists').html(data);
             }
