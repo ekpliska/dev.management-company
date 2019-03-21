@@ -72,7 +72,7 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
                             'counters_lists' => $counters_lists,
                             'is_current' => $is_current,
                             'auto_request' => $auto_request,
-                            'account_number' => $account_choosing->account_number,
+                            'account_id' => $account_choosing->account_id,
                     ]) ?>
                 </tbody>
             </table>

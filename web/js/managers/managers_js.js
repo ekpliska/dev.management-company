@@ -261,7 +261,7 @@ $(document).ready(function() {
                 }
             },
             error: function (textStatus) {
-                console.log(textStatus);                
+//                console.log(textStatus);                
             }
         });
     });

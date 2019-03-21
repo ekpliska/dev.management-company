@@ -574,7 +574,7 @@ class ClientsController extends AppManagersController {
         }
         
         if (Yii::$app->request->isAjax) {
-            $result = $new_request = PaidServices::automaticRequest($account_id, 'Поверка', $counter_type, $counter_id);
+            $result = PaidServices::automaticRequest($account_id, 'Поверка', $counter_type, $counter_id);
             if (!$result) {
                 return ['success' => false];
             }

@@ -46,7 +46,7 @@ $array_image = [
                     <?= Html::button('Заказать поверку', [
                             'id' => "create-request-{$key}",
                             'class' => 'create-send-request',
-                            'data-account' => $account_number,
+                            'data-account' => $account_id,
                             'data-counter-type' => $indication['Тип прибора учета'],
                             'data-counter-id' => $indication['ID']]) ?>
                 
