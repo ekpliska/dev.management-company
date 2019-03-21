@@ -2,11 +2,30 @@
 
     namespace app\modules\api\v1\models;
     use app\models\User;
-
+    use app\models\Clients;
+    
 /**
  * Профиль пользователя
  */
 class UserProfile extends User {
+    
+    public function rules() {
+        
+        return [
+            ['user_mobile', 'unique', 
+                'targetClass' => self::className(),
+                'targetAttribute' => 'user_mobile',
+                'message' => 'Пользователь с введенным номером мобильного телефона в системе уже зарегистрирован',
+            ],
+            
+            ['user_email', 'unique', 
+                'targetClass' => self::className(),
+                'targetAttribute' => 'user_email',
+                'message' => 'Данный электронный адрес уже используется в системе',
+            ],
+        ];
+        
+    }
     
     public static function userProfile($user_id) {
         
@@ -74,6 +93,25 @@ class UserProfile extends User {
         }
         
         return $user_info;
+        
+    }
+    
+    /*
+     * Обновление профиля собсвенника
+     */
+    public function updateUser($data) {
+        
+        $client = Clients::findOne(['clients_id' => $this->user_client_id]);
+        
+        $this->user_mobile = $data['mobile'];
+        $this->user_email = $data['email'];
+        $client->clients_phone = $data['home_phone'];
+        
+        if (!$this->save()) {
+            return false;
+        }
+        
+        return $client->save() ? true : false;
         
     }
     

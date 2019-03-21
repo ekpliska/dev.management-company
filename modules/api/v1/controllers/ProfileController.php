@@ -36,20 +36,36 @@ class ProfileController extends Controller {
     public function verbs() {
         return [
             'index' => ['get'],
-            'update' => ['put', 'patch'],
+            'update' => ['post'],
         ];
     }
     
+    /*
+     * Просмотр профиля
+     */
     public function actionIndex() {
         
         return $this->userProfile();
         
     }
     
+    /*
+     * Редактирование профиля Собсвенника
+     * {"mobile": "+7 (999) 999-99-99", "other_phone": "+7 (9999) 999-99-99", "email": "email@email.com"}
+     */
     public function actionUpdate() {
         
-        $user_id = Yii::$app->user->id;
-        return $user_id;
+        $data_post = Yii::$app->getRequest()->getBodyParams();
+        if (empty($data_post['mobile']) || empty($data_post['home_phone']) || empty($data_post['email'])) {
+            return ['success' => false];
+        }
+        
+        $model = UserProfile::findOne(['user_id' => Yii::$app->user->id]);
+        if (!$model->updateUser($data_post)) {
+            return ['success' => false];
+        }
+        
+        return ['success' => true];
         
     }
     
