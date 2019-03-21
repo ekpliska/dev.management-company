@@ -8,6 +8,7 @@
     use yii\filters\auth\HttpBearerAuth;
     use yii\web\ServerErrorHttpException;
     use app\modules\api\v1\models\UserProfile;
+    use app\modules\api\v1\models\profile\ChangePasswordForm;
 
 /**
  * Профиль пользователя
@@ -37,6 +38,7 @@ class ProfileController extends Controller {
         return [
             'index' => ['get'],
             'update' => ['post'],
+            'change-password' => ['post'],
         ];
     }
     
@@ -66,6 +68,24 @@ class ProfileController extends Controller {
         }
         
         return ['success' => true];
+        
+    }
+    
+    /*
+     * Редактирование профиля Арендатора
+     * {"old_password": "123456", "new_password": "123456", "repear_password": "123456"}
+     */
+    public function actionChangePassword() {
+        
+        $user = UserProfile::findOne(['user_id' => Yii::$app->user->id]);
+        
+        $model = new ChangePasswordForm($user);
+        $model->load(Yii::$app->getRequest()->getBodyParams(), '');
+        if ($model->changePassword()) {
+            return ['success' => true];
+        } else {
+            return $model;
+        }
         
     }
     
