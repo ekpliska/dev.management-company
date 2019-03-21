@@ -864,6 +864,11 @@ span.dot {
 .news-lists {
     margin-top: 170px;
 }
+.news-card-preview__image {
+    height: 218px;
+    position: relative;
+    overflow: hidden;
+}
 .news-card-preview {    
     color: #a7a7a7;
     height: 451px;
@@ -907,7 +912,7 @@ span.dot {
 .news-card-img {
     border-top-right-radius: 12px;
     border-top-left-radius: 12px;
-    height: 45%;
+    /*height: 45%;*/
     width: 100%;
 }
 .nav > li > a:hover, .nav > li > a:focus, 
@@ -2661,12 +2666,6 @@ label[class^='error-ind-'] {
     padding: 0 !important;
     margin: 10px 5px;
 }
-.vote-card-img {
-    border-top-right-radius: 12px;
-    border-top-left-radius: 12px;
-    height: 218px;
-    width: 100%;    
-}
 .vote-card_title {
     padding: 10px;
     height: 72px;
@@ -2730,7 +2729,7 @@ p.date-start-vote {
     border-radius: 18px;
     background-color: #202020;
     position: absolute;
-    top: 25%;
+    bottom: 20%;
     left: 20%;
     text-align: center;
     color: #fff;
@@ -2740,6 +2739,48 @@ p.date-start-vote {
 }
 .vote-card_date-end i {
     padding-right: 5px;
+}
+.vote-card-preview__image {
+    height: 218px;
+    position: relative;
+    overflow: hidden;
+}
+.vote-card-img {
+    border-top-right-radius: 12px;
+    border-top-left-radius: 12px;
+    /*height: 218px;*/
+    width: 100%;    
+}
+.vote-card-preview__overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.vote-card-preview__image:hover .vote-card-preview__overlay {
+    opacity: 2;
+}
+.vote-card-preview__image:hover .vote-card_date-end {
+    visibility: hidden;
+}
+.overlay__text > a {
+    color: #fff;
+    font-size: 14px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border: 1px solid #fff;
+    padding: 10px;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    letter-spacing: 0.05em;
 }
 /* Конец Опрос */
 
@@ -2827,8 +2868,9 @@ p.date-start-vote {
 .span-count {
     padding: 2px 20px;
     color: #fff !important;
-    margin-right: 5px;    
+    margin-right: 10px;
     border-radius: 25px;
+    height: 23px;
     background: #2d18b4;
 }
 .span-count-white {

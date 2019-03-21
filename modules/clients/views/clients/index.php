@@ -14,7 +14,9 @@ $this->title = Yii::$app->params['site-name'] . "Главная";
     <?php foreach ($news as $key => $post) : ?>
         <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
             <div class="news-card-preview">
-                <?= FormatHelpers::previewNewsOrVote($post['news_preview'], false) ?>
+                <div class="news-card-preview__image">
+                    <?= FormatHelpers::previewNewsOrVote($post['news_preview'], false) ?>
+                </div>
 
                 <h5 class="news-card-preview-title">
                     <?= FormatHelpers::formatUrlNewsOrVote(FormatHelpers::shortTitleOrText($post['news_title'], 45), $post['slug']) ?>
@@ -26,7 +28,7 @@ $this->title = Yii::$app->params['site-name'] . "Главная";
 
                 <div class="news-card-preview-body">
                     <p class="card-text news-card-preview-text ">
-                        <?= FormatHelpers::shortTextNews($post['news_text'], 20) ?>
+                        <?= FormatHelpers::shortTextNews($post['news_text'], 17) ?>
                     </p>
                 </div>
             </div>

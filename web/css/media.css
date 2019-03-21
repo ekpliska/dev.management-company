@@ -192,7 +192,10 @@
 /* End Nav menu */
 
 /* End Register Page, Login Page */
-@media screen and (max-width: 1199px) {
+@media screen and (max-width: 1200px) {
+    .news-card-preview__image {
+        height: 190px;
+    }
     .news-card-preview {
         height: 400px;
     }
@@ -326,12 +329,18 @@
     }
 }
 @media screen and (max-width: 660px) {
+    .news-card-preview__image {
+        height: 160px;
+    }
     .sub-menu_account > li > a {
         padding: 15px 15px;
         font-size: 10px;
     }
 }
 @media screen and (max-width: 560px) {
+    .news-card-preview__image {
+        height: 200px;
+    }
     .sub-menu_account > li > a {
         padding: 15px 7px;
         font-size: 10px;

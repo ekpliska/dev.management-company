@@ -25,10 +25,17 @@ $this->params['breadcrumbs'][] = 'Опрос';
 
         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
             <div class="vote-card-preview">
-                <?= Html::img(Yii::getAlias('@web') . $voting['voting_image'], ['class' => 'vote-card-img']) ?>
-                <span class="vote-card_date-end">
-                    <?= FormatHelpers::numberOfDaysToFinishVote($voting['voting_date_start'], $voting['voting_date_end']) ?>
-                </span>
+                <div class="vote-card-preview__image">
+                    <?= Html::img(Yii::getAlias('@web') . $voting['voting_image'], ['class' => 'vote-card-img']) ?>
+                    <div class="vote-card-preview__overlay">
+                        <div class="overlay__text">
+                            <?= Html::a('Принять участие', ['voting/view', 'voting_id' => $voting['voting_id']], ['class' => '']) ?>
+                        </div>
+                    </div>
+                    <span class="vote-card_date-end">
+                        <?= FormatHelpers::numberOfDaysToFinishVote($voting['voting_date_start'], $voting['voting_date_end']) ?>
+                    </span>
+                </div>
                 <div class="vote-card_title">
                     <a href="<?= Url::to(['voting/view', 'voting_id' => $voting['voting_id']]) ?>">
                         <?= FormatHelpers::shortTitleOrText($voting['voting_title'], 25) ?>

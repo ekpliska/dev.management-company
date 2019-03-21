@@ -1,6 +1,7 @@
 <?php
-    use yii\helpers\Html;
 
+    use yii\helpers\Html;
+    use app\helpers\FormatHelpers;
     
 /*
  * Список платных услуг
@@ -25,7 +26,8 @@
                     <div class="service-card__body">
                         <!--  ограничение на 250 символов -->
                         <p>
-                            <?= $service['service_description'] ? $service['service_description'] : 'Описание услуги отсутствует' ?>
+                            <?= $service['service_description'] ? 
+                                    FormatHelpers::shortTextNews($service['service_description'], 21) : 'Описание услуги отсутствует' ?>
                         </p>
                     </div>
                     <div class="service-card__btn">
