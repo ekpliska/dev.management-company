@@ -27,11 +27,12 @@ class ChangePasswordAdministrator extends Model {
     public function rules() {
         
         return [
-            [['new_password', 'new_password_repeat'], 'required', 'message' => 'Вы не заполнили поля'],
+            [['new_password'], 'required', 'message' => 'Введите новый пароль'],
+            [['new_password_repeat'], 'required', 'message' => 'Повторите новый пароль'],
 
             [['new_password', 'new_password_repeat'], 
                 'match', 
-                'pattern' => '/^[A-Za-z0-9\_\-]+$/iu', 
+                'pattern' => '/^[A-Za-z0-9\_\-]+$/i', 
                 'message' => 'Пароль может содержать только буквы английского алфавита, цифры, - и _',
             ],            
             

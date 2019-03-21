@@ -1301,6 +1301,14 @@ $(document).ready(function() {
         searchDesignerForm();
     });
     
+    /*
+     * Сброс форм
+     */
+    $('.modal').on('hide.bs.modal', function () {
+        $('form')[0].reset();
+        $(this).find('.help-block').text('');
+    });
+    
     
     // ******************************************************** //
     // ************     Start Block of Settings  ************** //
