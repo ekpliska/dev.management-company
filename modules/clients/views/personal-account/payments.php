@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = 'Платежи';
                 'name' => 'date_start-period-pay',
                 'type' => DatePicker::TYPE_INPUT,
                 'options' => [
-                    'placeholder' => 'Указать период с',
+                    'placeholder' => 'С',
                 ],
                 'pluginOptions' => [
                     'autoclose'=>true,
@@ -42,7 +42,7 @@ $this->params['breadcrumbs'][] = 'Платежи';
                 'name' => 'date_end-period-pay',
                 'type' => DatePicker::TYPE_INPUT,
                 'options' => [
-                    'placeholder' => 'Указать период по',
+                    'placeholder' => 'По',
                 ],
                 'pluginOptions' => [
                     'autoclose'=>true,
