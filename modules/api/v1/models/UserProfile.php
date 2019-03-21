@@ -36,6 +36,7 @@ class UserProfile extends User {
                 ->select('c.clients_id as clients_id, c.clients_name as name, c.clients_second_name as second_name, c.clients_surname as surname, '
                         . 'u.user_login as login, '
                         . 'u.user_mobile as user_mobile, '
+                        . 'c.clients_phone as other_phone, '
                         . 'u.user_email as email, u.user_photo as photo, '
                         . 'u.last_login as last_login, '
                         . 'u.user_check_email as subscribe')
@@ -105,7 +106,7 @@ class UserProfile extends User {
         
         $this->user_mobile = $data['mobile'];
         $this->user_email = $data['email'];
-        $client->clients_phone = $data['other_phone'];
+        $client->clients_phone = isset($data['other_phone']) ? $data['other_phone'] : '';
         
         if (!$this->save()) {
             return false;

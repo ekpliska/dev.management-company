@@ -1,9 +1,6 @@
 /*
-Form styles
-*/
-/* 
-    Created on : 08.11.2018, 9:24:52
-*/
+ *    Form styles of Managers Module
+ */
 
 /* Основная форма */
 
@@ -171,7 +168,6 @@ legend {
     float: left; 
     padding: 10px; 
     color: #b0b1b3;
-    font-family: "Mplus 1p Medium";
 }
 
 #steps li span {
@@ -536,7 +532,6 @@ textarea {
     position: relative;
     display: inline-block;
     user-select: none;
-    font-family: "Mplus 1p";
 }
 .custom-select-wrapper-dark select {
     display: none;
@@ -790,7 +785,6 @@ textarea {
     display: inline-block;
     user-select: none;
     margin-left: 77px;
-    font-family: "Mplus 1p";
 }
 .custom-select-wrapper-services select {
     display: none;

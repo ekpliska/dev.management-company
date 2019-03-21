@@ -612,7 +612,7 @@ $(document).ready(function() {
                     $('.btn-dispatcher').data('employee', dispatcherId);
                     $('#dispatcher-name').text('');
                     $('#dispatcher-name').html(
-                            '<a href="/managers/employee-form/employee-profile?type=dispatcher&employee_id=' + dispatcherId + '">' + 
+                            '<a href="/managers/employee-form/employee-profile/dispatcher/' + dispatcherId + '">' + 
                             employeeName + '</a>');
                 },
                 error: function() {
@@ -655,7 +655,7 @@ $(document).ready(function() {
                     $('.btn-specialist').data('employee', specialistId);
                     $('#specialist-name').text('');
                     $('#specialist-name').html(
-                            '<a href="/managers/employee-form/employee-profile?type=specialist&employee_id=' + specialistId + '">' + 
+                            '<a href="/managers/employee-form/employee-profile/specialist/' + specialistId + '">' + 
                             employeeName + '</a>');
                 },
                 error: function() {

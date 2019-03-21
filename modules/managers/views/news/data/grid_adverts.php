@@ -15,7 +15,7 @@
 <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
     <div class="news-item">
         <div class="news-item__title">
-            <?= Html::a($advert['title'], ['news/view', 'slug' => $advert['slug']], ['class' => 'title']) ?>
+            <?= Html::a(FormatHelpers::shortTitleOrText($advert['title'], 70), ['news/view', 'slug' => $advert['slug']], ['class' => 'title']) ?>
             <p class="date"><?= FormatHelpers::formatDate($advert['date'], false, 0, false) ?></p>
             
             <?php if (Yii::$app->user->can('NewsEdit')) : ?>

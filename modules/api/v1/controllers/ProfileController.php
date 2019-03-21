@@ -58,7 +58,7 @@ class ProfileController extends Controller {
     public function actionUpdate() {
         
         $data_post = Yii::$app->getRequest()->getBodyParams();
-        if (empty($data_post['mobile']) || empty($data_post['other_phone']) || empty($data_post['email'])) {
+        if (empty($data_post['mobile']) || empty($data_post['other_phone'])) {
             return ['success' => false];
         }
         
