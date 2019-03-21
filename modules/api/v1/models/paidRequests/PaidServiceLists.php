@@ -84,6 +84,7 @@ class PaidServiceLists extends PaidServices {
             'date_created' => $body_request->created_at,
             'date_closed' => $body_request->date_closed,
             'status' => \app\models\StatusRequest::statusNameKey($body_request->status),
+            'grade' => $body_request->grade,
         ];
         
         return $result;

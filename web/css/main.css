@@ -550,8 +550,8 @@ reset-password-sms:focus{
     outline: none;
 }
 .btn-edit-in-table::before {
-    content: '\0270E';
-    padding: 0 5px 0 0;
+/*    content: '\0270E';
+    padding: 0 5px 0 0;*/
 }
 .btn-edit-in-table:hover {
     background-color: #2d18b4;
