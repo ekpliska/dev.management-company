@@ -1092,3 +1092,20 @@ input:checked + .slider-orange {
     background: #2d18b4;    
 }
 /* End Multiple Form at Settings */
+
+/* */
+.upload-btn-wrapper-multi {
+}
+
+.btn-upload-cover-multi {
+    color: #2d18b4;
+}
+.btn-upload-cover-multi:hover {
+}
+.upload-btn-wrapper-multi input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
