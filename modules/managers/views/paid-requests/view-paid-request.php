@@ -106,8 +106,8 @@ $this->params['breadcrumbs'][] = "Заявка на платную услугу 
                                 <p>
                                     <?= FormatHelpers::formatFullUserName(
                                             $paid_request['clients_surname'], 
-                                            $paid_request['clients_second_name'],
-                                            $paid_request['clients_name'], true) ?>
+                                            $paid_request['clients_name'],
+                                            $paid_request['clients_second_name'], true) ?>
                                 </p>
                            </div>
                             <div class="text-right">

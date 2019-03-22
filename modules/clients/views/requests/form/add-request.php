@@ -46,13 +46,6 @@
                 ->textarea(['rows' => 10, 'class' => 'field-input-textarea-modal comment'])
                 ->label($model->getAttributeLabel('requests_comment'), ['class' => 'field-label-modal']) ?>
 
-        <?php /* = $form->field($model, 'gallery[]', [
-                'template' => '<label class="modal_btn-upload" role="button"><i class="fa fa-paperclip" aria-hidden="true"></i>{input}{label}{error}</label>'])
-                ->input('file', [
-                    'class' => 'addImages hidden', 
-                    'multiple' => true])
-                ->label(false) */ ?>
-
         <?= $form->field($model, 'gallery[]')
                 ->widget(FileInput::classname(), [
                     'options' => [
@@ -60,27 +53,21 @@
                         'multiple' => true,
                     ],
                     'pluginOptions' => [
-                        'maxFileCount' => 4,
-                        'maxFileSize' => 2800,
+                        'maxFileCount' => 5,
+//                        'maxFileSize' => 2800,
                         'showCaption' => false,
                         'showRemove' => false,
                         'showUpload' => false,
                         'browseClass' => 'btn btn-block',
                         'browseIcon' => '<i class="glyphicon glyphicon-camera"></i> ',
-                        'browseLabel' =>  'Загрузить фотографии'
+                        'browseLabel' =>  'Загрузить фотографии',
+                        'resizeImage' => true,
+//                        'resizeIfSizeMoreThan' => 1000,
+//                        'maxImageWidth' => 200,
+//                        'maxImageHeight' => 150,
+//                        'resizePreference' => 'height'
                     ]
             ])->label(false) ?>
-
-        <div class="form__upload-image">
-            <ul id="uploadImagesList">
-                <li class="item template">
-                    <span class="img-wrap">
-                        <img src="" alt="">
-                    </span>
-                    <span class="delete-link" title="Удалить">&#10005;</span>
-                </li>
-            </ul>
-        </div>
 
         <div class="modal-footer">
             <?= Html::submitButton('Отправить', ['class' => 'btn-modal btn-modal-yes']) ?>

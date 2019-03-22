@@ -121,8 +121,8 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
                                 <p>
                                     <?= FormatHelpers::formatFullUserName(
                                             $request['clients_surname'], 
-                                            $request['clients_second_name'],
-                                            $request['clients_name'], true) ?>
+                                            $request['clients_name'],
+                                            $request['clients_second_name'], true) ?>
                                 </p>
                             </div>
                             <div class="text-right">
