@@ -34,7 +34,7 @@ class BlockClientColumn extends DataColumn {
         
             var clientId;
 
-            $('body').on('click', '#block_client', function(e) {
+            $('body').on('click', 'ul.dropdown-setting li#block_client', function(e) {
                 e.preventDefault();
                 // Получаем data атрибут ID собственика
                 clientId = $(this).data('clientId');
@@ -52,12 +52,11 @@ class BlockClientColumn extends DataColumn {
                     },
                     success: function(response) {
                         if (response.status == " . User::STATUS_BLOCK . ") {
-                            btnValue.addClass('_status-user_block');
+                            btnValue.html('&Oslash;&nbsp;&nbsp;Разблокировать');
                             btnValue.data('status', 1);
                         } else {
                             if (response.status == " . User::STATUS_ENABLED . ") {
-                                btnValue.removeClass('_status-user_block');
-                                btnValue.addClass('_status-user');
+                                btnValue.html('&Oslash;&nbsp;&nbsp;Заблокировать');
                                 btnValue.data('status', 2);
                             }
                         }
@@ -68,6 +67,29 @@ class BlockClientColumn extends DataColumn {
                 });
                 
                 return false;
+            });
+            
+            $('body').on('click', 'ul.dropdown-setting li#delete_client', function(e) {
+                e.preventDefault();
+                // Получаем data атрибут ID собственика
+                clientId = $(this).data('clientId');
+                $('#delete_clients_manager').modal('show');
+            });
+            
+            $('body').on('click', '.delete_client__del', function(){
+                $.ajax({
+                    url: '" . $this->delete_action . "',
+                    type: '" . $this->ajax_method . "',
+                    data: {
+                        {$this->client_key} : clientId,
+                    },
+                    success: function(response) {
+                        // console.log(response);
+                    },
+                    error: function() {
+                        console.log('#2000 - 01: Ошибка Ajax запроса');
+                    },
+                });
             });
             
         ");
@@ -82,28 +104,32 @@ class BlockClientColumn extends DataColumn {
      */    
     protected function renderDataCellContent($data) {
         
-        $data_array = [];
-        $classBtn = '';
-        $message = '';
-        
         if ($data['status'] == User::STATUS_ENABLED) {
             $data_array = [
                 'client-id' => $data['client_id'],
                 'status' => USER::STATUS_BLOCK,
             ];
-            $classBtn = '_status-user';
-            $message = 'Пользователь разблокирован';
+            $label = 'Заблокировать';
         } elseif ($data['status'] == User::STATUS_BLOCK) {
             $data_array = [
                 'client-id' => $data['client_id'],
                 'status' => User::STATUS_ENABLED,
             ];            
-            $classBtn = '_status-user_block';
-            $message = 'Пользователь заблокирован';
+            $label = 'Разблокировать';
         }
         
         return
-            Html::button('', ['class' => $classBtn, 'id' => 'block_client', 'data' => $data_array, 'title' => $message]);
+            Html::beginTag('div', ['class' => 'dropdown']) .
+            Html::button('<i class="glyphicon glyphicon-option-horizontal"></i>', ['class' => 'btn-settings dropdown-toggle', 'type' => 'button', 'data-toggle' => 'dropdown']) .
+                Html::beginTag('ul', ['class' => 'dropdown-menu dropdown-setting']) . 
+                    Html::beginTag('li', ['id' => 'block_client', 'data' => $data_array]) .
+                        "&Oslash;&nbsp;&nbsp;{$label}" .
+                    Html::endTag('li') .
+                    Html::beginTag('li', ['id' => 'delete_client', 'data' => $data_array]) .
+                        '&times;&nbsp;&nbsp;Удалить собсвенника' .
+                    Html::endTag('li') .
+                Html::endTag('ul') . 
+            Html::endTag('div');
                         
     }
     

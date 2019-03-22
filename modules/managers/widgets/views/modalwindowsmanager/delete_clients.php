@@ -27,8 +27,8 @@ Modal::begin([
 
 <div class="modal-footer">
     <?= Html::button('Удалить', [
-            'class' => 'btn white-btn delete_client__del', 
-            'id' => 'confirm_delete-empl', 
+            'class' => 'btn white-btn', 
+            'id' => 'delete_client__del', 
             'data-dismiss' => 'modal']) ?>
     <?= Html::button('Отмена', ['class' => 'btn red-btn', 'data-dismiss' => 'modal']) ?>
 </div>

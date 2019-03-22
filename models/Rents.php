@@ -46,7 +46,7 @@ class Rents extends ActiveRecord
             [
                 ['rents_name', 'rents_second_name', 'rents_surname'], 
                 'match',
-                'pattern' => '/^[А-Яа-я\ \-]+$/i',
+                'pattern' => '/^[А-Яа-яЁё\\s\\-]+$/iu',
                 'message' => 'Поле должно содержать буквы русского алфавита',
             ],
             
@@ -63,8 +63,8 @@ class Rents extends ActiveRecord
                 'message' => 'Пользователь с введенным номером мобильного телефона в системе уже зарегистрирован',
             ],
             
-            ['rents_mobile', 'match', 'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/i'],
-            ['rents_mobile_more', 'match', 'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{4}\)?[\- ]?)?[\d\- ]{7,10}$/i'],
+//            ['rents_mobile', 'match', 'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}+$/iu'],
+//            ['rents_mobile_more', 'match', 'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{4}\)?[\- ]?)?[\d\- ]{7,10}+$/iu'],
             
             ['isActive', 'boolean'],
         ];

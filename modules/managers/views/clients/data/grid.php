@@ -17,7 +17,7 @@
         ],
         'rowOptions' => function ($data, $key, $index, $grid) {
             if ($data['balance'] < 0) {
-                return ['style' => 'background: #fce7df'];
+                return ['style' => 'background: #fff2e6'];
             }
         },
         'columns' => [
@@ -26,6 +26,13 @@
                 'value' => function ($data) {
                     return $data['client_id'];
                 },
+                'contentOptions' =>[
+                    'class' => 'managers-table_small',
+                ],
+            ],
+            [
+                'class' => BlockClientColumn::className(),
+                'visible' => Yii::$app->user->can('ClientsEdit') ? true : false,
                 'contentOptions' =>[
                     'class' => 'managers-table_small',
                 ],
@@ -74,8 +81,24 @@
                 ],
             ],
             [
-                'class' => BlockClientColumn::className(),
+                'class' => 'yii\grid\ActionColumn',
                 'visible' => Yii::$app->user->can('ClientsEdit') ? true : false,
+                'contentOptions' =>[
+                    'class' => 'managers-table_middle managers-table_button',
+                ],
+                'template' => '{delete-employee}',
+                'buttons' => [
+                    'delete-employee' => function ($url, $data) {
+                        return 
+                            Html::button('Удалить', [
+                                'data-pjax' => false,
+                                'class' => 'btn btn-sm btn-delete-in-table',
+                                'data-target' => '#delete_clients_manager',
+                                'data-toggle' => 'modal',
+                                'data-user' => $data['client_id'],
+                            ]);
+                    },
+                ],
             ],
         ],
     ]); ?>

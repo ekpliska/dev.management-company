@@ -53,6 +53,26 @@ $(document).ready(function() {
         return false;
     });
     
+    /*
+     * Вывоз модального окна, перед удаление собсвенника
+     */
+    $('#delete_clients_manager').on('show.bs.modal', function(e){
+        var buttonTarget = $(e.relatedTarget);
+        var dataContent = buttonTarget.data('user');
+        console.log(dataContent);
+        $(this).find('#delete_client__del').data('user', dataContent);
+    });
+    
+    $('#delete_client__del').on('click', function(){
+        var dataContent = $(this).data('user');
+        $.ajax({
+            url: '/managers/clients/delete-client',
+            method: 'POST',
+            data: {clientId: dataContent}
+        }).done(function(response){
+            console.log(response);
+        });
+    });
     
     /*
      * Список квитанций, Профиль Собственника
