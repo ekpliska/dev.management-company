@@ -17,7 +17,7 @@
         ],
         'rowOptions' => function ($data, $key, $index, $grid) {
             if ($data['balance'] < 0) {
-                return ['style' => 'background: #fff2e6'];
+                return ['style' => 'background: #fae6ff'];
             }
         },
         'columns' => [

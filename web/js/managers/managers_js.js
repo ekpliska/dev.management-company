@@ -59,7 +59,6 @@ $(document).ready(function() {
     $('#delete_clients_manager').on('show.bs.modal', function(e){
         var buttonTarget = $(e.relatedTarget);
         var dataContent = buttonTarget.data('user');
-        console.log(dataContent);
         $(this).find('#delete_client__del').data('user', dataContent);
     });
     

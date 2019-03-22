@@ -474,8 +474,6 @@ class ClientsController extends AppManagersController {
                 
         $client_id = Yii::$app->request->post('clientId');
         
-        Yii::$app->response->format = Response::FORMAT_JSON;
-        
         if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
             $client_info = Clients::findById($client_id);
             $full_name = $client_info->fullName;
@@ -484,7 +482,7 @@ class ClientsController extends AppManagersController {
                 return $this->redirect(Yii::$app->request->referrer);
             }
             Yii::$app->session->setFlash('success', ['message' => "Учетная запись собсвенника {$full_name} успешно удалена из системы."]);
-            return $this->redirect(Yii::$app->request->referrer);
+            return $this->redirect(['clients/index']);
         }
         
         Yii::$app->session->setFlash('error', ['message' => 'Ошибка удаления учетной записи собсвенника. Обновите страницу и повторите действие еще раз.']);

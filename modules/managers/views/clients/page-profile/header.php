@@ -2,6 +2,7 @@
 
     use yii\helpers\Html;
     use app\modules\managers\widgets\SubMenu;
+    use app\modules\managers\widgets\ModalWindowsManager;
 
 /* 
  * Шапка профиля собсвенника
@@ -39,7 +40,9 @@
             <?php endif; ?>
             <?= Html::button('Удалить', [
                         'class' => 'btn-delete-user',
-                        'data-user' => $user_info->user_id]) 
+                        'data-target' => '#delete_clients_manager',
+                        'data-toggle' => 'modal',
+                        'data-user' => $client_info->clients_id]) 
             ?>
         </div>
   
@@ -56,3 +59,5 @@
 </div>
 
 <?= SubMenu::widget(['view_name' => 'profile', 'client_id' => $client_info->clients_id, 'account_number' => $account_choosing->account_number]) ?>
+
+<?= ModalWindowsManager::widget(['modal_view' => 'delete_clients']) ?>
