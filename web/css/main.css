@@ -1689,6 +1689,9 @@ p.right {
 }
 .client_info__block {
     display: inline-flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
 }
 .client_info__block > div:first-child {
     position: absolute;
@@ -1700,10 +1703,16 @@ p.right {
     top: 40%;
     right: 2%;
 }
-.client_info__block > div.client_info-address,
+.client_info__block > div.client_info-address {
+    width: 50%;
+    padding-top: 10px;
+    padding-left: 60px;
+}
 .client_info__block > div.client_info-contact {
     width: 50%;
-    padding: 10px 60px 0 60px;
+    padding-top: 10px;
+    padding-right: 60px;
+    vertical-align: middle;
 }
 .request-body-rate {
     text-align: center;

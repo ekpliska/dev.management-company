@@ -46,7 +46,7 @@ $hide_btn = ($paid_request['status'] == StatusRequest::STATUS_CLOSE || $paid_req
         </h1>
         
         <div class="row row-flex">
-            <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 requests-paid-content">
                 <div class="content requests-view_body">
                     <p class="date_requests">
                         <?= FormatHelpers::formatDate($paid_request['date_cr'], true, 0, false) ?>
@@ -65,25 +65,34 @@ $hide_btn = ($paid_request['status'] == StatusRequest::STATUS_CLOSE || $paid_req
                     </p>
 
                     <div class="client_info">
-                        <div class="col-lg- col-sm-6 col-md-6 text-left">
-                            <div class="client_info-image">
+                        <div class="client_info__block">
+                            <div>
                                 <span class="glyphicon glyphicon-home"></span>
                             </div>
-                            <span class="client_info-text">
+                            <div class="client_info-address text-left">
+                                <p>
                                 <?= FormatHelpers::formatFullAdress(
                                         $paid_request['gis_adress'], 
                                         $paid_request['houses_number'], 
                                         $paid_request['porch'], 
                                         $paid_request['floor'], 
                                         $paid_request['flat']) ?>
-                            </span>
-
-                        </div>
-                        <div class="col-lg-6 col-sm-6 col-md-6 text-left">
-                            <div class="client_info-image">
-                                <i class="glyphicon glyphicon-phone"></i>
+                            </p>
                             </div>
-                            <span class="client_info-text"><?= $paid_request['phone'] ?></span>
+                            <div class="client_info-contact text-right">
+                                <p>
+                                    <?= $paid_request['phone'] ?>
+                                </p>
+                                <p>
+                                    <?= FormatHelpers::formatFullUserName(
+                                            $paid_request['clients_surname'], 
+                                            $paid_request['clients_name'],
+                                            $paid_request['clients_second_name'], true) ?>
+                                </p>
+                           </div>
+                            <div class="text-right">
+                                <span class="glyphicon glyphicon-phone"></span>
+                            </div>                            
                         </div>
                     </div>
 

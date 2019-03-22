@@ -54,18 +54,15 @@
                     ],
                     'pluginOptions' => [
                         'maxFileCount' => 5,
-//                        'maxFileSize' => 2800,
+                        'maxFileSize' => 5800,
                         'showCaption' => false,
-                        'showRemove' => false,
-                        'showUpload' => false,
+                        'showRemove' => true,
+                        'showUpload' => true,
                         'browseClass' => 'btn btn-block',
                         'browseIcon' => '<i class="glyphicon glyphicon-camera"></i> ',
                         'browseLabel' =>  'Загрузить фотографии',
-                        'resizeImage' => true,
-//                        'resizeIfSizeMoreThan' => 1000,
-//                        'maxImageWidth' => 200,
-//                        'maxImageHeight' => 150,
-//                        'resizePreference' => 'height'
+                        'resizePreference' => 'height',
+                        'resizeImages' => true,
                     ]
             ])->label(false) ?>
 
