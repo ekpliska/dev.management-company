@@ -28,7 +28,18 @@ class ChangePasswordForm extends Model {
         return [
             [['old_password', 'new_password'], 'required'],
             [['old_password', 'new_password'], 'string', 'min' => 6, 'max' => 12],
+            ['old_password', 'checkOldPassword'],
         ];
+        
+    }
+    
+    public function checkOldPassword($attribute, $param) {
+        
+        if (!$this->hasErrors()) {
+            if (!$this->_user->validatePassword($this->$attribute)) {
+                $this->addError($attribute, 'Текущий и введенный пароли не совпадают');
+            }
+        }
         
     }
     
