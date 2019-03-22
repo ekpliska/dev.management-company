@@ -62,9 +62,12 @@ $this->params['breadcrumbs'][] = 'Новая запись [Сотрудник]';
                         'alt' => 'user-photo']) ?>
             </div>
             <div class="profile-upload-btn">
-                <?= $form->field($model, 'photo', ['template' => '<label class="text-center btn-upload" role="button">{input}{label}{error}'])
-                        ->input('file', ['id' => 'btnLoad', 'class' => 'hidden'])->label('Загрузить фото') ?>
-            </div>   
+                <?= $form->field($model, 'photo', [
+                            'template' => '<label class="text-center btn-upload" role="button">{input}{label}{error}'])
+                        ->input('file', ['id' => 'btnLoad', 'class' => 'hidden'])
+                        ->label('<span class="glyphicon glyphicon-camera"></span>')
+                ?>
+            </div>  
         </div>
     
         

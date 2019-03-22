@@ -69,9 +69,11 @@ $this->params['breadcrumbs'][] = $employee_info->fullName;
                 ]) ?>
                 
                 <div class="profile-upload-btn profile-upload-btn-employee">
-                <?= $form->field($user_info, 'user_photo', ['template' => '<label class="text-center btn-upload" role="button">{input}{label}{error}'])
-                        ->input('file', ['id' => 'btnLoad', 'class' => 'hidden'])->label('Загрузить фото') ?>
-            </div>
+                    <?= $form->field($user_info, 'user_photo', [
+                                'template' => '<label class="text-center btn-upload" role="button">{input}{label}{error}'])
+                            ->input('file', ['id' => 'btnLoad', 'class' => 'hidden'])
+                            ->label('<span class="glyphicon glyphicon-camera"></span>') ?>
+                </div>
                 
             </div>
             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-left user-info-block">
