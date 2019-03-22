@@ -16,6 +16,7 @@ class User extends BaseUser {
     public function rules() {
         
         return [
+            ['user_check_email', 'boolean'],
             ['permission_list', 'safe'],
             [['user_email', 'user_mobile'], 'required'],
         ];

@@ -61,7 +61,7 @@ $this->params['breadcrumbs'][] = 'Новая запись [Сотрудник]';
                         'id' => 'photoPreview',
                         'alt' => 'user-photo']) ?>
             </div>
-            <div class="profile-upload-btn">
+            <div class="profile-upload-btn profile-upload-btn__load">
                 <?= $form->field($model, 'photo', [
                             'template' => '<label class="text-center btn-upload" role="button">{input}{label}{error}'])
                         ->input('file', ['id' => 'btnLoad', 'class' => 'hidden'])

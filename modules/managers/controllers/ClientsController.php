@@ -136,7 +136,7 @@ class ClientsController extends AppManagersController {
                 $add_rent = Yii::$app->request->post('AddRent');
                 
                 // Сохраняем данные существующего арендатора
-                if ($edit_rent !== null) {
+                if ($edit_rent != null) {
                     if ($edit_rent->load(Yii::$app->request->post())) {
                         // Если есть ошибки валидации
                         if ($edit_rent->hasErrors()) {
@@ -146,17 +146,7 @@ class ClientsController extends AppManagersController {
                         $edit_rent->save();
                     }
                 }
-                
-                if ($add_rent !== null) {
-                    $rent = new AddRent();
-                    if ($rent->load(Yii::$app->request->post())) {
-                        if ($rent->hasErrors()) {
-                            Yii::$app->session->setFlash('error', ['message' => 'Ошибка обновления профиля пользователя. Обновите страницу и повторите действие еще раз.']);
-                            return $this->redirect(Yii::$app->request->referrer);
-                        }
-                        $rent->addNewRent();
-                    }
-                }
+
                 Yii::$app->session->setFlash('success', ['message' => "Учетная запись собсвенника {$client_info->fullName} успешно обновлена."]);
                 $client_info->save();
             }

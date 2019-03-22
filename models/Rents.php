@@ -63,9 +63,6 @@ class Rents extends ActiveRecord
                 'message' => 'Пользователь с введенным номером мобильного телефона в системе уже зарегистрирован',
             ],
             
-//            ['rents_mobile', 'match', 'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}+$/iu'],
-//            ['rents_mobile_more', 'match', 'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{4}\)?[\- ]?)?[\d\- ]{7,10}+$/iu'],
-            
             ['isActive', 'boolean'],
         ];
     }
@@ -192,6 +189,15 @@ class Rents extends ActiveRecord
                     'message' => 'Арендатор ' . $this->fullName . ' и его учетная запись удалены с портала'
                 ]);
             }
+        }
+    }
+    
+    public function afterSave($insert, $changedAttributes) {
+        parent::afterSave($insert, $changedAttributes);
+        if (!$insert) {
+            $user_rent = User::findOne(['user_rent_id' => $this->rents_id]);
+            $user_rent->user_mobile = $this->rents_mobile;
+            $user_rent->save(false);
         }
     }
 
