@@ -27,7 +27,11 @@ class ChangePasswordForm extends Model {
         
         return [
             [['old_password', 'new_password'], 'required'],
-            [['old_password', 'new_password'], 'string', 'min' => 6, 'max' => 12],
+            [['new_password'],
+                'match', 
+                'pattern' => '/^[A-Za-z0-9\\_\\-]+$/iu', 
+                'message' => 'Вы используете запрещенные символы',
+            ],
             ['old_password', 'checkOldPassword'],
         ];
         
@@ -37,7 +41,7 @@ class ChangePasswordForm extends Model {
         
         if (!$this->hasErrors()) {
             if (!$this->_user->validatePassword($this->$attribute)) {
-                $this->addError($attribute, 'Текущий и введенный пароли не совпадают');
+                $this->addError($attribute, 'Старый пароль указан не верно');
             }
         }
         

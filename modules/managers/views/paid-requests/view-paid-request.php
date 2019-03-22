@@ -85,25 +85,34 @@ $this->params['breadcrumbs'][] = "Заявка на платную услугу 
                     </p>
 
                     <div class="client_info">
-                        <div class="col-lg- col-sm-6 col-md-6 text-left">
-                            <div class="client_info-image">
+                        <div class="client_info__block">
+                            <div>
                                 <span class="glyphicon glyphicon-home"></span>
                             </div>
-                            <span class="client_info-text">
+                            <div class="client_info-address text-left">
+                                <p>
                                 <?= FormatHelpers::formatFullAdress(
                                         $paid_request['gis_adress'], 
                                         $paid_request['houses_number'], 
                                         $paid_request['porch'], 
                                         $paid_request['floor'], 
                                         $paid_request['flat']) ?>
-                            </span>
-
-                        </div>
-                        <div class="col-lg-6 col-sm-6 col-md-6 text-left">
-                            <div class="client_info-image">
-                                <i class="glyphicon glyphicon-phone"></i>
+                            </p>
                             </div>
-                            <span class="client_info-text"><?= $paid_request['phone'] ?></span>
+                            <div class="client_info-contact text-right">
+                                <p>
+                                    <?= $paid_request['phone'] ?>
+                                </p>
+                                <p>
+                                    <?= FormatHelpers::formatFullUserName(
+                                            $paid_request['clients_surname'], 
+                                            $paid_request['clients_second_name'],
+                                            $paid_request['clients_name'], true) ?>
+                                </p>
+                           </div>
+                            <div class="text-right">
+                                <span class="glyphicon glyphicon-phone"></span>
+                            </div>                            
                         </div>
                     </div>
 

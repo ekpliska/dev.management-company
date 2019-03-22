@@ -203,6 +203,7 @@ class PaidServices extends ActiveRecord
                         . 'ed.employee_id as employee_id_d, ed.employee_surname as surname_d, ed.employee_name as name_d, ed.employee_second_name as second_name_d, '
                         . 'es.employee_id as employee_id_s, es.employee_surname as surname_s, es.employee_name as name_s, es.employee_second_name as second_name_s, '
                         . 'cs.category_name as category, s.service_name as services_name, '
+                        . 'c.clients_surname as clients_surname, c.clients_name as clients_name, c.clients_second_name as clients_second_name, '
                         . 'h.houses_gis_adress as gis_adress, h.houses_number as houses_number, '
                         . 'f.flats_porch as porch, f.flats_floor as floor, f.flats_number as flat')
                 ->from('paid_services as ps')

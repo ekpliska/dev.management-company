@@ -28,7 +28,7 @@ class SignupStepTwo extends Model {
             
             [['password', 'password_repeat'],
                 'match', 
-                'pattern' => '/^[A-Za-z0-9\_\-]+$/i', 
+                'pattern' => '/^[A-Za-z0-9\\_\\-]+$/iu', 
                 'message' => 'Вы используете не допустимые символы в пароле',
             ],
             
