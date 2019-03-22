@@ -41,7 +41,7 @@ class BlockClientColumn extends DataColumn {
                 // Получаем data атрибут статус собственика
                 var statusClient = $(this).data('status');
                 // Собираем все элементы, которые содержат одинаковые data атрибут ID собственика
-                var btnValue = $(this);
+                var btnValue = $('.user-' + clientId);
 
                 $.ajax({
                     url: '" . $this->block_action . "',
@@ -91,14 +91,14 @@ class BlockClientColumn extends DataColumn {
                 'client-id' => $data['client_id'],
                 'status' => USER::STATUS_BLOCK,
             ];
-            $classBtn = '_status-user';
+            $classBtn = "_status-user user-{$data['client_id']}";
             $message = 'Пользователь разблокирован';
         } elseif ($data['status'] == User::STATUS_BLOCK) {
             $data_array = [
                 'client-id' => $data['client_id'],
                 'status' => User::STATUS_ENABLED,
             ];            
-            $classBtn = '_status-user_block';
+            $classBtn = "_status-user_block user-{$data['client_id']}";
             $message = 'Пользователь заблокирован';
         }
         
