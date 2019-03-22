@@ -33,22 +33,24 @@ $this->params['breadcrumbs'][] = 'Профиль';
         ])
     ?>
     
-    <div class="profile-bg text-center">
-        <div class="face-container">
+    <div class="profile-bg">
+            <div class="profile-name">
+                <p class="profile-user-name">
+                    <?= $user_info->getFullNameClient(true) ?>
+                </p>
+            </div>
+            <div class="face-container">
             <?= Html::img($user_info->photo, [
                     'class' => 'img-rounded face',
                     'id' => 'photoPreview',
                     'alt' => $user_info->username]) ?>
-        </div>
-        <div class="profile-name">
-            <p class="profile-user-name text-center">
-                <?= $user_info->getFullNameClient(true) ?>
-            </p>
-        </div>
-        <div class="profile-upload">
-            <?= $form->field($user, 'user_photo', ['template' => '<label class="text-center btn-upload" role="button">{input}{label}{error}'])
-                    ->input('file', ['id' => 'btnLoad', 'class' => 'hidden'])->label('Загрузить фото') ?>
-        </div>   
+                <div class="profile-upload">
+                    <?= $form->field($user, 'user_photo', [
+                                'template' => '<label class="text-center btn-upload" role="button">{input}{label}'])
+                            ->input('file', ['id' => 'btnLoad', 'class' => 'hidden'])
+                            ->label('<span class="glyphicon glyphicon-camera"></span>') ?>
+                </div>
+            </div>
     </div>
     
     <div class="account-select text-center">

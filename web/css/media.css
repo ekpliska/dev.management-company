@@ -530,55 +530,27 @@
 /* End Vote Page */
 
 /* Profile Page */
-@media screen and (max-width: 1260px) {
-    .profile-page .btn {
-        width: 200px;
-    }
-}
-@media screen and (max-width: 991px) {
-    .rent-profile-info,
-    .clients-profile-info {
-        border-top: 1px solid #ddd;
-        padding: 40px 20px;
-        margin-top: 40px;
-    }
-    .spam-agree-txt label {
-        font-size: 14px;
-    }
-    .spam-agree-txt label:before {
-        width: 25px !important;
-        height: 25px !important;
-        margin-left: -32px !important;
-    }
-    .profile-bg {
-        height: 300px;
-    }
-    .face-container {
-        top: 60px;
-    }
-    .profile-name {
-        margin-top: 100px;
-    }
-    .profile-name p {
-        font-size: 22px;
-    }
+@media screen and (max-width: 768px) {
     .profile-bg .face {
         box-shadow: 0px 0px 0px 30px rgba(45, 24, 180, 0.5);
-        width: 90px;
-        height: 90px;
+        width: 100px;
+        height: 100px;
     }
-    .badge-personal-account, 
-    .profile-title,
-    .margin-r {
-        font-size: 14px;
+    .btn-upload {
+        padding: 2px 35px;
     }
-    .custom-select-trigger {
-        width: 300px !important;
-    }
-    .user-full-name {
-        font-size: 16px;
-        text-align: center;
+    .profile-name p {
+        font-size: 18px;
     }
 }
-
+@media screen and (max-width: 768px) {
+    .profile-bg .face {
+        box-shadow: 0px 0px 0px 20px rgba(45, 24, 180, 0.5);
+        width: 70px;
+        height: 70px;
+    }
+    .btn-upload {
+        padding: 2px 20px;
+    }
+}
 /* End Profile Page */
