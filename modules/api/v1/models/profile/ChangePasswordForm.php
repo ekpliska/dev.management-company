@@ -54,26 +54,14 @@ class ChangePasswordForm extends Model {
     public function changePassword() {
         
         if ($this->validate()) {
-            
-            $transaction = Yii::$app->db->beginTransaction();
-            try {
-                $new_token = $this->setNewToken();
-                if (!$new_token) {
-                    return false;
-                }
-                $user = $this->_user;
-                $user->setUserPassword($this->new_password);
-                if (!$user->save()) {
-                    return false;
-                }
-                
-                return ['success' => true, 'token' => $new_token];
-                
-                $transaction->commit();
-                
-            } catch (Exception $ex) {
-                $transaction->rollBack();
+            $user = $this->_user;
+            $user->setUserPassword($this->new_password);
+            if (!$user->save()) {
+                return false;
             }
+            $new_token = $this->setNewToken();
+                
+            return ['success' => true, 'token' => $new_token];
         }
         
         return false;
@@ -84,7 +72,7 @@ class ChangePasswordForm extends Model {
      * Сброс токена
      * Удаляем все токены текущего пользователя, формируем новуй токен
      */
-    private function setNewToken() {
+    public function setNewToken() {
         
         if (Token::deleteAll(['user_uid' => $this->_user->user_id])) {
             $token = new Token();
