@@ -41,7 +41,7 @@ class ClientsRentForm extends Model {
             [
                 ['rents_surname', 'rents_name', 'rents_second_name'], 
                 'match', 
-                'pattern' => '/^[А-Яа-я\ \-]$/i', 
+                'pattern' => '/^[А-Яа-яЁё\\s\\-]+$/iu',
                 'on' => self::SCENARIO_AJAX_VALIDATION,
                 'message' => 'Поле может содержать только буквы русского алфавита, и знак "-"',
             ],
@@ -53,7 +53,7 @@ class ClientsRentForm extends Model {
                 'message' => 'Пользователь с введенным номером мобильного телефона в системе уже зарегистрирован',
                 'on' => self::SCENARIO_AJAX_VALIDATION,
             ],
-            ['rents_mobile', 'match', 'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/i', 'on' => self::SCENARIO_AJAX_VALIDATION],
+            ['rents_mobile', 'match', 'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}+$/i', 'on' => self::SCENARIO_AJAX_VALIDATION],
             
             [
                 'rents_email', 'unique',
@@ -65,16 +65,10 @@ class ClientsRentForm extends Model {
             ['rents_email', 'string', 'min' => 5, 'max' => 150, 'on' => self::SCENARIO_AJAX_VALIDATION],
             ['rents_email', 'email', 'on' => self::SCENARIO_AJAX_VALIDATION],
             
-            ['rents_email', 'match',
-                'pattern' => '/^[A-Za-z0-9\_\-\@\.]+$/i',
-                'message' => 'Поле "{attribute}" может содержать только буквы английского алфавита, цифры, знаки "-", "_"',
-                'on' => self::SCENARIO_AJAX_VALIDATION,
-            ],            
-            
             [['password', 'password_repeat'], 'string', 'min' => 6, 'max' => 12, 'on' => self::SCENARIO_AJAX_VALIDATION],
             [['password', 'password_repeat'],
                 'match', 
-                'pattern' => '/^[A-Za-z0-9\_\-]+$/i', 
+                'pattern' => '/^[A-Za-z0-9\\_\\-]+$/i', 
                 'message' => 'Поле "{attribute}" может содержать только буквы английского алфавита, цифры, знаки "-", "_"',
                 'on' => self::SCENARIO_AJAX_VALIDATION,
             ],

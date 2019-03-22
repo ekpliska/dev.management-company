@@ -1682,21 +1682,28 @@ p.right {
 }
 .client_info {
     margin: 0 -10px;
-    background: #fcfcfc;
-    height: 80px;
+    background: #eee;
+    /*height: 80px;*/
     color: #2d1d88;
-    padding: 10px;
+    position: relative;
 }
-.client_info-image {
-    margin: 18px 10px;
+.client_info__block {
+    display: inline-flex;
 }
-.client_info-text {
-    padding: 0 35px;
-    margin: 0;
+.client_info__block > div:first-child {
     position: absolute;
-    top: 50%;
-    transform: translate(0, -50%);
-    font-size: 14px;
+    top: 40%;
+    left: 2%;
+}
+.client_info__block > div:last-child {
+    position: absolute;
+    top: 40%;
+    right: 2%;
+}
+.client_info__block > div.client_info-address,
+.client_info__block > div.client_info-contact {
+    width: 50%;
+    padding: 10px 60px 0 60px;
 }
 .request-body-rate {
     text-align: center;

@@ -69,13 +69,6 @@ class Requests extends ActiveRecord
             
             [['requests_type_id', 'requests_comment'], 'required', 'on' => self::SCENARIO_ADD_REQUEST],
             
-            [
-                'requests_phone', 
-                'match', 
-                'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/i',
-                'on' => [self::SCENARIO_ADD_REQUEST, self::SCENARIO_EDIT_REQUEST],
-            ],
-            
             [['gallery'], 'file', 
                 'extensions' => 'png, jpg, jpeg', 
                 'maxFiles' => 4, 
@@ -84,7 +77,7 @@ class Requests extends ActiveRecord
                 'on' => self::SCENARIO_ADD_REQUEST,
             ],
             [['requests_comment'], 'string', 'on' => [self::SCENARIO_ADD_REQUEST, self::SCENARIO_EDIT_REQUEST]],
-            [['requests_comment'], 'string', 'min' => 10, 'max' => 255, 'on' => [self::SCENARIO_ADD_REQUEST, self::SCENARIO_EDIT_REQUEST]],
+            [['requests_comment'], 'string', 'max' => 255, 'on' => [self::SCENARIO_ADD_REQUEST, self::SCENARIO_EDIT_REQUEST]],
             
             [['requests_grade', 'close_chat'], 'integer'],
             
@@ -267,6 +260,7 @@ class Requests extends ActiveRecord
                         . 'r.requests_comment as requests_comment, '
                         . 'r.close_chat as close_chat, '
                         . 'tr.type_requests_name as type_requests_name, '
+                        . 'c.clients_surname as clients_surname, c.clients_second_name as clients_second_name, c.clients_name as clients_name, '
                         . 'h.houses_gis_adress as houses_gis_adress, h.houses_number as houses_number, '
                         . 'f.flats_porch as flats_porch, f.flats_floor as flats_floor, f.flats_number as flats_number, '
                         . 'ed.employee_id as employee_id_d, ed.employee_surname as surname_d, ed.employee_name as name_d, ed.employee_second_name as sname_d, '
@@ -278,6 +272,7 @@ class Requests extends ActiveRecord
                 ->join('LEFT JOIN', 'houses as h', 'h.houses_id = f.flats_house_id')
                 ->join('LEFT JOIN', 'employees as ed', 'ed.employee_id = r.requests_dispatcher_id')
                 ->join('LEFT JOIN', 'employees as es', 'es.employee_id = r.requests_specialist_id')
+                ->join('LEFT JOIN', 'clients as c', 'c.clients_id = pa.personal_clients_id')
                 ->where(['requests_ident' => $request_numder])
                 ->one();
         

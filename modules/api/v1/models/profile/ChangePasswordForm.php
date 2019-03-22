@@ -12,7 +12,6 @@ class ChangePasswordForm extends Model {
     
     public $old_password;
     public $new_password;
-    public $repear_password;
     
     private $_user;
 
@@ -27,24 +26,11 @@ class ChangePasswordForm extends Model {
     public function rules() {
         
         return [
-            [['old_password', 'new_password', 'repear_password'], 'required'],
-            [['old_password', 'new_password', 'repear_password'], 'string', 'min' => 6, 'max' => 12],
-            ['new_password', 'compare', 'compareAttribute' => 'repear_password'],
-            ['old_password', 'checkOldPassword'],
+            [['old_password', 'new_password'], 'required'],
+            [['old_password', 'new_password'], 'string', 'min' => 6, 'max' => 12],
         ];
         
     }
-    
-    public function checkOldPassword($attribute, $param) {
-        
-        if (!$this->hasErrors()) {
-            if (!$this->_user->validatePassword($this->$attribute)) {
-                $this->addError($attribute, 'Текущий и введенный пароли не совпадают');
-            }
-        }
-        
-    }
-    
     
     public function changePassword() {
         

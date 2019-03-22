@@ -102,25 +102,32 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
                     <?php endif; ?>
 
                     <div class="client_info">
-                        <div class="col-lg-6 col-sm-6 col-md-6 text-left">
-                            <div class="client_info-image">
+                        <div class="client_info__block">
+                            <div>
                                 <span class="glyphicon glyphicon-home"></span>
                             </div>
-                            <span class="client_info-text">
-                                <?= FormatHelpers::formatFullAdress(
-                                        $request['houses_gis_adress'], 
-                                        $request['houses_number'], 
-                                        $request['flats_porch'], 
-                                        $request['flats_floor'], 
-                                        $request['flats_number']) ?>
-                            </span>
-
-                        </div>
-                        <div class="col-lg-6 col-sm-6 col-md-6 text-left">
-                            <div class="client_info-image">
-                                <i class="glyphicon glyphicon-phone"></i>
+                            <div class="client_info-address text-left">
+                                <p>
+                                    <?= FormatHelpers::formatFullAdress(
+                                            $request['houses_gis_adress'], 
+                                            $request['houses_number'], 
+                                            $request['flats_porch'], 
+                                            $request['flats_floor'], 
+                                            $request['flats_number']) ?>
+                                </p>
                             </div>
-                            <span class="client_info-text"><?= $request['requests_phone'] ?></span>
+                            <div class="client_info-contact text-right">
+                                <p><?= $request['requests_phone'] ?></p>
+                                <p>
+                                    <?= FormatHelpers::formatFullUserName(
+                                            $request['clients_surname'], 
+                                            $request['clients_second_name'],
+                                            $request['clients_name'], true) ?>
+                                </p>
+                            </div>
+                            <div class="text-right">
+                                <span class="glyphicon glyphicon-phone"></span>
+                            </div>                            
                         </div>
                     </div>
 

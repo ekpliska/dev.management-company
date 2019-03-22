@@ -73,7 +73,7 @@ class ProfileController extends Controller {
     
     /*
      * Редактирование профиля Арендатора
-     * {"old_password": "123456", "new_password": "123456", "repear_password": "123456"}
+     * {"old_password": "123456", "new_password": "123456"}
      */
     public function actionChangePassword() {
         

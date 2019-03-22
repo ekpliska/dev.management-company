@@ -14,6 +14,7 @@
     use app\modules\managers\models\searchForm\searchRequests;
     use app\modules\managers\models\Specialists;
     use app\helpers\FormatFullNameUser;
+    use app\models\User;
 
 /**
  * Заявки
