@@ -81,8 +81,8 @@ class ProfileController extends Controller {
         
         $model = new ChangePasswordForm($user);
         $model->load(Yii::$app->getRequest()->getBodyParams(), '');
-        if ($model->changePassword()) {
-            return ['success' => true];
+        if ($result = $model->changePassword()) {
+            return $result;
         } else {
             return $model;
         }
