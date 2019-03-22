@@ -42,7 +42,7 @@ class Services extends ActiveRecord {
             
             [['service_name', 'service_image'], 'string', 'min' => 3, 'max' => 255],
             
-            ['service_description', 'string', 'min' => 3, 'max' => 1000],
+            ['service_description', 'string', 'max' => 1000],
             
             [['image'], 'file', 'extensions' => 'png, jpg, jpeg'],
             [['image'], 'image', 'maxWidth' => 510, 'maxHeight' => 510],

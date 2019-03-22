@@ -18,7 +18,7 @@ class User extends BaseUser {
         return [
             ['user_check_email', 'boolean'],
             ['permission_list', 'safe'],
-            [['user_email', 'user_mobile'], 'required'],
+            [['user_login', 'user_email', 'user_mobile'], 'required'],
         ];
         
     }

@@ -74,11 +74,6 @@ class User extends ActiveRecord implements IdentityInterface
                 'message' => 'Данный электронный адрес уже используется в системе',
                 'on' => self::SCENARIO_EDIT_PROFILE,
             ],
-            ['user_email', 'match',
-                'pattern' => '/^[A-Za-z0-9\_\-\@\.]+$/iu',
-                'message' => 'Поле "{attribute}" может содержать только буквы английского алфавита, цифры, знаки "-", "_"',
-                'on' => self::SCENARIO_EDIT_PROFILE,
-            ],
             
             ['user_mobile', 
                 'match', 

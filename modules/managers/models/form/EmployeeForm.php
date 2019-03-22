@@ -57,8 +57,8 @@ class EmployeeForm extends Model {
             [
                 ['surname', 'name', 'second_name'], 
                 'match', 
-                'pattern' => '/^[А-Яа-я\ \-]+$/iu', 
-                'message' => 'Поле "{attribute}" может содержать только буквы русского алфавита, и знак "-"',
+                'pattern' => '/^[А-Яа-яЁё\\s\\-]+$/iu',
+                'message' => 'Поле должно содержать буквы русского алфавита',
             ],            
             
             
@@ -66,12 +66,7 @@ class EmployeeForm extends Model {
             
             [['password', 'password_repeat'], 'string', 'min' => 6, 'max' => 12],
             ['password_repeat', 'compare', 'compareAttribute' => 'password', 'message' => 'Указанные пароли не совпадают'],
-            
-            [['username', 'password', 'password_repeat'],
-                'match', 
-                'pattern' => '/^[A-Za-z0-9\_\-]+$/iu', 
-                'message' => 'Поле "{attribute}" может содержать только буквы английского алфавита, цифры, знаки "-", "_"',
-            ],            
+                       
             ['username', 'unique', 
                 'targetClass' => User::className(), 
                 'targetAttribute' => 'user_login', 
@@ -79,17 +74,13 @@ class EmployeeForm extends Model {
             ],
 
             ['email', 'email'],
-            ['email', 'match',
-                'pattern' => '/^[A-Za-z0-9\_\-\@\.]+$/iu',
-                'message' => 'Поле "{attribute}" может содержать только буквы английского алфавита, цифры, знаки "-", "_"',
-            ],
+
             ['email', 'unique',
                 'targetClass' => User::className(),
                 'targetAttribute' => 'user_email',
                 'message' => 'Указанный электронный адрес в системе уже используется'
             ],
             
-            ['mobile', 'match', 'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/i'],
             ['mobile', 'unique',
                 'targetClass' => User::className(),
                 'targetAttribute' => 'user_mobile',

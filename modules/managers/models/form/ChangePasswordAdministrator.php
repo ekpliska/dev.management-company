@@ -28,13 +28,7 @@ class ChangePasswordAdministrator extends Model {
         
         return [
             [['new_password'], 'required', 'message' => 'Введите новый пароль'],
-            [['new_password_repeat'], 'required', 'message' => 'Повторите новый пароль'],
-
-            [['new_password', 'new_password_repeat'], 
-                'match', 
-                'pattern' => '/^[A-Za-z0-9\_\-]+$/i', 
-                'message' => 'Пароль может содержать только буквы английского алфавита, цифры, - и _',
-            ],            
+            [['new_password_repeat'], 'required', 'message' => 'Повторите новый пароль'],           
             
             [['new_password', 'new_password_repeat'], 'string', 'min' => 6, 'max' => 12],
             ['new_password', 'compare', 'compareAttribute' => 'new_password_repeat', 'message' => 'Указанные пароли не совпадают'],

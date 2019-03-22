@@ -55,7 +55,7 @@ class Houses extends ActiveRecord
             [['houses_name'], 'string', 'max' => 100],
             
             ['houses_description', 'required', 'on' => self::SCENARIO_EDIT_DESCRIPRION],
-            ['houses_description', 'string', 'min' => 10, 'max' => 255, 'on' => self::SCENARIO_EDIT_DESCRIPRION],
+            ['houses_description', 'string', 'max' => 255, 'on' => self::SCENARIO_EDIT_DESCRIPRION],
             
             ['upload_file', 'required', 'on' => self::SCENARIO_LOAD_FILE],
             [['upload_file'],
