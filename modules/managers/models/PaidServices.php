@@ -6,6 +6,7 @@
     use app\models\StatusRequest;
     use app\helpers\FormatHelpers;
     use app\models\PersonalAccount;
+    use app\models\Notifications;
 
 /**
  * Заявки на платные услуги
@@ -86,6 +87,12 @@ class PaidServices extends BasePaidServices {
         
         $this->services_dispatcher_id = $dispatcher_id;
         $this->status = StatusRequest::STATUS_IN_WORK;
+        
+        // Формируем уведомление
+        if (empty($this->status != StatusRequest::STATUS_IN_WORK)) {
+            Notifications::createNoticeStatus(Notifications::TYPE_CHANGE_STATUS_IN_PAID_REQUEST, $this->services_id, StatusRequest::STATUS_IN_WORK);
+        }
+        
         return $this->save(false) ? true : false;
         
     }
@@ -97,6 +104,12 @@ class PaidServices extends BasePaidServices {
         
         $this->services_specialist_id = $specialist_id;
         $this->status = StatusRequest::STATUS_PERFORM;
+        
+        // Формируем уведомление
+        if (empty($this->status != StatusRequest::STATUS_PERFORM)) {
+            Notifications::createNoticeStatus(Notifications::TYPE_CHANGE_STATUS_IN_PAID_REQUEST, $this->services_id, StatusRequest::STATUS_PERFORM);
+        }
+        
         return $this->save(false) ? true : false;
     }
     

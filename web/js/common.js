@@ -179,8 +179,6 @@ $(document).ready(function() {
      */
     $('.notification_link').on('click', function(e) {
         var notice = $(this).data('notice');
-        e.preventDefault();
-        console.log(notice);
         $.post('/notification/one-notification?notice_id=' + notice, function(response) {});
     });
     

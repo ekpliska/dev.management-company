@@ -6,6 +6,7 @@
     use app\models\StatusRequest;
     use app\helpers\FormatHelpers;
     use app\models\PersonalAccount;
+    use app\models\Notifications;
 
 /**
  *  Завяки
@@ -76,6 +77,12 @@ class Requests extends BaseRequests {
         
         $this->requests_dispatcher_id = $dispatcher_id;
         $this->status = StatusRequest::STATUS_IN_WORK;
+        
+        // Формируем уведомление
+        if (empty($this->status != StatusRequest::STATUS_IN_WORK)) {
+            Notifications::createNoticeStatus(Notifications::TYPE_CHANGE_STATUS_IN_REQUEST, $this->requests_id, StatusRequest::STATUS_IN_WORK);
+        }
+        
         return $this->save(false) ? true : false;
         
     }
@@ -87,6 +94,12 @@ class Requests extends BaseRequests {
         
         $this->requests_specialist_id = $specialist_id;
         $this->status = StatusRequest::STATUS_PERFORM;
+        
+        // Формируем уведомление
+        if (empty($this->status != StatusRequest::STATUS_PERFORM)) {
+            Notifications::createNoticeStatus(Notifications::TYPE_CHANGE_STATUS_IN_REQUEST, $this->requests_id, StatusRequest::STATUS_PERFORM);
+        }
+        
         return $this->save(false) ? true : false;
     }
     

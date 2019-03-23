@@ -13,6 +13,7 @@
     use app\models\Image;
     use app\models\Employees;
     use app\models\PersonalAccount;
+    use app\models\Notifications;
 
 /**
  * Заяки
@@ -327,6 +328,11 @@ class Requests extends ActiveRecord
             $this->requests_grade = null;
             $this->close_chat = Requests::CHAT_OPEN;
             $request_answers = RequestAnswers::deleteAll(['anwswer_request_id' => $this->requests_id]);
+        }
+        
+        // Формируем уведомление
+        if (empty($this->status != $status)) {
+            Notifications::createNoticeStatus(Notifications::TYPE_CHANGE_STATUS_IN_REQUEST, $this->requests_id, $status);
         }
         
         return $this->save(false) ? true : false;

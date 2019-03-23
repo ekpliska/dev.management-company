@@ -175,7 +175,7 @@ $config = [
                 'request-password-reset' => 'site/request-password-reset',
                 'signup' => 'signup/index',
                 'remove-notifications' => 'notification/remove-notifications',
-                'one-notification/<notice_id:[\w]+>' => 'notification/one-notification',
+                'one-notification/<notice_id:[\w-]+>' => 'notification/one-notification',
                 
                 // REST Rules
                 [

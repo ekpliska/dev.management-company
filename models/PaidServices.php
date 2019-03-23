@@ -11,6 +11,7 @@
     use app\models\Services;
     use app\models\CategoryServices;
     use app\models\PersonalAccount;
+    use app\models\Notifications;
 
 /**
  * Платные услуги
@@ -233,6 +234,11 @@ class PaidServices extends ActiveRecord
             $this->date_closed = time();
         } else {
             $this->date_closed = null;
+        }
+        
+        // Формируем уведомление
+        if (empty($this->status != $status)) {
+            Notifications::createNoticeStatus(Notifications::TYPE_CHANGE_STATUS_IN_PAID_REQUEST, $this->services_id, $status);
         }
         
         return $this->save() ? true : false;
