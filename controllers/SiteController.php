@@ -18,6 +18,15 @@ class SiteController extends Controller
             'access' => [
                 'class' => AccessControl::className(),
                 'only' => ['index', 'login', 'logout'],
+                'denyCallback' => function ($rule, $action) {
+                    if (Yii::$app->user->can('clients') || Yii::$app->user->can('clients_rent')) {
+                        return $this->redirect(['/clients']);
+                    } elseif (Yii::$app->user->can('dispatcher')) {
+                        return $this->redirect(['/dispatchers']);
+                    } elseif (Yii::$app->user->can('administrator')) {
+                        return $this->redirect(['/managers']);
+                    }
+                },
                 'rules' => [
                     [
                         'actions' => ['index', 'login'],

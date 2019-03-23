@@ -3,6 +3,8 @@
     namespace app\models;
     use Yii;
     use yii\db\ActiveRecord;
+    use yii\imagine\Image;
+    use Imagine\Image\Box;
     use app\models\Units;
     use app\models\CategoryServices;
     use yii\helpers\ArrayHelper;
@@ -44,8 +46,12 @@ class Services extends ActiveRecord {
             
             ['service_description', 'string', 'max' => 1000],
             
-            [['image'], 'file', 'extensions' => 'png, jpg, jpeg'],
-            [['image'], 'image', 'maxWidth' => 510, 'maxHeight' => 510],
+            [['image'], 'file',
+                'skipOnEmpty' => true,
+                'extensions' => 'png, jpg',
+                'maxSize' => 5 * 256 * 1024,
+                'mimeTypes' => 'image/*',
+            ],
             
         ];
     }
@@ -122,6 +128,11 @@ class Services extends ActiveRecord {
                 $file_name = 'service_' . time() . '.' . $this->service_image->extension;
                 $this->service_image->saveAs($dir . $file_name);
                 $this->service_image = '/' . $dir . $file_name;
+                
+                $photo_path = Yii::getAlias('@webroot') . '/' . $dir . $file_name;
+                $photo = Image::getImagine()->open($photo_path);
+                $photo->thumbnail(new Box(900, 900))->save($photo_path, ['quality' => 90]);
+                
                 @unlink(Yii::getAlias('@webroot' . $current_image));
             } else {
                 $this->service_image = $current_image;

@@ -289,10 +289,6 @@ class SettingsController extends AppManagersController {
                 $link = 'service-duty';
                 $model = new Posts();
                 break;
-//            case 'partner';
-//                $model = new Partners();
-//                $link = 'partners-list';
-//                break;
             case 'slider';
                 $model = new SliderSettings();
                 $link = 'slider-settings';
@@ -351,7 +347,7 @@ class SettingsController extends AppManagersController {
             ]);
         }
         
-        if ($model->load(Yii::$app->request->post())) {
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $logo = UploadedFile::getInstance($model, 'image_logo');
             $model->image_logo = $logo;
             if ($model->upload()) {

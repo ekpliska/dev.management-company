@@ -6,6 +6,8 @@
     use yii\db\ActiveRecord;
     use yii\behaviors\TimestampBehavior;
     use yii\behaviors\SluggableBehavior;
+    use yii\imagine\Image;
+    use Imagine\Image\Box;
     use rico\yii2images\behaviors\ImageBehave;
     use app\models\Rubrics;
     use app\models\Partners;
@@ -97,7 +99,7 @@ class News extends ActiveRecord
             [['files'], 'file', 
                 'extensions' => 'doc, docx, pdf, xls, xlsx, ppt, pptx, txt, jpg, jpeg', 
                 'maxFiles' => 4, 
-                'maxSize' => 256 * 1024,
+                'maxSize' => 5 * 256 * 1024,
             ],
             
             [['news_partner_id', 'isAdvert'], 'integer'],
@@ -214,6 +216,11 @@ class News extends ActiveRecord
                 $file_name = 'previews_news_' . time() . '.' . $this->news_preview->extension;
                 $this->news_preview->saveAs($dir . $file_name);
                 $this->news_preview = '/' . $dir . $file_name;
+                
+                $photo_path = Yii::getAlias('@webroot') . '/' . $dir . $file_name;
+                $photo = Image::getImagine()->open($photo_path);
+                $photo->thumbnail(new Box(900, 900))->save($photo_path, ['quality' => 90]);
+                
                 @unlink(Yii::getAlias('@webroot' . $current_image));
             } else {
                 $this->news_preview = $current_image;

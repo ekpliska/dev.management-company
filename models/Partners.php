@@ -4,8 +4,10 @@
     use Yii;
     use yii\db\ActiveRecord;
     use yii\helpers\ArrayHelper;
-    use app\models\News;
+    use yii\imagine\Image;
+    use Imagine\Image\Box;
     use yii\validators\UrlValidator;
+    use app\models\News;
         
 /**
  * Партнеры (Контрагенты)
@@ -99,6 +101,11 @@ class Partners extends ActiveRecord
                 $this->image_logo->saveAs($dir . $file_name);
                 $this->image_logo = $file_name;
                 $this->partners_logo = '/' . $dir . $file_name;
+                
+                $photo_path = Yii::getAlias('@webroot') . '/' . $dir . $file_name;
+                $photo = Image::getImagine()->open($photo_path);
+                $photo->thumbnail(new Box(900, 900))->save($photo_path, ['quality' => 90]);
+                
                 @unlink(Yii::getAlias('@webroot' . $current_image));
             } else {
                 $this->partners_logo = $current_image;
