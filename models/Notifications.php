@@ -134,13 +134,24 @@ class Notifications extends ActiveRecord {
                         $notice = new Notifications();
                         $notice->user_uid = Yii::$app->user->id;
                         $notice->type_notification = $type_notice;
-                        $notice->message = "Заявка ID{$request}, устекло время рассмотрения";
+                        $notice->message = "Заявка ID{$request}, истекло время рассмотрения";
                         $notice->value_1 = $request;
                         $notice->save(false);
                     }
                 }
                 break;
             case self::TYPE_HAVE_MISSED_PAID_REQUEST:
+                foreach ($request_list as $paid_request) {
+                    $check_notice = self::find()->where(['value_1' => $paid_request, 'type_notification' => $type_notice])->one();
+                    if (empty($check_notice)) {
+                        $notice = new Notifications();
+                        $notice->user_uid = Yii::$app->user->id;
+                        $notice->type_notification = $type_notice;
+                        $notice->message = "Платная услуга, заявка ID{$paid_request}, истекло время рассмотрения";
+                        $notice->value_1 = $paid_request;
+                        $notice->save(false);
+                    }
+                }
                 break;
         }
         

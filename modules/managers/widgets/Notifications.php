@@ -5,6 +5,7 @@
     use yii\base\Widget;
     use app\models\Notifications as ModelNotifications;
     use app\models\Requests;
+    use app\models\PaidServices;
 
 /**
  * Виджет уведомлений
@@ -16,6 +17,8 @@ class Notifications extends Widget {
     public function init() {
         
         $this->getRequestList();
+        $this->getPaidReqestList();
+        
         $this->_notifications = ModelNotifications::find()
                 ->where(['user_uid' => Yii::$app->user->id])
                 ->orderBy(['created_at' => SORT_DESC])
@@ -33,8 +36,18 @@ class Notifications extends Widget {
         
     }
     
+    /*
+     * Не рассмотренный новые заявки
+     */
     private function getRequestList() {
         return Requests::getMissedListRequest();
+    }
+    
+    /*
+     * Не рассмотренные заявки на платные услуги
+     */
+    private function getPaidReqestList() {
+        return PaidServices::getMissedListPaidRequest();
     }
     
 }

@@ -24,7 +24,7 @@
                 <?php if ($note->type_notification == Notifications::TYPE_HAVE_MISSED_REQUEST) : ?>
                     <?= Html::a("<span class='dot'></span>{$note->message}", ['requests/view-request', 'request_number' => $note->value_1], ['class' => 'notification_link', 'data-notice' => $note->id]) ?>
                 <?php elseif ($note->type_notification == Notifications::TYPE_HAVE_MISSED_PAID_REQUEST) : ?>
-                    <?= Html::a("<span class='dot'></span>{$note->message}", ['paid-services/order-services'], ['class' => 'notification_link', 'data-notice' => $note->id]) ?>
+                    <?= Html::a("<span class='dot'></span>{$note->message}", ['paid-requests/view-paid-request', 'request_number' => $note->value_1], ['class' => 'notification_link', 'data-notice' => $note->id]) ?>
                 <?php endif; ?>
             <?php endforeach; ?>
             

@@ -348,6 +348,23 @@ class PaidServices extends ActiveRecord
                 ->one();
     
     }
+    
+    /*
+     * Получить список новых заявок, не рассмотренных в течении 10 минут
+     */
+    public static function getMissedListPaidRequest() {
+        
+        $list = self::find()
+                ->where(['AND', 
+                        ['>', new \yii\db\Expression("(UNIX_TIMESTAMP(NOW()) - created_at)/60"), '10'],
+                        ['status' => StatusRequest::STATUS_NEW]])
+                ->limit(3)
+                ->all();
+        
+        $array_list = ArrayHelper::map($list, 'services_id', 'services_number');
+        return $array_list ? Notifications::createNoticeMisses(Notifications::TYPE_HAVE_MISSED_PAID_REQUEST, $array_list) : false;
+        
+    }
 
     /**
      * Настройка полей для форм
