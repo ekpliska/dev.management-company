@@ -13,6 +13,8 @@ class Notifications extends ActiveRecord {
     const TYPE_NEW_MESSAGE_IN_REQUEST = 'New message in request';
     const TYPE_CHANGE_STATUS_IN_REQUEST = 'Change status in request';
     const TYPE_CHANGE_STATUS_IN_PAID_REQUEST = 'Change status in paid request';
+    const TYPE_HAVE_MISSED_REQUEST = 'Have the missed requests';
+    const TYPE_HAVE_MISSED_PAID_REQUEST = 'Have the missed paid requests';
 
     /**
      * Таблица  БД
@@ -119,6 +121,30 @@ class Notifications extends ActiveRecord {
         }
         
         return false;
+        
+    }
+    
+    public static function createNoticeMisses($type_notice, $request_list) {
+        
+        switch ($type_notice) {
+            case self::TYPE_HAVE_MISSED_REQUEST:
+                foreach ($request_list as $request) {
+                    $check_notice = self::find()->where(['value_1' => $request, 'type_notification' => $type_notice])->one();
+                    if (empty($check_notice)) {
+                        $notice = new Notifications();
+                        $notice->user_uid = Yii::$app->user->id;
+                        $notice->type_notification = $type_notice;
+                        $notice->message = "Заявка ID{$request}, устекло время рассмотрения";
+                        $notice->value_1 = $request;
+                        $notice->save(false);
+                    }
+                }
+                break;
+            case self::TYPE_HAVE_MISSED_PAID_REQUEST:
+                break;
+        }
+        
+        return true;
         
     }
 

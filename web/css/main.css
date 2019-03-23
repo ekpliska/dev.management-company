@@ -2773,7 +2773,10 @@ p.date-start-vote {
     background-color: #202020;
     position: absolute;
     bottom: 20%;
-    left: 20%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
     text-align: center;
     color: #fff;
     font-size: 10px;
@@ -2824,6 +2827,7 @@ p.date-start-vote {
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     letter-spacing: 0.05em;
+    text-align: center;
 }
 /* Конец Опрос */
 

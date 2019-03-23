@@ -367,6 +367,23 @@ class Requests extends ActiveRecord
         return $this->requests_account_id;
     }
     
+    /*
+     * Получить список новых заявок, не рассмотренных в течении 10 минут
+     */
+    public static function getMissedListRequest() {
+        
+        $count_request = Requests::find()
+                ->where(['AND', 
+                        ['>', new \yii\db\Expression("(UNIX_TIMESTAMP(NOW()) - created_at)/60"), '10'],
+                        ['status' => StatusRequest::STATUS_NEW]])
+                ->limit(3)
+                ->all();
+        
+        $array_list = ArrayHelper::map($count_request, 'requests_id', 'requests_ident');
+        return $array_list ? Notifications::createNoticeMisses(Notifications::TYPE_HAVE_MISSED_REQUEST, $array_list) : false;
+        
+    }
+    
     /**
      * Настройка полей для форм
      */

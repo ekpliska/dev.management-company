@@ -2,7 +2,7 @@
 
     use yii\helpers\Url;
     use yii\helpers\Html;
-    use app\modules\clients\widgets\Notifications;
+    use app\modules\managers\widgets\Notifications;
     use app\modules\managers\widgets\NavManager;
     use app\modules\managers\widgets\SubMenu;
     use app\modules\managers\widgets\ManagerUserInfo;
