@@ -10,6 +10,7 @@
     use app\modules\clients\widgets\AlertsShow;
     use app\models\RegistrationInVoting;
     use app\modules\clients\widgets\ResultsVote;
+    use app\modules\clients\widgets\ChatVote;
 
 /* 
  * Просмотр отдельного голосования
@@ -61,7 +62,7 @@ $_answer = '';
     </div>
     
     <div class="col-md-12 voting-body">
-        <div class=" col-md-3 voting-body_left">
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 voting-body_left">
             <p>
                 <span class="span-count"><?= count($participants) ?></span> Проголосовало
             </p>
@@ -83,7 +84,7 @@ $_answer = '';
             <?php endif; ?>
         </div>
 
-        <div class="col-md-9 voting-body_right">
+        <div class="col-lg-9 col-md-9 col-sm-6 col-xs-12 voting-body_right">
             
             <?php if ($is_register['finished'] == RegistrationInVoting::STATUS_FINISH_YES) : // Результаты голсования выводим, если пользователь голосование завершил ?>
                 <?= ResultsVote::widget(['voting_id' => $voting['voting_id']]) ?>
@@ -151,6 +152,8 @@ $_answer = '';
         </div>
         
     </div>
+    
+    <?= ChatVote::widget() ?>
     
 </div>
 
