@@ -236,6 +236,27 @@ $(document).ready(function() {
         return labelError.text('Укажите номер мобильного телефона');
 
     });
+    
+    /*
+     * Удалить все уведомления
+     */
+    $('.notification_reset').on('click', function(e){
+        e.preventDefault();
+        $.post('notification/remove-notifications', function(response) {
+            console.log('here');
+        });
+    });
+    
+    /*
+     * Удалить выбрангое уведомление
+     */
+    $('.notification_link').on('click', function(){
+        var notice = $(this).data('notice');
+        console.log(notice);
+        $.post('/notification/one-notification?notice_id=' + notice, function(response) {});
+    });
+    
+    
 
     /* Форма */
         $(document).on('focus', '.field-input, .field-input-modal, .field-input-textarea-modal, .field-input-textarea-page', function(){

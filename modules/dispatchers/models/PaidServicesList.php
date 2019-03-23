@@ -1,11 +1,9 @@
 <?php
 
     namespace app\modules\dispatchers\models;
-    use yii\helpers\ArrayHelper;
     use app\models\PaidServices as BasePaidServices;
     use app\models\StatusRequest;
-    use app\helpers\FormatHelpers;
-    use app\models\PersonalAccount;
+    use app\models\Notifications;
 
 /**
  * Заявки на платные услуги
@@ -48,6 +46,11 @@ class PaidServicesList extends BasePaidServices {
      * Назначение специалиста
      */
     public function chooseSpecialist($specialist_id) {
+        
+        // Формируем уведомление
+        if (empty($this->requests_specialist_id)) {
+            Notifications::createNoticeStatus(Notifications::TYPE_CHANGE_STATUS_IN_PAID_REQUEST, $this->services_id, StatusRequest::STATUS_PERFORM);
+        }
         
         $this->services_specialist_id = $specialist_id;
         $this->status = StatusRequest::STATUS_PERFORM;

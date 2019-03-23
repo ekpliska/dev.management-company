@@ -869,6 +869,14 @@ span.dot {
     margin-right: -50%;
     transform: translate(-50%, -50%);
 }
+.notification__dot {
+    position: absolute;
+    top: 15%;
+    right: 20%;
+    background: #fc3232;
+    padding: 7px 7px;
+    border-radius: 12px;
+}
 /* End Notifications Bar */
 
 /* Собственник, главная страница, Новости */

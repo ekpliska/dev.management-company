@@ -42,6 +42,23 @@ class Notifications extends ActiveRecord {
     }
     
     /*
+     * Поиск уведомления по его ID и ID текущего пользователя
+     */
+    public static function findOneNotice($notice_id) {
+        
+        $notice = self::find()
+                ->where(['id' => $notice_id, 'user_uid' => Yii::$app->user->id])
+                ->one();
+//     
+//        if (!$notice) {
+//            return false;
+//        }
+        
+        return $notice->delete() ? true : false;
+        
+    }
+    
+    /*
      * Формирование уведомления для Собственника
      * @param string $type_notice Тип уведомления
      * @param string $request_num Номер заявки
@@ -54,7 +71,7 @@ class Notifications extends ActiveRecord {
 
         switch ($type_notice) {
             case self::TYPE_CHANGE_STATUS_IN_REQUEST:
-                // ФОрмируем запрос по заявке
+                // Формируем запрос по заявке
                 $request_info = Requests::getFullInfoRequest($request_id);
                 // Проверяем существование заявки
                 if ($request_info == null) {
@@ -67,7 +84,16 @@ class Notifications extends ActiveRecord {
                 $notice->value_1 = $request_info->requests_ident;
                 break;
             case self::TYPE_CHANGE_STATUS_IN_PAID_REQUEST:
-                $url = null;
+                // Формируем запрос по заявке
+                $paid_request_info = PaidServices::getFullInfoPaidRequest($request_id);
+                // Проверяем существование заявки
+                if ($paid_request_info == null) {
+                    return false;
+                }
+                // Определяем статус заявки
+                $notice->user_uid = $paid_request_info->personalAccount->client->user->user_id;
+                $notice->type_notification = $type_notice;
+                $message = "У заявки ID{$paid_request_info->services_number} установлен статус {$status_request}";
                 break;
         }
         

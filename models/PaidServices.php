@@ -330,6 +330,18 @@ class PaidServices extends ActiveRecord
         return $this->save(false) ? true : false;
         
     }
+    
+    /*
+     * Получить подробную информацию о заявке
+     */
+    public static function getFullInfoPaidRequest($request_id) {
+        
+        return self::find()
+                ->with(['personalAccount', 'personalAccount.client.user'])
+                ->where(['services_id' => $request_id])
+                ->one();
+    
+    }
 
     /**
      * Настройка полей для форм
