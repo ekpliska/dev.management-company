@@ -2,35 +2,21 @@
 
     use yii\helpers\Html;
     use yii\widgets\ActiveForm;
-    use yii\bootstrap\Modal;
 
 /* 
- * Модальное окно для добавления нового партнера
+ * Модальное окно для редактирования партнера
  */
 ?>
 
-<?php
-    Modal::begin([
-        'id' => 'add-partner-modal-form',
-        'header' => 'Добавить партнера',
-        'closeButton' => [
-            'class' => 'close modal-close-btn',
-        ],
-        'clientOptions' => [
-            'backdrop' => 'static', 
-            'keyboard' => false],
-    ]);
-?>
-
-<?php
+<?php 
     $form = ActiveForm::begin([
-        'id' => 'add-partner',
+        'id' => 'edit-partner',
         'enableAjaxValidation' => true,
         'validateOnChange' => false,
         'validateOnBlur' => false,
         'validationUrl' => ['validate-form', 'form' => 'add-partner'],
         'fieldConfig' => [
-            'template' => '<div class="field-modal">{label}{input}{error}</div>',
+            'template' => '<div class="field-modal has-label">{label}{input}{error}</div>',
         ],
         'options' => [
             'enctype' => 'multipart/form-data',
@@ -40,7 +26,7 @@
 
     <div class="load_preview">
         <div class="text-center">
-            <?= Html::img($model->partners_logo, ['id' => 'photoPreview', 'class' => 'img-rounded']) ?>
+            <?= Html::img($model->logo, ['id' => 'photoPreview', 'class' => 'img-rounded']) ?>
         </div>
         <div class="upload-btn-wrapper">
             <?= $form->field($model, 'image_logo', ['template' => '<label class="text-center btn-upload-cover" role="button">{input}{label}{error}</label>'])
@@ -60,7 +46,7 @@
     </div>
     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
         <?= $form->field($model, 'partners_phone')
-                ->input('text', ['class' => 'field-input-modal cell-phone'])
+                ->input('text', ['class' => 'field-input-modal'])
                 ->label($model->getAttributeLabel('partners_phone'), ['class' => 'field-label-modal']) ?>
     </div>
     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -80,10 +66,8 @@
     </div>
 
     <div class="modal-footer">
-        <?= Html::submitButton('Добавить', ['class' => 'btn-modal btn-modal-yes']) ?>
+        <?= Html::submitButton('Сохранить', ['class' => 'btn-modal btn-modal-yes']) ?>
         <?= Html::button('Отмена', ['class' => 'btn-modal btn-modal-no', 'data-dismiss' => 'modal']) ?>
     </div>
 
-<?php ActiveForm::end() ?>
-
-<?php Modal::end(); ?>
+<?php ActiveForm::end(); ?>

@@ -1,6 +1,7 @@
 <?php
 
     use yii\widgets\Breadcrumbs;
+    use yii\bootstrap\Modal;
     use app\modules\managers\widgets\SubSettings;
 
 /* 
@@ -29,3 +30,17 @@ $this->params['breadcrumbs'][] = 'Настройки';
 </div>
 
 <?= $this->render('form/add-partner', ['model' => $model]) ?>
+
+<?php 
+    Modal::begin([
+        'id' => 'edit-partner-modal-form',
+        'header' => 'Редактировать партнера',
+        'closeButton' => [
+            'class' => 'close modal-close-btn',
+        ],
+        'clientOptions' => [
+            'backdrop' => 'static', 
+            'keyboard' => false],
+    ]);
+?>
+<?php Modal::end(); ?>

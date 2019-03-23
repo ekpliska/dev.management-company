@@ -37,6 +37,7 @@ class SettingsController extends AppManagersController {
                             'validate-form',
                             'create-record',
                             'switch-status-slider',
+                            'edit-partner'
                         ],
                         'allow' => true,
                         'roles' => ['SettingsView', 'SettingsEdit']
@@ -333,6 +334,30 @@ class SettingsController extends AppManagersController {
         }
         
         return ['success' => false];
+        
+    }
+    
+    /*
+     * Загрузка модального окна на редактирование партнера
+     * Сохранение данных
+     */
+    public function actionEditPartner($partner_id) {
+        
+        $model = Partners::findOne($partner_id);
+        
+        if (Yii::$app->request->isAjax) {
+            return $this->renderAjax('form/edit-partner', [
+                'model' => $model,
+            ]);
+        }
+        
+        if ($model->load(Yii::$app->request->post())) {
+            $logo = UploadedFile::getInstance($model, 'image_logo');
+            $model->image_logo = $logo;
+            if ($model->upload()) {
+                return $this->redirect('partners-list');
+            }
+        }
         
     }
     

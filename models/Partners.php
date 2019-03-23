@@ -47,7 +47,7 @@ class Partners extends ActiveRecord
             [['image_logo'], 'file',
                 'skipOnEmpty' => true,
                 'extensions' => 'png, jpg',
-                'maxSize' => 256 * 1024,
+                'maxSize' => 5 * 256 * 1024,
                 'mimeTypes' => 'image/*',
             ],
             
@@ -90,12 +90,19 @@ class Partners extends ActiveRecord
     
     public function upload() {
         
+        $current_image = $this->partners_logo;
+        
         if ($this->validate()) {
+            if ($this->image_logo) {
                 $dir = Yii::getAlias('@web') . 'upload/partners/';
                 $file_name = 'partner_logo_' . time() . '.' . $this->image_logo->extension;
                 $this->image_logo->saveAs($dir . $file_name);
                 $this->image_logo = $file_name;
                 $this->partners_logo = '/' . $dir . $file_name;
+                @unlink(Yii::getAlias('@webroot' . $current_image));
+            } else {
+                $this->partners_logo = $current_image;
+            }
                 return $this->save() ? true : false;
         }
         

@@ -1714,9 +1714,6 @@ span.status-vote-1::before {
 .partners-card {
     height: 135px;
 }
-.partners-card:hover {
-    box-shadow: 0 4px 26px 0 rgba(51, 29, 82, 0.16);
-}
 .partners-card__image {
     position: relative;
     overflow: hidden;
@@ -1729,6 +1726,9 @@ span.status-vote-1::before {
 }
 .partners-card__title {
     font-size: 12px;
+    height: 40px;
+    text-align: center;
+    padding-top: 5px;
 }
 .partners-card__image__overlay {
     position: absolute;

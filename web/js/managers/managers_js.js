@@ -1354,7 +1354,16 @@ $(document).ready(function() {
         });
     });
     
-    
+    /*
+     * Редактирование записи Партнера
+     */
+    $(document).on('click', 'a.edit-partner-btn', function(e) {
+        var link = $(this).attr('href');
+        $('#edit-partner-modal-form').modal('show');
+        $('#edit-partner-modal-form .modal-dialog .modal-content .modal-body').load(link);
+        e.preventDefault();
+        return false;        
+    });
     
     
 
