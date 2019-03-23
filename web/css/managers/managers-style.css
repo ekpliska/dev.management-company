@@ -1570,7 +1570,9 @@ span.status-vote-1::before {
     margin-top: -10px;
 }
 #create-service-form .load_preview,
-#edit-service-form .load_preview {
+#add-partner-modal-form .load_preview,
+#edit-service-form .load_preview,
+#edit-partner-modal-form .load_preview {
     width: 320px;
     height: 200px;
     margin: 10px auto;
@@ -1708,6 +1710,54 @@ span.status-vote-1::before {
     color: #999;
     padding: 10px 0;
     margin: 0;
+}
+.partners-card {
+    height: 135px;
+}
+.partners-card:hover {
+    box-shadow: 0 4px 26px 0 rgba(51, 29, 82, 0.16);
+}
+.partners-card__image {
+    position: relative;
+    overflow: hidden;
+    height: 90px;
+}
+.partners-card__image img {
+    border-radius: 12px;
+    height: 100%;
+    width: 100%;
+}
+.partners-card__title {
+    font-size: 12px;
+}
+.partners-card__image__overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 12px;
+}
+.partners-card__image:hover .partners-card__image__overlay {
+    opacity: 2;
+}
+.overlay__text > a {
+    color: #fff;
+    font-size: 12px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border: 1px solid #fff;
+    padding: 5px;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    letter-spacing: 0.05em;
 }
 /* Конец Настройки */
 

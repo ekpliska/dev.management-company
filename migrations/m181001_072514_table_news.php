@@ -24,7 +24,12 @@ class m181001_072514_table_news extends Migration
         $this->createTable('{{%partners}}', [
             'partners_id' => $this->primaryKey(),
             'partners_name' => $this->string(170)->notNull(),
-            'partners_adress' => $this->string(255)->notNull(),
+            'partners_adress' => $this->string(255),
+            'partners_site' => $this->string(255),
+            'partners_email' => $this->string(255),
+            'partners_phone' => $this->string(255),
+            'partners_logo' => $this->string(255),
+            'description' => $this->string(255),
         ]);
         $this->createIndex('idx-partners-partners_id', '{{%partners}}', 'partners_id');
 

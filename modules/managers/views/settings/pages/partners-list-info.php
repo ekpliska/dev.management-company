@@ -1,6 +1,5 @@
 <?php
 
-    use yii\widgets\ActiveForm;
     use yii\helpers\Html;
 
 /* 
@@ -18,49 +17,23 @@
         ]) ?>
 </h4>
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-    <?php
-        $form_partner = ActiveForm::begin([
-            'id' => 'multiple-form-departments',
-            'fieldConfig' => [
-                'template' => '{label}{input}',
-            ],
-        ]);
-    ?>
-    <table class="table table-striped ">
-        <thead>
-            <tr>
-                <td>Организация</td>
-                <td>Адрес</td>
-                <td></td>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($partners as $index_partner => $partner) : ?> 
-            <tr>
-                <td>
-                    <?= $form_partner->field($partner, "[$index_partner]partners_name")
-                        ->input('text', ['class' => 'settings-input'])->label(false); ?>
-                </td>
-                <td>
-                    <?= $form_partner->field($partner, "[$index_partner]partners_adress")
-                        ->input('text', ['class' => 'settings-input'])->label(false); ?>
-                </td>
-                <td>
-                    <?= Html::button('<i class="glyphicon glyphicon-trash"></i>', [
-                            'class' => 'delete-item-settings delete-partner-settings',
-                            'data' => [
-                                'record' => $partner->partners_id,
-                                'type' => 'partner',
-                            ]
-                        ]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-    
-    <div class="save-btn-group text-center">
-        <?= Html::submitButton('Сохранить', ['class' => 'btn save-settings-small']) ?>
-    </div>
-    <?php ActiveForm::end(); ?>
+    <?php if (isset($partners) && !empty($partners)) : ?>
+        <?php foreach ($partners as $key => $partner) : ?>
+            <div class="col-lg-2 col-md-2 col-sm-4 col-sx-3">
+                <div class="partners-card">
+                    <div class="partners-card__image">
+                        <?= Html::img($partner->logo, ['class' => '']) ?>
+                        <div class="partners-card__image__overlay">
+                            <div class="overlay__text">
+                                <?= Html::a('Изменить', ['edit-partner', 'partner_id' => $partner->partners_id]) ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="partners-card__title">
+                        <?= $partner->partners_name ?>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    <?php endif; ?>
 </div>

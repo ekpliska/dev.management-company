@@ -3,6 +3,7 @@
     namespace app\modules\managers\controllers;
     use Yii;
     use yii\base\Model;
+    use yii\web\UploadedFile;
     use app\modules\managers\controllers\AppManagersController;
     use app\models\Organizations;
     use app\models\Departments;
@@ -108,11 +109,12 @@ class SettingsController extends AppManagersController {
         
         $model = new Partners();
         
-        if (Model::loadMultiple($partners, Yii::$app->request->post()) && Model::validateMultiple($partners)) {
-            foreach ($partners as $partner) {
-                $partner->save(false);
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $logo = UploadedFile::getInstance($model, 'image_logo');
+            $model->image_logo = $logo;
+            if ($model->upload()) {
+                return $this->redirect('partners-list');
             }
-            return $this->redirect('partners-list');
         }
         
         return $this->render('partners-list', [
@@ -286,10 +288,10 @@ class SettingsController extends AppManagersController {
                 $link = 'service-duty';
                 $model = new Posts();
                 break;
-            case 'partner';
-                $model = new Partners();
-                $link = 'partners-list';
-                break;
+//            case 'partner';
+//                $model = new Partners();
+//                $link = 'partners-list';
+//                break;
             case 'slider';
                 $model = new SliderSettings();
                 $link = 'slider-settings';
