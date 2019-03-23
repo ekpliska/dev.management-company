@@ -37,76 +37,6 @@ $(document).ready(function() {
     $(document).on('change', '#btnLoad, #btnLoad-edit', function(){
         readURL(this);
     });
-//    $(document).on('change', '#btnLoad-edit', function(){
-//        readURL(this);
-//    });
-   
-//    /*
-//     * Предварительная загрузка превью нескольких фотографий
-//     */
-//
-//     var maxFileSize = 2 * 1024 * 1024; // (байт) Максимальный размер файла (2мб)
-//     var queue = {};
-//     var form = $('form#uploadImages');
-//     var imagesList = $('#uploadImagesList');
-// 
-//     var itemPreviewTemplate = imagesList.find('.item.template').clone();
-//     itemPreviewTemplate.removeClass('template');
-//     imagesList.find('.item.template').remove();
-// 
-// 
-//     $('.addImages').on('change', function () {
-//         var files = this.files;
-// 
-//         for (var i = 0; i < files.length; i++) {
-//             var file = files[i];
-// 
-//             if (!file.type.match(/image\/(jpeg|jpg|png|gif)/)) {
-//                 alert( 'Фотография должна быть в формате jpg, png или gif' );
-//                 continue;
-//             }
-// 
-//             if (file.size > maxFileSize) {
-//                 alert( 'Размер фотографии не должен превышать 2 Мб' );
-//                 continue;
-//             }
-// 
-//             preview(files[i]);
-//         }
-// 
-//     });
-// 
-//     // Создание превью
-//     function preview(file) {
-//         var reader = new FileReader();
-//         reader.addEventListener('load', function(event) {
-//             var img = document.createElement('img');
-// 
-//             var itemPreview = itemPreviewTemplate.clone();
-// 
-//             itemPreview.find('.img-wrap img').attr('src', event.target.result);
-//             itemPreview.data('id', file.name);
-// 
-//             imagesList.append(itemPreview);
-// 
-//             queue[file.name] = file;
-// 
-//         });
-//         reader.readAsDataURL(file);
-//     }
-// 
-//     // Удаление фотографий
-//     imagesList.on('click', '.delete-link', function () {
-//         var item = $(this).closest('.item'),
-//             id = item.data('id');
-// 
-//         delete queue[id];
-// 
-//         item.remove();
-//     });
-// 
-  
-
    
     /*
      * Показывать/Скрывать символы в поле ввода пароля
@@ -240,18 +170,16 @@ $(document).ready(function() {
     /*
      * Удалить все уведомления
      */
-    $('.notification_reset').on('click', function(e){
-        e.preventDefault();
-        $.post('notification/remove-notifications', function(response) {
-            console.log('here');
-        });
+    $('.notification_reset').on('click', function() {
+        $.post('/notification/remove-notifications', function(response) {});
     });
     
     /*
      * Удалить выбрангое уведомление
      */
-    $('.notification_link').on('click', function(){
+    $('.notification_link').on('click', function(e) {
         var notice = $(this).data('notice');
+        e.preventDefault();
         console.log(notice);
         $.post('/notification/one-notification?notice_id=' + notice, function(response) {});
     });

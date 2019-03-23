@@ -49,10 +49,6 @@ class Notifications extends ActiveRecord {
         $notice = self::find()
                 ->where(['id' => $notice_id, 'user_uid' => Yii::$app->user->id])
                 ->one();
-//     
-//        if (!$notice) {
-//            return false;
-//        }
         
         return $notice->delete() ? true : false;
         
@@ -80,7 +76,7 @@ class Notifications extends ActiveRecord {
                 // Определяем статус заявки
                 $notice->user_uid = $request_info->personalAccount->client->user->user_id;
                 $notice->type_notification = $type_notice;
-                $message = "У заявки ID{$request_info->requests_ident} установлен статус {$status_request}";
+                $message = "Заявка ID{$request_info->requests_ident} установлен статус {$status_request}";
                 $notice->value_1 = $request_info->requests_ident;
                 break;
             case self::TYPE_CHANGE_STATUS_IN_PAID_REQUEST:
@@ -93,13 +89,36 @@ class Notifications extends ActiveRecord {
                 // Определяем статус заявки
                 $notice->user_uid = $paid_request_info->personalAccount->client->user->user_id;
                 $notice->type_notification = $type_notice;
-                $message = "У заявки ID{$paid_request_info->services_number} установлен статус {$status_request}";
+                $message = "Платная услуга, заявка ID{$paid_request_info->services_number} установлен статус {$status_request}";
                 break;
         }
         
         $notice->message = $message;
         
         return $notice->save(false) ? true : false;
+        
+    }
+    
+    /*
+     * Формирование уведомления Диспетчеру
+     */
+    public static function createNoticeNewMessage($type_notice, $request_id) {
+        
+        $request_body = Requests::findOne(['requests_id' => $request_id]);
+        $user = User::findByEmployeeId($request_body->requests_dispatcher_id);
+        
+        if ($request_body->requests_dispatcher_id != null) {
+            $notice = new Notifications();
+
+            $notice->user_uid = $user->user_id;
+            $notice->type_notification = $type_notice;
+            $notice->message = "У заявки ID{$request_body->requests_ident} новое сообщение от собственника";
+            $notice->value_1 = $request_body->requests_ident;
+
+            return $notice->save(false) ? true : false;
+        }
+        
+        return false;
         
     }
 

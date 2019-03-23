@@ -54,7 +54,7 @@ class NotificationController extends Controller {
      */
     public function actionOneNotification($notice_id) {
         
-        Yii::$app->resoinse->format = \yii\web\Response::FORMAT_JSON;
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         
         if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
             if (Notifications::findOneNotice($notice_id)) {

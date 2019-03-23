@@ -5,6 +5,7 @@
     use yii\db\ActiveRecord;
     use app\models\Requests;
     use yii\behaviors\TimestampBehavior;
+    use app\models\Notifications;
 
 /**
  * Комментарии к заявкам
@@ -83,6 +84,10 @@ class CommentsToRequest extends ActiveRecord
         if ($this->validate()) {
             $this->comments_request_id = $request_id;
             $this->comments_user_id = Yii::$app->user->identity->id;
+            
+            // Формируем уведомление для диспетчера, который курирует заявку
+            Notifications::createNoticeNewMessage(Notifications::TYPE_NEW_MESSAGE_IN_REQUEST, $request_id);
+            
             return $this->save() ? true : false;
         }
         return false;
@@ -97,6 +102,7 @@ class CommentsToRequest extends ActiveRecord
             
             $this->comments_request_id = $request_id;
             $this->comments_user_id = Yii::$app->user->identity->id;
+            
             return $this->save() ? true : false;
             
         }

@@ -4,7 +4,7 @@
     use yii\helpers\Html;
     use app\modules\dispatchers\widgets\NavDispatchers;
     use app\modules\dispatchers\widgets\DispatcherUserInfo;
-    use app\modules\clients\widgets\Notifications;
+    use app\modules\dispatchers\widgets\Notifications;
     use app\modules\dispatchers\widgets\SubMenuGeneralPage;
     
 /*
@@ -25,7 +25,7 @@
         </a>
         <ul class="nav navbar-nav navbar-right user-notification">
             <?= DispatcherUserInfo::widget() ?>
-            <?php // = Notifications::widget() ?>
+            <?= Notifications::widget() ?>
         </ul>
     </div>  
     <div class="container-fluid navbar-menu__items text-center">

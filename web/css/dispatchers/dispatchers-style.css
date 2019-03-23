@@ -259,12 +259,8 @@ a.news-block__create-link:before {
 a.request__link-view {
     font-size: 13px;
     font-weight: bold;
-    padding: 5px 0;
+    padding: 0;
     color: #2d18b4;
-}
-a.request__link-view:before {
-    content: '\0270E';
-    padding-right: 5px;
 }
 a.request__link-view:hover {
     color: #f0754a;
