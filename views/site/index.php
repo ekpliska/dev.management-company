@@ -6,7 +6,6 @@ $this->title = 'Customers | Вход';
 ?>
 
 <div class="start-page">
-    <!--<p class="start-page__title">Быcтро и удобно</p>-->
     <div class="start-page__welcome-txt">
         <?= $welcome_text ?>
     </div>

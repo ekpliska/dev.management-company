@@ -26,16 +26,21 @@ CssLoginForm::register($this);
 <body>
 <?php $this->beginBody() ?>
 
-<main role="main">
-    
-    <div class="col-md-6 general-slider">
-        <?= Slider::widget() ?>
+<div class="main">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 hidden-sm hidden-xs">
+            <div class="general-slider">
+                <?= Slider::widget() ?>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="general-right-block">
+                <?= $content ?>
+            </div>
+        </div>
     </div>
-    <div class="col-md-6 general-right-block">
-        <?= $content ?>
-    </div>
     
-</main>    
+</div>    
 <?php $this->endBody() ?>
 </body>
 </html>

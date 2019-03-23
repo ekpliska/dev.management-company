@@ -27,6 +27,16 @@ button:hover {
     outline: 0px !important;
     -webkit-appearance: none;
 }
+.main > .row {
+    position: relative;
+    margin-left: 0;
+    margin-right: 0;
+    height: 100%;
+}
+.main > .row > [class*="col-"] {
+    margin: 0;
+    padding: 0;
+}
 .wrap {
     min-height: 100%;
     height: auto;
@@ -147,6 +157,7 @@ button:hover {
 .general-right-block, 
 .login-page {
     padding: 0;
+    margin: 0;
 }
 .general-slider__image {
     height: -webkit-fill-available !important;
