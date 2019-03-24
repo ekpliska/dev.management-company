@@ -57,7 +57,7 @@
                         'maxFileSize' => 5800,
                         'showCaption' => false,
                         'showRemove' => true,
-                        'showUpload' => true,
+                        'showUpload' => false,
                         'browseClass' => 'btn btn-block',
                         'browseIcon' => '<i class="glyphicon glyphicon-camera"></i> ',
                         'browseLabel' =>  'Загрузить фотографии',

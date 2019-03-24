@@ -6,6 +6,8 @@
     use yii\helpers\ArrayHelper;
     use yii\behaviors\TimestampBehavior;
     use yii\helpers\Html;
+    use yii\imagine\Image as ImageImagine;
+    use Imagine\Image\Box;
     use app\models\User;
     use app\models\TypeRequests;
     use app\models\CommentsToRequest;
@@ -302,9 +304,15 @@ class Requests extends ActiveRecord
         
         if ($this->validate()) {
             foreach ($this->gallery as $file) {
+                
                 $path = 'upload/store' . $file->baseName . '.' . $file->extension;
                 $file->saveAs($path);
-                $this->attachImage($path);
+                $photo_path = Yii::getAlias('@webroot') . '/' . $path;
+                $photo = ImageImagine::getImagine()->open($photo_path);
+                $photo->thumbnail(new Box(900, 900))->save($photo_path, ['quality' => 90]);
+                $this->attachImage($photo_path);
+                
+                
                 @unlink($path);
             }
             return true;
