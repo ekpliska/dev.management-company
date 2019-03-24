@@ -50,7 +50,7 @@ class m180901_131651_table_requests extends Migration
             'requests_id' => $this->primaryKey(),
             'requests_ident' => $this->string(20)->notNull(),
             'requests_type_id' => $this->integer()->notNull(),
-            'requests_comment' => $this->text(255)->notNull(),
+            'requests_comment' => $this->text(1000)->notNull(),
             'requests_phone' => $this->string(70)->notNull(),
             'status' => $this->tinyInteger()->notNull()->defaultValue(StatusRequest::STATUS_NEW),
             'is_accept' => $this->tinyInteger(),

@@ -78,7 +78,7 @@ class Requests extends ActiveRecord
                 'on' => self::SCENARIO_ADD_REQUEST,
             ],
             [['requests_comment'], 'string', 'on' => [self::SCENARIO_ADD_REQUEST, self::SCENARIO_EDIT_REQUEST]],
-            [['requests_comment'], 'string', 'max' => 255, 'on' => [self::SCENARIO_ADD_REQUEST, self::SCENARIO_EDIT_REQUEST]],
+            [['requests_comment'], 'string', 'max' => 1000, 'on' => [self::SCENARIO_ADD_REQUEST, self::SCENARIO_EDIT_REQUEST]],
             
             [['requests_grade', 'close_chat'], 'integer'],
             

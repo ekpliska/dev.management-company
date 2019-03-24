@@ -66,12 +66,6 @@ class ClientsRentForm extends Model {
             ['rents_email', 'email', 'on' => self::SCENARIO_AJAX_VALIDATION],
             
             [['password', 'password_repeat'], 'string', 'min' => 6, 'max' => 12, 'on' => self::SCENARIO_AJAX_VALIDATION],
-            [['password', 'password_repeat'],
-                'match', 
-                'pattern' => '/^[A-Za-z0-9\\_\\-]+$/i', 
-                'message' => 'Поле "{attribute}" может содержать только буквы английского алфавита, цифры, знаки "-", "_"',
-                'on' => self::SCENARIO_AJAX_VALIDATION,
-            ],
             
             ['password_repeat', 'compare', 'compareAttribute' => 'password', 'message' => 'Указанные пароли не совпадают!', 'on' => self::SCENARIO_AJAX_VALIDATION,],
             

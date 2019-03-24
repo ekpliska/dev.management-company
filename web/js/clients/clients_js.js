@@ -708,8 +708,8 @@ $(document).ready(function() {
     /*
      * Счетчик подстчета количества вводимых символов в поле комментарий к заявке
      */
-    limitLettrs('.comment', 250, '#label-count', '#label-count-left');
-    limitLettrs('#commentstorequest-comments_text', 250, '#label-count', '#label-count-left');
+    limitLettrs('.comment', 1000, '#label-count', '#label-count-left');
+    limitLettrs('#commentstorequest-comments_text', 1000, '#label-count', '#label-count-left');
 
 
     /*

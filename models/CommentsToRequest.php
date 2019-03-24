@@ -36,7 +36,7 @@ class CommentsToRequest extends ActiveRecord
         return [
             ['comments_text', 'required', 'on' => self::SCENARIO_ADD_COMMENTS],
             [['comments_request_id', 'comments_user_id', 'created_at'], 'integer'],
-            [['comments_text'], 'string', 'min' => 10, 'max' => 255, 'on' => self::SCENARIO_ADD_COMMENTS],
+            [['comments_text'], 'string', 'max' => 1000, 'on' => self::SCENARIO_ADD_COMMENTS],
         ];
     }
     

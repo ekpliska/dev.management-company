@@ -23,7 +23,7 @@ class m180901_125637_table_paid_services extends Migration
             'services_number' => $this->string(16)->notNull(),
             'services_servise_category_id' => $this->integer()->notNull(),
             'services_name_services_id' => $this->integer()->notNull(),
-            'services_comment' => $this->text(255)->notNull(),
+            'services_comment' => $this->text(1000)->notNull(),
             'services_phone' => $this->string(50)->notNull(),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),

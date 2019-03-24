@@ -54,7 +54,7 @@ class PaidServices extends ActiveRecord
             ],
 
             [['services_comment'], 'string', 'on' => [self::SCENARIO_ADD_SERVICE, self::SCENARIO_EDIT_REQUEST]],
-            [['services_comment'], 'string', 'min' => 10, 'max' => 255, 'on' => [self::SCENARIO_ADD_SERVICE, self::SCENARIO_EDIT_REQUEST]],
+            [['services_comment'], 'string', 'max' => 1000, 'on' => [self::SCENARIO_ADD_SERVICE, self::SCENARIO_EDIT_REQUEST]],
             
             [[
                 'services_servise_category_id', 

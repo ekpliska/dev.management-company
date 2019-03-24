@@ -20,7 +20,7 @@ class m180903_065819_table_comments_to_request extends Migration
         $this->createTable('{{%comments_to_request}}', [
             'comments_id' => $this->primaryKey(),
             'comments_request_id' => $this->integer()->notNull(),
-            'comments_text' => $this->string(255)->notNull(),
+            'comments_text' => $this->text(1000)->notNull(),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
             'comments_user_id' => $this->integer()->notNull(),

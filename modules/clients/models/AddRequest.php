@@ -30,7 +30,7 @@ class AddRequest extends Model {
             
             ['request_type', 'integer'],
             
-            ['request_comment', 'string', 'min' => 10, 'max' => 1000],
+            ['request_comment', 'string', 'max' => 1000],
             
             ['request_phone', 'string'],
             
