@@ -45,6 +45,19 @@ class ChatToVote extends ActiveRecord {
     public function getVote() {
         return $this->hasOne(Voting::className(), ['voting_id' => 'vote_vid']);
     }
+    
+    /*
+     * Получить все сообщения по текущему Опросу
+     */
+    public static function getChat($vote_id) {
+        
+        $chat = self::find()
+                ->with(['user', 'user.client', 'vote'])
+                ->all();
+        
+        return $chat;
+        
+    }
 
     /**
      * Аттрибуты полей

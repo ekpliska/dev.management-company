@@ -238,4 +238,16 @@ class VotingController extends AppClientsController {
         }
     }
     
+    /*
+     * Отправка сообщения в чате
+     */
+    public function actionSendMessage($vote) {
+        
+        if (Yii::$app->request->isPjax) {
+            echo $vote;
+            die();
+        }
+        
+    }
+    
 }

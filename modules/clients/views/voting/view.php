@@ -153,7 +153,7 @@ $_answer = '';
         
     </div>
     
-    <?= ChatVote::widget() ?>
+    <?= ChatVote::widget(['vote_id' => $voting['voting_id']]) ?>
     
 </div>
 
