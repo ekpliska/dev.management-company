@@ -9,6 +9,10 @@
  */
 class ChatToVote extends ActiveRecord {
     
+    const VIEW_YES = 1;
+    const VIEW_NO = 0;
+
+
     /**
      * Таблица БД
      */
@@ -24,7 +28,7 @@ class ChatToVote extends ActiveRecord {
     {
         return [
             [['vote_vid', 'uid_user', 'chat_message'], 'required'],
-            [['vote_vid', 'uid_user'], 'integer'],
+            [['vote_vid', 'uid_user', 'message_status'], 'integer'],
             [['chat_message'], 'string'],
             [['created_at'], 'safe'],
             [['uid_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['uid_user' => 'user_id']],
@@ -71,6 +75,7 @@ class ChatToVote extends ActiveRecord {
             'uid_user' => 'Uid User',
             'chat_message' => 'Chat Message',
             'created_at' => 'Created At',
+            'message_status' => 'Message status'
         ];
     }
 

@@ -3899,7 +3899,7 @@ a.employee-profile:hover {
 }
 .chat-window-open__sendbtn {
     position: absolute;
-    bottom: 10%;
+    bottom: 12%;
     right: 10%;
     border: none;
     background-color: transparent;
@@ -3915,5 +3915,10 @@ a.employee-profile:hover {
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%);
+}
+.chat-new-messages {
+    padding: 5px;
+    background: red;
+    position: absolute;
 }
 /* End Chat Vote */

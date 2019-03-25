@@ -16,7 +16,8 @@ class SendMessageForm extends Model {
     public function rules() {
         
         return [
-            [['message'], 'required'],
+            [['message'], 'required', 'message' => 'Укажите ваше сообщение'],
+            [['message'], 'filter', 'filter' => 'trim'],
             ['message', 'string', 'max' => 1000],
         ];
         

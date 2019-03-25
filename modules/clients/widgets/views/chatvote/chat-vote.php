@@ -3,6 +3,7 @@
     use yii\helpers\Html;
     use yii\widgets\ActiveForm;
     use yii\widgets\Pjax;
+    use yii\helpers\HtmlPurifier;
     use app\helpers\FormatHelpers;
 
 /* 
@@ -25,7 +26,7 @@
                         <p class="chat-name-user"><?= $message->user->client->clients_name ?></p>
                         <p class="chat-send-date"><?= FormatHelpers::formatDate($message->created_at, true, 1, false) ?></p>
                     </div>
-                    <?= $message->chat_message ?>
+                    <?= HtmlPurifier::process($message->chat_message) ?>
                 </div>
                 <div class="clearfix"></div>
             <?php endforeach; ?>
@@ -38,7 +39,7 @@
     
     <div class="clearfix"></div>
     
-    <?php Pjax::begin(['id' => 'new_note', 'enablePushState' => false]) ?>
+    <?php Pjax::begin(['id' => 'new_note', 'enablePushState' => false, 'timeout' => 5000]) ?>
     <div class="chat-window-open__form text-center">
         <?php $form = ActiveForm::begin([
             'id' => 'send-message-chat',
@@ -50,7 +51,9 @@
             ],
         ]) ?>
 
-        <?= $form->field($model, 'message')->textarea(['class' => 'chat-message__input', 'rows' => 4])->label(false) ?>
+        <?= $form->field($model, 'message')
+                ->textarea(['class' => 'chat-message__input', 'rows' => 4, 'placeHolder' => 'Ваше сообщение'])
+                ->label(false) ?>
         <?= Html::submitButton('<i class="glyphicon glyphicon-send"></i>', ['class' => 'chat-window-open__sendbtn']) ?>
 
         <?php ActiveForm::end() ?>

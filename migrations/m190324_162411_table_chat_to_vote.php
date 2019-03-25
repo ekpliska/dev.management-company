@@ -2,6 +2,7 @@
 
     use yii\db\Migration;
     use yii\db\Expression; 
+    use app\models\ChatToVote;
 
 /**
  * Чат голосования
@@ -24,6 +25,7 @@ class m190324_162411_table_chat_to_vote extends Migration
             'uid_user' => $this->integer()->notNull(),
             'chat_message' => $this->text(1000)->notNull(),
             'created_at' => $this->timestamp()->defaultValue(new Expression("NOW()")),
+            'message_status' => $this->integer()->defaultValue(ChatToVote::VIEW_NO),
         ]);
         
         $this->createIndex('idx-chat_to_vote-vote_vid', '{{%chat_to_vote}}', 'vote_vid');

@@ -246,9 +246,16 @@ class VotingController extends AppClientsController {
         
         if (Yii::$app->request->isPjax) {
             $model = new SendMessageForm();
-            if ($model->load(Yii::$app->request->post())) {
+            if ($model->load(Yii::$app->request->post()) && $model->validate()) {
                 $model->send($vote);
+                
+                $response = Yii::$app->getResponse();
+                $response->format = \yii\web\Response::FORMAT_JSON;
+//                $response->data['errors'] = $errors;
+                $response->send();
+
             }
+            
             
 //            $model->message = '';
         }
