@@ -68,6 +68,16 @@ class VotingController extends AppClientsController {
             return $this->refresh();
         }
         
+        /*
+         * Отправка сообщения в чате
+         */
+        if (Yii::$app->request->isPjax) {
+            $model = new SendMessageForm();
+            if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+                $model->send($voting_id);
+            }
+        }
+        
         return $this->render('view', [
             'voting' => $voting,
             'is_register' => $is_register ? $is_register : null,

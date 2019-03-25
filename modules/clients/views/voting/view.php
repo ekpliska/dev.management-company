@@ -145,6 +145,7 @@ $_answer = '';
                                 'data-question' => count($voting['question']),
                         ]) ?>
                     </div>
+                    <?= ChatVote::widget(['vote_id' => $voting['voting_id']]) ?>
                 <?php endif; ?>
             
             <?php endif; ?>
@@ -153,7 +154,6 @@ $_answer = '';
         
     </div>
     
-    <?= ChatVote::widget(['vote_id' => $voting['voting_id']]) ?>
     
 </div>
 
