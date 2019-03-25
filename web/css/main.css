@@ -3774,6 +3774,10 @@ a.employee-profile:hover {
 .krajee-default .file-other-icon {
     font-size: 1em !important;
 }
+.kv-file-remove {
+    position: absolute;
+    left: 0% !important;
+}
 /* End Drag and Drop files */
 
 /* Show password */

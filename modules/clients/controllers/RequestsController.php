@@ -249,5 +249,11 @@ class RequestsController extends AppClientsController
         return ['success' => false];
         
     }
+    
+    public function actionUploadImage() {
+        
+        return true;
+        
+    }
 
  }

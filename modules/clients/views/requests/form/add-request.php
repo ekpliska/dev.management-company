@@ -56,13 +56,21 @@
                         'maxFileCount' => 5,
                         'maxFileSize' => 20 * 1024* 1024,
                         'showCaption' => false,
-                        'showRemove' => true,
+                        'showRemove' => false,
                         'showUpload' => false,
                         'browseClass' => 'btn btn-block',
                         'browseIcon' => '<i class="glyphicon glyphicon-camera"></i> ',
                         'browseLabel' =>  'Загрузить фотографии',
                         'resizePreference' => 'height',
                         'resizeImages' => true,
+//                        'initialPreviewShowDelete' => true,
+                        'uploadUrl' => ['requests/upload-image'],
+                        'fileActionSettings' =>[
+                            'showUpload' => false,
+                        ],
+                        'uploadExtraData' => [
+                            'class' => $model->formName(),
+                        ],
                     ]
             ])->label(false) ?>
 
