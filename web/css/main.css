@@ -3820,7 +3820,7 @@ a.employee-profile:hover {
 .chat-window-open {
     display: none;
     position: fixed;
-    bottom: 15%;
+    bottom: 12%;
     right: 8%;
     z-index: 9;
     border-radius: 12px;
@@ -3866,13 +3866,15 @@ a.employee-profile:hover {
     width: 100%;
 }
 .chat-txt-block-white__atr p {
-    width: 50%;
     margin: 0;
+    font-weight: bold;
 }
 .chat-txt-block-white__atr p:first-child {
+    width: 20%;
     text-align: left;
 }
 .chat-txt-block-white__atr p:last-child {
+    width: 80%;
     text-align: right;
 }
 .chat-message__input {
@@ -3904,5 +3906,14 @@ a.employee-profile:hover {
     padding: 5px;
     color: #fff;
     font-size: 22px;
+}
+.chat-message__start {
+    color: #bcbcbc;
+    font-size: 12px;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
 }
 /* End Chat Vote */

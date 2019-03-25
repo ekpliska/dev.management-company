@@ -249,20 +249,11 @@ class VotingController extends AppClientsController {
             if ($model->load(Yii::$app->request->post())) {
                 $model->send($vote);
             }
+            
+//            $model->message = '';
         }
-        
-        die();
+//        return;
      
-//        $model = new SendMessageForm();
-//        
-//        if (Yii::$app->request->isPjax) {
-//            if ($model->load(Yii::$app->request->post())) {
-//                $model->send($vote);
-//                return $model;
-//            }
-//        }
-
-        
     }
     
 }

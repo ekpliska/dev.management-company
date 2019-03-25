@@ -3,6 +3,7 @@
     use yii\helpers\Html;
     use yii\widgets\ActiveForm;
     use yii\widgets\Pjax;
+    use app\helpers\FormatHelpers;
 
 /* 
  * Чат
@@ -12,7 +13,7 @@
 <?= Html::button('<i class="glyphicon glyphicon-comment"></i>', ['class' => 'open-button-chat']) ?>
 
 <div class="chat-window-open" id="chat-form">
-    <?php Pjax::begin(['id' => 'comments']) ?>
+    <?php Pjax::begin(['id' => 'comments', 'enablePushState' => false]) ?>
     <div class="row chat-window-open__body">
         <?php if (isset($chat_messages) && !empty($chat_messages)) : ?>
             <?php foreach ($chat_messages as $key => $message) : ?>
@@ -21,15 +22,15 @@
                 </div>
                 <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 chat-txt-block-white">
                     <div class="chat-txt-block-white__atr">
-                        <p class="chat-name-user"><?= $message->user->user_login ?></p>
-                        <p class="chat-send-date"><?= $message->created_at ?></p>
+                        <p class="chat-name-user"><?= $message->user->client->clients_name ?></p>
+                        <p class="chat-send-date"><?= FormatHelpers::formatDate($message->created_at, true, 1, false) ?></p>
                     </div>
                     <?= $message->chat_message ?>
                 </div>
                 <div class="clearfix"></div>
             <?php endforeach; ?>
         <?php else: ?>
-            <p>Чтобы начать беседу, отправьте сообщение!</p>
+            <p class="chat-message__start">Чтобы начать беседу, отправьте сообщение!</p>
         <?php endif; ?>
     </div>
     
@@ -37,7 +38,7 @@
     
     <div class="clearfix"></div>
     
-    <?php Pjax::begin(['id' => 'new_note']) ?>
+    <?php Pjax::begin(['id' => 'new_note', 'enablePushState' => false]) ?>
     <div class="chat-window-open__form text-center">
         <?php $form = ActiveForm::begin([
             'id' => 'send-message-chat',
@@ -49,7 +50,7 @@
             ],
         ]) ?>
 
-        <?= $form->field($model, 'message')->textarea(['class' => 'chat-message__input', 'rows' => 3])->label() ?>
+        <?= $form->field($model, 'message')->textarea(['class' => 'chat-message__input', 'rows' => 4])->label(false) ?>
         <?= Html::submitButton('<i class="glyphicon glyphicon-send"></i>', ['class' => 'chat-window-open__sendbtn']) ?>
 
         <?php ActiveForm::end() ?>
