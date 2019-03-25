@@ -42,19 +42,19 @@
     <?php Pjax::begin(['id' => 'new_note', 'enablePushState' => false, 'timeout' => 5000]) ?>
     <div class="chat-window-open__form text-center">
         <?php $form = ActiveForm::begin([
-            'id' => 'send-message-chat',
-            'action' => ['send-message', 'vote' => $vote_id],
-            'validateOnChange' => false,
-            'validateOnBlur' => false,
-            'options' => [
-                'data-pjax' => true,
-            ],
+                'id' => 'send-message-chat',
+                'action' => ['send-message', 'vote' => $vote_id],
+                'validateOnChange' => false,
+                'validateOnBlur' => false,
+                'options' => [
+                    'data-pjax' => true,
+                ],
         ]) ?>
 
-        <?= $form->field($model, 'message')
-                ->textarea(['class' => 'chat-message__input', 'rows' => 4, 'placeHolder' => 'Ваше сообщение'])
-                ->label(false) ?>
-        <?= Html::submitButton('<i class="glyphicon glyphicon-send"></i>', ['class' => 'chat-window-open__sendbtn']) ?>
+            <?= $form->field($model, 'message')
+                    ->textarea(['class' => 'chat-message__input', 'rows' => 4, 'placeHolder' => 'Ваше сообщение'])
+                    ->label(false) ?>
+            <?= Html::submitButton('<i class="glyphicon glyphicon-send"></i>', ['class' => 'chat-window-open__sendbtn']) ?>
 
         <?php ActiveForm::end() ?>
     </div>

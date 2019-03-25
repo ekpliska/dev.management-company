@@ -249,10 +249,12 @@ class VotingController extends AppClientsController {
             if ($model->load(Yii::$app->request->post()) && $model->validate()) {
                 $model->send($vote);
                 
+                
                 $response = Yii::$app->getResponse();
                 $response->format = \yii\web\Response::FORMAT_JSON;
 //                $response->data['errors'] = $errors;
                 $response->send();
+//                return $model;
 
             }
             
