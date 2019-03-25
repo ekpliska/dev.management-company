@@ -74,8 +74,8 @@ class Requests extends ActiveRecord
             
             [['gallery'], 'file', 
                 'extensions' => 'png, jpg, jpeg', 
-                'maxFiles' => 4, 
-                'maxSize' => 2 * 1024 * 1024,
+                'maxFiles' => 5, 
+                'maxSize' => 20 * 1024 * 1024,
                 'mimeTypes' => 'image/*',                
                 'on' => self::SCENARIO_ADD_REQUEST,
             ],

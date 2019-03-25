@@ -39,7 +39,7 @@ class AddRequest extends Model {
             [['gallery'], 'file', 
                 'extensions' => 'png, jpg, jpeg', 
                 'maxFiles' => 5, 
-                'maxSize' => 5 * 512 * 1024,
+                'maxSize' => 20 * 1024 * 1024,
                 'mimeTypes' => 'image/*',                
             ],
             

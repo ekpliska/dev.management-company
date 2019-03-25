@@ -54,7 +54,7 @@
                     ],
                     'pluginOptions' => [
                         'maxFileCount' => 5,
-                        'maxFileSize' => 5800,
+                        'maxFileSize' => 20 * 1024* 1024,
                         'showCaption' => false,
                         'showRemove' => true,
                         'showUpload' => false,

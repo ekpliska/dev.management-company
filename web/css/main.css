@@ -1181,6 +1181,7 @@ span.dot {
     height: 120px;
 }
 .face-container {
+    position: relative;
     width: 25%;
 }
 .profile-name {

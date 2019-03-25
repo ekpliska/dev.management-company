@@ -128,6 +128,7 @@ class PaidServicesController extends AppClientsController {
         
         if ($new_order->load(Yii::$app->request->post())) {
             $record = $new_order->addOrder($account_id);
+//            var_dump($new_order->errors); die();
             if ($record) {
                 Yii::$app->session->setFlash('success', ['message' => "Заявка ID{$record} была успешно создана"]);
                 return $this->redirect(['paid-services/order-services']);

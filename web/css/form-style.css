@@ -185,8 +185,8 @@ form .has-error .field::before {
 /* Textarea in modal windows */
 .field-modal-textarea {
     position: relative;
-    height: 139px;
-    padding: 5px 0 8px 0;
+    height: 167px;
+    padding: 10px 0 8px 0;
 }
 .field-input-textarea-modal {
     position: relative;
