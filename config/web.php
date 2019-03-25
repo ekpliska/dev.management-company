@@ -214,6 +214,16 @@ $config = [
                         'GET /' => 'index',
                     ]
                 ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'pluralize' => false,
+                    'controller' => 'v1/rent',
+                    'extraPatterns' => [
+                        'GET view/<account:[\w-]+>' => 'view',
+                        'POST update/<rent_id:[\w-]+>' => 'update',
+                        'GET delete/<rent_id:[\w-]+>' => 'delete',
+                    ]
+                ],
                 
             ],
         ],

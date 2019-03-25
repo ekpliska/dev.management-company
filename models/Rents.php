@@ -74,8 +74,18 @@ class Rents extends ActiveRecord
         return $this->hasOne(Clients::className(), ['clients_id' => 'rents_clients_id']);
     }
     
+    /*
+     * Связь с таблицей Пользователи
+     */
     public function getUser() {
         return $this->hasOne(User::className(), ['user_rent_id' => 'rents_id']);
+    }
+    
+    /*
+     * Свяь с таблицей Лицевой счет
+     */
+    public function getAccount() {
+        return $this->hasOne(PersonalAccount::className(), ['personal_rent_id' => 'rents_id']);
     }
     
     public static function findByRentId($rent_id) {
