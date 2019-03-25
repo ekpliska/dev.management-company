@@ -8,6 +8,7 @@
     use app\modules\clients\models\form\CheckSMSVotingForm;
     use app\models\Answers;
     use app\modules\clients\models\UserProfile;
+    use app\modules\clients\models\form\SendMessageForm;
 
 /**
  * Голосование
@@ -244,9 +245,23 @@ class VotingController extends AppClientsController {
     public function actionSendMessage($vote) {
         
         if (Yii::$app->request->isPjax) {
-            echo $vote;
-            die();
+            $model = new SendMessageForm();
+            if ($model->load(Yii::$app->request->post())) {
+                $model->send($vote);
+            }
         }
+        
+        die();
+     
+//        $model = new SendMessageForm();
+//        
+//        if (Yii::$app->request->isPjax) {
+//            if ($model->load(Yii::$app->request->post())) {
+//                $model->send($vote);
+//                return $model;
+//            }
+//        }
+
         
     }
     

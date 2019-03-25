@@ -53,6 +53,8 @@ class ChatToVote extends ActiveRecord {
         
         $chat = self::find()
                 ->with(['user', 'user.client', 'vote'])
+                ->where(['vote_vid' => $vote_id])
+                ->orderBy(['created_at' => SORT_DESC])
                 ->all();
         
         return $chat;

@@ -1,6 +1,6 @@
 <?php
+
     use yii\grid\GridView;
-    use yii\helpers\Url;
     use yii\helpers\Html;
     use app\helpers\FormatHelpers;
     use app\helpers\StatusHelpers;
@@ -49,7 +49,7 @@
             [
                 'attribute' => 'Описание',
                 'value' => function ($data) {
-                    return $data->requests_comment
+                    return FormatHelpers::shortTextNews($data->requests_comment, 10)
                             . '<br />'
                             . FormatHelpers::imageRequestList($data['image']);
                 },

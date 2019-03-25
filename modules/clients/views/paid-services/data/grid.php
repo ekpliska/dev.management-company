@@ -58,7 +58,7 @@
                 [
                     'attribute' => 'services_comment',
                     'label' => 'Текст заявки',
-                    'contentOptions' =>[
+                    'contentOptions' => [
                         'class' => 'clients-table_description',
                     ],
                 ],
