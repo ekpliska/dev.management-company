@@ -3,6 +3,7 @@
     namespace app\modules\clients\models\_searchForm;
     use Yii;
     use yii\base\Model;
+    use yii\helpers\HtmlPurifier;
 
 /*
  * Поиск по специалисту/исполнителю
@@ -19,11 +20,6 @@ class searchInPaidServices extends Model {
         return [
             ['_input', 'filter', 'filter' => 'trim'],
             ['_input', 'string', 'min' => 3, 'max' => 70],
-//            ['_input', 
-//                'match',
-//                'pattern' => '/^[А-Яа-яёЁ\s,]+$/u',
-//                'message' => 'Данное поле может содержать только буквы русского алфавита',
-//            ],
         ];
         
     }
@@ -35,6 +31,9 @@ class searchInPaidServices extends Model {
         
         $query = (new \yii\db\Query())
                 ->select('p.services_number, '
+                        . 'p.services_id, '
+                        . 'p.status, '
+                        . 'p.grade, '
                         . 'c.category_name, '
                         . 's.service_name, '
                         . 'p.created_at, p.services_comment, '
@@ -50,12 +49,17 @@ class searchInPaidServices extends Model {
         
         $dataProvider = new \yii\data\ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'forcePageParam' => false,
+                'pageSizeParam' => false,
+                'pageSize' => (Yii::$app->params['countRec']['client']) ? Yii::$app->params['countRec']['client'] : 15,
+            ],
         ]);
         
         $this->load($value, $account_id);
         
-        $query->andFilterWhere(['like', 'employee_surname', $value]);
-        $query->orFilterWhere(['=', 'services_number', $value]);
+        $query->andFilterWhere(['like', 'employee_surname', HtmlPurifier::process($value)]);
+        $query->orFilterWhere(['=', 'services_number', HtmlPurifier::process($value)]);
         
         return $dataProvider;
         
