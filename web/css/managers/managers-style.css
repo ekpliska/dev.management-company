@@ -1102,7 +1102,7 @@ span.status-vote-1::before {
 }
 .load_preview {
     height: 350px;
-    background: #ddd;
+    background: #fff;
     position: relative;
 }
 .load_preview img {

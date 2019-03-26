@@ -61,10 +61,10 @@
                 'template' => '<span id="label-count"></span><span id="label-count-left"></span>{input}'])
                 ->textarea([
                     'placeHolder' => $model->getAttributeLabel('comments_text'), 
-                    'rows' => 7])
+                    'rows' => 5])
                 ->label(false) ?>    
 
-        <?= Html::submitButton('Отправить <i class="glyphicon glyphicon-arrow-right"></i>', ['class' => 'chat-btn']) ?>
+        <?= Html::submitButton('', ['class' => 'sendmessage_button']) ?>
 
         <?php ActiveForm::end(); ?>
 

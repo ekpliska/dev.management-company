@@ -1819,6 +1819,7 @@ p.right {
     border-right: none;
     resize: none;
     box-shadow: none;
+    padding: 10px 40px 10px 10px;
 }
 .chat-msg textarea:focus {
     border-color: #ddd !important;
@@ -1856,20 +1857,6 @@ p.right {
 }
 #add-comment .form-group {
     margin-bottom: 0px;
-}
-.chat-btn {
-    color: #2d18b4;
-    font-size: 12px;
-    letter-spacing: 0.98px;
-    text-transform: uppercase;
-    background: #fff;
-    border: none;
-    font-weight: bold;
-    padding: 10px;
-    width: 100%;
-}
-.chat-btn:focus {
-    outline: none;
 }
 .error-summary {
     font-size: 12px;
@@ -3707,6 +3694,19 @@ a.employee-profile:hover {
     color: #3e3e3e;
 }
 #dispatcherList {    
+}
+.sendmessage_button {
+    background: #fff url(/images/send.png) 0 -41px no-repeat;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: 3%;
+    bottom: 10%;
+    border: none;
+}
+.sendmessage_button:hover {
+    cursor: pointer;
+    background-position: 0 0;
 }
 /* Конец Заявка, просмотр отдельной заявки */
 

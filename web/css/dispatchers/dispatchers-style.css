@@ -943,7 +943,7 @@ tbody > tr > td > div.empty::before {
 }
 .load_preview {
     height: 270px;
-    background: #ddd;
+    background: #fff;
     position: relative;
 }
 .load_preview img {

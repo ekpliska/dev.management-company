@@ -64,7 +64,7 @@ $prev_date = 0;
                         'rows' => 5])
                     ->label(false) ?>    
 
-            <?= Html::submitButton('Отправить <i class="glyphicon glyphicon-arrow-right"></i>', ['class' => 'chat-btn']) ?>
+            <?= Html::submitButton('', ['class' => 'sendmessage_button']) ?>
 
             <?php ActiveForm::end(); ?>
         </div>
