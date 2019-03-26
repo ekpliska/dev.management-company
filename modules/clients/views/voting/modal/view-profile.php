@@ -9,8 +9,8 @@
 ?>
 <?php if (!empty($user_info)) : ?>
 <div class="card card-view-profile text-center">
-    <?php $avatar = $user_info['user_photo'] ? $user_info['user_photo'] : "images/no-avatar.jpg" ?>
-    <?= Html::img("@web/{$avatar}", ['alt' => 'user-name', 'class' => 'img-responsive img-circle']) ?>
+    <?php $avatar = $user_info['user_photo'] ? $user_info['user_photo'] : "/images/no-avatar.jpg" ?>
+    <?= Html::img($avatar, ['alt' => 'user-name', 'class' => 'img-responsive img-circle']) ?>
     <h1>
         <?= $user_info['clients_surname'] . ' ' . $user_info['clients_name'] . ' ' . $user_info['clients_second_name'] ?>
     </h1>

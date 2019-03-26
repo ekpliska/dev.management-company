@@ -342,7 +342,7 @@ class News extends ActiveRecord
             'created_at' => 'Дата создания',
             'updated_at' => 'Дата обновления',
             'files' => 'Прикрепленные документы',
-            'isAdvert' => 'Рекламная публикаця',
+            'isAdvert' => 'Рекламная публикация',
             'news_partner_id' => 'Контрагент',
         ];
     }

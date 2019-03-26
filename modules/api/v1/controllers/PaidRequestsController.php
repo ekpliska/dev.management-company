@@ -112,7 +112,8 @@ class PaidRequestsController extends Controller {
         if ($model->save()) {
             return ['success' => true];
         } else {
-            return ['success' => false];
+//            return ['success' => false];
+            return $model;
         }
         
         

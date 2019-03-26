@@ -1712,12 +1712,12 @@ span.status-vote-1::before {
     margin: 0;
 }
 .partners-card {
-    height: 135px;
+    height: 155px;
 }
 .partners-card__image {
     position: relative;
     overflow: hidden;
-    height: 90px;
+    height: 120px;
 }
 .partners-card__image img {
     border-radius: 12px;

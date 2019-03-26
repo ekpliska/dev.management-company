@@ -86,7 +86,7 @@ class Partners extends ActiveRecord
             return Yii::getAlias('@web') . 'images/not_found.png';
         }
         
-        return Yii::getAlias('@web') . '/web/' . $this->partners_logo;
+        return Yii::getAlias('@web') . $this->partners_logo;
         
     }
     
