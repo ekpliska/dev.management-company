@@ -51,16 +51,13 @@ class ClientsRentForm extends Model {
                 'targetClass' => User::className(),
                 'targetAttribute' => 'user_mobile',
                 'message' => 'Пользователь с введенным номером мобильного телефона в системе уже зарегистрирован',
-                'on' => self::SCENARIO_AJAX_VALIDATION,
             ],
-            ['rents_mobile', 'match', 'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}+$/i', 'on' => self::SCENARIO_AJAX_VALIDATION],
             
             [
                 'rents_email', 'unique',
                 'targetClass' => User::className(),
                 'targetAttribute' => 'user_email',
                 'message' => 'Данный электронный адрес уже используется в системе',
-                'on' => self::SCENARIO_AJAX_VALIDATION,
             ],
             ['rents_email', 'string', 'min' => 5, 'max' => 150, 'on' => self::SCENARIO_AJAX_VALIDATION],
             ['rents_email', 'email', 'on' => self::SCENARIO_AJAX_VALIDATION],

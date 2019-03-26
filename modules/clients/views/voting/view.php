@@ -145,7 +145,6 @@ $_answer = '';
                                 'data-question' => count($voting['question']),
                         ]) ?>
                     </div>
-                    <?= ChatVote::widget(['vote_id' => $voting['voting_id']]) ?>
                 <?php endif; ?>
             
             <?php endif; ?>
@@ -154,6 +153,9 @@ $_answer = '';
         
     </div>
     
+    <?php if ($is_register['status'] == RegistrationInVoting::STATUS_ENABLED) : ?>
+        <?= ChatVote::widget(['vote_id' => $voting['voting_id']]) ?>
+    <?php endif; ?>
     
 </div>
 

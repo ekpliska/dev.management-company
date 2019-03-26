@@ -75,12 +75,6 @@ class User extends ActiveRecord implements IdentityInterface
                 'on' => self::SCENARIO_EDIT_PROFILE,
             ],
             
-            ['user_mobile', 
-                'match', 
-                'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/i', 
-                'on' => self::SCENARIO_EDIT_PROFILE,
-            ],
-            
             ['user_mobile', 'unique', 
                 'targetClass' => self::className(),
                 'targetAttribute' => 'user_mobile',
@@ -89,12 +83,6 @@ class User extends ActiveRecord implements IdentityInterface
             ],
             
             [['user_mobile'], 'required', 'on' => self::SCENARIO_EDIT_ADMINISTRATION_PROFILE],
-            
-            ['user_mobile', 
-                'match', 
-                'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/i', 
-                'on' => self::SCENARIO_EDIT_ADMINISTRATION_PROFILE,
-            ],
             
             ['user_mobile', 'unique', 
                 'targetClass' => self::className(),

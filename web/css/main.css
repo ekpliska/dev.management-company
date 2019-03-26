@@ -1807,8 +1807,10 @@ p.right {
     box-shadow: 0 10px 14px 2px rgba(0,0,0,0.26);
 }
 .chat-msg {
+    position: absolute;
     margin: 0 0 0 -15px;
-    padding: 40px 0px 0px 0px;
+    bottom: 0;
+    width: 100%;
 }
 .chat-msg span#label-count,
 .chat-msg span#label-count-left {
@@ -1823,6 +1825,7 @@ p.right {
     border-right: none;
     resize: none;
     box-shadow: none;
+    padding: 10px;
 }
 .chat-msg textarea:focus {
     border-color: #ddd !important;
@@ -1835,6 +1838,20 @@ p.right {
     box-shadow: none;
     -webkit-box-shadow: none;
 }
+.chat-msg textarea::-webkit-scrollbar {
+    width: 7px;
+    background-color: #ddd;
+}
+.chat-msg textarea::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    border-radius: 10px;
+}
+ 
+.chat-msg textarea::-webkit-scrollbar-thumb {
+    border-radius: 12px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #524e53;
+}
 .chat-msg__off > p {
     padding: 10px;
     color: #777;
@@ -1844,17 +1861,19 @@ p.right {
     background-color: #ddd;
     border-radius: 50px;
 }
+#add-comment .form-group {
+    margin-bottom: 0px;
+}
 .chat-btn {
     color: #2d18b4;
     font-size: 12px;
     letter-spacing: 0.98px;
     text-transform: uppercase;
-    background: transparent;
+    background: #fff;
     border: none;
-    position: absolute;
-    right: 25px;
-    bottom: 40px;
     font-weight: bold;
+    padding: 10px;
+    width: 100%;
 }
 .chat-btn:focus {
     outline: none;
@@ -1875,7 +1894,7 @@ p.right {
     border-radius: 12px;
 }
 .comments {
-    height: 460px;
+    height: 500px;
     overflow: auto;
     padding: 10px 0px 30px 0px;
 }
@@ -1886,7 +1905,7 @@ p.right {
 }
 
 .comments::-webkit-scrollbar {
-    width: 12px;
+    width: 7px;
     background-color: #ddd;
 }
 
@@ -3820,7 +3839,7 @@ a.employee-profile:hover {
 .chat-window-open {
     display: none;
     position: fixed;
-    bottom: 12%;
+    bottom: 14%;
     right: 8%;
     z-index: 9;
     border-radius: 12px;
