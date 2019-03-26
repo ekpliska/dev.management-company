@@ -52,8 +52,6 @@ $(document).ready(function() {
             }
         });
 
-    });
-
     /*
      * Работа навигационного меню, Собственник
      */
@@ -185,23 +183,23 @@ $(document).ready(function() {
     
 
     /* Форма */
-        $(document).on('focus', '.field-input, .field-input-modal, .field-input-textarea-modal, .field-input-textarea-page', function(){
-            $(this).parent().addClass('is-focused has-label');
-        });
+    $(document).on('focus', '.field-input, .field-input-modal, .field-input-textarea-modal, .field-input-textarea-page', function(){
+        $(this).parent().addClass('is-focused has-label');
+    });
 
-        $(document).on('blur', '.field-input, .field-input-modal, .field-input-textarea-modal, .field-input-textarea-page', function(){
-            $parent = $(this).parent();
-            if ($(this).val() == '') {
-                $parent.removeClass('has-label');
-            }
-            $parent.removeClass('is-focused');
-        });
+    $(document).on('blur', '.field-input, .field-input-modal, .field-input-textarea-modal, .field-input-textarea-page', function(){
+        $parent = $(this).parent();
+        if ($(this).val() == '') {
+            $parent.removeClass('has-label');
+        }
+        $parent.removeClass('is-focused');
+    });
 
-        $('.field-input, .field-input-modal, .field-input-textarea-modal, .field-input-textarea-page').each(function(){
-            if ($(this).val() !== '') {
-                $(this).parent().addClass('has-label');
-            }
-        });
+    $('.field-input, .field-input-modal, .field-input-textarea-modal, .field-input-textarea-page').each(function(){
+        if ($(this).val() !== '') {
+            $(this).parent().addClass('has-label');
+        }
+    });
 
     /* Скрыть всплывающее сообщение */
     $('.alert-message').on('click', function() {
@@ -219,3 +217,32 @@ $(document).ready(function() {
 	$(".pwd_value").replaceWith($('.pwd_value').clone().attr('type', 'password'));
     });
 
+    /*
+     * Показать/скрыть часть текста заявки
+     */
+    $('.text_review').each(function(){
+        var textFull = $(this).html();
+        var review = textFull;
+        var hideFull = '<div class="hide-more"> Скрыть <i class="glyphicon glyphicon-transfer"></i></div>';
+        if(review.length > 100) {
+            review = review.substring(0, 100) + '...';
+            $(this).html(
+                    '<div class="read-less">' + review
+                    + '<div class="read-more"> Посмотреть весь текст заявки <i class="glyphicon glyphicon-transfer"></i></div></div>' );
+        }
+        $(this).append('<div class="full-text" style="display: none;">' + textFull + hideFull  + '</div>');
+    });
+    
+    $('.read-more').click(function(){
+        $(this).parent().hide('slow', function(){
+            $(this).parent().parent().find('.full-text').show();
+        });
+    });
+    
+    $(document).on('click', '.hide-more', function(){
+        $(this).parent().hide('slow', function(){
+            $(this).parent().parent().find('.read-less').show();
+        });
+    });
+    
+});    

@@ -58,9 +58,13 @@
                 [
                     'attribute' => 'services_comment',
                     'label' => 'Текст заявки',
+                    'value' => function($data) {
+                        return '<div class="text_review">' . $data['services_comment'] . '</div>';
+                    },
                     'contentOptions' => [
                         'class' => 'clients-table_description',
                     ],
+                    'format' => 'raw',
                 ],
                 [
                     'attribute' => 'Исполнитель',

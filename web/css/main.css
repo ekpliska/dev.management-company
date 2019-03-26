@@ -2187,6 +2187,12 @@ a.btn-history:hover {
     margin: 10px;
     font-size: 12px;
 }
+.read-more,
+.hide-more {
+    color: #777;
+    font-weight: bold;
+    cursor: pointer;
+}
 /* Конец Платные услуги */
 
 /* История платных услуг */
