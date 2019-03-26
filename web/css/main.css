@@ -36,6 +36,7 @@ button:hover {
 .main > .row > [class*="col-"] {
     margin: 0;
     padding: 0;
+    overflow: hidden;
 }
 .wrap {
     min-height: 100%;
@@ -150,47 +151,60 @@ button:hover {
 /* Конец Футер */
 
 /* Слайдер на главной странице */
-.carousel-caption {
-    top: 35px;
+.general-slider {
+    background-image: url(/images/slider/elsa-ground.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
 }
-.general-slider,
-.general-right-block, 
-.login-page {
-    padding: 0;
-    margin: 0;
-}
-.general-slider__image {
-    height: -webkit-fill-available !important;
-    max-height: 100%;
-    min-height: 100%;
+#general-page__slider {
+    display: inline-block;
+    text-align: center;
     width: 100%;
+    height: 100%;
+    overflow: hidden;
+    padding: 60px;
+    text-align: center;
+    z-index: 999;
+}
+.carousel-title {
+    text-align: center;
+    margin: 5% 0 15% 0;
+}
+.carousel-title__small {
+    margin: 10% 0;
+}
+.carousel-logo-company {
+    margin: 20% 0;
+}
+.carousel-title > h3 {
+    font-size: 32px;
+    color: #fff;
+}
+.carousel-title__small img {
+    height: 40px;
 }
 .slider-logo {
     height: 236px;
     width: 176px;
-    margin-top: 101px;  
+    margin: 40px 0;
 }
 .slider-product-icon {
     height: 199px;
     width: 198px;
-    margin-top: 101px;    
 }
 .slide-txt-block {
-    margin-top: 38px;
-    margin-bottom: 52px;
     font-size: 16px;
-    letter-spacing: 1px;
-    padding: 0 150px;
+    color: #fff;
+    letter-spacing: 0.12em;
+    text-align: center;
+    padding: 20px 50px;
 }
-.slider-title {
-    background-size: 185px;
-    letter-spacing: 1.4px;
-    line-height: 47px;
-    margin-top: 55px;
-    font-size: 32px;
-}
-.slider-title > img {
-    width: 195px;
+.app-btn-group {
+    width: 100%;
+    padding: 10px;
+    margin: 10% 0;
 }
 .app-btn-group a {
     padding: 7px 30px 7px 50px;
@@ -213,19 +227,6 @@ button:hover {
     background-repeat: no-repeat;
     background-size: 20px;
     background-position: 20px center;
-}
-.carousel-indicators {
-    bottom: 20%;
-}
-.carousel-indicators .active {
-    width: 20px;
-    height: 20px;
-}
-.carousel-indicators li {
-    width: 12px;
-    height: 12px;
-    background: #fff;
-    margin: 5px 7px;
 }
 /* Конец Слайдер на главной странице */
 
