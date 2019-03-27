@@ -30,8 +30,8 @@ class PaidRequestForm extends Model {
         
         return [
             [['account', 'category_id', 'service_id', 'request_body'], 'required'],
-            [['account', 'category_id', 'service_id'], 'integer'],
-            [['request_body'], 'string', 'min' => 10, 'max' => 250],
+//            [['account', 'category_id', 'service_id'], 'integer'],
+            [['request_body'], 'string', 'max' => 1000],
         ];
         
     }
