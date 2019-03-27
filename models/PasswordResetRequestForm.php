@@ -36,16 +36,16 @@ class PasswordResetRequestForm extends Model {
         
         if (!$this->hasErrors()) {
             
-            $sms_code = Yii::$app->session->get('reset_sms_code');
+            $sms_code = isset(Yii::$app->session['reset_sms_code']) ? Yii::$app->session['reset_sms_code'] : null;
             $user = User::findByPhone($this->phone);
 
             if ($sms_code != $this->sms_code) {
-                $this->addError($attribute, 'Вы указали не верный СМС код');
+                $this->addError('sms_code', 'Вы указали не верный СМС код');
                 return false;
             }
             
             if (empty($user)) {
-                $this->addError($attribute, 'Указанный номер телефона не зарегистрирован');
+                $this->addError('phone', 'Указанный номер телефона не зарегистрирован');
                 return false;
             }
             
@@ -60,6 +60,10 @@ class PasswordResetRequestForm extends Model {
      */
     public function resetPassword() {
         
+        if (!$this->validate()) {
+            return false;
+        }
+        
         $user = User::findByPhone($this->phone);
         
         if (empty($user)) {
@@ -67,7 +71,7 @@ class PasswordResetRequestForm extends Model {
         }
         
         // Генерируем новый пароль (случайные 6 символов)
-        $new_password = Yii::$app->security->generateRandomString(6);
+        $new_password = preg_replace('/[^a-zA-Z]/', '', Yii::$app->security->generateRandomKey(32));
         
         if (!$this->sendSms($user->user_mobile, $new_password)) {
             return false;
