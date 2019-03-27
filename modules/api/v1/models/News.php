@@ -27,7 +27,7 @@ class News extends BaseNews {
     public static function otherNews($house_id, $is_advert) {
         
         $news = BaseNews::find()
-                ->select(['news_id', 'news_title', 'news_preview', 'LEFT(news_text, 120) as news_text', 'created_at'])
+                ->select(['news_id', 'news_title', 'news_preview', 'LEFT(news_text, 250) as news_text', 'created_at'])
                 ->andWhere([
                     'news_house_id' => $house_id,
                     'isAdvert' => $is_advert,

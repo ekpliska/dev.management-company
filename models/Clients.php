@@ -34,14 +34,14 @@ class Clients extends ActiveRecord
             
             [['clients_name', 'clients_second_name', 'clients_surname'], 'filter', 'filter' => 'trim'],
             
-            [['clients_name', 'clients_second_name', 'clients_surname'], 'string', 'min' => 3, 'max' => 70],
+            [['clients_name', 'clients_second_name', 'clients_surname'], 'string', 'max' => 70],
             
-            [[
-                'clients_name', 'clients_second_name', 'clients_surname'], 
-                'match',
-                'pattern' => '/^[А-Яа-яЁё\\s\\-]+$/iu',
-                'message' => 'Поле должно содержать буквы русского алфавита',
-            ],
+//            [[
+//                'clients_name', 'clients_second_name', 'clients_surname'], 
+//                'match',
+//                'pattern' => '/^[А-Яа-яЁё\\s\\-]+$/iu',
+//                'message' => 'Поле должно содержать буквы русского алфавита',
+//            ],
             
             ['clients_phone', 'string', 'max' => 50],
             

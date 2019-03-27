@@ -167,7 +167,6 @@ class RegisterForm extends Model {
             $client->clients_phone = $client_data_api['Домашний телефон'] ? preg_replace('/[^a-zа-яё\ \d]/ui', '', $client_data_api['Домашний телефон']) : 'Не задано';
             
             if (!$client->save()) {
-                Yii::$app->session->destroy();
                 return ['success' => false];
                 
             }

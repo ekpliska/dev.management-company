@@ -80,7 +80,6 @@ class RegistrationForm extends Model {
      */
     public function registration($data) {
         
-        
         if ($data == null) {
             return false;
         }

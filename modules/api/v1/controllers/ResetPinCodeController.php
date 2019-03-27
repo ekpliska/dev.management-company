@@ -6,6 +6,8 @@
     use yii\filters\AccessControl;
     use yii\filters\auth\HttpBasicAuth;
     use yii\filters\auth\HttpBearerAuth;
+    use app\models\SmsSettings;
+    
 /**
  * Восстановление PIN кода на мобильно устройствие
  */
