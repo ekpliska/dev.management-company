@@ -28,7 +28,7 @@ $action = Yii::$app->controller->action->id;
             <?= Html::img($model->voting->image, ['id' => 'photoPreview', 'class' => 'img-rounded', 'alt' => 'cover-vote']) ?>
             
             <div class="upload-btn-wrapper">
-            <?= $form->field($model, 'imageFile', ['template' => '<label class="text-center btn-upload-cover" role="button">{input}{label}{error}</label>'])
+            <?= $form->field($model->voting, 'imageFile', ['template' => '<label class="text-center btn-upload-cover" role="button">{input}{label}{error}</label>'])
                     ->input('file', ['id' => 'btnLoad', 'class' => 'hidden'])->label('<i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;Загрузить фото') ?>
             </div>
             

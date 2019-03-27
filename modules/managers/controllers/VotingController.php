@@ -93,24 +93,25 @@ class VotingController extends AppManagersController {
 //        $houses_array = Houses::getAdressHousesList();
         $houses_array = [];
         
-        if (Yii::$app->request->post() && $model->validate()) {
-            // Получаем загружаемую оложку для голосования
-            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
-            // Вызываем метод на загрузку обложки, при успехе - получаем полный путь к загруженной обложке
-            $path = $model->upload();
-            if ($model->imageFile && $path) {
-                $model->voting->voting_image = $path;
-            }
-            // Сбрасываем путь загруженного изображения
-            $model->imageFile = null; 
+        if (Yii::$app->request->post() && $model->save()) {
+//            // Получаем загружаемую оложку для голосования
+//            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+//            // Вызываем метод на загрузку обложки, при успехе - получаем полный путь к загруженной обложке
+//            $path = $model->upload();
+//            if ($model->imageFile && $path) {
+//                $model->voting->voting_image = $path;
+//            }
+//            // Сбрасываем путь загруженного изображения
+//            $model->imageFile = null; 
             // Сохраняем модель
-            if ($model->save()) {
-                Yii::$app->session->setFlash('success', ['message' => 'Новое голосование было успешно создано']);
+//            if ($model->save()) {
+//                Yii::$app->session->setFlash('success', ['message' => 'Новое голосование было успешно создано']);
                 return $this->redirect(['view', 'voting_id' => $model->voting->voting_id]);
-            } else {
-                Yii::$app->session->setFlash('error', ['message' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз']);
-                return $this->redirect(Yii::$app->request->referrer);
-            }
+//            } else {
+//                Yii::$app->session->setFlash('error', ['message' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз']);
+//                return $this->redirect(Yii::$app->request->referrer);
+//            }
+//            var_dump($model->errors); die();
         }
                 
         return $this->render('create', [

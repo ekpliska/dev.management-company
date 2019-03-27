@@ -5,6 +5,9 @@
     use yii\db\ActiveRecord;
     use yii\behaviors\TimestampBehavior;
     use yii\db\Expression;
+    use yii\web\UploadedFile;
+    use yii\imagine\Image;
+    use Imagine\Image\Box;
     use app\models\Questions;
     use app\models\RegistrationInVoting;
 
@@ -24,6 +27,8 @@ class Voting extends ActiveRecord
     const TYPE_FOR_ALL = 'all';
     const TYPE_FOR_HOUSE = 'house';
     
+    public $imageFile;
+
     /**
      * Таблица БД
      */
@@ -70,6 +75,13 @@ class Voting extends ActiveRecord
             
             ['voting_user_id', 'default', 'value' => Yii::$app->user->identity->id],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
+            
+            [['imageFile'], 'file',
+                'skipOnEmpty' => true,
+                'extensions' => 'png, jpg',
+                'maxSize' => 256 * 1024,
+                'mimeTypes' => 'image/*',
+            ],
             
         ];
     }
@@ -207,6 +219,21 @@ class Voting extends ActiveRecord
         }
         
         return false;
+    }
+    
+    public function beforeSave($insert) {
+        parent::beforeSave($insert);
+        
+        $file = UploadedFile::getInstance($this, 'imageFile');
+        
+        if ($file) {
+            $this->voting_image = $file;
+            $dir = Yii::getAlias('upload/voting/cover/');
+            $file_name = 'previews_voting_' . time() . '.' . $this->voting_image->extension;
+            $this->voting_image->saveAs($dir . $file_name);
+            $this->voting_image = '/' . $dir . $file_name;
+            
+        }
     }
     
     /*
