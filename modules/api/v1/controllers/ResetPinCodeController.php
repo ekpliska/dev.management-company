@@ -21,7 +21,7 @@ class ResetPinCodeController extends Controller {
         
         $behaviors['access'] = [
             'class' => AccessControl::className(),
-            'only' => ['index', 'view'],
+            'only' => ['index'],
             'rules' => [
                 [
                     'allow' => true,
@@ -56,9 +56,12 @@ class ResetPinCodeController extends Controller {
         
         // Генерируем случайное число, СМС код
         $sms_code = rand(10000, 99999);
+        $phone = preg_replace('/[^0-9]/', '', $post_data['mobile_phone']);
         
-        // Отправляем СМС пользователю
-//        Yii::$app->sms->send_sms($post_data, $message, $translit = 0, $time = 0, $id = 0, $format = 0, $sender = false, $query = "");
+        // Отправляем смс на указанный номер телефона
+        if (!$result = Yii::$app->sms->generalMethodSendSms(SmsSettings::TYPE_NOTICE_REGISTER, $phone, $sms_code)) {
+            return ['success' => false, 'message' => $result];
+        }
         
         return [
             'success' => true,

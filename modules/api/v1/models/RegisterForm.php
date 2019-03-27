@@ -9,6 +9,7 @@
     use app\models\Houses;
     use app\models\Flats;
     use app\models\Token;
+    use app\models\SmsSettings;
 
 /**
  * Регистрация по API
@@ -116,15 +117,12 @@ class RegisterForm extends Model {
         $sms_code = mt_rand(10000, 99999);
         
         $phone = preg_replace('/[^0-9]/', '', $data['phone']);
-        $sms = Yii::$app->sms;
-        $result = $sms->send_sms($phone, 'Благодарим за участие в регистрации на портале управляющей компании "ELSA". СМС-код для завершения регистрации ' . $sms_code);
         
-        if (!$sms->isSuccess($result)) {
-            return [
-                'success' => true,
-                'message' => 'Ошибка отправки СМС-кода',
-            ];
-        }        
+        $sms_code = mt_rand(10000, 99999);
+        // Отправляем смс на указанный номер телефона
+        if (!$result = Yii::$app->sms->generalMethodSendSms(SmsSettings::TYPE_NOTICE_REGISTER, $phone, $sms_code)) {
+            return ['success' => false, 'message' => $result];
+        }
         
         return [
             'success' => true,
@@ -163,10 +161,10 @@ class RegisterForm extends Model {
             // Сохраняем данные Собственника
             $client = new Clients();
             // Данные Собственника, пришедщие по API
-            $client->clients_surname = $client_data_api['Фамилия'] ? $client_data_api['Фамилия'] : 'Не задано';
-            $client->clients_name = $client_data_api['Имя'] ? $client_data_api['Имя'] : 'Не задано';
-            $client->clients_second_name = $client_data_api['Отчество'] ? $client_data_api['Отчество'] : 'Не задано';
-            $client->clients_phone = $client_data_api['Домашний телефон'] ? $client_data_api['Домашний телефон'] : 'Не задано';
+            $client->clients_surname = $client_data_api['Фамилия'] ? preg_replace('/[^a-zа-яё\ \d]/ui', '', $client_data_api['Фамилия']) : 'Не задано';
+            $client->clients_name = $client_data_api['Имя'] ? preg_replace('/[^a-zа-яё\ \d]/ui', '', $client_data_api['Имя']) : 'Не задано';
+            $client->clients_second_name = $client_data_api['Отчество'] ? preg_replace('/[^a-zа-яё\ \d]/ui', '', $client_data_api['Отчество']) : 'Не задано';
+            $client->clients_phone = $client_data_api['Домашний телефон'] ? preg_replace('/[^a-zа-яё\ \d]/ui', '', $client_data_api['Домашний телефон']) : 'Не задано';
             
             if (!$client->save()) {
                 Yii::$app->session->destroy();

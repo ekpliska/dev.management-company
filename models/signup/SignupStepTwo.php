@@ -44,7 +44,7 @@ class SignupStepTwo extends Model {
             $is_user = \app\models\User::findByEmail($email);
 
             if ($is_user != null) {
-                $this->addError($attribute, 'Указанный электронный адрес используется в системе');
+                $this->addError('email', 'Указанный электронный адрес используется в системе');
                 return false;
             }
         }
