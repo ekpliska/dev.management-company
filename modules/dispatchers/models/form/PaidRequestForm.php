@@ -48,7 +48,7 @@ class PaidRequestForm extends Model {
         $rent = $user['user_rent_id'];
         
         if ($client == null && $rent == null) {
-            $errorMsg = 'Указанный номер мобтльного телефона в системе не зарегистрирован';
+            $errorMsg = 'Указанный номер мобильного телефона в системе не зарегистрирован';
             $this->addError('phone', $errorMsg);
         }
 

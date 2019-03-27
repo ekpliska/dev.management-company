@@ -76,6 +76,7 @@ class Requests extends BaseRequests {
     public function chooseDispatcher($dispatcher_id) {
         
         $this->requests_dispatcher_id = $dispatcher_id;
+        $this->is_accept = self::ACCEPT_YES;
         $this->status = StatusRequest::STATUS_IN_WORK;
         
         // Формируем уведомление
@@ -93,6 +94,7 @@ class Requests extends BaseRequests {
     public function chooseSpecialist($specialist_id) {
         
         $this->requests_specialist_id = $specialist_id;
+        $this->is_accept = self::ACCEPT_YES;
         $this->status = StatusRequest::STATUS_PERFORM;
         
         // Формируем уведомление
@@ -150,10 +152,6 @@ class Requests extends BaseRequests {
     public static function closeChat($request_id) {
         
         $request = self::findOne($request_id);
-        
-        if ($request->status != StatusRequest::STATUS_CLOSE && $request != StatusRequest::STATUS_REJECT) {
-            return false;
-        }
         
         if ($request->close_chat == BaseRequests::CHAT_OPEN) {
             $request->close_chat = BaseRequests::CHAT_CLOSE;

@@ -38,12 +38,6 @@ class ChangePasswordForm extends Model {
         return [
             [['current_password', 'new_password', 'new_password_repeat'], 'required'],
 
-            [['current_password', 'new_password', 'new_password_repeat'], 
-                'match', 
-                'pattern' => '/^[A-Za-z0-9\_\-]+$/iu', 
-                'message' => 'Пароль может содержать только буквы английского алфавита, цифры, знаки "-", "_"',
-            ],            
-            
             [['current_password', 'new_password', 'new_password_repeat'], 'string', 'min' => 6, 'max' => 12],
             ['new_password', 'compare', 'compareAttribute' => 'new_password_repeat', 'message' => 'Указанные новые пароли не совпадают'],
             ['current_password', 'checkCurrentPassword'],

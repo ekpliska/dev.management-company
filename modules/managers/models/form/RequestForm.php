@@ -27,7 +27,7 @@ class RequestForm extends Model {
         return [
             [['type_request', 'phone', 'description', 'flat'], 'required'],
             
-            ['description', 'string', 'max' => 250],
+            ['description', 'string', 'max' => 1000],
             
             ['phone', 'existenceClient'],
             ['phone',
@@ -50,7 +50,7 @@ class RequestForm extends Model {
         $rent = $user['user_rent_id'];
         
         if ($client == null && $rent == null) {
-            $errorMsg = 'Указанный номер мобтльного телефона в системе не зарегистрирован';
+            $errorMsg = 'Указанный номер мобильного телефона в системе не зарегистрирован';
             $this->addError('phone', $errorMsg);
         }
 

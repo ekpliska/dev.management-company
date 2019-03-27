@@ -148,7 +148,7 @@ $this->params['breadcrumbs'][] = $employee_info->fullName;
                         ->input('text', ['class' => 'field-input'])
                         ->label($user_info->getAttributeLabel('user_email'), ['class' => 'field-label']) ?>
                 <?= $form->field($user_info, 'user_mobile')
-                        ->input('text', ['class' => 'field-input'])
+                        ->input('text', ['class' => 'field-input cell-phone'])
                         ->label($user_info->getAttributeLabel('user_mobile'), ['class' => 'field-label']) ?>
                 
             </div>

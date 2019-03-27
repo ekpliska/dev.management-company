@@ -35,7 +35,9 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
                     <?= DatePicker::widget([
                             'name' => 'date_start-period',
                             'type' => DatePicker::TYPE_INPUT,
-                            'value' => 'С',
+                            'options' => [
+                                'placeholder' => 'С',
+                            ],
                             'pluginOptions' => [
                                 'autoclose'=>true,
                                 'format' => 'dd-mm-yyyy'
@@ -46,7 +48,9 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
                     <?= DatePicker::widget([
                             'name' => 'date_end-period',
                             'type' => DatePicker::TYPE_INPUT,
-                            'value' => 'По',
+                            'options' => [
+                                'placeholder' => 'По',
+                            ],
                             'pluginOptions' => [
                                 'autoclose'=>true,
                                 'format' => 'dd-mm-yyyy'

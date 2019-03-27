@@ -1164,6 +1164,7 @@ span.dot {
     width: 100%;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 .profile-bg .face{
@@ -3005,6 +3006,14 @@ p.date-start-vote {
     margin-right: 10px;
     border-radius: 100%;
 }
+.table-voting-results > tbody > tr > td > h4 {
+    position: relative;
+    padding-left: 65px;
+}
+.table-voting-results > tbody > tr > td > h4 > i {
+    position: absolute;
+    left: 0;
+}
 .show-marker {
     visibility: hidden;
 }
@@ -3758,6 +3767,7 @@ a.employee-profile:hover {
     background: transparent !important;
 }
 .btn-block {
+    padding: 20px 0;
     color: #8b709d !important;
 }
 .btn-block:hover {

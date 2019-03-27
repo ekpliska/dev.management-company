@@ -37,7 +37,10 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
                             'name' => 'date_start-period-pay',
                             'class' => '__width-small',
                             'type' => DatePicker::TYPE_INPUT,
-                            'value' => date('F-Y'),
+                            'language' => 'ru',
+                            'options' => [
+                                'placeholder' => Yii::$app->formatter->asDate(time(), 'LLLL-yyyy')
+                            ],
                             'pluginOptions' => [
                                 'autoclose'=>true,
                                 'format' => 'MM-yyyy',

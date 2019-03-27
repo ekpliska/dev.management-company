@@ -90,6 +90,12 @@ class User extends ActiveRecord implements IdentityInterface
                 'message' => 'Пользователь с введенным номером мобильного телефона в системе уже зарегистрирован',
                 'on' => self::SCENARIO_EDIT_ADMINISTRATION_PROFILE,
             ],
+
+            ['user_mobile', 'unique', 
+                'targetClass' => self::className(),
+                'targetAttribute' => 'user_mobile',
+                'message' => 'Пользователь с введенным номером мобильного телефона в системе уже зарегистрирован',
+            ],
             
 //            [['user_email'], 'required', 'on' => self::SCENARIO_EDIT_CLIENT_PROFILE],
             
