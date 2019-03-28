@@ -16,7 +16,7 @@
 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
     <div class="news-item">
         <div class="news-item__title">
-            <?= Html::a(FormatHelpers::shortTitleOrText($news['title'], 50), ['news/view', 'slug' => $news['slug']], ['class' => 'title']) ?>
+            <?= Html::a(FormatHelpers::shortTitleOrText($news['title'], 70), ['news/view', 'slug' => $news['slug']], ['class' => 'title']) ?>
             <p class="date"><?= FormatHelpers::formatDate($news['date'], false, 0, false) ?></p>
         </div>
         <div class="news-item__image">
