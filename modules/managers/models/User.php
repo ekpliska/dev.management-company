@@ -19,10 +19,28 @@ class User extends BaseUser {
             ['user_check_email', 'boolean'],
             ['permission_list', 'safe'],
             [['user_login', 'user_email', 'user_mobile'], 'required'],
+            
+            ['user_login', 'unique', 
+                'targetClass' => self::className(),
+                'targetAttribute' => 'user_login',
+                'message' => 'Данное имя пользователя уже используется в системе',
+            ],
+            
+            ['user_email', 'unique', 
+                'targetClass' => self::className(),
+                'targetAttribute' => 'user_email',
+                'message' => 'Данный электронный адрес уже используется в системе',
+            ],
+            
+            ['user_mobile', 'unique', 
+                'targetClass' => self::className(),
+                'targetAttribute' => 'user_mobile',
+                'message' => 'Данный номер мобильного телефона уже используется в системе',
+            ],
+            
         ];
         
     }
-
 
     public function block($client_id, $status) {
         
