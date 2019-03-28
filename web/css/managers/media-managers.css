@@ -107,15 +107,12 @@
         width: 120px;
         height: 120px;
     }
-    .user-info-block {
-        padding-top: 80px;
-    }
     .rent-profile-info_manager,
     .clients-profile-info_manager {
         padding: 30px 50px;
     }
-    .profile-upload-btn {
-        margin-top: 150px;
+    .profile-upload-btn-employee {
+        top: 50%;
     }
 }
 /* End Create employee form */

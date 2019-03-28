@@ -465,10 +465,10 @@ tbody > tr > td > div.empty::before {
 }
 .profile-upload-btn-employee {
     position: absolute;
-    top: 50%;
-    left: 39%;
+    top: 60%;
+    left: 50%;
     margin-right: -50%;
-    transform: translate(-2%, -17%);
+    transform: translate(-50%, -30%);
 }
 .field-btnLoad > label > label.control-label {
     font-weight: normal;
