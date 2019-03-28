@@ -939,12 +939,12 @@ span.status-vote-1::before {
     border-radius: 25px;
     outline: none;
 }
-#employees-list {
+ul[id*="employees-list-"] {
     list-style: none;
     padding: 0;
     margin: 0;
 }
-#employees-list > li > a {
+ul[id*="employees-list-"] > li > a {
     background: transparent;
     border: 1px solid #8b709d;
     border-radius: 12px;
@@ -956,8 +956,8 @@ span.status-vote-1::before {
     display: block;
     width: 98%;
 }
-#employees-list > li > a.active,
-#employees-list > li > a:hover {
+ul[id*="employees-list-"] > li > a.active,
+ul[id*="employees-list-"] > li > a:hover {
     background: #2d18b4;
 }
 .employee-lists::-webkit-scrollbar-track {

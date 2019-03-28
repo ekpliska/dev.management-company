@@ -23,13 +23,13 @@
     ]);
 ?>
 
-    <?= Html::input('text', 'search-employee', null, ['id' => 'search-employee', 'class' => 'search-employee_input', 'placeHolder' => 'Поиск...']) ?>
+    <?= Html::input('text', 'search-employee', null, ['id' => 'search-employee-dispatcher', 'class' => 'search-employee_input', 'placeHolder' => 'Поиск...', 'data-type' => 'dispatcher']) ?>
 
     <div class="error-message" style="color: #ef693a; font-size: 12px;"></div>
     
     <div class="list-group employee-lists" id="dispatcherList">
         
-        <ul id="employees-list">
+        <ul id="employees-list-dispatcher">
         <?php if (isset($dispatcher_list)) : ?>
             <?php foreach ($dispatcher_list as $dispatcher) : ?>
                 <li>
@@ -72,13 +72,13 @@
     ]);
 ?>
 
-    <?= Html::input('text', 'search-employee', null, ['id' => 'search-employee', 'class' => 'search-employee_input', 'placeHolder' => 'Поиск...']) ?>
+    <?= Html::input('text', 'search-employee', null, ['id' => 'search-employee-specialist', 'class' => 'search-employee_input', 'placeHolder' => 'Поиск...', 'data-type' => 'specialist']) ?>
     
     <div class="error-message" style="color: #ef693a; font-size: 12px;"></div>
     
     <div class="list-group employee-lists" id="specialistList">
         
-        <ul id="employees-list">
+        <ul id="employees-list-specialist">
         <?php if (isset($specialist_list) && !empty($specialist_list)) : ?>
             <?php foreach ($specialist_list as $specialist) : ?>
                 <li>

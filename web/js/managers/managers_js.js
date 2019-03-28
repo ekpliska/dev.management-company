@@ -553,11 +553,6 @@ $(document).ready(function() {
                     $('#value-btn').data('status', statusId);
                     $('#value-btn').addClass('add-border-' + statusId);
                     liChoosing.addClass('disabled');
-                    if (statusId === 4 || statusId === 5) {
-                        $('.btn:not(.btn-choose-status)').attr('disabled', true);
-                    } else {
-                        $('.btn:not(.btn-choose-status)').attr('disabled', false);
-                    }
                 }
             },
             error: function() {
@@ -696,11 +691,11 @@ $(document).ready(function() {
     /*
      * Поиск по специалистам
      */
-    function searchEmployee() {
+    function searchEmployee(type) {
         var input, filter, ul, li, a, i, txtValue;
-        input = document.getElementById('search-employee');
+        input = document.getElementById('search-employee-' + type);
         filter = input.value.toUpperCase();
-        ul = document.getElementById('employees-list');
+        ul = document.getElementById('employees-list-' + type);
         li = ul.getElementsByTagName('li');
         for (i = 0; i < li.length; i++) {
             a = li[i].getElementsByTagName('a')[0];
@@ -713,8 +708,10 @@ $(document).ready(function() {
         }
     }
     
-    $('#search-employee').on('input', function() {
-        searchEmployee();
+    $('#search-employee-dispatcher, #search-employee-specialist').on('input', function() {
+        let type = $(this).data('type');
+        console.log(type);
+        searchEmployee(type);
     });
     
     /*
