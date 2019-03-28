@@ -1803,8 +1803,8 @@ p.right {
 .chat-msg {
     margin: 0 0 0 -15px;
     padding: 40px 0px 0px 0px;
-/*    position: absolute;
-    bottom: 0;
+    position: relative;
+/*    bottom: 0;
     width: 100%;*/
 }
 .chat-msg span#label-count,
@@ -3716,7 +3716,7 @@ a.employee-profile:hover {
     height: 30px;
     position: absolute;
     right: 3%;
-    bottom: 10%;
+    bottom: 23%;
     border: none;
 }
 .sendmessage_button:hover {

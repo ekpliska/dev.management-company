@@ -777,16 +777,16 @@
         },
         {
             "name": "vova07/yii2-imperavi-widget",
-            "version": "2.0.10",
+            "version": "2.0.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vova07/yii2-imperavi-widget.git",
-                "reference": "e197b731816f74b0da218d521d2631d99922925b"
+                "reference": "c4fe4a9f64a4c53d9686c80b8744e2c1366184e5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vova07/yii2-imperavi-widget/zipball/e197b731816f74b0da218d521d2631d99922925b",
-                "reference": "e197b731816f74b0da218d521d2631d99922925b",
+                "url": "https://api.github.com/repos/vova07/yii2-imperavi-widget/zipball/c4fe4a9f64a4c53d9686c80b8744e2c1366184e5",
+                "reference": "c4fe4a9f64a4c53d9686c80b8744e2c1366184e5",
                 "shasum": ""
             },
             "require": {
@@ -828,7 +828,7 @@
                 "yii 2",
                 "yii2"
             ],
-            "time": "2019-01-05T08:09:16+00:00"
+            "time": "2019-03-26T11:39:06+00:00"
         },
         {
             "name": "yiisoft/yii2",
