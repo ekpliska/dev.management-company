@@ -107,7 +107,7 @@ class DispatchersController extends AppDispatchersController {
         
         if (Yii::$app->request->isPost && $model->load(Yii::$app->request->post())) {
             $number = $model->save();
-            return $this->redirect(['view-request', 'request_number' => $number]);
+            return $this->redirect(['requests/view-request', 'request_number' => $number]);
         }
     }
     
@@ -120,7 +120,7 @@ class DispatchersController extends AppDispatchersController {
         
         if (Yii::$app->request->isPost && $model->load(Yii::$app->request->post())) {
             $number = $model->save();
-            return $this->render(['view-paid-request', 'request_number' => $number]);
+            return $this->redirect(['requests/view-paid-request', 'request_number' => $number]);
         }
     }    
     
@@ -150,7 +150,7 @@ class DispatchersController extends AppDispatchersController {
         $client_id = $model->findClientPhone($phone);
         
         $house_list = PersonalAccount::find()
-                ->select(['account_id', 'houses_gis_adress', 'houses_number', 'flats_number'])
+                ->select(['account_id', 'houses_gis_adress', 'houses_number', 'flats_number', 'personal_flat_id'])
                 ->joinWith(['flat', 'flat.house'])
                 ->andWhere(['personal_clients_id' => $client_id])
                 ->orWhere(['personal_rent_id' => $client_id])

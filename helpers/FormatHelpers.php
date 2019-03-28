@@ -411,7 +411,7 @@ class FormatHelpers {
         }
         
         foreach ($image_list as $key => $image) {
-            $list = Html::img('/web/upload/store/' . $image['filePath']);
+            $list = Html::img(Yii::getAlias('@web') . 'upload/store/' . $image['filePath']);
             $lists .= $list;
         }
         
