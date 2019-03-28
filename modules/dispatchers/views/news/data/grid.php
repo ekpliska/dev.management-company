@@ -16,15 +16,15 @@
 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
     <div class="news-item">
         <div class="news-item__title">
-            <?= Html::a($news['title'], ['news/view', 'slug' => $news['slug']], ['class' => 'title']) ?>
+            <?= Html::a(FormatHelpers::shortTitleOrText($news['title'], 70), ['news/view', 'slug' => $news['slug']], ['class' => 'title']) ?>
             <p class="date"><?= FormatHelpers::formatDate($news['date'], false, 0, false) ?></p>
         </div>
         <div class="news-item__image">
             <span class="item__image_desc"><?= $news['rubric'] ?></span>
-            <?= Html::img("/web/{$news['preview']}", ['class' => 'news_preview']) ?>
+            <?= Html::img(Yii::getAlias('@web') . $news['preview'], ['class' => 'news_preview']) ?>
         </div>
         <div class="news-item__text">
-            <?= FormatHelpers::shortTextNews($news['text'], 40) ?>
+            <?= FormatHelpers::shortTextNews($news['text'], 21) ?>
         </div>
     </div>
 </div>
