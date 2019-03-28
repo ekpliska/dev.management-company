@@ -76,7 +76,7 @@ $active_item = $house_cookie
             <h4 class="title">Вложения</h4>
             <div id="files_list">
                 <?= $this->render('data/view_upload_files', [
-                        'files' => isset($house_cookie) ? $houses_list[$house_cookie['key']]['image'] : $houses_list[$house_cookie[0]]['image']]) ?>
+                        'files' => isset($house_cookie) ? $houses_list[$house_cookie['key']]['image'] : $houses_list[0]['image']]) ?>
             </div>
         </div>
     </div>
