@@ -97,7 +97,7 @@ class PermissionsList {
         $permission_list = [];
         
         $query = (new \yii\db\Query)
-                ->select(['item_name'])
+                ->select(['item_name', 'user_id'])
                 ->from('auth_assignment')
                 ->where(['user_id' => $user_id])
                 ->all();

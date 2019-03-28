@@ -86,7 +86,7 @@ $this->params['breadcrumbs'][] = 'Новая запись [Сотрудник]';
                         ->label($model->getAttributeLabel('mobile'), ['class' => 'field-label']) ?>
                 
                 <?= $form->field($model, 'email')
-                        ->input('text', ['class' => 'field-input cell-phone'])
+                        ->input('text', ['class' => 'field-input'])
                         ->label($model->getAttributeLabel('email'), ['class' => 'field-label']) ?>
                 
                 <?= $form->field($model, 'password')
