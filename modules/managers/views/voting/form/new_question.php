@@ -1,8 +1,6 @@
 <?php
 
-    use app\models\Questions;
     use yii\helpers\Html;
-    use app\modules\managers\widgets\Vote;
     
 ?>
 <td class="text-question">
@@ -10,7 +8,8 @@
             ->textInput([
                 'id' => "Questions_{$key}_questions_text",
                 'name' => "Questions[$key][questions_text]",
-                'class' => 'field-input'])
+                'class' => 'field-input',
+                'maxlength' => '250'])
             ->label($question->getAttributeLabel('questions_text'), ['class' => 'field-label']) ?>
     
 </td>

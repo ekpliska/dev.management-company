@@ -99,7 +99,7 @@ class News extends ActiveRecord
             [['files'], 'file', 
                 'extensions' => 'doc, docx, pdf, xls, xlsx, ppt, pptx, txt, jpg, jpeg', 
                 'maxFiles' => 4, 
-                'maxSize' => 5 * 256 * 1024,
+                'maxSize' => 5 * 1024 * 1024,
             ],
             
             [['news_partner_id', 'isAdvert'], 'integer'],

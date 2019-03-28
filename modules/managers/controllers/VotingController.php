@@ -90,28 +90,16 @@ class VotingController extends AppManagersController {
         
         $type_voting = Voting::getTypeVoting();
         
-//        $houses_array = Houses::getAdressHousesList();
         $houses_array = [];
         
-        if (Yii::$app->request->post() && $model->save()) {
-//            // Получаем загружаемую оложку для голосования
-//            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
-//            // Вызываем метод на загрузку обложки, при успехе - получаем полный путь к загруженной обложке
-//            $path = $model->upload();
-//            if ($model->imageFile && $path) {
-//                $model->voting->voting_image = $path;
-//            }
-//            // Сбрасываем путь загруженного изображения
-//            $model->imageFile = null; 
-            // Сохраняем модель
-//            if ($model->save()) {
-//                Yii::$app->session->setFlash('success', ['message' => 'Новое голосование было успешно создано']);
+        if (Yii::$app->request->post() && $model->validate()) {
+            if (!$model->save()) {
+                Yii::$app->session->setFlash('error', ['message' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз']);
+                return $this->redirect(Yii::$app->request->referrer);
+            } else {
+                Yii::$app->session->setFlash('success', ['message' => 'Новое голосование было успешно создано']);
                 return $this->redirect(['view', 'voting_id' => $model->voting->voting_id]);
-//            } else {
-//                Yii::$app->session->setFlash('error', ['message' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз']);
-//                return $this->redirect(Yii::$app->request->referrer);
-//            }
-//            var_dump($model->errors); die();
+            }
         }
                 
         return $this->render('create', [
@@ -136,23 +124,12 @@ class VotingController extends AppManagersController {
         
         $type_voting = Voting::getTypeVoting();
         
-//        $houses_array = Houses::getAdressHousesList();
         $houses_array = empty($model->voting->voting_house_id) ? [] : Houses::getHousesList($for_list = false);
         
         // Получаем информаию о участниках голосования
         $participants = RegistrationInVoting::getParticipants($voting_id);
         
         if (Yii::$app->request->post()) {
-            
-            // Получаем загружаемую оложку для голосования
-            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
-            // Вызываем метод на загрузку обложки, при успехе - получаем полный путь к загруженной обложке
-            $path = $model->upload();
-            
-            if ($model->imageFile && $path) {
-                $model->voting->voting_image = $path;
-            }
-            $model->imageFile = null;
             if (!$model->save()) {
                 Yii::$app->session->setFlash('error', ['message' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз']);
                 return $this->redirect(Yii::$app->request->referrer);

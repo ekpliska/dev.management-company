@@ -62,8 +62,8 @@ class Voting extends ActiveRecord
             
             ['voting_type', 'string'],
             
-            ['voting_title', 'string', 'min' => 10, 'max' => 255],
-            ['voting_text', 'string', 'min' => 10, 'max' => 1000],
+            ['voting_title', 'string', 'max' => 255],
+            ['voting_text', 'string', 'max' => 1000],
             
             [['voting_title', 'voting_text'], 'filter', 'filter' => 'trim'],
             
@@ -76,10 +76,12 @@ class Voting extends ActiveRecord
             ['voting_user_id', 'default', 'value' => Yii::$app->user->identity->id],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             
+            ['imageFile', 'safe'],
+            
             [['imageFile'], 'file',
                 'skipOnEmpty' => true,
                 'extensions' => 'png, jpg',
-                'maxSize' => 256 * 1024,
+                'maxSize' => 256 * 1024 * 1024,
                 'mimeTypes' => 'image/*',
             ],
             
@@ -200,40 +202,50 @@ class Voting extends ActiveRecord
     /*
      * Загрузка обложки голосования
      */
-    public function uploadImage($file) {
-        
-        $current_image = $this->voting_image;
-        
-        if ($this->validate()) {
-            if ($file) {
-                $this->voting_image = $file;
-                $dir = Yii::getAlias('upload/voting/cover/');
-                $file_name = 'previews_voting_' . time() . '.' . $this->voting_image->extension;
-                $this->voting_image->saveAs($dir . $file_name);
-                $this->voting_image = '/' . $dir . $file_name;
-                @unlink(Yii::getAlias('@webroot' . $current_image));
-            } else {
-                $this->voting_image = $current_image;
-            }
-            return $this->save() ? true : false;
-        }
-        
-        return false;
-    }
+//    public function uploadImage($file) {
+//        
+//        $current_image = $this->voting_image;
+//        
+//        if ($this->validate()) {
+//            if ($file) {
+//                $this->voting_image = $file;
+//                $dir = Yii::getAlias('upload/voting/cover/');
+//                $file_name = 'previews_voting_' . time() . '.' . $this->voting_image->extension;
+//                $this->voting_image->saveAs($dir . $file_name);
+//                $this->voting_image = '/' . $dir . $file_name;
+//                @unlink(Yii::getAlias('@webroot' . $current_image));
+//            } else {
+//                $this->voting_image = $current_image;
+//            }
+//            return $this->save() ? true : false;
+//        }
+//        
+//        return false;
+//    }
     
     public function beforeSave($insert) {
-        parent::beforeSave($insert);
+        
+        $current_image = $this->voting_image;
         
         $file = UploadedFile::getInstance($this, 'imageFile');
         
         if ($file) {
+            
             $this->voting_image = $file;
             $dir = Yii::getAlias('upload/voting/cover/');
             $file_name = 'previews_voting_' . time() . '.' . $this->voting_image->extension;
             $this->voting_image->saveAs($dir . $file_name);
             $this->voting_image = '/' . $dir . $file_name;
             
+            $photo_path = Yii::getAlias('@webroot') . '/' . $dir . $file_name;
+            $photo = Image::getImagine()->open($photo_path);
+            $photo->thumbnail(new Box(900, 900))->save($photo_path, ['quality' => 90]);
+            
+            @unlink(Yii::getAlias('@webroot' . $current_image));
+            
         }
+        
+        return parent::beforeSave($insert);
     }
     
     /*

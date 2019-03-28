@@ -15,19 +15,19 @@ class VotingForm extends Model
     private $_voting;
     private $_questions;
     
-    public $imageFile;
+//    public $imageFile;
 
     public function rules()
     {
         return [
             [['Voting'], 'required'],
             [['Questions'], 'required'],
-            [['imageFile'], 'file',
-                'skipOnEmpty' => true,
-                'extensions' => 'png, jpg',
-                'maxSize' => 256 * 1024,
-                'mimeTypes' => 'image/*',
-            ],
+//            [['imageFile'], 'file',
+//                'skipOnEmpty' => true,
+//                'extensions' => 'png, jpg',
+//                'maxSize' => 256 * 1024,
+//                'mimeTypes' => 'image/*',
+//            ],
         ];
     }
 
@@ -146,35 +146,6 @@ class VotingForm extends Model
         return implode('', $errorLists);
     }
     
-    /*
-     * Загрузка обложки голосования
-     */
-    public function upload() {
-        
-        // Перед загрузкой изображения, получаем путь на текущее изображение
-        $current_image = $this->voting->voting_image;
-        
-        if ($this->validate()) {
-            // Если перед сохранением файл выбран
-            if (!empty($this->imageFile)) {
-                $dir = Yii::getAlias('upload/voting/cover/');
-                $file_name = 'previews_voting_' . time() . '.' . $this->imageFile->extension;
-                // Формируем путь нового изображения для хранения в БД
-                $path = '/' . $dir . $file_name;
-                // Сохраняем новое изображаение
-                $this->imageFile->saveAs($dir . $file_name);
-                // Удаляем старое
-                @unlink(Yii::getAlias('@webroot' . $current_image));
-            } else {
-                // Если не было выбрано новое изображение, то путь к изображению в БД оставляем текущий
-                $path = $current_image;
-            }
-            return $path;
-        } else {
-            return false;
-        }
-    }
-
     /*
      * Формируем массив моделей
      */

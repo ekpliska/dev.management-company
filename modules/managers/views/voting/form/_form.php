@@ -124,9 +124,9 @@ $action = Yii::$app->controller->action->id;
                 <div class="participant-list">
                     <p><span class="span-count"><?= count($participants) ?></span> Проголосовало</p>
                         <?php foreach ($participants as $participant) : ?>
-                            <div class="col-md-4 voting__participant_info text-center">
-                                <?php $avatar = $participant['user_photo'] ? $participant['user_photo'] : "images/no-avatar.jpg" ?>
-                                <?= Html::img("@web/{$avatar}", ['alt' => 'user-name', 'class' => 'img-responsive img-circle user-photo']) ?>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 voting__participant_info text-center">
+                                <?php $avatar = $participant['user_photo'] ? $participant['user_photo'] : "/images/no-avatar.jpg" ?>
+                                <?= Html::img($avatar, ['alt' => 'user-name', 'class' => 'img-responsive img-circle user-photo']) ?>
                                 <?= Html::a($participant['clients_name'], ['view-profile', 'user_id' => $participant['user_id']], [
                                         'id' => 'view-profile',
                                 ]) ?>

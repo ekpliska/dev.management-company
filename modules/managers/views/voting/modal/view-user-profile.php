@@ -9,8 +9,8 @@
 ?>
 <?php if (isset($user_info)) : ?>
 <div class="col-lg-4 col-md-4 col-xs-12 col-sm-4 profile_photo">
-    <?php $user_photo = $user_info['photo'] ? $user_info['photo'] : "images/no-avatar.jpg" ?>
-    <?= Html::img("/web/{$user_photo}", ['alt' => 'user-name', 'class' => 'profile_photo__image']) ?>
+    <?php $user_photo = $user_info['photo'] ? $user_info['photo'] : "/images/no-avatar.jpg" ?>
+    <?= Html::img($user_photo, ['alt' => 'user-name', 'class' => 'profile_photo__image']) ?>
 </div>
 <div class="col-lg-8 col-md-8 col-xs-12 col-sm-8 profile_info">
     <h4>
