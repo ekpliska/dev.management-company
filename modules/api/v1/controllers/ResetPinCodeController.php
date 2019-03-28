@@ -61,7 +61,7 @@ class ResetPinCodeController extends Controller {
         $phone = preg_replace('/[^0-9]/', '', $post_data['mobile_phone']);
         
         // Отправляем смс на указанный номер телефона
-        if (!$result = Yii::$app->sms->generalMethodSendSms(SmsSettings::TYPE_NOTICE_REGISTER, $phone, $sms_code)) {
+        if (!$result = Yii::$app->sms->generalMethodSendSms(SmsSettings::TYPE_RESET_PIN_CODE, $phone, $sms_code)) {
             return ['success' => false, 'message' => $result];
         }
         

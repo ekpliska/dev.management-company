@@ -18,6 +18,7 @@ class SmsSettings extends ActiveRecord {
     const TYPE_NOTICE_CHANGE_PASSWORD = 'change password';
     const TYPE_NOTICE_CHANGE_MOBILE = 'change mobile phone';
     const TYPE_NOTICE_SIGN_IN = 'sign in';
+    const TYPE_RESET_PIN_CODE = 'reset pin-code';
     
     /**
      * Таблица БД
@@ -48,6 +49,7 @@ class SmsSettings extends ActiveRecord {
             self::TYPE_NOTICE_CHANGE_PASSWORD => 'Подтверждение смены пароля',
             self::TYPE_NOTICE_CHANGE_MOBILE => 'Подтверждение смены номера мобильного телефона',
             self::TYPE_NOTICE_SIGN_IN => 'Подтверждение входа',
+            self::TYPE_RESET_PIN_CODE => 'Восстановление PIN-кода на мобильном устройстве',
         ];
         
     }
