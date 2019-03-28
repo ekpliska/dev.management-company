@@ -18,7 +18,7 @@ class Bootstrap implements BootstrapInterface {
              
                 // Заявки
                 'dispatchers/requests/view-request/<request_number:[\w-]+>' => 'dispatchers/requests/view-request',
-                '/dispatchers/requests/view-paid-request/<request_number:[\w-]+>' => '/dispatchers/requests/view-paid-request',
+                'dispatchers/requests/view-paid-request/<request_number:[\w-]+>' => '/dispatchers/requests/view-paid-request',
                 'dispatchers/requests/validation-form/<form:[\w-]+>' => 'dispatchers/requests/validation-form',
                 'dispatchers/requests/type/<block:[\w-]+>' => 'dispatchers/requests/index',
                 'dispatchers/requests' => 'dispatchers/requests/index',

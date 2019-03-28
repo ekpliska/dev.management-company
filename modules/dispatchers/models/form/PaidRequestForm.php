@@ -25,7 +25,7 @@ class PaidRequestForm extends Model {
         return [
             [['servise_category', 'servise_name', 'phone', 'description', 'flat'], 'required'],
             
-            ['description', 'string', 'min' => 10, 'max' => 255],
+            ['description', 'string', 'max' => 1000],
             
             ['phone', 'existenceClient'],
             ['phone',

@@ -24,7 +24,7 @@ class RequestForm extends Model {
         return [
             [['type_request', 'phone', 'description', 'flat'], 'required'],
             
-            ['description', 'string', 'min' => 10, 'max' => 250],
+            ['description', 'string', 'max' => 1000],
             
             ['phone', 'existenceClient'],
             ['phone',
