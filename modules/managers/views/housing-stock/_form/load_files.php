@@ -29,7 +29,7 @@
                     ],
                     'pluginOptions' => [
                         'maxFileCount' => 4,
-                        'maxFileSize' => 5800,
+                        'maxFileSize' => 10 * 1024 * 1024,
                         'showCaption' => false,
                         'showRemove' => false,
                         'showUpload' => false,

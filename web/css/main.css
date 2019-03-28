@@ -3898,11 +3898,11 @@ a.employee-profile:hover {
     font-weight: bold;
 }
 .chat-txt-block-white__atr p:first-child {
-    width: 20%;
+    width: 40%;
     text-align: left;
 }
 .chat-txt-block-white__atr p:last-child {
-    width: 80%;
+    width: 60%;
     text-align: right;
 }
 .chat-message__input {
