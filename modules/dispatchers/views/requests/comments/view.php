@@ -75,6 +75,7 @@
     $this->registerJs('
         $("document").ready(function(){
             $("#new_note").on("pjax:end", function() {
+                $("textarea").val("");
                 $.pjax.reload({container:"#comments"});
             });
         });
