@@ -585,7 +585,7 @@ $(document).ready(function() {
     /*
      * В списке сотрудников, выбранных диспетчеров/специалистов обозначаем активными
      */
-    $('#employees-list > li > a, #specialistList a').on('click', function() {
+    $('#dispatcherList a, #specialistList a').on('click', function() {
         var employeeId = $(this).data('employee');
         $('#dispatcherList, #specialistList').find('.active').removeClass('active');
         $(this).toggleClass('active');

@@ -7,7 +7,7 @@
 $(document).ready(function(){
     
     // ******************************************************** //
-    // ***********    General Page of Dispaycher   ************ //
+    // ***********    General Page of Dispatcher   ************ //
     // ******************************************************** //
     
     /*
@@ -187,9 +187,32 @@ $(document).ready(function(){
         $.post('/dispatchers/requests/confirm-close-chat?request_id=' + requestID, function (data) {});
     });
     
+    /*
+     * Поиск по специалистам
+     */
+    function searchEmployee() {
+        var input, filter, ul, li, a, i, txtValue;
+        input = document.getElementById('search-employee');
+        filter = input.value.toUpperCase();
+        ul = document.getElementById('employees-list');
+        li = ul.getElementsByTagName('li');
+        for (i = 0; i < li.length; i++) {
+            a = li[i].getElementsByTagName('a')[0];
+            txtValue = a.textContent || a.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = '';
+            } else {
+                li[i].style.display = 'none';
+            }
+        }
+    }
+    
+    $('#search-employee').on('input', function() {
+        searchEmployee();
+    });    
 
     // ******************************************************** //
-    // ***********    General Page of Dispaycher   ************ //
+    // ***********    General Page of Dispatcher   ************ //
     // ******************************************************** //
     
     /*
