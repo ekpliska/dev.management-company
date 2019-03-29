@@ -47,7 +47,7 @@ button:hover {
 }
 
 .wrap > .container-full-client {
-    margin: 0 auto;
+    margin: 80px auto;
     width: 100%;
     padding: 0;
 }
@@ -3342,9 +3342,49 @@ p.date-start-vote {
     background-image: url(Head.png);
     background-size: 100% 100%;
     background-repeat: no-repeat;
+    border: none;
+    box-shadow: #333 0px 2px 3px 0px;
+}
+.container-fluid {
+    padding: 15px;
+}
+.navbar-brand {
+    padding: 8px 15px;
+}
+.navbar__personal-account {
+    
+}
+.navbar__personal-account > p {
+    letter-spacing: 0.1em;
+    color: #fff;
+    font-size: 12px;
+}
+.navbar-toggle {
+    border: 1px solid #ccc;
+}
+.navbar-toggle .icon-bar {
+    background-color: #fff;
+}
+/*.navbar-menu {
+    background-image: url(Head.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
     box-shadow: 1px -1px 6px 2px #000;
-    /*box-shadow: rgba(0, 15, 41, 0.05) 0px 0px 16px 0px;*/
-    border: none;    
+    box-shadow: rgba(0, 15, 41, 0.05) 0px 0px 16px 0px;
+    border: none;
+    height: 90px;
+}
+.navbar-menu-content {
+    padding: 20px;
+}
+.navbar-menu {
+    background-image: url(Head.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    box-shadow: 1px -1px 6px 2px #000;
+    box-shadow: rgba(0, 15, 41, 0.05) 0px 0px 16px 0px;
+    border: none;
+    height: 90px;
 }
 .navbar-menu_header {
     padding: 50px;
@@ -3362,14 +3402,14 @@ p.date-start-vote {
 }
 .menu-show {
     margin-top: 0;
-    /*box-shadow: -1px 6px 7px #c1c1c1;*/
+    box-shadow: -1px 6px 7px #c1c1c1;
 }
 .user-notification {
     position: relative;
     top: -20px;
 }
 
-/* Открыть, закрыть меню */
+ Открыть, закрыть меню 
 .menu-toggle {
     position: fixed;
     top: 40px;
@@ -3452,7 +3492,7 @@ p.date-start-vote {
     -webkit-transform: rotate(-135deg);
 }
 
-/* Выпадающее меню навигации */
+ Выпадающее меню навигации 
 .menu-items {
     list-style-type: none;
     color: #fff;
@@ -3460,7 +3500,7 @@ p.date-start-vote {
 }
 .menu-items > li {
     padding: 10px;
-    /*cursor: none;*/
+    cursor: none;
 }
 .menu-items > li a {
     color: rgba(255, 255, 255, 0.44);
@@ -3495,7 +3535,7 @@ p.date-start-vote {
     padding: 5px;
     margin: 0px 11px;
     display: initial;
-    /*display: inline-block;*/
+    display: inline-block;
 }
 a.sub-menu-item {
     display: none;
@@ -3513,7 +3553,7 @@ a.sub-menu-item:hover {
     padding: 5px;
     margin: 0px 11px;
     display: initial;
-}
+}*/
 /* Конец Выпадающее меню навигации */
 
 
