@@ -19,9 +19,6 @@ $current_controller = Yii::$app->controller->id;
                 <li class="nav-item <?= ($current_block == $key) ? 'active' : '' ?>">
                     <a href="<?= Url::to(["{$current_controller}/index", 'block' => $key]) ?>">
                         <?= $item ?>
-                        <span class="menu_sub-bar__span">
-                            <?= $key === 'requests' ? $count_requests : $count_paid_requests ?>
-                        </span>
                     </a>
                 </li>
             <?php endforeach; ?>
