@@ -834,7 +834,8 @@ reset-password-sms:focus{
 /* Notifications Bar */
 .notification__dropdown {
     padding: 10px;
-    height: 220px;
+    min-height: 70px;
+    width: 320px;
     cursor: default;
 }
 .notification__dropdown a.notification_reset {
@@ -867,8 +868,8 @@ span.dot {
 }
 .notification__dot {
     position: absolute;
-    top: 15%;
-    right: 20%;
+    top: 0%;
+    right: 10%;
     background: #fc3232;
     padding: 7px 7px;
     border-radius: 12px;
@@ -3368,6 +3369,7 @@ p.date-start-vote {
 .user-profile {}
 .user-profile__photo {
     width: 50px;
+    height: 50px;
     border-radius: 100%;
 }
 .navbar_user-block {
@@ -3386,6 +3388,10 @@ p.date-start-vote {
 }
 .navbar_user-block_link-logout {
     float: right;
+}
+.navbar_user-block__image > div.dropdown > button {
+    background: transparent;
+    border: none;
 }
 /*.navbar-menu {
     background-image: url(Head.png);
