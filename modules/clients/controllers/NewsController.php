@@ -1,6 +1,8 @@
 <?php
 
     namespace app\modules\clients\controllers;
+    use Yii;
+    use yii\data\Pagination;
     use yii\web\NotFoundHttpException;
     use app\modules\clients\controllers\AppClientsController;
     use app\models\News;
@@ -10,6 +12,47 @@
  * Новости
  */
 class NewsController extends AppClientsController {
+    
+    public function actionIndex($block = 'important_information') {
+        
+        // Получаем ID текущего лицевого счета
+        $account_id = $this->_current_account_id;
+        // Получаем массив содержащий ID ЖК, ID дома, ID квартиры, номер подъезда
+        $living_space = Yii::$app->userProfile->getLivingSpace($account_id);
+        
+        switch ($block) {
+            case 'important_information':
+            case null: {
+                $news = News::getNewsByClients($living_space, $block);
+                break;
+            }
+            case 'special_offers': {
+                $news = News::getNewsByClients($living_space, $block);
+                break;
+            }
+            case 'house_news': {
+                $news = News::getNewsByClients($living_space, $block);
+                break;
+            }
+        }
+        
+            $pages = new Pagination([
+                'totalCount' => $news->count(), 
+                'pageSize' => 9, 
+                'forcePageParam' => false, 
+                'pageSizeParam' => false,
+            ]);
+
+            $news = $news->offset($pages->offset)
+                    ->limit($pages->limit)
+                    ->all();
+        
+        return $this->render('index', [
+            'news' => $news,
+            'pages' => $pages,
+        ]);
+        
+    }
     
     /*
      * Страница просмотра отдельной новости
