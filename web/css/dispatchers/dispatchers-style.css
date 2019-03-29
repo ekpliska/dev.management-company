@@ -1023,4 +1023,25 @@ tbody > tr > td > div.empty::before {
     font-weight: bold;
     outline: none;
 }
+.profile-upload-btn {
+    position: absolute;
+    top: 40%;
+    cursor: pointer;
+}
+.profile-upload-btn-employee {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -30%);
+}
+.field-btnLoad > label > label.control-label {
+    font-weight: normal;
+    cursor: pointer;
+}
+.btn-upload label {
+    font-weight: 100;
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.5);
+}
 /* Конец Профиль пользователя */
