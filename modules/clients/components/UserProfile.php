@@ -200,7 +200,8 @@ class UserProfile extends BaseObject {
      * Формат: Фамилия Имя Отчество $full = false
      * Формат: Фамилия И.О. $full = true
      */
-    public function getFullNameClient($full = true) {
+    public function getFullNameClient($full = true, $off_secondname = false) {
+        
         $_name = $full ? $this->_user['name'] . ' ' : mb_substr($this->_user['name'], 0, 1, 'UTF-8') . '. ';
         $_second_name = $full ? $this->_user['second_name'] : mb_substr($this->_user['second_name'], 0, 1, 'UTF-8') . '. ';
         return $this->_user['surname'] . ' ' . $_name . $_second_name;

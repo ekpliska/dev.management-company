@@ -9,6 +9,24 @@
 
 ?>
 
+<div class="navbar_user-block">
+    <div class="navbar_user-block__image">
+        <?= Html::img(Yii::$app->userProfile->photo, ['class' => 'user-profile__photo']) ?> 
+    </div>
+    <div class="navbar_user-block__info">
+        <p><?= Yii::$app->userProfile->getFullNameClient(false) ?></p>
+        <p>
+            <?= Html::a('Профиль', ['profile/index']) ?>
+            <?= Html::a('Выйти <i class="fa fa-sign-out" aria-hidden="true"></i>', ['/site/logout'], [
+                    'data' => ['method' => 'post'], 
+                    'class' => 'navbar_user-block_link-logout']) ?>
+        </p>
+    </div>
+</div>
+
+
+
+<?php /*
 <li class="dropdown">
     <a class="nav-link text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <?= Html::img('/images/navbar/user.svg') ?>
@@ -53,3 +71,5 @@
         </li>
     </ul>
 </li>
+
+ */ ?>

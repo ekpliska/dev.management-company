@@ -3365,6 +3365,28 @@ p.date-start-vote {
 .navbar-toggle .icon-bar {
     background-color: #fff;
 }
+.user-profile {}
+.user-profile__photo {
+    width: 50px;
+    border-radius: 100%;
+}
+.navbar_user-block {
+    display: inline-flex;
+    width: 270px;
+    color: #fff;
+}
+.navbar_user-block__info {
+    width: 100%;
+    padding: 5px 20px;
+}
+.navbar_user-block__info > p {
+    color: #fff;
+    padding: 0;
+    margin: 0;
+}
+.navbar_user-block_link-logout {
+    float: right;
+}
 /*.navbar-menu {
     background-image: url(Head.png);
     background-size: 100% 100%;
