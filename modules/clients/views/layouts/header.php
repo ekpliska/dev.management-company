@@ -14,7 +14,8 @@
  */
 ?>
 
-<nav class="navbar navbar-inverse">
+
+ <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -26,13 +27,12 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Projects</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="#">Лицевой счет</a></li>
+                <li><a href="#">Баланс</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span>Профиль</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span>Выход</a></li>
             </ul>
         </div>
     </div>
@@ -60,8 +60,9 @@
     <div class="container-fluid navbar-mobile-menu__items text-center">
         <?= NavMenu::widget(['view_name' => 'mobile-menu']); ?>
     </div>
-    <?php /* = SubBarGeneralPage::widget() ?>
+    <?php // = SubBarGeneralPage::widget() ?>
     <?= StatusRequest::widget(['account_id' => $this->context->_current_account_id]) ?>
     <?= SubBarPaidService::widget() ?>
-    <?= SubBarPersonalAccount::widget() 
-</nav>*/ ?>
+    <?= SubBarPersonalAccount::widget() ?>
+</nav>
+ */ ?>

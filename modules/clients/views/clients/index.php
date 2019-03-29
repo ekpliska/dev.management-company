@@ -28,7 +28,9 @@ $this->title = Yii::$app->params['site-name'] . "Главная";
         </div>        
     </div>
     <div class="row client-page__services">
-        <h1>Услуги</h1>
+        <h1>
+            Услуги
+        </h1>
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
             <div class="service-item">1</div>
         </div>
@@ -37,7 +39,9 @@ $this->title = Yii::$app->params['site-name'] . "Главная";
         </div>
     </div>
     <div class="row client-page__news">
-        <h1>Новости</h1>
+        <h1>
+            Новости
+        </h1>
         <?= LastNews::widget(['living_space' => $living_space]) ?>
     </div>
 </div>
