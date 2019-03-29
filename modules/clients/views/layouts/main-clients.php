@@ -28,8 +28,15 @@ ClientsAsset::register($this);
     <div class="wrap">
         <?php $this->beginContent('@app/modules/clients/views/layouts/header.php') ?>
         <?php $this->endContent() ?>        
-        <div class="container">            
-            <?= $content ?>
+        <div class="container container-full-client">
+            <div class="row content">
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 menu-clients">
+                    #MENU
+                </div>
+                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                    <?= $content ?>
+                </div>
+            </div>
         </div>
     </div>
 
