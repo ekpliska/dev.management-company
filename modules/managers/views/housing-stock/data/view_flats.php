@@ -12,7 +12,7 @@
     Квартиры
     <span class="span-count"><?= count($flats) ?></span>
 </h4>
-
+<div class="flats-items">
 <?php if (isset($flats) && $flats) : ?>
     <?php 
         foreach ($flats as $key => $flat) : 
@@ -73,3 +73,4 @@
     <p>В указанном доме квартиры не найдены</p>
 </div>
 <?php endif; ?>
+</div>

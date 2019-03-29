@@ -1183,7 +1183,7 @@ ul[id*="employees-list-"] > li > a:hover {
     padding: 0;
     margin: 0;
     border-right: 1px solid #ddd;
-    min-height: 1200px;
+    min-height: 1255px;
 }
 .housing-stock > div[class*="col-"]:last-child {
     border-right: none;
@@ -1284,8 +1284,27 @@ ul[id*="employees-list-"] > li > a:hover {
     content: "\270f";
     padding: 0 10px 0 0;
 }
+.flats-items {
+    height: 1200px;
+    overflow: auto;
+}
+.flats-items::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 7px;
+    background-color: #ddd;
+}
+.flats-items::-webkit-scrollbar {
+    width: 7px;
+    background-color: #ddd;
+}
+.flats-items::-webkit-scrollbar-thumb {
+    border-radius: 7px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #524e53;
+}
 .flats-info {
     border-bottom: 1px solid #ddd;
+    position: relative;
 }
 .flats-info > h3.title {
     background: #2d18b4;
