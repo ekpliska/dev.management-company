@@ -893,17 +893,15 @@ span.dot {
     font-size: 22px;
     margin: 0;
 }
+.client-page__news > h1,
 .client-page__services > h1 {
     padding: 10px;
     margin: 0;
+    font-size: 22px;
 }
 .client-page__services > div[class*="col-"] > div {
     height: 200px;
     border: 1px solid #ddd;
-}
-.client-page__news > h1 {
-    padding: 10px;
-    margin: 0;
 }
 .client-page__news > div[class*="col-"] > div {
     height: 200px;

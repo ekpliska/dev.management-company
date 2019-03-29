@@ -177,26 +177,24 @@ class News extends ActiveRecord
      *      $living_space['houses_id'] ID Дома
      *      $living_space['flats_id'] ID Квартиры
      *      $living_space['flats_porch'] Номер подъезда
-     * 
-     * @param boolean $is_advert - Переключатель типа новостей (true - Реклама)
      */
-    public static function getNewsByClients($living_space, $is_advert = false) {
+    public static function getNewsByClients($living_space) {
         
         if ($living_space == null) {
             return $news = [];
         }
         
         $news = self::find()
-                ->select(['news_id', 'news_title', 'news_type_rubric_id', 'news_partner_id', 'news_preview', 'news_text', 'created_at', 'slug', 'rubrics_name', 'isAdvert', 'partners_name'])
+                ->select([
+                    'news_id', 
+                    'news_title', 'news_type_rubric_id', 
+                    'news_partner_id', 'news_preview', 
+                    'news_text', 
+                    'created_at', 
+                    'slug', 'rubrics_name', 'isAdvert', 'partners_name'])
                 ->joinWith(['rubric', 'partner'])
-                ->andWhere([
-                    'news_house_id' => $living_space['houses_id'],
-                    'isAdvert' => $is_advert,
-                ])
-                ->orWhere([
-                    'news_status' => 'all',
-                    'isAdvert' => $is_advert,
-                ])
+                ->andWhere(['news_house_id' => $living_space['houses_id']])
+                ->orWhere(['news_status' => 'all'])
                 ->orderBy(['created_at' => SORT_DESC]);
         
         return $news;

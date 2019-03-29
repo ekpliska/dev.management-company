@@ -25,40 +25,45 @@ class ClientsController extends AppClientsController
         // Получаем массив содержащий ID ЖК, ID дома, ID квартиры, номер подъезда
         $living_space = Yii::$app->userProfile->getLivingSpace($account_id);
         
-        switch ($block) {
-            case 'important_information':
-            case null: {
-                $info = new ImportantInformations();
-                $news = $info->informations($living_space);
-                break;
-            }
-            case 'special_offers': {
-                $news = News::getNewsByClients($living_space, true);
-                break;
-            }
-            case 'house_news': {
-                $news = News::getNewsByClients($living_space, false);
-                break;
-            }
-        }
+//        switch ($block) {
+//            case 'important_information':
+//            case null: {
+//                $info = new ImportantInformations();
+//                $news = $info->informations($living_space);
+//                break;
+//            }
+//            case 'special_offers': {
+//                $news = News::getNewsByClients($living_space, true);
+//                break;
+//            }
+//            case 'house_news': {
+//                $news = News::getNewsByClients($living_space, false);
+//                break;
+//            }
+//        }
+//        
+//        if ($block == 'special_offers' || $block == 'house_news') {
+//            $pages = new Pagination([
+//                'totalCount' => $news->count(), 
+//                'pageSize' => 9, 
+//                'forcePageParam' => false, 
+//                'pageSizeParam' => false,
+//            ]);
+//
+//            $news = $news->offset($pages->offset)
+//                    ->limit($pages->limit)
+//                    ->all();
+//        }
         
-        if ($block == 'special_offers' || $block == 'house_news') {
-            $pages = new Pagination([
-                'totalCount' => $news->count(), 
-                'pageSize' => 9, 
-                'forcePageParam' => false, 
-                'pageSizeParam' => false,
-            ]);
-
-            $news = $news->offset($pages->offset)
-                    ->limit($pages->limit)
-                    ->all();
-        }
+//        return $this->render('index', [
+//            'news' => $news,
+//            'pages' => isset($pages) ? $pages : null,
+//        ]);
         
         return $this->render('index', [
-            'news' => $news,
-            'pages' => isset($pages) ? $pages : null,
+            'living_space' => $living_space,
         ]);
+        
     }
     
 }
