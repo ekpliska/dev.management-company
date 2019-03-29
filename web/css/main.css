@@ -907,8 +907,29 @@ span.dot {
     height: 200px;
     border: 1px solid #ddd;
 }
-
-
+.news-item {
+    position: relative;
+    overflow: hidden;
+}
+.news-item img {
+    height: 100%;
+    width: 100%;
+}
+.news-item__rubric {
+    padding: 5px 10px;
+    font-size: 12px;
+    position: absolute;
+    top: 0%;
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 50px;
+    margin: 10px;
+}
+.news-item__title,
+.news-item__date {
+    position: absolute;
+    bottom: 0%;
+}
 /*.news-lists {
     margin-top: 170px;
 }

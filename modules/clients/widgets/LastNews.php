@@ -13,7 +13,6 @@
 class LastNews extends Widget {
     
     public $living_space;
-
     // Количество Новостей на главной
     public $count_news = 12;
     
@@ -24,7 +23,7 @@ class LastNews extends Widget {
     public function run() {
         
         // Формируем список новостей для текущено пользователя
-        $news = News::getNewsByClients($this->living_space);
+        $news = News::getNewsByClients($this->living_space)->limit(12);
         
         $pages = new Pagination([
             'totalCount' => $news->count(), 
