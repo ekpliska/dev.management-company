@@ -4,6 +4,7 @@
     use Yii;
     use yii\db\ActiveRecord;
     use app\models\SmsSettings;
+    use app\models\User;
 
 /**
  * Регистрация в голосованиии
@@ -49,6 +50,13 @@ class RegistrationInVoting extends ActiveRecord
      */
     public function getVoting() {
         return $this->hasOne(Voting::className(), ['voting_id' => 'voting_id']);
+    }
+    
+    /*
+     * Связь с таблицей Пользователи
+     */
+    public function getUser() {
+        return $this->hasOne(User::className(), ['user_id' => 'user_id']);
     }
     
     /*

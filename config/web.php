@@ -224,6 +224,14 @@ $config = [
                         'GET delete/<rent_id:[\w-]+>' => 'delete',
                     ]
                 ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'pluralize' => false,
+                    'controller' => 'v1/vote',
+                    'extraPatterns' => [
+                        'GET /<account:[\w-]+>' => 'index',
+                    ]
+                ],
                 
             ],
         ],

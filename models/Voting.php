@@ -101,6 +101,15 @@ class Voting extends ActiveRecord
     public function getRegistration() {
         return $this->hasMany(RegistrationInVoting::className(), ['voting_id' => 'voting_id']);
     }
+
+    /**
+     * Свзяь с таблицей Регистрация в голосовании
+     */
+    public function getParticipant() {
+        return $this->hasMany(RegistrationInVoting::className(), ['voting_id' => 'voting_id'])
+                ->with('user')
+                ->where(['finished' => RegistrationInVoting::STATUS_FINISH_YES]);
+    }
     
     /*
      * Проверка даты начала и даты завершения голосования
