@@ -10,9 +10,9 @@
     use app\modules\managers\models\User;
     use app\models\PersonalAccount;
     use app\models\Rents;
-    use app\modules\managers\models\AddRent;
     use app\modules\managers\models\searchForm\searchClients;
     use app\models\PaidServices;
+    use app\modules\managers\models\form\CommentToCounterForm;
 
 /**
  * Клиенты
@@ -338,6 +338,9 @@ class ClientsController extends AppManagersController {
         // Получаем список зявок сформированных автоматически на поверу приборов учета
         $auto_request = PaidServices::notVerified($info['account_info']->account_id);
         
+        // Загружаем форму добавления комментария по приборам учета
+        $model_comment = new CommentToCounterForm();
+        
         $array_request = [
             'Номер лицевого счета' => $account_number,
             'Номер месяца' => date('m'),
@@ -355,6 +358,7 @@ class ClientsController extends AppManagersController {
             'counters_lists' => $counters_lists_api ? $counters_lists_api : null,
             'is_current' => $is_current,
             'auto_request' => $auto_request,
+            'model_comment' => $model_comment,
         ]);
         
     }

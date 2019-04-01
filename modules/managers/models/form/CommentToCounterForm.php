@@ -20,7 +20,11 @@ class CommentToCounterForm extends Model {
         ];
     }
     
-    
+    public function save($account) {
+        
+        
+        
+    }
     
     public function attributeLabels() {
         

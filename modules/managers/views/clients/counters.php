@@ -3,6 +3,7 @@
     use yii\widgets\Breadcrumbs;
     use yii\helpers\Html;
     use kartik\date\DatePicker;
+    use yii\widgets\ActiveForm;
 
 /* 
  * Профиль собсвенника, раздел Приборы устройства
@@ -82,7 +83,17 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
 
         </div>
         
-        
+        <div class="counters-notofication">
+            
+            <?php $comment = ActiveForm::begin([
+                'id' => 'counters-notofication-form',
+            ]) ?>
+            
+                <?= 'here' ?>
+            
+            <?php ActiveForm::begin(); ?>
+            
+        </div>
         
     </div>
 </div>
