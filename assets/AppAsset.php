@@ -19,7 +19,6 @@ class AppAsset extends AssetBundle
     public $css = [
         'css/main.css',
         'css/media.css',
-        'css/buttons.css',
         'css/checkbox.css',
         '//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css',
         'js/lib-magnific-popup-master/magnific-popup.css'

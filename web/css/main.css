@@ -733,7 +733,7 @@ reset-password-sms:focus{
 }
 /* Конец Страница 404 */
 
-/* Notifications Bar */
+/* Notifications Bar 
 .notification__dropdown {
     padding: 10px;
     min-height: 70px;
@@ -776,7 +776,7 @@ span.dot {
     padding: 7px 7px;
     border-radius: 12px;
 }
-/* End Notifications Bar */
+ End Notifications Bar */
 
 /* Show password */
 .form__show-password {

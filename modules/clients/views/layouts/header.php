@@ -49,13 +49,8 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right user-profile">
-                <li>
                     <?= UserInfo::widget() ?>
-                </li>
-                <li>
-                    <?php // = Notifications::widget() ?>
-                </li>
-<!--                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>-->
+                <?= Notifications::widget() ?>
             </ul>
         </div>
     </div>
