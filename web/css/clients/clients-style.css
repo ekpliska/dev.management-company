@@ -1521,9 +1521,7 @@ span.dot {
 /* Конец Статусы заявок, отдельная страница */
 
 /* Платные услуги */
-.paid-requests-page {
-    margin-top: 140px;
-}
+.paid-requests-page {}
 a.btn-history {
     padding: 0px 50px;
     border-radius: 12px;
@@ -2711,16 +2709,17 @@ p.date-start-vote {
 
 /* Статусы меню, заявки, главная страница */
 .status-request {
-    display: flex;
-    justify-content: center;
+    margin: 20px 0;
+}
+.status-request > li {
+    position: relative;
 }
 .status-request > li > a {
     border-radius: 25px;
     font-size: 12px;
     color: #000;
-    width: 175px;
-    height: 40px;
-    padding: 10px 0;
+/*    padding: 10px 0;*/
+    margin: 0 30px;
     font-weight: bold;
     text-transform: uppercase;
     cursor: pointer;
@@ -2730,9 +2729,6 @@ p.date-start-vote {
     text-decoration: none;
     background-color: transparent;
     border-radius: 25px;
-}
-.status-request > li + li {
-    margin-left: 15px;
 }
 .req-bange-default {
     border: 2px solid #4e2ae2;
