@@ -23,7 +23,7 @@ $this->title = Yii::$app->params['site-name'] . "Главная";
                 </h5>
 
                 <h5 class="news-card-preview-date">
-                    <?= FormatHelpers::formatDate($post['created_at'], false) ?>
+                    <?= FormatHelpers::formatDate($post['created_at'], true, 1) ?>
                 </h5>
 
                 <div class="news-card-preview-body">
