@@ -26,7 +26,7 @@ class CommentsToCounters extends ActiveRecord
             [['comments_text'], 'string'],
             [['account_id', 'user_id'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
-            [['comments_title'], 'string', 'max' => 255],
+            [['comments_title'], 'string', 'max' => 1000],
             [['account_id'], 'exist', 'skipOnError' => true, 'targetClass' => PersonalAccount::className(), 'targetAttribute' => ['account_id' => 'account_id']],
         ];
     }

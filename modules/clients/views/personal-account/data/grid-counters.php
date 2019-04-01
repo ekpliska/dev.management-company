@@ -112,5 +112,5 @@ $array_image = [
                 </tr>                
             <?php endif; ?>
         </tbody>
-    </table>
+    </table>    
 </div>
