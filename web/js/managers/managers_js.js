@@ -285,6 +285,13 @@ $(document).ready(function() {
         });
     });
     
+    $('#delete-note-counters').on('click', function(){
+        var noteId = $(this).data('note');
+        $.post('/managers/clients/delete-note-counters?id=' + noteId, function(response) {
+            console.log(response);
+        });
+    });
+    
     /*
      * Приборы учета, профиль Собственника
      */

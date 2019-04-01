@@ -12,6 +12,7 @@
     use app\models\Rents;
     use app\modules\managers\models\searchForm\searchClients;
     use app\models\PaidServices;
+    use app\models\CommentsToCounters;
     use app\modules\managers\models\form\CommentToCounterForm;
 
 /**
@@ -44,7 +45,9 @@ class ClientsController extends AppManagersController {
                             'delete-client',
                             'find-indications',
                             'send-indication',
-                            'create-paid-request'],
+                            'create-paid-request',
+                            'create-notification',
+                            'delete-note-counters'],
                         'allow' => true,
                         'roles' => ['ClientsEdit']
                     ],
@@ -338,8 +341,15 @@ class ClientsController extends AppManagersController {
         // Получаем список зявок сформированных автоматически на поверу приборов учета
         $auto_request = PaidServices::notVerified($info['account_info']->account_id);
         
-        // Загружаем форму добавления комментария по приборам учета
+        // Комментарии к приборам учета
         $model_comment = new CommentToCounterForm();
+        $comment_counter = CommentsToCounters::findOne(['account_id' => $info['account_info']->account_id]);
+        if (Yii::$app->request->isPost) {
+            if ($comment_counter->load(Yii::$app->request->post()) && $comment_counter->validate()) {
+                $comment_counter->save();
+                return $this->redirect(Yii::$app->request->referrer);
+            }
+        }
         
         $array_request = [
             'Номер лицевого счета' => $account_number,
@@ -358,6 +368,7 @@ class ClientsController extends AppManagersController {
             'counters_lists' => $counters_lists_api ? $counters_lists_api : null,
             'is_current' => $is_current,
             'auto_request' => $auto_request,
+            'comment_counter' => $comment_counter,
             'model_comment' => $model_comment,
         ]);
         
@@ -574,5 +585,31 @@ class ClientsController extends AppManagersController {
         }
         return ['success' => false];
     }
+    
+    /*
+     * Добавление нового уведомления для приборов учета
+     */
+    public function actionCreateNotification($account_id) {
+        
+        $model = new CommentToCounterForm();
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $model->save($account_id);
+            return $this->redirect(Yii::$app->request->referrer);
+        }
+    }
 
+    /*
+     * Удаление уведомления
+     */
+    public function actionDeleteNoteCounters($id) {
+        
+        if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
+            $note = CommentsToCounters::findOne($id);
+            if ($note->delete()) {
+                return $this->redirect(Yii::$app->request->referrer);
+            }
+        }
+        
+    }
+    
 }

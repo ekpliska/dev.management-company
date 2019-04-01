@@ -2,6 +2,7 @@
 
     namespace app\modules\managers\models\form;
     use yii\base\Model;
+    use app\models\CommentsToCounters;
 
 /**
  * Добавление Комментария 
@@ -20,9 +21,18 @@ class CommentToCounterForm extends Model {
         ];
     }
     
-    public function save($account) {
+    public function save($account_id) {
         
+        if (!$this->validate()) {
+            return false;
+        }
         
+        $notification = new CommentsToCounters();
+        $notification->comments_title = $this->title;
+        $notification->comments_text = $this->comments;
+        $notification->account_id = $account_id;
+        
+        return $notification->save() ? true : false;
         
     }
     

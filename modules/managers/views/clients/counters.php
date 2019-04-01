@@ -83,17 +83,50 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
 
         </div>
         
-        <div class="counters-notofication">
-            
-            <?php $comment = ActiveForm::begin([
-                'id' => 'counters-notofication-form',
-            ]) ?>
-            
-                <?= 'here' ?>
-            
-            <?php ActiveForm::begin(); ?>
-            
-        </div>
-        
     </div>
+    
+    <div class="counters-notification">
+        <?php if (isset($comment_counter) && !empty($comment_counter)) : ?>
+            <?php 
+                $comment_form = ActiveForm::begin([
+                    'id' => 'counters-notification-form',
+                    'validateOnChange' => false,
+                    'validateOnBlur' => false,
+                    'fieldConfig' => [
+                        'template' => '<div class="field"></i>{label}{input}{error}</div>',
+                    ],
+                ]) ?>
+
+                    <?= $comment_form->field($comment_counter, 'comments_title')
+                            ->input('text', ['class' => 'field-input'])
+                            ->label($comment_counter->getAttributeLabel('comments_title'), ['class' => 'field-label']) ?>
+
+                    <?= $comment_form->field($comment_counter, 'comments_text', [
+                                'template' => '<div class="field-page-textarea">{label}{input}{error}</div>'])
+                            ->textarea(['rows' => 10, 'class' => 'field-input-textarea-page'])
+                            ->label($comment_counter->getAttributeLabel('comments_text'), ['class' => 'field-label']) ?>
+
+        <div class="text-center">
+            <?= Html::submitButton('Сохранить', ['class' => 'btn blue-btn']) ?>
+            <?= Html::button('Удалить', [
+                    'class' => 'btn orange-btn', 
+                    'id' => 'delete-note-counters', 
+                    'data-note' => $comment_counter->id]) ?>
+        </div>
+
+                <?php ActiveForm::end(); ?>
+        <?php else: ?>
+        
+            <?= Html::button('Добавить примечание', [
+                    'class' => 'btn', 
+                    'data-toggle' => 'modal', 
+                    'data-target' => '#create-new-notification']) ?>
+        
+            <?= $this->render('_form/add-notification', [
+                    'model_comment' => $model_comment,
+                    'account_id' => $account_choosing->account_id
+            ]) ?>
+        
+        <?php endif; ?>
+        </div>
 </div>
