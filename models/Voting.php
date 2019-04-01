@@ -111,6 +111,15 @@ class Voting extends ActiveRecord
             return $this->addError('voting_date_start', 'Дата начала голосования не может быть позже даты завершения голосования');
         }
     }
+    
+    /**
+     * Связь с таблицей Регистрация в голосовании (Завершивших голосование)
+     */
+    public function getParticipant() {
+        return $this->hasMany(RegistrationInVoting::className(), ['voting_id' => 'voting_id'])
+                ->with('user')
+                ->where(['finished' => RegistrationInVoting::STATUS_FINISH_YES]);
+    }
 
     /*
      * Тип голосования

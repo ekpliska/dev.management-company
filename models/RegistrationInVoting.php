@@ -52,6 +52,13 @@ class RegistrationInVoting extends ActiveRecord
     }
     
     /*
+     * Связь с таблицей Пользователи
+     */
+    public function getUser() {
+        return $this->hasOne(User::className(), ['user_id' => 'user_id']);
+    }
+    
+    /*
      * Создаем запись регистрации участия в голосовании пользователя
      */
     public function registerIn($voting_id) {
