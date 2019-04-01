@@ -3,6 +3,7 @@
     use yii\helpers\Html;
     use yii\widgets\Breadcrumbs;
     use app\modules\clients\widgets\AlertsShow;
+    use app\modules\clients\widgets\StatusRequestWidget;
     
 /* 
  * Заявки (Общая страница)
@@ -12,6 +13,10 @@ $this->params['breadcrumbs'][] = 'Заявки';
 ?>
 
 <div class="requests-page">
+    
+    <div>
+        <?= StatusRequestWidget::widget(['account_id' => $this->context->_current_account_id]) ?>
+    </div>
     
     <?= Breadcrumbs::widget([
             'homeLink' => ['label' => 'ELSA', 'url' => ['clients/index']],
@@ -29,7 +34,7 @@ $this->params['breadcrumbs'][] = 'Заявки';
 <?php
 $this->registerCss("
         .navbar-menu {
-            box-shadow: none;
+//            box-shadow: none;
         }
         .navbar_repusets {
             box-shadow: inset 0px 2px 2px -1px #555;

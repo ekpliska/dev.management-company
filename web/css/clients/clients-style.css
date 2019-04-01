@@ -868,6 +868,9 @@ span.dot {
 /* End Notifications Bar */
 
 /* Заявки */
+.navbar-request {
+    margin: 20px 0;
+}
 .requests-page {}
 .fixed-bottom {
     position: absolute;
@@ -2716,8 +2719,8 @@ p.date-start-vote {
     font-size: 12px;
     color: #000;
     width: 175px;
-    height: 50px;
-    padding: 14px 0;
+    height: 40px;
+    padding: 10px 0;
     font-weight: bold;
     text-transform: uppercase;
     cursor: pointer;

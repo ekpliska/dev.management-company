@@ -8,7 +8,7 @@
 /**
  * Виджет для формирования статусов заявок
  */
-class StatusRequest extends Widget {
+class StatusRequestWidget extends Widget {
     
     public $account_id;
 
@@ -43,7 +43,7 @@ class StatusRequest extends Widget {
             $request_array[] = $array_count;
         }
         
-        return $this->render('statusrequest/default', [
+        return $this->render('statusrequestwidget/default', [
             'status_requests' => $request_array,
             'css_classes' => $this->css_classes,
         ]);
