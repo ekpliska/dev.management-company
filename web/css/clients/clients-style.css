@@ -50,6 +50,7 @@
     color: #fff;
     padding: 0;
     margin: 0;
+    text-align: right;
 }
 .navbar_user-block_link-logout {
     float: right;
@@ -58,217 +59,46 @@
     background: transparent;
     border: none;
 }
-/*.navbar-menu {
-    background-image: url(Head.png);
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    box-shadow: 1px -1px 6px 2px #000;
-    box-shadow: rgba(0, 15, 41, 0.05) 0px 0px 16px 0px;
+.list-account__title {
+    color: #78e4ff;
+    font-size: 12px;
+    letter-spacing: 1.26px;
+    line-height: 18px;
+    margin: 0;
+    padding: 5px 0;
+}
+.select-current-account {
+    width: 270px;
     border: none;
-    height: 90px;
-}
-.navbar-menu-content {
-    padding: 20px;
-}
-.navbar-menu {
-    background-image: url(Head.png);
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    box-shadow: 1px -1px 6px 2px #000;
-    box-shadow: rgba(0, 15, 41, 0.05) 0px 0px 16px 0px;
-    border: none;
-    height: 90px;
-}
-.navbar-menu_header {
-    padding: 50px;
-    height: 120px;
-}
-.brand {
-    position: absolute;
-    left: 50%;
-    margin-left: -80px !important;
-    margin-top: -10px;
-    display: block;
-}
-.navbar-menu__items {
-    margin-top: -350px;
-}
-.menu-show {
-    margin-top: 0;
-    box-shadow: -1px 6px 7px #c1c1c1;
-}
-.user-notification {
-    position: relative;
-    top: -20px;
-}
-
- Открыть, закрыть меню 
-.menu-toggle {
-    position: fixed;
-    top: 40px;
-    margin-left: -50px;
-    z-index: 11;
-}
-.menu-toggle span::before,
-.menu-toggle span::after {
-    position: absolute;
-    top: 50%; 
-    margin-top: -1px;
-    left: 50%; 
-    margin-left: -10px;
-    width: 25px;
-    height: 2px;
-    background-color: #e0e0d1;
-    content: '';
-    display: block;
-    transition: 0.2s;
-}
-.menu-toggle span::before {
-    transform: translateY(-5px);
-}
-.menu-toggle span::after {
-    transform: translateY(5px);
-}
-.menu-toggle_active span {
-    background-color: transparent;
-}
-.menu-toggle_active span:before {
-    transform: rotate(-135deg);
-    width: 20px;
-    transform-origin: center;
-}
-.menu-toggle_active span:after {
-    transform: rotate(135deg);
-    width: 20px;
-    transform-origin: center;
-}
-.menu-toggle_message {
-    margin-left: 100px;
-    margin-top: 11px; 
-    color: white;
-    text-decoration: none;
-}
-.menu-toggle_message:hover {
-    text-decoration: none;
-}
-.mobile-menu__items__sub {
-    display: none;
-}
-.mobile-menu__items__sub > li {
-    color: #fff;
-    list-style: none;
-    text-align: center;
-    padding-right: 35px;
-    padding-top: 10px;
-}
-.mobile-menu__items__sub > li > a {
-    color: #fff;
-}
-.mobile-menu__items__sub > li > a:hover {
-    border: 1px solid #fff;
-    padding: 5px;
-    border-radius: 12px;
-}
-.mobile-menu__sub-show {
-    display: block;
-}
-.caret-arrow {
-    border: solid #fff;
-    border-width: 0 3px 3px 0;
-    display: inline-block;
-    padding: 3px;
-    transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
-}
-.up-arrow {
-    transform: rotate(-135deg);
-    -webkit-transform: rotate(-135deg);
-}
-
- Выпадающее меню навигации 
-.menu-items {
-    list-style-type: none;
-    color: #fff;
-    padding: 10px 0;
-}
-.menu-items > li {
-    padding: 10px;
-    cursor: none;
-}
-.menu-items > li a {
-    color: rgba(255, 255, 255, 0.44);
-    text-decoration: none;
-    text-transform: uppercase;
-}
-.menu-items > li.active-item a {
-    display: inline-block;    
-    color: #fff;
-    font-weight: bold;
-}
-.menu-items > li:hover {
-    color: #fff;
-    font-weight: bold;
-}
-.menu-items > li:hover > a {
-    color: #fff;    
-}
-.menu-items > li.active-item {
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-    -moz-border-image: -moz-linear-gradient(to right, rgba(0, 0, 0, 0), rgba(255, 255, 255, 7), rgba(0, 0, 0, 0));  
-    -webkit-border-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(255, 255, 255, 7), rgba(0, 0, 0, 0));
-    border-image-slice: 1; 
-    
-}
-.menu-items > li.personal-account-menu:hover > a.sub-menu-item {
-    font-size: 12px;
-    font-weight: 100;
-    text-transform: none;
-    box-sizing: border-box;
-    padding: 5px;
-    margin: 0px 11px;
-    display: initial;
-    display: inline-block;
-}
-a.sub-menu-item {
-    display: none;
-}
-a.active-sub-item,
-a.sub-menu-item:hover {
-    border-radius: 12px;
-    border: 1px solid #fff;
-}
-.menu-items > li.active-item > a.sub-menu-item {
-    font-size: 12px;
-    font-weight: 100;
-    text-transform: none;
-    box-sizing: border-box;
-    padding: 5px;
-    margin: 0px 11px;
-    display: initial;
-}*/
-/* Конец Выпадающее меню навигации */
-
-/* Хлебные крошки */
-.breadcrumb {
-    margin-top: 70px;
-    font-size: 12px;
     background: transparent;
+    border-bottom: 1px solid #fff;
+    color: #fff;
 }
-.breadcrumb-padding {
-    margin-top: 140px;
+.select-current-account option {
+    color: #000;
 }
-.breadcrumb > li > a {
-    color: #c1c1c1;
+.account-balance {
+    padding: 15px 40px 0;
+    color: #fff;
 }
-.breadcrumb > li > a:hover {
-    color: #f0754a;
-    border-bottom: 1px solid #f0754a;
+.account-balance > span.defaul {
+    padding: 6px 8px;
+    border-radius: 50%;
+    background-color: #fff;
+    color: #1fd68d;
+    font-size: 11px;
 }
-.breadcrumb > .active {
-    color: #67768a;
+.account-balance > span.minus {
+    padding: 6px 8px;
+    border-radius: 50%;
+    background-color: #fff;
+    color: #ef693a;
+    font-size: 11px;
 }
-/* Конец Хлебные крошки */
+.account-balance > span:last-child {
+    padding: 0 10px;
+}
+/* Конец Выпадающее меню навигации */
 
 /* Футер */
 .footer {
@@ -337,6 +167,24 @@ a.sub-menu-item:hover {
     color: #454545;
 }
 /* Конец Футер */
+
+/* Хлебные крошки */
+.breadcrumb {
+    margin-top: 15px;
+    font-size: 12px;
+    background: transparent;
+}
+.breadcrumb > li > a {
+    color: #c1c1c1;
+}
+.breadcrumb > li > a:hover {
+    color: #f0754a;
+    border-bottom: 1px solid #f0754a;
+}
+.breadcrumb > .active {
+    color: #67768a;
+}
+/* Конец Хлебные крошки */
 
 /* Собственник, главная страница, Новости */
 .client-page {}
@@ -967,9 +815,7 @@ p.right {
 /* Конец Настройки профиля пользователя */
 
 /* Заявки */
-.requests-page {
-    margin-top: 140px;
-}
+.requests-page {}
 .fixed-bottom {
     position: absolute;
     bottom: 20px;

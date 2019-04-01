@@ -3,7 +3,7 @@
     use yii\helpers\Html;
     use app\assets\AppAsset;
     use app\assets\ClientsAsset;
-    use yii\widgets\Breadcrumbs;
+    use app\modules\clients\widgets\NavMenu;    
 
 AppAsset::register($this);
 ClientsAsset::register($this);
@@ -31,7 +31,7 @@ ClientsAsset::register($this);
         <div class="container container-full-client">
             <div class="row content">
                 <div class="col-lg-2 col-md-2 hidden-sm hidden-xs menu-clients">
-                    #MENU
+                    <?= NavMenu::widget() ?>
                 </div>
                 <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
                     <?= $content ?>

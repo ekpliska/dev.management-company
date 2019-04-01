@@ -18,7 +18,6 @@ a, a:hover, a:active {
 }
 a,
 input,
-select,
 textarea,
 img,
 button,
@@ -27,6 +26,9 @@ button:focus,
 button:hover {
     outline: 0px !important;
     -webkit-appearance: none;
+}
+select {
+    outline: 0px !important;
 }
 .main > .row {
     position: relative;

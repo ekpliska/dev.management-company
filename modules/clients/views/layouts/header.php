@@ -17,7 +17,7 @@
 <nav class="navbar navbar-fixed-top navbar-menu">
     <div class="container-fluid">
         <div class="navbar-header col-md-2">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#elseNavbar">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>                        
@@ -27,18 +27,26 @@
             </a>
         </div>
         
-        <div class="collapse navbar-collapse" id="myNavbar">
+        <div class="collapse navbar-collapse" id="elseNavbar">
             <ul class="nav navbar-nav">
                 <li>
-                    <p>Лицевой счет</p>
-                    <?php /* = Html::dropDownList('_list-account', $this->context->_current_account_id, $this->context->_lists, [
+                    <p class="list-account__title">Лицевой счет</p>
+                    <?= Html::dropDownList('_list-account', $this->context->_current_account_id, $this->context->_lists, [
                             'placeholder' => $this->context->_current_account_number,
-                            'id' => 'sources',
-                            'class' => 'custom-select sources',
+                            'class' => 'select-current-account',
                             'data-client' => Yii::$app->user->can('clients') ? $user_info->clientID : '',
-                    ]) */ ?>
+                    ]) ?>
                 </li>
-                <li><a href="#">Баланс</a></li>
+                <li>
+                    <p class="account-balance">
+                        <span class="<?= Yii::$app->userProfile->balance > 0 ? 'defaul' : 'minus' ?>">
+                            <i class="glyphicon glyphicon-ruble"></i>
+                        </span>
+                        <span>
+                            <?= Yii::$app->userProfile->balance ?>
+                        </span>
+                    </p>
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right user-profile">
                 <li>
