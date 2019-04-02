@@ -20,7 +20,7 @@ class searchRequests extends Requests {
             [['value', 'account_number'], 'string'],
             [['value', 'account_number'], 'trim'],
             
-            [['requests_type_id'], 'integer'],
+            [['requests_type_id', 'status'], 'integer'],
             
             [['requests_specialist_id', 'requests_specialist_id'], 'integer'],
             
@@ -71,13 +71,10 @@ class searchRequests extends Requests {
         if (!empty($this->value)) {
             $_value = (int)$this->value;
             $query->andFilterWhere(['=', 'requests_ident', $_value]);
+            $query->orFilterWhere(['=', 'account_number', $_value]);
         }
         
-        if (!empty($this->account_number)) {
-            $_value = $this->account_number;
-            $query->andFilterWhere(['=', 'account_number', $_value]);
-        }
-        
+        $query->andFilterWhere(['=', 'status', $this->status]);
         $query->andFilterWhere(['=', 'requests_type_id', $this->requests_type_id]);
         $query->andFilterWhere(['=', 'requests_specialist_id', $this->requests_specialist_id]);
         

@@ -35,6 +35,8 @@ class RequestsController extends AppDispatchersController {
         $name_services = Services::getServicesNameArray();
         // Формируем массив для Категорий услуг
         $servise_category = CategoryServices::getCategoryNameArray();
+        // Статусы заявок
+        $status_list = StatusRequest::getStatusNameArray();
         
         // Загружаем список всех спициалистов
         $specialist_lists = ArrayHelper::map(Specialists::getListSpecialists()->all(), 'id', function ($data) {
@@ -68,6 +70,7 @@ class RequestsController extends AppDispatchersController {
             'model' => $model,
             'flat' => [],
             'servise_category' => $servise_category,
+            'status_list' => $status_list,
         ]);
         
     }

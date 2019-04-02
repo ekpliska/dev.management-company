@@ -15,8 +15,8 @@ class StatusRequest {
     const STATUS_FEEDBACK = 3;
     const STATUS_CLOSE = 4;
     const STATUS_REJECT = 5;
-    const STATUS_CONFIRM = 6;
-    const STATUS_ON_VIEW = 7;
+//    const STATUS_CONFIRM = 6;
+//    const STATUS_ON_VIEW = 7;
     
     /*
      * Массив статусов заявок
@@ -29,8 +29,8 @@ class StatusRequest {
             self::STATUS_FEEDBACK => 'На уточнении',
             self::STATUS_CLOSE => 'Закрыто',
             self::STATUS_REJECT => 'Отклонена',
-            self::STATUS_CONFIRM => 'Подтверждена пользователем',
-            self::STATUS_ON_VIEW => 'На рассмотрении',
+//            self::STATUS_CONFIRM => 'Подтверждена пользователем',
+//            self::STATUS_ON_VIEW => 'На рассмотрении',
         ];
     }
     

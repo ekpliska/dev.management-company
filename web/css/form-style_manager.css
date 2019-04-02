@@ -917,7 +917,7 @@ textarea {
     border-bottom: 1px solid #ddd;
 }
 ._search-input::placeholder {
-    color: #fff;
+    color: #ccc;
 }
 .search-panel__btn {
     height: 7em;
@@ -947,6 +947,9 @@ textarea {
     outline: none;
     font-size: 12px;
     border-bottom: 1px solid #ddd;
+}
+._dropdown-subpanel:first-child {
+    color: #ccc;
 }
 ._dropdown-subpanel option {
     color: #000;

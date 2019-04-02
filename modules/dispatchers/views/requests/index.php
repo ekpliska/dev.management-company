@@ -15,6 +15,7 @@ $this->params['breadcrumbs'][] = 'Заявки';
         'type_requests' => $type_requests,
         'name_services' => $name_services,
         'specialist_lists' => $specialist_lists,
+        'status_list' => $status_list,
 ]) ?>
 
 <div class="dispatcher-main-with-sub-general margin-search-panel">
