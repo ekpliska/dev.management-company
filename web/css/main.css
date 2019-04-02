@@ -1274,6 +1274,7 @@ span.dot {
     margin-right: -50%;
     transform: translate(-50%, -50%);
     width: 200px;  
+    height: 200px;  
 }
 .user-full-name {
     font-size: 22px;
