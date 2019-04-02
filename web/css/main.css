@@ -538,7 +538,11 @@ reset-password-sms:focus{
 .btn-send-request:focus {
     outline: none;
 }
-
+.message-after-sms {
+    font-size: 12px;
+    color: #635f5f;
+    text-align: center;
+}
 /* Конец Кнопки */
 
 /* Кнопка в таблице */

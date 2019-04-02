@@ -73,7 +73,7 @@ class PasswordResetRequestForm extends Model {
         // Генерируем новый пароль (случайные 6 символов)
         $new_password = preg_replace('/[^a-zA-Z]/', '', Yii::$app->security->generateRandomKey(32));
         
-        if (!$this->sendSms($user->user_mobile, $new_password)) {
+        if (!$this->sendSms($user->user_mobile, $user->user_login, $new_password)) {
             return false;
         }
         
@@ -89,14 +89,15 @@ class PasswordResetRequestForm extends Model {
     /*
      * Отправка СМС-кода на номер мобильного телефона
      */
-    public function sendSms($phone, $new_password) {
+    public function sendSms($phone, $user_login, $new_password) {
         
         $phone = preg_replace('/[^0-9]/', '', $phone);
         
         $sms = Yii::$app->sms;
         
         $result = $sms->send_sms($phone,
-                'Новый пароль ' . $new_password);
+                'Для вашей учетной записи был создан новый пароль. Используйте его при следующем входе в личный кабинет. '
+                . 'Напоминаем, ваш логин: ' . $user_login . ', ваш новый пароль: ' . $new_password);
         
         if (!$sms->isSuccess($result)) {
 //            return $sms->getError($result);
