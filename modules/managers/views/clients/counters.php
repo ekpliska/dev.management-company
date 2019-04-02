@@ -106,19 +106,19 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
                             ->textarea(['rows' => 10, 'class' => 'field-input-textarea-page'])
                             ->label($comment_counter->getAttributeLabel('comments_text'), ['class' => 'field-label']) ?>
 
-        <div class="text-center">
-            <?= Html::submitButton('Сохранить', ['class' => 'btn blue-btn']) ?>
-            <?= Html::button('Удалить', [
-                    'class' => 'btn orange-btn', 
-                    'id' => 'delete-note-counters', 
-                    'data-note' => $comment_counter->id]) ?>
-        </div>
+                    <div class="text-left">
+                        <?= Html::submitButton('Сохранить', ['class' => 'btn save-settings-small']) ?>
+                        <?= Html::button('Удалить', [
+                                'class' => 'btn delete-settings-small', 
+                                'id' => 'delete-note-counters', 
+                                'data-note' => $comment_counter->id]) ?>
+                    </div>
 
                 <?php ActiveForm::end(); ?>
         <?php else: ?>
         
             <?= Html::button('Добавить примечание', [
-                    'class' => 'btn', 
+                    'class' => 'btn-show-info', 
                     'data-toggle' => 'modal', 
                     'data-target' => '#create-new-notification']) ?>
         

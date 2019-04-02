@@ -24,7 +24,7 @@ class CommentsToCounters extends ActiveRecord
         return [
             [['comments_title', 'comments_text'], 'required'],
             [['comments_text'], 'string'],
-            [['account_id', 'user_id'], 'integer'],
+            [['account_id'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['comments_title'], 'string', 'max' => 1000],
             [['account_id'], 'exist', 'skipOnError' => true, 'targetClass' => PersonalAccount::className(), 'targetAttribute' => ['account_id' => 'account_id']],
@@ -59,7 +59,6 @@ class CommentsToCounters extends ActiveRecord
             'comments_title' => 'Заголовок',
             'comments_text' => 'Комментарий',
             'account_id' => 'Лицевой счет',
-            'user_id' => 'Пользоваель',
             'created_at' => 'Дата создания',
             'updated_at' => 'Дата обновления',
         ];

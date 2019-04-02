@@ -18,6 +18,7 @@ class ApiController extends Controller
         return [
             'login' => ['post'],
             'sign-up' => ['post'],
+            'finish' => ['get'],
         ];
     }
     
@@ -73,6 +74,13 @@ class ApiController extends Controller
                 break;
         }
         
+        return $result;
+        
+    }
+    
+    public function actionFinish() {
+        
+        $result = RegisterForm::registerStepFinish();
         return $result;
         
     }

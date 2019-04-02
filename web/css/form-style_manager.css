@@ -1091,6 +1091,15 @@ input:checked + .slider-orange {
     color: #fff;
     background: #2d18b4;    
 }
+.delete-settings-small {
+    background: #fff;
+    color: #ef693a;
+    border: 2px solid #ef693a;
+}
+.delete-settings-small:hover {
+    color: #fff;
+    background: #ef693a;    
+}
 /* End Multiple Form at Settings */
 
 /* */
