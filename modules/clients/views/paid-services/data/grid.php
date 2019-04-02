@@ -89,10 +89,10 @@
                     'format' => 'raw',
                 ],
                 [
-                    'attribute' => 'updated_at',
+                    'attribute' => 'date_closed',
                     'label' => 'Дата закрытия',
                     'value' => function ($data) {
-                        return FormatHelpers::formatDate($data['updated_at'], false, 0, false) . 
+                        return FormatHelpers::formatDate($data['date_closed'], false, 0, false) . 
                                 GradePaidService::widget([
                                     'request_id' => $data['services_id'], 
                                     'request_status' => $data['status'],

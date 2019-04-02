@@ -134,6 +134,7 @@ class PaidServices extends ActiveRecord
         $query = (new \yii\db\Query())
                 ->select('p.services_number, '
                         . 'p.services_id, '
+                        . 'p.date_closed, '
                         . 'c.category_name, '
                         . 's.service_name, '
                         . 'p.created_at, p.services_comment, '
@@ -230,7 +231,7 @@ class PaidServices extends ActiveRecord
         
         $this->status = $status;
         
-        if ($status == StatusRequest::STATUS_CLOSE) {
+        if ($status == StatusRequest::STATUS_CLOSE || $status == StatusRequest::STATUS_REJECT) {
             $this->date_closed = time();
         } else {
             $this->date_closed = null;
@@ -241,7 +242,7 @@ class PaidServices extends ActiveRecord
             Notifications::createNoticeStatus(Notifications::TYPE_CHANGE_STATUS_IN_PAID_REQUEST, $this->services_id, $status);
         }
         
-        return $this->save() ? true : false;
+        return $this->save(false) ? true : false;
         
     }
     
