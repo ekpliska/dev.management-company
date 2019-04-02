@@ -71,14 +71,14 @@ class User extends ActiveRecord implements IdentityInterface
             ['user_email', 'unique', 
                 'targetClass' => self::className(),
                 'targetAttribute' => 'user_email',
-                'message' => 'Данный электронный адрес уже используется в системе',
+                'message' => 'Указанный электронный адрес уже зарегистрирован в системе.',
                 'on' => self::SCENARIO_EDIT_PROFILE,
             ],
             
             ['user_mobile', 'unique', 
                 'targetClass' => self::className(),
                 'targetAttribute' => 'user_mobile',
-                'message' => 'Пользователь с введенным номером мобильного телефона в системе уже зарегистрирован',
+                'message' => 'Указанный номер телефона уже зарегистрирован в системе.',
                 'on' => self::SCENARIO_EDIT_PROFILE,
             ],
             
@@ -87,14 +87,14 @@ class User extends ActiveRecord implements IdentityInterface
             ['user_mobile', 'unique', 
                 'targetClass' => self::className(),
                 'targetAttribute' => 'user_mobile',
-                'message' => 'Пользователь с введенным номером мобильного телефона в системе уже зарегистрирован',
+                'message' => 'Указанный номер телефона уже зарегистрирован в системе.',
                 'on' => self::SCENARIO_EDIT_ADMINISTRATION_PROFILE,
             ],
 
             ['user_mobile', 'unique', 
                 'targetClass' => self::className(),
                 'targetAttribute' => 'user_mobile',
-                'message' => 'Пользователь с введенным номером мобильного телефона в системе уже зарегистрирован',
+                'message' => 'Указанный номер телефона уже зарегистрирован в системе.',
             ],
             
 //            [['user_email'], 'required', 'on' => self::SCENARIO_EDIT_CLIENT_PROFILE],

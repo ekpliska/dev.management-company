@@ -107,7 +107,8 @@ class ClientsController extends AppManagersController {
                 && $client_info->load(Yii::$app->request->post()) && $client_info->load(Yii::$app->request->post())) {
             
             if (!$user_info->validate()) {
-                Yii::$app->session->setFlash('error', ['message' => 'Ошибка обновления профиля пользователя. Обновите страницу и повторите действие еще раз.']);
+                $error_message = reset($user_info->getFirstErrors());
+                Yii::$app->session->setFlash('error', ['message' => "Ошибка обновления профиля пользователя. {$error_message}"]);
                 return $this->redirect(Yii::$app->request->referrer);
             }
             
@@ -134,30 +135,28 @@ class ClientsController extends AppManagersController {
         
         // Если переключатель Арендатор пришел из пост
         if (isset($_POST['is_rent'])) {
-            if ($client_info->load(Yii::$app->request->post())) {
-                
-                $add_rent = Yii::$app->request->post('AddRent');
-                
+            if ($client_info->load(Yii::$app->request->post()) && $client_info->validate()) {
                 // Сохраняем данные существующего арендатора
-                if ($edit_rent != null) {
+                if (!empty($edit_rent)) {
                     if ($edit_rent->load(Yii::$app->request->post())) {
                         // Если есть ошибки валидации
-                        if ($edit_rent->hasErrors()) {
-                            Yii::$app->session->setFlash('error', ['message' => 'Ошибка обновления профиля пользователя. Обновите страницу и повторите действие еще раз.']);
-                            return $this->redirect(Yii::$app->request->referrer);
+                        if (!$edit_rent->save()) {
+                            $error_message = reset($edit_rent->getFirstErrors());
+                            Yii::$app->session->setFlash('error', ['message' => "Ошибка обновления профиля пользователя. {$error_message}"]);
+                            return false;
                         }
-                        $edit_rent->save();
                     }
                 }
-
                 Yii::$app->session->setFlash('success', ['message' => "Учетная запись собсвенника {$client_info->fullName} успешно обновлена."]);
                 $client_info->save();
+                return true;
             }
         } else {
             // Если переключатель Арендатор, не пришли из пост, сохраняем данные только собственника
             if ($client_info->load(Yii::$app->request->post())) {
                 Yii::$app->session->setFlash('success', ['message' => "Учетная запись собсвенника {$client_info->fullName} успешно обновлена."]);
                 $client_info->save();
+                return true;
             }
         }
         
