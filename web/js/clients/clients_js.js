@@ -498,6 +498,7 @@ $(document).ready(function() {
             $(this).removeClass('active');
         });
         $(this).addClass('active');
+        $('.status-request > li > a').first().addClass('req-bange-unactive');
         
         $.ajax({
             url: 'requests/filter-by-type-request',
