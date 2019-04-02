@@ -21,6 +21,7 @@
     use app\modules\dispatchers\models\form\RequestForm;
     use app\modules\dispatchers\models\form\PaidRequestForm;
     use app\models\CategoryServices;
+    use app\models\Houses;
 
 /**
  * Заявки, Платные услуги
@@ -37,11 +38,12 @@ class RequestsController extends AppDispatchersController {
         $servise_category = CategoryServices::getCategoryNameArray();
         // Статусы заявок
         $status_list = StatusRequest::getStatusNameArray();
-        
         // Загружаем список всех спициалистов
         $specialist_lists = ArrayHelper::map(Specialists::getListSpecialists()->all(), 'id', function ($data) {
             return FormatFullNameUser::nameEmployee($data['surname'], $data['name'], $data['second_name']);
         });
+        // Список всех домов
+        $house_lists = Houses::getHousesList();
         
         switch ($block) {
             case 'requests':
@@ -71,6 +73,7 @@ class RequestsController extends AppDispatchersController {
             'flat' => [],
             'servise_category' => $servise_category,
             'status_list' => $status_list,
+            'house_lists' => $house_lists,
         ]);
         
     }

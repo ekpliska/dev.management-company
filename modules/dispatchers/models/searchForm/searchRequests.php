@@ -10,15 +10,16 @@
 class searchRequests extends Requests {
     
     public $value;
-    public $account_number;
+    public $house_id;
     public $date_start;
     public $date_finish;
     
     public function rules() {
         
         return [
-            [['value', 'account_number'], 'string'],
-            [['value', 'account_number'], 'trim'],
+            [['value'], 'string'],
+            [['value'], 'trim'],
+            [['house_id'], 'trim'],
             
             [['requests_type_id', 'status'], 'integer'],
             
@@ -41,7 +42,7 @@ class searchRequests extends Requests {
                         . 'pa.account_number as account_number, '
                         . 'es.employee_id as employee_id_s, es.employee_surname as surname_s, es.employee_name as name_s, es.employee_second_name as sname_s, '
                         . 'c.clients_surname as clients_surname, c.clients_second_name as clients_second_name, c.clients_name as clients_name, '
-                        . 'h.houses_gis_adress as gis_adress, h.houses_number as house, '
+                        . 'h.houses_id as houses_id, h.houses_gis_adress as gis_adress, h.houses_number as house, '
                         . 'f.flats_porch as porch, f.flats_floor as floor, '
                         . 'f.flats_number as flat')
                 ->from('requests as r')
@@ -77,6 +78,8 @@ class searchRequests extends Requests {
         $query->andFilterWhere(['=', 'status', $this->status]);
         $query->andFilterWhere(['=', 'requests_type_id', $this->requests_type_id]);
         $query->andFilterWhere(['=', 'requests_specialist_id', $this->requests_specialist_id]);
+        
+        $query->andFilterWhere(['=', 'houses_id', $this->house_id]);
         
         if (!empty($this->date_start)) {
             $date_start = strtotime($this->date_start);

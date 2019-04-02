@@ -47,6 +47,11 @@
             </div>
             
             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                <?= $form->field($search_model, 'house_id')->dropDownList($house_lists, [
+                        'prompt' => '[Дома]',
+                        'class' => 'form-control _dropdown-subpanel _small']) ?>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
                 <?= $form->field($search_model, 'date_start')
                         ->widget(DatePicker::className(), [
                             'id' => 'date-start',
