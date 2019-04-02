@@ -124,12 +124,12 @@ $this->params['breadcrumbs'][] = 'Новая запись [Сотрудник]';
                             'id' => 'date-input',
                             'language' => 'ru',
                             'options' => [
-                                'placeHolder' => 'ГГГГ-ММ-ДД',
+                                'placeHolder' => 'ДД-ММ-ГГГГ',
                             ],
                             'type' => DatePicker::TYPE_COMPONENT_APPEND,
                             'pluginOptions' => [
                                 'autoClose' => true,
-                                'format' => 'yyyy-mm-dd',
+                                'format' => 'dd-mm-yyyy',
                             ]])
                         ->label($model->getAttributeLabel('birthday'), ['class' => 'date-label']) ?>
                 

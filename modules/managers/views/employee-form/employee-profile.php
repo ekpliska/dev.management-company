@@ -177,12 +177,12 @@ $this->params['breadcrumbs'][] = $employee_info->fullName;
                                 'id' => 'date-input',
                                 'language' => 'ru',
                                 'options' => [
-                                    'placeholder' => 'Дата рождения',
+                                    'placeHolder' => 'ДД-ММ-ГГГГ',
                                 ],
                                 'type' => DatePicker::TYPE_COMPONENT_APPEND,
                                 'pluginOptions' => [
                                     'autoClose' => true,
-                                    'format' => 'yyyy-mm-dd',
+                                    'format' => 'dd-mm-yyyy',
                                 ]])
                             ->label($employee_info->getAttributeLabel('employee_birthday'), ['class' => 'date-label'])?>
                     
