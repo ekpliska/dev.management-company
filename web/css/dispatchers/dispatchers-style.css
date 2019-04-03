@@ -160,13 +160,60 @@ and open the template in the editor.
     font-size: 14px;
     /*font-weight: bold;*/
 }
+.panel__request_block {
+    border: none;
+}
+.panel-default > .panel-heading-0 {
+    background-color: transparent;
+    border: 2px solid #598eff;
+    border-radius: 25px;
+}
+.panel-default > .panel-heading-1 {
+    background-color: transparent;
+    border: 2px solid #ff7d7d;
+    border-radius: 25px;
+}
+.panel-default > .panel-heading-1 {
+    background-color: transparent;
+    border: 2px solid #ff7d7d;
+    border-radius: 25px;
+}
+.panel-default > .panel-heading-2 {
+    background-color: transparent;
+    border: 2px solid #e17dff;
+    border-radius: 25px;
+}
+.panel-default > .panel-heading-3 {
+    background-color: transparent;
+    border: 2px solid #7c7c7c;
+    border-radius: 25px;
+}
+.panel-default > .panel-heading-4 {
+    background-color: transparent;
+    border: 2px solid #1fd68d;
+    border-radius: 25px;
+}
+.panel-default > .panel-heading-5 {
+    background-color: #ccc;
+    border: 2px solid #ccc;
+    border-radius: 25px;
+}
+.panel-default h4.panel-title {
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: right;
+}
+.date-create-request {
+    text-align: center;
+    font-size: 12px;
+    padding: 10px 0;
+}
 .dispatcher_genaral-page__request_block {
-    border: 1px solid #ddd;
-    border-radius: 12px;
+    border-bottom: 1px solid #ddd;
     height: 170px;
     padding: 10px 0 0 0;
     margin-bottom: 15px;
-    box-shadow: 0 4px 26px 0 rgba(51, 29, 82, 0.16);
 }
 .request_block__info {
     display: inline-grid;
@@ -185,18 +232,6 @@ and open the template in the editor.
     height: 40px;
     margin-right: 5px;
     border-radius: 12px;
-}
-.request_block__info > span {
-    margin: 10px 0;
-}
-.request_block__info > span.request_number {
-    padding: 7px 10px;
-    background: #2d18b4;
-    color: #fff;
-    border-radius: 25px;
-    width: 150px;
-    font-size: 12px;
-    text-align: center;
 }
 .news-block__news-item {
     border-bottom: 1px solid #ddd;
@@ -260,13 +295,15 @@ a.news-block__create-link:before {
     padding-right: 10px;
 }
 a.request__link-view {
-    font-size: 13px;
-    font-weight: bold;
-    padding: 0;
-    color: #2d18b4;
+    padding: 7px 10px;
+    background-color: #2d18b4;
+    color: #fff;
+    border-radius: 25px;
+    font-size: 12px;
+    text-align: center;
 }
 a.request__link-view:hover {
-    color: #f0754a;
+    background-color: #3231ab;
 }
 /* Конец Диспетчер, главная страница */
 

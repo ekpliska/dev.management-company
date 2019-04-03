@@ -12,6 +12,7 @@
     use app\models\CategoryServices;
     use app\models\Services;
     use app\models\PersonalAccount;
+    use app\models\StatusRequest;
 
 /**
  * Диспетчеры
@@ -44,6 +45,8 @@ class DispatchersController extends AppDispatchersController {
         $servise_name = [];        
         // Жилой массив
         $flat = [];
+        // Статусы заявок
+        $status_list = StatusRequest::getStatusNameArray();
         
         switch ($block) {
             case 'requests':
@@ -65,6 +68,7 @@ class DispatchersController extends AppDispatchersController {
             'servise_category' => $servise_category,
             'servise_name' => $servise_name,
             'flat' => $flat,
+            'status_list' => $status_list,
         ]);
         
     }
@@ -77,6 +81,8 @@ class DispatchersController extends AppDispatchersController {
         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $user_id = Yii::$app->request->post('userID');
         $type = Yii::$app->request->post('type');
+        // Статусы заявок
+        $status_list = StatusRequest::getStatusNameArray();
         
         if (Yii::$app->request->isAjax) {
             switch ($type) {
@@ -90,7 +96,7 @@ class DispatchersController extends AppDispatchersController {
                     return ['success' => false];
             }
             
-            $data = $this->renderPartial("request-block/{$type}_list", ['user_lists' => $request_list]);
+            $data = $this->renderPartial("request-block/{$type}_list", ['user_lists' => $request_list, 'status_list' => $status_list]);
             return [
                 'success' => true,
                 'data' => $data,
