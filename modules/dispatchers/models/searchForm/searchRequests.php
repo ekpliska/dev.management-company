@@ -19,7 +19,7 @@ class searchRequests extends Requests {
         return [
             [['value'], 'string'],
             [['value'], 'trim'],
-            [['house_id'], 'trim'],
+            [['house_id'], 'integer'],
             
             [['requests_type_id', 'status'], 'integer'],
             

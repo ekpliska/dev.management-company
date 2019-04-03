@@ -73,21 +73,6 @@ class Houses extends ActiveRecord
             
         ];
     }
-    
-//    public function validateNumberHouse() {
-//        
-//        $house = Houses::find()
-//                ->where(['houses_street' => $this->houses_street])
-//                ->andWhere(['houses_number_house' => $this->houses_number_house])
-//                ->asArray()
-//                ->one();
-//        
-//        if ($house !== null) {
-//            $errorMsg = 'Указанный номер дома в выбранном жилом комплексе не является уникальным';
-//            $this->addError('houses_number_house', $errorMsg);
-//        }
-//        
-//    }
 
     /**
      * Связь с таблицей Квартиры
@@ -159,7 +144,8 @@ class Houses extends ActiveRecord
         
         return $for_list == false ? 
                 ArrayHelper::map($houses, 'houses_id', function($data) {
-                    return $data['houses_gis_adress'] . ', ' . $data['houses_number'];
+                    $house_address = substr($data['houses_gis_adress'], 8);
+                    return $house_address . ', ' . $data['houses_number'];
                 }) : $houses;
     }    
     

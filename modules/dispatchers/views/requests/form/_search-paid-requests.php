@@ -21,33 +21,39 @@
         ]); ?>
         
         <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+            
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
                 <?= $form->field($search_model, 'value')
                         ->input('text', [
                             'class' => 'form-control _search-input', 
-                            'placeHolder' => 'ID заявки'])
+                            'placeHolder' => 'ID заявки или Лицевой счет'])
                         ->label(false) ?>
             </div>
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
-                <?= $form->field($search_model, 'account_number')
-                        ->input('text', [
-                            'class' => 'form-control _search-input', 
-                            'placeHolder' => 'Лицевой счет'])
-                        ->label(false) ?>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
                 <?= $form->field($search_model, 'services_name_services_id')
                         ->dropDownList($name_services, [
                             'prompt' => '[Услуга]',
                             'class' => 'form-control _dropdown-subpanel']) ?>
             </div>
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
                 <?= $form->field($search_model, 'services_specialist_id')
                         ->dropDownList($specialist_lists, [
                             'prompt' => '[Специалист]',
                             'class' => 'form-control _dropdown-subpanel']) ?>
             </div>
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                <?= $form->field($search_model, 'status')
+                        ->dropDownList($status_list, [
+                            'prompt' => '[Статус]',
+                            'class' => 'form-control _dropdown-subpanel']) ?>
+            </div>
+            
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                <?= $form->field($search_model, 'house_id')->dropDownList($house_lists, [
+                        'prompt' => '[Дом]',
+                        'class' => 'form-control _dropdown-subpanel _small']) ?>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                 <?= $form->field($search_model, 'date_start')
                     ->widget(DatePicker::className(), [
                         'id' => 'date-start',
@@ -63,7 +69,7 @@
                         ]])
                     ->label(false) ?>
             </div>
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                 <?= $form->field($search_model, 'date_finish')
                     ->widget(DatePicker::className(), [
                         'id' => 'date-finish',

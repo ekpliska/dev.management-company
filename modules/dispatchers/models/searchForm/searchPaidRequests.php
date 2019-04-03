@@ -10,19 +10,20 @@
 class searchPaidRequests extends PaidServices {
     
     public $value;
-    public $account_number;
+    public $house_id;
     public $date_start;
     public $date_finish;
     
     public function rules() {
         
         return [
-            [['value', 'account_number'], 'string'],
-            [['value', 'account_number'], 'trim'],
+            [['value'], 'string'],
+            [['value'], 'trim'],
+            [['house_id'], 'integer'],
             
             [['services_name_services_id'], 'integer'],
             
-            [['services_specialist_id'], 'integer'],
+            [['services_specialist_id', 'status'], 'integer'],
             
             [['date_start', 'date_finish'], 'date', 'format' => 'php:Y-m-d']
             
@@ -79,15 +80,12 @@ class searchPaidRequests extends PaidServices {
         if (!empty($this->value)) {
             $_value = (int)$this->value;
             $query->andFilterWhere(['=', 'services_number', $_value]);
-        }
-        
-        if (!empty($this->account_number)) {
-            $_value = $this->account_number;
-            $query->andFilterWhere(['=', 'account_number', $_value]);
+            $query->orFilterWhere(['=', 'account_number', $_value]);
         }
         
         $query->andFilterWhere(['=', 'services_name_services_id', $this->services_name_services_id]);
         $query->andFilterWhere(['=', 'services_specialist_id', $this->services_specialist_id]);
+        $query->andFilterWhere(['=', 'status', $this->status]);
         
         if (!empty($this->date_start)) {
             $date_start = strtotime($this->date_start);
