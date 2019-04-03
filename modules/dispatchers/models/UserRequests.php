@@ -22,9 +22,9 @@ class UserRequests extends Clients {
                     'user u', 
                     'personalAccount pa', 
                     'personalAccount.request rq' => function($query) {
-                        $query->andWhere(['rq.requests_dispatcher_id' => Yii::$app->profileDispatcher->employeeID]);
-                        $query->orWhere(['rq.status' => StatusRequest::STATUS_NEW]);
-                        $query->andWhere(['!=', 'rq.status', StatusRequest::STATUS_CLOSE]);
+                        $query->where(['rq.requests_dispatcher_id' => Yii::$app->profileDispatcher->employeeID]);
+//                        $query->orWhere(['rq.status' => StatusRequest::STATUS_NEW]);
+                        $query->orWhere(['!=', 'rq.status', StatusRequest::STATUS_CLOSE]);
                         $query->orderBy(['rq.created_at' => SORT_DESC]);
                     }, 
                     'personalAccount.request.image i', 
