@@ -24,8 +24,8 @@ class UserRequests extends Clients {
                     'personalAccount.request rq' => function($query) {
                         $query->where(['rq.requests_dispatcher_id' => Yii::$app->profileDispatcher->employeeID]);
 //                        $query->orWhere(['rq.status' => StatusRequest::STATUS_NEW]);
-                        $query->orWhere(['!=', 'rq.status', StatusRequest::STATUS_CLOSE]);
-                        $query->orderBy(['rq.created_at' => SORT_DESC]);
+                        $query->where(['<>', 'rq.status', StatusRequest::STATUS_CLOSE]);
+                        $query->orderBy(['rq.status' => SORT_DESC]);
                     }, 
                     'personalAccount.request.image i', 
                     'personalAccount.flat fl', 
@@ -48,8 +48,8 @@ class UserRequests extends Clients {
                     'personalAccount pa', 
                     'personalAccount.paidRequest ps' => function($query) {
                         $query->andWhere(['ps.services_dispatcher_id' => Yii::$app->profileDispatcher->employeeID]);
-//                        $query->orWhere(['ps.status' => StatusRequest::STATUS_NEW]);
-                        $query->orWhere(['!=', 'ps.status', StatusRequest::STATUS_CLOSE]);
+                        $query->orWhere(['ps.status' => StatusRequest::STATUS_NEW]);
+                        $query->andWhere(['!=', 'ps.status', StatusRequest::STATUS_CLOSE]);
                         $query->orderBy(['ps.created_at' => SORT_DESC]);
                     }, 
                     'personalAccount.flat fl', 
