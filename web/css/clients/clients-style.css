@@ -122,7 +122,7 @@
     color: #000;
 }
 .account-balance {
-    margin: 10px 40px 0;
+    margin: 15px 40px 0;
     background-color: #fff;
     padding: 3px 50px 4px 30px;
     border-radius: 25px;
@@ -268,31 +268,52 @@
     border: 1px solid #ddd;
 }
 .client-page__news > div[class*="col-"] > div {
-    height: 200px;
+    height: 250px;
     border: 1px solid #ddd;
+    border-radius: 12px;
 }
 .news-item {
     position: relative;
     overflow: hidden;
 }
-.news-item img {
+.news-item .news-item__preview {
     height: 100%;
     width: 100%;
 }
 .news-item__rubric {
-    padding: 5px 10px;
-    font-size: 12px;
+    font-size: 14px;
     position: absolute;
-    top: 0%;
+    top: 10%;
+    left: 5%;
     color: #fff;
-    border: 1px solid #fff;
     border-radius: 50px;
-    margin: 10px;
+    letter-spacing: 0.1em;
 }
-.news-item__title,
-.news-item__date {
+.news-item__info {
     position: absolute;
     bottom: 0%;
+    padding: 0 10px;
+}
+.news-item__title {
+    font-size: 20px;
+    color: #fff;
+    letter-spacing: 0.1em;
+    padding: 15px 0;
+    margin: 0;    
+}
+.news-item__date {
+    font-size: 12px;
+    color: #fff;
+    letter-spacing: 0.1em;
+    font-weight: bold;
+}
+.news__partner-logo {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    border-radius: 100%;
 }
 /* Конец Собственник, главная страница, Новости */
 

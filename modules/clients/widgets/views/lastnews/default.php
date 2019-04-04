@@ -13,12 +13,19 @@
 <?php foreach ($news as $key => $post) : ?>
     <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
         <div class="news-item">
-            <?= Html::img('/web/' . $post['news_preview']) ?>
+            <?= Html::img(Yii::getAlias('@web') . $post['news_preview'], ['class' => 'news-item__preview']) ?>
             <span class="news-item__rubric"><?= $post['rubric']['rubrics_name'] ?></span>
-            <p class="news-item__title">
-                <?= FormatHelpers::formatDate($post['created_at'], false) ?>
-                <?= FormatHelpers::shortTextNews($post['news_text'], 17) ?>
-            </p>
+            <?php if (!empty($post['news_partner_id'])) : ?>
+                <?= Html::img(Yii::getAlias('@web') . $post['partner']['partners_logo'], ['class' => 'news__partner-logo', 'alt' => $post['partner']['partners_name']]) ?>
+            <?php endif; ?>
+            <div class="news-item__info">
+                <h2 class="news-item__title">
+                    <?= FormatHelpers::shortTitleOrText($post['news_title'], 65) ?>
+                </h2>
+                <p class="news-item__date">
+                    <?= FormatHelpers::formatDate($post['created_at'], false) ?>
+                </p>
+            </div>
         </div>
     </div>
 <?php endforeach; ?>

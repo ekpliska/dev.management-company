@@ -191,12 +191,11 @@ class News extends ActiveRecord
                     'news_partner_id', 'news_preview', 
                     'news_text', 
                     'created_at', 
-                    'slug', 'rubrics_name', 'isAdvert', 'partners_name'])
+                    'slug', 'rubrics_name', 'isAdvert', 'partners_name', 'partners_logo'])
                 ->joinWith(['rubric', 'partner'])
                 ->andWhere(['news_house_id' => $living_space['houses_id']])
                 ->orWhere(['news_status' => 'all'])
                 ->orderBy(['created_at' => SORT_DESC]);
-        
         if ($rubric != null) {
             $news->andWhere(['news_type_rubric_id' => $rubric]);
         }
