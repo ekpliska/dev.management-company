@@ -118,7 +118,7 @@ class Voting extends ActiveRecord
     public function getParticipant() {
         return $this->hasMany(RegistrationInVoting::className(), ['voting_id' => 'voting_id'])
                 ->with('user')
-                ->where(['finished' => RegistrationInVoting::STATUS_FINISH_YES]);
+                ->where(['status' => RegistrationInVoting::STATUS_ENABLED]);
     }
 
     /*

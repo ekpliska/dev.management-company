@@ -4,6 +4,7 @@
     use Yii;
     use app\models\Voting;
     use app\models\Houses;
+    use app\models\RegistrationInVoting;
     
 /**
  * Опрос
@@ -37,24 +38,33 @@ class VoteList extends Voting {
                 ->orderBy(['created_at' => SORT_DESC])
                 ->all();
         
-        
         foreach ($vote_lists as $key_vote => $vote_list) {
-            // Тело опроса
-            $_vote = [
-                'vote_id' => $vote_list->voting_id,
-                'vote_title' => $vote_list->voting_title,
-            ];
             
             // Участники опроса, которые завершили голосование
             $participants = [];
+            $status_current_user = null;
             foreach ($vote_list->participant as $key_participant => $participant) {
+                
                 $_participant[$key_participant] = [
                     'user_id' => $participant->user->user_id,
                     'user_image' => $participant->user->photo,
                 ];
                 $participants = $_participant;
+                if ($participant->user->user_id == Yii::$app->user->getId()) {
+                    $status_current_user = ($participant->finished == RegistrationInVoting::STATUS_FINISH_YES) ? 'finished' : $participant->status;
+                }
             }
             $_participant = null;
+            
+            // Тело опроса
+            $_vote = [
+                'vote_id' => $vote_list->voting_id,
+                'vote_image' => $vote_list->voting_image,
+                'vote_title' => $vote_list->voting_title,
+                'voting_text' => $vote_list->voting_text,
+                'vote_date' => $vote_list->created_at,
+                'status' => $status_current_user,
+            ];            
             
             // Результат
             $results[] = [
