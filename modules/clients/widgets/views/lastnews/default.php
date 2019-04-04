@@ -11,7 +11,7 @@
 
 <?php if (isset($news) && count($news) > 0) : ?>
 <?php foreach ($news as $key => $post) : ?>
-    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
         <div class="news-item">
             <?= Html::img(Yii::getAlias('@web') . $post['news_preview'], ['class' => 'news-item__preview']) ?>
             <span class="news-item__rubric"><?= $post['rubric']['rubrics_name'] ?></span>

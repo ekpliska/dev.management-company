@@ -27,7 +27,7 @@ class LastNews extends Widget {
         
         $pages = new Pagination([
             'totalCount' => $news->count(), 
-            'pageSize' => 4, 
+            'pageSize' => 3, 
             'forcePageParam' => false, 
             'pageSizeParam' => false,
         ]);

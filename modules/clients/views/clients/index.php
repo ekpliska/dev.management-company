@@ -1,6 +1,7 @@
 <?php
 
     use app\modules\clients\widgets\LastNews;
+    use app\modules\clients\widgets\LastServices;
     
 
 /*
@@ -31,12 +32,7 @@ $this->title = Yii::$app->params['site-name'] . "Главная";
         <h1>
             Услуги
         </h1>
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-            <div class="service-item">1</div>
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-            <div class="service-item">1</div>
-        </div>
+        <?= LastServices::widget() ?>
     </div>
     <div class="row client-page__news">
         <h1>
