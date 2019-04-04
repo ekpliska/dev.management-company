@@ -39,11 +39,9 @@
                 </li>
                 <li>
                     <p class="account-balance">
+                        <?= Yii::$app->userProfile->balance ?>
                         <span class="<?= Yii::$app->userProfile->balance > 0 ? 'defaul' : 'minus' ?>">
                             <i class="glyphicon glyphicon-ruble"></i>
-                        </span>
-                        <span>
-                            <?= Yii::$app->userProfile->balance ?>
                         </span>
                     </p>
                 </li>

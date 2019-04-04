@@ -39,7 +39,6 @@
 }
 .navbar_user-block {
     display: inline-flex;
-    width: 270px;
     color: #fff;
 }
 .navbar_user-block__info {
@@ -50,7 +49,9 @@
     color: #fff;
     padding: 0;
     margin: 0;
+    font-size: 14px;
     text-align: right;
+    letter-spacing: 0.1em;
 }
 .navbar_user-block_link-logout {
     float: right;
@@ -78,25 +79,33 @@
     color: #000;
 }
 .account-balance {
-    padding: 15px 40px 0;
-    color: #fff;
+    margin: 10px 40px 0;
+    background-color: #fff;
+    padding: 5px 50px 5px 30px;
+    border-radius: 25px;
+    position: relative;
+    font-weight: bold;
+    letter-spacing: 0.2em;
 }
 .account-balance > span.defaul {
-    padding: 6px 8px;
-    border-radius: 50%;
-    background-color: #fff;
+    padding: 7px 13px;
+    border-radius: 25px;
+    background-color: #ff1760;
+    color: #fff;
+    font-size: 12px;
+    position: absolute;
+    top: 0px;
     color: #1fd68d;
-    font-size: 11px;
 }
 .account-balance > span.minus {
-    padding: 6px 8px;
-    border-radius: 50%;
-    background-color: #fff;
-    color: #ef693a;
-    font-size: 11px;
-}
-.account-balance > span:last-child {
-    padding: 0 10px;
+    padding: 7px 13px;
+    border-radius: 25px;
+    background-color: #ff1760;
+    color: #fff;
+    font-size: 12px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
 }
 /* Конец Выпадающее меню навигации */
 
