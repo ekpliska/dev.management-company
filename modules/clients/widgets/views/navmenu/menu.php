@@ -10,10 +10,12 @@ $count = 0;
 $controller = Yii::$app->controller->id;
 ?>
 
-<div class="list-group">
+<ul class="menu-clients__navbar">
     <?php foreach ($menu_array as $key => $item) : ?>
-        <a href="<?= Url::to([$item['link']]) ?>" class="list-group-item">
-            <?= $item['name'] ?>
-        </a>
+        <li>
+            <a href="<?= Url::to([$item['link']]) ?>">
+                <?= $item['name'] ?>
+            </a>
+        </li>
     <?php endforeach; ?>
-</div>
+</ul>
