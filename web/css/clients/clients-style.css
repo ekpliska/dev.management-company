@@ -4,6 +4,7 @@
 */
 .content-clients {
     border-left: 1px solid #ddd;
+    height: 100vh;
 }
 /* NavBar */
 .menu-clients {
