@@ -4,7 +4,8 @@
 */
 .content-clients {
     border-left: 1px solid #ddd;
-    height: 100vh;
+    height: 100%;
+    min-height: 870px;
 }
 /* NavBar */
 .menu-clients {
@@ -974,8 +975,8 @@ span.dot {
 }
 .count-label {
     position: absolute;
-    top: -7px;
-    right: -4px;
+    top: -15%;
+    right: 10%;
     background: #EF693A;
     font-size: 10px;
     color: #fff;
@@ -1459,14 +1460,13 @@ span.dot {
 
 /* Статусы заявок, таблица */
 .badge {
-    height: 35px;
+    height: 30px;
     width: 100px;
     background: #fff;
     color: #000;
     border-radius: 25px;
     font-size: 9px;
-    line-height: 18px;
-    padding-top: 8px;
+    line-height: 20px;
     text-transform: uppercase;
     cursor: default;
 }
@@ -2783,9 +2783,8 @@ p.date-start-vote {
 }
 .status-request > li > a {
     border-radius: 25px;
-    font-size: 12px;
+    font-size: 10px;
     color: #000;
-/*    padding: 10px 0;*/
     margin: 0 30px;
     font-weight: bold;
     text-transform: uppercase;

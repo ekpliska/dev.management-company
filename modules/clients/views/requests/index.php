@@ -14,19 +14,23 @@ $this->params['breadcrumbs'][] = 'Заявки';
 
 <div class="requests-page">
     
-    <div>
-        <?= StatusRequestWidget::widget(['account_id' => $this->context->_current_account_id]) ?>
-    </div>
-    
     <?= Breadcrumbs::widget([
             'homeLink' => ['label' => 'ELSA', 'url' => ['clients/index']],
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]) ?>    
     
+    <div>
+        <?= StatusRequestWidget::widget(['account_id' => $this->context->_current_account_id]) ?>
+    </div>
+
     <?= AlertsShow::widget() ?>
     
     <?= $this->render('data/grid', ['all_requests' => $all_requests]); ?>
-    <?= Html::button('', ['class' => 'create-request-btn pull-right', 'data-toggle' => 'modal', 'data-target' => '#add-request-modal']) ?>
+    
+    <?= Html::button('', [
+            'class' => 'create-request-btn pull-right', 
+            'data-toggle' => 'modal', 
+            'data-target' => '#add-request-modal']) ?>
 </div>
 
 <?= $this->render('form/add-request', ['model' => $model, 'type_requests' => $type_requests]) ?>
