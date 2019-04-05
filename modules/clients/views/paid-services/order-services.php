@@ -1,24 +1,19 @@
 <?php
 
-    use yii\widgets\Breadcrumbs;
     use app\modules\clients\widgets\AlertsShow;
     use app\modules\clients\widgets\ModalWindows;
+    use app\modules\clients\widgets\SubBarPaidService;
     
 /* 
  * Заявки (Обзая страница)
  */
 $this->title = Yii::$app->params['site-name'] . 'История услуг';
-$this->params['breadcrumbs'][] = ['label' => 'Услуги', 'url' => ['paid-services/index']];
-$this->params['breadcrumbs'][] = 'История услуг';
 ?>
 
 
 <div class="paid-requests-history">
     
-    <?= Breadcrumbs::widget([
-            'homeLink' => ['label' => 'ELSA', 'url' => ['clients/index']],
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-    ]) ?>  
+    <?= SubBarPaidService::widget(['view_name' => 'search-panel']) ?>
     
     <?= AlertsShow::widget() ?>
     

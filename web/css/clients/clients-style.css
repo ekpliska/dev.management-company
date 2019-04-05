@@ -6,7 +6,7 @@
     border-left: 1px solid #ddd;
     height: 100%;
     min-height: 870px;
-    padding: 0 10px;
+    padding: 10px;
     margin: 0;
 }
 /* NavBar */
@@ -1007,7 +1007,7 @@ span.dot {
     vertical-align: middle;
     text-align: center;
     border: none;
-    padding: 25px 0;
+    padding: 15px 0;
 }
 .clients-table > tbody > tr > td {
     vertical-align: middle;
@@ -1684,9 +1684,7 @@ a.btn-history:hover {
 /* Конец Платные услуги */
 
 /* История платных услуг */
-.paid-requests-history {
-    margin-top: 140px;
-}
+.paid-requests-history {}
 form#search-form .form-group {
     margin: 0;
 }
@@ -1695,52 +1693,21 @@ form#search-form {
     padding: 7px;
 }
 .search-block__input-dark {
-    background: transparent;
-    color: #fff;
-    width: 340px;
-    padding: 7px 20px;
-    border: none;
-    border-bottom: 1px solid #ddd;
+    background-size: 16%;
+    background-image: url(../../images/searchicon.png);
+    background-position: 0%;
+    background-repeat: no-repeat;
+    color: #454545;
+    width: 100%;
+    padding: 3px 20px 3px 40px;
+    border: 1px solid #ddd;
+    border-radius: 25px;
     outline: none;
+    font-size: 12px;
 }
 .search-block__input-dark::placeholder {
     color: #ddd;
-    text-align: center;
-    background-repeat: no-repeat;
-    background-size: 10%;
-    background-image: url('../images/searchicon_white.png');
-    background-position: 64%;
 }
-/*input[id="_search-input"] {
-    background: url(/images/clients/search.svg) no-repeat 20px 10px;
-    border: 1px solid #ccc;
-    border-radius: 10em;
-    box-sizing: content-box;
-    transition: all 0.5s ease 0s;
-    background-size: 5%;
-    padding: 0 54px;
-    width: 250px;
-    color: #fffd;
-    font-size: 14px;
-}
-input[id="_search-input"]:focus {
-    background-color: transparent;
-    border-color: #8b709d;
-    box-shadow: 0 0 5px #8b709d;
-    color: #fff;
-}
-input[id="_search-input"]::-webkit-input-placeholder { 
-  color: #fff;
-}
-input[id="_search-input"]::-moz-placeholder {
-  color: #fff;
-}
-input[id="_search-input"]:-ms-input-placeholder {
-  color: #fff;
-}
-input[id="_search-input"]:-moz-placeholder {
-  color: #fff;
-}*/
 /* Конец История платных услуг */
 
 /* Лицевой счет */
