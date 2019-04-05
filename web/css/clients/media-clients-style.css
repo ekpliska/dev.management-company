@@ -1,0 +1,19 @@
+/*
+ * Media Clients CSS style
+ * 29-03-2019
+*/
+/* NavBar */
+@media screen and (max-width: 1200px) {
+    .container-fluid {
+        padding: 10px;
+    }
+    .navbar-brand > img {
+        margin: 0 -20px;
+        width: 140px;
+    }
+    .select-current-account {
+        width: 170px;
+    }
+}
+
+/* End NavBar */

@@ -14,6 +14,7 @@ class ClientsAsset extends AssetBundle {
     
     public $css = [
         'css/clients/clients-style.css',
+        'css/clients/media-clients-style.css',
         'css/form-style.css',
         'js/lib-rating-plugin/jquery.raty.css',
     ];

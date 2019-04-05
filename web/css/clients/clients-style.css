@@ -46,7 +46,7 @@
     background-size: cover;
     background-repeat: no-repeat;
     border: none;
-    box-shadow: #333 0px 0px 2px 0px;
+    /*box-shadow: #333 0px 0px 2px 0px;*/
 }
 .container-fluid {
     padding: 20px;
@@ -2732,6 +2732,7 @@ p.date-start-vote {
     letter-spacing: 0.1em;
     border-radius: 25px;
     width: 140px;
+    margin: 3px;
 }
 .status-request .nav > li > a:hover {
     background-color: #fff;
