@@ -1,6 +1,7 @@
 <?php
 
     use yii\helpers\Html;
+    use yii\bootstrap\Modal;
 
 /* 
  * Услуги Для главной страницы
@@ -23,11 +24,29 @@
                 <p>
                     <?= $service->service_description ?>
                 </p>
-                    <?= Html::a('Заказать',
-                            ['create-paid-request', 'category' => $service['category']['category_id'], 'service' => $service['service_id']], 
-                            ['class' => 'btn-link card-link-blue new-rec']) ?>                    
+                <?= Html::a('Заказать',
+                        ['paid-services/create-paid-request', 
+                            'category' => $service->service_category_id, 
+                            'service' => $service->service_id], 
+                        ['class' => 'order-to-service new-rec']) ?>                    
             </div>
         </div>
     </div>
 <?php endforeach; ?>
 <?php endif; ?>
+
+<?php
+    Modal::begin([
+        'id' => 'add-paid-request-modal',
+        'header' => 'Заявка на платную услугу',
+        'closeButton' => [
+            'class' => 'close modal-close-btn btn__paid_service_close',
+        ],
+        'clientOptions' => [
+            'backdrop' => 'static',
+            'keyboard' => false,
+        ],
+    ]);
+?>
+    
+<?php Modal::end(); ?>

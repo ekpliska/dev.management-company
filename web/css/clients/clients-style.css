@@ -19,7 +19,7 @@
     width: 100%;
 }
 .menu-clients__navbar > li {
-    display block;
+    display: block;
 }
 .menu-clients__navbar > li > a {
     display: block;
@@ -326,6 +326,8 @@
 .service-item__image > img {
     width: 100%;
     height: 100%;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
 }
 .service-item__content {
     padding: 10px;
@@ -348,6 +350,24 @@
     color: #2d18b4;
     font-weight: bold;
     padding: 5px 0;
+}
+.order-to-service {
+    position: absolute;
+    font-size: 11px;
+    padding: 10px 20px;
+    border: 1px solid #2d18b4;
+    border-radius: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: bold;
+    bottom: 0%;
+    transform: translate(50%, -50%);
+}
+.order-to-service:hover {
+    box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
+    text-decoration: none;
+    background: #2d18b4;
+    color: #fff;
 }
 /* Конец Собственник, главная страница, Новости */
 
