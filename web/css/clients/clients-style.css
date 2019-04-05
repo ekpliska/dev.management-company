@@ -100,6 +100,9 @@
     font-size: 12px;
     padding: 5px 0;
 }
+.navbar_user-block_link-logout:hover {
+    color: #fff;
+}
 .navbar_user-block__image > div.dropdown > button {
     background: transparent;
     border: none;
@@ -1595,7 +1598,7 @@ a.btn-history {
     padding: 10px 30px;
     border-radius: 12px;
     border: 1px solid #fff;
-    background-color: #2d18b4;
+    background-color: #ff1760;
     color: #fff;
     font-size: 10px;
     letter-spacing: 0.3em;

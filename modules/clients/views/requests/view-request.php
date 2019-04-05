@@ -2,7 +2,6 @@
 
     use yii\helpers\Html;
     use yii\bootstrap\Modal;
-    use yii\widgets\Breadcrumbs;
     use app\helpers\FormatHelpers;    
     use app\modules\clients\widgets\RatingRequest;
     use app\helpers\StatusHelpers;
@@ -13,21 +12,14 @@
  * Детали заявки
  */
 $this->title = Yii::$app->params['site-name'] . 'Детали заявки ' . $request_info['requests_ident'];
-$this->params['breadcrumbs'][] = ['label' => 'Заявки', 'url' => ['requests/index']];
-$this->params['breadcrumbs'][] = 'Заявка ID ' . $request_info['requests_ident'];
 ?>
-
-<?= Breadcrumbs::widget([
-        'homeLink' => ['label' => 'ELSA', 'url' => ['clients/index']],
-        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-]) ?>
 
 <?= AlertsShow::widget() ?>
 
 <div class="requests-view">
-    
     <h1 class="page-header requests-view_title">
         <i class="glyphicon glyphicon-ok <?= $request_info['is_accept'] ? 'check' : 'uncheck' ?>"></i>&nbsp;&nbsp;Заявка принята
+        <?= Html::a('Вернуться к списку заявок', ['requests/index'], ['class' => 'link-comeback pull-right']) ?>
     </h1>
     <div class="row row-flex">
         <div class="col-md-7 col-sm-6 col-xs-12 requests-border">

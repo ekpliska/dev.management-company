@@ -691,6 +691,16 @@ reset-password-sms:focus{
 }
 /* Конец Кнопки-ссылки */
 
+/* Comeback-link */
+.link-comeback,
+.link-comeback:hover {
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 2.5em;
+    color: #fff;
+    padding-right: 30px;
+}
+/* End Comeback-link */
 /* Страница 404 */
 .page_error {
     position: absolute;

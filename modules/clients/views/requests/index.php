@@ -1,7 +1,6 @@
 <?php
     
     use yii\helpers\Html;
-    use yii\widgets\Breadcrumbs;
     use app\modules\clients\widgets\AlertsShow;
     use app\modules\clients\widgets\StatusRequestWidget;
     
@@ -9,15 +8,9 @@
  * Заявки (Общая страница)
  */
 $this->title = Yii::$app->params['site-name'] . 'Заявки';
-$this->params['breadcrumbs'][] = 'Заявки';
 ?>
 
 <div class="requests-page">
-    
-    <?= Breadcrumbs::widget([
-            'homeLink' => ['label' => 'ELSA', 'url' => ['clients/index']],
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-    ]) ?>    
     
     <div>
         <?= StatusRequestWidget::widget(['account_id' => $this->context->_current_account_id]) ?>
