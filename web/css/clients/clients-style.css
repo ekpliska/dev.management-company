@@ -6,6 +6,8 @@
     border-left: 1px solid #ddd;
     height: 100%;
     min-height: 870px;
+    padding: 0 10px;
+    margin: 0;
 }
 /* NavBar */
 .menu-clients {
@@ -1590,24 +1592,22 @@ span.dot {
 /* Платные услуги */
 .paid-requests-page {}
 a.btn-history {
-    padding: 0px 50px;
+    padding: 10px 30px;
     border-radius: 12px;
     border: 1px solid #fff;
     background-color: #2d18b4;
     color: #fff;
-    font-size: 12px;
+    font-size: 10px;
     letter-spacing: 0.3em;
     text-transform: uppercase;
     font-weight: bold;
-    line-height: 4em;
+    /*line-height: 3em;*/
     float: right;
     margin-right: 25px;
 }
 a.btn-history:hover {
-    background: #fff;
     border: none;
-    color: #2d18b4;
-    border-radius: 12px;
+    box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
 }
 .service-card {
     height: 500px;
@@ -2841,13 +2841,8 @@ p.date-start-vote {
 
 /* Дополнительное навигационное меню, платные услуги */
 .navbar_paid-request {
-    background: #2d18b4;
-    padding: 15px;
-    height: 80px;
-    box-shadow: inset 0px 1px 10px -1px rgb(0, 0, 0);
-}
-.navbar_paid-request > ul {
-    margin-right: 15px;
+    padding: 15px 0;
+    /*border-bottom: 1px solid #ddd;*/
 }
 /* Конец Дополнительное навигационное меню, платные услуги */
 /* Дополнительное навигационное меню, лицевой счет */

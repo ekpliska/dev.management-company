@@ -11,20 +11,25 @@
 ?>
 
 <?php if (Yii::$app->controller->id == 'paid-services' && Yii::$app->controller->action->id == 'index') : ?>
-    <div class="container-fluid navbar_paid-request text-center menu_sub-bar">
-        <div class="text-left">
-            <div class="category-select">
-                <?= Html::dropDownList('category_list', 1, $category_list, [
-                        'placeholder' => reset($category_list),
-                        'id' => 'sources-services',
-                        'class' => 'custom-select-services sources-services']) 
-                ?>
-            </div>
-            <?= Html::a('История', ['paid-services/order-services'], ['class' => 'btn-history']) ?>
+<div class="row navbar_paid-request">
+    <div class="col-lg-6">
+        <div class="category-select">
+            <p class="category-select-label">
+                Категории услуг:
+            </p>
+            <?= Html::dropDownList('category_list', 1, $category_list, [
+                    'placeholder' => reset($category_list),
+                    'id' => 'sources-services',
+                    'class' => 'custom-select-services sources-services']) 
+            ?>
         </div>
-     </div>
+    </div>
+    <div class="col-lg-6 text-left">
+        <?= Html::a('История', ['paid-services/order-services'], ['class' => 'btn-history']) ?>
+    </div>
+</div>
 
-<?php elseif(Yii::$app->controller->id == 'paid-services' && Yii::$app->controller->action->id == 'order-services') : ?>
+    <?php elseif(Yii::$app->controller->id == 'paid-services' && Yii::$app->controller->action->id == 'order-services') : ?>
     <div class="container-fluid navbar_paid-request text-center menu_sub-bar">
         <?php
             $form = ActiveForm::begin([

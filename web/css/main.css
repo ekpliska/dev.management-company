@@ -675,6 +675,7 @@ reset-password-sms:focus{
 }
 .card-link-blue {
     width: 160px;
+    padding: 10px;
     border: 1px solid #2d18b4;
     color: #2d18b4;
     border-radius: 12px;
