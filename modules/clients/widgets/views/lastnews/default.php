@@ -10,6 +10,9 @@
 ?>
 
 <?php if (isset($news) && count($news) > 0) : ?>
+<h1>
+    Новости
+</h1>
 <?php foreach ($news as $key => $post) : ?>
     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
         <div class="news-item">

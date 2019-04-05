@@ -8,6 +8,9 @@
  */
 ?>
 <?php if (isset($services_lists) && count($services_lists) > 0) : ?>
+<h1>
+    Услуги
+</h1>
 <?php foreach ($services_lists as $key => $service) : ?>
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
         <div class="service-item">

@@ -29,15 +29,9 @@ $this->title = Yii::$app->params['site-name'] . "Главная";
         </div>        
     </div>
     <div class="row client-page__services">
-        <h1>
-            Услуги
-        </h1>
         <?= LastServices::widget() ?>
     </div>
     <div class="row client-page__news">
-        <h1>
-            Новости
-        </h1>
         <?= LastNews::widget(['living_space' => $living_space]) ?>
     </div>
 </div>
