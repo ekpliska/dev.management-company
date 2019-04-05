@@ -3,11 +3,10 @@
     use app\modules\clients\widgets\LastNews;
     use app\modules\clients\widgets\LastServices;
     
-
 /*
  * Главная страница личного кабинета Собственника
  */    
-$this->title = Yii::$app->params['site-name'] . "Главная";
+$this->title = Yii::$app->params['site-name'] . "Новости";
 ?>
 
 <div class="client-page">

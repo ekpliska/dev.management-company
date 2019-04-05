@@ -2,12 +2,11 @@
 
     namespace app\modules\clients\widgets;
     use yii\base\Widget;
-    use app\models\Rubrics as ModelRubrics;
 
 /**
  * Список рубрик новостной ленты
  */
-class SubBarGeneralPage extends Widget {
+class SubBarNews extends Widget {
 
     public $general_navbar = [
         'important_information' => 'Важная информация',
@@ -17,7 +16,7 @@ class SubBarGeneralPage extends Widget {
     
     public function run() {
         
-        return $this->render('subbargeneralpage/default', [
+        return $this->render('subbarnews/default', [
             'general_navbar' => $this->general_navbar,
         ]);
     }

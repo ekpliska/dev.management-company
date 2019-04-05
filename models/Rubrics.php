@@ -9,8 +9,15 @@
 /**
  * Рубрика / Тип публикации
  */
-class Rubrics extends ActiveRecord
-{
+class Rubrics extends ActiveRecord {
+    
+    // Важная инофрмация
+    const RUBRIC_INFORMATION = 1;
+    // Специальные предложения
+    const RUBRIC_ADVERTS = 2;
+    // Новости дома
+    const RUBRIC_HOUSE = 3;
+
     /**
      * Таблица из БД
      */

@@ -7,6 +7,7 @@
     use app\modules\clients\controllers\AppClientsController;
     use app\models\News;
     use app\models\Image;
+    use app\models\Rubrics;
 
 /**
  * Новости
@@ -23,15 +24,15 @@ class NewsController extends AppClientsController {
         switch ($block) {
             case 'important_information':
             case null: {
-                $news = News::getNewsByClients($living_space, $block);
+                $news = News::getNewsByClients($living_space, Rubrics::RUBRIC_INFORMATION);
                 break;
             }
             case 'special_offers': {
-                $news = News::getNewsByClients($living_space, $block);
+                $news = News::getNewsByClients($living_space, Rubrics::RUBRIC_ADVERTS);
                 break;
             }
             case 'house_news': {
-                $news = News::getNewsByClients($living_space, $block);
+                $news = News::getNewsByClients($living_space, Rubrics::RUBRIC_HOUSE);
                 break;
             }
         }

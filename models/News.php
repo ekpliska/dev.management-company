@@ -196,10 +196,10 @@ class News extends ActiveRecord
                 ->andWhere(['news_house_id' => $living_space['houses_id']])
                 ->orWhere(['news_status' => 'all'])
                 ->orderBy(['created_at' => SORT_DESC]);
+        
         if ($rubric != null) {
             $news->andWhere(['news_type_rubric_id' => $rubric]);
         }
-        
         return $news;
     }
         
