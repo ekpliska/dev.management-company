@@ -37,16 +37,16 @@ class NewsController extends AppClientsController {
             }
         }
         
-            $pages = new Pagination([
-                'totalCount' => $news->count(), 
-                'pageSize' => 9, 
-                'forcePageParam' => false, 
-                'pageSizeParam' => false,
-            ]);
-
-            $news = $news->offset($pages->offset)
-                    ->limit($pages->limit)
-                    ->all();
+        $pages = new Pagination([
+            'totalCount' => $news->count(), 
+            'pageSize' => 9, 
+            'forcePageParam' => false, 
+            'pageSizeParam' => false,
+        ]);
+        
+        $news = $news->offset($pages->offset)
+                ->limit($pages->limit)
+                ->all();
         
         return $this->render('index', [
             'news' => $news,

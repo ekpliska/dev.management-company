@@ -200,6 +200,7 @@ class News extends ActiveRecord
         if ($rubric != null) {
             $news->andWhere(['news_type_rubric_id' => $rubric]);
         }
+        
         return $news;
     }
         
