@@ -18,6 +18,10 @@
                 'labelOptions' => ['class' => 'label-registration hidden'],
             ],
     ]) ?>
+
+    <?= $form->field($model_rent, 'rents_id', ['options' => ['class' => 'hidden']])
+            ->hiddenInput(['value' => $model_rent->rents_id, 'id' => '_rents'])
+            ->label(false) ?>
     
     <?= $form->field($model_rent, 'rents_surname')
             ->input('text', ['class' => 'field-input'])
@@ -43,10 +47,16 @@
     <div class="clearfix"></div>
     
     <div class="rent-tab__btn">
-        <?= Html::button('Удалить', ['class' => 'btn btn-small profile-btn-delete']) ?>
+        <?= Html::button('Удалить', [
+                'class' => 'btn btn-small profile-btn-delete', 
+                'id' => 'confirm_rent_delete',
+                'data-toggle' => 'modal',
+                'data-target' => '#changes_rent'
+            ]) ?>
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-small profile-btn']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
-
+    
 <?php endif; ?>
+

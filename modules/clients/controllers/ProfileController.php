@@ -44,13 +44,15 @@ class ProfileController extends AppClientsController
         $add_rent = new ClientsRentForm(['scenario' => ClientsRentForm::SCENARIO_AJAX_VALIDATION]);
         // Данные Арендатора
         $rent_info = Rents::find()->where(['rents_id' => $account_info['personal_rent_id']])->one();
-        if ($rent_info->load(Yii::$app->request->post()) && $rent_info->validate()) {
-            if (!$rent_info->save()) {
-                Yii::$app->session->setFlash('error', ['message' => 'При обновлении данных арендатора произошла ошибка. Обновите страницу и повторите действие заново']);
-                return $this->redirect('index');
+        if ($rent_info) {
+            if ($rent_info->load(Yii::$app->request->post()) && $rent_info->validate()) {
+                if (!$rent_info->save()) {
+                    Yii::$app->session->setFlash('error', ['message' => 'При обновлении данных арендатора произошла ошибка. Обновите страницу и повторите действие заново']);
+                    return $this->redirect('index');
+                }
+                Yii::$app->session->setFlash('success', ['message' => 'Личная информация вашего арендатора была успешно обновлена']);
+                return $this->redirect(Yii::$app->request->referrer);
             }
-            Yii::$app->session->setFlash('success', ['message' => 'Личная информация вашего арендатора была успешно обновлена']);
-            return $this->redirect(Yii::$app->request->referrer);
         }
         
         return $this->render('index', [
@@ -104,57 +106,6 @@ class ProfileController extends AppClientsController
         Yii::$app->session->setFlash('error', ['message' => 'При создании лицевого счета произошла ошибка. Обновите страницу и повторите действие заново']);
         return $this->redirect('index');
     }    
-    
-    
-    /*
-     * Метод обновления профиля пользователя
-     */
-    public function actionUpdateProfile() {
-
-        if (Yii::$app->request->isPost) {
-            // Если пришел из пост статуса о существующем Арендаторе
-            if (isset($_POST['is_rent'])) {
-                // Загружаем модель пользователя
-                $user_info = $this->permisionUser()->_model;
-                $data_rent = Yii::$app->request->post('Rents');
-                $rent_info = Rents::find()->where(['rents_id' => $data_rent['rents_id']])->one();
-                
-                if ($user_info->load(Yii::$app->request->post()) && $rent_info->load(Yii::$app->request->post())) {
-                    
-                    $is_valid = $user_info->validate();
-                    $is_valid = $rent_info->validate() && $is_valid;
-
-                    
-                    if ($is_valid) {
-                        // Сохраняем профиль Собственника
-                        $file = UploadedFile::getInstance($user_info, 'user_photo');
-                        $user_info->uploadPhoto($file);
-                        
-                        // Сохраняем профиль Арендатора
-                        $rent_info->save();
-
-                        Yii::$app->session->setFlash('success', ['message' => 'Ваш профиль был успешно обновлен']);
-                        return $this->redirect(Yii::$app->request->referrer);
-                        
-                    }
-                    Yii::$app->session->setFlash('error', ['message' => 'Ошибка обновления профиля. Обновите страницу и повторите действие заново']);
-                    return $this->redirect(Yii::$app->request->referrer);                    
-                }
-            } else {
-                // иначе сохраняем только профиль пользователя
-                $user_info = $this->permisionUser()->_model;
-                if ($user_info->load(Yii::$app->request->post()) && $user_info->validate()) {
-                    $file = UploadedFile::getInstance($user_info, 'user_photo');
-                    $user_info->uploadPhoto($file);
-                    Yii::$app->session->setFlash('success', ['message' => 'Ваш профиль был успешно обновлен']);
-                    return $this->redirect(Yii::$app->request->referrer);
-                }
-            }
-        }
-        
-        Yii::$app->session->setFlash('error', ['message' => 'Ошибка обновления профиля. Обновите страницу и повторите действие заново']);
-        return $this->redirect(Yii::$app->request->referrer);
-    }
     
     /*
      * Смена выбора текущего лицевого счета

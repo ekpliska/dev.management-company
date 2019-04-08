@@ -1,6 +1,7 @@
 <?php
 
     use yii\helpers\Html;
+    use app\modules\clients\widgets\ModalWindows;
 
 /* 
  * Вкладка "Арендатор"
@@ -18,5 +19,6 @@
     </div>
     <?php else: // Если у текущего ЛС есть арендатор ?>
         <?= $this->render('../data/rent-view', ['model_rent' => $rent_info]) ?>
+        <?= ModalWindows::widget(['modal_view' => 'changes_rent']) ?>
     <?php endif; ?>
 </div>
