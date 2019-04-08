@@ -7,5 +7,16 @@
  */
 ?>
 <div class="rent-tab">
-    <?= Html::button('Добавить арендатора') ?>
+    <?php if (!$is_rent) : // Если у текущего ЛС нет арендатора ?>
+    <div class="rent-tab__btn">
+        <?= Html::button('Добавить арендатора', [
+                'class' => 'add-rent-btn',
+                'data-toggle' => 'modal',
+                'data-target' => '#add-rent-modal'
+            ]) ?>
+        <?= $this->render('../form/create-rent', ['add_rent' => $add_rent]) ?>
+    </div>
+    <?php else: // Если у текущего ЛС есть арендатор ?>
+        <?= $this->render('../data/rent-view', ['model_rent' => $rent_info]) ?>
+    <?php endif; ?>
 </div>

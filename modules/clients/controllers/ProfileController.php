@@ -40,9 +40,16 @@ class ProfileController extends AppClientsController
         // Загружаем модель добавления нового лицевого счета
         $model = new NewAccountForm();
         
+        // Загружаем модель добаления нового арендатора
+        $add_rent = new ClientsRentForm(['scenario' => ClientsRentForm::SCENARIO_AJAX_VALIDATION]);
+        // Данные Арендатора
+        $rent_info = Rents::find()->where(['rents_id' => $account_info['personal_rent_id']])->one();
+        
         return $this->render('index', [
             'account_info' => $account_info,
             'model' => $model,
+            'add_rent' => $add_rent,
+            'rent_info' => $rent_info,
         ]);
         
     }

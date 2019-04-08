@@ -685,6 +685,7 @@ li.partners-info > img {
     border-bottom: none;
 }
 .tab-content.profile-control {
+    padding: 20px;
     border: 1px solid #ddd;
     border-radius: 12px;
     min-height: 510px;
@@ -694,6 +695,39 @@ li.partners-info > img {
     font-weight: bold;
     padding: 10px;
     margin: 0;
+}
+.rent-tab__btn {
+    text-align: center;
+    margin: 40px;
+}
+.add-rent-btn {
+    border: none;
+    border: 1px solid #2d18b4;
+    padding: 15px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: bold;
+    color: #2d18b4;
+    background-color: transparent;
+    border-radius: 12px;
+}
+.add-rent-btn:hover {
+    box-shadow: 0px 1px 8px 0 #ccc;
+}
+.profile-btn {
+    width: 150px;
+    background-color: #2d18b4;
+    color: #fff;
+}
+.profile-btn-delete {
+    width: 150px;
+    background-color: #ef693a;
+    color: #fff;
+}
+.profile-btn:hover,
+.profile-btn-delete:hover {
+    color: #fff;
 }
 /* Кoнец Страница Профиль пользователя */
 

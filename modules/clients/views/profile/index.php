@@ -45,7 +45,11 @@ $this->title = Yii::$app->params['site-name'] . 'Профиль';
         </div>
     </div>
     <div class="row">
-        <?= $this->render('profile-control/profile-control') ?>
+        <?= $this->render('profile-control/profile-control', [
+                'account_info' => $account_info,
+                'add_rent' => $add_rent,
+                'rent_info' => $rent_info,
+        ]) ?>
     </div>
 </div>
 
