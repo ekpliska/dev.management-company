@@ -229,7 +229,11 @@ $config = [
                     'pluralize' => false,
                     'controller' => 'v1/vote',
                     'extraPatterns' => [
-                        'GET <account:[\w-]+>' => 'index',
+                        'GET get-results/<vote_id:[\w-]+>' => 'get-results',
+                        'POST set-answers/<vote_id:[\w-]+>' => 'set-answers',
+                        'GET get-questions/<vote_id:[\w-]+>' => 'get-questions',
+                        'GET vote-list/<account:[\w-]+>' => 'vote-list',
+//                        'GET /' => 'index',
                     ]
                 ],
                 

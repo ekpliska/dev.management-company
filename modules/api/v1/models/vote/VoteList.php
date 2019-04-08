@@ -2,9 +2,11 @@
 
     namespace app\modules\api\v1\models\vote;
     use Yii;
+    use yii\helpers\ArrayHelper;
     use app\models\Voting;
     use app\models\Houses;
     use app\models\RegistrationInVoting;
+    use app\models\Answers;
     
 /**
  * Опрос
@@ -74,6 +76,48 @@ class VoteList extends Voting {
         }
         
         return $results;
+        
+    }
+    
+    /*
+     * Проверить, является ли текущий пользователь 
+     * зарегистрированным участником
+     */
+    public static function isParticipant($vote_id) {
+        
+        $is_participant = RegistrationInVoting::find()
+                ->where([
+                    'voting_id' => $vote_id,
+                    'user_id' => Yii::$app->user->getId(),
+                    'status' => RegistrationInVoting::STATUS_ENABLED])
+                ->one();
+
+        return $is_participant ? true : false;
+    }
+    
+    /*
+     * Отправка ответов
+     */
+    public static function sendAnswer($data_post) {
+        
+        if (empty($data_post)) {
+            return false;
+        }
+        
+        $type_answer = Answers::getAnswersArray();
+        
+        foreach ($data_post['answers'] as $key => $answer) {
+            $model = new Answers();
+            $model->answers_questions_id = $key;
+            if (!ArrayHelper::keyExists($answer, $type_answer)) {
+                return false;
+            }
+            $model->answers_vote = $answer;
+            $model->answers_user_id = Yii::$app->user->getId();
+            $model->save();
+        }
+        
+        return true;
         
     }
     
