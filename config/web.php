@@ -62,7 +62,7 @@ $config = [
             'parsers' => [
                 'application/json' => 'yii\web\JsonParser',
             ],
-//            'baseUrl'=> '',
+            'baseUrl'=> '',
         ],
         
         /*

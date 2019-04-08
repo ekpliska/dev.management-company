@@ -1781,7 +1781,7 @@ form#search-form {
 .receipts_period {
     padding: 0px;
     border-right: 1px solid #ddd;
-    min-height: 700px;
+    min-height: 850px;
 }
 .receipts_period-calendar {
     display: flex;
@@ -1916,7 +1916,7 @@ a.receipte-btn-dowload {
     padding: 0 10px;    
 }
 #receipts-lists {
-    height: 600px;
+    height: 800px;
     overflow: auto;
     min-height: 600px;
     margin: 10px 0;

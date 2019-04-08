@@ -20,11 +20,11 @@ class NavMenu extends Widget {
             'link' => 'paid-services/index',
             'name' => 'Услуги',
         ],
-        '#1' => [
-            'link' => 'receipts-payments/index',
+        'payments' => [
+            'link' => 'payments/index',
             'name' => 'Платежи и квитанции',
         ],
-        '#2' => [
+        'counters' => [
             'link' => 'counters/index',
             'name' => 'Показания приборов учета',
         ],
