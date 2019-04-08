@@ -4,10 +4,10 @@
     use yii\helpers\Html;
     
 /* 
- * Показания и приборы учета, главная страница
+ * Палатежи и квитанции
  */
 
-$this->title = Yii::$app->params['site-name'] . 'Квитанции КЖУ';
+$this->title = Yii::$app->params['site-name'] . 'Палатежи и квитанции';
 ?>
 
 <div class="receipts-page row">

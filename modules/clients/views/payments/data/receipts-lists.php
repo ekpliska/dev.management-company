@@ -43,7 +43,7 @@ $current_date = date('Y-m');
             <div class="receipte-of-lists__operations">
                 <?php if ($status == false) : // Кнопка Оплатить выводим только для неоплаченных квитанций ?>
                     <?= Html::a('<i class="glyphicon glyphicon-ruble"></i> Оплатить</a>', [
-                            'personal-account/payment', 
+                            'payments/payment', 
                             'period' => urlencode($receipt['Расчетный период']), 
                             'nubmer' => urlencode($receipt['Номер квитанции']), 
                             'sum' => urlencode($receipt['Сумма к оплате'])
