@@ -26,7 +26,7 @@ class VoteController extends Controller {
         
         $behaviors['access'] = [
             'class' => AccessControl::className(),
-            'only' => ['index', 'send-sms', 'get-questions', 'set-answers', 'get-results'],
+            'only' => ['index', 'send-sms', 'get-questions', 'set-answers', 'get-results', 'become-participant'],
             'rules' => [
                 [
                     'allow' => true,
@@ -45,7 +45,8 @@ class VoteController extends Controller {
             'send-sms' => ['get'],
             'get-questions' => ['get'],
             'set-answers' => ['post'],
-            'get-results' => ['get']
+            'get-results' => ['get'],
+            'become-participant' => ['get']
         ];
     }
     
@@ -156,6 +157,14 @@ class VoteController extends Controller {
         $results_vote = ResultsVote::getResults($vote_id);
         
         return $results_vote ? $results_vote : ['success' => false];
+    }
+    
+    /*
+     * Регистрация после успешного ввода СМС
+     */
+    public function actionBecomeParticipant($vote_id) {
+        
+        return VoteList::registerToVote($vote_id);
     }
     
 }

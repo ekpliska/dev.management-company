@@ -96,6 +96,26 @@ class VoteList extends Voting {
     }
     
     /*
+     * Регистрация участника опроса
+     */
+    public static function registerToVote($vote_id) {
+
+        // Проверяем не был ли пользователь зарегистрирован раньше
+        if (self::isParticipant($vote_id)) {
+            return false;
+        }
+        
+        $model = new RegistrationInVoting();
+        $model->voting_id = $vote_id;
+        $model->user_id = Yii::$app->user->getId();
+        $model->random_number = 0;
+        $model->status = RegistrationInVoting::STATUS_ENABLED;
+        $model->status = RegistrationInVoting::STATUS_ENABLED;
+        return $model->save(false) ? true : false;
+        
+    }
+    
+    /*
      * Отправка ответов
      */
     public static function sendAnswer($data_post) {
