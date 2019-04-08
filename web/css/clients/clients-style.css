@@ -53,9 +53,13 @@
 }
 .navbar-brand {
     padding: 8px 15px;
+    margin: 0 !important;
 }
 .navbar__personal-account {
     
+}
+li.account-info {
+    padding: 0 20px;
 }
 .navbar__personal-account > p {
     letter-spacing: 0.1em;

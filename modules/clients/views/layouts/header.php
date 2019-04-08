@@ -17,7 +17,7 @@
 <nav class="navbar navbar-fixed-top navbar-menu">
     <div class="container-fluid">
         <div class="navbar-header col-md-2">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#elseNavbar">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#elsaNavbar">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>                        
@@ -27,9 +27,9 @@
             </a>
         </div>
         
-        <div class="collapse navbar-collapse" id="elseNavbar">
+        <div class="collapse navbar-collapse" id="elsaNavbar">
             <ul class="nav navbar-nav">
-                <li>
+                <li class="account-info">
                     <p class="list-account__title">Лицевой счет</p>
                     <?= Html::dropDownList('_list-account', $this->context->_current_account_id, $this->context->_lists, [
                             'placeholder' => $this->context->_current_account_number,
