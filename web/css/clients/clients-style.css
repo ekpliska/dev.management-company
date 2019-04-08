@@ -894,12 +894,12 @@ p.right {
     box-shadow: none;
 }
 .notification__dropdown > ul {
-    height: 200px;
+    height: 230px;
 }
 .notification__dropdown a.notification_reset {
     color: #bcbcbc;
     font-size: 12px;
-    padding: 0 0 20px;
+    padding: 5px 20px 20px;
     cursor: pointer;
 }
 .notification__dropdown a.notification_link {
@@ -2270,6 +2270,8 @@ p.date-start-vote {
     opacity: 0;
     transition: .5s ease;
     background-color: rgba(0, 0, 0, 0.5);
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
 }
 .vote-card-preview__image:hover .vote-card-preview__overlay {
     opacity: 2;

@@ -2,7 +2,6 @@
 
     use yii\helpers\Html;
     use yii\bootstrap\Modal;
-    use yii\widgets\Breadcrumbs;
     use app\helpers\FormatHelpers;
     use app\modules\clients\widgets\ModalWindows;
     use app\models\Voting;
@@ -16,15 +15,8 @@
  * Просмотр отдельного голосования
  */
 $this->title = Yii::$app->params['site-name'] . $voting['voting_title'];
-$this->params['breadcrumbs'][] = ['label' => 'Опрос', 'url' => ['voting/index']];
-$this->params['breadcrumbs'][] = $voting['voting_title'];
 $_answer = '';
 ?>
-
-<?= Breadcrumbs::widget([
-        'homeLink' => ['label' => 'ELSA', 'url' => ['clients/index']],
-        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-]) ?>
 
 <?= AlertsShow::widget() ?>
 
