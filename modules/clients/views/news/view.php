@@ -30,7 +30,7 @@ $this->title = Yii::$app->params['site-name'] .  $news['news_title'];
             &nbsp;<span><?= $news['partner']['partners_name'] ?></span>
         </li>
         <?php endif; ?>
-        <li class="post_rubric">
+        <li class="all_news">
             <?= Html::a('Все новости', ['news/index']) ?>
         </li>
     </ul>
