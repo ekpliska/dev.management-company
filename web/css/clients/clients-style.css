@@ -1647,7 +1647,7 @@ a.btn-history:hover {
     box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
 }
 .service-card {
-    height: 500px;
+    height: 525px;
     border-radius: 12px;
     background-color: #fff;
     box-shadow: 0 4px 26px 0 rgba(51,29,82,0.16); 
@@ -2332,10 +2332,7 @@ p.date-start-vote {
 /* Конец Опрос */
 
 /* Страница голосования */
-.view-voting {
-    border: 1px solid #ddd;
-    border-radius: 12px;
-}
+.view-voting {}
 .preview-voting {
     position: relative;
     height: 616px;
@@ -2402,6 +2399,7 @@ p.date-start-vote {
 }
 .voting-body {
     margin: 15px 0;
+    padding: 0;
 }
 .voting-body_left {
     border: 1px solid #ddd;

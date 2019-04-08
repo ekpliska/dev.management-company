@@ -113,7 +113,7 @@
 }
 
 
-/* Nav menu */
+/* Nav menu 
 @media screen and (min-width: 991px) {
     .navbar-mobile-menu__items {
         display: none;
@@ -168,12 +168,12 @@
         display: none;
     }
     .navbar-general-page {
-        /*margin-top: 70px;*/
+        margin-top: 70px;
     }
     .navbar__pills > li, .navbar__pills > li:first-child {
         width: 150px;
         height: 50px;
-        /*padding: 0;*/
+        padding: 0;
     }
     .navbar__pills > li > a {
         font-size: 10px;
@@ -181,15 +181,15 @@
 }
 @media screen and (max-width: 770px) {
     .navbar-general-page {
-        /*margin-top: 150px;*/
+        margin-top: 150px;
     }
 }
 @media screen and (max-width: 520px) {
     .navbar-general-page {
-        /*margin-top: 170px;*/
+        margin-top: 170px;
     }
 }
-/* End Nav menu */
+ End Nav menu */
 
 /* End Register Page, Login Page */
 @media screen and (max-width: 1200px) {
@@ -294,7 +294,7 @@
 }
 /* End Request Page */
 
-/* Personal-account Page */
+/* Personal-account Page 
 @media screen and (max-width: 991px) {
     .breadcrumb-padding {
         margin-top: 125px;
@@ -357,9 +357,9 @@
         display: none;
     }
 }
-/* End Personal-account Page */
+ End Personal-account Page 
 
-/* Paid-request Page */
+ Paid-request Page 
 @media screen and (max-width: 1190px) {
     .cost_service {
         font-size: 16px;
@@ -415,119 +415,9 @@
         line-height: 5em;
     }
 }
-/* End Paid-request Page */
+ End Paid-request Page */
 
-/* Vote Page */
-@media screen and (max-width: 1200px) {
-    .table-voting-results > tbody > tr > td > h4, 
-    .questions-text-show > h4 {
-        font-size: 16px;
-    }
-    .table-voting-results > tbody > tr > td > h4 > i, 
-    .questions-text-show > h4 > i {
-        padding: 7px;
-    }
-    .table-voting-results > tbody > tr > td p.title {
-        font-size: 14px;
-    }
-}
-@media screen and (max-width: 1199px) {
-    .vote-card_title {
-        height: 66px;
-    }
-    .vote-card_title i {
-        padding: 20px;
-    }
-}
-@media screen and (max-width: 991px) {
-    .vote-card_date-end {
-        font-size: 11px;
-        padding: 10px;
-    }
-    .voting-body_right {
-        padding: 10px 15px 10px 0;
-    }
-}
-@media screen and (max-width: 768px) {
-    .vote-card_date-end {
-        width: 180px;
-        padding: 10px;
-        font-size: 10px;
-        left: 22%;
-    }
-    .vote-card_title a {
-        font-size: 14px;
-    }
-    .vote-card_text {
-        font-size: 12px;
-    }
-    .voting-title-block h2 {
-        font-size: 22px;
-    }
-    .voting-info {
-        display: grid;
-    }
-    .voting-info span {
-        margin: 10px;
-    }
-    .btn-set-voting {
-        padding: 15px 0 !important;
-    }
-}
-@media screen and (max-width: 680px) {
-    .btn-group > .btn {
-        width: 130px;
-        font-size: 10px  !important;
-    }
-}
-@media screen and (max-width: 550px) {
-    .vote-card-img {
-        height: 255px;
-    }
-    .vote-card_date-end {
-        width: 200px;
-        font-size: 10px;
-        left: 30%;
-        top: 30%;
-    }
-    .vote-card_text {
-        height: 133px;
-    }
-    .register-in-voting {
-        padding: 12px 20px;
-    }
-}
-@media screen and (max-width: 480px) {
-    .btn-group > .btn {
-        width: 100px;
-        font-size: 10px  !important;
-    }
-}
-@media screen and (max-width: 400px) {
-    .vote-card_date-end {
-        left: 20%;
-    }
-    .vote-card_title i {
-        padding: 15px;
-    }
-    .vote-card_text {
-        font-size: 12px;
-    }
-    [class*="col-"] {
-        font-size: 12px;
-    }
-    .vote-card_title {
-        height: 56px;
-    }
-    .vote-card_title a {
-        font-size: 14px;
-    }
-    p.date-start-vote {
-        font-size: 10px;
-        padding: 0;
-    }
-}
-/* End Vote Page */
+
 
 /* Profile Page */
 @media screen and (max-width: 768px) {

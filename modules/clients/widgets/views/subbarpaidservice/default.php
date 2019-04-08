@@ -9,7 +9,7 @@
 ?>
 
 <div class="row navbar_paid-request">
-    <div class="col-lg-6">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <div class="category-select">
             <p class="category-select-label">
                 Категории услуг:
@@ -21,7 +21,7 @@
             ?>
         </div>
     </div>
-    <div class="col-lg-6 text-left">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-left">
         <?= Html::a('История', ['paid-services/order-services'], ['class' => 'btn-history']) ?>
     </div>
 </div>

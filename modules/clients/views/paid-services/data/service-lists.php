@@ -10,7 +10,7 @@
 <div id="services-list">
     <?php if ($pay_services): ?>
         <?php foreach ($pay_services as $key => $service) : ?>
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6">
                 <div class="service-card">
                     <div class="service-card_title">
                         <?= $service['category']['category_name'] ?>
