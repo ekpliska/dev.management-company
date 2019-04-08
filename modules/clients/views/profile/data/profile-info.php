@@ -1,34 +1,23 @@
 <?php
 
     use yii\helpers\Html;
-    use app\helpers\FormatHelpers;
 
 /* 
- * Полный профиль пользователя на странице "Настройки"
+ * Данные пользователя
  */
 ?>
 
-<p class="user-full-name">
-    <?= $user_info->fullNameClient ?>
+<?= Html::img(Yii::$app->userProfile->photo, ['class' => 'img-circle', 'alt' => 'user photo']) ?>
+<p class="profile-page__user__name">
+    <?= Yii::$app->userProfile->surname ?>
+    <br />
+    <?= Yii::$app->userProfile->name . ' ' . Yii::$app->userProfile->secondName ?>
 </p>
-<p class="profile-settings_block"><span>Пользовательские данные</span></p>
-    <span class="user-login-name">Логин: <?= $user_info->username ?></span>
-    <span class="user-role-name">Роль: <?= $user_info->role ?></span>
-    <span class="user-status">                
-        <i class="glyphicon glyphicon-globe status-<?= $user_info->status['value'] ?>"></i> <?= $user_info->status['name'] ?>
-    </span>
-            
-<p class="profile-settings_block"><span>Адрес</span></p>
-    <span class="user-span-text">
-        <i class="fa fa-map-marker"></i> <?= $user_info->getFullAdress($this->context->_current_account_id) ?>
-    </span>
-        
-<p class="profile-settings_block"><span>Дата регистрации</span></p>
-    <span class="user-span-text">        
-        <?= FormatHelpers::formatDate($user_info->dateRegister, true, 0, false) ?>
-    </span>
-        
-<p class="profile-settings_block"><span>Дата последнего входа</span></p>
-    <span class="user-span-text">
-        <?= FormatHelpers::formatDate($user_info->lastLogin, true, 0, false) ?>
-    </span>
+<p class="profile-page__user-info">
+    <i class="glyphicon glyphicon-phone"></i>&nbsp;
+    <?= Yii::$app->userProfile->mobile ?>
+</p>
+<p class="profile-page__user-info">
+    <i class="glyphicon glyphicon-envelope"></i>&nbsp;
+    <?= Yii::$app->userProfile->email ?>
+</p>

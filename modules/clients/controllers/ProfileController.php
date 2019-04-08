@@ -13,6 +13,7 @@
     use app\modules\clients\models\ChangeMobilePhone;
     use app\models\SmsOperations;
     use app\modules\clients\models\form\SMSForm;
+    use app\modules\clients\models\form\NewAccountForm;
     
     
 
@@ -32,14 +33,63 @@ class ProfileController extends AppClientsController
     public function actionIndex() {
         
         $user_info = $this->permisionUser();
+        $accoint_id = $this->_current_account_id;
         
-        if (Yii::$app->user->can('clients')) {
-            return $this->client($user_info);
-        } else {
-            return $this->rent($user_info);
-        }
+        $account_info = PersonalAccount::getAccountInfo($accoint_id, $user_info->clientID);
+        
+        // Загружаем модель добавления нового лицевого счета
+        $model = new NewAccountForm();
+        
+        return $this->render('index', [
+            'account_info' => $account_info,
+            'model' => $model,
+        ]);
         
     }
+    
+    /*
+     * Общий метод валидации форм раздела Лицевой счет
+     */
+    public function actionValidateForm($form) {
+        
+        if ($form == null) {
+            throw new NotFoundHttpException('Ошибка передалчи параметров. Вы обратились к несуществующей странице');
+        }
+        
+        switch ($form) {
+            case 'NewAccountForm':
+                $model = new NewAccountForm();
+                break;
+        }
+        
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return \yii\widgets\ActiveForm::validate($model);
+        }
+        
+    }    
+    
+    /*
+     * Создание лицевого счета Собсвенника
+     */
+    public function actionCreateAccount() {
+        
+        $model = new NewAccountForm();
+        
+        // Получаем текущий лицевой счет
+        $old_account_id = $this->_current_account_id;
+        
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            if ($model->createAccount($old_account_id)) {
+                Yii::$app->session->setFlash('success', ['message' => 'Лицевой счет был успешно создан']);
+                return $this->redirect('index');
+            }
+        }
+        
+        Yii::$app->session->setFlash('error', ['message' => 'При создании лицевого счета произошла ошибка. Обновите страницу и повторите действие заново']);
+        return $this->redirect('index');
+    }    
+    
     
     /*
      * Метод обновления профиля пользователя

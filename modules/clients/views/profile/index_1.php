@@ -11,46 +11,8 @@
 $this->title = Yii::$app->params['site-name'] . 'Профиль';
 ?>
 
-<div class="profile-page">
-    <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-            <h1>
-                Личная информация
-            </h1>
-            <div class="profile-page__user">
-                <?= $this->render('data/profile-info') ?>
-                <div class="profile-page__btn-block">
-                    <?= Html::a('Настройки профиля', ['/']) ?>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-            <h1>
-                Лицевой счет
-            </h1>
-            <div class="profile-page__account">
-                <?= $this->render('data/account-info', [
-                        'account_info' => $account_info,
-                ]) ?>
-                <?php if (Yii::$app->user->can('clients')) : ?>
-                    <div class="profile-page__btn-block">
-                        <?= Html::button('Добавить лицевой счет', [
-                            'data-toggle' => 'modal',
-                            'data-target' => '#create-account-modal'
-                        ]) ?>
-                    </div>
-                    <?= $this->render('form/create_account', ['model' => $model]) ?>
-                <?php endif; ?>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <?= $this->render('profile-control/profile-control') ?>
-    </div>
-</div>
+<?= AlertsShow::widget() ?>
 
-
-<?php /*
 <div class="profile-page">
     <?php
         $form = ActiveForm::begin([
@@ -172,4 +134,4 @@ $this->title = Yii::$app->params['site-name'] . 'Профиль';
 
     <?= ModalWindows::widget(['modal_view' => 'changes_rent']) ?>
 
-<?php endif; */ ?>
+<?php endif; ?>
