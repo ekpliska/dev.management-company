@@ -27,11 +27,13 @@
                 <p>
                     <?= $service->service_description ?>
                 </p>
-                <?= Html::a('Заказать',
-                        ['paid-services/create-paid-request', 
-                            'category' => $service->service_category_id, 
-                            'service' => $service->service_id], 
-                        ['class' => 'order-to-service new-rec']) ?>                    
+                <div class="service-item__btn text-center">
+                    <?= Html::a('Заказать',
+                            ['paid-services/create-paid-request', 
+                                'category' => $service->service_category_id, 
+                                'service' => $service->service_id], 
+                            ['class' => 'order-to-service new-rec']) ?>                    
+                </div>
             </div>
         </div>
     </div>

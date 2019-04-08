@@ -299,9 +299,9 @@ li.account-info {
     font-weight: bold;
 }
 .client-page__services > div[class*="col-"] > div {
-    height: 320px;
     border: 1px solid #ddd;
     border-radius: 12px;
+    height: 320px;
 }
 .client-page__news > div[class*="col-"] > a > div {
     height: 250px;
@@ -359,8 +359,12 @@ li.account-info {
 .service-item {
     display: flex;
 }
-.service-item > div {
-    width: 50%;
+.service-item > div:first-child {
+    width: 40%;
+}
+.service-item > div:last-child {
+    width: 60%;
+    padding: 10px;
 }
 .service-item__image > img {
     width: 100%;
@@ -376,7 +380,7 @@ li.account-info {
     color: #2d18b4;
     font-weight: bold;
     margin: 0;
-    padding: 10px 0;
+    padding: 0;
     text-align: left;
 }
 .service-item__content p {
@@ -388,10 +392,15 @@ li.account-info {
     font-size: 16px;
     color: #2d18b4;
     font-weight: bold;
-    padding: 5px 0;
+    padding: 0 0 5px 0;
+}
+.service-item__btn {
+    margin: 20px 0;
+    position: absolute;
+    bottom: 0;
+    right: 5%;
 }
 .order-to-service {
-    position: absolute;
     font-size: 11px;
     padding: 10px 20px;
     border: 1px solid #2d18b4;
@@ -399,7 +408,6 @@ li.account-info {
     text-transform: uppercase;
     letter-spacing: 0.1em;
     font-weight: bold;
-    bottom: 0%;
     transform: translate(50%, -50%);
 }
 .order-to-service:hover {

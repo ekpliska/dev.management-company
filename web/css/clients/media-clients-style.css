@@ -64,7 +64,7 @@
         padding: 0 10px;
     }
     .account-balance {
-        margin: 15px 10px 0;
+        margin: 15px 5px 0;
     }
     .list-account__title,
     .select-current-account {
@@ -98,5 +98,54 @@
     #elsaNavbar {
         min-height: 420px;
     }
+    .wrap > .container-full-client {
+        margin-top: 60px;
+    }
 }
 /* End NavBar */
+
+/* General Page */
+@media screen and (max-width: 1400px) {
+    .client-page__services > div[class*="col-"] > div {
+        height: 370px;
+    }
+    .service-item > div {
+        /*width: 50% !important;*/
+        width: 50%;
+    }
+    .service-item__content p {
+        font-size: 13px;
+    }
+}
+@media screen and (max-width: 1270px) {
+    .client-page__services > div[class*="col-"] > div {
+        height: 430px;
+    }
+    .service-item {
+        display: grid;
+    }
+    .service-item > div:first-child {
+        width: 100%;
+        min-height: 50%;
+        /*height: 170px;*/
+    }
+    .service-item > div:last-child {
+        width: 100%;
+    }
+    .service-item__image > img {
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+        border-bottom-left-radius: 0;
+    }
+}
+@media screen and (max-width: 1200px) {
+    .client-page__services > div[class*="col-"] > div {
+        height: 470px;
+    }
+}
+@media screen and (max-width: 991px) {
+    .client-page__services > div[class*="col-"] > div {
+        height: 570px;
+    }
+}
+/* End General Page */
