@@ -11,6 +11,8 @@
 $this->title = Yii::$app->params['site-name'] . 'Профиль';
 ?>
 
+<?= AlertsShow::widget() ?>
+
 <div class="profile-page">
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">

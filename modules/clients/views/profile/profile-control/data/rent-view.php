@@ -14,7 +14,7 @@
             'validateOnChange' => false,
             'validateOnBlur' => false,
             'fieldConfig' => [
-                'template' => '<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"><div class="field">{label}{input}</div></div>',
+                'template' => '<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"><div class="field">{label}{input}{error}</div></div>',
                 'labelOptions' => ['class' => 'label-registration hidden'],
             ],
     ]) ?>

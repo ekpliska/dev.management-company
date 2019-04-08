@@ -44,6 +44,14 @@ class ProfileController extends AppClientsController
         $add_rent = new ClientsRentForm(['scenario' => ClientsRentForm::SCENARIO_AJAX_VALIDATION]);
         // Данные Арендатора
         $rent_info = Rents::find()->where(['rents_id' => $account_info['personal_rent_id']])->one();
+        if ($rent_info->load(Yii::$app->request->post()) && $rent_info->validate()) {
+            if (!$rent_info->save()) {
+                Yii::$app->session->setFlash('error', ['message' => 'При обновлении данных арендатора произошла ошибка. Обновите страницу и повторите действие заново']);
+                return $this->redirect('index');
+            }
+            Yii::$app->session->setFlash('success', ['message' => 'Личная информация вашего арендатора была успешно обновлена']);
+            return $this->redirect(Yii::$app->request->referrer);
+        }
         
         return $this->render('index', [
             'account_info' => $account_info,
