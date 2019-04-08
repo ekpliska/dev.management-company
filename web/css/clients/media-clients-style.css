@@ -78,4 +78,25 @@
         right: 25%;
     }
 }
+@media screen and (max-width: 768px) {
+    .navbar-brand > img {
+        margin: 0;
+    }
+    .select-current-account {
+        width: 100%;
+    }
+    .list-account__title {
+        text-align: right;
+    }
+    .account-balance > span.minus {
+        padding: 6px 18px;
+        right: 0px;
+    }
+    .navbar_mobile {
+        display: unset;
+    }
+    #elsaNavbar {
+        min-height: 420px;
+    }
+}
 /* End NavBar */
