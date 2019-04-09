@@ -3,7 +3,8 @@
     use yii\helpers\Html;
     use app\assets\AppAsset;
     use app\assets\ClientsAsset;
-    use app\modules\clients\widgets\NavMenu;    
+    use app\modules\clients\widgets\NavMenu;
+    use app\modules\clients\widgets\AlertsShow;
 
 AppAsset::register($this);
 ClientsAsset::register($this);
@@ -34,6 +35,7 @@ ClientsAsset::register($this);
                     <?= NavMenu::widget() ?>
                 </div>
                 <div class="col-lg-9 col-md-9 col-sm-10 col-xs-12 content-clients">
+                    <?= AlertsShow::widget() ?>
                     <?= $content ?>
                 </div>
             </div>

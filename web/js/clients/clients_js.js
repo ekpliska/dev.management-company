@@ -28,37 +28,21 @@ $(document).ready(function() {
         return false;
     });    
     
-    
-    $('input[name*=account-number]').val($('.current__account_list :selected').text());
-    
     /*
-     * Функция смены текущего лицевого счета,
-     * в личном кабинете пользователя
-     * @param {integer} currentValue ID текущего лицевого счета
-     * @param {integer} valueSelect ID выбранного лицевого счета
+     * Переключение текущего лицевого счета,
      */
-    function switchAccountNumber(currentValue, valueSelect) {
+    $('#switch-current-account').on('change', function() {
+        var valueSelect = $('#switch-current-account option:selected').val();
         $.ajax({
-            url: 'check-account',
+            url: '/clients/app-clients/check-account',
             data: {
-                currentAccount: currentValue,
                 newCurrentAccount: valueSelect,
             },
             dataType: 'json',
             type: 'POST',
-            success: function(response) {
-                if (response.is_rent) {
-                    $('#is_rent').prop('checked', true);
-                } else {
-                    $('#is_rent').prop('checked', false);
-                }                
-                $("#content-replace").html(response.data);
-            },
-            error: function() {
-                console.log('Error #1000-11');
-            }
-        });        
-    }
+            success: function() {},
+        });
+    });
     
     // Удалить данные арендатора из системы
     $('.changes_rent__del').on('click', function() {
@@ -69,12 +53,7 @@ $(document).ready(function() {
             data: {
                 rentsId: rentsId,
             },
-            success: function (response, textStatus, jqXHR) {
-//                console.log(textStatus);
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.log(textStatus);
-            },
+            success: function () {},
         });
     });
            
@@ -918,62 +897,62 @@ $(document).ready(function() {
         });
     });
    
-    
-    /* Кастомизация элеметнов управления формой, лицевой счет */
-    $(".custom-select").each(function() {
-        var classes = $(this).attr("class"),
-            id = $(this).attr("id"),
-            name = $(this).attr("name");
-        var template =  '<div class="' + classes + '">';
-            template += '<span class="custom-select-trigger">' + $(this).attr("placeholder") + '</span>';
-            template += '<div class="custom-options">';
-        // Текущий выбранный лицевой счета    
-        var currentValue = $('#sources option:selected').val();
-        
-        $(this).find("option").each(function() {
-            var classSelection = ($(this).attr("value") == currentValue) ? 'selection ' : '';            
-            template += '<span class="custom-option ' + classSelection + $(this).attr("class") + '" data-value="' + $(this).attr("value") + '">' + $(this).html() + '</span>';
-//            $(this).val('selection');
-            
-        });
-        template += '</div></div>';
-
-        $(this).wrap('<div class="custom-select-wrapper"></div>');
-        $(this).hide();
-        $(this).after(template);
-    });
-
-    $(".custom-option:first-of-type").hover(function() {
-        $(this).parents(".custom-options").addClass("option-hover");
-    }, function() {
-        $(this).parents(".custom-options").removeClass("option-hover");
-    });
-
-    $(".custom-select-trigger").on("click", function() {
-        $('html').one('click',function() {
-            $(".custom-select").removeClass("opened");
-        });
-        $(this).parents(".custom-select").toggleClass("opened");
-        event.stopPropagation();
-    });
-
-
-    $(".custom-option").on("click", function() {
-        // ID выбранного лицевого счета
-        var valueSelect = $(this).data("value");
-        // Номер выбранного лицевого счета
-        var textSelect = $(this).text();
-        // ID текущего лицевого счета
-        var currentValue = $('#sources option:selected').val();
-        console.log(valueSelect + ' ' + textSelect + ' ' + currentValue);
-        $(this).parents(".custom-select-wrapper").find("select").val(valueSelect);
-        $(this).parents(".custom-options").find(".custom-option").removeClass("selection");
-        $(this).addClass("selection");
-        $(this).parents(".custom-select").removeClass("opened");
-        $(this).parents(".custom-select").find(".custom-select-trigger").text(textSelect);
-        // Смена текущего лицевого счета, ЛК собственник
-        switchAccountNumber(currentValue, valueSelect);
-    });
+//    
+//    /* Кастомизация элеметнов управления формой, лицевой счет */
+//    $(".custom-select").each(function() {
+//        var classes = $(this).attr("class"),
+//            id = $(this).attr("id"),
+//            name = $(this).attr("name");
+//        var template =  '<div class="' + classes + '">';
+//            template += '<span class="custom-select-trigger">' + $(this).attr("placeholder") + '</span>';
+//            template += '<div class="custom-options">';
+//        // Текущий выбранный лицевой счета    
+//        var currentValue = $('#sources option:selected').val();
+//        
+//        $(this).find("option").each(function() {
+//            var classSelection = ($(this).attr("value") == currentValue) ? 'selection ' : '';            
+//            template += '<span class="custom-option ' + classSelection + $(this).attr("class") + '" data-value="' + $(this).attr("value") + '">' + $(this).html() + '</span>';
+////            $(this).val('selection');
+//            
+//        });
+//        template += '</div></div>';
+//
+//        $(this).wrap('<div class="custom-select-wrapper"></div>');
+//        $(this).hide();
+//        $(this).after(template);
+//    });
+//
+//    $(".custom-option:first-of-type").hover(function() {
+//        $(this).parents(".custom-options").addClass("option-hover");
+//    }, function() {
+//        $(this).parents(".custom-options").removeClass("option-hover");
+//    });
+//
+//    $(".custom-select-trigger").on("click", function() {
+//        $('html').one('click',function() {
+//            $(".custom-select").removeClass("opened");
+//        });
+//        $(this).parents(".custom-select").toggleClass("opened");
+//        event.stopPropagation();
+//    });
+//
+//
+//    $(".custom-option").on("click", function() {
+//        // ID выбранного лицевого счета
+//        var valueSelect = $(this).data("value");
+//        // Номер выбранного лицевого счета
+//        var textSelect = $(this).text();
+//        // ID текущего лицевого счета
+//        var currentValue = $('#sources option:selected').val();
+//        console.log(valueSelect + ' ' + textSelect + ' ' + currentValue);
+//        $(this).parents(".custom-select-wrapper").find("select").val(valueSelect);
+//        $(this).parents(".custom-options").find(".custom-option").removeClass("selection");
+//        $(this).addClass("selection");
+//        $(this).parents(".custom-select").removeClass("opened");
+//        $(this).parents(".custom-select").find(".custom-select-trigger").text(textSelect);
+//        // Смена текущего лицевого счета, ЛК собственник
+//        switchAccountNumber(currentValue, valueSelect);
+//    });
     
     /* Кастомизация элеметнов управления формой, категории услуг */
     $(".custom-select-services").each(function() {

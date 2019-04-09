@@ -5,6 +5,7 @@
     use yii\web\Controller;
     use yii\filters\AccessControl;
     use app\modules\clients\behaviors\checkPersonalAccount;
+    use app\models\PersonalAccount;
         
 /*
  * Общий контроллер модуля Clients
@@ -49,6 +50,35 @@ class AppClientsController extends Controller {
      */
     public function permisionUser() {
         return Yii::$app->userProfile;
-    }    
+    }
+    
+    /*
+     * Смена выбора текущего лицевого счета
+     * Текущий лицевой счет устанавливается в БД, как статус STATUS_CURRENT
+     * dropDownList Лицевой счет
+     */
+    public function actionCheckAccount() {
+
+        // ID Текущего лицевого счета
+        $current_account_id = $this->_current_account_id;
+        // Из пост запроса получаем ID лицевого счета и собственника
+        $new_current_account_id = Yii::$app->request->post('newCurrentAccount');
+        
+        $client_id = Yii::$app->userProfile->clientID;
+        
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        
+        if (Yii::$app->request->isAjax) {
+            if (!PersonalAccount::changeCurrentAccount($current_account_id, $new_current_account_id)) {
+                Yii::$app->session->setFlash('error', ['message' => 'Ошибка смены текущего лицевого счета. Обновите страницу и повторите действие заново']);
+                return $this->redirect(Yii::$app->request->referrer);
+            }
+            Yii::$app->session->setFlash('success', ['message' => 'Ваш текущий лицевой счет успешно изменен']);
+            return $this->redirect(Yii::$app->request->referrer);
+        }
+        
+        return $this->goHome();
+        
+    }
     
 }

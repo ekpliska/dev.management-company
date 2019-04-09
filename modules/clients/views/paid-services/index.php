@@ -35,11 +35,3 @@ $this->title = Yii::$app->params['site-name'] . 'Услуги';
 ?>
     
 <?php Modal::end(); ?>
-
-<?php
-$this->registerCss("
-        .navbar-menu {
-            box-shadow: none;
-        }
-");
-?>

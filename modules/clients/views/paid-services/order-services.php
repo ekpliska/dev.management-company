@@ -20,12 +20,4 @@ $this->title = Yii::$app->params['site-name'] . 'История услуг';
     <?= $this->render('data/grid', ['all_orders' => $all_orders]) ?>
 </div>
 
-<?php
-$this->registerCss("
-        .navbar-menu {
-            box-shadow: none;
-        }
-");
-?>
-
 <?= ModalWindows::widget(['modal_view' => 'default_dialog']) ?>

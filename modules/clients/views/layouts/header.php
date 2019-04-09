@@ -28,6 +28,7 @@
                 <li class="account-info">
                     <p class="list-account__title">Лицевой счет</p>
                     <?= Html::dropDownList('_list-account', $this->context->_current_account_id, $this->context->_lists, [
+                            'id' => 'switch-current-account',
                             'placeholder' => $this->context->_current_account_number,
                             'class' => 'select-current-account',
                             'data-client' => Yii::$app->user->can('clients') ? $user_info->clientID : '',

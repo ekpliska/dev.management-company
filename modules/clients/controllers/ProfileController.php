@@ -290,60 +290,20 @@ class ProfileController extends AppClientsController
     }
     
     /*
-     * Смена выбора текущего лицевого счета
-     * Текущий лицевой счет устанавливается в БД, как статус STATUS_CURRENT
-     * dropDownList Лицевой счет
-     */
-    public function actionCheckAccount() {
-
-        // Из пост запроса получаем ID лицевого счета и собственника
-        $current_account_id = Yii::$app->request->post('currentAccount');
-        $new_current_account_id = Yii::$app->request->post('newCurrentAccount');
-        $client_id = Yii::$app->userProfile->clientID;
-        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        
-        if (Yii::$app->request->isAjax) {
-            $change_account = PersonalAccount::changeCurrentAccount($current_account_id, $new_current_account_id);
-            // Ищем арендатора, закрепленного за указанным лицевым счетом
-            $model = PersonalAccount::findByRent($new_current_account_id, $client_id);
-            
-            // Если арендатор существует, генерирурем для него модель
-            if (!empty($model->personal_rent_id)) {
-                $model_rent = Rents::findOne(['rents_id' => $model->personal_rent_id]);
-                if ($model_rent) {
-                    $this->_is_rent = true;
-                }
-            } else {
-                $model_rent = [];
-            }
-            
-            $data = $this->renderPartial('_form/rent-view', [
-                'form' => ActiveForm::begin(),
-                'model_rent' => $model_rent, 
-            ]);
-           
-            return ['status' => true, 'data' => $data, 'is_rent' => $this->_is_rent];
-            
-        }
-        return ['status' => false];
-        
-    }
-    
-    /*
      * Проверка наличия арендатора у лицевого счета
      * AJAX запрос при клике на переключатель Арендатор
      */
-    public function actionCheckIsRent($account) {
-        
-        $client_id = Yii::$app->userProfile->clientID;
-        if (Yii::$app->request->isPost) {
-            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;            
-            $is_rent = PersonalAccount::findByRent($account, $client_id);
-            $is_rent = $is_rent ? true : false;
-            return ['success' => true, 'is_rent' => $is_rent];
-        }
-        return ['success' => false];
-    }
+//    public function actionCheckIsRent($account) {
+//        
+//        $client_id = Yii::$app->userProfile->clientID;
+//        if (Yii::$app->request->isPost) {
+//            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;            
+//            $is_rent = PersonalAccount::findByRent($account, $client_id);
+//            $is_rent = $is_rent ? true : false;
+//            return ['success' => true, 'is_rent' => $is_rent];
+//        }
+//        return ['success' => false];
+//    }
     
     /*
      * AJAX валидация формы отправки подтверждения СМС кода
