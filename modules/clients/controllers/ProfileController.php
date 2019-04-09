@@ -55,11 +55,15 @@ class ProfileController extends AppClientsController
             }
         }
         
+        // Полуаем данные по платежам, по текущему лиыевому счету
+        $payment_history = $this->getPaymentsHistory();
+        
         return $this->render('index', [
             'account_info' => $account_info,
             'model' => $model,
             'add_rent' => $add_rent,
             'rent_info' => $rent_info,
+            'payment_history' => $payment_history,
         ]);
         
     }
@@ -164,7 +168,29 @@ class ProfileController extends AppClientsController
     }
     
     
-    
+    /*
+     * Получить историю платежей по текущему лицевому счету
+     */
+    private function getPaymentsHistory() {
+        
+        // Получить номер текущего лицевого счета
+        $account_number = $this->_current_account_number;
+        // Получаем номер текущего месяца и год
+        $current_period = date('Y-m-d');
+        
+        $array_request = [
+            'Номер лицевого счета' => $account_number,
+            'Период начало' => null,
+            'Период конец' => $current_period,
+        ];
+        
+        $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
+        
+        $payments_lists = Yii::$app->client_api->getPayments($data_json);
+        
+        return $payments_lists;
+        
+    }
     
     
     

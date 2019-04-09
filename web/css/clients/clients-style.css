@@ -1108,6 +1108,9 @@ span.dot {
     border-radius: 3px;
     margin: 5px 4px;
 }
+.without-border {
+    border: none;
+}
 /* Конец Таблица для заявок */
 
 /* Таблица Результаты голосования */
