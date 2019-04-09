@@ -120,7 +120,7 @@ class ClientsRentForm extends Model {
             }
             $transaction->commit();
             
-            return ['rent' => $add_rent->rents_id];
+            return true;
                 
         } catch (Exception $ex) {
             $transaction->rollBack();

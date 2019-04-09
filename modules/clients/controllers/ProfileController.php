@@ -65,12 +65,12 @@ class ProfileController extends AppClientsController
     }
     
     /*
-     * Общий метод валидации форм раздела Лицевой счет
+     * Валидация формы добавления лицевого счета
      */
     public function actionValidateForm($form) {
         
         if ($form == null) {
-            throw new NotFoundHttpException('Ошибка передалчи параметров. Вы обратились к несуществующей странице');
+            throw new NotFoundHttpException('Ошибка передачи параметров. Вы обратились к несуществующей странице');
         }
         
         switch ($form) {
@@ -105,7 +105,81 @@ class ProfileController extends AppClientsController
         
         Yii::$app->session->setFlash('error', ['message' => 'При создании лицевого счета произошла ошибка. Обновите страницу и повторите действие заново']);
         return $this->redirect('index');
-    }    
+    }
+    
+    /*
+     * Удаление учетной записи арендатора с портала
+     */
+    public function actionDeleteRentProfile() {
+        
+        $rent_id = Yii::$app->request->post('rentsId');
+        
+        if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            $rent = Rents::findOne($rent_id);
+            if (!$rent->delete()) {
+                return $this->goHome();
+            }
+            return $this->redirect(Yii::$app->request->referrer);
+        }
+        
+        return ['status' => false];
+        
+    }
+    
+    /*
+     * Проверка валидации формы добавление нового Арендатора
+     */
+    public function actionValidateRentForm() {
+        
+        $model = new ClientsRentForm();
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return \yii\widgets\ActiveForm::validate($model);
+        }
+    }
+    
+    /*
+     * Добавление учетной записи Арендатора
+     */
+    public function actionCreateRentForm($client) {
+        
+        $account = $this->_current_account_id;
+        
+        if ($client == null || $account == null) {
+            return 'Ошибка отправки формы';
+        }
+        
+        $model = new ClientsRentForm(['scenario' => ClientsRentForm::SCENARIO_AJAX_VALIDATION]);
+        
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            if (!$model->saveRentToUser($client, $account)) {
+                Yii::$app->session->setFlash('error', ['message' => 'Ошибка добавления арендатора. Обновите страницу и повторите действие заново']);
+                return $this->redirect(Yii::$app->request->referrer);
+            }
+            Yii::$app->session->setFlash('success', ['message' => 'Учетная запись арендатора была успешно создана']);
+            return $this->redirect(Yii::$app->request->referrer);
+        }
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     /*
      * Смена выбора текущего лицевого счета
@@ -164,25 +238,7 @@ class ProfileController extends AppClientsController
     }
     
 
-    /*
-     * Удаление учетной записи арендатора с портала
-     */
-    public function actionDeleteRentProfile() {
-        
-        $rent_id = Yii::$app->request->post('rentsId');
-        
-        if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
-            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-            $rent = Rents::findOne($rent_id);
-            if (!$rent->delete()) {
-                return $this->goHome();
-            }
-            return $this->redirect(Yii::$app->request->referrer);
-        }
-        
-        return ['status' => false];
-        
-    }
+    
     
     /*
      * Раздел - Настройки профиля
@@ -344,37 +400,7 @@ class ProfileController extends AppClientsController
         
     }
     
-    /*
-     * Проверка валидации формы добавление нового Арендатора
-     */
-    public function actionValidateRentForm() {
-        
-        $model = new ClientsRentForm();
-        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
-            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-            return \yii\widgets\ActiveForm::validate($model);
-        }
-    }
     
-    /*
-     * Добавление учетной записи Арендатора
-     */
-    public function actionCreateRentForm($client) {
-        
-        $account = $this->_current_account_id;
-        
-        if ($client == null || $account == null) {
-            return 'Ошибка отправки формы';
-        }
-        
-        $model = new ClientsRentForm(['scenario' => ClientsRentForm::SCENARIO_AJAX_VALIDATION]);
-        
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            $model->saveRentToUser($client, $account);
-            return $this->redirect(['profile/index']);
-        }
-        
-    }
 
     /*
      * Установка времени куки для СМС операций

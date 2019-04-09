@@ -77,20 +77,7 @@ $(document).ready(function() {
             },
         });
     });
-    
-    /*
-     * Форма 'Добавить нового Арендатора'
-     */
-    /*
-     * При загрузке модального окна, получаем
-     * ID выбранного лицевого счета
-     */
-    $('#add-rent-modal').on('show.bs.modal', function(e) {
-        var accountId = $('#_list-account :selected').text();
-        $('#_personal-account').val(accountId);
-        $('.btn__add_rent', this).data('accountId', accountId);
-    });
-        
+           
     // Очистить поля ввода, клик по кнопкам 'Отмена', 'x'
     $('#add-rent-modal .add-rent-modal__close').on('click', function() {
         $('#add-rent input').val('');
@@ -110,6 +97,7 @@ $(document).ready(function() {
      * Смена номера мобильного телефона,
      * Снять атрибут, только для чтения
      * Кастомизация текстового поля
+     * Настройки профиля
      */
     $('.settings-input-phone').on('click', function(){
         $(this).prop('readOnly', false);
