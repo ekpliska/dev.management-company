@@ -60,21 +60,6 @@ $(document).ready(function() {
         });        
     }
     
-    /*
-     * Снять чекбокс Арендатор, если пользователь закрыл модальное окно "Новый арендатор"
-     */
-    $('.add-rent-modal__close').on('click', function() {
-        $('#is_rent').prop('checked', false);
-    });    
-
-    /*
-     * Обработка событий в модальном окне 'Дальнейшие действия с учетной записью арендатора'
-     * Закрыть модальное окно
-     */
-    $('.changes_rent__close').on('click', function() {
-        $('#is_rent').prop('checked', true);
-    });
-    
     // Удалить данные арендатора из системы
     $('.changes_rent__del').on('click', function() {
         var rentsId = $('input[id=_rents]').val();
@@ -88,7 +73,7 @@ $(document).ready(function() {
 //                console.log(textStatus);
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                console.log('Error #1000-03');                
+                console.log(textStatus);
             },
         });
     });
