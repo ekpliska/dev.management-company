@@ -285,11 +285,14 @@ li.account-info {
     height: 200px;
     margin: 10px;
     border: 1px solid #ddd;
+    border-radius: 12px;
 }
 .client-page__top > div[class*="col-"] > div > h1 {
     padding: 10px 5px;
-    font-size: 22px;
+    font-size: 18px;
     margin: 0;
+    font-weight: bold;
+    text-align: center;
 }
 .client-page__news > h1,
 .client-page__services > h1 {
@@ -389,7 +392,7 @@ li.account-info {
 }
 .service-item__content > .cost-service {
     font-size: 16px;
-    color: #ef693a;
+    color: #2d18b4;
     font-weight: bold;
     padding: 0 0 5px 0;
 }
