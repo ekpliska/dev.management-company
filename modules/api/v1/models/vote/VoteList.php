@@ -47,11 +47,8 @@ class VoteList extends Voting {
             $status_current_user = null;
             foreach ($vote_list->participant as $key_participant => $participant) {
                 
-                $_participant[$key_participant] = [
-                    'user_id' => $participant->user->user_id,
-                    'user_image' => $participant->user->photo,
-                ];
-                $participants = $_participant;
+                $_participant = $participant->user->photo;
+                $participants[] = $_participant;
                 if ($participant->user->user_id == Yii::$app->user->getId()) {
                     $status_current_user = ($participant->finished == RegistrationInVoting::STATUS_FINISH_YES) ? 'finished' : $participant->status;
                 }
@@ -64,8 +61,9 @@ class VoteList extends Voting {
                 'vote_image' => $vote_list->voting_image,
                 'vote_title' => $vote_list->voting_title,
                 'voting_text' => $vote_list->voting_text,
-                'vote_date' => $vote_list->created_at,
-                'status' => $status_current_user,
+                'vote_date' => $vote_list->voting_date_end,
+                'is_opened' => $vote_list->status == 0 ? true : false,
+                'participant_status' => $status_current_user,
             ];            
             
             // Результат
@@ -99,6 +97,11 @@ class VoteList extends Voting {
      * Регистрация участника опроса
      */
     public static function registerToVote($vote_id) {
+        
+        // Проверяем судествование опроса
+        if (!self::findOne(['voting_id' => $vote_id])) {
+            return false;
+        }
 
         // Проверяем не был ли пользователь зарегистрирован раньше
         if (self::isParticipant($vote_id)) {
@@ -110,7 +113,7 @@ class VoteList extends Voting {
         $model->user_id = Yii::$app->user->getId();
         $model->random_number = 0;
         $model->status = RegistrationInVoting::STATUS_ENABLED;
-        $model->status = RegistrationInVoting::STATUS_ENABLED;
+        $model->date_registration = time();
         return $model->save(false) ? true : false;
         
     }

@@ -6,7 +6,6 @@
     use yii\filters\AccessControl;
     use yii\filters\auth\HttpBasicAuth;
     use yii\filters\auth\HttpBearerAuth;
-    use app\models\SmsSettings;
     use app\modules\api\v1\models\vote\VoteList;
     use app\modules\api\v1\models\vote\QuestionList;
     use app\modules\api\v1\models\vote\ResultsVote;
@@ -164,7 +163,10 @@ class VoteController extends Controller {
      */
     public function actionBecomeParticipant($vote_id) {
         
-        return VoteList::registerToVote($vote_id);
+        if (!VoteList::registerToVote($vote_id)) {
+            return ['success' => false];
+        }
+        return ['success' => true];
     }
     
 }
