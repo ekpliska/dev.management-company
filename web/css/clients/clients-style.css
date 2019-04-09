@@ -681,13 +681,43 @@ li.partners-info > img {
 .profile-page__btn-block a:hover {
     box-shadow: 0px 1px 8px 0 #7c7c7c;
 }
-.nav-tabs {
+.profile-control {
+    margin: 10px;
     border-bottom: none;
+}
+.profile-control > li.active > a,
+.profile-control > li.active > a:focus,
+.profile-control > li > a:hover {
+    color: #000;
+    cursor: default;
+    background-color: #fff;
+    border: 2px solid #2d18b4;
+    border-radius: 25px;
+    width: 170px;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    font-weight: bold;
+    box-shadow: 0px 1px 4px 4px rgba(51,0,255,0.33);
+}
+.profile-control > li > a {
+    color: #000;
+    cursor: default;
+    background-color: #fff;
+    border: 2px solid #ddd;
+    border-radius: 25px;
+    width: 170px;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    font-weight: bold;
+    margin: 5px 10px;
 }
 .tab-content.profile-control {
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 12px;
+    min-height: 320px;
 }
 .profile-control > div > h3 {
     font-size: 16px;
