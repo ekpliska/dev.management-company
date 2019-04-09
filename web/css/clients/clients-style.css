@@ -775,6 +775,10 @@ li.partners-info > img {
     border-radius: 12px;
     border: 1px solid #ddd;
 }
+.user-form > div > div[class*="col-"] {
+    padding: 0;
+    margin: 0;
+}
 .profile-settings__settings > div[class*="col-"] > div {
     margin: 10px;
     padding: 10px;
@@ -838,6 +842,7 @@ li.partners-info > img {
 .profile-settings_block {
     font-size: 10px;
     margin-top: 15px;
+    margin-right: 20px;
     text-transform: uppercase;
     border-bottom: 1px solid #eee;
 }
