@@ -273,7 +273,8 @@ class ProfileController extends AppClientsController
         }
         
         if ($user->load(Yii::$app->request->post()) && $user->validate()) {
-            $user->save();
+            $file = UploadedFile::getInstance($user, 'user_photo');
+            $user->uploadPhoto($file);
             return $this->refresh();
         }
 
@@ -287,19 +288,6 @@ class ProfileController extends AppClientsController
             'is_change_phone' => $is_change_phone,
         ]);
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     /*
      * Смена выбора текущего лицевого счета
@@ -357,65 +345,6 @@ class ProfileController extends AppClientsController
         return ['success' => false];
     }
     
-
-    
-    
-    /*
-     * Раздел - Настройки профиля
-     * @param array $model_password Модель смены пароля учетной записи
-     */
-    public function actionSettingsProfile() {
-        
-        // Проверяем время существования куки
-        $this->hasCookieSMS();
-        
-        $user_info = $this->permisionUser();
-        $user = $user_info->_model;
-        
-        // Загружаем модель смены пароля
-        $model_password = new ChangePasswordForm($user);
-        // Модель на смену номера мобильного телефона
-        $model_phone = new ChangeMobilePhone($user);        
-        
-        // Модель на ввод СМС кода
-        $sms_model = new SMSForm($user);
-        
-        // Получаем статус СМС запроса
-        $is_change_password = SmsOperations::findByUserIDAndType($user_info->userID, SmsOperations::TYPE_CHANGE_PASSWORD);
-        $is_change_phone = SmsOperations::findByUserIDAndType($user_info->userID, SmsOperations::TYPE_CHANGE_PHONE);
-
-        if ($model_password->load(Yii::$app->request->post()) && $model_password->validate()) {
-            // Если данные успешно провалидированы, то устанавливаем куку времени на смену пароля
-            if ($model_password->checkPassword()) {
-                $this->setTimeCookies();
-                return $this->refresh();
-            }
-        }
-        
-        if ($model_phone->load(Yii::$app->request->post()) && $model_phone->validate()) {
-            // Если данные успешно провалидированы, то устанавливаем куку времени на смену пароля
-            if ($model_phone->checkPhone()) {
-                $this->setTimeCookies();
-                return $this->refresh();
-            }
-        }
-        
-        if ($user->load(Yii::$app->request->post()) && $user->validate()) {
-            $user->save();
-            return $this->refresh();
-        }
-
-        return $this->render('settings-profile', [
-            'user_info' => $user_info,
-            'user' => $user,
-            'model_password' => $model_password,
-            'sms_model' => $sms_model,
-            'model_phone' => $model_phone,
-            'is_change_password' => $is_change_password,
-            'is_change_phone' => $is_change_phone,
-        ]);
-    }
-    
     /*
      * AJAX валидация формы отправки подтверждения СМС кода
      */
@@ -452,76 +381,6 @@ class ProfileController extends AppClientsController
         
     }
     
-    /*
-     * Метод формирования вывода Профиля Собственника
-     * 
-     * @param array $user_info Информация текущем пользователе (Пользователь + Собственник)
-     * @param model $_user['user'] Модель Пользователь
-     * @param integer $accoint_id Значение ID лицевого счета из глобального dropDownList (хеддер)
-     * @param array $accounts_list Получить список всех лицевых счетов закрепленны за Собственником
-     * @param array $accounts_list_rent Получить все лицевые счета не связанные с Арендатором
-     */
-    protected function client($user_info) {
-        
-        $accoint_id = $this->_current_account_id;
-        $accounts_list = $this->_lists;
-        
-        $model = $user_info->_model;
-        $model->scenario = User::SCENARIO_EDIT_PROFILE;
-        
-        // Получить информацию по текущему лицевому счету
-        $accounts_info = PersonalAccount::findByAccountID($accoint_id);
-        
-        /* Если у текущего лицевого счета есть арендатор, передаем в глабальный параметр _is_rent значение true;
-         * Если у текущего лицевого счета арендатора нет, то формируем модель на добавление нового Арендатора
-         */
-        if (!empty($accounts_info->personal_rent_id)) {
-            $this->_is_rent = true;
-            $model_rent = Rents::findOne(['rents_id' => $accounts_info->personal_rent_id]);
-            
-            return $this->render('index', [
-                'user' => $model,
-                'user_info' => $user_info,
-                'accounts_list' => $accounts_list,
-                'is_rent' => $this->_is_rent,
-                'accounts_info' => $accounts_info,
-                'model_rent' => $model_rent,
-            ]);
-        } else {
-            $this->_is_rent = false;
-            $model_rent = null;
-            $add_rent = new ClientsRentForm(['scenario' => ClientsRentForm::SCENARIO_AJAX_VALIDATION]);
-        
-            return $this->render('index', [
-                'user' => $model,
-                'user_info' => $user_info,
-                'accounts_list' => $accounts_list,
-                'is_rent' => $this->_is_rent,
-                'accounts_info' => $accounts_info,
-                'add_rent' => $add_rent,
-            ]);
-        }
-        
-    }
-    
-    /*
-     * Метод формирования вывода Профиля Арендатора
-     */
-    protected function rent($user_info) {
-        
-        $model = $user_info->_model;
-        $accounts_list = $this->_lists;
-        
-        return $this->render('index', [
-            'user' => $model,
-            'user_info' => $user_info,
-            'accounts_list' => $accounts_list,
-        ]);
-        
-    }
-    
-    
-
     /*
      * Установка времени куки для СМС операций
      */

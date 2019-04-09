@@ -5,6 +5,8 @@
     use Yii;
     use yii\helpers\ArrayHelper;
     use yii\behaviors\TimestampBehavior;
+    use yii\imagine\Image;
+    use Imagine\Image\Box;
     use app\models\PersonalAccount;
     use app\models\Employees;
     use app\models\Token;
@@ -63,8 +65,12 @@ class User extends ActiveRecord implements IdentityInterface
             
             [['user_email', 'user_mobile'], 'required', 'on' => self::SCENARIO_EDIT_PROFILE],
             
-            [['user_photo'], 'file', 'extensions' => 'png, jpg, jpeg'],
-            [['user_photo'], 'image', 'maxWidth' => 510, 'maxHeight' => 510],
+            [['user_photo'], 'file', 
+                'extensions' => 'png, jpg, jpeg', 
+                'maxFiles' => 5, 
+                'maxSize' => 20 * 1024 * 1024,
+                'mimeTypes' => 'image/*',                
+            ],
             
             ['user_email', 'string', 'min' => 5, 'max' => 150, 'on' => self::SCENARIO_EDIT_PROFILE],
             ['user_email', 'email'],
@@ -322,6 +328,11 @@ class User extends ActiveRecord implements IdentityInterface
                 $file_name = $this->user_login . '_' . $this->user_photo->baseName . '.' . $this->user_photo->extension;
                 $this->user_photo->saveAs($dir . $file_name);
                 $this->user_photo = '/' . $dir . $file_name;
+                
+                $photo_path = Yii::getAlias('@webroot') . '/' . $dir . $file_name;
+                $photo = Image::getImagine()->open($photo_path);
+                $photo->thumbnail(new Box(200, 200))->save($photo_path, ['quality' => 40]);
+                
                 @unlink(Yii::getAlias('@webroot' . $current_image));
             } else {
                 $this->user_photo = $current_image;
