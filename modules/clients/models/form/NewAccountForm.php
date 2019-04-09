@@ -25,7 +25,7 @@ class NewAccountForm extends Model {
     public function rules() {
         
         return [
-            [['account_number', 'last_sum', 'square'], 'required'],
+            [['account_number', 'last_sum', 'square'], 'required', 'message' => 'Поле обязательно для заполнения'],
 //            ['account_number', 'string', 'min' => 12, 'max' => 12],
             
             [['square'], 'double', 'min' => 20.00, 'max' => 1000.00, 'message' => 'Площадь жилого помещения указана не верно. Пример, 80.27'],

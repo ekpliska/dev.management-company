@@ -2,6 +2,7 @@
 
     namespace app\modules\clients\controllers;
     use Yii;
+    use yii\web\Response;
     use yii\web\UploadedFile;
     use yii\widgets\ActiveForm;
     use app\modules\clients\controllers\AppClientsController;
@@ -228,7 +229,61 @@ class ProfileController extends AppClientsController
         
     }
     
-    
+    /*
+     * Раздел - Настройки профиля
+     * @param array $model_password Модель смены пароля учетной записи
+     */
+    public function actionSettings() {
+        
+        // Проверяем время существования куки
+        $this->hasCookieSMS();
+        
+        $user_info = $this->permisionUser();
+        $user = $user_info->_model;
+        
+        // Загружаем модель смены пароля
+        $model_password = new ChangePasswordForm($user);
+        // Модель на смену номера мобильного телефона
+        $model_phone = new ChangeMobilePhone($user);        
+        
+        // Модель на ввод СМС кода
+        $sms_model = new SMSForm($user);
+        
+        // Получаем статус СМС запроса
+        $is_change_password = SmsOperations::findByUserIDAndType($user_info->userID, SmsOperations::TYPE_CHANGE_PASSWORD);
+        $is_change_phone = SmsOperations::findByUserIDAndType($user_info->userID, SmsOperations::TYPE_CHANGE_PHONE);
+
+        if ($model_password->load(Yii::$app->request->post()) && $model_password->validate()) {
+            // Если данные успешно провалидированы, то устанавливаем куку времени на смену пароля
+            if ($model_password->checkPassword()) {
+                $this->setTimeCookies();
+                return $this->refresh();
+            }
+        }
+        
+        if ($model_phone->load(Yii::$app->request->post()) && $model_phone->validate()) {
+            // Если данные успешно провалидированы, то устанавливаем куку времени на смену пароля
+            if ($model_phone->checkPhone()) {
+                $this->setTimeCookies();
+                return $this->refresh();
+            }
+        }
+        
+        if ($user->load(Yii::$app->request->post()) && $user->validate()) {
+            $user->save();
+            return $this->refresh();
+        }
+
+        return $this->render('settings', [
+            'user_info' => $user_info,
+            'user' => $user,
+            'model_password' => $model_password,
+            'sms_model' => $sms_model,
+            'model_phone' => $model_phone,
+            'is_change_password' => $is_change_password,
+            'is_change_phone' => $is_change_phone,
+        ]);
+    }
     
     
     

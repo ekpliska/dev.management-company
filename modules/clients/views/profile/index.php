@@ -22,7 +22,7 @@ $this->title = Yii::$app->params['site-name'] . 'Профиль';
             <div class="profile-page__user">
                 <?= $this->render('data/profile-info') ?>
                 <div class="profile-page__btn-block">
-                    <?= Html::a('Настройки профиля', ['/']) ?>
+                    <?= Html::a('Настройки профиля', ['profile/settings']) ?>
                 </div>
             </div>
         </div>

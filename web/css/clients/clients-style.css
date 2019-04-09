@@ -761,13 +761,31 @@ li.partners-info > img {
 /* Кoнец Страница Профиль пользователя */
 
 /* Настройки профиля пользователя */
-.profile-settings {
+.profile-settings,
+.profile-settings > div[class*="col-"] {
+    padding: 0;
+    margin: 0;
+}
+.profile-settings > div[class*="col-"] > div {
+    margin: 10px;
+    padding: 10px;
     border: 1px solid #ddd;
     border-radius: 12px;
-    padding: 20px 10px;
 }
-.user-image {
-    height: 260px;
+.profile-settings__left, 
+.profile-settings__right {
+    min-height: 850px;
+}
+.profile-settings__photo {
+    height: 210px;
+    width: 210px;
+    border-radius: 100%;
+    margin: 0 auto;
+    background-color: #ddd;
+}
+.profile-settings__photo img {
+    height: 100%;
+    width: 100%;
 }
 .user-image img {
     position: absolute;
@@ -781,6 +799,18 @@ li.partners-info > img {
     font-size: 22px;
     font-weight: bold;
 }
+.profile-settings__right > div {
+    /*display: grid;*/
+}
+
+
+
+
+
+
+
+
+
 .profile-settings_block {
     font-size: 10px;
     margin-top: 15px;
@@ -841,17 +871,10 @@ i.status-2 {
     padding: 10px 10px 10px 0px;
     text-align: center;
 }
-p.left {
-    color: #2d18b4;
-    border-bottom: 3px solid #2d18b4;
-}
+p.left,
 p.center {
-    color: #f0754a;
-    border-bottom: 3px solid #f0754a;
-}
-p.right {
-    color: #1fd68d;
-    border-bottom: 3px solid #1fd68d;
+    color: #fff;
+    background-color: #2d18b4;
 }
 .settings-input {
     padding: 5px 10px;
