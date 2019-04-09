@@ -39,7 +39,8 @@
         ]) ?>
     </div>
     <div id="counters" class="tab-pane fade">
-        <!--<h3>Приборы учета</h3>-->
-        <?= $this->render('tabs/counters') ?>
+        <?= $this->render('tabs/counters', [
+                'indications' => $counters_indication,
+        ]) ?>
     </div>
 </div>

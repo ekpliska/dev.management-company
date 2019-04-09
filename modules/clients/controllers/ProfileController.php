@@ -14,6 +14,8 @@
     use app\models\SmsOperations;
     use app\modules\clients\models\form\SMSForm;
     use app\modules\clients\models\form\NewAccountForm;
+    use app\models\PaidServices;
+    use app\models\CommentsToCounters;
     
     
 
@@ -57,6 +59,8 @@ class ProfileController extends AppClientsController
         
         // Полуаем данные по платежам, по текущему лиыевому счету
         $payment_history = $this->getPaymentsHistory();
+        // Полуаем данные по приблрам учета, по текущему лицевому счету
+        $counters_indication = $this->getCountersIndication();
         
         return $this->render('index', [
             'account_info' => $account_info,
@@ -64,6 +68,7 @@ class ProfileController extends AppClientsController
             'add_rent' => $add_rent,
             'rent_info' => $rent_info,
             'payment_history' => $payment_history,
+            'counters_indication' => $counters_indication,
         ]);
         
     }
@@ -170,6 +175,7 @@ class ProfileController extends AppClientsController
     
     /*
      * Получить историю платежей по текущему лицевому счету
+     * Для вкладки "Платежи", Профиль пользователя
      */
     private function getPaymentsHistory() {
         
@@ -189,6 +195,36 @@ class ProfileController extends AppClientsController
         $payments_lists = Yii::$app->client_api->getPayments($data_json);
         
         return $payments_lists;
+        
+    }
+    
+    /*
+     * Получить теукщие показания приборов учета
+     * по текущему лицевому счету
+     * Для вкладки "Приборы учета", Профиль пользователя
+     */
+    private function getCountersIndication() {
+        
+        $account_id = $this->_current_account_id;
+        $account_number = $this->_current_account_number;
+        
+        // Получаем список зявок сформированных автоматически на поверу приборов учета
+        $auto_request = PaidServices::notVerified($account_id);
+        
+        // Получаем комментарии по приборам учета Собсвенника. Комментарий формирует Администратор системы
+        $comments_to_counters = CommentsToCounters::getComments($account_id);
+
+        // Формируем запрос для текущего расчетного перирода
+        $array_request = [
+            'Номер лицевого счета' => $account_number,
+            'Номер месяца' => date('m'),
+            'Год' => date('Y'),
+        ];
+        
+        $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
+        $indications = Yii::$app->client_api->getPreviousCounters($data_json);
+        
+        return $indications;
         
     }
     

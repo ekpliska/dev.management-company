@@ -714,7 +714,7 @@ li.partners-info > img {
     margin: 5px 10px;
 }
 .tab-content.profile-control {
-    padding: 20px;
+    padding: 20px 0;
     border: 1px solid #ddd;
     border-radius: 12px;
     min-height: 320px;
@@ -1801,10 +1801,10 @@ form#search-form {
     padding: 5px 20px;
     border: none;
 }
-.table-striped > tbody > tr:first-child > td {
+/*.table-striped > tbody > tr:first-child > td {
     border-top-right-radius: 12px;
     border-top-left-radius: 12px;
-}
+}*/
 /* Конец Лицевой счет, таблица */
 
 /* Квитанции */
@@ -2240,6 +2240,13 @@ label[class^='error-ind-'] {
     padding: 20px;
     text-align: center;
     font-size: 14px;
+    color: #2d18b4;
+}
+.counters-info {
+    font-weight: bold;
+    color: #ff1760;
+}
+.counters-info:hover {
     color: #2d18b4;
 }
 /* Конец Приборы учета */

@@ -52,6 +52,7 @@ $this->title = Yii::$app->params['site-name'] . 'Профиль';
                 'add_rent' => $add_rent,
                 'rent_info' => $rent_info,
                 'payment_history' => $payment_history,
+                'counters_indication' => $counters_indication,
         ]) ?>
     </div>
 </div>
