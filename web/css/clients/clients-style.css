@@ -306,12 +306,10 @@ li.account-info {
     border-radius: 12px;
     height: 320px;
 }
-.client-page__news > div[class*="col-"] > a > div {
+.news-item {
     height: 250px;
     border: 1px solid #ddd;
     border-radius: 12px;
-}
-.news-item {
     position: relative;
     overflow: hidden;
     cursor: pointer;

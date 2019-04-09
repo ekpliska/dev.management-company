@@ -173,11 +173,8 @@ class News extends ActiveRecord
      * Формирование списка новостей для конечного пользователя
      * 
      * @param array $living_space
-     *      $living_space['estate_id'] ID ЖК
      *      $living_space['houses_id'] ID Дома
-     *      $living_space['flats_id'] ID Квартиры
-     *      $living_space['flats_porch'] Номер подъезда
-     */
+    */
     public static function getNewsByClients($living_space, $rubric = null) {
         
         if ($living_space == null) {

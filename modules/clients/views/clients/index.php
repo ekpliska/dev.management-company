@@ -17,9 +17,7 @@ $current_date = date('F, Y');
                 <h1>
                     <?= $current_date ?>
                 </h1>
-                <div class="__top-counters_content">
-                    #todo
-                </div>
+                <?= $this->render('data/indications-slider', ['indications' => $indications]) ?>
             </div>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
@@ -44,3 +42,20 @@ $current_date = date('F, Y');
         <?= LastNews::widget(['living_space' => $living_space]) ?>
     </div>
 </div>
+
+<?php
+$this->registerJs("
+    $('.news-carousel').owlCarousel({
+        loop:true,
+        margin:10,
+        nav:true,
+        items: 3,
+    });
+    $('.counters-carousel').owlCarousel({
+        loop:true,
+        margin:10,
+        nav:true,
+        items: 1,
+    });
+")
+?>

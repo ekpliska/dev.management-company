@@ -27,7 +27,31 @@ class ClientsController extends AppClientsController
         
         return $this->render('index', [
             'living_space' => $living_space,
+            'indications' => $this->getCountersIndication(),
         ]);
+        
+    }
+    
+    /*
+     * Получить теукщие показания приборов учета
+     * по текущему лицевому счету
+     * Для вкладки "Приборы учета", Профиль пользователя
+     */
+    private function getCountersIndication() {
+        
+        $account_number = $this->_current_account_number;
+        
+        // Формируем запрос для текущего расчетного перирода
+        $array_request = [
+            'Номер лицевого счета' => $account_number,
+            'Номер месяца' => date('m'),
+            'Год' => date('Y'),
+        ];
+        
+        $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
+        $indications = Yii::$app->client_api->getPreviousCounters($data_json);
+        
+        return $indications;
         
     }
     

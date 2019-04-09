@@ -23,24 +23,12 @@ class LastNews extends Widget {
     public function run() {
         
         // Формируем список новостей для текущено пользователя
-        $news = News::getNewsByClients($this->living_space)->limit(12);
-        
-        $pages = new Pagination([
-            'totalCount' => $news->count(), 
-            'pageSize' => 3, 
-            'forcePageParam' => false, 
-            'pageSizeParam' => false,
-        ]);
-
-        $news = $news->offset($pages->offset)
-                ->limit($pages->limit)
-                ->all();
+        $news = News::getNewsByClients($this->living_space)->limit($this->count_news)->all();
         
         return $this->render('lastnews/default', [
             'news' => $news,
-            'pages' => $pages,
         ]);
         
     }
-    
+
 }

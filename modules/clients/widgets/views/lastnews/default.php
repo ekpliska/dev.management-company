@@ -1,6 +1,5 @@
 <?php
 
-    use yii\widgets\LinkPager;
     use yii\helpers\Html;
     use yii\helpers\Url;
     use app\helpers\FormatHelpers;
@@ -14,9 +13,17 @@
 <h1>
     Новости
 </h1>
+<div class="news-carousel owl-carousel owl-theme">
 <?php foreach ($news as $key => $post) : ?>
-    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
-        <a href="<?= Url::to(['news/view', 'slug' => $post['slug']]) ?>">
+    <div class="item news-item">
+        <?= Html::img(Yii::getAlias('@web') . '/web' . $post['news_preview'], ['class' => 'news-item__preview']) ?>
+    </div>
+<?php endforeach; ?>
+</div>
+<?php endif; ?>
+
+<?php /*
+ * <a href="<?= Url::to(['news/view', 'slug' => $post['slug']]) ?>">
             <div class="news-item">
                 <?= Html::img(Yii::getAlias('@web') . $post['news_preview'], ['class' => 'news-item__preview']) ?>
                 <span class="news-item__rubric"><?= $post['rubric']['rubrics_name'] ?></span>
@@ -33,10 +40,4 @@
                 </div>
             </div>
         </a>
-    </div>
-<?php endforeach; ?>
-<?php endif;?>
-
-<div class="clearfix"></div>
-
-<?= LinkPager::widget(['pagination' => $pages]); ?>
+ */ ?>
