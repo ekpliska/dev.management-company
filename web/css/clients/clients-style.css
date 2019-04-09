@@ -637,7 +637,10 @@ li.partners-info > img {
     margin: 5px;
     border: 1px solid #ddd;
     border-radius: 12px;
-    min-height: 520px;
+    min-height: 500px;
+}
+.profile-page__user {
+    padding: 20px;
 }
 .profile-page__user img {
     width: 170px;
@@ -762,30 +765,38 @@ li.partners-info > img {
 
 /* Настройки профиля пользователя */
 .profile-settings,
-.profile-settings > div[class*="col-"] {
+.profile-settings__settings > div[class*="col-"] {
     padding: 0;
     margin: 0;
 }
-.profile-settings > div[class*="col-"] > div {
+.user-form {
+    margin: 0 10px;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+}
+.profile-settings__settings > div[class*="col-"] > div {
     margin: 10px;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 12px;
-}
-.profile-settings__left, 
-.profile-settings__right {
-    min-height: 850px;
+    min-height: 475px;
 }
 .profile-settings__photo {
-    height: 210px;
-    width: 210px;
+    height: 170px;
+    width: 170px;
     border-radius: 100%;
     margin: 0 auto;
     background-color: #ddd;
+    position: relative;
 }
 .profile-settings__photo img {
     height: 100%;
     width: 100%;
+    border-radius: 100%;
+}
+.profile-settings__photo:hover .profile-upload {
+    opacity: 1;
 }
 .user-image img {
     position: absolute;
@@ -799,18 +810,31 @@ li.partners-info > img {
     font-size: 22px;
     font-weight: bold;
 }
-.profile-settings__right > div {
-    /*display: grid;*/
+.profile-upload {
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 40px;
+    opacity: 0;
+    transition: .5s ease;
 }
-
-
-
-
-
-
-
-
-
+.profile-upload .form-group {
+    margin: 0;
+}
+.profile-upload label {
+    cursor: pointer;
+}
+.profile-settings__info {
+    padding: 20px 0;
+}
+.spam-agree-txt {
+    margin: 30px 0;
+}
 .profile-settings_block {
     font-size: 10px;
     margin-top: 15px;
@@ -875,6 +899,7 @@ p.left,
 p.center {
     color: #fff;
     background-color: #2d18b4;
+    border-radius: 12px;
 }
 .settings-input {
     padding: 5px 10px;

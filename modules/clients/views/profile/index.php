@@ -1,6 +1,5 @@
 <?php
     
-    use yii\widgets\ActiveForm;
     use yii\helpers\Html;
     use app\modules\clients\widgets\AlertsShow;
     use app\modules\clients\widgets\ModalWindows;
@@ -15,7 +14,7 @@ $this->title = Yii::$app->params['site-name'] . 'Профиль';
 
 <div class="profile-page">
     <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <div class="col-lg-4 col-md-5 col-sm-12 col-xs-12">
             <h1>
                 Личная информация
             </h1>
@@ -26,7 +25,7 @@ $this->title = Yii::$app->params['site-name'] . 'Профиль';
                 </div>
             </div>
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <div class="col-lg-8 col-md-7 col-sm-12 col-xs-12">
             <h1>
                 Лицевой счет
             </h1>

@@ -36,6 +36,8 @@ class ProfileController extends AppClientsController
     public function actionIndex() {
         
         $user_info = $this->permisionUser();
+        $user = $user_info->_model;
+        
         $accoint_id = $this->_current_account_id;
         
         $account_info = PersonalAccount::getAccountInfo($accoint_id, $user_info->clientID);
@@ -64,6 +66,7 @@ class ProfileController extends AppClientsController
         $counters_indication = $this->getCountersIndication();
         
         return $this->render('index', [
+            'user' => $user,
             'account_info' => $account_info,
             'model' => $model,
             'add_rent' => $add_rent,
