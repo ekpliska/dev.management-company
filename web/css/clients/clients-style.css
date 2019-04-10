@@ -175,7 +175,7 @@ li.account-info {
     color: #1fd68d;
 }
 .account-balance > span.minus {
-    padding: 4px 13px;
+    padding: 4px 10px;
     border-radius: 25px;
     background-color: #ff1760;
     color: #fff;

@@ -81,16 +81,6 @@ $this->title = Yii::$app->params['site-name'] . 'Оплата';
         
         <?php endif; ?>
         
-        
-        <?php /*
-        <?= Html::beginForm([
-            'id' => 'payment-form',
-        ]) ?>
-            <?= Html::input('text') ?>
-        <?= Html::endForm(); ?>
-        <?= Html::button('Оплатить', ['class' => 'blue-btn add-acc-btn']) ?>
-         * 
-         */ ?>
     </div>
 </div>
 

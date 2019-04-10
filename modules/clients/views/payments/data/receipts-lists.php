@@ -40,6 +40,7 @@ $current_date = date('Y-m');
                 </span>
             <?php endif; ?>
             
+            <?php /*
             <div class="receipte-of-lists__operations">
                 <?php if ($status == false) : // Кнопка Оплатить выводим только для неоплаченных квитанций ?>
                     <?= Html::a('<i class="glyphicon glyphicon-ruble"></i> Оплатить</a>', [
@@ -56,6 +57,7 @@ $current_date = date('Y-m');
                     
                 <a href="<?= Url::to($url_pdf, true) ?>" class="print_receipt"><i class="glyphicon glyphicon-print"></i> Распечатать</a>
             </div>
+             */ ?>
         </li>
     <?php endforeach; ?>
 </ul>

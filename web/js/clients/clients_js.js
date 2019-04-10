@@ -382,7 +382,7 @@ $(document).ready(function() {
         var year = dateValue.split('-')[1];
         var monthNumber = month[nameMonth.toLowerCase()];
         
-        $.post('find-indications?month=' + monthNumber + '&year=' + year, function(response) {
+        $.post('counters/find-indications?month=' + monthNumber + '&year=' + year, function(response) {
             $('#indication-table').html(response.result);
 //            console.log(response.result);
         });
