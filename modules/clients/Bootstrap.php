@@ -40,9 +40,11 @@ class Bootstrap implements BootstrapInterface {
                 
                 // Собственники, Платежи и квитанции
                 'payments' => 'clients/payments/index',
+                'payments/<action>' => 'clients/payments/<action>',
                 
                 // Собсвенники, Показания приборов учета
                 'counters' => 'clients/counters/index',
+                'counters/<action>' => 'clients/counters/<action>',
                 
                 // Собственники, лицевой счет
                 'personal-account' => 'clients/personal-account/index',

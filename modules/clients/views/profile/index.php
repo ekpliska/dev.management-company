@@ -1,7 +1,6 @@
 <?php
     
     use yii\helpers\Html;
-    use app\modules\clients\widgets\AlertsShow;
     
 /*
  * Профиль пользователя

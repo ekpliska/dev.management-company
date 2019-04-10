@@ -1,8 +1,6 @@
 <?php
 
     use kartik\date\DatePicker;
-    use yii\widgets\Breadcrumbs;
-    use app\modules\clients\widgets\AlertsShow;
 
 /* 
  * Приборы учета
@@ -10,8 +8,6 @@
 
 $this->title = Yii::$app->params['site-name'] . 'Показания приборов учета';
 ?>
-
-<?= AlertsShow::widget() ?>
 
 <div class="counters-page row">
 

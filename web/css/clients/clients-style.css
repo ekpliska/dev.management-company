@@ -1431,7 +1431,7 @@ span.dot {
     background: linear-gradient(180.67deg, #412b5d 32%, rgba(10,8,8,0.7) 96%);
     padding: 15px;
     word-wrap: break-word;
-    margin-left: 19px;
+    margin-left: 25px;
     color: #fff;
     font-size: 12px;
     line-height: 20px;
@@ -3449,7 +3449,7 @@ a.employee-profile:hover {
     background: transparent !important;
 }
 .counters-item {
-    height: 220px;
+    /*height: 220px;*/
 }
 .counters-item > .item {
     display: grid;
@@ -3464,6 +3464,7 @@ a.employee-profile:hover {
     padding-left: 25px;
 }
 .slider-input {
+    width: 100%;
     padding: 5px 10px;
     border: 1px solid #2d18b4;
     color: #2d18b4;

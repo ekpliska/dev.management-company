@@ -6,7 +6,6 @@
     use app\modules\clients\widgets\ModalWindows;
     use app\models\Voting;
     use app\models\Answers;
-    use app\modules\clients\widgets\AlertsShow;
     use app\models\RegistrationInVoting;
     use app\modules\clients\widgets\ResultsVote;
     use app\modules\clients\widgets\ChatVote;
@@ -17,8 +16,6 @@
 $this->title = Yii::$app->params['site-name'] . $voting['voting_title'];
 $_answer = '';
 ?>
-
-<?= AlertsShow::widget() ?>
 
 <div class="view-voting row">
     <div class="preview-voting">

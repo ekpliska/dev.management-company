@@ -1,7 +1,6 @@
 <?php
     
     use yii\bootstrap\Modal;
-    use app\modules\clients\widgets\AlertsShow;
     use app\modules\clients\widgets\SubBarPaidService;
     
 /* 
@@ -11,14 +10,9 @@ $this->title = Yii::$app->params['site-name'] . 'Услуги';
 ?>
 
 <div class="paid-requests-page">
-    
     <?= SubBarPaidService::widget() ?>    
-    
-    <?= AlertsShow::widget() ?>
-    
     <?= $this->render('data/service-lists', ['pay_services' => $pay_services]) ?>
 </div>
-
 
 <?php
     Modal::begin([

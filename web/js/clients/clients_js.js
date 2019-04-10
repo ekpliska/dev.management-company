@@ -235,7 +235,7 @@ $(document).ready(function() {
             $('.message-block').addClass('invalid-message-show').html('Вы указали некорректный диапазон');
         } else if (parseStartDate - parseEndDate <= 0) {
             $('.message-block').removeClass('invalid-message-show').html('');
-            $.post('search-data-on-period?account_number=' + accountNumber + '&date_start=' + startDate + '&date_end=' + endDate + '&type=' + type,
+            $.post('payments/search-data-on-period?account_number=' + accountNumber + '&date_start=' + startDate + '&date_end=' + endDate + '&type=' + type,
                 function(data) {
                     if (data.success === false) {
                         $('.message-block').addClass('invalid-message-show').html('Ошибка запроса');
@@ -319,7 +319,7 @@ $(document).ready(function() {
             e.preventDefault();
         } else if (isCheck === true) {
             labelMess.text('');
-            $.post('send-indication?counter=' + uniqueCounter + '&indication=' + curIndication, function(responce) {
+            $.post('counters/send-indication?counter=' + uniqueCounter + '&indication=' + curIndication, function(responce) {
                 if (responce.success === false) {
                     return false;
                 } else if (responce.success === true) {

@@ -1,7 +1,6 @@
 <?php
     
     use yii\helpers\Html;
-    use app\modules\clients\widgets\AlertsShow;
     use app\modules\clients\widgets\StatusRequestWidget;
     
 /* 
@@ -16,8 +15,6 @@ $this->title = Yii::$app->params['site-name'] . 'Заявки';
         <?= StatusRequestWidget::widget(['account_id' => $this->context->_current_account_id]) ?>
     </div>
 
-    <?= AlertsShow::widget() ?>
-    
     <?= $this->render('data/grid', ['all_requests' => $all_requests]); ?>
     
     <?= Html::button('', [
