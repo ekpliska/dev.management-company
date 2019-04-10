@@ -1239,6 +1239,10 @@ span.dot {
     color: #fe2f70;
     font-weight: bold;
 }
+.table-last-payment > tbody > tr > td > a {
+    color: #454545;
+    font-weight: bold;
+}
 /* End Table last payments */
 
 /* Просмотр отдельной заявки */
