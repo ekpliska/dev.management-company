@@ -3340,7 +3340,7 @@ p.date-start-vote {
 
 /* Навигационное меню */
 .navbar-menu {
-    background-image: url(Head.png);
+    background-image: url(../header.png);
     background-size: 100% 100%;
     background-repeat: no-repeat;
     border: none;
