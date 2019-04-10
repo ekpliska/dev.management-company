@@ -2644,6 +2644,10 @@ p.date-start-vote {
     color: #fff;
     border-radius: 25px;
 }
+.user-finish-vote {
+    height: 60px;
+    width: 60px;
+}
 /* Конец Страница голосования */
 
 /* Блок кнопок голосования: за, против, воздержаться */
