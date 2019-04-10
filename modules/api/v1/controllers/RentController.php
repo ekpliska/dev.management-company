@@ -6,7 +6,6 @@
     use yii\filters\auth\HttpBasicAuth;
     use yii\filters\auth\HttpBearerAuth;
     use yii\rest\Controller;
-    use yii\helpers\Url;
     use app\modules\api\v1\models\RentForm;
     use app\modules\api\v1\models\Rent;
     

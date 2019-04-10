@@ -236,7 +236,14 @@ $config = [
                         'GET vote-list/<account:[\w-]+>' => 'vote-list',
                     ]
                 ],
-                
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'pluralize' => false,
+                    'controller' => 'v1/personal-account',
+                    'extraPatterns' => [
+                        'GET view/<account:[\w-]+>' => 'view',
+                    ]
+                ],                
             ],
         ],
         'sms' => $sms,
