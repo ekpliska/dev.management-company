@@ -245,42 +245,4 @@ $(document).ready(function() {
         });
     });
     
-    /*
-     * Настройки слайдера
-     */
-    $('.news-carousel').owlCarousel({
-        loop:true,
-        margin:10,
-        nav:true,
-        items: 3,
-        dots: false,
-        navText: [
-            '<span class="glyphicon glyphicon-arrow-left slider-prev"></span>',
-            '<span class="glyphicon glyphicon-arrow-right slider-next"></span>'
-        ],
-        responsive: {
-            0:{
-                items: 1
-            },
-            600: {
-                items: 2,
-            },
-            1000:{
-                items: 2
-            },
-            1440:{
-                items: 3
-            }
-        }
-    });
-    
-    $('.counters-carousel').owlCarousel({
-        loop:true,
-        margin:10,
-        nav:true,
-        items: 1,
-        nav: false,
-    });
-    
-    
 });    

@@ -291,3 +291,21 @@
     }
 }
 /* End Vote Page */
+
+/* Slider */
+@media screen and (max-width: 1200px) {
+    .client-page__top > div[class*="col-"] > div {
+        height: 370px;
+    }
+}
+@media screen and (max-width: 768px) {
+    .client-page__top > div[class*="col-"] > div {
+        height: 330px;
+    }
+}
+@media screen and (max-width: 370px) {
+    .client-page__top > div[class*="col-"] > div {
+        height: 360px;
+    }
+}
+/* End Slider */

@@ -21,8 +21,8 @@ class Bootstrap implements BootstrapInterface {
                 
                 // Собственники, голосование
                 'voting/<voting_id:\d+>' => 'clients/voting/view',
-                'voting/<action>' => 'clients/voting/<action>',
                 'voting' => 'clients/voting/index',
+                'voting/<action>' => 'clients/voting/<action>',
                 
                 // Собственники, заявки
                 'requests/filter-by-type-request' => 'clients/requests/filter-by-type-request',
