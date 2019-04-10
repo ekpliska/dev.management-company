@@ -2525,6 +2525,7 @@ p.date-start-vote {
     color: #fff;
     border-radius: 12px;
     outline: none;
+    letter-spacing: 0.1em;
 }
 .voting-body {
     margin: 15px 0;

@@ -20,9 +20,9 @@ class Bootstrap implements BootstrapInterface {
                 'news' => 'clients/news/index',
                 
                 // Собственники, голосование
+                'voting/<voting_id:\d+>' => 'clients/voting/view',
+                'voting/<action>' => 'clients/voting/<action>',
                 'voting' => 'clients/voting/index',
-                'voting/<action>' => 'voting/voting/<action>',
-//                'voting/<voting_id:[\w-]+>' => 'clients/voting/view',
                 
                 // Собственники, заявки
                 'requests/filter-by-type-request' => 'clients/requests/filter-by-type-request',

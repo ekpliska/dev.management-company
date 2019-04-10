@@ -334,10 +334,10 @@ class ProfileController extends AppClientsController
         if ($sms_model->load(Yii::$app->request->post()) && $sms_model->validate()) {
             $sms_model->changeUserInfo($type);
             Yii::$app->session->setFlash('success', ['message' => 'Настройки профиля были успешно обновлены']);
-            return $this->redirect(['profile/settings-profile']);
+            return $this->redirect(['profile/settings']);
         }
         Yii::$app->session->setFlash('error', ['message' => 'Ошибка сохранения настроек профиля. Обновите страницу и повторите действие заново']);
-        return $this->redirect(['profile/settings-profile']);
+        return $this->redirect(['profile/settings']);
         
     }
     
@@ -386,7 +386,7 @@ class ProfileController extends AppClientsController
         $_record = SmsOperations::deleteOperation($value);
         // Удаляем куку
         Yii::$app->response->cookies->remove('_time');
-        return $this->redirect(['profile/settings-profile']);
+        return $this->redirect(['profile/settings']);
     }
     
     /*

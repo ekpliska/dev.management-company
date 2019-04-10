@@ -117,69 +117,6 @@ $(document).ready(function() {
         }
     });
     
-//    /*
-//     * Если в модальном окне "Новый арендатор" нажата нопка Отмена/х
-//     * Сбрасываем заполненный поля
-//     * Снимаем чекбокс Арендатор
-//     * Блокирем кнопку "Добавить арендатора"
-//     * 
-//     */
-//    $("#add-rent-modal .btn__modal_rent_close, .btn__modal_close").on("click", function() {
-//        $("#add-rent-modal input").val("");
-//        $("#add-rent-modal .modal-body").removeClass("has-error");
-//        $("#add-rent-modal .modal-body").removeClass("has-success");
-//        $("#add-rent-modal .form-group").removeClass("has-success"); 
-//        $("#add-rent-modal .form-group").removeClass("has-error");
-//        $("#add-rent-modal").find(".help-block").text("");
-//        $("#isRent").prop("checked", false);
-//        $(".btn__add-rent").prop("disabled", true);
-//    });
-//    
-//    /*
-//     * Метод контрольной проверки заполнения формы "Новый лицевой счет"
-//     * до того, как была нажала кнопка "Добавить лицевой счет"
-//     */
-//    $("#add-account").on("beforeSubmit.yii", function (e) {
-//
-//        // Форма "Новый арендатор" по умолчанию считается не заполненной
-//        var isCheck = false;
-//        // Поиск в модальном окне создания арендатора поля для заполнения
-//        var form = $("#add-rent-modal").find("input[id*=clientsrentform]");
-//        // Количество полей на форме "Новый арендатор"
-//        var field = [];
-//
-//        // Проверяем каждое поле на форме "Новый арендатор" на заполнение
-//        form.each(function() {
-//            field.push("input[id*=clientsrentform]");
-//            var value = $(this).val();
-//            // console.log(value);
-//            for (var i = 1; i < field.length; i++) {
-//                // Если втречается заполненное поле, то статус заполнения формы меням на положительный
-//                if (value) {
-//                    isCheck = true;
-//                }
-//            }
-//            // console.log(field.length);
-//        });
-//    
-//        /*
-//        *   Перед отправкой формы, проверяем чекбокс "Арендатор"
-//        *   Если переключатель установлен, то проверяем наличие выбранного арендатора из списка
-//        *   или наличее добавленного арендатора
-//        */
-//        if (!$("#isRent").is(":checked")) {
-//            $("#add-rent-modal input").val("");
-//            $("#add-rent-modal .modal-body").removeClass("has-error");
-//            $("#add-rent-modal .modal-body").removeClass("has-success");
-//            $("#add-rent-modal .form-group").removeClass("has-success"); 
-//            $("#add-rent-modal .form-group").removeClass("has-error");
-//            $("#add-rent-modal").find(".help-block").text("");
-//            $("#isRent").prop("checked", false);
-//            $(".btn__add-rent").prop("disabled", true);
-//            e.preventDefault();    
-//        }
-//    });
-    
     /*
      * Сброс формы в модальном окне на добавление нового лицевого счета при закрытии формы "Отмена"/х
      */
@@ -292,7 +229,6 @@ $(document).ready(function() {
             $(parentContainer).find('.help-block').text('');
             tdBlock.css('border', 'none');
         }
-        console.log(currentIndicaton);
     });
     
     /*
@@ -352,9 +288,7 @@ $(document).ready(function() {
                     $('#' + button).replaceWith('<span class="message-request">Сформирована заявка ID' + data.request_number + '</span>');
                 }
             },
-            error: function (textStatus) {
-                console.log(textStatus);                
-            }
+            error: function (textStatus) {}
         });
     });
     
@@ -384,7 +318,6 @@ $(document).ready(function() {
         
         $.post('counters/find-indications?month=' + monthNumber + '&year=' + year, function(response) {
             $('#indication-table').html(response.result);
-//            console.log(response.result);
         });
     });
     
@@ -393,7 +326,6 @@ $(document).ready(function() {
         var urlPDF = $(this).attr('href');
         var w = window.open(urlPDF);
         w.print();
-        console.log('--', urlPDF);
     });
     
     /*
@@ -468,41 +400,6 @@ $(document).ready(function() {
         
     });
     
-//    /*
-//     * Добавление оценки для закрытой заявки
-//     */
-//    // Получаем ID заявки через data
-//    var request_id = $('div#star').data('request');
-//    // Получаем оценку текущей заявки
-//    var scoreRequest = $('div#star').data('scoreReguest');
-//    // Вызываем функцию raty из библиотеки плагина по голосованию
-//    $('div#star').raty({
-//        score: scoreRequest, // Оценка
-//        readOnly: scoreRequest === 0 ? false : true, // Если оценка высталена, то возможность голосования закрываем
-//        click: function(score) {
-//            $.ajax({
-//                url: 'add-score-request',
-//                method: 'POST',
-//                data: {
-//                    score: score,
-//                    request_id: request_id,
-//                },
-//                success: function(response) {
-//                    if (response.status === true) {
-//                        $('#score-modal-message').modal('show');
-//                        $('div#star').raty({
-//                            score: score,
-//                            readOnly: true,
-//                        });
-//                    }
-//                },
-//                error: function() {
-//                    console.log('Error #1000-09');
-//                }
-//            });
-//        }
-//    });    
-    
     /*
      * Вызов модального окна "Добавление оценки"
      */
@@ -572,9 +469,7 @@ $(document).ready(function() {
      */
     $(document).on('click', '.grade-modal__close', function(){
         var requestID = $(this).data('request');
-        $.post('close-grade-window?request=' + requestID, function(response) {
-//            console.log(response.success);
-        });
+        $.post('close-grade-window?request=' + requestID, function(response) {});
     });
 
 
@@ -584,19 +479,6 @@ $(document).ready(function() {
     // ************   Start Block of Paid Services   ************** //
     // *********************************************************** //
     
-    /*
-     * Загрузка модального окна "Добавить платную услугу"
-     * В dropDownList, hiddenInput загружаем ID выбранной услуги
-     */
-//    $(document).on('click', '.new-rec', function(){
-//        var idService = $(this).data('service');
-//        var idCategory = $(this).data('service-cat');
-//        $('#add-record-modal').modal('show');
-//        $('#add-record-modal').find('#name_services').val(idService);
-//        $('#secret-name').val(idService);
-//        $('#secret-cat').val(idCategory);
-//        $('#name_services').val(idCategory);
-//    }); 
     $(document).on('click', '.new-rec', function(e) {
         var link = $(this).attr('href');
         $('#add-paid-request-modal').modal('show');
@@ -715,9 +597,7 @@ $(document).ready(function() {
      */
     $('#renouncement_participate, #renouncement_participate_close').on('click', function(){
         var votingId = $(this).data('voting');
-        $.post('renouncement-to-participate?voting_id=' + votingId, function(response) {
-//            console.log(response);
-        });
+        $.post('renouncement-to-participate?voting_id=' + votingId, function(response) {});
     });
     
     /*
@@ -739,15 +619,6 @@ $(document).ready(function() {
         return false;
     });
     
-    /*
-     * Подтверждение согласия участия в голосовании
-     * @type Number
-     */
-//    $('#participate_in').on('click', function(){
-//        var votingId = $(this).data('votingId');
-//        alert(votingId);
-//    });
-
     /*
      * Отправка голоса участника
      */
@@ -777,20 +648,13 @@ $(document).ready(function() {
         var countAnswers = $('.btn-set-voting-active').length;
         var modalMessage = $('#participate_modal-message');
         
-        console.log(votingID + ' ' + countQuestions + ' ' + countAnswers);
         if (countQuestions !== countAnswers) {
             modalMessage.find('.vote-message_span').text('Ошибка завершения участия в голосовании');
             modalMessage.find('.modal-title-vote').text('Пожалуйста вернитесь к голосованию и дайте ответы на все заявленные вопросы');
             modalMessage.modal('show');
-            console.log('error');
             return false;
         } else if (countQuestions === countAnswers) {
-            console.log('all right');
-            $.post('finish-voting?voting_id=' + votingID, function(response) {
-//                if (response.success === true) {
-//                    console.log(response.success);
-//                }
-            });
+            $.post('finish-voting?voting_id=' + votingID, function(response) {});
             return true;
         }
 
@@ -874,9 +738,7 @@ $(document).ready(function() {
             data: {
                 valueData: valueData,
             },
-        }).done(function(response) {
-            console.log(response.status);
-        });
+        }).done(function(response) {});
     });
 
     /*
@@ -892,68 +754,9 @@ $(document).ready(function() {
             data: {
                 valueData: valueData
             },
-        }).done(function(response) {
-//            console.log(response.value);
-        });
+        }).done(function(response) {});
     });
    
-//    
-//    /* Кастомизация элеметнов управления формой, лицевой счет */
-//    $(".custom-select").each(function() {
-//        var classes = $(this).attr("class"),
-//            id = $(this).attr("id"),
-//            name = $(this).attr("name");
-//        var template =  '<div class="' + classes + '">';
-//            template += '<span class="custom-select-trigger">' + $(this).attr("placeholder") + '</span>';
-//            template += '<div class="custom-options">';
-//        // Текущий выбранный лицевой счета    
-//        var currentValue = $('#sources option:selected').val();
-//        
-//        $(this).find("option").each(function() {
-//            var classSelection = ($(this).attr("value") == currentValue) ? 'selection ' : '';            
-//            template += '<span class="custom-option ' + classSelection + $(this).attr("class") + '" data-value="' + $(this).attr("value") + '">' + $(this).html() + '</span>';
-////            $(this).val('selection');
-//            
-//        });
-//        template += '</div></div>';
-//
-//        $(this).wrap('<div class="custom-select-wrapper"></div>');
-//        $(this).hide();
-//        $(this).after(template);
-//    });
-//
-//    $(".custom-option:first-of-type").hover(function() {
-//        $(this).parents(".custom-options").addClass("option-hover");
-//    }, function() {
-//        $(this).parents(".custom-options").removeClass("option-hover");
-//    });
-//
-//    $(".custom-select-trigger").on("click", function() {
-//        $('html').one('click',function() {
-//            $(".custom-select").removeClass("opened");
-//        });
-//        $(this).parents(".custom-select").toggleClass("opened");
-//        event.stopPropagation();
-//    });
-//
-//
-//    $(".custom-option").on("click", function() {
-//        // ID выбранного лицевого счета
-//        var valueSelect = $(this).data("value");
-//        // Номер выбранного лицевого счета
-//        var textSelect = $(this).text();
-//        // ID текущего лицевого счета
-//        var currentValue = $('#sources option:selected').val();
-//        console.log(valueSelect + ' ' + textSelect + ' ' + currentValue);
-//        $(this).parents(".custom-select-wrapper").find("select").val(valueSelect);
-//        $(this).parents(".custom-options").find(".custom-option").removeClass("selection");
-//        $(this).addClass("selection");
-//        $(this).parents(".custom-select").removeClass("opened");
-//        $(this).parents(".custom-select").find(".custom-select-trigger").text(textSelect);
-//        // Смена текущего лицевого счета, ЛК собственник
-//        switchAccountNumber(currentValue, valueSelect);
-//    });
-    
     /* Кастомизация элеметнов управления формой, категории услуг */
     $(".custom-select-services").each(function() {
         var classes = $(this).attr("class"),
