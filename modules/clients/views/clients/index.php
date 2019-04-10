@@ -25,6 +25,7 @@ $current_date = date('F, Y');
                 <h1>
                     Платежи и квитанции
                 </h1>
+                <?= $this->render('data/last-payments', ['payments' => $payments]) ?>
             </div>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">

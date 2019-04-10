@@ -254,25 +254,6 @@ li.account-info {
 }
 /* Конец Футер */
 
-/* Хлебные крошки */
-.breadcrumb {
-    margin: 20px 0;
-    padding: 0;
-    font-size: 12px;
-    background: transparent;
-}
-.breadcrumb > li > a {
-    color: #c1c1c1;
-}
-.breadcrumb > li > a:hover {
-    color: #f0754a;
-    border-bottom: 1px solid #f0754a;
-}
-.breadcrumb > .active {
-    color: #67768a;
-}
-/* Конец Хлебные крошки */
-
 /* Собственник, главная страница, Новости */
 .client-page {}
 .client-page > div {
@@ -282,14 +263,14 @@ li.account-info {
     padding: 0;
 }
 .client-page__top > div[class*="col-"] > div {
-    height: 200px;
+    height: 250px;
     margin: 10px;
     border: 1px solid #ddd;
     border-radius: 12px;
 }
 .client-page__top > div[class*="col-"] > div > h1 {
     padding: 10px 5px;
-    font-size: 18px;
+    font-size: 16px;
     margin: 0;
     font-weight: bold;
     text-align: center;
@@ -305,6 +286,9 @@ li.account-info {
     border: 1px solid #ddd;
     border-radius: 12px;
     height: 320px;
+}
+.payments-lists {
+    background-color: red;
 }
 .news-item {
     height: 250px;
@@ -1229,6 +1213,33 @@ span.dot {
     color: #7c7c7c;
 }
 /* Конец Постраничная нафигация, таблица */
+
+/* Table last payments */
+.table-last-payment {
+    margin: 10px 0;
+    padding: 0;
+    border: none;
+    table-layout: fixed;
+}
+.table-last-payment > tbody > tr > td {
+    border: none;
+    padding: 5px 10px;
+    text-align: center;
+    vertical-align: middle;
+    color: #454545;
+}
+.table-last-payment > tbody > tr:nth-child(even) {
+    background-color: #f8f8f8;
+}
+.table-last-payment > tbody > tr > td.status-payment-ok {
+    color: #40e282;
+    font-weight: bold;
+}
+.table-last-payment > tbody > tr > td.status-payment-not {
+    color: #fe2f70;
+    font-weight: bold;
+}
+/* End Table last payments */
 
 /* Просмотр отдельной заявки */
 .requests-view {

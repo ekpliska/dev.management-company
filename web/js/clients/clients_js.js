@@ -193,7 +193,7 @@ $(document).ready(function() {
     $(document).on('click', '.list-group-item', function() {
         var liItem = $(this).data('receipt');
         var accountNumber = $(this).data('account');
-        var url = location.origin + '/receipts/' + accountNumber + '/' + accountNumber + '-' + liItem + '.pdf';
+        var url = location.origin + '/receipts/' + accountNumber + '/' + liItem + '.pdf';
         var conteiner = $('.receipts_body');
         $('ul.receipte-of-lists li').removeClass('active');
         $(this).addClass('active');

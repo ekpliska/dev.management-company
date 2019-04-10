@@ -18,11 +18,11 @@ $current_date = date('Y-m');
             // Сравниваем текущаю дату и дату расчетного периода квитанции
             $_date = ($current_date == $date->format('Y-m')) ? true : false;
             // Статус квитанции
-            $status = $receipt['Статус квитанции'] == 'Не оплачено' ? true : false;
+            $status = $receipt['Статус квитанции'] == 'Оплачена' ? true : false;
             // Формируем ссылку на PDF квитанцию
-            $url_pdf = Yii::getAlias('@web') . '/receipts/' . $account_number . '/' . $account_number . '-' . $receipt['Номер квитанции'] . '.pdf';
+            $url_pdf = Yii::getAlias('@web') . '/web' . '/receipts/' . $account_number . '/' . $receipt['Расчетный период'] . '.pdf';
         ?>
-        <li class="list-group-item" data-receipt="<?= $receipt['Номер квитанции'] ?>" data-account="<?= $account_number ?>">
+        <li class="list-group-item" data-receipt="<?= $receipt['Расчетный период'] ?>" data-account="<?= $account_number ?>">
             <p class="receipte-month"><?= $date->format('F Y') ?></p>
             <p class="receipte-number">Квитанция <?= $receipt['Номер квитанции'] ?></p>
             <?php if ($_date == true && $status == false) : // Если оплата за текущий расчетный период ?>

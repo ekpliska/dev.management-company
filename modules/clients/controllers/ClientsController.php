@@ -28,6 +28,7 @@ class ClientsController extends AppClientsController
         return $this->render('index', [
             'living_space' => $living_space,
             'indications' => $this->getCountersIndication(),
+            'payments' => $this->getPaymentsList(),
         ]);
         
     }
@@ -53,6 +54,26 @@ class ClientsController extends AppClientsController
         
         return $indications;
         
+    }
+    
+    /*
+     * Получить список оплаченных/не оплаченных квитанций
+     */
+    public function getPaymentsList() {
+        
+        // Получить номер текущего лицевого счета
+        $account_number = $this->_current_account_number;
+        // Получаем номер текущего месяца и год
+        $current_period = date('Y-n');
+        $array_request = [
+            'Номер лицевого счета' => $account_number,
+            'Период начало' => null,
+            'Период конец' => $current_period,
+        ];
+        $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
+        $receipts_lists = Yii::$app->client_api->getReceipts($data_json);
+        
+        return $receipts_lists;
     }
     
 }
