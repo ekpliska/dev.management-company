@@ -42,20 +42,3 @@ $current_date = date('F, Y');
         <?= LastNews::widget(['living_space' => $living_space]) ?>
     </div>
 </div>
-
-<?php
-$this->registerJs("
-    $('.news-carousel').owlCarousel({
-        loop:true,
-        margin:10,
-        nav:true,
-        items: 3,
-    });
-    $('.counters-carousel').owlCarousel({
-        loop:true,
-        margin:10,
-        nav:true,
-        items: 1,
-    });
-")
-?>
