@@ -16,6 +16,7 @@ class Bootstrap implements BootstrapInterface {
                 
                 // Собственники, отдельная новость
                 'news/<slug:[\w-]+>' => 'clients/news/view',
+                'news/block/<block:[\w-]+>' => 'clients/news/index',
                 'news' => 'clients/news/index',
                 
                 // Собственники, голосование

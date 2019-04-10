@@ -9,7 +9,7 @@
 /*
  * Все новости, главная страница
  */    
-$this->title = Yii::$app->params['site-name'] . "Главная";
+$this->title = Yii::$app->params['site-name'] . "Новости";
 ?>
 
 
