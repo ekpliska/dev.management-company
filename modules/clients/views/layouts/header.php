@@ -31,7 +31,6 @@
                             'id' => 'switch-current-account',
                             'placeholder' => $this->context->_current_account_number,
                             'class' => 'select-current-account',
-                            'data-client' => Yii::$app->user->can('clients') ? $user_info->clientID : '',
                     ]) ?>
                 </li>
                 <li>

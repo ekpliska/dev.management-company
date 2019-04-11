@@ -277,6 +277,9 @@ li.account-info {
     font-weight: bold;
     text-align: center;
 }
+.client-page__top > div[class*="col-"] > div > h1:first-letter {
+    text-transform: capitalize;
+}
 .client-page__news > h1,
 .client-page__services > h1 {
     padding: 20px 40px;

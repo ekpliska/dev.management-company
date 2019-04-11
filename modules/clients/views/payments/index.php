@@ -52,6 +52,6 @@ $this->title = Yii::$app->params['site-name'] . 'Палатежи и квита�
                     'account_number' => $account_number,
                 ]) ?>
         </div>
-        
     </div>
+    <div class="col-lg-7 col-md-7 col-sm-6 col-xs-12 receipts_body"></div>
 </div>

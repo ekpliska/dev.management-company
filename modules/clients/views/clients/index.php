@@ -7,7 +7,7 @@
  * Главная страница личного кабинета Собственника
  */    
 $this->title = Yii::$app->params['site-name'] . "Новости";
-$current_date = date('F, Y');
+$current_date = Yii::$app->formatter->asDate(time(), 'LLLL, Y');
 ?>
 
 <div class="client-page">
