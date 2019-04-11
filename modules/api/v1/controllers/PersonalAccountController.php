@@ -16,7 +16,7 @@ class PersonalAccountController extends Controller {
     public function behaviors() {
         
         $behaviors = parent::behaviors();
-        $behaviors['authenticator']['only'] = ['view'];
+        $behaviors['authenticator']['only'] = ['view', 'payments-history'];
         $behaviors['authenticator']['authMethods'] = [
               HttpBasicAuth::className(),
               HttpBearerAuth::className(),
@@ -36,6 +36,7 @@ class PersonalAccountController extends Controller {
     public function verbs() {
         return [
             'view' => ['get'],
+            'payments-history' => ['get'],
         ];
     }
     
@@ -47,6 +48,26 @@ class PersonalAccountController extends Controller {
         $account_info = Info::getInfo($account);
         
         return $account_info ? $account_info : ['success' => false];
+    }
+    
+    /*
+     * История платежей
+     */
+    public function actionPaymentsHistory($account) {
+        
+        // Получаем номер текущего месяца и год
+        $current_period = date('Y-m-d');
+        
+        $array_request = [
+            'Номер лицевого счета' => $account,
+            'Период начало' => null,
+            'Период конец' => $current_period,
+        ];
+        
+        $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
+        $payments_lists = Yii::$app->client_api->getPayments($data_json);
+        
+        return $payments_lists ? $payments_lists : ['success' => false];
         
     }
     

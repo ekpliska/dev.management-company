@@ -242,6 +242,7 @@ $config = [
                     'controller' => 'v1/personal-account',
                     'extraPatterns' => [
                         'GET view/<account:[\w-]+>' => 'view',
+                        'GET payments-history/<account:[\w-]+>' => 'payments-history',
                     ]
                 ],                
             ],
