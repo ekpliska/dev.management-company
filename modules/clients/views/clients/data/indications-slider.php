@@ -65,11 +65,7 @@ $this->registerJs("
         
         var dataPost = valIndication.serializeArray();
         $.each(dataPost, function(i, data){
-            if (data.value === '') {
-                console.log(data.name);
-               $('input[name=data.name]').css('background', 'green');
-                return false;
-            }
+            console.log(data.name);
         });
         
 //        valIndication.css('background', 'green');
