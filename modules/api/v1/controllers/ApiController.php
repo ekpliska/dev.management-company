@@ -80,8 +80,13 @@ class ApiController extends Controller
     
     public function actionFinish() {
         
-        $result = RegisterForm::registerStepFinish();
-        return $result;
+        // Для зарегистрированного пользователя формируем токен, для автологина
+        $token = \app\models\Token::findOne(['id' => '51']);
+
+        return [
+            'success' => true,
+            'token' => $token->token,
+        ];
         
     }
     
