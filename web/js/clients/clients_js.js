@@ -175,7 +175,7 @@ $(document).ready(function() {
         // Проверяем сущестование pdf, если существует - загружаем фрейм
         $.get(url)
                 .done(function (){
-                    conteiner.html('<iframe src="' + url + '" style="width: 100%; height: 660px;" frameborder="0">Ваш браузер не поддерживает фреймы</iframe>');
+                    conteiner.html('<iframe src="' + url + '" style="width: 100%; height: 850px;" frameborder="0">Ваш браузер не поддерживает фреймы</iframe>');
                 }).fail(function(){
                     conteiner.html('<div class="notice error"><p>Квитанция на сервере не найдена.</p></div>');
                 });
