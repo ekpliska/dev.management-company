@@ -18,7 +18,7 @@ $date_period = '';
             <?php if ($key <= 5) : ?>
                 <?php $status_payment = $payment['Статус квитанции'] == 'Не оплачена' ? false : true; ?>
                 <td>
-                    <?php $date_period = Yii::$app->formatter->asDate($payment['Расчетный период'], 'LLLL, YYYY'); ?>
+                    <?php $date_period = Yii::$app->formatter->asDate($payment['Расчетный период'], 'LLLL, Y'); ?>
                     <?= $status_payment ?
                             $date_period :
                             Html::a($date_period, [
