@@ -8,6 +8,7 @@
 
 $count_payment = 6;
 $status_payment;
+$date_period = '';
 ?>
 <?php if(!empty($payments) && is_array($payments)) : ?>
 <table class="table table-last-payment">
@@ -17,9 +18,10 @@ $status_payment;
             <?php if ($key <= 5) : ?>
                 <?php $status_payment = $payment['Статус квитанции'] == 'Не оплачена' ? false : true; ?>
                 <td>
+                    <?php $date_period = Yii::$app->formatter->asDate($payment['Расчетный период'], 'LLLL, YYYY'); ?>
                     <?= $status_payment ?
-                            $payment['Расчетный период'] :
-                            Html::a($payment['Расчетный период'], [
+                            $date_period :
+                            Html::a($date_period, [
                                 'payments/payment', 
                                 'period' => urlencode($payment['Расчетный период']), 
                                 'nubmer' => urlencode($payment['Номер квитанции']), 

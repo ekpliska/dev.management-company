@@ -1233,6 +1233,9 @@ span.dot {
     vertical-align: middle;
     color: #454545;
 }
+.table-last-payment > tbody > tr > td:first-letter {
+    text-transform: capitalize;
+}
 .table-last-payment > tbody > tr:nth-child(even) {
     background-color: #f8f8f8;
 }
