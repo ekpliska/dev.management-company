@@ -1,8 +1,11 @@
 <?php
 
-    namespace app\modules\api\v1\models\profile;
+    namespace app\modules\api\v1\models\personalAccount;
     use Yii;
     use yii\base\Model;
+    use app\models\PersonalAccount;
+    use app\models\Houses;
+    use app\models\Flats;
 
 /*
  * Сздание лицевого счета
@@ -13,6 +16,8 @@ class CreateAccount extends Model {
     public $last_sum;
     public $square;
     
+    public $client_info = [];
+    
     /*
      * Правила валидации
      */
@@ -21,10 +26,6 @@ class CreateAccount extends Model {
         return [
             [['account_number', 'last_sum', 'square'], 'required', 'message' => 'Поле обязательно для заполнения'],
 //            ['account_number', 'string', 'min' => 12, 'max' => 12],
-            
-            [['square'], 'double', 'message' => 'Площадь жилого помещения указана не верно. Пример, 80.27'],
-            
-            ['last_sum', 'double', 'message' => 'Сумма предыдущей квитанции указана не верно. Пример: 2578.70'],
             
             ['account_number', 'checkPersonalAccount'],
             
@@ -75,5 +76,59 @@ class CreateAccount extends Model {
         
     }    
     
+    public function save() {
+        
+        if (!$this->validate()) {
+            return false;
+        }
+        
+        // Получаем данные пришедшие по API
+        $house_info = $this->client_info;
+        
+        $transaction = Yii::$app->db->beginTransaction();
+
+        try {
+            $house = new Houses();
+            $house_data_api = $house_info['Жилая площадь'];
+            // Проверяем существование дома у базе
+            $house_id = $house::isExistence(
+                    $house_data_api['House adress'], 
+                    $house_data_api['Полный адрес Собственника'],
+                    $house_data_api['Номер дома']);
+
+            // Создаем запись квартиры
+            $flat = new Flats();
+            $flat->flats_house_id = $house_id;
+            $flat->flats_porch = $house_data_api['Номер подъезда'];
+            $flat->flats_floor = $house_data_api['Номер этажа'];
+            $flat->flats_number = $house_data_api['Номер квартиры'];
+            $flat->flats_rooms = $house_data_api['Количество комнат'];
+            $flat->flats_square = $this->square;
+
+            if (!$flat->save()) {
+                return false;
+            }
+
+            // Создаем запись нового лицевого счета
+            $account = new PersonalAccount();
+            $account->account_number = $this->account_number;
+            $account->account_organization_id = 1;
+            $account->account_balance = $house_info['Лицевой счет']['Баланс'];
+            $account->personal_clients_id = Yii::$app->user->identity->user_client_id;
+            $account->personal_rent_id = null;
+            $account->personal_flat_id = $flat->flats_id;
+
+            if (!$account->save()) {
+                return false;
+            }
+            
+            $transaction->commit();
+            
+        } catch (Exception $ex) {
+            $transaction->rollBack();
+        }
+        
+        return true;
+    }
     
 }

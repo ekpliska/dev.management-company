@@ -7,6 +7,7 @@
     use yii\filters\auth\HttpBearerAuth;
     use yii\rest\Controller;
     use app\modules\api\v1\models\personalAccount\Info;
+    use app\modules\api\v1\models\personalAccount\CreateAccount;
     
 /**
  * Лицевой счет
@@ -16,7 +17,7 @@ class PersonalAccountController extends Controller {
     public function behaviors() {
         
         $behaviors = parent::behaviors();
-        $behaviors['authenticator']['only'] = ['view', 'payments-history'];
+        $behaviors['authenticator']['only'] = ['view', 'payments-history', 'create'];
         $behaviors['authenticator']['authMethods'] = [
               HttpBasicAuth::className(),
               HttpBearerAuth::className(),
@@ -37,6 +38,7 @@ class PersonalAccountController extends Controller {
         return [
             'view' => ['get'],
             'payments-history' => ['get'],
+            'create' => ['post'],
         ];
     }
     
@@ -69,6 +71,20 @@ class PersonalAccountController extends Controller {
         
         return $payments_lists ? $payments_lists : ['success' => false];
         
+    }
+    
+    /*
+     * Создание лицевого счета
+     * {"account_number": "20", "last_sum": "4036.85", "square": "59.8"}
+     */
+    public function actionCreate() {
+        
+        $model = new CreateAccount();
+        $model->load(Yii::$app->request->getBodyParams(), '');
+        if (!$model->save()) {
+            return $model;
+        }
+        return ['success' => true];
     }
     
 }

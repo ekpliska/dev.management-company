@@ -39,7 +39,7 @@ class PersonalAccount extends ActiveRecord
     {
         return [
             ['account_number', 'required'],
-            ['account_balance', 'double', 'min' => 20.00, 'max' => 1000.00],
+            ['account_balance', 'double'],
             ['account_organization_id', 'integer'],
             [['personal_clients_id', 'personal_rent_id', 'personal_flat_id'], 'integer']
         ];
