@@ -117,6 +117,117 @@
 }
 /* Конец Открыть, закрыть меню */
 
+/* Выпадающее меню, профиль пользователя */
+.in_navbar {
+    width: 479px;    
+}
+.dropdown-menu {
+    border-top-left-radius: 12px !important;
+    border-top-right-radius: 12px !important;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    background: linear-gradient(180.67deg, #39284E 0, rgba(10,8,8,0.7) 117%);
+    box-shadow: 0 10px 14px 2px rgba(0,0,0,0.26); 
+}
+.dropdown-menu > li > a {
+    color: #fff;
+}
+.dropdown-menu > li > a:hover {
+    color: #fff;
+    background: transparent;
+}
+.dropdown-menu:before{
+    border: none;
+}
+
+.dropdown-menu_link-profile {
+    font-size: 12px;
+}
+
+.dropdown-menu_link-profile a {
+    color: #bcbcbc;
+}
+
+.dropdown_footer div {
+    padding: 20px;
+    font-size: 12px;
+}
+
+.dropdown a#navbarDropdown:hover {
+    background: #928DD2;
+    border-radius: 50px;    
+}
+
+.dropdown_footer a.footer_link {
+    text-transform: uppercase;
+    color: #fff;
+    letter-spacing: 0.12em;
+}
+
+.dropdown_footer a.footer_link:hover {
+    text-decoration: none;
+}
+
+.dropdown_footer a.footer_link-logout {
+    text-transform: uppercase;
+    color: #ff1760;
+    letter-spacing: 0.12em;
+}
+
+.dropdown_footer a.footer_link-logout:hover {
+    text-decoration: none;
+}
+
+.photo-user-dropdown {
+    border: 4px solid #2d18b4;
+    border-radius: 100%;
+    box-shadow: 0px 0px 0px 20px rgba(45, 24, 180, 0.5);
+    margin-top: 30px;
+    width: 100px;
+    height: 100px;
+}
+
+.dropdown_user-info {
+    padding: 20px 0px;
+}
+
+.dropdown_user-name {
+    color: #fff;
+    font-size: 18px;
+    letter-spacing: 1.23px;
+    line-height: 27px;
+    margin-bottom: 0px;    
+}
+
+.dropdown_account-block {}
+
+.mail-border p {
+    color: #ef693a;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+    padding: 0 0 10px 0;
+}
+
+.mail-border a:hover {
+    text-decoration: none;
+}
+
+.dropdown_account-title{
+    color: #78e4ff;
+    font-size: 12px;
+    letter-spacing: 1.26px;
+    line-height: 18px;
+    margin-bottom: 0;
+}
+.dropdown_account-number {
+    color: #fff;
+    font-size: 16px;
+    letter-spacing: 1.26px;
+    line-height: 18px;
+    margin-bottom: 0;
+}
+
+/* Конец Выпадающее меню, профиль пользователя */
+
 /* Выпадающее навигационное меню, Администратор */
 .menu-wrap-manager {
     background-color: #6968AB;
@@ -838,6 +949,527 @@ div#permission_lists {
     margin-top: 10px;
 }
 /* Конец Заявки, главная страница */
+
+/* Просмотр отдельной заявки */
+.requests-view {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    min-height: 750px;
+}
+.requests-view_title {
+    padding: 20px 0 20px 30px;
+    color: #fff;
+    border-radius: 12px 12px 0 0;
+    background-color: #2d18b4;
+    margin: 0;
+    font-size: 14px;
+    min-height: 75px;
+}
+.requests-paid-view_title {
+    padding: 25px 30px;
+    color: #fff;
+    border-radius: 12px 12px 0 0;
+    background-color: #2d18b4;
+    margin: 0;
+    font-size: 18px;
+    min-height: 75px;
+    font-weight: bold;
+}
+.requests-paid-view_title .label_service-name {
+    border: 1px solid white;
+    border-radius: 25px;
+    font-size: 12px;
+    padding: 5px 20px;
+    margin: 0 20px;
+    background: #fff;
+    color: #2d18b4;
+}
+.requests-paid-view_title .label_service-date {
+    background: #fff;
+}
+.requests-paid-content {
+    padding: 0;
+}
+.requests-view_title i.check {
+    background: #36eadf;
+    padding: 10px;
+    border-radius: 100%;
+}
+.requests-view_title i.uncheck {
+    background: #ddd;
+    padding: 10px;
+    border-radius: 100%;
+}
+.requests-view_body {
+    padding: 10px;
+    min-height: 710px;
+}
+.requests-border {
+    border-right: 1px solid #ddd;
+    padding: 0;    
+}
+.requests-view_body h4 {
+    font-size: 18px;
+    letter-spacing: 0.32px;
+    font-weight: bold;
+    padding: 0;
+}
+.requests-view_body > h4 > span {
+    border: 1px solid #2d18b4;
+    color: #2d18b4;
+    padding: 5px 10px;
+    margin-left: 10px;
+    border-radius: 25px;
+}
+.date_requests {
+    color: #2D18B4;
+    font-size: 12px;
+    letter-spacing: 0.29px;
+}
+.request_text {
+    color: #2d18b4;
+    padding: 20px 0;
+    font-size: 14px;
+    letter-spacing: 0.25px;
+}
+.client_info {
+    margin: 0 -10px;
+    background: #eee;
+    /*height: 80px;*/
+    color: #2d1d88;
+    position: relative;
+}
+.client_info__block {
+    display: inline-flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+.client_info__block > div:first-child {
+    position: absolute;
+    top: 40%;
+    left: 2%;
+}
+.client_info__block > div:last-child {
+    position: absolute;
+    top: 40%;
+    right: 2%;
+}
+.client_info__block > div.client_info-address {
+    width: 50%;
+    padding-top: 10px;
+    padding-left: 60px;
+}
+.client_info__block > div.client_info-contact {
+    width: 50%;
+    padding-top: 10px;
+    padding-right: 60px;
+    vertical-align: middle;
+}
+.request-body-rate {
+    text-align: center;
+    margin: 30px;
+}
+.requests-view_chat {
+    margin: 0 -15px 0 0px;
+}
+.requests__chat-status {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.requests__chat-status > .__label {
+    padding: 0 10px;
+    color: #999;
+}
+.row-flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+[class*="col-"] {
+    margin-bottom: 0px;
+}
+.requests-view_body img.info-img {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 30px;
+}
+.requests__status-block {
+    padding: 10px 0;
+    display: flex;
+}
+#star {
+    padding: 5px 0;
+}
+.requests-view__setting {
+    padding: 20px 0;
+}
+.page-btn-block {
+    padding: 20px 0;
+}
+a.employee-profile {
+    color: #717171;
+    font-size: 14px;    
+}
+a.employee-profile:hover {
+    color: #3e3e3e;
+}
+#dispatcherList {    
+}
+.sendmessage_button {
+    background: #fff url(/images/send.png) 0 -41px no-repeat;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: 3%;
+    bottom: 23%;
+    border: none;
+}
+.sendmessage_button:hover {
+    cursor: pointer;
+    background-position: 0 0;
+}
+/* Конец Просмотр отдельной заявки */
+
+/* Завяки, чат */
+.comments .row {
+    margin: 10px 0;
+}
+.request-chat-icon {
+    height: 40px;
+    width: 40px;
+    border-radius: 100%;    
+}
+.chat_photo {
+    padding: 0 10px;
+}
+.chat-name {
+    letter-spacing: 0.13em;
+}
+.chat_time {
+    text-align: center;
+    vertical-align: middle;
+    font-size: 12px;
+}
+.chat-txt-block {
+    min-width: 92px;
+    /*max-width: 398px;*/
+    border-radius: 12px;
+    background: linear-gradient(180.67deg, #412b5d 32%, rgba(10,8,8,0.7) 96%);
+    padding: 15px;
+    word-wrap: break-word;
+    margin-left: 19px;
+    color: #fff;
+    font-size: 12px;
+    line-height: 20px;
+    box-shadow: 0 10px 14px 2px rgba(0,0,0,0.26);
+}
+.chat-msg {
+    margin: 0 0 0 -15px;
+    padding: 40px 0px 0px 0px;
+    position: relative;
+/*    bottom: 0;
+    width: 100%;*/
+}
+.chat-msg span#label-count,
+.chat-msg span#label-count-left {
+    color: #6b5d4a;
+}
+.chat-msg span#label-count-left {
+    padding-right: 10px;
+}
+.chat-msg textarea {
+    border: 1px solid #d4d4d4;
+    border-left: none;
+    border-right: none;
+    resize: none;
+    box-shadow: none;
+    padding: 10px 40px 10px 10px;
+}
+.chat-msg textarea:focus {
+    border-color: #ddd !important;
+    outline: none;
+    box-shadow: none;
+}
+.has-error textarea {
+    border-color: #ff7d7d !important;
+    outline: none;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+.chat-msg textarea::-webkit-scrollbar {
+    width: 7px;
+    background-color: #ddd;
+}
+.chat-msg textarea::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    border-radius: 10px;
+}
+ 
+.chat-msg textarea::-webkit-scrollbar-thumb {
+    border-radius: 12px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #524e53;
+}
+.chat-msg__off > p {
+    padding: 10px;
+    color: #777;
+    font-size: 12px;
+    text-align: center;
+    margin: 50px 50px 0 35px;
+    background-color: #ddd;
+    border-radius: 50px;
+}
+#add-comment .form-group {
+    margin-bottom: 0px;
+}
+.error-summary {
+    font-size: 12px;
+    color: #ff7d7d;
+}
+.chat-badge-date {
+    text-align: center;
+}
+.chat-badge-date span {
+    background-color: #2d18b4;
+    padding: 4px 20px;
+    color: #fff;
+    font-size: 10px;
+    letter-spacing: 1.05px;
+    border-radius: 12px;
+}
+.comments {
+    height: 500px;
+    overflow: auto;
+    padding: 10px 0px 30px 0px;
+}
+.comments::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #ddd;
+}
+
+.comments::-webkit-scrollbar {
+    width: 7px;
+    background-color: #ddd;
+}
+
+.comments::-webkit-scrollbar-thumb {
+    border-radius: 12px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #524e53;
+}
+/* Конец Завяки, чат */
+
+/* Блок переключения статуса заявок */
+.btn-group_status-request {
+    padding: 0 15px;
+    background: #fff;
+}
+.btn-choose-status {
+    font-size: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 10px 15px;
+    background: #fff;
+}
+.btn-choose-status:focus,
+.btn-group.open .dropdown-toggle {
+    outline: none;
+    box-shadow: none;
+}
+.dropdown-status > li > a {
+    color: #fff;
+    text-transform: none;
+    font-size: 12px;
+}
+.dropdown-status > li > a:hover {
+    background: rgba(0, 123, 255, 0.12);
+    color: #fff;
+}
+#status-value-0 {
+    border: 2px solid #598eff;
+    box-shadow: 0px 1px 4px 6px rgba(0,101,255,0.28);
+    border-radius: 25px;
+}
+.add-border-0 {
+    border-right: 2px solid #598eff;
+}
+#status-value-1 {
+    border: 2px solid #ff7d7d;
+    box-shadow: 0px 1px 4px 4px rgba(252,193,193,0.83);    
+    border-radius: 25px;
+}
+.add-border-1 {
+    border-right: 2px solid #ff7d7d;
+}
+#status-value-2 {
+    border: 2px solid #7c7c7c;
+    box-shadow: 0px 1px 4px 4px rgba(255,125,125,0.26);
+    border-radius: 25px;    
+}
+.add-border-2 {
+    border-right: 2px solid #7c7c7c;
+}
+#status-value-3 {
+    border: 2px solid #e17dff;
+    box-shadow: 0px 1px 4px 4px rgba(225,125,255,0.42);
+    border-radius: 25px;
+}
+.add-border-3 {
+    border-right: 2px solid #e17dff;
+}
+#status-value-4 {
+    border: 2px solid #1fd68d;
+    box-shadow: 0px 1px 4px 4px rgba(56,231,161,0.54);
+    border-radius: 25px;
+}
+.add-border-4 {
+    border-right: 2px solid #1fd68d;
+}
+#status-value-5 {
+    border: 1px solid #5f697a;
+    border-radius: 25px;
+    color: #5f697a;
+}
+#status-value-5 > .btn-group > button,
+#status-value-5 > button {
+    color: #5f697a;
+}
+.btn-choose-status > .caret {
+    margin-left: 10px;
+}
+/* Конец Блок переключения статуса заявок */
+
+/* Статусы заявок, таблица */
+.badge {
+    height: 35px;
+    width: 100px;
+    background: #fff;
+    color: #000;
+    border-radius: 25px;
+    font-size: 9px;
+    line-height: 18px;
+    padding-top: 8px;
+    text-transform: uppercase;
+    cursor: default;
+}
+.req-badge-new {
+    border: 2px solid #598eff;
+    box-shadow: 0px 1px 4px 6px rgba(0,101,255,0.28);
+}
+.req-badge-work {
+    border: 2px solid #ff7d7d;
+    box-shadow: 0px 1px 4px 6px rgba(252,193,193,0.83);
+}
+.req-badge-complete {
+    border: 2px solid #7c7c7c;
+    box-shadow: 0px 1px 4px 6px rgba(255,125,125,0.26);    
+}
+.req-badge-rectification {
+    border: 2px solid #e17dff;
+    box-shadow: 0px 1px 4px 6px rgba(225,125,255,0.42);
+}
+.req-badge-close {
+    border: 2px solid #1fd68d;
+    box-shadow: 0px 1px 4px 6px rgba(56,231,161,0.54);    
+}
+.req-badge-reject {
+    border: 2px solid #5f697a
+}
+.request-ident {
+    background: #2d18b4;
+    border-radius: 25px;
+    padding: 10px 30px;
+    margin-right: 20px;
+    font-size: 12px;
+    width: 170px;
+    color: #fff;
+    text-align: center;
+    font-weight: normal;
+}
+/* Конец Статусы заявок, таблица */
+
+/* Статусы заявок, отдельная страница */
+.badge-page {
+    height: 35px;
+    background: #fff;
+    padding: 7px;
+    color: #000;
+    border-radius: 25px;
+    font-size: 10px;
+    line-height: 15px;
+    padding-top: 8px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.req-badge-new-page {
+    border: 2px solid #598eff;
+    box-shadow: 0px 1px 4px 6px rgba(0,101,255,0.28);
+}
+.req-badge-work-page {
+    border: 2px solid #ff7d7d;
+    box-shadow: 0px 1px 4px 6px rgba(252,193,193,0.83);
+}
+.req-badge-complete-page {
+    border: 2px solid #7c7c7c;
+    box-shadow: 0px 1px 4px 6px rgba(255,125,125,0.26);
+}
+.req-badge-rectification-page {
+    border: 2px solid #e17dff;
+    box-shadow: 0px 1px 4px 6px rgba(225,125,255,0.42);
+}
+.req-badge-close-page {
+    border: 2px solid #1fd68d;
+    box-shadow: 0px 1px 4px 6px rgba(56,231,161,0.54);
+}
+.req-badge-reject-page {
+    border: 2px solid #5f697a;
+}
+
+.req-badge-new-page span:first-child {
+    border-right: 1px solid #598eff;
+    padding: 8px 15px;
+}
+.req-badge-new-page span:last-child {
+    padding: 8px 15px;
+}
+.req-badge-work-page span:first-child {
+    border-right: 1px solid #ff7d7d;
+    padding: 8px 15px;
+}
+.req-badge-work-page span:last-child {
+    padding: 8px 15px;
+}
+.req-badge-complete-page span:first-child {
+    border-right: 1px solid #7c7c7c;
+    padding: 8px 15px;
+}
+.req-badge-complete-page span:last-child {
+    padding: 8px 15px;
+}
+.req-badge-rectification-page span:first-child {
+    border-right: 1px solid #e17dff;
+    padding: 8px 15px;
+}
+.req-badge-rectification-page span:last-child {
+    padding: 8px 15px;
+}
+.req-badge-close-page span:first-child {
+    border-right: 1px solid #1fd68d;
+    padding: 8px 15px;
+}
+.req-badge-close-page span:last-child {
+    padding: 8px 15px;
+}
+.req-badge-reject-page span:first-child {
+    border-right: 1px solid #5f697a;
+    padding: 8px 15px;
+}
+.req-badge-reject-page span:last-child {
+    padding: 8px 15px;
+}
+/* Конец Статусы заявок, отдельная страница */
 
 /* Голосование, главная страница */
 .vote-card {
@@ -1897,6 +2529,14 @@ ul[id*="employees-list-"] > li > a:hover {
     border-radius: 25px;
     background: #598eff;
 }
+.span-count {
+    padding: 2px 20px;
+    color: #fff !important;
+    margin-right: 10px;
+    border-radius: 25px;
+    height: 23px;
+    background: #2d18b4;
+}
 /* Конец Конструктор заявок */
 
 /* Настройки */
@@ -2182,3 +2822,24 @@ ul[id*="employees-list-"] > li > a:hover {
 }
 .modal-body span#disp-fullname {}
 /* Конец Переопреденное модальное окно бутстрапа */
+
+/* Таблица Результаты голосования */
+.table-voting-results {
+    table-layout: fixed;
+}
+.table-voting-results > tbody > tr > td {
+    text-align: center;
+    vertical-align: bottom;
+    border-top: none; 
+}
+.table-voting-results > tbody > tr > td#dispatcher-name > span,
+.table-voting-results > tbody > tr > td#specialist-name > span {
+    color: #717171;
+    font-style: italic;
+    font-size: 12px;
+}
+.table-voting-results > tbody > tr > td p.title {
+    font-weight: bold;
+    font-size: 16px;
+}
+/* Конец Таблица Результаты голосования */
