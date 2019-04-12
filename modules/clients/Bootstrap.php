@@ -13,6 +13,7 @@ class Bootstrap implements BootstrapInterface {
             [
                 // Собственники, главная
                 'clients' => 'clients/clients/index',
+                'clients/<action>' => 'clients/clients/<action>',
                 
                 // Собственники, отдельная новость
                 'news/<slug:[\w-]+>' => 'clients/news/view',

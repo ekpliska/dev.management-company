@@ -864,5 +864,64 @@ $(document).ready(function() {
             }
         });
     }
+    
+    /*
+     * Send current indication at general page
+     */
+    $('form#form-send-indication').on('beforeSubmit.yii', function(e) {
+        e.preventDefault();
+        var valIndication = $('.counters-carousel').find('.active').find(':input');        
+        var dataPost = valIndication.serializeArray();
+        var dataForm = {};
+        var isCheck = true;
+        
+        // Проверяем элементы формы
+        if (dataPost.length === 0) {
+            return false;
+        }
+        
+        $.each(dataPost, function(index, data) {
+            var inputIndication = $('input[name=\"' + data.name + '\"]');
+            var prevValue = parseFloat(inputIndication.data('indication'));
+            var newValue = parseFloat(data.value);            
+            
+            // Сравниваем введенное показание с текущим
+            if (!newValue || newValue < prevValue) {
+                $(inputIndication).next().text('Ошибка подачи показаний, предыдущее показание ' + prevValue);
+                isCheck = false;
+            } else {
+                $(inputIndication).next().text('');
+            }
+            
+            // Собираем данные для отправи в AJAX запрос
+            if (index%2 === 0) {
+                dataForm[dataPost[index].value] = dataPost[index + 1].value;
+            }
+        });
+
+        if (isCheck === false) {
+            return false;
+        } else {
+            $.ajax({
+                url: 'clients/send-indications',
+                method: 'POST',
+                data: {dataForm: dataForm},
+                success: function(response) {
+                    if (response.success == false) {
+                        $('.counters-carousel').find('.active').find('.notice-text').text('Ошибка подачи показаний');
+                        $('.counters-carousel').find('.active').find('.popup-notice').addClass('show-notice');
+                    } else {
+                        $('.counters-carousel').find('.active').find('.notice-text').text('Ваши показания успешно отправлены');
+                        $('.counters-carousel').find('.active').find('.popup-notice').addClass('show-notice');
+                    }
+                },
+            });
+        }
+        return false;
+    });
+    
+    $('.popup-notice').on('click', function() {
+        $(this).removeClass('show-notice');
+    });    
 
 });
