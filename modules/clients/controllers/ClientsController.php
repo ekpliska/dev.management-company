@@ -101,7 +101,10 @@ class ClientsController extends AppClientsController
         $result = Yii::$app->client_api->setCurrentIndications($data_json);
             
         if (Yii::$app->request->isAjax) {
-            return ['data' => $result];
+            if (!$result) {
+                return ['success' => false];
+            }
+            return ['success' => true];
         }
         
     }

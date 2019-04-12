@@ -294,6 +294,9 @@
 
 /* Slider */
 @media screen and (max-width: 1200px) {
+    .counters-item > .item {
+        padding: 3px 10px;
+    }
     .client-page__top > div[class*="col-"] > div {
         height: 370px;
     }

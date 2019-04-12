@@ -32,6 +32,9 @@ $block_send = '<span class="block_send">Ввод показания заблок
 <div class="counters-carousel owl-carousel owl-theme">
     <?php for ($i = 0; $i < (count($indications))/2; $i++) : ?>
     <div class="counters-item">
+        <div class="popup-notice">
+            <span class="notice-text">A Simple Popup!</span>
+        </div>
         <?php for ($j = 0; $j < 2; $j++) : ?>
         <div class="item">
             <div>
@@ -41,9 +44,12 @@ $block_send = '<span class="block_send">Ввод показания заблок
             </div>
             <div>
                 <?php if ($data_check) : ?> 
-                    <?= Html::input('text', "counter-{$item}", $indications[$item]['Регистрационный номер прибора учета'], ['class' => 'slider-input']) ?>
-                    <?php // = Html::input('text', "indication-{$item}", $indications[$item]['Предыдущие показание'], ['class' => 'slider-input']) ?>
-                    <?= Html::input('text', "indication-{$item}", $indications[$item]['Текущее показание'], ['class' => 'slider-input']) ?>
+                    <?= Html::input('text', "counter-{$item}", $indications[$item]['ID'], ['class' => 'slider-input hidden']) ?>
+                    <?= Html::input('text', "indication-{$item}", $indications[$item]['Текущее показание'], [                            
+                            'class' => 'slider-input',
+                            'data-indication' => $indications[$item]['Текущее показание']]) ?>
+                            
+                    <span class="error"></span>
                 <?php else: ?>
                     <?= $block_send ?>
                 <?php endif; ?>
@@ -52,7 +58,7 @@ $block_send = '<span class="block_send">Ввод показания заблок
         <?php ++$item; ?>
         <?php endfor; ?>
         <div class="item-btn">
-            <?= Html::submitButton('Отправить', ['id' => "send-indication-{$i}"]) ?>
+            <?= Html::submitButton('Отправить', ['id' => "send-indication-{$i}", 'disabled' => false]) ?>
         </div>
     </div>
     <?php endfor; ?>
@@ -63,29 +69,50 @@ $block_send = '<span class="block_send">Ввод показания заблок
 
 <?php
 $this->registerJs("
-    $('form#form-send-indication').on('beforeSubmit', function(e) {
-
+    $('form#form-send-indication').on('beforeSubmit.yii', function(e) {
+        e.preventDefault();
         var valIndication = $('.counters-carousel').find('.active').find(':input');        
         var dataPost = valIndication.serializeArray();
+        var dataForm = {};
+        var isCheck = true;
         
-        var dataForm = {}
 
         $.each(dataPost, function(index, data) {
+            var inputIndication = $('input[name=\"' + data.name + '\"]');
+            var prevValue = parseFloat(inputIndication.data('indication'));
+            var newValue = parseFloat(data.value);            
+            
+            // Сравниваем введенное показание с текущим
+            if (newValue < prevValue) {
+                $(inputIndication).next().text('Ошибка подачи показаний, предыдущее показание ' + prevValue);
+                isCheck = false;1
+            } else {
+                $(inputIndication).next().text('');
+            }
+            
+            // Собираем данные для отправи в AJAX запрос
             if (index%2 == 0) {
-                console.log(dataPost[index].value, '---', dataPost[index + 1].value);
                 dataForm[dataPost[index].value] = dataPost[index + 1].value;
             }
         });
-        
-        $.ajax({
-            url: '/clients/clients/send-indications',
-            method: 'POST',
-            data: {dataForm: dataForm},
-            success: function(data){
-                console.log(data);
-            },
-        });
-        
+
+        console.log(isCheck);
+        if (isCheck == false) {
+            return false;
+        } else {
+            $.ajax({
+                url: '/clients/clients/send-indications',
+                method: 'POST',
+                data: {dataForm: dataForm},
+                success: function(response) {
+                    if (response.success == false) {
+                        console.log('Ошибка отправки показаний');
+                    } else {
+                        console.log('Показания успешно отправлены');
+                    }
+                },
+            });
+        }
         return false;
     });
 ")
