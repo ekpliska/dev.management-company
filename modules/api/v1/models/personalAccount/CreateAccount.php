@@ -76,6 +76,9 @@ class CreateAccount extends Model {
         
     }    
     
+    /*
+     * Создание лицевого счета
+     */
     public function save() {
         
         if (!$this->validate()) {
