@@ -313,7 +313,7 @@ $(document).ready(function() {
         var idCounter = $(this).data('counterId');
         
         $.ajax({
-            url: 'create-paid-request',
+            url: 'counters/create-paid-request',
             method: 'POST',
             data: {
                 accountID: accountID,

@@ -30,7 +30,7 @@ class Bootstrap implements BootstrapInterface {
                 'requests/add-answer-request' => 'clients/requests/add-answer-request',
                 'requests/add-score-request' => 'clients/requests/add-score-request',
                 'requests/close-grade-window' => 'clients/requests/close-grade-window',
-                'requests/<request_number:\w+>' => 'clients/requests/view-request',
+                'requests/<request_number:[\w-]+>' => 'clients/requests/view-request',
                 'requests' => 'clients/requests/index',
                 
                 // Собственники, услуги
