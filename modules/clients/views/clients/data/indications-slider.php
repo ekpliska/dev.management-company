@@ -72,61 +72,8 @@ $block_send = '<span class="block_send">Ввод показания заблок
 </div>
 <?php ActiveForm::end(); ?>
 <?php Pjax::end(); ?>
+<?php else: ?>
+    <p class="message-general-page">
+        Лицевой счет <span><?= $this->context->_current_account_number ?></span> не содержит сведений о приборах учета.
+    </p>
 <?php endif; ?>
-
-<?php
-//$this->registerJs("
-//    $('form#form-send-indication').on('beforeSubmit.yii', function(e) {
-//        e.preventDefault();
-//        var valIndication = $('.counters-carousel').find('.active').find(':input');        
-//        var dataPost = valIndication.serializeArray();
-//        var dataForm = {};
-//        var isCheck = true;
-//        
-//
-//        $.each(dataPost, function(index, data) {
-//            var inputIndication = $('input[name=\"' + data.name + '\"]');
-//            var prevValue = parseFloat(inputIndication.data('indication'));
-//            var newValue = parseFloat(data.value);            
-//            
-//            // Сравниваем введенное показание с текущим
-//            if (!newValue || newValue < prevValue) {
-//                $(inputIndication).next().text('Ошибка подачи показаний, предыдущее показание ' + prevValue);
-//                isCheck = false;
-//            } else {
-//                $(inputIndication).next().text('');
-//            }
-//            
-//            // Собираем данные для отправи в AJAX запрос
-//            if (index%2 == 0) {
-//                dataForm[dataPost[index].value] = dataPost[index + 1].value;
-//            }
-//        });
-//
-//        if (isCheck == false) {
-//            return false;
-//        } else {
-//            $.ajax({
-//                url: '/clients/clients/send-indications',
-//                method: 'POST',
-//                data: {dataForm: dataForm},
-//                success: function(response) {
-//                    if (response.success == false) {
-//                        $('.counters-carousel').find('.active').find('.notice-text').text('Ошибка подачи показаний');
-//                        $('.counters-carousel').find('.active').find('.popup-notice').addClass('show-notice');
-//                    } else {
-//                        $('.counters-carousel').find('.active').find('.notice-text').text('Ваши показания успешно отправлены');
-//                        $('.counters-carousel').find('.active').find('.popup-notice').addClass('show-notice');
-//                    }
-//                },
-//            });
-//        }
-//        return false;
-//    });
-//    
-//    $('.popup-notice').on('click', function() {
-//        $(this).removeClass('show-notice');
-//    });
-//    
-//")
-?>

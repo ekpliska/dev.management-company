@@ -3551,7 +3551,9 @@ button[id*="send-indication-"]:disabled {
     font-size: 12px;
     font-weight: bold;
     text-decoration: underline;
-    padding: 0 5px;}
+    padding: 0 5px;
+    cursor: pointer;
+}
 .popup-notice .notice-text {
     font-size: 12px;
 }
@@ -3570,3 +3572,14 @@ button[id*="send-indication-"]:disabled {
     to {opacity:1 ;}
 }
 /* End Notice popup */
+
+.message-general-page {
+    padding: 10px;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-align: center;
+    color: #454545;
+}
+.message-general-page span {
+    font-weight: bold;
+}

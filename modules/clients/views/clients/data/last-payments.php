@@ -37,6 +37,10 @@ $date_period = '';
         </tr>
     </tbody>
 </table>
+<?php else: ?>
+    <p class="message-general-page">
+        Лицевой счет <span><?= $this->context->_current_account_number ?></span> не содержит сведений о квитанциях.
+    </p>
 <?php endif; ?>
 
 
