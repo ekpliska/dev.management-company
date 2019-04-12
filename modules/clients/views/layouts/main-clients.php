@@ -31,10 +31,10 @@ ClientsAsset::register($this);
         <?php $this->endContent() ?>        
         <div class="container container-full-client">
             <div class="row content">
-                <div class="col-lg-3 col-md-3 col-sm-2 hidden-xs menu-clients">
+                <div class="col-lg-2 col-md-3 col-sm-3 hidden-xs menu-clients">
                     <?= NavMenu::widget() ?>
                 </div>
-                <div class="col-lg-9 col-md-9 col-sm-10 col-xs-12 content-clients">
+                <div class="col-lg-10 col-md-9 col-sm-9 col-xs-12 content-clients">
                     <?= AlertsShow::widget() ?>
                     <?= $content ?>
                 </div>
