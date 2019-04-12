@@ -9,14 +9,7 @@
  * Слайдер для текущих показаний приборов учета
  */
     
-$array_image = [
-    '1' => 'hold-water',
-    '2' => 'hot-water',
-    '3' => 'electric-meter',
-    '6' => 'electric-meter',
-    '4' => 'heating-meter',
-    '5' => 'heat-distributor',
-];
+// Текущая дата
 $current_date = date('Y-m-d');
 $item = 0;
 $block_send = '<span class="block_send">Ввод показания заблокрован</span><br />' . Html::a('Мои приборы учета', ['counters/index']);
@@ -41,7 +34,7 @@ $block_send = '<span class="block_send">Ввод показания заблок
         <div class="item">
             <div>
                 <?php $data_check = (strtotime($current_date) >= strtotime($indications[$item]['Дата следующей поверки'])) ? false : true ?>
-                <?= Html::img('/images/counters/' . $array_image[TypeCounters::getTypeID($indications[$item]['Тип прибора учета'])] . '.svg', ['alt' => '', 'class' => 'counters-img']) ?>
+                <?= Html::img(TypeCounters::getImageCounter($indications[$item]['Тип прибора учета']), ['alt' => '', 'class' => 'counters-img']) ?>
                 <?= $indications[$item]['Тип прибора учета'] ?>
             </div>
             <div>

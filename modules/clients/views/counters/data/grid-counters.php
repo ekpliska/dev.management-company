@@ -9,14 +9,6 @@
  */
     
 $current_date = date('Y-m-d');
-$array_image = [
-    '1' => 'hold-water',
-    '2' => 'hot-water',
-    '3' => 'electric-meter',
-    '6' => 'electric-meter',
-    '4' => 'heating-meter',
-    '5' => 'heat-distributor',
-];
 ?>
 
 <div id="indication-table">
@@ -38,7 +30,7 @@ $array_image = [
                     <?php $data_check = (strtotime($current_date) >= strtotime($indication['Дата следующей поверки'])) ? true : false ?>
                     <tr class="<?= ($data_check == true) ? 'block-edit-reading' : '' ?>">
                         <td class="image-counters">
-                            <?= Html::img('/images/counters/' . $array_image[TypeCounters::getTypeID($indication['Тип прибора учета'])] . '.svg', ['alt' => '']) ?>
+                            <?= Html::img(TypeCounters::getImageCounter($indication['Тип прибора учета']), ['alt' => '']) ?>
                         </td>
                         <td>
                             <p class="counter-name"><?= $indication['Тип прибора учета'] ?></p>
