@@ -3536,15 +3536,14 @@ button[id*="send-indication-"]:disabled {
     position: absolute;
     width: 70%;
     padding: 5px 10px;
-    border: 1px solid #f5f5f5;
     z-index: 1;
-    background: #ef693a;
+    background-color: #69bbeb;
     top: 50%;
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%);
     box-shadow: 0 0 8px 0px #ccc;
-    color: #ffffff;
+    color: #fff;
     letter-spacing: 0.04em;
 }
 .popup-notice::after {
