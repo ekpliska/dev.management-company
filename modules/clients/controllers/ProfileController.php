@@ -274,7 +274,11 @@ class ProfileController extends AppClientsController
         
         if ($user->load(Yii::$app->request->post()) && $user->validate()) {
             $file = UploadedFile::getInstance($user, 'user_photo');
-            $user->uploadPhoto($file);
+            if (!$user->uploadPhoto($file)) {
+                Yii::$app->session->setFlash('error', ['message' => 'Ошибка оновления профиля. Обновите страницу и повторите действие заново']);
+                return $this->redirect(Yii::$app->request->referrer);
+            }
+            Yii::$app->session->setFlash('success', ['message' => 'Настройки профиля были успешно обновлены']);
             return $this->refresh();
         }
 
@@ -288,22 +292,6 @@ class ProfileController extends AppClientsController
             'is_change_phone' => $is_change_phone,
         ]);
     }
-    
-    /*
-     * Проверка наличия арендатора у лицевого счета
-     * AJAX запрос при клике на переключатель Арендатор
-     */
-//    public function actionCheckIsRent($account) {
-//        
-//        $client_id = Yii::$app->userProfile->clientID;
-//        if (Yii::$app->request->isPost) {
-//            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;            
-//            $is_rent = PersonalAccount::findByRent($account, $client_id);
-//            $is_rent = $is_rent ? true : false;
-//            return ['success' => true, 'is_rent' => $is_rent];
-//        }
-//        return ['success' => false];
-//    }
     
     /*
      * AJAX валидация формы отправки подтверждения СМС кода
