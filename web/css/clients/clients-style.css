@@ -999,7 +999,7 @@ p.center {
 /* Notifications Bar */
 .notification__dropdown button {
     background: transparent;
-    margin: 0 20px;
+    margin: 10px;
 }
 .notification__dropdown button:hover {
     box-shadow: none;
