@@ -315,3 +315,22 @@
     }
 }
 /* End Slider */
+
+/* Profila settings */ 
+@media screen and (max-width: 991px) {
+    .spam-agree-txt label:before {
+        width: 20px !important;
+        height: 20px !important;
+        margin-left: -24px !important;
+    }
+    .spam-agree-txt label {
+        font-size: 12px !important;
+    }
+}
+@media screen and (max-width: 768px) {
+    .profile-settings__photo {
+        width: 120px;
+        height: 120px;
+    }
+}
+/* End Profila settings */

@@ -12,12 +12,12 @@ $this->title = Yii::$app->params['site-name'] . 'Настройки профил
     </div>
     
     <div class="profile-settings__settings row">
-        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6">
             <div class="user-info-block">
                 <?= $this->render('form/user-profile', ['user' => $user]) ?>
             </div>
         </div>
-        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6">
             <div class="settings">
                 <p class="profile-settings_title left">
                     <i class="glyphicon glyphicon-lock"></i>&nbsp;&nbsp;Изменить пароль учетной записи
@@ -30,7 +30,7 @@ $this->title = Yii::$app->params['site-name'] . 'Настройки профил
                     ]) ?>        
             </div>
         </div>
-        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+        <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
             <div class="settings">
                 <p class="profile-settings_title center">
                     <i class="glyphicon glyphicon-phone"></i>&nbsp;&nbsp;Изменить номер мобильного телефона
