@@ -2,6 +2,7 @@
     
     use kartik\date\DatePicker;
     use yii\helpers\Html;
+    use yii\helpers\Url;
     
 /* 
  * Палатежи и квитанции
@@ -53,5 +54,11 @@ $this->title = Yii::$app->params['site-name'] . 'Палатежи и квита�
                 ]) ?>
         </div>
     </div>
-    <div class="col-lg-7 col-md-7 col-sm-6 col-xs-12 receipts_body"></div>
+    <div class="col-lg-7 col-md-7 col-sm-6 col-xs-12 receipts_body">
+        <?php if (!empty($receipts_lists)) : ?>
+            <iframe src="<?= Url::to(Yii::getAlias('@web') . "/receipts/{$account_number}/{$receipts_lists[0]['Расчетный период']}.pdf") ?>" style="width: 100%; height: 850px;" frameborder="0">
+                Ваш браузер не поддерживает фреймы
+            </iframe>
+        <?php endif; ?>
+    </div>
 </div>
