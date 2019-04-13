@@ -50,7 +50,7 @@ class StatusRequestWidget extends Widget {
     }
     
     /*
-     * Подсчет количества заявко по каждому статусу
+     * Подсчет количества заявок по каждому статусу
      */
     public function countRequestToStatus($account_id, $status) {
         

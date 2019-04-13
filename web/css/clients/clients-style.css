@@ -1087,7 +1087,7 @@ span.dot {
 .count-label {
     position: absolute;
     top: -15%;
-    right: 10%;
+    right: 0;
     background: #EF693A;
     font-size: 10px;
     color: #fff;
