@@ -56,16 +56,21 @@ class Rents extends ActiveRecord
                 'message' => 'Указанный номер телефона в системе зарегистрирован',
             ],
 
-            ['rents_mobile', 'unique',
-                'targetClass' => User::className(),
-                'targetAttribute' => 'user_mobile',
-                'message' => 'Указанный номер телефона в системе зарегистрирован',
-            ],
+            ['rents_mobile', 'phoneCheck'],
             
             ['rents_mobile_more', 'string', 'max' => 70],
             
             ['isActive', 'boolean'],
         ];
+    }
+    
+    public function phoneCheck() {
+        
+        $user = User::findOne(['user_mobile' => $this->rents_mobile]);
+        if ($user && $user->user_rent_id != $this->rents_id) {
+            $this->addError('rents_mobile', 'Указанный номер телефона в системе зарегистрирован');
+        }
+        
     }
     
     /*

@@ -41,7 +41,7 @@ class RentForm extends Model {
             [
                 ['rents_surname', 'rents_name', 'rents_second_name'], 
                 'match', 
-                'pattern' => '/^[А-Яа-я\ \-]+$/iu', 
+                'pattern' => '/^[А-Яа-яЁё\ \-]+$/iu', 
                 'message' => 'Поле может содержать только буквы русского алфавита, и знак "-"',
             ],
             
@@ -62,17 +62,7 @@ class RentForm extends Model {
             ['rents_email', 'string', 'min' => 5, 'max' => 150],
             ['rents_email', 'email'],
             
-            ['rents_email', 'match',
-                'pattern' => '/^[A-Za-z0-9\_\-\@\.]+$/iu',
-                'message' => 'Поле "{attribute}" может содержать только буквы английского алфавита, цифры, знаки "-", "_"',
-            ],            
-            
             [['password'], 'string', 'min' => 6, 'max' => 12],
-            [['password'],
-                'match', 
-                'pattern' => '/^[A-Za-z0-9\_\-]+$/iu', 
-                'message' => 'Поле "{attribute}" может содержать только буквы английского алфавита, цифры, знаки "-", "_"',
-            ],
             
         ];
     }
