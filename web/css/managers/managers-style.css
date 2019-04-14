@@ -1740,9 +1740,10 @@ p.title span.count {
 /* Таблица на форме создания голосования */
 #voting-questions {
     margin: 10px 0;
+    border: 1px solid #ddd;
 }
 #voting-questions > tbody > tr {
-    border: 1px solid #ddd;
+    /*border: 1px solid #ddd;*/
 }
 #voting-questions > tbody > tr > td.text-question {
     padding: 0 20px;
@@ -1761,6 +1762,10 @@ p.title span.count {
     background: transparent;
     outline: none;
     border: none;
+}
+#voting-questions > tbody > tr.voting-questions-result > td {
+    width: 30%;
+    border-top: none;
 }
 /* Конец Таблица на форме создания голосования */
 
