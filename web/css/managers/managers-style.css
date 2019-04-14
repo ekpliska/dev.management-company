@@ -1586,101 +1586,6 @@ span.status-vote-1::before {
     padding: 5px 10px;
     font-size: 12px;
 }
-/*
-.vote-card__image {
-    width: 350px;
-    height: 200px;
-    padding: 0;
-    margin: 0;
-}
-.vote-card__image img {
-    height: 100%;
-    width: 100%;
-    border: 1px solid #ddd;
-    border-top-left-radius: 12px;
-    border-bottom-left-radius: 12px;
-    height: 240px;
-}
-.vote-table {
-    border: none;
-}
-.vote-table > tbody > tr > td {
-    border: none;
-    text-align: center;
-    vertical-align: middle;
-    font-size: 12px;
-    border-right: 1px solid #ddd;
-    padding: 0;
-}
-.vote-table > tbody > tr > td:first-child {
-    text-align: left;
-}
-.vote-table > tbody > tr > td:last-child {
-    border-right: none;
-}
-.vote-table > tbody > tr > td span {
-    color: #2d18b4;
-    font-weight: bold;
-}
-.vote-card__content {
-    width: 100%;
-    padding: 0 20px;
-    border: 1px solid #ddd;
-    border-left: none;
-    border-top-right-radius: 12px;
-    border-bottom-right-radius: 12px;    
-}
-.vote-card__content h1 > a > span {
-    background: #2d18b4;
-    color: #fff;
-    padding: 2px 15px;
-    border-radius: 25px;
-    font-size: 14px;
-    font-weight: normal;
-}
-.vote-card__content_title {
-    font-size: 18px;
-    font-weight: bold;
-    color: #2d18b4;
-}
-.vote-card__content_info div[class*="col-"] {
-    text-align: center;
-    font-size: 12px;
-    border-right: 1px solid #ddd;
-}
-.vote-card__content_info div[class*="col-"]:first-child {
-    text-align: left;
-    font-size: 10px;
-}
-.vote-card__content_info div[class*="col-"]:last-child {
-    border-right: none;
-}
-span[class^=status-vote-] {font-size: 12px;
-    font-weight: bold;
-}
-span.status-vote-0::before {
-    content: '\02691';
-    padding: 0 5px;
-    background: #2d18b4;
-    margin: 0 5px 0 0;
-    color: #fff;
-}
-span.status-vote-1::before {
-    content: '\02713';
-    padding: 0 3px;
-    background: #1fd68d;
-    margin: 0 5px 0 0;
-    color: #fff;
-}
-.vote-card__content_info span.title {
-    color: #2d18b4;
-    font-weight: bold;
-}
-.vote-card__content_text {
-    padding: 10px 0;
-    text-align: justify;
-    font-size: 14px;
-}*/
 /* Конец Голосование, главная страница */
 
 /* Голосование, форма создания/редактирования голосования */
@@ -1809,6 +1714,26 @@ span.status-vote-1::before {
     width: 50px;
     height: 50px;
     margin: 0 auto;
+}
+p.title {
+    padding: 5px 10px;
+    border-radius: 25px;
+    border: 1px solid #999;
+    font-size: 12px;
+    color: #999;
+}
+p.title span.type {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+p.title span.count {
+    background-color: #2d18b4;
+    padding: 5px 19px;
+    margin: -5px -10px -5px 0;
+    color: #fff;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    font-weight: bold;
 }
 /* Конец Голосование, форма создания/редактирования голосования */
 

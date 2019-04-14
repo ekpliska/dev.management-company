@@ -57,7 +57,9 @@ class NewsForm extends Model {
             [['preview'], 'file', 'extensions' => 'png, jpg, jpeg'],
             [['preview'], 'image', 'maxWidth' => 510, 'maxHeight' => 510],
             
-            [['files'], 'file', 'extensions' => 'doc, docx, pdf, xls, xlsx, ppt, pptx, txt', 'maxFiles' => 4],
+            [['files'], 'file', 
+                'extensions' => 'doc, docx, pdf, xls, xlsx, ppt, pptx, png, jpg, jepg', 
+                'maxFiles' => 4],
             
             [['partner', 'isAdvert'], 'integer'],
             

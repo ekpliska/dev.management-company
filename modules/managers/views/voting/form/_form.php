@@ -5,6 +5,7 @@
     use kartik\datetime\DateTimePicker;
     use vova07\imperavi\Widget;
     use app\models\Questions;
+    use app\modules\managers\widgets\Vote;
 
 /*
  * Форма голосования
@@ -143,17 +144,21 @@ $action = Yii::$app->controller->action->id;
                         <tbody>
                             <?php // Формируем поле для ввода вопроса для текущего голосования ?>
                             <?php foreach ($model->questions as $key => $_question) : ?>
-                                <tr>
-                                <?= $this->render('new_question', [
-                                        'key' => $_question->isNewRecord ? (strpos($key, 'new') !== false ? $key : 'new' . $key) : $_question->questions_id,
-                                        'form' => $form,
-                                        'question' => $_question,
-                                        'status' => $model->voting->status,
-                                    ]) 
-                                ?>
-                                </tr>
+                            <tr>
+                            <?= $this->render('new_question', [
+                                    'key' => $_question->isNewRecord ? (strpos($key, 'new') !== false ? $key : 'new' . $key) : $_question->questions_id,
+                                    'form' => $form,
+                                    'question' => $_question,
+                                    'status' => $model->voting->status,
+                                ]) 
+                            ?>
+                            </tr>
+                            <tr class="voting-questions-result">
+                                <?= Vote::widget(['question_id' => $_question->questions_id]) ?>
+                            </tr>
                             <?php endforeach; ?>
                             <?php // Поля для нового вопроса ?>
+
                             <tr id="voting-new-question-block" style="display: none;">
                                 <?= $this->render('new_question', [
                                         'key' => '__id__',

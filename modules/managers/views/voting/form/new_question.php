@@ -3,7 +3,7 @@
     use yii\helpers\Html;
     
 ?>
-<td class="text-question">
+<td colspan="3" class="text-question">
     <?= $form->field($question, 'questions_text', ['template' => '<div class="field"></i>{label}{input}{error}</div>'])
             ->textInput([
                 'id' => "Questions_{$key}_questions_text",
