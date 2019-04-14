@@ -144,7 +144,7 @@ class NewsController extends AppManagersController {
                     'success' => true,
                     'message' => 'Новость была успешно добавлена',
                 ]);                
-                return $this->redirect(['view', 'slug' => $slug]);
+                return $this->redirect(['view', 'slug' => $slug->slug]);
             } else {
                 Yii::$app->session->setFlash('news-admin', [
                     'success' => false,

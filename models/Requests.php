@@ -312,7 +312,6 @@ class Requests extends ActiveRecord
                 $photo->thumbnail(new Box(900, 900))->save($photo_path, ['quality' => 90]);
                 $this->attachImage($photo_path);
                 
-                
                 @unlink($path);
             }
             return true;

@@ -235,7 +235,7 @@ class News extends ActiveRecord
      */
     public function uploadFiles($files) {
         
-        if ($this->validate() && $files) {
+        if ($files) {
             foreach ($files as $file) {
                 $file_name = $file->basename;                
                 $path = 'upload/store' . $file_name . '.' . $file->extension;
