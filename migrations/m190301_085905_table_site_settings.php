@@ -19,6 +19,7 @@ class m190301_085905_table_site_settings extends Migration {
             'api_url' => $this->string(100)->notNull(),
             'welcome_text' => $this->text(1000),
             'user_agreement' => $this->text(2000)->notNull(),
+            'promo_block' => $this->text(1000),
         ], $table_options);
         
         $this->batchInsert('{{%site_settings}}', 
@@ -26,7 +27,8 @@ class m190301_085905_table_site_settings extends Migration {
                     [
                         'https://api.myelsa.ru/api/', 
                         'Добро пожаловать!',
-                        'Пользовательское соглашение.'
+                        'Пользовательское соглашение.',
+                        'Промоблок',
                     ],
                 ]);
         

@@ -33,6 +33,9 @@ $current_date = Yii::$app->formatter->asDate(time(), 'LLLL, Y');
                 <h1>
                     Промоблок
                 </h1>
+                <div class="__top-promo-content">
+                    <?= !empty($promo_text) ? $promo_text : '<p class="message-general-page">Информация отсутствует.</p>' ?>
+                </div>
             </div>
         </div>        
     </div>

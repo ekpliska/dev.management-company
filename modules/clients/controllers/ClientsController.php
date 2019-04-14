@@ -2,10 +2,7 @@
 
     namespace app\modules\clients\controllers;
     use Yii;
-    use yii\data\Pagination;
-    use app\modules\clients\controllers\AppClientsController;
-    use app\models\News;
-    use app\modules\clients\models\ImportantInformations;
+    use app\models\SiteSettings;
     
 
 /**
@@ -25,10 +22,14 @@ class ClientsController extends AppClientsController
         // Получаем массив содержащий ID ЖК, ID дома, ID квартиры, номер подъезда
         $living_space = Yii::$app->userProfile->getLivingSpace($account_id);
         
+        // Ифонмация из настроек для Промоблока
+        $promo_info = SiteSettings::findOne(['id' => 1]);
+        
         return $this->render('index', [
             'living_space' => $living_space,
             'indications' => $this->getCountersIndication(),
             'payments' => $this->getPaymentsList(),
+            'promo_text' => $promo_info->promo_block,
         ]);
         
     }

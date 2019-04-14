@@ -22,7 +22,7 @@ class SiteSettings extends ActiveRecord {
     public function rules() {
         return [
             [['api_url', 'user_agreement'], 'required', 'message' => 'Поле обязательно для заполнения'],
-            [['welcome_text'], 'string', 'max' => 1000],
+            [['welcome_text', 'promo_block'], 'string', 'max' => 1000],
             [['api_url'], 'string', 'max' => 100],
             [['user_agreement'], 'string', 'min' => 10, 'max' => 2000],
             ['api_url', UrlValidator::className(), 'message' => 'Не верный формат адреса']
@@ -38,6 +38,7 @@ class SiteSettings extends ActiveRecord {
             'api_url' => 'URL адрес ',
             'welcome_text' => 'Текст приветствия на главной странице',
             'user_agreement' => 'Пользовательское соглашение',
+            'promo_block' => 'Промоблок',
         ];
     }
 }

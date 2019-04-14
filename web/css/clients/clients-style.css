@@ -405,6 +405,12 @@ li.account-info {
     background: #2d18b4;
     color: #fff;
 }
+.__top-promo-content {
+    padding: 10px;
+    height: 80%;
+    overflow: hidden;
+    font-size: 13px;
+}
 /* Конец Собственник, главная страница, Новости */
 
 /* All News */
