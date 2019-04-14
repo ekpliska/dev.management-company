@@ -1751,9 +1751,13 @@ span.status-vote-1::before {
     border-radius: 50px;
     font-size: 14px;
     font-weight: bold;
+    cursor: pointer;
 }
 .btn-upload-cover:hover {
     box-shadow: 0px 1px 6px 1px rgba(55,35,35,0.32);
+}
+.btn-upload-cover label {
+    cursor: pointer;
 }
 .upload-btn-wrapper input[type=file] {
   font-size: 100px;
@@ -2034,6 +2038,29 @@ ul[id*="employees-list-"] > li > a:hover {
     color: #999;
     font-style: italic;
     padding: 10px 0;
+}
+.create-request-btn {
+    background-image: url(/images/clients/new_record.svg);
+    background-repeat: no-repeat;
+    background-position: 0px 5px;
+    background-color: transparent;
+    width: 70px;
+    height: 70px;
+    position: fixed;
+    right: 2%;
+    bottom: 10%;    
+    cursor: pointer;
+    outline: none;
+    border: none;
+}
+.create-request-btn:hover {
+    filter: brightness(80%);
+    outline: none;
+}
+
+.create-request-btn:active {
+    filter: brightness(120%);
+    outline: none;
 }
 /* Конец Новости, главная страница */
 
@@ -2831,7 +2858,7 @@ ul[id*="employees-list-"] > li > a:hover {
     color: #FF1760;
     text-shadow: none! important;
     opacity: 1;
-    line-height: 0.1;
+    line-height: 1.5;
 }
 .modal-close-btn:hover {
     color: white;
@@ -2869,3 +2896,50 @@ ul[id*="employees-list-"] > li > a:hover {
     font-size: 16px;
 }
 /* Конец Таблица Результаты голосования */
+
+/* Уведомления на странице */
+.notice {
+    position: relative;
+    margin: 2em;
+    background: #fff;
+    padding: 1em 1em 1em 2em;
+    border-left: 4px solid #DDD;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.125);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: rgb(69, 69, 69);
+}
+.notice p {
+    margin: 0;
+    font-size: 13px;
+    color: #67768a;
+}
+.notice:before {
+    position: absolute;
+    top: 50%;
+    margin-top: -17px;
+    left: -17px;
+    background-color: #DDD;
+    color: #FFF;
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    text-align: center;
+    line-height: 30px;
+    font-weight: bold;
+    font-family: Georgia;
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.5);
+}
+.info {
+    border-color: #1fd68d;
+}
+.warning {
+    border-color: #fed75b;
+}
+.success {
+    border-color: #1fd68d;
+}
+.error {
+    border-color: #ef693a;
+}
+/* Конец Уведомления на странице */
