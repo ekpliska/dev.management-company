@@ -218,10 +218,18 @@ li.account-info {
     margin: 0;
     padding: 0;
 }
-.footer_hepl-link,
-.footer_hepl-link:hover {
-    font-size: 12px;
+.footer_hepl-link {
     color: rgb(103, 118, 138);
+    padding: 10px;
+    border: 1px solid;
+    margin: 10px 0;
+    text-transform: uppercase;
+    font-size: 10px;
+    border-radius: 5px;
+    background-color: #f3f3f3;
+}
+.footer_hepl-link:hover {
+    background-color: #fff;
 }
 .footer__adress h3.footer_title {
     font-size: 16px;
@@ -1043,8 +1051,8 @@ span.dot {
 }
 .notification__dot {
     position: absolute;
-    top: 10%;
-    right: 35%;
+    top: 25%;
+    right: 30%;
     background: #ff1760;
     padding: 5px 5px;
     border-radius: 12px;
@@ -3580,6 +3588,28 @@ button[id*="send-indication-"]:disabled {
     to {opacity:1 ;}
 }
 /* End Notice popup */
+
+/* FAQ modal */
+.panel-faq,
+.panel-faq > .panel-heading {
+    background-color: transparent;
+    border-color: #8b709d;
+    font-size: 14px;
+}
+.panel-faq .panel-title > a,
+.panel-faq .panel-title > a:hover {
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+}
+.panel-faq .collapse.in {
+    background: rgba(255, 255, 255, 0.15);
+}
+.panel-faq .panel-body {
+    border-top-color: #8b709d !important;
+}
+/* End FAQ modal */
+
 
 .message-general-page {
     padding: 10px;
