@@ -86,7 +86,6 @@ class NewsForm extends Model {
     public function save($file, $files) {
         
         $transaction = Yii::$app->db->beginTransaction();
-//        var_dump(count($this->isNotice)); die();
         
         try {
             
@@ -119,9 +118,7 @@ class NewsForm extends Model {
             
             if(!$add_news->save()) {
                 throw new \yii\db\Exception('Ошибка добавления новости. Ошибка: ' . join(', ', $add_news->getFirstErrors()));
-//                return ['error' => join(', ', $add_news->getFirstErrors())];
             }
-            
             
             $transaction->commit();
             

@@ -2943,3 +2943,43 @@ ul[id*="employees-list-"] > li > a:hover {
     border-color: #ef693a;
 }
 /* Конец Уведомления на странице */
+
+/* Modal window for load image at redactor */
+#redactor-modal {
+    background: linear-gradient(180.67deg, #39284E 0%, rgba(10,8,8,0.7) 100%);
+    border-radius: 12px;
+}
+#redactor-modal header {
+    color: #fff;
+    font-weight: normal;
+}
+#redactor-droparea {
+    border: 2px dashed #8b709d;
+}
+#redactor-modal-close {
+    color: #FF1760;
+}
+#redactor-modal-close:hover {
+    color: #fff;
+}
+#redactor-modal section {
+    padding: 10px;
+}
+#redactor-modal label {
+    color: #fff;
+    font-weight: 100;
+}
+#redactor-modal footer button,
+#redactor-modal footer button.redactor-modal-delete-btn,
+#redactor-modal footer button.redactor-modal-action-btn {
+    background-color: transparent;
+    border: 1px solid #ddd;
+    color: #fff;
+    border-radius: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+#redactor-modal footer {
+    padding: 10px !important;
+}
+/* End Modal window for load image at redactor */

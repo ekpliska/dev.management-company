@@ -182,7 +182,7 @@ class NewsController extends AppManagersController {
         $houses = empty($news->news_house_id) ? [] : Houses::getHousesList($for_list = false);
         $parnters = Partners::getAllParnters();
         
-        // Получаем прикрепленные к заявке файлы
+        // Получаем прикрепленные к новости файлы
         $docs = Image::getAllDocByNews($news->news_id, $model_name = 'News');
         
         if ($news->load(Yii::$app->request->post())) {
