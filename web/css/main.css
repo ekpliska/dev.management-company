@@ -802,3 +802,9 @@ span.dot {
     box-shadow: none !important;
 }
 /* End Show password */
+
+.has-error .help-block {
+    color: #ef693a;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+}
