@@ -115,6 +115,9 @@
     transform: rotate(-135deg);
     -webkit-transform: rotate(-135deg);
 }
+.menu-profile-item {
+    background-color: rgba(0, 0, 0, 0.5);
+}
 /* Конец Открыть, закрыть меню */
 
 /* Выпадающее меню, профиль пользователя */
@@ -229,6 +232,10 @@
 /* Конец Выпадающее меню, профиль пользователя */
 
 /* Выпадающее навигационное меню, Администратор */
+ul.menu {
+    padding: 0;
+    margin: 0;
+}
 .menu-wrap-manager {
     background-color: #6968AB;
     position: fixed;
@@ -249,16 +256,22 @@
 }
 .menu-sidebar-manager {
     margin-top: 116px;
+    width: 280px;
+    top: 0;
+    bottom: 0;
+    position: fixed;
+    overflow-y: visible;
+    overflow-x: hidden;
 }
 .menu > li:first-child {
     border-top: 1px solid #604c6e;    
 }
 .menu > li {
-    padding: 20px;
     border-bottom: 1px solid #604c6e;
-    margin-left: -40px;
 }
 .menu > li > a {
+    display: block;
+    padding: 20px;
     color: #fff;
     font-weight: normal;
     font-size: 14px;
@@ -266,6 +279,19 @@
 .menu > li:hover,
 .menu > li.active {
     background: rgba(247, 247, 247, 0.3);    
+}
+.menu-sidebar-manager::-webkit-scrollbar {
+    width: 7px;
+    background-color: #ddd;
+}
+.menu-sidebar-manager::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    border-radius: 10px;
+}
+.menu-sidebar-manager::-webkit-scrollbar-thumb {
+    border-radius: 12px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #8b709d;
 }
 /* Конец Выпадающее навигационное меню, Администратор */
 

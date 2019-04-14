@@ -22,7 +22,7 @@
         <a href="<?= Url::to(['managers/index']) ?>" class="brand">
             <?= Html::img('/images/navbar/group_46.svg', ['alt' => 'image'])  ?>
         </a>
-        <ul class="nav navbar-nav navbar-right user-notification">
+        <ul class="nav navbar-nav navbar-right user-notification hidden-sm hidden-xs">
             <?= ManagerUserInfo::widget() ?>
             <?= Notifications::widget() ?>
         </ul>
