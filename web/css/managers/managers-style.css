@@ -2397,6 +2397,71 @@ ul[id*="employees-list-"] > li > a:hover {
 }
 /* Конец Жилищный фонд */
 
+/* Drag and Drop files */
+.file-drop-zone {
+    border: 1px dashed #8b709d !important;
+}
+.file-drop-zone-title {
+    color: #8b709d !important;
+}
+.file-preview {
+    border: none !important;
+    padding: 0 !important;
+}
+.file-drop-zone-title {
+    color: #999 !important;
+    font-size: 16px !important;
+    padding: 39px 10px !important;
+    cursor: default !important;
+}
+.fileinput-remove {
+    visibility: hidden !important;
+}
+.load-images {
+    background: transparent !important;
+}
+.btn-block {
+    padding: 20px 0;
+    color: #8b709d !important;
+}
+.btn-block:hover {
+    color: #fff !important;
+}
+.krajee-default.file-preview-frame {
+    margin: 0 !important;
+}
+.krajee-default.file-preview-frame .kv-file-content {
+    width: 118px !important;
+    height: 70px !important;
+}
+.file-preview-pdf {
+    height: 70px !important;
+}
+.krajee-default .file-caption-info, .krajee-default .file-size-info {
+    width: 118px !important;
+}
+.file-upload-indicator {
+    visibility: hidden !important;
+}
+.file-zoom-dialog .btn-navigate {
+    opacity: unset !important;
+    color: #fff !important;
+}
+.file-error-message {
+    color: #ef693a !important;
+    background-color: transparent !important;
+    border: 1px solid #ef693a !important;
+    padding: 10px !important;
+}
+.krajee-default .file-other-icon {
+    font-size: 1em !important;
+}
+.kv-file-remove {
+    position: absolute;
+    left: 0% !important;
+}
+/* End Drag and Drop files */
+
 /* Конструктор заявок */
 .designer-block {
     border: 1px solid #ddd;
@@ -2962,8 +3027,8 @@ span.dot {
 }
 .notification__dot {
     position: absolute;
-    top: 25%;
-    right: 30%;
+    top: 20%;
+    right: 25%;
     background: #ff1760;
     padding: 5px 5px;
     border-radius: 12px;
@@ -3187,3 +3252,260 @@ a.receipte-btn-dowload {
     background-color: #524e53;
 }
 /* Конец Квитанции */
+
+/* Лицевой счет */
+.paid-account-page {
+    border-radius: 12px;
+    border: 1px solid #ddd;
+}
+.table-account thead {
+    font-weight: bold;
+    padding: 20px 0;
+}
+.table-account > tbody > tr > td:first-child {
+    width: 30%;
+}
+.table-account > thead > tr > td,
+.table-account > tbody > tr > td {
+    padding: 20px;
+}
+.paid-account-page_btn {
+    padding: 20px;
+}
+/* Конец Лицевой счет */
+
+/* Платежи */
+.payments-page {}
+.payment-pages_period {
+    display: flex;
+}
+.date-block {
+    display: flex;
+    margin: 0px -15px;
+}
+.payment_title {
+    font-size: 12px;
+    color: #2d1d83;
+    padding:  0px 0px 0px 10px;
+}
+.payments-page__date-block {
+    display: flex;
+}
+.date-block span {
+    padding: 10px;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+input[name="date_start-period-pay"],
+input[name="date_end-period-pay"] {
+    box-shadow: none;
+    border: none;
+    border-bottom: 1px solid #ddd;    
+}
+input[name="date_start-period-pay"]:focus,
+input[name="date_end-period-pay"]:focus {
+    border-color: #8b709d;
+    outline: 0;
+    box-shadow: none;
+}
+input[name="date_start-period-pay"]::placeholder,
+input[name="date_end-period-pay"]::placeholder {
+    text-transform: capitalize;
+}
+
+.btn-show-info {
+    height: 45px;
+    margin: 0 30px;
+    border-radius: 12px;
+    border: 1px solid #2d18b4;
+    background-color: #fff;
+    color: #3436ae;
+    font-size: 12px;
+    letter-spacing: 0.9px;
+    text-transform: uppercase;
+    font-weight: bold;
+    outline: none;
+}
+.btn-edit-reading {
+    height: 48px;
+    width: 220px;
+    border-radius: 12px;
+    border: 1px solid #2d18b4;
+    background-color: #fff;
+    color: #3436ae;
+    font-size: 12px;
+    letter-spacing: 0.9px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.btn-show-info:hover,
+.btn-edit-reading:hover,
+.btn-send-request:hover {
+    border-radius: 12px;
+    border: 1px solid #2d18b4;
+    background-color: #2d18b4;
+    color: #fff;
+    box-shadow: 0 2px 5px 2px rgba(0,0,0,0.26);    
+}
+.payments-page table {
+    margin-top: 50px;
+}
+.payment_btn-pay {
+    background: #2d18b4;
+    padding: 15px 45px;
+    border-radius: 12px;
+    font-size: 10px;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 0.07em;
+}
+.payment_btn-pay:hover {
+    background-color: #2D18B4;
+    box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
+    color: #FFFFFF;
+}
+.payment-ok {
+    color: #23dd6f;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+}
+.payment-debt {
+    color: #f0754a;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+}
+/* Кoнец Платежи */
+
+/* Приборы учета */
+.counters-page {}
+.options-panel {
+    margin-bottom: 20px;
+}
+.btn-save-reading {
+    height: 48px;
+    width: 220px;
+    border-radius: 12px;
+    border: 1px solid #2d18b4;
+    background-color: #2d18b4;
+    color: #fff;
+    font-size: 12px;
+    letter-spacing: 0.9px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.btn-save-reading:hover {
+    border-radius: 12px;
+    border: 1px solid #2d18b4;
+    background-color: #2d18b4;
+    color: #fff;
+    box-shadow: 0 2px 5px 2px rgba(0,0,0,0.26);    
+}
+.btn-save-reading[disabled],
+.btn-edit-reading[disabled] {
+    cursor: no-drop;
+    opacity: 0.5;
+}
+.counters-page table {
+    margin-top: 100px;
+}
+.counter-name {
+    font-size: 12px;
+}
+.counter-number {
+    font-size: 12px;
+    font-weight: bold;
+    color: #2d18b4;    
+}
+.create-send-request {
+    background-color: #fff;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    padding: 10px 25px;
+    text-transform: uppercase;
+    color: #2d18b4;
+    font-size: 12px;
+    font-weight: bold;
+}
+.create-send-request:hover {
+    border: 1px solid #2d18b4;
+    color: #2d18b4;
+}
+.reading-input {
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    padding: 10px 10px;
+    color: #2d18b4;
+    font-size: 12px;
+    font-weight: bold;    
+}
+.reading-input:focus {
+    border: 1px solid #2d18b4;
+    color: #2d18b4;
+    outline: none;    
+}
+.counters-message {
+    margin: 0;
+    padding: 0;
+}
+.counters-message p.title {
+    padding: 40px 0 0 0;
+    color: #ef693a;
+    font-size: 24px;
+    letter-spacing: 1.05px;
+}
+.counters-message p.text {
+    color: #2d18b4;
+    margin-bottom: 40px;
+    text-align: justify;
+}
+.block-edit-reading {
+    background-color: #fce7df !important; 
+}
+.block-edit-reading span {
+    color: #ef693a;
+    font-weight: bold;
+    font-size: 12px;
+    letter-spacing: 0.23px;
+}
+.block-edit-reading span.message-request {
+    font-size: 12px;
+    font-weight: normal;
+    color: #000;
+}
+.counters-page .managers-table {
+    margin-top: 0;
+}
+.send-indication-counter {
+    background: #2d18b4;
+    border: none;
+    color: #fff;
+    border-radius: 12px;
+    letter-spacing: 2px;
+    font-weight: normal;
+    outline: none;
+}
+.send-indication-counter:hover,
+.send-indication-counter:focus,
+.send-indication-counter:active {
+    background: #4326b2;
+    color: #fff;
+}
+.send-indication-counter[disabled]:hover {
+    color: #fff;
+}
+label[class^='error-ind-'] {
+    color: #ef693a;
+    font-weight: normal;
+    text-align: center;
+}
+.input-indication {
+    display: grid;    
+}
+.payment-from_control_summ {
+    padding: 20px;
+    text-align: center;
+    font-size: 14px;
+    color: #2d18b4;
+}
+/* Конец Приборы учета */

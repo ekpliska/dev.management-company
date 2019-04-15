@@ -861,7 +861,7 @@ $(document).ready(function() {
     $(document).on('click' , 'a[id^=delete-file-yes]', function(e){
         var fileId = $(this).data('files');
         e.preventDefault();
-        $.post('delete-file?file=' + fileId, function(data) {
+        $.post('/managers/news/delete-file?file=' + fileId, function(data) {
             $('a[id^=delete-file-yes-' + fileId + ']').closest('tr').remove();
             e.preventDefault(); 
         });

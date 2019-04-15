@@ -138,6 +138,7 @@ class Requests extends BaseRequests {
                 ->select(['requests_id', 'requests_ident', 'status', 'created_at', 'requests_type_id', 'type_requests_name'])
                 ->joinWith('typeRequest')
                 ->where(['requests_specialist_id' => $emplotee_id])
+                ->andWhere(['!=', 'status', StatusRequest::STATUS_CLOSE])
                 ->orderBy(['created_at' => SORT_DESC])
                 ->asArray()
                 ->all();

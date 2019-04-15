@@ -36,9 +36,9 @@ class Bootstrap implements BootstrapInterface {
                 'managers/paid-requests/view-paid-request/<request_number>' => 'managers/paid-requests/view-paid-request',
                 
                 // Новости
-                'managers/news' => 'managers/news/index',
-                'managers/news/view/<slug>' => 'managers/news/view',
+                'managers/news/view/<slug:[\w-]+>' => 'managers/news/view',
                 'managers/news/<action>' => 'managers/news/<action>',
+                'managers/news' => 'managers/news/index',
                 
                 // Голосование
                 'managers/voting' => 'managers/voting/index',

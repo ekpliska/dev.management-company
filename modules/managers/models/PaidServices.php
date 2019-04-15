@@ -143,6 +143,7 @@ class PaidServices extends BasePaidServices {
                 ->select(['services_name_services_id', 'services_number', 'created_at', 'status', 'category_name', 'service_name'])
                 ->joinWith(['service', 'service.category'])
                 ->where(['services_specialist_id' => $employee_id])
+                ->andWhere(['!=', 'status', StatusRequest::STATUS_CLOSE])
                 ->orderBy(['created_at' => SORT_DESC])
                 ->asArray()
                 ->all();

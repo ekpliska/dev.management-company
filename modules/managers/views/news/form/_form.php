@@ -95,12 +95,11 @@
                     ]])
                 ->label(false) ?>
 
-        <?= $form->field($model, 'files[]')->input('file', ['multiple' => true])->label() ?>
-        
-<?php /* div class="upload-btn-wrapper-multi">        
-<?= $form->field($model, 'files[]', ['template' => '<label class="text-center btn-upload-cover-multi" role="button">{input}{label}{error}</label>'])
-        ->input('file', ['multiple' => true, 'class' => 'hidden'])->label('Добавить вложения') ?>
-</div */?>
+        <?= $form->field($model, 'files[]', [
+                    'template' => '<div class="file-upload"><button class="file-upload__btn"></button>{input}{label}</div>{error}'])
+                ->input('file', ['multiple' => true, 'class' => 'file-upload__input'])
+                ->label('Добавить вложения', ['class' => 'file-upload__label'])
+        ?>
         
         
         <?= $form->field($model, 'isNotice')

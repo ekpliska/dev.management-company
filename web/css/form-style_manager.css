@@ -591,6 +591,7 @@ textarea {
     pointer-events: none;
     transform: translateY(-15px);
     z-index: 999;
+    position: absolute;
 }
 .custom-select-dark.opened .custom-options-dark {
     text-align: left;
