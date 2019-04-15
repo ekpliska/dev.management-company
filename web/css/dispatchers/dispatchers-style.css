@@ -1442,7 +1442,7 @@ a.request__link-view:hover {
     border-radius: 12px;
     color: #fff;
     cursor: pointer;
-    margin-top: -1px; /* Prevent double borders */
+    margin-top: -1px;
     padding: 12px;
     text-decoration: none;
     display: block;
@@ -2337,7 +2337,7 @@ tbody > tr > td > div.empty::before {
     color: #FF1760;
     text-shadow: none! important;
     opacity: 1;
-    line-height: 0.1;
+    line-height: 1.5;
 }
 .modal-close-btn:hover {
     color: white;
