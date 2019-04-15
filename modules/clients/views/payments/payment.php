@@ -74,9 +74,6 @@ $this->title = Yii::$app->params['site-name'] . 'Оплата';
         <?php else: ?>
         
             <div>
-                <?php
-                 var_dump($paiment_info);
-                ?>
             </div>
         
         <?php endif; ?>

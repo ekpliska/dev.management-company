@@ -496,7 +496,7 @@ ul.menu {
 .general-right__request-body > h5 {
     padding: 10px;
 }
-.general-right__request-body > h5 > span.requiest-id {
+.general-right__request-body > h5 > a.requiest-id {
     background: #2d18b4;
     border-radius: 25px;
     padding: 5px 10px;
@@ -1735,6 +1735,10 @@ p.title span.count {
     border-bottom-right-radius: 25px;
     font-weight: bold;
 }
+.participant-list a {
+    font-size: 12px;
+    font-weight: bold;
+}
 /* Конец Голосование, форма создания/редактирования голосования */
 
 /* Таблица на форме создания голосования */
@@ -2968,3 +2972,218 @@ span.dot {
     padding: 0 20px;
 }
 /* End Notifications Bar */
+
+/* Постраничная нафигация, таблица */
+.pagination {
+    margin: 5px 0;
+}
+.pagination > .active > a, 
+.pagination > .active > span, 
+.pagination > .active > a:hover, 
+.pagination > .active > a:focus, 
+.pagination > .active > span:focus {
+    color: #67768a;
+    border-bottom: 2px solid #67768a;
+    background-color: #fff;    
+}
+.pagination > li > a, .pagination > li > span {
+    color: #7c7c7c;
+    background-color: transparent;
+    font-size: 14px;
+    padding: 2px 7px;
+    border: none;
+}
+.pagination > li > a:hover, 
+.pagination > li > a:focus, 
+.pagination > li > span:focus {
+    color: #7c7c7c;
+    background-color: transparent;
+    border-bottom: 2px solid #ef693a;    
+}
+.pagination > li.prev > a:hover, 
+.pagination > li.next > a:hover, 
+.pagination > .active > span:hover, 
+.pagination > li > span:hover {
+    border: none;
+}
+.pagination > li.prev > a:hover i, 
+.pagination > li.next > a:hover i {
+    color: #ef693a;
+}
+.pagination i {
+    font-size: 10px;
+    color: #7c7c7c;
+}
+/* Конец Постраничная нафигация, таблица */
+
+/* Квитанции */
+.receipts-page {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+}
+.period_title {
+    font-size: 12px;
+    color: #2d1d83;
+    padding: 20px 20px 0 20px;
+}
+.receipts_period {
+    padding: 0px;
+    border-right: 1px solid #ddd;
+    min-height: 700px;
+}
+.receipts_period-calendar {
+    display: flex;
+    padding: 0 10px 0px 10px;
+}
+.receipts_period-calendar span {
+    padding: 10px;
+}
+.receipte-of-lists {
+    margin: 0 0 20px 0;    
+}
+.receipte-of-lists > li {
+    position: relative;
+    padding: 20px 20px;
+    border-left: none;
+    border-right: none;
+}
+.receipte-of-lists > li.active,
+.receipte-of-lists > li.active:hover,
+.receipte-of-lists > li:hover {
+    box-shadow: 0px 0px 3em -8px #7139c5;
+    z-index: 2;
+    background: transparent;
+    border: none;
+    color: #000;
+}
+.receipte-of-lists__operations {
+    position: absolute;
+    right: 5%;
+    display: inline-grid;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+.receipte-of-lists__operations a {
+    padding: 5px 15px;
+    background: #1fd68d;
+    color: #fff;
+    border-radius: 12px;
+    margin: 2px 0;
+}
+.receipte-of-lists__operations a:hover {
+    background: #5747c3;
+}
+.receipte-month {
+    font-size: 12px;
+    color: #2d18b4;
+    font-weight: bold;
+}
+.receipte-number {
+    font-size: 14px;
+    font-weight: bold;
+}
+span.receipte-btn-pay-ok {
+    padding: 5px 10px;
+    background: #23dd6f;
+    color: #fff;
+    border-radius: 25px;
+}
+span.receipte-btn-pay-ok::before {
+    content: '\2713';
+}
+span.receipte-btn-pay-debt {
+    padding: 5px 10px;
+    background: #f0754a;
+    color: #fff;
+    border-radius: 25px;
+}
+span.receipte-btn-pay-debt::before {
+    content: '\2715';
+}
+a.receipte-btn-pay {
+    padding: 5px 10px;
+    background: #2d18b4;
+    color: #fff;
+    border-radius: 25px;
+}
+a.receipte-btn-dowload {
+    color: #ccc;
+    float: right;
+    position: absolute;
+    right: 20px;
+    top: 43%;
+}
+.receipts_body {
+    padding: 20px 10px;
+    min-height: 700px;
+}
+#default_modal-message__text {
+    font-size: 16px;
+    padding: 20px;
+    text-align: center;
+}
+/*.operations-block {
+    margin-left: 5%;
+    right: 10%;
+    bottom: 10%;
+    background: #2d18b4;
+    position: fixed;
+    border-radius: 12px;
+}
+.operations-block_items {
+    border-radius: 12px;
+}
+.operations-block_items > li > a {
+    padding: 15px 20px;
+    width: 160px;
+    color: #fff;    
+}
+.operations-block_items > li > a > i {
+    padding: 0px 7px;
+}
+.operations-block_items > li > a.left-block:hover {
+    border-radius: 12px 0px 0px 12px;
+    background-color: rgba(247, 247, 247, 0.22);
+}
+.operations-block_items > li > a.center-block:hover {
+    border-radius: 0px;
+    background-color: rgba(247, 247, 247, 0.22);
+}
+.operations-block_items > li > a.right-block:hover {
+    border-radius: 0px 12px 12px 0px;
+    background-color: rgba(247, 247, 247, 0.22);
+}*/
+.invalid-message-show {
+    max-width: 100%;
+    /*margin: 10px;*/
+    font-size: 12px;
+    color: #ef693a;
+}
+.invalid-message-show::before {
+    content: "\02716";
+    padding: 0 10px;    
+}
+#receipts-lists {
+    height: 600px;
+    overflow: auto;
+    min-height: 600px;
+    margin: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+#receipts-lists::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #ddd;
+}
+
+#receipts-lists::-webkit-scrollbar {
+    width: 12px;
+    background-color: #ddd;
+}
+
+#receipts-lists::-webkit-scrollbar-thumb {
+    border-radius: 12px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #524e53;
+}
+/* Конец Квитанции */

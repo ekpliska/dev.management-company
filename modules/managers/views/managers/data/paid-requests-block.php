@@ -11,7 +11,9 @@
     <?php foreach ($paid_request_list as $paid_request) : ?>
         <div class="general-right__request-body">
             <h5>
-                <span class="requiest-id"><?= "ID {$paid_request['number']}" ?></span>
+                <?= Html::a("ID {$paid_request['number']}", ['paid-requests/view-paid-request', 'request_number' => $paid_request['number']], [
+                        'class' => 'requiest-id']) ?>
+                
                 <span class="requiest-date pull-right">
                     <?= FormatHelpers::formatDate($paid_request['date_create'], true, 0, false) ?>
                 </span>
@@ -24,9 +26,6 @@
                             $paid_request['gis_adress'], $paid_request['house'], false, false, $paid_request['flat'])
                     ?>
                 </p>
-                <?php if (Yii::$app->user->can('PaidRequestsEdit')) : ?>
-                    <?= Html::a('Перейти', ['paid-requests/view-paid-request', 'request_number' => $paid_request['number']], ['class' => 'pull-right']) ?>
-                <?php endif; ?>
             </div>
         </div>
     <?php endforeach; ?>

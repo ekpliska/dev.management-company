@@ -1,6 +1,7 @@
 <?php
 
     use yii\helpers\Html;
+    use yii\helpers\Url;
     use yii\widgets\Breadcrumbs;
     use kartik\date\DatePicker;
 
@@ -68,6 +69,23 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
                 </div>
             </div>
             <div class="col-lg-7 col-md-7 col-sm-6 col-xs-12 receipts_body">
+                <?php if (!empty($receipts_lists)) : ?> 
+                    <?php 
+                        // Формируем путь в PDF квитацнии на сервере
+                        $file_path = Yii::getAlias('@web') . "/receipts/" . $account_number . "/" . $receipts_lists[0]['Расчетный период'] . ".pdf";
+                    ?>
+                    <?php if (!file_exists($file_path)) : ?>
+                        <div class="notice error">
+                            <p>
+                                <?= "Квитанция {$receipts_lists[0]['Расчетный период']} на сервере не найдена." ?>
+                            </p>
+                        </div>
+                    <?php else : ?>
+                        <iframe src="<?= Url::to($file_path) ?>" style="width: 100%; height: 670px;" frameborder="0">
+                            Ваш браузер не поддерживает фреймы
+                        </iframe>
+                    <?php endif; ?>
+                <?php endif; ?>
             </div>
 
         </div>

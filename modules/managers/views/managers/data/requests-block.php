@@ -11,7 +11,7 @@
     <?php foreach ($request_list as $request) : ?>
         <div class="general-right__request-body">
             <h5>
-                <span class="requiest-id"><?= "ID {$request['number']}" ?></span>
+                <?= Html::a("ID {$request['number']}", ['requests/view-request', 'request_number' => $request['number']], ['class' => 'requiest-id']) ?>
                 <span class="requiest-date pull-right">
                     <?= FormatHelpers::formatDate($request['date_create'], true, 0, false) ?>
                 </span>
@@ -24,9 +24,6 @@
                             $request['gis_adress'], $request['house'], false, false, $request['flat'])
                     ?>
                 </p>
-                <?php if (Yii::$app->user->can('RequestsEdit')) : ?>
-                    <?= Html::a('Перейти', ['requests/view-request', 'request_number' => $request['number']], ['class' => 'pull-right']) ?>
-                <?php endif; ?>
             </div>
         </div>
     <?php endforeach; ?>
