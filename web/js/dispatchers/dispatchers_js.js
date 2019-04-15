@@ -167,17 +167,7 @@ $(document).ready(function(){
                 $('#confirm-request-error').modal('show');
             },
         });
-    });    
-    
-       
-    /*
-     * Сброс форм 
-     *      Новая завяка
-     *      Новая заявка на платную услугу
-     */
-//    $('.create-request, .create-paid-request').on('click', function(){
-//        $('#create-new-request, #create-new-paid-request')[0].reset();
-//    });
+    });
 
     /*
      * Запрос на отключение статуса у заявки
@@ -334,8 +324,31 @@ $(document).ready(function(){
        }
     });
     
+    /*
+     * Запрос на удаление прикрепленного документа
+     */
+    $('.delete_span').on('click', function() {
+        var fileId = $(this).data('files');
+        $(this).html('');
+        $(this).append(
+                '<a href="javascript:void(0)" id="delete-file-yes-' + fileId + '" data-files="' + fileId + '">Удалить</a>' + '&nbsp;&nbsp;&nbsp;' + 
+                '<a href="javascript:void(0)" id="delete-file-no-' + fileId + '" data-files="' + fileId + '">Восстановить</a>'
+                );
+    });
     
+    $(document).on('click' , 'a[id^=delete-file-yes]', function(e){
+        var fileId = $(this).data('files');
+        e.preventDefault();
+        $.post('/dispatchers/news/delete-file?file=' + fileId, function(data) {
+            $('a[id^=delete-file-yes-' + fileId + ']').closest('tr').remove();
+            e.preventDefault(); 
+        });
+    });
     
+    $(document).on('click' , 'a[id^=delete-file-no]', function(e){
+        var fileId = $(this).data('files');
+        $('#delete-file-no-' + fileId).parent().html('&times;');
+    });    
     
     // *********************************************************** //
     // ************     Start Block of Profile      ************** //

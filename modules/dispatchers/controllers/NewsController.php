@@ -36,6 +36,7 @@ class NewsController extends AppDispatchersController {
                             'for-whom-news', 
                             'image-upload',
                             'file-delete',
+                            'delete-file'
                         ],
                         'allow' => true,
                         'roles' => ['CreateNewsDispatcher']
@@ -222,6 +223,23 @@ class NewsController extends AppDispatchersController {
                 $full_adress = $house['houses_gis_adress'] . ', д. ' . $house['houses_number'];
                 echo '<option value="' . $house['houses_id'] . '">' . $full_adress . '</option>';
             }
+        }
+    }
+    
+    /*
+     * Запрос на удаление прикрепленного документа
+     */
+    public function actionDeleteFile($file) {
+        
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        
+        if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
+            
+            $file = Image::findOne($file);
+            if (!$file->delete()) {
+                Yii::$app->session->setFlash('error', ['messages' => 'Извините, при удалении документа произошла ошибка. Попробуйте обновить страницу и повторите действие еще раз']);
+            }
+            return ['success' => true];
         }
     }
     
