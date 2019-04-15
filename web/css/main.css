@@ -42,7 +42,7 @@ select {
     overflow: hidden;
 }
 .wrap {
-    min-height: 100%;
+    /*min-height: 100%;*/
     height: auto;
     margin: 0 auto -60px;
     padding: 0 0 30px;

@@ -5,9 +5,9 @@
 .content-clients {
     border-left: 1px solid #ddd;
     height: 100%;
-    min-height: 870px;
+    /*min-height: 870px;*/
     padding: 10px;
-    margin: 0;
+    margin: 0 0 30px 0;
 }
 /* NavBar */
 .menu-clients {
@@ -422,6 +422,9 @@ li.account-info {
 /* Конец Собственник, главная страница, Новости */
 
 /* All News */
+.news-page {
+    min-height: 700px;
+}
 .news-page__items {
     padding: 20px 0;
 }
@@ -1066,7 +1069,9 @@ span.dot {
 .navbar-request {
     margin: 20px 0;
 }
-.requests-page {}
+.requests-page {
+    min-height: 700px;
+}
 .fixed-bottom {
     position: absolute;
     bottom: 20px;
@@ -1756,7 +1761,9 @@ span.dot {
 /* Конец Статусы заявок, отдельная страница */
 
 /* Платные услуги */
-.paid-requests-page {}
+.paid-requests-page {
+    min-height: 700px;
+}
 a.btn-history {
     padding: 10px 30px;
     border-radius: 12px;
@@ -1850,7 +1857,9 @@ a.btn-history:hover {
 /* Конец Платные услуги */
 
 /* История платных услуг */
-.paid-requests-history {}
+.paid-requests-history {
+    min-height: 700px;
+}
 form#search-form .form-group {
     margin: 0;
 }
@@ -2348,7 +2357,9 @@ label[class^='error-ind-'] {
 /* Конец Приборы учета */
 
 /* Опрос */
-.vote-lists {}
+.vote-lists {
+    min-height: 700px;
+}
 .vote-card-preview {
     color: #a7a7a7;
     height: 570px;
