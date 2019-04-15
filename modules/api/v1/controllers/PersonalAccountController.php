@@ -37,9 +37,8 @@ class PersonalAccountController extends Controller {
     public function verbs() {
         return [
             'view' => ['get'],
-            'payments-history' => ['get'],
+            'payments-history' => ['POST'],
             'create' => ['post'],
-            'find-history-payments' => ['post']
         ];
     }
     
@@ -55,45 +54,22 @@ class PersonalAccountController extends Controller {
     
     /*
      * История платежей
+     * {"period_start": "2018-04", "period_end": "2019-01"}
      */
     public function actionPaymentsHistory($account) {
         
-        // Получаем номер текущего месяца и год
-        $current_period = date('Y-m-d');
+        $data_post = Yii::$app->request->getBodyParams();
+        
+        $date_start = empty($data_post['period_start']) ? null : "{$data_post['period_start']}-01";
+        $date_end = empty($data_post['period_end']) ? date('Y-m-d') : "{$data_post['period_end']}-01";
         
         $array_request = [
             'Номер лицевого счета' => $account,
-            'Период начало' => null,
-            'Период конец' => $current_period,
+            'Период начало' => Yii::$app->formatter->asDate($date_start, 'YYYY-MM-d'),
+            'Период конец' => Yii::$app->formatter->asDate($date_end, 'YYYY-MM-d'),
         ];
         
         $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
-        $payments_lists = Yii::$app->client_api->getPayments($data_json);
-        
-        return $payments_lists ? $payments_lists : ['success' => false];
-        
-    }
-    
-    /*
-     * Поиск по истории платежей
-     * {"period_start": "2018-04", "period_end": "2019-01"}
-     */
-    public function actionFindHistoryPayments($account) {
-        
-        $data_post = Yii::$app->request->getBodyParams();
-        if (empty($data_post['period_start']) || empty($data_post['period_end'])) {
-            return ['success' => false];
-        }
-        
-        $date_start = Yii::$app->formatter->asDate($data_post['period_start'], 'YYYY-MM');
-        $date_end = Yii::$app->formatter->asDate($data_post['period_end'], 'YYYY-MM');
-        
-        $data_array = [
-            'Номер лицевого счета' => $account,
-            'Период начало' => "{$date_start}-01",
-            'Период конец' => "{$date_end}-01"
-        ];        
-        $data_json = json_encode($data_array, JSON_UNESCAPED_UNICODE);
         $payments_lists = Yii::$app->client_api->getPayments($data_json);
         
         return $payments_lists;

@@ -242,8 +242,7 @@ $config = [
                     'controller' => 'v1/personal-account',
                     'extraPatterns' => [
                         'GET view/<account:[\w-]+>' => 'view',
-                        'GET payments-history/<account:[\w-]+>' => 'payments-history',
-                        'POST find-history-payments/<account:[\w-]+>' => 'find-history-payments',
+                        'POST payments-history/<account:[\w-]+>' => 'payments-history',
                     ]
                 ],                
                 [
@@ -254,6 +253,14 @@ $config = [
                         'GET view/<account:[\w-]+>' => 'view',
                         'POST get-receipts/<account:[\w-]+>' => 'get-receipts',
                         'POST get-receipt-pdf' => 'get-receipt-pdf',
+                    ]
+                ],                
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'pluralize' => false,
+                    'controller' => 'v1/counters',
+                    'extraPatterns' => [
+                        'GET view/<account:[\w-]+>' => 'view',
                     ]
                 ],                
             ],
