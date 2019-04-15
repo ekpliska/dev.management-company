@@ -1,6 +1,7 @@
 <?php
 
     use yii\bootstrap\Modal;
+    use yii\helpers\Html;
 
 /* 
  * Ответы на часто задаваемые вопросы
@@ -38,6 +39,10 @@ Modal::begin([
                 <?= $faq->faq_answer ?>
             </div>
         </div>
+    </div>
+    
+    <div class="modal-footer">
+        <?= Html::button('Закрыть', ['class' => 'btn-modal btn-modal-yes', 'data-dismiss' => 'modal']) ?>        
     </div>
 <?php endforeach; ?>
 </div>
