@@ -243,6 +243,7 @@ $config = [
                     'extraPatterns' => [
                         'GET view/<account:[\w-]+>' => 'view',
                         'GET payments-history/<account:[\w-]+>' => 'payments-history',
+                        'POST find-history-payments/<account:[\w-]+>' => 'find-history-payments',
                     ]
                 ],                
                 [
