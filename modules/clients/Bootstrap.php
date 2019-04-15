@@ -55,7 +55,7 @@ class Bootstrap implements BootstrapInterface {
                 
                 // Профиль
                 'profile' => 'clients/profile/index',
-                'profile/settings' => 'clients/profile/settings',
+                'profile/<action>' => 'clients/profile/<action>',
             ]
         );
     }

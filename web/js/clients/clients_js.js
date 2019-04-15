@@ -85,7 +85,7 @@ $(document).ready(function() {
     $('.changes_rent__del').on('click', function() {
         var rentsId = $('input[id=_rents]').val();
         $.ajax({
-            url: 'delete-rent-profile',
+            url: 'profile/delete-rent-profile',
             method: 'POST',
             data: {
                 rentsId: rentsId,
