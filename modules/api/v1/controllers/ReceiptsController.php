@@ -92,12 +92,12 @@ class ReceiptsController extends Controller {
     
     /*
      * Получить квитанцию
-     * {"account": "1", "period": "2018-08"}
+     * {"account": "1", "period": "2018-09"}
      */
     public function actionGetReceiptPdf() {
         
         $data_post = Yii::$app->request->getBodyParams();
-        if (empty($data_post)) {
+        if (empty($data_post['account']) || empty($data_post['period'])) {
             return ['success' => false];
         }
         
