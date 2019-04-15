@@ -32,6 +32,7 @@ class NewsController extends AppDispatchersController {
                     [
                         'actions' => [
                             'create',
+                            'view',
                             'for-whom-news', 
                             'image-upload',
                             'file-delete',

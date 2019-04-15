@@ -53,9 +53,6 @@ class NewsForm extends Model {
             
             [['house', 'isPrivateOffice', 'isNotice', 'partner'], 'integer'],
             
-//            [['preview'], 'file', 'extensions' => 'png, jpg, jpeg'],
-//            [['preview'], 'image', 'maxWidth' => 510, 'maxHeight' => 510],
-            
             [['preview'], 'file',
                 'skipOnEmpty' => true,
                 'extensions' => 'png, jpg',
