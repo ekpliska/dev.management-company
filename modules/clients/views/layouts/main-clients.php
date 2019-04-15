@@ -3,7 +3,8 @@
     use yii\helpers\Html;
     use app\assets\AppAsset;
     use app\assets\ClientsAsset;
-    use yii\widgets\Breadcrumbs;
+    use app\modules\clients\widgets\NavMenu;
+    use app\modules\clients\widgets\AlertsShow;
 
 AppAsset::register($this);
 ClientsAsset::register($this);
@@ -28,8 +29,16 @@ ClientsAsset::register($this);
     <div class="wrap">
         <?php $this->beginContent('@app/modules/clients/views/layouts/header.php') ?>
         <?php $this->endContent() ?>        
-        <div class="container">            
-            <?= $content ?>
+        <div class="container container-full-client">
+            <div class="row content">
+                <div class="col-lg-2 col-md-3 col-sm-3 hidden-xs menu-clients">
+                    <?= NavMenu::widget() ?>
+                </div>
+                <div class="col-lg-10 col-md-9 col-sm-9 col-xs-12 content-clients">
+                    <?= AlertsShow::widget() ?>
+                    <?= $content ?>
+                </div>
+            </div>
         </div>
     </div>
 

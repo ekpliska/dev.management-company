@@ -1,0 +1,336 @@
+/*
+ * Media Clients CSS style
+ * 29-03-2019
+*/
+
+/* Content */
+@media screen and (max-width: 1200px) {
+    .wrap > .container-full-client {
+        margin-top: 90px;
+    }
+}
+@media screen and (max-width: 997px) {
+    .wrap > .container-full-client {
+        margin-top: 80px;
+    }
+}
+/* End Content */
+
+/* NavBar */
+@media screen and (max-width: 1200px) {
+    .container-fluid {
+        padding: 10px;
+    }
+    .navbar-brand > img {
+        margin: 5px -20px;
+        width: 140px;
+    }
+    .select-current-account {
+        width: 170px;
+    }
+    .account-balance {
+        margin-top: 20px;
+        font-size: 12px;
+    }
+    .account-balance > span.minus {
+        padding: 5px 10px;
+        border-radius: 25px;
+        background-color: #ff1760;
+        color: #fff;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        font-size: 11px;
+    }
+    .user-profile__photo {
+        width: 50px;
+        height: 50px;
+        margin: 10px 0;
+    }
+    .navbar_user-block__info > p {
+        font-size: 12px;
+    }
+}
+@media screen and (max-width: 991px) {
+    .navbar-menu {
+        box-shadow: none;
+    }
+    .account-balance {
+        margin: 20px 10px 0;
+        padding: 5px 25px 5px 10px;
+    }
+    .account-balance > span.minus {
+        padding: 6px 10px;
+        right: -10px;
+    }
+    .user-profile__photo {
+        width: 40px;
+        height: 40px;
+        border: 2px solid #fff;
+    }
+    .notification__dropdown button {
+        margin: 5px 10px;
+    }
+}
+@media screen and (max-width: 830px) {
+    .notification__dropdown button {
+        margin: 5px;
+    }
+    li.account-info {
+        padding: 0 10px;
+    }
+    .account-balance {
+        margin: 15px 5px 0;
+    }
+    .list-account__title,
+    .select-current-account {
+        font-size: 11px;
+    }
+    .navbar_user-block__info {
+        padding: 10px 10px;
+    }
+    .notification__dot {
+        top: 20%;
+        right: 25%;
+    }
+}
+@media screen and (max-width: 768px) {
+    .navbar-brand > img {
+        margin: 0;
+    }
+    .select-current-account {
+        width: 100%;
+    }
+    .list-account__title {
+        text-align: right;
+    }
+    .account-balance > span.minus {
+        padding: 6px 18px;
+        right: 0px;
+    }
+    .navbar_mobile {
+        display: unset;
+    }
+    #elsaNavbar {
+        min-height: 420px;
+    }
+    .wrap > .container-full-client {
+        margin-top: 60px;
+    }
+}
+/* End NavBar */
+
+/* General Page */
+@media screen and (max-width: 1400px) {
+    .client-page__services > div[class*="col-"] > div {
+        height: 370px;
+    }
+    .service-item > div {
+        /*width: 50% !important;*/
+        width: 50%;
+    }
+    .service-item__content p {
+        font-size: 13px;
+    }
+}
+@media screen and (max-width: 1270px) {
+    .client-page__services > div[class*="col-"] > div {
+        height: 430px;
+    }
+    .service-item {
+        display: grid;
+    }
+    .service-item > div:first-child {
+        width: 100%;
+        min-height: 50%;
+        /*height: 170px;*/
+    }
+    .service-item > div:last-child {
+        width: 100%;
+    }
+    .service-item__image > img {
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+        border-bottom-left-radius: 0;
+    }
+}
+@media screen and (max-width: 1200px) {
+    .client-page__services > div[class*="col-"] > div {
+        height: 470px;
+    }
+}
+@media screen and (max-width: 991px) {
+    .client-page__services > div[class*="col-"] > div {
+        height: 570px;
+    }
+}
+/* End General Page */
+
+/* Paid-services page */
+@media screen and (max-width: 991px) {
+    .service-card__body p {
+        font-size: 13px;
+    }
+}
+@media screen and (max-width: 768px) {
+    .cost_service {
+        font-size: 14px;
+        bottom: 3%;
+    }
+    .card-link-blue {
+        width: 120px;
+    }
+}
+/* End Paid-services page */
+
+/* Vote Page */
+@media screen and (max-width: 1200px) {
+    .table-voting-results > tbody > tr > td > h4, 
+    .questions-text-show > h4 {
+        font-size: 16px;
+    }
+    .table-voting-results > tbody > tr > td > h4 > i, 
+    .questions-text-show > h4 > i {
+        padding: 7px;
+    }
+    .table-voting-results > tbody > tr > td p.title {
+        font-size: 14px;
+    }
+}
+@media screen and (max-width: 1199px) {
+    .vote-card_title {
+        height: 66px;
+    }
+    .vote-card_title i {
+        padding: 20px;
+    }
+}
+@media screen and (max-width: 991px) {
+    .vote-card_date-end {
+        font-size: 11px;
+        padding: 10px;
+    }
+    .voting-body_right {
+        padding: 10px 15px 10px 0;
+    }
+}
+@media screen and (max-width: 768px) {
+    .vote-card_date-end {
+        width: 180px;
+        padding: 10px;
+        font-size: 10px;
+        left: 22%;
+    }
+    .vote-card_title a {
+        font-size: 14px;
+    }
+    .vote-card_text {
+        font-size: 12px;
+    }
+    .voting-title-block h2 {
+        font-size: 22px;
+    }
+    .voting-info {
+        display: grid;
+    }
+    .voting-info span {
+        margin: 10px;
+    }
+    .btn-set-voting {
+        padding: 15px 0 !important;
+    }
+}
+@media screen and (max-width: 680px) {
+    .btn-group > .btn {
+        width: 130px;
+        font-size: 10px  !important;
+    }
+}
+@media screen and (max-width: 550px) {
+    .vote-card-img {
+        height: 255px;
+    }
+    .vote-card_date-end {
+        width: 200px;
+        font-size: 10px;
+        left: 30%;
+        top: 30%;
+    }
+    .vote-card_text {
+        height: 133px;
+    }
+    .register-in-voting {
+        padding: 12px 20px;
+    }
+}
+@media screen and (max-width: 480px) {
+    .btn-group > .btn {
+        width: 100px;
+        font-size: 10px  !important;
+    }
+}
+@media screen and (max-width: 400px) {
+    .vote-card_date-end {
+        left: 20%;
+    }
+    .vote-card_title i {
+        padding: 15px;
+    }
+    .vote-card_text {
+        font-size: 12px;
+    }
+    [class*="col-"] {
+        font-size: 12px;
+    }
+    .vote-card_title {
+        height: 56px;
+    }
+    .vote-card_title a {
+        font-size: 14px;
+    }
+    p.date-start-vote {
+        font-size: 10px;
+        padding: 0;
+    }
+}
+/* End Vote Page */
+
+/* Slider */
+@media screen and (max-width: 1200px) {
+    .counters-item > .item {
+        padding: 3px 10px;
+    }
+    .client-page__top > div[class*="col-"] > div {
+        height: 370px;
+    }
+}
+@media screen and (max-width: 768px) {
+    .client-page__top > div[class*="col-"] > div {
+        height: 330px;
+    }
+}
+@media screen and (max-width: 370px) {
+    .client-page__top > div[class*="col-"] > div {
+        height: 360px;
+    }
+}
+/* End Slider */
+
+/* Profila settings */ 
+@media screen and (max-width: 991px) {
+    .spam-agree-txt label:before {
+        width: 20px !important;
+        height: 20px !important;
+        margin-left: -24px !important;
+    }
+    .spam-agree-txt label {
+        font-size: 12px !important;
+    }
+}
+@media screen and (max-width: 768px) {
+    .profile-settings__photo {
+        width: 120px;
+        height: 120px;
+    }
+}
+/* End Profila settings */

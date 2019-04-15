@@ -18,7 +18,7 @@
 $array_url = [
     'administrator' => [
         'label' => 'Администраторы',
-        'url' => 'managers/index',
+        'url' => 'employees/administrators',
     ],
     'dispatcher' => [
         'label' => 'Диспетчеры',

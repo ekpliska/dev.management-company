@@ -54,10 +54,16 @@ class NewsForm extends Model {
             
             [['house', 'isPrivateOffice', 'isNotice', 'partner'], 'integer'],
             
-            [['preview'], 'file', 'extensions' => 'png, jpg, jpeg'],
-            [['preview'], 'image', 'maxWidth' => 510, 'maxHeight' => 510],
+            [['preview'], 'file',
+                'skipOnEmpty' => true,
+                'extensions' => 'png, jpg',
+                'maxSize' => 10 * 1024 * 1024,
+                'mimeTypes' => 'image/*',
+            ],
             
-            [['files'], 'file', 'extensions' => 'doc, docx, pdf, xls, xlsx, ppt, pptx, txt', 'maxFiles' => 4],
+            [['files'], 'file', 
+                'extensions' => 'doc, docx, pdf, xls, xlsx, ppt, pptx, png, jpg, jepg', 
+                'maxFiles' => 4],
             
             [['partner', 'isAdvert'], 'integer'],
             
@@ -96,8 +102,6 @@ class NewsForm extends Model {
             $add_news->news_user_id = Yii::$app->user->identity->id;
             // Сохраняем превью публикации
             $add_news->uploadImage($file);
-            // Сохраняем прикрепленные изображения
-            $add_news->uploadFiles($files);
             
             $add_news->isPrivateOffice = isset($this->isNotice[0]) ? News::NOTICE_YES : News::NOTICE_NO;
             $add_news->isEmail = isset($this->isNotice[1]) ? News::NOTICE_YES : News::NOTICE_NO;
@@ -113,13 +117,13 @@ class NewsForm extends Model {
             
             if(!$add_news->save()) {
                 throw new \yii\db\Exception('Ошибка добавления новости. Ошибка: ' . join(', ', $add_news->getFirstErrors()));
-//                return ['error' => join(', ', $add_news->getFirstErrors())];
             }
             
-            
+            // Сохраняем прикрепленные изображения
+            $add_news->uploadFiles($files);
             $transaction->commit();
             
-            return $add_news->slug;
+            return $add_news;
             
         } catch (Exception $ex) {
             $transaction->rollBack();

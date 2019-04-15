@@ -4,6 +4,7 @@
     use Yii;
     use yii\data\Pagination;
     use yii\web\UploadedFile;
+    use yii\helpers\Url;
     use app\modules\dispatchers\controllers\AppDispatchersController;
     use app\models\Houses;
     use app\modules\dispatchers\models\searchForm\searchNews;
@@ -31,6 +32,7 @@ class NewsController extends AppDispatchersController {
                     [
                         'actions' => [
                             'create',
+                            'view',
                             'for-whom-news', 
                             'image-upload',
                             'file-delete',
@@ -54,13 +56,13 @@ class NewsController extends AppDispatchersController {
             
             'image-upload' => [
                 'class' => 'vova07\imperavi\actions\UploadFileAction',
-                'url' => 'http://dev.management-company/web/upload/news', // Directory URL address, where files are stored.
+                'url' => Url::base() . '/web/upload/news', // Directory URL address, where files are stored.
                 'path' => '@webroot/upload/news', // Or absolute path to directory where files are stored.
             ],
             
             'file-delete' => [
                 'class' => 'vova07\imperavi\actions\DeleteFileAction',
-                'url' => 'http://dev.management-company/web/upload/news', // Directory URL address, where files are stored.
+                'url' => Url::base() . '/web/upload/news', // Directory URL address, where files are stored.
                 'path' => '/var/www/my-site.com/dev.management-company/web/upload/news', // Or absolute path to directory where files are stored.
             ],            
          
@@ -130,7 +132,7 @@ class NewsController extends AppDispatchersController {
             $slug = $model->save($file, $files);            
             if ($slug) {
                 Yii::$app->session->setFlash('success', ['message' => 'Новость была успешно создана']);
-                return $this->redirect(['view', 'slug' => $slug]);
+                return $this->redirect(['view', 'slug' => $slug->slug]);
             } else {
                 Yii::$app->session->setFlash('error', ['message' => 'Извините, при обработке запроса произошел сбой. Попробуйте обновить страницу и повторите действие еще раз']);
                 return $this->redirect(Yii::$app->request->referrer);

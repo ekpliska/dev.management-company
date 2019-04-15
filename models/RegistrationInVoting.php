@@ -4,6 +4,7 @@
     use Yii;
     use yii\db\ActiveRecord;
     use app\models\SmsSettings;
+    use app\models\User;
 
 /**
  * Регистрация в голосованиии

@@ -48,6 +48,7 @@ class UserProfile extends BaseObject {
                         . 'u.created_at as date_created , u.last_login as last_login, '
                         . 'u.status as status, '
                         . 'pa.account_number as account,'
+                        . 'pa.account_balance as balance,'
                         . 'f.flats_id as flat_id,'
                         . 'f.flats_id as flat_id,'
                         . 'h.houses_id as house_id')
@@ -193,28 +194,36 @@ class UserProfile extends BaseObject {
      */
     public function getSecondName() {
         return $this->_user['second_name'];
-    }       
+    }
+    
+    /*
+     * Баланс текущего лицевого счета
+     */
+    public function getBalance() {
+        return $this->_user['balance'];
+    }
     
     /*
      * Фамилия имя отчество Собственника/Аренедтора
      * Формат: Фамилия Имя Отчество $full = false
      * Формат: Фамилия И.О. $full = true
      */
-    public function getFullNameClient($full = true) {
+    public function getFullNameClient($full = true, $off_secondname = false) {
+        
         $_name = $full ? $this->_user['name'] . ' ' : mb_substr($this->_user['name'], 0, 1, 'UTF-8') . '. ';
         $_second_name = $full ? $this->_user['second_name'] : mb_substr($this->_user['second_name'], 0, 1, 'UTF-8') . '. ';
         return $this->_user['surname'] . ' ' . $_name . $_second_name;
     }
     
     /*
-     * Мобальный телефон Собственника/Аренедтора
+     * Мобильный телефон Собственника/Арендатор
      */
     public function getMobile() {
         return $this->_user['user_mobile'];
     }
     
     /*
-     * Дополнительный телефон Собственника/Аренедтора
+     * Дополнительный телефон Собственника/Арендатор
      */
     public function getOtherPhone() {
         return $this->_user['phone'];

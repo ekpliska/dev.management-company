@@ -27,13 +27,13 @@
             [
                 'header' => 'Фамилия <br /> имя отчество',
                 'value' => function ($data) {
-                    return $data['employee_surname'] . ' ' .
-                            $data['employee_name'] . ' ' .
-                            $data['employee_second_name'];
+                    return Html::a("{$data['employee_surname']} {$data['employee_name']} {$data['employee_second_name']}",
+                        ['employee-form/employee-profile', 'type' => 'dispatcher', 'employee_id' => $data['employee_id']]);
                 },
                 'contentOptions' => [
                     'class' => 'managers-managers-table_big managers-table_left',
                 ],
+                'format' => 'raw',
             ],            
             [
                 'attribute' => 'department_name',
@@ -60,22 +60,8 @@
                 'contentOptions' =>[
                     'class' => 'managers-table_middle managers-table_button',
                 ],
-                'template' => '{edit-dispatcher} {delete-dispatcher}',
+                'template' => '{delete-dispatcher}',
                 'buttons' => [
-                    'edit-dispatcher' => function ($url, $data) {                        
-                        return 
-                            Html::a('Просмотр', 
-                                    [
-                                        'employee-form/employee-profile',
-                                        'type' => 'dispatcher',
-                                        'employee_id' => $data['employee_id'],
-                                    ], 
-                                    [
-                                        'data-pjax' => false,
-                                        'class' => 'btn btn-sm btn-edit-in-table',
-                                    ]
-                            );
-                    },
                     'delete-dispatcher' => function ($url, $data) {
                         $full_name = $data['employee_surname'] . ' ' . $data['employee_name'] . ' ' . $data['employee_second_name'];
                         return 

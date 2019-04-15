@@ -173,31 +173,30 @@ class News extends ActiveRecord
      * Формирование списка новостей для конечного пользователя
      * 
      * @param array $living_space
-     *      $living_space['estate_id'] ID ЖК
      *      $living_space['houses_id'] ID Дома
-     *      $living_space['flats_id'] ID Квартиры
-     *      $living_space['flats_porch'] Номер подъезда
-     * 
-     * @param boolean $is_advert - Переключатель типа новостей (true - Реклама)
-     */
-    public static function getNewsByClients($living_space, $is_advert = false) {
+    */
+    public static function getNewsByClients($living_space, $rubric = null) {
         
         if ($living_space == null) {
             return $news = [];
         }
         
         $news = self::find()
-                ->select(['news_id', 'news_title', 'news_type_rubric_id', 'news_partner_id', 'news_preview', 'news_text', 'created_at', 'slug', 'rubrics_name', 'isAdvert', 'partners_name'])
+                ->select([
+                    'news_id', 
+                    'news_title', 'news_type_rubric_id', 
+                    'news_partner_id', 'news_preview', 
+                    'news_text', 
+                    'created_at', 
+                    'slug', 'rubrics_name', 'isAdvert', 'partners_name', 'partners_logo'])
                 ->joinWith(['rubric', 'partner'])
-                ->andWhere([
-                    'news_house_id' => $living_space['houses_id'],
-                    'isAdvert' => $is_advert,
-                ])
-                ->orWhere([
-                    'news_status' => 'all',
-                    'isAdvert' => $is_advert,
-                ])
+                ->andWhere(['news_house_id' => $living_space['houses_id']])
+                ->orWhere(['news_status' => 'all'])
                 ->orderBy(['created_at' => SORT_DESC]);
+        
+        if ($rubric != null) {
+            $news->andWhere(['news_type_rubric_id' => $rubric]);
+        }
         
         return $news;
     }
@@ -236,7 +235,7 @@ class News extends ActiveRecord
      */
     public function uploadFiles($files) {
         
-        if ($this->validate() && $files) {
+        if ($files) {
             foreach ($files as $file) {
                 $file_name = $file->basename;                
                 $path = 'upload/store' . $file_name . '.' . $file->extension;

@@ -2,12 +2,10 @@
 
     use yii\helpers\Html;
     use yii\bootstrap\Modal;
-    use yii\widgets\Breadcrumbs;
     use app\helpers\FormatHelpers;
     use app\modules\clients\widgets\ModalWindows;
     use app\models\Voting;
     use app\models\Answers;
-    use app\modules\clients\widgets\AlertsShow;
     use app\models\RegistrationInVoting;
     use app\modules\clients\widgets\ResultsVote;
     use app\modules\clients\widgets\ChatVote;
@@ -16,17 +14,8 @@
  * Просмотр отдельного голосования
  */
 $this->title = Yii::$app->params['site-name'] . $voting['voting_title'];
-$this->params['breadcrumbs'][] = ['label' => 'Опрос', 'url' => ['voting/index']];
-$this->params['breadcrumbs'][] = $voting['voting_title'];
 $_answer = '';
 ?>
-
-<?= Breadcrumbs::widget([
-        'homeLink' => ['label' => 'ELSA', 'url' => ['clients/index']],
-        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-]) ?>
-
-<?= AlertsShow::widget() ?>
 
 <div class="view-voting row">
     <div class="preview-voting">
@@ -75,7 +64,7 @@ $_answer = '';
                 <?php foreach ($participants as $participant) : ?>
                     <div class="col-lg-4 col-md-4 col-sm-2 col-xs-2 voting__participant_info text-center">
                         <?php $avatar = $participant['user_photo'] ? $participant['user_photo'] : "/images/no-avatar.jpg" ?>
-                        <?= Html::img(Yii::getAlias('@web') . $avatar, ['alt' => 'user-name', 'class' => 'img-responsive img-circle']) ?>
+                        <?= Html::img(Yii::getAlias('@web') . $avatar, ['alt' => 'user-name', 'class' => 'img-circle user-finish-vote']) ?>
                         <?= Html::a($participant['clients_name'], ['view-profile', 'user_id' => $participant['user_id']], [
                                     'id' => 'view-profile',
                             ]) ?>

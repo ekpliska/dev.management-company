@@ -13,6 +13,7 @@ class ManagersAsset extends AssetBundle {
     public $baseUrl = '@web';
     
     public $css = [
+//        'css/managers/main.css',
         'css/managers/managers-style.css',
         'css/managers/media-managers.css',
         'css/form-style_manager.css',

@@ -96,7 +96,10 @@ legend {
 }
 .error-summary > ul {
     list-style: none;
-    padding: 10px 0;
+    padding: 10px 0 0 0;
+    font-size: 12px;
+    color: #ff7d7d;
+    margin: 0;
 }
 .circle-btn-block {
     margin-top: 7%;

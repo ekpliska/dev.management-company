@@ -2,6 +2,7 @@
 
     namespace app\modules\clients\controllers;
     use Yii;
+    use yii\web\Response;
     use yii\web\UploadedFile;
     use yii\widgets\ActiveForm;
     use app\modules\clients\controllers\AppClientsController;
@@ -13,6 +14,9 @@
     use app\modules\clients\models\ChangeMobilePhone;
     use app\models\SmsOperations;
     use app\modules\clients\models\form\SMSForm;
+    use app\modules\clients\models\form\NewAccountForm;
+    use app\models\PaidServices;
+    use app\models\CommentsToCounters;
     
     
 
@@ -32,122 +36,90 @@ class ProfileController extends AppClientsController
     public function actionIndex() {
         
         $user_info = $this->permisionUser();
+        $user = $user_info->_model;
         
-        if (Yii::$app->user->can('clients')) {
-            return $this->client($user_info);
-        } else {
-            return $this->rent($user_info);
-        }
+        $accoint_id = $this->_current_account_id;
         
-    }
-    
-    /*
-     * Метод обновления профиля пользователя
-     */
-    public function actionUpdateProfile() {
-
-        if (Yii::$app->request->isPost) {
-            // Если пришел из пост статуса о существующем Арендаторе
-            if (isset($_POST['is_rent'])) {
-                // Загружаем модель пользователя
-                $user_info = $this->permisionUser()->_model;
-                $data_rent = Yii::$app->request->post('Rents');
-                $rent_info = Rents::find()->where(['rents_id' => $data_rent['rents_id']])->one();
-                
-                if ($user_info->load(Yii::$app->request->post()) && $rent_info->load(Yii::$app->request->post())) {
-                    
-                    $is_valid = $user_info->validate();
-                    $is_valid = $rent_info->validate() && $is_valid;
-
-                    
-                    if ($is_valid) {
-                        // Сохраняем профиль Собственника
-                        $file = UploadedFile::getInstance($user_info, 'user_photo');
-                        $user_info->uploadPhoto($file);
-                        
-                        // Сохраняем профиль Арендатора
-                        $rent_info->save();
-
-                        Yii::$app->session->setFlash('success', ['message' => 'Ваш профиль был успешно обновлен']);
-                        return $this->redirect(Yii::$app->request->referrer);
-                        
-                    }
-                    Yii::$app->session->setFlash('error', ['message' => 'Ошибка обновления профиля. Обновите страницу и повторите действие заново']);
-                    return $this->redirect(Yii::$app->request->referrer);                    
+        $account_info = PersonalAccount::getAccountInfo($accoint_id, $user_info->clientID);
+        
+        // Загружаем модель добавления нового лицевого счета
+        $model = new NewAccountForm();
+        
+        // Загружаем модель добаления нового арендатора
+        $add_rent = new ClientsRentForm(['scenario' => ClientsRentForm::SCENARIO_AJAX_VALIDATION]);
+        // Данные Арендатора
+        $rent_info = Rents::find()->where(['rents_id' => $account_info['personal_rent_id']])->one();
+        if ($rent_info) {
+            if ($rent_info->load(Yii::$app->request->post()) && $rent_info->validate()) {
+                if (!$rent_info->save()) {
+                    Yii::$app->session->setFlash('error', ['message' => 'При обновлении данных арендатора произошла ошибка. Обновите страницу и повторите действие заново']);
+                    return $this->redirect('index');
                 }
-            } else {
-                // иначе сохраняем только профиль пользователя
-                $user_info = $this->permisionUser()->_model;
-                if ($user_info->load(Yii::$app->request->post()) && $user_info->validate()) {
-                    $file = UploadedFile::getInstance($user_info, 'user_photo');
-                    $user_info->uploadPhoto($file);
-                    Yii::$app->session->setFlash('success', ['message' => 'Ваш профиль был успешно обновлен']);
-                    return $this->redirect(Yii::$app->request->referrer);
-                }
+                Yii::$app->session->setFlash('success', ['message' => 'Личная информация вашего арендатора была успешно обновлена']);
+                return $this->redirect(Yii::$app->request->referrer);
             }
         }
         
-        Yii::$app->session->setFlash('error', ['message' => 'Ошибка обновления профиля. Обновите страницу и повторите действие заново']);
-        return $this->redirect(Yii::$app->request->referrer);
+        // Полуаем данные по платежам, по текущему лиыевому счету
+        $payment_history = $this->getPaymentsHistory();
+        // Полуаем данные по приблрам учета, по текущему лицевому счету
+        $counters_indication = $this->getCountersIndication();
+        
+        return $this->render('index', [
+            'user' => $user,
+            'account_info' => $account_info,
+            'model' => $model,
+            'add_rent' => $add_rent,
+            'rent_info' => $rent_info,
+            'payment_history' => $payment_history,
+            'counters_indication' => $counters_indication,
+        ]);
+        
     }
     
     /*
-     * Смена выбора текущего лицевого счета
-     * Текущий лицевой счет устанавливается в БД, как статус STATUS_CURRENT
-     * dropDownList Лицевой счет
+     * Валидация формы добавления лицевого счета
      */
-    public function actionCheckAccount() {
-
-        // Из пост запроса получаем ID лицевого счета и собственника
-        $current_account_id = Yii::$app->request->post('currentAccount');
-        $new_current_account_id = Yii::$app->request->post('newCurrentAccount');
-        $client_id = Yii::$app->userProfile->clientID;
-        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+    public function actionValidateForm($form) {
         
-        if (Yii::$app->request->isAjax) {
-            $change_account = PersonalAccount::changeCurrentAccount($current_account_id, $new_current_account_id);
-            // Ищем арендатора, закрепленного за указанным лицевым счетом
-            $model = PersonalAccount::findByRent($new_current_account_id, $client_id);
-            
-            // Если арендатор существует, генерирурем для него модель
-            if (!empty($model->personal_rent_id)) {
-                $model_rent = Rents::findOne(['rents_id' => $model->personal_rent_id]);
-                if ($model_rent) {
-                    $this->_is_rent = true;
-                }
-            } else {
-                $model_rent = [];
+        if ($form == null) {
+            throw new NotFoundHttpException('Ошибка передачи параметров. Вы обратились к несуществующей странице');
+        }
+        
+        switch ($form) {
+            case 'NewAccountForm':
+                $model = new NewAccountForm();
+                break;
+        }
+        
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return \yii\widgets\ActiveForm::validate($model);
+        }
+        
+    }    
+    
+    /*
+     * Создание лицевого счета Собсвенника
+     */
+    public function actionCreateAccount() {
+        
+        $model = new NewAccountForm();
+        
+        // Получаем текущий лицевой счет
+        $old_account_id = $this->_current_account_id;
+        
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            if ($model->createAccount($old_account_id)) {
+                Yii::$app->session->setFlash('success', ['message' => 'Лицевой счет был успешно создан']);
+                return $this->redirect('index');
             }
-            
-            $data = $this->renderPartial('_form/rent-view', [
-                'form' => ActiveForm::begin(),
-                'model_rent' => $model_rent, 
-            ]);
-           
-            return ['status' => true, 'data' => $data, 'is_rent' => $this->_is_rent];
-            
         }
-        return ['status' => false];
         
+        Yii::$app->session->setFlash('error', ['message' => 'При создании лицевого счета произошла ошибка. Обновите страницу и повторите действие заново']);
+        return $this->redirect('index');
     }
     
-    /*
-     * Проверка наличия арендатора у лицевого счета
-     * AJAX запрос при клике на переключатель Арендатор
-     */
-    public function actionCheckIsRent($account) {
-        
-        $client_id = Yii::$app->userProfile->clientID;
-        if (Yii::$app->request->isPost) {
-            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;            
-            $is_rent = PersonalAccount::findByRent($account, $client_id);
-            $is_rent = $is_rent ? true : false;
-            return ['success' => true, 'is_rent' => $is_rent];
-        }
-        return ['success' => false];
-    }
-    
-
     /*
      * Удаление учетной записи арендатора с портала
      */
@@ -169,10 +141,102 @@ class ProfileController extends AppClientsController
     }
     
     /*
+     * Проверка валидации формы добавление нового Арендатора
+     */
+    public function actionValidateRentForm() {
+        
+        $model = new ClientsRentForm();
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return \yii\widgets\ActiveForm::validate($model);
+        }
+    }
+    
+    /*
+     * Добавление учетной записи Арендатора
+     */
+    public function actionCreateRentForm($client) {
+        
+        $account = $this->_current_account_id;
+        
+        if ($client == null || $account == null) {
+            return 'Ошибка отправки формы';
+        }
+        
+        $model = new ClientsRentForm(['scenario' => ClientsRentForm::SCENARIO_AJAX_VALIDATION]);
+        
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            if (!$model->saveRentToUser($client, $account)) {
+                Yii::$app->session->setFlash('error', ['message' => 'Ошибка добавления арендатора. Обновите страницу и повторите действие заново']);
+                return $this->redirect(Yii::$app->request->referrer);
+            }
+            Yii::$app->session->setFlash('success', ['message' => 'Учетная запись арендатора была успешно создана']);
+            return $this->redirect(Yii::$app->request->referrer);
+        }
+        
+    }
+    
+    
+    /*
+     * Получить историю платежей по текущему лицевому счету
+     * Для вкладки "Платежи", Профиль пользователя
+     */
+    private function getPaymentsHistory() {
+        
+        // Получить номер текущего лицевого счета
+        $account_number = $this->_current_account_number;
+        // Получаем номер текущего месяца и год
+        $current_period = date('Y-m-d');
+        
+        $array_request = [
+            'Номер лицевого счета' => $account_number,
+            'Период начало' => null,
+            'Период конец' => $current_period,
+        ];
+        
+        $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
+        
+        $payments_lists = Yii::$app->client_api->getPayments($data_json);
+        
+        return $payments_lists;
+        
+    }
+    
+    /*
+     * Получить теукщие показания приборов учета
+     * по текущему лицевому счету
+     * Для вкладки "Приборы учета", Профиль пользователя
+     */
+    private function getCountersIndication() {
+        
+        $account_id = $this->_current_account_id;
+        $account_number = $this->_current_account_number;
+        
+        // Получаем список зявок сформированных автоматически на поверу приборов учета
+        $auto_request = PaidServices::notVerified($account_id);
+        
+        // Получаем комментарии по приборам учета Собсвенника. Комментарий формирует Администратор системы
+        $comments_to_counters = CommentsToCounters::getComments($account_id);
+
+        // Формируем запрос для текущего расчетного перирода
+        $array_request = [
+            'Номер лицевого счета' => $account_number,
+            'Номер месяца' => date('m'),
+            'Год' => date('Y'),
+        ];
+        
+        $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
+        $indications = Yii::$app->client_api->getPreviousCounters($data_json);
+        
+        return $indications;
+        
+    }
+    
+    /*
      * Раздел - Настройки профиля
      * @param array $model_password Модель смены пароля учетной записи
      */
-    public function actionSettingsProfile() {
+    public function actionSettings() {
         
         // Проверяем время существования куки
         $this->hasCookieSMS();
@@ -209,11 +273,16 @@ class ProfileController extends AppClientsController
         }
         
         if ($user->load(Yii::$app->request->post()) && $user->validate()) {
-            $user->save();
+            $file = UploadedFile::getInstance($user, 'user_photo');
+            if (!$user->uploadPhoto($file)) {
+                Yii::$app->session->setFlash('error', ['message' => 'Ошибка оновления профиля. Обновите страницу и повторите действие заново']);
+                return $this->redirect(Yii::$app->request->referrer);
+            }
+            Yii::$app->session->setFlash('success', ['message' => 'Настройки профиля были успешно обновлены']);
             return $this->refresh();
         }
 
-        return $this->render('settings-profile', [
+        return $this->render('settings', [
             'user_info' => $user_info,
             'user' => $user,
             'model_password' => $model_password,
@@ -253,113 +322,13 @@ class ProfileController extends AppClientsController
         if ($sms_model->load(Yii::$app->request->post()) && $sms_model->validate()) {
             $sms_model->changeUserInfo($type);
             Yii::$app->session->setFlash('success', ['message' => 'Настройки профиля были успешно обновлены']);
-            return $this->redirect(['profile/settings-profile']);
+            return $this->redirect(['profile/settings']);
         }
         Yii::$app->session->setFlash('error', ['message' => 'Ошибка сохранения настроек профиля. Обновите страницу и повторите действие заново']);
-        return $this->redirect(['profile/settings-profile']);
+        return $this->redirect(['profile/settings']);
         
     }
     
-    /*
-     * Метод формирования вывода Профиля Собственника
-     * 
-     * @param array $user_info Информация текущем пользователе (Пользователь + Собственник)
-     * @param model $_user['user'] Модель Пользователь
-     * @param integer $accoint_id Значение ID лицевого счета из глобального dropDownList (хеддер)
-     * @param array $accounts_list Получить список всех лицевых счетов закрепленны за Собственником
-     * @param array $accounts_list_rent Получить все лицевые счета не связанные с Арендатором
-     */
-    protected function client($user_info) {
-        
-        $accoint_id = $this->_current_account_id;
-        $accounts_list = $this->_lists;
-        
-        $model = $user_info->_model;
-        $model->scenario = User::SCENARIO_EDIT_PROFILE;
-        
-        // Получить информацию по текущему лицевому счету
-        $accounts_info = PersonalAccount::findByAccountID($accoint_id);
-        
-        /* Если у текущего лицевого счета есть арендатор, передаем в глабальный параметр _is_rent значение true;
-         * Если у текущего лицевого счета арендатора нет, то формируем модель на добавление нового Арендатора
-         */
-        if (!empty($accounts_info->personal_rent_id)) {
-            $this->_is_rent = true;
-            $model_rent = Rents::findOne(['rents_id' => $accounts_info->personal_rent_id]);
-            
-            return $this->render('index', [
-                'user' => $model,
-                'user_info' => $user_info,
-                'accounts_list' => $accounts_list,
-                'is_rent' => $this->_is_rent,
-                'accounts_info' => $accounts_info,
-                'model_rent' => $model_rent,
-            ]);
-        } else {
-            $this->_is_rent = false;
-            $model_rent = null;
-            $add_rent = new ClientsRentForm(['scenario' => ClientsRentForm::SCENARIO_AJAX_VALIDATION]);
-        
-            return $this->render('index', [
-                'user' => $model,
-                'user_info' => $user_info,
-                'accounts_list' => $accounts_list,
-                'is_rent' => $this->_is_rent,
-                'accounts_info' => $accounts_info,
-                'add_rent' => $add_rent,
-            ]);
-        }
-        
-    }
-    
-    /*
-     * Метод формирования вывода Профиля Арендатора
-     */
-    protected function rent($user_info) {
-        
-        $model = $user_info->_model;
-        $accounts_list = $this->_lists;
-        
-        return $this->render('index', [
-            'user' => $model,
-            'user_info' => $user_info,
-            'accounts_list' => $accounts_list,
-        ]);
-        
-    }
-    
-    /*
-     * Проверка валидации формы добавление нового Арендатора
-     */
-    public function actionValidateRentForm() {
-        
-        $model = new ClientsRentForm();
-        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
-            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-            return \yii\widgets\ActiveForm::validate($model);
-        }
-    }
-    
-    /*
-     * Добавление учетной записи Арендатора
-     */
-    public function actionCreateRentForm($client) {
-        
-        $account = $this->_current_account_id;
-        
-        if ($client == null || $account == null) {
-            return 'Ошибка отправки формы';
-        }
-        
-        $model = new ClientsRentForm(['scenario' => ClientsRentForm::SCENARIO_AJAX_VALIDATION]);
-        
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            $model->saveRentToUser($client, $account);
-            return $this->redirect(['profile/index']);
-        }
-        
-    }
-
     /*
      * Установка времени куки для СМС операций
      */
@@ -405,7 +374,7 @@ class ProfileController extends AppClientsController
         $_record = SmsOperations::deleteOperation($value);
         // Удаляем куку
         Yii::$app->response->cookies->remove('_time');
-        return $this->redirect(['profile/settings-profile']);
+        return $this->redirect(['profile/settings']);
     }
     
     /*

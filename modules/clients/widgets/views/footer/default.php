@@ -22,7 +22,10 @@
             </div>
             <div class="footer__help-block">
                 <h3 class="footer_title">Нужна помощь?</h3>
-                <?= Html::a('Ответы на часто задаваемые вопросы', ['/'], ['class' => 'footer_hepl-link']) ?>
+                <?= Html::button('Ответы на часто задаваемые вопросы', [
+                        'data-target' => '#faq-modal',
+                        'data-toggle' => 'modal',
+                        'class' => 'footer_hepl-link']) ?>
             </div>
         </div>
         <div class="col-xs-12 col-sm-8 col-md-4">
@@ -83,3 +86,5 @@
     </div>
 </div>
 <?php endif; ?>
+
+<?= $this->render('data/help-data', ['faq_info' => $faq_info]) ?>

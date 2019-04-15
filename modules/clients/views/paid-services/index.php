@@ -1,28 +1,18 @@
 <?php
     
     use yii\bootstrap\Modal;
-    use yii\widgets\Breadcrumbs;
-    use app\modules\clients\widgets\AlertsShow;
+    use app\modules\clients\widgets\SubBarPaidService;
     
 /* 
  * Платные заявки (Заказать услугу)
  */
 $this->title = Yii::$app->params['site-name'] . 'Услуги';
-$this->params['breadcrumbs'][] = 'Услуги';
 ?>
 
 <div class="paid-requests-page">
-    
-    <?= Breadcrumbs::widget([
-            'homeLink' => ['label' => 'ELSA', 'url' => ['clients/index']],
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-    ]) ?>
-    
-    <?= AlertsShow::widget() ?>
-    
+    <?= SubBarPaidService::widget() ?>    
     <?= $this->render('data/service-lists', ['pay_services' => $pay_services]) ?>
 </div>
-
 
 <?php
     Modal::begin([
@@ -39,11 +29,3 @@ $this->params['breadcrumbs'][] = 'Услуги';
 ?>
     
 <?php Modal::end(); ?>
-
-<?php
-$this->registerCss("
-        .navbar-menu {
-            box-shadow: none;
-        }
-");
-?>

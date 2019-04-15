@@ -11,8 +11,9 @@
  */
 class SubBarPaidService extends Widget {
 
-    private $category_list;
-    
+    public $view_name = 'default';
+    private $category_list;    
+
     public function init() {
         
         if ($this->getNameSevices() == null) {
@@ -26,7 +27,9 @@ class SubBarPaidService extends Widget {
         
         $_search = new searchInPaidServices();
 
-        return $this->render('subbarpaidservice/default', ['category_list' => $this->getNameSevices(), '_search' => $_search]);
+        return $this->render('subbarpaidservice/' . $this->view_name, [
+            'category_list' => $this->getNameSevices(), 
+            '_search' => $_search]);
     }
     
     /*

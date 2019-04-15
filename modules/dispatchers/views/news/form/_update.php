@@ -5,7 +5,6 @@
     use yii\widgets\ActiveForm;
     use vova07\imperavi\Widget;
     use app\helpers\FormatHelpers;
-    use app\modules\managers\widgets\ModalWindowsManager;    
 
 /*
  * Форма редатирования новости
@@ -102,7 +101,10 @@
                 <thead>
                     <tr>
                         <th>
-                            <?= $form->field($model, 'files[]')->input('file', ['multiple' => true])->label() ?>
+                            <?= $form->field($model, 'files[]', [
+                                'template' => '<div class="file-upload"><button class="file-upload__btn"></button>{input}{label}</div>{error}'])
+                            ->input('file', ['multiple' => true, 'class' => 'file-upload__input'])
+                            ->label('Добавить вложения', ['class' => 'file-upload__label']) ?>
                         </th>
                     </tr>    
                 </thead>

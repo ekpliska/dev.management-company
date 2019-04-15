@@ -4,6 +4,43 @@
 
 $(document).ready(function() {
     
+    /*
+     * Настройки слайдера
+     */
+    $('.news-carousel').owlCarousel({
+        loop: true,
+        margin: 10,
+        nav: true,
+        items: 3,
+        dots: false,
+        navText: [
+            '<span class="glyphicon glyphicon-arrow-left slider-prev"></span>',
+            '<span class="glyphicon glyphicon-arrow-right slider-next"></span>'
+        ],
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 2,
+            },
+            1000: {
+                items: 2
+            },
+            1440: {
+                items: 3
+            }
+        }
+    });
+
+    $('.counters-carousel').owlCarousel({
+        loop: true,
+        margin: 10,
+        nav: true,
+        items: 1,
+        nav: false,
+    });
+    
     // ******************************************************** //
     // ************    Start Block of Profile    ************** //
     // ******************************************************** //
@@ -28,51 +65,20 @@ $(document).ready(function() {
         return false;
     });    
     
-    
-    $('input[name*=account-number]').val($('.current__account_list :selected').text());
-    
     /*
-     * Функция смены текущего лицевого счета,
-     * в личном кабинете пользователя
-     * @param {integer} currentValue ID текущего лицевого счета
-     * @param {integer} valueSelect ID выбранного лицевого счета
+     * Переключение текущего лицевого счета,
      */
-    function switchAccountNumber(currentValue, valueSelect) {
+    $('#switch-current-account').on('change', function() {
+        var valueSelect = $('#switch-current-account option:selected').val();
         $.ajax({
-            url: 'check-account',
+            url: '/clients/app-clients/check-account',
             data: {
-                currentAccount: currentValue,
                 newCurrentAccount: valueSelect,
             },
             dataType: 'json',
             type: 'POST',
-            success: function(response) {
-                if (response.is_rent) {
-                    $('#is_rent').prop('checked', true);
-                } else {
-                    $('#is_rent').prop('checked', false);
-                }                
-                $("#content-replace").html(response.data);
-            },
-            error: function() {
-                console.log('Error #1000-11');
-            }
-        });        
-    }
-    
-    /*
-     * Снять чекбокс Арендатор, если пользователь закрыл модальное окно "Новый арендатор"
-     */
-    $('.add-rent-modal__close').on('click', function() {
-        $('#is_rent').prop('checked', false);
-    });    
-
-    /*
-     * Обработка событий в модальном окне 'Дальнейшие действия с учетной записью арендатора'
-     * Закрыть модальное окно
-     */
-    $('.changes_rent__close').on('click', function() {
-        $('#is_rent').prop('checked', true);
+            success: function() {},
+        });
     });
     
     // Удалить данные арендатора из системы
@@ -84,28 +90,10 @@ $(document).ready(function() {
             data: {
                 rentsId: rentsId,
             },
-            success: function (response, textStatus, jqXHR) {
-//                console.log(textStatus);
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.log('Error #1000-03');                
-            },
+            success: function () {},
         });
     });
-    
-    /*
-     * Форма 'Добавить нового Арендатора'
-     */
-    /*
-     * При загрузке модального окна, получаем
-     * ID выбранного лицевого счета
-     */
-    $('#add-rent-modal').on('show.bs.modal', function(e) {
-        var accountId = $('#_list-account :selected').text();
-        $('#_personal-account').val(accountId);
-        $('.btn__add_rent', this).data('accountId', accountId);
-    });
-        
+           
     // Очистить поля ввода, клик по кнопкам 'Отмена', 'x'
     $('#add-rent-modal .add-rent-modal__close').on('click', function() {
         $('#add-rent input').val('');
@@ -125,6 +113,7 @@ $(document).ready(function() {
      * Смена номера мобильного телефона,
      * Снять атрибут, только для чтения
      * Кастомизация текстового поля
+     * Настройки профиля
      */
     $('.settings-input-phone').on('click', function(){
         $(this).prop('readOnly', false);
@@ -165,69 +154,6 @@ $(document).ready(function() {
         }
     });
     
-//    /*
-//     * Если в модальном окне "Новый арендатор" нажата нопка Отмена/х
-//     * Сбрасываем заполненный поля
-//     * Снимаем чекбокс Арендатор
-//     * Блокирем кнопку "Добавить арендатора"
-//     * 
-//     */
-//    $("#add-rent-modal .btn__modal_rent_close, .btn__modal_close").on("click", function() {
-//        $("#add-rent-modal input").val("");
-//        $("#add-rent-modal .modal-body").removeClass("has-error");
-//        $("#add-rent-modal .modal-body").removeClass("has-success");
-//        $("#add-rent-modal .form-group").removeClass("has-success"); 
-//        $("#add-rent-modal .form-group").removeClass("has-error");
-//        $("#add-rent-modal").find(".help-block").text("");
-//        $("#isRent").prop("checked", false);
-//        $(".btn__add-rent").prop("disabled", true);
-//    });
-//    
-//    /*
-//     * Метод контрольной проверки заполнения формы "Новый лицевой счет"
-//     * до того, как была нажала кнопка "Добавить лицевой счет"
-//     */
-//    $("#add-account").on("beforeSubmit.yii", function (e) {
-//
-//        // Форма "Новый арендатор" по умолчанию считается не заполненной
-//        var isCheck = false;
-//        // Поиск в модальном окне создания арендатора поля для заполнения
-//        var form = $("#add-rent-modal").find("input[id*=clientsrentform]");
-//        // Количество полей на форме "Новый арендатор"
-//        var field = [];
-//
-//        // Проверяем каждое поле на форме "Новый арендатор" на заполнение
-//        form.each(function() {
-//            field.push("input[id*=clientsrentform]");
-//            var value = $(this).val();
-//            // console.log(value);
-//            for (var i = 1; i < field.length; i++) {
-//                // Если втречается заполненное поле, то статус заполнения формы меням на положительный
-//                if (value) {
-//                    isCheck = true;
-//                }
-//            }
-//            // console.log(field.length);
-//        });
-//    
-//        /*
-//        *   Перед отправкой формы, проверяем чекбокс "Арендатор"
-//        *   Если переключатель установлен, то проверяем наличие выбранного арендатора из списка
-//        *   или наличее добавленного арендатора
-//        */
-//        if (!$("#isRent").is(":checked")) {
-//            $("#add-rent-modal input").val("");
-//            $("#add-rent-modal .modal-body").removeClass("has-error");
-//            $("#add-rent-modal .modal-body").removeClass("has-success");
-//            $("#add-rent-modal .form-group").removeClass("has-success"); 
-//            $("#add-rent-modal .form-group").removeClass("has-error");
-//            $("#add-rent-modal").find(".help-block").text("");
-//            $("#isRent").prop("checked", false);
-//            $(".btn__add-rent").prop("disabled", true);
-//            e.preventDefault();    
-//        }
-//    });
-    
     /*
      * Сброс формы в модальном окне на добавление нового лицевого счета при закрытии формы "Отмена"/х
      */
@@ -241,7 +167,7 @@ $(document).ready(function() {
     $(document).on('click', '.list-group-item', function() {
         var liItem = $(this).data('receipt');
         var accountNumber = $(this).data('account');
-        var url = location.origin + '/receipts/' + accountNumber + '/' + accountNumber + '-' + liItem + '.pdf';
+        var url = location.origin + '/receipts/' + accountNumber + '/' + liItem + '.pdf';
         var conteiner = $('.receipts_body');
         $('ul.receipte-of-lists li').removeClass('active');
         $(this).addClass('active');
@@ -249,7 +175,7 @@ $(document).ready(function() {
         // Проверяем сущестование pdf, если существует - загружаем фрейм
         $.get(url)
                 .done(function (){
-                    conteiner.html('<iframe src="' + url + '" style="width: 100%; height: 660px;" frameborder="0">Ваш браузер не поддерживает фреймы</iframe>');
+                    conteiner.html('<iframe src="' + url + '" style="width: 100%; height: 850px;" frameborder="0">Ваш браузер не поддерживает фреймы</iframe>');
                 }).fail(function(){
                     conteiner.html('<div class="notice error"><p>Квитанция на сервере не найдена.</p></div>');
                 });
@@ -283,7 +209,7 @@ $(document).ready(function() {
             $('.message-block').addClass('invalid-message-show').html('Вы указали некорректный диапазон');
         } else if (parseStartDate - parseEndDate <= 0) {
             $('.message-block').removeClass('invalid-message-show').html('');
-            $.post('search-data-on-period?account_number=' + accountNumber + '&date_start=' + startDate + '&date_end=' + endDate + '&type=' + type,
+            $.post('payments/search-data-on-period?account_number=' + accountNumber + '&date_start=' + startDate + '&date_end=' + endDate + '&type=' + type,
                 function(data) {
                     if (data.success === false) {
                         $('.message-block').addClass('invalid-message-show').html('Ошибка запроса');
@@ -340,7 +266,6 @@ $(document).ready(function() {
             $(parentContainer).find('.help-block').text('');
             tdBlock.css('border', 'none');
         }
-        console.log(currentIndicaton);
     });
     
     /*
@@ -367,7 +292,7 @@ $(document).ready(function() {
             e.preventDefault();
         } else if (isCheck === true) {
             labelMess.text('');
-            $.post('send-indication?counter=' + uniqueCounter + '&indication=' + curIndication, function(responce) {
+            $.post('counters/send-indication?counter=' + uniqueCounter + '&indication=' + curIndication, function(responce) {
                 if (responce.success === false) {
                     return false;
                 } else if (responce.success === true) {
@@ -388,7 +313,7 @@ $(document).ready(function() {
         var idCounter = $(this).data('counterId');
         
         $.ajax({
-            url: 'create-paid-request',
+            url: 'counters/create-paid-request',
             method: 'POST',
             data: {
                 accountID: accountID,
@@ -400,9 +325,7 @@ $(document).ready(function() {
                     $('#' + button).replaceWith('<span class="message-request">Сформирована заявка ID' + data.request_number + '</span>');
                 }
             },
-            error: function (textStatus) {
-                console.log(textStatus);                
-            }
+            error: function (textStatus) {}
         });
     });
     
@@ -430,9 +353,8 @@ $(document).ready(function() {
         var year = dateValue.split('-')[1];
         var monthNumber = month[nameMonth.toLowerCase()];
         
-        $.post('find-indications?month=' + monthNumber + '&year=' + year, function(response) {
+        $.post('counters/find-indications?month=' + monthNumber + '&year=' + year, function(response) {
             $('#indication-table').html(response.result);
-//            console.log(response.result);
         });
     });
     
@@ -441,7 +363,6 @@ $(document).ready(function() {
         var urlPDF = $(this).attr('href');
         var w = window.open(urlPDF);
         w.print();
-        console.log('--', urlPDF);
     });
     
     /*
@@ -498,7 +419,7 @@ $(document).ready(function() {
             $(this).removeClass('active');
         });
         $(this).addClass('active');
-        $('.status-request > li > a').first().addClass('req-bange-unactive');
+        $('.req-bange-default').addClass('req-bange-unactive');
         
         $.ajax({
             url: 'requests/filter-by-type-request',
@@ -516,41 +437,6 @@ $(document).ready(function() {
         });        
         
     });
-    
-//    /*
-//     * Добавление оценки для закрытой заявки
-//     */
-//    // Получаем ID заявки через data
-//    var request_id = $('div#star').data('request');
-//    // Получаем оценку текущей заявки
-//    var scoreRequest = $('div#star').data('scoreReguest');
-//    // Вызываем функцию raty из библиотеки плагина по голосованию
-//    $('div#star').raty({
-//        score: scoreRequest, // Оценка
-//        readOnly: scoreRequest === 0 ? false : true, // Если оценка высталена, то возможность голосования закрываем
-//        click: function(score) {
-//            $.ajax({
-//                url: 'add-score-request',
-//                method: 'POST',
-//                data: {
-//                    score: score,
-//                    request_id: request_id,
-//                },
-//                success: function(response) {
-//                    if (response.status === true) {
-//                        $('#score-modal-message').modal('show');
-//                        $('div#star').raty({
-//                            score: score,
-//                            readOnly: true,
-//                        });
-//                    }
-//                },
-//                error: function() {
-//                    console.log('Error #1000-09');
-//                }
-//            });
-//        }
-//    });    
     
     /*
      * Вызов модального окна "Добавление оценки"
@@ -621,9 +507,7 @@ $(document).ready(function() {
      */
     $(document).on('click', '.grade-modal__close', function(){
         var requestID = $(this).data('request');
-        $.post('close-grade-window?request=' + requestID, function(response) {
-//            console.log(response.success);
-        });
+        $.post('close-grade-window?request=' + requestID, function(response) {});
     });
 
 
@@ -633,19 +517,6 @@ $(document).ready(function() {
     // ************   Start Block of Paid Services   ************** //
     // *********************************************************** //
     
-    /*
-     * Загрузка модального окна "Добавить платную услугу"
-     * В dropDownList, hiddenInput загружаем ID выбранной услуги
-     */
-//    $(document).on('click', '.new-rec', function(){
-//        var idService = $(this).data('service');
-//        var idCategory = $(this).data('service-cat');
-//        $('#add-record-modal').modal('show');
-//        $('#add-record-modal').find('#name_services').val(idService);
-//        $('#secret-name').val(idService);
-//        $('#secret-cat').val(idCategory);
-//        $('#name_services').val(idCategory);
-//    }); 
     $(document).on('click', '.new-rec', function(e) {
         var link = $(this).attr('href');
         $('#add-paid-request-modal').modal('show');
@@ -764,9 +635,7 @@ $(document).ready(function() {
      */
     $('#renouncement_participate, #renouncement_participate_close').on('click', function(){
         var votingId = $(this).data('voting');
-        $.post('renouncement-to-participate?voting_id=' + votingId, function(response) {
-//            console.log(response);
-        });
+        $.post('renouncement-to-participate?voting_id=' + votingId, function(response) {});
     });
     
     /*
@@ -788,15 +657,6 @@ $(document).ready(function() {
         return false;
     });
     
-    /*
-     * Подтверждение согласия участия в голосовании
-     * @type Number
-     */
-//    $('#participate_in').on('click', function(){
-//        var votingId = $(this).data('votingId');
-//        alert(votingId);
-//    });
-
     /*
      * Отправка голоса участника
      */
@@ -826,20 +686,13 @@ $(document).ready(function() {
         var countAnswers = $('.btn-set-voting-active').length;
         var modalMessage = $('#participate_modal-message');
         
-        console.log(votingID + ' ' + countQuestions + ' ' + countAnswers);
         if (countQuestions !== countAnswers) {
             modalMessage.find('.vote-message_span').text('Ошибка завершения участия в голосовании');
             modalMessage.find('.modal-title-vote').text('Пожалуйста вернитесь к голосованию и дайте ответы на все заявленные вопросы');
             modalMessage.modal('show');
-            console.log('error');
             return false;
         } else if (countQuestions === countAnswers) {
-            console.log('all right');
-            $.post('finish-voting?voting_id=' + votingID, function(response) {
-//                if (response.success === true) {
-//                    console.log(response.success);
-//                }
-            });
+            $.post('finish-voting?voting_id=' + votingID, function(response) {});
             return true;
         }
 
@@ -923,9 +776,7 @@ $(document).ready(function() {
             data: {
                 valueData: valueData,
             },
-        }).done(function(response) {
-            console.log(response.status);
-        });
+        }).done(function(response) {});
     });
 
     /*
@@ -941,68 +792,9 @@ $(document).ready(function() {
             data: {
                 valueData: valueData
             },
-        }).done(function(response) {
-//            console.log(response.value);
-        });
+        }).done(function(response) {});
     });
    
-    
-    /* Кастомизация элеметнов управления формой, лицевой счет */
-    $(".custom-select").each(function() {
-        var classes = $(this).attr("class"),
-            id = $(this).attr("id"),
-            name = $(this).attr("name");
-        var template =  '<div class="' + classes + '">';
-            template += '<span class="custom-select-trigger">' + $(this).attr("placeholder") + '</span>';
-            template += '<div class="custom-options">';
-        // Текущий выбранный лицевой счета    
-        var currentValue = $('#sources option:selected').val();
-        
-        $(this).find("option").each(function() {
-            var classSelection = ($(this).attr("value") == currentValue) ? 'selection ' : '';            
-            template += '<span class="custom-option ' + classSelection + $(this).attr("class") + '" data-value="' + $(this).attr("value") + '">' + $(this).html() + '</span>';
-//            $(this).val('selection');
-            
-        });
-        template += '</div></div>';
-
-        $(this).wrap('<div class="custom-select-wrapper"></div>');
-        $(this).hide();
-        $(this).after(template);
-    });
-
-    $(".custom-option:first-of-type").hover(function() {
-        $(this).parents(".custom-options").addClass("option-hover");
-    }, function() {
-        $(this).parents(".custom-options").removeClass("option-hover");
-    });
-
-    $(".custom-select-trigger").on("click", function() {
-        $('html').one('click',function() {
-            $(".custom-select").removeClass("opened");
-        });
-        $(this).parents(".custom-select").toggleClass("opened");
-        event.stopPropagation();
-    });
-
-
-    $(".custom-option").on("click", function() {
-        // ID выбранного лицевого счета
-        var valueSelect = $(this).data("value");
-        // Номер выбранного лицевого счета
-        var textSelect = $(this).text();
-        // ID текущего лицевого счета
-        var currentValue = $('#sources option:selected').val();
-        console.log(valueSelect + ' ' + textSelect + ' ' + currentValue);
-        $(this).parents(".custom-select-wrapper").find("select").val(valueSelect);
-        $(this).parents(".custom-options").find(".custom-option").removeClass("selection");
-        $(this).addClass("selection");
-        $(this).parents(".custom-select").removeClass("opened");
-        $(this).parents(".custom-select").find(".custom-select-trigger").text(textSelect);
-        // Смена текущего лицевого счета, ЛК собственник
-        switchAccountNumber(currentValue, valueSelect);
-    });
-    
     /* Кастомизация элеметнов управления формой, категории услуг */
     $(".custom-select-services").each(function() {
         var classes = $(this).attr("class"),
@@ -1073,5 +865,64 @@ $(document).ready(function() {
             }
         });
     }
+    
+    /*
+     * Send current indication at general page
+     */
+    $('form#form-send-indication').on('beforeSubmit.yii', function(e) {
+        e.preventDefault();
+        var valIndication = $('.counters-carousel').find('.active').find(':input');        
+        var dataPost = valIndication.serializeArray();
+        var dataForm = {};
+        var isCheck = true;
+        
+        // Проверяем элементы формы
+        if (dataPost.length === 0) {
+            return false;
+        }
+        
+        $.each(dataPost, function(index, data) {
+            var inputIndication = $('input[name=\"' + data.name + '\"]');
+            var prevValue = parseFloat(inputIndication.data('indication'));
+            var newValue = parseFloat(data.value);            
+            
+            // Сравниваем введенное показание с текущим
+            if (!newValue || newValue < prevValue) {
+                $(inputIndication).next().text('Ошибка подачи показаний, предыдущее показание ' + prevValue);
+                isCheck = false;
+            } else {
+                $(inputIndication).next().text('');
+            }
+            
+            // Собираем данные для отправи в AJAX запрос
+            if (index%2 === 0) {
+                dataForm[dataPost[index].value] = dataPost[index + 1].value;
+            }
+        });
+
+        if (isCheck === false) {
+            return false;
+        } else {
+            $.ajax({
+                url: 'clients/send-indications',
+                method: 'POST',
+                data: {dataForm: dataForm},
+                success: function(response) {
+                    if (response.success == false) {
+                        $('.counters-carousel').find('.active').find('.notice-text').text('Ошибка подачи показаний');
+                        $('.counters-carousel').find('.active').find('.popup-notice').addClass('show-notice');
+                    } else {
+                        $('.counters-carousel').find('.active').find('.notice-text').text('Ваши показания успешно отправлены');
+                        $('.counters-carousel').find('.active').find('.popup-notice').addClass('show-notice');
+                    }
+                },
+            });
+        }
+        return false;
+    });
+    
+    $('.popup-notice').on('click', function() {
+        $(this).removeClass('show-notice');
+    });    
 
 });

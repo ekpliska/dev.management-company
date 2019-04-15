@@ -5,13 +5,17 @@
  */
 ?>
 
-<table class="table table-voting-results">
-    <tr>
-        <?php foreach ($results as $key => $result) : ?>
-            <td>
-                <p class="title"><?= $key ?></p>
-                <p class="results"><?= $result ?>%</p>
-            </td>
-        <?php endforeach; ?>
-    </tr>
-</table>
+<?php foreach ($results as $key => $result) : ?>
+<td>
+    <p class="title">
+        Проголосовало 
+        <span class="type"><?= $key ?></span>
+        <span class="count pull-right">
+            <?= $result ?>%
+        </span>
+    </p>
+</td>
+<?php endforeach; ?>
+<td></td>
+
+

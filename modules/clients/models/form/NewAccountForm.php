@@ -28,9 +28,7 @@ class NewAccountForm extends Model {
             [['account_number', 'last_sum', 'square'], 'required', 'message' => 'Поле обязательно для заполнения'],
 //            ['account_number', 'string', 'min' => 12, 'max' => 12],
             
-            [['square'], 'double', 'message' => 'Площадь жилого помещения указана не верно. Пример, 80.27'],
-            
-            ['last_sum', 'double', 'message' => 'Сумма предыдущей квитанции указана не верно. Пример: 2578.70'],
+            [['square', 'last_sum'], 'double'],
             
             ['account_number', 'checkPersonalAccount'],
             

@@ -2,10 +2,7 @@
 
     namespace app\modules\clients\controllers;
     use Yii;
-    use yii\data\Pagination;
-    use app\modules\clients\controllers\AppClientsController;
-    use app\models\News;
-    use app\modules\clients\models\ImportantInformations;
+    use app\models\SiteSettings;
     
 
 /**
@@ -25,40 +22,92 @@ class ClientsController extends AppClientsController
         // Получаем массив содержащий ID ЖК, ID дома, ID квартиры, номер подъезда
         $living_space = Yii::$app->userProfile->getLivingSpace($account_id);
         
-        switch ($block) {
-            case 'important_information':
-            case null: {
-                $info = new ImportantInformations();
-                $news = $info->informations($living_space);
-                break;
-            }
-            case 'special_offers': {
-                $news = News::getNewsByClients($living_space, true);
-                break;
-            }
-            case 'house_news': {
-                $news = News::getNewsByClients($living_space, false);
-                break;
-            }
-        }
-        
-        if ($block == 'special_offers' || $block == 'house_news') {
-            $pages = new Pagination([
-                'totalCount' => $news->count(), 
-                'pageSize' => 9, 
-                'forcePageParam' => false, 
-                'pageSizeParam' => false,
-            ]);
-
-            $news = $news->offset($pages->offset)
-                    ->limit($pages->limit)
-                    ->all();
-        }
+        // Ифонмация из настроек для Промоблока
+        $promo_info = SiteSettings::findOne(['id' => 1]);
         
         return $this->render('index', [
-            'news' => $news,
-            'pages' => isset($pages) ? $pages : null,
+            'living_space' => $living_space,
+            'indications' => $this->getCountersIndication(),
+            'payments' => $this->getPaymentsList(),
+            'promo_text' => $promo_info->promo_block,
         ]);
+        
+    }
+    
+    /*
+     * Получить теукщие показания приборов учета
+     * по текущему лицевому счету
+     * Для вкладки "Приборы учета", Профиль пользователя
+     */
+    private function getCountersIndication() {
+        
+        $account_number = $this->_current_account_number;
+        
+        // Формируем запрос для текущего расчетного перирода
+        $array_request = [
+            'Номер лицевого счета' => $account_number,
+            'Номер месяца' => date('m'),
+            'Год' => date('Y'),
+        ];
+        
+        $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
+        $indications = Yii::$app->client_api->getPreviousCounters($data_json);
+        
+        return $indications;
+        
+    }
+    
+    /*
+     * Получить список оплаченных/не оплаченных квитанций
+     */
+    public function getPaymentsList() {
+        
+        // Получить номер текущего лицевого счета
+        $account_number = $this->_current_account_number;
+        // Получаем номер текущего месяца и год
+        $current_period = date('Y-n');
+        $array_request = [
+            'Номер лицевого счета' => $account_number,
+            'Период начало' => null,
+            'Период конец' => $current_period,
+        ];
+        $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
+        $receipts_lists = Yii::$app->client_api->getReceipts($data_json);
+        
+        return $receipts_lists;
+    }
+    
+    /*
+     * Отправка показаний приборов учета
+     */
+    public function actionSendIndications() {
+        
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $indications = Yii::$app->request->post('dataForm');
+        
+        $array = [];
+        
+        foreach ($indications as $key => $indication) {
+            $_array = [
+                "ID" => $key,
+                "Дата снятия показания" => date('Y-m'),
+                "Текущее показание" => $indication,
+            ];
+            $array[] = $_array;
+            
+        }
+        
+        $array_request['Приборы учета'] = $array;
+        $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
+        $result = Yii::$app->client_api->setCurrentIndications($data_json);
+            
+        if (Yii::$app->request->isAjax) {
+            if (!$result) {
+                return ['success' => false];
+            }
+            return ['success' => true];
+        }
+        
     }
     
 }

@@ -2,41 +2,51 @@
 
     use yii\helpers\Html;
     use yii\helpers\Url;
-    use app\modules\clients\widgets\NavMenu;
     use app\modules\clients\widgets\UserInfo;
     use app\modules\clients\widgets\Notifications;
-    use app\modules\clients\widgets\SubBarGeneralPage;
-    use app\modules\clients\widgets\SubBarPaidService;
-    use app\modules\clients\widgets\SubBarPersonalAccount;
-    use app\modules\clients\widgets\StatusRequest;
+    use app\modules\clients\widgets\NavMenu;
 /*
  * Шапка, меню, хлебные крошки
  */
 ?>
 
 <nav class="navbar navbar-fixed-top navbar-menu">
-    <div class="container-fluid navbar-menu_header">
-        <div class="navbar-header">
-            <a class="menu-toggle" href="#menu">
-                <span></span><p class="menu-toggle_message">Меню</p>
-            </a>        
+    <div class="container-fluid">
+        <div class="navbar-header col-md-2">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#elsaNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>                        
+            </button>
+            <a class="navbar-brand" href="<?= Url::to(['clients/index']) ?>">
+                <?= Html::img('/images/navbar/group_46.svg', ['alt' => 'image'])  ?>
+            </a>
         </div>
-        <a href="<?= Url::to(['clients/index']) ?>" class="brand">
-            <?= Html::img('/images/navbar/group_46.svg', ['alt' => 'image'])  ?>
-        </a>
-        <ul class="nav navbar-nav navbar-right user-notification">
-            <?= UserInfo::widget(['_value_choosing' => $this->context->_current_account_number]) ?>
-            <?= Notifications::widget() ?>            
-        </ul>
-    </div>  
-    <div class="container-fluid navbar-menu__items text-center">
-        <?= NavMenu::widget(); ?>   
+        
+        <div class="collapse navbar-collapse" id="elsaNavbar">
+            <ul class="nav navbar-nav">
+                <li class="account-info">
+                    <p class="list-account__title">Лицевой счет</p>
+                    <?= Html::dropDownList('_list-account', $this->context->_current_account_id, $this->context->_lists, [
+                            'id' => 'switch-current-account',
+                            'placeholder' => $this->context->_current_account_number,
+                            'class' => 'select-current-account',
+                    ]) ?>
+                </li>
+                <li>
+                    <p class="account-balance">
+                        <?= Yii::$app->userProfile->balance ?>
+                        <span class="<?= Yii::$app->userProfile->balance > 0 ? 'defaul' : 'minus' ?>">
+                            <i class="glyphicon glyphicon-ruble"></i>
+                        </span>
+                    </p>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right user-profile hidden-xs">
+                <?= UserInfo::widget() ?>
+                <?= Notifications::widget() ?>
+            </ul>
+            <?= NavMenu::widget(['view_name' => 'mobile-menu']) ?>
+        </div>
     </div>
-    <div class="container-fluid navbar-mobile-menu__items text-center">
-        <?= NavMenu::widget(['view_name' => 'mobile-menu']); ?>
-    </div>
-    <?= SubBarGeneralPage::widget() ?>
-    <?= StatusRequest::widget(['account_id' => $this->context->_current_account_id]) ?>
-    <?= SubBarPaidService::widget() ?>
-    <?= SubBarPersonalAccount::widget() ?>
 </nav>

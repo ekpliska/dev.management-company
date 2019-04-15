@@ -29,7 +29,7 @@
             <?= Html::img($model->logo, ['id' => 'photoPreview', 'class' => 'img-rounded']) ?>
         </div>
         <div class="upload-btn-wrapper">
-            <?= $form->field($model, 'partners_logo', ['template' => '<label class="text-center btn-upload-cover" role="button">{input}{label}{error}</label>'])
+            <?= $form->field($model, 'image_logo', ['template' => '<label class="text-center btn-upload-cover" role="button">{input}{label}{error}</label>'])
                     ->input('file', ['id' => 'btnLoad-edit', 'class' => 'hidden'])->label('<i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;Загрузить фото') ?>
         </div>
     </div>

@@ -38,8 +38,6 @@ class AppManagersController extends Controller {
         ];
     }
     
-    
-    
     public function permisionUser() {
         return Yii::$app->userProfileCompany;
     }

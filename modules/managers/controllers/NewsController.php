@@ -144,7 +144,7 @@ class NewsController extends AppManagersController {
                     'success' => true,
                     'message' => 'Новость была успешно добавлена',
                 ]);                
-                return $this->redirect(['view', 'slug' => $slug]);
+                return $this->redirect(['view', 'slug' => $slug->slug]);
             } else {
                 Yii::$app->session->setFlash('news-admin', [
                     'success' => false,
@@ -182,7 +182,7 @@ class NewsController extends AppManagersController {
         $houses = empty($news->news_house_id) ? [] : Houses::getHousesList($for_list = false);
         $parnters = Partners::getAllParnters();
         
-        // Получаем прикрепленные к заявке файлы
+        // Получаем прикрепленные к новости файлы
         $docs = Image::getAllDocByNews($news->news_id, $model_name = 'News');
         
         if ($news->load(Yii::$app->request->post())) {

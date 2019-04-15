@@ -1,48 +1,48 @@
 <?php
 
-    use yii\widgets\LinkPager;
-    use app\helpers\FormatHelpers;
-
+    use app\modules\clients\widgets\LastNews;
+    use app\modules\clients\widgets\LastServices;
+    
 /*
  * Главная страница личного кабинета Собственника
  */    
-$this->title = Yii::$app->params['site-name'] . "Главная";
+$this->title = Yii::$app->params['site-name'] . "Новости";
+$current_date = Yii::$app->formatter->asDate(time(), 'LLLL, Y');
 ?>
 
-<div class="row news-lists">
-    <?php if (isset($news) && count($news) > 0) : ?>
-    <?php foreach ($news as $key => $post) : ?>
-        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-            <div class="news-card-preview">
-                <div class="news-card-preview__image">
-                    <?= FormatHelpers::previewNewsOrVote($post['news_preview'], false) ?>
-                </div>
-
-                <h5 class="news-card-preview-title">
-                    <?= FormatHelpers::formatUrlNewsOrVote(FormatHelpers::shortTitleOrText($post['news_title'], 45), $post['slug']) ?>
-                </h5>
-
-                <h5 class="news-card-preview-date">
-                    <?= FormatHelpers::formatDate($post['created_at'], true, 1) ?>
-                </h5>
-
-                <div class="news-card-preview-body">
-                    <p class="card-text news-card-preview-text ">
-                        <?= FormatHelpers::shortTextNews($post['news_text'], 17) ?>
-                    </p>
-                </div>
+<div class="client-page">
+    <div class="row client-page__top">
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            <div class="__top-counters">
+                <h1>
+                    <?= $current_date ?>
+                </h1>
+                <?= $this->render('data/indications-slider', ['indications' => $indications]) ?>
             </div>
         </div>
-    <?php endforeach; ?>
-    <?php else : ?>
-         <div class="notice info">
-            <strong>Новости</strong> по текущему разделу новостной информации не найдено.
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            <div class="__top-payments">
+                <h1>
+                    Платежи и квитанции
+                </h1>
+                <?= $this->render('data/last-payments', ['payments' => $payments]) ?>
+            </div>
         </div>
-    <?php endif; ?>
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            <div class="__top-promo">
+                <h1>
+                    Промоблок
+                </h1>
+                <div class="__top-promo-content">
+                    <?= !empty($promo_text) ? $promo_text : '<p class="message-general-page">Информация отсутствует.</p>' ?>
+                </div>
+            </div>
+        </div>        
+    </div>
+    <div class="row client-page__services">
+        <?= LastServices::widget() ?>
+    </div>
+    <div class="row client-page__news">
+        <?= LastNews::widget(['living_space' => $living_space]) ?>
+    </div>
 </div>
-
-<?= 
-    isset($pages) && !empty($pages) ? LinkPager::widget([
-        'pagination' => $pages,
-    ]) : '';
-?>

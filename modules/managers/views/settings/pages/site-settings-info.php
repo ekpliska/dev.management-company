@@ -52,6 +52,21 @@
                 ],
             ],
         ])->label(false) ?>
+    
+    <p class="__settings-p">
+        <?= $model->getAttributeLabel('promo_block') ?>
+    </p>
+    <?= $form->field($model, 'promo_block')->widget(Widget::className(), [
+            'settings' => [
+                'lang' => 'ru',
+                'minHeight' => 200,
+                'plugins' => [
+                    'fullscreen',
+                    'fontcolor',
+                    'fontsize',
+                ],
+            ],
+        ])->label(false) ?>
 
     <div class="save-btn-group text-center">
         <?= Html::submitButton('Сохранить', ['class' => 'btn save-settings-small']) ?>

@@ -1,7 +1,6 @@
 <?php
 
     namespace app\models;
-    use Yii;
     use yii\db\ActiveRecord;
     use app\models\Counters;
     use yii\helpers\ArrayHelper;
@@ -23,7 +22,7 @@ class TypeCounters extends ActiveRecord
      */
     public function rules() {
         return [
-            [['type_counters_name'], 'string', 'max' => 100],
+            [['type_counters_name', 'type_counters_image'], 'string', 'max' => 100],
         ];
     }
     
@@ -43,15 +42,15 @@ class TypeCounters extends ActiveRecord
     }
     
     /*
-     * Возвращает ID типа прибора учета
+     * Получить изображение прибора учета
      */
-    public static function getTypeID($name) {
+    public static function getImageCounter($name) {
         
         $array = self::find()
                 ->where(['type_counters_name' => $name])
                 ->asArray()
                 ->one();
-        return $array['type_counters_id'];
+        return $array['type_counters_image'];
         
     }
 
@@ -62,6 +61,7 @@ class TypeCounters extends ActiveRecord
         return [
             'type_counters_id' => 'Type Counters ID',
             'type_counters_name' => 'Type Counters Name',
+            'type_counters_image' => 'Type Counters Image',
         ];
     }
 }

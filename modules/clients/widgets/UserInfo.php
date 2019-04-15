@@ -1,22 +1,25 @@
 <?php
 
     namespace app\modules\clients\widgets;
-    use yii\base\InvalidConfigException;
+    use Yii;
     use yii\base\Widget;
+    use app\models\Notifications;
 
 /**
  * Профиль пользователя из навигационного меню
  */
 class UserInfo extends Widget {
     
-    public $_user;
-    public $_value_choosing;
-
+    public $_notifications;
+    
+    
     public function init() {
         
-        if ($this->_value_choosing == null) {
-            throw new InvalidConfigException('Ошибка передачи параметров');
-        }
+        $this->_notifications = Notifications::find()
+                ->where(['user_uid' => Yii::$app->user->id])
+                ->orderBy(['created_at' => SORT_DESC])
+                ->limit(7)
+                ->all();
         
         parent::init();        
         
@@ -25,8 +28,7 @@ class UserInfo extends Widget {
     public function run() {
         
         return $this->render('userinfo/profile', [
-            'user_info' => $this->_user, 
-            'account_number' => $this->_value_choosing,
+            'notifications_lists' => $this->_notifications,
         ]);
         
     }
