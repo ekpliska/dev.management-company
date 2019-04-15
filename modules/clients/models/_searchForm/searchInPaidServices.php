@@ -34,6 +34,7 @@ class searchInPaidServices extends Model {
                         . 'p.services_id, '
                         . 'p.status, '
                         . 'p.grade, '
+                        . 'p.date_closed, '
                         . 'c.category_name, '
                         . 's.service_name, '
                         . 'p.created_at, p.services_comment, '

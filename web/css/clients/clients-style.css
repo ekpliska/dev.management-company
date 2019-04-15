@@ -310,7 +310,6 @@ li.account-info {
     position: relative;
     overflow: hidden;
     cursor: pointer;
-    margin-bottom: 20px;
 }
 .news-item:hover {
     box-shadow: 0 4px 10px 0 rgba(51, 29, 82, 0.16);
@@ -2210,7 +2209,7 @@ input[name="date_end-period-pay"]::placeholder {
 /* Приборы учета */
 .counters-page {}
 .options-panel {
-    margin-bottom: 20px;
+    margin: 20px 0;
 }
 .btn-save-reading {
     height: 48px;

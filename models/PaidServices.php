@@ -129,7 +129,7 @@ class PaidServices extends ActiveRecord
      * Получить все заявки, текущего пользователя
      * @param ActiveQuery $all_orders
      */
-    public static function getOrderByUder($account_id) {
+    public static function getOrderByUser($account_id) {
         
         $query = (new \yii\db\Query())
                 ->select('p.services_number, '

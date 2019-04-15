@@ -48,7 +48,7 @@ class PaidServicesController extends AppClientsController {
         $this->permisionUser();
         $account_id = $this->_current_account_id;
         
-        $all_orders = PaidServices::getOrderByUder($account_id);
+        $all_orders = PaidServices::getOrderByUser($account_id);
         
         return $this->render('order-services', ['all_orders' => $all_orders]);
         
