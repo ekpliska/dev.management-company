@@ -250,7 +250,6 @@ $config = [
                     'pluralize' => false,
                     'controller' => 'v1/receipts',
                     'extraPatterns' => [
-                        'GET view/<account:[\w-]+>' => 'view',
                         'POST get-receipts/<account:[\w-]+>' => 'get-receipts',
                         'POST get-receipt-pdf' => 'get-receipt-pdf',
                     ]

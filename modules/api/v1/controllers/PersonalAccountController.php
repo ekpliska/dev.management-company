@@ -17,7 +17,7 @@ class PersonalAccountController extends Controller {
     public function behaviors() {
         
         $behaviors = parent::behaviors();
-        $behaviors['authenticator']['only'] = ['view', 'payments-history', 'create', 'find-history-payments'];
+        $behaviors['authenticator']['only'] = ['view', 'payments-history', 'create'];
         $behaviors['authenticator']['authMethods'] = [
               HttpBasicAuth::className(),
               HttpBearerAuth::className(),
