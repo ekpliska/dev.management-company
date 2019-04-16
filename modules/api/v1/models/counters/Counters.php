@@ -69,4 +69,36 @@ class Counters extends Model {
         
     }
     
+    public function getCounterInfo($id_counter) {
+        
+        $current_date = date('Y-m-d');        
+        $counter_info = $this->_counters;
+        $_key = 0;
+
+        foreach ($counter_info as $key => $counter) {
+            if ($counter['ID'] != $id_counter) {
+                unset($counter_info[$key]);
+            } else {
+                $_key = $key;
+            }
+        }
+        
+        if (empty($counter_info)) {
+            return ['success' => false];
+        }
+        
+        /*
+         * Устанавливаем статус блокировки ввода показаний, 
+         *      false Если дата поверки актуальны
+         *      true Если дата поверки истекла
+         */
+        $_status = (strtotime($counter_info[$_key]["Дата следующей поверки"])) > strtotime($current_date) ? false : true;
+        
+        $counter_info[$_key] += [
+            'is_block' => $_status
+        ];
+        
+        return $counter_info;
+    }
+    
 }

@@ -17,7 +17,7 @@ class CountersController extends Controller {
     public function behaviors() {
         
         $behaviors = parent::behaviors();
-        $behaviors['authenticator']['only'] = ['view'];
+        $behaviors['authenticator']['only'] = ['view', 'get-counter'];
         $behaviors['authenticator']['authMethods'] = [
               HttpBasicAuth::className(),
               HttpBearerAuth::className(),
@@ -37,6 +37,7 @@ class CountersController extends Controller {
     public function verbs() {
         return [
             'view' => ['get'],
+            'get-counter' => ['get'],
         ];
     }
     
@@ -45,14 +46,41 @@ class CountersController extends Controller {
      */
     public function actionView($account) {
         
-        $personal_account = PersonalAccount::findOne(['account_number' => $account]);
-        if (empty($personal_account)) {
-            return ['sucess' => false];
+        $personal_account = $this->findAccount($account);
+        if (!$personal_account) {
+            return ['success' => false];
         }
         
         $counters = new Counters($personal_account);
         return $counters->getCountesList();
         
+    }
+    
+    /*
+     * Получить показания по текущему прибору учета
+     */
+    public function actionGetCounter($account, $id_counter) {
+        
+        $personal_account = $this->findAccount($account);
+        if (!$personal_account) {
+            return ['success' => false];
+        }
+        
+        $counters = new Counters($personal_account);
+        return $counters->getCounterInfo($id_counter);
+        
+    }
+    
+    /*
+     * Проверка существования лицевого счета
+     */
+    private function findAccount($account) {
+        
+        $personal_account = PersonalAccount::findOne(['account_number' => $account]);
+        if (empty($personal_account)) {
+            return false;
+        }
+        return $personal_account;
     }
     
 }

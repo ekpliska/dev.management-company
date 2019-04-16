@@ -83,7 +83,7 @@ class ReceiptsController extends Controller {
             return ['message' => "Приносим извинения. Квитанция {$data_post['period']} на сервере не найдена."];
         } else {
             // Возвращаем абсолютный путь
-            return ['receipt_pdf' => Url::base(true) . $file_path];
+            return ['receipt_pdf' => Url::base(true) . '/' . $file_path];
         }
         
     }
