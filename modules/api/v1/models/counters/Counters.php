@@ -12,8 +12,9 @@
  */
 class Counters extends Model {
     
+    // Список приборов учета
     public $_counters;
-    
+    // Информация по лицевому счету
     public $_account;
 
     /*
@@ -54,7 +55,7 @@ class Counters extends Model {
             $counter_item = [
                 'id_counter' => $counter['ID'],
                 'type_counter' => $counter['Тип прибора учета'],
-                '_type' => $counter['Тип прибора учета'],
+                '_type' => TypeCounters::getTypeCounterMobile($counter['Тип прибора учета']),
             ];
             
             $counters_items[] = $counter_item;

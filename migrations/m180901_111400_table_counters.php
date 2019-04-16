@@ -23,19 +23,20 @@ class m180901_111400_table_counters extends Migration
             'type_counters_id' => $this->primaryKey(),
             'type_counters_name' => $this->string(100)->notNull(),
             'type_counters_image' => $this->string(255),
+            '_type' => $this->string(50),
         ], $table_options);        
         $this->createIndex('idx-type_counters-type_counters_id', '{{%type_counters}}', 'type_counters_id');
         $this->createIndex('idx-type_counters-type_counters_name', '{{%type_counters}}', 'type_counters_name');
         
         $this->batchInsert('{{%type_counters}}', 
-                ['type_counters_id', 'type_counters_name', 'type_counters_image'], 
+                ['type_counters_id', 'type_counters_name', 'type_counters_image', '_type'], 
                 [
-                    ['1', 'Счётчик ХВС', '/images/counters/hold-water.svg'],
-                    ['2', 'Счётчик ГВС', '/images/counters/hot-water.svg'],
-                    ['3', 'Счётчик ЭЭ(д)', '/images/counters/electric-meter.svg'],
-                    ['4', 'Счётчик ЭЭ(н)', '/images/counters/electric-meter.svg'],
-                    ['5', 'Счётчик отопления', '/images/counters/heating-meter.svg'],
-                    ['5', 'Распределитель тепла', '/images/counters/heat-distributor.svg'],
+                    ['1', 'Счётчик ХВС', '/images/counters/hold-water.svg', 'hold_water'],
+                    ['2', 'Счётчик ГВС', '/images/counters/hot-water.svg', 'hot_water'],
+                    ['3', 'Счётчик ЭЭ(д)', '/images/counters/electric-meter.svg', 'electric_meter'],
+                    ['4', 'Счётчик ЭЭ(н)', '/images/counters/electric-meter.svg', 'electric_meter'],
+                    ['5', 'Счётчик отопления', '/images/counters/heating-meter.svg', 'heating_meter'],
+                    ['5', 'Распределитель тепла', '/images/counters/heat-distributor.svg', 'heat_distributor'],
                 ]
             );
         

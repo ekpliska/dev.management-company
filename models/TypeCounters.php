@@ -8,8 +8,8 @@
 /**
  * Виды приборов учета
  */
-class TypeCounters extends ActiveRecord
-{
+class TypeCounters extends ActiveRecord {
+    
     /**
      * Таблица из БД
      */
@@ -23,6 +23,7 @@ class TypeCounters extends ActiveRecord
     public function rules() {
         return [
             [['type_counters_name', 'type_counters_image'], 'string', 'max' => 100],
+            [['_type'], 'string', 'max' => 50],
         ];
     }
     
@@ -39,6 +40,17 @@ class TypeCounters extends ActiveRecord
         
         return ArrayHelper::map($array, 'type_counters_id', 'type_counters_name');
         
+    }
+    
+    /*
+     * Получить тип прибора латиницей для мобильный телефонов
+     */
+    public static function getTypeCounterMobile($name) {
+        $array = self::find()
+                ->where(['type_counters_name' => $name])
+                ->asArray()
+                ->one();
+        return $array['_type'];
     }
     
     /*
