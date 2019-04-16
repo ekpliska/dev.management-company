@@ -407,6 +407,9 @@ ul.menu {
 .manager-main__general-left__content a.title:hover {
     color: #2d18b4;
 }
+.manager-main__general-left__content > div.__content-news:last-child {
+    border-bottom: none;
+}
 .__content-news {
     border-bottom: 1px solid #ddd;
     height: 190px;

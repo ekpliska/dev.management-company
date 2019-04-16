@@ -2216,7 +2216,9 @@ input[name="date_end-period-pay"]::placeholder {
 /* Конец Оплата */
 
 /* Приборы учета */
-.counters-page {}
+.counters-page {
+    min-height: 700px;
+}
 .options-panel {
     margin: 20px 0;
 }
