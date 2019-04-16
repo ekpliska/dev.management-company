@@ -782,6 +782,68 @@ a.request__link-view:hover {
 }
 /* Кoнец Страница Профиль пользователя */
 
+/* Подменю, профиль собсвенника */
+.profile-sub_menu {
+    background: linear-gradient(190.67deg, #42314e 50%, rgba(132, 131, 131, 0.65) 100%);
+}
+.profile-sub_menu_ul {
+    margin: 0;
+    display: inline-flex;
+    list-style-type: none;
+}
+.profile-sub_menu_ul > li {
+    padding: 30px;
+    margin: 0px 40px 0px -40px;
+}
+.profile-sub_menu_ul > li.active,
+.profile-sub_menu_ul > li:hover {
+    background: rgba(247, 247, 247, 0.16);
+}
+.profile-sub_menu_ul > li > a {
+    color: #fff;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+.clients-profile-info_manager {
+    padding: 30px 70px;
+    text-align: left;
+}
+.rent-profile-info_manager {
+    padding: 30px 70px;
+    text-align: left;
+}
+.payments-date-block {
+    padding: 20px 15px 30px;
+}
+.control-block, 
+.status-block {
+    margin: 10px 0px;
+}
+.status-block .title {
+    display: inline-block;
+    padding-right: 50px;
+    color: #fff;
+    font-size: 12px;
+    text-align: right;
+}
+.status-block span.role-administrator,
+.status-block span.role-specialist,
+.status-block span.role-dispatcher {
+    padding: 2px 0px;
+    color: #fff;
+    font-size: 12px;
+}
+.debt-client {
+    background: #ef693a;
+    font-family: cursive;
+    padding: 3px 7px;
+    font-size: 22px;
+    border-radius: 50%;
+    box-shadow: 3px 3px 5px -2px #333;
+}
+/* Конец Подменю, профиль собсвенника */
+
 /* Заявки */
 .requests-page {
     margin-top: 140px;
@@ -1882,7 +1944,7 @@ tbody > tr > td > div.empty::before {
 
 /* Администратор, профиль */
 .face-user {
-    min-height: 370px;
+    min-height: 200px;
 }
 .face-user img {
     width: 130px;
@@ -1909,74 +1971,6 @@ tbody > tr > td > div.empty::before {
     left: 30%;
 }
 /* Конец Администратор, профиль */
-
-/* Подменю, профиль собсвенника */
-.profile-content {
-    min-height: 700px;
-}
-.profile-content table {
-    margin-top: 0;
-}
-.profile-sub_menu {
-    background: linear-gradient(190.67deg, #42314e 50%, rgba(132, 131, 131, 0.65) 100%);
-}
-.profile-sub_menu_ul {
-    margin: 0;
-    display: inline-flex;
-    list-style-type: none;
-}
-.profile-sub_menu_ul > li {
-    padding: 30px;
-    margin: 0px 40px 0px -40px;
-}
-.profile-sub_menu_ul > li.active,
-.profile-sub_menu_ul > li:hover {
-    background: rgba(247, 247, 247, 0.16);
-}
-.profile-sub_menu_ul > li > a {
-    color: #fff;
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-}
-.clients-profile-info_manager {
-    padding: 30px 150px;
-    text-align: left;
-}
-.rent-profile-info_manager {
-    padding: 30px 150px;
-    text-align: left;
-}
-.payments-date-block {
-    padding: 20px 15px 80px;
-}
-.control-block, 
-.status-block {
-    margin: 10px 0px;
-}
-.status-block .title {
-    display: inline-block;
-    padding-right: 50px;
-    color: #fff;
-    font-size: 12px;
-    text-align: right;
-}
-.status-block span.role-administrator,
-.status-block span.role-specialist,
-.status-block span.role-dispatcher {
-    padding: 2px 0px;
-    color: #fff;
-    font-size: 12px;
-}
-.debt-client {
-    background: #ef693a;
-    font-family: cursive;
-    padding: 3px 7px;
-    font-size: 22px;
-    border-radius: 50%;
-    box-shadow: 3px 3px 5px -2px #333;
-}
-/* Конец Подменю, профиль собсвенника */
 
 /* Новости, главная страница */
 .news-margin {
@@ -2470,3 +2464,399 @@ tbody > tr > td > div.empty::before {
     padding: 10px !important;
 }
 /* End Modal window for load image at redactor */
+
+/* Квитанции */
+.receipts-page {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+}
+.period_title {
+    font-size: 12px;
+    color: #2d1d83;
+    padding: 20px 20px 0 20px;
+}
+.receipts_period {
+    padding: 0px;
+    border-right: 1px solid #ddd;
+    min-height: 700px;
+}
+.receipts_period-calendar {
+    display: flex;
+    padding: 0 10px 0px 10px;
+}
+.receipts_period-calendar span {
+    padding: 10px;
+}
+.receipte-of-lists {
+    margin: 0 0 20px 0;    
+}
+.receipte-of-lists > li {
+    position: relative;
+    padding: 20px 20px;
+    border-left: none;
+    border-right: none;
+}
+.receipte-of-lists > li.active,
+.receipte-of-lists > li.active:hover,
+.receipte-of-lists > li:hover {
+    box-shadow: 0px 0px 3em -8px #7139c5;
+    z-index: 2;
+    background: transparent;
+    border: none;
+    color: #000;
+}
+.receipte-of-lists__operations {
+    position: absolute;
+    right: 5%;
+    display: inline-grid;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+.receipte-of-lists__operations a {
+    padding: 5px 15px;
+    background: #1fd68d;
+    color: #fff;
+    border-radius: 12px;
+    margin: 2px 0;
+}
+.receipte-of-lists__operations a:hover {
+    background: #5747c3;
+}
+.receipte-month {
+    font-size: 12px;
+    color: #2d18b4;
+    font-weight: bold;
+}
+.receipte-number {
+    font-size: 14px;
+    font-weight: bold;
+}
+span.receipte-btn-pay-ok {
+    padding: 5px 10px;
+    background: #23dd6f;
+    color: #fff;
+    border-radius: 25px;
+}
+span.receipte-btn-pay-ok::before {
+    content: '\2713';
+}
+span.receipte-btn-pay-debt {
+    padding: 5px 10px;
+    background: #f0754a;
+    color: #fff;
+    border-radius: 25px;
+}
+span.receipte-btn-pay-debt::before {
+    content: '\2715';
+}
+a.receipte-btn-pay {
+    padding: 5px 10px;
+    background: #2d18b4;
+    color: #fff;
+    border-radius: 25px;
+}
+a.receipte-btn-dowload {
+    color: #ccc;
+    float: right;
+    position: absolute;
+    right: 20px;
+    top: 43%;
+}
+.receipts_body {
+    padding: 20px 10px;
+    min-height: 700px;
+}
+#default_modal-message__text {
+    font-size: 16px;
+    padding: 20px;
+    text-align: center;
+}
+.invalid-message-show {
+    max-width: 100%;
+    /*margin: 10px;*/
+    font-size: 12px;
+    color: #ef693a;
+}
+.invalid-message-show::before {
+    content: "\02716";
+    padding: 0 10px;    
+}
+#receipts-lists {
+    height: 600px;
+    overflow: auto;
+    min-height: 600px;
+    margin: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+#receipts-lists::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #ddd;
+}
+
+#receipts-lists::-webkit-scrollbar {
+    width: 12px;
+    background-color: #ddd;
+}
+
+#receipts-lists::-webkit-scrollbar-thumb {
+    border-radius: 12px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #524e53;
+}
+/* Конец Квитанции */
+
+/* Платежи */
+.payments-page {}
+.payment-pages_period {
+    display: flex;
+}
+.date-block {
+    display: flex;
+    margin: 0px -15px;
+}
+.payment_title {
+    font-size: 12px;
+    color: #2d1d83;
+    padding:  0px 0px 0px 10px;
+}
+.payments-page__date-block {
+    display: flex;
+}
+.date-block span {
+    padding: 10px;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+input[name="date_start-period-pay"],
+input[name="date_end-period-pay"] {
+    box-shadow: none;
+    border: none;
+    border-bottom: 1px solid #ddd;    
+}
+input[name="date_start-period-pay"]:focus,
+input[name="date_end-period-pay"]:focus {
+    border-color: #8b709d;
+    outline: 0;
+    box-shadow: none;
+}
+input[name="date_start-period-pay"]::placeholder,
+input[name="date_end-period-pay"]::placeholder {
+    text-transform: capitalize;
+}
+
+.btn-show-info {
+    height: 45px;
+    margin: 0 30px;
+    border-radius: 12px;
+    border: 1px solid #2d18b4;
+    background-color: #fff;
+    color: #3436ae;
+    font-size: 12px;
+    letter-spacing: 0.9px;
+    text-transform: uppercase;
+    font-weight: bold;
+    outline: none;
+}
+.btn-edit-reading {
+    height: 48px;
+    width: 220px;
+    border-radius: 12px;
+    border: 1px solid #2d18b4;
+    background-color: #fff;
+    color: #3436ae;
+    font-size: 12px;
+    letter-spacing: 0.9px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.btn-show-info:hover,
+.btn-edit-reading:hover,
+.btn-send-request:hover {
+    border-radius: 12px;
+    border: 1px solid #2d18b4;
+    background-color: #2d18b4;
+    color: #fff;
+    box-shadow: 0 2px 5px 2px rgba(0,0,0,0.26);    
+}
+.payments-page table {
+    margin-top: 50px;
+}
+.payment_btn-pay {
+    background: #2d18b4;
+    padding: 15px 45px;
+    border-radius: 12px;
+    font-size: 10px;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 0.07em;
+}
+.payment_btn-pay:hover {
+    background-color: #2D18B4;
+    box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
+    color: #FFFFFF;
+}
+.payment-ok {
+    color: #23dd6f;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+}
+.payment-debt {
+    color: #f0754a;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+}
+/* Кoнец Платежи */
+
+/* Приборы учета */
+.counters-page {}
+.options-panel {
+    margin-bottom: 20px;
+}
+.btn-save-reading {
+    height: 48px;
+    width: 220px;
+    border-radius: 12px;
+    border: 1px solid #2d18b4;
+    background-color: #2d18b4;
+    color: #fff;
+    font-size: 12px;
+    letter-spacing: 0.9px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.btn-save-reading:hover {
+    border-radius: 12px;
+    border: 1px solid #2d18b4;
+    background-color: #2d18b4;
+    color: #fff;
+    box-shadow: 0 2px 5px 2px rgba(0,0,0,0.26);    
+}
+.btn-save-reading[disabled],
+.btn-edit-reading[disabled] {
+    cursor: no-drop;
+    opacity: 0.5;
+}
+.counters-page table {}
+.counter-name {
+    font-size: 12px;
+}
+.counter-number {
+    font-size: 12px;
+    font-weight: bold;
+    color: #2d18b4;    
+}
+.create-send-request {
+    background-color: #fff;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    padding: 10px 25px;
+    text-transform: uppercase;
+    color: #2d18b4;
+    font-size: 12px;
+    font-weight: bold;
+}
+.create-send-request:hover {
+    border: 1px solid #2d18b4;
+    color: #2d18b4;
+}
+.reading-input {
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    padding: 10px 10px;
+    color: #2d18b4;
+    font-size: 12px;
+    font-weight: bold;    
+}
+.reading-input:focus {
+    border: 1px solid #2d18b4;
+    color: #2d18b4;
+    outline: none;    
+}
+.counters-message {
+    margin: 0;
+    padding: 0;
+}
+.counters-message p.title {
+    padding: 40px 0 0 0;
+    color: #ef693a;
+    font-size: 24px;
+    letter-spacing: 1.05px;
+}
+.counters-message p.text {
+    color: #2d18b4;
+    margin-bottom: 40px;
+    text-align: justify;
+}
+.block-edit-reading {
+    background-color: #fce7df !important; 
+}
+.block-edit-reading span {
+    color: #ef693a;
+    font-weight: bold;
+    font-size: 12px;
+    letter-spacing: 0.23px;
+}
+.block-edit-reading span.message-request {
+    font-size: 12px;
+    font-weight: normal;
+    color: #000;
+}
+.counters-page .managers-table {
+    margin-top: 0;
+}
+.send-indication-counter {
+    background: #2d18b4;
+    border: none;
+    color: #fff;
+    border-radius: 12px;
+    letter-spacing: 2px;
+    font-weight: normal;
+    outline: none;
+}
+.send-indication-counter:hover,
+.send-indication-counter:focus,
+.send-indication-counter:active {
+    background: #4326b2;
+    color: #fff;
+}
+.send-indication-counter[disabled]:hover {
+    color: #fff;
+}
+label[class^='error-ind-'] {
+    color: #ef693a;
+    font-weight: normal;
+    text-align: center;
+}
+.input-indication {
+    display: grid;    
+}
+.payment-from_control_summ {
+    padding: 20px;
+    text-align: center;
+    font-size: 14px;
+    color: #2d18b4;
+}
+/* Конец Приборы учета */
+
+/* Лицевой счет */
+.paid-account-page {
+    border-radius: 12px;
+    border: 1px solid #ddd;
+}
+.table-account thead {
+    font-weight: bold;
+    padding: 20px 0;
+}
+.table-account > tbody > tr > td:first-child {
+    width: 30%;
+}
+.table-account > thead > tr > td,
+.table-account > tbody > tr > td {
+    padding: 20px;
+}
+.paid-account-page_btn {
+    padding: 20px;
+}
+/* Конец Лицевой счет */
