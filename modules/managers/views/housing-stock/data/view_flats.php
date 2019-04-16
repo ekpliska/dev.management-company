@@ -1,6 +1,7 @@
 <?php
 
     use yii\helpers\Html;
+    use yii\helpers\Url;
     use app\helpers\FormatHelpers;
 
 /* 
@@ -31,7 +32,13 @@
         
         <div class="flats-info__info">
             <div class="flats-info__info_image">
-                <?= FormatHelpers::formatUserPhoto($flat['user_photo']) ?>
+                <a href="<?= Url::to([
+                    'clients/view-client', 
+                    'client_id' => $flat['account']['client']['clients_id'], 
+                    'account_number' => $flat['account']['account_number']]) ?>">
+                
+                    <?= FormatHelpers::formatUserPhoto($flat['user_photo']) ?>
+                </a>
             </div>
             <div class="flats-info__info_content">
                 <span>Собственник</span>

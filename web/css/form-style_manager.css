@@ -1105,6 +1105,23 @@ input:checked + .slider-orange {
 }
 /* End Multiple Form at Settings */
 
+/* Settings block, input */ 
+.settings-input {
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    width: 100%;
+    outline: none;
+}
+.settings-input:hover,
+.settings-input:focus {
+    border: 1px solid #2d18b4;
+}
+.settings-input::placeholder  {
+    color: #777;
+}
+/* End Settings block, input */ 
+
 /* */
 .upload-btn-wrapper-multi {
 }
