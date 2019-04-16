@@ -364,61 +364,6 @@ $(document).ready(function() {
         });
     });
 
-
-//    /*
-//     * Запрос на удаление профиля сотрудника (Диспетчер)
-//     */
-//    $('.delete_disp__del').on('click', function(){
-//        var employerId = $(this).data('employer');
-//        $.ajax({
-//            url: 'query-delete-dispatcher',
-//            method: 'POST',
-//            dataType: 'json',
-//            data: {
-//                employerId: employerId,
-//            },
-//            success: function(response) {
-//                if (response.isClose === true) {                
-//                    $('#delete_disp_manager_message').modal('show');
-//                } else if (response.isClose === false) {
-//                    console.log('все заявки закрыты');
-//                }
-//            },
-//            error: function(){
-//                console.log('Error #2000');
-//            },
-//        });
-//    });
-//
-//    /*
-//     * Запрос на удаление профиля сотрудника (Диспетчер)
-//     */
-//    $('.delete_spec__del').on('click', function(){
-//        var employerId = $(this).data('employer');
-//        $.ajax({
-//            url: 'query-delete-specialist',
-//            method: 'POST',
-//            dataType: 'json',
-//            data: {
-//                employerId: employerId,
-//            },
-//            success: function(response) {
-//                if (response.isClose === true) {                
-//                    $('#delete_spec_manager_message').modal('show');
-//                } else if (response.isClose === false) {
-//                    console.log('все заявки закрыты');
-//                }
-//            },
-//            error: function(){
-//                console.log('Error #2000');
-//            },
-//        });
-//    });
-//    
-//    /*
-//     * Поиск по Специалистам
-//     */
-
     /*
      * Поиск по Диспетчерам
      */

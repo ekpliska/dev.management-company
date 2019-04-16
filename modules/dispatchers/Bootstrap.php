@@ -37,11 +37,11 @@ class Bootstrap implements BootstrapInterface {
                 'dispatchers/profile' => 'dispatchers/profile/index',
                 
                 // Собсвенники
-                'dispatchers/clients/view-client/<client_id:[\d-]+>/<account_number:[\w-]+>' => 'dispatchers/clients/view-client',
-                'dispatchers/clients/receipts-of-hapu/<client_id:[\d-]+>/<account_number:[\w-]+>' => 'dispatchers/clients/receipts-of-hapu',
-                'dispatchers/clients/payments/<client_id:[\d-]+>/<account_number:[\w-]+>' => 'dispatchers/clients/payments',
-                'dispatchers/clients/counters/<client_id:[\d-]+>/<account_number:[\w-]+>' => 'dispatchers/clients/counters',
-                'dispatchers/clients/account-info/<client_id:[\d-]+>/<account_number:[\w-]+>' => 'dispatchers/clients/account-info',
+                'dispatchers/clients/view-client/<client_id:\d+>/<account_number:\d+>' => 'dispatchers/clients/view-client',
+                'dispatchers/clients/receipts-of-hapu/<client_id:\d+>/<account_number:\w+>' => 'dispatchers/clients/receipts-of-hapu',
+                'dispatchers/clients/payments/<client_id:\d+>/<account_number:\w+>' => 'dispatchers/clients/payments',
+                'dispatchers/clients/counters/<client_id:\d+>/<account_number:\w+>' => 'dispatchers/clients/counters',
+                'dispatchers/clients/account-info/<client_id:\d+>/<account_number:\w+>' => 'dispatchers/clients/account-info',
                 'dispatchers/clients' => 'dispatchers/clients/index',
                 
             ]

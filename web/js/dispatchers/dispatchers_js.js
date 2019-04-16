@@ -226,7 +226,7 @@ $(document).ready(function(){
         });
     });
    
-    /* Кастомизация элеметнов управления формой, лицевой счет в профите пользователя */
+    /* Кастомизация элеметнов управления формой, категории услуг */
     $(".custom-select-dark").each(function() {
         var classes = $(this).attr("class"),
             id = $(this).attr("id"),
@@ -243,7 +243,7 @@ $(document).ready(function(){
         
         $(this).find("option").each(function() {
             var classSelection = ($(this).attr("value") == currentValue) ? 'selection-dark ' : '';            
-            template += '<a href="' + currentAction + '?client_id=' + currentClient + '&account_number=' + $(this).text() + '" class="custom-option-dark ' + classSelection + $(this).attr("class") 
+            template += '<a href="' + $(this).text() + '" class="custom-option-dark ' + classSelection + $(this).attr("class") 
                         + '" data-value="' + $(this).attr("value") + '">' 
                         + $(this).html() + '</a>';
             

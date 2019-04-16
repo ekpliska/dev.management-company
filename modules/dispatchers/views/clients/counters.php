@@ -35,12 +35,15 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
                 <div id="panel-search">
                     <?= DatePicker::widget([
                             'name' => 'date_start-period-pay',
+                            'class' => '__width-small',
                             'type' => DatePicker::TYPE_INPUT,
-                            'value' => date('F-Y'),
-                            'layout' => '<span class="input-group-text">Birth Date</span>',
+                            'language' => 'ru',
+                            'options' => [
+                                'placeholder' => Yii::$app->formatter->asDate(time(), 'LLLL-yyyy')
+                            ],
                             'pluginOptions' => [
                                 'autoclose'=>true,
-                                'format' => 'MM-yyyy'
+                                'format' => 'MM-yyyy',
                             ]
                         ]);        
                     ?>
