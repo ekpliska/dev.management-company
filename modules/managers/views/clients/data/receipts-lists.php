@@ -6,7 +6,7 @@
  * Рендер вида Квитанции ЖКУ
  */
 ?>
-<?php if (isset($receipts_lists)) : ?>
+<?php if (!empty($receipts_lists) || count($receipts_lists) > 0) : ?>
 <ul class="list-group receipte-of-lists">
     <?php foreach ($receipts_lists as $key => $receipt) : ?>
         <?php

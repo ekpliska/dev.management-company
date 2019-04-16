@@ -1,6 +1,5 @@
 <?php
 
-    use yii\helpers\Url;
     use yii\helpers\Html;
     use app\modules\clients\widgets\ModalWindows;
 
@@ -8,7 +7,7 @@
  * Рендер вида Квитанции ЖКУ Собственника
  */
 // Текущая дата (Год и номер месяца)
-$current_date = date('Y-m');
+$current_date = date('Y-m', strtotime("-1 month"));
 ?>
 <?php if (!empty($receipts_lists) || count($receipts_lists) > 0) : ?>
 <ul class="list-group receipte-of-lists">

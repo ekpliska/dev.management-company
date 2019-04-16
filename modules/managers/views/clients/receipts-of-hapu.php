@@ -72,7 +72,7 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
                 <?php if (!empty($receipts_lists)) : ?> 
                     <?php 
                         // Формируем путь в PDF квитацнии на сервере
-                        $file_path = Yii::getAlias('@web') . "/receipts/" . $account_number . "/" . $receipts_lists[0]['Расчетный период'] . ".pdf";
+                        $file_path = Yii::getAlias('@web') . "receipts/" . $account_number . "/" . $receipts_lists[0]['Расчетный период'] . ".pdf";
                     ?>
                     <?php if (!file_exists($file_path)) : ?>
                         <div class="notice error">
@@ -81,7 +81,7 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
                             </p>
                         </div>
                     <?php else : ?>
-                        <iframe src="<?= Url::to($file_path) ?>" style="width: 100%; height: 670px;" frameborder="0">
+                        <iframe src="<?= Url::to($file_path, true) ?>" style="width: 100%; height: 670px;" frameborder="0">
                             Ваш браузер не поддерживает фреймы
                         </iframe>
                     <?php endif; ?>
