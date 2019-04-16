@@ -28,7 +28,10 @@
         <?= Html::a('Профиль', ['profile/index'], ['class' => '']) ?>
     </li>
     <li>
-        <?= Html::a('Уведомления', ['/'], ['class' => '']) ?>
+        <?= Html::a('Выйти', ['/site/logout'], [
+                'data' => [
+                    'method' => 'post'], 
+                    'class' => '']) ?>
     </li>
 </ul>
 <?php endif; ?>

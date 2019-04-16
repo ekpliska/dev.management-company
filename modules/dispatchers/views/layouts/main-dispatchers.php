@@ -32,9 +32,6 @@ DispatchersAsset::register($this);
             <?= $content ?>
         </div>        
     </div>
-
-    <?php // $this->beginContent('@app/modules/dispatchers/views/layouts/footer.php'); ?>
-    <?php // $this->endContent(); ?>
     <?php $this->endBody(); ?>
     
 </body>
