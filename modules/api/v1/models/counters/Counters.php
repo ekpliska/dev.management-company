@@ -71,7 +71,7 @@ class Counters extends Model {
     
     public function getCounterInfo($id_counter) {
         
-        $current_date = date('Y-m-d');        
+        $current_date = date('Y-m-d');
         $counter_info = $this->_counters;
         $_key = 0;
 
