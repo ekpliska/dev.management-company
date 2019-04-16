@@ -152,8 +152,8 @@ $this->params['breadcrumbs'][] = 'Новая запись [Сотрудник]';
         <?php if ($role == 'dispatcher') : ?>
             <div class="spam-agree-txt text-center">
                 <div class="dispatch-privileges-block">
-                    <?= $form->field($model, 'permission_list[]', ['template' => '{input}{label}'])
-                            ->checkbox(['name' => "permission_list[{$permissions_list['value']}]"], false)->label($permissions_list['name']) ?> 
+                    <?= $form->field($model, 'is_new', ['template' => '{input}{label}'])
+                            ->checkbox([], false)->label() ?>
                 </div>
             </div>
         <?php endif; ?>

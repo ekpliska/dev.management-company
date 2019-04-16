@@ -204,9 +204,7 @@ $this->params['breadcrumbs'][] = $employee_info->fullName;
                 
                 <?php if ($type == 'dispatcher' && Yii::$app->user->can('EmployeesEdit')) : ?>
                     <div class="dispatch-privileges-block">
-                        <?= $form->field($user_info, 'permission_list[]', ['template' => '{input}{label}'])
-                                ->checkbox(['name' => "permission_list[{$permissions_list['value']}]"], false)->label($permissions_list['name']) ?> 
-                        
+                        <?= $form->field($user_info, 'is_new', ['template' => '{input}{label}'])->checkbox([], false)->label() ?>
                     </div>
                 <?php endif; ?>
                 

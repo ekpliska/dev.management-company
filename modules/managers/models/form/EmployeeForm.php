@@ -135,7 +135,7 @@ class EmployeeForm extends Model {
                 $user->setRole($role, $user->user_id);
                 
                 // Устанавливаем права на добавление новостей
-                if ($this->is_new === 1) {
+                if ($this->is_new == 1) {
                     $permission_news = Yii::$app->authManager->getPermission('CreateNewsDispatcher');
                     Yii::$app->authManager->assign($permission_news, $user->user_id);
                 }
