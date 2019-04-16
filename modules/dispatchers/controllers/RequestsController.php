@@ -165,7 +165,7 @@ class RequestsController extends AppDispatchersController {
                 return $this->redirect(Yii::$app->request->referrer);
             }
             
-            Yii::$app->session->setFlash('success', ['message' => 'Изменения в теле заявки были успешно сохранены']);
+            Yii::$app->session->setFlash('success', ['message' => 'Заявка была успешно сохранена']);
             return $this->redirect(Yii::$app->request->referrer);
                         
         }

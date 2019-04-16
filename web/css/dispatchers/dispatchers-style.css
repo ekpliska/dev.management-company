@@ -2389,3 +2389,84 @@ tbody > tr > td > div.empty::before {
 }
 .modal-body span#disp-fullname {}
 /* Конец Переопреденное модальное окно бутстрапа */
+
+/* Всплывающие уведовления */
+.alert-message[data-notification-status="success"] {
+    border-left: 7px solid #1fd68d;
+}
+.alert-message[data-notification-status="error"] {
+    border-left: 7px solid #ff7d7d;
+}
+.alert-message {
+    position: fixed;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    color: #454545;
+    background: #fff;
+    font-size: 12px;
+    line-height: 1.3;
+    box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.35);
+    width: 350px;
+    margin: 40px 20px;
+    /*top: 20%;*/
+    right: 0;
+    cursor: default;
+}
+.alert-message::before {
+    content: '\2716';
+    display: block;
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+    margin-right: 20px;
+    font-size: 24px;
+}
+.alert-message[data-notification-status="success"]:before {
+    color: #1fd68d;
+}
+.alert-message[data-notification-status="error"]:before {
+    color: #ff7d7d;
+}
+/* Конец Всплывающие уведовления */
+
+/* Modal window for load image at redactor */
+#redactor-modal {
+    background: linear-gradient(180.67deg, #39284E 0%, rgba(10,8,8,0.7) 100%);
+    border-radius: 12px;
+}
+#redactor-modal header {
+    color: #fff;
+    font-weight: normal;
+}
+#redactor-droparea {
+    border: 2px dashed #8b709d;
+}
+#redactor-modal-close {
+    color: #FF1760;
+}
+#redactor-modal-close:hover {
+    color: #fff;
+}
+#redactor-modal section {
+    padding: 10px;
+}
+#redactor-modal label {
+    color: #fff;
+    font-weight: 100;
+}
+#redactor-modal footer button,
+#redactor-modal footer button.redactor-modal-delete-btn,
+#redactor-modal footer button.redactor-modal-action-btn {
+    background-color: transparent;
+    border: 1px solid #ddd;
+    color: #fff;
+    border-radius: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+#redactor-modal footer {
+    padding: 10px !important;
+}
+/* End Modal window for load image at redactor */

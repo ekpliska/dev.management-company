@@ -83,8 +83,8 @@
                     'settings' => [
                         'lang' => 'ru',
                         'minHeight' => 400,
-                        'imageUpload' => Url::to(['/managers/news/image-upload']),
-                        'imageDelete' => Url::to(['/managers/news/file-delete']),
+                        'imageUpload' => Url::to(['/dispatchers/news/image-upload']),
+                        'imageDelete' => Url::to(['/dispatchers/news/file-delete']),
                         'plugins' => [
                             'fullscreen',
                             'imagemanager',

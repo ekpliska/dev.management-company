@@ -57,14 +57,14 @@ class NewsController extends AppDispatchersController {
             
             'image-upload' => [
                 'class' => 'vova07\imperavi\actions\UploadFileAction',
-                'url' => Url::base() . '/web/upload/news', // Directory URL address, where files are stored.
+                'url' => Url::base() . Yii::getAlias('@web') . '/upload/news', // Directory URL address, where files are stored.
                 'path' => '@webroot/upload/news', // Or absolute path to directory where files are stored.
             ],
             
             'file-delete' => [
                 'class' => 'vova07\imperavi\actions\DeleteFileAction',
-                'url' => Url::base() . '/web/upload/news', // Directory URL address, where files are stored.
-                'path' => '/var/www/my-site.com/dev.management-company/web/upload/news', // Or absolute path to directory where files are stored.
+                'url' => Url::base() . Yii::getAlias('@web') . '/upload/news', // Directory URL address, where files are stored.
+                'path' => '@webroot/upload/news', // Or absolute path to directory where files are stored.
             ],            
          
        ]; 

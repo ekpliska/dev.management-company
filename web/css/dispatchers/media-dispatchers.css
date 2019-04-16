@@ -239,7 +239,7 @@
 }
 @media screen and (max-width: 1400px) {
     .news-item__title {
-        height: 90px;
+        height: 100px;
     }
     .news-item__image {
         height: 230px;

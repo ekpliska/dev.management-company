@@ -16,7 +16,6 @@ $(document).ready(function(){
     $('.notice__user_block').on('click', function() {
         var userID = $(this).data('user');
         var type = $(this).data('type');
-        console.log(userID + ' ' + type);
         var allBlock = $('.notice__user_block');
         allBlock.removeClass('notice__user__active');
         $(this).addClass('notice__user__active');
@@ -160,8 +159,6 @@ $(document).ready(function(){
                     $('.badge-page').addClass('req-badge-reject-page');
                     $('.badge-page span:first-child').text(response.status_name);
                 });                
-                
-                console.log(response);
             },
             error: function() {
                 $('#confirm-request-error').modal('show');
@@ -225,9 +222,7 @@ $(document).ready(function(){
                 $('#flats_list').html(response.flats);
                 $('#files_list').html(response.files);
             },
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.log(textStatus);
-            }
+            error: function (jqXHR, textStatus, errorThrown) {}
         });
     });
    
