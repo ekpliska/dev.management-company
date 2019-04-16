@@ -7,15 +7,13 @@
 
 <?php foreach ($results as $key => $result) : ?>
 <td>
-    <p class="title">
-        Проголосовало 
-        <span class="type"><?= $key ?></span>
-        <span class="count pull-right">
-            <?= $result ?>%
+    <div class="result-item">
+        <div class="<?= round($result, 0) != 0 ? 'result-count-is' : 'result-count' ?>" style="width: <?= round($result, 0) != 0 ? round($result, 0) : 100 ?>%">
+        </div>
+        <span class="title <?= round($result, 0) != 0 ? '' : '' ?>">
+            <?= $key . ' ' . round($result, 0) ?>%
         </span>
-    </p>
+    </div>
 </td>
 <?php endforeach; ?>
 <td></td>
-
-

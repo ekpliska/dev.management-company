@@ -35,7 +35,8 @@ class Vote extends Widget {
             $vote = (new \yii\db\Query())
                     ->from('answers')
                     ->where(['answers_questions_id' => $this->question_id])
-                    ->andWhere(['answers_vote' => $key])->count();
+                    ->andWhere(['answers_vote' => $key])
+                    ->count();
             // Если деление на 0
             $result[$answer] = $this->count == 0 ? '0' : ($vote * 100) / $this->count;
             $results = $result;

@@ -683,7 +683,6 @@ p.category-select-label {
     box-sizing: border-box;
     box-shadow: 0 2px 1px rgba(0,0,0,.07);
     background: #fff;
-    transition: all .4s ease-in-out;
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
