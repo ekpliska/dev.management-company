@@ -92,6 +92,9 @@ class PermissionsList {
         
     }
     
+    /*
+     * Получить роли администратора
+     */
     public static function getUserPermission($user_id) {
         
         $permission_list = [];
@@ -101,12 +104,26 @@ class PermissionsList {
                 ->from('auth_assignment')
                 ->where(['user_id' => $user_id])
                 ->all();
-        
+
         foreach ($query as $key => $value) {
             $permission_list[$value['item_name']] = $key;
         }
         
         return $permission_list;
         
+    }
+    
+    /*
+     * 
+     */
+    public function canAddNews($user_id) {
+        
+        $query = (new \yii\db\Query)
+                ->from('auth_assignment')
+                ->where(['user_id' => $user_id])
+                ->andWhere(['item_name' => 'CreateNewsDispatcher'])
+                ->all();
+        
+        return $query ? true : false;
     }
 }

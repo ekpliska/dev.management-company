@@ -204,7 +204,10 @@ $this->params['breadcrumbs'][] = $employee_info->fullName;
                 
                 <?php if ($type == 'dispatcher' && Yii::$app->user->can('EmployeesEdit')) : ?>
                     <div class="dispatch-privileges-block">
-                        <?= $form->field($user_info, 'is_new', ['template' => '{input}{label}'])->checkbox([], false)->label() ?>
+                        <?php $can_add_news = $current_permissions; ?>
+                        <?= $form->field($user_info, 'is_new', ['template' => '{input}{label}'])
+                                ->checkbox(['checked' => $can_add_news], false)
+                                ->label() ?>
                     </div>
                 <?php endif; ?>
                 

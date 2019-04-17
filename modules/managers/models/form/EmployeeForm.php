@@ -90,7 +90,7 @@ class EmployeeForm extends Model {
             [['photo'], 'file', 'extensions' => 'png, jpg, jpeg'],
             [['photo'], 'image', 'maxWidth' => 510, 'maxHeight' => 510],
             
-            ['permission_list', 'safe'],
+            [['permission_list', 'is_new'], 'safe'],
         ];
     }
     
@@ -135,7 +135,7 @@ class EmployeeForm extends Model {
                 $user->setRole($role, $user->user_id);
                 
                 // Устанавливаем права на добавление новостей
-                if ($this->is_new == 1) {
+                if ($this->is_new) {
                     $permission_news = Yii::$app->authManager->getPermission('CreateNewsDispatcher');
                     Yii::$app->authManager->assign($permission_news, $user->user_id);
                 }

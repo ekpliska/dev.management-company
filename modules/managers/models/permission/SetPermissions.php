@@ -50,9 +50,12 @@ class SetPermissions extends User {
                 $permission_name = Yii::$app->authManager->getPermission($key);
                 Yii::$app->authManager->assign($permission_name, $user_id);
             }
+        } elseif ($array_permissions == true) {
+            $permission_name = Yii::$app->authManager->getPermission('CreateNewsDispatcher');
+            Yii::$app->authManager->assign($permission_name, $user_id);
         }
         
-        return;
+        return true;
         
         
     }

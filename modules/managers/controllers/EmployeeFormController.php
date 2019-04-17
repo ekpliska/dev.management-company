@@ -57,8 +57,6 @@ class EmployeeFormController extends AppManagersController {
         if ($new_employee == 'administrator') {
             // Формируем список для натсройки прав доступа
             $permissions_list = PermissionsList::getPermissionList($for_admnin = true);
-        } elseif ($new_employee == 'dispatcher') {
-            $permissions_list = PermissionsList::getPermissionList($for_admnin = false);
         }
         
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
@@ -116,20 +114,17 @@ class EmployeeFormController extends AppManagersController {
         
         // Список прав пользователя (для checkBoxList)
         if ($type == 'administrator') {
-            // Формируем список для натсройки прав доступа
+            // Формируем список для настройки прав доступа
             $permissions_list = PermissionsList::getPermissionList($for_admnin = true);
+            // Получаем массив текущих прав пользователя
+            $current_permissions = PermissionsList::getUserPermission($user_info->id);
         } elseif ($type == 'dispatcher') {
-            $permissions_list = PermissionsList::getPermissionList($for_admnin = false);
+            // Проверяем права на добаление Новостей у Диспетчера
+            $current_permissions = PermissionsList::canAddNews($user_info->id);
         }
-        
-        // Получаем массив текущих прав пользователя
-        $current_permissions = PermissionsList::getUserPermission($user_info->id);
         
         // Сохраняем данные с формы
         if ($user_info->load(Yii::$app->request->post()) && $employee_info->load(Yii::$app->request->post())) {
-            
-            // Получаем массив разрешений для администратора
-            $permission_list_post = Yii::$app->request->post()['permission_list'];
             
             $is_valid = $user_info->validate();
             $is_valid = $employee_info->validate() && $is_valid;
@@ -139,7 +134,15 @@ class EmployeeFormController extends AppManagersController {
                 $user_info->uploadPhoto($file);
                 $employee_info->save();
                 
-                $set_permissions = SetPermissions::changePermissions($user_info->id, $role = $type, $permission_list_post);
+                if ($type == 'administrator') {
+                    // Получаем массив разрешений для администратора
+                    $permission_list_post = Yii::$app->request->post()['permission_list'];
+                    $set_permissions = SetPermissions::changePermissions($user_info->id, $role = $type, $permission_list_post);
+                } elseif ($type == 'dispatcher') {
+                    // Получаем массив разрешений для Диспетчера
+                    $permission_list_post = Yii::$app->request->post()['User']['is_new'];
+                    $set_permissions = SetPermissions::changePermissions($user_info->id, $role = $type, $permission_list_post);
+                }
                 
             } else {
                 Yii::$app->session->setFlash('error', ['message' => 'Во время обновления профиля произошла ошибка. Обновите страницу и повторите действие заново.']);
@@ -158,7 +161,7 @@ class EmployeeFormController extends AppManagersController {
             'post_list' => $post_list,
             'role' => $role,
             'permissions_list' => isset($permissions_list) ? $permissions_list : null,
-            'current_permissions' => $current_permissions,
+            'current_permissions' => $current_permissions ? $current_permissions : null,
         ]);
         
     }
