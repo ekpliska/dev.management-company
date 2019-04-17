@@ -103,6 +103,13 @@ class User extends ActiveRecord implements IdentityInterface
                 'message' => 'Указанный номер телефона в системе зарегистрирован',
             ],
             
+            ['user_email', 'unique', 
+                'targetClass' => self::className(),
+                'targetAttribute' => 'user_email',
+                'message' => 'Указанный электронный адрес в системе зарегистрирован',
+            ],
+            
+            
 //            [['user_email'], 'required', 'on' => self::SCENARIO_EDIT_CLIENT_PROFILE],
             
             [['user_check_email'], 'boolean'],
