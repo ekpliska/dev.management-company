@@ -37,7 +37,7 @@ class CountersController extends Controller {
     public function verbs() {
         return [
             'view' => ['get'],
-            'get-counter' => ['get'],
+            'get-counter' => ['post'],
         ];
     }
     
@@ -58,6 +58,7 @@ class CountersController extends Controller {
     
     /*
      * Получить показания по текущему прибору учета
+     * {"month": "04", "year": "2019"}
      */
     public function actionGetCounter($account, $id_counter) {
         
@@ -66,7 +67,9 @@ class CountersController extends Controller {
             return ['success' => false];
         }
         
-        $counters = new Counters($personal_account);
+        $data_post = Yii::$app->request->getBodyParams();
+        
+        $counters = new Counters($personal_account, $data_post['month'], $data_post['year']);
         return $counters->getCounterInfo($id_counter);
         
     }

@@ -37,7 +37,7 @@ $current_date = date('Y-m-d');
                             <p class="counter-number"><?= $indication['Регистрационный номер прибора учета'] ?></p>
                         </td>
                         <td><?= Yii::$app->formatter->asDate($indication['Дата следующей поверки'], 'long') ?></td>
-                        <td><?= Yii::$app->formatter->asDate($indication['Дата снятия предыдущего показания'], 'long') ?></td>
+                        <td><?= Yii::$app->formatter->asDate($indication['Дата снятия показания'], 'long') ?></td>
                         <td><?= $indication['Предыдущие показание'] ?></td>
                         <?php if ($data_check == true) : ?>
                             <td>

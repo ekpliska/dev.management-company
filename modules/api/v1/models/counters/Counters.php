@@ -20,13 +20,16 @@ class Counters extends Model {
     /*
      * Получаем список приборов учета
      */
-    public function __construct(PersonalAccount $account) {
+    public function __construct(PersonalAccount $account, $month = null, $year = null) {
+        
+        $_month = $month ? $month : date('m');
+        $_year = $year ? $year : date('Y');
         
         // Формируем запрос для текущего расчетного перирода
         $array_request = [
             'Номер лицевого счета' => $account->account_number,
-            'Номер месяца' => date('m'),
-            'Год' => date('Y'),
+            'Номер месяца' => $_month,
+            'Год' => $_year,
         ];
         
         $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);

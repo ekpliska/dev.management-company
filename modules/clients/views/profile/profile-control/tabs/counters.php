@@ -36,7 +36,7 @@ $current_date = date('Y-m-d');
                             <?= Yii::$app->formatter->asDate($indication['Дата следующей поверки'], 'long') ?>
                         </td>
                         <td>
-                            <?= Yii::$app->formatter->asDate($indication['Дата снятия предыдущего показания'], 'long') ?>
+                            <?= Yii::$app->formatter->asDate($indication['Дата снятия показания'], 'long') ?>
                         </td>
                         <td>
                             <?= $indication['Предыдущие показание'] ?>

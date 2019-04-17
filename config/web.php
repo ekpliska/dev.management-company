@@ -259,7 +259,7 @@ $config = [
                     'pluralize' => false,
                     'controller' => 'v1/counters',
                     'extraPatterns' => [
-                        'GET get-counter/<account:[\w-]+>/<id_counter:[\w-]+>' => 'get-counter',
+                        'POST get-counter/<account:[\w-]+>/<id_counter:[\w-]+>' => 'get-counter',
                         'GET view/<account:[\w-]+>' => 'view',
                     ]
                 ],                
