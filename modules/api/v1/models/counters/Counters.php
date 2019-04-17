@@ -59,6 +59,7 @@ class Counters extends Model {
                 'id_counter' => $counter['ID'],
                 'type_counter' => $counter['Тип прибора учета'],
                 '_type' => TypeCounters::getTypeCounterMobile($counter['Тип прибора учета']),
+                '_status' => strtotime($counter['Дата следующей поверки']) > time() ? false : true,
             ];
             
             $counters_items[] = $counter_item;
@@ -74,8 +75,12 @@ class Counters extends Model {
     
     public function getCounterInfo($id_counter) {
         
-        $current_date = date('Y-m-d');
         $counter_info = $this->_counters;
+        if (empty($counter_info)) {
+            return ['success' => false];
+        }
+        
+        $current_date = date('Y-m-d');
         $_key = 0;
 
         foreach ($counter_info as $key => $counter) {
@@ -102,6 +107,56 @@ class Counters extends Model {
         ];
         
         return $counter_info;
+    }
+    
+    /*
+     * Отправка показаний
+     */
+    public function setIndication($data) {
+        
+        if (!array_key_exists('counter_id', $data) || !array_key_exists('indication', $data)) {
+            return ['message' => 'Данные показаний не корректны.'];
+        }
+        
+        $counter_info = $this->_counters;
+        if (empty($counter_info)) {
+            return ['success' => false];
+        }
+        
+        $_key = 0;
+        foreach ($counter_info as $key => $counter) {
+            if ($counter['ID'] != $data['counter_id']) {
+                unset($counter_info[$key]);
+            } else {
+                $_key = $key;
+            }
+        }
+        
+        // Если текущее показание не указано, то Новое показание сравниваем с предыдущим
+        if (empty($counter_info[$_key]['Текущее показание']) && $data['indication'] > $counter_info[$_key]['Предыдущие показание']) {
+            return ['message' => "Ошибка подачи показания, предыдущее показание {$counter_info[$_key]['Предыдущие показание']}"];
+        } 
+        // Если текущее показание указано, то Новое показание сравниваем с текущим
+        elseif ($counter_info[$_key]['Текущее показание'] && $data['indication'] < $counter_info[$_key]['Текущее показание']) {
+            return ['message' => "Ошибка подачи показания, предыдущее показание {$counter_info[$_key]['Текущее показание']}"];
+        }
+        
+        // Отправляем показания
+        $array = [
+            "ID" => $data['counter_id'],
+            "Дата снятия показания" => date('Y-m'),
+            "Текущее показание" => $data['indication'],
+        ];
+    
+        $array_request['Приборы учета'] = [
+            $array,
+        ];
+        
+        $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
+        $result = Yii::$app->client_api->setCurrentIndications($data_json);
+        
+        return $result;
+        
     }
     
 }

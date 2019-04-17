@@ -17,7 +17,7 @@ class CountersController extends Controller {
     public function behaviors() {
         
         $behaviors = parent::behaviors();
-        $behaviors['authenticator']['only'] = ['view', 'get-counter'];
+        $behaviors['authenticator']['only'] = ['view', 'get-counter', 'send-indications'];
         $behaviors['authenticator']['authMethods'] = [
               HttpBasicAuth::className(),
               HttpBearerAuth::className(),
@@ -38,6 +38,7 @@ class CountersController extends Controller {
         return [
             'view' => ['get'],
             'get-counter' => ['post'],
+            'send-indications' => ['post'],
         ];
     }
     
@@ -75,6 +76,26 @@ class CountersController extends Controller {
     }
     
     /*
+     * Отправка показаний
+     * {"counter_id": "1", "indication": "4"}
+     */
+    public function actionSendIndications($account) {
+
+        $personal_account = $this->findAccount($account);
+        if (!$personal_account) {
+            return ['success' => false];
+        }
+
+        $data_post = Yii::$app->request->getBodyParams();
+        $counters = new Counters($personal_account);
+        if (!$counters->setIndication($data_post)) {
+            return ['success' => false];
+        }
+        return ['success' => true];
+        
+    }
+    
+    /*
      * Проверка существования лицевого счета
      */
     private function findAccount($account) {
@@ -85,5 +106,6 @@ class CountersController extends Controller {
         }
         return $personal_account;
     }
+    
     
 }

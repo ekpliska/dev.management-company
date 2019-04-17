@@ -261,6 +261,7 @@ $config = [
                     'extraPatterns' => [
                         'POST get-counter/<account:[\w-]+>/<id_counter:[\w-]+>' => 'get-counter',
                         'GET view/<account:[\w-]+>' => 'view',
+                        'POST send-indications/<account:[\w-]+>' => 'send-indications',
                     ]
                 ],                
             ],
