@@ -103,11 +103,20 @@ class Counters extends Model {
          */
         $_status = (strtotime($counter_info[$_key]["Дата следующей поверки"]) > strtotime($current_date)) ? false : true;
         
-        $counter_info[$_key] += [
+        $result = [
+            'ID' => $counter_info[$_key]['ID'],
+            'Тип прибора учета' => $counter_info[$_key]['Тип прибора учета'],
+            'Регистрационный номер прибора учета' => $counter_info[$_key]['Регистрационный номер прибора учета'],
+            'Дата следующей поверки' => $counter_info[$_key]['Дата следующей поверки'],
+            'Дата снятия показания' => $counter_info[$_key]['Дата снятия показания'],
+            'Дата снятия предыдущего показания' => $counter_info[$_key]['Дата снятия предыдущего показания'],
+            'Предыдущие показание' => $counter_info[$_key]['Предыдущие показание'],
+            'Текущее показание' => $counter_info[$_key]['Текущее показание'],
+            'Расход' => $counter_info[$_key]['Расход'],
             'is_block' => $_status
         ];
         
-        return $counter_info;
+        return $result;
     }
     
     /*
