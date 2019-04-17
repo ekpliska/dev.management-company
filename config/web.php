@@ -262,6 +262,7 @@ $config = [
                         'POST get-counter/<account:[\w-]+>/<id_counter:[\w-]+>' => 'get-counter',
                         'GET view/<account:[\w-]+>' => 'view',
                         'POST send-indications/<account:[\w-]+>' => 'send-indications',
+                        'GET order-request/<account:[\w-]+>/<id_counter:[\w-]+>' => 'order-request',
                     ]
                 ],                
             ],

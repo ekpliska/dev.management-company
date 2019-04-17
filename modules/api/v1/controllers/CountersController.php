@@ -17,7 +17,7 @@ class CountersController extends Controller {
     public function behaviors() {
         
         $behaviors = parent::behaviors();
-        $behaviors['authenticator']['only'] = ['view', 'get-counter', 'send-indications'];
+        $behaviors['authenticator']['only'] = ['view', 'get-counter', 'send-indications', 'order-request'];
         $behaviors['authenticator']['authMethods'] = [
               HttpBasicAuth::className(),
               HttpBearerAuth::className(),
@@ -39,6 +39,7 @@ class CountersController extends Controller {
             'view' => ['get'],
             'get-counter' => ['post'],
             'send-indications' => ['post'],
+            'order-request' => ['get'],
         ];
     }
     
@@ -92,6 +93,21 @@ class CountersController extends Controller {
         $counters = new Counters($personal_account);
         
         return $counters->setIndication($data_post);
+        
+    }
+    
+    /*
+     * Сформировать автоматическую заявку на "Поверку прибора учета"
+     */
+    public function actionOrderRequest($account, $id_counter) {
+        
+        $personal_account = $this->findAccount($account);
+        if (!$personal_account) {
+            return ['success' => false];
+        }
+        
+        $counters = new Counters($personal_account);
+        return $counters->order($id_counter);
         
     }
     

@@ -6,6 +6,7 @@
     use app\models\PersonalAccount;
     use app\models\CommentsToCounters;
     use app\models\TypeCounters;
+    use app\models\PaidServices;
 
 /**
  * Приборы учета
@@ -168,6 +169,36 @@ class Counters extends Model {
         $result = Yii::$app->client_api->setCurrentIndications($data_json);
         
         return $result ? ['success' => true] : ['success' => false];
+        
+    }
+    
+    /*
+     * Автоматическая заявка на поверку прибора учета
+     */
+    public function order($id_counter) {
+        
+        $counter_info = $this->_counters;
+        
+        foreach ($counter_info as $key => $counter) {
+            if ($counter['ID'] != $id_counter) {
+                unset($counter_info[$key]);
+            } else {
+                $_key = $key;
+            }
+        }
+        
+        if (empty($counter_info)) {
+            return ['success' => false];
+        }
+        
+        $account_id = $this->_account->account_id;
+        $type_request = 'Поверка';
+        $counter_type = $counter_info[$_key]['Тип прибора учета'];
+        $counter_id = $id_counter;
+        
+        $create_order = PaidServices::automaticRequest($account_id, $type_request, $counter_type, $counter_id);
+        
+        return $create_order ? ['success' => true] : ['success' => false];
         
     }
     

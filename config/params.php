@@ -16,7 +16,7 @@ return [
      * Модуль Сlients - Заявки, Платные услуги
      */
     'countRec' => [
-        'client' => 2,
+        'client' => 10,
     ],
     
     /*
