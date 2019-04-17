@@ -25,7 +25,7 @@ class PaidRequestsController extends Controller {
         
         $behaviors['access'] = [
             'class' => AccessControl::className(),
-            'only' => ['index', 'get-services', 'info-service', 'history', 'create', 'view'],
+            'only' => ['index', 'get-services', 'info-service', 'history', 'create', 'view', 'set-grade'],
             'rules' => [
                 [
                     'allow' => true,
@@ -45,7 +45,8 @@ class PaidRequestsController extends Controller {
             'info-service' => ['get'],
             'history' => ['post'],
             'create' => ['post'],
-            'View' => ['get'],
+            'view' => ['get'],
+            'set-grade' => ['post'],
         ];
     }
 
@@ -112,8 +113,7 @@ class PaidRequestsController extends Controller {
         if ($model->save()) {
             return ['success' => true];
         } else {
-//            return ['success' => false];
-            return $model;
+            return ['success' => false];
         }
         
         
@@ -127,6 +127,22 @@ class PaidRequestsController extends Controller {
         $request_info = PaidServiceLists::getBodyRequest($request_id);
         
         return $request_info;
+        
+    }
+    
+    /*
+     * Выставить оценку по пятибальной системе
+     * Оценка только для закрытых заявок
+     * {"grade": "4"}
+     */
+    public function actionSetGrade($request_id) {
+        
+        $grade = Yii::$app->request->getBodyParam('grade');
+        if (!isset($grade) || empty($grade)) {
+            return ['message' => 'Невозможно выставить оценку для заявки. Оценка не указана'];
+        }
+        
+        return PaidServiceLists::setGrade($request_id, $grade);
         
     }
     

@@ -211,6 +211,7 @@ $config = [
                         'GET get-services/<category_id>' => 'get-services',
                         'GET info-service/<service_id>' => 'info-service',
                         'GET view/<request_id>' => 'view',
+                        'POST set-grade/<request_id>' => 'set-grade',
                         'GET /' => 'index',
                     ]
                 ],

@@ -5,6 +5,7 @@
     use app\models\PaidServices;
     use app\models\CategoryServices;
     use app\models\PersonalAccount;
+    use app\models\StatusRequest;
 
 /**
  * Список всех услуг, на платные заявки
@@ -89,6 +90,25 @@ class PaidServiceLists extends PaidServices {
         
         return $result;
                     
+    }
+    
+    /*
+     * Оценка
+     */
+    public static function setGrade($request_id, $grade) {
+        
+        $request = self::find()
+                ->where(['services_id' => $request_id])
+                ->andWhere(['status' => StatusRequest::STATUS_CLOSE])
+                ->one();
+        
+        if ($request == null || $grade > 5) {
+            return ['message' => 'Оценка доступна только для закрытых заявок'];
+        }
+        
+        $request->grade = $grade;
+        return $request->save(false) ? ['success' => true] : ['success' => false];
+        
     }
     
 }
