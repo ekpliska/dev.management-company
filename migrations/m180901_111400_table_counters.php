@@ -36,7 +36,7 @@ class m180901_111400_table_counters extends Migration
                     ['3', 'Счётчик ЭЭ(д)', '/images/counters/electric-meter.svg', 'electric_meter'],
                     ['4', 'Счётчик ЭЭ(н)', '/images/counters/electric-meter.svg', 'electric_meter'],
                     ['5', 'Счётчик отопления', '/images/counters/heating-meter.svg', 'heating_meter'],
-                    ['5', 'Распределитель тепла', '/images/counters/heat-distributor.svg', 'heat_distributor'],
+                    ['6', 'Распределитель тепла', '/images/counters/heat-distributor.svg', 'heat_distributor'],
                 ]
             );
         
