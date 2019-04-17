@@ -64,7 +64,7 @@ class Counters extends Model {
             
             $counters_items[] = $counter_item;
         }
-        $results[] = [
+        $results = [
             'counters' => $counters_items,
             'comments' => !empty($comments_to_counters) ? $comments : null,
         ];
@@ -100,7 +100,7 @@ class Counters extends Model {
          *      false Если дата поверки актуальны
          *      true Если дата поверки истекла
          */
-        $_status = (strtotime($counter_info[$_key]["Дата следующей поверки"])) > strtotime($current_date) ? false : true;
+        $_status = (strtotime($counter_info[$_key]["Дата следующей поверки"]) > strtotime($current_date)) ? false : true;
         
         $counter_info[$_key] += [
             'is_block' => $_status
@@ -115,14 +115,16 @@ class Counters extends Model {
     public function setIndication($data) {
         
         if (!array_key_exists('counter_id', $data) || !array_key_exists('indication', $data)) {
-            return ['message' => 'Данные показаний не корректны.'];
+            return ['message' => 'Данные показаний не корректны'];
         }
         
+        // Показания текущих приборов учета
         $counter_info = $this->_counters;
         if (empty($counter_info)) {
             return ['success' => false];
         }
         
+        // Ключ массива $counter_info
         $_key = 0;
         foreach ($counter_info as $key => $counter) {
             if ($counter['ID'] != $data['counter_id']) {
@@ -131,6 +133,12 @@ class Counters extends Model {
                 $_key = $key;
             }
         }
+        if (empty($counter_info)) {
+            return ['success' => false];
+        }
+        
+        // Текущая дата
+        $current_date = date('Y-m-d');
         
         // Если текущее показание не указано, то Новое показание сравниваем с предыдущим
         if (empty($counter_info[$_key]['Текущее показание']) && $data['indication'] > $counter_info[$_key]['Предыдущие показание']) {
@@ -139,6 +147,10 @@ class Counters extends Model {
         // Если текущее показание указано, то Новое показание сравниваем с текущим
         elseif ($counter_info[$_key]['Текущее показание'] && $data['indication'] < $counter_info[$_key]['Текущее показание']) {
             return ['message' => "Ошибка подачи показания, предыдущее показание {$counter_info[$_key]['Текущее показание']}"];
+        }
+        // Если ввод показаний заблокирован
+        elseif (strtotime($counter_info[$_key]["Дата следующей поверки"]) < strtotime($current_date)) {
+            return ['message' => 'Истек срок поверки прибора учета'];
         }
         
         // Отправляем показания
@@ -155,7 +167,7 @@ class Counters extends Model {
         $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
         $result = Yii::$app->client_api->setCurrentIndications($data_json);
         
-        return $result;
+        return $result ? ['success' => true] : ['success' => false];
         
     }
     

@@ -69,8 +69,10 @@ class CountersController extends Controller {
         }
         
         $data_post = Yii::$app->request->getBodyParams();
+        $month = isset($data_post['month']) ? $data_post['month'] : null;
+        $year = isset($data_post['year']) ? $data_post['year'] : null;
         
-        $counters = new Counters($personal_account, $data_post['month'], $data_post['year']);
+        $counters = new Counters($personal_account, $month, $year);
         return $counters->getCounterInfo($id_counter);
         
     }
@@ -88,10 +90,8 @@ class CountersController extends Controller {
 
         $data_post = Yii::$app->request->getBodyParams();
         $counters = new Counters($personal_account);
-        if (!$counters->setIndication($data_post)) {
-            return ['success' => false];
-        }
-        return ['success' => true];
+        
+        return $counters->setIndication($data_post);
         
     }
     
