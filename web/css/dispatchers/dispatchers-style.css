@@ -360,10 +360,10 @@ span.dot {
 }
 .notification__dot {
     position: absolute;
-    top: 0%;
-    right: 10%;
+    top: 20%;
+    right: 25%;
     background: #fc3232;
-    padding: 7px 7px;
+    padding: 5px 5px;
     border-radius: 12px;
 }
 /* End Notifications Bar */
