@@ -71,6 +71,7 @@
     background-repeat: no-repeat;
     border: none;
     box-shadow: #333 0px 0px 2px 0px;
+    cursor: default;
 }
 .container-fluid {
     padding: 20px;

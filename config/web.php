@@ -4,7 +4,7 @@ $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 $sms = require __DIR__ . '/sms.php';
 $client_api = require __DIR__ . '/client_api.php';
-$orangedata_client = require __DIR__ . '/orange_data_client.php';
+$session_settings = require __DIR__ . '/session_settings.php';
 
 $config = [
     'id' => 'elsa-company',
@@ -97,33 +97,16 @@ $config = [
         /*
          * Настройка session и cookie
          */
-//        'session' => [
-//            'timeout' => 1800,
-//            'class' => 'yii\web\DbSession',
-//            'sessionTable' => 'user_session',
-//            /*
-//             * Настройка параметров cookie
-//             */
-//            'cookieParams' => [
-//                // Если true, cookie будет недоступен через JavaScript
-//                'httpOnly' => false,
-//                /*
-//                 * Путь на сервере, на котором будут доступены cookie
-//                 * По умолчанию '/' куки будут доступны для всего домена
-//                 */
-//                'path' => '/',
-//            ],
-//        ],
+        'session' => $session_settings,
         
         'user' => [
             'class' => 'yii\web\User',
             'identityClass' => 'app\models\User',
-//            'enableAutoLogin' => false, // Отключение автологина на основе фалов cookies
-//            'absoluteAuthTimeout' => 1200, // Время сессии 20мин
-//            'authTimeout' => 1200, // Автоматический выход из сиситемы, когда пользователь неактивен 20мин
+            'enableAutoLogin' => (YII_ENV_DEV) ? true: false, // Отключение автологина на основе фалов cookies
+            'absoluteAuthTimeout' => (YII_ENV_DEV) ? null : 1200, // Время сессии 20мин
+            'authTimeout' => (YII_ENV_DEV) ? null : 1200, // Автоматический выход из сиситемы, когда пользователь неактивен 20мин
             'loginUrl' => ['site/login'],
             'as afterLogin' => 'app\behaviors\LoginTimestampBehavior',
-            
             /*
             'identityCookie' => [
                 'name' => '_identity',
