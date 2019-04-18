@@ -46,7 +46,11 @@ class CommentsToRequest extends ActiveRecord
 
     public function getUser() {
         return $this->hasOne(User::className(), ['user_id' => 'comments_user_id']);
-    }    
+    }
+    
+    public function getRequest() {
+        return $this->hasOne(Requests::className(), ['requests_id' => 'comments_user_id']);
+    }
 
     /*
      * Жадная выгрузка данных для формирования комментариев, соответствующих своей заявке

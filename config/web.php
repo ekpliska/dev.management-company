@@ -250,6 +250,15 @@ $config = [
                         'GET order-request/<account:[\w-]+>/<id_counter:[\w-]+>' => 'order-request',
                     ]
                 ],                
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'pluralize' => false,
+                    'controller' => 'v1/chat',
+                    'extraPatterns' => [
+                        'GET get-messages/<type:[\w-]+>/<chat_id:[\w-]+>' => 'get-messages',
+                        'GET /' => 'index',
+                    ]
+                ],                
             ],
         ],
         'sms' => $sms,
