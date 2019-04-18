@@ -19,6 +19,10 @@
             ],
     ]) ?>
 
+    <div class="notice info">
+        <p>Логином для входа в личный кабинет Арендатора, является <b><?= "{$this->context->_current_account_number}r" ?></b>.</p>
+    </div>
+
     <?= $form->field($model_rent, 'rents_id', ['options' => ['class' => 'hidden']])
             ->hiddenInput(['value' => $model_rent->rents_id, 'id' => '_rents'])
             ->label(false) ?>
@@ -43,7 +47,6 @@
             ->input('text', ['class' => 'field-input house-phone'])
             ->label($model_rent->getAttributeLabel('rents_mobile_more'), ['class' => 'field-label']) ?>
 
-            
     <div class="clearfix"></div>
     
     <div class="rent-tab__btn">

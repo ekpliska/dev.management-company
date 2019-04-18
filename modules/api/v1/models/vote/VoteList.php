@@ -49,8 +49,14 @@ class VoteList extends Voting {
                 
                 $_participant = $participant->user->photo;
                 $participants[] = $_participant;
-                if ($participant->user->user_id == Yii::$app->user->getId()) {
-                    $status_current_user = ($participant->finished == RegistrationInVoting::STATUS_FINISH_YES) ? 'finished' : $participant->status;
+                if ($participant->user->user_id === Yii::$app->user->getId()) {
+                    if ($participant->finished == RegistrationInVoting::STATUS_FINISH_YES) {
+                        $status_current_user = 'finished';
+                    } elseif ($participant->finished == RegistrationInVoting::STATUS_FINISH_NO) {
+                        $status_current_user = 'participant';
+                    } else {
+                        $status_current_user = null;
+                    }
                 }
             }
             $_participant = null;
@@ -136,9 +142,16 @@ class VoteList extends Voting {
                 return false;
             }
             $model->answers_vote = $answer;
-            $model->answers_user_id = Yii::$app->user->getId();
+            $model->answers_user_id = Yii::$app->user->getId();            
             $model->save();
         }
+        
+        $finish = RegistrationInVoting::find()
+                ->where(['voting_id' => $data_post['vote_id']])
+                ->andWhere(['user_id' => Yii::$app->user->getId()])
+                ->one();
+        $finish->finished = RegistrationInVoting::STATUS_FINISH_YES;        
+        $finish->save(false);
         
         return true;
         

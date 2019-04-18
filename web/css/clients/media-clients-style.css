@@ -33,13 +33,13 @@
         font-size: 12px;
     }
     .account-balance > span.minus {
-        padding: 5px 10px;
+        padding: 3px 9px;
         border-radius: 25px;
         background-color: #ff1760;
         color: #fff;
         position: absolute;
-        top: 0px;
-        right: 0px;
+        top: 1px;
+        right: 2px;
         font-size: 11px;
     }
     .user-profile__photo {
@@ -57,11 +57,13 @@
     }
     .account-balance {
         margin: 20px 10px 0;
-        padding: 5px 25px 5px 10px;
+        padding: 5px 30px 5px 10px;
     }
     .account-balance > span.minus {
-        padding: 6px 10px;
-        right: -10px;
+        padding: 4px 7px;
+        right: 2px;
+        font-size: 10px;
+        top: 2px;
     }
     .user-profile__photo {
         width: 40px;
@@ -172,12 +174,12 @@
     .service-card__body p {
         font-size: 13px;
     }
-}
-@media screen and (max-width: 768px) {
     .cost_service {
         font-size: 14px;
         bottom: 3%;
     }
+}
+@media screen and (max-width: 768px) {
     .card-link-blue {
         width: 120px;
     }

@@ -216,7 +216,7 @@ class Rents extends ActiveRecord
             $user_rent->save(false);
         }
     }
-
+    
     /**
      * Настройка полей для форм
      */

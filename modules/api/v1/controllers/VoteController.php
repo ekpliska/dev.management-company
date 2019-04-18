@@ -9,6 +9,7 @@
     use app\modules\api\v1\models\vote\VoteList;
     use app\modules\api\v1\models\vote\QuestionList;
     use app\modules\api\v1\models\vote\ResultsVote;
+    use app\models\SmsSettings;
 
 /**
  * Опросы
@@ -73,10 +74,10 @@ class VoteController extends Controller {
         $sms_code = rand(10000, 99999);
         $phone = preg_replace('/[^0-9]/', '', $user_phone);
         
-//        // Отправляем смс на указанный номер телефона
-//        if (!$result = Yii::$app->sms->generalMethodSendSms(SmsSettings::TYPE_NOTICE_PARTICIPANT_VOTING, $phone, $sms_code)) {
-//            return ['success' => false, 'message' => $result];
-//        }
+        // Отправляем смс на указанный номер телефона
+        if (!$result = Yii::$app->sms->generalMethodSendSms(SmsSettings::TYPE_NOTICE_PARTICIPANT_VOTING, $phone, $sms_code)) {
+            return ['success' => false, 'message' => $result];
+        }
         
         return [
             'success' => true,

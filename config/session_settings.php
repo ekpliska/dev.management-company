@@ -8,9 +8,9 @@ if (YII_ENV_DEV) {
     return [];
 } else {
     return [
-        'timeout' => 1200,
-        'class' => 'yii\web\DbSession',
-        'sessionTable' => 'user_session',
+//        'timeout' => 1200,
+//        'class' => 'yii\web\DbSession',
+//        'sessionTable' => 'user_session',
         /*
          * Настройка параметров cookie
          */

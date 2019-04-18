@@ -34,14 +34,14 @@ class ResultsVote extends Answers {
             }
             // Массив формирует количество ответов (в %) каждого типа по текущему вопросы
             $ansqwers_count = [
-                'behind' => $count == 0 ? '0' : round(($against_count * 100) / $count),
-                'against' => $count == 0 ? '0' : round(($behind_count * 100) / $count),
-                'abstain' => $count == 0 ? '0' : round(($abstain_count * 100) / $count),
+                'behind' => $count == 0 ? '0' : (string)round(($against_count * 100) / $count),
+                'against' => $count == 0 ? '0' : (string)round(($behind_count * 100) / $count),
+                'abstain' => $count == 0 ? '0' : (string)round(($abstain_count * 100) / $count),
             ];
             // Формируем массив по каждому ответу
             $result = [
                 'text_question' => $question['questions_text'],
-                'count' => $count,
+                'count' => (string)$count,
                 'answers' => $ansqwers_count,
             ];
             $results[] = $result;

@@ -4,7 +4,6 @@
     use Yii;
     use yii\web\Response;
     use yii\web\UploadedFile;
-    use yii\widgets\ActiveForm;
     use app\modules\clients\controllers\AppClientsController;
     use app\models\User;
     use app\modules\clients\models\ClientsRentForm;
