@@ -103,6 +103,12 @@ class Counters extends Model {
          */
         $_status = (strtotime($counter_info[$_key]["Дата следующей поверки"]) > strtotime($current_date)) ? false : true;
         
+        // Проверяем наличие автоматической заявки на поверку прибора учета
+        $is_request = PaidServices::find()
+                ->where(['services_account_id' => $this->_account->account_id])
+                ->andWhere(['value' => $id_counter])
+                ->one();
+        
         $result = [
             'ID' => $counter_info[$_key]['ID'],
             'Тип прибора учета' => $counter_info[$_key]['Тип прибора учета'],
@@ -113,7 +119,8 @@ class Counters extends Model {
             'Предыдущие показание' => $counter_info[$_key]['Предыдущие показание'],
             'Текущее показание' => $counter_info[$_key]['Текущее показание'],
             'Расход' => $counter_info[$_key]['Расход'],
-            'is_block' => $_status
+            'is_block' => $_status,
+            'is_request' => $is_request ? $is_request->services_number : null,
         ];
         
         return $result;
