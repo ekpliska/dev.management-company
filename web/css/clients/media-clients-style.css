@@ -105,8 +105,9 @@
         text-align: right;
     }
     .account-balance > span.minus {
-        padding: 6px 18px;
-        right: 0px;
+        padding: 4px 15px;
+        right: 3px;
+        top: 2px;
     }
     .navbar_mobile {
         display: unset;

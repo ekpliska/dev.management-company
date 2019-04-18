@@ -20,6 +20,10 @@ class VotingController extends AppClientsController {
      */
     public function actionIndex() {
         
+        if (Yii::$app->user->can('clients_rent')) {
+            throw new \yii\web\NotFoundHttpException();
+        }
+        
         $house_id = Yii::$app->userProfile->_user['house_id'];
         
         $voting_list = Voting::findAllVotingForClient($house_id);
@@ -34,6 +38,10 @@ class VotingController extends AppClientsController {
      * Страница конечного голосования
      */
     public function actionView($voting_id) {
+        
+        if (Yii::$app->user->can('clients_rent')) {
+            throw new \yii\web\NotFoundHttpException();
+        }
         
         /*
          *  Проверем наличие куки на загрузку модального окна ввода СМС кода, 
@@ -100,6 +108,10 @@ class VotingController extends AppClientsController {
      */
     public function actionParticipateInVoting() {
         
+        if (Yii::$app->user->can('clients_rent')) {
+            throw new \yii\web\NotFoundHttpException();
+        }
+        
         $voting_id = Yii::$app->request->post('voting');
         
         if (Yii::$app->request->isAjax) {
@@ -120,6 +132,10 @@ class VotingController extends AppClientsController {
      */
     public function actionRenouncementToParticipate($voting_id) {
         
+        if (Yii::$app->user->can('clients_rent')) {
+            throw new \yii\web\NotFoundHttpException();
+        }
+        
         if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
             if (RegistrationInVoting::deleteRegisterById($voting_id)) {
@@ -135,6 +151,10 @@ class VotingController extends AppClientsController {
      * Повторная отправка вновь сгенерированного кода
      */
     public function actionRepeatSmsCode() {
+        
+        if (Yii::$app->user->can('clients_rent')) {
+            throw new \yii\web\NotFoundHttpException();
+        }
         
         $voting_id = Yii::$app->request->post('votingId');
         
@@ -202,10 +222,14 @@ class VotingController extends AppClientsController {
      */
     public function actionSendAnswer($question_id, $type_answer) {
         
+        if (Yii::$app->user->can('clients_rent')) {
+            throw new \yii\web\NotFoundHttpException();
+        }
+        
         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-//        if (!is_numeric($question_id) || !is_numeric($type_answer)) {
-//            return ['success' => false];
-//        }
+        if (!is_numeric($question_id) || !is_numeric($type_answer)) {
+            return ['success' => false];
+        }
         
         if (Yii::$app->request->isPost) {
             if (Answers::sendAnswer($question_id, $type_answer)) {
@@ -220,6 +244,10 @@ class VotingController extends AppClientsController {
      * Завершение голосования
      */
     public function actionFinishVoting($voting_id) {
+        
+        if (Yii::$app->user->can('clients_rent')) {
+            throw new \yii\web\NotFoundHttpException();
+        }
         
         if (!is_numeric($voting_id)) {
             Yii::$app->session->setFlash('error', ['message' => 'Возникла ошибка. Обновите страницу и повторите действие заново']);
@@ -241,6 +269,10 @@ class VotingController extends AppClientsController {
      */
     public function actionViewProfile($user_id) {
         
+        if (Yii::$app->user->can('clients_rent')) {
+            throw new \yii\web\NotFoundHttpException();
+        }
+        
         $user_info = UserProfile::userInfo($user_id);
         
         if (Yii::$app->request->isAjax) {
@@ -253,6 +285,10 @@ class VotingController extends AppClientsController {
      * Отправка сообщения в чате
      */
     public function actionSendMessage($vote) {
+        
+        if (Yii::$app->user->can('clients_rent')) {
+            throw new \yii\web\NotFoundHttpException();
+        }
         
         if (Yii::$app->request->isPjax) {
             $model = new SendMessageForm();

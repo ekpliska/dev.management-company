@@ -10,6 +10,13 @@ $count = 0;
 $controller = Yii::$app->controller->id;
 ?>
 
+<?php 
+// Если пользователь с правами арендатора, то из списка меню удаляем пункт "Опрос"
+if (Yii::$app->user->can('clients_rent')) {
+    unset($menu_array['voting']);
+}
+?>
+
 <ul class="menu-clients__navbar">
     <?php foreach ($menu_array as $key => $item) : ?>
         <li>
