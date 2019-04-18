@@ -414,6 +414,31 @@ class User extends ActiveRecord implements IdentityInterface
     }
     
     /*
+     * Получить имя собсвенника, арендатора, сотрудника
+     */
+    public static function getUserName() {
+        
+        $name = 'Не определено';
+        
+        $quesry = self::find()
+                ->with(['client', 'rent', 'employee'])
+                ->where(['user_id' => Yii::$app->user->id])
+                ->asArray()
+                ->one();
+        
+        if (!empty($quesry['client'])) {
+            $name = $quesry['client']['clients_name'];
+        } elseif (!empty($quesry['rent'])) {
+            $name = $quesry['rent']['rents_name'];
+        } elseif (!empty($quesry['employee'])) {
+            $name = $quesry['employee']['employee_name'];
+        }
+        
+        return $name;
+        
+    }
+    
+    /*
      * Настройка полей для форм
      */
     public function attributeLabels() {

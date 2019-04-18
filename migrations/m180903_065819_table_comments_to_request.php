@@ -24,6 +24,7 @@ class m180903_065819_table_comments_to_request extends Migration
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
             'comments_user_id' => $this->integer()->notNull(),
+            'user_name' => $this->string(70)->notNull(),
         ]);
         
         $this->createIndex('idx-comments_to_request-comments_request_id', '{{%comments_to_request}}', 'comments_request_id');

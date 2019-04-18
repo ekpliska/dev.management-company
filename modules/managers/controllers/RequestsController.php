@@ -111,7 +111,7 @@ class RequestsController extends AppManagersController {
                 'scenario' => CommentsToRequest::SCENARIO_ADD_COMMENTS
             ]);        
             if ($model_comment->load(Yii::$app->request->post())) {
-                $model_comment->sendComments($request['requests_id']);
+                $model_comment->sendComment($request['requests_id']);
             }
         }
         

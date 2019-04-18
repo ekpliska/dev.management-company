@@ -73,7 +73,8 @@ class UserProfile extends BaseObject {
                         . 'u.user_email as email, u.user_photo as photo, '
                         . 'u.created_at as date_created , u.last_login as last_login, '
                         . 'u.status as status, '
-                        . 'pa.account_number as account')
+                        . 'pa.account_number as account, '
+                        . 'pa.account_balance as balance')
                     ->from('user as u')
                     ->join('LEFT JOIN', 'rents as r', 'u.user_rent_id = r.rents_id')
                     ->join('LEFT JOIN', 'personal_account as pa', 'u.user_rent_id = pa.personal_rent_id')

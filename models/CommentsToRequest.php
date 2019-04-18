@@ -54,7 +54,7 @@ class CommentsToRequest extends ActiveRecord
     public static function findCommentsById($request_id) {
         
         $comments = self::find()
-                ->joinWith(['user', 'user.client', 'user.employee'])
+                ->joinWith(['user'])
                 ->andWhere(['comments_request_id' => $request_id])
                 ->orderBy(['created_at' => SORT_DESC])
                 ->all();
@@ -81,34 +81,23 @@ class CommentsToRequest extends ActiveRecord
      */
     public function sendComment($request_id) {
         
+        $user_name = User::getUserName();
+        
         if ($this->validate()) {
             $this->comments_request_id = $request_id;
             $this->comments_user_id = Yii::$app->user->identity->id;
+            $this->user_name = $user_name;
             
-            // Формируем уведомление для диспетчера, который курирует заявку
-            Notifications::createNoticeNewMessage(Notifications::TYPE_NEW_MESSAGE_IN_REQUEST, $request_id);
+            if (Yii::$app->user->can('clients') || Yii::$app->user->can('clients_rent')) {
+                // Формируем уведомление для диспетчера, который курирует заявку
+                Notifications::createNoticeNewMessage(Notifications::TYPE_NEW_MESSAGE_IN_REQUEST, $request_id);
+            }
             
             return $this->save() ? true : false;
         }
         return false;
     }
     
-    /*
-     * Сохранение комментария в бд
-     */
-    public function sendComments($request_id) {
-        
-        if ($this->validate()) {
-            
-            $this->comments_request_id = $request_id;
-            $this->comments_user_id = Yii::$app->user->identity->id;
-            
-            return $this->save() ? true : false;
-            
-        }
-        return false;
-    }    
-
     /**
      * Настройка полей для форм
      */
