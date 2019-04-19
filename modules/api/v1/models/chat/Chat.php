@@ -55,6 +55,16 @@ class Chat extends Model {
                     ->where(['comments_request_id' => $chat_id])
                     ->orderBy(['created_at' => SORT_DESC])
                     ->all();
+                foreach ($messages as $key => $message) {
+                    $_message = [
+                        'user_name' => $message['user_name'],
+                        'photo' => $message['user']->photo,
+                        'message' => $message['comments_text'],
+                        'date_message' => $message['created_at'],
+                        '_type' => ($message['comments_user_id'] == Yii::$app->user->getId()) ? 'in' : 'out',
+                    ];
+                    $results[] = $_message;
+                }
                 break;
             case 'vote':
                 $messages = ChatToVote::find()
@@ -66,13 +76,11 @@ class Chat extends Model {
                     $_message = [
                         'user_name' => $message['user']->client->clients_name,
                         'photo' => $message['user']->photo,
-                        'message' => $message['created_at'],
-                        'date_message' => $message['chat_message'],
-                        '_type' => 'type',
+                        'message' => $message['chat_message'],
+                        'date_message' => strtotime($message['created_at']),
+                        '_type' => ($message['uid_user'] == Yii::$app->user->getId()) ? 'in' : 'out',
                     ];
-                    $results[] = [
-                        $_message
-                    ];
+                    $results[] = $_message;
                 }
                 break;
             default:
