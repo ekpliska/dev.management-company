@@ -8,6 +8,7 @@
     use yii\rest\Controller;
     use app\models\User;
     use app\modules\api\v1\models\chat\Chat;
+    use app\modules\api\v1\models\chat\MessageForm;
 
 /**
  * Чат
@@ -17,7 +18,7 @@ class ChatController extends Controller {
     public function behaviors() {
         
         $behaviors = parent::behaviors();
-        $behaviors['authenticator']['only'] = ['index', 'get-messages'];
+        $behaviors['authenticator']['only'] = ['index', 'get-messages', 'send-message'];
         $behaviors['authenticator']['authMethods'] = [
               HttpBasicAuth::className(),
               HttpBearerAuth::className(),
@@ -38,6 +39,7 @@ class ChatController extends Controller {
         return [
             'index' => ['get'],
             'get-messages' => ['get'],
+            'send-message' => ['post'],
         ];
     }
     
@@ -60,6 +62,25 @@ class ChatController extends Controller {
         $user = $this->getUser();
         $chat = new Chat($user);
         return $chat->getChatMessages($type, $chat_id);
+        
+    }
+    
+    /*
+     * Отправка сообщения
+     * {
+     *      "type_chat": "vote",
+     *      "chat_id": "1",
+     *      "message": "text message"
+     * }
+     */
+    public function actionSendMessage() {
+        
+        $model = new MessageForm();
+        $model->load(Yii::$app->request->getBodyParams(), '');
+        if ($model->send()) {
+            return ['success' => true];
+        }
+        return ['message' => 'Ошибка отправки сообщения'];
         
     }
     

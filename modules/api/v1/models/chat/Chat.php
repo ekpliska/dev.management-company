@@ -29,7 +29,7 @@ class Chat extends Model {
         
         $request_chat = $this->getRequestChats();
         $vote_chat = $this->getVoteChats();
-        $all_chats = array_merge($request_chat, $vote_chat);
+        $all_chats = array_merge((array)$request_chat, (array)$vote_chat);
         
         usort($all_chats, function ($a, $b) {
             if ($a['date_message'] == $b['date_message']) {
@@ -61,7 +61,7 @@ class Chat extends Model {
                         'photo' => $message['user']->photo,
                         'message' => $message['comments_text'],
                         'date_message' => $message['created_at'],
-                        '_type' => ($message['comments_user_id'] == Yii::$app->user->getId()) ? 'in' : 'out',
+                        '_type' => ($message['comments_user_id'] == Yii::$app->user->getId()) ? 'out' : 'in',
                     ];
                     $results[] = $_message;
                 }
@@ -78,7 +78,7 @@ class Chat extends Model {
                         'photo' => $message['user']->photo,
                         'message' => $message['chat_message'],
                         'date_message' => strtotime($message['created_at']),
-                        '_type' => ($message['uid_user'] == Yii::$app->user->getId()) ? 'in' : 'out',
+                        '_type' => ($message['uid_user'] == Yii::$app->user->getId()) ? 'out' : 'in',
                     ];
                     $results[] = $_message;
                 }
