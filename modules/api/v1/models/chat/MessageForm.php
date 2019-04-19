@@ -8,6 +8,7 @@
     use app\models\User;
     use app\models\Requests;
     use app\models\Voting;
+    use app\models\Notifications;
 
 /**
  * Отправка сообщения
@@ -42,7 +43,8 @@ class MessageForm extends Model {
                 $new_messaqe->comments_text = $this->message;
                 $new_messaqe->comments_user_id = Yii::$app->user->getId();
                 $new_messaqe->user_name = User::getUserName();
-                
+                // Оправляем уведомления Диспетчеру
+                Notifications::createNoticeNewMessage(Notifications::TYPE_NEW_MESSAGE_IN_REQUEST, $this->chat_id);
                 break;
             case 'vote':
                 if (!Voting::findOne(['voting_id' => $this->chat_id])) {

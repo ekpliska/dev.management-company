@@ -124,7 +124,6 @@ class Chat extends Model {
                 'message' => $_chat['comments_text'],
                 'date_message' => $_chat['created_at'],
                 '_type' =>  'request',
-                '_status' => $_chat['request']->status == StatusRequest::STATUS_CLOSE ? true : false,
             ];
             
             $result[] = $_message;
@@ -165,7 +164,6 @@ class Chat extends Model {
                 'message' => $_chat['chat_message'],
                 'date_message' => strtotime($_chat['created_at']),
                 '_type' => 'vote',
-                '_status' => false,
             ];
             
             $result[] = $_message;
