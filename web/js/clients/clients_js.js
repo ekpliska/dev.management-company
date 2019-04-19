@@ -923,6 +923,6 @@ $(document).ready(function() {
     
     $('.popup-notice').on('click', function() {
         $(this).removeClass('show-notice');
-    });    
+    });
 
 });

@@ -30,6 +30,9 @@ return [
      */
     'finish_day' => 20,
     
-    // (EL)ectronic (S)mart (A)ssistant 
+    // Payments system
+    'payments_system' => [
+        'publicId' => 'pk_1f5d5ad761f44549ac761e0329e86',  //id из личного кабинета
+    ],
         
 ];

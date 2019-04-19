@@ -90,6 +90,15 @@ class Payments extends \yii\db\ActiveRecord {
         
     }
     
+    /*
+     * Сменить статус платежа на "Оплачено"
+     */
+    public function changeStatus() {
+        
+        $this->payment_status = self::YES_PAID;
+        return $this->save(false) ? true : false;
+    }
+    
     /**
      * Аттрибуты полей
      */

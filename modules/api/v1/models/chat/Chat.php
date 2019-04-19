@@ -53,7 +53,7 @@ class Chat extends Model {
                 $messages = CommentsToRequest::find()
                     ->with('user', 'request')
                     ->where(['comments_request_id' => $chat_id])
-                    ->orderBy(['created_at' => SORT_DESC])
+                    ->orderBy(['created_at' => SORT_ASC])
                     ->all();
                 foreach ($messages as $key => $message) {
                     $_message = [
@@ -70,7 +70,7 @@ class Chat extends Model {
                 $messages = ChatToVote::find()
                     ->with('user', 'vote')
                     ->where(['vote_vid' => $chat_id])
-                    ->orderBy(['created_at' => SORT_DESC])
+                    ->orderBy(['created_at' => SORT_ASC])
                     ->all();
                 foreach ($messages as $key => $message) {
                     $_message = [
@@ -129,7 +129,7 @@ class Chat extends Model {
             $result[] = $_message;
         }
             
-        return $result;
+        return $result ? $result : $result = null;
     }
     
     /*

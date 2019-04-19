@@ -2,7 +2,7 @@
 
     use yii\helpers\Html;
     use yii\widgets\ActiveForm;
-    use yii\widgets\MaskedInput;
+    use app\models\Payments;
 
 /* 
  * Страница "Платеж" (оплата квитанции)
@@ -53,27 +53,22 @@ $this->title = Yii::$app->params['site-name'] . 'Оплата';
                 ])
             ?>
             
-            <?= $form->field($model, 'payment_sum')
-                    ->widget(MaskedInput::className(), [
-                        'clientOptions' => [
-                            'alias' =>  'decimal',
-                            'groupSeparator' => '',
-                            'radixPoint' => '.',
-                            'autoGroup' => false]])
-                    ->input('text', ['class' => 'field-input'])
-                    ->label($model->getAttributeLabel('payment_sum'), ['class' => 'field-label']) ?>
-
             <p class="payment-from_control_summ">Сумма к оплате: <?= isset($sum) ? $sum : '' ?> </p>
             
             <div class="save-btn-group text-center">
-                <?= Html::submitButton('Оплатить', ['class' => 'btn blue-btn']) ?>
+                <?php // = Html::submitButton('Оплатить', ['class' => 'btn blue-btn']) ?>
+                <?= Html::button('Оплатить', ['class' => 'btn blue-btn', 'id' => 'checkout']) ?>
             </div>
 
             <?php ActiveForm::end(); ?>
         
         <?php else: ?>
         
-            <div>
+            <div class="notice info">
+                <p>
+                    Платеж <span><?= '#TODO' ?></span> находится в стадии рассмотрения. Срок рассмотрения платежа занимает от 1 до 7 дней. 
+                    После подтверждания платежа его статус будет изменен на <span>&laquo;Оплачено&raquo;</span>.
+                </p>
             </div>
         
         <?php endif; ?>
@@ -81,3 +76,40 @@ $this->title = Yii::$app->params['site-name'] . 'Оплата';
     </div>
 </div>
 
+<?php if ($paiment_info['payment']->payment_status == Payments::NOT_PAID) : ?>
+    <?php
+        $this->registerJsFile('https://widget.cloudpayments.ru/bundles/cloudpayments', ['position' => $this::POS_HEAD]);
+        $this->registerJs("
+            var pay = function () {
+                var widget = new cp.CloudPayments();
+                widget.charge({
+                    publicId: '" . Yii::$app->params['payments_system']['publicId'] . "',
+                    description: 'Оплата услуг ЖКХ', //назначение
+                    amount: " . $sum . ", //сумма
+                    currency: 'RUB', //валюта
+                    invoiceId: '" . $paiment_info['payment']->unique_number . "', //номер заказа  (необязательно)
+                    accountId: '" . Yii::$app->userProfile->email . "', //идентификатор плательщика (необязательно)
+                    data: {
+                        myProp: '" .$this->context->_current_account_number ."' //произвольный набор параметров
+                    }
+                },
+                function (options) { // success
+                    $.ajax({
+                        url: 'payment-transaction',
+                        method: 'POST',
+                        data: {
+                            paymentID: '" . $paiment_info['payment']->unique_number . "',
+                        },
+                        }).done(function(responce) {
+                            console.log(responce);
+                        });
+                },
+                function (reason, options) { // fail
+                    //действие при неуспешной оплате
+                });
+            };
+
+            $('#checkout').click(pay);    
+        ", yii\web\View::POS_READY);
+    ?>
+<?php endif; ?>

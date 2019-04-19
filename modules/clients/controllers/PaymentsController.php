@@ -173,5 +173,18 @@ class PaymentsController extends AppClientsController {
         
     }
     
+    public function actionPaymentTransaction() {
+        
+        $payment_id = Yii::$app->request->post('paymentID');
+        
+        if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
+            $payment = Payments::findOne(['unique_number' => $payment_id]);
+            if ($payment->changeStatus()) {
+                return $this->redirect(Yii::$app->request->referrer);
+            }
+            return $this->goHome();
+        }
+        
+    }
     
 }
