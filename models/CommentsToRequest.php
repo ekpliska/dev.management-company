@@ -49,7 +49,7 @@ class CommentsToRequest extends ActiveRecord
     }
     
     public function getRequest() {
-        return $this->hasOne(Requests::className(), ['requests_id' => 'comments_user_id']);
+        return $this->hasOne(Requests::className(), ['requests_id' => 'comments_request_id']);
     }
 
     /*

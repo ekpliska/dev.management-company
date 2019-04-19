@@ -6,6 +6,7 @@
     use app\models\User;
     use app\models\CommentsToRequest;
     use app\models\ChatToVote;
+    use app\models\StatusRequest;
     
 /*
  * Чат
@@ -29,6 +30,13 @@ class Chat extends Model {
         $request_chat = $this->getRequestChats();
         $vote_chat = $this->getVoteChats();
         $all_chats = array_merge($request_chat, $vote_chat);
+        
+        usort($all_chats, function ($a, $b) {
+            if ($a['date_message'] == $b['date_message']) {
+                return 0;
+            }
+            return ($a['date_message'] > $b['date_message']) ? +1 : -1;
+        });
         
         return $all_chats;
         
@@ -85,10 +93,10 @@ class Chat extends Model {
         $chat_requests = CommentsToRequest::find()
                 ->select(['comments_request_id'])
                 ->where(['comments_user_id' => Yii::$app->user->getId()])
-                ->orderBy(['created_at' => SORT_DESC])
                 ->groupBy('comments_request_id')
                 ->asArray()
                 ->all();
+        
         if (!$chat_requests) {
             $result = null;
         }
@@ -106,13 +114,12 @@ class Chat extends Model {
                 'user_name' => $_chat['user_name'],
                 'user_photo' => $_chat['user']->user_photo,
                 'message' => $_chat['comments_text'],
-                'date_message' => strtotime($_chat['created_at']),
+                'date_message' => $_chat['created_at'],
                 '_type' =>  'request',
+                '_status' => $_chat['request']->status == StatusRequest::STATUS_CLOSE ? true : false,
             ];
             
-            $result[] = [
-                $_message,
-            ];
+            $result[] = $_message;
         }
             
         return $result;
@@ -128,7 +135,6 @@ class Chat extends Model {
         $chat_votes = ChatToVote::find()
                 ->select(['vote_vid'])
                 ->where(['uid_user' => Yii::$app->user->getId()])
-                ->orderBy(['created_at' => SORT_DESC])
                 ->groupBy('vote_vid')
                 ->asArray()
                 ->all();
@@ -136,7 +142,6 @@ class Chat extends Model {
         if (!$chat_votes) {
             $result = null;
         }
-        
         foreach ($chat_votes as $key => $chat_request) {
             $_chat = ChatToVote::find()
                     ->with('user', 'vote')
@@ -152,11 +157,10 @@ class Chat extends Model {
                 'message' => $_chat['chat_message'],
                 'date_message' => strtotime($_chat['created_at']),
                 '_type' => 'vote',
+                '_status' => false,
             ];
             
-            $result[] = [
-                $_message,
-            ];
+            $result[] = $_message;
         }
             
         return $result;
