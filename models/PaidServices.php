@@ -234,6 +234,7 @@ class PaidServices extends ActiveRecord
         if ($status == StatusRequest::STATUS_CLOSE || $status == StatusRequest::STATUS_REJECT) {
             $this->date_closed = time();
         } else {
+            $this->grade = null;
             $this->date_closed = null;
         }
         
