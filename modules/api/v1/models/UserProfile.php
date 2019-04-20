@@ -83,7 +83,7 @@ class UserProfile extends User {
             $living_area = [
                 'house_id' => $account['house_id'],
                 'gis_adress' => $account['gis_adress'],
-                'houses_number' => $account['houses_numb.er'],
+                'houses_number' => $account['houses_number'],
                 'flats_number' => $account['flats_number'],
             ];
             
