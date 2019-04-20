@@ -74,6 +74,11 @@ $this->registerJs("
             $('textarea').val('');
             $.pjax.reload({container:'#comments'});
         });
-    });
+        // Обновление чата
+        function updateList() {
+            $.pjax.reload({container: '#comments'});
+        }
+        setInterval(updateList, 1000);
+});
 ");
 ?>
