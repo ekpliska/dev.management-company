@@ -2086,7 +2086,9 @@ a.receipte-btn-dowload {
 /* Конец Квитанции 
 
 /* Платежи */
-.payments-page {}
+.payments-page {
+    min-height: 700px;
+}
 .payment-pages_period {
     display: flex;
 }
@@ -2190,6 +2192,7 @@ input[name="date_end-period-pay"]::placeholder {
 
 /* Оплата */
 .payment-page {
+    min-height: 700px;
 }
 .payment-page_block__title {
     font-size: 20px;

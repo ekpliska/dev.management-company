@@ -77,17 +77,22 @@ class Payments extends \yii\db\ActiveRecord {
             $paymant->receipt_period = $_period;
             $paymant->receipt_number = $_nubmer;
             $paymant->payment_sum = $_sum;
+            $paymant->payment_status = self::NOT_PAID;
             $paymant->account_uid = $accoint_id;
             $paymant->user_uid = Yii::$app->user->identity->id;
             if (!$paymant->save(false)) {
                 throw new \yii\web\NotFoundHttpException(404);
             }
-            return ['status' => self::NOT_PAID, 'payment' => $info];
-        }
+            return [
+                'status' => self::NOT_PAID, 
+                'payment' => $paymant
+            ];
+        } 
         
-        
-        return ['status' => self::NOT_PAID, 'payment' => $info];
-        
+        return [
+            'status' => self::NOT_PAID, 
+            'payment' => $info
+        ];
     }
     
     /*

@@ -34,6 +34,21 @@ class PaymentsController extends AppClientsController {
         
         $receipts_lists = Yii::$app->client_api->getReceipts($data_json);
         
+        $receipts_lists = [
+            '0' => [
+                "Расчетный период" => "2018-10-06",
+                "Номер квитанции" => "10/2018",
+                "Сумма к оплате" => "4782.00",
+                "Статус квитанции" => "Не оплачено",
+            ],
+            '1' => [
+                "Расчетный период" => "2018-11-06",
+                "Номер квитанции" => "11/2018",
+                "Сумма к оплате" => "3000.00",
+                "Статус квитанции" => "Оплачено",                
+            ],
+        ];
+        
         return $this->render('index', [
             'account_number' => $account_number,
             'receipts_lists' => $receipts_lists ? $receipts_lists : null,
@@ -85,28 +100,19 @@ class PaymentsController extends AppClientsController {
         // Проверяем наличие платежа и его статус
         $paiment_info = Payments::isPayment($_period, $_nubmer, $_sum, $accoint_id);
         
+//        var_dump($paiment_info);die();
+        
         // Если статус платежа Оплачено
         if ($paiment_info['status'] == Payments::YES_PAID) {
             return $this->render('payment', [
-                'paiment_info' => $paiment_info,
+                'paiment_info' => $paiment_info['payment'],
             ]);
         } elseif ($paiment_info['status'] == Payments::NOT_PAID) { 
-            /*
-             * Если статус платежа Не оплачено
-             * Загружаем модель оплаты квитанции
-             */
-            $model = new PaymentForm($paiment_info['payment']);
+            // Если статус платежа Не оплачено
             $organization_info = Organizations::findOne(['organizations_id' => 1]);
-            
-            if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-                $model->send();
-            }
-            
             return $this->render('payment', [
-                'model' => $model,
-                'paiment_info' => $paiment_info,
+                'paiment_info' => $paiment_info['payment'],
                 'organization_info' => $organization_info,
-                'sum' => $sum,
             ]);
             
         }

@@ -33,6 +33,7 @@ return [
     // Payments system
     'payments_system' => [
         'publicId' => 'pk_1f5d5ad761f44549ac761e0329e86',  //id из личного кабинета
+        'description' => 'Оплата услуг ЖКХ',
     ],
         
 ];
