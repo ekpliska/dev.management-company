@@ -36,6 +36,30 @@ class TokenPushMobile extends ActiveRecord {
         return $this->hasOne(User::className(), ['user_id' => 'user_uid']);
     }
     
+    /*
+     * Установка токена мобильного устройства
+     * {"push_token":"test_push 11211 123"}
+     */
+    public function setPushToken($_token) {
+        
+        // Проверяем наличие токена
+        $push_token = TokenPushMobile::findOne([
+            'user_uid' => Yii::$app->user->id,
+            'token' => $_token
+        ]);
+        
+        // Если токена не существует то добавляем его в базу
+        if (!$push_token) {
+            $new_token = new TokenPushMobile();
+            $new_token->user_uid = Yii::$app->user->id;
+            $new_token->token = $_token;
+            return $new_token->save(false) ? true : false;
+        }
+        
+        return true;
+        
+    }
+    
     /**
      * Атрибуты полей
      */

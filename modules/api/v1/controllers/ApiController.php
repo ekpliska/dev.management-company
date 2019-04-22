@@ -17,7 +17,6 @@ class ApiController extends Controller
         return [
             'login' => ['post'],
             'sign-up' => ['post'],
-            'finish' => ['get'],
         ];
     }
     
