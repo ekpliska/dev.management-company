@@ -56,9 +56,23 @@ $this->title = Yii::$app->params['site-name'] . 'Палатежи и квита�
     </div>
     <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 receipts_body">
         <?php if (!empty($receipts_lists)) : ?>
-            <iframe src="<?= Url::to(Yii::getAlias('@web') . "/receipts/{$account_number}/{$receipts_lists[0]['Расчетный период']}.pdf") ?>" style="width: 100%; height: 850px;" frameborder="0">
-                Ваш браузер не поддерживает фреймы
-            </iframe>
+        
+            <?php
+                // Формируем путь в PDF квитацнии на сервере
+                $file_path = Yii::getAlias('@web') . "receipts/" . $account_number . "/" . $receipts_lists[0]['Расчетный период'] . ".pdf";
+            ?>
+            <?php if (!file_exists($file_path)) : ?>
+                <div class="notice error">
+                    <p>
+                        <?= "Квитанция {$receipts_lists[0]['Расчетный период']} на сервере не найдена." ?>
+                    </p>
+                </div>
+            <?php else : ?>
+                <iframe src="<?= Url::to($file_path, true) ?>" style="width: 100%; height: 850px;" frameborder="0">
+                    Ваш браузер не поддерживает фреймы
+                </iframe>
+            <?php endif; ?>
+        
         <?php endif; ?>
     </div>
 </div>

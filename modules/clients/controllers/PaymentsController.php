@@ -33,21 +33,6 @@ class PaymentsController extends AppClientsController {
         
         $receipts_lists = Yii::$app->client_api->getReceipts($data_json);
         
-        $receipts_lists = [
-            '0' => [
-                "Расчетный период" => "2018-10-06",
-                "Номер квитанции" => "10/2018",
-                "Сумма к оплате" => "4782.00",
-                "Статус квитанции" => "Не оплачено",
-            ],
-            '1' => [
-                "Расчетный период" => "2018-11-06",
-                "Номер квитанции" => "11/2018",
-                "Сумма к оплате" => "3000.00",
-                "Статус квитанции" => "Оплачено",                
-            ],
-        ];
-        
         return $this->render('index', [
             'account_number' => $account_number,
             'receipts_lists' => $receipts_lists ? $receipts_lists : null,
