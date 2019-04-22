@@ -6,7 +6,6 @@
     use app\modules\clients\controllers\AppClientsController;
     use app\components\mail\Mail;
     use app\models\Payments;
-    use app\modules\clients\models\form\PaymentForm;
     use app\models\Organizations;
 
 /**
@@ -99,8 +98,6 @@ class PaymentsController extends AppClientsController {
         
         // Проверяем наличие платежа и его статус
         $paiment_info = Payments::isPayment($_period, $_nubmer, $_sum, $accoint_id);
-        
-//        var_dump($paiment_info);die();
         
         // Если статус платежа Оплачено
         if ($paiment_info['status'] == Payments::YES_PAID) {

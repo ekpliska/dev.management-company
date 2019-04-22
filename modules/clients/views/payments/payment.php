@@ -52,8 +52,9 @@ $this->title = Yii::$app->params['site-name'] . 'Оплата';
         <?php elseif ($paiment_info->payment_status == Payments::YES_PAID) : // Если платеж существует и его статус "Оплачено" ?>
             <div class="notice info">
                 <p>
-                    Платеж <span><?= '#TODO' ?></span> находится в стадии рассмотрения. Срок рассмотрения платежа занимает от 1 до 7 дней. 
-                    После подтверждания платежа его статус будет изменен на <span>&laquo;Оплачено&raquo;</span>.
+                    Платеж за расчетный период <span><?= $paiment_info->receipt_period ?></span>, на сумму <span><?= $paiment_info->payment_sum ?></span> находится 
+                    в стадии рассмотрения. Срок рассмотрения платежа занимает от 1 до 7 дней. После подтверждания платежа его статус будет изменен 
+                    на <span>&laquo;Оплачено&raquo;</span>.
                 </p>
             </div>
         

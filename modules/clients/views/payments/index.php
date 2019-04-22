@@ -12,7 +12,7 @@ $this->title = Yii::$app->params['site-name'] . 'Палатежи и квита�
 ?>
 
 <div class="receipts-page row">
-    <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12 receipts_period">
+    <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 receipts_period">
         <p class="period_title"><i class="glyphicon glyphicon-calendar"></i> Период</p>
         <div class="receipts_period-calendar">
             <?= DatePicker::widget([
@@ -54,7 +54,7 @@ $this->title = Yii::$app->params['site-name'] . 'Палатежи и квита�
                 ]) ?>
         </div>
     </div>
-    <div class="col-lg-7 col-md-7 col-sm-6 col-xs-12 receipts_body">
+    <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 receipts_body">
         <?php if (!empty($receipts_lists)) : ?>
             <iframe src="<?= Url::to(Yii::getAlias('@web') . "/receipts/{$account_number}/{$receipts_lists[0]['Расчетный период']}.pdf") ?>" style="width: 100%; height: 850px;" frameborder="0">
                 Ваш браузер не поддерживает фреймы

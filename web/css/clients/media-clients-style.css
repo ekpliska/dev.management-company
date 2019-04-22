@@ -337,3 +337,21 @@
     }
 }
 /* End Profila settings */
+
+/* Кeceiptes */
+@media screen and (max-width: 1200px) {
+    .receipte-of-lists > li {
+        padding: 10px;
+    }
+    .receipte-of-lists__operations a,
+    span.receipte-btn-pay-debt {
+        padding: 2px 10px;
+        font-size: 12px;
+    }
+}
+@media screen and (max-width: 991px) {
+    .receipts_period {
+        border-right: none;
+    }
+}
+/* End Кeceiptes */
