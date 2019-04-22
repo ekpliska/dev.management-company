@@ -3,7 +3,8 @@
     
     
 class m190202_081016_table_token_to_api extends Migration {
-    public function up() {
+    
+    public function safeUp() {
         
         $table_options = null;
         if ($this->db->driverName === 'mysql') {
@@ -27,7 +28,7 @@ class m190202_081016_table_token_to_api extends Migration {
                 'RESTRICT');
     }
     
-    public function down() {
+    public function safeDown() {
         
         $this->dropIndex('idx-token-user_uid', '{{%token}}');
         $this->dropForeignKey('fk-token-user_uid', '{{%token}}');

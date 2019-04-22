@@ -14,7 +14,9 @@ class LoginForm extends Model {
 
     public $username;
     public $password;
-    
+    // Токен мобильного устройства, для расслки push-уведомлений
+    public $push_token;
+
     private $_user;
     
     /*
@@ -24,6 +26,7 @@ class LoginForm extends Model {
         return [
             [['username', 'password'], 'required'],
             ['password', 'validatePassword'],
+            ['push_token', 'string', 'max' => 255],
         ];
     }
     

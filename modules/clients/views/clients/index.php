@@ -2,6 +2,7 @@
 
     use app\modules\clients\widgets\LastNews;
     use app\modules\clients\widgets\LastServices;
+    use app\components\firebasePush\FirebaseNotifications;
     
 /*
  * Главная страница личного кабинета Собственника
