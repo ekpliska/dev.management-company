@@ -337,7 +337,10 @@ class Requests extends ActiveRecord
             $request_answers = RequestAnswers::deleteAll(['anwswer_request_id' => $this->requests_id]);
         }
         
-        // Формируем уведомление
+        /*
+         * Формируем уведомление и 
+         * Отправка PUSH-уведомления
+         */
         if (empty($this->status != $status)) {
             Notifications::createNoticeStatus(Notifications::TYPE_CHANGE_STATUS_IN_REQUEST, $this->requests_id, $status);
         }

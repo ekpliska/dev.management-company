@@ -4,6 +4,7 @@
     use Yii;
     use yii\db\ActiveRecord;
     use app\models\User;
+    use app\models\TokenPushMobile;
 
 /**
  * Уведомления
@@ -75,11 +76,16 @@ class Notifications extends ActiveRecord {
                 if ($request_info == null) {
                     return false;
                 }
+                $user_id = $request_info->personalAccount->client->user->user_id;
                 // Определяем статус заявки
-                $notice->user_uid = $request_info->personalAccount->client->user->user_id;
+                $notice->user_uid = $user_id;
                 $notice->type_notification = $type_notice;
                 $message = "Заявка ID{$request_info->requests_ident} установлен статус {$status_request}";
                 $notice->value_1 = $request_info->requests_ident;
+                
+                // Отправка PUSH
+                $push_note = TokenPushMobile::send($user_id, 'Заявки', "Заявка ID{$request_info->requests_ident} установлен статус {$status_request}");
+                
                 break;
             case self::TYPE_CHANGE_STATUS_IN_PAID_REQUEST:
                 // Формируем запрос по заявке

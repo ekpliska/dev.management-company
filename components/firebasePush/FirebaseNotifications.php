@@ -59,7 +59,7 @@ class FirebaseNotifications extends BaseObject
         }
         $code = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE);
         
-        if ($code<200 || $code>=300) {
+        if ($code < 200 || $code >= 300) {
             Yii::error("got unexpected response code $code with result=$result");
             throw new \Exception("Could not send notification");
         }
@@ -81,11 +81,11 @@ class FirebaseNotifications extends BaseObject
     {
         $body = [
             'registration_ids' => $tokens,
-            'notification' => [
-                'title' => 'test WEB',
-                'body' => 'text test web'
-            ],
-//            'notification' => $notification,
+            'notification' => $notification,
+//            'notification' => [
+//                'title' => 'test WEB',
+//                'body' => 'text test web'
+//            ],
         ];
         $body = ArrayHelper::merge($body, $options);
         return $this->send($body);

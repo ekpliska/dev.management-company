@@ -80,10 +80,10 @@ $prev_date = 0;
                 $.pjax.reload({container:"#comments"});
             });
         });
-        // Обновление чата
-        function updateList() {
-            $.pjax.reload({container: "#comments"});
-        }
-        setInterval(updateList, 1000);
+//        // Обновление чата
+//        function updateList() {
+//            $.pjax.reload({container: "#comments"});
+//        }
+//        setInterval(updateList, 1000);
     ');
 ?>

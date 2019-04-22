@@ -3,6 +3,8 @@
     namespace app\models;
     use Yii;
     use yii\db\ActiveRecord;
+    use app\components\firebasePush\FirebaseNotifications;
+    use yii\helpers\ArrayHelper;
 
 /**
  * Токены мобильных устройств для рассылки PUSH-уведомлений
@@ -57,6 +59,30 @@ class TokenPushMobile extends ActiveRecord {
         }
         
         return true;
+        
+    }
+    
+    /*
+     * Отправка уведомления
+     */
+    public static function send($user_id, $title = null, $message) {
+        
+        
+        $_tokens = self::find()
+                ->select(['token'])
+                ->where(['user_uid' => Yii::$app->user->id])
+                ->asArray()
+                ->all();
+        
+//        $tokens = ArrayHelper::getColumn($_tokens, 'token');
+        $tokens = ['cOAJ07Nsrog:APA91bFnDTTgLneoApqE5Kh1nmwdjxokrHjYylp2uIWVW7TmZQLSF63d2aTK-gcu7lOOp8xfIn7yFjHtV8wOzDMbHU8j0u_nRSuH6RIEEyujL9PHkyKhFUF7VleN2vLFylTkO46FVHqk', 'fUb9QA1nV9M:APA91bEzZ_7sFhuelGZMQfT2WeK2Z5ESj0v0LHPdVe7jqXNCYY5UPmSveCHjXfxApTSHTGKAOx9DQ9l2VpyihE9zAwjddnz_pVF6jSCNzibP2yfC3NXM1fWqUv_uV-ExRi8_8KZIwRxZ'];
+        $message = [
+            'title' => $title,
+            'body' => $message
+        ];
+        
+        $notes = new FirebaseNotifications();
+        $notes->sendNotification($tokens, $message);
         
     }
     
