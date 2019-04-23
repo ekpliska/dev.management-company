@@ -76,8 +76,9 @@ class PaidRequestForm extends Model {
             $paid_request->services_name_services_id = $this->servise_name;
             $paid_request->services_phone = $this->phone;
             $paid_request->services_comment = $this->description;
-            $paid_request->status = StatusRequest::STATUS_NEW;
+            $paid_request->status = StatusRequest::STATUS_IN_WORK;
             $paid_request->services_account_id = $this->flat;
+            $paid_request->services_dispatcher_id = Yii::$app->profileDispatcher->employeeID;
             
             $paid_request->save();
             

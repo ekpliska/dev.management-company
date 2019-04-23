@@ -78,9 +78,10 @@ class RequestForm extends Model {
             $request->requests_type_id = $this->type_request;
             $request->requests_phone = $this->phone;
             $request->requests_comment = $this->description;
-            $request->status = StatusRequest::STATUS_NEW;
+            $request->status = StatusRequest::STATUS_IN_WORK;
             $request->is_accept = 1;
             $request->requests_account_id = $this->flat;
+            $request->requests_dispatcher_id = Yii::$app->profileDispatcher->employeeID;
             
             $request->save();
             

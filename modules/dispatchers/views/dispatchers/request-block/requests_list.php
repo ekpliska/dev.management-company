@@ -13,9 +13,9 @@ $key = 0;
 
 <?php if (isset($user_lists) && !empty($user_lists)) : ?>
     <?php foreach ($user_lists[$key]['personalAccount'] as $key_account => $account) : // foreach 1 ?>
-    <?php $status_use = []; ?>
+        <?php $status_use = []; ?>
         <p class="account-title">
-            <?= count($account['request']) > 0 ? "Лицевой счет {$account['account_number']}" : '' ?>
+            <?= count($account['request']) > 1 ? "Лицевой счет {$account['account_number']}" : '' ?>
         </p>
         <?php foreach ($account['request'] as $key_request => $request) : // foreach 2 ?>
             <?php if (!in_array($request['status'], $status_use)) : ?>
@@ -29,7 +29,7 @@ $key = 0;
                     </h4>
                 </div>
                 <div id="<?= "status-{$key_account}-{$request['status']}" ?>" class="panel-collapse collapse">
-            <?php endif; ?>
+                <?php endif; ?>
                 <div class="dispatcher_genaral-page__request_block row">
                     <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 request_block__info text-center">
                         <?= Html::a("ID{$request['requests_ident']}", [
@@ -56,7 +56,7 @@ $key = 0;
                 <?php if ($request['status'] != $account['request'][$key_request + 1]['status']) : ?>
                 </div>
             </div>
-            <?php endif; ?>
+                <?php endif; ?>
         <?php endforeach; // foreach 2 ?>
     <?php endforeach; // foreach 1 ?>
 <?php else : ?>
