@@ -9,6 +9,7 @@
     use app\models\Requests;
     use app\models\Voting;
     use app\models\Notifications;
+    use app\models\TokenPushMobile;
 
 /**
  * Отправка сообщения
@@ -54,6 +55,10 @@ class MessageForm extends Model {
                 $new_messaqe->vote_vid = $this->chat_id;
                 $new_messaqe->uid_user = Yii::$app->user->getId();
                 $new_messaqe->chat_message = $this->message;
+                
+                 // Отправляем push-уведомление
+                 $push_note = TokenPushMobile::sendPushToVote(Yii::$app->user->getId(), $this->message, $this->chat_id);
+                
                 break;
             default:
                 return false;

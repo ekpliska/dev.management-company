@@ -3307,6 +3307,7 @@ a.employee-profile:hover {
     right: 8%;
     z-index: 9;
     border-radius: 12px;
+    cursor: default;
 }
 .open-chat {
     display: block;
