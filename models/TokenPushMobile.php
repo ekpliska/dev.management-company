@@ -40,15 +40,12 @@ class TokenPushMobile extends ActiveRecord {
     
     /*
      * Установка токена мобильного устройства
-     * {"push_token":"test_push 11211 123"}
+     * {"push_token":"key"}
      */
     public function setPushToken($_token) {
         
         // Проверяем наличие токена
-        $push_token = TokenPushMobile::findOne([
-            'user_uid' => Yii::$app->user->id,
-            'token' => $_token
-        ]);
+        $push_token = TokenPushMobile::findOne(['token' => $_token]);
         
         // Если токена не существует то добавляем его в базу
         if (!$push_token) {
@@ -56,6 +53,10 @@ class TokenPushMobile extends ActiveRecord {
             $new_token->user_uid = Yii::$app->user->id;
             $new_token->token = $_token;
             return $new_token->save(false) ? true : false;
+        } // Если токен сущствует, то проверяем его принадлежность текущему пользователю
+        elseif ($push_token && $push_token->user_uid != Yii::$app->getUser()->id) { 
+            $push_token->user_uid = Yii::$app->user->id;
+            return $push_token->save(false) ? true : false;
         }
         
         return true;
@@ -69,21 +70,22 @@ class TokenPushMobile extends ActiveRecord {
         
         
         $_tokens = self::find()
-                ->select(['token'])
-                ->where(['user_uid' => Yii::$app->user->id])
+                ->where(['user_uid' => $user_id])
                 ->asArray()
                 ->all();
+        // Если массив токенов не пустой, то отправляем push-уведомления
+        if (!empty($_tokens)) {
+            $tokens = ArrayHelper::getColumn($_tokens, 'token');
+            $message = [
+                'title' => $title,
+                'body' => $message
+            ];
+
+            $notes = new FirebaseNotifications();
+            return $notes->sendNotification($tokens, $message);            
+        }
         
-//        $tokens = ArrayHelper::getColumn($_tokens, 'token');
-        $tokens = ['cOAJ07Nsrog:APA91bFnDTTgLneoApqE5Kh1nmwdjxokrHjYylp2uIWVW7TmZQLSF63d2aTK-gcu7lOOp8xfIn7yFjHtV8wOzDMbHU8j0u_nRSuH6RIEEyujL9PHkyKhFUF7VleN2vLFylTkO46FVHqk', 'fUb9QA1nV9M:APA91bEzZ_7sFhuelGZMQfT2WeK2Z5ESj0v0LHPdVe7jqXNCYY5UPmSveCHjXfxApTSHTGKAOx9DQ9l2VpyihE9zAwjddnz_pVF6jSCNzibP2yfC3NXM1fWqUv_uV-ExRi8_8KZIwRxZ'];
-        $message = [
-            'title' => $title,
-            'body' => $message
-        ];
-        
-        $notes = new FirebaseNotifications();
-        $notes->sendNotification($tokens, $message);
-        
+        return true;
     }
     
     /**

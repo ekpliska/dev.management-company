@@ -2,28 +2,12 @@
 
     use app\modules\clients\widgets\LastNews;
     use app\modules\clients\widgets\LastServices;
-    use app\components\firebasePush\FirebaseNotifications;
     
 /*
  * Главная страница личного кабинета Собственника
  */    
 $this->title = Yii::$app->params['site-name'] . "Новости";
 $current_date = Yii::$app->formatter->asDate(time(), 'LLLL, Y');
-?>
-
-<?php
-echo '<pre>';
-$_tokens = \app\models\TokenPushMobile::find()
-        ->select('token')
-        ->where(['user_uid' => Yii::$app->user->id])
-        ->asArray()
-        ->all();
-//var_dump($_tokens); die();
-$array = [];
-foreach ($_tokens as $key => $_token) {
-    $array .= $_token[$key];
-}
-var_dump($array); die();
 ?>
 
 <div class="client-page">
