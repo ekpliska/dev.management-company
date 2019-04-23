@@ -167,7 +167,42 @@ $(document).ready(function(){
     });
 
     /*
-     * Запрос на отключение статуса у заявки
+     * Переключение статуса заявки
+     */
+    $('.switch-request, .reject-request').on('click', function (e) {
+        e.preventDefault();
+        var linkValue = $(this).text();
+        var statusId = $(this).data('status');
+        var requestId = $(this).data('request');
+        var liChoosing = $('li#status' + statusId);
+        var typeRequest = $(this).data('typeRequest');
+        $.ajax({
+            url: '/dispatchers/requests/switch-status-request',
+            method: 'POST',
+            data: {
+                statusId: statusId,
+                requestId: requestId,
+                typeRequest: typeRequest,
+            },
+            success: function (response) {
+                if (response.status) {
+                    $('.dropdown-menu').find('.disabled').removeClass('disabled');
+                    $('#value-btn').html(linkValue + '<span class="caret"></span>');
+                    $('.btn-group_status-request').attr('id', 'status-value-' + statusId);
+                    $('#value-btn').removeClass('add-border-' + $('#value-btn').data('status'));
+                    $('#value-btn').data('status', statusId);
+                    $('#value-btn').addClass('add-border-' + statusId);
+                    liChoosing.addClass('disabled');
+                }
+            },
+            error: function () {
+//                console.log('error');
+            },
+        });
+    });
+
+    /*
+     * Запрос на отключение чата у заявки
      */
     $(document).on('click', '#close-chat', function () {
         var requestID = $(this).data('request');

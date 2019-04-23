@@ -81,9 +81,9 @@ $prev_date = 0;
             });
         });
         // Обновление чата
-        function updateList() {
-            $.pjax.reload({container: "#comments"});
-        }
-        setInterval(updateList, 1000);
+//        function updateList() {
+//            $.pjax.reload({container: "#comments"});
+//        }
+//        setInterval(updateList, 1000);
     ');
 ?>

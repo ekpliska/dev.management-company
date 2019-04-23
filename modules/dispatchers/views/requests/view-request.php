@@ -4,11 +4,11 @@
     use yii\widgets\Breadcrumbs;
     use app\models\StatusRequest;
     use app\modules\dispatchers\widgets\AlertsShow;
-    use app\helpers\StatusHelpers;
     use app\helpers\FormatHelpers;
     use app\helpers\FormatFullNameUser;
     use app\modules\dispatchers\widgets\AddSpecialist;
     use app\modules\dispatchers\widgets\ModalWindowsDispatcher;
+    use app\modules\dispatchers\widgets\SwitchStatusRequest;
 
 
 /* 
@@ -67,7 +67,12 @@ $hide_btn = ($request['status'] == StatusRequest::STATUS_CLOSE || $request['stat
                         <span class="badge request-ident">
                             <?= "ID{$request['requests_ident']}" ?>
                         </span>
-                        <?= StatusHelpers::requestStatusPage($request['status'], $request['updated_at']) ?>
+                        <?= SwitchStatusRequest::widget([
+                                'status' => $request['status'],
+                                'request_id' => $request['requests_id'],
+                                'date_update' => $request['updated_at'],
+                                'type_request' => 'requests',
+                        ]) ?>
                     </div>
 
 

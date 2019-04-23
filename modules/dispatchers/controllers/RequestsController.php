@@ -327,4 +327,35 @@ class RequestsController extends AppDispatchersController {
         }
         
     }
+    
+    /*
+     * Метод переключения статуса для заявки
+     */
+    public function actionSwitchStatusRequest() {
+        
+        $status = Yii::$app->request->post('statusId');
+        $request_id = Yii::$app->request->post('requestId');
+        $type_request = Yii::$app->request->post('typeRequest');
+        
+        if (Yii::$app->request->isAjax) {
+            
+            switch ($type_request) {
+                case 'requests':
+                    $request = RequestsList::findOne($request_id);
+                    $request->switchStatus($status);                    
+                    break;
+                case 'paid-requests':
+                    $request = PaidServices::findOne($request_id);
+                    $request->switchStatus($status);
+                    break;
+                default:
+                    return ['success' => false];
+            }
+            
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return ['success' => true, 'status' => $status];
+        }
+        
+        return ['success' => false];
+    }
 }
