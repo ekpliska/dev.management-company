@@ -4,8 +4,8 @@
     use Yii;
     use yii\base\Model;
     use app\models\ChatToVote;
-    use app\models\Voting;
-
+    use app\models\TokenPushMobile;
+    
 /**
  * Отправка сообщения в чат Опроса
  */
@@ -28,11 +28,15 @@ class SendMessageForm extends Model {
         if (!$this->validate()) {
             return false;
         }
+        $current_id = Yii::$app->user->id;
         
         $new_message = new ChatToVote();
         $new_message->vote_vid = $vote;
-        $new_message->uid_user = Yii::$app->user->id;
+        $new_message->uid_user = $current_id;
         $new_message->chat_message = $this->message;
+        
+        // Отправляем push-уведомление
+        $push_note = TokenPushMobile::sendPushToVote($current_id, $this->message, $vote);
         
         return $new_message->save() ? true : false;
         

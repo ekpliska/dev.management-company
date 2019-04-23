@@ -10,6 +10,7 @@
     use app\models\PersonalAccount;
     use app\models\Employees;
     use app\models\Token;
+    use app\models\TokenPushMobile;
     
 
 /**
@@ -153,6 +154,13 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function getTokens() {
         return $this->hasMany(Token::className(), ['user_uid' => 'user_id']);
+    }
+    
+    /*
+     * Сязь с таблицей Токенов для push рассылки
+     */
+    public function getPushToken() {
+        return $this->hasMany(TokenPushMobile::className(), ['user_uid' => 'user_id']);
     }
         
     /*

@@ -5,6 +5,8 @@
     use yii\db\ActiveRecord;
     use app\components\firebasePush\FirebaseNotifications;
     use yii\helpers\ArrayHelper;
+    use app\models\RegistrationInVoting;
+    use app\models\User;
 
 /**
  * Токены мобильных устройств для рассылки PUSH-уведомлений
@@ -77,7 +79,7 @@ class TokenPushMobile extends ActiveRecord {
         if (!empty($_tokens)) {
             $tokens = ArrayHelper::getColumn($_tokens, 'token');
             $message = [
-                'title' => $title,
+                'title' => "{$title}",
                 'body' => $message
             ];
 
@@ -86,6 +88,42 @@ class TokenPushMobile extends ActiveRecord {
         }
         
         return true;
+    }
+    
+    /*
+     * Отправка уведомлений из чата Опроса
+     */
+    public function sendPushToVote($from, $message, $vote_id) {
+        
+        // От кого сообщение
+        $user_from = User::find()->joinWith('client')->where(['user_id' => $from])->one();
+        
+        // Рассылка всем кто зарегистрирован на голосование
+        $participants = RegistrationInVoting::find()
+                ->joinWith('pushToken')
+                ->where(['voting_id' => $vote_id, 'status' => RegistrationInVoting::STATUS_ENABLED])
+                ->andWhere(['!=', 'user_id', $from])
+                ->asArray()
+                ->all();
+        
+        $tokens = [];
+        foreach ($participants as $key => $participant) {
+            foreach ($participant['pushToken'] as $key => $token) {
+                $tokens[] .= $token['token'];
+            }
+        }
+        $message = [
+            'title' => "{$user_from->client->clients_name}",
+            'body' => $message
+        ];
+            
+        if ($tokens) {
+            $notes = new FirebaseNotifications();
+            return $notes->sendNotification($tokens, $message);
+        }
+        
+        return true;
+        
     }
     
     /**

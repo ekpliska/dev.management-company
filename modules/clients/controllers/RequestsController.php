@@ -110,7 +110,7 @@ class RequestsController extends AppClientsController
         if (Yii::$app->request->isPjax) {
             $model = new CommentsToRequest([
                 'scenario' => CommentsToRequest::SCENARIO_ADD_COMMENTS
-            ]);        
+            ]);
             if ($model->load(Yii::$app->request->post())) {
                 $model->sendComment($request_info['requests_id']);
             }

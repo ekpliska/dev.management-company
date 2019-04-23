@@ -60,6 +60,13 @@ class RegistrationInVoting extends ActiveRecord
     }
     
     /*
+     * Сязь с таблицей Токены PUSH уведомлений
+     */
+    public function getPushToken() {
+        return $this->hasMany(TokenPushMobile::className(), ['user_uid' => 'user_id']);
+    }
+    
+    /*
      * Создаем запись регистрации участия в голосовании пользователя
      */
     public function registerIn($voting_id) {

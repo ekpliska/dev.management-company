@@ -6,6 +6,7 @@
     use app\models\Requests;
     use yii\behaviors\TimestampBehavior;
     use app\models\Notifications;
+    use app\models\TokenPushMobile;
 
 /**
  * Комментарии к заявкам
@@ -95,6 +96,12 @@ class CommentsToRequest extends ActiveRecord
             if (Yii::$app->user->can('clients') || Yii::$app->user->can('clients_rent')) {
                 // Формируем уведомление для диспетчера, который курирует заявку
                 Notifications::createNoticeNewMessage(Notifications::TYPE_NEW_MESSAGE_IN_REQUEST, $request_id);
+            }
+            
+            // Отправляем PUSH-уведомление
+            if (Yii::$app->user->can('administrator') || Yii::$app->user->can('dispatcher') || Yii::$app->user->can('clients_rent')) {
+                $user_id = Requests::find()->with('personalAccount.client.user')->where(['requests_id' => $request_id])->one();
+                $push_note = TokenPushMobile::send($user_id->personalAccount->client->user->id, $user_name, $this->comments_text);
             }
             
             return $this->save() ? true : false;
