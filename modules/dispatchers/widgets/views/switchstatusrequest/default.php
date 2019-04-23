@@ -18,7 +18,7 @@
             <?php foreach ($array_status as $key => $value) : ?>
                 <li class="<?= ($key == $status) ? 'disabled' : '' ?>" id="status<?= $key ?>">
                     <a href="javascript:void(0);" class="switch-request switch-request-status"
-                        data-status="<?= $key ?>" data-request="<?= $request ?>" data-type-request="requests">
+                        data-status="<?= $key ?>" data-request="<?= $request ?>" data-type-request="<?= $type_request ?>">
                         <?= $value ?>
                     </a>
                 </li>

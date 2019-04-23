@@ -3,11 +3,11 @@
     use yii\helpers\Html;
     use yii\widgets\Breadcrumbs;
     use app\models\StatusRequest;
-    use app\helpers\StatusHelpers;
     use app\helpers\FormatHelpers;
     use app\helpers\FormatFullNameUser;
     use app\modules\dispatchers\widgets\AddSpecialist;
     use app\modules\dispatchers\widgets\ModalWindowsDispatcher;
+    use app\modules\dispatchers\widgets\SwitchStatusRequest;
 
 
 /* 
@@ -56,7 +56,12 @@ $hide_btn = ($paid_request['status'] == StatusRequest::STATUS_CLOSE || $paid_req
                         <span class="badge request-ident">
                             <?= "ID{$paid_request['number']}" ?>
                         </span>
-                        <?= StatusHelpers::requestStatusPage($paid_request['status'], $paid_request['date_up']) ?>
+                        <?= SwitchStatusRequest::widget([
+                                'status' => $paid_request['status'],
+                                'request_id' => $paid_request['id'],
+                                'date_update' => $paid_request['date_up'],
+                                'type_request' => 'paid-requests',
+                        ]) ?>
                     </div>
 
 

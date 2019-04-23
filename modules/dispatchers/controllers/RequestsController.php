@@ -345,7 +345,7 @@ class RequestsController extends AppDispatchersController {
                     $request->switchStatus($status);                    
                     break;
                 case 'paid-requests':
-                    $request = PaidServices::findOne($request_id);
+                    $request = PaidServicesList::findOne($request_id);
                     $request->switchStatus($status);
                     break;
                 default:
@@ -353,7 +353,7 @@ class RequestsController extends AppDispatchersController {
             }
             
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-            return ['success' => true, 'status' => $status];
+            return ['success' => true, 'status' => $type_request];
         }
         
         return ['success' => false];
