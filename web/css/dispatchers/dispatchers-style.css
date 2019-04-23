@@ -1301,6 +1301,14 @@ a.employee-profile:hover {
 .panel__request_block {
     border: none;
 }
+.account-title {
+    padding: 10px;
+    margin: 0;
+    font-size: 10px;
+    color: #7c7c7c;
+    text-align: right;
+    text-transform: uppercase;
+}
 .panel-default > .panel-heading-0 {
     background-color: transparent;
     border: 2px solid #598eff;
@@ -1318,12 +1326,12 @@ a.employee-profile:hover {
 }
 .panel-default > .panel-heading-2 {
     background-color: transparent;
-    border: 2px solid #e17dff;
+    border: 2px solid #7c7c7c;
     border-radius: 25px;
 }
 .panel-default > .panel-heading-3 {
     background-color: transparent;
-    border: 2px solid #7c7c7c;
+    border: 2px solid #e17dff;
     border-radius: 25px;
 }
 .panel-default > .panel-heading-4 {
@@ -1351,7 +1359,7 @@ a.employee-profile:hover {
     border-bottom: 1px solid #ddd;
     height: 170px;
     padding: 10px 0 0 0;
-    margin-bottom: 15px;
+    margin: 15px;
 }
 .req-badge-new {
     border: 2px solid #598eff;
