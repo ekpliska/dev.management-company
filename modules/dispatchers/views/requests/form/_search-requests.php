@@ -46,18 +46,18 @@
                         'class' => 'form-control _dropdown-subpanel _small']) ?>
             </div>
             
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                 <?= $form->field($search_model, 'house_id')->dropDownList($house_lists, [
                         'prompt' => '[Дом]',
                         'class' => 'form-control _dropdown-subpanel _small']) ?>
             </div>
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
                 <?= $form->field($search_model, 'date_start')
                         ->widget(DatePicker::className(), [
                             'id' => 'date-start',
                             'language' => 'ru',
                             'options' => [
-                                'placeHolder' => 'Выберите дату с',
+                                'placeHolder' => 'Период с',
                                 'class' => 'search-date',
                             ],
                             'type' => DatePicker::TYPE_INPUT,
@@ -67,13 +67,13 @@
                             ]])
                         ->label(false) ?>
             </div>
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
                 <?= $form->field($search_model, 'date_finish')
                         ->widget(DatePicker::className(), [
                             'id' => 'date-finish',
                             'language' => 'ru',
                             'options' => [
-                                'placeHolder' => 'Выберите дату по',
+                                'placeHolder' => 'Перид по',
                                 'class' => 'search-date',
                             ],
                             'type' => DatePicker::TYPE_INPUT,

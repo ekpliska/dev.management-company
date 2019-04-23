@@ -97,7 +97,11 @@ and open the template in the editor.
     position: relative;
     top: -20px;
 }
-
+.user-notification .open > a,
+.user-notification .open > a:focus {
+    background: #928DD2;
+    border-radius: 50px;
+}
 /* Открыть, закрыть меню */
 .menu-toggle {
     position: fixed;
