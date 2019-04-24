@@ -52,7 +52,6 @@ class NotificationsController extends Controller {
      * Удаляепм просмотренное уведомление
      */
     public function actionView($note_id) {
-        
         $note = NotificationLists::findOne(['id' => $note_id]);
         if ($note) {
             return $note->delete(false) ? true : false;

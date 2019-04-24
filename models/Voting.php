@@ -11,6 +11,7 @@
     use app\models\Questions;
     use app\models\RegistrationInVoting;
     use app\models\TokenPushMobile;
+    use app\models\Notifications;
 
 /*
  * Голосование
@@ -282,6 +283,7 @@ class Voting extends ActiveRecord
     
     /*
      * После создания опроса, отправляем push-уведомление
+     * Создаем оповещени
      */
     public function afterSave($insert, $changedAttributes) {
         parent::afterSave($insert, $changedAttributes);
