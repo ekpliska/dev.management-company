@@ -10,6 +10,7 @@
     use Imagine\Image\Box;
     use app\models\Questions;
     use app\models\RegistrationInVoting;
+    use app\models\TokenPushMobile;
 
 /*
  * Голосование
@@ -269,11 +270,25 @@ class Voting extends ActiveRecord
         @unlink(Yii::getAlias('@webroot') . $cover);
     }
     
+    /*
+     * Закрытие опроса
+     */
     public function closeVoting() {
         
         $this->status = self::STATUS_CLOSED;
         return $this->save(false) ? true : false;
         
+    }
+    
+    /*
+     * После создания опроса, отправляем push-уведомление
+     */
+    public function afterSave($insert, $changedAttributes) {
+        parent::afterSave($insert, $changedAttributes);
+        if ($insert) {
+            $house_id = $this->voting_house_id;
+            TokenPushMobile::sendPublishNotice(TokenPushMobile::TYPE_PUBLISH_VOTE, $this->voting_title, $house_id);
+        }
     }
     
     /**
