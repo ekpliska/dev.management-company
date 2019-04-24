@@ -21,7 +21,7 @@ class ApiController extends Controller
             'login' => ['post'],
             'sign-up' => ['post'],
             'send-sms' => ['post'],
-            'reset-password' => ['post']
+            'reset-password' => ['get']
         ];
     }
     
@@ -102,7 +102,7 @@ class ApiController extends Controller
         // Модель смены номера телефона
         $model = new ResetPassword($user, $sms_code);
         if (!$model->changePassword()) {
-            return ['message' => 'Ошибка сброса пароля. Попробуйте ещё раз.'];
+            return ['message' => 'Ошибка сброса пароля. Попробуйте ещё раз'];
         }
         
         return ['success' => true];
