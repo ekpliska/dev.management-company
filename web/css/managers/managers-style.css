@@ -2053,7 +2053,12 @@ ul[id*="employees-list-"] > li > a:hover {
     margin: 50px 10px;
 }
 .notice-block {
-    margin: 70px 50%;
+    margin: 70px 0;
+    margin-left: 45%;
+}
+#newsform-isnotice {
+    margin: 70px 0;
+    margin-left: 35%;
 }
 /* Конец Новость, форма создания и редатирования публикации */
 
