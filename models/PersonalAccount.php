@@ -297,6 +297,14 @@ class PersonalAccount extends ActiveRecord
         return true;
     }
     
+    /*
+     * Смена баланса
+     */
+    public function changeBalance($new_balance) {
+        $this->account_balance = $new_balance;
+        return $this->save(false) ? true : false;
+    }
+    
     /**
      * Метки для полей
      */

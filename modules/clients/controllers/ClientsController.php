@@ -3,6 +3,7 @@
     namespace app\modules\clients\controllers;
     use Yii;
     use app\models\SiteSettings;
+    use app\models\PersonalAccount;
     
 
 /**
@@ -74,7 +75,46 @@ class ClientsController extends AppClientsController
         $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
         $receipts_lists = Yii::$app->client_api->getReceipts($data_json);
         
+        // Проверяем актуальность баланса по лицевому счету
+        $summ_last = $receipts_lists ? $receipts_lists[0]['Сумма к оплате'] : null;
+        if ($summ_last) {
+            $this->checkBalance($summ_last);
+        }
+        
         return $receipts_lists;
+    }
+    
+    /*
+     * Проверка баланса Лицевого счета
+     */
+    private function checkBalance($last_sum) {
+        
+        $square = Yii::$app->userProfile->getLivingSpace($this->_current_account_id)['flat']['flats_square'];
+        $old_balance = Yii::$app->userProfile->balance;
+
+        $data_array = [
+            "Номер лицевого счета" => "{$this->_current_account_number}",
+            "Сумма последней квитанции" => "{$last_sum}",
+            "Площадь жилого помещения" => "{$square}",
+        ];
+        // Преобразуем массив в json
+        $data_json = json_encode($data_array, JSON_UNESCAPED_UNICODE);
+        // Отправляем запрос по API        
+        $result_api = Yii::$app->client_api->accountRegister($data_json);
+        
+        // Если данные по API получены, то проверяем текущий баланс с новым
+        if ($result_api['Лицевой счет']['success']) {
+            $new_balance = $result_api['Лицевой счет']['Баланс'];
+            if ($old_balance != $new_balance) {
+                $account = PersonalAccount::findOne($this->_current_account_id);
+                $account->changeBalance($new_balance);
+                return true;
+            }
+            
+        }
+        return true;
+        
+
     }
     
     /*
