@@ -127,7 +127,6 @@
 
             <div class="spam-agree-txt notice-block">
                 <?= $form->field($model, 'isPush', ['template' => '{input}{label}'])->checkbox([], false)->label() ?> 
-                <?= $form->field($model, 'isPrivateOffice', ['template' => '{input}{label}'])->checkbox([], false)->label() ?> 
                 <?= $form->field($model, 'isEmail', ['template' => '{input}{label}'])->checkbox([], false)->label() ?> 
             </div>            
 

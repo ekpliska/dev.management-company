@@ -127,7 +127,10 @@ $this->params['breadcrumbs'][] = $employee_info->fullName;
                     
                     <div class="field">
                         <label for="user_mobile" class="field-label"><?= $employee_info->getAttributeLabel('employee_birthday') ?></label>
-                        <?= Html::input('text', 'user_mobile', $employee_info->employee_birthday, ['class' => 'field-input', 'readonly' => true]) ?>
+                        <?= Html::input('text', 'user_mobile', 
+                                Yii::$app->formatter->asDate($employee_info->employee_birthday, 'd MMMM Y'), [
+                                    'class' => 'field-input', 
+                                    'readonly' => true]) ?>
                     </div>
                     
                     <div class="field">

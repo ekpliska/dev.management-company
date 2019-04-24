@@ -131,7 +131,6 @@ class News extends ActiveRecord
     public static function getNoticeType() {
         return [
             self::NOTICE_PUSH => 'Push-оповещения',
-            self::NOTICE_PERSONAL_OFFICE => 'Публикация только личном кабинете',
             self::NOTICE_EMAIL => 'Email-оповещения',
         ];
     }
@@ -336,8 +335,8 @@ class News extends ActiveRecord
             'news_user_id' => 'Пользователь',
             'isPrivateOffice' => 'Уведомления',
             'isSMS' => 'СМС',
-            'isEmail' => 'Email',
-            'isPush' => 'Push',
+            'isEmail' => 'Push-оповещения',
+            'isPush' => 'Email-оповещения',
             'created_at' => 'Дата создания',
             'updated_at' => 'Дата обновления',
             'files' => 'Прикрепленные документы',

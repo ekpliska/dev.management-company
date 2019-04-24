@@ -25,7 +25,7 @@ class NewsForm extends Model {
     public $house;
     // Тип публикации
     public $isPrivateOffice;
-    // Тип оповещение (СМСб Email, Push)
+    // Тип оповещение (Email, Push)
     public $isNotice;
     // Пользователь
     public $user;
@@ -103,7 +103,7 @@ class NewsForm extends Model {
             // Сохраняем превью публикации
             $add_news->uploadImage($file);
             
-            $add_news->isPrivateOffice = isset($this->isNotice[0]) ? News::NOTICE_YES : News::NOTICE_NO;
+//            $add_news->isPrivateOffice = isset($this->isNotice[0]) ? News::NOTICE_YES : News::NOTICE_NO;
             $add_news->isEmail = isset($this->isNotice[1]) ? News::NOTICE_YES : News::NOTICE_NO;
             $add_news->isPush = isset($this->isNotice[2]) ? News::NOTICE_YES : News::NOTICE_NO;
             
