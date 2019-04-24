@@ -82,6 +82,8 @@ class Notifications extends ActiveRecord {
                 $notice->type_notification = $type_notice;
                 $message = "Заявка ID{$request_info->requests_ident} установлен статус {$status_request}";
                 $notice->value_1 = $request_info->requests_ident;
+                $notice->value_2 = 'request';
+                $notice->value_3 = $request_id;
                 
                 // Отправка PUSH
                 $push_note = TokenPushMobile::send($user_id, 'Заявки', "Заявка ID{$request_info->requests_ident} установлен статус {$status_request}");
@@ -100,6 +102,8 @@ class Notifications extends ActiveRecord {
                 $notice->user_uid = $user_id;
                 $notice->type_notification = $type_notice;
                 $message = "Платная услуга, заявка ID{$paid_request_info->services_number} установлен статус {$status_request}";
+                $notice->value_2 = 'paid_request';
+                $notice->value_3 = $request_id;
                 
                 // Отправка PUSH
                 $push_note = TokenPushMobile::send($user_id, 'Платные услуги', "Платная услуга, заявка ID{$paid_request_info->services_number} установлен статус {$status_request}");

@@ -78,8 +78,22 @@ class ApiController extends Controller
     
     /*
      * Восстановление пароля
+     * {"phone": "+7 (000) 000-00-00"}
      */
     public function actionResetPassword() {
+    }
+    
+    private function sendSmsCode($phone) {
+        
+        // Формируем случайный смс-код
+        $sms_code = mt_rand(10000, 99999);
+        $phone = preg_replace('/[^0-9]/', '', $phone);
+        $sms_code = mt_rand(10000, 99999);
+        // Отправляем смс на указанный номер телефона
+        if (!$result = Yii::$app->sms->generalMethodSendSms(SmsSettings::TYPE_NOTICE_REGISTER, $phone, $sms_code)) {
+            return ['success' => false, 'message' => $result];
+        }
+        return true;
     }
     
     

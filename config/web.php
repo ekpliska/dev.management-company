@@ -267,6 +267,15 @@ $config = [
                         'POST /' => 'index',
                     ]
                 ],                
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'pluralize' => false,
+                    'controller' => 'v1/notifications',
+                    'extraPatterns' => [
+                        'GET view/<note_id:[\d-]+>' => 'view',
+                        'GET /' => 'index',
+                    ]
+                ],                
             ],
         ],
         'sms' => $sms,
