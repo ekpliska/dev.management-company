@@ -5,6 +5,9 @@
     use yii\rest\Controller;
     use app\modules\api\v1\models\LoginForm;
     use app\modules\api\v1\models\RegisterForm;
+    use app\models\SmsSettings;
+    use app\models\User;
+    use app\modules\api\v1\models\ResetPassword;
 
 /**
  * API контроллер
@@ -17,6 +20,8 @@ class ApiController extends Controller
         return [
             'login' => ['post'],
             'sign-up' => ['post'],
+            'send-sms' => ['post'],
+            'reset-password' => ['post']
         ];
     }
     
@@ -78,22 +83,61 @@ class ApiController extends Controller
     
     /*
      * Восстановление пароля
-     * {"phone": "+7 (000) 000-00-00"}
      */
     public function actionResetPassword() {
+        
+        if (!Yii::$app->session->has('user_phone') || !Yii::$app->session->has('sms_code')) {
+            return ['message' => 'Не верно указан смс код'];
+        }
+        
+        // Берем данные из сессии
+        $phone = Yii::$app->session->get('user_phone');
+        $sms_code = Yii::$app->session->get('sms_code');
+        // Ищем пользователя по номеру телефона
+        $user = User::findOne(['user_mobile' => $phone]);
+        
+        if ($user == null) {
+            return ['message' => 'Пользователь с указанным номером телефона не найден'];
+        }
+        // Модель смены номера телефона
+        $model = new ResetPassword($user, $sms_code);
+        if (!$model->changePassword()) {
+            return ['message' => 'Ошибка сброса пароля. Попробуйте ещё раз.'];
+        }
+        
+        return ['success' => true];
     }
     
-    private function sendSmsCode($phone) {
+    /*
+     * Отправка СМС кода на смену пароля учетной записи
+     * {"phone": "+7 (000) 000-00-00"}
+     */
+    public function actionSendSms() {
+        
+        Yii::$app->session->destroy();
+        
+        $_phone = Yii::$app->request->getBodyParam('phone');
+        if (empty($_phone) || !isset($_phone)) {
+            return ['message' => 'Укажите номер телефона'];
+        }
         
         // Формируем случайный смс-код
         $sms_code = mt_rand(10000, 99999);
-        $phone = preg_replace('/[^0-9]/', '', $phone);
-        $sms_code = mt_rand(10000, 99999);
+        $phone = preg_replace('/[^0-9]/', '', $_phone);
+        
+        Yii::$app->session['user_phone'] = $_phone;
+        Yii::$app->session['sms_code'] = $sms_code;
+        
         // Отправляем смс на указанный номер телефона
-        if (!$result = Yii::$app->sms->generalMethodSendSms(SmsSettings::TYPE_NOTICE_REGISTER, $phone, $sms_code)) {
+        if (!$result = Yii::$app->sms->generalMethodSendSms(SmsSettings::TYPE_NOTICE_RECOVERY_PASSWORD, $phone, $sms_code)) {
             return ['success' => false, 'message' => $result];
         }
-        return true;
+        
+        return [
+            'sucess' => true,
+            'sms_code' => (string) $sms_code
+        ];
+        
     }
     
     
