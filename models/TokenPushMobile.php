@@ -13,6 +13,9 @@
  */
 class TokenPushMobile extends ActiveRecord {
     
+    const TYPE_PUBLISH_NEWS = 'news';
+    const TYPE_PUBLISH_VOTE = 'vote';
+    
     /**
      * Таблица БД
      */
@@ -93,7 +96,7 @@ class TokenPushMobile extends ActiveRecord {
     /*
      * Отправка уведомлений из чата Опроса
      */
-    public function sendPushToVote($from, $message, $vote_id) {
+    public function sendPushToVote($from, $message_text, $vote_id) {
         
         // От кого сообщение
         $user_from = User::find()->joinWith('client')->where(['user_id' => $from])->one();
@@ -114,7 +117,7 @@ class TokenPushMobile extends ActiveRecord {
         }
         $message = [
             'title' => "{$user_from->client->clients_name}",
-            'body' => $message
+            'body' => $message_text
         ];
             
         if ($tokens) {
@@ -123,6 +126,44 @@ class TokenPushMobile extends ActiveRecord {
         }
         
         return true;
+        
+    }
+    
+    /*
+     * Отправка уведомлений для Новостей, Опроса
+     * @param string $for_whom Для всех, Для конкреного дома
+     * @param string $type Новости, Опрос
+     */
+    public static function sendPublishNotice($type, $message_text, $house_id = null) {
+        
+        if ($house_id == null) {
+            // Собираем все токены для рассылки
+            $_tokens = self::find()
+                ->asArray()
+                ->all();
+            $tokens = ArrayHelper::getColumn($_tokens, 'token');
+        } elseif ($house_id) {
+            // Собираем токены для собсвенников указанного дома
+            $_tokens = (new yii\db\Query())
+                ->select('token')
+                ->from('flats as f')
+                ->join('LEFT JOIN', 'personal_account as pa', 'pa.personal_flat_id = f.flats_id')
+                ->join('LEFT JOIN', 'account_to_users as ua', 'ua.account_id = pa.account_id')
+                ->join('RIGHT JOIN', 'token_push_mobile as t', 't.user_uid = ua.user_id')
+                ->where(['flats_house_id' => $house_id])
+                ->groupBy('token')
+                ->all();
+            $tokens = ArrayHelper::getColumn($_tokens, 'token');
+        }
+        $message = [
+            'title' => $type == 'news' ? "Новости" : "Опрос",
+            'body' => $message_text
+        ];
+        if ($tokens) {
+            $notes = new FirebaseNotifications();
+            return $notes->sendNotification($tokens, $message);
+        }
+        return true;            
         
     }
     

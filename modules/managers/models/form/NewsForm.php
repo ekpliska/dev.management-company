@@ -5,6 +5,7 @@
     use yii\base\Model;
     use app\models\News;
     use yii\helpers\HtmlPurifier;
+    use app\models\TokenPushMobile;
 
 /* 
  * Создание новой новости
@@ -115,6 +116,12 @@ class NewsForm extends Model {
             }
             
             $add_news->uploadFiles($files);
+            
+            // Отправляем push-уведомления
+            if ($add_news->isPush == News::NOTICE_YES) {
+                $house_id = $add_news->news_house_id;
+                TokenPushMobile::sendPublishNotice(TokenPushMobile::TYPE_PUBLISH_NEWS, $add_news->news_title, $house_id);
+            }
             
             $transaction->commit();
             return $add_news;
