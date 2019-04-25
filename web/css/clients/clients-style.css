@@ -3499,6 +3499,9 @@ a.employee-profile:hover {
 }
 
 /* Slider */
+.news-carousel {
+    margin: 0 15px;
+}
 .news-carousel > .owl-nav {
     margin: 10px;
     position: absolute;

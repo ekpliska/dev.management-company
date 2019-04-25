@@ -5,6 +5,7 @@
     use yii\db\ActiveRecord;
     use app\models\User;
     use app\models\TokenPushMobile;
+    use yii\behaviors\TimestampBehavior;
 
 /**
  * Уведомления
@@ -17,6 +18,15 @@ class Notifications extends ActiveRecord {
     const TYPE_HAVE_MISSED_REQUEST = 'Have the missed requests';
     const TYPE_HAVE_MISSED_PAID_REQUEST = 'Have the missed paid requests';
 
+    public function behaviors () {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'value' => time(),
+            ],
+        ];
+    }
+    
     /**
      * Таблица  БД
      */
@@ -41,6 +51,7 @@ class Notifications extends ActiveRecord {
             [['type_notification'], 'string', 'max' => 70],
             [['message', 'value_1', 'value_2', 'value_3'], 'string', 'max' => 255],
             [['user_uid'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_uid' => 'user_id']],
+            [['created_at'], 'default', 'value' => time()],
         ];
     }
     
@@ -86,7 +97,7 @@ class Notifications extends ActiveRecord {
                 $notice->value_3 = $request_id;
                 
                 // Отправка PUSH
-                $push_note = TokenPushMobile::send($user_id, 'Заявки', "Заявка ID{$request_info->requests_ident} установлен статус {$status_request}");
+                $push_note = TokenPushMobile::send($user_id, "Заявка ID{$request_info->requests_ident}", "{$status_request}");
                 
                 break;
             case self::TYPE_CHANGE_STATUS_IN_PAID_REQUEST:
@@ -106,7 +117,7 @@ class Notifications extends ActiveRecord {
                 $notice->value_3 = $request_id;
                 
                 // Отправка PUSH
-                $push_note = TokenPushMobile::send($user_id, 'Платные услуги', "Платная услуга, заявка ID{$paid_request_info->services_number} установлен статус {$status_request}");
+                $push_note = TokenPushMobile::send($user_id, "Платная услуга, ID{$paid_request_info->services_number}", "{$status_request}");
                 
                 break;
         }

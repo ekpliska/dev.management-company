@@ -22,6 +22,7 @@ class m190307_090202_table_notifications extends Migration {
             'value_2' => $this->string(255),
             'value_3' => $this->string(255),
             'created_at' => $this->integer(),
+            'updated_at' => $this->integer(),
         ], $table_options);
         
         $this->addForeignKey(
