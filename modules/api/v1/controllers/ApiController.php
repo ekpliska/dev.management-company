@@ -21,7 +21,7 @@ class ApiController extends Controller
             'login' => ['post'],
             'sign-up' => ['post'],
             'send-sms' => ['post'],
-            'reset-password' => ['get']
+            'reset-password' => ['post']
         ];
     }
     
@@ -83,13 +83,15 @@ class ApiController extends Controller
     
     /*
      * Восстановление пароля
+     * {"sms_code": "code"}
      */
     public function actionResetPassword() {
         
+        $_code = Yii::$app->request->getBodyParam('sms_code');
+        
         if (!Yii::$app->session->has('user_phone') || !Yii::$app->session->has('sms_code')) {
             return ['message' => 'Не верно указан смс код'];
-        }
-        
+        }        
         // Берем данные из сессии
         $phone = Yii::$app->session->get('user_phone');
         $sms_code = Yii::$app->session->get('sms_code');
@@ -99,6 +101,10 @@ class ApiController extends Controller
         if ($user == null) {
             return ['message' => 'Пользователь с указанным номером телефона не найден'];
         }
+        if ($sms_code != $_code) {
+            return ['message' => 'Не верно указан смс код'];
+        }
+        
         // Модель смены номера телефона
         $model = new ResetPassword($user, $sms_code);
         if (!$model->changePassword()) {
@@ -133,10 +139,7 @@ class ApiController extends Controller
             return ['success' => false, 'message' => $result];
         }
         
-        return [
-            'sucess' => true,
-            'sms_code' => (string) $sms_code
-        ];
+        return ['sucess' => true];
         
     }
     
