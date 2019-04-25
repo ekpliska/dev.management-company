@@ -17,14 +17,13 @@ class SettingsAppController extends Controller {
     public function behaviors() {
         
         $behaviors = parent::behaviors();
+        $behaviors['authenticator']['only'] = ['index', 'switch-email'];
         $behaviors['authenticator']['authMethods'] = [
-            HttpBasicAuth::className(),
-            HttpBearerAuth::className(),
+              HttpBasicAuth::className(),
+              HttpBearerAuth::className(),
         ];
-        
         $behaviors['access'] = [
             'class' => AccessControl::className(),
-            'only' => ['index'],
             'rules' => [
                 [
                     'allow' => true,
@@ -40,6 +39,7 @@ class SettingsAppController extends Controller {
         
         return [
             'index' => ['post'],
+            'switch-email' => ['post'],
         ];
     }
     
@@ -54,10 +54,29 @@ class SettingsAppController extends Controller {
             return false;
         }
         
-        $user = User::findOne(['user_id' => Yii::$app->user->getId()]);
+        $user = $this->getUser();
         $settings = new Settings($user, $data_post);
         return $settings->getSettings($data_post);
         
+    }
+    
+    /*
+     * Смена состояния email-уведомлений
+     * {"enable":true/false}
+     */
+    public function actionSwitchEmail() {
+        $data_post = Yii::$app->request->getBodyParam('enable');
+        if (!isset($data_post) && $data_post == null) {
+            return false;
+        }
+        $user = $this->getUser();
+        $settings = new Settings($user);
+        return $settings->switchStatusEmail($data_post);
+        
+    }
+    
+    private function getUser() {
+        return User::findOne(['user_id' => Yii::$app->user->getId()]);
     }
     
 }
