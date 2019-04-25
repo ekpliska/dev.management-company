@@ -69,15 +69,18 @@ class UserRequests extends Clients {
                 ->joinWith([
                     'user u', 
                     'personalAccount pa', 
-                    'personalAccount.request rq', 
+                    'personalAccount.request rq' => function($query) {
+                        $query->where(['rq.requests_dispatcher_id' => Yii::$app->profileDispatcher->employeeID]);
+                        $query->where(['!=', 'rq.status', StatusRequest::STATUS_CLOSE]);
+                        $query->orderBy(['rq.status' => SORT_ASC]);
+                    }, 
                     'personalAccount.request.image i', 
                     'personalAccount.flat fl', 
                     'personalAccount.flat.house hs'])
-                ->where(['!=', 'rq.status', StatusRequest::STATUS_CLOSE])
-                ->andWhere(['u.user_id' => $user_id])
-                ->orderBy(['rq.created_at' => SORT_ASC])
+                ->where(['u.user_id' => $user_id])
                 ->asArray()
-                ->all();
+                ->all();        
+        
         
         return $query;
     }
@@ -91,12 +94,15 @@ class UserRequests extends Clients {
                 ->joinWith([
                     'user u', 
                     'personalAccount pa', 
-                    'personalAccount.paidRequest ps', 
+                    'personalAccount.paidRequest ps' => function($query) {
+                        $query->andWhere(['ps.services_dispatcher_id' => Yii::$app->profileDispatcher->employeeID]);
+                        $query->orWhere(['ps.status' => StatusRequest::STATUS_NEW]);
+                        $query->andWhere(['!=', 'ps.status', StatusRequest::STATUS_CLOSE]);
+                        $query->orderBy(['ps.status' => SORT_ASC]);
+                    }, 
                     'personalAccount.flat fl', 
                     'personalAccount.flat.house hs'])
-                ->where(['!=', 'ps.status', StatusRequest::STATUS_CLOSE])
-                ->andWhere(['u.user_id' => $user_id])
-                ->orderBy(['ps.created_at' => SORT_ASC])
+                ->where(['u.user_id' => $user_id])
                 ->asArray()
                 ->all();
         

@@ -14,9 +14,10 @@ $key = 0;
 <?php if (isset($user_lists) && !empty($user_lists)) : ?>
     <?php foreach ($user_lists[$key]['personalAccount'] as $key_account => $account) : // foreach 1 ?>
         <?php $status_use = []; ?>
-        <p class="account-title">
-            <?= count($account['request']) > 1 ? "Лицевой счет {$account['account_number']}" : '' ?>
-        </p>
+
+        <?= count($account['request']) >= 1 ?
+                "<p class='account-title'>Лицевой счет {$account['account_number']}</p>" : '' ?>
+
         <?php foreach ($account['request'] as $key_request => $request) : // foreach 2 ?>
             <?php if (!in_array($request['status'], $status_use)) : ?>
             <div class="panel panel-default panel__request_block">
@@ -53,7 +54,8 @@ $key = 0;
                         </div>
                     </div>
                 </div>
-                <?php if ($request['status'] != $account['request'][$key_request + 1]['status']) : ?>
+                <?php $next_ststus = isset($account['request'][$key_request + 1]['status']) ? $account['request'][$key_request + 1]['status'] : '-1' ?>
+                <?php if ($request['status'] != $next_ststus) : ?>
                 </div>
             </div>
                 <?php endif; ?>

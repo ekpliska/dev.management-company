@@ -14,9 +14,10 @@ $key = 0;
 <?php if (isset($user_lists) && !empty($user_lists)) : ?>
     <?php foreach ($user_lists[$key]['personalAccount'] as $key_account => $account) : // foreach 1 ?>
         <?php $status_use = []; ?>
-        <p class="account-title">
-            <?= count($account['paidRequest']) > 1 ? "Лицевой счет {$account['account_number']}" : '' ?>
-        </p>
+
+        <?= count($account['paidRequest']) >= 1 ?
+                "<p class='account-title'>Лицевой счет {$account['account_number']}</p>" : '' ?>
+
         <?php foreach ($account['paidRequest'] as $key_request => $paid_request) : // foreach 2 ?>
             <?php if (!in_array($paid_request['status'], $status_use)) : ?>
             <div class="panel panel-default panel__request_block">
@@ -51,7 +52,8 @@ $key = 0;
                         <?= FormatHelpers::shortTitleOrText($paid_request['services_comment'], 90) ?>
                     </div>
                 </div>
-                <?php if ($paid_request['status'] != $account['paidRequest'][$key_request + 1]['status']) : ?>
+                <?php $next_ststus = isset($account['paidRequest'][$key_request + 1]['status']) ? $account['paidRequest'][$key_request + 1]['status'] : '-1' ?>
+                <?php if ($paid_request['status'] != $next_ststus) : ?>                    
                 </div>
             </div>
                 <?php endif; ?>
