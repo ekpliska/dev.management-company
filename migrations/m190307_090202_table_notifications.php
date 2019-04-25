@@ -21,6 +21,10 @@ class m190307_090202_table_notifications extends Migration {
             'value_1' => $this->string(255),
             'value_2' => $this->string(255),
             'value_3' => $this->string(255),
+            'value_4' => $this->string(255),
+            'value_5' => $this->string(255),
+            'value_6' => $this->string(255),
+            'value_7' => $this->string(255),
             'created_at' => $this->integer(),
             'updated_at' => $this->integer(),
         ], $table_options);

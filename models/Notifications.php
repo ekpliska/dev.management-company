@@ -6,6 +6,7 @@
     use app\models\User;
     use app\models\TokenPushMobile;
     use yii\behaviors\TimestampBehavior;
+    use app\models\StatusRequest;
 
 /**
  * Уведомления
@@ -95,6 +96,7 @@ class Notifications extends ActiveRecord {
                 $notice->value_1 = $request_info->requests_ident;
                 $notice->value_2 = 'request';
                 $notice->value_3 = $request_id;
+                $notice->value_4 = StatusRequest::statusNameKey($status_name);
                 
                 // Отправка PUSH
                 $push_note = TokenPushMobile::send($user_id, "Заявка ID{$request_info->requests_ident}", "{$status_request}");
@@ -115,6 +117,7 @@ class Notifications extends ActiveRecord {
                 $message = "Платная услуга, заявка ID{$paid_request_info->services_number} установлен статус {$status_request}";
                 $notice->value_2 = 'paid_request';
                 $notice->value_3 = $request_id;
+                $notice->value_4 = StatusRequest::statusNameKey($status_name);
                 
                 // Отправка PUSH
                 $push_note = TokenPushMobile::send($user_id, "Платная услуга, ID{$paid_request_info->services_number}", "{$status_request}");
