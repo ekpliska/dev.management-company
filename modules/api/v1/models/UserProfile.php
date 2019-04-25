@@ -49,7 +49,7 @@ class UserProfile extends User {
         
         $personal_account = (new \yii\db\Query)
                 ->select('pa.account_number as number, '
-                        . 'r.rents_surname as rents_surname, r.rents_name as rents_name, r.rents_second_name as rents_second_name, '
+                        . 'r.rents_id as rents_id, r.rents_surname as rents_surname, r.rents_name as rents_name, r.rents_second_name as rents_second_name, '
                         . 'r.rents_mobile as rents_mobile, r.rents_mobile_more as other_phone, '
                         . 'u_r.user_email as email_rent, '
                         . 'h.houses_id as house_id, '
@@ -71,6 +71,7 @@ class UserProfile extends User {
                 
             } else {
                 $rent_info = [
+                    'rents_id' => $account['rents_id'],
                     'rents_surname' => $account['rents_surname'],
                     'rents_name' => $account['rents_name'],
                     'rents_second_name' => $account['rents_second_name'],

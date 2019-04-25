@@ -14,7 +14,6 @@
  */
 class ApiController extends Controller
 {
-    
     protected function verbs() {
         
         return [
@@ -139,7 +138,7 @@ class ApiController extends Controller
             return ['success' => false, 'message' => $result];
         }
         
-        return ['sucess' => true];
+        return ['success' => true];
         
     }
     
