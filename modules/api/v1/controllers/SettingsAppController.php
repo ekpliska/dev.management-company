@@ -17,7 +17,7 @@ class SettingsAppController extends Controller {
     public function behaviors() {
         
         $behaviors = parent::behaviors();
-        $behaviors['authenticator']['only'] = ['index', 'switch-email'];
+        $behaviors['authenticator']['only'] = ['index', 'switch-email', 'switch-push'];
         $behaviors['authenticator']['authMethods'] = [
               HttpBasicAuth::className(),
               HttpBearerAuth::className(),
@@ -40,6 +40,7 @@ class SettingsAppController extends Controller {
         return [
             'index' => ['post'],
             'switch-email' => ['post'],
+            'switch-push' => ['post'],
         ];
     }
     
@@ -62,17 +63,34 @@ class SettingsAppController extends Controller {
     
     /*
      * Смена состояния email-уведомлений
-     * {"enable":true/false}
+     * {"enabled":true/false}
      */
     public function actionSwitchEmail() {
-        $data_post = Yii::$app->request->getBodyParam('enable');
+        $data_post = Yii::$app->request->getBodyParam('enabled');
         if (!isset($data_post) && $data_post == null) {
             return false;
         }
         $user = $this->getUser();
         $settings = new Settings($user);
-        return $settings->switchStatusEmail($data_post);
-        
+        return $settings->switchStatusEmail((bool)$data_post);        
+    }
+    
+    /*
+     * Смена состояния push-уведомлений
+     * {
+     *      "token": "string key",
+     *      "enabled": true/false}
+     * }
+     */
+    public function actionSwitchPush() {
+        $token_post = Yii::$app->request->getBodyParam('token');
+        $enabled_post = Yii::$app->request->getBodyParam('enabled');
+        if ((!isset($token_post) || !isset($token_post)) && (empty($token_post) || $enabled_post)) {
+            return false;
+        }
+        $user = $this->getUser();
+        $settings = new Settings($user, $token_post);
+        return $settings->switchStatusPush((bool)$enabled_post);        
     }
     
     private function getUser() {

@@ -36,8 +36,19 @@ class Settings extends Model {
      * Смена статуса email-уведомлений
      */
     public function switchStatusEmail($status) {
-        $this->_user->user_check_email = (boolval($status));
+        $this->_user->user_check_email = (bool)$status;
         return $this->_user->save(false) ? true : false;
+    }
+
+    /*
+     * Смена статуса push-уведомлений
+     */
+    public function switchStatusPush($status) {
+        if ($this->_push) {
+            $this->_push->status = (bool)$status;
+            return $this->_push->save(false) ? true : false;
+        }
+        return false;
     }
     
     
