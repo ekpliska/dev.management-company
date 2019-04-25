@@ -276,6 +276,14 @@ $config = [
                         'GET /' => 'index',
                     ]
                 ],                
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'pluralize' => false,
+                    'controller' => 'v1/settings-app',
+                    'extraPatterns' => [
+                        'POST /' => 'index',
+                    ]
+                ],                
             ],
         ],
         'sms' => $sms,

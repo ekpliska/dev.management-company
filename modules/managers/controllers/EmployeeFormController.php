@@ -61,7 +61,7 @@ class EmployeeFormController extends AppManagersController {
         
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             
-            $permission_list_post = Yii::$app->request->post()['permission_list'];
+            $permission_list_post = isset(Yii::$app->request->post()['permission_list']) ? Yii::$app->request->post()['permission_list'] : null;
             
             $file = UploadedFile::getInstance($model, 'photo');
             $model->photo = $file;
