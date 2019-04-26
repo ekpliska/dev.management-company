@@ -2,11 +2,11 @@
 
 return [
     
-    'site-name' => 'ELSA | ',
+    'site-name' => '',
     'site-name-manager' => 'ELSA | Администратор | ',
     'site-name-dispatcher' => 'ELSA | Диспетчер | ',
     
-    'company-name' => 'ELSA Company',
+    'company-name' => 'ELSA',
     'company-email' => 'elsa@elsa.ru',
     
     'adminEmail' => 'admin@example.com',

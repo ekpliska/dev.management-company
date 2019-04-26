@@ -4,7 +4,7 @@
     use yii\helpers\Url;
     use yii\widgets\ActiveForm;
 
-$this->title = 'Вход';
+$this->title = 'ELSA | Вход';
 ?>
 
 <div class="main-page">

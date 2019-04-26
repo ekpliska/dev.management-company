@@ -20,7 +20,7 @@
     ]) ?>
 
     <div class="notice info">
-        <p>Логино для входа в личный кабинет Арендатора <b><?= "{$this->context->_current_account_number}r" ?></b>.</p>
+        <p>Логин для входа в личный кабинет Арендатора <b><?= "{$this->context->_current_account_number}r" ?></b>.</p>
     </div>
 
     <?= $form->field($model_rent, 'rents_id', ['options' => ['class' => 'hidden']])

@@ -3,7 +3,7 @@
     use yii\helpers\Html;
     use yii\helpers\Url;
     
-$this->title = "Customers | Восстановаление пароля";
+$this->title = "ELSA | Восстановаление пароля";
 ?>
 
 <div class="main-page">

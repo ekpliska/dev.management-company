@@ -27,8 +27,8 @@ class Settings extends Model {
      */
     public function getSettings() {
         return [
-            'push' => $this->_user->user_check_email ? true : false,
-            'email' => ($this->_push && $this->_push->status) ? true : false,
+            'email' => $this->_user->user_check_email ? true : false,
+            'push' => ($this->_push && $this->_push->status) ? true : false,
         ];
     }
     

@@ -37,7 +37,9 @@ class SupportController extends Controller {
      */
     public function actionUserAgreement() {
         $user_agreement = SiteSettings::findOne(['id' => 1]);
-        return $user_agreement ? strip_tags($user_agreement->user_agreement) : null;
+        return $user_agreement ? 
+                ['agreement' => strip_tags($user_agreement->user_agreement)] 
+                : ['agreement' => 'Приносим свои извинения, пользовательское соглашение не запонено'];
     }
     
 }

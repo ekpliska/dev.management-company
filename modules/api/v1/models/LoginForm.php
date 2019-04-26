@@ -6,7 +6,7 @@
     use app\models\Token;
     use app\models\User;
     use app\models\Clients;
-    use app\models\TokenPushMobile;
+    use app\models\Rents;
     
 /*
  * Модель авторизации по API
@@ -58,17 +58,33 @@ class LoginForm extends Model {
         }
         
         $client = Clients::findOne(['clients_id' => $this->getUser()->user_client_id]);
+        $rent = Rents::findOne(['rents_id' => $this->getUser()->user_rent_id]);
+        $role = $this->getRole($this->getUser()->id);
         
         $response = [
             'user_uid' => $token->user_uid,
             'token' => $token->token,
             'expired_at' => $token->expired_at,
             'user_photo' => $this->getUser()->getPhoto(),
-            'user_fullname' => $client->fullName,
+            'user_fullname' => $role == 'clients' ? $client->fullName : $rent->fullName,
+            'role' => $role,
         ];
         
         return $response;
         
+    }
+    
+    /*
+     * Получить роль пользователя
+     */
+    private function getRole($user_id) {
+        $role = (new \yii\db\Query())
+                ->select(['item_name'])
+                ->from('auth_assignment')
+                ->andWhere(['=', 'user_id', $user_id])
+                ->one();
+        
+        return $role['item_name'];
     }
     
     protected function getUser() {

@@ -16,24 +16,9 @@
 class ApiController extends Controller
 {
     
-    public function behaviors() {
-        
-        $behaviors['access'] = [
-            'class' => AccessControl::className(),
-            'rules' => [
-                [
-                    'allow' => true,
-                    'roles' => ['?'],
-                ],
-            ],
-        ];
-        return $behaviors;
-        
-    }
-    
-    protected function verbs() {
-        
+    public function verbs() {
         return [
+            'index' => ['get'],
             'login' => ['post'],
             'sign-up' => ['post'],
             'send-sms' => ['post'],
@@ -45,14 +30,13 @@ class ApiController extends Controller
      * Загрушка на /index
      */
     public function actionIndex() {
-        return 'api';
+        return ['success' => true];
     }
     
     /*
      * Авторизация
      */
     public function actionLogin() {
-        
         $model = new LoginForm();
         $model->load(Yii::$app->request->bodyParams, '');
         if ($token = $model->auth()) {
@@ -60,7 +44,6 @@ class ApiController extends Controller
         } else {
             return $model;
         }
-        
     }
     
     /*

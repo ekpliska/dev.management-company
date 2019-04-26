@@ -2,7 +2,7 @@
     
     use yii\helpers\Html;
 
-$this->title = 'Customers | Вход';
+$this->title = 'ELSA';
 ?>
 
 <div class="start-page">

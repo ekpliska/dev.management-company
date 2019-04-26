@@ -6,7 +6,7 @@
 /*
  * Главная страница личного кабинета Собственника
  */    
-$this->title = Yii::$app->params['site-name'] . "Новости";
+$this->title = Yii::$app->params['site-name'] . "Личный кабинет";
 $current_date = Yii::$app->formatter->asDate(time(), 'LLLL, Y');
 ?>
 

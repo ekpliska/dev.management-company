@@ -136,6 +136,8 @@ class TokenPushMobile extends ActiveRecord {
      */
     public static function sendPublishNotice($type, $message_text, $house_id = null) {
         
+        $tokens = [];
+        
         if ($house_id == null) {
             // Собираем все токены для рассылки
             $_tokens = self::find()

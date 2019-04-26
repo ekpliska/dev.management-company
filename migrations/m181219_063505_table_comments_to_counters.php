@@ -23,7 +23,6 @@ class m181219_063505_table_comments_to_counters extends Migration
             'comments_title' => $this->string(255)->notNull(),
             'comments_text' => $this->text(1000)->notNull(),
             'account_id' => $this->integer()->notNull(),
-            'user_id' => $this->integer()->notNull(),
             'created_at' => $this->timestamp()->defaultValue(new Expression("NOW()")),
             'updated_at' => $this->timestamp()->defaultValue(new Expression("NOW()")),
         ]);
