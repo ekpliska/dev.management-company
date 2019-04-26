@@ -30,8 +30,8 @@ class FirebaseNotifications extends BaseObject
      * @param array $body
      * @return mixed
      */
-    public function send($body)
-    {
+    public function send($body) {
+        
         $headers = [
             "Authorization:key={$this->authKey}",
             'Content-Type: application/json',
@@ -77,8 +77,7 @@ class FirebaseNotifications extends BaseObject
      * @param array  $options other FCM options https://firebase.google.com/docs/cloud-messaging/http-server-ref#downstream-http-messages-json
      * @return mixed
      */
-    public function sendNotification($tokens = [], $notification, $options = [])
-    {
+    public function sendNotification($tokens = [], $notification, $options = []) {
         $body = [
             'registration_ids' => $tokens,
             'notification' => $notification,

@@ -319,6 +319,10 @@ li.account-info {
     height: 100%;
     width: 100%;
     border-radius: 12px;
+    object-fit: cover;
+}
+.owl-carousel .owl-item img {
+    object-fit: cover;
 }
 .news-item__rubric {
     font-size: 12px;
@@ -490,10 +494,12 @@ li.partners-info > img {
 .news-conteiner__image img {
     height: 100%;
     width: 100%;
+    object-fit: cover;
 }
 .news-conteiner__content {
-    padding: 20px 0;
+    padding: 20px;
     text-align: justify;
+    line-height: 2;
 }
 .load-news-documents {
     padding: 20px;
@@ -3500,7 +3506,7 @@ a.employee-profile:hover {
 
 /* Slider */
 .news-carousel {
-    margin: 0 15px;
+    padding: 0 15px;
 }
 .news-carousel > .owl-nav {
     margin: 10px;

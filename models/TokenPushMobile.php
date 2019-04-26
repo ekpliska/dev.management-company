@@ -32,6 +32,7 @@ class TokenPushMobile extends ActiveRecord {
             [['user_uid'], 'integer'],
             [['token'], 'string', 'max' => 255],
             [['token'], 'unique'],
+            ['status', 'integer'],
             [['user_uid'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_uid' => 'user_id']],
         ];
     }
@@ -76,6 +77,7 @@ class TokenPushMobile extends ActiveRecord {
         
         $_tokens = self::find()
                 ->where(['user_uid' => $user_id])
+                ->andWhere(['status' => true])
                 ->asArray()
                 ->all();
         // Если массив токенов не пустой, то отправляем push-уведомления
@@ -103,7 +105,9 @@ class TokenPushMobile extends ActiveRecord {
         
         // Рассылка всем кто зарегистрирован на голосование
         $participants = RegistrationInVoting::find()
-                ->joinWith('pushToken')
+                ->joinWith(['pushToken' => function($query) {
+                    $query->andWhere(['status' => true]);
+                }])
                 ->where(['voting_id' => $vote_id, 'status' => RegistrationInVoting::STATUS_ENABLED])
                 ->andWhere(['!=', 'user_id', $from])
                 ->asArray()
@@ -138,9 +142,10 @@ class TokenPushMobile extends ActiveRecord {
         
         $tokens = [];
         
-        if ($house_id == null) {
+        if (!$house_id) {
             // Собираем все токены для рассылки
             $_tokens = self::find()
+                ->where(['status' => true])
                 ->asArray()
                 ->all();
             $tokens = ArrayHelper::getColumn($_tokens, 'token');
@@ -152,14 +157,15 @@ class TokenPushMobile extends ActiveRecord {
                 ->join('LEFT JOIN', 'personal_account as pa', 'pa.personal_flat_id = f.flats_id')
                 ->join('LEFT JOIN', 'account_to_users as ua', 'ua.account_id = pa.account_id')
                 ->join('RIGHT JOIN', 'token_push_mobile as t', 't.user_uid = ua.user_id')
-                ->where(['flats_house_id' => $house_id])
+                ->where(['pa.flats_house_id' => $house_id])
+                ->where(['t.status' => true])
                 ->groupBy('token')
                 ->all();
             $tokens = ArrayHelper::getColumn($_tokens, 'token');
         }
         $message = [
             'title' => $type == 'news' ? "Новости" : "Опрос",
-            'body' => $message_text
+            'body' => strip_tags($message_text)
         ];
         if ($tokens) {
             $notes = new FirebaseNotifications();
@@ -177,6 +183,7 @@ class TokenPushMobile extends ActiveRecord {
             'id' => 'ID',
             'user_uid' => 'User Uid',
             'token' => 'Token',
+            'status' => 'Status',
         ];
     }
 
