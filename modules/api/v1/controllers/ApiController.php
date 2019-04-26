@@ -3,6 +3,7 @@
     namespace app\modules\api\v1\controllers;
     use Yii;
     use yii\rest\Controller;
+    use yii\filters\AccessControl;
     use app\modules\api\v1\models\LoginForm;
     use app\modules\api\v1\models\RegisterForm;
     use app\models\SmsSettings;
@@ -14,6 +15,22 @@
  */
 class ApiController extends Controller
 {
+    
+    public function behaviors() {
+        
+        $behaviors['access'] = [
+            'class' => AccessControl::className(),
+            'rules' => [
+                [
+                    'allow' => true,
+                    'roles' => ['?'],
+                ],
+            ],
+        ];
+        return $behaviors;
+        
+    }
+    
     protected function verbs() {
         
         return [

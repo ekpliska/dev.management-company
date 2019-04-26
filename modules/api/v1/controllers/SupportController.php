@@ -2,7 +2,6 @@
 
     namespace app\modules\api\v1\controllers;
     use yii\rest\Controller;
-    use yii\helpers\HtmlPurifier;
     use app\models\FaqSettings;
     use app\models\SiteSettings;
 
@@ -25,7 +24,7 @@ class SupportController extends Controller {
     public function actionIndex() {
         
         $questions_list = FaqSettings::find()
-                ->select('faq_question', 'faq_answer')
+                ->select(['faq_question', 'faq_answer'])
                 ->asArray()
                 ->orderBy('id')
                 ->all();
