@@ -373,7 +373,7 @@ $(document).ready(function() {
         var fileURL = $(this).attr('href');
         e.preventDefault();
         $.ajax({
-            url: 'send-receipt-to-email',
+            url: 'payments/send-receipt-to-email',
             method: 'POST',
             data: {
                 fileUrl: fileURL,
