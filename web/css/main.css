@@ -839,17 +839,15 @@ span.dot {
 }
 .file-upload__btn {
     position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 40px;
+    top: 5px;
     left: 0;
     width: 96px;
-    height: 88px;
-    margin: auto;
+    height: 19px;
+    margin-left: 30%;
     cursor: pointer;
     border: 0;
-    background: transparent url('../images/backgrounds/file-upload-bg.png') no-repeat center;
-    background-size: contain;
+    background: transparent url(../images/file-upload.png) no-repeat center;
+    background-size: auto;
 }
 .file-upload__label {
     font-size: 12px;
