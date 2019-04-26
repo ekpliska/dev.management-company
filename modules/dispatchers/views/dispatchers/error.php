@@ -1,8 +1,15 @@
 <?php
 
 /* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Обработка ошибок
+ * 404, 403
  */
 ?>
+
+<div class="dispatcher-main-error">
+    <h4>
+        <?= $message ?>
+    </h4>
+</div>
+
+

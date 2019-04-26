@@ -2958,3 +2958,30 @@ label[class^='error-ind-'] {
     margin-left: 10px;
 }
 /* Конец Блок переключения статуса заявок */
+
+/* Error page */
+.dispatcher-main-error {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
+    overflow: auto;
+    justify-content: center;
+    background: url(../../images/error/page-not-found-adm.png) no-repeat center center fixed;
+    background-size: cover;
+}
+.dispatcher-main-error h4 {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+    color: #828286;
+    letter-spacing: 0.2em;
+}
+/* End Error page */
