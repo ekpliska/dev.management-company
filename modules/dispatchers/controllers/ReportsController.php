@@ -3,6 +3,7 @@
     namespace app\modules\dispatchers\controllers;
     use Yii;
     use yii\helpers\ArrayHelper;
+    use kartik\mpdf\Pdf;
     use app\modules\dispatchers\controllers\AppDispatchersController;
     use app\modules\dispatchers\models\searchForm\searchRequests;
     use app\modules\dispatchers\models\searchForm\searchPaidRequests;
@@ -49,7 +50,7 @@ class ReportsController extends AppDispatchersController {
                 break;
         }
         
-        return $this->render('index', [            
+        return $this->render('index', [
             'block' => $block,
             'search_model' => $search_model,
             'results' => $results,
@@ -61,5 +62,5 @@ class ReportsController extends AppDispatchersController {
         ]);
         
     }
-    
+        
 }

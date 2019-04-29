@@ -39,8 +39,14 @@ $this->params['breadcrumbs'][] = 'Отчеты';
         
         <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
             <div class="reports_title">
-                <?= Html::a('Заявки', ['reports/index', 'block' => 'requests'], ['class' => '']) ?>
-                <?= Html::a('Платные услуги', ['reports/index', 'block' => 'paid-requests'], ['class' => '']) ?>
+                <ul class="nav nav-pills reports__type-report">
+                    <li class="active">
+                        <?= Html::a('Заявки', ['reports/index', 'block' => 'requests'], ['class' => '']) ?>
+                    </li>
+                    <li>
+                        <?= Html::a('Платные услуги', ['reports/index', 'block' => 'paid-requests'], ['class' => '']) ?>
+                    </li>
+                </ul>
             </div>
             <div class="reports__content">
                 

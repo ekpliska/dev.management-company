@@ -3066,6 +3066,10 @@ legend.report__period-border {
 .reports__filtr_form button:hover {
     box-shadow: 0px 0px 3px -1px #ccc;
 }
+.reports__type-report > li.active > a,
+.reports__type-report > li.active > a:hover {
+    background-color: #2d18b4;
+}
 /* End Reports */
 
 /* Таблица, Reports */

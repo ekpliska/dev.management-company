@@ -31,6 +31,7 @@ class Bootstrap implements BootstrapInterface {
                 'dispatchers/housing-stock' => 'dispatchers/housing-stock/index',
                 
                 // Отчеты
+                'dispatchers/reports/type/<block:[\w-]+>' => 'dispatchers/reports/index',
                 'dispatchers/reports' => 'dispatchers/reports/index',
                 
                 // Профиль
