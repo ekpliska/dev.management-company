@@ -1,8 +1,10 @@
 <?php
 
     namespace app\modules\api\v1\models;
+    use Yii;
     use app\models\User;
     use app\models\Clients;
+    use app\models\Rents;
     
 /**
  * Профиль пользователя
@@ -29,6 +31,48 @@ class UserProfile extends User {
     
     public static function userProfile($user_id) {
         
+        if (Yii::$app->user->can('clients')) {
+            return self::getClientInfo($user_id);
+        } elseif (Yii::$app->user->can('clients_rent')) {
+            return self::getRentInfo($user_id);
+        }
+    }
+    
+    /*
+     * Обновление профиля собсвенника
+     */
+    public function updateUser($data) {
+        
+        if (!$this->validate()) {
+            return false;
+        }
+        
+        if (Yii::$app->user->can('clients')) {
+            $client = Clients::findOne(['clients_id' => $this->user_client_id]);
+            $this->user_mobile = $data['mobile'];
+            $this->user_email = $data['email'];
+            $client->clients_phone = isset($data['other_phone']) ? $data['other_phone'] : '';
+            $client->save(false);
+        } elseif (Yii::$app->user->can('clients_rent')) {
+            $rent = Rents::findOne(['rents_id' => $this->user_rent_id]);
+            $this->user_mobile = $data['mobile'];
+            $this->user_email = $data['email'];
+            $rent->rents_mobile = $data['mobile'];
+            $rent->rents_mobile_more = isset($data['other_phone']) ? $data['other_phone'] : '';
+            $rent->save(false);
+        } else {
+            return false;
+        }
+        
+        return $this->save() ? true : false;
+        
+    }
+    
+    /*
+     * Информация собсвенника
+     */
+    private function getClientInfo($user_id) {
+        
         $user_info = [];
         $rent_info = [];
         
@@ -44,9 +88,9 @@ class UserProfile extends User {
                 ->join('LEFT JOIN', 'clients as c', 'u.user_client_id = c.clients_id')
                 ->where(['u.user_id' => $user_id])
                 ->one();
-        
+
         $user_info['client_info'] = $clients;
-        
+
         $personal_account = (new \yii\db\Query)
                 ->select('pa.account_number as number, '
                         . 'r.rents_id as rents_id, r.rents_surname as rents_surname, r.rents_name as rents_name, r.rents_second_name as rents_second_name, '
@@ -63,12 +107,11 @@ class UserProfile extends User {
                 ->where(['pa.personal_clients_id' => $clients['clients_id']])
                 ->orderBy(['pa.account_id' => SORT_ASC])
                 ->all();
-        
+
         foreach ($personal_account as $key => $account) {
-            
+
             if (empty($account['rents_surname'])) {
                 $rent_info = null;
-                
             } else {
                 $rent_info = [
                     'rents_id' => $account['rents_id'],
@@ -80,14 +123,14 @@ class UserProfile extends User {
                     'email_rent' => $account['email_rent'],
                 ];
             }
-            
+
             $living_area = [
                 'house_id' => $account['house_id'],
                 'gis_adress' => $account['gis_adress'],
                 'houses_number' => $account['houses_number'],
                 'flats_number' => $account['flats_number'],
             ];
-            
+
             $user_info['personal_account'][] = [
                 'account_number' => $account['number'],
                 'rent_info' => $rent_info,
@@ -100,21 +143,55 @@ class UserProfile extends User {
     }
     
     /*
-     * Обновление профиля собсвенника
+     * Информация Арендатора
      */
-    public function updateUser($data) {
+    private function getRentInfo($user_id) {
         
-        $client = Clients::findOne(['clients_id' => $this->user_client_id]);
+        $user_info = [];
         
-        $this->user_mobile = $data['mobile'];
-        $this->user_email = $data['email'];
-        $client->clients_phone = isset($data['other_phone']) ? $data['other_phone'] : '';
-        
-        if (!$this->save()) {
-            return false;
+        $rent = (new \yii\db\Query)
+                ->select('r.rents_id as clients_id, r.rents_name as name, r.rents_second_name as second_name, r.rents_surname as surname, '
+                        . 'u.user_login as login, '
+                        . 'u.user_mobile as user_mobile, '
+                        . 'r.rents_mobile_more as other_phone, '
+                        . 'u.user_email as email, u.user_photo as photo, '
+                        . 'u.last_login as last_login, '
+                        . 'u.user_check_email as subscribe')
+                ->from('user as u')
+                ->join('LEFT JOIN', 'rents as r', 'u.user_rent_id = r.rents_id')
+                ->where(['u.user_id' => $user_id])
+                ->one();
+
+        $user_info['client_info'] = $rent;
+
+        $personal_account = (new \yii\db\Query)
+                ->select('pa.account_number as number, '
+                        . 'h.houses_id as house_id, '
+                        . 'h.houses_gis_adress as gis_adress, h.houses_number as houses_number, f.flats_number as flats_number')
+                ->from('personal_account as pa')
+                ->join('LEFT JOIN', 'flats as f', 'f.flats_id = pa.personal_flat_id')
+                ->join('LEFT JOIN', 'houses as h', 'h.houses_id = f.flats_house_id')
+                ->where(['pa.personal_rent_id' => $rent['clients_id']])
+                ->orderBy(['pa.account_id' => SORT_ASC])
+                ->all();
+
+        foreach ($personal_account as $key => $account) {
+
+            $living_area = [
+                'house_id' => $account['house_id'],
+                'gis_adress' => $account['gis_adress'],
+                'houses_number' => $account['houses_number'],
+                'flats_number' => $account['flats_number'],
+            ];
+
+            $user_info['personal_account'][] = [
+                'account_number' => $account['number'],
+                'rent_info' => null,
+                'living_area' => $living_area,
+            ];
         }
         
-        return $client->save() ? true : false;
+        return $user_info;
         
     }
     
