@@ -8,59 +8,45 @@
  * Форма поиска
  */
 ?>
-<div class="container-fluid submenu-dispatcher text-center">
-    <div class="row search-panel">
-        <?php 
-            $form = ActiveForm::begin([
-                'id' => 'search-paid-request-form',
-                'action' => ['index', 'block' => 'paid-requests'],
-                'method' => 'get',
-                'fieldConfig' => [
-                    'template' => '{input}',
-                ],
-        ]); ?>
-        
-        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-            
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                <?= $form->field($search_model, 'value')
-                        ->input('text', [
-                            'class' => 'form-control _search-input', 
-                            'placeHolder' => 'ID заявки или Лицевой счет'])
-                        ->label(false) ?>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                <?= $form->field($search_model, 'services_name_services_id')
-                        ->dropDownList($name_services, [
-                            'prompt' => '[Услуга]',
-                            'class' => 'form-control _dropdown-subpanel']) ?>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                <?= $form->field($search_model, 'services_specialist_id')
-                        ->dropDownList($specialist_lists, [
-                            'prompt' => '[Специалист]',
-                            'class' => 'form-control _dropdown-subpanel']) ?>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                <?= $form->field($search_model, 'status')
-                        ->dropDownList($status_list, [
-                            'prompt' => '[Статус]',
-                            'class' => 'form-control _dropdown-subpanel']) ?>
-            </div>
-            
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                <?= $form->field($search_model, 'house_id')->dropDownList($house_lists, [
-                        'prompt' => '[Дом]',
-                        'class' => 'form-control _dropdown-subpanel _small']) ?>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+<?php 
+    $form = ActiveForm::begin([
+        'id' => 'search-paid-request-form',
+        'action' => ['index', 'block' => 'paid-requests'],
+        'method' => 'get',
+        'fieldConfig' => [
+            'template' => '{input}',
+        ],
+]); ?>
+
+        <?= $form->field($search_model, 'services_servise_category_id')
+                ->dropDownList($servise_category, [
+                    'prompt' => '[Категория]',
+                    'class' => '']) ?>
+
+        <?= $form->field($search_model, 'services_name_services_id')
+                ->dropDownList($name_services, [
+                    'prompt' => '[Услуга]',
+                    'class' => '']) ?>
+
+        <?= $form->field($search_model, 'services_specialist_id')
+                ->dropDownList($specialist_lists, [
+                    'prompt' => '[Специалист]',
+                    'class' => '']) ?>
+
+        <?= $form->field($search_model, 'status')
+                ->dropDownList($status_list, [
+                    'prompt' => '[Статус]',
+                    'class' => '']) ?>
+
+        <fieldset class="report__period">
+            <legend class="report__period-border">Период</legend>
                 <?= $form->field($search_model, 'date_start')
                     ->widget(DatePicker::className(), [
                         'id' => 'date-start',
                         'language' => 'ru',
                         'options' => [
                             'placeHolder' => 'Выберите дату с',
-                            'class' => 'search-date',
+                            'class' => 'search-date-report',
                         ],
                         'type' => DatePicker::TYPE_INPUT,
                         'pluginOptions' => [
@@ -68,15 +54,14 @@
                             'format' => 'yyyy-mm-dd',
                         ]])
                     ->label(false) ?>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+
                 <?= $form->field($search_model, 'date_finish')
                     ->widget(DatePicker::className(), [
                         'id' => 'date-finish',
                         'language' => 'ru',
                         'options' => [
                             'placeHolder' => 'Выберите дату по',
-                            'class' => 'search-date',
+                            'class' => 'search-date-report',
                         ],
                         'type' => DatePicker::TYPE_INPUT,
                         'pluginOptions' => [
@@ -84,11 +69,9 @@
                             'format' => 'yyyy-mm-dd',
                         ]])
                     ->label(false) ?>
-            </div>
-        </div>
-        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 search-panel__btn">
-            <?= Html::submitButton('Найти', ['class' => 'btn search-block__button']) ?>
-        </div>
-        <?php ActiveForm::end(); ?>
-    </div>
-</div>
+        </fieldset>
+
+    <?= Html::submitButton('Найти', ['class' => '']) ?>
+    <?= Html::resetButton('Сброс', ['class' => '']) ?>
+
+<?php ActiveForm::end(); ?>

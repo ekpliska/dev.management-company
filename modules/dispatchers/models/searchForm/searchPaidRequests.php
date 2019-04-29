@@ -21,7 +21,7 @@ class searchPaidRequests extends PaidServices {
             [['value'], 'trim'],
             [['house_id'], 'integer'],
             
-            [['services_name_services_id'], 'integer'],
+            [['services_name_services_id', 'services_servise_category_id'], 'integer'],
             
             [['services_specialist_id', 'status'], 'integer'],
             
@@ -84,6 +84,7 @@ class searchPaidRequests extends PaidServices {
         }
         
         $query->andFilterWhere(['=', 'services_name_services_id', $this->services_name_services_id]);
+        $query->andFilterWhere(['=', 'services_servise_category_id', $this->services_servise_category_id]);
         $query->andFilterWhere(['=', 'services_specialist_id', $this->services_specialist_id]);
         $query->andFilterWhere(['=', 'status', $this->status]);
         

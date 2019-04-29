@@ -23,7 +23,7 @@ class ReportsController extends AppDispatchersController {
      */
     public function actionIndex($block = 'requests') {
         
-// Загружаем виды заявок        
+        // Загружаем виды заявок        
         $type_requests = TypeRequests::getTypeNameArray();
         // Загружаем список услуг для формы поиска
         $name_services = Services::getServicesNameArray();

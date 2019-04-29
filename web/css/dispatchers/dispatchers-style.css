@@ -3025,7 +3025,7 @@ label[class^='error-ind-'] {
     padding: 5px;
     border: none;
     border-bottom: 1px solid #ddd;
-    box-shadow: none;
+    color: #7c7c7c;
     border-radius: 0;
 }
 .search-date-report:active,
@@ -3033,6 +3033,7 @@ label[class^='error-ind-'] {
 .search-date-report:focus {
     box-shadow: none;
     border-color: #ddd;
+    color: #7c7c7c;
 }
 fieldset.report__period {
     border: 1px ridge #ddd !important;

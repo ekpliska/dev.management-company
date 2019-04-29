@@ -64,7 +64,7 @@
     </fieldset>
 
     <?= Html::submitButton('Найти', ['class' => '']) ?>
-    <?= Html::submitButton('Сброс', ['class' => '']) ?>
+    <?= Html::resetButton('Сброс', ['class' => '']) ?>
 
 <?php ActiveForm::end(); ?>        
 

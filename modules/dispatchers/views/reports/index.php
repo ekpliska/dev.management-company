@@ -29,6 +29,7 @@ $this->params['breadcrumbs'][] = 'Отчеты';
                         'search_model' => $search_model,
                         'type_requests' => $type_requests,
                         'name_services' => $name_services,
+                        'servise_category' => $servise_category,
                         'specialist_lists' => $specialist_lists,
                         'status_list' => $status_list,
                 ]) ?>
