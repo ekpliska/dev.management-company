@@ -24,7 +24,15 @@ $this->params['breadcrumbs'][] = 'Отчеты';
                 Фильтр
             </div>
             <div class="reports__filtr_form">
-                HERE
+                
+                <?= $this->render("form/_search-{$block}", [
+                        'search_model' => $search_model,
+                        'type_requests' => $type_requests,
+                        'name_services' => $name_services,
+                        'specialist_lists' => $specialist_lists,
+                        'status_list' => $status_list,
+                ]) ?>
+                
             </div>
         </div>
         

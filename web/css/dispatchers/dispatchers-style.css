@@ -3015,6 +3015,56 @@ label[class^='error-ind-'] {
 .requests__info > .panel-heading {
     border: none;
 }
+.reports__filtr_form {
+    padding: 10px;
+    text-align: center;
+}
+.reports__filtr_form select,
+.reports__filtr_form input {
+    width: 100%;
+    padding: 5px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    box-shadow: none;
+    border-radius: 0;
+}
+.search-date-report:active,
+.search-date-report:hover,
+.search-date-report:focus {
+    box-shadow: none;
+    border-color: #ddd;
+}
+fieldset.report__period {
+    border: 1px ridge #ddd !important;
+    padding: 0 1.4em 1.4em 1.4em !important;
+    margin: 0 0 1.5em 0 !important;
+    -webkit-box-shadow: 0px 0px 0px 0px #ddd;
+    box-shadow: 0px 0px 0px 0px #ddd;
+}
+legend.report__period-border {
+    width: 30%;
+    font-size: 12px;
+    margin: 0px;
+    padding: 10px 15px;
+    color: #454545;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    text-align: left;
+    border: none;
+}
+.reports__filtr_form button {
+    padding: 10px 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 10px;
+    border: 1px solid #ddd;
+    font-weight: bold;
+    background: transparent;
+}
+.reports__filtr_form button:hover {
+    box-shadow: 0px 0px 3px -1px #ccc;
+}
 /* End Reports */
 
 /* Таблица, Reports */
@@ -3036,15 +3086,16 @@ label[class^='error-ind-'] {
     text-align: center;
     border: none;
     padding: 15px 0;
-    background: #ddd;
+    border-bottom: 1px solid #ddd;
 }
 .dispatcher-table-report > tbody > tr > td {
     vertical-align: middle;
     text-align: center;
     padding: 10px 5px;
+    border: none;
 }
 .dispatcher-table-report tr:nth-child(even) {
-  background-color: #f2f2f2
+  background-color: #e9eaff;
 }
 /* Таблица, Reports */
 
