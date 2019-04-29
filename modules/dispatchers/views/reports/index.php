@@ -1,5 +1,6 @@
 <?php
 
+    use yii\helpers\Html;
     use yii\widgets\Breadcrumbs;
     
 /*
@@ -15,5 +16,56 @@ $this->params['breadcrumbs'][] = 'Отчеты';
             'homeLink' => ['label' => 'ELSA | Диспетчер', 'url' => ['dispatchers/index']],
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]) ?>
+    
+    <div class="row reports">
+        
+        <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
+            <div class="reports_title">
+                Фильтр
+            </div>
+            <div class="reports__filtr_form">
+                HERE
+            </div>
+        </div>
+        
+        <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
+            <div class="reports_title">
+                <?= Html::a('Заявки', ['reports/index', 'block' => 'requests'], ['class' => '']) ?>
+                <?= Html::a('Платные услуги', ['reports/index', 'block' => 'paid-requests'], ['class' => '']) ?>
+            </div>
+            <div class="reports__content">
+                
+                <div class="panel-group requests__info">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse1">
+                                    Оперативная информация 
+                                    <i class="glyphicon glyphicon-menu-down"></i>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse1" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <div class="col-md-2">1</div>
+                                <div class="col-md-2">2</div>
+                                <div class="col-md-2">3</div>
+                                <div class="col-md-2">4</div>
+                                <div class="col-md-2">5</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="panel-group requests__content">
+                    <?= $this->render("data/grid_{$block}", [
+                            'results' => $results,
+                    ]) ?>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
     
 </div>

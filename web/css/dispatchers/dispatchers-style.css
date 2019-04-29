@@ -2985,3 +2985,96 @@ label[class^='error-ind-'] {
     letter-spacing: 0.2em;
 }
 /* End Error page */
+
+/* Reports */
+.reports {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+}
+.reports > div[class*="col-"] {
+    padding: 0;
+    margin: 0;
+}
+.reports > div[class*="col-"]:first-child {
+    border-right: 1px solid #ddd;
+    min-height: 1050px;
+}
+.reports_title {
+    padding: 20px;
+    margin: 0;
+    border-bottom: 1px solid #ddd;
+    color: #2d18b4;
+    font-weight: bold;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+}
+.requests__info > .panel-default {
+    border: none;
+}
+.requests__info > .panel-heading {
+    border: none;
+}
+/* End Reports */
+
+/* Таблица, Reports */
+.dispatcher-table-report {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    font-size: 12px;
+    margin-bottom: 0px;
+}
+.dispatcher-table-report thead {
+    color: #454545;
+    text-transform: uppercase;
+    text-align: center;
+    vertical-align: top;
+}
+.dispatcher-table-report > thead > tr > th {
+    font-size: 12px;
+    vertical-align: middle;
+    text-align: center;
+    border: none;
+    padding: 15px 0;
+    background: #ddd;
+}
+.dispatcher-table-report > tbody > tr > td {
+    vertical-align: middle;
+    text-align: center;
+    padding: 10px 5px;
+}
+.dispatcher-table-report tr:nth-child(even) {
+  background-color: #f2f2f2
+}
+/* Таблица, Reports */
+
+/* Status request for report */
+.reposrt-status {
+    padding: 5px;
+    font-size: 8px;
+    text-transform: uppercase;
+    border-radius: 5px;
+    color: #fff;
+    letter-spacing: 0.2em;
+    cursor: default;
+}
+.req-new {
+    background: #598eff;
+}
+.req-work {
+    background: #ff7d7d;
+}
+.req-complete {
+    background: #7c7c7c;
+}
+.req-rectification {
+    background: #e17dff;
+}
+.req-close {
+    background: #1fd68d;
+}
+.req-reject {
+    color: #454545;
+    font-weight: bold;
+}
+/* End Status request for report */

@@ -101,6 +101,40 @@ class StatusHelpers {
         
         return $btn_css;
         
-    }    
+    }
+    
+    public static function reportStatus($status) {
+        
+        // Стили для кнопок статусов
+        $css_classes = [
+            'reposrt-status req-new', 
+            'reposrt-status req-work', 
+            'reposrt-status req-complete', 
+            'reposrt-status req-rectification', 
+            'reposrt-status req-close',
+            'reposrt-status req-reject',
+        ];
+    
+        
+        // Получаем текстовое обозначение статуса
+        $status_name = ArrayHelper::getValue(StatusRequest::getStatusNameArray(), $status);        
+        
+        if ($status == StatusRequest::STATUS_NEW) {
+            $btn_css = '<span class="' . $css_classes[0] . '">' . $status_name . '</span>';
+        } elseif ($status == StatusRequest::STATUS_IN_WORK) {
+            $btn_css = '<span class="' . $css_classes[1] . '">' . $status_name . '</span>';
+        } elseif ($status == StatusRequest::STATUS_PERFORM) {
+            $btn_css = '<span class="' . $css_classes[2] . '">' . $status_name . '</span>';
+        } elseif ($status == StatusRequest::STATUS_FEEDBACK) {
+            $btn_css = '<span class="' . $css_classes[3] . '">' . $status_name . '</span>';
+        } elseif ($status == StatusRequest::STATUS_CLOSE) {
+            $btn_css = '<span class="' . $css_classes[4] . '">' . $status_name . '</span>';
+        } elseif ($status == StatusRequest::STATUS_REJECT) {
+            $btn_css = '<span class="' . $css_classes[5] . '">' . $status_name . '</span>';
+        }
+        
+        return $btn_css;
+        
+    }
     
 }
