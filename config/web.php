@@ -292,11 +292,21 @@ $config = [
                         'GET /' => 'index',
                     ]
                 ],                
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'pluralize' => false,
+                    'controller' => 'v1/payments',
+                    'extraPatterns' => [
+                        'POST /' => 'index',
+                    ]
+                ],                
             ],
         ],
         'sms' => $sms,
         'client_api' => $client_api,
-        'orangedata_client' => $orangedata_client,
+        'paymentSystem' => [
+            'class' => 'app\components\paymentSystem\PaymentSystem',
+        ],
     ],
     'params' => $params,
 ];
