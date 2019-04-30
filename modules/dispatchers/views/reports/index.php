@@ -2,6 +2,7 @@
 
     use yii\helpers\Html;
     use yii\widgets\Breadcrumbs;
+    use app\modules\dispatchers\widgets\ReportBar;
     
 /*
  * Отчеты, главная страница
@@ -29,32 +30,13 @@ $this->params['breadcrumbs'][] = 'Отчеты';
                         <?= Html::a('Платные услуги', ['reports/index', 'block' => 'paid-requests'], ['class' => '']) ?>
                     </li>
                     
-                    <?= Html::a('В PDF <i class="glyphicon glyphicon-export"></i>', ['reports/create-report', 'block' => $block], ['class' => 'btn-to-pdf pull-right']) ?>
+                    <?= Html::a('В PDF <i class="glyphicon glyphicon-export"></i>', ['reports/create-report', 'block' => $block], [
+                            'target' => '_blank',
+                            'class' => 'btn-to-pdf pull-right']) ?>
                 </ul>
             </div>
             <div class="reports__content">
-                
-                <div class="panel-group requests__info">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a data-toggle="collapse" href="#collapse1">
-                                    Оперативная информация 
-                                    <i class="glyphicon glyphicon-menu-down"></i>
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapse1" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                <div class="col-md-2">1</div>
-                                <div class="col-md-2">2</div>
-                                <div class="col-md-2">3</div>
-                                <div class="col-md-2">4</div>
-                                <div class="col-md-2">5</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <?= ReportBar::widget(['type' => $block]) ?>
                 
                 <div class="panel-group requests__content">
                     <?= $this->render("data/grid_{$block}", [
