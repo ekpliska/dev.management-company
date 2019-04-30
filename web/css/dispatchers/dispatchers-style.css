@@ -3009,6 +3009,9 @@ label[class^='error-ind-'] {
     text-transform: uppercase;
     letter-spacing: 0.07em;
 }
+.requests__info > .panel-default > .panel-heading {
+    background: transparent;
+}
 .requests__info > .panel-default {
     border: none;
 }
@@ -3069,6 +3072,9 @@ legend.report__period-border {
 .reports__type-report > li.active > a,
 .reports__type-report > li.active > a:hover {
     background-color: #2d18b4;
+}
+.btn-to-pdf {
+    padding: 10px;
 }
 /* End Reports */
 

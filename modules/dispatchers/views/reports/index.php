@@ -19,24 +19,6 @@ $this->params['breadcrumbs'][] = 'Отчеты';
     
     <div class="row reports">
         
-        <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
-            <div class="reports_title">
-                Фильтр
-            </div>
-            <div class="reports__filtr_form">
-                
-                <?= $this->render("form/_search-{$block}", [
-                        'search_model' => $search_model,
-                        'type_requests' => $type_requests,
-                        'name_services' => $name_services,
-                        'servise_category' => $servise_category,
-                        'specialist_lists' => $specialist_lists,
-                        'status_list' => $status_list,
-                ]) ?>
-                
-            </div>
-        </div>
-        
         <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
             <div class="reports_title">
                 <ul class="nav nav-pills reports__type-report">
@@ -46,9 +28,8 @@ $this->params['breadcrumbs'][] = 'Отчеты';
                     <li>
                         <?= Html::a('Платные услуги', ['reports/index', 'block' => 'paid-requests'], ['class' => '']) ?>
                     </li>
-                    <li>
-                        <?= Html::a('Отчет', ['reports/create-report', 'block' => $block], ['class' => '']) ?>
-                    </li>
+                    
+                    <?= Html::a('В PDF <i class="glyphicon glyphicon-export"></i>', ['reports/create-report', 'block' => $block], ['class' => 'btn-to-pdf pull-right']) ?>
                 </ul>
             </div>
             <div class="reports__content">
@@ -84,6 +65,22 @@ $this->params['breadcrumbs'][] = 'Отчеты';
             </div>
         </div>
         
+        <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
+            <div class="reports_title">
+                Фильтр
+            </div>
+            <div class="reports__filtr_form">
+
+                <?= $this->render("form/_search-{$block}", [
+                        'search_model' => $search_model,
+                        'type_requests' => $type_requests,
+                        'name_services' => $name_services,
+                        'servise_category' => $servise_category,
+                        'specialist_lists' => $specialist_lists,
+                        'status_list' => $status_list]) ?>
+
+            </div>
+        </div>        
+        
     </div>
-    
 </div>

@@ -55,6 +55,8 @@ class ReportsController extends AppDispatchersController {
                 $results = $search_model->search(Yii::$app->request->queryParams);
                 Yii::$app->session['session_query'] = Yii::$app->request->queryParams;
                 break;
+            default:
+                throw new NotFoundHttpException('Вы обратились к несуществующей странице');
         }
         
         return $this->render('index', [
