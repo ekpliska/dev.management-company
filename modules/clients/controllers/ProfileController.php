@@ -5,7 +5,6 @@
     use yii\web\Response;
     use yii\web\UploadedFile;
     use app\modules\clients\controllers\AppClientsController;
-    use app\models\User;
     use app\modules\clients\models\ClientsRentForm;
     use app\models\Rents;
     use app\models\PersonalAccount;

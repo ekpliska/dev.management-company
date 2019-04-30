@@ -6,6 +6,7 @@
     use app\models\User;
     use app\models\SmsOperations;
     use app\models\SmsSettings;
+    use app\models\Token;
 
 /**
  * Смена пароля учетной записи
@@ -79,6 +80,9 @@ class ChangePasswordForm extends Model {
             if (!$result = Yii::$app->sms->generalMethodSendSms(SmsSettings::TYPE_NOTICE_CHANGE_PASSWORD, $phone, $sms_code)) {
                 return ['success' => false, 'message' => $result];
             }
+            
+            // Удаляем все токены для доступа по мбольному устройству текущего пользователя
+            Token::deleteAll(['user_uid' => Yii::$app->user->id]);
             
             $sms_model->save(false);
             return true;
