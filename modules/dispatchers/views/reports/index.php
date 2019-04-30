@@ -23,10 +23,10 @@ $this->params['breadcrumbs'][] = 'Отчеты';
         <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
             <div class="reports_title">
                 <ul class="nav nav-pills reports__type-report">
-                    <li class="active">
+                    <li class="<?= $block == 'requests' ? 'active' : '' ?>">
                         <?= Html::a('Заявки', ['reports/index', 'block' => 'requests'], ['class' => '']) ?>
                     </li>
-                    <li>
+                    <li class="<?= $block == 'paid-requests' ? 'active' : '' ?>">
                         <?= Html::a('Платные услуги', ['reports/index', 'block' => 'paid-requests'], ['class' => '']) ?>
                     </li>
                     

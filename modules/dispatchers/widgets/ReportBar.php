@@ -62,10 +62,10 @@ class ReportBar extends Widget {
         $results += [
             '8' => $this->type == 'requests' ? 
                 $this->request_all
-                    ->where(['is', 'requests_specialist_id', null])
+                    ->orWhere(['IS', 'requests_specialist_id', NULL])
                     ->count() :
                 $this->request_all
-                    ->where(['is', 'services_dispatcher_id', null])
+                    ->orWhere(['IS', 'services_specialist_id', NULL])
                     ->count(),
         ];
         

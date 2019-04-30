@@ -3166,24 +3166,24 @@ p.status_name {
     font-size: 8px;
     text-transform: uppercase;
     border-radius: 5px;
-    color: #fff;
+    color: #454545;
     letter-spacing: 0.2em;
     cursor: default;
 }
 .req-new {
-    background: #598eff;
+    border: 1px solid #598eff;
 }
 .req-work {
-    background: #ff7d7d;
+    border: 1px solid #ff7d7d;
 }
 .req-complete {
-    background: #7c7c7c;
+    border: 1px solid #7c7c7c;
 }
 .req-rectification {
-    background: #e17dff;
+    border: 1px solid #e17dff;
 }
 .req-close {
-    background: #1fd68d;
+    border: 1px solid #1fd68d;
 }
 .req-reject {
     color: #454545;

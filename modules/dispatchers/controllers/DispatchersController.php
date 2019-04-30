@@ -81,8 +81,6 @@ class DispatchersController extends AppDispatchersController {
         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $user_id = Yii::$app->request->post('userID');
         $type = Yii::$app->request->post('type');
-        // Статусы заявок
-        $status_list = StatusRequest::getStatusNameArray();
         
         if (Yii::$app->request->isAjax) {
             switch ($type) {
@@ -96,7 +94,7 @@ class DispatchersController extends AppDispatchersController {
                     return ['success' => false];
             }
             
-            $data = $this->renderPartial("request-block/{$type}_list", ['user_lists' => $request_list, 'status_list' => $status_list]);
+            $data = $this->renderPartial("request-block/{$type}_list", ['user_lists' => $request_list]);
             return [
                 'success' => true,
                 'data' => $data,

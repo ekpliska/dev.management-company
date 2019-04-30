@@ -47,7 +47,7 @@ $key = 0;
                                 false, false, 
                                 $account['flat']['flats_number']) ?>
                     </div>
-                    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 request_block__content">
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 request_block__content">
                         <?= FormatHelpers::shortTitleOrText($request['requests_comment'], 90) ?>
                         <div class="request_block__content_img">
                             <?= FormatHelpers::imageRequestListByDispatcher($request['image']) ?>

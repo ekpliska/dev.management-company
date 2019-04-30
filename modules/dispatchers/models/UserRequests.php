@@ -22,17 +22,16 @@ class UserRequests extends Clients {
                     'user u', 
                     'personalAccount pa', 
                     'personalAccount.request rq' => function($query) {
+                        $query->with('image');
                         $query->where(['rq.requests_dispatcher_id' => Yii::$app->profileDispatcher->employeeID]);
-//                        $query->orWhere(['rq.status' => StatusRequest::STATUS_NEW]);
                         $query->where(['!=', 'rq.status', StatusRequest::STATUS_CLOSE]);
                         $query->orderBy(['rq.status' => SORT_ASC]);
                     }, 
-                    'personalAccount.request.image i', 
                     'personalAccount.flat fl', 
                     'personalAccount.flat.house hs'])
                 ->asArray()
                 ->all();
-
+                    
         return $result;
     }
 
@@ -70,11 +69,11 @@ class UserRequests extends Clients {
                     'user u', 
                     'personalAccount pa', 
                     'personalAccount.request rq' => function($query) {
+                        $query->with('image');
                         $query->where(['rq.requests_dispatcher_id' => Yii::$app->profileDispatcher->employeeID]);
-                        $query->andWhere(['!=', 'rq.status', StatusRequest::STATUS_CLOSE]);
+                        $query->where(['!=', 'rq.status', StatusRequest::STATUS_CLOSE]);
                         $query->orderBy(['rq.status' => SORT_ASC]);
                     }, 
-                    'personalAccount.request.image i', 
                     'personalAccount.flat fl', 
                     'personalAccount.flat.house hs'])
                 ->where(['u.user_id' => $user_id])
