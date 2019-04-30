@@ -24,7 +24,7 @@ class UserRequests extends Clients {
                     'personalAccount.request rq' => function($query) {
                         $query->where(['rq.requests_dispatcher_id' => Yii::$app->profileDispatcher->employeeID]);
 //                        $query->orWhere(['rq.status' => StatusRequest::STATUS_NEW]);
-                        $query->andWhere(['!=', 'rq.status', StatusRequest::STATUS_CLOSE]);
+                        $query->where(['!=', 'rq.status', StatusRequest::STATUS_CLOSE]);
                         $query->orderBy(['rq.status' => SORT_ASC]);
                     }, 
                     'personalAccount.request.image i', 

@@ -3,6 +3,7 @@
     namespace app\modules\dispatchers\controllers;
     use Yii;
     use yii\helpers\ArrayHelper;
+    use yii\web\NotFoundHttpException;
     use kartik\mpdf\Pdf;
     use app\modules\dispatchers\controllers\AppDispatchersController;
     use app\modules\dispatchers\models\searchForm\searchRequests;
@@ -24,6 +25,10 @@ class ReportsController extends AppDispatchersController {
      */
     public function actionIndex($block = 'requests') {
         
+        if (!Yii::$app->session->isActive) {
+            Yii::$app->session->open();
+        }
+        
         // Загружаем виды заявок        
         $type_requests = TypeRequests::getTypeNameArray();
         // Загружаем список услуг для формы поиска
@@ -36,17 +41,19 @@ class ReportsController extends AppDispatchersController {
         $specialist_lists = ArrayHelper::map(Specialists::getListSpecialists()->all(), 'id', function ($data) {
             return FormatFullNameUser::nameEmployee($data['surname'], $data['name'], $data['second_name']);
         });
-        
+                
         switch ($block) {
             case 'requests':
                 // Загружаем модель поиска
                 $search_model = new searchRequests();
                 $results = $search_model->search(Yii::$app->request->queryParams);
+                Yii::$app->session['session_query'] = Yii::$app->request->queryParams;
                 break;
             case 'paid-requests':
                 // Загружаем модель поиска
                 $search_model = new searchPaidRequests();
                 $results = $search_model->search(Yii::$app->request->queryParams);
+                Yii::$app->session['session_query'] = Yii::$app->request->queryParams;
                 break;
         }
         
@@ -60,6 +67,53 @@ class ReportsController extends AppDispatchersController {
             'status_list' => $status_list,
             'specialist_lists' => $specialist_lists,
         ]);
+        
+    }
+    
+    /*
+     * Формирование выборки фильтра в PDF
+     */
+    public function actionCreateReport($block) {
+        
+        $session_query = Yii::$app->session->has('session_query') ? Yii::$app->session['session_query'] : Yii::$app->request->queryParams;
+        
+        switch ($block) {
+            case 'requests':
+                $search_model = new searchRequests();
+                $results = $search_model->search($session_query);
+                $title = 'Заявки';
+                break;
+            case 'paid-requests':
+                $search_model = new searchPaidRequests();
+                $results = $search_model->search($session_query);
+                $title = 'Заявки на платные услуги';
+                break;
+            default:
+                throw new NotFoundHttpException('Вы обратились к несуществующей странице');
+        }
+        
+        $content = $this->renderPartial("data/grid_{$block}", [
+            'search_model' => $search_model,
+            'results' => $results,
+        ]);
+        
+        $pdf = new Pdf([
+            'mode' => Pdf::MODE_UTF8, 
+            'format' => Pdf::FORMAT_A4, 
+            'orientation' => Pdf::ORIENT_LANDSCAPE, 
+            'destination' => Pdf::DEST_BROWSER, 
+            'defaultFontSize' => 12,
+            'content' => $content,
+            'options' => [
+                'title' => 'Отчет PDF ',
+            ],
+            'methods' => [ 
+                'SetHeader'=>[$title], 
+                'SetFooter'=>['стр. ' . '{PAGENO}'],
+            ]
+        ]);
+    
+        return $pdf->render(); 
         
     }
         

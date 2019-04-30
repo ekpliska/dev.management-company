@@ -46,6 +46,9 @@ $this->params['breadcrumbs'][] = 'Отчеты';
                     <li>
                         <?= Html::a('Платные услуги', ['reports/index', 'block' => 'paid-requests'], ['class' => '']) ?>
                     </li>
+                    <li>
+                        <?= Html::a('Отчет', ['reports/create-report', 'block' => $block], ['class' => '']) ?>
+                    </li>
                 </ul>
             </div>
             <div class="reports__content">
