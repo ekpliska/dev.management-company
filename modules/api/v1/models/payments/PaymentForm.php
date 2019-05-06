@@ -42,7 +42,7 @@ class PaymentForm extends Model {
         
         $account_info = PersonalAccount::findOne(['account_number' => $this->account_number]);
         if ($account_info == null) {
-            return false;
+            return ['success' => false];
         }
         
         /*
@@ -60,7 +60,7 @@ class PaymentForm extends Model {
         if ($is_payment['status'] == Payments::YES_PAID) {
             return ['success' => true, 'message' => "Оплата квитанции {$this->receipt_num} была совершена ранее"];
         } elseif ($is_payment['status'] == Payments::NOT_PAID) {
-            
+            // Собираем данные для отправки по платежному шлюзу
             $data_posts = [
                 'Amount' => $is_payment['payment']->payment_sum,
                 'Currency' => 'RUB',
