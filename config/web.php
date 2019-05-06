@@ -297,6 +297,7 @@ $config = [
                     'pluralize' => false,
                     'controller' => 'v1/payments',
                     'extraPatterns' => [
+                        'GET post3ds/<account_number:[\w-]+>/<period:[\w-]+>' => 'post3ds',
                         'POST /' => 'index',
                     ]
                 ],                

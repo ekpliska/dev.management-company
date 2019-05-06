@@ -23,7 +23,7 @@ class PaymentsController extends Controller {
         
         $behaviors['access'] = [
             'class' => AccessControl::className(),
-            'only' => ['get-public-key', 'index'],
+            'only' => ['get-public-key', 'index', 'post3ds'],
             'rules' => [
                 [
                     'allow' => true,
@@ -40,6 +40,7 @@ class PaymentsController extends Controller {
         return [
             'get-public-key' => ['get'],
             'index' => ['post'],
+            'post3ds' => ['get'],
         ];
     }
     
@@ -74,6 +75,28 @@ class PaymentsController extends Controller {
             return $model;
         }
         return $result;
+    }
+    
+    /*
+     * Проведение платежа
+     * 
+     * на API платежной системы
+     *      $md              параметр TransactionId из ответа сервера
+     *      $pa_res          Значение одноименного параметра
+     * 
+     * на наш API
+     *      $account_number  Номер лицевого счета
+     *      $period          Период оплаты квитанции
+     */
+    public function actionPost3ds($md, $pa_res, $account_number, $period) {
+        
+        if (empty($account_number) || empty($period)) {
+            return false;
+        }
+        
+        
+        
+        return 'here';
     }
     
 }
