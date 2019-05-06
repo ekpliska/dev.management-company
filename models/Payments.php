@@ -104,6 +104,27 @@ class Payments extends \yii\db\ActiveRecord {
         return $this->save(false) ? true : false;
     }
     
+    /*
+     * Получить статус платежа
+     */
+    public static function getStatusPayment($period, $accoint_number) {
+        
+        $account_info = PersonalAccount::findOne(['account_number' => $accoint_number]);
+        if ($account_info == null) {
+            return null;
+        }
+        
+        $status_payment = self::find()
+                ->andWhere([
+                    'receipt_period' => $period,
+                    'account_uid' => $account_info->account_id,
+                    'user_uid' => Yii::$app->user->identity->id])
+                ->one();
+        
+        return isset($status_payment->payment_status) ? $status_payment->payment_status : null;
+        
+    }
+    
     /**
      * Аттрибуты полей
      */

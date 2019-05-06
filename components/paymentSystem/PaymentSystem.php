@@ -38,6 +38,8 @@ class PaymentSystem {
        
         $curl = curl_init(); // Инициализируем запрос
         curl_setopt_array($curl, array(
+            CURLOPT_HTTPAUTH => CURLAUTH_BASIC,
+            CURLOPT_USERPWD => 'pk_1f5d5ad761f44549ac761e0329e86:979331b40c62fb869c8a10b377bf42ed',
             CURLOPT_URL => $url, // Полный адрес метода
             CURLOPT_RETURNTRANSFER => true, // Возвращать ответ
             CURLOPT_POST => true, // Метод POST
@@ -61,7 +63,7 @@ class PaymentSystem {
         
         // В случае ошибки соверщение платежа, в ответе возвращаем код ошибки
         if ($response['Success'] == false) {
-            return $response['Model']['ReasonCode'];
+            return $response['Message'];
         } elseif ($response['Success'] == true) {
             return true;
         }

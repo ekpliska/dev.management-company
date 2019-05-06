@@ -7,6 +7,7 @@
     use yii\filters\auth\HttpBearerAuth;
     use yii\rest\Controller;
     use yii\helpers\Url;
+    use app\models\Payments;
 
 /**
  * Квитанции
@@ -76,14 +77,20 @@ class ReceiptsController extends Controller {
             return ['success' => false];
         }
         
+        // Проверяем статус платежа по текущей квитанции
+        $status_payment = Payments::getStatusPayment($data_post['period'], $data_post['account']);
+        
         // Формируем путь в PDF квитацнии на сервере
         $file_path = Yii::getAlias('@web') . "receipts/" . $data_post['account'] . "/" . $data_post['period'] . ".pdf";
         
         if (!file_exists($file_path)) {
-            return ['message' => "Приносим извинения. Квитанция {$data_post['period']} на сервере не найдена."];
+            return [
+                'message' => "Приносим извинения. Квитанция {$data_post['period']} на сервере не найдена."];
         } else {
-            // Возвращаем абсолютный путь
-            return ['receipt_pdf' => Url::base(true) . '/' . $file_path];
+            // Возвращаем абсолютный путь и статус платежа
+            return [
+                'receipt_pdf' => Url::base(true) . '/' . $file_path,
+                'status_payment' => $status_payment];
         }
         
     }
