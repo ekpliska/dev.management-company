@@ -13,7 +13,7 @@ class News extends BaseNews {
         $count_news = 9;
         
         $news_list = BaseNews::find()
-                ->select(['news_id', 'news_title', 'news_preview', 'LEFT(news_text, 250) as news_text', 'created_at'])
+                ->select(['news_id', 'news_title', 'news_preview', 'LEFT(news_text_mobile, 250) as news_text', 'created_at'])
                 ->andWhere(['news_house_id' => $house_id])
                 ->orderBy(['created_at' => SORT_DESC])
                 ->orWhere(['news_status' => 'all'])
@@ -27,7 +27,7 @@ class News extends BaseNews {
     public static function otherNews($house_id, $is_advert) {
         
         $news = BaseNews::find()
-                ->select(['news_id', 'news_title', 'news_preview', 'LEFT(news_text, 250) as news_text', 'created_at'])
+                ->select(['news_id', 'news_title', 'news_preview', 'LEFT(news_text_mobile, 250) as news_text', 'created_at'])
                 ->andWhere([
                     'news_house_id' => $house_id,
                     'isAdvert' => $is_advert,
@@ -46,7 +46,7 @@ class News extends BaseNews {
     public static function findNewsByID($id) {
         
         return self::find()
-                ->select(['news_id', 'news_title', 'news_preview', 'news_text', 'created_at'])
+                ->select(['news_id', 'news_title', 'news_preview', 'news_text_mobile as news_text', 'created_at'])
                 ->where(['news_id' => $id])
                 ->asArray()
                 ->one();
