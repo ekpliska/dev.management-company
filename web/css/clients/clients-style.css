@@ -2656,14 +2656,17 @@ p.date-start-vote {
     text-align: center;
 }
 .questions-text-show {
-    padding: 40px 0px;
+    padding: 20px 0px;
     border-bottom: 1px solid #ddd;
 }
 .table-voting-results > tbody > tr > td > h4,
 .questions-text-show > h4 {
-    font-size: 19px;
+    font-size: 18px;
     font-weight: bold;
     text-align: left;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
 }
 .table-voting-results > tbody > tr > td > h4 > i,
 .questions-text-show > h4 > i {
@@ -2704,7 +2707,7 @@ p.date-start-vote {
     text-transform: uppercase;
     color: #2d18b4;
     background: #fff;
-    border-color: #2d18b4;
+    border-color: #ddd;
     outline: none;
 }
 .btn-group-lg > .btn-set-voting {

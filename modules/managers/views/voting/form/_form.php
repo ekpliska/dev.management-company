@@ -155,7 +155,6 @@ $action = Yii::$app->controller->action->id;
                             </tr>
                             <?php if (!$model->voting->isNewRecord) : ?>
                             <tr class="voting-questions-result">
-                                <?= count($participants) ?>
                                 <?= Vote::widget(['question_id' => $_question->questions_id, 'count' => count($participants)]) ?>
                             </tr>
                             <?php endif; ?>

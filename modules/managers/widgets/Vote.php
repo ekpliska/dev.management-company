@@ -42,7 +42,6 @@ class Vote extends Widget {
             $results = $result;
         }
         
-        
         return $this->render('vote/default', [
             'answers' => $answers,
             'results' => $results,
