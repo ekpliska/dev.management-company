@@ -2667,6 +2667,7 @@ p.date-start-vote {
     display: inline-flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
 }
 .table-voting-results > tbody > tr > td > h4 > i,
 .questions-text-show > h4 > i {

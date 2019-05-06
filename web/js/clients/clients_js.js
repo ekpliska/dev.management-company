@@ -664,13 +664,15 @@ $(document).ready(function() {
         var idBtn = $(this).prop('id');
         var questionID = $(this).data('question');
         var typeAnswer = $(this).data('typeAnswer');
+        console.log(idBtn, '--', questionID, '--', typeAnswer);
         // Родительский контейнер кнопки
         var block = $(this).closest('div');
         $(block).find('.btn-set-voting-active').removeClass('btn-set-voting-active');
         $(this).addClass('btn-set-voting-active');
         
         $.post('send-answer?question_id=' + questionID + '&type_answer=' + typeAnswer, function(response) {
-            if (response.success === true) {
+            console.log(response);
+            if (response.success == true) {
                 $('.marker-vote-' + questionID).removeClass('show-marker');
                 $('#finished-voting-btn').removeClass('btn-hidden');
             }

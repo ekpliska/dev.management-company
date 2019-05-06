@@ -2043,6 +2043,7 @@ ul[id*="employees-list-"] > li > a:hover {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    object-fit: cover;
 }
 .check-partners-block {
     border: 1px solid #ef693a;
