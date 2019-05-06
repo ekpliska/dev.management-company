@@ -74,6 +74,8 @@ class News extends ActiveRecord
             
             [['news_type_rubric_id', 'news_status'], 'string'],
             
+            [['news_text', 'news_text_mobile'], 'string', 'max' => 10000],
+            
             [[
                 'news_house_id', 
                 'news_user_id', 
@@ -91,7 +93,6 @@ class News extends ActiveRecord
                 }
             }],
             
-            [['news_text'], 'string'],
             [['news_title', 'news_preview', 'slug'], 'string', 'max' => 255],
             
             ['slug', 'string'],
@@ -313,6 +314,10 @@ class News extends ActiveRecord
     public function afterSave($insert, $changedAttributes) {
         parent::afterSave($insert, $changedAttributes);
         
+        if (!$insert) {
+            $this->news_text_mobile = strip_tags($this->news_text);
+        }
+        
         if (!isset($changedAttributes['isAdvert'])) {
             $this->news_partner_id = null;
             $this->isAdvert = false;
@@ -329,7 +334,8 @@ class News extends ActiveRecord
             'news_id' => 'News ID',
             'news_type_rubric_id' => 'Тип публикации',
             'news_title' => 'Заголовок публикации',
-            'news_text' => 'Текс публикации',
+            'news_text' => 'Текст публикации',
+            'news_text_mobile' => 'Текст публикации (для мобильных устройств)',
             'news_preview' => 'Превью',
             'news_house_id' => 'Адрес',
             'news_user_id' => 'Пользователь',
