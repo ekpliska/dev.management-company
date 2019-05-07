@@ -7,6 +7,7 @@
     use yii\filters\auth\HttpBasicAuth;
     use yii\filters\auth\HttpBearerAuth;
     use app\modules\api\v1\models\payments\PaymentForm;
+    use app\modules\api\v1\models\payments\Payments;
 
 /**
  * Платежная система
@@ -50,9 +51,7 @@ class PaymentsController extends Controller {
     public function actionGetPublicKey() {
         
         $key = Yii::$app->params['payments_system']['publicId'] ? Yii::$app->params['payments_system']['publicId'] : null;
-        return [
-            'merchantPublicId' => $key,
-        ];
+        return ['merchantPublicId' => $key];
     }
     
     
@@ -90,11 +89,11 @@ class PaymentsController extends Controller {
      */
     public function actionPost3ds($md, $pa_res, $account_number, $period) {
         
-        if (empty($account_number) || empty($period)) {
+        if (empty($md) || empty($pa_res) || empty($account_number) || empty($period)) {
             return false;
         }
         
-        
+        $payment = Payments::setStatusPayment($md, $pa_res, $account_number, $period);
         
         return 'here';
     }

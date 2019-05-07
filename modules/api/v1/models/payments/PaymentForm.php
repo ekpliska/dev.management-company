@@ -55,6 +55,7 @@ class PaymentForm extends Model {
         $accoint_id = $account_info->account_id;
         
         $is_payment = Payments::isPayment($_period, $_nubmer, $_sum, $accoint_id);
+        $payment_number = $is_payment['payment']->unique_number;
         
         // Если платеж был оплачен ранее
         if ($is_payment['status'] == Payments::YES_PAID) {
@@ -71,10 +72,10 @@ class PaymentForm extends Model {
                 'CardCryptogramPacket' => $this->cryptogram_packet
             ];
             
-            if (!$result = Yii::$app->paymentSystem->send_payment($data_posts)) {
+            if (!$result = Yii::$app->paymentSystem->send_payment($data_posts, $payment_number)) {
                 return ['success' => false, 'message' => $result];
-            } 
-            return $result;
+            }
+            return ['success' => true, 'message' => $result];
         }
         
         
