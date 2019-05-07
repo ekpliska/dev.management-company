@@ -40,9 +40,9 @@ class Payments extends Payments {
         ];
         
         if (!$result = Yii::$app->paymentSystem->post3ds($data_posts)) {
-            return ['success' => false];
+            return "<h1>Ошибка</h1>";
         }
-        return ['success' => true, 'message' => $result];
+        return "<h1>{$result}</h1>";
     }
     
 }

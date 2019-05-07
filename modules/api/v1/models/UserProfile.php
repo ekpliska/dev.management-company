@@ -58,7 +58,7 @@ class UserProfile extends User {
             $this->user_mobile = $data['mobile'];
             $this->user_email = $data['email'];
             $rent->rents_mobile = $data['mobile'];
-            $rent->rents_mobile_more = isset($data['other_phone']) ? $data['other_phone'] : '';
+            $rent->rents_mobile_more = (isset($data['other_phone']) || !empty($data['other_phone'])) ? $data['other_phone'] : '';
             $rent->save(false);
         } else {
             return false;

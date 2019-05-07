@@ -41,7 +41,7 @@ class PaymentsController extends Controller {
         return [
             'get-public-key' => ['get'],
             'index' => ['post'],
-            'post3ds' => ['get'],
+            'post3ds' => ['post'],
         ];
     }
     
@@ -79,7 +79,7 @@ class PaymentsController extends Controller {
     /*
      * Проведение платежа
      * 
-     * на API платежной системы
+     * на API платежной системы (из POST)
      *      $md              параметр TransactionId из ответа сервера
      *      $pa_res          Значение одноименного параметра
      * 
@@ -89,13 +89,16 @@ class PaymentsController extends Controller {
      */
     public function actionPost3ds($account_number, $period) {
         
-        if (empty($md) || empty($pa_res) || empty($account_number) || empty($period)) {
+        if (empty($account_number) || empty($period)) {
             return false;
         }
         
-        $payment = Payments::setStatusPayment($md, $pa_res, $account_number, $period);
+        $data_md = Yii::$app->request->getBodyParam('MD');
+        $data_pres = Yii::$app->request->getBodyParam('PaRes');
         
-        return 'here';
+        $payment = Payments::setStatusPayment($data_md, $data_pres, $data_pres, $period);
+        
+        return $payment;
     }
     
 }

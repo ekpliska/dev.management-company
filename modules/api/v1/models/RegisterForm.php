@@ -10,6 +10,7 @@
     use app\models\Flats;
     use app\models\Token;
     use app\models\SmsSettings;
+    use app\models\Rents;
 
 /**
  * Регистрация по API
@@ -230,16 +231,22 @@ class RegisterForm extends Model {
             $token = new Token();
             $token->user_uid = $user->user_id;
             $token->generateToken(time() + 3600 * 24 * 365);
-            $token = $token->save() ? $token->token : null;
+            $token->save(false);
             
             // Дропаем сессию в случае успешной регистрации нового пользователя
             Yii::$app->session->destroy();
 
             $transaction->commit();
             
+            $client = Clients::findOne(['clients_id' => $user->user_client_id]);
+            
             return [
                 'success' => true,
-                'token' => $token,
+                'token' => $token->token,
+                'expired_at' => $token->expired_at,
+                'user_photo' => $user->getPhoto(),
+                'user_fullname' => $client->fullName,
+                'role' => 'clients',
             ];
             
         } catch (Exception $e) {
@@ -249,7 +256,5 @@ class RegisterForm extends Model {
         }
         
     }
-
-    
-    
+        
 }
