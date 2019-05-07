@@ -87,7 +87,7 @@ class PaymentsController extends Controller {
      *      $account_number  Номер лицевого счета
      *      $period          Период оплаты квитанции
      */
-    public function actionPost3ds($md, $pa_res, $account_number, $period) {
+    public function actionPost3ds($account_number, $period) {
         
         if (empty($md) || empty($pa_res) || empty($account_number) || empty($period)) {
             return false;
