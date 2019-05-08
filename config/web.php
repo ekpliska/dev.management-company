@@ -5,6 +5,7 @@ $db = require __DIR__ . '/db.php';
 $sms = require __DIR__ . '/sms.php';
 $client_api = require __DIR__ . '/client_api.php';
 $session_settings = require __DIR__ . '/session_settings.php';
+$payment_system = require __DIR__ . '/payment_system.php';
 
 $config = [
     'id' => 'elsa-company',
@@ -307,9 +308,7 @@ $config = [
         ],
         'sms' => $sms,
         'client_api' => $client_api,
-        'paymentSystem' => [
-            'class' => 'app\components\paymentSystem\PaymentSystem',
-        ],
+        'paymentSystem' => $payment_system,
     ],
     'params' => $params,
 ];

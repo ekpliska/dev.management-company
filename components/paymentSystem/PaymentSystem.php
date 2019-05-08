@@ -4,7 +4,6 @@
     use Yii;
     use app\models\Payments;
     use yii\helpers\Url;
-    use app\models\SliderSettings;
 
 /*
  * Интеграция с платежной системой Cloudpayments
@@ -14,14 +13,14 @@ class PaymentSystem {
     /**
      * ДАННЫЕ ДЛЯ ПОДКЛЮЧЕНИЯ К ПЛАТЕЖНОМУ ШЛЮЗУ
      *
-     * username         Логин магазина, полученный при подключении.
-     * password         Пароль магазина, полученный при подключении.
-     * gateway_url      Адрес платежного шлюза.
-     * 
+     * public_id        Логин магазина, полученный при подключении.
+     * api_secret       Пароль магазина, полученный при подключении.
+     * gateway_url      Метод для передачи сформированной криптограммы, пришедшей с мобильного устройства
+     * post3ds_url      Метод для завершения оплаты
      */
     
-    public $public_id = 'pk_1f5d5ad761f44549ac761e0329e86';
-    public $api_secret = '979331b40c62fb869c8a10b377bf42ed';
+    public $public_id;
+    public $api_secret;
     // Метод для оплаты по криптограмме
     public $gateway_url = 'https://api.cloudpayments.ru/payments/cards/charge';
     // Метод для проведение платежа
@@ -92,14 +91,12 @@ class PaymentSystem {
         $response = $this->gateway($url, $post_data);
         
         if (isset($response['Success']) && $response['Success'] == true) {
-            header( 'Location: ' . Url::toRoute(['/site/result', 'status' => 'success']), true, 301);
+            header('Location: ' . Url::toRoute(['/site/result', 'status' => 'success']), true, 301);
             exit();
         } elseif (isset($response['Success']) && $response['Success'] == false) {
-            header( 'Location: ' . Url::toRoute(['site/result', 'status' => 'success'], true), true, 301);
+            header('Location: ' . Url::toRoute(['/site/result', 'status' => 'unsuccess']), true, 301);
             exit();
         }
-        
-        return false;
         
     }
 }

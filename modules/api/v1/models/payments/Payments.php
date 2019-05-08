@@ -19,10 +19,20 @@ class Payments extends BasePayments {
     public static function setStatusPayment($md, $pa_res, $account_number, $period) {
         
         $account = PersonalAccount::findOne(['account_number' => $account_number]);
-        if (!$account) {
+
+        // Формируем данные для отправки в платежный шлюз для проведения платежа
+        $data_posts = [
+            'TransactionId' => $md,
+            'PaRes' => $pa_res
+        ];
+                
+        if (!$account || $data_posts == null) {
             header( 'Location: ' . Url::toRoute(['/site/result', 'status' => 'unsuccess']), true, 301);
             exit();
-        }
+        }        
+        
+        // Вызываем API метод на завершение платежа
+        Yii::$app->paymentSystem->post3ds($data_posts);
         
         // Находим платеж, меняем ему статус
         $payment = self::find()
@@ -31,20 +41,9 @@ class Payments extends BasePayments {
                     'account_uid' => $account->account_id])
                 ->one();
         $payment->payment_status = self::YES_PAID;
-        $payment->save(false);
-        
-        // Формируем данные для отправки в платежный шлюз для проведения платежа
-        $data_posts = [
-            'TransactionId' => $md,
-            'PaRes' => $pa_res
-        ];
-        
-        if (!$data_posts) {
-            header('Location: ' . Url::toRoute(['/site/result', 'status' => 'unsuccess']), true, 301);
-            exit();
+        if (!$payment->save(false)) {
+            return false;
         }
-        // Вызываем API метод на завершение платежа
-        Yii::$app->paymentSystem->post3ds($data_posts);
         
         return true;
         
