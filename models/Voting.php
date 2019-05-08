@@ -210,30 +210,6 @@ class Voting extends ActiveRecord
                 ->one();
     }
     
-    /*
-     * Загрузка обложки голосования
-     */
-//    public function uploadImage($file) {
-//        
-//        $current_image = $this->voting_image;
-//        
-//        if ($this->validate()) {
-//            if ($file) {
-//                $this->voting_image = $file;
-//                $dir = Yii::getAlias('upload/voting/cover/');
-//                $file_name = 'previews_voting_' . time() . '.' . $this->voting_image->extension;
-//                $this->voting_image->saveAs($dir . $file_name);
-//                $this->voting_image = '/' . $dir . $file_name;
-//                @unlink(Yii::getAlias('@webroot' . $current_image));
-//            } else {
-//                $this->voting_image = $current_image;
-//            }
-//            return $this->save() ? true : false;
-//        }
-//        
-//        return false;
-//    }
-    
     public function beforeSave($insert) {
         
         $current_image = $this->voting_image;

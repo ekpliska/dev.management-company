@@ -82,12 +82,6 @@ $action = Yii::$app->controller->action->id;
                     'settings' => [
                         'lang' => 'ru',
                         'minHeight' => 200,
-                        'plugins' => [
-                            'fullscreen',
-                            'fontcolor',
-                            'table',
-                            'fontsize',
-                        ],
                     ],
                 ])->label(false) ?>
             </div>            
