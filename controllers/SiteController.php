@@ -167,8 +167,12 @@ class SiteController extends Controller
     public function actionResult($status = 'success') {
         
         $this->layout = '@app/views/layouts/result-layout';
+        
+        $message = Yii::$app->session->get('payment_message');
+        
         return $this->render('result', [
             'status_name' => $status,
+            'message' => $message,
         ]);
     }
    

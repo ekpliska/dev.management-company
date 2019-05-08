@@ -15,7 +15,7 @@ $status = $status_name === 'success' ? true : false;
         <i class="glyphicon <?= $status ? 'glyphicon-ok-sign' : 'glyphicon-remove-sign' ?>"></i>
     </h1>
     <h1 class="result-page__message">
-        <?= $status ? 'Оплачено' : 'Ошибка совершения платежа' ?>
+        <?= $message ?>
     </h1>
     
 </div>

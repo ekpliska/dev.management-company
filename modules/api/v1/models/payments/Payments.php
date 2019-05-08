@@ -30,10 +30,7 @@ class Payments extends BasePayments {
             header( 'Location: ' . Url::toRoute(['/site/result', 'status' => 'unsuccess']), true, 301);
             exit();
         }        
-        
-        // Вызываем API метод на завершение платежа
-        Yii::$app->paymentSystem->post3ds($data_posts);
-        
+
         // Находим платеж, меняем ему статус
         $payment = self::find()
                 ->andWhere([
@@ -41,9 +38,11 @@ class Payments extends BasePayments {
                     'account_uid' => $account->account_id])
                 ->one();
         $payment->payment_status = self::YES_PAID;
-        if (!$payment->save(false)) {
-            return false;
-        }
+        $payment->save(false);
+        
+        // Вызываем API метод на завершение платежа
+        Yii::$app->paymentSystem->post3ds($data_posts);
+        
         
         return true;
         

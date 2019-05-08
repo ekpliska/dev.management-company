@@ -90,6 +90,9 @@ class PaymentSystem {
         $url = $this->post3ds_url;
         $response = $this->gateway($url, $post_data);
         
+        $message = isset($response['Model']['CardHolderMessage']) ? $response['Model']['CardHolderMessage'] : $response['Model']['CardHolderMessage'];
+        Yii::$app->session->set('payment_message', $message);
+        
         if (isset($response['Success']) && $response['Success'] == true) {
             header('Location: ' . Url::toRoute(['/site/result', 'status' => 'success']), true, 301);
             exit();
