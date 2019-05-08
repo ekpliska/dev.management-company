@@ -20,7 +20,7 @@ class Payments extends BasePayments {
         
         $account = PersonalAccount::findOne(['account_number' => $account_number]);
         if (!$account) {
-            header( 'Location: ' . Url::toRoute(['/site/result', 'status' => 'unsuccess']), true, 301 );
+            header( 'Location: ' . Url::toRoute(['/site/result', 'status' => 'unsuccess']), true, 301);
             exit();
         }
         
@@ -39,8 +39,8 @@ class Payments extends BasePayments {
             'PaRes' => $pa_res
         ];
         
-        if ($data_posts != null) {
-            header( 'Location: ' . Url::toRoute(['/site/result', 'status' => 'unsuccess']), true, 301 );
+        if (!$data_posts) {
+            header('Location: ' . Url::toRoute(['/site/result', 'status' => 'unsuccess']), true, 301);
             exit();
         }
         // Вызываем API метод на завершение платежа

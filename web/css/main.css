@@ -838,4 +838,18 @@ reset-password-sms:focus{
     position: relative;
     margin: 0 0 85px;
 }
+.result-page__status {
+    font-size: 100px;
+    color: #7f8c8d;
+}
+._result-ok {
+    color: #2ecc71;
+}
+._result-no {
+    color: #e74c3c;
+}
+.result-page__message {
+    font-size: 28px;
+    color: #7f8c8d;
+}
 /* End Results page */

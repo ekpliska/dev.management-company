@@ -121,7 +121,7 @@ class Payments extends \yii\db\ActiveRecord {
                     'user_uid' => Yii::$app->user->identity->id])
                 ->one();
         
-        return isset($status_payment->payment_status) ? $status_payment->payment_status : null;
+        return isset($status_payment->payment_status) ? $status_payment->payment_status : self::NOT_PAID;
         
     }
     

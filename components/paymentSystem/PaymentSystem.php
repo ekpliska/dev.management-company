@@ -4,6 +4,7 @@
     use Yii;
     use app\models\Payments;
     use yii\helpers\Url;
+    use app\models\SliderSettings;
 
 /*
  * Интеграция с платежной системой Cloudpayments
@@ -86,18 +87,16 @@ class PaymentSystem {
      * Проведение платежа
      */
     public function post3ds($post_data) {
-        
+
         $url = $this->post3ds_url;
         $response = $this->gateway($url, $post_data);
         
         if (isset($response['Success']) && $response['Success'] == true) {
             header( 'Location: ' . Url::toRoute(['/site/result', 'status' => 'success']), true, 301);
             exit();
-//            return $response['Model']['CardHolderMessage'];
         } elseif (isset($response['Success']) && $response['Success'] == false) {
-            header( 'Location: ' . Url::toRoute(['/site/result', 'status' => 'unsuccess']), true, 301);
+            header( 'Location: ' . Url::toRoute(['site/result', 'status' => 'success'], true), true, 301);
             exit();
-//            return $response['Model']['ReasonCode'];
         }
         
         return false;
