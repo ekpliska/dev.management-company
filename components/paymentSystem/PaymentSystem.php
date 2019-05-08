@@ -3,6 +3,7 @@
     namespace app\components\paymentSystem;
     use Yii;
     use app\models\Payments;
+    use yii\helpers\Url;
 
 /*
  * Интеграция с платежной системой Cloudpayments
@@ -69,14 +70,14 @@ class PaymentSystem {
         
         // Если карта с 3-D Secure 
         if ($response['Success'] == false) {
-            return isset($response['Model']) ? $response['Model'] : $response['Model']['CardHolderMessage'];
+            return isset($response['Model']['CardHolderMessage']) ? $response['Model']['CardHolderMessage'] : $response['Model'];
         } elseif ($response['Success'] == true) {
             // Если карта без 3-D Secure устанавливаем платежу статус Оплачен
             $payment = Payments::findOne(['unique_number' => $payment_number]);
             if ($payment) {
                 $payment->changeStatus();
             }
-            return isset($response['Model']['CardHolderMessage']) ? $response['Model']['CardHolderMessage'] : $response['Model'];
+            return isset($response['Model']['CardHolderMessage']) ? $response['Model']['CardHolderMessage'] : $response['Model']['CardHolderMessage'];
         }
         
     }
@@ -90,11 +91,11 @@ class PaymentSystem {
         $response = $this->gateway($url, $post_data);
         
         if (isset($response['Success']) && $response['Success'] == true) {
-            header( 'Location: http://google.ru', true, 301 );
+            header( 'Location: ' . Url::toRoute(['/site/result', 'status' => 'success']), true, 301);
             exit();
 //            return $response['Model']['CardHolderMessage'];
         } elseif (isset($response['Success']) && $response['Success'] == false) {
-            header( 'Location: http://yandex.ru', true, 301 );
+            header( 'Location: ' . Url::toRoute(['/site/result', 'status' => 'unsuccess']), true, 301);
             exit();
 //            return $response['Model']['ReasonCode'];
         }

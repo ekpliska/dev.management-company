@@ -154,6 +154,7 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 '' => 'site/index',
+                'result/<status:[\w-]+>' => 'site/result',
                 'login' => 'site/login',
                 'registration' => 'site/registration',
                 'request-password-reset' => 'site/request-password-reset',

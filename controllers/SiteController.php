@@ -163,12 +163,20 @@ class SiteController extends Controller
         }
         
     }
-   
-     public function actionTestAccount() {
+    
+    public function actionResult($status = 'success') {
         
+        $this->layout = '@app/views/layouts/result-layout';
+        return $this->render('result', [
+            'status_name' => $status,
+        ]);
+    }
+   
+    public function actionTestAccount() {
+
         $this->layout = false;
         return $this->render('test-account');
-         
+
     }
     
 }
