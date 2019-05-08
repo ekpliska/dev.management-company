@@ -2552,7 +2552,8 @@ p.date-start-vote {
 .voting-title-block h2 {
     color: #fff;
     font-size: 24px;
-    padding: 0px 30% 0px 20px;
+    padding: 0px 30% 0px 10px;
+    margin: 10px;
 }
 .voting-title-block p {
     color: #fff;
@@ -2597,6 +2598,10 @@ p.date-start-vote {
 .span-count-white {
     color: #454545 !important;
     background: #fff;
+}
+.voting__participant_info {
+    padding: 5px;
+    display: grid
 }
 .voting__participant_info a {
     color: #000;

@@ -199,13 +199,20 @@
     .table-voting-results > tbody > tr > td p.title {
         font-size: 14px;
     }
-}
-@media screen and (max-width: 1199px) {
     .vote-card_title {
         height: 66px;
     }
     .vote-card_title i {
         padding: 20px;
+    }
+    .voting-title-block h2 {
+        font-size: 18px;
+    }
+    .voting-body_left p {
+        padding: 10px 5px;
+    }
+    .span-count {
+        padding: 2px 15px;
     }
 }
 @media screen and (max-width: 991px) {
@@ -218,12 +225,6 @@
     }
 }
 @media screen and (max-width: 768px) {
-    .vote-card_date-end {
-        width: 180px;
-        padding: 10px;
-        font-size: 10px;
-        left: 22%;
-    }
     .vote-card_title a {
         font-size: 14px;
     }
@@ -253,12 +254,6 @@
     .vote-card-img {
         height: 255px;
     }
-    .vote-card_date-end {
-        width: 200px;
-        font-size: 10px;
-        left: 30%;
-        top: 30%;
-    }
     .vote-card_text {
         height: 133px;
     }
@@ -273,9 +268,6 @@
     }
 }
 @media screen and (max-width: 400px) {
-    .vote-card_date-end {
-        left: 20%;
-    }
     .vote-card_title i {
         padding: 15px;
     }
