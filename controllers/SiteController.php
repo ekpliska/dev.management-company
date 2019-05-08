@@ -168,7 +168,7 @@ class SiteController extends Controller
         
         $this->layout = false;
         return $this->render('test-account');
-        
+         
     }
     
 }

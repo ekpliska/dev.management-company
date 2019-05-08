@@ -90,9 +90,13 @@ class PaymentSystem {
         $response = $this->gateway($url, $post_data);
         
         if (isset($response['Success']) && $response['Success'] == true) {
-            return $response['Model']['CardHolderMessage'];
+            header( 'Location: http://google.ru', true, 301 );
+            exit();
+//            return $response['Model']['CardHolderMessage'];
         } elseif (isset($response['Success']) && $response['Success'] == false) {
-            return $response['Model']['CardHolderMessage'];
+            header( 'Location: http://yandex.ru', true, 301 );
+            exit();
+//            return $response['Model']['ReasonCode'];
         }
         
         return false;

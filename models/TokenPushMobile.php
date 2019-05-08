@@ -32,7 +32,7 @@ class TokenPushMobile extends ActiveRecord {
             [['user_uid'], 'integer'],
             [['token'], 'string', 'max' => 255],
             [['token'], 'unique'],
-            ['status', 'integer'],
+            ['enabled', 'integer'],
             [['user_uid'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_uid' => 'user_id']],
         ];
     }
@@ -77,7 +77,7 @@ class TokenPushMobile extends ActiveRecord {
         
         $_tokens = self::find()
                 ->where(['user_uid' => $user_id])
-                ->andWhere(['status' => true])
+                ->andWhere(['enabled' => true])
                 ->asArray()
                 ->all();
         // Если массив токенов не пустой, то отправляем push-уведомления
@@ -106,7 +106,7 @@ class TokenPushMobile extends ActiveRecord {
         // Рассылка всем кто зарегистрирован на голосование
         $participants = RegistrationInVoting::find()
                 ->joinWith(['pushToken' => function($query) {
-                    $query->andWhere(['status' => true]);
+                    $query->andWhere(['enabled' => true]);
                 }])
                 ->where(['voting_id' => $vote_id, 'status' => RegistrationInVoting::STATUS_ENABLED])
                 ->andWhere(['!=', 'user_id', $from])
@@ -145,7 +145,7 @@ class TokenPushMobile extends ActiveRecord {
         if (!$house_id) {
             // Собираем все токены для рассылки
             $_tokens = self::find()
-                ->where(['status' => true])
+                ->where(['enabled' => true])
                 ->asArray()
                 ->all();
             $tokens = ArrayHelper::getColumn($_tokens, 'token');
@@ -158,7 +158,7 @@ class TokenPushMobile extends ActiveRecord {
                 ->join('LEFT JOIN', 'account_to_users as ua', 'ua.account_id = pa.account_id')
                 ->join('RIGHT JOIN', 'token_push_mobile as t', 't.user_uid = ua.user_id')
                 ->where(['pa.flats_house_id' => $house_id])
-                ->where(['t.status' => true])
+                ->where(['t.enabled' => true])
                 ->groupBy('token')
                 ->all();
             $tokens = ArrayHelper::getColumn($_tokens, 'token');
@@ -183,7 +183,7 @@ class TokenPushMobile extends ActiveRecord {
             'id' => 'ID',
             'user_uid' => 'User Uid',
             'token' => 'Token',
-            'status' => 'Status',
+            'enabled' => 'Enabled',
         ];
     }
 

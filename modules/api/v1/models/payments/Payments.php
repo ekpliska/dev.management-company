@@ -2,13 +2,13 @@
 
     namespace app\modules\api\v1\models\payments;
     use Yii;
-    use app\models\Payments;
+    use app\models\Payments as BasePayments;
     use app\models\PersonalAccount;
 
 /**
  * Платежи
  */
-class Payments extends Payments {
+class Payments extends BasePayments {
     
     /*
      * Находим платеж. по переданным данным - устанавливаем ему статус Оплачено
@@ -26,8 +26,7 @@ class Payments extends Payments {
         $payment = self::find()
                 ->andWhere([
                     'receipt_period' => $period, 
-                    'account_uid' => $account->account_id,
-                    'user_uid' => Yii::$app->user->identity->id])
+                    'account_uid' => $account->account_id])
                 ->one();
         $payment->payment_status = self::YES_PAID;
         $payment->save(false);
@@ -39,10 +38,14 @@ class Payments extends Payments {
             'PaRes' => $pa_res
         ];
         
-        if (!$result = Yii::$app->paymentSystem->post3ds($data_posts)) {
-            return "<h1>Ошибка</h1>";
+        if ($data_posts != null) {
+            header( 'Location: /', true, 301);
         }
-        return "<h1>{$result}</h1>";
+        // Вызываем API метод на завершение платежа
+        Yii::$app->paymentSystem->post3ds($data_posts);
+        
+        return true;
+        
     }
     
 }
