@@ -9,7 +9,7 @@ $(document).ready(function() {
      */
     $('.news-carousel').owlCarousel({
         loop: true,
-        margin: 10,
+        margin: 2,
         nav: true,
         items: 3,
         dots: false,

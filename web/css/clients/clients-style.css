@@ -299,7 +299,8 @@ li.account-info {
 .client-page__services > div[class*="col-"] > div {
     border: 1px solid #ddd;
     border-radius: 12px;
-    height: 320px;
+    height: 350px;
+    margin: 10px 0;
 }
 .payments-lists {
     background-color: red;
@@ -397,10 +398,10 @@ li.account-info {
     padding: 0 0 5px 0;
 }
 .service-item__btn {
-    margin: 20px 0;
+    margin-right: 25px;
     position: absolute;
-    bottom: 0;
-    right: 5%;
+    bottom: 8%;
+    right: 0%;
 }
 .order-to-service {
     font-size: 11px;
@@ -917,7 +918,7 @@ p.left,
 p.center {
     color: #fff;
     background-color: #2d18b4;
-    border-radius: 12px;
+    border-radius: 25px;
 }
 .settings-input {
     padding: 5px 10px;

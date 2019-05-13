@@ -25,8 +25,17 @@ class LastNews extends Widget {
         // Формируем список новостей для текущено пользователя
         $news = News::getNewsByClients($this->living_space)->limit($this->count_news)->all();
         
+        // Параметр для слайдера по умолчанию (влияет на отображения новостей при количестве новостей меньше 3)
+        $data_merge = 3;
+        if (count($news) == 2) {
+            $data_merge = 2;
+        } elseif (count($news) == 3) {
+            $data_merge = 1;
+        }
+                
         return $this->render('lastnews/default', [
             'news' => $news,
+            'data_merge' => $data_merge,
         ]);
         
     }

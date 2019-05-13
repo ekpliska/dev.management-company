@@ -17,7 +17,7 @@
 <?php foreach ($news as $key => $post) : ?>
     <a href="<?= Url::to(['news/view', 'slug' => $post['slug']]) ?>">
         <div>
-            <div class="news-item">
+            <div class="news-item" data-merge="<?= $data_merge ?>">
                 <?= Html::img(Yii::getAlias('@web') . $post['news_preview'], ['class' => 'news-item__preview']) ?>
                 <span class="news-item__rubric"><?= $post['rubric']['rubrics_name'] ?></span>
                 <?php if (!empty($post['news_partner_id'])) : ?>
