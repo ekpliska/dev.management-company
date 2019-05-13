@@ -21,6 +21,7 @@ class Bootstrap implements BootstrapInterface {
                 'news' => 'clients/news/index',
                 
                 // Собственники, голосование
+                'voting/user/<user_id:\d+>' => 'clients/voting/view-profile',
                 'voting/<voting_id:\d+>' => 'clients/voting/view',
                 'voting' => 'clients/voting/index',
                 'voting/<action>' => 'clients/voting/<action>',
