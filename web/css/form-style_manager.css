@@ -959,7 +959,7 @@ textarea {
 }
 .search-block__button {
     background: #2d18b4;
-    border: 2px solid #fff;
+    border: 1px solid #fff;
     font-size: 12px;
     text-transform: none;
     padding: 7px 20px;
