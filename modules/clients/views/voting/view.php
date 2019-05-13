@@ -35,10 +35,7 @@ $_answer = '';
                  * "Принять участие" доступно только в активных голосованиях, 
                  * Собственнику
                  */
-                if (
-                        ($voting['status'] == Voting::STATUS_ACTIVE || Yii::$app->user->can('clients')) 
-                        && empty($is_register)
-                    ) : 
+                if ($voting['status'] == Voting::STATUS_ACTIVE && empty($is_register)) : 
             ?>
                 <?= Html::button('Принять участие', [
                         'class' => 'register-in-voting',
@@ -74,12 +71,13 @@ $_answer = '';
 
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 voting-body_right">
             
-            <?php if ($is_register['finished'] == RegistrationInVoting::STATUS_FINISH_YES) : // Результаты голсования выводим, если пользователь голосование завершил ?>
+            <?php /* Результаты голсования выводим, если пользователь голосование завершил или опрос закрыт */ ?>
+            <?php if ($is_register['finished'] == RegistrationInVoting::STATUS_FINISH_YES || $voting['status'] == Voting::STATUS_CLOSED) : ?>
                 <?= ResultsVote::widget(['voting_id' => $voting['voting_id']]) ?>
             <?php endif; ?>
             
             <?php /* Контент для участников голосования не подтвердивших свое участие */ ?>
-            <?php if (empty($is_register) || $is_register['status'] == RegistrationInVoting::STATUS_DISABLED) : ?>
+            <?php if ((empty($is_register) || $is_register['status'] == RegistrationInVoting::STATUS_DISABLED) && $voting['status'] == Voting::STATUS_ACTIVE) : ?>
                 <?php foreach ($voting['question'] as $key => $question) : ?>
                     <div class="questions-text">
                         <span><?= $question['questions_text'] ?></span>
@@ -87,9 +85,8 @@ $_answer = '';
                     </div>
                 <?php endforeach; ?>
             
+            <?php /* Контент для зарегистрировавщихся участников */ ?>
             <?php elseif ($is_register['status'] == RegistrationInVoting::STATUS_ENABLED && $is_register['finished'] == RegistrationInVoting::STATUS_FINISH_NO) : ?>
-                <?php /* Контент для зарегистрировавщихся участников */ ?>
-            
                 <div class="questions-text-show-form">
                     <?php $count_answer = 0; ?>
                     <?php foreach ($voting['question'] as $key => $question) : ?>

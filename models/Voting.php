@@ -167,8 +167,9 @@ class Voting extends ActiveRecord
                 ->orWhere(['voting_house_id' => $house_id])
                 ->groupBy(['voting_id'])
                 ->orderBy(['created_at' => SORT_DESC])
-                ->asArray()
                 ->all();
+        
+        self::autoCloseVote($votings);
         
         return $votings;
     }
@@ -267,6 +268,27 @@ class Voting extends ActiveRecord
             $house_id = $this->voting_house_id;
             TokenPushMobile::sendPublishNotice(TokenPushMobile::TYPE_PUBLISH_VOTE, $this->voting_title, $house_id);
         }
+    }
+    
+    /*
+     * Закрытие опросов с истекшей датой закрытия
+     * 
+     * @param array $data   Список опросов текущего пользователя
+     */
+    private static function autoCloseVote($vote_lists) {
+        
+        $current_date = time();
+        
+        foreach ($vote_lists as $key => $vote) {
+            $date_close = strtotime($vote->voting_date_end);
+            if ($date_close < $current_date) {
+                $vote->status = self::STATUS_CLOSED;
+                $vote->save(false);
+            }
+        }
+        
+        return;
+        
     }
     
     /**

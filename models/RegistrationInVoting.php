@@ -101,12 +101,20 @@ class RegistrationInVoting extends ActiveRecord
      * @param integer $voting_id ID голосование
      * @param integer $user_id ID текущего пользователя
      */
-    public static function findById($voting_id) {
+    public static function findById($voting_id, $status_vote) {
         
         $user_id = Yii::$app->user->identity->id;
+        
         $register = RegistrationInVoting::find()
                 ->andWhere(['voting_id' => $voting_id, 'user_id' => $user_id])
                 ->one();
+        
+        if ($register && $status_vote == Voting::STATUS_CLOSED) {
+            $register->status = self::STATUS_ENABLED;
+            $register->finished = self::STATUS_FINISH_YES;
+            return $register;            
+        }
+        
         return $register;
     }
     

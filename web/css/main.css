@@ -853,3 +853,10 @@ reset-password-sms:focus{
     color: #7f8c8d;
 }
 /* End Results page */
+
+/* Reset Bootstrap style's */
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+    background-color: #928DD2 !important;
+    border-radius: 50px;
+}
+/* End Reset Bootstrap style's */

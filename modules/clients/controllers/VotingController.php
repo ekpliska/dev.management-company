@@ -51,7 +51,6 @@ class VotingController extends AppClientsController {
         
         // Получаем информацию по текущему голосованию
         $voting = Voting::findVotingById($voting_id);
-
         if ($voting == null) {
             throw new \yii\web\NotFoundHttpException('Вы обратились к несуществующей странице');
         }
@@ -60,7 +59,7 @@ class VotingController extends AppClientsController {
         $participants = RegistrationInVoting::getParticipants($voting_id);
         
         // Проверяем наличие текущего пользователя в списке зарегистрированных участников голосования
-        $is_register = RegistrationInVoting::findById($voting_id);
+        $is_register = RegistrationInVoting::findById($voting_id, $voting['status']);
         
         // Загружаем модель на ввод СМС кода
         $model = new CheckSMSVotingForm($is_register['random_number']);
