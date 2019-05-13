@@ -215,10 +215,20 @@
         padding: 2px 15px;
     }
 }
+@media screen and (max-width: 1099px) {
+    .user-finish-vote {
+        height: 40px;
+        width: 40px;
+    }
+}
 @media screen and (max-width: 991px) {
     .vote-card_date-end {
         font-size: 11px;
         padding: 10px;
+    }
+    .voting-body_left {
+        height: auto;
+        padding-bottom: 10px;
     }
     .voting-body_right {
         padding: 10px 15px 10px 0;

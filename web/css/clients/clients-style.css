@@ -2601,7 +2601,7 @@ p.date-start-vote {
 }
 .voting__participant_info {
     padding: 5px;
-    display: grid
+    display: inherit;
 }
 .voting__participant_info a {
     color: #000;
@@ -2700,8 +2700,8 @@ p.date-start-vote {
     border-radius: 25px;
 }
 .user-finish-vote {
-    height: 60px;
-    width: 60px;
+    height: 50px;
+    width: 50px;
 }
 /* Конец Страница голосования */
 

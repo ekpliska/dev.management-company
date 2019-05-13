@@ -51,7 +51,7 @@ $_answer = '';
     </div>
     
     <div class="col-md-12 voting-body">
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 voting-body_left">
+        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 voting-body_left">
             <p>
                 <span class="span-count"><?= count($participants) ?></span> Проголосовало
             </p>
@@ -62,7 +62,7 @@ $_answer = '';
                 if (isset($participants) && count($participants) > 0) : 
             ?>
                 <?php foreach ($participants as $participant) : ?>
-                    <div class="col-lg-4 col-md-4 col-sm-2 col-xs-2 voting__participant_info text-center">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 voting__participant_info text-center">
                         <?php $avatar = $participant['user_photo'] ? $participant['user_photo'] : "/images/no-avatar.jpg" ?>
                         <?= Html::img(Yii::getAlias('@web') . $avatar, ['alt' => 'user-name', 'class' => 'img-circle user-finish-vote']) ?>
                         <?= Html::a($participant['clients_name'], ['view-profile', 'user_id' => $participant['user_id']], [
@@ -73,7 +73,7 @@ $_answer = '';
             <?php endif; ?>
         </div>
 
-        <div class="col-lg-9 col-md-9 col-sm-6 col-xs-12 voting-body_right">
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 voting-body_right">
             
             <?php if ($is_register['finished'] == RegistrationInVoting::STATUS_FINISH_YES) : // Результаты голсования выводим, если пользователь голосование завершил ?>
                 <?= ResultsVote::widget(['voting_id' => $voting['voting_id']]) ?>
