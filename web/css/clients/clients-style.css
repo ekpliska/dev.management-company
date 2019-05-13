@@ -2670,9 +2670,10 @@ p.date-start-vote {
     font-weight: bold;
     text-align: left;
     display: inline-flex;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
     width: 100%;
+    min-height: 42px;
 }
 .table-voting-results > tbody > tr > td > h4 > i,
 .questions-text-show > h4 > i {
@@ -2735,8 +2736,8 @@ p.date-start-vote {
     margin: 0 auto;
 }*/
 .card-view-profile img {
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     display: block;
     margin: 0 auto;
 }

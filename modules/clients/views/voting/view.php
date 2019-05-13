@@ -3,7 +3,6 @@
     use yii\helpers\Html;
     use yii\bootstrap\Modal;
     use app\helpers\FormatHelpers;
-    use app\modules\clients\widgets\ModalWindows;
     use app\models\Voting;
     use app\models\Answers;
     use app\models\RegistrationInVoting;
@@ -216,7 +215,6 @@ $this->registerJs("
     });
 ");
 ?>
-<?= ModalWindows::widget(['modal_view' => 'participate_modal']) ?>
 
 <?php
     /* Модальное окно для загрузки профиля пользователя */

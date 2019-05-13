@@ -12,7 +12,7 @@
         <tbody>
             <?php foreach ($results as $result) : ?>
             <tr>
-                <td colspan="3">
+                <td colspan="3" class="table-voting-results__title">
                     <h4>
                         <i class="glyphicon glyphicon-ok marker-vote-10"></i>
                         <?= $result['text_question'] ?>

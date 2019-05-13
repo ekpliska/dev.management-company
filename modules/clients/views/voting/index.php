@@ -16,7 +16,7 @@ $this->title = Yii::$app->params['site-name'] . 'Опрос';
     <?php if (isset($voting_list) && count($voting_list) > 0) : ?>
         <?php foreach ($voting_list as $key => $voting) : ?>
 
-        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6">
+        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-6">
             <div class="vote-card-preview">
                 <div class="vote-card-preview__image">
                     <?= Html::img(Yii::getAlias('@web') . $voting['voting_image'], ['class' => 'vote-card-img']) ?>

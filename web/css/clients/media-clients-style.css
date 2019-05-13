@@ -254,6 +254,18 @@
         padding: 15px 0 !important;
     }
 }
+@media screen and (max-width: 610px) and (min-width: 550px) {
+    .vote-card_text {
+        padding: 6px;
+        line-height: 18px;
+    }
+    .vote-card_title {
+        padding: 3px;
+    }
+    .vote-card_count, .vote-card_participants {
+        font-size: 12px;
+    }
+}
 @media screen and (max-width: 680px) {
     .btn-group > .btn {
         width: 130px;
