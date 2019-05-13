@@ -65,7 +65,7 @@
                         'prompt' => '[Котрагент]',
                         'class' => 'field-input-select',
                         'disabled' => true,])
-                    ->label($model->getAttributeLabel('partner'), ['class' => 'field-input-select_label']) ?>
+                    ->label($model->getAttributeLabel('news_partner_id'), ['class' => 'field-input-select_label']) ?>
         </div>
         
         
