@@ -184,6 +184,12 @@
         width: 120px;
     }
 }
+@media screen and (max-width: 550px) {
+    .navbar_paid-request [class*="col-"]:last-child > a {
+        float: left;
+        margin-left: 15px;
+    }
+}
 /* End Paid-services page */
 
 /* Vote Page */

@@ -28,7 +28,7 @@ class SubBarPaidService extends Widget {
         $_search = new searchInPaidServices();
 
         return $this->render('subbarpaidservice/' . $this->view_name, [
-            'category_list' => $this->getNameSevices(), 
+            'category_list' => $this->getNameSevices(),
             '_search' => $_search]);
     }
     

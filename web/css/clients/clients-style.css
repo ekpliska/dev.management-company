@@ -1781,9 +1781,8 @@ a.btn-history {
     letter-spacing: 0.3em;
     text-transform: uppercase;
     font-weight: bold;
-    /*line-height: 3em;*/
     float: right;
-    margin-right: 25px;
+    margin-right: 15px;
 }
 a.btn-history:hover {
     border: none;
@@ -3026,6 +3025,9 @@ p.date-start-vote {
 .navbar_paid-request {
     padding: 15px 0;
     /*border-bottom: 1px solid #ddd;*/
+}
+.navbar_paid-request [class*="col-"] {
+    min-height: 65px;
 }
 /* Конец Дополнительное навигационное меню, платные услуги */
 /* Дополнительное навигационное меню, лицевой счет */
