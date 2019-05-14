@@ -158,7 +158,7 @@ class Counters extends Model {
         $current_date = date('Y-m-d');
         
         // Если текущее показание не указано, то Новое показание сравниваем с предыдущим
-        if (empty($counter_info[$_key]['Текущее показание']) && $data['indication'] > $counter_info[$_key]['Предыдущие показание']) {
+        if (empty($counter_info[$_key]['Текущее показание']) && $data['indication'] < $counter_info[$_key]['Предыдущие показание']) {
             return ['message' => "Ошибка подачи показания, предыдущее показание {$counter_info[$_key]['Предыдущие показание']}"];
         } 
         // Если текущее показание указано, то Новое показание сравниваем с текущим
