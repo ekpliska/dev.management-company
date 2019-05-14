@@ -12,6 +12,22 @@
     <meta http-equiv="Content-Type" content="text/html; charset=<?= Yii::$app->charset ?>" />
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+    
+    <style type="text/css">
+	.view-news {
+            padding: 8px 12px;
+            border: 1px solid #331fb6;
+            border-radius: 25px;
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            color: #331fb6; 
+            text-transform: uppercase;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+        }
+    </style>
+    
 </head>
 <body>
     <?php $this->beginBody() ?>

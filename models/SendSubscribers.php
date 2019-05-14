@@ -113,13 +113,22 @@ class SendSubscribers extends ActiveRecord {
              */
             foreach ($subscribers as $key => $subscriber) {
                 
-                $email = $subscriber; 
-                $post_id = $post_info->news_id ? $post_info->news_id : $post_info->voting_id;
-                $post_title = $post_info->news_title ? $post_info->news_title : $post_info->voting_title;
-                $post_text = $post_info->news_text ? $post_info->news_text : $post_info->voting_text;
-                $post_slug = $post_info->slug ? $post_info->slug : null;
+                $email = $subscriber;
+                $params = [
+                    'id_post' => $post_info->news_id ? $post_info->news_id : $post_info->voting_id,
+                    'post_image' => $post_info->news_preview ? $post_info->news_preview : $post_info->voting_image,
+                    'post_title' => $post_info->news_title ? $post_info->news_title : $post_info->voting_title,
+                    'post_text' => $post_info->news_text ? substr(strip_tags($post_info->news_text), 0, 97) : substr(strip_tags($post_info->voting_text), 1, 97),
+                    'post_slug' => $post_info->slug ? $post_info->slug : null
+                ];
                 
-                $this->sendEmail($email, $post_id, $post_title, $post_text, $post_slug);
+//                $post_id = $post_info->news_id ? $post_info->news_id : $post_info->voting_id;
+//                $post_title = $post_info->news_title ? $post_info->news_title : $post_info->voting_title;
+//                $post_text = $post_info->news_text ? $post_info->news_text : $post_info->voting_text;
+//                $post_slug = $post_info->slug ? $post_info->slug : null;
+//                $this->sendEmail($email, $post_id, $post_title, $post_text, $post_slug);
+                
+                $this->sendEmail($email, $params);
                 
             }
             
@@ -128,13 +137,18 @@ class SendSubscribers extends ActiveRecord {
         
     }
     
-    private function sendEmail($email, $post_id = null, $post_title, $post_text, $post_slug = null) {
+    private function sendEmail($email, $params) {
         
-        Yii::$app->mailer->compose()
+        Yii::$app->mailer->compose('views/NewsNotice', ['params' => $params])
                 ->setTo($email)
-                ->setSubject($params['adminName'])
-                ->setTextBody('Сообщение')
+                ->setSubject($post_title)
                 ->send();
+        
+//        Yii::$app->mailer->compose()
+//                ->setTo($email)
+//                ->setSubject($params['adminName'])
+//                ->setTextBody($post_title)
+//                ->send();
         
     }
     
