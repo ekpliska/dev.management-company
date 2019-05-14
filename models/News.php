@@ -155,6 +155,16 @@ class News extends ActiveRecord
         }
         return Yii::getAlias('@web') . $this->news_preview;
     }
+
+    /*
+     * Найти публикацию по slug
+     */
+    public static function findNewsByID($news_id) {
+        
+        return self::find()
+                ->where(['news_id' => $news_id])
+                ->one();
+    }
     
     /*
      * Найти публикацию по slug

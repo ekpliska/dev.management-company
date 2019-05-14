@@ -6,8 +6,8 @@ return [
     'site-name-manager' => 'ELSA | Администратор | ',
     'site-name-dispatcher' => 'ELSA | Диспетчер | ',
     
-    'company-name' => 'ELSA',
-    'company-email' => 'elsa@elsa.ru',
+    'company_name' => 'ELSA',
+    'company_email' => 'elsa@elsa.ru',
     
     /*
      * Количество записей на страницах в таблицах

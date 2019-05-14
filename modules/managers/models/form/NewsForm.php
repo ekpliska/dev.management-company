@@ -6,7 +6,7 @@
     use app\models\News;
     use yii\helpers\HtmlPurifier;
     use app\models\TokenPushMobile;
-
+    use app\models\SendSubscribers;
 /* 
  * Создание новой новости
  */
@@ -122,6 +122,11 @@ class NewsForm extends Model {
             if ($add_news->isPush == News::NOTICE_YES) {
                 $house_id = $add_news->news_house_id;
                 TokenPushMobile::sendPublishNotice(TokenPushMobile::TYPE_PUBLISH_NEWS, $add_news->news_title, $house_id);
+            }
+            
+            // Ставим публикуемую статью на очередь в рассылку
+            if ($add_news->isEmail == News::NOTICE_YES) {
+                SendSubscribers::createSubscriber(SendSubscribers::POST_TYPE_NEWS, $add_news->news_id, $add_news->news_house_id);
             }
             
             $transaction->commit();

@@ -127,16 +127,16 @@ $config = [
             'useFileTransport' => true,
             'messageConfig' => [
                 'charset' => 'UTF-8',
-                'from' => [$params[''] => 'ELSA'],
+                'from' => [$params['company_email'] => $params['company_name']],
             ],
-            'transport' => [
-                'class' => 'Swift_SmtpTransport',
-                'host' => 'smtp.ukr.net',
-                'username' => 'user@ukr.net',
-                'password' => 'password',
-                'port' => '2525',
-                'encryption' => 'ssl',
-            ],
+//            'transport' => [
+//                'class' => 'Swift_SmtpTransport',
+//                'host' => 'smtp.ukr.net',
+//                'username' => 'user@ukr.net',
+//                'password' => 'password',
+//                'port' => '2525',
+//                'encryption' => 'ssl',
+//            ],
         ],
         'assetManager' => [
             'appendTimestamp' => true,

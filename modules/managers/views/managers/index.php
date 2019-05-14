@@ -13,6 +13,12 @@ $this->title = Yii::$app->params['site-name-manager'] .  'Главная';
 $this->params['breadcrumbs'][] = 'Главная';
 ?>
 
+<?php
+$subscribers = new app\models\SendSubscribers();
+$subscribers->send();
+die();
+?>
+
 <div class="manager-main">
 
     <?= Breadcrumbs::widget([
