@@ -66,7 +66,7 @@ class PaymentForm extends Model {
                 'Amount' => $is_payment['payment']->payment_sum,
                 'Currency' => 'RUB',
                 'InvoiceId' => $is_payment['payment']->unique_number,
-                'Description' => Yii::$app->params['payments_system']['description'],
+                'Description' => Yii::$app->paymentSystem->description,
                 'AccountId' => $account_info->account_id,
                 'Name' => $this->client_name,
                 'CardCryptogramPacket' => $this->cryptogram_packet

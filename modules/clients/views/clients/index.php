@@ -34,6 +34,7 @@ $current_date = Yii::$app->formatter->asDate(time(), 'LLLL, Y');
                     Промоблок
                 </h1>
                 <div class="__top-promo-content">
+                    <?php var_dump(Yii::$app->paymentSystem->public_id); ?>
                     <?= !empty($promo_text) ? $promo_text : '<p class="message-general-page">Информация отсутствует.</p>' ?>
                 </div>
             </div>

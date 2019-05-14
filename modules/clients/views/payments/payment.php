@@ -1,8 +1,8 @@
 <?php
 
     use yii\helpers\Html;
-    use yii\widgets\ActiveForm;
     use app\models\Payments;
+    use app\components\paymentSystem\PaymentSystem;
 
 /* 
  * Страница "Платеж" (оплата квитанции)
@@ -53,7 +53,7 @@ $this->title = Yii::$app->params['site-name'] . 'Оплата';
             <div class="notice info">
                 <p>
                     Платеж за расчетный период <span><?= $paiment_info->receipt_period ?></span>, на сумму <span><?= $paiment_info->payment_sum ?></span> находится 
-                    в стадии рассмотрения. Срок рассмотрения платежа занимает от 1 до 7 дней. После подтверждания платежа его статус будет изменен 
+                    на стадии рассмотрения. Срок рассмотрения платежа занимает от 1 до 7 дней. После подтверждения платежа его статус будет изменен 
                     на <span>&laquo;Оплачено&raquo;</span>.
                 </p>
             </div>
@@ -70,8 +70,8 @@ $this->title = Yii::$app->params['site-name'] . 'Оплата';
             var pay = function () {
                 var widget = new cp.CloudPayments();
                 widget.charge({
-                    publicId: '" . Yii::$app->params['payments_system']['publicId'] . "',
-                    description: '" . Yii::$app->params['payments_system']['description'] . "', //назначение
+                    publicId: '" . Yii::$app->paymentSystem->public_id . "',
+                    description: '" . Yii::$app->paymentSystem->description . "', //назначение
                     amount: " . $paiment_info->payment_sum . ", //сумма
                     currency: 'RUB', //валюта
                     invoiceId: '" . $paiment_info->unique_number . "', //номер заказа или счета 

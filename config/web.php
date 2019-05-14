@@ -125,14 +125,18 @@ $config = [
             'class' => 'yii\swiftmailer\Mailer',
             // Сохранять отправленные письма на диске
             'useFileTransport' => true,
-//            'transport' => [
-//                'class' => 'Swift_SmtpTransport',
-//                'host' => 'smtp.ukr.net',
-//                'username' => 'user@ukr.net',
-//                'password' => 'password',
-//                'port' => '2525',
-//                'encryption' => 'ssl',
-//            ],
+            'messageConfig' => [
+                'charset' => 'UTF-8',
+                'from' => [$params[''] => 'ELSA'],
+            ],
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.ukr.net',
+                'username' => 'user@ukr.net',
+                'password' => 'password',
+                'port' => '2525',
+                'encryption' => 'ssl',
+            ],
         ],
         'assetManager' => [
             'appendTimestamp' => true,

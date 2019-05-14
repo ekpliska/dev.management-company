@@ -25,6 +25,8 @@ class PaymentSystem {
     public $gateway_url = 'https://api.cloudpayments.ru/payments/cards/charge';
     // Метод для проведение платежа
     public $post3ds_url = 'https://api.cloudpayments.ru/payments/cards/post3ds';
+    // Описание платежа
+    public $description = 'Оплата услуг ЖКХ';
 
     /**
     * ФУНКЦИЯ ДЛЯ ВЗАИМОДЕЙСТВИЯ С ПЛАТЕЖНЫМ ШЛЮЗОМ

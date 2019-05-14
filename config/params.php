@@ -9,8 +9,6 @@ return [
     'company-name' => 'ELSA',
     'company-email' => 'elsa@elsa.ru',
     
-    'adminEmail' => 'admin@example.com',
-    
     /*
      * Количество записей на страницах в таблицах
      * Модуль Сlients - Заявки, Платные услуги
@@ -25,15 +23,4 @@ return [
      */
     'count_symbol' => 70,
     
-    /*
-     * День текущего месяца, когда ввод показаний будет не доступен
-     */
-    'finish_day' => 20,
-    
-    // Payments system
-    'payments_system' => [
-        'publicId' => 'pk_1f5d5ad761f44549ac761e0329e86',  //id из личного кабинета
-        'description' => 'Оплата услуг ЖКХ',
-    ],
-        
 ];
