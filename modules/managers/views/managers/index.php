@@ -1,9 +1,7 @@
 <?php
     
     use yii\widgets\Breadcrumbs;
-    use yii\helpers\Html;
     use yii\helpers\Url;
-    use app\helpers\FormatHelpers;
 
 /*
  * Администраторы
@@ -11,12 +9,6 @@
     
 $this->title = Yii::$app->params['site-name-manager'] .  'Главная';
 $this->params['breadcrumbs'][] = 'Главная';
-?>
-
-<?php
-$subscribers = new app\models\SendSubscribers();
-$subscribers->send();
-die();
 ?>
 
 <div class="manager-main">

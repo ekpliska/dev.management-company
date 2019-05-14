@@ -2,11 +2,12 @@
 
     use yii\helpers\Html;
     use yii\helpers\Url;
-    
 
 /* 
  * Уведомление о новой новости
  */
+    
+//$post_path = $params['post_slug'] ? Url::to(['news/view', 'slug' => 'news'], true) : Url::to(['voting/view', 'id' => '1'], true);
 ?>
 
 <table border="0" cellpadding="10" cellspacing="10" width="100%" align="center" valign="middle" style="font-family: sans-serif; font-size: 14px;">
@@ -48,7 +49,7 @@
         </tr>
         <tr>
             <td colspan="2" align="center">
-                <a href="#" class="view-news" target="_blank">
+                <a href="" class="view-news" target="_blank">
                     Ознакомиться
                 </a>
             </td>

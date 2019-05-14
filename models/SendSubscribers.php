@@ -58,6 +58,8 @@ class SendSubscribers extends ActiveRecord {
      */
     public function send() {
         
+//        var_dump('here'); die();
+        
         // Массив электронных адресов для рассылки
         $subscribers = [];
         
