@@ -79,7 +79,7 @@ class SettingsAppController extends Controller {
      * Смена состояния push-уведомлений
      * {
      *      "token": "string key",
-     *      "enabled": true/false}
+     *      "enabled": true/false
      * }
      */
     public function actionSwitchPush() {

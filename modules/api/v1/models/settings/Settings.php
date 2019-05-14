@@ -28,7 +28,7 @@ class Settings extends Model {
     public function getSettings() {
         return [
             'email' => $this->_user->user_check_email ? true : false,
-            'push' => ($this->_push && $this->_push->status) ? true : false,
+            'push' => ($this->_push && $this->_push->enabled) ? true : false,
         ];
     }
     
@@ -45,7 +45,7 @@ class Settings extends Model {
      */
     public function switchStatusPush($status) {
         if ($this->_push) {
-            $this->_push->status = (bool)$status;
+            $this->_push->enabled = (bool)$status;
             return $this->_push->save(false) ? ['success' => true] : ['success' => false];
         }
         return false;
