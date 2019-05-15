@@ -1478,6 +1478,16 @@ span.dot {
 /*    bottom: 0;
     width: 100%;*/
 }
+#label-count {
+    position: absolute;
+    bottom: 10%;
+    right: 6%;
+}
+#label-count-left {
+    position: absolute;
+    bottom: 10%;
+    right: 0%;    
+}
 .chat-msg span#label-count,
 .chat-msg span#label-count-left {
     color: #6b5d4a;
