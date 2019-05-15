@@ -6,6 +6,7 @@ $sms = require __DIR__ . '/sms.php';
 $client_api = require __DIR__ . '/client_api.php';
 $session_settings = require __DIR__ . '/session_settings.php';
 $payment_system = require __DIR__ . '/payment_system.php';
+$mailer_config = require __DIR__ . '/mailer_config.php';
 
 $config = [
     'id' => 'elsa-company',
@@ -121,23 +122,7 @@ $config = [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        'mailer' => [
-            'class' => 'yii\swiftmailer\Mailer',
-            // Сохранять отправленные письма на диске
-            'useFileTransport' => true,
-            'messageConfig' => [
-                'charset' => 'UTF-8',
-                'from' => [$params['company_email'] => $params['company_name']],
-            ],
-//            'transport' => [
-//                'class' => 'Swift_SmtpTransport',
-//                'host' => 'smtp.ukr.net',
-//                'username' => 'user@ukr.net',
-//                'password' => 'password',
-//                'port' => '2525',
-//                'encryption' => 'ssl',
-//            ],
-        ],
+        'mailer' => $mailer_config,
         'assetManager' => [
             'appendTimestamp' => true,
         ],

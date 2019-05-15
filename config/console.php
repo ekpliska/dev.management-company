@@ -2,6 +2,7 @@
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
+$mailer_config = require __DIR__ . '/mailer_config.php';
 
 $config = [
     'id' => 'basic-console',
@@ -34,23 +35,7 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
         ],
-        'mailer' => [
-            'class' => 'yii\swiftmailer\Mailer',
-            // Сохранять отправленные письма на диске
-            'useFileTransport' => true,
-            'messageConfig' => [
-                'charset' => 'UTF-8',
-                'from' => [$params['company_email'] => $params['company_name']],
-            ],
-//            'transport' => [
-//                'class' => 'Swift_SmtpTransport',
-//                'host' => 'smtp.ukr.net',
-//                'username' => 'user@ukr.net',
-//                'password' => 'password',
-//                'port' => '2525',
-//                'encryption' => 'ssl',
-//            ],
-        ],
+        'mailer' => $mailer_config,
         'db' => $db,
     ],
     'params' => $params,
