@@ -16,11 +16,23 @@
     <style type="text/css">
 	.view-news {
             padding: 8px 12px;
-            border: 1px solid #331fb6;
+            background-color: #331fb6; 
             border-radius: 25px;
             font-family: Helvetica, Arial, sans-serif;
             font-size: 14px;
-            color: #331fb6; 
+            color: #ffffff; 
+            text-transform: uppercase;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+        }
+	.view-vote {
+            padding: 8px 12px;
+            background-color: #4caf50; 
+            border-radius: 25px;
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            color: #ffffff; 
             text-transform: uppercase;
             text-decoration: none;
             font-weight: bold;

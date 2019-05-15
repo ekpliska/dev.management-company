@@ -11,10 +11,10 @@ return [
     ],
 //    'transport' => [
 //        'class' => 'Swift_SmtpTransport',
-//        'host' => 'smtp.ukr.net',
-//        'username' => 'user@ukr.net',
-//        'password' => 'password',
-//        'port' => '2525',
-//        'encryption' => 'ssl',
+//        'host' => '',
+//        'username' => '',
+//        'password' => '',
+//        'port' => '',
+//        'encryption' => '',
 //    ],    
 ];

@@ -7,7 +7,7 @@ return [
     'site-name-dispatcher' => 'ELSA | Диспетчер | ',
     
     'company_name' => 'ELSA',
-    'company_email' => 'elsa@elsa.ru',
+    'company_email' => 'pliska.ek@gmail.com',
     
     /*
      * Количество записей на страницах в таблицах

@@ -48,14 +48,14 @@ $post_path = $params['post_slug'] ?
         </tr>
         <tr>
             <td colspan="2" align="center" height="70" style="padding: 20px;">
-                <a href="<?= $post_path ?>" class="view-news" target="_blank">
+                <a href="<?= $post_path ?>" class="view-vote" target="_blank">
                     Принять участие
                 </a>
             </td>
         </tr>
         <tr>
             <td colspan="2" style="font-size: 12px; color: #777777;" bgcolor="#dddddd">
-                Как отписаться от рассылки:
+                <b>Как отписаться от рассылки:</b>
                 <ol>
                     <li>
                         Вы можете отписаться от рассылки в личном кабинете, раздел Профиль.
