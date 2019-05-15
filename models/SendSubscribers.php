@@ -115,6 +115,7 @@ class SendSubscribers extends ActiveRecord {
                 
                 $email = $subscriber;
                 $params = [
+                    'type_post' => $type_post,
                     'id_post' => $post_info->news_id ? $post_info->news_id : $post_info->voting_id,
                     'post_image' => $post_info->news_preview ? $post_info->news_preview : $post_info->voting_image,
                     'post_title' => $post_info->news_title ? $post_info->news_title : $post_info->voting_title,
@@ -135,17 +136,13 @@ class SendSubscribers extends ActiveRecord {
     
     private function sendEmail($email, $params) {
         
-        Yii::$app->mailer->compose('views/NewsNotice', ['params' => $params])
+        $view_email = $params['type_post'] == self::POST_TYPE_NEWS ? 'NewsNotice' : 'VoteNotice';
+        
+        Yii::$app->mailer->compose("views/{$view_email}", ['params' => $params])
                 ->setTo($email)
                 ->setSubject($params['post_title'])
                 ->send();
-        
-//        Yii::$app->mailer->compose()
-//                ->setTo($email)
-//                ->setSubject($params['adminName'])
-//                ->setTextBody($post_title)
-//                ->send();
-        
+            
     }
     
     /*

@@ -3,7 +3,7 @@
     use yii\helpers\Html;
 
 /* 
- * Уведомление о новой новости
+ * Уведомление о новом опросе
  */
     
 $post_path = $params['post_slug'] ? 
@@ -32,7 +32,8 @@ $post_path = $params['post_slug'] ?
             <td colspan="2">
                 Здравствуйте, вы подписанны на рассылку email-уведомлений на портале 
                 <a href="<?= Yii::$app->urlManager->createAbsoluteUrl(['/']) ?>">ELSA</a>. 
-                На нашем портале появилась публикация, которая, возможно вас заинтересует.
+                Предлагаем вам принять участие в опросе на тему <?= "&#171;{$params['post_title']}&#187; " ?>. 
+                С кратким содержанием опроса вы можете ознакомиться ниже в данном письме.
             </td>
         </tr>
         <tr>
@@ -49,9 +50,9 @@ $post_path = $params['post_slug'] ?
             </td>
         </tr>
         <tr>
-            <td colspan="2" align="center">
+            <td colspan="2" align="center" height="70" style="padding: 20px;">
                 <a href="<?= $post_path ?>" class="view-news" target="_blank">
-                    Ознакомиться
+                    Принять участие
                 </a>
             </td>
         </tr>
