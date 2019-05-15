@@ -50,11 +50,11 @@ $config = [
          */
         'yii2images' => [
             'class' => 'rico\yii2images\Module',
-            'imagesStorePath' => '@webroot/upload/store', //path to origin images
-            'imagesCachePath' => '@webroot/upload/cache', //path to resized copies
-            'graphicsLibrary' => 'GD', //but really its better to use 'Imagick' 
-            // 'placeHolderPath' => '@web/images/placeHolder.png', // if you want to get placeholder when image not exists, string will be processed by Yii::getAlias
-            'imageCompressionQuality' => 60, // Optional. Default value is 85.
+            'imagesStorePath' => '@webroot/upload/store', // Путь к оригиналу изображения
+            'imagesCachePath' => '@webroot/upload/cache', // Путь для изененных изображений
+            'graphicsLibrary' => 'GD', // PHP-библиотека для работы с изображениями
+            // 'placeHolderPath' => '@web/images/placeHolder.png', // Заглушка для изображений, спользовать с Yii::getAlias
+            'imageCompressionQuality' => 60, // Процент сжатия
         ],        
     ],
     'components' => [
@@ -153,7 +153,7 @@ $config = [
                 'one-notification/<notice_id:[\w-]+>' => 'notification/one-notification',
                 'unsubscribe' => 'unsubscribe/index',
                 
-                // REST Rules
+                // REST API Rules
                 [
                     'class' => 'yii\rest\UrlRule', 
                     'pluralize' => false, 

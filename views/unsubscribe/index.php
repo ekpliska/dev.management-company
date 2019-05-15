@@ -15,9 +15,9 @@ $this->title= "Описаться от рассылки"
             Приносим извинения, произошла ошибка. 
             Если вы попали на эту страницу из пришедщего вам письма, то воспользуйтесь повторной операцией по отмене рассыки на ваш электронный адрес.
         </p>
-        <?php if (Yii::$app->params['support_email']) : ?>
+        <?php if (Yii::$app->params['email_subscriber']['support_email']) : ?>
         <p>
-            Если данная ошибка повторится, напишите нам в <a href="mailto:<?= Yii::$app->params['support_email'] ?>">службу поддержки</a>
+            Если данная ошибка повторится, напишите нам в <a href="mailto:<?= Yii::$app->params['email_subscriber']['support_email'] ?>">службу поддержки</a>
         </p>
         <?php endif; ?>
         
