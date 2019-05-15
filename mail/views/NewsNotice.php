@@ -36,15 +36,12 @@ $post_path = $params['post_slug'] ?
             </td>
         </tr>
         <tr>
-            <td width="20%" rowspan="2">
-                <img src="<?= Yii::$app->urlManager->createAbsoluteUrl($params['post_image']) ?>" alt="Image publish" width="240" style="display:block;">
+            <td width="20%">
+                <img src="<?= Yii::$app->urlManager->createAbsoluteUrl($params['post_image']) ?>" alt="Image publish" width="240" height="170" style="display:block;">
             </td>
-            <td>
-                <?= Html::encode($params['post_title']) ?>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2" height="40">
+            <td valign="top">
+                <h3 style="color: #454545;"><?= Html::encode($params['post_title']) ?></h3>
+                <br>
                 <?= Html::encode($params['post_text']) ?>
             </td>
         </tr>
@@ -56,7 +53,7 @@ $post_path = $params['post_slug'] ?
             </td>
         </tr>
         <tr>
-            <td colspan="2" style="font-size: 12px; color: #777; border-top: 1px solid #dddddd;">
+            <td colspan="2" style="font-size: 12px; color: #777777;" bgcolor="#dddddd">
                 Как отписаться от рассылки:
                 <ol>
                     <li>

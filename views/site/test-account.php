@@ -3,61 +3,6 @@
     use yii\helpers\Html;
 ?>
 
-<table border="0" cellpadding="10" cellspacing="10" width="100%" align="center" valign="middle" style="font-family: sans-serif; font-size: 14px;">
-    <thead>
-        <tr>
-            <th colspan="2">
-                <?= Html::img('@web/images/main/elsa-logo13@2x.png', ['alt' => 'elsa logo', 'width' => 170]) ?>
-                <p style="font-family: sans-serif; font-size: 12px; letter-spacing: 2; color: #331fb6;">
-                    ELECTRONIC SMART ASSISTEN
-                </p>
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td colspan="2">
-                Здравствуйте, вы подписанны на рассылку email-уведомлений на портале <?= Html::a('ELSA', ['/']) ?>. 
-                На нашем портале появилась публикация, которая, возможно вас заинтересует.
-            </td>
-        </tr>
-        <tr>
-            <td width="20%" rowspan="2">
-                <?= Html::img('', ['width' => 200]) ?>
-            </td>
-            <td>
-                TITLE NEWS
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                TEXT NEWS
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2" align="center">
-                <?= Html::a('Ознакомиться', [''], [
-                        'style' => 'padding: 10px; background-color: #331fb6; color: #fff; text-transform: uppercase; letter-spacing: 2px;
-                                    font-weight: bold; text-decoration: none; border-radius: 25px;'
-                ]) ?>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2" style="font-size: 12px; color: #777;">
-                Как отписаться от рассылки:
-                <ol>
-                    <li>
-                        Вы можете отписаться от рассылки на портале в личном кабинете. Раздел Профиль.
-                    </li>
-                    <li>
-                        Или перейдя по ссылке <?= Html::a('Отписаться от рассылки', ['/']) ?>
-                    </li>
-                </ol>
-            </td>
-        </tr>
-    </tbody>
-</table>
-
 <?php
 
 $array = [

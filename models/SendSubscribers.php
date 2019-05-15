@@ -127,13 +127,16 @@ class SendSubscribers extends ActiveRecord {
                 
             }
             
-//            $subscriber_list->status_subscriber = self::STATUS_SEND;
-//            $subscriber_list->update();
+            $subscriber_list->status_subscriber = self::STATUS_SEND;
+            $subscriber_list->update();
             
         }
         
     }
     
+    /*
+     * Отправка письма получателю
+     */
     private function sendEmail($email, $params) {
         
         $view_email = $params['type_post'] == self::POST_TYPE_NEWS ? 'NewsNotice' : 'VoteNotice';
