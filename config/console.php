@@ -30,8 +30,8 @@ $config = [
         ],
         'urlManager' => [
             'class' => 'yii\web\UrlManager',
-            'scriptUrl' => 'http://dev.management-company', // Setup your domain
-            'baseUrl' => 'http://dev.management-company', // Setup your domain
+            'scriptUrl' => $params['email_subscriber']['base_url'],
+            'baseUrl' => $params['email_subscriber']['base_url'],
             'enablePrettyUrl' => true,
             'showScriptName' => false,
         ],
