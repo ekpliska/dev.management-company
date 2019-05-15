@@ -71,7 +71,8 @@ class PasswordResetRequestForm extends Model {
         }
         
         // Генерируем новый пароль (случайные 6 символов)
-        $new_password = preg_replace('/[^a-zA-Z]/', '', Yii::$app->security->generateRandomKey(32));
+//        $new_password = preg_replace('/[^a-zA-Z]/', '', Yii::$app->security->generateRandomKey(32));
+        $new_password = Yii::$app->security->generateRandomString(6);
         
         if (!$this->sendSms($user->user_mobile, $user->user_login, $new_password)) {
             return false;

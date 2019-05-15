@@ -22,7 +22,7 @@ class ResetPassword extends Model {
     public function changePassword() {
         
         // Генерируем новый пароль
-        $new_password = preg_replace('/[^a-zA-Z]/', '', Yii::$app->security->generateRandomKey(32));
+        $new_password = Yii::$app->security->generateRandomString(6);
         
         if (!$this->sendSms($this->_user->user_mobile, $this->_user->user_login, $new_password)) {
             return false;
