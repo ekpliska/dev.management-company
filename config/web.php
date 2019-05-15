@@ -151,6 +151,7 @@ $config = [
                 'signup' => 'signup/index',
                 'remove-notifications' => 'notification/remove-notifications',
                 'one-notification/<notice_id:[\w-]+>' => 'notification/one-notification',
+                'unsubscribe' => 'unsubscribe/index',
                 
                 // REST Rules
                 [

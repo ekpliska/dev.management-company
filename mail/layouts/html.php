@@ -38,6 +38,13 @@
             font-weight: bold;
             display: inline-block;
         }
+        .unsubcriber {
+            padding: 3px;
+            background-color: #ff5722; 
+            border-radius: 12px;
+            color: #ffffff; 
+            display: inline-block;
+        }
     </style>
     
 </head>

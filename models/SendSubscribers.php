@@ -140,7 +140,7 @@ class SendSubscribers extends ActiveRecord {
         
         $view_email = $params['type_post'] == self::POST_TYPE_NEWS ? 'NewsNotice' : 'VoteNotice';
         
-        Yii::$app->mailer->compose("views/{$view_email}", ['params' => $params])
+        Yii::$app->mailer->compose("views/{$view_email}", ['params' => $params, 'email' => $email])
                 ->setTo($email)
                 ->setSubject($params['post_title'])
                 ->send();

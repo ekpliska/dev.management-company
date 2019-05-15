@@ -1,0 +1,50 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 15.05.2019, 15:08:31
+    Author     : Ekaterina
+*/
+
+@font-face{
+    font-family: 'Mplus1p';
+    src: url('../fonts/Mplus1p.ttf');
+}
+
+html, body {
+    font-family: 'Mplus1p';
+    height: 100%;
+    background-color: #ecf0f1;
+    font-size: 12px;
+}
+a, a:hover, a:active {
+    text-decoration: none;
+    color: #2d18b4;
+}
+.sub_bar {
+    background-image: url(../header.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    border: none;
+    box-shadow: #333 0px 0px 2px 0px;
+    cursor: default;
+    padding: 20px 0;
+}
+.container-unsubscribe {
+    height: 100%;
+    padding: 20px;
+    margin: 10px;
+    border: 1px solid #bdc3c7;
+}
+.container-unsubscribe h3 {
+    margin: 0;
+    padding-bottom: 20px;
+    font-weight: bold;
+    font-size: 20px;
+    color: #2c3e50;
+}
+.container-unsubscribe span {
+    font-weight: bold;
+}

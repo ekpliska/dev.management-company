@@ -1,10 +1,10 @@
 <?php
 
     use yii\helpers\Html;
-    use app\widgets\Slider;
-    use app\assets\AppAsset;
+    use yii\helpers\Url;
+    use app\assets\UnsubscribeAsset;
 
-AppAsset::register($this);
+UnsubscribeAsset::register($this);
 
 ?>
 <?php $this->beginPage() ?>
@@ -21,9 +21,16 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body class="page_error">
+<body>
 <?php $this->beginBody() ?>
 <main>
+    <div class="sub_bar">
+        <div class="container text-center">
+            <a href="<?= Url::to(['site/index']) ?>">
+                <?= Html::img('/images/navbar/group_46.svg', ['alt' => 'ELSA Company'])  ?>
+            </a>
+        </div>
+    </div>
     <?= $content ?>
 </main>    
 <?php $this->endBody() ?>
