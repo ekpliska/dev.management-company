@@ -64,7 +64,7 @@ class SendSubscribers extends ActiveRecord {
         // Находим последную запись на очередь в рассыльщике со статусом "Рассылки не было"
         $subscriber_list = $this->find()
                 ->where(['status_subscriber' => self::STATUS_NOT_SEND])
-                ->orderBy(['date_create' => SORT_DESC])
+                ->orderBy(['id' => SORT_DESC])
                 ->limit(1)
                 ->one();
         
@@ -75,7 +75,6 @@ class SendSubscribers extends ActiveRecord {
         
         // Если имеется запись со статусом "Рассылки не было"
         if ($subscriber_list->status_subscriber == self::STATUS_NOT_SEND) {
-            
             
             // Получаем тип поста
             $type_post = $subscriber_list->type_post;
@@ -116,11 +115,11 @@ class SendSubscribers extends ActiveRecord {
                 $email = $subscriber;
                 $params = [
                     'type_post' => $type_post,
-                    'id_post' => $post_info->news_id ? $post_info->news_id : $post_info->voting_id,
-                    'post_image' => $post_info->news_preview ? $post_info->news_preview : $post_info->voting_image,
-                    'post_title' => $post_info->news_title ? $post_info->news_title : $post_info->voting_title,
-                    'post_text' => $post_info->news_text ? substr(strip_tags($post_info->news_text), 0, 97) : substr(strip_tags($post_info->voting_text), 1, 97),
-                    'post_slug' => $post_info->slug ? $post_info->slug : null
+                    'id_post' => isset($post_info->news_id) ? $post_info->news_id : $post_info->voting_id,
+                    'post_image' => isset($post_info->news_preview) ? $post_info->news_preview : $post_info->voting_image,
+                    'post_title' => isset($post_info->news_title) ? $post_info->news_title : $post_info->voting_title,
+                    'post_text' => isset($post_info->news_text) ? substr(strip_tags($post_info->news_text), 0, 97) : substr(strip_tags($post_info->voting_text), 1, 97),
+                    'post_slug' => isset($post_info->slug) ? $post_info->slug : null
                 ];
                 
                 $this->sendEmail($email, $params);
@@ -159,6 +158,7 @@ class SendSubscribers extends ActiveRecord {
                 break;
             case self::POST_TYPE_VOTE:
                 $post_info = Voting::findVoteById($id_post);
+                break;
             default:
                 exit;
         }

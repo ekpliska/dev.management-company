@@ -5,7 +5,6 @@
     use app\models\Questions;
     use Yii;
     use yii\base\Model;
-    use yii\widgets\ActiveForm;
 
 /*
  * Голосование

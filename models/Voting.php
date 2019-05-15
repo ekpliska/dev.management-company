@@ -11,7 +11,7 @@
     use app\models\Questions;
     use app\models\RegistrationInVoting;
     use app\models\TokenPushMobile;
-    use app\models\Notifications;
+    use app\models\SendSubscribers;
 
 /*
  * Голосование
@@ -267,6 +267,7 @@ class Voting extends ActiveRecord
         if ($insert) {
             $house_id = $this->voting_house_id;
             TokenPushMobile::sendPublishNotice(TokenPushMobile::TYPE_PUBLISH_VOTE, $this->voting_title, $house_id);
+            SendSubscribers::createSubscriber(SendSubscribers::POST_TYPE_VOTE, $this->voting_id, $house_id);
         }
     }
     
@@ -297,7 +298,7 @@ class Voting extends ActiveRecord
     public static function findVoteById($voting_id) {
         
         return self::find()
-                ->andWhere(['voting_id' => $voting_id])
+                ->where(['voting_id' => $voting_id])
                 ->one();
     }
     
