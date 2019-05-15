@@ -27,6 +27,30 @@ $config = [
                 ],
             ],
         ],
+        'urlManager' => [
+            'class' => 'yii\web\UrlManager',
+            'scriptUrl' => 'http://dev.management-company', // Setup your domain
+            'baseUrl' => 'http://dev.management-company', // Setup your domain
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+        ],
+        'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            // Сохранять отправленные письма на диске
+            'useFileTransport' => true,
+            'messageConfig' => [
+                'charset' => 'UTF-8',
+                'from' => [$params['company_email'] => $params['company_name']],
+            ],
+//            'transport' => [
+//                'class' => 'Swift_SmtpTransport',
+//                'host' => 'smtp.ukr.net',
+//                'username' => 'user@ukr.net',
+//                'password' => 'password',
+//                'port' => '2525',
+//                'encryption' => 'ssl',
+//            ],
+        ],
         'db' => $db,
     ],
     'params' => $params,

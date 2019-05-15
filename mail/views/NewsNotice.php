@@ -14,7 +14,7 @@
     <thead>
         <tr>
             <th colspan="2" style="border-bottom: 1px solid #dddddd;">
-                <img src="<?= Url::to('images/main/elsa_logo.png', true) ?>" alt="ELSA LOGO" width="170">
+                <img src="<?= Yii::$app->urlManager->createAbsoluteUrl(['images/main/elsa_logo.png']) ?>" alt="ELSA LOGO" width="170">
                 <p style="font-family: sans-serif; font-size: 12px; letter-spacing: 2; color: #331fb6;">
                     ELECTRONIC SMART ASSISTEN
                 </p>
@@ -30,13 +30,13 @@
         <tr>
             <td colspan="2">
                 Здравствуйте, вы подписанны на рассылку email-уведомлений на портале 
-                <a href="<?= Url::home(true) ?>">ELSA</a>. 
+                <a href="<?= '/' ?>">ELSA</a>. 
                 На нашем портале появилась публикация, которая, возможно вас заинтересует.
             </td>
         </tr>
         <tr>
             <td width="20%" rowspan="2">
-                <img src="<?= Url::to($params['post_image'], true) ?>" alt="Image publish" width="240" style="display:block;">
+                <img src="<?= Yii::$app->urlManager->createAbsoluteUrl($params['post_image']) ?>" alt="Image publish" width="240" style="display:block;">
             </td>
             <td>
                 <?= Html::encode($params['post_title']) ?>
@@ -62,7 +62,7 @@
                         Вы можете отписаться от рассылки на портале в личном кабинете. Раздел Профиль.
                     </li>
                     <li>
-                        Или перейдя по ссылке <a href="<?= Url::to(['/'], true) ?>">Отписаться от рассылки</a>
+                        Или перейдя по ссылке Отписаться от рассылки
                     </li>
                 </ol>
             </td>

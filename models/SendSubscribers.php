@@ -58,8 +58,6 @@ class SendSubscribers extends ActiveRecord {
      */
     public function send() {
         
-//        var_dump('here'); die();
-        
         // Массив электронных адресов для рассылки
         $subscribers = [];
         
@@ -124,16 +122,12 @@ class SendSubscribers extends ActiveRecord {
                     'post_slug' => $post_info->slug ? $post_info->slug : null
                 ];
                 
-//                $post_id = $post_info->news_id ? $post_info->news_id : $post_info->voting_id;
-//                $post_title = $post_info->news_title ? $post_info->news_title : $post_info->voting_title;
-//                $post_text = $post_info->news_text ? $post_info->news_text : $post_info->voting_text;
-//                $post_slug = $post_info->slug ? $post_info->slug : null;
-//                $this->sendEmail($email, $post_id, $post_title, $post_text, $post_slug);
-                
                 $this->sendEmail($email, $params);
                 
             }
             
+//            $subscriber_list->status_subscriber = self::STATUS_SEND;
+//            $subscriber_list->update();
             
         }
         
@@ -143,7 +137,7 @@ class SendSubscribers extends ActiveRecord {
         
         Yii::$app->mailer->compose('views/NewsNotice', ['params' => $params])
                 ->setTo($email)
-                ->setSubject($post_title)
+                ->setSubject($params['post_title'])
                 ->send();
         
 //        Yii::$app->mailer->compose()

@@ -9,6 +9,8 @@
  */
 class MailerController extends Controller {
     
+    public $defaultAction = 'send';
+    
     public function actionSend() {
         
         $subscribers = new SendSubscribers();
