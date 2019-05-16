@@ -68,10 +68,11 @@ class m180903_073459_table_rbac_init extends Migration
         
         $this->createTable($auth_manager->assignmentTable, [
             'item_name' => $this->string(64)->notNull(),
-            'user_id' => $this->string(64)->notNull(),
+            'user_id' => $this->integer()->notNull(),
             'created_at' => $this->integer(),
             'PRIMARY KEY (item_name, user_id)',
             'FOREIGN KEY (item_name) REFERENCES ' . $auth_manager->itemTable . ' (name) ON DELETE CASCADE ON UPDATE CASCADE',
+            'FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE ON UPDATE CASCADE',
         ], $table_options);
         
         // Роли
@@ -129,36 +130,6 @@ class m180903_073459_table_rbac_init extends Migration
                     ['SettingsView', 1, time()],
                     ['SettingsEdit', 1, time()]
         ]);
-        
-        
-        // Права
-//        $this->batchInsert($auth_manager->itemChildTable, [
-//            'parent', 'child'], [
-//                ['clients', 'ParticipantToVote'],
-//                ['clients', 'CreateAccount'],
-//                ['dispatcher', 'CreateNewsDispatcher'],
-//                ['administrator', 'ClientsView'],
-//                ['administrator', 'ClientsEdit'],
-//                ['administrator', 'EmployeesView'],
-//                ['administrator', 'EmployeesEdit'],
-//                ['administrator', 'ServicesView'],
-//                ['administrator', 'ServicesEdit'],
-//                ['administrator', 'RequestsView'],
-//                ['administrator', 'RequestsEdit'],
-//                ['administrator', 'PaidReuestsView'],
-//                ['administrator', 'PaidReuestsEdit'],
-//                ['administrator', 'NewsView'],
-//                ['administrator', 'NewsEdit'],
-//                ['administrator', 'VotingsView'],
-//                ['administrator', 'VotingsEdit'],
-//                ['administrator', 'EstatesView'],
-//                ['administrator', 'EstatesEdit'],
-//                ['administrator', 'DesignerView'],
-//                ['administrator', 'DesignerEdit'],
-//                ['administrator', 'SettingsView'],
-//                ['administrator', 'SettingsEdit'],
-//            ]
-//        );
         
     }
 
