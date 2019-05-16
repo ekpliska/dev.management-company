@@ -1,7 +1,10 @@
 <?php
+
     use yii\db\Migration;
     
-    
+/*
+ * Авторизация пользователей по токену (для мобильных устройств)
+ */    
 class m190202_081016_table_token_to_api extends Migration {
     
     public function safeUp() {
