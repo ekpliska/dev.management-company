@@ -53,8 +53,7 @@ $current_date = date('Y-m', strtotime("-1 month"));
                 <a href="<?= Url::to($url_pdf, true) ?>" class="send_receipt" data-number-receipt="<?= $receipt['Номер квитанции'] ?>">
                     <i class="glyphicon glyphicon-send"></i> Отправить
                 </a>
-                    
-                <a href="<?= Url::to($url_pdf, true) ?>" class="print_receipt"><i class="glyphicon glyphicon-print"></i> Распечатать</a>
+                
             </div>
             
         </li>

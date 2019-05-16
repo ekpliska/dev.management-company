@@ -185,6 +185,9 @@ li.account-info {
     top: 1px;
     right: 1px;
 }
+.account-balance > span.minus > .glyphicon {
+    font-weight: normal;
+}
 /* Конец Выпадающее меню навигации */
 
 /* Футер */

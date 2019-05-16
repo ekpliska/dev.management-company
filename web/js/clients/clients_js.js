@@ -358,13 +358,6 @@ $(document).ready(function() {
         });
     });
     
-    $(document).on('click', '.print_receipt', function(e) {
-        e.preventDefault();
-        var urlPDF = $(this).attr('href');
-        var w = window.open(urlPDF);
-        w.print();
-    });
-    
     /*
      * Отправка квитанции по почте
      */
