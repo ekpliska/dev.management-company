@@ -11,6 +11,7 @@
     use rico\yii2images\behaviors\ImageBehave;
     use app\models\Rubrics;
     use app\models\Partners;
+    use app\models\SendSubscribers;
 
     
 /*
@@ -315,6 +316,9 @@ class News extends ActiveRecord
         if (file_exists($dir_news)) {
             $this->removeDirectory($dir_news);
         }
+        
+        // Удаление подписки на рассылку новости
+        SendSubscribers::deleteSubscribe(SendSubscribers::POST_TYPE_NEWS, $this->news_id);
         
     }
     

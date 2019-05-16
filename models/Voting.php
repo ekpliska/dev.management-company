@@ -246,6 +246,9 @@ class Voting extends ActiveRecord
         
         $cover = $this->voting_image;
         @unlink(Yii::getAlias('@webroot') . $cover);
+        
+        // Удаление подписки на рассылку опроса
+        SendSubscribers::deleteSubscribe(SendSubscribers::POST_TYPE_VOTE, $this->voting_id);
     }
     
     /*

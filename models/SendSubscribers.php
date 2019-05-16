@@ -54,6 +54,25 @@ class SendSubscribers extends ActiveRecord {
     }
     
     /*
+     * Поиск подписки на Новость/Опрос
+     */
+    public static function deleteSubscribe($type_post, $post_id) {
+        
+        $subsribe = self::find()
+                ->where(['type_post' => $type_post])
+                ->andWhere(['post_id' => $post_id])
+                ->one();
+        
+        if ($subsribe) {
+            $subsribe->delete();
+            return true;
+        }
+        
+        return false;
+        
+    }
+    
+    /*
      * Запуск рассылки
      */
     public function send() {
