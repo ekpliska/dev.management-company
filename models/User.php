@@ -384,31 +384,7 @@ class User extends ActiveRecord implements IdentityInterface
     public static function getRole($name) {
         return ArrayHelper::getValue(self::getRoles(), $name);
     }
-    
-    /*
-     * Метод сохранения электронной почты
-     * 
-     * Если пользователь меняет мобильный телефон, то 
-     * номер меняется у сущности Пользователь/Собственник/Арендатор
-     * 
-     */
-    public function updateEmailProfile() {
         
-        if ($this->validate()) {
-//            if (Yii::$app->user->can('AddNewRent')) {
-//                $this->client->clients_mobile = $this->user_mobile;
-//                $this->client->save();                
-//            } else {
-//                $this->rent->rents_mobile = $this->user_mobile;
-//                $this->rent->save();
-//            }
-            $this->save();
-            return true;
-        }
-        return false;
-        
-    }
-    
     /*
      * Аватар пользователя
      */
@@ -446,6 +422,29 @@ class User extends ActiveRecord implements IdentityInterface
         
     }
     
+    public function afterSave($insert, $changedAttributes) {
+        
+        parent::afterSave($insert, $changedAttributes);
+        if (!$insert) {
+            // Удаляем токены авторизации для мобильных устройств для пользователей со статусом Заблокирован
+            if ($this->status == User::STATUS_BLOCK) {
+                Token::deleteAll(['user_uid' => $this->user_id]);
+            }
+        }
+        
+    }
+
+    
+    public function afterDelete() {
+        
+        parent::afterDelete();
+        
+        Yii::$app->db->createCommand('DELETE FROM auth_assignment WHERE user_id=:user_id')
+            ->bindValue(':user_id', $this->user_id)
+            ->execute();
+        
+    }
+
     /*
      * Настройка полей для форм
      */

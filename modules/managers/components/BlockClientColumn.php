@@ -107,5 +107,4 @@ class BlockClientColumn extends DataColumn {
                         
     }
     
-    
 }
