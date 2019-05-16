@@ -164,10 +164,13 @@ class SiteController extends Controller
         
     }
     
+    /*
+     * Страница отображения результатов, для мобильных устройств
+     * Результат прведения оплаты
+     */
     public function actionResult($status = 'success') {
         
         $this->layout = '@app/views/layouts/result-layout';
-        
         $message = Yii::$app->session->get('payment_message');
         
         return $this->render('result', [
@@ -175,7 +178,7 @@ class SiteController extends Controller
             'message' => $message,
         ]);
     }
-   
+    
     public function actionTestAccount() {
 
         $this->layout = false;

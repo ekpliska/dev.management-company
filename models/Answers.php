@@ -4,6 +4,9 @@
     use Yii;
     use yii\db\ActiveRecord;
 
+/*
+ * Ответы, Опрос
+ */    
 class Answers extends ActiveRecord
 {
     // Голос "За"

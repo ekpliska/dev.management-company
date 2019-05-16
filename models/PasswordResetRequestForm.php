@@ -14,10 +14,6 @@ class PasswordResetRequestForm extends Model {
     public $phone;
     public $sms_code;
     
-//    public function __construct() {
-//        
-//    }
-    
     public function rules() {
         return [
             
@@ -71,7 +67,6 @@ class PasswordResetRequestForm extends Model {
         }
         
         // Генерируем новый пароль (случайные 6 символов)
-//        $new_password = preg_replace('/[^a-zA-Z]/', '', Yii::$app->security->generateRandomKey(32));
         $new_password = Yii::$app->security->generateRandomString(6);
         
         if (!$this->sendSms($user->user_mobile, $user->user_login, $new_password)) {
@@ -90,9 +85,9 @@ class PasswordResetRequestForm extends Model {
     /*
      * Отправка СМС-кода на номер мобильного телефона
      */
-    public function sendSms($phone, $user_login, $new_password) {
+    public function sendSms($_phone, $user_login, $new_password) {
         
-        $phone = preg_replace('/[^0-9]/', '', $phone);
+        $phone = preg_replace('/[^0-9]/', '', $_phone);
         
         $sms = Yii::$app->sms;
         
