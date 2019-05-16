@@ -78,12 +78,12 @@ $action = Yii::$app->controller->action->id;
         <div class="row form-vote">
             
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <?= $form->field($model->voting, 'voting_text')->widget(Widget::className(), [
-                    'settings' => [
-                        'lang' => 'ru',
-                        'minHeight' => 200,
-                    ],
-                ])->label(false) ?>
+                
+                <?= $form->field($model->voting, 'voting_text', [
+                            'template' => '<div class="field-page-textarea">{label}{input}{error}</div>'])
+                        ->textarea(['rows' => 10, 'class' => 'field-input-textarea-page'])
+                        ->label($model->voting->getAttributeLabel('voting_text'), ['class' => 'field-label']) ?>
+                
             </div>            
         </div>
     
