@@ -48,7 +48,7 @@
     </div>
     <div class="upload-btn-wrapper">
         <?= $form->field($model_service, 'service_image', ['template' => '<label class="text-center btn-upload-cover" role="button">{input}{label}{error}</label>'])
-                ->input('file', ['id' => 'btnLoad', 'class' => 'hidden'])->label('<i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;Загрузить фото') ?>
+                ->input('file', ['id' => 'btnLoad', 'class' => 'hidden', 'accept' => 'image/*'])->label('<i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;Загрузить фото') ?>
     </div>
 </div>
 

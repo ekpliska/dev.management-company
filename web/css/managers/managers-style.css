@@ -544,6 +544,11 @@ ul.menu {
     background: rgba(247, 247, 247, 0.3);
     color: #fff;
 }
+.dropdown-setting > li > a:hover,
+.dropdown-setting > li > a:focus {
+    background-color: transparent;
+    color: #fff;
+}
 .btn-settings {
     background: transparent;
     border: none;

@@ -64,7 +64,7 @@ $this->params['breadcrumbs'][] = 'Новая запись [Сотрудник]';
             <div class="profile-upload-btn profile-upload-btn__load">
                 <?= $form->field($model, 'photo', [
                             'template' => '<label class="text-center btn-upload" role="button">{input}{label}{error}'])
-                        ->input('file', ['id' => 'btnLoad', 'class' => 'hidden'])
+                        ->input('file', ['id' => 'btnLoad', 'class' => 'hidden', 'accept' => 'image/*'])
                         ->label('<span class="glyphicon glyphicon-camera"></span>')
                 ?>
             </div>  

@@ -71,7 +71,7 @@ $this->params['breadcrumbs'][] = $employee_info->fullName;
                 <div class="profile-upload-btn profile-upload-btn-employee">
                     <?= $form->field($user_info, 'user_photo', [
                                 'template' => '<label class="text-center btn-upload" role="button">{input}{label}{error}'])
-                            ->input('file', ['id' => 'btnLoad', 'class' => 'hidden'])
+                            ->input('file', ['id' => 'btnLoad', 'class' => 'hidden', 'accept' => 'image/*'])
                             ->label('<span class="glyphicon glyphicon-camera"></span>') ?>
                 </div>
                 
