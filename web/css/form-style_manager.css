@@ -385,6 +385,9 @@ select[name="category_list"] option {
     background: #382949;
     color: #fff;    
 }
+.modal-body .has-success .form-control {
+    border-color: #8b709d;
+}
 /* End Select in modal window */
 
 /* File input in modal window */

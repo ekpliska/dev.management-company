@@ -101,8 +101,8 @@ class RequestForm extends Model {
      */
     private function uploadImage($images_srt, $request_id) {
         
-        // Количество загружаемых файлов 4
-        if (count($images_srt) > 4 ) {
+        // Количество загружаемых файлов 5
+        if (count($images_srt) > 5 ) {
             return false;
         }
 

@@ -50,7 +50,7 @@ class PaymentsController extends Controller {
      */
     public function actionGetPublicKey() {
         
-        $key = Yii::$app->params['payments_system']['publicId'] ? Yii::$app->params['payments_system']['publicId'] : null;
+        $key = Yii::$app->paymentSystem->public_id ? Yii::$app->paymentSystem->public_id : null;
         return ['merchantPublicId' => $key];
     }
     
