@@ -2984,9 +2984,9 @@ label[class^='error-ind-'] {
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%);
-    font-size: 16px;
+    font-size: 14px;
     color: #828286;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.17em;
 }
 /* End Error page */
 
