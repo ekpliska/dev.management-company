@@ -17,7 +17,7 @@ class Mail {
     
     public static function send($to, $subject, $view, $file_name = null, $params = []) {
         
-        $from = [Yii::$app->params['company-email'] => Yii::$app->params['company-name']];
+        $from = [Yii::$app->params['email_subscriber']['company_email'] => Yii::$app->params['email_subscriber']['company_name']];
         
         if (empty($file_name)) {
             Yii::$app->mailer->compose(['html' => 'views/' . $view], $params)

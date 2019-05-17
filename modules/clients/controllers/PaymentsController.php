@@ -57,7 +57,7 @@ class PaymentsController extends AppClientsController {
         }
         
         if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
-            Mail::send($user_email, "Квитанция {$date_receipt}", 'SendReceipt', $file_name = $file_url, ['receipt_number' => $date_receipt]);
+            Mail::send($user_email, "Квитанция {$date_receipt}", 'SendReceipt', $file_url, ['receipt_number' => $date_receipt]);
             return ['success' => true];
         }
         
