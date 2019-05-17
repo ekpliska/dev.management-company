@@ -2105,7 +2105,7 @@ tbody > tr > td > div.empty::before {
     border-left: 1px solid #ddd;    
 }
 .load_preview {
-    height: 270px;
+    height: 450px;
     background: #fff;
     position: relative;
 }
@@ -2119,9 +2119,13 @@ tbody > tr > td > div.empty::before {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    object-fit: cover;
+}
+.btn-upload-cover > .control-label {
+    color: #fff;
 }
 .check-partners-block {
-    border: 1px solid #ef693a;
+    border: 1px solid #ddd;
     padding: 10px;
     border-radius: 12px;
 }
