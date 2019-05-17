@@ -28,7 +28,7 @@
     <div class="profile-upload">
         <?= $form->field($user, 'user_photo', [
                     'template' => '<label class="text-center btn-upload" role="button">{input}{label}'])
-                ->input('file', ['id' => 'btnLoad', 'class' => 'hidden'])
+                ->input('file', ['id' => 'btnLoad', 'class' => 'hidden', 'accept' => 'image/*'])
                 ->label('<span class="glyphicon glyphicon-camera"></span>')
         ?>
     </div>

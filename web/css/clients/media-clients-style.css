@@ -390,6 +390,11 @@
 /* End Кeceiptes */
 
 /* News Page */
+@media screen and (max-width: 1200px) {
+    .news-conteiner__image {
+        height: 600px;
+    }
+}
 @media screen and (max-width: 995px) {
     .tabbable-line {
         padding: 10px 0;
@@ -400,6 +405,11 @@
     }
     .tabbable-line > .nav-tabs > li > a {
         font-size: 12px;
+    }
+}
+@media screen and (max-width: 768px) {
+    .news-conteiner__image {
+        height: 400px;
     }
 }
 @media screen and (max-width: 570px) {
