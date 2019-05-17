@@ -24,7 +24,7 @@ class CreateAccount extends Model {
     public function rules() {
         
         return [
-            [['account_number', 'last_sum', 'square'], 'required', 'message' => 'Поле обязательно для заполнения'],
+            [['account_number', 'last_sum', 'square'], 'required'],
 //            ['account_number', 'string', 'min' => 12, 'max' => 12],
             
             ['account_number', 'checkPersonalAccount'],
@@ -132,6 +132,16 @@ class CreateAccount extends Model {
         }
         
         return true;
+    }
+    
+    public function attributeLabels() {
+        
+        return [
+            'account_number' => 'Номер лицевого счета',
+            'last_sum' => 'Сумма последней квитации',
+            'square' => 'Площадь жилого помещения',
+        ];
+        
     }
     
 }

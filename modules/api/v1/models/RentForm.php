@@ -129,4 +129,19 @@ class RentForm extends Model {
         
     }
     
+    public function attributeLabels() {
+        
+        return [
+            'rents_surname' => 'Фамилия арендатора',
+            'rents_name' => 'Имя арендатора',
+            'rents_second_name' => 'Отчество арендатора',
+            'rents_mobile' => 'Мобильный телефон',
+            'rents_email' => 'Электронный адрес',
+            'client_id' => 'Собсвенник',
+            'account_number' => 'Лицевой счет',
+            'password' => 'Пароль',
+        ];
+        
+    }
+    
 }
