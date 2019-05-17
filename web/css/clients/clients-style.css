@@ -459,6 +459,7 @@ li.account-info {
     border-top: 1px solid #e9e9e9;
     border-bottom: 1px solid #e9e9e9;
     padding: 0 20px;
+    cursor: default;
 }
 .post_details > li {
     padding: 10px 20px;
@@ -469,7 +470,7 @@ li.account-info {
     color: #7c7c7c;
 }
 .post_details > li > a {
-    color: #2d18b4;
+    color: #7c7c7c;
 }
 li.post_rubric {
     background-image: url(../../images/news/post_rubric.png);

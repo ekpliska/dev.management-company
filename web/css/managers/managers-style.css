@@ -2045,8 +2045,11 @@ ul[id*="employees-list-"] > li > a:hover {
     transform: translate(-50%, -50%);
     object-fit: cover;
 }
+.btn-upload-cover > .control-label {
+    color: #fff;
+}
 .check-partners-block {
-    border: 1px solid #ef693a;
+    border: 1px solid #ddd;
     padding: 10px;
     border-radius: 12px;
 }

@@ -769,8 +769,8 @@ reset-password-sms:focus{
     color: #ef693a;
     font-size: 11px;
     letter-spacing: 0.1em;
+    font-weight: normal;
 }
-
 
 /* File upload */
 .has-error .file-upload {

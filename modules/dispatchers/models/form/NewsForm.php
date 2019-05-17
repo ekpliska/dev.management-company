@@ -158,7 +158,7 @@ class NewsForm extends Model {
             'isPush' => 'Push',
             'user' => 'Пользователь',
             'files' => 'Прикрепленные файлы',
-            'isAdvert' => 'Рекламная публикаця',
+            'isAdvert' => 'Рекламная публикация',
             'partner' => 'Котрагент',
         ];
     }
