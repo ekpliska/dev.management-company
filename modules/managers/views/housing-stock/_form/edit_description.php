@@ -21,7 +21,7 @@
     ]);
 ?>
     <?= $form->field($model, 'houses_description', [
-                'template' => '<div class="field-modal-textarea has-label">{label}<span id="label-count"></span><span id="label-count-left"></span>{input}{error}</div>'])
+                'template' => '<div class="field-modal-textarea has-label">{label}{input}{error}</div>'])
             ->textarea(['rows' => 10, 'class' => 'field-input-textarea-modal comment'])
             ->label($model->getAttributeLabel('houses_description'), ['class' => 'field-label-modal']) ?>
 
