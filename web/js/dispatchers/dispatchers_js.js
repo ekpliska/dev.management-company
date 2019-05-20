@@ -153,12 +153,12 @@ $(document).ready(function(){
                 $('.reject-request').hide();
                 $('.blue-btn').hide();
                 // Перерисовываем класс у статуса заявки
-                $('.badge-page').removeClass(function (index, classNames) {
-                    var classList = classNames.split(' ');
-                    $('.badge-page').removeClass(classList[0]);
-                    $('.badge-page').addClass('req-badge-reject-page');
-                    $('.badge-page span:first-child').text(response.status_name);
-                });                
+                $('.dropdown-menu').find('.disabled').removeClass('disabled');
+                $('#value-btn').html(response.status_name + '<span class="caret"></span>');
+                $('.btn-group_status-request').attr('id', 'status-value-' + requestStatus);
+                $('#value-btn').removeClass('add-border-' + $('#value-btn').data('status'));
+                $('#value-btn').data('status', requestStatus);
+                $('#value-btn').addClass('add-border-' + requestStatus);
             },
             error: function() {
                 $('#confirm-request-error').modal('show');
@@ -169,7 +169,7 @@ $(document).ready(function(){
     /*
      * Переключение статуса заявки
      */
-    $('.switch-request, .reject-request').on('click', function (e) {
+    $('.switch-request').on('click', function (e) {
         e.preventDefault();
         var linkValue = $(this).text();
         var statusId = $(this).data('status');

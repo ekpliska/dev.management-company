@@ -147,7 +147,7 @@ $hide_btn = ($request['status'] == StatusRequest::STATUS_CLOSE || $request['stat
                 </div>
             </div>
             <div class="col-md-5 col-sm-6 col-xs-12">
-                <?php if ($request['status'] == StatusRequest::STATUS_REJECT || $request['status'] == StatusRequest::STATUS_CLOSE) : ?>
+                <?php if ($request['status'] == StatusRequest::STATUS_CLOSE) : ?>
                     <div class="text-right requests__chat-status">
                         <label class="switch-rule switch-rule-orange">
                             <?= Html::checkbox('chat_status', $request['close_chat'], [
