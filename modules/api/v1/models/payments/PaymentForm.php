@@ -74,10 +74,8 @@ class PaymentForm extends Model {
             
             if (!$result = Yii::$app->paymentSystem->send_payment($data_posts, $payment_number)) {
                 return $result;
-//                return ['success' => false, 'message' => $result];
             }
             return $result;
-//            return ['success' => true, 'message' => $result];
         }
         
         

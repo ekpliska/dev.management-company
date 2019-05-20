@@ -72,12 +72,13 @@ class ReceiptsController extends Controller {
         
         // Получаем даные по квитанции
         $get_receipt = $this->getReceiptList($data_post['account'], $data_post['period'], $data_post['period']);
-        // Устанавливаем статус для квитанции
-        $status_payment = isset($get_receipt[0]['Статус квитанции']) == 'Не оплачена' ? 'not paid' : 'paid';
-        // Если статус "Не оплачена", то проверяем наличие платежа на нашей стороне
-        if (isset($get_receipt[0]['Статус квитанции']) === 'Не оплачена') {
+        $status_payment = isset($get_receipt) ? $get_receipt[0]['Статус квитанции'] : null;
+        
+        if ($status_payment == 'Не оплачена') {
             // Проверяем статус платежа по текущей квитанции
             $status_payment = Payments::getStatusPayment($data_post['period'], $data_post['account']);
+        } else {
+            $status_payment = 'paid';
         }
         
         // Формируем путь в PDF квитацнии на сервере
