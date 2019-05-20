@@ -43,7 +43,7 @@ class ReceiptsController extends Controller {
     
     /*
      * Получить список всех квитанций по текущему Лицевому счету
-     * Сразу увсе. или за указанный приод
+     * Сразу все или за указанный приод
      * {"period_start": "2018-04", "period_end": "2019-01"}
      */
     public function actionGetReceipts($account) {
@@ -53,14 +53,7 @@ class ReceiptsController extends Controller {
         $date_start = empty($data_post['period_start']) ? null : $data_post['period_start'];
         $date_end = empty($data_post['period_end']) ? date('Y-n') : $data_post['period_end'];
         
-        $array_request = [
-            'Номер лицевого счета' => $account,
-            'Период начало' => $date_start,
-            'Период конец' => $date_end,
-        ];
-        
-        $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
-        $receipts_lists = Yii::$app->client_api->getReceipts($data_json);
+        $receipts_lists = $this->getReceiptList($account, $date_start, $date_end);
         
         return $receipts_lists;
         
@@ -77,12 +70,18 @@ class ReceiptsController extends Controller {
             return ['success' => false];
         }
         
-        // Проверяем статус платежа по текущей квитанции
-        $status_payment = Payments::getStatusPayment($data_post['period'], $data_post['account']);
+        // Получаем даные по квитанции
+        $get_receipt = $this->getReceiptList($data_post['account'], $data_post['period'], $data_post['period']);
+        // Устанавливаем статус для квитанции
+        $status_payment = isset($get_receipt[0]['Статус квитанции']) == 'Не оплачена' ? 'not paid' : 'paid';
+        // Если статус "Не оплачена", то проверяем наличие платежа на нашей стороне
+        if (isset($get_receipt[0]['Статус квитанции']) === 'Не оплачена') {
+            // Проверяем статус платежа по текущей квитанции
+            $status_payment = Payments::getStatusPayment($data_post['period'], $data_post['account']);
+        }
         
         // Формируем путь в PDF квитацнии на сервере
         $file_path = Yii::getAlias('@web') . "receipts/" . $data_post['account'] . "/" . $data_post['period'] . ".pdf";
-        
         if (!file_exists($file_path)) {
             return [
                 'message' => "Приносим извинения. Квитанция {$data_post['period']} на сервере не найдена.",
@@ -94,6 +93,22 @@ class ReceiptsController extends Controller {
                 'receipt_pdf' => Url::base(true) . '/' . $file_path,
                 'status_payment' => $status_payment];
         }
+        
+    }
+    
+    /*
+     * Запрос на выдачу квитанций/квитанции
+     */
+    private function getReceiptList($account, $date_start, $date_end) {
+        
+        $array_request = [
+            'Номер лицевого счета' => $account,
+            'Период начало' => $date_start,
+            'Период конец' => $date_end,
+        ];
+        
+        $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
+        return Yii::$app->client_api->getReceipts($data_json);
         
     }
     

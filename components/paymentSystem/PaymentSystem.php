@@ -72,14 +72,32 @@ class PaymentSystem {
         
         // Если карта с 3-D Secure 
         if ($response['Success'] == false) {
-            return isset($response['Model']['CardHolderMessage']) ? $response['Model']['CardHolderMessage'] : $response['Model'];
+            // Если была передана некорректная крипрограмма
+            if ($response['Message'] != null) {
+                return [
+                    'success' => false,
+                    'message' => $response['Message'],
+                ];                
+            }
+            /*
+             * Если возникает ошибка с картой без 3-D Secure, ошибку выводим в ключе message, 
+             * иначе карта с 3-D Secure, данне для продолжения платежа выводим в ключе secure_info
+             */
+            $key_text = isset($response['Model']['CardHolderMessage']) ? 'message' : 'secure_info';
+            return [
+                'success' => true,
+                $key_text => isset($response['Model']['CardHolderMessage']) ? $response['Model']['CardHolderMessage'] : $response['Model'],
+            ];
         } elseif ($response['Success'] == true) {
             // Если карта без 3-D Secure устанавливаем платежу статус Оплачен
             $payment = Payments::findOne(['unique_number' => $payment_number]);
             if ($payment) {
                 $payment->changeStatus();
             }
-            return isset($response['Model']['CardHolderMessage']) ? $response['Model']['CardHolderMessage'] : $response['Model']['CardHolderMessage'];
+            return [
+                'success' => true,
+                'message' => isset($response['Model']['CardHolderMessage']) ? $response['Model']['CardHolderMessage'] : $response['Model']['CardHolderMessage'],
+            ];            
         }
         
     }
