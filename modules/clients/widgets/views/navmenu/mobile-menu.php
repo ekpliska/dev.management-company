@@ -22,4 +22,9 @@
             Профиль
         </a>            
     </li>
+    <li>
+        <?= Html::a('Выйти', ['/site/logout'], [
+                'data' => ['method' => 'post'],
+                'class' => 'item-mobile-menu']) ?>
+    </li>
 </ul>

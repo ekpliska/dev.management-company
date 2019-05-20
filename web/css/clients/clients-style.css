@@ -58,6 +58,7 @@
     padding: 10px;
     text-decoration: none;
     text-align: center;
+    letter-spacing: 0.1em;
 }
 .navbar_mobile a.item-mobile-menu:hover {
     font-weight: bold;
