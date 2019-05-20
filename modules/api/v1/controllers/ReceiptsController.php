@@ -85,7 +85,9 @@ class ReceiptsController extends Controller {
         
         if (!file_exists($file_path)) {
             return [
-                'message' => "Приносим извинения. Квитанция {$data_post['period']} на сервере не найдена."];
+                'message' => "Приносим извинения. Квитанция {$data_post['period']} на сервере не найдена.",
+                'status_payment' => $status_payment
+            ];
         } else {
             // Возвращаем абсолютный путь и статус платежа
             return [
