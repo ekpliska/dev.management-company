@@ -106,8 +106,18 @@ class NewsForm extends Model {
             // Сохраняем превью публикации
             $add_news->uploadImage($file);
             
-            $add_news->isPush = isset($this->isNotice[0]) ? News::NOTICE_YES : News::NOTICE_NO;
-            $add_news->isEmail = isset($this->isNotice[1]) ? News::NOTICE_YES : News::NOTICE_NO;
+            // Тип оповещени1 push, email
+            $count_notice = isset($this->isNotice) ? count($this->isNotice) : 0;
+            if ($count_notice == 2) {
+                $add_news->isPush = $this->isNotice[0] == 3 ? News::NOTICE_YES : News::NOTICE_NO;
+                $add_news->isEmail = $this->isNotice[1] == 2 ? News::NOTICE_YES : News::NOTICE_NO;
+            } elseif ($count_notice == 1 && $this->isNotice[0] == 3) {
+                $add_news->isPush = News::NOTICE_YES;
+                $add_news->isEmail = News::NOTICE_NO;
+            } elseif ($count_notice == 1 && $this->isNotice[0] == 2) {
+                $add_news->isPush = News::NOTICE_NO;
+                $add_news->isEmail = News::NOTICE_YES;
+            }
             
             if ($this->isAdvert == 1) {
                 $add_news->isAdvert = 1;

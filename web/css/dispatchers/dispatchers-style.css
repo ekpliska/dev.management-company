@@ -2146,6 +2146,9 @@ tbody > tr > td > div.empty::before {
 .table-upload-file {
     border: none;
 }
+.table-upload-file > thead > tr > th {
+    border-bottom: none;
+}
 .table-upload-file > tbody > tr > td {
     border-top: none;
     border-bottom: 1px solid #ddd;

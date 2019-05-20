@@ -771,7 +771,7 @@ textarea {
 .input-checklist .checkmark-list:after {
     content: '\2713';
     top: 3px;
-    left: 5px;
+    left: 8px;
     width: 8px;
     height: 8px;
     color: #fff;

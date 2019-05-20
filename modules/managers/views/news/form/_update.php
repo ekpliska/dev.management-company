@@ -126,12 +126,6 @@
                 <?php endif; ?>
             </table>
 
-            <div class="spam-agree-txt notice-block">
-                <?= $form->field($model, 'isPush', ['template' => '{input}{label}'])->checkbox([], false)->label() ?> 
-                <?= $form->field($model, 'isEmail', ['template' => '{input}{label}'])->checkbox([], false)->label() ?> 
-            </div>            
-
-            
         <div class="news-form__btn-block text-center">
             
             <?= Html::button('Удалить', [

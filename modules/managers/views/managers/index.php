@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = 'Главная';
     ]) ?>
     
     <div class="row manager-main__general">
-        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 manager-main__general-left">
+        <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12 manager-main__general-left">
             <h4>
                 Новости, Голосование
                 <?php if (Yii::$app->user->can('NewsEdit') && Yii::$app->user->can('VotingsEdit')) : ?>
