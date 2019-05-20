@@ -25,7 +25,7 @@ $_answer = '';
         </div>
         <div class="voting-title-block">
             <h2 class="voting-title">
-                <?= $voting['voting_title'] ?>
+                <?= Html::encode($voting['voting_title']) ?>
             </h2>
             <p class="voting-description">
                 <?= FormatHelpers::shortTitleOrText($voting['voting_text'], 255) ?>
@@ -175,7 +175,7 @@ $this->registerJs("
         var dateStart = " . $_start . ";
         var _dateStart = '" . FormatHelpers::formatDate($voting['voting_date_start'], true, 1) . "';
         var dateEnd = " . $_end . ";
-        var titleModal = '" . $voting['voting_title'] . "';
+        var titleModal = '" . Html::encode($voting['voting_title']) . "';
         var modalMessage = $('#participate_modal-message');
         modalMessage.find('.modal-title').text(titleModal);
         
