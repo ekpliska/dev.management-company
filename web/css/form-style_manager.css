@@ -1089,13 +1089,21 @@ input:checked + .slider-orange {
     border: 1px solid #ef693a;
 }
 .save-settings-small {
-    background: #fff;
-    color: #2d18b4;
-    border: 2px solid #2d18b4;
+    background: #2d18b4;
+    border: none;
+    border-radius: 0;
+    color: #fff;
+    padding: 10px 25px;
+    text-align: center;
+    font-size: 12px;
+    margin: 4px 2px;
+    opacity: 0.6;
+    transition: 0.3s;
 }
 .save-settings-small:hover {
+    opacity: 1;
     color: #fff;
-    background: #2d18b4;    
+    box-shadow: none;
 }
 .delete-settings-small {
     background: #fff;

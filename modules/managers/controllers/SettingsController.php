@@ -57,6 +57,7 @@ class SettingsController extends AppManagersController {
         
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $model->save();
+            Yii::$app->session->setFlash('success', ['message' => 'Информация об управляющей организации была успешно обновлена']);
             return $this->redirect(['index']);
         }
         
@@ -81,6 +82,7 @@ class SettingsController extends AppManagersController {
             foreach ($departments as $department) {
                 $department->save(false);
             }
+            Yii::$app->session->setFlash('success', ['message' => 'Информация была успешно обновлена']);
             return $this->redirect('service-duty');
         }
 
@@ -88,6 +90,7 @@ class SettingsController extends AppManagersController {
             foreach ($posts as $post) {
                 $post->save();
             }
+            Yii::$app->session->setFlash('success', ['message' => 'Информация была успешно обновлена']);
             return $this->redirect('service-duty');
         }
 
@@ -138,6 +141,7 @@ class SettingsController extends AppManagersController {
             foreach ($sliders as $slider) {
                 $slider->save(false);
             }
+            Yii::$app->session->setFlash('success', ['message' => 'Настройки слайдера были успешно обновлены']);
             return $this->redirect('slider-settings');
         }
         
@@ -157,6 +161,7 @@ class SettingsController extends AppManagersController {
         
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $model->save();
+            Yii::$app->session->setFlash('success', ['message' => 'Настройки портала были успешно обновлены']);
             return $this->redirect('site-settings');
         }
         
@@ -177,6 +182,7 @@ class SettingsController extends AppManagersController {
             foreach ($faq_settings as $faq_setting) {
                 $faq_setting->save(false);
             }
+            Yii::$app->session->setFlash('success', ['message' => 'Информация была успешно обновлена']);
             return $this->redirect('faq-settings');
         }
         
@@ -198,6 +204,7 @@ class SettingsController extends AppManagersController {
             foreach ($sms_notices as $notice) {
                 $notice->save(false);
             }
+            Yii::$app->session->setFlash('success', ['message' => 'Настройки СМС-оповещений были успешно обновлены']);
             return $this->redirect('sms-settings');
         }
         

@@ -18,7 +18,7 @@ class SubSettings extends Widget {
             'url' => 'settings/site-settings',
         ],
         'slider-settings' => [
-            'label' => 'Настройка слайдера',
+            'label' => 'Настройки слайдера',
             'url' => 'settings/slider-settings',
         ],
         'service-duty' => [

@@ -2,6 +2,7 @@
 
     use yii\widgets\Breadcrumbs;
     use app\modules\managers\widgets\SubSettings;
+    use app\modules\managers\widgets\AlertsShow;
 
 /* 
  * Настройки, FAQ
@@ -9,6 +10,8 @@
 $this->title = Yii::$app->params['site-name-manager'] .  'Настройки';
 $this->params['breadcrumbs'][] = 'Настройки';
 ?>
+
+<?= AlertsShow::widget() ?>
 
 <div class="manager-main">
     <?= Breadcrumbs::widget([
