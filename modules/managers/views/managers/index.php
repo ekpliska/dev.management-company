@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = 'Главная';
                 <?= $this->render('data/statistic-bar', [
                         'count_request' => isset($request_list) ? count($request_list) : 0,
                         'count_paid_request' => isset($paid_request_list) ? count($paid_request_list) : 0,
-                        'count_active_vote' => 0,
+                        'count_active_vote' => isset($active_vote) ? count($active_vote) : 0,
                 ]) ?>
             </div>
             
@@ -89,14 +89,9 @@ $this->params['breadcrumbs'][] = 'Главная';
             </div>
             
             <div class="active_vote">
-                <div class="__title">
-                    <h5>
-                        Активные опросы
-                    </h5>
-                </div>
-                <div class="__content">
-                    active_vote
-                </div>
+                <?= $this->render('data/active-vote', [
+                        'active_vote' => $active_vote,
+                ]) ?>
             </div>
 
             <div class="last_news">

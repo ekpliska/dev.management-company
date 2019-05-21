@@ -430,6 +430,7 @@ ul.menu {
 .today_block {
     border: 1px solid #e6eaee;
     border-radius: 4px;
+    cursor: default;
 }
 .today_block__day {
     padding: 10px;
@@ -495,7 +496,32 @@ ul.menu {
     margin: 0;
 }
 
-
+.active_vote__item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.active_vote__item-image {
+    padding-right: 10px;
+}
+.active_vote__item-image img {
+    max-width: 70px;
+    border-radius: 4px;
+}
+.active_vote__link-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: #6c7293;
+    transition: color 0.3s ease;
+}
+.active_vote__info {
+    font-size: 12px;
+    color: #646c9a;
+}
+.active_vote__span-info {
+    font-weight: bold;
+    color: #2786fb;
+}
 
 /*.manager-main__general-left {
     border-right: 1px solid #ddd;

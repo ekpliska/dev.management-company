@@ -6,6 +6,7 @@
     use app\modules\managers\models\News;
     use app\modules\managers\models\Requests;
     use app\modules\managers\models\PaidServices;
+    use app\models\Voting;
 
 /**
  * Профиль Админимтратора
@@ -54,6 +55,9 @@ class ManagersController extends AppManagersController {
         // Формируем список последних 10 новых заявок
         $request_list = Requests::getOnlyNewRequest();
         
+        // Формируем список актиынх опросов
+        $active_vote = Voting::getActiveVote();
+        
         // Формируем список последних 10 новых заявок на платные услуги
         $paid_request_list = PaidServices::getOnlyNewPaidRequest();
         
@@ -61,6 +65,7 @@ class ManagersController extends AppManagersController {
             'news_content' => $news_content,
             'request_list' => $request_list,
             'paid_request_list' => $paid_request_list,
+            'active_vote' => $active_vote,
         ]);
         
     }

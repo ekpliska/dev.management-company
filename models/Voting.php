@@ -305,6 +305,23 @@ class Voting extends ActiveRecord
                 ->one();
     }
     
+    /*
+     * Получить активные опросы
+     */
+    public static function getActiveVote() {
+        
+        $current_date = time();
+        
+        $active_list = self::find()
+                ->where(['status' => Voting::STATUS_ACTIVE])
+                ->andWhere(['<', 'UNIX_TIMESTAMP(voting_date_start)', $current_date])
+                ->orderBy(['voting_date_start' => SORT_DESC])
+                ->all();
+        
+        return $active_list;
+        
+    }
+    
     /**
      * Аттрибуты полей
      */
