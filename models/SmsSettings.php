@@ -34,7 +34,7 @@ class SmsSettings extends ActiveRecord {
         return [
             [['sms_code', 'sms_text'], 'required'],
             [['sms_text'], 'string'],
-            [['sms_code'], 'string', 'max' => 20],
+            [['sms_code'], 'string', 'max' => 70],
         ];
     }
     

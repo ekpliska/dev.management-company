@@ -2,7 +2,6 @@
 
     use yii\widgets\ActiveForm;
     use yii\helpers\Html;
-    use app\models\SliderSettings;
 
 /* 
  * СМС оповещения

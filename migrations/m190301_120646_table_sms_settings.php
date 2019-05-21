@@ -16,7 +16,7 @@ class m190301_120646_table_sms_settings extends Migration {
         
         $this->createTable('{{%sms_settings}}', [
             'id' => $this->primaryKey(),
-            'sms_code' => $this->string(100)->notNull(),
+            'sms_code' => $this->string(70)->notNull(),
             'sms_text' => $this->text(250)->notNull(),
         ], $table_options);
         
@@ -25,7 +25,7 @@ class m190301_120646_table_sms_settings extends Migration {
                 [
                     ['register', 'Спасибо за регистрацию на нашем портале! Ваша учетная запись будет активирована после подтверждения СМС-кода. Ваш СМС-код: '],
                     ['repeat sms', 'Запрос повторной отправки СМС-кода. Ваш СМС-код: '],
-                    ['participant at voting', 'Регистрация на участие в голосовании. Для продолжения укажите СМС-код: '],
+                    ['participant at voting', 'Регистрация на участие в опрос. Для продолжения укажите СМС-код: '],
                     ['recovery password', 'Подтверждение сброса забытого пароля. Для продолжения, укажите СМС-код: '],
                     ['change password', 'Подтверждение изменения пароля для доступа в личный кабинет. СМС-код подтверждения: '],
                     ['change mobile phone', 'Подтверждение изменения номера мобильного телефона. СМС-код подтверждения: '],
