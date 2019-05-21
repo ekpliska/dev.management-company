@@ -3,6 +3,7 @@
     use yii\widgets\Breadcrumbs;
     use yii\helpers\Url;
     use yii\helpers\Html;
+    use app\modules\managers\widgets\StatisticBar;
 
 /*
  * Администраторы
@@ -23,48 +24,11 @@ $this->params['breadcrumbs'][] = 'Главная';
         
         <div class="col-lg-9 manager-main__general__left">
             <div class="row top_bar">
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                    <div class="top_bar__block">
-                        <div class="top_bar__block__header">
-                            <h4>Заявки</h4>
-                            <p>
-                                Новых заявок
-                                <span class="pull-right">15</span>
-                            </p>
-                        </div>
-                        <div class="top_bar__block__footer">
-                            <?= Html::a('Все зявки', ['/']) ?>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                    <div class="top_bar__block">
-                        <div class="top_bar__block__header">
-                            <h4>Платные услуги</h4>
-                            <p>
-                                Новых заявок
-                                <span class="pull-right">15</span>
-                            </p>
-                        </div>
-                        <div class="top_bar__block__footer">
-                            <?= Html::a('Все платные услуги', ['/']) ?>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                    <div class="top_bar__block">
-                        <div class="top_bar__block__header">
-                            <h4>Опросы</h4>
-                            <p>
-                                Активных опросов
-                                <span class="pull-right">15</span>
-                            </p>
-                        </div>
-                        <div class="top_bar__block__footer">
-                            <?= Html::a('Все опросы', ['/']) ?>
-                        </div>
-                    </div>
-                </div>
+                <?= $this->render('data/statistic-bar', [
+                        'count_request' => isset($request_list) ? count($request_list) : 0,
+                        'count_paid_request' => isset($paid_request_list) ? count($paid_request_list) : 0,
+                        'count_active_vote' => 0,
+                ]) ?>
             </div>
             
             <div class="row">

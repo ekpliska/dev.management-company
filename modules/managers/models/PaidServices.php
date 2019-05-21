@@ -52,7 +52,7 @@ class PaidServices extends BasePaidServices {
      * Формируем запрос на получение всех заявок на платные услуги
      * Стасут: Новая
      */
-    public static function getOnlyNewPaidRequest($count = 10) {
+    public static function getOnlyNewPaidRequest() {
         
         $requests = (new \yii\db\Query)
                 ->select('ps.services_id as id, '
@@ -73,7 +73,6 @@ class PaidServices extends BasePaidServices {
                 ->join('LEFT JOIN', 'houses as h', 'h.houses_id = f.flats_house_id')
                 ->join('LEFT JOIN', 'clients as c', 'c.clients_id = pa.personal_clients_id')
                 ->where(['status' => StatusRequest::STATUS_NEW])
-                ->limit($count)
                 ->orderBy(['ps.created_at' => SORT_DESC])
                 ->all();
         

@@ -46,7 +46,7 @@ class Requests extends BaseRequests {
     /*
      * Последние 10 заявок, со статусом Новая
      */
-    public static function getOnlyNewRequest($count = 10) {
+    public static function getOnlyNewRequest() {
         
         $requests = (new \yii\db\Query)
                 ->select('r.requests_id as requests_id, r.requests_ident as number, '
@@ -62,7 +62,6 @@ class Requests extends BaseRequests {
                 ->join('LEFT JOIN', 'flats as f', 'f.flats_id = pa.personal_flat_id')
                 ->join('LEFT JOIN', 'houses as h', 'h.houses_id = f.flats_house_id')
                 ->where(['status' => StatusRequest::STATUS_NEW])
-                ->limit($count)
                 ->orderBy(['r.created_at' => SORT_DESC])
                 ->all();
         

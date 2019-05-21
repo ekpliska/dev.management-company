@@ -30,6 +30,9 @@ class ManagersController extends AppManagersController {
         ];
     }
     
+    /*
+     * Обработка ошибок
+     */
     public function actionError() {
         
         $exception = Yii::$app->errorHandler->exception;
@@ -40,16 +43,19 @@ class ManagersController extends AppManagersController {
         return $this->render('error', ['message' => $exception->getMessage()]);
     }
     
+    /*
+     * Главная страница
+     */
     public function actionIndex() {
         
         // Формируем список последних новостей и голосования, 10
         $news_content = News::getAllNewsAndVoting();
         
         // Формируем список последних 10 новых заявок
-        $request_list = Requests::getOnlyNewRequest(10);
+        $request_list = Requests::getOnlyNewRequest();
         
         // Формируем список последних 10 новых заявок на платные услуги
-        $paid_request_list = PaidServices::getOnlyNewPaidRequest(10);
+        $paid_request_list = PaidServices::getOnlyNewPaidRequest();
         
         return $this->render('index', [
             'news_content' => $news_content,
