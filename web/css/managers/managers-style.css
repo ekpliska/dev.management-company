@@ -377,10 +377,127 @@ ul.menu {
 
 /* Администратор, Главная страница */
 .manager-main__general {
-    border: 1px solid #ddd;
-    border-radius: 12px;
 }
-.manager-main__general-left {
+
+.manager-main__general__left, 
+.manager-main__general__right {
+    min-height: 800px;
+}
+
+.manager-main__general__left > .row, 
+.manager-main__general__right > .row {
+    margin-bottom: 20px;
+}
+
+.top_bar .top_bar__block {
+    border: 1px solid #e6eaee;
+    border-radius: 4px;
+    background-color: #fff;
+    overflow: hidden;
+}
+
+.top_bar__block__header {
+    padding: 10px;
+    border-bottom: 1px solid #e6eaee;
+}
+
+.top_bar__block__header h4,
+.__request_block-title > h5 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #6c7293;
+}
+.top_bar__block__header p {
+    font-size: 12px;
+    color: #a7abc3;
+}
+.top_bar__block__header p > span {
+    font-weight: bold;
+}
+
+.top_bar__block__footer {
+    padding: 10px;
+    text-align: right;
+}
+.top_bar__block__footer a {
+    color: #7f8fa4;
+    font-size: 11px;
+}
+.top_bar__block__footer a:hover {
+    border-bottom: 1px solid #7f8fa4;
+}
+
+.today_block {
+    border: 1px solid #e6eaee;
+    border-radius: 4px;
+}
+.today_block__day {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #e6eaee;
+}
+.today_block__day p:first-child {
+    font-size: 42px;
+    font-weight: bold;
+    color: #6c7293;
+    padding: 0;
+    margin: 0;
+}
+.today_block__day p:last-child {
+    font-size: 14px;
+    color: #6c7293;
+    padding: 0;
+}
+.today_block__user {
+    font-size: 12px;
+    color: #6c7293;
+    padding: 20px;
+    text-align: right;
+}
+.today_block__user img {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid #6c7293;
+}
+
+.new_user, .active_vote, .last_news {
+    border: 1px solid #e6eaee;
+    border-radius: 4px;
+    margin-top: 20px;
+}
+
+.__title, 
+.__request_block-title {
+    padding: 20px;
+    border-bottom: 1px solid #e6eaee;
+    cursor: default;
+}
+.__title > h5 {
+    font-size: 16px;
+    font-weight: bold;
+    color: #6c7293;
+}
+.__content, .__request_block-content {
+    padding: 20px;
+}
+
+.__request_block-request {
+    border: 1px solid #e6eaee;
+    border-radius: 4px;
+    background-color: #fff;
+    overflow: hidden;
+}
+
+
+.manager-main__general > div[class*="col-"] {
+    padding: 0;
+    margin: 0;
+}
+
+
+
+/*.manager-main__general-left {
     border-right: 1px solid #ddd;
     min-height: 1200px;
     padding: 0;
@@ -525,7 +642,7 @@ ul.menu {
 }
 .general-right__request-body > div > a {
     margin: 5px 0;
-}
+}*/
 /* Конец Администратор, Главная страница */
 
 /* Администратор, Собственники */

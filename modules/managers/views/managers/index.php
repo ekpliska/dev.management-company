@@ -2,6 +2,7 @@
     
     use yii\widgets\Breadcrumbs;
     use yii\helpers\Url;
+    use yii\helpers\Html;
 
 /*
  * Администраторы
@@ -19,6 +20,136 @@ $this->params['breadcrumbs'][] = 'Главная';
     ]) ?>
     
     <div class="row manager-main__general">
+        
+        <div class="col-lg-9 manager-main__general__left">
+            <div class="row top_bar">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="top_bar__block">
+                        <div class="top_bar__block__header">
+                            <h4>Заявки</h4>
+                            <p>
+                                Новых заявок
+                                <span class="pull-right">15</span>
+                            </p>
+                        </div>
+                        <div class="top_bar__block__footer">
+                            <?= Html::a('Все зявки', ['/']) ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="top_bar__block">
+                        <div class="top_bar__block__header">
+                            <h4>Платные услуги</h4>
+                            <p>
+                                Новых заявок
+                                <span class="pull-right">15</span>
+                            </p>
+                        </div>
+                        <div class="top_bar__block__footer">
+                            <?= Html::a('Все платные услуги', ['/']) ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="top_bar__block">
+                        <div class="top_bar__block__header">
+                            <h4>Опросы</h4>
+                            <p>
+                                Активных опросов
+                                <span class="pull-right">15</span>
+                            </p>
+                        </div>
+                        <div class="top_bar__block__footer">
+                            <?= Html::a('Все опросы', ['/']) ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-6">
+                    <div class="__request_block-request">
+                        <div class="__request_block-title">
+                            <h5>
+                                Заявки
+                            </h5>
+                        </div>
+                        <div class="__request_block-content">
+                            content
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-6">
+                    <div class="__request_block-request">
+                        <div class="__request_block-title">
+                            <h5>
+                                Платные услуги
+                            </h5>
+                        </div>
+                        <div class="__request_block-content">
+                            content
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-3 manager-main__general__right">
+            <div class="today_block">
+                <div class="today_block__day">
+                    <p>
+                        <?= Yii::$app->formatter->asDate(time(), 'd') ?>
+                    </p>
+                    <p><?= Yii::$app->formatter->asDate(time(), 'MMMM, Y') ?></p>
+                </div>
+                <div class="today_block__user">
+                    <p>
+                        Добрый день, 
+                        <?= Html::img(Yii::$app->userProfileCompany->photo) ?>
+                        <?= Yii::$app->userProfileCompany->fullNameEmployee ?>
+                    </p>
+                </div>
+            </div>
+            
+            <div class="new_user">
+                <div class="__title">
+                    <h5>
+                        Новые пользователи
+                    </h5>
+                </div>
+                <div class="__content">
+                    
+                </div>
+            </div>
+            
+            <div class="active_vote">
+                <div class="__title">
+                    <h5>
+                        Активные опросы
+                    </h5>
+                </div>
+                <div class="__content">
+                    active_vote
+                </div>
+            </div>
+
+            <div class="last_news">
+                <div class="__title">
+                    <h5>
+                        Последние новости
+                    </h5>
+                </div>
+                <div class="__content">
+                    last_news
+                </div>                                    
+            </div>
+            
+        </div>
+        
+        
+<?php /*         
         <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12 manager-main__general-left">
             <h4>
                 Новости, Голосование
@@ -55,6 +186,7 @@ $this->params['breadcrumbs'][] = 'Главная';
                 </div>
             </div>
         </div>
+*/ 
+?>
     </div>
-    
 </div>
