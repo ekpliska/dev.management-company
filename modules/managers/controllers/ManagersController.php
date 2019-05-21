@@ -49,7 +49,7 @@ class ManagersController extends AppManagersController {
      */
     public function actionIndex() {
         
-        // Формируем список последних новостей и голосования, 10
+        // Формируем список последних новостей
         $news_content = News::getAllNewsAndVoting();
         
         // Формируем список последних 10 новых заявок

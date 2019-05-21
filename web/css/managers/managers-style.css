@@ -407,7 +407,8 @@ ul.menu {
     font-weight: bold;
     color: #6c7293;
 }
-.top_bar__block__header p {
+.top_bar__block__header p,
+.__content p {
     font-size: 12px;
     color: #a7abc3;
 }
@@ -419,11 +420,11 @@ ul.menu {
     padding: 10px;
     text-align: right;
 }
-.top_bar__block__footer a {
+.manager-main__general a {
     color: #7f8fa4;
     font-size: 11px;
 }
-.top_bar__block__footer a:hover {
+.manager-main__general a:hover {
     border-bottom: 1px solid #7f8fa4;
 }
 
@@ -966,7 +967,7 @@ tbody > tr > td > div.empty::before {
     color: #fff;
     font-size: 16px;
     padding: 20px;
-    background-color: (255, 255, 255, .15);
+    background-color: rgb(255, 255, 255, .15);
 }
 /* Кoнец Страница Профиль пользователя */
 

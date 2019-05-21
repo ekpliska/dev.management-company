@@ -89,20 +89,11 @@ $this->params['breadcrumbs'][] = 'Главная';
             </div>
             
             <div class="active_vote">
-                <?= $this->render('data/active-vote', [
-                        'active_vote' => $active_vote,
-                ]) ?>
+                <?= $this->render('data/active-vote', ['active_vote' => $active_vote]) ?>
             </div>
 
             <div class="last_news">
-                <div class="__title">
-                    <h5>
-                        Последние новости
-                    </h5>
-                </div>
-                <div class="__content">
-                    last_news
-                </div>                                    
+                <?= $this->render('data/last-news', ['news_content' => $news_content]) ?>
             </div>
             
         </div>
