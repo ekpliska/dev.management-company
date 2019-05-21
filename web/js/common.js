@@ -144,17 +144,15 @@ $(document).ready(function() {
         var phoneNumber = $('input[name*="phone"]').val();
         var re = /^\+7\ \([\d]{3}\)\ [\d]{3}-[\d]{2}-[\d]{2}$/;
         var valid = re.test(phoneNumber);
-        if (valid === true && phoneNumber.length == 18) {
+        if (valid === true && phoneNumber.length === 18) {
             $.ajax({
                 url: 'site/reset-password',
                 method: 'POST',
                 data: {
                     phoneNumber: phoneNumber,
                 },
-                success: function (data, textStatus, jqXHR) {},
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.log(textStatus);                
-                }
+                success: function () {},
+                error: function () {}
             });
             $(this).hide();
             display = $('#timer-to-send');
@@ -242,6 +240,22 @@ $(document).ready(function() {
     $(document).on('click', '.hide-more', function(){
         $(this).parent().hide('slow', function(){
             $(this).parent().parent().find('.read-less').show();
+        });
+    });
+    
+    
+    /*
+     * Перед отправкой формы
+     */
+    $(document).on('beforeSubmit', 'form', function() {
+        $(this).css('opacity', 0.5);
+        $(this).find(':submit').attr('disabled', 'disabled');
+        $(this).find('button').attr('disabled', 'disabled');
+        var textBtn = $(this).find(':submit').text();
+        $(this).find(':submit').html('<i class="fa fa-spinner fa-spin"></i> ' + textBtn);
+        $(this).on('submit', function (e) {
+            e.preventDefault();
+            return false;
         });
     });
     

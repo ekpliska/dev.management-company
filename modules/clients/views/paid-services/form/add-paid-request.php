@@ -41,7 +41,7 @@
     
     <div class="modal-footer no-border">
         <?= Html::submitButton('Добавить', ['class' => 'btn-modal btn-modal-yes']) ?>
-        <?= Html::submitButton('Отмена', ['class' => 'btn-modal btn-modal-no btn__paid_service_close', 'data-dismiss' => 'modal']) ?>
+        <?= Html::button('Отмена', ['class' => 'btn-modal btn-modal-no btn__paid_service_close', 'data-dismiss' => 'modal']) ?>
     </div>
     
 <?php ActiveForm::end() ?>    
