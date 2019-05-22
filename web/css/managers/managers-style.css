@@ -387,6 +387,7 @@ ul.menu {
 .manager-main__general__left > .row, 
 .manager-main__general__right > .row {
     margin-bottom: 20px;
+    cursor: default;
 }
 
 .top_bar .top_bar__block {
@@ -402,13 +403,13 @@ ul.menu {
 }
 
 .top_bar__block__header h4,
-.__request_block-title > h5 {
-    font-size: 18px;
+.__request_block-title > h5, 
+.__title > h5 {
+    font-size: 16px;
     font-weight: bold;
-    color: #6c7293;
+    color: #464457;
 }
-.top_bar__block__header p,
-.__content p {
+.top_bar__block__header p {
     font-size: 12px;
     color: #a7abc3;
 }
@@ -420,11 +421,13 @@ ul.menu {
     padding: 10px;
     text-align: right;
 }
-.manager-main__general a {
+.top_bar__block__footer a, 
+.active_block__link {
     color: #7f8fa4;
     font-size: 11px;
 }
-.manager-main__general a:hover {
+.top_bar__block__footer a:hover,
+.active_block__link:hover {
     border-bottom: 1px solid #7f8fa4;
 }
 
@@ -463,7 +466,7 @@ ul.menu {
     border: 1px solid #6c7293;
 }
 
-.new_user, .active_vote, .last_news {
+.new_user, .active_item, .last_news {
     border: 1px solid #e6eaee;
     border-radius: 4px;
     margin-top: 20px;
@@ -475,13 +478,13 @@ ul.menu {
     border-bottom: 1px solid #e6eaee;
     cursor: default;
 }
-.__title > h5 {
-    font-size: 16px;
-    font-weight: bold;
-    color: #6c7293;
-}
 .__content, .__request_block-content {
     padding: 20px;
+}
+
+.__content p {
+    color: #7f8fa4;
+    font-size: 12px;
 }
 
 .__request_block-request {
@@ -497,31 +500,41 @@ ul.menu {
     margin: 0;
 }
 
-.active_vote__item {
+.active_block__item {
     display: flex;
     align-items: center;
     margin-bottom: 15px;
 }
-.active_vote__item-image {
+.active_block__item-image {
     padding-right: 10px;
 }
-.active_vote__item-image img {
-    max-width: 70px;
+.active_block__item-image img {
+    max-width: 90px;
     border-radius: 4px;
+    width: 90px;
+    max-height: 70px;
 }
-.active_vote__link-title {
+.active_block__link-title {
     font-size: 14px;
     font-weight: bold;
     color: #6c7293;
     transition: color 0.3s ease;
 }
-.active_vote__info {
+.active_block__info {
     font-size: 12px;
     color: #646c9a;
 }
-.active_vote__span-info {
+.active_block__span-info {
     font-weight: bold;
     color: #2786fb;
+}
+
+.settings-block > button {
+    background: transparent;
+    border: none;
+}
+.settings-block > ul > li:hover {
+    background: rgba(255, 255, 255, 0.15);
 }
 
 /*.manager-main__general-left {

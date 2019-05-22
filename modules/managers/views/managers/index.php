@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = 'Главная';
     
     <div class="row manager-main__general">
         
-        <div class="col-lg-9 manager-main__general__left">
+        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12 manager-main__general__left">
             <div class="row top_bar">
                 <?= $this->render('data/statistic-bar', [
                         'count_request' => isset($request_list) ? count($request_list) : 0,
@@ -60,7 +60,7 @@ $this->params['breadcrumbs'][] = 'Главная';
             </div>
         </div>
         
-        <div class="col-lg-3 manager-main__general__right">
+        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 manager-main__general__right">
             <div class="today_block">
                 <div class="today_block__day">
                     <p>
@@ -88,11 +88,11 @@ $this->params['breadcrumbs'][] = 'Главная';
                 </div>
             </div>
             
-            <div class="active_vote">
+            <div class="active_item">
                 <?= $this->render('data/active-vote', ['active_vote' => $active_vote]) ?>
             </div>
 
-            <div class="last_news">
+            <div class="active_item">
                 <?= $this->render('data/last-news', ['news_content' => $news_content]) ?>
             </div>
             

@@ -19,7 +19,7 @@
             </p>
         </div>
         <div class="top_bar__block__footer">
-            <?= Html::a('Все зявки', ['requests/index']) ?>
+            <?= Html::a('Все зявки <i class="fa fa-angle-double-right" aria-hidden="true"></i>', ['requests/index']) ?>
         </div>
     </div>
 </div>
@@ -35,7 +35,7 @@
             </p>
         </div>
         <div class="top_bar__block__footer">
-            <?= Html::a('Все платные услуги', ['paid-requests/index']) ?>
+            <?= Html::a('Все платные услуги <i class="fa fa-angle-double-right" aria-hidden="true"></i>', ['paid-requests/index']) ?>
         </div>
     </div>
 </div>
@@ -51,7 +51,7 @@
             </p>
         </div>
         <div class="top_bar__block__footer">
-            <?= Html::a('Все опросы', ['voting/index']) ?>
+            <?= Html::a('Все опросы <i class="fa fa-angle-double-right" aria-hidden="true"></i>', ['voting/index']) ?>
         </div>
     </div>
 </div>
