@@ -42,6 +42,9 @@ class User extends BaseUser {
         
     }
 
+    /*
+     * Блокировать пользователя, по ID собсвенника
+     */
     public function block($client_id, $status) {
         
         $user_info = self::find()
@@ -58,6 +61,9 @@ class User extends BaseUser {
         
     }
     
+    /*
+     * Блокировать пользователя, по ID пользователя
+     */
     public function blockInView($user_id, $status) {
         
         $user_info = self::find()
@@ -74,4 +80,23 @@ class User extends BaseUser {
         
     }
     
+    /*
+     * Получить список новых пользователей
+     * за последнуюю неделю
+     */
+    public static function getNewUser() {
+        
+        $current_date = time();
+        $end_date = strtotime('-1 week');
+        
+        $user_lists = Clients::find()
+                ->joinWith('user as u')
+                ->where(['between', 'u.created_at', $end_date, $current_date])
+                ->orderBy(['u.created_at' => SORT_DESC])
+                ->limit(10)
+                ->all();
+        
+        return $user_lists;
+        
+    }
 }

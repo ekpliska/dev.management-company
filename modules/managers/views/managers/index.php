@@ -78,14 +78,7 @@ $this->params['breadcrumbs'][] = 'Главная';
             </div>
             
             <div class="new_user">
-                <div class="__title">
-                    <h5>
-                        Новые пользователи
-                    </h5>
-                </div>
-                <div class="__content">
-                    
-                </div>
+                <?= $this->render('data/new-users', ['user_lists' => $user_lists]) ?>
             </div>
             
             <div class="active_item">

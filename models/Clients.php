@@ -112,9 +112,11 @@ class Clients extends ActiveRecord
     }
     
     public function getFullName() {
+        
         return $this->clients_surname . ' ' .
                 $this->clients_name . ' ' .
                 $this->clients_second_name;
+        
     }
     
     /*
@@ -130,6 +132,13 @@ class Clients extends ActiveRecord
         }
         
     }
+
+    public function getSurnameName() {
+        
+        return $this->clients_surname . ' ' .
+                $this->clients_name;
+        
+    }    
     
     /**
      * Настройка полей для форм

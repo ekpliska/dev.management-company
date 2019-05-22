@@ -7,6 +7,7 @@
     use app\modules\managers\models\Requests;
     use app\modules\managers\models\PaidServices;
     use app\models\Voting;
+    use app\modules\managers\models\User;
 
 /**
  * Профиль Админимтратора
@@ -61,11 +62,15 @@ class ManagersController extends AppManagersController {
         // Формируем список последних 10 новых заявок на платные услуги
         $paid_request_list = PaidServices::getOnlyNewPaidRequest();
         
+        // Формируем список последних зарегистрированных пользователей
+        $user_lists = User::getNewUser();
+        
         return $this->render('index', [
             'news_content' => $news_content,
             'request_list' => $request_list,
             'paid_request_list' => $paid_request_list,
             'active_vote' => $active_vote,
+            'user_lists' => $user_lists,
         ]);
         
     }
