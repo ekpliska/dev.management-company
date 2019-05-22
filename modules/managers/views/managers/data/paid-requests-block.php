@@ -1,13 +1,81 @@
 <?php
 
     use yii\helpers\Html;
+    use yii\grid\GridView;
+    use yii\widgets\Pjax;
     use app\helpers\FormatHelpers;
 
 /* 
- * Последние 10 новых заявок на платные услуги
+ * Заявки на платные усуги, новые
  */
 ?>
-<?php if (!empty($paid_request_list) && count($paid_request_list) > 0) : ?>
+
+<div class="__request_block-content">
+    
+    <?php Pjax::begin([
+        'enablePushState' => false,
+    ]) ?>
+    <?= GridView::widget([
+            'dataProvider' => $paid_request_list,
+            'layout' => '{items}{pager}',
+            'tableOptions' => [
+                'class' => 'table table-request',
+            ],
+            'columns' => [
+                [
+                    'attribute' => 'number',
+                    'header' => 'Заявка, Категория',
+                    'value' => function ($data) {
+                        return Html::a("ID{$data['number']}", ['paid-requests/view-paid-request', 'request_number' => $data['number']]) .
+                                '<span>' . $data['category'] . '</span>' .
+                                '<span>' . $data['service_name'] . '</span>';
+                    },
+                    'format' => 'raw',
+                ],
+                [
+                    'attribute' => 'date_create',
+                    'header' => 'Дата создания',
+                    'value' => function ($data) {
+                        return Yii::$app->formatter->asDate($data['date_create'], 'dd/MM/y');
+                    },
+                            
+                ],
+                [
+                    'attribute' => 'requests_comment',
+                    'header' => 'Описание',
+                    'value' => function ($data) {
+                        return FormatHelpers::shortTextNews($data['comment'], 7);;
+                    },
+                ],
+                [
+                    'class' => 'yii\grid\ActionColumn',
+                    'visible' => Yii::$app->user->can('RequestsEdit') ? true : false,
+                    'template' => '{settings-request}',
+                    'buttons' => [
+                        'settings-request' => function ($url, $data) {
+                            return Html::a('<i class="fa fa-pencil-square-o" aria-hidden="true"></i>', 
+                                    ['paid-requests/view-paid-request', 'request_number' => $data['number']], [
+                                        'class' => 'table-request__btn-view'
+                                    ]);
+;
+                        },
+                    ],
+                    'contentOptions' => [
+                            'class' => 'table-request__settings',
+                        ],
+                    ],
+            ],
+        ]);
+    ?>
+    <?php Pjax::end() ?>
+    
+</div>
+
+
+
+
+
+<?php /* if (!empty($paid_request_list) && count($paid_request_list) > 0) : ?>
     <?php foreach ($paid_request_list as $paid_request) : ?>
         <div class="general-right__request-body">
             <h5>
@@ -33,4 +101,4 @@
     <div class="notice info">
         <p>Новых заявок на платные услуги нет.</p>
     </div>
-<?php endif; ?>
+<?php endif; */ ?>

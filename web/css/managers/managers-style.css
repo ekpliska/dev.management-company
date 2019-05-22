@@ -629,11 +629,8 @@ ul.menu {
 .table-request > tbody > tr > td.table-request__settings {
     width: 5%;
 }
-
-
 .table-request > tbody > tr > td.table-request__settings a.table-request__btn-view {
-    color: #ff5722;
-    font-weight: bold;
+    color: #7239c5;
 }
 
 

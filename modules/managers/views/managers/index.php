@@ -50,9 +50,7 @@ $this->params['breadcrumbs'][] = 'Главная';
                                 Платные услуги
                             </h5>
                         </div>
-                        <div class="__request_block-content">
-                            content
-                        </div>
+                        <?= $this->render('data/paid-requests-block', ['paid_request_list' => $paid_request_list]) ?>
                     </div>
                 </div>
             </div>
