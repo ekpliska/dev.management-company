@@ -7,6 +7,7 @@
     use app\helpers\FormatHelpers;
     use app\models\PersonalAccount;
     use app\models\Notifications;
+    use yii\data\ActiveDataProvider;
 
 /**
  *  Завяки
@@ -44,28 +45,32 @@ class Requests extends BaseRequests {
     }
     
     /*
-     * Последние 10 заявок, со статусом Новая
+     * Последние, со статусом Новая
      */
     public static function getOnlyNewRequest() {
         
         $requests = (new \yii\db\Query)
                 ->select('r.requests_id as requests_id, r.requests_ident as number, '
                         . 'r.created_at as date_create, '
+                        . 'r.requests_comment as requests_comment, '
                         . 'r.status as status, '
-                        . 'tr.type_requests_name as type_requests, '
-                        . 'h.houses_gis_adress as gis_adress, h.houses_number as house, '
-                        . 'f.flats_porch as porch, f.flats_floor as floor, '
-                        . 'f.flats_number as flat')
+                        . 'tr.type_requests_name as type_requests')
                 ->from('requests as r')
                 ->join('LEFT JOIN', 'type_requests as tr', 'tr.type_requests_id = r.requests_type_id')
                 ->join('LEFT JOIN', 'personal_account as pa', 'pa.account_id = r.requests_account_id')
-                ->join('LEFT JOIN', 'flats as f', 'f.flats_id = pa.personal_flat_id')
-                ->join('LEFT JOIN', 'houses as h', 'h.houses_id = f.flats_house_id')
                 ->where(['status' => StatusRequest::STATUS_NEW])
-                ->orderBy(['r.created_at' => SORT_DESC])
-                ->all();
+                ->orderBy(['r.created_at' => SORT_DESC]);
         
-        return $requests;
+        $data_provider = new ActiveDataProvider([
+            'query' => $requests,
+            'pagination' => [
+                'forcePageParam' => false,
+                'pageSizeParam' => false,
+                'pageSize' => 7,
+            ],
+        ]);
+        
+        return $data_provider;
         
     }
     

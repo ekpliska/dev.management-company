@@ -39,9 +39,7 @@ $this->params['breadcrumbs'][] = 'Главная';
                                 Заявки
                             </h5>
                         </div>
-                        <div class="__request_block-content">
-                            content
-                        </div>
+                        <?= $this->render('data/requests-block', ['request_list' => $request_list]) ?>
                     </div>
                 </div>
                 
@@ -91,7 +89,7 @@ $this->params['breadcrumbs'][] = 'Главная';
             
         </div>
         
-        
+
 <?php /*         
         <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12 manager-main__general-left">
             <h4>

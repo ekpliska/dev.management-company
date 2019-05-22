@@ -472,13 +472,12 @@ ul.menu {
     margin-top: 20px;
 }
 
-.__title, 
-.__request_block-title {
+.__title {
     padding: 20px;
     border-bottom: 1px solid #e6eaee;
     cursor: default;
 }
-.__content, .__request_block-content {
+.__content {
     padding: 20px;
 }
 
@@ -492,6 +491,7 @@ ul.menu {
     border-radius: 4px;
     background-color: #fff;
     overflow: hidden;
+    height: 540px;
 }
 
 
@@ -580,6 +580,67 @@ ul.menu {
     background-color: #2ecc71;
     color: #fff;
 }
+
+.__request_block-title {
+    padding: 10px 20px;
+    cursor: default;
+}
+.__request_block-content {
+    padding: 5px;
+}
+
+.table-request {
+    width: 100%;
+}
+.table-request > thead > tr > th {
+    border-bottom: 1px solid #f0f3ff;    
+}
+.table-request > thead > tr > th {
+    vertical-align: middle;
+    padding: 16px 10px;
+    font-size: 12px;
+    color: #6c7293;
+}
+.table-request > tbody > tr {
+    font-size: 12px;
+    color: #6c7293;
+    border-bottom: 1px solid #f0f3ff;
+}
+.table-request > tbody > tr > td {
+    border: none;
+    vertical-align: middle;
+    padding: 10px;
+}
+.table-request > tbody a {
+    font-size: 12px;
+    color: #6c7293;
+    transition: color 0.3s ease;
+    font-weight: bold;
+}
+.table-request > tbody > tr > td span {
+    display: block;
+}
+.table-request > tbody > tr > td {
+    width: 30%;
+}
+.table-request > tbody > tr:hover {
+    background-color: #f0f3ff;
+}
+.table-request > tbody > tr > td.table-request__settings {
+    width: 5%;
+}
+
+
+.table-request > tbody > tr > td.table-request__settings a.table-request__btn-view {
+    color: #ff5722;
+    font-weight: bold;
+}
+
+
+
+
+
+
 
 /*.manager-main__general-left {
     border-right: 1px solid #ddd;
