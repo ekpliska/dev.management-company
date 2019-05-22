@@ -29,7 +29,7 @@
         <?php foreach ($news_content as $key => $news) : ?>
             <div class="active_block__item">
                 <div class="active_block__item-image">
-                    <?= Html::img(Yii::getAlias('@web') . '/web/' . $news['news_preview']) ?>
+                    <?= Html::img(Yii::getAlias('@web') . $news['news_preview']) ?>
                 </div>
                 <div class="active_block__item-section">
                     <?= Html::a(Html::encode($news['news_title']), ['news/view', 'slug' => $news['slug']], ['class' => 'active_block__link-title']) ?>

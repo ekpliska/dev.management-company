@@ -87,7 +87,7 @@ class User extends BaseUser {
     public static function getNewUser() {
         
         $current_date = time();
-        $end_date = strtotime('-1 week');
+        $end_date = strtotime('-2 week');
         
         $user_lists = Clients::find()
                 ->joinWith('user as u')

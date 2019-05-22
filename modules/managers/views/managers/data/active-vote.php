@@ -27,7 +27,7 @@
         <?php foreach ($active_vote as $key => $vote) : ?>
             <div class="active_block__item">
                 <div class="active_block__item-image">
-                    <?= Html::img(Yii::getAlias('@web') . '/web/' . $vote->voting_image) ?>
+                    <?= Html::img(Yii::getAlias('@web') . $vote->voting_image) ?>
                 </div>
                 <div class="active_block__item-section">
                     <?= Html::a(Html::encode($vote->voting_title), ['voting/view', 'voting_id' => $vote->voting_id], ['class' => 'active_block__link-title']) ?>

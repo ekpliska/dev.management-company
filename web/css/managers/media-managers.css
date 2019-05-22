@@ -556,5 +556,22 @@
         object-fit: cover;
     }
 }
-
+@media screen and (max-width: 1200px) {
+    .manager-main__general__left, .manager-main__general__right {
+        min-height: 0;
+    }
+    .manager-main__general__right {
+        padding: 0 15px !important;
+    }
+}
+@media screen and (max-width: 991px) {
+    .__request_block-request {
+        margin-bottom: 20px;
+    }
+}
+@media screen and (max-width: 768px) {
+    .top_bar__block {
+        margin-bottom: 20px;
+    }
+}
  /* End General Page */

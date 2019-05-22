@@ -66,7 +66,7 @@ class Requests extends BaseRequests {
             'pagination' => [
                 'forcePageParam' => false,
                 'pageSizeParam' => false,
-                'pageSize' => 7,
+                'pageSize' => 5,
             ],
         ]);
         
