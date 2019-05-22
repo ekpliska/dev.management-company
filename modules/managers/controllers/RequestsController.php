@@ -14,7 +14,7 @@
     use app\modules\managers\models\searchForm\searchRequests;
     use app\modules\managers\models\Specialists;
     use app\helpers\FormatFullNameUser;
-    use app\models\User;
+    use app\models\StatusRequest;
 
 /**
  * Заявки
@@ -75,6 +75,9 @@ class RequestsController extends AppManagersController {
             return FormatFullNameUser::nameEmployee($data['surname'], $data['name'], $data['second_name']);
         });
         
+        // Статусы заявок
+        $status_list = StatusRequest::getStatusNameArray();
+        
         $requests = $search_model->search(Yii::$app->request->queryParams);
         
         return $this->render('index', [
@@ -83,7 +86,8 @@ class RequestsController extends AppManagersController {
             'type_requests' => $type_requests,
             'flat' => $flat,
             'requests' => $requests,
-            'specialist_lists' => $specialist_lists ? $specialist_lists : null,
+            'specialist_lists' => $specialist_lists,
+            'status_list' => $status_list,
         ]);
     }
     

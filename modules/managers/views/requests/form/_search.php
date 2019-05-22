@@ -29,14 +29,18 @@
                         ->label(false) ?>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                <?php if (!empty($specialist_lists)) : ?>
-                    <?= $form->field($search_model, 'requests_specialist_id')
-                            ->dropDownList($specialist_lists, [
-                                'prompt' => '[Специалист]',
-                                'class' => 'form-control _dropdown-subpanel']) ?>
-                <?php endif; ?>
+                <?= $form->field($search_model, 'requests_specialist_id')
+                        ->dropDownList($specialist_lists, [
+                            'prompt' => '[Специалист]',
+                            'class' => 'form-control _dropdown-subpanel']) ?>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <?= $form->field($search_model, 'status')->dropDownList($status_list, [
+                        'prompt' => '[Статус]',
+                        'class' => 'form-control _dropdown-subpanel _small']) ?>
+            </div>            
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
                 <?= $form->field($search_model, 'date_start')
                         ->widget(DatePicker::className(), [
                             'id' => 'date-start',
@@ -51,7 +55,7 @@
                                 'format' => 'yyyy-mm-dd']])
                         ->label(false) ?>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
                 <?= $form->field($search_model, 'date_finish')
                         ->widget(DatePicker::className(), [
                             'id' => 'date-finish',

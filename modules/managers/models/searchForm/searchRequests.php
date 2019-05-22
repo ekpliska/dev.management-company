@@ -19,7 +19,7 @@ class searchRequests extends Requests {
             [['value'], 'string'],
             [['value'], 'trim'],
             
-            [['requests_type_id'], 'integer'],
+            [['requests_type_id', 'status'], 'integer'],
             
             [['requests_specialist_id', 'requests_specialist_id'], 'integer'],
             
@@ -75,6 +75,7 @@ class searchRequests extends Requests {
         
         $query->andFilterWhere(['=', 'requests_type_id', $this->requests_type_id]);
         $query->andFilterWhere(['=', 'requests_specialist_id', $this->requests_specialist_id]);
+        $query->andFilterWhere(['=', 'status', $this->status]);
         
         if (!empty($this->date_start)) {
             $date_start = strtotime($this->date_start);

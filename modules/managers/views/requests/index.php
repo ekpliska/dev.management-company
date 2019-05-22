@@ -16,6 +16,7 @@ $this->params['breadcrumbs'][] = 'Заявки';
         'search_model' => $search_model,
         'type_requests' => $type_requests,
         'specialist_lists' => $specialist_lists,
+        'status_list' => $status_list,
 ]) ?>
 
 <div class="manager-main-with-sub _sub-910">
