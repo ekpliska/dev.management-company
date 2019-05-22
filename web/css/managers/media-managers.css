@@ -542,78 +542,19 @@
  /* End Settings Page */
  
  /* General Page */
-@media screen and (max-width: 1300px) {
-    .__content-image {
-        height: 90px;
+@media (min-width: 1200px) and (max-width: 1500px) {
+    .active_block__item {
+        display: grid;
     }
-    .__content-text {
-        font-size: 13px;
+    .active_block__item-image {
+        padding: 0;
     }
-}
-@media screen and (max-width: 1200px) {
-    .__content-news {
-        height: 400px;
-    }
-    .__content-image {
-        height: 230px;
-    }
-    .__content-news-item {
-        display: block;
-    }
-    .__content-text {
-        font-size: 14px;
-        padding: 10px 0;
+    .active_block__item-image img {
+        max-width: 100%;
+        width: 100%;
+        max-height: 170px;
+        object-fit: cover;
     }
 }
-@media screen and (max-width: 991px) {
-    .manager-main__general-left {
-        border: none;
-        border-bottom: 1px solid #ddd;
-    }
-    .__content-news {
-        height: 150px;
-    }
-    .__content-news > a {
-        font-size: 14px;
-    }
-    .__content-image {
-        height: 90px;
-    }
-    .__content-text {
-        font-size: 14px;
-        padding: 10px;
-    }
-}
-@media screen and (max-width: 768px) {
-    .__content-news {
-        height: 240px;
-    }
-    .__content-image {
-        height: 170px;
-    }
-    .__content-news-item {
-        display: block;
-    }
-    .__content-text {
-        font-size: 14px;
-        padding: 0 10px;
-    }
-}
-@media screen and (max-width: 550px) {
-    .__content-news {
-        height: 400px;
-    }
-    .__content-image {
-        height: 240px;
-    }
-    .__content-text {
-        font-size: 14px;
-        padding: 10px 0;
-    }
-}
-@media screen and (max-width: 470px) {
-    .general-right__request-body {
-        height: 150px;
-    }
-}
+
  /* End General Page */
