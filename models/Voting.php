@@ -316,6 +316,7 @@ class Voting extends ActiveRecord
                 ->where(['status' => Voting::STATUS_ACTIVE])
                 ->andWhere(['<', 'UNIX_TIMESTAMP(voting_date_start)', $current_date])
                 ->orderBy(['voting_date_start' => SORT_DESC])
+                ->limit(5)
                 ->all();
         
         return $active_list;

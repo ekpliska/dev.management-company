@@ -1,7 +1,5 @@
 /* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * For Dispatcher of Modules
  */
 
 $(document).ready(function(){
@@ -195,9 +193,7 @@ $(document).ready(function(){
                     liChoosing.addClass('disabled');
                 }
             },
-            error: function () {
-//                console.log('error');
-            },
+            error: function () {},
         });
     });
 

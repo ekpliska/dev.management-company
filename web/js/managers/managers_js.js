@@ -279,9 +279,7 @@ $(document).ready(function() {
                     $('#' + button).replaceWith('<span class="message-request">Сформирована заявка ID' + data.request_number + '</span>');
                 }
             },
-            error: function (textStatus) {
-//                console.log(textStatus);                
-            }
+            error: function () {}
         });
     });
     
@@ -1180,8 +1178,6 @@ $(document).ready(function() {
     // ******************************************************** //
     // ************     Start Block of Designer   ************** //
     // ******************************************************** // 
-
-
     /*
      * Переключение списка Заявок, разд "Заявки"
      * Переключение списка Категорий, разд "Платные услуги"

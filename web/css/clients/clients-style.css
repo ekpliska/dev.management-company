@@ -1,7 +1,6 @@
 /*
- * Clients CSS style
- * 29-03-2019
-*/
+ * Clients CSS Style's
+ */
 
 .content-clients {
     border-left: 1px solid #ddd;
@@ -2016,6 +2015,7 @@ form#search-form {
     color: #2d18b4;
     font-weight: bold;
     margin: 0;
+    text-transform: capitalize;
 }
 .receipte-number {
     font-size: 14px;

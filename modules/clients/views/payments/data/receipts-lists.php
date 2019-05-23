@@ -29,7 +29,7 @@ $current_date = date('Y-m', strtotime("-1 month"));
             <div class="receipt-item">
                 <div class="receipt-item__info">
                     <div class="receipt-item__info-head">
-                        <p class="receipte-month"><?= $date->format('F Y') ?></p>
+                        <p class="receipte-month"><?= Yii::$app->formatter->asDate($receipt['receipt_period'], 'LLLL, Y') ?></p>
                         <p class="receipte-number">Квитанция <?= $receipt['receipt_num'] ?></p>
                     </div>
                     <div class="receipt-item__info-footer">

@@ -50,7 +50,6 @@ $(document).ready(function() {
      * выводим модальное окно для управления учетной записью арендатора
      */
     
-    
     $('#is_rent').on('change', function() {
         
         var currentAccount = $('.custom-options').find('.selection').data('value');
@@ -325,7 +324,7 @@ $(document).ready(function() {
                     $('#' + button).replaceWith('<span class="message-request">Сформирована заявка ID' + data.request_number + '</span>');
                 }
             },
-            error: function (textStatus) {}
+            error: function () {}
         });
     });
     

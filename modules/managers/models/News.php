@@ -45,7 +45,7 @@ class News extends BaseNews {
                 ->select(['news_id', 'news_title', 'news_preview', 'news_text', 'created_at', 'slug'])
                 ->orderBy(['created_at' => SORT_DESC])
                 ->asArray()
-                ->limit(7)
+                ->limit(5)
                 ->all();
         
         return $news_list;
