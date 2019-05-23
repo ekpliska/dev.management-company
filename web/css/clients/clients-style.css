@@ -2,6 +2,7 @@
  * Clients CSS style
  * 29-03-2019
 */
+
 .content-clients {
     border-left: 1px solid #ddd;
     height: 100%;
@@ -553,45 +554,36 @@ li.partners-info > img {
 .dropdown-menu:before{
     border: none;
 }
-
 .dropdown-menu_link-profile {
     font-size: 12px;
 }
-
 .dropdown-menu_link-profile a {
     color: #bcbcbc;
 }
-
 .dropdown_footer div {
     padding: 20px;
     font-size: 12px;
 }
-
 .dropdown a#navbarDropdown:hover {
     background: #928DD2;
     border-radius: 50px;    
 }
-
 .dropdown_footer a.footer_link {
     text-transform: uppercase;
     color: #fff;
     letter-spacing: 0.12em;
 }
-
 .dropdown_footer a.footer_link:hover {
     text-decoration: none;
 }
-
 .dropdown_footer a.footer_link-logout {
     text-transform: uppercase;
     color: #ff1760;
     letter-spacing: 0.12em;
 }
-
 .dropdown_footer a.footer_link-logout:hover {
     text-decoration: none;
 }
-
 .photo-user-dropdown {
     border: 4px solid #2d18b4;
     border-radius: 100%;
@@ -600,11 +592,9 @@ li.partners-info > img {
     width: 100px;
     height: 100px;
 }
-
 .dropdown_user-info {
     padding: 20px 0px;
 }
-
 .dropdown_user-name {
     color: #fff;
     font-size: 18px;
@@ -612,19 +602,15 @@ li.partners-info > img {
     line-height: 27px;
     margin-bottom: 0px;    
 }
-
 .dropdown_account-block {}
-
 .mail-border p {
     color: #ef693a;
     border-bottom: 1px solid rgba(255, 255, 255, 0.35);
     padding: 0 0 10px 0;
 }
-
 .mail-border a:hover {
     text-decoration: none;
 }
-
 .dropdown_account-title{
     color: #78e4ff;
     font-size: 12px;
@@ -639,7 +625,6 @@ li.partners-info > img {
     line-height: 18px;
     margin-bottom: 0;
 }
-
 /* Конец Выпадающее меню, профиль пользователя */
 
 /* Страница Профиль пользователя */
@@ -1576,7 +1561,6 @@ span.dot {
     width: 7px;
     background-color: #ddd;
 }
-
 .comments::-webkit-scrollbar-thumb {
     border-radius: 12px;
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
@@ -1588,16 +1572,6 @@ span.dot {
 .req-rate-star {
     margin: 15px 0;
 }
-
-/*.req-rate-star .starrr a {
-    margin-left: 9.75px;
-    margin-right: 9.75px;
-}
-
-.rate-star-white{
-    margin-top: 48px;
-    margin-bottom: 75px;
-}*/
 /* Конец Оценка заявки, звездочки */
 
 /* Модальное окно "Выставить оценку завершенной заявке" */
@@ -1929,10 +1903,6 @@ form#search-form {
     padding: 5px 20px;
     border: none;
 }
-/*.table-striped > tbody > tr:first-child > td {
-    border-top-right-radius: 12px;
-    border-top-left-radius: 12px;
-}*/
 /* Конец Лицевой счет, таблица */
 
 /* Квитанции */
@@ -1975,7 +1945,6 @@ form#search-form {
     border: none;
     color: #000;
 }
-
 .receipt-item {
     display: flex;
     justify-content: space-between;
@@ -2019,8 +1988,6 @@ form#search-form {
     cursor: default;
     border-radius: 4px;
 }
-
-
 .receipt-item__btn-pay {
     color: #591df1;
     border-color: #591df1;
@@ -2044,24 +2011,6 @@ form#search-form {
     background-color: #6c7293;
     color: #fff;
 }
-
-/*.receipte-of-lists__operations {
-    position: absolute;
-    right: 5%;
-    display: inline-grid;
-    top: 50%;
-    transform: translate(0, -50%);
-}
-.receipte-of-lists__operations a {
-    padding: 5px 15px;
-    background: #1fd68d;
-    color: #fff;
-    border-radius: 12px;
-    margin: 2px 0;
-}
-.receipte-of-lists__operations a:hover {
-    background: #5747c3;
-}*/
 .receipte-month {
     font-size: 12px;
     color: #2d18b4;
@@ -2072,37 +2021,6 @@ form#search-form {
     font-size: 14px;
     font-weight: bold;
 }
-/*span.receipte-btn-pay-ok {
-    padding: 5px 10px;
-    background: #23dd6f;
-    color: #fff;
-    border-radius: 25px;
-}
-span.receipte-btn-pay-ok::before {
-    content: '\2713';
-}
-span.receipte-btn-pay-debt {
-    padding: 5px 10px;
-    background: #f0754a;
-    color: #fff;
-    border-radius: 25px;
-}
-span.receipte-btn-pay-debt::before {
-    content: '\2715';
-}
-a.receipte-btn-pay {
-    padding: 5px 10px;
-    background: #2d18b4;
-    color: #fff;
-    border-radius: 25px;
-}
-a.receipte-btn-dowload {
-    color: #ccc;
-    float: right;
-    position: absolute;
-    right: 20px;
-    top: 43%;
-}*/
 .receipts_body {
     padding: 20px 10px;
     min-height: 700px;
@@ -2134,12 +2052,10 @@ a.receipte-btn-dowload {
     border-radius: 10px;
     background-color: #ddd;
 }
-
 #receipts-lists::-webkit-scrollbar {
     width: 12px;
     background-color: #ddd;
 }
-
 #receipts-lists::-webkit-scrollbar-thumb {
     border-radius: 12px;
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
@@ -2187,7 +2103,6 @@ input[name="date_start-period-pay"]::placeholder,
 input[name="date_end-period-pay"]::placeholder {
     text-transform: capitalize;
 }
-
 .btn-show-info {
     height: 45px;
     margin: 0 30px;
@@ -2791,10 +2706,6 @@ p.date-start-vote {
 /* Конец блок кнопок голосования: за, против, воздержаться */
 
 /* Модальное окно "Профиль пользователя" */
-/*#view-user-profile .modal-content {
-    width: 50%;
-    margin: 0 auto;
-}*/
 .card-view-profile img {
     width: 150px;
     height: 150px;
@@ -2876,8 +2787,6 @@ p.date-start-vote {
 /* Переодпределение ширины, высоты модальных окон */
 .modal-body form {
     padding: 0;
-/*    width: 670px;
-    padding: 0 90px;*/
 }
 .modal-body form#form-add-note {
     width: 100%;
@@ -2898,7 +2807,6 @@ p.date-start-vote {
 /* Переопреденное модальное окно бутстрапа */
 .modal-content {
     position: relative;
-    /*top: 100px;*/
     background: linear-gradient(180.67deg, #39284E 0%, rgba(10,8,8,0.7) 100%);
     margin: 0;
     padding-top: 30px;
@@ -2916,7 +2824,6 @@ p.date-start-vote {
     font-size: 21px;
 }
 .modal-header .close {
-    /*margin: 0 !important;*/
     margin: -10px !important;
 }
 .modal-close-btn {
@@ -3006,8 +2913,6 @@ p.date-start-vote {
 }
 /* Конец Дополнительное меню, услуги */
 
-
-
 /* Дополнительное навигационное меню, главная страница */
 .navbar-general-page {
     /*padding: 20px;*/
@@ -3085,7 +2990,6 @@ p.date-start-vote {
 /* Дополнительное навигационное меню, платные услуги */
 .navbar_paid-request {
     padding: 15px 0;
-    /*border-bottom: 1px solid #ddd;*/
 }
 .navbar_paid-request [class*="col-"] {
     min-height: 65px;
@@ -3139,7 +3043,6 @@ p.date-start-vote {
     box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.35);
     width: 250px;
     margin: 40px 20px;
-    /*top: 20%;*/
     right: 0;
     cursor: default;
 }
@@ -3354,7 +3257,6 @@ a.employee-profile:hover {
 }
 /* End Drag and Drop files */
 
-
 /* Chat Vote */
 .open-button-chat {
     background-color: #555;
@@ -3515,7 +3417,7 @@ a.employee-profile:hover {
 .tabbable-line > .nav-tabs > li.open > a, .tabbable-line > .nav-tabs > li:hover > a {
     border: 0;
     background: none !important;
-    color: #ffff;
+    color: #fff;
 }
 .tabbable-line > .nav-tabs > li.open > a > i, .tabbable-line > .nav-tabs > li:hover > a > i {
     color: #a6a6a6;
@@ -3596,9 +3498,7 @@ a.employee-profile:hover {
 .owl-theme .owl-nav [class*=owl-]:hover {
     background: transparent !important;
 }
-.counters-item {
-    /*height: 220px;*/
-}
+.counters-item {}
 .counters-item > .item {
     display: grid;
     padding: 3px 30px;
@@ -3721,7 +3621,6 @@ button[id*="send-indication-"]:disabled {
     border-top-color: #8b709d !important;
 }
 /* End FAQ modal */
-
 
 .message-general-page {
     padding: 10px;

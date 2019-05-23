@@ -34,7 +34,7 @@ $this->title = Yii::$app->params['site-name'] . 'Оплата';
     <div class="col-md-7 col-sm-6 col-xs-12 payment-page_block">
         
         <h1 class="payment-page_block__title">
-            <?= "Оплата, квитанции {$paiment_info->receipt_number}"; ?>
+            Оплата, квитанции <?= isset($paiment_info->receipt_number) ? $paiment_info->receipt_number : null ?>
         </h1>
         <?php if ($paiment_info->payment_status == Payments::NOT_PAID) : // Если платеж существует и его статус "Не оплачено" ?>
             <div class="field">
@@ -58,6 +58,16 @@ $this->title = Yii::$app->params['site-name'] . 'Оплата';
             
             <?= Html::a('Вернуться к моим платежам', ['payments/index'], ['class' => 'go-back-page']) ?>
         
+        <?php elseif ($paiment_info == 'error') : ?>
+            
+            <div class="notice info">
+                <p>
+                    Приносим свои извинения, совершить оплату в данный момент невозможно.
+                </p>
+            </div>
+            
+            <?= Html::a('Вернуться к моим платежам', ['payments/index'], ['class' => 'go-back-page']) ?>
+            
         <?php endif; ?>
         
     </div>
@@ -70,8 +80,8 @@ $this->title = Yii::$app->params['site-name'] . 'Оплата';
             var pay = function () {
                 var widget = new cp.CloudPayments();
                 widget.charge({
-                    publicId: '" . Yii::$app->paymentSystem->public_id . "',
-                    description: '" . Yii::$app->paymentSystem->description . "', //назначение
+                    publicId: '" . $public_id . "',
+                    description: '" . $description . "', //назначение
                     amount: " . $paiment_info->payment_sum . ", //сумма
                     currency: 'RUB', //валюта
                     invoiceId: '" . $paiment_info->unique_number . "', //номер заказа или счета 

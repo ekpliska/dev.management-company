@@ -102,6 +102,15 @@ class PaymentsController extends AppClientsController {
         $_nubmer = urldecode($nubmer); 
         $_sum = urldecode($sum);
         
+        // Данные для платежной системы
+        $public_id = isset(Yii::$app->paymentSystem->public_id) ? Yii::$app->paymentSystem->public_id : null;
+        $description = isset(Yii::$app->paymentSystem->description) ? Yii::$app->paymentSystem->description : null;
+        if ($public_id == null || $description == null) {
+            return $this->render('payment', [
+                'paiment_info' => 'error',
+            ]);
+        }
+        
         // Получаем ID текущего лицевого счета
         $accoint_id = $this->_current_account_id;
         
@@ -119,6 +128,8 @@ class PaymentsController extends AppClientsController {
             return $this->render('payment', [
                 'paiment_info' => $paiment_info['payment'],
                 'organization_info' => $organization_info,
+                'public_id' => $public_id,
+                'description' => $description,
             ]);
             
         }
