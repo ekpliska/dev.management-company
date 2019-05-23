@@ -1,6 +1,7 @@
 <?php
 
     use yii\helpers\Html;
+    use app\models\Payments;
 
 /* 
  * Последний 6 платежей по квитанция
@@ -15,8 +16,13 @@ $date_period = '';
     <tbody>
         <tr>
             <?php foreach ($payments as $key => $payment) : ?>
+            
             <?php if ($key <= 5) : ?>
-                <?php $status_payment = $payment['Статус квитанции'] == 'Не оплачена' ? false : true; ?>
+                <?php 
+                    // Проверяем совершался ли платеж ранее
+                    $is_payment = Payments::getStatusPayment($payment['Расчетный период'], $this->context->_current_account_number); 
+                    $status_payment = $is_payment == Payments::YES_PAID ? true : false;
+                ?>
                 <td>
                     <?php $date_period = Yii::$app->formatter->asDate($payment['Расчетный период'], 'LLLL, Y'); ?>
                     <?= $status_payment ?

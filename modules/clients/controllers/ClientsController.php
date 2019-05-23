@@ -16,7 +16,7 @@ class ClientsController extends AppClientsController
      * Главная страница
      * Формирование списка новостей для собственника
      */
-    public function actionIndex($block = 'important_information') {
+    public function actionIndex() {
 
         // Получаем ID текущего лицевого счета
         $account_id = $this->_current_account_id;
@@ -75,7 +75,10 @@ class ClientsController extends AppClientsController
         $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
         $receipts_lists = Yii::$app->client_api->getReceipts($data_json);
         
-        // Проверяем актуальность баланса по лицевому счету
+        /*
+         * Проверяем актуальность баланса по лицевому счету
+         * Получаем сумму последней квитанции, и передаем ее в метод на проверку баланса лицевого счета
+         */
         $summ_last = $receipts_lists ? $receipts_lists[0]['Сумма к оплате'] : null;
         if ($summ_last) {
             $this->checkBalance($summ_last);

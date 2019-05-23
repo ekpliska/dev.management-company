@@ -282,6 +282,7 @@ li.account-info {
     margin: 10px;
     border: 1px solid #ddd;
     border-radius: 12px;
+    cursor: default;
 }
 .client-page__top > div[class*="col-"] > div > h1 {
     padding: 20px 5px;
