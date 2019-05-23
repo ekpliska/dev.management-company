@@ -1969,13 +1969,83 @@ form#search-form {
 .receipte-of-lists > li.active,
 .receipte-of-lists > li.active:hover,
 .receipte-of-lists > li:hover {
-    box-shadow: 0px 0px 3em -8px #7139c5;
+    box-shadow: 0px 0px 1.2em -8px #7139c5;
     z-index: 2;
     background: transparent;
     border: none;
     color: #000;
 }
-.receipte-of-lists__operations {
+
+.receipt-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    cursor: default;
+}
+.receipt-item__info {
+    width: 100%;
+}
+.receipt-item__status {
+    text-align: center;
+}
+.receipt-item__status span {
+    display: block;
+}
+.receipte-info-pay-ok {
+    background-color: rgba(29, 201, 183, 0.1);
+    color: #1dc9b7;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 10px;
+    cursor: default;
+    border-radius: 4px;
+}
+.receipte-info-pay {
+    background-color: rgba(88, 103, 221, 0.1);
+    color: #5867dd;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 10px;
+    cursor: default;
+    border-radius: 4px;
+}
+.receipte-info-pay-debt {
+    background-color: rgba(255, 184, 34, 0.1);
+    color: #ffb822;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 10px;
+    cursor: default;
+    border-radius: 4px;
+}
+
+
+.receipt-item__btn-pay {
+    color: #591df1;
+    border-color: #591df1;
+    padding: 5px 10px;
+    border: 1px solid #591df1;
+    border-radius: 4px;
+}
+.receipt-item__btn-pay:hover {
+    background-color: #591df1;
+    color: #fff;
+}
+
+.send_receipt {
+    color: #6c7293;
+    border-color: #6c7293;
+    padding: 5px 10px;
+    border: 1px solid #6c7293;
+    border-radius: 4px;    
+}
+.send_receipt:hover {
+    background-color: #6c7293;
+    color: #fff;
+}
+
+/*.receipte-of-lists__operations {
     position: absolute;
     right: 5%;
     display: inline-grid;
@@ -1991,17 +2061,18 @@ form#search-form {
 }
 .receipte-of-lists__operations a:hover {
     background: #5747c3;
-}
+}*/
 .receipte-month {
     font-size: 12px;
     color: #2d18b4;
     font-weight: bold;
+    margin: 0;
 }
 .receipte-number {
     font-size: 14px;
     font-weight: bold;
 }
-span.receipte-btn-pay-ok {
+/*span.receipte-btn-pay-ok {
     padding: 5px 10px;
     background: #23dd6f;
     color: #fff;
@@ -2031,7 +2102,7 @@ a.receipte-btn-dowload {
     position: absolute;
     right: 20px;
     top: 43%;
-}
+}*/
 .receipts_body {
     padding: 20px 10px;
     min-height: 700px;
@@ -2041,37 +2112,6 @@ a.receipte-btn-dowload {
     padding: 20px;
     text-align: center;
 }
-/*.operations-block {
-    margin-left: 5%;
-    right: 10%;
-    bottom: 10%;
-    background: #2d18b4;
-    position: fixed;
-    border-radius: 12px;
-}
-.operations-block_items {
-    border-radius: 12px;
-}
-.operations-block_items > li > a {
-    padding: 15px 20px;
-    width: 160px;
-    color: #fff;    
-}
-.operations-block_items > li > a > i {
-    padding: 0px 7px;
-}
-.operations-block_items > li > a.left-block:hover {
-    border-radius: 12px 0px 0px 12px;
-    background-color: rgba(247, 247, 247, 0.22);
-}
-.operations-block_items > li > a.center-block:hover {
-    border-radius: 0px;
-    background-color: rgba(247, 247, 247, 0.22);
-}
-.operations-block_items > li > a.right-block:hover {
-    border-radius: 0px 12px 12px 0px;
-    background-color: rgba(247, 247, 247, 0.22);
-}*/
 .invalid-message-show {
     max-width: 100%;
     /*margin: 10px;*/
@@ -2240,6 +2280,10 @@ input[name="date_end-period-pay"]::placeholder {
     font-size: 14px;
     color: #2d18b4;
     padding: 15px 0px;
+}
+.payment-page_block .go-back-page {
+    font-weight: bold;
+    float: right;
 }
 /* Конец Оплата */
 

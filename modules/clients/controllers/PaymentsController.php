@@ -15,8 +15,6 @@ class PaymentsController extends AppClientsController {
     
     public function actionIndex() {
         
-        $user_info = $this->permisionUser();
-        
         // Получить номер текущего лицевого счета
         $account_number = $this->_current_account_number;
         
@@ -30,12 +28,38 @@ class PaymentsController extends AppClientsController {
         ];
         
         $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
-        
         $receipts_lists = Yii::$app->client_api->getReceipts($data_json);
+        
+        /*
+         * Перепроверяем полученные квитанции,
+         * если у квитанции статус "Не оплачена", то проверяем наличие платежа в БД
+         */
+        $results = [];
+        if (isset($receipts_lists) && !$receipts_lists == null) {
+            foreach ($receipts_lists as $key => $receipt) {
+                if ($receipt['Статус квитанции'] === 'Не оплачена') {
+                    $results[] = [
+                        'receipt_period' => $receipt['Расчетный период'],
+                        'receipt_num' => $receipt['Номер квитанции'],
+                        'receipt_summ' => $receipt['Сумма к оплате'],
+                        'receipt_status' => $receipt['Статус квитанции'],
+                        'status_payment' => Payments::getStatusPayment($receipt['Расчетный период'], $account_number) == Payments::YES_PAID ? true : false,
+                    ];
+                } else {
+                    $results[] = [
+                        'receipt_period' => $receipt['Расчетный период'],
+                        'receipt_num' => $receipt['Номер квитанции'],
+                        'receipt_summ' => $receipt['Сумма к оплате'],
+                        'receipt_status' => $receipt['Статус квитанции'],
+                        'status_payment' => true,
+                    ];
+                }
+            }
+        }
         
         return $this->render('index', [
             'account_number' => $account_number,
-            'receipts_lists' => $receipts_lists ? $receipts_lists : null,
+            'receipts_lists' => $results ? $results : null,
         ]);
         
     }

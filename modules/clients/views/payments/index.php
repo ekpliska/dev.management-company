@@ -59,12 +59,12 @@ $this->title = Yii::$app->params['site-name'] . 'Палатежи и квита�
         
             <?php
                 // Формируем путь в PDF квитацнии на сервере
-                $file_path = Yii::getAlias('@web') . "receipts/" . $account_number . "/" . $receipts_lists[0]['Расчетный период'] . ".pdf";
+                $file_path = Yii::getAlias('@web') . "receipts/" . $account_number . "/" . $receipts_lists[0]['receipt_period'] . ".pdf";
             ?>
             <?php if (!file_exists($file_path)) : ?>
                 <div class="notice error">
                     <p>
-                        <?= "Квитанция {$receipts_lists[0]['Расчетный период']} на сервере не найдена." ?>
+                        <?= "Квитанция {$receipts_lists[0]['receipt_period']} на сервере не найдена." ?>
                     </p>
                 </div>
             <?php else : ?>
