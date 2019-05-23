@@ -16,6 +16,7 @@ $this->params['breadcrumbs'][] = 'Платные услуги';
         'search_model' => $search_model,
         'name_services' => $name_services,
         'specialist_lists' => $specialist_lists,
+        'status_list' => $status_list,
 ]) ?>
 
 <div class="manager-main-with-sub _sub-910-paid">

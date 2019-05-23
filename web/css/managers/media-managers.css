@@ -361,7 +361,7 @@
         margin-top: 380px;
     }
     .news-margin {
-        margin-top: 80px;
+        margin-top: 90px;
     }
     .load_preview {
         height: 440px;
@@ -374,7 +374,7 @@
 }
 @media screen and (max-width: 560px) {
     .news-margin {
-        margin-top: 120px;
+        margin-top: 100px;
     }
     .__sub-news-1087 {
         margin-top: 420px;

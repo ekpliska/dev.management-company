@@ -19,7 +19,7 @@ class searchPaidRequests extends PaidServices {
             [['value'], 'string'],
             [['value'], 'trim'],
             
-            [['services_name_services_id'], 'integer'],
+            [['services_name_services_id', 'status'], 'integer'],
             
             [['services_specialist_id'], 'integer'],
             
@@ -81,6 +81,7 @@ class searchPaidRequests extends PaidServices {
         
         $query->andFilterWhere(['=', 'services_name_services_id', $this->services_name_services_id]);
         $query->andFilterWhere(['=', 'services_specialist_id', $this->services_specialist_id]);
+        $query->andFilterWhere(['=', 'status', $this->status]);
         
         if (!empty($this->date_start)) {
             $date_start = strtotime($this->date_start);

@@ -7,11 +7,11 @@
     use app\models\CategoryServices;
     use app\models\Services;
     use app\modules\managers\models\form\PaidRequestForm;
-    use app\modules\managers\models\Requests;
     use app\modules\managers\models\PaidServices;
     use app\modules\managers\models\searchForm\searchPaidRequests;
     use app\modules\managers\models\Specialists;
     use app\helpers\FormatFullNameUser;
+    use app\models\StatusRequest;
     
 /**
  * Заявки
@@ -70,6 +70,9 @@ class PaidRequestsController extends AppManagersController {
             return FormatFullNameUser::nameEmployee($data['surname'], $data['name'], $data['second_name']);
         });
         
+        // Статусы заявок
+        $status_list = StatusRequest::getStatusNameArray();
+        
         // Загружаем список услуг для формы поиска
         $name_services = Services::getServicesNameArray();
         
@@ -84,6 +87,7 @@ class PaidRequestsController extends AppManagersController {
             'specialist_lists' => $specialist_lists,
             'name_services' => $name_services,
             'paid_requests' => $paid_requests,
+            'status_list' => $status_list,
         ]);
     }
     

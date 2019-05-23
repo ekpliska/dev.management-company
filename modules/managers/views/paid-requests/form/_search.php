@@ -21,24 +21,33 @@
             ]); ?>
         
         <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                 <?= $form->field($search_model, 'value')
                         ->input('text', [
                             'class' => 'form-control _search-input', 
                             'placeHolder' => 'ID заявки'])
                         ->label(false) ?>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                 <?= $form->field($search_model, 'services_specialist_id')->dropDownList($specialist_lists, [
                         'prompt' => '[Специалист]',
                         'class' => 'form-control _dropdown-subpanel']) ?>
             </div>
+            
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                 <?= $form->field($search_model, 'services_name_services_id')
                         ->dropDownList($name_services, [
-                            'prompt' => '[Услуга]',
+                            'prompt' => '[Все услуги]',
                             'class' => 'form-control _dropdown-subpanel']) ?>
             </div>
+            
+            
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <?= $form->field($search_model, 'status')->dropDownList($status_list, [
+                        'prompt' => '[Статус]',
+                        'class' => 'form-control _dropdown-subpanel _small']) ?>
+            </div>
+            
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                 <?= $form->field($search_model, 'date_start')
                     ->widget(DatePicker::className(), [
