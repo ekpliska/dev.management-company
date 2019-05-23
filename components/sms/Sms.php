@@ -17,7 +17,7 @@ class Sms extends Object {
     public $charset = 'utf-8';   // кодировка сообщения: utf-8, koi8-r или windows-1251 (по умолчанию)
     public $debug = false;  // флаг отладки
     public $from = 'api@smsc.ru';   // e-mail адрес отправителя
-    
+
     protected $_error_code = [
         1 => 'Ошибка в параметрах',
         2 => 'Неверный логин или пароль',
@@ -83,7 +83,7 @@ class Sms extends Object {
      * 
      */
     
-    public function send_sms($phones, $message, $translit = 0, $time = 0, $id = 0, $format = 0, $sender = false, $query = "") {
+    public function send_sms($phones, $message, $translit = 0, $time = 0, $id = 0, $format = 0, $sender = true, $query = "") {
         static $formats = array(1 => "flash=1", "push=1", "hlr=1", "bin=1", "bin=2", "ping=1");
         $m = $this->_smsc_send_cmd("send", "cost=3&phones=".urlencode($phones)."&mes=".urlencode($message).
             "&translit=$translit&id=$id".($format > 0 ? "&".$formats[$format] : "").
