@@ -10,7 +10,8 @@
 }
 @media screen and (max-width: 560px) {
     .manager-main-with-sub {
-        margin-top: 195px;
+        /*margin-top: 195px;*/
+        margin-top: 150px;
     }
     .manager-main {
         margin-top: 0;
@@ -90,7 +91,8 @@
         /*margin-top: 30px;*/
     }
     ._sub-4 {
-        margin-top: 280px;
+        margin-top: 250px;
+        /*margin-top: 280px;*/
     }
 }
 /* End Search Form Panel */

@@ -1900,7 +1900,7 @@ span.status-vote-1::before {
 .btn-delete-question:hover,
 .btn-delete-question:focus {
     color: #fb6d5b;
-    font-size: 12px;
+    font-size: 16px;
     background: transparent;
     outline: none;
     border: none;

@@ -25,7 +25,7 @@
                     <?= Html::a($voting['voting_title'] . " <span>ID{$voting['voting_id']}</span>", ['voting/view', 'voting_id' => $voting['voting_id']]) ?>
                     
                     <?php if (Yii::$app->user->can('VotingsEdit')) : ?>
-                        <?= Html::button('<i class="glyphicon glyphicon-trash"></i>', [
+                        <?= Html::button('<i class="fa fa-trash-o" aria-hidden="true"></i>', [
                                 'class' => 'pull-right btn-delete-question',
                                 'data-toggle' => 'modal',
                                 'data-target' => '#delete_voting_manager',

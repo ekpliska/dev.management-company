@@ -101,7 +101,7 @@
                 'buttons' => [
                     'delete-request' => function ($url, $data) {
                         return 
-                            Html::button('<i class="glyphicon glyphicon-trash"></i>', [
+                            Html::button('<i class="fa fa-trash-o" aria-hidden="true"></i>', [
                                 'data-pjax' => false,
                                 'class' => 'btn-delete-record__table',
                                 'data-target' => '#delete-request-message',
