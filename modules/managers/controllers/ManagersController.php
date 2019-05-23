@@ -50,17 +50,16 @@ class ManagersController extends AppManagersController {
      */
     public function actionIndex() {
         
-        // Формируем список последних новостей
-        $news_content = News::getAllNewsAndVoting();
         
         // Формируем список последних 10 новых заявок
         $request_list = Requests::getOnlyNewRequest();
+        // Формируем список новых заявок на платные услуги
+        $paid_request_list = PaidServices::getOnlyNewPaidRequest();
         
         // Формируем список актиынх опросов
         $active_vote = Voting::getActiveVote();
-        
-        // Формируем список последних 10 новых заявок на платные услуги
-        $paid_request_list = PaidServices::getOnlyNewPaidRequest();
+        // Формируем список последних новостей
+        $news_content = News::getAllNewsAndVoting();
         
         // Формируем список последних зарегистрированных пользователей
         $user_lists = User::getNewUser();

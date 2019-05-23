@@ -1,9 +1,7 @@
 <?php
     
     use yii\widgets\Breadcrumbs;
-    use yii\helpers\Url;
     use yii\helpers\Html;
-    use app\modules\managers\widgets\StatisticBar;
 
 /*
  * Администраторы
@@ -25,8 +23,8 @@ $this->params['breadcrumbs'][] = 'Главная';
         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12 manager-main__general__left">
             <div class="row top_bar">
                 <?= $this->render('data/statistic-bar', [
-                        'count_request' => isset($request_list) ? count($request_list) : 0,
-                        'count_paid_request' => isset($paid_request_list) ? count($paid_request_list) : 0,
+                        'count_request' => isset($request_list) ? $request_list->getTotalCount() : 0,
+                        'count_paid_request' => isset($paid_request_list) ? $paid_request_list->getTotalCount() : 0,
                         'count_active_vote' => isset($active_vote) ? count($active_vote) : 0,
                 ]) ?>
             </div>
