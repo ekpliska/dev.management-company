@@ -3350,6 +3350,9 @@ a.employee-profile:hover {
     background-color: transparent;
     color: #fff;
 }
+.chat-message__input::placeHolder {
+    color: #fff;
+}
 .chat-message__input::-webkit-scrollbar {
     width: 7px;
 }

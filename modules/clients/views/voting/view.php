@@ -217,7 +217,7 @@ $this->registerJs("
     /* Модальное окно для загрузки профиля пользователя */
     Modal::begin([
         'id' => 'view-user-profile',
-        'header' => 'Профиль пользователя',
+        'header' => 'Профиль участника',
         'size' => Modal::SIZE_SMALL,
         'closeButton' => false,
     ]);
