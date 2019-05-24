@@ -53,7 +53,6 @@ $this->params['breadcrumbs'][] = 'Главная';
                 </div>
             </div>
             
-            <?php /*
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                     <div class="active_item">
@@ -71,7 +70,6 @@ $this->params['breadcrumbs'][] = 'Главная';
                     </div>
                 </div>
             </div>
-             */ ?>
             
         </div>
         

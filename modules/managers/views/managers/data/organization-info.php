@@ -22,7 +22,36 @@
                         <?= $organization_info->organizations_name ?>
                     </div>
                 </div>
-                
+            </div>
+            <div class="active_block__flex-item">
+                <div class="__flex-item__cont">
+                    <div class="__flex-item__cont-title">
+                        Контактный телефон
+                    </div>
+                    <div class="__flex-item__cont-value">
+                        <?= $organization_info->phone ?>
+                    </div>
+                </div>
+            </div>
+            <div class="active_block__flex-item">
+                <div class="__flex-item__cont">
+                    <div class="__flex-item__cont-title">
+                        Электронный адрес
+                    </div>
+                    <div class="__flex-item__cont-value">
+                        <?= $organization_info->email ?>
+                    </div>
+                </div>
+            </div>
+            <div class="active_block__flex-item">
+                <div class="__flex-item__cont">
+                    <div class="__flex-item__cont-title">
+                        Телефон диспетчерской службы
+                    </div>
+                    <div class="__flex-item__cont-value">
+                        <?= $organization_info->dispatcher_phone ?>
+                    </div>
+                </div>
             </div>
         </div>
     <?php else: ?>

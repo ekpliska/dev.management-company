@@ -649,9 +649,17 @@ ul.menu {
     align-items: center;
     padding: 0;
     border-bottom: 1px solid #f7f8fa;
+    padding-bottom: 10px;
+    padding-top: 10px;
 }
-.__flex-item__ico {
-    border: 2px solid red;
+.__flex-item__cont-title {
+    font-size: 14px;
+    color: #6c7293;
+    font-weight: bold;
+}
+.__flex-item__cont-value {
+    font-size: 12px;
+    color: #6c7293;
 }
 /* Конец Администратор, Главная страница */
 
