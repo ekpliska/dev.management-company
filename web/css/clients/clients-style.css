@@ -2000,6 +2000,7 @@ form#search-form {
 }
 
 .send_receipt {
+    background-color: #fff;
     color: #6c7293;
     border-color: #6c7293;
     padding: 5px 10px;
@@ -2009,6 +2010,11 @@ form#search-form {
 .send_receipt:hover {
     background-color: #6c7293;
     color: #fff;
+}
+.send_receipt:disabled {
+    opacity: 0.6;
+    background-color: #fff;
+    color: #6c7293;
 }
 .receipte-month {
     font-size: 12px;
@@ -2053,7 +2059,7 @@ form#search-form {
     background-color: #ddd;
 }
 #receipts-lists::-webkit-scrollbar {
-    width: 12px;
+    width: 7px;
     background-color: #ddd;
 }
 #receipts-lists::-webkit-scrollbar-thumb {

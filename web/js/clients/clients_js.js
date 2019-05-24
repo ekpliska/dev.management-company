@@ -360,16 +360,14 @@ $(document).ready(function() {
     /*
      * Отправка квитанции по почте
      */
-    $(document).on('click', '.send_receipt', function(e){
-        var dateReceipt = $(this).data('number-receipt');
-        var fileURL = $(this).attr('href');
-        e.preventDefault();
+    $(document).on('click', '.send_receipt', function(){
+        var dateReceipt = $(this).data('periodReceipt');
+        $(this).prop('disabled', true);
         $.ajax({
             url: 'payments/send-receipt-to-email',
             method: 'POST',
             data: {
-                fileUrl: fileURL,
-                dateReceipt: dateReceipt,
+                dateReceipt: dateReceipt
             }
         }).done(function(data) {
             var textMess = $('#default_modal-message').find('#default_modal-message__text');

@@ -103,19 +103,27 @@ class PaymentsController extends AppClientsController {
      */
     public function actionSendReceiptToEmail() {
         
+        $account_number = $this->_current_account_number;
+
         Yii::$app->response->format = Response::FORMAT_JSON;
-        $file_url = Yii::$app->request->post('fileUrl');
-        $date_receipt = Yii::$app->request->post('dateReceipt');
-        $user_email = Yii::$app->userProfile->email;
+        // Получаем расчетный период из AJAX
+        $period_receipt = Yii::$app->request->post('dateReceipt');
+        // Формируем пусть к квитанции на сервере
+        $file_url = Yii::getAlias('@web') . "receipts/{$account_number}/{$period_receipt}.pdf";
         
+        // Проверяем существование PDF документа на сервере
+        if (!file_exists($file_url)) {
+            return ['success' => false, 'file_url' => $file_url];
+        }
+        
+        // Получаем электронный адрес текущего пользователя
+        $user_email = Yii::$app->userProfile->email;
         if (empty($user_email)) {
-            return [
-                'success' => false,
-            ];
+            return ['success' => false];
         }
         
         if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
-            Mail::send($user_email, "Квитанция {$date_receipt}", 'SendReceipt', $file_url, ['receipt_number' => $date_receipt]);
+            Mail::send($user_email, "Квитанция {$period_receipt}", 'SendReceipt', $file_url, ['receipt_number' => $period_receipt]);
             return ['success' => true];
         }
         

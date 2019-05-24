@@ -43,9 +43,14 @@ $current_date = date('Y-m', strtotime("-1 month"));
                                     ['class' => 'receipt-item__btn-pay']) ?>
                         <?php endif; ?>
 
-                        <a href="<?= Url::to($url_pdf, true) ?>" class="send_receipt" data-number-receipt="<?= $receipt['receipt_num'] ?>">
+                        <?= Html::button('Отправить <i class="fa fa-paper-plane-o" aria-hidden="true"></i>', [
+                                'class' => 'send_receipt',
+                                'data-period-receipt' => $receipt['receipt_period'],
+                            ]) ?>
+                        
+                        <?php /*a href="<?= Url::to($url_pdf, true) ?>" class="send_receipt" data-number-receipt="<?= $receipt['receipt_num'] ?>">
                             Отправить <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
-                        </a>
+                        </a */ ?>
                         
                     </div>
                 </div>
