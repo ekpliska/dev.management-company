@@ -115,16 +115,23 @@ class RequestForm extends Model {
         foreach ($images_srt as $key => $image) {
             // Конвертируем пришедший файл из base64
             $data = base64_decode($image); 
+            // Создание нового изображения из потока представленного строкой
             $source_img = imagecreatefromstring($data);
+            // Поворот изображения с заданным углом
             $rotated_img = imagerotate($source_img, 0, 0);
+            
+            // Задаем уникальное имя для загруженного файла
             $file_name = uniqid(). '.png';
             $file_path = $folder_path . $file_name;
+            
             // Записываем в БД пути загруженных вложений
             $image = new Image();
             $image->filePath = "Requests/Requests{$request_id}/{$file_name}";
             $image->itemId = $request_id;
             $image->modelName = 'Requests';
             $image->save(false);
+            
+            // Записываем изображение в файл
             $imageSave = imagejpeg($rotated_img, $file_path, 70);
             imagedestroy($source_img);
         }
