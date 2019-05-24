@@ -52,6 +52,27 @@ $this->params['breadcrumbs'][] = 'Главная';
                     </div>
                 </div>
             </div>
+            
+            <?php /*
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <div class="active_item">
+                        <?= $this->render('data/organization-info', ['organization_info' => $organization_info]) ?>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <div class="active_item">
+                        2
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <div class="active_item">
+                        3
+                    </div>
+                </div>
+            </div>
+             */ ?>
+            
         </div>
         
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 manager-main__general__right">
@@ -84,6 +105,6 @@ $this->params['breadcrumbs'][] = 'Главная';
             </div>
             
         </div>
-    
+        
     </div>
 </div>

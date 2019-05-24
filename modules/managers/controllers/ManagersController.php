@@ -8,6 +8,7 @@
     use app\modules\managers\models\PaidServices;
     use app\models\Voting;
     use app\modules\managers\models\User;
+    use app\models\Organizations;
 
 /**
  * Профиль Админимтратора
@@ -64,12 +65,16 @@ class ManagersController extends AppManagersController {
         // Формируем список последних зарегистрированных пользователей
         $user_lists = User::getNewUser();
         
+        // Получить информацию об управляющей организации
+        $organization_info = Organizations::find()->where(['organizations_id' => 1])->one();
+        
         return $this->render('index', [
             'news_content' => $news_content,
             'request_list' => $request_list,
             'paid_request_list' => $paid_request_list,
             'active_vote' => $active_vote,
             'user_lists' => $user_lists,
+            'organization_info' => $organization_info,
         ]);
         
     }

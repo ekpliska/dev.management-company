@@ -34,6 +34,8 @@ class Mail {
                     ->send();
         }
         
+        return;
+        
     }
     
 }

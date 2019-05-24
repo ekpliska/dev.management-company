@@ -166,18 +166,21 @@ $(document).ready(function() {
     $(document).on('click', '.list-group-item', function() {
         var liItem = $(this).data('receipt');
         var accountNumber = $(this).data('account');
-        var url = location.origin + '/receipts/' + accountNumber + '/' + liItem + '.pdf';
+        var url = location.origin + '/receipts/' + encodeURIComponent(accountNumber) + '/' + encodeURIComponent(liItem) + '.pdf';
         var conteiner = $('.receipts_body');
         $('ul.receipte-of-lists li').removeClass('active');
         $(this).addClass('active');
         
         // Проверяем сущестование pdf, если существует - загружаем фрейм
-        $.get(url)
-                .done(function (){
-                    conteiner.html('<iframe src="' + url + '" style="width: 100%; height: 850px;" frameborder="0">Ваш браузер не поддерживает фреймы</iframe>');
-                }).fail(function(){
-                    conteiner.html('<div class="notice error"><p>Квитанция на сервере не найдена.</p></div>');
-                });
+        $.ajax(url, {
+            success: function() {
+                conteiner.html('<iframe src="' + url + '" style="width: 100%; height: 850px;" frameborder="0">Ваш браузер не поддерживает фреймы</iframe>');
+            },
+            error: function() {
+                conteiner.html('<div class="notice error"><p>Квитанция на сервере не найдена.</p></div>');
+            },
+            method: 'HEAD'
+        });
     });
     
     /*

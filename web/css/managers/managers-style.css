@@ -529,7 +529,6 @@ ul.menu {
 .settings-block > ul > li:hover {
     background: rgba(255, 255, 255, 0.15);
 }
-
 .new-user-block {
     display: flex;
     justify-content: space-between;
@@ -565,7 +564,6 @@ ul.menu {
     background-color: #2ecc71;
     color: #fff;
 }
-
 .__request_block-title {
     padding: 10px 20px;
     cursor: default;
@@ -573,7 +571,6 @@ ul.menu {
 .__request_block-content {
     padding: 5px;
 }
-
 .table-request {
     width: 100%;
 }
@@ -646,6 +643,15 @@ ul.menu {
     background: #f0f3ff;
     color: #93a2dd;
     transition: all 0.3s;
+}
+.active_block__flex-item {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    border-bottom: 1px solid #f7f8fa;
+}
+.__flex-item__ico {
+    border: 2px solid red;
 }
 /* Конец Администратор, Главная страница */
 
