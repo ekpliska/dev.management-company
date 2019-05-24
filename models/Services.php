@@ -170,7 +170,7 @@ class Services extends ActiveRecord {
         
         $lists = self::find()
                 ->with('category')
-                ->orderBy('service_id')
+                ->orderBy(['service_id' => SORT_ASC])
                 ->limit(5)
                 ->all();
         

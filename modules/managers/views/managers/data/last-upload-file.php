@@ -9,8 +9,7 @@
 
 <div class="__title">
     <h5>
-        Новые услуги
-        <?= Html::a('Платные услуги', ['managers/designer-requests'], ['class' => 'active_block__link pull-right']) ?>
+        Должники
     </h5>
 </div>
 <div class="__content">

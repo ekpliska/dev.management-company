@@ -66,7 +66,7 @@ $this->params['breadcrumbs'][] = 'Главная';
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                     <div class="active_item">
-                        3
+                        <?= $this->render('data/last-upload-file', ['new_services' => $new_services]) ?>
                     </div>
                 </div>
             </div>
