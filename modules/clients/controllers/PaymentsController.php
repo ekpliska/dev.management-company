@@ -3,6 +3,7 @@
     namespace app\modules\clients\controllers;
     use Yii;
     use yii\web\Response;
+    use yii\web\NotFoundHttpException;
     use app\modules\clients\controllers\AppClientsController;
     use app\components\mail\Mail;
     use app\models\Payments;
@@ -28,7 +29,40 @@ class PaymentsController extends AppClientsController {
         ];
         
         $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
-        $receipts_lists = Yii::$app->client_api->getReceipts($data_json);
+//        $receipts_lists = Yii::$app->client_api->getReceipts($data_json);
+        
+        $receipts_lists = [
+            '0' => [
+                "Расчетный период" => "2018-10",
+                "Номер квитанции" => "10/2018",
+                "Сумма к оплате" => "4782.00",
+                "Статус квитанции" => "Оплачена",
+            ],
+            '1' => [
+                "Расчетный период" => "2018-09",
+                "Номер квитанции" => "09/2018",
+                "Сумма к оплате" => "4782.00",
+                "Статус квитанции" => "Не оплачена",
+            ],
+            '2' => [
+                "Расчетный период" => "2018-08",
+                "Номер квитанции" => "08/2018",
+                "Сумма к оплате" => "1200.00",
+                "Статус квитанции" => "Не оплачена",
+            ],
+            '3' => [
+                "Расчетный период" => "2018-07",
+                "Номер квитанции" => "07/2018",
+                "Сумма к оплате" => "7000.00",
+                "Статус квитанции" => "Оплачена",
+            ],
+            '4' => [
+                "Расчетный период" => "2018-06",
+                "Номер квитанции" => "06/2018",
+                "Сумма к оплате" => "3000.00",
+                "Статус квитанции" => "Не оплачена",
+            ],
+        ];
         
         /*
          * Перепроверяем полученные квитанции,
@@ -92,15 +126,19 @@ class PaymentsController extends AppClientsController {
     /*
      * Страница "Платеж" (форма оплаты)
      * 
-     * @param integer $period Расчетный период квитанции
-     * @param string $nubmer Номер квитанции
-     * @param decimal $sum Сумма к оплате по квитанции
+     * @param integer $qw1 Расчетный период квитанции
+     * @param string $qw2 Номер квитанции
+     * @param decimal $qw3 Сумма к оплате по квитанции
      */
-    public function actionPayment($period, $nubmer, $sum) {
+    public function actionPayment($qw1, $qw2, $qw3) {
         
-        $_period = urldecode($period);
-        $_nubmer = urldecode($nubmer); 
-        $_sum = urldecode($sum);
+        $_period = base64_decode($qw1);
+        $_nubmer = base64_decode($qw2); 
+        $_sum = base64_decode($qw3);
+        
+        if (!$_period || !$_nubmer || !$_sum) {
+            throw new NotFoundHttpException('Вы обратились к несуществующей странице');
+        }
         
         // Данные для платежной системы
         $public_id = isset(Yii::$app->paymentSystem->public_id) ? Yii::$app->paymentSystem->public_id : null;

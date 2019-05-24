@@ -37,11 +37,10 @@ $current_date = date('Y-m', strtotime("-1 month"));
                         <?php if ($status == false) : // Кнопка Оплатить выводим только для неоплаченных квитанций ?>
                             <?= Html::a('Оплатить <i class="fa fa-rub" aria-hidden="true"></i>', [
                                     'payments/payment',
-                                        'period' => urlencode($receipt['receipt_period']),
-                                        'nubmer' => urlencode($receipt['receipt_num']),
-                                        'sum' => urlencode($receipt['receipt_summ'])], [
-                                            'class' => 'receipt-item__btn-pay'
-                                        ]) ?>
+                                            'qw1' => base64_encode(utf8_encode($receipt['receipt_period'])),
+                                            'qw2' => base64_encode(utf8_encode($receipt['receipt_num'])),
+                                            'qw3' => base64_encode(utf8_encode($receipt['receipt_summ']))], 
+                                    ['class' => 'receipt-item__btn-pay']) ?>
                         <?php endif; ?>
 
                         <a href="<?= Url::to($url_pdf, true) ?>" class="send_receipt" data-number-receipt="<?= $receipt['receipt_num'] ?>">

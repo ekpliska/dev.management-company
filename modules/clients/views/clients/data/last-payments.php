@@ -29,9 +29,9 @@ $date_period = '';
                             $date_period :
                             Html::a($date_period, [
                                 'payments/payment', 
-                                'period' => urlencode($payment['Расчетный период']), 
-                                'nubmer' => urlencode($payment['Номер квитанции']), 
-                                'sum' => urlencode($payment['Сумма к оплате'])
+                                'period' => base64_encode(utf8_encode($payment['Расчетный период'])), 
+                                'nubmer' => base64_encode(utf8_encode($payment['Номер квитанции'])), 
+                                'sum' => base64_encode(utf8_encode($payment['Сумма к оплате']))
                             ]) 
                     ?>
                 </td>
