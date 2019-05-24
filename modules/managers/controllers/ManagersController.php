@@ -9,6 +9,7 @@
     use app\models\Voting;
     use app\modules\managers\models\User;
     use app\models\Organizations;
+    use app\models\Services;
 
 /**
  * Профиль Админимтратора
@@ -68,6 +69,9 @@ class ManagersController extends AppManagersController {
         // Получить информацию об управляющей организации
         $organization_info = Organizations::find()->where(['organizations_id' => 1])->one();
         
+        // Новые платные услуги
+        $new_services = Services::getLastNewSevices();
+        
         return $this->render('index', [
             'news_content' => $news_content,
             'request_list' => $request_list,
@@ -75,6 +79,7 @@ class ManagersController extends AppManagersController {
             'active_vote' => $active_vote,
             'user_lists' => $user_lists,
             'organization_info' => $organization_info,
+            'new_services' => $new_services,
         ]);
         
     }

@@ -154,9 +154,6 @@ class Services extends ActiveRecord {
         return Yii::getAlias('@web') . $this->service_image;
     }
 
-    /*
-     * 
-     */
     public static function getServicesName($service_id) {
         
         $name = self::find()
@@ -164,6 +161,20 @@ class Services extends ActiveRecord {
                 ->asArray()
                 ->one();
         return $name ? $name : null;
+    }
+    
+    /*
+     * Последние 5 новых услуг
+     */
+    public static function getLastNewSevices() {
+        
+        $lists = self::find()
+                ->with('category')
+                ->orderBy('service_id')
+                ->limit(5)
+                ->all();
+        
+        return $lists;
         
     }
     

@@ -1,5 +1,7 @@
 <?php
 
+    use yii\helpers\Html;
+
 /* 
  * Данные об управляющей компании
  */
@@ -52,6 +54,9 @@
                         <?= $organization_info->dispatcher_phone ?>
                     </div>
                 </div>
+            </div>
+            <div class="text-center" style="padding-top: 20px;">
+                <?= Html::a('Изменить', ['managers/settings'], ['class' => 'active_block__chn']) ?>
             </div>
         </div>
     <?php else: ?>
