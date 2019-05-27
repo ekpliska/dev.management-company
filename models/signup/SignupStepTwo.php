@@ -2,7 +2,6 @@
 
     namespace app\models\signup;
     use yii\base\Model;
-    use app\models\PersonalAccount;
 
 /**
  * Регистрация, шаг второй
