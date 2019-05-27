@@ -28,7 +28,7 @@ class m190301_085905_table_site_settings extends Migration {
                         'https://api.myelsa.ru/api/', 
                         'Добро пожаловать!',
                         'Пользовательское соглашение.',
-                        'Промоблок',
+                        '',
                     ],
                 ]);
         

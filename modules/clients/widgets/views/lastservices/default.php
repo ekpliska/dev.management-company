@@ -22,7 +22,7 @@
                     <?= $service->service_name ?>                    
                 </h1>
                 <p class="cost-service">
-                    <?= "{$service->service_price} &#8381;" ?>
+                    <?= $service->service_price ? "{$service->service_price}&#8381;" : '<span class="price_notset">Цена не установлена</span>' ?>
                 </p>
                 <p>
                     <?= $service->service_description ?>
