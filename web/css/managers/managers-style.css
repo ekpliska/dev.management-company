@@ -911,6 +911,7 @@ tbody > tr > td > div.empty::before {
     border: 4px solid #2d18b4;
     border-radius: 100%;
     box-shadow: 0px 0px 0px 30px rgba(45, 24, 180, 0.5);
+    object-fit: cover;
 }
 .user-info-block {
     /*padding: 110px 20px;*/

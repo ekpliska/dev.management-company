@@ -9,15 +9,16 @@
 <?php if (!empty($receipts_lists) || count($receipts_lists) > 0) : ?>
 <ul class="list-group receipte-of-lists">
     <?php foreach ($receipts_lists as $key => $receipt) : ?>
-        <?php
-            $date = new DateTime($receipt['Дата оплаты']);
-            $str = $date ? "Оплачено {$receipt['Сумма к оплате']}&#8381" : $receipt['Сумма к оплате'].'&#8381"';
+        <?php 
+            // Статус оплаты квитанции
+            $status_payment = $receipt['Статус квитанции'] == 'Не оплачена' ? false : true;
+            $str = $status_payment ? "Оплачено {$receipt['Сумма к оплате']}&#8381" : "Задолженность {$receipt['Сумма к оплате']}&#8381";
             $url_pdf = Yii::getAlias('@web') . '/receipts/' . $account_number . '/' . $receipt['Расчетный период'] . '.pdf';
         ?>
         <li class="list-group-item <?= $key == 0 ? 'active' : '' ?>" data-receipt="<?= $receipt['Расчетный период'] ?>" data-account="<?= $account_number ?>">
             <p class="receipte-month"><?= $date ? $date->format('F Y') : date('F Y') ?></p>
             <p class="receipte-number">Квитанция <?= $receipt['Номер квитанции'] ?></p>                                
-            <span class="<?= $date ? 'receipte-btn-pay-ok' : 'receipte-btn-pay' ?>">
+            <span class="<?= $status_payment ? 'receipte-btn-pay-ok' : 'receipte-btn-pay-debt' ?>">
                 <?= $str ?>
             </span>
             <a href="<?= Url::to($url_pdf) ?>" class="receipte-btn-dowload" target="_blank">
