@@ -51,6 +51,7 @@ $this->title = Yii::$app->params['site-name'] . 'Палатежи и квита�
             <?= $this->render('data/receipts-lists', [
                     'receipts_lists' => $receipts_lists,
                     'account_number' => $account_number,
+                    'house_id' => $house_id,
                 ]) ?>
         </div>
     </div>
@@ -59,7 +60,7 @@ $this->title = Yii::$app->params['site-name'] . 'Палатежи и квита�
         
             <?php
                 // Формируем путь в PDF квитацнии на сервере
-                $file_path = Yii::getAlias('@web') . "receipts/" . $account_number . "/" . $receipts_lists[0]['receipt_period'] . ".pdf";
+                $file_path = Yii::getAlias('@web') . "receipts/{$house_id}/{$receipts_lists[0]['receipt_period']}/{$account_number}.pdf";
             ?>
             <?php if (!file_exists($file_path)) : ?>
                 <div class="notice error">

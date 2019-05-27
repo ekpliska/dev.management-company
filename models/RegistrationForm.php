@@ -129,6 +129,7 @@ class RegistrationForm extends Model {
             $house = new Houses();
             $house_data_api = $data['user_info']['Жилая площадь'];
             $house_id = $house::isExistence(
+                            $house_data_api['House_id'], 
                             $house_data_api['House adress'], 
                             $house_data_api['Полный адрес Собственника'],
                             $house_data_api['Номер дома']);

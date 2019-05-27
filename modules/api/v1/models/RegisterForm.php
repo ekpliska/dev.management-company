@@ -10,7 +10,6 @@
     use app\models\Flats;
     use app\models\Token;
     use app\models\SmsSettings;
-    use app\models\Rents;
 
 /**
  * Регистрация по API
@@ -196,6 +195,7 @@ class RegisterForm extends Model {
             // Дом
             $house = new Houses();
             $house_id = $house::isExistence(
+                            $house_data_api['House_id'], 
                             $house_data_api['House adress'], 
                             $house_data_api['Полный адрес Собственника'],
                             $house_data_api['Номер дома']);

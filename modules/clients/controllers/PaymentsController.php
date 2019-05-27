@@ -18,6 +18,8 @@ class PaymentsController extends AppClientsController {
         
         // Получить номер текущего лицевого счета
         $account_number = $this->_current_account_number;
+        // Получить ID дома для текущего ЛС (используется для формирования списка квитанций)
+        $house_id = Yii::$app->userProfile->getLivingSpace($this->_current_account_id);
         
         // Получаем номер текущего месяца и год
         $current_period = date('Y-n');
@@ -60,6 +62,7 @@ class PaymentsController extends AppClientsController {
         
         return $this->render('index', [
             'account_number' => $account_number,
+            'house_id' => $house_id['houses_id'],
             'receipts_lists' => $results ? $results : null,
         ]);
         

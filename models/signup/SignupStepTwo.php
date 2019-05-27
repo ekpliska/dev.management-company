@@ -25,12 +25,6 @@ class SignupStepTwo extends Model {
                 'compare', 
                 'compareAttribute' => 'password', 'message' => 'Указанные пароли не совпадают!'],
             
-            [['password', 'password_repeat'],
-                'match', 
-                'pattern' => '/^[A-Za-z0-9\\_\\-]+$/iu', 
-                'message' => 'Вы используете не допустимые символы в пароле',
-            ],
-            
         ];
     }
     

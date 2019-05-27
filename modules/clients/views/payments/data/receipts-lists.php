@@ -1,6 +1,5 @@
 <?php
 
-    use yii\helpers\Url;
     use yii\helpers\Html;
     use app\modules\clients\widgets\ModalWindows;
 
@@ -22,7 +21,8 @@ $current_date = date('Y-m', strtotime("-1 month"));
             // Платежа по квитанции
             $status = $receipt['status_payment'];
             // Формируем ссылку на PDF квитанцию
-            $url_pdf = Yii::getAlias('@web') . '/receipts/' . $account_number . '/' . $receipt['receipt_period'] . '.pdf';
+//            $url_pdf = Yii::getAlias('@web') . '/receipts/' . $account_number . '/' . $receipt['receipt_period'] . '.pdf';
+            $url_pdf = Yii::getAlias('@web') . "receipts/{$house_id}/{$receipt['receipt_period']}/{$account_number}.pdf";
         ?>
         <li class="list-group-item <?= $key == 0 ? 'active' : '' ?>" data-receipt="<?= $receipt['receipt_period'] ?>" data-account="<?= $account_number ?>">
             
@@ -47,10 +47,6 @@ $current_date = date('Y-m', strtotime("-1 month"));
                                 'class' => 'send_receipt',
                                 'data-period-receipt' => $receipt['receipt_period'],
                             ]) ?>
-                        
-                        <?php /*a href="<?= Url::to($url_pdf, true) ?>" class="send_receipt" data-number-receipt="<?= $receipt['receipt_num'] ?>">
-                            Отправить <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
-                        </a */ ?>
                         
                     </div>
                 </div>

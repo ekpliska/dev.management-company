@@ -216,7 +216,7 @@ class Houses extends ActiveRecord
     /*
      * Проверка существования Дома при регистрации и создании лицевого счета
      */
-    public static function isExistence($house_adress, $full_adress, $house_number) {
+    public static function isExistence($house_id, $house_adress, $full_adress, $house_number) {
         
         // Обрезаем строку полного адреса содственника до номера дома
         $_adress = stristr($full_adress, 'д.', true);
@@ -225,14 +225,13 @@ class Houses extends ActiveRecord
         
         $_house = self::find()
                 ->where([
-                    'houses_name' => $house_adress, 
-                    'houses_gis_adress' => $_adress,
-                    'houses_number' => $house_number])
+                    'houses_id' => $house_id])
                 ->asArray()
                 ->one();
         
         if ($_house == null) {
             $house = new Houses();
+            $house->houses_id = $house_id;
             $house->houses_name = $house_adress;
             $house->houses_gis_adress = $_adress;
             $house->houses_number = $house_number;
@@ -242,6 +241,36 @@ class Houses extends ActiveRecord
         
         return $_house['houses_id'];
     }
+    
+    /*
+     * Проверка существования Дома при регистрации и создании лицевого счета
+     */
+//    public static function isExistence($house_adress, $full_adress, $house_number) {
+//        
+//        // Обрезаем строку полного адреса содственника до номера дома
+//        $_adress = stristr($full_adress, 'д.', true);
+//        // Обрезаем последний символ в строке (,)
+//        $_adress = substr($_adress, 0, -2);
+//        
+//        $_house = self::find()
+//                ->where([
+//                    'houses_name' => $house_adress, 
+//                    'houses_gis_adress' => $_adress,
+//                    'houses_number' => $house_number])
+//                ->asArray()
+//                ->one();
+//        
+//        if ($_house == null) {
+//            $house = new Houses();
+//            $house->houses_name = $house_adress;
+//            $house->houses_gis_adress = $_adress;
+//            $house->houses_number = $house_number;
+//            $house->save(false);
+//            return $house->houses_id;
+//        }
+//        
+//        return $_house['houses_id'];
+//    }
     
     /**
      * {@inheritdoc}

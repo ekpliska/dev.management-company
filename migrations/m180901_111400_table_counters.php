@@ -41,38 +41,38 @@ class m180901_111400_table_counters extends Migration
             );
         
         // Приборы учета собственника
-        $this->createTable('{{%counters}}', [
-            'counters_id' => $this->primaryKey(),
-            'counters_type_id' => $this->integer()->notNull(),
-            'counters_number' => $this->integer()->notNull(),
-            'counters_description' => $this->string(255),
-            'counters_account_id' => $this->integer()->notNull(),
-            'date_check' => $this->integer()->notNull(),
-            'isRequest' => $this->string(15)->defaultValue(Counters::REQUEST_NO),
-            'ID_counter_clients' => $this->integer()->notNull(),
-        ], $table_options);
-        $this->createIndex('idx-counters-counters_id', '{{%counters}}', 'counters_id');
-        $this->createIndex('idx-counters-counters_number', '{{%counters}}', 'counters_number');
-                
-        $this->addForeignKey(
-                'fk-counters-counters_type_id', 
-                '{{%counters}}', 
-                'counters_type_id', 
-                '{{%type_counters}}', 
-                'type_counters_id', 
-                'RESTRICT',
-                'CASCADE'
-        );
-        
-        $this->addForeignKey(
-                'fk-counters-counters_account_id', 
-                '{{%counters}}', 
-                'counters_account_id', 
-                '{{%personal_account}}', 
-                'account_id', 
-                'CASCADE',
-                'CASCADE'
-        );
+//        $this->createTable('{{%counters}}', [
+//            'counters_id' => $this->primaryKey(),
+//            'counters_type_id' => $this->integer()->notNull(),
+//            'counters_number' => $this->integer()->notNull(),
+//            'counters_description' => $this->string(255),
+//            'counters_account_id' => $this->integer()->notNull(),
+//            'date_check' => $this->integer()->notNull(),
+//            'isRequest' => $this->string(15)->defaultValue(Counters::REQUEST_NO),
+//            'ID_counter_clients' => $this->integer()->notNull(),
+//        ], $table_options);
+//        $this->createIndex('idx-counters-counters_id', '{{%counters}}', 'counters_id');
+//        $this->createIndex('idx-counters-counters_number', '{{%counters}}', 'counters_number');
+//                
+//        $this->addForeignKey(
+//                'fk-counters-counters_type_id', 
+//                '{{%counters}}', 
+//                'counters_type_id', 
+//                '{{%type_counters}}', 
+//                'type_counters_id', 
+//                'RESTRICT',
+//                'CASCADE'
+//        );
+//        
+//        $this->addForeignKey(
+//                'fk-counters-counters_account_id', 
+//                '{{%counters}}', 
+//                'counters_account_id', 
+//                '{{%personal_account}}', 
+//                'account_id', 
+//                'CASCADE',
+//                'CASCADE'
+//        );
 
     }
 
