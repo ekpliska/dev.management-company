@@ -494,6 +494,13 @@ ul.menu {
     padding-bottom: 15px;
     border-bottom: 1px dashed #ebedf2;
 }
+.active_block__item p.notice-text {
+    font-weight: bold;
+    color: #6c7293;
+    font-size: 14px;
+    padding: 0;
+    margin: 0;
+}
 .active_block__item:last-child {
     border-bottom: none;
 }
@@ -731,8 +738,8 @@ ul.menu {
     color: #2d18b4;
 }
 .bottom-block {
-    max-height: 590px;
-    height: 590px;
+    max-height: 600px;
+    height: 600px;
     margin-bottom: 0;
 }
 /* Конец Администратор, Собственники */

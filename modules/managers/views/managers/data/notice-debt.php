@@ -9,7 +9,7 @@
 
 <div class="__title">
     <h5>
-        Задолжности
+        Задолженности
     </h5>
 </div>
 <div class="__content">
@@ -18,14 +18,11 @@
             <?php foreach ($notice_debt as $key => $notice) : ?>
                 <div class="active_block__item">
                     <div style="width: 100%;">
-                        <?= $notice->notes_name ?>
+                        <p class="notice-text">
+                            <?= mb_substr($notice->notes_name, 0, 30) ?>
+                        </p>
                         <div class="active_block__item-section">
                             <div class="active_block__info">
-                                <span>Лицевой счет: </span>
-                                <span class="active_block__span-info">
-                                    <?= $notice->flat->account->account_number ?>
-                                </span>
-                                <br />
                                 <span>Собсвенник: </span>
                                 <span class="active_block__span-info">
                                     <?= $notice->flat->account->client->fullName ?>

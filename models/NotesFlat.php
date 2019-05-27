@@ -109,7 +109,7 @@ class NotesFlat extends ActiveRecord
         return self::find()
                 ->with(['flat', 'flat.account', 'flat.account.client'])
                 ->orderBy(['notes_id' => SORT_DESC])
-                ->limit(10)
+                ->limit(6)
                 ->all();
         
     }
