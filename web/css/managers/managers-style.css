@@ -411,6 +411,18 @@ ul.menu {
 .top_bar__block__header p > span {
     font-weight: bold;
 }
+.block_one {
+    background-color: rgba(61, 148, 251, 0.1);
+    border-bottom: 2px solid #3d94fb;
+}
+.block_two {
+    background-color: rgba(29, 201, 183, 0.1);
+    border-bottom: 2px solid #1dc9b7;
+}
+.block_three {
+    background-color: rgba(255, 184, 34, 0.1);
+    border-bottom: 2px solid #ffb822;
+}
 .top_bar__block__footer {
     padding: 10px;
     text-align: right;

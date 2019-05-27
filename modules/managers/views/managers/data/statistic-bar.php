@@ -9,7 +9,7 @@
 
 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
     <div class="top_bar__block">
-        <div class="top_bar__block__header">
+        <div class="top_bar__block__header block_one">
             <h4>Заявки</h4>
             <p>
                 Новых заявок
@@ -25,7 +25,7 @@
 </div>
 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
     <div class="top_bar__block">
-        <div class="top_bar__block__header">
+        <div class="top_bar__block__header block_two">
             <h4>Платные услуги</h4>
             <p>
                 Новых заявок
@@ -41,7 +41,7 @@
 </div>
 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
     <div class="top_bar__block">
-        <div class="top_bar__block__header">
+        <div class="top_bar__block__header block_three">
             <h4>Опросы</h4>
             <p>
                 Активных опросов
