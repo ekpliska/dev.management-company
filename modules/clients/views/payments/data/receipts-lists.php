@@ -61,7 +61,9 @@ $current_date = date('Y-m');
                             <span>Задолженность</span>
                             <?= "{$receipt['receipt_summ']}&#8381" ?>
                         </span>
-                    <?php elseif ($_date == false && $status == true) : // Если оплата квитанции была совершена ?>
+                    <?php 
+                        // Если оплата квитанции была совершена, или же квитанцию за текущий приеод еще не оплатили
+                        elseif ( ($_date == false && $status == true) || ($_date == true && $status == true)) : ?>
                         <span class="receipte-info-pay-ok">
                             <span>Оплачено</span>
                             <?= "{$receipt['receipt_summ']}&#8381" ?>
