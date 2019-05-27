@@ -14,14 +14,21 @@ $date_period = '';
 <?php if(!empty($payments) && is_array($payments)) : ?>
 <table class="table table-last-payment">
     <tbody>
+    <?php foreach ($payments as $key => $payment) : ?>
         <tr>
-            <?php foreach ($payments as $key => $payment) : ?>
-            
             <?php if ($key <= 5) : ?>
                 <?php 
-                    // Проверяем совершался ли платеж ранее
+                    $status_payment = false;
+                    // Проверяем наличие платежа в БД
                     $is_payment = Payments::getStatusPayment($payment['Расчетный период'], $this->context->_current_account_number); 
-                    $status_payment = $is_payment == Payments::YES_PAID ? true : false;
+                                        
+                    // Если квитанция "Не оплачена"
+                    if ($payment['Статус квитанции'] == 'Не оплачена') {
+                        $status_payment = $is_payment == Payments::NOT_PAID ? false : true;
+                    } elseif ($payment['Статус квитанции'] == 'Оплачена') {
+                        $status_payment = true;
+                    }
+                    // Проверяем совершался ли платеж ранее
                 ?>
                 <td>
                     <?php $date_period = Yii::$app->formatter->asDate($payment['Расчетный период'], 'LLLL, Y'); ?>
@@ -29,9 +36,9 @@ $date_period = '';
                             $date_period :
                             Html::a($date_period, [
                                 'payments/payment', 
-                                'period' => base64_encode(utf8_encode($payment['Расчетный период'])), 
-                                'nubmer' => base64_encode(utf8_encode($payment['Номер квитанции'])), 
-                                'sum' => base64_encode(utf8_encode($payment['Сумма к оплате']))
+                                'qw1' => base64_encode(utf8_encode($payment['Расчетный период'])), 
+                                'qw2' => base64_encode(utf8_encode($payment['Номер квитанции'])), 
+                                'qw3' => base64_encode(utf8_encode($payment['Сумма к оплате']))
                             ]) 
                     ?>
                 </td>
@@ -39,8 +46,8 @@ $date_period = '';
                     <?= $status_payment ? 'Оплачено' : 'Не оплачено' ?>
                 </td>
             <?php endif; ?>
-            <?php endforeach; ?>
         </tr>
+    <?php endforeach; ?>
     </tbody>
 </table>
 <?php else: ?>

@@ -33,6 +33,10 @@ class PaymentsController extends AppClientsController {
         $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
         $receipts_lists = Yii::$app->client_api->getReceipts($data_json);
         
+//        echo '<pre>';
+//        var_dump($receipts_lists);
+//        die();
+        
         /*
          * Перепроверяем полученные квитанции,
          * если у квитанции статус "Не оплачена", то проверяем наличие платежа в БД
@@ -59,6 +63,10 @@ class PaymentsController extends AppClientsController {
                 }
             }
         }
+        
+//        echo '<pre>';
+//        var_dump($results);
+//        die();
         
         return $this->render('index', [
             'account_number' => $account_number,

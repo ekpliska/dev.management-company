@@ -7,7 +7,7 @@
  * Рендер вида Квитанции ЖКУ Собственника
  */
 // Текущая дата (Год и номер месяца)
-$current_date = date('Y-m', strtotime("-1 month"));
+$current_date = date('Y-m');
 ?>
 
 

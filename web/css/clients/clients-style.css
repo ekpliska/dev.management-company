@@ -105,6 +105,7 @@ li.account-info {
     border-radius: 100%;
     border: 4px solid #fff;
     box-shadow: 0 0 0px 6px #9e95d7;
+    object-fit: cover;
 }
 .navbar_user-block {
     display: inline-flex;
@@ -802,6 +803,7 @@ li.partners-info > img {
     height: 100%;
     width: 100%;
     border-radius: 100%;
+    object-fit: cover;
 }
 .profile-settings__photo:hover .profile-upload {
     opacity: 1;
