@@ -540,11 +540,12 @@ span.dot {
     color: #fff;
 }
 .notice__user_block img {
-  float: left;
-  margin: 0 10px 0 -25px;
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
+    float: left;
+    margin: 0 10px 0 -25px;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 .notice__user_block span.notice__count {
     font-size: 12px;
@@ -2548,6 +2549,7 @@ tbody > tr > td > div.empty::before {
     font-size: 12px;
     color: #2d18b4;
     font-weight: bold;
+    text-transform: capitalize;
 }
 .receipte-number {
     font-size: 14px;

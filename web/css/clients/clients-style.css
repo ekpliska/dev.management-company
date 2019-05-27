@@ -154,6 +154,8 @@ li.account-info {
     color: #fff;
     font-size: 12px;
     padding: 3px 0;
+    letter-spacing: 2.7px;
+    font-family: unset;
 }
 .select-current-account option {
     color: #000;

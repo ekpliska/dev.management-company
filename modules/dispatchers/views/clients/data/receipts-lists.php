@@ -16,7 +16,9 @@
             $url_pdf = '@web/receipts/' . $account_number . '/' . $account_number . '-' . $receipt['Номер квитанции'] . '.pdf';
         ?>
         <li class="list-group-item <?= $key == 0 ? 'active' : '' ?>" data-receipt="<?= $receipt['Номер квитанции'] ?>" data-account="<?= $account_number ?>">
-            <p class="receipte-month"><?= $date ? $date->format('F Y') : date('F Y') ?></p>
+            <p class="receipte-month">
+                <?= Yii::$app->formatter->asDate($receipt['Расчетный период'], 'LLLL, Y') ?>
+            </p>
             <p class="receipte-number">Квитанция <?= $receipt['Номер квитанции'] ?></p>                                
             <span class="<?= $status_payment ? 'receipte-btn-pay-ok' : 'receipte-btn-pay-debt' ?>">
                 <?= $str ?>

@@ -932,15 +932,6 @@ textarea {
     padding: 6px 0;
     text-align: center;
     justify-content: center;
-/*    height: 4em;
-    display: flex;
-    align-items: center;
-    justify-content: center;*/
-}
-._search-input:hover,
-._dropdown-subpanel:hover {
-    /*border: 1px solid #2fb6f0;*/
-    box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
 }
 ._dropdown-subpanel {
     padding: 6px 5px;
@@ -971,6 +962,12 @@ textarea {
 .search-block__button:hover {
     color: #fff;
     box-shadow: 0 8px 16px 0 rgba(55,35,35,0.32);
+}
+.search-panel .has-success .form-control,
+.search-panel .has-success .form-control:focus,
+.search-panel .form-control:focus {
+    border-color: #746bd0;
+    box-shadow: none !important;
 }
 /* Конец Поиск */
 /* Конец Администратор, инпуты */
