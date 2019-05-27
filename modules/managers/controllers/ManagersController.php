@@ -10,6 +10,7 @@
     use app\modules\managers\models\User;
     use app\models\Organizations;
     use app\models\Services;
+    use app\models\NotesFlat;
 
 /**
  * Профиль Админимтратора
@@ -72,6 +73,9 @@ class ManagersController extends AppManagersController {
         // Новые платные услуги
         $new_services = Services::getLastNewSevices();
         
+        // Задолжности по квартирам
+        $notice_debt = NotesFlat::getLastNotice();
+        
         return $this->render('index', [
             'news_content' => $news_content,
             'request_list' => $request_list,
@@ -80,6 +84,7 @@ class ManagersController extends AppManagersController {
             'user_lists' => $user_lists,
             'organization_info' => $organization_info,
             'new_services' => $new_services,
+            'notice_debt' => $notice_debt,
         ]);
         
     }

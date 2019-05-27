@@ -2,6 +2,7 @@
     
     use yii\widgets\Breadcrumbs;
     use yii\helpers\Html;
+    use app\modules\managers\widgets\Notifications;
 
 /*
  * Администраторы
@@ -55,18 +56,18 @@ $this->params['breadcrumbs'][] = 'Главная';
             
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <div class="active_item">
+                    <div class="active_item bottom-block">
                         <?= $this->render('data/organization-info', ['organization_info' => $organization_info]) ?>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <div class="active_item">
+                    <div class="active_item bottom-block">
                         <?= $this->render('data/news-service', ['new_services' => $new_services]) ?>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <div class="active_item">
-                        <?= $this->render('data/last-upload-file', ['new_services' => $new_services]) ?>
+                    <div class="active_item bottom-block">
+                        <?= $this->render('data/notice-debt', ['notice_debt' => $notice_debt]) ?>
                     </div>
                 </div>
             </div>

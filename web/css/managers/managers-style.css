@@ -428,6 +428,7 @@ ul.menu {
     border: 1px solid #e6eaee;
     border-radius: 4px;
     cursor: default;
+    margin-bottom: 20px;
 }
 .today_block__day {
     padding: 10px;
@@ -461,7 +462,7 @@ ul.menu {
 .new_user, .active_item, .last_news {
     border: 1px solid #e6eaee;
     border-radius: 4px;
-    margin-top: 20px;
+    margin-bottom: 20px;
 }
 .__title {
     padding: 20px;
@@ -685,6 +686,21 @@ ul.menu {
     margin: 0;
     font-size: 12px;
 }
+.new-user-block__debt {
+    background-color: rgba(253, 57, 122, 0.1);
+    color: #fd397a;
+    padding: 5px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 4px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    text-align: center;
+}
+.new-user-block__debt:hover {
+    background-color: #fd397a;
+    color: #fff;
+}
 /* Конец Администратор, Главная страница */
 
 /* Администратор, Собственники */
@@ -713,6 +729,11 @@ ul.menu {
     border: none;
     outline: none;
     color: #2d18b4;
+}
+.bottom-block {
+    max-height: 590px;
+    height: 590px;
+    margin-bottom: 0;
 }
 /* Конец Администратор, Собственники */
 

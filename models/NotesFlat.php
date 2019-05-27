@@ -100,6 +100,19 @@ class NotesFlat extends ActiveRecord
         return true;
 
     }
+    
+    /*
+     * Получить список последних примечаний по задолженностям
+     */
+    public static function getLastNotice() {
+        
+        return self::find()
+                ->with(['flat', 'flat.account', 'flat.account.client'])
+                ->orderBy(['notes_id' => SORT_DESC])
+                ->limit(10)
+                ->all();
+        
+    }
 
     /**
      * Аттрибуты полей
