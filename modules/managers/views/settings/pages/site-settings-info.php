@@ -22,6 +22,10 @@
     <?= $form->field($model, 'api_url', ['template' => '<div class="field"></i>{label}{input}{error}</div>'])
             ->input('text', ['class' => 'field-input'])
             ->label($model->getAttributeLabel('api_url'), ['class' => 'field-label']) ?>
+
+    <?= $form->field($model, 'url_get_receipts', ['template' => '<div class="field"></i>{label}{input}{error}</div>'])
+            ->input('text', ['class' => 'field-input'])
+            ->label($model->getAttributeLabel('url_get_receipts'), ['class' => 'field-label']) ?>
     
     <p class="__settings-p">
         <?= $model->getAttributeLabel('welcome_text') ?>
