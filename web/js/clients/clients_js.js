@@ -164,23 +164,31 @@ $(document).ready(function() {
      * Список квитанций, переключение по квитанции для загрузки PDF
      */
     $(document).on('click', '.list-group-item', function() {
-        var liItem = $(this).data('receipt');
-        var accountNumber = $(this).data('account');
-        var url = location.origin + '/receipts/' + encodeURIComponent(accountNumber) + '/' + encodeURIComponent(liItem) + '.pdf';
+        var period = $(this).data('period'),
+            house = $(this).data('house');
+            
         var conteiner = $('.receipts_body');
         $('ul.receipte-of-lists li').removeClass('active');
         $(this).addClass('active');
-        
+
         // Проверяем сущестование pdf, если существует - загружаем фрейм
-        $.ajax(url, {
-            success: function() {
-                conteiner.html('<iframe src="' + url + '" style="width: 100%; height: 850px;" frameborder="0">Ваш браузер не поддерживает фреймы</iframe>');
-            },
-            error: function() {
-                conteiner.html('<div class="notice error"><p>Квитанция на сервере не найдена.</p></div>');
-            },
-            method: 'HEAD'
+        $.ajax({
+            url: '/payments/get-receipt-pdf',
+            method: 'POST',
+            data: {
+                house: house,
+                period: period
+            }
+        }).done(function(data){
+            if (data.success === true) {
+                conteiner.html('<iframe src="' + data.url + '" style="width: 100%; height: 670px;" frameborder="0">Ваш браузер не поддерживает фреймы</iframe>');
+            } else if (data.success === false) {
+                conteiner.html('<div class="notice error"><p>Квитанция ' + period + ' на сервере не найдена.</p></div>');
+            }
+        }).fail(function(){
+            conteiner.html('<div class="notice error"><p>Квитанция на сервере не найдена.</p></div>');
         });
+        
     });
     
     /*
@@ -364,18 +372,21 @@ $(document).ready(function() {
      * Отправка квитанции по почте
      */
     $(document).on('click', '.send_receipt', function(){
-        var dateReceipt = $(this).data('periodReceipt');
+        var house = $(this).data('house'),
+            period = $(this).data('period');
+            
         $(this).prop('disabled', true);
         $.ajax({
             url: 'payments/send-receipt-to-email',
             method: 'POST',
             data: {
-                dateReceipt: dateReceipt
+                house: house,
+                period: period
             }
         }).done(function(data) {
             var textMess = $('#default_modal-message').find('#default_modal-message__text');
             if (data.success === true) {
-                textMess.html(`Квитанция ${dateReceipt} была успешно отправлена на ваш электронный адрес!`);
+                textMess.html(`Квитанция ${period} была успешно отправлена на ваш электронный адрес!`);
             } else if (data.success === false) {
                 textMess.html('При отправке квитанции возникла ошибка. Обновите страницу и повторите действие еще раз.');
             }

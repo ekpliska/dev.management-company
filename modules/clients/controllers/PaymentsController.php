@@ -8,6 +8,7 @@
     use app\components\mail\Mail;
     use app\models\Payments;
     use app\models\Organizations;
+    use app\models\SiteSettings;
 
 /**
  * Платежи и квитанции
@@ -32,10 +33,6 @@ class PaymentsController extends AppClientsController {
         
         $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
         $receipts_lists = Yii::$app->client_api->getReceipts($data_json);
-        
-//        echo '<pre>';
-//        var_dump($receipts_lists);
-//        die();
         
         /*
          * Перепроверяем полученные квитанции,
@@ -64,14 +61,13 @@ class PaymentsController extends AppClientsController {
             }
         }
         
-//        echo '<pre>';
-//        var_dump($results);
-//        die();
+        $path_to_receipts = SiteSettings::getReceiptsUrl();
         
         return $this->render('index', [
             'account_number' => $account_number,
             'house_id' => $house_id['houses_id'],
             'receipts_lists' => $results ? $results : null,
+            'path_to_receipts' => $path_to_receipts,
         ]);
         
     }
@@ -81,22 +77,25 @@ class PaymentsController extends AppClientsController {
      */
     public function actionSendReceiptToEmail() {
         
-        $account_number = $this->_current_account_number;
-
         Yii::$app->response->format = Response::FORMAT_JSON;
-        // Получаем расчетный период из AJAX
-        $period_receipt = Yii::$app->request->post('dateReceipt');
-        // Формируем пусть к квитанции на сервере
-        $file_url = Yii::getAlias('@web') . "receipts/{$account_number}/{$period_receipt}.pdf";
         
-        // Проверяем существование PDF документа на сервере
-        if (!file_exists($file_url)) {
-            return ['success' => false, 'file_url' => $file_url];
-        }
+        // Текущий номер лицевого счета
+        $account_number = $this->_current_account_number;
+        // Получаем расчетный период из AJAX
+        $period_receipt = Yii::$app->request->post('house');
+        // Получаем ID дома из AJAX
+        $house_id = Yii::$app->request->post('period');
+        
+        // Формируем путь к квитанции
+        $path_to_receipts = SiteSettings::getReceiptsUrl();
+        $file_url = $path_to_receipts . "{$house_id}/{$period_receipt}/{$account_number}.pdf";
+        $headers = @get_headers($file_url);
         
         // Получаем электронный адрес текущего пользователя
         $user_email = Yii::$app->userProfile->email;
-        if (empty($user_email)) {
+        
+        // Проверяем существование PDF документа на сервере и адрес электронной почты
+        if (!strpos($headers[0], '200') || empty($user_email)) {
             return ['success' => false];
         }
         
@@ -220,6 +219,9 @@ class PaymentsController extends AppClientsController {
         
     }
     
+    /*
+     * Смена статуса платежа
+     */
     public function actionPaymentTransaction() {
         
         $payment_id = Yii::$app->request->post('paymentID');
@@ -231,6 +233,32 @@ class PaymentsController extends AppClientsController {
             }
             return $this->goHome();
         }
+        
+    }
+    
+    /*
+     * Получение URL для квитанции
+     */
+    public function actionGetReceiptPdf() {
+        
+        $house_id = Yii::$app->request->post('house');
+        $period = Yii::$app->request->post('period');
+        // Текущий номер лицевого счета
+        $account_number = $this->_current_account_number;
+        
+        $path_to_receipts = SiteSettings::getReceiptsUrl();
+        $path_url = $path_to_receipts . "{$house_id}/{$period}/{$account_number}.pdf";
+        $headers = @get_headers($path_url);
+        
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
+            if (strpos($headers[0], '200')) {
+                return ['success' => true, 'url' => $path_url];
+            }
+            return ['success' => false];
+        }
+        
+        return ['success' => false];
         
     }
     

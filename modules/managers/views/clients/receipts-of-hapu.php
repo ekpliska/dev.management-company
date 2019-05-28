@@ -73,7 +73,7 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
             <div class="col-lg-7 col-md-7 col-sm-6 col-xs-12 receipts_body">
                 <?php if (!empty($receipts_lists)) : ?> 
                     <?php 
-                        // Формируем путь в PDF квитацнии на сервере
+                        // Формируем путь к PDF квитацнии
                         $url_pdf = $path_to_receipts . "{$account_choosing->flat->house->houses_id}/{$receipts_lists[0]['Расчетный период']}/{$account_number}.pdf";
                         // Получаем заголовки из ответа для загруженной квитанции
                         $headers = @get_headers($url_pdf);

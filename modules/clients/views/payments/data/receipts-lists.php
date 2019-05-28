@@ -20,11 +20,14 @@ $current_date = date('Y-m');
             $_date = ($current_date == $date->format('Y-m')) ? true : false;
             // Платежа по квитанции
             $status = $receipt['status_payment'];
-            // Формируем ссылку на PDF квитанцию
-//            $url_pdf = Yii::getAlias('@web') . '/receipts/' . $account_number . '/' . $receipt['receipt_period'] . '.pdf';
-            $url_pdf = Yii::getAlias('@web') . "receipts/{$house_id}/{$receipt['receipt_period']}/{$account_number}.pdf";
+            
+            // Формируем путь к PDF-квитанции
+            $url_pdf = $path_to_receipts . "{$house_id}/{$receipt['receipt_period']}/{$account_number}.pdf";
+            // Получаем заголовки из ответа для загруженной квитанции
+            $headers = @get_headers($url_pdf);
         ?>
-        <li class="list-group-item <?= $key == 0 ? 'active' : '' ?>" data-receipt="<?= $receipt['receipt_period'] ?>" data-account="<?= $account_number ?>">
+    
+        <li class="list-group-item <?= $key == 0 ? 'active' : '' ?>" data-period="<?= $receipt['receipt_period'] ?>" data-house="<?= $house_id ?>">
             
             <div class="receipt-item">
                 <div class="receipt-item__info">
@@ -43,10 +46,14 @@ $current_date = date('Y-m');
                                     ['class' => 'receipt-item__btn-pay']) ?>
                         <?php endif; ?>
 
-                        <?= Html::button('Отправить <i class="fa fa-paper-plane-o" aria-hidden="true"></i>', [
-                                'class' => 'send_receipt',
-                                'data-period-receipt' => $receipt['receipt_period'],
-                            ]) ?>
+                        <?php 
+                        // Если в заголовке имеется статус 200, квитанция на сервере существует, даем возможность отправить ее по почте
+                        if (strpos($headers[0], '200')) : ?>
+                            <?= Html::button('Отправить <i class="fa fa-paper-plane-o" aria-hidden="true"></i>', [
+                                    'class' => 'send_receipt',
+                                    'data-house' => $house_id,
+                                    'data-period' => $receipt['receipt_period']]) ?>
+                        <?php endif; ?>
                         
                     </div>
                 </div>
