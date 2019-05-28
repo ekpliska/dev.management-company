@@ -207,6 +207,7 @@ class PaidServices extends ActiveRecord
                         . 'cs.category_name as category, s.service_name as services_name, '
                         . 'c.clients_surname as clients_surname, c.clients_name as clients_name, c.clients_second_name as clients_second_name, '
                         . 'h.houses_gis_adress as gis_adress, h.houses_number as houses_number, '
+                        . 'h.houses_street as houses_street, '
                         . 'f.flats_porch as porch, f.flats_floor as floor, f.flats_number as flat')
                 ->from('paid_services as ps')
                 ->join('LEFT JOIN', 'services as s', 's.service_id = ps.services_name_services_id')

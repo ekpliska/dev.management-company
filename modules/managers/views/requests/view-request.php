@@ -110,6 +110,7 @@ $this->params['breadcrumbs'][] = "Заявка ID{$request['requests_ident']}";
                                 <p>
                                     <?= FormatHelpers::formatFullAdress(
                                             $request['houses_gis_adress'], 
+                                            $request['houses_street'], 
                                             $request['houses_number'], 
                                             $request['flats_porch'], 
                                             $request['flats_floor'], 

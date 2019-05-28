@@ -3580,6 +3580,14 @@ input[name="date_end-period-pay"]::placeholder {
     text-transform: uppercase;
     letter-spacing: 0.07em;
 }
+.table-account > tbody > tr > td > span.balance-debt {
+    color: #ff5722;
+    font-weight: bold;
+}
+.table-account > tbody > tr > td > span.balance {
+    color: #000;
+    font-weight: bold;
+}
 /* Кoнец Платежи */
 
 /* Приборы учета */

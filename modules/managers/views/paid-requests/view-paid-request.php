@@ -93,6 +93,7 @@ $this->params['breadcrumbs'][] = "Заявка на платную услугу 
                                 <p>
                                 <?= FormatHelpers::formatFullAdress(
                                         $paid_request['gis_adress'], 
+                                        $paid_request['houses_street'], 
                                         $paid_request['houses_number'], 
                                         $paid_request['porch'], 
                                         $paid_request['floor'], 

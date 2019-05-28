@@ -1088,7 +1088,7 @@ input:checked + .slider-orange {
 .save-settings-small {
     background: #2d18b4;
     border: none;
-    border-radius: 0;
+    border-radius: 12px;
     color: #fff;
     padding: 10px 25px;
     text-align: center;

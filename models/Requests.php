@@ -265,6 +265,7 @@ class Requests extends ActiveRecord
                         . 'tr.type_requests_name as type_requests_name, '
                         . 'c.clients_surname as clients_surname, c.clients_second_name as clients_second_name, c.clients_name as clients_name, '
                         . 'h.houses_gis_adress as houses_gis_adress, h.houses_number as houses_number, '
+                        . 'h.houses_street as houses_street, '
                         . 'f.flats_porch as flats_porch, f.flats_floor as flats_floor, f.flats_number as flats_number, '
                         . 'ed.employee_id as employee_id_d, ed.employee_surname as surname_d, ed.employee_name as name_d, ed.employee_second_name as sname_d, '
                         . 'es.employee_id as employee_id_s, es.employee_surname as surname_s, es.employee_name as name_s, es.employee_second_name as sname_s')
