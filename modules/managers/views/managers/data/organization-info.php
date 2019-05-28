@@ -55,6 +55,16 @@
                     </div>
                 </div>
             </div>
+            <div class="active_block__flex-item">
+                <div class="__flex-item__cont">
+                    <div class="__flex-item__cont-title">
+                        Адрес
+                    </div>
+                    <div class="__flex-item__cont-value">
+                        <?= $organization_info->fullAddress ?>
+                    </div>
+                </div>
+            </div>
             <div class="text-center" style="padding-top: 20px;">
                 <?= Html::a('Изменить', ['managers/settings'], ['class' => 'active_block__chn']) ?>
             </div>

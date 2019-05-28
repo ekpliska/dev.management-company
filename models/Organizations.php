@@ -42,6 +42,14 @@ class Organizations extends ActiveRecord
         return $this->organizations_name;
     }
     
+    public function getFullAddress() {
+        
+        return $this->postcode
+                . ', г. ' . $this->town
+                . ', ул. ' . $this->street
+                . ', д. ' . $this->house;
+    }
+    
     /**
      * Настройка полей для форм
      */
