@@ -119,7 +119,12 @@ class Flats extends ActiveRecord
                 ->one();
         
         return FormatHelpers::formatFullAdress(
-                $adress->house->houses_gis_adress, $adress->house->houses_number, false, false, $adress->flats_number);
+                $adress->house->houses_gis_adress,
+                $adress->house->houses_street,
+                $adress->house->houses_number, 
+                false, 
+                false, 
+                $adress->flats_number);
     }
     
     /**

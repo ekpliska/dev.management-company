@@ -15,7 +15,7 @@ class Info extends PersonalAccount {
                     'CONCAT_WS(" ", clients_surname, clients_name, clients_second_name) as client_fullname',
                     'clients_phone',
                     'CONCAT_WS(" ", rents_surname, rents_name, rents_second_name) as rent_fullname',
-                    'CONCAT_WS(", кв. ", houses_gis_adress, flats_number) as gis_address',
+                    'CONCAT(houses_gis_adress, ", ул. ", houses_street, ", д. ", houses_number, ", кв. ", flats_number) as gis_address',
                     'flats_porch', 'flats_floor', 'flats_square'])
                 ->join('LEFT JOIN', 'clients', 'personal_clients_id = clients_id')
                 ->join('LEFT JOIN', 'flats', 'flats_id = personal_flat_id')
