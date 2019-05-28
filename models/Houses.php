@@ -136,18 +136,19 @@ class Houses extends ActiveRecord
     public static function getHousesList($for_list = false) {
         
         $houses = self::find()
-                ->select(['houses_id', 'houses_gis_adress', 'houses_number'])
+                ->select(['houses_id', 'houses_gis_adress', 'houses_street', 'houses_number'])
                 ->orderBy([
                     'houses_gis_adress' => SORT_ASC,
                     'houses_number' => SORT_ASC])
                 ->asArray()
                 ->all();
         
-        return $for_list == false ? 
-                ArrayHelper::map($houses, 'houses_id', function($data) {
-                    $house_address = substr($data['houses_gis_adress'], 8);
-                    return $house_address . ', ' . $data['houses_number'];
-                }) : $houses;
+        return $for_list == false 
+                ? ArrayHelper::map($houses, 'houses_id', function($data) {
+                    $house_address = $data['houses_gis_adress'] . ', ' . $data['houses_street'];
+                    return $house_address  . ', ' . $data['houses_number'];
+                  }) 
+                : $houses;
     }    
     
     /*

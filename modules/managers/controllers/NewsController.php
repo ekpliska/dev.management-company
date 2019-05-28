@@ -234,7 +234,7 @@ class NewsController extends AppManagersController {
             echo '<option value="0">-</option>';
         } elseif ($status == 'house') {
             foreach ($houses_list as $house) {
-                $full_adress = $house['houses_gis_adress'] . ', д. ' . $house['houses_number'];
+                $full_adress = $house['houses_gis_adress'] . ', ул. ' . $house['houses_street'] . ', д. ' . $house['houses_number'];
                 echo '<option value="' . $house['houses_id'] . '">' . $full_adress . '</option>';
             }
         }

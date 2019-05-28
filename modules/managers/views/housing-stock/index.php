@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = 'Жилищный фонд';
                                 </a>
                             </h4>
                             <h4 class="house-adress">
-                                <i class="glyphicon glyphicon-map-marker"></i> <?= FormatHelpers::formatHousingStosk($house['houses_gis_adress'], $house['houses_number']) ?>
+                                <i class="glyphicon glyphicon-map-marker"></i> <?= "Ул. {$house['houses_street']}, д. {$house['houses_number']}" ?>
                             </h4>
                         </div>
                         <div id="house<?= $house['houses_id'] ?>" class="panel-collapse collapse house_accordion <?= $house_cookie == $house['houses_id'] ? 'in' : '' ?>">

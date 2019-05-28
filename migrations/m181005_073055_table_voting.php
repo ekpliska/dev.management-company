@@ -30,7 +30,7 @@ class m181005_073055_table_voting extends Migration
             'voting_date_start' => $this->timestamp()->defaultValue(new Expression("NOW()")),
             'voting_date_end' => $this->timestamp()->defaultValue(new Expression("NOW()")),
             'voting_house_id' => $this->integer(),
-            'voting_image' => $this->string(255)->notNull(),
+            'voting_image' => $this->string(255),
             'status' => $this->tinyInteger()->defaultValue(true),
             'created_at' => $this->timestamp()->defaultValue(new Expression("NOW()")),
             'updated_at' => $this->timestamp()->defaultValue(new Expression("NOW()")),

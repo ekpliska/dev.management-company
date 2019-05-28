@@ -1925,6 +1925,7 @@ span.status-vote-1::before {
     width: 50px;
     height: 50px;
     margin: 0 auto;
+    object-fit: cover;
 }
 .participant-list a {
     font-size: 12px;
@@ -2018,6 +2019,7 @@ span.status-vote-1::before {
     width: 150px;
     height: 150px;
     margin: 0 auto;
+    object-fit: cover;
 }
 .user-info > tbody > tr > td {
     border: none;
@@ -2237,7 +2239,7 @@ ul[id*="employees-list-"] > li > a:hover {
     border-left: 1px solid #ddd;    
 }
 .load_preview {
-    height: 450px;
+    height: 360px;
     background: #fff;
     position: relative;
 }

@@ -2103,7 +2103,7 @@ tbody > tr > td > div.empty::before {
     border-left: 1px solid #ddd;    
 }
 .load_preview {
-    height: 450px;
+    height: 370px;
     background: #fff;
     position: relative;
 }
