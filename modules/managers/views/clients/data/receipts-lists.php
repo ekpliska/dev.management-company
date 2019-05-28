@@ -13,19 +13,29 @@
             // Статус оплаты квитанции
             $status_payment = $receipt['Статус квитанции'] == 'Не оплачена' ? false : true;
             $str = $status_payment ? "Оплачено {$receipt['Сумма к оплате']}&#8381" : "Задолженность {$receipt['Сумма к оплате']}&#8381";
-            $url_pdf = Yii::getAlias('@web') . '/receipts/' . $account_number . '/' . $receipt['Расчетный период'] . '.pdf';
+            
+            $url_pdf = $path_to_receipts . "{$house_id}/{$receipt['Расчетный период']}/{$account_number}.pdf";
+            // Получаем заголовки из ответа для загруженной квитанции
+            $headers = @get_headers($url_pdf);
+            
         ?>
         <li class="list-group-item <?= $key == 0 ? 'active' : '' ?>" data-receipt="<?= $receipt['Расчетный период'] ?>" data-account="<?= $account_number ?>">
             <p class="receipte-month">
                 <?= Yii::$app->formatter->asDate($receipt['Расчетный период'], 'LLLL, Y') ?>
             </p>
-            <p class="receipte-number">Квитанция <?= $receipt['Номер квитанции'] ?></p>                                
+            <p class="receipte-number">Квитанция <?= $receipt['Номер квитанции'] ?></p>
             <span class="<?= $status_payment ? 'receipte-btn-pay-ok' : 'receipte-btn-pay-debt' ?>">
                 <?= $str ?>
             </span>
-            <a href="<?= Url::to($url_pdf) ?>" class="receipte-btn-dowload" target="_blank">
-                <i class="glyphicon glyphicon-download-alt"></i>
-            </a>
+            
+            <?php 
+            // Если в заголовке имеется статус 200, квитанция на сервере существует, даем возможность ее скачать
+            if (strpos($headers[0], '200')) : ?>
+                <a href="<?= $url_pdf ?>" class="receipte-btn-dowload" target="_blank">
+                    <i class="glyphicon glyphicon-download-alt"></i>
+                </a>
+            <?php endif; ?>
+            
         </li>
     <?php endforeach; ?>
 </ul>

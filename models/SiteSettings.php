@@ -28,6 +28,19 @@ class SiteSettings extends ActiveRecord {
             [['api_url', 'url_get_receipts'], UrlValidator::className(), 'message' => 'Не верный формат адреса']
         ];
     }
+    
+    /*
+     * Получить url адрес хранения квитанций
+     */
+    public static function getReceiptsUrl() {
+        
+        $info = self::find()
+                ->where(['id' => 1])
+                ->one();
+        
+        return $info ? $info->url_get_receipts : 'https://api.myelsa.ru/receipts/';
+        
+    }
 
     /**
      * Аттрибуты полей

@@ -14,6 +14,7 @@
     use app\models\PaidServices;
     use app\models\CommentsToCounters;
     use app\modules\managers\models\form\CommentToCounterForm;
+    use app\models\SiteSettings;
 
 /**
  * Клиенты
@@ -271,10 +272,10 @@ class ClientsController extends AppManagersController {
             'Период начало' => null,
             'Период конец' => $current_period,
         ];
-        
         $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
-        
         $receipts_lists = Yii::$app->client_api->getReceipts($data_json);
+        
+        $path_to_receipts = SiteSettings::getReceiptsUrl();
         
         return $this->render('receipts-of-hapu', [
             'client_info' => $info['client_info'],
@@ -283,6 +284,7 @@ class ClientsController extends AppManagersController {
             'list_account' => $info['list_account'],
             'account_number' => $account_number,
             'receipts_lists' => $receipts_lists ? $receipts_lists : null,
+            'path_to_receipts' => $path_to_receipts,
         ]);
         
     }
