@@ -92,7 +92,7 @@ $(document).ready(function() {
             data: {
                 house: house,
                 period: period,
-                account: account,
+                account: account
             }
         }).done(function(data){
             if (data.success === true) {

@@ -9,6 +9,7 @@
     use app\models\User;
     use app\models\Rents;
     use app\modules\dispatchers\models\searchForm\searchClients;
+    use app\models\SiteSettings;
 
 /**
  * Профиль собственника
@@ -95,8 +96,9 @@ class ClientsController extends AppDispatchersController {
         ];
         
         $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
-        
         $receipts_lists = Yii::$app->client_api->getReceipts($data_json);
+        
+        $path_to_receipts = SiteSettings::getReceiptsUrl();
         
         return $this->render('receipts-of-hapu', [
             'client_info' => $info['client_info'],
@@ -105,6 +107,7 @@ class ClientsController extends AppDispatchersController {
             'list_account' => $info['list_account'],
             'account_number' => $account_number,
             'receipts_lists' => $receipts_lists,
+            'path_to_receipts' => $path_to_receipts,
         ]);
         
     }
@@ -312,6 +315,31 @@ class ClientsController extends AppDispatchersController {
             return ['success' => true, 'result' => $data];
         }
         return ['success' => false];
+    }
+    
+    /*
+     * Получение URL для квитанции
+     */
+    public function actionGetReceiptPdf() {
+        
+        $house_id = Yii::$app->request->post('house');
+        $period = Yii::$app->request->post('period');
+        $account = Yii::$app->request->post('account');
+        
+        $path_to_receipts = SiteSettings::getReceiptsUrl();
+        $path_url = $path_to_receipts . "{$house_id}/{$period}/{$account}.pdf";
+        $headers = @get_headers($path_url);
+        
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
+            if (strpos($headers[0], '200')) {
+                return ['success' => true, 'url' => $path_url];
+            }
+            return ['success' => false];
+        }
+        
+        return ['success' => false];
+        
     }
     
 }
