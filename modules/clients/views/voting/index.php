@@ -74,7 +74,7 @@ $this->title = Yii::$app->params['site-name'] . 'Опрос';
         <?php endforeach; ?>
     <?php else : ?>
         <div class="notice info">
-            <p>Голосования еще не проводились</p>
+            <p>Опросы еще не проводились</p>
         </div>
     <?php endif; ?>
 </div>

@@ -38,9 +38,9 @@ $current_date = date('Y-m-d');
                         </td>
                         <td><?= Yii::$app->formatter->asDate($indication['Дата следующей поверки'], 'long') ?></td>
                         <td>
-                            <?= strtotime($indication['Дата снятия показания']) 
+                            <?= strtotime($indication['Дата снятия показания']) > 0
                                     ? Yii::$app->formatter->asDate($indication['Дата снятия показания'], 'long') 
-                                    : '<span>Дата передачи не установлена<span>' ?>
+                                    : '<span class="date">Дата передачи не установлена<span>' ?>
                         </td>
                         <td><?= $indication['Предыдущие показание'] ?></td>
                         <?php if ($data_check == true) : ?>

@@ -24,7 +24,7 @@ class m190301_085905_table_site_settings extends Migration {
         ], $table_options);
         
         $this->batchInsert('{{%site_settings}}', 
-                ['api_url', 'welcome_text', 'user_agreement', 'promo_block'], [
+                ['api_url', 'url_get_receipts', 'welcome_text', 'user_agreement', 'promo_block'], [
                     [
                         'https://api.myelsa.ru/api/', 
                         'https://api.myelsa.ru/receipts/', 
