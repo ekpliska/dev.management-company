@@ -61,7 +61,7 @@ $this->title = Yii::$app->params['site-name'] . 'Палатежи и квита�
         
             <?php
                 // Формируем путь к PDF квитацнии
-                $url_pdf = $path_to_receipts . "{$account_choosing->flat->house->houses_id}/{$receipts_lists[0]['Расчетный период']}/{$account_number}.pdf";
+                $url_pdf = $path_to_receipts . "{$house_id}/{$receipts_lists[0]['receipt_period']}/{$account_number}.pdf";
                 $headers =  @get_headers($url_pdf);
             ?>
         
