@@ -43,6 +43,7 @@ $key = 0;
                     <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 request_block__adress text-right">
                         <?= FormatHelpers::formatFullAdress(
                                 $account['flat']['house']['houses_gis_adress'],
+                                $account['flat']['house']['houses_street'],
                                 $account['flat']['house']['houses_number'],
                                 false, false, 
                                 $account['flat']['flats_number']) ?>

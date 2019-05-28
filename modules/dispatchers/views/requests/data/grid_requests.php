@@ -46,7 +46,9 @@
                 'header' => 'Адрес',
                 'value' => function ($data) {
                     return FormatHelpers::formatFullAdress(
-                            $data['gis_adress'], $data['house'],
+                            $data['gis_adress'],
+                            $data['houses_street'],
+                            $data['house'],
                             false, false, $data['flat']
                     );
                 },

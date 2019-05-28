@@ -40,7 +40,7 @@ $active_item = $house_cookie
                                 </a>
                             </h4>
                             <h4 class="house-adress">
-                                <?= FormatHelpers::formatHousingStosk($house['houses_gis_adress'], $house['houses_number']) ?>
+                                <?= "Ул. {$house['houses_street']}, д. {$house['houses_number']}" ?>
                             </h4>
                         </div>
                         <div id="house<?= $house['houses_id'] ?>" class="panel-collapse collapse house_accordion <?= $house_cookie['value'] == $house['houses_id'] ? 'in' : '' ?>">

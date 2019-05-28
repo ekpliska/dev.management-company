@@ -1,8 +1,7 @@
 <?php
 
     use yii\widgets\Breadcrumbs;
-    use yii\helpers\Html;
-    use kartik\date\DatePicker;
+    use app\helpers\FormatHelpers;
 
 /* 
  * Профиль собсвенника, раздел Приборы устройства
@@ -46,7 +45,7 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
                     </tr>
                     <tr>
                         <td scope="row" class="text-left-tb">Арендатор</td>
-                        <td><?= $account_choosing['rent']->fullName ?></td>
+                        <td><?= isset($account_choosing['rent']) ? $account_choosing['rent']->fullName : 'Арендатор отсутствует.' ?></td>
                     </tr>
                     <tr>
                         <td scope="row" class="text-left-tb">Контактный телефон</td>
@@ -55,7 +54,12 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
                     <tr>
                         <td scope="row" class="text-left-tb">Адрес</td>
                         <td>
-                            <?= "{$account_choosing['flat']['house']['houses_gis_adress']}, кв. {$account_choosing['flat']['flats_number']}" ?>
+                            <?= FormatHelpers::formatFullAdress(
+                                    $account_choosing['flat']['house']['houses_gis_adress'], 
+                                    $account_choosing['flat']['house']['houses_street'], 
+                                    $account_choosing['flat']['house']['houses_number'], 
+                                    false, false, 
+                                    $account_choosing['flat']['flats_number']) ?>
                         </td>
                     </tr>
                     <tr>
@@ -69,6 +73,14 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
                     <tr>
                         <td scope="row" class="text-left-tb">Жилая площадь квартиры</td>
                         <td><?= $account_choosing['flat']['flats_square'] ?></td>
+                    </tr>
+                    <tr>
+                        <td scope="row" class="text-left-tb">Баланс</td>
+                        <td>
+                            <span class="<?= $account_choosing['account_balance'] < 0 ? 'balance-debt' : 'balance' ?>">
+                                <?= $account_choosing['account_balance'] ?><i class="fa fa-rub" aria-hidden="true"></i>
+                            </span>
+                        </td>
                     </tr>
                 </tbody>
             </table>    

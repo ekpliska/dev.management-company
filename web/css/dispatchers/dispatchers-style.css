@@ -2883,6 +2883,14 @@ label[class^='error-ind-'] {
 .paid-account-page_btn {
     padding: 20px;
 }
+.table-account > tbody > tr > td > span.balance-debt {
+    color: #ff5722;
+    font-weight: bold;
+}
+.table-account > tbody > tr > td > span.balance {
+    color: #000;
+    font-weight: bold;
+}
 /* Конец Лицевой счет */
 
 /* Блок переключения статуса заявок */

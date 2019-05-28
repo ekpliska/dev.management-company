@@ -78,6 +78,7 @@ $hide_btn = ($paid_request['status'] == StatusRequest::STATUS_CLOSE || $paid_req
                                 <p>
                                 <?= FormatHelpers::formatFullAdress(
                                         $paid_request['gis_adress'], 
+                                        $paid_request['houses_street'], 
                                         $paid_request['houses_number'], 
                                         $paid_request['porch'], 
                                         $paid_request['floor'], 

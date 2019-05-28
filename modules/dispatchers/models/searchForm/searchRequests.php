@@ -43,6 +43,7 @@ class searchRequests extends Requests {
                         . 'es.employee_id as employee_id_s, es.employee_surname as surname_s, es.employee_name as name_s, es.employee_second_name as sname_s, '
                         . 'c.clients_surname as clients_surname, c.clients_second_name as clients_second_name, c.clients_name as clients_name, '
                         . 'h.houses_id as houses_id, h.houses_gis_adress as gis_adress, h.houses_number as house, '
+                        . 'h.houses_street as houses_street, '
                         . 'f.flats_porch as porch, f.flats_floor as floor, '
                         . 'f.flats_number as flat')
                 ->from('requests as r')
