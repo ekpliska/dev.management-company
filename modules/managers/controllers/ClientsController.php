@@ -27,7 +27,7 @@ class ClientsController extends AppManagersController {
                 'class' => \yii\filters\AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index'],
+                        'actions' => ['index', 'get-receipt-pdf'],
                         'allow' => true,
                         'roles' => ['ClientsView']
                     ],
@@ -48,7 +48,8 @@ class ClientsController extends AppManagersController {
                             'send-indication',
                             'create-paid-request',
                             'create-notification',
-                            'delete-note-counters'],
+                            'delete-note-counters',
+                            'get-receipt-pdf'],
                         'allow' => true,
                         'roles' => ['ClientsEdit']
                     ],
@@ -610,6 +611,31 @@ class ClientsController extends AppManagersController {
                 return $this->redirect(Yii::$app->request->referrer);
             }
         }
+        
+    }
+    
+    /*
+     * Получение URL для квитанции
+     */
+    public function actionGetReceiptPdf() {
+        
+        $house_id = Yii::$app->request->post('house');
+        $period = Yii::$app->request->post('period');
+        $account = Yii::$app->request->post('account');
+        
+        $path_to_receipts = SiteSettings::getReceiptsUrl();
+        $path_url = $path_to_receipts . "{$house_id}/{$period}/{$account}.pdf";
+        $headers = @get_headers($path_url);
+        
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
+            if (strpos($headers[0], '200')) {
+                return ['success' => true, 'url' => $path_url];
+            }
+            return ['success' => false];
+        }
+        
+        return ['success' => false];
         
     }
     

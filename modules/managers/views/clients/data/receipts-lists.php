@@ -17,9 +17,13 @@
             $url_pdf = $path_to_receipts . "{$house_id}/{$receipt['Расчетный период']}/{$account_number}.pdf";
             // Получаем заголовки из ответа для загруженной квитанции
             $headers = @get_headers($url_pdf);
-            
         ?>
-        <li class="list-group-item <?= $key == 0 ? 'active' : '' ?>" data-receipt="<?= $receipt['Расчетный период'] ?>" data-account="<?= $account_number ?>">
+    
+        <li class="list-group-item <?= $key == 0 ? 'active' : '' ?>" 
+                data-house="<?= $house_id ?>" 
+                data-period="<?= $receipt['Расчетный период'] ?>" 
+                data-account="<?= $account_number ?>">
+            
             <p class="receipte-month">
                 <?= Yii::$app->formatter->asDate($receipt['Расчетный период'], 'LLLL, Y') ?>
             </p>
