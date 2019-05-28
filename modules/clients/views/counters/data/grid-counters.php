@@ -37,7 +37,11 @@ $current_date = date('Y-m-d');
                             <p class="counter-number"><?= $indication['Регистрационный номер прибора учета'] ?></p>
                         </td>
                         <td><?= Yii::$app->formatter->asDate($indication['Дата следующей поверки'], 'long') ?></td>
-                        <td><?= Yii::$app->formatter->asDate($indication['Дата снятия показания'], 'long') ?></td>
+                        <td>
+                            <?= strtotime($indication['Дата снятия показания']) 
+                                    ? Yii::$app->formatter->asDate($indication['Дата снятия показания'], 'long') 
+                                    : '<span>Дата передачи не установлена<span>' ?>
+                        </td>
                         <td><?= $indication['Предыдущие показание'] ?></td>
                         <?php if ($data_check == true) : ?>
                             <td>
