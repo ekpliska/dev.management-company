@@ -53,6 +53,7 @@ class Houses extends ActiveRecord
             [['houses_description'], 'string', 'max' => 255],
             
             [['houses_name'], 'string', 'max' => 100],
+            [['houses_street'], 'string', 'max' => 170],
             
             ['houses_description', 'required', 'on' => self::SCENARIO_EDIT_DESCRIPRION],
             ['houses_description', 'string', 'max' => 255, 'on' => self::SCENARIO_EDIT_DESCRIPRION],
@@ -216,12 +217,14 @@ class Houses extends ActiveRecord
     /*
      * Проверка существования Дома при регистрации и создании лицевого счета
      */
-    public static function isExistence($house_id, $house_adress, $full_adress, $house_number) {
+    public static function isExistence($house_id, $house_adress, $full_adress, $house_street, $house_number) {
         
-        // Обрезаем строку полного адреса содственника до номера дома
-        $_adress = stristr($full_adress, 'д.', true);
+        // Обрезаем строку полного адреса собсвенника до номера дома
+        $_adress = stristr($full_adress, $house_street, true);
+//        $_adress = stristr($full_adress, $house_street, true);
         // Обрезаем последний символ в строке (,)
-        $_adress = substr($_adress, 0, -2);
+        $_adress = mb_substr($_adress, 0, mb_strpos($_adress, ','));
+//        $_adress = substr($_adress, 0, -2);
         
         $_house = self::find()
                 ->where([
@@ -234,6 +237,7 @@ class Houses extends ActiveRecord
             $house->houses_id = $house_id;
             $house->houses_name = $house_adress;
             $house->houses_gis_adress = $_adress;
+            $house->houses_street = $house_street;
             $house->houses_number = $house_number;
             $house->save(false);
             return $house->houses_id;
@@ -241,36 +245,6 @@ class Houses extends ActiveRecord
         
         return $_house['houses_id'];
     }
-    
-    /*
-     * Проверка существования Дома при регистрации и создании лицевого счета
-     */
-//    public static function isExistence($house_adress, $full_adress, $house_number) {
-//        
-//        // Обрезаем строку полного адреса содственника до номера дома
-//        $_adress = stristr($full_adress, 'д.', true);
-//        // Обрезаем последний символ в строке (,)
-//        $_adress = substr($_adress, 0, -2);
-//        
-//        $_house = self::find()
-//                ->where([
-//                    'houses_name' => $house_adress, 
-//                    'houses_gis_adress' => $_adress,
-//                    'houses_number' => $house_number])
-//                ->asArray()
-//                ->one();
-//        
-//        if ($_house == null) {
-//            $house = new Houses();
-//            $house->houses_name = $house_adress;
-//            $house->houses_gis_adress = $_adress;
-//            $house->houses_number = $house_number;
-//            $house->save(false);
-//            return $house->houses_id;
-//        }
-//        
-//        return $_house['houses_id'];
-//    }
     
     /**
      * {@inheritdoc}
@@ -280,6 +254,7 @@ class Houses extends ActiveRecord
         return [
             'houses_id' => 'Houses ID',
             'houses_gis_adress' => 'Адресс',
+            'houses_street' => 'Улица',
             'houses_description' => 'Описание',
             'upload_file' => 'Загружаемый файл',
             'upload_files' => 'Файлы',

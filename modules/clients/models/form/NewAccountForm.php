@@ -99,8 +99,10 @@ class NewAccountForm extends Model {
             $house_data_api = $house_info['Жилая площадь'];
             // Проверяем существование дома у базе
             $house_id = $house::isExistence(
-                    $house_data_api['House adress'], 
+                    $house_data_api['house_id'],
+                    isset($house_data_api['house_name']) ? $house_data_api['house_name'] : 'Жилой комплекс',
                     $house_data_api['Полный адрес Собственника'],
+                    $house_data_api['Улица'],
                     $house_data_api['Номер дома']);
 
             // Создаем запись квартиры

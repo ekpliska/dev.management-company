@@ -251,16 +251,13 @@ class UserProfile extends BaseObject {
     public function getFullAdress($account_id) {
         
         $info = PersonalAccount::find()
-                ->select(['account_id', 'houses_gis_adress', 'houses_number', 'flats_number', 'personal_flat_id'])
+                ->select(['account_id', 'houses_gis_adress', 'houses_street', 'houses_number', 'flats_number', 'personal_flat_id'])
                 ->joinWith(['flat', 'flat.house'])
                 ->where(['account_id' => $account_id])
                 ->asArray()
                 ->one();
         
-        $houses_gis_adress = explode(',', $info['houses_gis_adress']);
-        unset($houses_gis_adress[0]);
-                
-        $adress_string = implode(',', $houses_gis_adress) . ', д. ' . $info['houses_number'] . ', кв. ' . $info['flats_number'];
+        $adress_string = $info['houses_gis_adress'] . ', ул. ' . $info['houses_street'] . ', д. ' . $info['houses_number'] . ', кв. ' . $info['flats_number'];
         
         return $info ? $adress_string : 'Адрес не определен';
     }

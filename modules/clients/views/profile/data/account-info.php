@@ -35,6 +35,7 @@
                 <p class="title">Адрес</p>
                 <?= HtmlPurifier::process(FormatHelpers::formatFullAdress(
                         $account_info['houses_gis_adress'],
+                        $account_info['houses_street'],
                         $account_info['houses_number'],
                         false,
                         false,

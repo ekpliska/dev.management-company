@@ -23,7 +23,7 @@ class m180831_214438_table_clients extends Migration
             'clients_second_name' => $this->string(70)->notNull(),
             'clients_surname' => $this->string(70)->notNull(),
             'clients_mobile' => $this->string(70),
-            'clients_phone' => $this->string(70)->unique(),
+            'clients_phone' => $this->string(70),
         ], $table_options);
         
     }

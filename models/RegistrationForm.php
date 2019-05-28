@@ -95,7 +95,7 @@ class RegistrationForm extends Model {
             $client->clients_surname = $client_data_api['Фамилия'] ? preg_replace('/[^a-zа-яё\ \d]/ui', '', $client_data_api['Фамилия']) : 'Не задано';
             $client->clients_name = $client_data_api['Имя'] ? preg_replace('/[^a-zа-яё\ \d]/ui', '', $client_data_api['Имя']) : 'Не задано';
             $client->clients_second_name = $client_data_api['Отчество'] ? preg_replace('/[^a-zа-яё\ \d]/ui', '', $client_data_api['Отчество']) : 'Не задано';
-            $client->clients_phone = $client_data_api['Домашний телефон'] ? preg_replace('/[^a-zа-яё\ \d]/ui', '', $client_data_api['Домашний телефон']) : 'Не задано';
+            $client->clients_phone = $client_data_api['Домашний телефон'] ? preg_replace('/[^a-zа-яё\ \d]/ui', '', $client_data_api['Домашний телефон']) : '';
             
             if (!$client->save()) {
                 // throw new \yii\db\Exception('Ошибка создания новой записи' . 'Ошибка: ' . join(', ', $client->getFirstErrors()));
@@ -129,9 +129,10 @@ class RegistrationForm extends Model {
             $house = new Houses();
             $house_data_api = $data['user_info']['Жилая площадь'];
             $house_id = $house::isExistence(
-                            $house_data_api['House_id'], 
-                            $house_data_api['House adress'], 
+                            $house_data_api['house_id'], 
+                            isset($house_data_api['house_name']) ? $house_data_api['house_name'] : 'Жилой комплекс', 
                             $house_data_api['Полный адрес Собственника'],
+                            $house_data_api['Улица'],
                             $house_data_api['Номер дома']);
         
             // Квартира
