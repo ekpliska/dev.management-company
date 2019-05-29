@@ -40,18 +40,6 @@ class m180831_193134_table_users extends Migration
         ], $table_options);
         $this->createIndex('idx-user-user_id', '{{%user}}', 'user_id');
         
-        $this->batchInsert('{{%user}}', 
-                ['user_id', 'user_login', 'user_password', 'user_email', 'user_mobile', 'created_at', 'status'], [
-                    [
-                        '1', 'administrator', 
-                        Yii::$app->security->generatePasswordHash('123456'), 
-                        'administrator@administrator.com', 
-                        '+7 (000) 000-00-00', 
-                        time(),
-                        '1'],
-        ]);
-
-        
     }
     
     /**

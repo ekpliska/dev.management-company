@@ -107,30 +107,6 @@ class m180903_073459_table_rbac_init extends Migration
             ]
         );
         
-        // Добавляем роль для Администратора
-        $this->batchInsert($auth_manager->assignmentTable, 
-                ['item_name', 'user_id', 'created_at'], [
-                    ['administrator', 1, time()],
-                    ['ClientsView', 1, time()],
-                    ['ClientsEdit', 1, time()],
-                    ['EmployeesView', 1, time()],
-                    ['EmployeesEdit', 1, time()],
-                    ['RequestsView', 1, time()],
-                    ['RequestsEdit', 1, time()],
-                    ['PaidRequestsView', 1, time()],
-                    ['PaidRequestsEdit', 1, time()],
-                    ['NewsView', 1, time()],
-                    ['NewsEdit', 1, time()],
-                    ['VotingsView', 1, time()],
-                    ['VotingsEdit', 1, time()],
-                    ['EstatesView', 1, time()],
-                    ['EstatesEdit', 1, time()],
-                    ['DesignerView', 1, time()],
-                    ['DesignerEdit', 1, time()],
-                    ['SettingsView', 1, time()],
-                    ['SettingsEdit', 1, time()]
-        ]);
-        
     }
 
     /**
