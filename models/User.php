@@ -338,7 +338,7 @@ class User extends ActiveRecord implements IdentityInterface
         if ($this->validate()) {
             if ($file) {
                 $this->user_photo = $file;
-                $dir = Yii::getAlias('images/users/');
+                $dir = Yii::getAlias('upload/users/');
                 $file_name = $this->user_login . '_' . $this->user_photo->baseName . '.' . $this->user_photo->extension;
                 $this->user_photo->saveAs($dir . $file_name);
                 $this->user_photo = '/' . $dir . $file_name;
