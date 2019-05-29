@@ -503,7 +503,8 @@ li.partners-info > img {
     border-radius: 100%;
 }
 .news-conteiner__image {
-    height: 860px;
+    padding: 0 20%;
+    height: 570px;
     overflow: hidden;
 }
 .news-conteiner__image img {
@@ -1379,7 +1380,7 @@ span.dot {
     position: relative;
 }
 .client_info__block {
-    display: inline-flex;
+    display: flex;
     width: 100%;
     align-items: center;
     justify-content: center;
@@ -1450,7 +1451,8 @@ span.dot {
 .request-chat-icon {
     height: 40px;
     width: 40px;
-    border-radius: 100%;    
+    border-radius: 100%;
+    object-fit: cover;
 }
 .chat_photo {
     padding: 0 10px;
@@ -1544,6 +1546,9 @@ span.dot {
 }
 #add-comment .form-group {
     margin-bottom: 0px;
+}
+#add-comment .form-group #label-count {
+    right: 9%;
 }
 .error-summary {
     font-size: 12px;
@@ -2514,6 +2519,7 @@ p.date-start-vote {
     height: 100%;
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
+    object-fit: cover;
 }
 .voting-info {
     position: absolute;
@@ -2699,6 +2705,7 @@ p.date-start-vote {
 .user-finish-vote {
     height: 50px;
     width: 50px;
+    object-fit: cover;
 }
 /* Конец Страница голосования */
 
@@ -2732,6 +2739,7 @@ p.date-start-vote {
     height: 150px;
     display: block;
     margin: 0 auto;
+    object-fit: cover;
 }
 .card-view-profile h1 {
     font-size: 18px;

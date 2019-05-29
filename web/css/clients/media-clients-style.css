@@ -389,9 +389,16 @@
 /* End Кeceiptes */
 
 /* News Page */
+@media (max-width: 1500px) and (min-width: 1200px) {
+    .news-conteiner__image {
+        height: 570px;
+        padding: 0 10%;
+    }
+}
 @media screen and (max-width: 1200px) {
     .news-conteiner__image {
-        height: 600px;
+        height: 470px;
+        padding: 0;
     }
 }
 @media screen and (max-width: 995px) {
