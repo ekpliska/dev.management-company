@@ -66,13 +66,13 @@
                 </div>
             </div>
             <div class="text-center" style="padding-top: 20px;">
-                <?= Html::a('Изменить', ['managers/settings'], ['class' => 'active_block__chn']) ?>
+                <?= Html::a('Изменить', ['settings/index'], ['class' => 'active_block__chn']) ?>
             </div>
         </div>
     <?php else: ?>
          <p>
             Информация не доступна.
         </p>
-        <?= Html::a('Настройки', ['managers/settings'], ['class' => 'active_block__link']) ?>
+        <?= Html::a('Настройки', ['settings/index'], ['class' => 'active_block__link']) ?>
     <?php endif; ?>
 </div>

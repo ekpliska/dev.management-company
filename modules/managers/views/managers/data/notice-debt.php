@@ -10,6 +10,7 @@
 <div class="__title">
     <h5>
         Задолженности
+        <?= Html::a('Жилищный фонд', ['housing-stock/index', 'section' => 'paid-services'], ['class' => 'active_block__link pull-right']) ?>
     </h5>
 </div>
 <div class="__content">

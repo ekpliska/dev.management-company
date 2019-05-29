@@ -1434,6 +1434,9 @@ span.dot {
     height: 70px;
     margin-bottom: 30px;
     cursor: zoom-in;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid #ddd;
 }
 .requests__status-block {
     padding: 10px 0;

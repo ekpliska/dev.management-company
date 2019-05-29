@@ -10,7 +10,7 @@
 <div class="__title">
     <h5>
         Новые услуги
-        <?= Html::a('Платные услуги', ['managers/designer-requests'], ['class' => 'active_block__link pull-right']) ?>
+        <?= Html::a('Платные услуги', ['designer-requests/index', 'section' => 'paid-services'], ['class' => 'active_block__link pull-right']) ?>
     </h5>
 </div>
 <div class="__content">
