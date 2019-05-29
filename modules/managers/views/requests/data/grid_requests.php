@@ -11,7 +11,7 @@
  * Вывод таблицы заявки пользователя
  */
 ?>
-<div class="grid-view">
+<div class="grid-view table-container">
     <?= GridView::widget([
         'dataProvider' => $requests,
         'layout' => '{items}{pager}',

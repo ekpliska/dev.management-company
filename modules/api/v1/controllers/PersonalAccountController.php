@@ -87,7 +87,7 @@ class PersonalAccountController extends Controller {
         if (!$model->save()) {
             return $model;
         }
-        return ['success' => true];
+        return ['success' => true, 'message' => "Лицевой счет {$model->account_number} успешно создан"];
     }
     
 }

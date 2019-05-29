@@ -10,7 +10,7 @@
  * Вывод таблицы заявки на платные услуги пользователя
  */
 ?>
-<div class="grid-view">
+<div class="grid-view table-container">
     <?= GridView::widget([
         'dataProvider' => $results,
         'layout' => '{items}{pager}',

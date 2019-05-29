@@ -12,7 +12,7 @@
  */    
 ?>
 
-<div class="grid-view">
+<div class="grid-view table-container">
     
     <?php Pjax::begin() ?>
     

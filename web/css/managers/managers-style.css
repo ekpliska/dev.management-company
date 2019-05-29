@@ -3810,3 +3810,9 @@ label[class^='error-ind-'] {
     letter-spacing: 0.17em;
 }
 /* End Error page */
+
+.table-container {
+    width: 100%;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}

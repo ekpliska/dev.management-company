@@ -3667,3 +3667,9 @@ button[id*="send-indication-"]:disabled {
 .message-general-page span {
     font-weight: bold;
 }
+
+.table-container {
+    width: 100%;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}

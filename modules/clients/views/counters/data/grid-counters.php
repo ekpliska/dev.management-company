@@ -11,7 +11,7 @@
 $current_date = date('Y-m-d');
 ?>
 
-<div id="indication-table">
+<div id="indication-table table-container">
     <table class="table clients-table table-striped">
         <thead>
             <tr>

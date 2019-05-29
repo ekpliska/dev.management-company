@@ -61,7 +61,7 @@ class CreateAccount extends Model {
         $is_account = PersonalAccount::findAccountBeforeRegister($account);
         
         if ($is_account == true) {
-            $this->addError('account_number', 'Указанный номер номер лицевого счета зарегистрирован');
+            $this->addError('account_number', 'Указанный номер лицевого счета зарегистрирован');
             return false;
         }
 

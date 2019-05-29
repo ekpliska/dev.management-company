@@ -1,7 +1,6 @@
 <?php
     use yii\grid\GridView;
     use yii\helpers\Html;
-    use yii\helpers\Url;
     use app\helpers\FormatHelpers;
     use app\modules\managers\components\BlockClientColumn;
 
@@ -9,6 +8,7 @@
  * Вывод таблицы зарегистрированных собственников
  */
 ?>
+<div class="table-container">
     <?= GridView::widget([
         'dataProvider' => $client_list,
         'layout' => '{items}{pager}',
@@ -102,3 +102,4 @@
             ],
         ],
     ]); ?>
+</div>

@@ -3208,3 +3208,9 @@ p.status_name {
     font-weight: bold;
 }
 /* End Status request for report */
+
+.table-container {
+    width: 100%;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}

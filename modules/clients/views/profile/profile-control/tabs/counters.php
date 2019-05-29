@@ -8,7 +8,8 @@
  */
 $current_date = date('Y-m-d');
 ?>
-<table class="table clients-table table-striped without-border">
+<div class="table-container">
+    <table class="table clients-table table-striped without-border">
         <thead>
             <tr>
                 <th></th>
@@ -74,3 +75,4 @@ $current_date = date('Y-m-d');
             <?php endif; ?>
         </tbody>
     </table>
+</div>

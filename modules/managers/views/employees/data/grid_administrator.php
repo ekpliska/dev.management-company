@@ -9,7 +9,7 @@
  */
 ?>
 
-<div class="grid-managers">
+<div class="grid-managers table-container">
     <?= GridView::widget([
         'dataProvider' => $manager_list,
         'layout' => '{items}{pager}',
@@ -17,7 +17,6 @@
             'class' => 'table managers-table',
         ],
         'columns' => [
-//            ['class' => 'yii\grid\SerialColumn'],
             [
                 'attribute' => 'employee_id',
                 'header' => 'ID',

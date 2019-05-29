@@ -5,13 +5,12 @@
     use app\helpers\FormatHelpers;
     use app\helpers\StatusHelpers;
     use app\helpers\FormatFullNameUser;
-    use app\modules\clients\widgets\RatingRequest;
 
 /*
  * Вывод таблицы заявки пользователя
  */
 ?>
-<div class="grid-view">
+<div class="grid-view table-container">
     <?= GridView::widget([
         'dataProvider' => $results,
         'layout' => '{items}{pager}',

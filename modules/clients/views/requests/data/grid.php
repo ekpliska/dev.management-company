@@ -11,6 +11,7 @@
  * Вывод таблицы заявок текущего пользователя
  */
 ?>
+<div class="table-container">
     <?= GridView::widget([
         'dataProvider' => $all_requests,
         'layout' => '{items}{pager}',
@@ -98,8 +99,6 @@
                     'class' => 'clients-table_main',
                 ],                        
             ],
-//            [
-//                'class' => 'yii\grid\ActionColumn',
-//            ],
         ],
     ]); ?>
+</div>

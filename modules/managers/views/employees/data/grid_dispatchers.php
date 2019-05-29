@@ -8,7 +8,7 @@
  * Вывод таблицы зарегистрированных пользователей с ролью Диспетчер
  */
 ?>
-<div class="grid-view">
+<div class="grid-view table-container">
     <?= GridView::widget([
         'dataProvider' => $dispatchers,
         'layout' => '{items}{pager}',
