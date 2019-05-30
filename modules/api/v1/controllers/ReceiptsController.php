@@ -6,7 +6,6 @@
     use yii\filters\auth\HttpBasicAuth;
     use yii\filters\auth\HttpBearerAuth;
     use yii\rest\Controller;
-    use yii\helpers\Url;
     use app\models\Payments;
     use app\models\SiteSettings;
     use app\models\PersonalAccount;
