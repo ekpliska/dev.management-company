@@ -8,6 +8,8 @@
     use yii\rest\Controller;
     use yii\helpers\Url;
     use app\models\Payments;
+    use app\models\SiteSettings;
+    use app\models\PersonalAccount;
 
 /**
  * Квитанции
@@ -66,32 +68,33 @@ class ReceiptsController extends Controller {
     public function actionGetReceiptPdf() {
         
         $data_post = Yii::$app->request->getBodyParams();
-        if (empty($data_post['account']) || empty($data_post['period'])) {
-            return ['success' => false];
-        }
         
         // Получаем даные по квитанции
         $get_receipt = $this->getReceiptList($data_post['account'], $data_post['period'], $data_post['period']);
+        // Определяем статус квитанции
         $status_payment = isset($get_receipt) ? $get_receipt[0]['Статус квитанции'] : null;
-        
+        // Проверяем статус платежа по текущей квитанции
         if ($status_payment == 'Не оплачена') {
-            // Проверяем статус платежа по текущей квитанции
             $status_payment = Payments::getStatusPayment($data_post['period'], $data_post['account']);
         } else {
             $status_payment = 'paid';
         }
         
-        // Формируем путь в PDF квитацнии на сервере
-        $file_path = Yii::getAlias('@web') . "receipts/" . $data_post['account'] . "/" . $data_post['period'] . ".pdf";
-        if (!file_exists($file_path)) {
+        // Получаем ID дома для текущего лицевого счета
+        $house_id = $this->getHouseID($data_post['account']);
+        
+        // Получаем путь к квитанциям
+        $path_to_receipts = SiteSettings::getReceiptsUrl();
+        // Формируем url для квитанции
+        $file_path = $path_to_receipts . "{$house_id}/{$data_post['period']}/{$data_post['account']}.pdf";
+        $headers = @get_headers($file_path);
+        if (strpos($headers[0], '200')) {
+            return [
+                'receipt_pdf' => $file_path,
+                'status_payment' => $status_payment];
+        } else {
             return [
                 'message' => "Приносим извинения. Квитанция {$data_post['period']} на сервере не найдена.",
-                'status_payment' => $status_payment
-            ];
-        } else {
-            // Возвращаем абсолютный путь и статус платежа
-            return [
-                'receipt_pdf' => Url::base(true) . '/' . $file_path,
                 'status_payment' => $status_payment];
         }
         
@@ -111,6 +114,21 @@ class ReceiptsController extends Controller {
         $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
         return Yii::$app->client_api->getReceipts($data_json);
         
+    }
+    
+    /*
+     * Формирование url квитанции
+     */
+    private function getHouseID($account) {
+        
+        $query = PersonalAccount::find()
+                ->select(['houses_id'])
+                ->joinWith(['flat', 'flat.house'])
+                ->where(['account_number' => $account])
+                ->asArray()
+                ->one();
+        
+        return $query['houses_id'];
     }
     
 }
