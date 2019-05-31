@@ -426,10 +426,10 @@ class ClientsController extends AppManagersController {
      * ]
      * 
      */
-    public function actionSearchDataOnPeriod($account_number, $house, $date_start, $date_end, $type) {
+    public function actionSearchDataOnPeriod($account_number, $house = null, $date_start, $date_end, $type) {
         
-        $date_start = Yii::$app->formatter->asDate($date_start, 'YYYY-MM');
-        $date_end = Yii::$app->formatter->asDate($date_end, 'YYYY-MM');
+        $date_start = $type == 'receipts' ? Yii::$app->formatter->asDate($date_start, 'YYYY-MM') : Yii::$app->formatter->asDate($date_start, 'YYYY-MM-dd');
+        $date_end = $type == 'receipts' ? Yii::$app->formatter->asDate($date_end, 'YYYY-MM') : Yii::$app->formatter->asDate($date_end, 'YYYY-MM-dd');
         
         $path_to_receipts = SiteSettings::getReceiptsUrl();
         

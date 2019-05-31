@@ -173,7 +173,7 @@ $(document).ready(function() {
         var startDate = $('input[name="date_start-period-pay"]').val();
         var endDate = $('input[name="date_end-period-pay"]').val();
 
-        getDataClients(accountNumber, startDate, endDate, '#payments-lists', 'payments');
+        getDataClients(accountNumber, null, startDate, endDate, '#payments-lists', 'payments');
         
     });
     

@@ -432,7 +432,7 @@ $(document).ready(function(){
          * @param {type} type Тип запроса (Квитанции, Платежи, Приборы учета)
          * @returns {undefined}
          */
-        function getDataClients (accountNumber, startDate, endDate, idContent, type) {
+        function getDataClients (accountNumber, house, startDate, endDate, idContent, type) {
             var parseStartDate = dateParse(startDate);
             var parseEndDate = dateParse(endDate);
 
@@ -440,7 +440,7 @@ $(document).ready(function(){
                 $('.message-block').addClass('invalid-message-show').html('Вы указали некорректный диапазон');
             } else if (parseStartDate - parseEndDate <= 0) {
                 $('.message-block').removeClass('invalid-message-show').html('');
-                $.post('/dispatchers/clients/search-data-on-period?account_number=' + accountNumber + '&date_start=' + startDate + '&date_end=' + endDate + '&type=' + type,
+                $.post('/dispatchers/clients/search-data-on-period?account_number=' + accountNumber + '$house=' + house + '&date_start=' + startDate + '&date_end=' + endDate + '&type=' + type,
                     function(data) {
                         if (data.success === false) {
                             $('.message-block').addClass('invalid-message-show').html('Ошибка запроса');
@@ -461,10 +461,11 @@ $(document).ready(function(){
      */
     $('#get-receipts').on('click', function(){
         var accountNumber = +$('#select-dark :selected').text();
+        var house = +$(this).data('house');
         var startDate = $('input[name="date_start-period"]').val();
         var endDate = $('input[name="date_end-period"]').val();
         
-        getDataClients(accountNumber, startDate, endDate, '#receipts-lists', 'receipts');
+        getDataClients(accountNumber, house, startDate, endDate, '#receipts-lists', 'receipts');
         
     });
     
@@ -476,7 +477,7 @@ $(document).ready(function(){
         var startDate = $('input[name="date_start-period-pay"]').val();
         var endDate = $('input[name="date_end-period-pay"]').val();
 
-        getDataClients(accountNumber, startDate, endDate, '#payments-lists', 'payments');
+        getDataClients(accountNumber, null, startDate, endDate, '#payments-lists', 'payments');
         
     });
     

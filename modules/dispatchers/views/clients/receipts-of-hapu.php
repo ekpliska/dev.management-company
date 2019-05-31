@@ -54,7 +54,10 @@ $this->params['breadcrumbs'][] = $client_info->fullName . ' [' . $account_choosi
                             ]
                         ]);        
                     ?>
-                    <?= Html::button('<i class="glyphicon glyphicon-search"></i>', ['id' => 'get-receipts', 'class' => 'btn-send-request']) ?>
+                    <?= Html::button('<i class="glyphicon glyphicon-search"></i>', [
+                            'id' => 'get-receipts', 
+                            'class' => 'btn-send-request',
+                            'data-house' => $account_choosing->flat->house->houses_id]) ?>
                 </div>
                 <div class="message-block"></div>
                 <div id="receipts-lists">
