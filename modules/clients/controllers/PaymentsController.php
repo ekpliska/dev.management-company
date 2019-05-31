@@ -172,14 +172,9 @@ class PaymentsController extends AppClientsController {
      */
     public function actionSearchDataOnPeriod($account_number, $date_start, $date_end, $type) {
         
-        $date_start = Yii::$app->formatter->asDate($date_start, 'YYYY-MM-d');
-        $date_end = Yii::$app->formatter->asDate($date_end, 'YYYY-MM-d');
-                
+        $date_start = Yii::$app->formatter->asDate($date_start, 'YYYY-MM');
+        $date_end = Yii::$app->formatter->asDate($date_end, 'YYYY-MM');
         Yii::$app->response->format = Response::FORMAT_JSON;
-        
-        if (!is_numeric($account_number)) {
-            return ['success' => false];
-        }
         
         $data_array = [
             'Номер лицевого счета' => $account_number,
@@ -188,11 +183,33 @@ class PaymentsController extends AppClientsController {
         ];        
         $data_json = json_encode($data_array, JSON_UNESCAPED_UNICODE);
         
-        if (Yii::$app->request->isPost) {
+        if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
             
             switch ($type) {
                 case 'receipts':
-                    $results = Yii::$app->client_api->getReceipts($data_json);
+                    $_results = Yii::$app->client_api->getReceipts($data_json);
+                    $results = [];
+                    if (isset($_results) && !$_results == null) {
+                        foreach ($_results as $key => $receipt) {
+                            if ($receipt['Статус квитанции'] === 'Не оплачена') {
+                                $results[] = [
+                                    'receipt_period' => $receipt['Расчетный период'],
+                                    'receipt_num' => $receipt['Номер квитанции'],
+                                    'receipt_summ' => $receipt['Сумма к оплате'],
+                                    'receipt_status' => $receipt['Статус квитанции'],
+                                    'status_payment' => Payments::getStatusPayment($receipt['Расчетный период'], $account_number) == Payments::YES_PAID ? true : false,
+                                ];
+                            } else {
+                                $results[] = [
+                                    'receipt_period' => $receipt['Расчетный период'],
+                                    'receipt_num' => $receipt['Номер квитанции'],
+                                    'receipt_summ' => $receipt['Сумма к оплате'],
+                                    'receipt_status' => $receipt['Статус квитанции'],
+                                    'status_payment' => true,
+                                ];
+                            }
+                        }
+                    }
                     break;
                 case 'payments':
                     $results = Yii::$app->client_api->getPayments($data_json);
@@ -201,17 +218,20 @@ class PaymentsController extends AppClientsController {
                     $results['status'] == 'error';
                     break;
             }
+            // Получить ID дома для текущего ЛС (используется для формирования списка квитанций)
+            $house_id = Yii::$app->userProfile->getLivingSpace($this->_current_account_id);
+            $path_to_receipts = SiteSettings::getReceiptsUrl();
             
             $data_render = $this->renderPartial('data/' . $type . '-lists', [
                 $type . '_lists' => $results ? $results : null,
-                'account_number' => $account_number]);
+                'account_number' => $account_number,
+                'house_id' => $house_id['houses_id'],
+                'path_to_receipts' => $path_to_receipts,
+            ]);
             
             return [
                 'success' => true,
-                'data_render' => $data_render,
-                'results' => $results,
-                'date_start' => $date_start,
-                'date_end' => $date_end,
+                'data_render' => $data_render
             ];
         }
         
