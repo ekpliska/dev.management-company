@@ -590,6 +590,7 @@ span.dot {
     height: 40px;
     margin-right: 5px;
     border-radius: 12px;
+    object-fit: cover;
 }
 .request_block__info > span {
     margin: 10px 0;

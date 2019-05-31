@@ -61,7 +61,7 @@ class PersonalAccountController extends Controller {
         $data_post = Yii::$app->request->getBodyParams();
         
         $date_start = empty($data_post['period_start']) ? null : "{$data_post['period_start']}-01";
-        $date_end = empty($data_post['period_end']) ? date('Y-m-d') : "{$data_post['period_end']}-01";
+        $date_end = empty($data_post['period_end']) ? date('Y-m-d') : "{$data_post['period_end']}-28";
         
         $array_request = [
             'Номер лицевого счета' => $account,
@@ -71,7 +71,6 @@ class PersonalAccountController extends Controller {
         
         $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
         $payments_lists = Yii::$app->client_api->getPayments($data_json);
-        
         return $payments_lists;
         
     }

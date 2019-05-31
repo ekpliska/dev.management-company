@@ -121,13 +121,12 @@ class ReceiptsController extends Controller {
     private function getHouseID($account) {
         
         $query = PersonalAccount::find()
-                ->select(['houses_id'])
-                ->joinWith(['flat', 'flat.house'])
+                ->with(['flat', 'flat.house'])
                 ->where(['account_number' => $account])
                 ->asArray()
                 ->one();
         
-        return $query['houses_id'];
+        return $query['flat']['house']['houses_id'];
     }
     
 }

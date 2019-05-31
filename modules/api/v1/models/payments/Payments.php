@@ -32,13 +32,13 @@ class Payments extends BasePayments {
         }        
 
         // Находим платеж, меняем ему статус
-//        $payment = self::find()
-//                ->andWhere([
-//                    'receipt_period' => $period, 
-//                    'account_uid' => $account->account_id])
-//                ->one();
-//        $payment->payment_status = self::YES_PAID;
-//        $payment->save(false);
+        $payment = self::find()
+                ->andWhere([
+                    'receipt_period' => $period, 
+                    'account_uid' => $account->account_id])
+                ->one();
+        $payment->payment_status = self::YES_PAID;
+        $payment->save(false);
         
         // Вызываем API метод на завершение платежа
         Yii::$app->paymentSystem->post3ds($data_posts);
