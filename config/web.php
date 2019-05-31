@@ -9,7 +9,7 @@ $payment_system = require __DIR__ . '/payment_system.php';
 $mailer_config = require __DIR__ . '/mailer_config.php';
 
 $config = [
-    'id' => 'elsa-company',
+    'id' => 'elsa-project',
     'name' => 'Electronic Smart Assistant',
     'basePath' => dirname(__DIR__),
     'bootstrap' => [
