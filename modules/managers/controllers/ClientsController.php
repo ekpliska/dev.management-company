@@ -426,16 +426,14 @@ class ClientsController extends AppManagersController {
      * ]
      * 
      */
-    public function actionSearchDataOnPeriod($account_number, $date_start, $date_end, $type) {
+    public function actionSearchDataOnPeriod($account_number, $house, $date_start, $date_end, $type) {
         
-        $date_start = Yii::$app->formatter->asDate($date_start, 'YYYY-MM-d');
-        $date_end = Yii::$app->formatter->asDate($date_end, 'YYYY-MM-d');
-                
+        $date_start = Yii::$app->formatter->asDate($date_start, 'YYYY-MM');
+        $date_end = Yii::$app->formatter->asDate($date_end, 'YYYY-MM');
+        
+        $path_to_receipts = SiteSettings::getReceiptsUrl();
+        
         Yii::$app->response->format = Response::FORMAT_JSON;
-        
-        if (!is_numeric($account_number)) {
-            return ['success' => false];
-        }
         
         $data_array = [
             'Номер лицевого счета' => $account_number,
@@ -445,7 +443,6 @@ class ClientsController extends AppManagersController {
         $data_json = json_encode($data_array, JSON_UNESCAPED_UNICODE);
         
         if (Yii::$app->request->isPost) {
-            
             switch ($type) {
                 case 'receipts':
                     $results = Yii::$app->client_api->getReceipts($data_json);
@@ -460,13 +457,13 @@ class ClientsController extends AppManagersController {
             
             $data_render = $this->renderPartial('data/' . $type . '-lists', [
                 $type . '_lists' => $results,
-                'account_number' => $account_number]);
+                'account_number' => $account_number,
+                'path_to_receipts' => $path_to_receipts,
+                'house_id' => $house]);
             
             return [
                 'success' => true,
                 'data_render' => $data_render,
-                'date_start' => $date_start,
-                'date_end' => $date_end,
             ];
         }
         
