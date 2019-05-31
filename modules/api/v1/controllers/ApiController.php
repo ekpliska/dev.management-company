@@ -3,7 +3,6 @@
     namespace app\modules\api\v1\controllers;
     use Yii;
     use yii\rest\Controller;
-    use yii\filters\AccessControl;
     use app\modules\api\v1\models\LoginForm;
     use app\modules\api\v1\models\RegisterForm;
     use app\models\SmsSettings;

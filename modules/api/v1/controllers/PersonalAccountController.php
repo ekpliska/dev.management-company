@@ -81,6 +81,13 @@ class PersonalAccountController extends Controller {
      */
     public function actionCreate() {
         
+        if (Yii::$app->user->can('clients_rent')) {
+            return [
+                'success' => false,
+                'message' => 'Недопустимое действие для данной учетной записи'
+            ];
+        }
+        
         $model = new CreateAccount();
         $model->load(Yii::$app->request->getBodyParams(), '');
         if (!$model->save()) {
