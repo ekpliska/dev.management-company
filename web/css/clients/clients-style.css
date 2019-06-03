@@ -2212,6 +2212,7 @@ input[name="date_end-period-pay"]::placeholder {
     padding: 20px;
     width: 150px;
     height: 150px;
+    object-fit: cover;
 }
 .payment-page_block {
     padding: 40px;

@@ -21,7 +21,6 @@ $config = [
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
-        '@orangedata'   => '@app/orangedata',
     ],
     'language' => 'ru',
     // Подключение модулей
@@ -105,8 +104,8 @@ $config = [
             'class' => 'yii\web\User',
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => (YII_ENV_DEV) ? true: false, // Отключение автологина на основе фалов cookies
-            'absoluteAuthTimeout' => (YII_ENV_DEV) ? null : 1200, // Время сессии 20мин
-            'authTimeout' => (YII_ENV_DEV) ? null : 1200, // Автоматический выход из сиситемы, когда пользователь неактивен 20мин
+            'absoluteAuthTimeout' => (YII_ENV_DEV) ? null : 2400, // Время сессии 20мин
+            'authTimeout' => (YII_ENV_DEV) ? null : 2400, // Автоматический выход из сиситемы, когда пользователь неактивен 20мин
             'autoRenewCookie' => true,
             'loginUrl' => ['site/login'],
             'as afterLogin' => 'app\behaviors\LoginTimestampBehavior',
