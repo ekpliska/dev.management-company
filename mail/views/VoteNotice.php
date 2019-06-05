@@ -7,8 +7,8 @@
  */
     
 $post_path = $params['post_slug'] ? 
-        Yii::$app->urlManager->createAbsoluteUrl(['/']) . "/news/{$params['post_slug']}" :
-        Yii::$app->urlManager->createAbsoluteUrl(['/']) . "/voting/{$params['id_post']}";
+        Yii::$app->urlManager->createAbsoluteUrl(['/']) . "news/{$params['post_slug']}" :
+        Yii::$app->urlManager->createAbsoluteUrl(['/']) . "voting/{$params['id_post']}";
 ?>
 
 <table border="0" cellpadding="10" cellspacing="10" width="100%" align="center" valign="middle" style="font-family: sans-serif; font-size: 14px;">
