@@ -37,7 +37,6 @@ $post_path = $params['post_slug'] ?
         </tr>
         <tr>
             <td width="20%">
-                <p><?= Yii::$app->urlManager->createAbsoluteUrl($params['post_image']) ?></p>
                 <img src="<?= Yii::$app->urlManager->createAbsoluteUrl($params['post_image']) ?>" alt="Image publish" width="240" height="170" style="display:block;">
             </td>
             <td valign="top">

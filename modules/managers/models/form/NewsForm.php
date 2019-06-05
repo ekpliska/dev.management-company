@@ -56,7 +56,7 @@ class NewsForm extends Model {
             
             [['preview'], 'file',
                 'skipOnEmpty' => true,
-                'extensions' => 'png, jpg',
+                'extensions' => 'png, jpg, jpeg',
                 'maxSize' => 10 * 1024 * 1024,
                 'mimeTypes' => 'image/*',
             ],
