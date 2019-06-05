@@ -31,7 +31,7 @@ class searchClients extends Clients {
                         . 'c.clients_name as name, c.clients_second_name as second_name, c.clients_surname as surname, '
                         . 'a.account_number as number, a.account_balance as balance, '
                         . 'u.status as status, '
-                        . 'h.houses_gis_adress as full_adress, '
+                        . 'h.houses_gis_adress as full_adress, h.houses_street as houses_street, h.houses_number as houses_number, '
                         . 'f.flats_porch as porch, f.flats_floor as floor, '
                         . 'f.flats_number as flat')
                 ->from('clients as c')

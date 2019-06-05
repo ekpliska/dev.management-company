@@ -64,6 +64,8 @@ class AppManagersController extends Controller {
      */
     public function actionShowPost($departmentId) {
         
+        $str = '';
+        
         $department_list = Departments::find()
                 ->andWhere(['department_id' => $departmentId])
                 ->asArray()
@@ -75,10 +77,11 @@ class AppManagersController extends Controller {
         
         if ($department_list > 0) {
             foreach ($post_list as $post) {
-                echo '<option value="' . $post['post_id'] . '">' . $post['post_name'] . '</option>';
+                $str .= '<option value="' . $post['post_id'] . '">' . $post['post_name'] . '</option>';
             }
+            return $str;
         } else {
-            echo '<option>-</option>';
+            return '<option>-</option>';
         }
     }
     
@@ -87,6 +90,8 @@ class AppManagersController extends Controller {
      * Выбор названия услуги зависит от ее категории
      */
     public function actionShowNameService($categoryId) {
+        
+        $str = '';
         
         $category_list = CategoryServices::find()
                 ->andWhere(['category_id' => $categoryId])
@@ -100,10 +105,11 @@ class AppManagersController extends Controller {
         
         if ($category_list > 0) {
             foreach ($service_list as $service) {
-                echo '<option value="' . $service['service_id'] . '">' . $service['service_name'] . '</option>';
+                $str .= '<option value="' . $service['service_id'] . '">' . $service['service_name'] . '</option>';
             }
+            return $str;
         } else {
-            echo '<option>-</option>';
+            return '<option>-</option>';
         }
         
     }
@@ -113,6 +119,8 @@ class AppManagersController extends Controller {
         
         $model = new RequestForm();
         $client_id = $model->findClientPhone($phone);
+        
+        $str = '';
         
         $house_list = \app\models\PersonalAccount::find()
                 ->select(['account_id', 'houses_gis_adress', 'houses_street', 'houses_number', 'flats_number', 'personal_flat_id'])
@@ -129,10 +137,11 @@ class AppManagersController extends Controller {
                         $house['houses_street'] . ', д. ' .
                         $house['houses_number'] . ', кв. ' .
                         $house['flats_number'];
-                echo '<option value="' . $house['account_id'] . '">' . $full_adress . '</option>';
+                $str .= '<option value="' . $house['account_id'] . '">' . $full_adress . '</option>';
             }
+            return $str;
         } else {
-            echo '<option>Адрес не найден</option>';
+            return '<option>Адрес не найден</option>';
         }        
         
     }

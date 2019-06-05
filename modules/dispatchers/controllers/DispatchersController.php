@@ -152,6 +152,7 @@ class DispatchersController extends AppDispatchersController {
         
         $model = new RequestForm();
         $client_id = $model->findClientPhone($phone);
+        $str = '';
         
         $house_list = PersonalAccount::find()
                 ->select(['account_id', 'houses_gis_adress', 'houses_street', 'houses_number', 'flats_number', 'personal_flat_id'])
@@ -168,10 +169,11 @@ class DispatchersController extends AppDispatchersController {
                         $house['houses_street'] . ', д. ' .
                         $house['houses_number'] . ', кв. ' .
                         $house['flats_number'];
-                echo '<option value="' . $house['account_id'] . '">' . $full_adress . '</option>';
+                $str .= '<option value="' . $house['account_id'] . '">' . $full_adress . '</option>';
             }
+            return $str;
         } else {
-            echo '<option>Адрес не найден</option>';
+            return '<option>Адрес не найден</option>';
         }        
         
     }
@@ -180,6 +182,8 @@ class DispatchersController extends AppDispatchersController {
      * Поиск наименование услуги по выбранной категории
      */
     public function actionShowNameService($categoryId) {
+        
+        $str = '';
         
         $category_list = CategoryServices::find()
                 ->andWhere(['category_id' => $categoryId])
@@ -193,10 +197,11 @@ class DispatchersController extends AppDispatchersController {
         
         if ($category_list > 0) {
             foreach ($service_list as $service) {
-                echo '<option value="' . $service['service_id'] . '">' . $service['service_name'] . '</option>';
+                $str .= '<option value="' . $service['service_id'] . '">' . $service['service_name'] . '</option>';
             }
+            return $str;
         } else {
-            echo '<option>-</option>';
+            return '<option>-</option>';
         }
         
     }

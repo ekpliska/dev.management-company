@@ -227,6 +227,8 @@ class NewsController extends AppManagersController {
      */
     public function actionForWhomNews($status) {
         
+        $str = '';
+        
         // Получаем список всех домов
         $houses_list = Houses::getHousesList(true);
         
@@ -235,8 +237,9 @@ class NewsController extends AppManagersController {
         } elseif ($status == 'house') {
             foreach ($houses_list as $house) {
                 $full_adress = $house['houses_gis_adress'] . ', ул. ' . $house['houses_street'] . ', д. ' . $house['houses_number'];
-                echo '<option value="' . $house['houses_id'] . '">' . $full_adress . '</option>';
+                $str .= '<option value="' . $house['houses_id'] . '">' . $full_adress . '</option>';
             }
+            return $str;
         }
     }
     

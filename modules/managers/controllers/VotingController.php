@@ -214,16 +214,19 @@ class VotingController extends AppManagersController {
      */
     public function actionForWhomNews($status) {
         
+        $str = '';
+        
         // Получаем список всех домов
         $houses_list = Houses::getHousesList($for_list = true);
         
         if ($status == 'all') {
-            echo '<option value="0">-</option>';
+            return '<option value="0">-</option>';
         } elseif ($status == 'house') {
             foreach ($houses_list as $house) {
                 $full_adress = $house['houses_gis_adress']. ', ул. ' . $house['houses_street'] . ', д. ' . $house['houses_number'];
-                echo '<option value="' . $house['houses_id'] . '">' . $full_adress . '</option>';
+                $str .= '<option value="' . $house['houses_id'] . '">' . $full_adress . '</option>';
             }
+            return $str;
         }
     }
     

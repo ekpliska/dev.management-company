@@ -29,6 +29,12 @@ button:hover {
 select {
     outline: 0px !important;
 }
+select:disabled,
+input[type="radio"]:disabled,
+input[type="checkbox"]:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
 .main > .row {
     position: relative;
     margin-left: 0;

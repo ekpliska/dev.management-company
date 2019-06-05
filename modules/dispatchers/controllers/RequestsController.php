@@ -165,7 +165,7 @@ class RequestsController extends AppDispatchersController {
                 return $this->redirect(Yii::$app->request->referrer);
             }
             
-            Yii::$app->session->setFlash('success', ['message' => 'Заявка была успешно сохранена']);
+            Yii::$app->session->setFlash('success', ['message' => 'Заявка была успешно обновлена']);
             return $this->redirect(Yii::$app->request->referrer);
                         
         }
@@ -263,8 +263,10 @@ class RequestsController extends AppDispatchersController {
         $model = new RequestForm();
         $client_id = $model->findClientPhone($phone);
         
+        $str = '';
+        
         $house_list = PersonalAccount::find()
-                ->select(['account_id', 'houses_gis_adress', 'houses_number', 'flats_number'])
+                ->select(['account_id', 'houses_gis_adress', 'houses_street', 'houses_number', 'flats_number'])
                 ->joinWith(['flat', 'flat.house'])
                 ->andWhere(['personal_clients_id' => $client_id])
                 ->orWhere(['personal_rent_id' => $client_id])
@@ -274,13 +276,15 @@ class RequestsController extends AppDispatchersController {
         if (!empty($client_id)) {
             foreach ($house_list as $house) {
                 $full_adress = 
-                        $house['houses_gis_adress'] . ', д. ' .
+                        $house['houses_gis_adress'] . ', ул. ' .
+                        $house['houses_street'] . ', д. ' .
                         $house['houses_number'] . ', кв. ' .
                         $house['flats_number'];
-                echo '<option value="' . $house['account_id'] . '">' . $full_adress . '</option>';
+                $str .= '<option value="' . $house['account_id'] . '">' . $full_adress . '</option>';
             }
+            return $str;
         } else {
-            echo '<option>Адрес не найден</option>';
+            return '<option>Адрес не найден</option>';
         }        
         
     }
@@ -289,6 +293,8 @@ class RequestsController extends AppDispatchersController {
      * Поиск наименование услуги по выбранной категории
      */
     public function actionShowNameService($categoryId) {
+        
+        $str = '';
         
         $category_list = CategoryServices::find()
                 ->andWhere(['category_id' => $categoryId])
@@ -302,10 +308,11 @@ class RequestsController extends AppDispatchersController {
         
         if ($category_list > 0) {
             foreach ($service_list as $service) {
-                echo '<option value="' . $service['service_id'] . '">' . $service['service_name'] . '</option>';
+                $str .= '<option value="' . $service['service_id'] . '">' . $service['service_name'] . '</option>';
             }
+            return $str;
         } else {
-            echo '<option>-</option>';
+            return '<option>-</option>';
         }
         
     }

@@ -111,11 +111,9 @@ class NewsForm extends Model {
             if ($count_notice == 2) {
                 $add_news->isPush = $this->isNotice[0] == 3 ? News::NOTICE_YES : News::NOTICE_NO;
                 $add_news->isEmail = $this->isNotice[1] == 2 ? News::NOTICE_YES : News::NOTICE_NO;
-            } elseif ($count_notice == 1 && isset($this->isNotice[0]) == 3) {
+            } elseif ($count_notice == 1 && $this->isNotice[0] == 3) {
                 $add_news->isPush = News::NOTICE_YES;
-                $add_news->isEmail = News::NOTICE_NO;
-            } elseif ($count_notice == 1 && isset($this->isNotice[0]) == 2) {
-                $add_news->isPush = News::NOTICE_NO;
+            } elseif ($count_notice == 1 && $this->isNotice[0] == 2) {
                 $add_news->isEmail = News::NOTICE_YES;
             }
             

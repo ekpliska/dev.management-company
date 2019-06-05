@@ -124,7 +124,7 @@ class PaidServices extends BasePaidServices {
         $client_id = $client_info['user_client_id'] ? $client_info['user_client_id'] : $client_info['user_rent_id'];
         
         $house_list = PersonalAccount::find()
-                ->select(['account_id', 'houses_gis_adress', 'houses_number', 'flats_number', 'personal_flat_id'])
+                ->select(['account_id', 'houses_gis_adress', 'houses_street', 'houses_number', 'flats_number', 'personal_flat_id'])
                 ->joinWith(['flat', 'flat.house'])
                 ->andWhere(['personal_clients_id' => $client_id])
                 ->orWhere(['personal_rent_id' => $client_id])
@@ -132,7 +132,7 @@ class PaidServices extends BasePaidServices {
                 ->all();
         
         $house_lists = ArrayHelper::map($house_list, 'account_id', function ($data) {
-            return FormatHelpers::formatFullAdress($data['houses_gis_adress'], $data['houses_number'], false, false, $data['flats_number']);
+            return FormatHelpers::formatFullAdress($data['houses_gis_adress'], $data['houses_street'], $data['houses_number'], false, false, $data['flats_number']);
         });
         
         return $house_lists ? $house_lists : null;

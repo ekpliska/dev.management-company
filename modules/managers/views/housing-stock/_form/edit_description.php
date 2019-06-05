@@ -2,15 +2,14 @@
 
     use yii\widgets\ActiveForm;
     use yii\helpers\Html;
-    use app\helpers\FormatHelpers;
 
 /* 
  * Форма редактировния описания дома
  */
 ?>
 
-<p class="modal-confirm">
-    <?= FormatHelpers::formatHousingStosk($model->houses_gis_adress, $model->houses_number) ?>
+<p class="modal-confirm-h3">
+    <?= "{$model->houses_street}, дом {$model->houses_number}" ?>
 </p>
 
 <?php

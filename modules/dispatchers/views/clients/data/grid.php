@@ -55,7 +55,9 @@
                 'attribute' => 'adress',
                 'header' => 'Адрес',
                 'value' => function ($data) {
-                    return ($data['full_adress'] && $data['flat']) ? "{$data['full_adress']} , кв. {$data['flat']}" : "Не указан";
+                    return ($data['full_adress'] && $data['flat']) 
+                            ? "{$data['full_adress']}, ул. {$data['houses_street']}, д. {$data['houses_number']}, кв. {$data['flat']}" 
+                            : "Не указан";
                 },
                 'format' => 'raw',
                 'contentOptions' => [

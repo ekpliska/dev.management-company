@@ -215,14 +215,19 @@ class NewsController extends AppDispatchersController {
         
         // Получаем список всех домов
         $houses_list = Houses::getHousesList(true);
+        $str = '';
 
         if ($status == 'all') {
-            echo '<option value="0">-</option>';
+            return '<option value="0">-</option>';
         } elseif ($status == 'house') {
             foreach ($houses_list as $house) {
-                $full_adress = $house['houses_gis_adress'] . ', д. ' . $house['houses_number'];
-                echo '<option value="' . $house['houses_id'] . '">' . $full_adress . '</option>';
+                $full_adress = 
+                        $house['houses_gis_adress'] . ', ул. ' .
+                        $house['houses_street'] . ', д. ' .
+                        $house['houses_number'];
+                $str .= '<option value="' . $house['houses_id'] . '">' . $full_adress . '</option>';
             }
+            return $str;
         }
     }
     

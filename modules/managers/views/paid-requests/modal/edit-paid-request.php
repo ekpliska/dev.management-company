@@ -36,7 +36,8 @@
 
     <?= $form->field($model, 'services_account_id', [
                 'template' => '<span class="paid-service-dropdown-arrow"><div class="field-modal-select">{label}{input}{error}</div></span>'])
-            ->dropDownList($adress_list)
+            ->dropDownList($adress_list, [
+                'id' => 'house'])
             ->label(false) ?>
 
     <?= $form->field($model, 'services_comment', [
