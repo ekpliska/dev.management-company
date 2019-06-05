@@ -191,6 +191,7 @@
     margin-top: 30px;
     width: 100px;
     height: 100px;
+    object-fit: cover;
 }
 
 .dropdown_user-info {
