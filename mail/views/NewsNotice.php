@@ -7,8 +7,8 @@
  */
     
 $post_path = $params['post_slug'] ? 
-        Yii::$app->urlManager->createAbsoluteUrl(['/']) . "/news/{$params['post_slug']}" :
-        Yii::$app->urlManager->createAbsoluteUrl(['/']) . "/voting/{$params['id_post']}";
+        Yii::$app->urlManager->createAbsoluteUrl(['/']) . "news/{$params['post_slug']}" :
+        Yii::$app->urlManager->createAbsoluteUrl(['/']) . "voting/{$params['id_post']}";
 ?>
 
 <table border="0" cellpadding="10" cellspacing="10" width="100%" align="center" valign="middle" style="font-family: sans-serif; font-size: 14px;">
@@ -25,7 +25,7 @@ $post_path = $params['post_slug'] ?
     <tbody>
         <tr>
             <td colspan="2">
-                <?= Yii::$app->formatter->asDate(time(), 'd MMMM, YYYY') ?>
+                <?= Yii::$app->formatter->asDate(time(), 'long') ?>
             </td>
         </tr>
         <tr>
@@ -37,6 +37,7 @@ $post_path = $params['post_slug'] ?
         </tr>
         <tr>
             <td width="20%">
+                <p><?= Yii::$app->urlManager->createAbsoluteUrl($params['post_image']) ?></p>
                 <img src="<?= Yii::$app->urlManager->createAbsoluteUrl($params['post_image']) ?>" alt="Image publish" width="240" height="170" style="display:block;">
             </td>
             <td valign="top">

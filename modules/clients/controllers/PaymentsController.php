@@ -82,9 +82,9 @@ class PaymentsController extends AppClientsController {
         // Текущий номер лицевого счета
         $account_number = $this->_current_account_number;
         // Получаем расчетный период из AJAX
-        $period_receipt = Yii::$app->request->post('house');
+        $period_receipt = Yii::$app->request->post('period');
         // Получаем ID дома из AJAX
-        $house_id = Yii::$app->request->post('period');
+        $house_id = Yii::$app->request->post('house');
         
         // Формируем путь к квитанции
         $path_to_receipts = SiteSettings::getReceiptsUrl();

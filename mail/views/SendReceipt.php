@@ -32,18 +32,5 @@
                 С уважением, компания <a href="<?= Yii::$app->urlManager->createAbsoluteUrl(['/']) ?>">ELSA</a>
             </td>
         </tr>
-        <tr>
-            <td colspan="2" style="font-size: 12px; color: #777777;" bgcolor="#dddddd">
-                Как отписаться от рассылки:
-                <ol>
-                    <li>
-                        Вы можете отписаться от рассылки в личном кабинете, раздел Профиль.
-                    </li>
-                    <li>
-                        Или же перейдя по ссылке <a href="<?= Yii::$app->urlManager->createAbsoluteUrl(['/']) ?>">Отписаться от рассылки</a>
-                    </li>
-                </ol>
-            </td>
-        </tr>
     </tbody>
 </table>

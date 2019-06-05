@@ -10,11 +10,11 @@ return [
         // Имя компании, задается для email-зассылки
         'company_name' => 'ELSA',
         // Электронный адрес с котрого будет производится email-рассылка
-        'company_email' => 'email@email.com',
+        'company_email' => 'hi@myelsa.ru',
         // Электронный адрес поддержки пользователей
-        'support_email' => 'support_email@email.com',
+        'support_email' => 'hi@myelsa.ru',
         // Адрес портала
-        'base_url' => 'http://dev.management-company',
+        'base_url' => 'http://lk.myelsa.ru',
     ],
     
     /*

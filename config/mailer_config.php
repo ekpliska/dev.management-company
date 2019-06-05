@@ -8,7 +8,7 @@ return [
      *      true    Сохранять отправленные письма на диске в директории проекта runtime/mail
      *      false   Отправлять письма адресатам
      */
-    'useFileTransport' => true,
+    'useFileTransport' => false,
     'messageConfig' => [
         'charset' => 'UTF-8',
         'from' => [$params['email_subscriber']['company_email'] => $params['email_subscriber']['company_name']],
