@@ -43,14 +43,14 @@ class UnsubscribeController extends Controller {
         }
         
         $user_email = utf8_encode(base64_decode($qs));
+        // Находим пользователя по переданному электронному адресу
+        $user = User::findOne(['user_email' => $user_email]);
         
         // Проверяем валидность переданного электронного адреса
-        if (!filter_var($user_email, FILTER_VALIDATE_EMAIL)) {
+        if (!filter_var($user_email, FILTER_VALIDATE_EMAIL) || $user == null) {
             return $this->render('index', ['success' => false]);
         }
         
-        // Находим пользователя по переданному электронному адресу
-        $user = User::findOne(['user_email' => $user_email]);
         $unsubscribe = new UnsubscribeModel($user);
         
         if (!$unsubscribe->unsubscribe()) {
