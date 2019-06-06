@@ -55,13 +55,17 @@ $post_path = $params['post_slug'] ?
         </tr>
         <tr>
             <td colspan="2" style="font-size: 12px; color: #777777;" bgcolor="#dddddd">
-                <b>Как отписаться от рассылки:</b>
+                Если вы больше не хотите получать новостную рассылку с портала <a href="<?= Yii::$app->urlManager->createAbsoluteUrl(['/']) ?>">ELSA</a>, вы 
+                можете воспользоваться вариантами указанными ниже:
                 <ol>
                     <li>
-                        Вы можете отписаться от рассылки в личном кабинете, раздел Профиль.
+                        Вы можете отписаться от рассылки в личном кабинете, раздел Настройки профиля
                     </li>
                     <li>
-                        Или же перейдя по ссылке <a href="<?= Yii::$app->urlManager->createAbsoluteUrl(['/']) ?>">Отписаться от рассылки</a>
+                        Перейдя по ссылке 
+                        <a href="<?= Yii::$app->urlManager->createAbsoluteUrl(['/']) . 'unsubscribe?qs=' . base64_encode($email) ?>" class="unsubcriber">
+                            Отписаться от рассылки
+                        </a>
                     </li>
                 </ol>
             </td>

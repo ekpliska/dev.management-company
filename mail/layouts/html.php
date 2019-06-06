@@ -32,7 +32,7 @@
             border-radius: 25px;
             font-family: Helvetica, Arial, sans-serif;
             font-size: 14px;
-            color: #ffffff; 
+            color: #ffffff;
             text-transform: uppercase;
             text-decoration: none;
             font-weight: bold;
