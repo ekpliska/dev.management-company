@@ -21,7 +21,7 @@ class RatingRequest extends Widget {
 
     public function init() {
         
-        // Если передан не верный статус или ID заявки, кидаем исключение
+        // Если передан неверный статус или ID заявки, кидаем исключение
         if (!ArrayHelper::keyExists($this->_status, StatusRequest::getStatusNameArray()) || empty($this->_request_id)) {
             throw new UnknownPropertyException('Ошибка при передаче параметра');
         }

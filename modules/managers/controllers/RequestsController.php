@@ -175,7 +175,7 @@ class RequestsController extends AppManagersController {
         $request_id = Yii::$app->request->post('requestId');
         $type_request = Yii::$app->request->post('typeRequest');
         
-        // Если параметр "тип заявки" пришел не верный отправляем на главную страницу
+        // Если параметр "тип заявки" пришел неверный отправляем на главную страницу
         if (ArrayHelper::keyExists($type_request, $this->type_request)) {
             return $this->goHome();
         }
@@ -213,7 +213,7 @@ class RequestsController extends AppManagersController {
         $dispatcher_id = Yii::$app->request->post('dispatcherId');
         $type_request = Yii::$app->request->post('typeRequest');
         
-        // Если параметр "тип заявки" пришел не верный отправляем на главную страницу
+        // Если параметр "тип заявки" пришел неверный отправляем на главную страницу
         if (ArrayHelper::keyExists($type_request, $this->type_request)) {
             return $this->goHome();
         }
@@ -252,7 +252,7 @@ class RequestsController extends AppManagersController {
         $specialist_id = Yii::$app->request->post('specialistId');
         $type_request = Yii::$app->request->post('typeRequest');
         
-        // Если параметр "тип заявки" пришел не верный отправляем на главную страницу
+        // Если параметр "тип заявки" пришел неверный отправляем на главную страницу
         if (ArrayHelper::keyExists($type_request, $this->type_request)) {
             return $this->goHome();
         }        

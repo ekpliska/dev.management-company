@@ -88,7 +88,7 @@ class ApiController extends Controller
         $_code = Yii::$app->request->getBodyParam('sms_code');
         
         if (!Yii::$app->session->has('user_phone') || !Yii::$app->session->has('sms_code')) {
-            return ['message' => 'Не верно указан смс код'];
+            return ['message' => 'Неверно указан смс код'];
         }        
         // Берем данные из сессии
         $phone = Yii::$app->session->get('user_phone');
@@ -100,7 +100,7 @@ class ApiController extends Controller
             return ['message' => 'Пользователь с указанным номером телефона не найден'];
         }
         if ($sms_code != $_code) {
-            return ['message' => 'Не верно указан смс код'];
+            return ['message' => 'Неверно указан смс код'];
         }
         
         // Модель смены номера телефона

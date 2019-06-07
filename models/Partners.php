@@ -42,7 +42,7 @@ class Partners extends ActiveRecord
                 'partners_logo',
                 'description', 'partners_email'], 'string', 'max' => 255],
             
-            ['partners_site', UrlValidator::className(), 'message' => 'Не верный формат адреса'],
+            ['partners_site', UrlValidator::className(), 'message' => 'Неверный формат адреса'],
             
             ['partners_email', 'email'],
             

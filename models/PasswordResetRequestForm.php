@@ -36,7 +36,7 @@ class PasswordResetRequestForm extends Model {
             $user = User::findByPhone($this->phone);
 
             if ($sms_code != $this->sms_code) {
-                $this->addError('sms_code', 'Вы указали не верный СМС код');
+                $this->addError('sms_code', 'Вы указали неверный СМС код');
                 return false;
             }
             

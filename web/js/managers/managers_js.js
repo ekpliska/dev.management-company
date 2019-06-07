@@ -252,7 +252,7 @@ $(document).ready(function() {
         var isCheck = (!curIndication || curIndication <= prevIndication) ? false : true;
         
         if  (isCheck === false) {
-            labelMess.text('Показание указано не верно');
+            labelMess.text('Показание указано неверно');
             $(this).prop('disabled', true);
             e.preventDefault();
         } else if (isCheck === true) {

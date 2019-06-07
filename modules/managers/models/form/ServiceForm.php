@@ -25,7 +25,7 @@ class ServiceForm extends Model {
             
             [['service_name', 'service_description'], 'string', 'max' => 255],
             
-            ['service_price', 'double', 'min' => 00.00, 'max' => 100000.00, 'message' => 'Цена услуги указана не верно. Пример: 790.70'],
+            ['service_price', 'double', 'min' => 00.00, 'max' => 100000.00, 'message' => 'Цена услуги указана неверно. Пример: 790.70'],
             ['service_price', 'validatePrice'],
             
             ['service_name', 'unique', 

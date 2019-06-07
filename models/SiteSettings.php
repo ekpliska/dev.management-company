@@ -25,7 +25,7 @@ class SiteSettings extends ActiveRecord {
             [['welcome_text', 'promo_block'], 'string', 'max' => 1000],
             [['api_url', 'url_get_receipts'], 'string', 'max' => 100],
             [['user_agreement'], 'string', 'min' => 10, 'max' => 2000],
-            [['api_url', 'url_get_receipts'], UrlValidator::className(), 'message' => 'Не верный формат адреса']
+            [['api_url', 'url_get_receipts'], UrlValidator::className(), 'message' => 'Неверный формат адреса']
         ];
     }
     

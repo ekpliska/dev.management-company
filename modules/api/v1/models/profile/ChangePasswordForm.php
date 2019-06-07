@@ -42,7 +42,7 @@ class ChangePasswordForm extends Model {
         
         if (!$this->hasErrors()) {
             if (!$this->_user->validatePassword($this->$attribute)) {
-                $this->addError($attribute, 'Старый пароль указан не верно');
+                $this->addError($attribute, 'Старый пароль указан неверно');
             }
         }
         
