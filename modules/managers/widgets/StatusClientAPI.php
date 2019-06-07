@@ -29,7 +29,7 @@ class StatusClientAPI extends Widget {
         $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
         $result = Yii::$app->client_api->getPreviousCounters($data_json);
         
-        if ($result == null) {
+        if ($result == null || !$result) {
             $this->_status = false;
         }
         
