@@ -3,6 +3,7 @@
     use yii\helpers\Html;
     use app\assets\AppAsset;
     use app\assets\ManagersAsset;
+    use app\modules\managers\widgets\StatusClientAPI;
 
 AppAsset::register($this);
 ManagersAsset::register($this);
@@ -32,6 +33,7 @@ ManagersAsset::register($this);
             <?= $content ?>
         </div>        
     </div>
+    <?= StatusClientAPI::widget() ?>
 
     <?php // $this->beginContent('@app/modules/managers/views/layouts/footer.php') ?>
     <?php // $this->endContent() ?>

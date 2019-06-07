@@ -3815,6 +3815,42 @@ label[class^='error-ind-'] {
 }
 /* End Error page */
 
+/* Status API Block */
+.status-api-info {
+    width: 250px;
+    display: flex;
+    background-color: #e74c3c;
+    position: fixed;
+    top: 50%;
+    right: 0%;
+    margin-right: -200px;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    cursor: default;
+    z-index: 999;
+    transition-duration: 0.7s;
+}
+.status-api-info .status-image {
+    font-size: 20px;
+    color: #fff;
+    padding-right: 20px;
+}
+.status-api-info .status-info {
+    font-size: 12px;
+    color: #fff;
+}
+.status-api-info:hover {
+    margin-right: 0;
+}
+.status-api-info a {
+    color: #fff;
+    font-weight: bold;
+}
+/* End Status API Block */
+
 .table-container {
     width: 100%;
     overflow: auto;

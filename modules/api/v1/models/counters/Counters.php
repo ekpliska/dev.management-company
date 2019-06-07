@@ -55,16 +55,19 @@ class Counters extends Model {
         $results = [];
         // Массив приборов учета
         $counters_items = [];
-        foreach ($this->_counters as $key => $counter) {
-            $counter_item = [
-                'id_counter' => $counter['ID'],
-                'type_counter' => $counter['Тип прибора учета'],
-                '_type' => TypeCounters::getTypeCounterMobile($counter['Тип прибора учета']),
-                '_status' => strtotime($counter['Дата следующей поверки']) > time() ? false : true,
-            ];
-            
-            $counters_items[] = $counter_item;
+        if ($this->_counters) {
+            foreach ($this->_counters as $key => $counter) {
+                $counter_item = [
+                    'id_counter' => $counter['ID'],
+                    'type_counter' => $counter['Тип прибора учета'],
+                    '_type' => TypeCounters::getTypeCounterMobile($counter['Тип прибора учета']),
+                    '_status' => strtotime($counter['Дата следующей поверки']) > time() ? false : true,
+                ];
+
+                $counters_items[] = $counter_item;
+            }
         }
+        
         $results = [
             'counters' => $counters_items,
             'comments' => !empty($comments_to_counters) ? $comments : null,
