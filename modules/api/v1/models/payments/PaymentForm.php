@@ -62,6 +62,37 @@ class PaymentForm extends Model {
             return ['success' => true, 'message' => "Оплата квитанции {$this->receipt_num} была совершена ранее"];
         } elseif ($is_payment['status'] == Payments::NOT_PAID) {
             // Собираем данные для отправки по платежному шлюзу
+            
+            // Формируем данные для онлайн чека
+            $_date = [
+                'Items' => [
+                    '0' => [
+                        'label' => Yii::$app->paymentSystem->description, //наименование товара
+                        'price' => $is_payment['payment']->payment_sum,
+                        'quantity' => '1.00', //количество
+                        'amount' => $is_payment['payment']->payment_sum, //сумма
+                        'vat' => (int)Yii::$app->paymentSystem->vat, //ставка НДС
+                        'method' => (int)Yii::$app->paymentSystem->method, // тег-1214 признак способа расчета - признак способа расчета
+                        'object' => (int)Yii::$app->paymentSystem->object, // тег-1212 признак предмета расчета - признак предмета товара, работы, услуги, платежа, выплаты, иного предмета расчета
+                    ],
+                ],
+                'taxationSystem' => 0, //система налогообложения; необязательный, если у вас одна система налогообложения
+                'email' => Yii::$app->user->identity->user_email, //e-mail покупателя, если нужно отправить письмо с чеком
+                'phone' => Yii::$app->user->identity->user_mobile, //телефон покупателя в любом формате, если нужно отправить сообщение со ссылкой на чек
+                'isBso' => false, //чек является бланком строгой отчётности
+                'amounts' => [
+                    'electronic' => $is_payment['payment']->payment_sum, // Сумма оплаты электронными деньгами
+                    'advancePayment' => '0.00', // Сумма из предоплаты (зачетом аванса) (2 знака после запятой)
+                    'credit' => '0.00', // Сумма постоплатой(в кредит) (2 знака после запятой)
+                    'provision' => '0.00' // Сумма оплаты встречным предоставлением (сертификаты, др. мат.ценности) (2 знака после запятой)
+                ],
+            ];
+            $data = [
+                'cloudPayments' => [
+                    'customerReceipt' => $_date,
+                ]
+            ];
+            
             $data_posts = [
                 'Amount' => $is_payment['payment']->payment_sum,
                 'Currency' => 'RUB',
@@ -69,7 +100,8 @@ class PaymentForm extends Model {
                 'Description' => Yii::$app->paymentSystem->description,
                 'AccountId' => $account_info->account_id,
                 'Name' => $this->client_name,
-                'CardCryptogramPacket' => $this->cryptogram_packet
+                'CardCryptogramPacket' => $this->cryptogram_packet,
+                'JsonData' => json_encode($data, JSON_UNESCAPED_UNICODE)
             ];
             
             if (!$result = Yii::$app->paymentSystem->send_payment($data_posts, $payment_number)) {

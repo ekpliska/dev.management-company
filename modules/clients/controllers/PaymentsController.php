@@ -34,6 +34,22 @@ class PaymentsController extends AppClientsController {
         $data_json = json_encode($array_request, JSON_UNESCAPED_UNICODE);
         $receipts_lists = Yii::$app->client_api->getReceipts($data_json);
         
+        
+        $receipts_lists = [
+            '0' => [
+                "Расчетный период" => "2018-10-06",
+                "Номер квитанции" => "06/2018",
+                "Сумма к оплате" => "4782.00",
+                "Статус квитанции" => "not_paid",
+            ],
+            '1' => [
+                "Расчетный период" => "2018-10-07",
+                "Номер квитанции" => "07/2018",
+                "Сумма к оплате" => "5000.00",
+                "Статус квитанции" => "not_paid",
+            ],
+        ];
+
         /*
          * Перепроверяем полученные квитанции,
          * если у квитанции статус "Не оплачена", то проверяем наличие платежа в БД
@@ -55,7 +71,7 @@ class PaymentsController extends AppClientsController {
                         'receipt_num' => $receipt['Номер квитанции'],
                         'receipt_summ' => $receipt['Сумма к оплате'],
                         'receipt_status' => $receipt['Статус квитанции'],
-                        'status_payment' => true,
+                        'status_payment' => false,
                     ];
                 }
             }

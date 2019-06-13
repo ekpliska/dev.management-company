@@ -79,6 +79,38 @@ $this->title = Yii::$app->params['site-name'] . 'Оплата';
         $this->registerJs("
             var pay = function () {
                 var widget = new cp.CloudPayments();
+                
+                var receipt = {
+                    Items: [//товарные позиции
+                         {
+                            label: '" . $description . "', //наименование товара
+                            price: " . $paiment_info->payment_sum . ", //цена
+                            quantity: 1.00, //количество
+                            amount: " . $paiment_info->payment_sum . ", //сумма
+                            vat: " . Yii::$app->paymentSystem->vat . ", //ставка НДС
+                            method: " . Yii::$app->paymentSystem->method . ", // тег-1214 признак способа расчета - признак способа расчета
+                            object: " . Yii::$app->paymentSystem->object . ", // тег-1212 признак предмета расчета - признак предмета товара, работы, услуги, платежа, выплаты, иного предмета расчета
+                        }
+                    ],
+                    taxationSystem: 0, //система налогообложения; необязательный, если у вас одна система налогообложения
+                    email: '" . Yii::$app->userProfile->email . "', //e-mail покупателя, если нужно отправить письмо с чеком
+                    phone: '" . Yii::$app->userProfile->mobile . "', //телефон покупателя в любом формате, если нужно отправить сообщение со ссылкой на чек
+                    isBso: false, //чек является бланком строгой отчётности
+                    amounts:
+                    {
+                        electronic: " . $paiment_info->payment_sum . ", // Сумма оплаты электронными деньгами
+                        advancePayment: 0.00, // Сумма из предоплаты (зачетом аванса) (2 знака после запятой)
+                        credit: 0.00, // Сумма постоплатой(в кредит) (2 знака после запятой)
+                        provision: 0.00 // Сумма оплаты встречным предоставлением (сертификаты, др. мат.ценности) (2 знака после запятой)
+                    }
+                };
+                
+                var data = { //содержимое элемента data
+                    'cloudPayments': {
+                        'customerReceipt': receipt, //онлайн-чек
+                    }
+                }
+                
                 widget.charge({
                     publicId: '" . $public_id . "',
                     description: '" . $description . "', //назначение
@@ -88,13 +120,7 @@ $this->title = Yii::$app->params['site-name'] . 'Оплата';
                     accountId: '" . $this->context->_current_account_number . "', // идентификатор плательщика (необязательно)
                     email: '" . Yii::$app->userProfile->email . "', // E-mail адрес пользователя
                     requireEmail: true,
-                    data: {
-                        lastName: '" . Yii::$app->userProfile->surname . "',
-                        firstName: '" . Yii::$app->userProfile->name . "',
-                        middleName: '" . Yii::$app->userProfile->secondName . "',
-                        phone: '" . Yii::$app->userProfile->mobile . "',
-                        address: '" . Yii::$app->userProfile->getFullAdress($this->context->_current_account_id) . "',
-                    }
+                    data: data
                 },
                 function (options) { // success
                     $.ajax({

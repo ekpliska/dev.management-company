@@ -27,6 +27,46 @@ class PaymentSystem {
     public $post3ds_url = 'https://api.cloudpayments.ru/payments/cards/post3ds';
     // Описание платежа
     public $description = 'Оплата услуг ЖКХ';
+    /*
+     *  Ставка НДС
+     *      ''       НДС не облагается
+     *      0        НДС 0%
+     *      10       НДС 10%
+     *      20       НДС 20%
+     *      110      НДС 110%
+     *      120      НДС 120%
+     */
+    public $vat = 0;
+    /*
+     *  Признак способа расчета
+     *      0	Unknown, неизвестный способ расчета
+     *      1	FullPrepayment, Предоплата 100%
+     *      2	PartialPrepayment, Предоплата
+     *      3	AdvancePay, Аванс
+     *      4	FullPay, Полный расчёт
+     *      5	PartialPayAndCredit, Частичный расчёт и кредит
+     *      6	Credit, Передача в кредит
+     *      7	CreditPayment, Оплата кредита
+     */
+    public $method = 4;
+    /*
+     *  Признак Предметы расчета
+     *      0	Unknown, неизвестный предмет оплаты
+     *      1	Commodity, Товар
+     *      2	ExcisedCommodity, Подакцизный товар
+     *      3	Job, Работа
+     *      4	Service, Услуга
+     *      5	GamblingBet, Ставка азартной игры
+     *      6	GamblingWin, Выигрыш азартной игры
+     *      7	LotteryTicket, Лотерейный билет
+     *      8	LotteryWin, Выигрыш лотереи
+     *      9	RidAccess, Предоставление РИД
+     *      10	Payment, Платеж
+     *      11	AgentReward, Агентское вознаграждение
+     *      12	Composite, Составной предмет расчета
+     *      13	Another, Иной предмет расчета
+     */
+    public $object = 10;
 
     /**
     * ФУНКЦИЯ ДЛЯ ВЗАИМОДЕЙСТВИЯ С ПЛАТЕЖНЫМ ШЛЮЗОМ
